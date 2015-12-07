@@ -1,0 +1,141 @@
+# Project specific makefile for Drush make.
+# NOTE: Drush7 does not work properly on SL6 (PHP 5.3.3).
+#       https://github.com/drush-ops/drush/pull/1440.patch
+#
+# Usage:
+# $ drush7 make --no-core --no-patch-txt eiti.make.yml /var/www/eiti-local
+
+api: 2
+core: 7.x
+
+# Specify common subdir of "contrib"
+defaults:
+  projects:
+    subdir: contrib
+    overwrite: TRUE
+  libraries:
+      overwrite: TRUE
+
+
+projects:
+  drupal: 7.37
+
+  # Drupal contrib modules:
+  admin_menu: 3.0-rc5
+  ctools: 1.7
+  date: 2.8
+  diff: 3.2
+  ds:
+    download:
+      type: git
+      url: http://git.drupal.org/project/ds.git
+      branch: 7.x-2.x
+      revision: 8ec9d6c40c1ce4586bdbbe4b974bc2b87d075939
+    patch:
+      - https://www.drupal.org/files/issues/ds-allow_customizing_title_for_all_entity_types-2557921-2-D7.patch
+  email: 1.3
+  elements: 1.4
+  entity: 1.6
+  entityform: 2.0-rc1
+  entityreference: 1.1
+  features: 2.5
+  field_group: 1.4
+  file_entity: 2.0-beta1
+  filefield_paths:
+    download:
+      type: git
+      url: http://git.drupal.org/project/filefield_paths.git
+      branch: 7.x-1.x
+      revision: 8b39e7369bdc8790d4075a1a0e7544fb60111eea
+  globalredirect: 1.5
+  hierarchical_select: 3.0-beta2
+  htmlpurifier:
+    do_recursion: 0
+    download:
+      type: git
+      url: http://git.drupal.org/project/htmlpurifier.git
+      branch: 7.x-2.x
+      revision: 802b9f91da9bb968bce86007404ebf26f1c85efd
+    patch:
+      - https://www.drupal.org/files/issues/htmlpurifier-add_custom_version_callback-2555427-2-D7.patch
+  imagecache_actions: 1.5
+  inline_entity_form: 1.6
+  less:
+    download:
+      type: git
+      url: http://git.drupal.org/project/less.git
+      branch: 7.x-3.x
+      revision: 5f3482e4fe176a6dde3393379f25fec4b25c8787
+  libraries: 2.2
+  link: 1.3
+  media: 2.0-alpha4
+  pathauto: 1.2
+  profile2: 1.3
+  redirect:
+    download:
+      type: git
+      url: http://git.drupal.org/project/redirect.git
+      branch: 7.x-1.x
+      revision: 20542c13c3004adf495633836842a83b7f343892
+  rel: 1.0-alpha2
+  rules: 2.9
+  strongarm: 2.0
+  title:
+    download:
+      type: git
+      url: http://git.drupal.org/project/title.git
+      branch: 7.x-1.x
+      revision: d6f2000bbf54686faccc95e7b970d7a00db1dfd8
+  token: 1.6
+  transliteration: 3.2
+  views: 3.11
+  wysiwyg:
+    download:
+      type: git
+      url: http://git.drupal.org/project/wysiwyg.git
+      branch: 7.x-2.x
+      revision: 4efd47771a7fce77eb0364c747e3c76a6a65c460
+
+  # Contrib modules for developers:
+  # NOTE: "Administration menu", "Features" and "Diff" modules also need to be
+  #       enabled on non-dev environments.
+  coder:
+    subdir: dev
+    version: ~
+  schema:
+    subdir: dev
+    version: ~
+  devel:
+    subdir: dev
+    version: ~
+  module_filter:
+    subdir: dev
+    version: 1.8
+  stage_file_proxy:
+    subdir: dev
+    version: ~
+
+# Third party libraries:
+libraries:
+  ckeditor:
+    type: library
+    download:
+      type: file
+      # @see: public_html/sites/all/libraries/ckeditor/build-config.js
+      url: http://ckeditor.com/builder/download/83d8b8ef1005b62d0e1c92a094617e00
+      filename: ckeditor-custom-build.zip
+      md5: bbc7ff0961184eba3603735be442fd88
+  htmlpurifier:
+    type: library
+    download:
+      type: file
+      url: http://htmlpurifier.org/releases/htmlpurifier-4.7.0-lite.tar.gz
+      md5: 1fd03c15575d730ff193fa82c0193af2
+  modernizr:
+    type: library
+    download:
+      type: file
+      # @TODO: Find a way to download a custom, minified build.
+      # @see: http://modernizr.com/download/#-fontface-borderradius-boxshadow-opacity-rgba-generatedcontent-cssgradients-csstransitions-canvas-canvastext-inlinesvg-smil-svg-svgclippaths-touch-printshiv-mq-cssclasses-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_boxsizing-css_lastchild-css_remunit-css_vhunit-style_scoped-load-cssclassprefix:mdzr!
+      url: https://github.com/Modernizr/Modernizr/archive/v2.8.3.tar.gz
+      md5: 5be0fb2dd7e291e30cb5abe79bbadccf
