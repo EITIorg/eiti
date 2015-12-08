@@ -54,7 +54,7 @@ install:
 	@echo 'Securing the site settings.'
 	@chmod a-w sites/default/settings*.php sites/default
 	@echo ''
-	@echo 'Use oneUser/oneUser for credentials!'
+	@echo 'Use eitiUser/eitiUser for credentials!'
 
 # Prepare environment for local development.
 prepare-local: prepare

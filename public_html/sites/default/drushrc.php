@@ -67,7 +67,7 @@ $options['shell-aliases']['online'] = 'variable-set -y --always-set maintenance_
 $options['shell-aliases']['install'] = 'site-install eitibase';
 $command_specific['site-install'] = array(
   // Set a name for user one.
-  'account-name' => 'oneUser',
+  'account-name' => 'eitiUser',
   // 'account-pass' => 'ThiSIs4R@nd0mPa$swOrD',
 
   // Update the site name and mail.
