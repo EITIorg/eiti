@@ -584,3 +584,23 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * Remove the leading hash sign to enable.
  */
 # $conf['theme_debug'] = TRUE;
+
+
+/**
+ * Allow environment specific configuration overrides.
+ */
+if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.custom.php')) {
+  include_once('settings.custom.php');
+}
+else {
+  $message = array();
+  $message[] = 'Environment specific configuration file "settings.custom.php" is missing.';
+  $message[] = '';
+  $message[] = 'You can use the sample file:';
+  $message[] = '    cp sites/default/settings.{sample,custom}.php';
+  $message[] = 'But remember to update the content:';
+  $message[] = '    vi sites/default/settings.custom.php';
+  $message[] = '';
+  $message[] = '';
+  die(implode("\n", $message));
+}
