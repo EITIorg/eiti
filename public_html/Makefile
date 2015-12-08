@@ -60,7 +60,7 @@ install:
 prepare-local: prepare
 	@echo 'Creating file: "sites/default/update_scripts/environment/setup.local.php"'
 	@test -f sites/default/update_scripts/environment/setup.local.php || \
-		cp sites/default/update_scripts/environment/setup.local{_sample,}.php
+		cp sites/default/update_scripts/environment/setup.local{.sample,}.php
 	@echo 'Creating and updating file: "sites/default/settings.custom.php"'
 	@test -f sites/default/settings.custom.php || \
 		chmod ug+w sites/default && \
