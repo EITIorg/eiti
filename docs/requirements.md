@@ -3,9 +3,9 @@
 
 
 ## Minimum Hardware Requirements
-  * CPU: 2 cores, 64-bit
+  * CPU: 4 cores, 64-bit
 
-  * RAM: 8GB
+  * RAM: 16GB
 
   * HDD: 40GB - for storing user uploaded files, only 200MB are required for the project.
 
