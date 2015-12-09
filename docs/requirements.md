@@ -1,5 +1,5 @@
 
-# MCA Server Requirements
+# EITI Server Requirements
 
 
 ## Minimum Hardware Requirements
