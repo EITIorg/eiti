@@ -31,7 +31,7 @@
     
     Settings: 
     ```
-    max_execution_time = 60
+    max_execution_time = 360
     memory_limit = 512M
     post_max_size = 128M
     upload_max_filesize = 128M
