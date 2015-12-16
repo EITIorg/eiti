@@ -1,0 +1,381 @@
+<?php
+/**
+ * @file
+ * Provides a CountryEntity entity.
+ */
+
+/**
+ * Define administrative URLs.
+ */
+define('EITIENTITY_COUNTRY_UI_PATH', 'country');
+define('EITIENTITY_COUNTRY_ADMIN_UI_PATH', 'admin/content/country');
+define('EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH', 'admin/structure/country');
+
+/**
+ * Implements hook_entity_info().
+ */
+function eitientity_country_entity_info() {
+  $entity_info = array();
+
+  $menu_wildcard = '%country';
+  $entity_info['country'] = array(
+    'label' => t('Country'),
+    'plural label' => t('Countries'),
+    'description' => t('Custom country entity.'),
+
+    'base table' => 'eiticountry',
+    'module' => 'eitientity_country',
+
+    'entity class' => 'CountryEntity',
+    'controller class' => 'EntityAPIController',
+    //'extra fields controller class' => 'EntityDefaultExtraFieldsController',
+    'metadata controller class' => 'CountryMetadataController',
+
+    //'entity cache' => TRUE,
+    'field cache' => TRUE,
+    'static cache' => TRUE,
+
+    'fieldable' => TRUE,
+
+    'access callback' => 'eitientity_country_access',
+    'uri callback' => 'entity_class_uri',
+
+    'entity keys' => array(
+      'id' => 'id',
+      //'revision' => 'vid',
+      'bundle' => 'type',
+      'label' => 'name',
+      'language' => 'language',
+    ),
+
+    'field replacement' => array(
+      'name' => array(
+        'field' => array(
+          'type' => 'text',
+          'cardinality' => 1,
+          'translatable' => TRUE,
+        ),
+        'instance' => array(
+          'label' => t('Name'),
+          'description' => '',
+          'required' => TRUE,
+          'settings' => array(
+            'text_processing' => 0,
+          ),
+          'widget' => array(
+            'weight' => -5,
+          ),
+          'display' => array(
+            'default' => array(
+              'type' => 'hidden',
+            ),
+          ),
+        ),
+      ),
+    ),
+
+    'bundles' => array(),
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'bundles callback' => 'eitientity_country_get_types',
+
+    'admin ui' => array(
+      'path' => EITIENTITY_COUNTRY_ADMIN_UI_PATH,
+      'entity path' => EITIENTITY_COUNTRY_UI_PATH,
+      'bundle path' => EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH,
+      'controller class' => 'CountryEntityUIController',
+      'menu wildcard' => $menu_wildcard,
+      'file' => 'eitientity_country.admin.inc',
+    ),
+
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Full'),
+        'custom settings' => FALSE,
+      ),
+      'full_private' => array(
+        'label' => t('Full (Private)'),
+        'custom settings' => FALSE,
+      ),
+      'full_extra' => array(
+        'label' => t('Full (Extra)'),
+        'custom settings' => FALSE,
+      ),
+      'teaser' => array(
+        'label' => t('Teaser'),
+        'custom settings' => FALSE,
+      ),
+    ),
+  );
+
+  foreach ($entity_info['country']['bundles callback']() as $type => $bundle_info) {
+    $entity_info['country']['bundles'][$type] = array(
+      'label' => $bundle_info['label'],
+      'admin' => array(
+        'path' => EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
+      ),
+    );
+  }
+
+  return $entity_info;
+}
+
+/**
+ * Menu loader function: load a country from its path.
+ *
+ * @see entity_object_load()
+ *
+ * @param $entity_id
+ * @param $entity_type
+ * @return FALSE|CountryEntity
+ */
+function country_load($entity_id, $entity_type) {
+  return entity_object_load($entity_id, $entity_type);
+}
+
+/**
+ * Returns a list of country types.
+ */
+function eitientity_country_get_types() {
+  $items = array();
+
+  $items['simple'] = array(
+    'label' => t('Simple'),
+    'description' => t('Create a country.'),
+  );
+
+  return $items;
+}
+
+/**
+ * Returns the entity type name.
+ *
+ * @param $bundle
+ * @return string|FALSE
+ */
+function eitientity_country_type_get_name($bundle) {
+  $bundles = eitientity_country_get_types();
+  return (isset($bundles[$bundle]['label'])) ? $bundles[$bundle]['label'] : FALSE;
+}
+
+/**
+ * Access callback for custom country entities.
+ *
+ * @param $op
+ * @param CountryEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_country_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  $rights = &drupal_static(__FUNCTION__, array());
+
+  // Fix for panelizer.
+  if ($op == 'update') {
+    $op = 'edit';
+  }
+
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  // If no user object is supplied, the access check is for the current user.
+  if (empty($account)) {
+    $account = $GLOBALS['user'];
+  }
+
+  $cid = is_object($entity) ? "$entity_type:" . $entity->identifier() : FALSE;
+
+  // If we've already checked access for this node, user and op, return from cache.
+  if ($cid && isset($rights[$account->uid][$cid][$op])) {
+    return $rights[$account->uid][$cid][$op];
+  }
+
+  if ($op == 'view') {
+    if (empty($cid)) {
+      return FALSE;
+    }
+
+    $allow = FALSE;
+    if (user_access("$entity_type entity administer") || user_access("$entity_type entity access overview")) {
+      $allow = TRUE;
+    }
+    else if ($entity->status && user_access("$entity_type entity $op")) {
+      // For now we ignore the status field.
+      $allow = TRUE;
+    }
+
+    $rights[$account->uid][$cid][$op] = $allow;
+    return $allow;
+  }
+
+  if (user_access("$entity_type entity $op")) {
+    if ($cid) {
+      $rights[$account->uid][$cid][$op] = TRUE;
+    }
+    return TRUE;
+  }
+
+  if ($cid) {
+    $rights[$account->uid][$cid][$op] = FALSE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function eitientity_country_permission() {
+  $perms = array();
+
+  $entity_type = 'country';
+  $entity_info = entity_get_info($entity_type);
+
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%entity' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %entity", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+
+    if ($op == 'access overview') {
+      $perms[$permission_string]['title'] = t('Access the %entity overview page', $t_args);
+      $perms[$permission_string]['description'] = t('Get an overview of all %entity.', $t_args);
+    }
+  }
+
+  return $perms;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * @param $data
+ * @param $router_item
+ * @param $root_path
+ */
+function eitientity_country_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to 'country/add' on 'admin/content/country' page.
+  if ($root_path == EITIENTITY_COUNTRY_ADMIN_UI_PATH) {
+    $item = menu_get_item(EITIENTITY_COUNTRY_UI_PATH . '/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Gets the page title for the passed operation.
+ * @see entity_ui_get_page_title()
+ *
+ * @param $op
+ * @param $entity_type
+ * @param CountryEntity $entity
+ * @return null|string
+ */
+function eitientity_country_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
+  module_load_include('inc', 'entity', 'includes/entity.ui');
+
+  $label = entity_label($entity_type, $entity);
+
+  // Get the entity information.
+  $entity_info = entity_get_info($entity_type);
+  $t_args = array(
+    '@entity_type' => drupal_strtolower($entity_info['label']),
+    '%label' => $label,
+  );
+
+  switch ($op) {
+    case 'view':
+      return $label;
+    case 'edit':
+      return t('Edit @entity_type %label', $t_args);
+    case 'clone':
+      return t('Clone @entity_type %label', $t_args);
+    case 'revert':
+      return t('Revert @entity_type %label', $t_args);
+    case 'delete':
+      return t('Delete @entity_type %label', $t_args);
+    case 'export':
+      return t('Export @entity_type %label', $t_args);
+  }
+  if (isset($entity)) {
+    list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  }
+  else {
+    $bundle = NULL;
+  }
+  return entity_ui_get_action_title($op, $entity_type, $bundle);
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function eitientity_country_field_extra_fields() {
+  $extra = array();
+
+  foreach (eitientity_country_get_types() as $bundle_type => $bundle_info) {
+    $extra['country'][$bundle_type]['form'] = array(
+      'name' => array(
+        'label' => t('Name'),
+        'description' => t('Name of the @label', array('@label' => t('Country'))),
+        'weight' => -5,
+      ),
+    );
+  }
+
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ * @param array $build
+ * @param string $entity_type
+ */
+function eitientity_country_entity_view_alter(&$build, $entity_type) {
+  if ($entity_type != 'country') {
+    return;
+  }
+
+  /** @var CountryEntity $entity */
+  $entity = $build['#entity'];
+
+  // Add contextual links for this node, except when the node is already being
+  // displayed on its own page. Modules may alter this behavior (for example,
+  // to restrict contextual links to certain view modes) by implementing
+  // hook_node_view_alter().
+  if ($entity->identifier()) {
+    $build['#contextual_links'][$entity_type] = array($entity_type, array($entity->identifier()));
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ * @param string $owner
+ * @param string $plugin_type
+ * @return null|string
+ */
+function eitientity_country_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'panelizer' && $plugin_type == 'entity') {
+    return 'plugins/entity';
+  }
+
+  return NULL;
+}
