@@ -1,0 +1,482 @@
+<?php
+/**
+ * @file
+ * This file contains form/UI cleanup functions.
+ */
+
+/**
+ * Implements hook_update_projects_alter().
+ *
+ * Hide project-specific modules from the update list.
+ *
+ * @param array $projects
+ */
+function helpergeneric_update_projects_alter(&$projects) {
+  $not_updated = array();
+  foreach ($projects as $project_name => $project_info) {
+    if ($project_info['project_type'] == 'core') {
+      continue;
+    }
+
+    // Determine where the module is located.
+    $project_path = drupal_get_path($project_info['project_type'], $project_info['name']);
+
+    // Projects like 'features_extra' don't contain a module called 'features_extra' so an empty path is returned.
+    $project_location = '';
+    if (!empty($project_path)) {
+      $project_location = dirname($project_path);
+    }
+
+    // Do not query updates for custom modules and features.
+    switch ($project_location) {
+      case 'sites/all/modules/custom':
+      case 'sites/all/modules/features':
+        // Hide project-specific modules from the update list.
+        $not_updated[] = $projects[$project_name]['info']['name'];
+        unset($projects[$project_name]);
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_features_component_export_alter().
+ *
+ * Filter the available components in the (re)create feature form.
+ *
+ * @param array $component_export
+ * @param string $component
+ */
+function helpergeneric_features_component_export_alter(&$component_export, $component) {
+  switch ($component) {
+    case 'dependencies':
+      // Hide custom features from dependencies.
+      $entries_list = array(
+      );
+      break;
+
+    case 'menu_custom':
+      // Hide menus.
+      $entries_list = array(
+        'devel',
+        'main-menu',
+        'management',
+        'navigation',
+        'user-menu',
+      );
+      break;
+
+    case 'user_permission':
+      $entries_list = array(
+        // Hide admin_menu.module permissions.
+        'access administration menu',
+        'flush caches',
+        'display drupal links',
+
+        // Hide devel.module permissions.
+        'access devel information',
+        'execute php code',
+        'switch users',
+
+        // Hide ds_ui.module permissions.
+        'admin_view_modes',
+        'admin_fields',
+        'admin_classes',
+
+        // Hide less.module permissions.
+        'administer less',
+
+        // Hide stage_file_proxy.module permissions.
+        'administer stage_file_proxy settings',
+      );
+      break;
+
+    case 'variable':
+      // Hide variables that should not be exported.
+      $entries_list = array(
+        // Custom variables.
+
+
+        // Hide CORE variables.
+        'cache',
+        'cache_lifetime',
+        'clean_url',
+        'cron_key',
+        'cron_last',
+        'cron_semaphore',
+        'css_js_query_string',
+        'date_default_timezone',
+        'date_first_day',
+        'date_format_long',
+        'date_format_medium',
+        'date_format_short',
+        'dblog_row_limit',
+        'drupal_private_key',
+        'drupal_css_cache_files',
+        'drupal_http_request_fails',
+        'drupal_js_cache_files',
+        'error_level',
+        'file_temporary_path',
+        'image_toolkit',
+        'install_profile',
+        'install_task',
+        'install_time',
+        'javascript_parsed',
+        'maintenance_mode',
+        'menu_expanded',
+        'menu_masks',
+        'menu_rebuild_needed',
+        'page_cache_maximum_age',
+        'page_compression',
+        'path_alias_whitelist',
+        'preprocess_css',
+        'preprocess_js',
+        'site_403',
+        'site_404',
+        'site_default_country',
+        'site_frontpage',
+        'site_mail',
+        'site_name',
+        'site_slogan',
+        'teaser_length',
+        'theme_default',
+
+        // Cache specific variables.
+        'cache_flush_cache',
+        'cache_flush_cache_field',
+        'cache_flush_cache_filter',
+        'cache_flush_cache_form',
+        'cache_flush_cache_htmlpurifier',
+        'cache_flush_cache_image',
+        'cache_flush_cache_libraries',
+        'cache_flush_cache_menu',
+        'cache_flush_cache_page',
+        'cache_flush_cache_panels',
+        'cache_flush_cache_path',
+        'cache_flush_cache_restclient',
+        'cache_flush_cache_token',
+        'cache_flush_cache_variable',
+        'cache_flush_cache_views',
+        'cache_flush_cache_views_data',
+
+        // Hide admin_menu.module variables.
+        'admin_menu_devel_modules_enabled',
+
+        // Hide ctools.module variables.
+        'ctools_last_cron',
+        'cache_class_cache_ctools_css',
+
+        // Hide date.module variables.
+        'date_api_version',
+        'date_views_month_format_with_year',
+        'date_views_month_format_without_year',
+        'date_views_day_format_with_year',
+        'date_views_day_format_without_year',
+        'date_views_week_format_with_year',
+        'date_views_week_format_without_year',
+
+        // Hide entity.module variables.
+        'entity_cache_tables_created',
+
+        // Hide entityreference.module variables.
+        'entityreference:base-tables',
+
+        // Hide features.module variables.
+        'features_codecache',
+        'features_default_export_path',
+        'features_feature_locked',
+        'features_ignored_orphans',
+        'features_lock_mode',
+        'features_semaphore',
+
+        // Hide htmlpurifier.module variables.
+        'htmlpurifier_version_current',
+
+        // Hide job_scheduler.module variables.
+        'job_scheduler_rebuild_all',
+
+        // Hide jquery_update.module variables.
+        'jquery_update_compression_type',
+        'jquery_update_jquery_version',
+        'jquery_update_jquery_admin_version',
+        'jquery_update_jquery_cdn',
+
+        // Hide less.module variables.
+        'less_devel',
+        'less_dir',
+        'less_engine',
+        'less_watch',
+
+        // Hide locale.module variables.
+        'language_count',
+        'language_default',
+
+        // Hide media.module variables.
+        'media_icon_base_directory',
+        'media_dialogclass',
+        'media_modal',
+        'media_draggable',
+        'media_resizable',
+        'media_minwidth',
+        'media_width',
+        'media_height',
+        'media_position',
+        'media_zindex',
+        'media_backgroundcolor',
+        'media_opacity',
+
+        // Hide media_wysiwyg.module variables.
+        // 'media_wysiwyg_wysiwyg_allowed_attributes',
+        // 'media_wysiwyg_wysiwyg_allowed_types',
+        // 'media_wysiwyg_wysiwyg_browser_plugins',
+        // 'media_wysiwyg_wysiwyg_default_view_mode',
+        // 'media_wysiwyg_wysiwyg_icon_title',
+        // 'media_wysiwyg_wysiwyg_upload_directory',
+        'media_wysiwyg_view_mode_audio_file_wysiwyg_view_mode',
+        'media_wysiwyg_view_mode_audio_file_wysiwyg_view_mode_status',
+        'media_wysiwyg_view_mode_audio_wysiwyg_restricted_view_modes',
+        'media_wysiwyg_view_mode_audio_wysiwyg_restricted_view_modes_status',
+        'media_wysiwyg_view_mode_document_file_wysiwyg_view_mode',
+        'media_wysiwyg_view_mode_document_file_wysiwyg_view_mode_status',
+        'media_wysiwyg_view_mode_document_wysiwyg_restricted_view_modes',
+        'media_wysiwyg_view_mode_document_wysiwyg_restricted_view_modes_status',
+        'media_wysiwyg_view_mode_image_file_wysiwyg_view_mode',
+        'media_wysiwyg_view_mode_image_file_wysiwyg_view_mode_status',
+        'media_wysiwyg_view_mode_image_wysiwyg_restricted_view_modes',
+        'media_wysiwyg_view_mode_image_wysiwyg_restricted_view_modes_status',
+        'media_wysiwyg_view_mode_video_file_wysiwyg_view_mode',
+        'media_wysiwyg_view_mode_video_file_wysiwyg_view_mode_status',
+        'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes',
+        'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes_status',
+
+        // Hide recaptcha.module variables.
+        'recaptcha_private_key',
+        'recaptcha_public_key',
+
+        // Hide update.module variables.
+        'update_last_check',
+
+        // Hide update_scripts.module variables.
+        'update_scripts_clear_cache',
+        'update_scripts_directory',
+        'update_scripts_revert_features',
+        'update_scripts_user_one_updated',
+
+        // Hide variable.module variables.
+        'variable_module_list',
+
+        // Hide views.module variables.
+        'views_defaults',
+        'views_show_additional_queries',
+
+        // Hide views_ui.module variables.
+        'views_ui_always_live_preview',
+        'views_ui_custom_theme',
+        'views_ui_display_embed',
+        'views_ui_show_advanced_column',
+        'views_ui_show_advanced_help_warning',
+        'views_ui_show_listing_filters',
+        'views_ui_show_master_display',
+        'views_ui_show_performance_statistics',
+        'views_ui_show_preview_information',
+        'views_ui_show_sql_query',
+        'views_ui_show_sql_query_where',
+      );
+
+      $variable_name_prefixes = array(
+      );
+      foreach ($component_export['options']['sources'] as $name) {
+        foreach ($variable_name_prefixes as $prefix) {
+          if (strpos($name, $prefix) === 0) {
+            // Only remove the variable and do not display any message.
+            unset($component_export['options']['sources'][$name]);
+          }
+        }
+      }
+      break;
+
+    case 'views_view':
+      // Hide views.
+      $entries_list = array(
+        'feeds_log',
+        'redirects',
+      );
+      break;
+
+  }
+
+  if (empty($entries_list)) {
+    return;
+  }
+
+  $removed_entries_list = array();
+  foreach ($entries_list as $name) {
+    if (isset($component_export['options']['sources'][$name])) {
+      unset($component_export['options']['sources'][$name]);
+      $removed_entries_list[] = check_plain($name);
+    }
+
+    if ($component == 'dependencies') {
+      if (isset($component_export['options']['detected'][$name])) {
+        unset($component_export['options']['detected'][$name]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_features_api_alter().
+ *
+ * Prevent exporting of some features API components.
+ *
+ * @param array $components
+ */
+function helpergeneric_features_api_alter(&$components) {
+  // We manage menu_links manually or via update scripts.
+  unset($components['menu_links']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_form().
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
+  if (!helpergeneric_cleanup_ui()) {
+    return;
+  }
+
+  // Do not display as vertical tabs.
+  unset($form['additional_settings']['#type']);
+
+  if (isset($form['author'])) {
+    $form['author']['#access'] = FALSE;
+  }
+
+  if (isset($form['menu'])) {
+    $form['menu']['#access'] = FALSE;
+  }
+
+  if (isset($form['path'])) {
+    $form['path']['#access'] = FALSE;
+  }
+
+  if (isset($form['redirect'])) {
+    $form['redirect']['#access'] = FALSE;
+  }
+
+  if (isset($form['revision_information'])) {
+    $form['revision_information']['#access'] = FALSE;
+  }
+
+  if (isset($form['options']['promote'])) {
+    $form['options']['promote']['#access'] = FALSE;
+  }
+
+  if (isset($form['options']['sticky'])) {
+    $form['options']['sticky']['#access'] = FALSE;
+  }
+
+  // Restrict summary length.
+  $form['#validate'][] = 'helpergeneric_node_form_summary_validate';
+}
+
+/**
+ * Form validation handler for node_form_alter().
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function helpergeneric_node_form_summary_validate($form, &$form_state, $form_id) {
+  if (empty($form_state['values']['body'][LANGUAGE_NONE][0]['summary'])) {
+    return;
+  }
+
+  $teaser_length = variable_get('teaser_length', 600);
+  $summary_length = drupal_strlen(trim($form_state['values']['body'][LANGUAGE_NONE][0]['summary']));
+  if ($summary_length > $teaser_length) {
+    form_set_error('body][und][0][summary', t('The Summary must be less than %max characters, you provided %count characters.', array('%max' => $teaser_length, '%count' => $summary_length)));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_profile_form().
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function helpergeneric_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  if (!helpergeneric_cleanup_ui()) {
+    return;
+  }
+
+  if (isset($form['redirect'])) {
+    $form['redirect']['#access'] = FALSE;
+  }
+
+  if (isset($form['profile_main']['redirect'])) {
+    $form['profile_main']['redirect']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function helpergeneric_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_login') {
+    drupal_set_title('Log in');
+    $form['actions']['cancel'] = array(
+      '#type' => 'link',
+      '#title' => t('Request new password'),
+      '#href' => 'user/password',
+      '#weight' => 20,
+    );
+  }
+
+  if (in_array($form_id, array('file_entity_add_upload', 'media_internet_add_upload', 'media_wysiwyg_format_form'))) {
+    if (!helpergeneric_cleanup_ui()) {
+      return;
+    }
+
+    if (isset($form['redirect'])) {
+      $form['redirect']['#access'] = FALSE;
+    }
+
+    if (isset($form['options']['fields']['redirect'])) {
+      $form['options']['fields']['redirect']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for file_entity_edit().
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function helpergeneric_form_file_entity_edit_alter(&$form, &$form_state, $form_id) {
+  if (!helpergeneric_cleanup_ui()) {
+    return;
+  }
+
+  if (isset($form['path'])) {
+    $form['path']['#access'] = FALSE;
+  }
+
+  if (isset($form['redirect'])) {
+    $form['redirect']['#access'] = FALSE;
+  }
+
+  if (isset($form['user'])) {
+    $form['user']['#access'] = FALSE;
+  }
+}
