@@ -1,6 +1,7 @@
 
 # Ignore development specific files and folders.
 .idea
+*.sublime*
 *--ignore.*
 /.buildpath
 /.project
