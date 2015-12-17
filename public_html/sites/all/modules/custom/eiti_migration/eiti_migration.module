@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ *
+ * Main .module file, for migrations doesn't have to have anything inside.
+ *
+ * But we'll use it to hold basic helper functions used for migrations and
+ * other migration-related functionality.
+ */

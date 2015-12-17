@@ -1,0 +1,10 @@
+name = EITI Migration
+description = This module is responsible for the migration process from the Old (Legacy) Drupal 7 to the New one.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = migrate
+dependencies[] = migrate_extras
+dependencies[] = migrate_d2d
+files[] = eiti_migration.migrate.inc
+files[] = eiti_migration.demo.inc
