@@ -199,7 +199,7 @@ function eitict_article_field_default_field_instances() {
   $field_instances['node-article-field_event_date'] = array(
     'bundle' => 'article',
     'deleted' => 0,
-    'description' => 'Please specify the event date.',
+    'description' => 'Please specify the event date(s). Optionally you can specify when the event ends.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -407,7 +407,7 @@ function eitict_article_field_default_field_instances() {
   t('If the article references any of the countries, please specify them here.');
   t('If there\'s a featured image, specify it.');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
-  t('Please specify the event date.');
+  t('Please specify the event date(s). Optionally you can specify when the event ends.');
   t('Specify the event location.');
   t('Tags');
   t('Use tags to wire this content to other related content.');
