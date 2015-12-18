@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitict_article feature.
+ */
+
+include_once 'eitict_article.features.inc';
