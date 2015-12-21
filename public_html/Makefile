@@ -43,7 +43,7 @@ install:
 
 	@echo 'Installing a new environment...'
 	@echo ' - this might take a couple of minutes.'
-	@drush site-install eitibase --yes
+	@drush install --yes
 
 	@echo 'Setting up the new environment...'
 	@drush update-scripts-run --run-all --yes
@@ -54,7 +54,8 @@ install:
 	@echo 'Securing the site settings.'
 	@chmod a-w sites/default/settings*.php sites/default
 	@echo ''
-	@echo 'Use eitiUser/eitiUser for credentials!'
+	@echo 'Run `drush uli` for a one time login link for UID1.'
+	@echo 'Or use eitiUser/eitiUser for credentials!'
 
 # Prepare environment for local development.
 prepare-local: prepare
