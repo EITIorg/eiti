@@ -65,6 +65,9 @@ prepare-local: prepare
 	@test -f sites/default/settings.custom.php || \
 		chmod ug+w sites/default && \
 		cp sites/default/settings.{sample,custom}.php
+	@echo 'Creating file: "sites/default/drushrc.custom.php"'
+	@test -f sites/default/drushrc.custom.php || \
+		cp sites/default/drushrc.{sample,custom}.php
 
 # Prepare environment for staging.
 prepare-staging: prepare
