@@ -3,8 +3,16 @@ description = This module is responsible for the migration process from the Old 
 core = 7.x
 package = EITI Custom
 
+; Functional dependencies.
 dependencies[] = migrate
 dependencies[] = migrate_extras
 dependencies[] = migrate_d2d
+
+; Migration-related dependencies.
+dependencies[] = etict_article
+
+
 files[] = eiti_migration.migrate.inc
-files[] = eiti_migration.demo.inc
+files[] = migrations/eiti_migration.demo.inc
+files[] = migrations/eiti_migration.core.inc
+files[] = migrations/eiti_migration.article.inc
