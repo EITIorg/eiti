@@ -19,7 +19,17 @@ class EITIUsersMigration extends DrupalUser7Migration {
 
   public function prepareRow($row) {
     parent::prepareRow($row);
-    // @TODO
-    // Decide the roles.
+
+    // Fetch the old role and find out what is the correct new role.
+    $query = Database::getConnection('default', 'legacy')->select('users_roles', 'ur');
+    $query->join('role', 'r', 'ur.rid = r.rid');
+    $query->fields('ur', array('rid'));
+    $query->fields('r', array('name'));
+    $query->condition('uid', $row->uid);
+    $result = $query->execute();
+    foreach ($result as $role_row) {
+      $new_role = user_role_load_by_name($role_row->name);
+      $row->roles[] = $new_role->rid;
+    }
   }
 }
