@@ -40,6 +40,7 @@ function eitict_article_field_default_field_instances() {
     'required' => FALSE,
     'settings' => array(
       'display_summary' => TRUE,
+      'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -84,6 +85,7 @@ function eitict_article_field_default_field_instances() {
     'label' => 'Article Type',
     'required' => 1,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -121,6 +123,7 @@ function eitict_article_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
+      'entity_translation_sync' => FALSE,
       'file_directory' => 'documents',
       'file_extensions' => 'xls xlsx doc docx ppt pptx pdf jpeg jpg gif png rtf txt',
       'max_filesize' => '20MB',
@@ -180,6 +183,7 @@ function eitict_article_field_default_field_instances() {
     'label' => 'Countries',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -231,6 +235,7 @@ function eitict_article_field_default_field_instances() {
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -276,6 +281,7 @@ function eitict_article_field_default_field_instances() {
     'label' => 'Event Location',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -320,6 +326,7 @@ function eitict_article_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
+      'entity_translation_sync' => FALSE,
       'file_directory' => 'image_featured',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '4mb',
@@ -384,6 +391,7 @@ function eitict_article_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
+      'entity_translation_sync' => FALSE,
       'file_directory' => 'image_gallery',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -444,6 +452,7 @@ function eitict_article_field_default_field_instances() {
     'label' => 'Tags',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
