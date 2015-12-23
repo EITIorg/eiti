@@ -148,7 +148,7 @@ function eitict_article_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -191,7 +191,7 @@ function eitict_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -354,6 +354,70 @@ function eitict_article_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_image_gallery'.
+  $field_instances['node-article-field_image_gallery'] = array(
+    'bundle' => 'article',
+    'deleted' => 0,
+    'description' => 'If you want to upload multiple images and display them in a gallery fashion, use this field.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_image_gallery',
+    'label' => 'Image Gallery',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'image_gallery',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 'media_internet',
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_tags'.
   $field_instances['node-article-field_tags'] = array(
     'bundle' => 'article',
@@ -390,7 +454,7 @@ function eitict_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -407,6 +471,8 @@ function eitict_article_field_default_field_instances() {
   t('If the article references any of the countries, please specify them here.');
   t('If there\'s a featured image, specify it.');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
+  t('If you want to upload multiple images and display them in a gallery fashion, use this field.');
+  t('Image Gallery');
   t('Please specify the event date(s). Optionally you can specify when the event ends.');
   t('Specify the event location.');
   t('Tags');

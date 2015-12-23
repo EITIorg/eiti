@@ -21,7 +21,7 @@ function eitict_article_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Event Details',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_event_date',
       1 => 'field_event_location',
