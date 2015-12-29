@@ -1239,7 +1239,7 @@ abstract class Migration extends MigrationBase {
         $callbacks = $mapping->getCallbacks();
         foreach ($callbacks as $callback) {
           if (isset($destination_values)) {
-            $destination_values = call_user_func($callback, $destination_values);
+            $destination_values = call_user_func_array($callback['callback'], array_merge(array($destination_values), $callback['params']));
           }
         }
 
@@ -1377,6 +1377,11 @@ abstract class Migration extends MigrationBase {
     // Instantiate each migration, and store back in the array.
     foreach ($source_migrations as $key => $source_migration) {
       $source_migrations[$key] = Migration::getInstance($source_migration);
+      if (!isset($source_migrations[$key])) {
+        MigrationBase::displayMessage(t('The @source cannot be resolved to a migration instance.',
+          array('@source' => $source_migration)));
+        unset($source_migrations[$key]);
+      }
     }
 
     $results = array();
