@@ -17,6 +17,10 @@ class EITIUsersMigration extends DrupalUser7Migration {
     $this->team[] = new MigrateTeamMember('Sergiu Nagailic', 'snagailic@developmentgateway.org', t('Developer'));
   }
 
+
+  /**
+   * We need to do some work to properly import users.
+   */
   public function prepareRow($row) {
     parent::prepareRow($row);
 

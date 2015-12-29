@@ -13,6 +13,7 @@ function eiti_migration_migrate_api() {
   $legacy_database = variable_get('eiti_migration_db_name', '');
   $legacy_username = variable_get('eiti_migration_db_user_name', '');
   $legacy_password = variable_get('eiti_migration_db_user_pass', '');
+  $legacy_public = variable_get('eiti_migration_files_public', '');
   if ($legacy_database == '' || $legacy_username == '' || $legacy_password == '') {
     drupal_set_message('Please <a href="admin/content/migrate/configure-legacy">configure the Legacy System settings</a> on this machine before you run or register your migrations. Make sure you complete all the fields.');
     return array();
@@ -43,6 +44,7 @@ function eiti_migration_migrate_api() {
     'class_name' => 'ExcelDemoEitiMigration',
     'group_name' => 'preparations',
   );
+
   // #################################
   // ######## CORE MIGRATIONS ########
   // #################################
@@ -51,14 +53,15 @@ function eiti_migration_migrate_api() {
     'class_name' => 'DrupalPicture7Migration',
     'group_name' => 'core',
     'description' => t('Migrate user Pictures.'),
-    'detination_dir' => 'public://pictures',
-    'source_dir' => variable_get('eiti_migration_files_public', ''),
+    'destination_dir' => 'public://pictures',
+    'source_dir' => $legacy_public,
   );
   $migrations['migrations']['EITIUsersMigration'] = array(
     'class_name' => 'EITIUsersMigration',
     'group_name' => 'core',
     'description' => t('Migrate users.'),
-    'picture_migration' => 'EITIUserPictureMigration'
+    'picture_migration' => 'EITIUserPictureMigration',
+    'dependencies' => array('EITIUserPictureMigration'),
   );
   $migrations['migrations']['EITITaxonomyTagsNewsMigration'] = array(
     'class_name' => 'DrupalTerm7Migration',
@@ -88,11 +91,69 @@ function eiti_migration_migrate_api() {
   // ####################################
   // ######## ARTICLE MIGRATIONS ########
   // ####################################
-//  // Article Migrations goes here: News articles, Blog Posts and Events.
-//  $migrations['migrations']['EITINewsToArticleMigration'] = array(
-//    'class_name' => 'EITINewsToArticleMigration',
-//    'group_name' => 'articles',
-//  );
+  // Article Migrations goes here: News articles, Blog Posts and Events.
+
+  // But first, files.
+  $migrations['migrations']['EITINewsFeaturedImageMigration'] = array(
+    'class_name' => 'EITINewsFeaturedImageMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://',
+    'bundle' => 'image',
+    'description' => t('Migrates the Featured Images from the Legacy System (2 fields to one).'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITINewsImageGalleryMigration'] = array(
+    'class_name' => 'EITINewsImageGalleryMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://image_gallery',
+    'bundle' => 'image',
+    'description' => t('Migrates the Gallery-related Images from the Legacy System (2 fields to one).'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITINewsAttachedFilesMigration'] = array(
+    'class_name' => 'EITINewsAttachedFilesMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Attached Files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITINewsUploadFilesMigration'] = array(
+    'class_name' => 'EITINewsUploadFilesMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Upload field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITINewsToArticleMigration'] = array(
+    'class_name' => 'EITINewsToArticleMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'source_type' => 'news',
+    'destination_type' => 'article',
+    'description' => t('Migration responsible for migrating news articles to the article content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITINewsFeaturedImageMigration',
+      'EITINewsImageGalleryMigration',
+      'EITINewsUploadFilesMigration',
+      'EITINewsAttachedFilesMigration',
+      'EITITaxonomyTagsNewsMigration'
+    ),
+  );
 //  $migrations['migrations']['EITIBlogToArticleMigration'] = array(
 //    'class_name' => 'EITIBlogToArticleMigration',
 //    'group_name' => 'articles',
