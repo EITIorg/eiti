@@ -1,0 +1,55 @@
+{
+  "name": "disbursement",
+  "children": [
+    {
+      "name": "offshore",
+      "children" : [
+        {
+          "name": "US Treasury",
+          "size": 100000
+        },
+        { 
+          "name": "Land and Water Conservation",
+          "size": 20000
+        },
+        {
+          "name": "Other",
+          "size": 10000
+        },
+          {
+            "name": "Historic Preservation",
+            "size": 10000
+          },
+          {
+            "name": "States",
+            "size": 5000
+          }
+      ]
+    },
+    {
+      "name": "onshore",
+      "children": [
+        {
+          "name": "States",
+          "size": 40000           
+        },
+        {
+          "name": "Reclamation",
+          "size": 40000
+        },
+          {
+            "name": "American Indian Tribes",
+            "size": 20000
+          },
+          {
+            "name": "U.S. Treasury",
+            "size": 15000
+          },
+            {
+              "name": "Other",
+              "size": 7500
+            }
+      ]
+    }
+  ]
+}

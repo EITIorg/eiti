@@ -1,0 +1,107 @@
+{
+  "name":"Revenue",
+  "children":[
+    {
+      "name":"Mining",
+      "children":[
+        {
+          "name":"Gold",
+          "children":[
+            {
+              "name":"AngloGold Ashanti (Obuasi)",
+              "value":25303243
+            },
+            {
+              "name":"Adamus",
+              "value":16256814
+            },
+            {
+              "name":"GSR-Prestea",
+              "value":22813726
+            },
+            {
+              "name":"Goldfields Tarkwa",
+              "value":102422421
+            },
+            {
+              "name":"Abosso",
+              "value":25032098
+            },
+            {
+              "name":"GSR Wassa",
+              "value":21828134
+            },
+            {
+              "name":"Chirano",
+              "value":40456808
+            },
+            {
+              "name":"Newmont Ghana Gold",
+              "value":47038033
+            },
+            {
+              "name":"Perseus",
+              "value":24051513
+            },
+            {
+              "name":"Noble Gold",
+              "value":713299
+            },
+            {
+              "name":"Prestea Sankofa",
+              "value":3091400
+            }
+          ]
+        },
+        {
+          "name":"Bauxite",
+          "children":[
+            {
+              "name":"Ghana Bauxite",
+              "value":1985269
+            }
+          ]
+        },
+        {
+          "name":"Manganese",
+          "children":[
+            {
+              "name":"Ghana Manganese Ltd",
+              "value":10114274
+            }
+          ]
+        },
+        {
+          "name":"Limestone",
+          "children":[
+            {
+              "name":"West Africa",
+              "value":1030799
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name":"Oil/Gas",
+      "children":[
+        {
+          "name":"Tullow(Ghana) Ltd",
+          "value":63867000
+        },
+        {
+          "name":"Kosmos Energy Ghana Hc",
+          "value":35438000
+        },
+        {
+          "name":"Ghana National Petroleum Corporation",
+          "value":54107132
+        },
+        {
+          "name":"Saltpond Offshore Producing Company",
+          "value":33945400
+        }
+      ]
+    }
+  ]
+}
