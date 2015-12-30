@@ -54,6 +54,10 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
     ```
     vagrant ssh
     ```
+    NOTE: On windows you can run `vagrant ssh-config` to view the information required for [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/). 
+
+6.  For now the visualisations can be be access on [eiti-visualizations-local.dev](http://eiti-visualizations-local.dev/).
+    To setup the Drupal project continue with the next set of instructions.
 
 
 ## GUEST: Environment Setup Instructions:
@@ -107,7 +111,7 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
         make
         ```
 
-4.  Check if the project has been installed properly, for local development go to: http://eiti-local.dev/
+4.  Check if the project has been installed properly, for local development go to: [eiti-local.dev](http://eiti-local.dev/)
 
 
 ## More Info:
