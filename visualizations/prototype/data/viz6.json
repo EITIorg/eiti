@@ -1,55 +1,21 @@
 {
   "name": "disbursement",
   "children": [
-    {
-      "name": "offshore",
-      "children" : [
         {
-          "name": "US Treasury",
-          "size": 100000
+          "name": "The Petroleum Tax Office",
+          "size": 1031251468630
         },
         { 
-          "name": "Land and Water Conservation",
-          "size": 20000
+          "name": "The Norwegian Petroleum Directorate",
+          "size": 21178254000
         },
         {
-          "name": "Other",
-          "size": 10000
-        },
-          {
-            "name": "Historic Preservation",
-            "size": 10000
-          },
-          {
-            "name": "States",
-            "size": 5000
-          }
-      ]
-    },
-    {
-      "name": "onshore",
-      "children": [
-        {
-          "name": "States",
-          "size": 40000           
+          "name": "Directorate of Customs and Excise",
+          "size": 262139000
         },
         {
-          "name": "Reclamation",
-          "size": 40000
-        },
-          {
-            "name": "American Indian Tribes",
-            "size": 20000
-          },
-          {
-            "name": "U.S. Treasury",
-            "size": 15000
-          },
-            {
-              "name": "Other",
-              "size": 7500
-            }
-      ]
-    }
+          "name": "Norges Bank",
+          "size": 710866858000
+        }
   ]
 }

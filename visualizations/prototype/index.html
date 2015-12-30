@@ -40,6 +40,7 @@
         <h3 class="text-muted">EITI Visualization Sampler</h3>
         <nav>
           <ul class="nav nav-justified">
+            <li><a href="#viz2head">VIZ #2</a></li>
             <li><a href="#viz3head">VIZ #3</a></li>
             <li><a href="#viz4head">VIZ #4</a></li>
             <li><a href="#viz5head">VIZ #5</a></li>
@@ -53,6 +54,10 @@
       </div>
       <br/><br/><br/>
       <!-- Jumbotron -->
+      <div class="jumbotron" id="viz2head">
+        <h3>Viz #2 - Production Volume</h3>
+        <p id="viz2"></p>
+      </div>
       <div class="jumbotron" id="viz3head">
         <h3>Viz #3 - Production Figures, Historical, Per Commodity</h3>
         <p id="viz3"></p>
@@ -66,7 +71,7 @@
         <p id="viz5"></p>
       </div>
       <div class="jumbotron" id="viz6head">
-        <h3>Viz #6 - Government Disbursement of Extractives Income</h3>
+        <h3 class="info">Viz #6 - Disbursed Revenue</h3>
         <p id="viz6"></p>
       </div>
       <div class="jumbotron" id="viz7head">
@@ -109,6 +114,109 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.js"></script>
         <script src="js/vendor/sankey.js"></script>
         <script>
+
+            $(
+
+              function() {
+            /********** VIZ #2 **********/
+            debugger;
+            var margin8 = {top: 20, right: 20, bottom: 30, left: 40},
+                width8 = 600 - margin8.left - margin8.right,
+                height8 = 300 - margin8.top - margin8.bottom;
+
+            var x0 = d3.scale.ordinal()
+                .rangeRoundBands([0, width8], .1);
+
+            var x1 = d3.scale.ordinal();
+
+            var y8 = d3.scale.linear()
+                .range([height8, 0]);
+
+            var color = d3.scale.ordinal()
+                .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x0)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis()
+                .scale(y8)
+                .orient("left")
+                .tickFormat(d3.format(".2s"));
+
+            var svg8 = d3.select("#viz2").append("svg")
+                .attr("width", width8 + margin8.left + margin8.right)
+                .attr("height", height8 + margin8.top + margin8.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin8.left + "," + margin8.top + ")");
+
+            d3.csv("data/viz2.csv", function(error, data) {
+              if (error) throw error;
+
+              var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "Year"; });
+
+              data.forEach(function(d) {
+                d.ages = ageNames.map(function(name) { return {name: name, value: +d[name]}; });
+              });
+
+              x0.domain(data.map(function(d) { return d.Year; }));
+              x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
+              y8.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
+
+              svg8.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height8 + ")")
+                  .call(xAxis);
+
+              svg8.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis)
+                .append("text")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Revenue (USD)");
+
+              var state8 = svg8.selectAll(".state")
+                  .data(data)
+                .enter().append("g")
+                  .attr("class", "g")
+                  .attr("transform", function(d) { return "translate(" + x0(d.Year) + ",0)"; });
+
+              state8.selectAll("rect")
+                  .data(function(d) { return d.ages; })
+                .enter().append("rect")
+                  .attr("width", x1.rangeBand())
+                  .attr("x", function(d) { return x1(d.name); })
+                  .attr("y", function(d) { return y8(d.value); })
+                  .attr("height", function(d) { return height8 - y8(d.value); })
+                  .style("fill", function(d) { return color(d.name); });
+
+              var legend = svg8.selectAll(".legend")
+                  .data(ageNames.slice().reverse())
+                .enter().append("g")
+                  .attr("class", "legend")
+                  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+              legend.append("rect")
+                  .attr("x", 28)
+                  .attr("width", 18)
+                  .attr("height", 18)
+                  .style("fill", color);
+
+              legend.append("text")
+                  .attr("x", 114)
+                  .attr("y", 9)
+                  .attr("dy", ".35em")
+                  .style("text-anchor", "end")
+                  .text(function(d) { return d; });
+
+            });
+
+              }
+              );
+
         /********* VIZ #3 ********/
             var margin3 = {top: 20, right: 20, bottom: 30, left: 40},
                 width3 = 600 - margin3.left - margin3.right,
