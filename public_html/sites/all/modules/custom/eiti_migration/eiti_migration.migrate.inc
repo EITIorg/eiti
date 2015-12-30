@@ -105,8 +105,41 @@ function eiti_migration_migrate_api() {
     'description' => t('Migrates the Featured Images from the Legacy System (2 fields to one).'),
     'dependencies' => array('EITIUsersMigration'),
   );
+  $migrations['migrations']['EITIBlogFeaturedImageMigration'] = array(
+    'class_name' => 'EITIBlogFeaturedImageMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://',
+    'bundle' => 'image',
+    'description' => t('Migrates the Featured Images from the Legacy System (2 fields to one).'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIEventFeaturedImageMigration'] = array(
+    'class_name' => 'EITIEventFeaturedImageMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://',
+    'bundle' => 'image',
+    'description' => t('Migrates the Featured Images from the Legacy System (2 fields to one).'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
   $migrations['migrations']['EITINewsImageGalleryMigration'] = array(
     'class_name' => 'EITINewsImageGalleryMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://image_gallery',
+    'bundle' => 'image',
+    'description' => t('Migrates the Gallery-related Images from the Legacy System (2 fields to one).'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIBlogImageGalleryMigration'] = array(
+    'class_name' => 'EITIBlogImageGalleryMigration',
     'group_name' => 'articles',
     'user_migration' => 'EITIUsersMigration',
     'skip_pictures' => TRUE,
@@ -138,15 +171,51 @@ function eiti_migration_migrate_api() {
     'description' => t('Migrates the Upload field files.'),
     'dependencies' => array('EITIUsersMigration'),
   );
+  $migrations['migrations']['EITIBlogUploadFilesMigration'] = array(
+    'class_name' => 'EITIBlogUploadFilesMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Upload field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIEventUploadFilesMigration'] = array(
+    'class_name' => 'EITIEventUploadFilesMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Upload field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIIMCEFilesMigration'] = array(
+    'class_name' => 'EITIIMCEFilesMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'description' => t('Migrates the IMCE files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+
+  // Now, nodes themselves.
   $migrations['migrations']['EITINewsToArticleMigration'] = array(
     'class_name' => 'EITINewsToArticleMigration',
     'group_name' => 'articles',
     'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
     'source_type' => 'news',
     'destination_type' => 'article',
     'description' => t('Migration responsible for migrating news articles to the article content-type.'),
     'soft_dependencies' => array(
       'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
       'EITINewsFeaturedImageMigration',
       'EITINewsImageGalleryMigration',
       'EITINewsUploadFilesMigration',
@@ -154,14 +223,39 @@ function eiti_migration_migrate_api() {
       'EITITaxonomyTagsNewsMigration'
     ),
   );
-//  $migrations['migrations']['EITIBlogToArticleMigration'] = array(
-//    'class_name' => 'EITIBlogToArticleMigration',
-//    'group_name' => 'articles',
-//  );
-//  $migrations['migrations']['EITIEventsToArticleMigration'] = array(
-//    'class_name' => 'EITIEventsToArticleMigration',
-//    'group_name' => 'articles',
-//  );
+  $migrations['migrations']['EITIBlogToArticleMigration'] = array(
+    'class_name' => 'EITIBlogToArticleMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
+    'source_type' => 'blog',
+    'destination_type' => 'article',
+    'description' => t('Migration responsible for migrating blog posts to the article content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
+      'EITIBlogFeaturedImageMigration',
+      'EITIBlogImageGalleryMigration',
+      'EITIBlogUploadFilesMigration',
+      'EITITaxonomyTagsBlogMigration'
+    ),
+  );
+  $migrations['migrations']['EITIEventsToArticleMigration'] = array(
+    'class_name' => 'EITIEventsToArticleMigration',
+    'group_name' => 'articles',
+    'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
+    'source_type' => 'event',
+    'destination_type' => 'article',
+    'description' => t('Migration responsible for migrating event nodes to the article content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
+      'EITIEventFeaturedImageMigration',
+      'EITIEventUploadFilesMigration',
+      'EITITaxonomyTagsEventsMigration'
+    ),
+  );
 
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
