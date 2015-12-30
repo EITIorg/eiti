@@ -30,6 +30,12 @@ vhosts:
     template: default
     source: ./old_html
     docroot: /var/www/eiti-old-local
+  - domain: eiti-visualizations-local.dev
+    aliases:
+      - www.eiti-visualizations-local.dev
+    template: default
+    source: ./visualizations
+    docroot: /var/www/eiti-visualizations-local
 
 
 ####################
