@@ -23,6 +23,13 @@ abstract class EITIGenericToArticleMigration extends DrupalNode7Migration {
     $this->addFieldMapping('title_field', 'title');
     $this->addFieldMapping('title_field:language', 'language');
     $this->addFieldMapping('body:language', 'language');
+
+    // Now let's handle the paths.
+    $this->removeFieldMapping('path', 'path');
+    $this->addFieldMapping('migrate_redirects', 'path');
+    $this->addFieldMapping('pathauto')
+    ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
+    ->defaultValue(TRUE);
   }
 
   /**
