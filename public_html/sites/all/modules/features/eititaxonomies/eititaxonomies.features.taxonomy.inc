@@ -9,6 +9,14 @@
  */
 function eititaxonomies_taxonomy_default_vocabularies() {
   return array(
+    'document_category' => array(
+      'name' => 'Document Category',
+      'machine_name' => 'document_category',
+      'description' => 'Categories used to classify documents.',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'tags' => array(
       'name' => 'Tags',
       'machine_name' => 'tags',
