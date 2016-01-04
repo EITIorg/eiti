@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ *
+ * Main .module file, for migrations doesn't have to have anything inside.
+ *
+ * But we'll use it to hold basic helper functions used for migrations and
+ * other migration-related functionality.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function eiti_migration_menu() {
+  // Legacy System configs used for migration.
+  $items['admin/content/migrate/configure-legacy'] = array(
+    'title' => 'Legacy System',
+    'type' => MENU_LOCAL_TASK,
+    'description' => 'Configure migration settings for the Legacy System',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eiti_migration_settings'),
+    'access arguments' => array(MIGRATE_ACCESS_ADVANCED),
+    'file' => 'eiti_migration.admin.inc',
+    'weight' => 200,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_migrate_overview().
+ */
+function eiti_migration_migrate_overview() {
+  return t('Please <a href="admin/content/migrate/configure-legacy">configure the Legacy System settings</a> on this machine before you run or register your migrations.');
+}

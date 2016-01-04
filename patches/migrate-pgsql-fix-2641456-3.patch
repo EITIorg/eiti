@@ -1,0 +1,28 @@
+From 3b77a61fefecc9f3d6479a079e1a0a5a7d47d3aa Mon Sep 17 00:00:00 2001
+From: Sergiu Nagailic | Nikro <nikro.md@gmail.com>
+Date: Tue, 29 Dec 2015 20:55:38 +0700
+Subject: [PATCH] Issue #2641456 by Nikro: Small fix for postgres.
+
+---
+ plugins/sources/sqlmap.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/plugins/sources/sqlmap.inc b/plugins/sources/sqlmap.inc
+index 1954170..2eb6e75 100644
+--- a/plugins/sources/sqlmap.inc
++++ b/plugins/sources/sqlmap.inc
+@@ -42,6 +42,11 @@ class MigrateSQLMap extends MigrateMap {
+         // Backtick the db name on mysql to ensure dbs with hyphens work.
+         $dbname = "`{$dbname}`";
+       }
++      elseif (!empty($options['driver']) && $options['driver'] == 'pgsql') {
++        // Postgres throws an error if we prefix the database name, so just
++        // return the table name as is.
++        return $this->mapTable;
++      }
+       return $dbname . '.' . $this->mapTable;
+     }
+   }
+-- 
+2.1.0
+

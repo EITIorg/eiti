@@ -1,0 +1,88 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the eitientity_country module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_country_schema() {
+  $schema['eiticountry'] = array(
+    'description' => 'The base table for countries.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The country primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The country name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'type' => array(
+        'description' => 'The country type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'language' => array(
+        'description' => 'The country {languages}.language.',
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'user_id' => array(
+        'description' => 'The {users}.uid that owns this country; initially, this is the user that created it.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the country is published (visible to non-administrators).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the country was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the country was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'entity_status'    => array('status', 'id'),
+      //'entity_status_type'    => array('status', 'type', 'id'),
+    ),
+    'foreign keys' => array(
+      'entity_author' => array(
+        'table' => 'users',
+        'columns' => array('user_id' => 'user_id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Perform setup tasks when the module is installed.
+ */
+function eitientity_install() {
+  // DO stuff.
+}
