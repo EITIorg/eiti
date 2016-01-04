@@ -178,8 +178,8 @@ function eitict_document_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_resource_category'.
-  $field_instances['node-document-field_resource_category'] = array(
+  // Exported field_instance: 'node-document-field_document_category'.
+  $field_instances['node-document-field_document_category'] = array(
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
@@ -200,8 +200,8 @@ function eitict_document_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_resource_category',
-    'label' => 'Resource Category',
+    'field_name' => 'field_document_category',
+    'label' => 'Document Category',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,

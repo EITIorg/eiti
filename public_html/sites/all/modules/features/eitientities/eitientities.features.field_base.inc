@@ -36,13 +36,13 @@ function eitientities_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_resource_category'.
-  $field_bases['field_resource_category'] = array(
+  // Exported field_base: 'field_document_category'.
+  $field_bases['field_document_category'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_resource_category',
+    'field_name' => 'field_document_category',
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -53,7 +53,7 @@ function eitientities_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => 'resource_category',
+          'vocabulary' => 'document_category',
           'parent' => 0,
         ),
       ),
