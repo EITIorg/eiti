@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitientities feature.
+ */
+
+include_once 'eitientities.features.inc';

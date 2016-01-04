@@ -9,6 +9,14 @@
  */
 function eititaxonomies_taxonomy_default_vocabularies() {
   return array(
+    'resource_category' => array(
+      'name' => 'Resource Category',
+      'machine_name' => 'resource_category',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'tags' => array(
       'name' => 'Tags',
       'machine_name' => 'tags',

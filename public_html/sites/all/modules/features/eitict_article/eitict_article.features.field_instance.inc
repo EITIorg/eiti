@@ -467,6 +467,49 @@ function eitict_article_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-title_field'.
+  $field_instances['node-article-title_field'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Article Type');
@@ -485,6 +528,7 @@ function eitict_article_field_default_field_instances() {
   t('Please specify the event date(s). Optionally you can specify when the event ends.');
   t('Specify the event location.');
   t('Tags');
+  t('Title');
   t('Use tags to wire this content to other related content.');
 
   return $field_instances;
