@@ -36,3 +36,7 @@
 /public_html/sites/default/update_scripts/environment/setup.local.php
 /xdebug/
 /old_html/
+
+# Ignore development things for visualizations
+/visualizations/prototype/node_modules
+/visualizations/prototype/js/rd3
