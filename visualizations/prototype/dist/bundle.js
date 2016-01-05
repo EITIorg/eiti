@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9acf701c5c51e3ab4223"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b73331cc14af328ea129"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -997,7 +997,7 @@
 		'div',
 		null,
 		React.createElement(GroupedBar, {
-			filename: 'data/viz2a.json',
+			filename: 'data/viz2.json',
 			xlabel: 'Year',
 			ylabel: 'Volume (liters)'
 		})
