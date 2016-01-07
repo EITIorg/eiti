@@ -9,7 +9,7 @@
  */
 function eitientity_indicator_schema() {
   $schema['eitiindicator'] = array(
-    'description' => 'The base table for storing indicators.',
+    'description' => 'The base table for storing indicator entities.',
     'fields' => array(
       'id' => array(
         'description' => 'The indicator identifier.',
@@ -32,7 +32,7 @@ function eitientity_indicator_schema() {
         'default' => '',
       ),
       'parent' => array(
-        'description' => 'The indicator parent.',
+        'description' => 'The indicator parent indicator id.',
         'type' => 'int',
         'not null' => FALSE,
         'default' => NULL,

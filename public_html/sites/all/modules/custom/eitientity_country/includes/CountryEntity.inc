@@ -27,7 +27,7 @@ class CountryEntity extends Entity {
     }
 
     return array(
-      'path' => EITIENTITY_COUNTRY_UI_PATH . '/' . $this->identifier(),
+      'path' => $this->entityInfo['admin ui']['entity path'] . '/' . $this->identifier(),
     );
   }
 }

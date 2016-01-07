@@ -9,7 +9,7 @@
  */
 function eitientity_country_schema() {
   $schema['eiticountry'] = array(
-    'description' => 'The base table for countries.',
+    'description' => 'The base table for country entities.',
     'fields' => array(
       'id' => array(
         'description' => 'The country primary identifier.',

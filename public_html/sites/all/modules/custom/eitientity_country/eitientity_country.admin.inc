@@ -165,11 +165,11 @@ function _country_entity_form_submit($form, &$form_state) {
   }
 
   if (empty($entity->is_new)) {
-    watchdog('survey', '@type: updated %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('country', '@type: updated %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %label has been updated.', $t_args));
   }
   else {
-    watchdog('survey', '@type: added %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('country', '@type: added %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %label has been created.', $t_args));
   }
 

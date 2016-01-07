@@ -218,12 +218,13 @@ class IndicatorEntityUIController extends EntityBundleableUIController {
     $entities = $ids ? entity_load($this->entityType, $ids) : array();
 
     $rows = array();
+    /** @var IndicatorEntity $entity */
     foreach ($entities as $entity) {
       $cols = array(
         check_plain($this->entityInfo['bundles'][$entity->bundle()]['label']),
         format_date(!empty($entity->changed) ? $entity->changed : $entity->created, 'short'),
       );
-      $rows[] = $this->overviewTableRow($conditions, entity_id($this->entityType, $entity), $entity, $cols);
+      $rows[] = $this->overviewTableRow($conditions, $entity->identifier(), $entity, $cols);
     }
 
     $render = array(
@@ -241,7 +242,7 @@ class IndicatorEntityUIController extends EntityBundleableUIController {
    *
    * @param $conditions
    * @param $id
-   * @param $entity
+   * @param IndicatorEntity $entity
    * @param $additional_cols
    *   Additional columns to be added after the entity label column.
    * @return array
@@ -252,7 +253,7 @@ class IndicatorEntityUIController extends EntityBundleableUIController {
     $row[] = array('data' => array(
       '#theme' => 'entity_ui_overview_item',
       '#label' => entity_label($this->entityType, $entity),
-      '#name' => !empty($this->entityInfo['exportable']) ? entity_id($this->entityType, $entity) : FALSE,
+      '#name' => !empty($this->entityInfo['exportable']) ? $entity->identifier() : FALSE,
       '#url' => $entity_uri ? $entity_uri : FALSE,
       '#entity_type' => $this->entityType),
     );
@@ -276,7 +277,7 @@ class IndicatorEntityUIController extends EntityBundleableUIController {
     $row[] = $entity->status ? t('published') : t('not published');
 
     // Add operations.
-    $row[] = l(t('edit'), $this->entity_path . "/$id/edit");
+    $row[] = l(t('edit'), $this->entity_path . "/$id/edit", array('query' => drupal_get_destination()));
     if ($i18n) {
       $row[] = l(t('translate'), $this->entity_path . "/$id/translate");
     }
