@@ -13,4 +13,5 @@ dependencies[] = eitientity_country
 ; Entity handlers.
 files[] = includes/SummaryDataEntity.inc
 files[] = includes/SummaryDataEntityUIController.inc
+files[] = includes/SummaryDataExtraFieldsController.inc
 files[] = includes/SummaryDataMetadataController.inc

@@ -35,6 +35,7 @@ function eitientity_summarydata_entity_info() {
 
     'entity class' => 'SummaryDataEntity',
     'controller class' => 'EntityAPIController',
+    'extra fields controller class' => 'SummaryDataExtraFieldsController',
     'metadata controller class' => 'SummaryDataMetadataController',
     //'i18n controller class' => 'EntityDefaultI18nStringController',
 

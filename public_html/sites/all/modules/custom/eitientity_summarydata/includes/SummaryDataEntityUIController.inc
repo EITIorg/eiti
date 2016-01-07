@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Controllers extending the Entity API providing custom administrative pages.
+ * Controller for providing the UI
  */
 
 /**
