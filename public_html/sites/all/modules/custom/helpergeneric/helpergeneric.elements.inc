@@ -16,6 +16,17 @@ function helpergeneric_element_info() {
     '#theme_wrappers' => array('radios'),
     '#pre_render' => array('form_pre_render_conditional_form_element'),
   );
+
+  $types['ereference'] = array(
+    '#input' => TRUE,
+    '#size' => 60,
+    '#maxlength' => 255,
+    '#process' => array('form_process_ereference', 'form_process_autocomplete', 'ajax_process_form'),
+    '#element_validate' => array('form_process_ereference_validate'),
+    '#theme' => 'textfield',
+    '#theme_wrappers' => array('form_element'),
+  );
+
   return $types;
 }
 
@@ -43,7 +54,77 @@ function form_process_radioicons($element, &$form_state) {
 }
 
 /**
+ * Creates an simple entity reference form element.
+ *
+ * @see form_process_machine_name()
+ *
+ * @param $element
+ * @param $form_state
+ * @return array|null
+ */
+function form_process_ereference($element, &$form_state) {
+  if (empty($element['#referenced_type'])) {
+    drupal_set_message('Referenced entity type is missing.', 'warning');
+    return $element;
+  }
+
+  $entity_info = entity_get_info($element['#referenced_type']);
+  if (empty($entity_info)) {
+    drupal_set_message('Referenced entity type information is missing.', 'warning');
+    return $element;
+  }
+
+  if (!empty($element['#default_value'])) {
+    /** @var Entity $entity */
+    $entity = entity_load_single($element['#referenced_type'], $element['#default_value']);
+
+    if ($entity) {
+      $eid = $entity->identifier();
+      $element['#value'] = $entity->label() . " [id:$eid]";
+    }
+  }
+
+  return $element;
+}
+
+/**
+ * Form element validation handler for default group audience elements.
+ *
+ * @param $element
+ * @param $form_state
+ */
+function form_process_ereference_validate($element, &$form_state) {
+  if (empty($element['#referenced_type'])) {
+    return;
+  }
+
+  preg_match('/\[id:\s*([0-9]+)\s*\]/', $element['#value'], $matches);
+  if (!empty($matches[1]) && is_numeric($matches[1])) {
+    /** @var Entity $entity */
+    $entity = entity_load_single($element['#referenced_type'], $matches[1]);
+    if (empty($entity)) {
+      preg_match('/(.*)\s+\[id:\s*[0-9]+\s*\]/', $element['#value'], $matches);
+      $args = array('%name' => $matches[0]);
+      form_error($element, t('%name does not exist.', $args));
+    }
+    else {
+      // Clean-up submitted values.
+      form_set_value($element, $entity->identifier(), $form_state);
+    }
+  }
+  elseif (!empty($element['#value'])) {
+    $args = array(
+      '%value' => $element['#value'],
+    );
+    form_error($element, t('"%value" is not a valid reference.', $args));
+  }
+}
+
+/**
  * Returns render array for options.
+ *
+ * @param $element
+ * @return array
  */
 function _helpergeneric_build_radioicons($element) {
   $items = array();

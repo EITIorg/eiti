@@ -84,3 +84,45 @@ function helpergeneric_settings_form($form) {
 
   return system_settings_form($form);
 }
+
+/**
+ * Page callback: Outputs JSON for project specific group audience autocomplete suggestions.
+ */
+function helpergeneric_ereference_autocomplete($entity_type, $string = '') {
+  $matches = array();
+
+  if (empty($string)) {
+    drupal_json_output($matches);
+    exit();
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  $id_key = $entity_info['entity keys']['id'];
+  $label_key = $entity_info['entity keys']['label'];
+
+  // Get a list of entity titles that contain the requested string.
+  $query = new EntityFieldQuery();
+  $results = $query
+    ->entityCondition('entity_type', $entity_type)
+    ->propertyCondition($label_key, $string, 'CONTAINS')
+    ->propertyOrderBy($label_key, 'ASC')
+    ->range(0, 10)
+    ->execute();
+
+  if (!empty($results[$entity_type])) {
+    $entities = entity_load($entity_type, array_keys($results[$entity_type]));
+
+    foreach ($results[$entity_type] as $values) {
+      if (empty($entities[$values->$id_key])) {
+        continue;
+      }
+
+      /** @var Entity $entity */
+      $entity = $entities[$values->$id_key];
+      $entry = $entity->label() . ' [id:' . $entity->identifier() . ']';
+      $matches[$entry] = $entry;
+    }
+  }
+
+  drupal_json_output($matches);
+}
