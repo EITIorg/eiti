@@ -15,3 +15,4 @@ files[] = eiti_migration.migrate.inc
 files[] = migrations/eiti_migration.core.inc
 files[] = migrations/eiti_migration.demo.inc
 files[] = migrations/eiti_migration.article.inc
+files[] = migrations/eiti_migration.document.inc

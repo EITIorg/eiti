@@ -23,27 +23,20 @@ function eiti_migration_migrate_api() {
   $migrations = array(
     'api' => 2,
     'groups' => array(
-      'preparations' => array(
-        'title' => t('Demo Migrations'),
-        'default_format' => 'filtered_html',
-      ),
       'core' => array(
         'title' => t('Core Migrations: Users, Taxonomies, others'),
       ),
       'articles' => array(
         'title' => t('Migration to the Article CT'),
       ),
+      'documents' => array(
+        'title' => t('Migration to the Document CT'),
+      ),
     ),
   );
 
   // Migrations themselves go here.
   $migrations['migrations'] = array();
-
-  // This is a demo migration.
-  $migrations['migrations']['ExcelDemo'] = array(
-    'class_name' => 'ExcelDemoEitiMigration',
-    'group_name' => 'preparations',
-  );
 
   // #################################
   // ######## CORE MIGRATIONS ########
@@ -86,6 +79,14 @@ function eiti_migration_migrate_api() {
     'source_vocabulary' => 'tags_events',
     'destination_vocabulary' => 'tags',
     'description' => t('Migrate news tags (tags_news) to one common tags vocabulary.'),
+  );
+  $migrations['migrations']['EITITaxonomyResouceCategoryMigration'] = array(
+    'class_name' => 'DrupalTerm7Migration',
+    'group_name' => 'core',
+    'soft_dependencies' => array('EITIUsersMigration'),
+    'source_vocabulary' => 'resource_category',
+    'destination_vocabulary' => 'document_category',
+    'description' => t('Migrate the resource category tags to document category.'),
   );
 
   // ####################################
@@ -257,10 +258,65 @@ function eiti_migration_migrate_api() {
     ),
   );
 
+  // #####################################
+  // ######## DOCUMENT MIGRATIONS ########
+  // #####################################
+  // Document Migrations goes here.
+  $migrations['migrations']['EITIDocumentUploadFilesMigration'] = array(
+    'class_name' => 'EITIDocumentUploadFilesMigration',
+    'group_name' => 'documents',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Upload field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIDocumentFilesPreviewMigration'] = array(
+    'class_name' => 'EITIDocumentFilesPreviewMigration',
+    'group_name' => 'documents',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://document_preview',
+    'bundle' => 'document',
+    'description' => t('Migrates the Image Previews field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIDocumentAttachmentsMigration'] = array(
+    'class_name' => 'EITIDocumentAttachmentsMigration',
+    'group_name' => 'documents',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://documents',
+    'bundle' => 'document',
+    'description' => t('Migrates the Document File field files.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIDocumentMigration'] = array(
+    'class_name' => 'EITIDocumentMigration',
+    'group_name' => 'documents',
+    'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
+    'source_type' => 'eiti_document',
+    'destination_type' => 'document',
+    'description' => t('Migration responsible for migrating eiti_document nodes to the document content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
+      'EITITaxonomyResouceCategoryMigration',
+      'EITIDocumentUploadFilesMigration',
+      'EITIDocumentAttachmentsMigration',
+      'EITIDocumentFilesPreviewMigration',
+    ),
+  );
+
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
     // Add the connection only to the groups we want to opt in.
-    $opt_in_groups = array('core', 'articles');
+    $opt_in_groups = array('core', 'articles', 'documents');
     if (in_array($migration['group_name'], $opt_in_groups)) {
       $migrations['migrations'][$key]['source_database'] = array(
         'driver'   => 'mysql',

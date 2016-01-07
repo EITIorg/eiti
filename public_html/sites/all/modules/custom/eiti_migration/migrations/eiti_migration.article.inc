@@ -11,7 +11,7 @@
  * The generic migration class to Article CT. News, Blog Posts & Events migrations
  * should implement this class.
  */
-abstract class EITIGenericToArticleMigration extends DrupalNode7Migration {
+abstract class EITIGenericToArticleMigration extends EITINodeMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
@@ -30,14 +30,6 @@ abstract class EITIGenericToArticleMigration extends DrupalNode7Migration {
     $this->addFieldMapping('pathauto')
     ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
     ->defaultValue(TRUE);
-  }
-
-  /**
-   * That's where we want to work on the almost-saved $entity.
-   */
-  public function prepare($entity, $row) {
-    // Replace the old <img> tags with the new Media JSON.
-    MigrateDestinationMedia::rewriteImgTags($entity);
   }
 }
 
