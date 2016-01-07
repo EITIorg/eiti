@@ -3,10 +3,12 @@ description = Exposes a custom entity to store summary data.
 core = 7.x
 package = Custom
 
+dependencies[] = currency
 dependencies[] = date_popup
 dependencies[] = elements
 dependencies[] = entity
 dependencies[] = eitientity_country
+
 
 ; Entity handlers.
 files[] = includes/SummaryDataEntity.inc
