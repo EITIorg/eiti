@@ -17,6 +17,14 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'person_positions' => array(
+      'name' => 'Person Positions',
+      'machine_name' => 'person_positions',
+      'description' => 'Work-position and titles people can get in the Person content-type.',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'tags' => array(
       'name' => 'Tags',
       'machine_name' => 'tags',
