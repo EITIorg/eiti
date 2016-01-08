@@ -72,6 +72,9 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       MigrateDestinationMedia::rewriteImgTags($entity);
     }
 
+    // Take care of the paths.
+    $this->migrateRedirects($entity, $row);
+
     // Check if it is a translation.
     $this->entityTranslate($entity, $row);
   }
@@ -89,8 +92,100 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       // Init translations and update the node.
       $handler->initTranslations();
       node_save($node);
+
+      // Process the old redirects.
+      $redirects = $this->fetchLegacyRedirects($row->nid);
+      foreach ($redirects as $redirect) {
+        $new_redirect_default = array(
+          'uid' => $node->uid,
+          'language' => $redirect->language,
+        );
+        $new_redirect = new stdClass();
+        redirect_object_prepare($new_redirect, $new_redirect_default);
+        $redirect_destination = entity_uri('node', $node);
+        $new_redirect->redirect = $redirect_destination['path'];
+        $new_redirect->source = $redirect->source;
+
+        // Only save if the redirect does not already exist.
+        if (EITIMigrateRedirectEntityHandler::redirectValidate($new_redirect)) {
+          redirect_save($new_redirect);
+        }
+      }
     }
   }
+
+  /**
+   * Migrate the redirects.
+   */
+  public function migrateRedirects($entity, $row) {
+    $source_ids = $this->getMap()->lookupSourceID(array($row->tnid));
+    $source_tnid = (!empty($source_ids)) ? $source_ids['sourceid1'] : FALSE;
+
+    // This is translation!
+    if (!empty($row->tnid) && $row->tnid != 0 && ($source_tnid && $source_tnid != $row->nid)) {
+      $source_nid = $row->tnid;
+      $source_node = node_load($source_nid);
+      $redirect_destination = entity_uri('node', $source_node);
+
+      // Process the old ones.
+      $redirects = $this->fetchLegacyRedirects($row->nid);
+      foreach ($redirects as $redirect) {
+        $new_redirect_default = array(
+          'uid' => $entity->uid,
+          'language' => $redirect->language,
+        );
+        $new_redirect = new stdClass();
+        redirect_object_prepare($new_redirect, $new_redirect_default);
+        $new_redirect->redirect = $redirect_destination['path'];
+        $new_redirect->source = $redirect->source;
+
+        // Only save if the redirect does not already exist.
+        if (EITIMigrateRedirectEntityHandler::redirectValidate($new_redirect)) {
+          redirect_save($new_redirect);
+        }
+      }
+      // Now we need to add the current path as a redirect.
+      $new_redirect_default = array(
+        'uid' => $entity->uid,
+        'language' => $entity->language,
+      );
+      $new_redirect = new stdClass();
+      redirect_object_prepare($new_redirect, $new_redirect_default);
+      $new_redirect->redirect = $redirect_destination['path'];
+      $parsed = redirect_parse_url($row->path);
+      $new_redirect->source = isset($parsed['path']) ? ltrim($parsed['path'], '/') : '';
+      if (!empty($parsed['query'])) {
+        $new_redirect->source_options['query'] = $parsed['query'];
+      }
+      if (EITIMigrateRedirectEntityHandler::redirectValidate($new_redirect)) {
+        redirect_save($new_redirect);
+      }
+
+      // Special case when we have a Stub.
+      if ($source_node->title == 'Stub') {
+        $source_node->language = 'en';
+        node_save($source_node);
+      }
+    }
+    elseif (!empty($entity->nid)) {
+      // In this case, it's an updated stub (source of translation).
+      $old_stub = node_load($entity->nid);
+      $entity->translations = $old_stub->translations;
+    }
+  }
+
+  /**
+   * Helper function that fetches legacy redirects via given node nid.
+   */
+  public function fetchLegacyRedirects($nid) {
+    $query = Database::getConnection('default', $this->sourceConnection)
+       ->select('redirect', 'r')
+       ->fields('r')
+       ->condition('r.redirect', 'node/' . $nid);
+    $results = $query->execute();
+    return $results->fetchAll();
+  }
+
 
   /**
    * This is where we check if the pre-imported entity is actually
@@ -102,6 +197,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
     $source_ids = $this->getMap()->lookupSourceID(array($row->tnid));
     $source_tnid = (!empty($source_ids)) ? $source_ids['sourceid1'] : FALSE;
 
+    // This is translation!
     if (!empty($row->tnid) && $row->tnid != 0 && ($source_tnid && $source_tnid != $row->nid)) {
       $source_nid = $row->tnid;
       $source_node = node_load($source_nid);
@@ -163,7 +259,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
             )), Migration::MESSAGE_NOTICE, MigrateMap::STATUS_IGNORED);
     }
     elseif (!empty($entity->nid)) {
-      // In this case, it's an updated stub.
+      // In this case, it's an updated stub (source of translation).
       $old_stub = node_load($entity->nid);
       $entity->translations = $old_stub->translations;
     }
