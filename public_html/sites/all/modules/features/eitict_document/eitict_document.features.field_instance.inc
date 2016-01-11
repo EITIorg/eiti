@@ -263,11 +263,11 @@ function eitict_document_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Attachments');
   t('Body');
+  t('Document Category');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('Image Preview');
   t('Image preview relevant to the document you\'re creating.');
   t('Please specify the resource categories that apply to this document.');
-  t('Resource Category');
   t('Title');
 
   return $field_instances;

@@ -151,51 +151,7 @@ function eitict_article_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-article-field_countries'.
-  $field_instances['node-article-field_countries'] = array(
-    'bundle' => 'article',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'If the article references any of the countries, please specify them here.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_countries',
-    'label' => 'Countries',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -426,6 +382,44 @@ function eitict_article_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-article-field_related_country'.
+  $field_instances['node-article-field_related_country'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If this article is somehow related to a certain country, please specify the country. It can be related to multiple countries. This changes the article visibility as it will show up on the country\'s page.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'countries',
+        'settings' => array(),
+        'type' => 'country_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_country',
+    'label' => 'Related Country',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-article-field_tags'.
   $field_instances['node-article-field_tags'] = array(
     'bundle' => 'article',
@@ -463,7 +457,7 @@ function eitict_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -506,7 +500,7 @@ function eitict_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -516,16 +510,16 @@ function eitict_article_field_default_field_instances() {
   t('As all three, news articles, blog posts and events have similar structure, we\'ve created just one generic type for these. Please specify the Article Type of this node.');
   t('Attachments');
   t('Body');
-  t('Countries');
   t('Event Date');
   t('Event Location');
   t('Featured Image');
-  t('If the article references any of the countries, please specify them here.');
   t('If there\'s a featured image, specify it.');
+  t('If this article is somehow related to a certain country, please specify the country. It can be related to multiple countries. This changes the article visibility as it will show up on the country\'s page.');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('If you want to upload multiple images and display them in a gallery fashion, use this field.');
   t('Image Gallery');
   t('Please specify the event date(s). Optionally you can specify when the event ends.');
+  t('Related Country');
   t('Specify the event location.');
   t('Tags');
   t('Title');

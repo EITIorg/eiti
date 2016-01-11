@@ -27,7 +27,7 @@ class EITIUsersMigration extends DrupalUser7Migration {
     }
 
     // Fetch the old role and find out what is the correct new role.
-    $query = Database::getConnection('default', 'legacy')->select('users_roles', 'ur');
+    $query = Database::getConnection('default', $this->arguments['source_connection'])->select('users_roles', 'ur');
     $query->join('role', 'r', 'ur.rid = r.rid');
     $query->fields('ur', array('rid'));
     $query->fields('r', array('name'));
@@ -112,6 +112,22 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
         }
       }
     }
+  }
+
+  /**
+   * Helper function that returns the terms of a specific vocabulary.
+   */
+  public function fetchSourceTerm($vid, $tids) {
+    $terms = array();
+    $query = Database::getConnection('default', $this->arguments['source_connection'])->select('taxonomy_term_data', 'td');
+    $query->fields('td');
+    $query->condition('vid', $vid);
+    $query->condition('tid', $tids, 'IN');
+    $result = $query->execute();
+    foreach ($result as $term_row) {
+      $terms[] = $term_row;
+    }
+    return $terms;
   }
 
   /**

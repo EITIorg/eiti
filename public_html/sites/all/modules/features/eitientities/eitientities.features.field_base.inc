@@ -60,8 +60,33 @@ function eitientities_field_default_field_bases() {
       'entity_translation_sync' => FALSE,
       'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_related_country'.
+  $field_bases['field_related_country'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_related_country',
+    'indexes' => array(
+      'iso2' => array(
+        0 => 'iso2',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'countries',
+    'settings' => array(
+      'continents' => array(),
+      'countries' => array(),
+      'enabled' => 1,
+      'entity_translation_sync' => FALSE,
+      'size' => 5,
+    ),
+    'translatable' => 0,
+    'type' => 'country',
   );
 
   // Exported field_base: 'title_field'.

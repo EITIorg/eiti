@@ -58,6 +58,7 @@ class EITIPersonMigration extends EITINodeMigration {
     $this->addFieldMapping('field_website', 'field_contact_site');
     $this->addFieldMapping('field_website:title', 'field_contact_site:title');
     $this->addFieldMapping('field_website:attributes', 'field_contact_site:attributes');
+    $this->addFieldMapping('field_related_country', 'field_ref_country_name_2');
 
     $this->addSimpleMappings(array('field_board_membership'));
 
@@ -104,7 +105,61 @@ class EITIPersonMigration extends EITINodeMigration {
 
     // Default to English always.
     $row->language = ($row->language == LANGUAGE_NONE) ? 'en' : $row->language;
+
+    // Let's take care of the countries.
+    if (!empty($row->field_ref_country_name_2)) {
+      $row->field_ref_country_name_2 = $this->fetchSourceReferencedNodesCountry($row->field_ref_country_name_2);
+    }
     return TRUE;
+  }
+
+  /**
+   * Helper function that returns array of country-iso2s.
+   */
+  protected function fetchSourceReferencedNodesCountry($nids) {
+    $countries = array();
+    $exceptions = array(
+      'Democratic Republic of Congo' => 'CD',
+      "Côte d'Ivoire" => 'CI'
+    );
+    $query = Database::getConnection('default', $this->arguments['source_connection'])->select('node', 'n');
+    $query->fields('n');
+    $query->condition('nid', $nids, 'IN');
+    $query->condition('status', 1);
+    $query->leftJoin('field_data_field_country_info', 'fc', 'fc.entity_id = n.nid');
+    $query->fields('fc');
+    $query->leftJoin('field_data_field_taxonomy_countries', 'fx', 'fx.entity_id = n.nid');
+    $query->fields('fx');
+    $results = $query->execute();
+    foreach ($results as $result) {
+      $continue = FALSE;
+      // In case that the country ISO2 is NO, it probably was left as default value, let's
+      // try and check out the taxonomy reference value instead.
+      if (empty($result->field_country_info_iso2) || $result->field_country_info_iso2 == 'NO') {
+        $country_vocabulary_vid = 9;
+        $terms = $this->fetchSourceTerm($country_vocabulary_vid, array($result->field_taxonomy_countries_tid));
+        if (!empty($terms)) {
+          $term = array_pop($terms);
+          $country = countries_country_lookup($term->name, 'name');
+          if (!empty($country)) {
+            $countries[] = $country->iso2;
+          }
+          elseif (in_array($term->name, array_keys($exceptions))) {
+            $countries[] = $exceptions[$term->name];
+          }
+        }
+        else {
+          $continue = TRUE;
+        }
+      }
+
+      // Now the 2nd part.
+      if (!empty($result->field_country_info_iso2) || $continue) {
+        $countries[] = $result->field_country_info_iso2;
+      }
+    }
+    $countries = array_unique($countries);
+    return $countries;
   }
 }
 

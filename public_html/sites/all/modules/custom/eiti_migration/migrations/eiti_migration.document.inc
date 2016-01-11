@@ -88,6 +88,7 @@ class EITIDocumentMigration extends EITINodeMigration {
 
     // Default to English always.
     $row->language = ($row->language == LANGUAGE_NONE) ? 'en' : $row->language;
+
     return TRUE;
   }
 }

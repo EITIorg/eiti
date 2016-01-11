@@ -68,10 +68,10 @@ function eitict_person_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '8',
+          'weight' => '9',
         ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '10',
         ),
         'language' => array(
           'weight' => '1',
