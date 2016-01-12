@@ -26,6 +26,13 @@ class SummaryDataMetadataController extends EntityDefaultMetadataController {
       if ($type = _entity_metadata_convert_schema_type($info['type'])) {
         $label = ucwords(str_replace('_', ' ', $name));
 
+        if ($name == 'published') {
+          $label = 'Published Date';
+        }
+        if ($name == 'status') {
+          $label = 'Published';
+        }
+
         $properties[$name] = array(
           'type' => $type,
           'label' => $label,

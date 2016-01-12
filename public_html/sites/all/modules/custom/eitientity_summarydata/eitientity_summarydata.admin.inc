@@ -43,7 +43,7 @@ function summarydata_form($form, &$form_state, $entity) {
 
   $form['country_id'] = array(
     '#type' => 'ereference',
-    '#title' => t('Country Ereference'),
+    '#title' => t('Country'),
     '#default_value' => $entity->country_id,
     '#required' => TRUE,
     '#referenced_type' => 'country',
@@ -57,7 +57,7 @@ function summarydata_form($form, &$form_state, $entity) {
   }
   $form['year_start'] = array(
     '#type' => 'date_popup',
-    '#title' => t('Financial Year Start Date'),
+    '#title' => t('Start Date'),
     '#required' => TRUE,
     '#default_value' => $year_start_value,
     '#date_format' => EITIENTITY_SUMMARYDATA_DATE_FORMAT,
@@ -72,7 +72,7 @@ function summarydata_form($form, &$form_state, $entity) {
   }
   $form['year_end'] = array(
     '#type' => 'date_popup',
-    '#title' => t('Financial Year End Date'),
+    '#title' => t('End Date'),
     '#required' => TRUE,
     '#default_value' => $year_end_value,
     '#date_format' => EITIENTITY_SUMMARYDATA_DATE_FORMAT,
@@ -88,6 +88,7 @@ function summarydata_form($form, &$form_state, $entity) {
   $form['published'] = array(
     '#type' => 'date_popup',
     '#title' => t('Published on'),
+    '#description' => t('Date that the EITI Report was published (i.e., made publicly available)'),
     '#required' => TRUE,
     '#default_value' => $published_value,
     '#date_format' => EITIENTITY_SUMMARYDATA_DATE_FORMAT,
