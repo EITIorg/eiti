@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitict_mention feature.
+ */
+
+include_once 'eitict_mention.features.inc';
