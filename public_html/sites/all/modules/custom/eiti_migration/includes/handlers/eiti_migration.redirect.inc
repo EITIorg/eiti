@@ -3,9 +3,15 @@
 /**
  * @file
  * Migrate support for Redirect module.
+ *
+ * Original one didn't handle the languages correctly, so we decided to
+ * write a custom one.
+ *
+ * Inspired from MigrateRedirectEntityHandler.
+ * @see https://www.drupal.org/node/1116408
  */
 
-class MigrateRedirectEntityHandler extends MigrateDestinationHandler {
+class EITIMigrateRedirectEntityHandler extends MigrateDestinationHandler {
 
   /**
    * Constructor.
@@ -33,7 +39,7 @@ class MigrateRedirectEntityHandler extends MigrateDestinationHandler {
    * @return bool
    *   TRUE if the redirect is valid and can be saved.
    */
-  protected function redirectValidate($redirect) {
+  static public function redirectValidate($redirect) {
     $redirect = (object) $redirect;
 
     // Check that there there are no redirect loops.
@@ -98,7 +104,7 @@ class MigrateRedirectEntityHandler extends MigrateDestinationHandler {
         if (isset($entity->uid)) {
           $redirect_defaults['uid'] = $entity->uid;
         }
-        $redirect_defaults['language'] = empty($entity->language) ? LANGUAGE_NONE : $entity->language;
+        $redirect_defaults['language'] = empty($entity->language) ? 'en' : $entity->language;
         $redirect = new stdClass();
         redirect_object_prepare($redirect, $redirect_defaults);
         $redirect->redirect = $redirect_destination['path'];
@@ -109,7 +115,7 @@ class MigrateRedirectEntityHandler extends MigrateDestinationHandler {
         }
 
         // Only save if the redirect does not already exist.
-        if ($this->redirectValidate($redirect)) {
+        if (self::redirectValidate($redirect)) {
           redirect_save($redirect);
         }
       }

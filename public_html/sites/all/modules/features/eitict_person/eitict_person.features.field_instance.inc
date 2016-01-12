@@ -90,7 +90,7 @@ function eitict_person_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -132,7 +132,7 @@ function eitict_person_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -362,6 +362,44 @@ function eitict_person_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-person-field_related_country'.
+  $field_instances['node-person-field_related_country'] = array(
+    'bundle' => 'person',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If this person is somehow related to a certain country, please specify the country. It can be related to multiple countries. This changes the persons visibility as it will show up on the country\'s page.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'countries',
+        'settings' => array(),
+        'type' => 'country_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_country',
+    'label' => 'Related Country',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-person-field_website'.
   $field_instances['node-person-field_website'] = array(
     'bundle' => 'person',
@@ -470,6 +508,7 @@ function eitict_person_field_default_field_instances() {
   t('Board Membership');
   t('Email');
   t('Fax Number');
+  t('If this person is somehow related to a certain country, please specify the country. It can be related to multiple countries. This changes the persons visibility as it will show up on the country\'s page.');
   t('Phone Number');
   t('Picture');
   t('Please specify if this person is a member of the board or not.');
@@ -477,6 +516,7 @@ function eitict_person_field_default_field_instances() {
   t('Please specify the person\'s picture.');
   t('Please specify the position / work title of this person.');
   t('Position');
+  t('Related Country');
   t('Title');
   t('Website');
 

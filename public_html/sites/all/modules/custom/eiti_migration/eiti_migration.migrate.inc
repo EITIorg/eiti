@@ -32,6 +32,9 @@ function eiti_migration_migrate_api() {
       'documents' => array(
         'title' => t('Migration to the Document CT'),
       ),
+      'persons' => array(
+        'title' => t('Migration to the Person CT'),
+      ),
     ),
   );
 
@@ -313,10 +316,39 @@ function eiti_migration_migrate_api() {
     ),
   );
 
+  // ###################################
+  // ######## PERSON MIGRATIONS ########
+  // ###################################
+  $migrations['migrations']['EITIPersonPicturesMigration'] = array(
+    'class_name' => 'EITIPersonPicturesMigration',
+    'group_name' => 'persons',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://person_picture',
+    'bundle' => 'image',
+    'description' => t('Migrates the images from the Contact legacy-ct to Person CT.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIPersonMigration'] = array(
+    'class_name' => 'EITIPersonMigration',
+    'group_name' => 'persons',
+    'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
+    'source_type' => 'contact',
+    'destination_type' => 'person',
+    'description' => t('Migration responsible for migrating contact nodes to the person content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
+      'EITIPersonPicturesMigration',
+    ),
+  );
+
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
     // Add the connection only to the groups we want to opt in.
-    $opt_in_groups = array('core', 'articles', 'documents');
+    $opt_in_groups = array('core', 'articles', 'documents', 'persons');
     if (in_array($migration['group_name'], $opt_in_groups)) {
       $migrations['migrations'][$key]['source_database'] = array(
         'driver'   => 'mysql',
@@ -330,6 +362,11 @@ function eiti_migration_migrate_api() {
       $migrations['migrations'][$key]['source_connection'] = 'legacy';
     }
   }
+
+  // And some handlers.
+  $migrations['destination handlers'] = array(
+    'EITIMigrateRedirectEntityHandler',
+  );
 
   return $migrations;
 }

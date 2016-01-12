@@ -71,7 +71,13 @@ function eitict_article_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '9',
+          'weight' => '10',
+        ),
+        'redirect' => array(
+          'weight' => '11',
+        ),
+        'language' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),
