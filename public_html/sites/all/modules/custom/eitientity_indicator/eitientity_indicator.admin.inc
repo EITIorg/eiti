@@ -154,11 +154,11 @@ function _identifier_entity_form_submit($form, &$form_state) {
   }
 
   if (empty($entity->is_new)) {
-    watchdog('survey', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('indicator', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %title has been updated.', $t_args));
   }
   else {
-    watchdog('survey', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('indicator', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %title has been created.', $t_args));
   }
 }

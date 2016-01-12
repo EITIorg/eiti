@@ -254,7 +254,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
         check_plain($this->entityInfo['bundles'][$entity->bundle()]['label']),
         format_date(!empty($entity->changed) ? $entity->changed : $entity->created, 'short'),
       );
-      $rows[] = $this->overviewTableRow($conditions, entity_id($this->entityType, $entity), $entity, $cols);
+      $rows[] = $this->overviewTableRow($conditions, $entity->identifier(), $entity, $cols);
     }
 
     $render = array(
@@ -267,7 +267,15 @@ class CountryEntityUIController extends EntityBundleableUIController {
   }
 
   /**
-   * {@inheritdoc}
+   * Generates the row for the passed entity and may be overridden in order to
+   * customize the rows.
+   *
+   * @param $conditions
+   * @param $id
+   * @param CountryEntity $entity
+   * @param $additional_cols
+   *   Additional columns to be added after the entity label column.
+   * @return array
    */
   protected function overviewTableRow($conditions, $id, $entity, $additional_cols = array()) {
     $entity_uri = entity_uri($this->entityType, $entity);
@@ -275,7 +283,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
     $row[] = array('data' => array(
       '#theme' => 'entity_ui_overview_item',
       '#label' => entity_label($this->entityType, $entity),
-      '#name' => !empty($this->entityInfo['exportable']) ? entity_id($this->entityType, $entity) : FALSE,
+      '#name' => !empty($this->entityInfo['exportable']) ? $entity->identifier() : FALSE,
       '#url' => $entity_uri ? $entity_uri : FALSE,
       '#entity_type' => $this->entityType),
     );
@@ -296,7 +304,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
     $row[] = $entity->status ? t('published') : t('not published');
 
     // Add operations.
-    $row[] = l(t('edit'), $this->entity_path . "/$id/edit");
+    $row[] = l(t('edit'), $this->entity_path . "/$id/edit", array('query' => drupal_get_destination()));
 
     // If i18n integration is enabled, add a link to the translate tab.
     $i18n = !empty($this->entityInfo['i18n controller class']);

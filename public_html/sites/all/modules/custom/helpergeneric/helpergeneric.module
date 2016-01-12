@@ -97,7 +97,30 @@ function helpergeneric_menu() {
     'weight' => -18,
   );
 
+  // Page callback that outputs JSON for embedded content specific autocomplete suggestions.
+  $items['helpergeneric/ereference/%'] = array(
+    'title' => 'Autocomplete',
+    'page callback' => 'helpergeneric_ereference_autocomplete',
+    'page arguments' => array(2),
+    'access callback' => 'helpergeneric_ereference_autocomplete_access',
+    'access arguments' => array(2),
+    'type' => MENU_CALLBACK,
+    'file' => 'helpergeneric.admin.inc',
+  );
+
   return $items;
+}
+
+/**
+ * Access callback for ereference autocomplete endpoints.
+ */
+function helpergeneric_ereference_autocomplete_access($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+  if (empty($entity_info)) {
+    return FALSE;
+  }
+
+  return entity_access('create', $entity_type);
 }
 
 /**

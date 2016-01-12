@@ -25,7 +25,7 @@ class IndicatorEntity extends Entity {
     }
 
     return array(
-      'path' => EITIENTITY_INDICATOR_UI_PATH . '/' . $this->identifier(),
+      'path' => $this->entityInfo['admin ui']['entity path'] . '/' . $this->identifier(),
     );
   }
 }
