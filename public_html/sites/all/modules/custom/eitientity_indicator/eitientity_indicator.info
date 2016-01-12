@@ -3,6 +3,8 @@ description = Exposes a custom entity to store indicators.
 core = 7.x
 package = Custom
 
+configure = admin/structure/indicator
+
 dependencies[] = entity
 
 ; Entity handlers.

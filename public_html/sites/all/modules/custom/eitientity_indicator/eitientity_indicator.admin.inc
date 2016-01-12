@@ -36,7 +36,7 @@ function indicator_form($form, &$form_state, $entity) {
   $query->propertyOrderBy('name');
   $results = $query->execute();
 
-  $indicator_options = array('' => t('-Select-'));
+  $indicator_options = array('' => t('- None -'));
   foreach ($results['indicator'] as $result) {
     $indicator = entity_load_single($entity_type, $result->id);
 
@@ -45,11 +45,10 @@ function indicator_form($form, &$form_state, $entity) {
 
   $form['parent'] = array(
     '#type' => 'select',
-    '#required' => TRUE,
     '#title' => t('Parent'),
     '#default_value' => $entity->parent,
     '#options' => $indicator_options,
-    '#description' => t('The indicator group.'),
+    '#description' => t('The indicator parent group.'),
   );
 
   $form['status'] = array(
