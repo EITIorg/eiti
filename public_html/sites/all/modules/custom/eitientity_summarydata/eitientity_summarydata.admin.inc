@@ -19,6 +19,26 @@
 function summarydata_form($form, &$form_state, $entity) {
   $entity_type = $entity->entityType();
 
+  $query = new EntityFieldQuery();
+  $query_count = $query
+    ->entityCondition('entity_type', 'implementing_country')
+    ->count()
+    ->execute();
+  if (empty($query_count)) {
+    drupal_set_message(t('No implementing countries exist.'), 'warning');
+    return drupal_access_denied();
+  }
+
+  $query = new EntityFieldQuery();
+  $query_count = $query
+    ->entityCondition('entity_type', 'indicator')
+    ->count()
+    ->execute();
+  if (empty($query_count)) {
+    drupal_set_message(t('No indicators exist.'), 'warning');
+    return drupal_access_denied();
+  }
+
   if (isset($form_state['op']) && arg(0) != 'admin') {
     drupal_set_title(eitientity_summarydata_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
