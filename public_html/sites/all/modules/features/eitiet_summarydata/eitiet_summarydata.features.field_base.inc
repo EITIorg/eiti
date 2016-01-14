@@ -20,7 +20,9 @@ function eitiet_summarydata_field_default_field_bases() {
     'indexes' => array(),
     'locked' => 0,
     'module' => 'email',
-    'settings' => array(),
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
     'translatable' => 0,
     'type' => 'email',
   );
@@ -40,6 +42,7 @@ function eitiet_summarydata_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max_length' => 255,
     ),
     'translatable' => 0,
@@ -61,6 +64,7 @@ function eitiet_summarydata_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max_length' => 255,
     ),
     'translatable' => 0,
@@ -87,6 +91,7 @@ function eitiet_summarydata_field_default_field_bases() {
         'url_cutoff' => 80,
       ),
       'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
       'title' => 'optional',
       'title_maxlength' => 128,
       'title_value' => '',
@@ -117,6 +122,7 @@ function eitiet_summarydata_field_default_field_bases() {
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'list_integer',
@@ -137,10 +143,45 @@ function eitiet_summarydata_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max_length' => 255,
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_sd_indicator_values'.
+  $field_bases['field_sd_indicator_values'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_sd_indicator_values',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(),
+      ),
+      'target_type' => 'indicatorvalue',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_sd_mining_sector'.
@@ -164,6 +205,7 @@ function eitiet_summarydata_field_default_field_bases() {
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'list_integer',
@@ -179,7 +221,9 @@ function eitiet_summarydata_field_default_field_bases() {
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
-    'settings' => array(),
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
@@ -194,7 +238,9 @@ function eitiet_summarydata_field_default_field_bases() {
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
-    'settings' => array(),
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
@@ -220,6 +266,7 @@ function eitiet_summarydata_field_default_field_bases() {
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'list_integer',
@@ -240,6 +287,7 @@ function eitiet_summarydata_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max_length' => 255,
     ),
     'translatable' => 0,

@@ -23,9 +23,9 @@ function eitiet_summarydata_field_group_info() {
     'label' => 'Contact details',
     'weight' => '10',
     'children' => array(
-      0 => 'field_sd_contact_email_address',
-      1 => 'field_sd_contact_organisation',
-      2 => 'field_sd_contact_name',
+      0 => 'field_sd_contact_organisation',
+      1 => 'field_sd_contact_name',
+      2 => 'field_sd_contact_email_address',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -158,10 +158,10 @@ function eitiet_summarydata_field_group_info() {
     'label' => 'Sectors Covered',
     'weight' => '4',
     'children' => array(
-      0 => 'field_sd_gas_sector',
-      1 => 'field_sd_other_sector',
+      0 => 'field_sd_other_sector',
+      1 => 'field_sd_oil_sector',
       2 => 'field_sd_mining_sector',
-      3 => 'field_sd_oil_sector',
+      3 => 'field_sd_gas_sector',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

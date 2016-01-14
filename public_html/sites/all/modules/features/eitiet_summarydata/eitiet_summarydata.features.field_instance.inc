@@ -31,6 +31,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Email address',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -64,6 +65,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Name',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -99,6 +101,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Organisation',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -146,6 +149,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'url_cutoff' => 80,
       ),
       'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
       'rel_remove' => 'default',
       'title' => 'optional',
       'title_label_use_field_label' => 0,
@@ -184,6 +188,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Gas',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -216,6 +221,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Independent Administrator',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -227,6 +233,49 @@ function eitiet_summarydata_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summarydata-summarydata-field_sd_indicator_values'.
+  $field_instances['summarydata-summarydata-field_sd_indicator_values'] = array(
+    'bundle' => 'summarydata',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(),
+        'type' => 'entityreference_entity_id',
+        'weight' => 21,
+      ),
+    ),
+    'entity_type' => 'summarydata',
+    'field_name' => 'field_sd_indicator_values',
+    'label' => 'Indicator Values',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 0,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'indicator values',
+          'label_singular' => 'indicator value',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 0,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 11,
     ),
   );
 
@@ -250,6 +299,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Mining',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -287,6 +337,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Number of reporting companies',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max' => '',
       'min' => '',
       'prefix' => '',
@@ -328,6 +379,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Number of reporting government entities',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'max' => '',
       'min' => '',
       'prefix' => '',
@@ -363,6 +415,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Oil',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -394,6 +447,7 @@ function eitiet_summarydata_field_default_field_instances() {
     'label' => 'Other',
     'required' => 0,
     'settings' => array(
+      'entity_translation_sync' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -414,6 +468,7 @@ function eitiet_summarydata_field_default_field_instances() {
   t('File Links');
   t('Gas');
   t('Independent Administrator');
+  t('Indicator Values');
   t('Mining');
   t('Name');
   t('Number of reporting companies');
