@@ -82,15 +82,24 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
     );
 
     $entity_form['value_boolean'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Boolean Value'),
+      '#type' => 'select',
+      '#title' => t('Value'),
+      '#options' => array(
+        EITIENTITY_INDICATORVALUE_VALUE_NO => t('No'),
+        EITIENTITY_INDICATORVALUE_VALUE_YES => t('Yes'),
+      ),
       '#default_value' => $entity->value_boolean,
     );
     $this->entityFormSetElementStates($entity_form['value_boolean'], 'boolean', $entity_form['#parents'], 'indicator_id');
 
     $entity_form['value_enum'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enum Value'),
+      '#type' => 'select',
+      '#title' => t('Value'),
+      '#options' => array(
+        EITIENTITY_INDICATORVALUE_VALUE_NO => t('No'),
+        EITIENTITY_INDICATORVALUE_VALUE_YES => t('Yes'),
+        EITIENTITY_INDICATORVALUE_VALUE_PARTIALLY => t('Partially'),
+      ),
       '#default_value' => $entity->value_enum,
     );
     $this->entityFormSetElementStates($entity_form['value_enum'], 'enum', $entity_form['#parents'], 'indicator_id');

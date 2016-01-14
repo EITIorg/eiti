@@ -55,13 +55,10 @@ class IndicatorValueEntity extends Entity {
     switch ($this->indicator->type) {
       case 'boolean':
         return $this->value_boolean;
-        break;
       case 'enum':
         return $this->value_enum;
-        break;
       case 'numeric':
         return $this->value_numeric;
-        break;
       case 'text':
       default:
         return $this->value_text;
