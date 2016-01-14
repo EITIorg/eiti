@@ -23,7 +23,7 @@ function eitiet_summarydata_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '12',
         ),
         'country_id' => array(
           'weight' => '0',

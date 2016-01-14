@@ -113,13 +113,26 @@ function summarydata_load($entity_id, $entity_type) {
  * @return string
  */
 function eitientity_summarydata_label($entity, $entity_type) {
-  $country_entity = entity_load_single('country', $entity->country_id);
+  $t_args = array();
 
-  $t_args = array(
-    '!year_start' => format_date($entity->year_start, 'custom', 'Y'),
-    '!year_end' => format_date($entity->year_end, 'custom', 'Y'),
-    '!country' => entity_label('country', $country_entity),
-  );
+  if (!is_null($entity->country_id)) {
+    $country_entity = entity_load_single('country', $entity->country_id);
+    $t_args['!country'] = entity_label('country', $country_entity);
+  }
+
+  if (empty($t_args['!country'])) {
+    return '';
+  }
+
+  $t_args['!year_start'] = '';
+  if (!is_null($entity->year_start)) {
+    $t_args['!year_start'] = format_date($entity->year_start, 'custom', 'Y');
+  }
+
+  $t_args['!year_end'] = '';
+  if (!is_null($entity->year_end)) {
+    $t_args['!year_end'] = format_date($entity->year_end, 'custom', 'Y');
+  }
 
   if ($t_args['!year_start'] == $t_args['!year_end']) {
     return t('!country: !year_start', $t_args);
