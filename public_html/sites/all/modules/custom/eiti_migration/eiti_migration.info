@@ -17,6 +17,7 @@ files[] = migrations/eiti_migration.demo.inc
 files[] = migrations/eiti_migration.article.inc
 files[] = migrations/eiti_migration.document.inc
 files[] = migrations/eiti_migration.person.inc
+files[] = migrations/eiti_migration.mention.inc
 
 ; Extra Handlers.
 files[] = includes/handlers/eiti_migration.redirect.inc

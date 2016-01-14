@@ -35,6 +35,9 @@ function eiti_migration_migrate_api() {
       'persons' => array(
         'title' => t('Migration to the Person CT'),
       ),
+      'mentions' => array(
+        'title' => t('Migration to the Mention CT'),
+      ),
     ),
   );
 
@@ -345,10 +348,26 @@ function eiti_migration_migrate_api() {
     ),
   );
 
+  // #####################################
+  // ######## MENTIONS MIGRATIONS ########
+  // #####################################
+  // Mentions Migrations goes here: In the News CT to Mentions.
+  $migrations['migrations']['EITIMentionMigration'] = array(
+    'class_name' => 'EITIMentionMigration',
+    'group_name' => 'mentions',
+    'user_migration' => 'EITIUsersMigration',
+    'source_type' => 'in_the_news',
+    'destination_type' => 'mention',
+    'description' => t('Migration responsible for migrating In the News nodes to the mention content-type.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+    ),
+  );
+
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
     // Add the connection only to the groups we want to opt in.
-    $opt_in_groups = array('core', 'articles', 'documents', 'persons');
+    $opt_in_groups = array('core', 'articles', 'documents', 'persons', 'mentions');
     if (in_array($migration['group_name'], $opt_in_groups)) {
       $migrations['migrations'][$key]['source_database'] = array(
         'driver'   => 'mysql',

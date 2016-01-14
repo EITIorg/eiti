@@ -91,7 +91,9 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
       // Init translations and update the node.
       $handler->initTranslations();
+      $changed_old_value = $node->changed;
       node_save($node);
+      $node = $this->fixChangePropertyValue($node, $changed_old_value);
 
       // Process the old redirects.
       $redirects = $this->fetchLegacyRedirects($row->nid);
@@ -180,7 +182,9 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       // Special case when we have a Stub.
       if ($source_node->title == 'Stub') {
         $source_node->language = 'en';
+        $changed_old_value = $source_node->changed;
         node_save($source_node);
+        $source_node = $this->fixChangePropertyValue($source_node, $changed_old_value);
       }
     }
     elseif (!empty($entity->nid)) {
@@ -188,6 +192,17 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       $old_stub = node_load($entity->nid);
       $entity->translations = $old_stub->translations;
     }
+  }
+
+  public function fixChangePropertyValue($node, $changed) {
+    // Unfortunately, http://drupal.org/node/722688 was not accepted, so fix
+    // the changed timestamp
+    db_update('node')
+      ->fields(array('changed' => $changed))
+      ->condition('nid', $node->nid)
+      ->execute();
+    $node->changed = $changed;
+    return $node;
   }
 
   /**
