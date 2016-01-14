@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b73331cc14af328ea129"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fad72a7f26901d5f7cfa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -887,6 +887,8 @@
 	var d3 = __webpack_require__(166);
 	var rd3c = __webpack_require__(167);
 
+	window.CHART_WIDGETS = {};
+
 	var BarChart = rd3c.BarChart;
 
 	var GroupedBar = React.createClass({
@@ -993,25 +995,29 @@
 		}
 	});
 
-	(0, _reactDom.render)(React.createElement(
-		'div',
-		null,
-		React.createElement(GroupedBar, {
-			filename: 'data/viz2.json',
-			xlabel: 'Year',
-			ylabel: 'Volume (liters)'
-		})
-	), document.getElementById('viz2'));
+	window.CHART_WIDGETS.createGroupedBar = function (options) {
+		(0, _reactDom.render)(React.createElement(
+			'div',
+			null,
+			React.createElement(GroupedBar, {
+				filename: options.filename,
+				xlabel: options.xlabel,
+				ylabel: options.ylabel
+			})
+		), document.getElementById(options.container));
+	};
 
-	(0, _reactDom.render)(React.createElement(
-		'div',
-		null,
-		React.createElement(StackedBar, {
-			filename: 'data/viz3.json',
-			xlabel: 'Year',
-			ylabel: 'Revenue (USD)'
-		})
-	), document.getElementById('viz3'));
+	window.CHART_WIDGETS.createStackedBar = function (options) {
+		(0, _reactDom.render)(React.createElement(
+			'div',
+			null,
+			React.createElement(StackedBar, {
+				filename: options.filename,
+				xlabel: options.xlabel,
+				ylabel: options.ylabel
+			})
+		), document.getElementById(options.container));
+	};
 
 /***/ },
 /* 8 */

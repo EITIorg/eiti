@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 var d3 = require('d3');
 var rd3c= require('./rd3c');
 
+window.CHART_WIDGETS = {};
+
 var BarChart = rd3c.BarChart;
 
 var GroupedBar = React.createClass ({
@@ -125,23 +127,26 @@ var StackedBar = React.createClass ({
 });
 
 
-render((
+window.CHART_WIDGETS.createGroupedBar = function(options) {
+	render((
 		<div>
 			<GroupedBar
-	            filename = "data/viz2.json"
-	            xlabel = "Year"
-	            ylabel = "Volume (liters)"
+	            filename = {options.filename}
+	            xlabel = {options.xlabel}
+	            ylabel = {options.ylabel}
 	        />
         </div>
-	), document.getElementById('viz2'))
+	), document.getElementById(options.container))
+}
 
-
-render((
-		<div>
-			<StackedBar
-	            filename = "data/viz3.json"
-	            xlabel = "Year"
-	            ylabel = "Revenue (USD)"
-	        />
-        </div>
-	), document.getElementById('viz3'))
+window.CHART_WIDGETS.createStackedBar = function(options) {
+	render((
+			<div>
+				<StackedBar
+		            filename = {options.filename}
+		            xlabel = {options.xlabel}
+		            ylabel = {options.ylabel}
+		        />
+	        </div>
+		), document.getElementById(options.container))
+}
