@@ -7,7 +7,9 @@ dependencies[] = currency
 dependencies[] = date_popup
 dependencies[] = elements
 dependencies[] = entity
-dependencies[] = eitientity_country
+dependencies[] = helpergeneric
+dependencies[] = eitientity_indicatorvalue
+dependencies[] = eitientity_implementing_country
 
 
 ; Entity handlers.

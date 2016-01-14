@@ -5,8 +5,8 @@
  */
 
 $plugin = array(
-  'handler' => 'CountryPanelizerEntity',
-  'entity path' => 'country/%country',
+  'handler' => 'ImplementingCountryPanelizerEntity',
+  'entity path' => 'implementing_country/%implementing_country',
   'uses page manager' => TRUE,
   'hooks' => array(
     'menu' => TRUE,

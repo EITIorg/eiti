@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * Install, update and uninstall functions for the eitientity_country module.
+ * Install, update and uninstall functions for the ImplementingCountryEntity entity module.
  */
 
 /**
  * Implements hook_schema().
  */
-function eitientity_country_schema() {
-  $schema['eiticountry'] = array(
+function eitientity_implementing_country_schema() {
+  $schema['eiti_implementing_country'] = array(
     'description' => 'The base table for country entities.',
     'fields' => array(
       'id' => array(
@@ -64,8 +64,7 @@ function eitientity_country_schema() {
       ),
     ),
     'indexes' => array(
-      'entity_status'    => array('status', 'id'),
-      //'entity_status_type'    => array('status', 'type', 'id'),
+      'entity_status_type' => array('status', 'type', 'id'),
     ),
     'foreign keys' => array(
       'entity_author' => array(
@@ -77,12 +76,4 @@ function eitientity_country_schema() {
   );
 
   return $schema;
-}
-
-
-/**
- * Perform setup tasks when the module is installed.
- */
-function eitientity_install() {
-  // DO stuff.
 }

@@ -116,8 +116,8 @@ function eitientity_summarydata_label($entity, $entity_type) {
   $t_args = array();
 
   if (!is_null($entity->country_id)) {
-    $country_entity = entity_load_single('country', $entity->country_id);
-    $t_args['!country'] = entity_label('country', $country_entity);
+    $country_entity = entity_load_single('implementing_country', $entity->country_id);
+    $t_args['!country'] = entity_label('implementing_country', $country_entity);
   }
 
   if (empty($t_args['!country'])) {

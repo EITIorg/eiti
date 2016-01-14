@@ -44,7 +44,7 @@ function eitientity_indicatorvalue_entity_info() {
  * Access callback for custom score entities.
  *
  * @param $op
- * @param CountryEntity $entity
+ * @param ImplementingCountryEntity $entity
  * @param stdClass $account
  * @param $entity_type
  *

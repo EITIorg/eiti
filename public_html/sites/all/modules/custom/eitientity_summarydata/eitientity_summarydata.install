@@ -81,8 +81,8 @@ function eitientity_summarydata_schema() {
       'entity_information' => array('id'),
     ),
     'foreign keys' => array(
-      'entity_eiticountry' => array(
-        'table' => 'eiticountry',
+      'entity_eiti_implementing_country' => array(
+        'table' => 'eiti_implementing_country',
         'columns' => array('country_id' => 'id'),
       ),
     ),

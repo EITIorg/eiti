@@ -1,35 +1,35 @@
 <?php
 /**
  * @file
- * Provides a CountryEntity entity.
+ * Provides a ImplementingCountryEntity entity.
  */
 
 /**
  * Define administrative URLs.
  */
-define('EITIENTITY_COUNTRY_UI_PATH', 'country');
-define('EITIENTITY_COUNTRY_ADMIN_UI_PATH', 'admin/content/country');
-define('EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH', 'admin/structure/country');
+define('EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH', 'implementing_country');
+define('EITIENTITY_IMPLEMENTING_COUNTRY_ADMIN_UI_PATH', 'admin/content/implementing_country');
+define('EITIENTITY_IMPLEMENTING_COUNTRY_BUNDLE_ADMIN_UI_PATH', 'admin/structure/implementing_country');
 
 /**
  * Implements hook_entity_info().
  */
-function eitientity_country_entity_info() {
+function eitientity_implementing_country_entity_info() {
   $entity_info = array();
 
-  $menu_wildcard = '%country';
-  $entity_info['country'] = array(
-    'label' => t('Country'),
-    'plural label' => t('Countries'),
-    'description' => t('Custom country entity.'),
+  $menu_wildcard = '%implementing_country';
+  $entity_info['implementing_country'] = array(
+    'label' => t('Implementing Country'),
+    'plural label' => t('Implementing Countries'),
+    'description' => t('Custom implementing country entity.'),
 
-    'base table' => 'eiticountry',
-    'module' => 'eitientity_country',
+    'base table' => 'eiti_implementing_country',
+    'module' => 'eitientity_implementing_country',
 
-    'entity class' => 'CountryEntity',
+    'entity class' => 'ImplementingCountryEntity',
     'controller class' => 'EntityAPIController',
     //'extra fields controller class' => 'EntityDefaultExtraFieldsController',
-    'metadata controller class' => 'CountryMetadataController',
+    'metadata controller class' => 'ImplementingCountryMetadataController',
 
     //'entity cache' => TRUE,
     'field cache' => TRUE,
@@ -37,7 +37,7 @@ function eitientity_country_entity_info() {
 
     'fieldable' => TRUE,
 
-    'access callback' => 'eitientity_country_access',
+    'access callback' => 'eitientity_implementing_country_access',
     'uri callback' => 'entity_class_uri',
 
     'entity keys' => array(
@@ -78,28 +78,20 @@ function eitientity_country_entity_info() {
     'bundle keys' => array(
       'bundle' => 'type',
     ),
-    'bundles callback' => 'eitientity_country_get_types',
+    'bundles callback' => 'eitientity_implementing_country_get_types',
 
     'admin ui' => array(
-      'path' => EITIENTITY_COUNTRY_ADMIN_UI_PATH,
-      'entity path' => EITIENTITY_COUNTRY_UI_PATH,
-      'bundle path' => EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH,
-      'controller class' => 'CountryEntityUIController',
+      'path' => EITIENTITY_IMPLEMENTING_COUNTRY_ADMIN_UI_PATH,
+      'entity path' => EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH,
+      'bundle path' => EITIENTITY_IMPLEMENTING_COUNTRY_BUNDLE_ADMIN_UI_PATH,
+      'controller class' => 'ImplementingCountryEntityUIController',
       'menu wildcard' => $menu_wildcard,
-      'file' => 'eitientity_country.admin.inc',
+      'file' => 'eitientity_implementing_country.admin.inc',
     ),
 
     'view modes' => array(
       'full' => array(
         'label' => t('Full'),
-        'custom settings' => FALSE,
-      ),
-      'full_private' => array(
-        'label' => t('Full (Private)'),
-        'custom settings' => FALSE,
-      ),
-      'full_extra' => array(
-        'label' => t('Full (Extra)'),
         'custom settings' => FALSE,
       ),
       'teaser' => array(
@@ -109,11 +101,11 @@ function eitientity_country_entity_info() {
     ),
   );
 
-  foreach ($entity_info['country']['bundles callback']() as $type => $bundle_info) {
-    $entity_info['country']['bundles'][$type] = array(
+  foreach ($entity_info['implementing_country']['bundles callback']() as $type => $bundle_info) {
+    $entity_info['implementing_country']['bundles'][$type] = array(
       'label' => $bundle_info['label'],
       'admin' => array(
-        'path' => EITIENTITY_COUNTRY_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
+        'path' => EITIENTITY_IMPLEMENTING_COUNTRY_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
       ),
     );
   }
@@ -128,21 +120,21 @@ function eitientity_country_entity_info() {
  *
  * @param $entity_id
  * @param $entity_type
- * @return FALSE|CountryEntity
+ * @return FALSE|ImplementingCountryEntity
  */
-function country_load($entity_id, $entity_type) {
+function implementing_country_load($entity_id, $entity_type) {
   return entity_object_load($entity_id, $entity_type);
 }
 
 /**
  * Returns a list of country types.
  */
-function eitientity_country_get_types() {
+function eitientity_implementing_country_get_types() {
   $items = array();
 
-  $items['simple'] = array(
-    'label' => t('Simple'),
-    'description' => t('Create a country.'),
+  $items['normal'] = array(
+    'label' => t('Normal'),
+    'description' => t('Create a normal implementing country.'),
   );
 
   return $items;
@@ -154,8 +146,8 @@ function eitientity_country_get_types() {
  * @param $bundle
  * @return string|FALSE
  */
-function eitientity_country_type_get_name($bundle) {
-  $bundles = eitientity_country_get_types();
+function eitientity_implementing_country_type_get_name($bundle) {
+  $bundles = eitientity_implementing_country_get_types();
   return (isset($bundles[$bundle]['label'])) ? $bundles[$bundle]['label'] : FALSE;
 }
 
@@ -163,7 +155,7 @@ function eitientity_country_type_get_name($bundle) {
  * Access callback for custom country entities.
  *
  * @param $op
- * @param CountryEntity $entity
+ * @param ImplementingCountryEntity $entity
  * @param stdClass $account
  * @param $entity_type
  *
@@ -171,7 +163,7 @@ function eitientity_country_type_get_name($bundle) {
  *   Whether access is allowed or not. If the entity type does not specify any
  *   access information, NULL is returned.
  */
-function eitientity_country_access($op, $entity = NULL, $account = NULL, $entity_type) {
+function eitientity_implementing_country_access($op, $entity = NULL, $account = NULL, $entity_type) {
   $rights = &drupal_static(__FUNCTION__, array());
 
   // Fix for panelizer.
@@ -231,10 +223,10 @@ function eitientity_country_access($op, $entity = NULL, $account = NULL, $entity
 /**
  * Implements hook_permission().
  */
-function eitientity_country_permission() {
+function eitientity_implementing_country_permission() {
   $perms = array();
 
-  $entity_type = 'country';
+  $entity_type = 'implementing_country';
   $entity_info = entity_get_info($entity_type);
 
   $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
@@ -266,10 +258,10 @@ function eitientity_country_permission() {
  * @param $router_item
  * @param $root_path
  */
-function eitientity_country_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  // Add action link to 'country/add' on 'admin/content/country' page.
-  if ($root_path == EITIENTITY_COUNTRY_ADMIN_UI_PATH) {
-    $item = menu_get_item(EITIENTITY_COUNTRY_UI_PATH . '/add');
+function eitientity_implementing_country_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to 'implementing_country/add' on 'admin/content/implementing_country' page.
+  if ($root_path == EITIENTITY_IMPLEMENTING_COUNTRY_ADMIN_UI_PATH) {
+    $item = menu_get_item(EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/add');
     if ($item['access']) {
       $data['actions']['output'][] = array(
         '#theme' => 'menu_local_action',
@@ -285,10 +277,10 @@ function eitientity_country_menu_local_tasks_alter(&$data, $router_item, $root_p
  *
  * @param $op
  * @param $entity_type
- * @param CountryEntity $entity
+ * @param ImplementingCountryEntity $entity
  * @return null|string
  */
-function eitientity_country_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
+function eitientity_implementing_country_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
   module_load_include('inc', 'entity', 'includes/entity.ui');
 
   $label = entity_label($entity_type, $entity);
@@ -326,14 +318,14 @@ function eitientity_country_entity_ui_get_page_title($op, $entity_type, $entity 
 /**
  * Implements hook_field_extra_fields().
  */
-function eitientity_country_field_extra_fields() {
+function eitientity_implementing_country_field_extra_fields() {
   $extra = array();
 
-  foreach (eitientity_country_get_types() as $bundle_type => $bundle_info) {
-    $extra['country'][$bundle_type]['form'] = array(
+  foreach (eitientity_implementing_country_get_types() as $bundle_type => $bundle_info) {
+    $extra['implementing_country'][$bundle_type]['form'] = array(
       'name' => array(
         'label' => t('Name'),
-        'description' => t('Name of the @label', array('@label' => t('Country'))),
+        'description' => t('Name of the @label', array('@label' => t('Implementing Country'))),
         'weight' => -5,
       ),
     );
@@ -348,12 +340,12 @@ function eitientity_country_field_extra_fields() {
  * @param array $build
  * @param string $entity_type
  */
-function eitientity_country_entity_view_alter(&$build, $entity_type) {
-  if ($entity_type != 'country') {
+function eitientity_implementing_country_entity_view_alter(&$build, $entity_type) {
+  if ($entity_type != 'implementing_country') {
     return;
   }
 
-  /** @var CountryEntity $entity */
+  /** @var ImplementingCountryEntity $entity */
   $entity = $build['#entity'];
 
   // Add contextual links for this node, except when the node is already being
@@ -372,7 +364,7 @@ function eitientity_country_entity_view_alter(&$build, $entity_type) {
  * @param string $plugin_type
  * @return null|string
  */
-function eitientity_country_ctools_plugin_directory($owner, $plugin_type) {
+function eitientity_implementing_country_ctools_plugin_directory($owner, $plugin_type) {
   if ($owner == 'panelizer' && $plugin_type == 'entity') {
     return 'plugins/entity';
   }

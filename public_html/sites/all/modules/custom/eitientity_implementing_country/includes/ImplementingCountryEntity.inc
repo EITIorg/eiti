@@ -7,7 +7,7 @@
 /**
  * The entity main class.
  */
-class CountryEntity extends Entity {
+class ImplementingCountryEntity extends Entity {
   // Define some default values.
   public $id = NULL;
   public $name = '';

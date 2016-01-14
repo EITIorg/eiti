@@ -5,20 +5,21 @@
  */
 
 /**
- * Form constructor for the CountryEntity add/edit form.
+ * Form constructor for the ImplementingCountryEntity add/edit form.
  *
  * @see country_entity_info().
  *
  * @param $form
  * @param $form_state
- * @param CountryEntity $entity
+ * @param ImplementingCountryEntity $entity
  * @return array
  */
-function country_form($form, &$form_state, $entity) {
-  $entity_type = 'country';
+function implementing_country_form($form, &$form_state, $entity) {
+  $entity_type = 'implementing_country';
 
   if (isset($form_state['op']) && arg(0) != 'admin') {
-    drupal_set_title(eitientity_country_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
+    $title = eitientity_implementing_country_entity_ui_get_page_title($form_state['op'], $entity_type, $entity);
+    drupal_set_title($title, PASS_THROUGH);
   }
 
   // $form['additional_settings'] = array(
@@ -89,8 +90,8 @@ function country_form($form, &$form_state, $entity) {
   field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
 
   // Attach validate and submit callbacks.
-  $form['#validate'][] = '_country_entity_form_validate';
-  $form['#submit'][] = '_country_entity_form_submit';
+  $form['#validate'][] = '_implementing_country_entity_form_validate';
+  $form['#submit'][] = '_implementing_country_entity_form_submit';
 
   if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
     if (isset($form['redirect'])) {
@@ -110,7 +111,7 @@ function country_form($form, &$form_state, $entity) {
  * @param $form
  * @param $form_state
  */
-function _country_entity_form_validate($form, &$form_state) {
+function _implementing_country_entity_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
@@ -122,12 +123,13 @@ function _country_entity_form_validate($form, &$form_state) {
  * @param $form
  * @param $form_state
  */
-function _country_entity_form_submit($form, &$form_state) {
+function _implementing_country_entity_form_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
 
   // Remove unneeded values.
   form_state_values_clean($form_state);
-  /** @var CountryEntity $entity */
+
+  /** @var ImplementingCountryEntity $entity */
   $entity = entity_ui_form_submit_build_entity($form, $form_state);
 
   // Set the timestamp fields.
@@ -141,9 +143,6 @@ function _country_entity_form_submit($form, &$form_state) {
   if (!empty($entity->is_new)) {
     $entity->user_id = $GLOBALS['user']->uid;
   }
-  else {
-    // @TODO: Add possibility to change user?!?
-  }
 
   // Save the entity.
   entity_save($entity_type, $entity);
@@ -151,7 +150,7 @@ function _country_entity_form_submit($form, &$form_state) {
   // Prepare the messages.
   $entity_label = $entity->label();
   $watchdog_args = array('@type' => $entity->entityType(), '%label' => $entity_label);
-  $t_args = array('@type' => eitientity_country_type_get_name($entity_type), '%label' => $entity_label);
+  $t_args = array('@type' => eitientity_implementing_country_type_get_name($entity_type), '%label' => $entity_label);
   $entity_uri = entity_uri($entity_type, $entity);
   $entity_link = l(t('view'), $entity_uri['path']);
 
@@ -165,11 +164,11 @@ function _country_entity_form_submit($form, &$form_state) {
   }
 
   if (empty($entity->is_new)) {
-    watchdog('country', '@type: updated %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('implementing_country', '@type: updated %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %label has been updated.', $t_args));
   }
   else {
-    watchdog('country', '@type: added %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('implementing_country', '@type: added %label.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %label has been created.', $t_args));
   }
 
@@ -187,7 +186,7 @@ function _country_entity_form_submit($form, &$form_state) {
  * @param $form
  * @param $form_state
  */
-function country_entity_form_delete_submit($form, &$form_state) {
+function implementing_country_entity_form_delete_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
 
@@ -202,12 +201,12 @@ function country_entity_form_delete_submit($form, &$form_state) {
 }
 
 /**
- * Menu callback: Overview page for CountryEntity at admin/structure/%.
+ * Menu callback: Overview page for ImplementingCountryEntity at admin/structure/%.
  *
  * @param string $entity_type
- * @return null|array
+ * @return array
  */
-function country_entity_overview_types($entity_type) {
+function implementing_country_entity_overview_types($entity_type) {
   $build = array();
 
   $entity_info = entity_get_info($entity_type);
@@ -240,5 +239,6 @@ function country_entity_overview_types($entity_type) {
     '#rows' => $rows,
     '#empty' => t('No entity types available.'),
   );
+
   return $build;
 }

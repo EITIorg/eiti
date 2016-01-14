@@ -9,20 +9,20 @@
  *
  * Handles country specific functionality for Panelizer.
  */
-class CountryPanelizerEntity extends PanelizerEntityDefault {
+class ImplementingCountryPanelizerEntity extends PanelizerEntityDefault {
   public $supports_revisions = FALSE;
-  public $entity_admin_root = 'admin/structure/country/%';
+  public $entity_admin_root = 'admin/structure/implementing_country/%';
   public $entity_admin_bundle = 3;
-  public $views_table = 'eiticountry';
+  public $views_table = 'eiti_implementing_country';
   //public $uses_page_manager = TRUE;
 
   public function entity_access($op, $entity) {
     // This must be implemented by the extending class.
-    return eitientity_country_access($op, $entity, NULL, 'country');
+    return eitientity_implementing_country_access($op, $entity, NULL, 'implementing_country');
   }
 
   public function entity_save($entity) {
-    entity_save('country', $entity);
+    entity_save('implementing_country', $entity);
   }
 
   /**
@@ -35,17 +35,17 @@ class CountryPanelizerEntity extends PanelizerEntityDefault {
     $handler = new stdClass;
     $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
     $handler->api_version = 1;
-    $handler->name = 'country_view_panelizer';
-    $handler->task = 'country_view';
+    $handler->name = 'implementing_country_view_panelizer';
+    $handler->task = 'implementing_country_view';
     $handler->subtask = '';
-    $handler->handler = 'panelizer_country';
+    $handler->handler = 'panelizer_implementing_country';
     $handler->weight = -100;
     $handler->conf = array(
-      'title' => t('country panelizer'),
-      'context' => 'argument_entity_id:country_1',
+      'title' => t('implementing country panelizer'),
+      'context' => 'argument_entity_id:implementing_country_1',
       'access' => array(),
     );
-    $handlers['country_view_panelizer'] = $handler;
+    $handlers['implementing_country_view_panelizer'] = $handler;
 
     return $handlers;
   }

@@ -43,11 +43,11 @@ function summarydata_form($form, &$form_state, $entity) {
 
   $form['country_id'] = array(
     '#type' => 'ereference',
-    '#title' => t('Country'),
+    '#title' => t('Implementing Country'),
     '#default_value' => $entity->country_id,
     '#required' => TRUE,
-    '#referenced_type' => 'country',
-    '#autocomplete_path' => 'helpergeneric/ereference/country',
+    '#referenced_type' => 'implementing_country',
+    '#autocomplete_path' => 'helpergeneric/ereference/implementing_country',
   );
 
   $year_start_value = 0;

@@ -7,7 +7,7 @@
 /**
  * Override EntityBundleableUIController to customize our menu items.
  */
-class CountryEntityUIController extends EntityBundleableUIController {
+class ImplementingCountryEntityUIController extends EntityBundleableUIController {
   protected $entity_path;
   protected $entity_id_count;
   protected $bundle_path;
@@ -154,8 +154,8 @@ class CountryEntityUIController extends EntityBundleableUIController {
         'access callback' => 'entity_access',
         'access arguments' => array('administer', $this->entityType),
         'type' => MENU_NORMAL_ITEM,
-        'file' => 'eitientity_country.admin.inc',
-        'file path' => drupal_get_path('module', 'eitientity_country'),
+        'file' => 'eitientity_implementing_country.admin.inc',
+        'file path' => drupal_get_path('module', 'eitientity_implementing_country'),
       );
       $items[$this->bundle_path . '/overview'] = array(
         'title' => 'Overview',
@@ -166,7 +166,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
       foreach ($this->entityInfo['bundles'] as $bundle_type => $bundle_info) {
         $items[$this->bundle_path . '/manage/' . $bundle_type] = array(
           'title' => $bundle_info['label'] . ' info',
-          'page callback' => 'eitientity_country_type_get_name',
+          'page callback' => 'eitientity_implementing_country_type_get_name',
           'page arguments' => array($bundle_type),
           'access callback' => 'entity_access',
           'access arguments' => array('administer', $this->entityType),
@@ -209,7 +209,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
 
     $header = array(
       array(
-        'data' => t('Label'),
+        'data' => t('Name'),
         'type' => 'property',
         'specifier' => 'title',
         'class' => array('country-ui-title'),
@@ -248,7 +248,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
     $entities = $ids ? entity_load($this->entityType, $ids) : array();
 
     $rows = array();
-    /** @var CountryEntity $entity */
+    /** @var ImplementingCountryEntity $entity */
     foreach ($entities as $entity) {
       $cols = array(
         check_plain($this->entityInfo['bundles'][$entity->bundle()]['label']),
@@ -272,7 +272,7 @@ class CountryEntityUIController extends EntityBundleableUIController {
    *
    * @param $conditions
    * @param $id
-   * @param CountryEntity $entity
+   * @param ImplementingCountryEntity $entity
    * @param $additional_cols
    *   Additional columns to be added after the entity label column.
    * @return array
