@@ -8,7 +8,7 @@ dependencies[] = date_popup
 dependencies[] = elements
 dependencies[] = entity
 dependencies[] = helpergeneric
-dependencies[] = eitientity_indicatorvalue
+dependencies[] = eitientity_indicator_value
 dependencies[] = eitientity_implementing_country
 
 

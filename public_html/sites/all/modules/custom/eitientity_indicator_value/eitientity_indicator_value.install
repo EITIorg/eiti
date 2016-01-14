@@ -7,8 +7,8 @@
 /**
  * Implements hook_schema().
  */
-function eitientity_indicatorvalue_schema() {
-  $schema['eitiindicatorvalue'] = array(
+function eitientity_indicator_value_schema() {
+  $schema['eiti_indicator_value'] = array(
     'description' => 'The base table for storing indicator value entities.',
     'fields' => array(
       'id' => array(

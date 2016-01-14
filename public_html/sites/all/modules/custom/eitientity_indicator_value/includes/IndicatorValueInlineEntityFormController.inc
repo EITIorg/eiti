@@ -36,21 +36,21 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
 
     $fields['indicator'] = array(
       'type' => 'callback',
-      'render_callback' => 'eitientity_indicatorvalue_get_indicator_label',
+      'render_callback' => 'eitientity_indicator_value_get_indicator_label',
       'label' => t('Indicator'),
       'weight' => 20,
     );
 
     $fields['indicator_value'] = array(
       'type' => 'callback',
-      'render_callback' => 'eitientity_indicatorvalue_get_indicator_value_value',
+      'render_callback' => 'eitientity_indicator_value_get_indicator_value_value',
       'label' => t('Value'),
       'weight' => 30,
     );
 
     $fields['indicator_unit'] = array(
       'type' => 'callback',
-      'render_callback' => 'eitientity_indicatorvalue_get_indicator_value_unit',
+      'render_callback' => 'eitientity_indicator_value_get_indicator_value_unit',
       'label' => t('Unit'),
       'weight' => 35,
     );
@@ -69,7 +69,7 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
     /** @var IndicatorValueEntity $entity */
     $entity = $entity_form['#entity'];
 
-    $indicator_information = eitientity_indicatorvalue_get_indicator_information();
+    $indicator_information = eitientity_indicator_value_get_indicator_information();
     $entity_form['indicator_id'] = array(
       '#type' => 'select',
       '#required' => TRUE,
@@ -85,8 +85,8 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
       '#type' => 'select',
       '#title' => t('Value'),
       '#options' => array(
-        EITIENTITY_INDICATORVALUE_VALUE_NO => t('No'),
-        EITIENTITY_INDICATORVALUE_VALUE_YES => t('Yes'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_NO => t('No'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_YES => t('Yes'),
       ),
       '#default_value' => $entity->value_boolean,
     );
@@ -96,9 +96,9 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
       '#type' => 'select',
       '#title' => t('Value'),
       '#options' => array(
-        EITIENTITY_INDICATORVALUE_VALUE_NO => t('No'),
-        EITIENTITY_INDICATORVALUE_VALUE_YES => t('Yes'),
-        EITIENTITY_INDICATORVALUE_VALUE_PARTIALLY => t('Partially'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_NO => t('No'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_YES => t('Yes'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY => t('Partially'),
       ),
       '#default_value' => $entity->value_enum,
     );

@@ -4,23 +4,23 @@
  * Exposes a custom entity to store indicators.
  */
 
-define('EITIENTITY_INDICATORVALUE_VALUE_NO', '0');
-define('EITIENTITY_INDICATORVALUE_VALUE_YES', '1');
-define('EITIENTITY_INDICATORVALUE_VALUE_PARTIALLY', '2');
+define('EITIENTITY_INDICATOR_VALUE_VALUE_NO', '0');
+define('EITIENTITY_INDICATOR_VALUE_VALUE_YES', '1');
+define('EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY', '2');
 
 /**
  * Implements hook_entity_info().
  */
-function eitientity_indicatorvalue_entity_info() {
+function eitientity_indicator_value_entity_info() {
   $entity_info = array();
 
-  $entity_info['indicatorvalue'] = array(
+  $entity_info['indicator_value'] = array(
     'label' => t('Indicator Value'),
     'plural label' => t('Indicator Values'),
     'description' => t('Indicators value represent a single data point.'),
 
-    'base table' => 'eitiindicatorvalue',
-    'module' => 'eitientity_indicatorvalue',
+    'base table' => 'eiti_indicator_value',
+    'module' => 'eitientity_indicator_value',
 
     'entity class' => 'IndicatorValueEntity',
     'controller class' => 'EntityAPIController',
@@ -32,7 +32,7 @@ function eitientity_indicatorvalue_entity_info() {
     'static cache' => FALSE,
     'fieldable' => FALSE,
 
-    'access callback' => 'eitientity_indicatorvalue_access',
+    'access callback' => 'eitientity_indicator_value_access',
     'uri callback' => 'entity_class_uri',
 
     'entity keys' => array(
@@ -56,7 +56,7 @@ function eitientity_indicatorvalue_entity_info() {
  *   Whether access is allowed or not. If the entity type does not specify any
  *   access information, NULL is returned.
  */
-function eitientity_indicatorvalue_access($op, $entity = NULL, $account = NULL, $entity_type) {
+function eitientity_indicator_value_access($op, $entity = NULL, $account = NULL, $entity_type) {
   $operations = array('administer', 'create', 'view', 'edit', 'update', 'delete');
   if (!in_array($op, $operations, TRUE)) {
     // If the $op was not one of the supported ones, we return access denied.
@@ -74,7 +74,7 @@ function eitientity_indicatorvalue_access($op, $entity = NULL, $account = NULL, 
 /**
  * Implements hook_permission().
  */
-function eitientity_indicatorvalue_permission() {
+function eitientity_indicator_value_permission() {
   $perms = array();
 
   $entity_type = 'score';
@@ -104,7 +104,7 @@ function eitientity_indicatorvalue_permission() {
  *
  * @return string
  */
-function eitientity_indicatorvalue_get_indicator_label($entity_type, $entity) {
+function eitientity_indicator_value_get_indicator_label($entity_type, $entity) {
   if (!empty($entity->indicator_id)) {
     /** @var IndicatorEntity $indicator_entity */
     $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
@@ -122,7 +122,7 @@ function eitientity_indicatorvalue_get_indicator_label($entity_type, $entity) {
  *
  * @return string
  */
-function eitientity_indicatorvalue_get_indicator_value_value($entity_type, $entity) {
+function eitientity_indicator_value_get_indicator_value_value($entity_type, $entity) {
   if (empty($entity->indicator_id)) {
     return '';
   }
@@ -142,7 +142,7 @@ function eitientity_indicatorvalue_get_indicator_value_value($entity_type, $enti
  *
  * @return string
  */
-function eitientity_indicatorvalue_get_indicator_value_unit($entity_type, $entity) {
+function eitientity_indicator_value_get_indicator_value_unit($entity_type, $entity) {
   if (empty($entity->indicator_id)) {
     return '';
   }
@@ -159,7 +159,7 @@ function eitientity_indicatorvalue_get_indicator_value_unit($entity_type, $entit
 /**
  * @return array
  */
-function eitientity_indicatorvalue_get_indicator_information() {
+function eitientity_indicator_value_get_indicator_information() {
   $information = &drupal_static(__FUNCTION__);
 
   if (!empty($information)) {
@@ -217,7 +217,7 @@ function eitientity_indicatorvalue_get_indicator_information() {
 /**
  * Provides theme registration for themes across .inc files.
  */
-function eitientity_indicatorvalue_theme() {
+function eitientity_indicator_value_theme() {
   return array(
     // From form.inc.
     'select_indicators' => array(
@@ -244,7 +244,7 @@ function theme_select_indicators($variables) {
   element_set_attributes($element, array('id', 'name', 'size'));
   _form_set_class($element, array('form-select'));
 
-  return '<select' . drupal_attributes($element['#attributes']) . '>' . eitientity_indicatorvalue_form_select_options($element) . '</select>';
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . eitientity_indicator_value_form_select_options($element) . '</select>';
 }
 
 
@@ -253,7 +253,7 @@ function theme_select_indicators($variables) {
  *
  * @return string
  */
-function eitientity_indicatorvalue_form_select_options($element, $choices = NULL) {
+function eitientity_indicator_value_form_select_options($element, $choices = NULL) {
   if (!isset($choices)) {
     $choices = $element['#options'];
   }
@@ -265,7 +265,7 @@ function eitientity_indicatorvalue_form_select_options($element, $choices = NULL
   foreach ($choices as $key => $choice) {
     if (is_array($choice)) {
       $options .= '<optgroup label="' . check_plain($key) . '">';
-      $options .= eitientity_indicatorvalue_form_select_options($element, $choice);
+      $options .= eitientity_indicator_value_form_select_options($element, $choice);
       $options .= '</optgroup>';
     }
     elseif (is_object($choice)) {

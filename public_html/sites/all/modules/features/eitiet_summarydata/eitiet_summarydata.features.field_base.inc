@@ -178,7 +178,7 @@ function eitiet_summarydata_field_default_field_bases() {
         ),
         'target_bundles' => array(),
       ),
-      'target_type' => 'indicatorvalue',
+      'target_type' => 'indicator_value',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
