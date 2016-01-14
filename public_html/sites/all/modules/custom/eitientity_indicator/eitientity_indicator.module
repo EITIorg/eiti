@@ -263,3 +263,29 @@ function eitientity_indicator_entity_ui_get_page_title($op, $entity_type, $entit
   }
   return entity_ui_get_action_title($op, $entity_type, $bundle);
 }
+
+/**
+ * Returns a list of indicators by type.
+ *
+ * @param string $bundle
+ * @return array
+ */
+function eitientity_indicator_get_by_bundle($bundle) {
+  $entities = array();
+
+  // Get a list of domains sorted by weight and name.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'indicator');
+  $query->entityCondition('bundle', $bundle);
+  $query->propertyOrderBy('name');
+  $results = $query->execute();
+
+  foreach ($results['indicator'] as $result) {
+    /** @var IndicatorEntity $indicator */
+    $indicator = entity_load_single('indicator', $result->id);
+
+    $entities[$indicator->identifier()] = $indicator;
+  }
+
+  return $entities;
+}
