@@ -1,22 +1,22 @@
 <?php
 /**
  * @file
- * eitiet_summarydata.field_group.inc
+ * eitiet_summary_data.field_group.inc
  */
 
 /**
  * Implements hook_field_group_info().
  */
-function eitiet_summarydata_field_group_info() {
+function eitiet_summary_data_field_group_info() {
   $export = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_contact_details|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_contact_details|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_contact_details';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -38,15 +38,15 @@ function eitiet_summarydata_field_group_info() {
       'formatter' => 'collapsible',
     ),
   );
-  $export['group_sd_contact_details|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_contact_details|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_data_disaggregation|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_data_disaggregation|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_data_disaggregation';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -63,15 +63,15 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_data_disaggregation|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_data_disaggregation|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_fiscal_year|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_fiscal_year|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_fiscal_year';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -91,15 +91,15 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_fiscal_year|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_fiscal_year|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_reporting_currency|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_reporting_currency|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_reporting_currency';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -119,15 +119,15 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_reporting_currency|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_reporting_currency|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_sectors_covered|summarydata|summarydata|default';
+  $field_group->identifier = 'group_sd_sectors_covered|summary_data|summary_data|default';
   $field_group->group_name = 'group_sd_sectors_covered';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -143,15 +143,15 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_sectors_covered|summarydata|summarydata|default'] = $field_group;
+  $export['group_sd_sectors_covered|summary_data|summary_data|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_sectors_covered|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_sectors_covered|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_sectors_covered';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -173,15 +173,15 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_sectors_covered|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_sectors_covered|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_web_links|summarydata|summarydata|form';
+  $field_group->identifier = 'group_sd_web_links|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_web_links';
-  $field_group->entity_type = 'summarydata';
-  $field_group->bundle = 'summarydata';
+  $field_group->entity_type = 'summary_data';
+  $field_group->bundle = 'summary_data';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
@@ -200,7 +200,7 @@ function eitiet_summarydata_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_web_links|summarydata|summarydata|form'] = $field_group;
+  $export['group_sd_web_links|summary_data|summary_data|form'] = $field_group;
 
   return $export;
 }

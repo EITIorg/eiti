@@ -9,14 +9,14 @@
  *
  * @TODO: Add proper validation!
  *
- * @see eitientity_summarydata_entity_info().
+ * @see eitientity_summary_data_entity_info().
  *
  * @param array $form
  * @param array $form_state
  * @param SummaryDataEntity $entity
  * @return array
  */
-function summarydata_form($form, &$form_state, $entity) {
+function summary_data_form($form, &$form_state, $entity) {
   $entity_type = $entity->entityType();
 
   $query = new EntityFieldQuery();
@@ -40,7 +40,7 @@ function summarydata_form($form, &$form_state, $entity) {
   }
 
   if (isset($form_state['op']) && arg(0) != 'admin') {
-    drupal_set_title(eitientity_summarydata_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
+    drupal_set_title(eitientity_summary_data_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
 
   // $form['additional_settings'] = array(
@@ -149,7 +149,7 @@ function summarydata_form($form, &$form_state, $entity) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
-      '#submit' => array('_summarydata_form_delete_submit'),
+      '#submit' => array('_summary_data_form_delete_submit'),
     );
   }
 
@@ -175,8 +175,8 @@ function summarydata_form($form, &$form_state, $entity) {
   field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
 
   // Attach validate and submit callbacks.
-  $form['#validate'][] = '_summarydata_form_validate';
-  $form['#submit'][] = '_summarydata_form_submit';
+  $form['#validate'][] = '_summary_data_form_validate';
+  $form['#submit'][] = '_summary_data_form_submit';
 
   if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
     if (isset($form['redirect'])) {
@@ -193,7 +193,7 @@ function summarydata_form($form, &$form_state, $entity) {
  * @param $element
  * @param $form_state
  */
-function _summarydata_form_date_popup_date_validate($element, &$form_state, $form) {
+function _summary_data_form_date_popup_date_validate($element, &$form_state, $form) {
   // Get the date format and value.;
   $date_value = drupal_array_get_nested_value($form_state['values'], $element['#parents']);
 
@@ -213,21 +213,21 @@ function _summarydata_form_date_popup_date_validate($element, &$form_state, $for
 }
 
 /**
- * Form validation handler for summarydata_form().
+ * Form validation handler for summary_data_form().
  *
- * @see summarydata_form()
+ * @see summary_data_form()
  * @see entity_form_field_validate()
  */
-function _summarydata_form_validate($form, &$form_state) {
+function _summary_data_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
 }
 
 /**
- * Form API submit callback for summarydata_form().
+ * Form API submit callback for summary_data_form().
  */
-function _summarydata_form_submit($form, &$form_state) {
+function _summary_data_form_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
 
   // Remove unneeded values.
@@ -255,10 +255,10 @@ function _summarydata_form_submit($form, &$form_state) {
   }
 
   if (empty($entity->is_new)) {
-    watchdog('summarydata', '@type: updated %id.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('summary_data', '@type: updated %id.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
   }
   else {
-    watchdog('summarydata', '@type: added %id.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('summary_data', '@type: added %id.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
   }
 
   // Clear the page and block caches.
@@ -266,13 +266,13 @@ function _summarydata_form_submit($form, &$form_state) {
 }
 
 /**
- * Form submission handler for summarydata_form().
+ * Form submission handler for summary_data_form().
  *
  * Handles the 'Delete' button on the entity form.
  *
- * @see summarydata_form()
+ * @see summary_data_form()
  */
-function _summarydata_form_delete_submit($form, &$form_state) {
+function _summary_data_form_delete_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
 
@@ -292,7 +292,7 @@ function _summarydata_form_delete_submit($form, &$form_state) {
  * @param $entity_type
  * @return array
  */
-function eitientity_summarydata_entity_overview_types($entity_type) {
+function eitientity_summary_data_entity_overview_types($entity_type) {
   $entity_info = entity_get_info($entity_type);
 
   $build = array();

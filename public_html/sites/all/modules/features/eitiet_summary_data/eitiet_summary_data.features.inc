@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * eitiet_summarydata.features.inc
+ * eitiet_summary_data.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function eitiet_summarydata_ctools_plugin_api($module = NULL, $api = NULL) {
+function eitiet_summary_data_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }

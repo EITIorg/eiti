@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * eitiet_summarydata.features.field_instance.inc
+ * eitiet_summary_data.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function eitiet_summarydata_field_default_field_instances() {
+function eitiet_summary_data_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_contact_email_address'.
-  $field_instances['summarydata-summarydata-field_sd_contact_email_address'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_contact_email_address'.
+  $field_instances['summary_data-summary_data-field_sd_contact_email_address'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -26,7 +26,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 20,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_contact_email_address',
     'label' => 'Email address',
     'required' => 0,
@@ -45,9 +45,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_contact_name'.
-  $field_instances['summarydata-summarydata-field_sd_contact_name'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_contact_name'.
+  $field_instances['summary_data-summary_data-field_sd_contact_name'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -60,7 +60,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 18,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_contact_name',
     'label' => 'Name',
     'required' => 0,
@@ -81,9 +81,9 @@ function eitiet_summarydata_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_contact_organisation'.
-  $field_instances['summarydata-summarydata-field_sd_contact_organisation'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_contact_organisation'.
+  $field_instances['summary_data-summary_data-field_sd_contact_organisation'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -96,7 +96,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 19,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_contact_organisation',
     'label' => 'Organisation',
     'required' => 0,
@@ -116,9 +116,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_file_links'.
-  $field_instances['summarydata-summarydata-field_sd_file_links'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_file_links'.
+  $field_instances['summary_data-summary_data-field_sd_file_links'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -131,7 +131,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 15,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_file_links',
     'label' => 'File Links',
     'required' => 0,
@@ -168,9 +168,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_gas_sector'.
-  $field_instances['summarydata-summarydata-field_sd_gas_sector'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_gas_sector'.
+  $field_instances['summary_data-summary_data-field_sd_gas_sector'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -183,7 +183,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 10,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_gas_sector',
     'label' => 'Gas',
     'required' => 0,
@@ -201,9 +201,9 @@ function eitiet_summarydata_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_independent_admin'.
-  $field_instances['summarydata-summarydata-field_sd_independent_admin'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_independent_admin'.
+  $field_instances['summary_data-summary_data-field_sd_independent_admin'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -216,7 +216,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 13,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_independent_admin',
     'label' => 'Independent Administrator',
     'required' => 0,
@@ -237,9 +237,9 @@ function eitiet_summarydata_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_indicator_values'.
-  $field_instances['summarydata-summarydata-field_sd_indicator_values'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_indicator_values'.
+  $field_instances['summary_data-summary_data-field_sd_indicator_values'] = array(
+    'bundle' => 'summary_data',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -251,7 +251,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 21,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_indicator_values',
     'label' => 'Indicator Values',
     'required' => 0,
@@ -279,9 +279,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_mining_sector'.
-  $field_instances['summarydata-summarydata-field_sd_mining_sector'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_mining_sector'.
+  $field_instances['summary_data-summary_data-field_sd_mining_sector'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -294,7 +294,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 11,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_mining_sector',
     'label' => 'Mining',
     'required' => 0,
@@ -312,9 +312,9 @@ function eitiet_summarydata_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_no_reporting_com'.
-  $field_instances['summarydata-summarydata-field_sd_no_reporting_com'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_no_reporting_com'.
+  $field_instances['summary_data-summary_data-field_sd_no_reporting_com'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -332,7 +332,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 17,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_no_reporting_com',
     'label' => 'Number of reporting companies',
     'required' => 0,
@@ -354,9 +354,9 @@ function eitiet_summarydata_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'summarydata-summarydata-field_sd_no_reporting_gov'.
-  $field_instances['summarydata-summarydata-field_sd_no_reporting_gov'] = array(
-    'bundle' => 'summarydata',
+  // 'summary_data-summary_data-field_sd_no_reporting_gov'.
+  $field_instances['summary_data-summary_data-field_sd_no_reporting_gov'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -374,7 +374,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 16,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_no_reporting_gov',
     'label' => 'Number of reporting government entities',
     'required' => 0,
@@ -395,9 +395,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_oil_sector'.
-  $field_instances['summarydata-summarydata-field_sd_oil_sector'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_oil_sector'.
+  $field_instances['summary_data-summary_data-field_sd_oil_sector'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -410,7 +410,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 9,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_oil_sector',
     'label' => 'Oil',
     'required' => 0,
@@ -427,9 +427,9 @@ function eitiet_summarydata_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summarydata-summarydata-field_sd_other_sector'.
-  $field_instances['summarydata-summarydata-field_sd_other_sector'] = array(
-    'bundle' => 'summarydata',
+  // Exported field_instance: 'summary_data-summary_data-field_sd_other_sector'.
+  $field_instances['summary_data-summary_data-field_sd_other_sector'] = array(
+    'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -442,7 +442,7 @@ function eitiet_summarydata_field_default_field_instances() {
         'weight' => 12,
       ),
     ),
-    'entity_type' => 'summarydata',
+    'entity_type' => 'summary_data',
     'field_name' => 'field_sd_other_sector',
     'label' => 'Other',
     'required' => 0,

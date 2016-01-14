@@ -146,14 +146,14 @@ class SummaryDataEntityUIController extends EntityBundleableUIController {
     if (module_exists('field_ui')) {
       $items[$this->bundle_path] = array(
         'title' => $plural_label,
-        'page callback' => 'eitientity_summarydata_entity_overview_types',
+        'page callback' => 'eitientity_summary_data_entity_overview_types',
         'page arguments' => array($this->entityType),
         'description' => 'Manage ' . $plural_label . '.',
         'access callback' => 'entity_access',
         'access arguments' => array('administer', $this->entityType),
         'type' => MENU_NORMAL_ITEM,
-        'file' => 'eitientity_summarydata.admin.inc',
-        'file path' => drupal_get_path('module', 'eitientity_summarydata'),
+        'file' => 'eitientity_summary_data.admin.inc',
+        'file path' => drupal_get_path('module', 'eitientity_summary_data'),
       );
       $items[$this->bundle_path . '/overview'] = array(
         'title' => 'Overview',
@@ -164,7 +164,7 @@ class SummaryDataEntityUIController extends EntityBundleableUIController {
       foreach ($this->entityInfo['bundles'] as $bundle_type => $bundle_info) {
         $items[$this->bundle_path . '/manage/' . $bundle_type] = array(
           'title' => $bundle_info['label'] . ' info',
-          'page callback' => 'eitientity_summarydata_type_get_name',
+          'page callback' => 'eitientity_summary_data_type_get_name',
           'page arguments' => array($bundle_type),
           'access callback' => 'entity_access',
           'access arguments' => array('administer', $this->entityType),
@@ -221,31 +221,31 @@ class SummaryDataEntityUIController extends EntityBundleableUIController {
         'data' => t('ID'),
         'type' => 'property',
         'specifier' => 'id',
-        'class' => array('summarydata-ui-id'),
+        'class' => array('summary-data-ui-id'),
       ),
       array(
         'data' => t('Type'),
         'type' => 'property',
         'specifier' => 'type',
-        'class' => array('summarydata-ui-type'),
+        'class' => array('summary-data-ui-type'),
       ),
       array(
         'data' => t('Created'),
         'type' => 'property',
         'specifier' => 'created',
-        'class' => array('summarydata-ui-created'),
+        'class' => array('summary-data-ui-created'),
         'sort' => 'desc',
       ),
       array(
         'data' => t('Status'),
         'type' => 'property',
         'specifier' => 'status',
-        'class' => array('summarydata-ui-status'),
+        'class' => array('summary-data-ui-status'),
         'sort' => 'desc',
       ),
       array(
         'data' => t('Operations'),
-        'class' => array('summarydata-ui-operations'),
+        'class' => array('summary-data-ui-operations'),
         'colspan' => $this->operationCount(),
       ),
     );

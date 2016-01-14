@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * eitiet_summarydata.strongarm.inc
+ * eitiet_summary_data.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function eitiet_summarydata_strongarm() {
+function eitiet_summary_data_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_summarydata__summarydata';
+  $strongarm->name = 'field_bundle_settings_summary_data__summary_data';
   $strongarm->value = array(
     'view_modes' => array(
       'token' => array(
@@ -120,7 +120,7 @@ function eitiet_summarydata_strongarm() {
       ),
     ),
   );
-  $export['field_bundle_settings_summarydata__summarydata'] = $strongarm;
+  $export['field_bundle_settings_summary_data__summary_data'] = $strongarm;
 
   return $export;
 }

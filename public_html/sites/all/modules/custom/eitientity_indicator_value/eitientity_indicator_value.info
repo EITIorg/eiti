@@ -6,7 +6,7 @@ package = Custom
 dependencies[] = entity
 dependencies[] = inline_entity_form
 dependencies[] = eitientity_indicator
-dependencies[] = eitientity_summarydata
+dependencies[] = eitientity_summary_data
 
 ; Entity handlers.
 files[] = includes/IndicatorValueEntity.inc

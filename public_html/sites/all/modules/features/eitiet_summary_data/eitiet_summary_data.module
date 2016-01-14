@@ -4,4 +4,4 @@
  * Code for the EITI Entity Type SummaryData feature.
  */
 
-include_once 'eitiet_summarydata.features.inc';
+include_once 'eitiet_summary_data.features.inc';

@@ -7,25 +7,25 @@
 /**
  * Implements hook_schema().
  */
-function eitientity_summarydata_schema() {
-  $schema['eitisummarydata'] = array(
-    'description' => 'The base table for storing summarydata entities.',
+function eitientity_summary_data_schema() {
+  $schema['eiti_summary_data'] = array(
+    'description' => 'The base table for storing summary_data entities.',
     'fields' => array(
       'id' => array(
-        'description' => 'The summarydata identifier.',
+        'description' => 'The summary_data identifier.',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'type' => array(
-        'description' => 'The summarydata type.',
+        'description' => 'The summary_data type.',
         'type' => 'varchar',
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
       ),
       'country_id' => array(
-        'description' => 'The summarydata country identifier.',
+        'description' => 'The summary_data country identifier.',
         'type' => 'int',
         'not null' => FALSE,
       ),
@@ -59,19 +59,19 @@ function eitientity_summarydata_schema() {
         'not null' => TRUE,
       ),
       'status' => array(
-        'description' => 'Boolean indicating whether the summarydata is enabled.',
+        'description' => 'Boolean indicating whether the summary_data is enabled.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
       ),
       'created' => array(
-        'description' => 'The Unix timestamp when the summarydata was created.',
+        'description' => 'The Unix timestamp when the summary_data was created.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
       ),
       'changed' => array(
-        'description' => 'The Unix timestamp when the summarydata was changed.',
+        'description' => 'The Unix timestamp when the summary_data was changed.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
