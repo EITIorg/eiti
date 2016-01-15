@@ -38,6 +38,9 @@ function eiti_migration_migrate_api() {
       'mentions' => array(
         'title' => t('Migration to the Mention CT'),
       ),
+      'spreadsheets' => array(
+        'title' => t('Migration of spreadsheets (Reports) to custom entities.'),
+      ),
     ),
   );
 
@@ -362,6 +365,15 @@ function eiti_migration_migrate_api() {
     'soft_dependencies' => array(
       'EITIUsersMigration',
     ),
+  );
+
+  // ###################################################
+  // ######## SPREADSHEETS / REPORTS MIGRATIONS ########
+  // ###################################################
+  $migrations['migrations']['EITISummaryDataMigration'] = array(
+    'class_name' => 'EITISummaryDataMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Summary Data from the specified spreadsheets.'),
   );
 
   // Add legacy database key.

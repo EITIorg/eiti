@@ -1,0 +1,648 @@
+<?php
+
+/**
+ * @file
+ * Holds MigrateSource implementation for importing spreadsheet reports.
+ * Inspired from the original spreadsheet.inc from migrate module.
+ */
+
+define('EITI_SOURCE_SUMMARY_DATA', 'summarydata');
+define('EITI_SOURCE_INDICATOR_VALUE', 'indicatorvalue');
+
+
+/**
+ * This is a tweaked version, adjusted to multiple sheets, specifically for the
+ * EITI import process.
+ */
+class EITIMigrateSourceSpreadsheet extends MigrateSource {
+  /**
+   * All of the file paths.
+   * @var array
+   */
+  protected $filePaths;
+
+  /**
+   * All of the processed file paths.
+   * @var array
+   */
+  protected $filePathsProcessed;
+
+  /**
+   * All the file objects.
+   */
+  protected $files;
+
+  /**
+   * Currently processed file object.
+   */
+  protected $currentFile;
+
+  /**
+   * PHPExcel object for storing the workbook data.
+   *
+   * @var PHPExcel
+   */
+  protected $currentWorkbook;
+
+  /**
+   * Report Version
+   *
+   * @var string
+   */
+  protected $currentReportVersion;
+
+  /**
+   * PHPExcel object for storing the worksheet data.
+   *
+   * @var PHPExcel_Worksheet
+   */
+  protected $currentWorksheet;
+
+  /**
+   * Current position in the worksheet.
+   *
+   * @var array
+   */
+  protected $currentPosition;
+
+  /**
+   * List of available source fields.
+   *
+   * @var array
+   */
+  protected $fields = array();
+
+  /**
+   * Defines the current import source type.
+   * @var constant
+   */
+  protected $sourceType;
+
+  /**
+   * Parsed rows, temporary storage.
+   * @var array
+   */
+  protected $migrateRows;
+
+  /**
+   * Migration Row.
+   *
+   * @var int
+   */
+  protected $migrateRowIndex;
+
+  /**
+   * Migration Row Count.
+   *
+   * @var int
+   */
+  protected $migrateRowsCountInFile;
+
+  /**
+   * Simple initialization.
+   *
+   * @param string|array $paths
+   *   The path to the source file or an array of paths to source files.
+   * @param constant
+   *   Please specify what type of data are you looking for, in these sheets.
+   * @param array $options
+   *   Options inherited from MigrateSource.
+   */
+  public function __construct($paths, $source_type, array $options = array()) {
+    parent::__construct($options);
+
+    // Normalize, make sure it's stored as an array.
+    if (!is_array($paths)) {
+      $this->filePaths = array($paths);
+    }
+    else {
+      // We like nicely reseted keys, because those will be used for walking.
+      $this->filePaths = array_values($paths);
+    }
+
+    // The whole process depends on this variable.
+    $this->sourceType = $source_type;
+
+    // To be memory-efficient, we don't want to load all the files on
+    // the construct.
+  }
+
+  /**
+   * Loads the specified spreadsheet.
+   *
+   * @param $path
+   *   Path to the spreadsheet that needs to be loaded.
+   *
+   * @return bool
+   *   Indicates if the spreadsheet was loaded successfully or not.
+   */
+  public function loadSpreadsheet($path) {
+    // Check that the file exists.
+    if (!file_exists($path)) {
+      Migration::displayMessage(t('The file !filename does not exist.', array('!filename' => $path)));
+      return FALSE;
+    }
+
+    // Check that required modules are enabled.
+    if (!module_exists('libraries')) {
+      Migration::displayMessage(t('The Libraries API module is not enabled.'));
+      return FALSE;
+    }
+    if (!module_exists('phpexcel')) {
+      Migration::displayMessage(t('The PHPExcel module is not enabled.'));
+      return FALSE;
+    }
+
+    $library = libraries_load('PHPExcel');
+    if (empty($library['loaded'])) {
+      Migration::displayMessage(t('The PHPExcel library could not be found.'));
+      return FALSE;
+    }
+
+    // Load the workbook.
+    try {
+      // Identify the type of the input file.
+      $type = PHPExcel_IOFactory::identify($path);
+      // Create a new Reader of the file type.
+      $reader = PHPExcel_IOFactory::createReader($type);
+      // Advise the Reader that we want to load all the sheets.
+      $reader->setLoadAllSheets();
+      // Load the source file.
+      $this->currentWorkbook = $reader->load($path);
+      // We also want to save the file, if successful, as current.
+      $this->currentFile = $path;
+      // Also we want to fetch the version of the report.
+      $this->updateReportVersion();
+    }
+    catch (Exception $e) {
+      Migration::displayMessage(t('Error loading file: %message', array('%message' => $e->getMessage())));
+      return FALSE;
+    }
+
+    return TRUE;
+  }
+
+  /**
+   * Unloads the specified workbook (by default, the current workbook).
+   *
+   * @param $workbook
+   *   Workbook that you wish to unload (disconnect).
+   *
+   * @return void
+   */
+  public function unloadSpreadsheet($workbook = NULL) {
+    if (!isset($workbook) && isset($this->currentWorkbook)) {
+      $this->currentWorkbook->disconnectWorksheets();
+      unset($this->currentWorkbook);
+    }
+    elseif (isset($workbook)) {
+      $workbook->disconnectWorksheets();
+    }
+  }
+
+
+  /**
+   * Returns a list of fields available to be mapped from the source query.
+   *
+   * @return array
+   *   Keys: machine names of the fields (to be passed to addFieldMapping).
+   *   Values: Human-friendly descriptions of the fields.
+   */
+  public function fields() {
+    $this->fields = self::generateFields($this->sourceType);
+    return $this->fields;
+  }
+
+  /**
+   * Returns a count of all available source records.
+   */
+  public function computeCount() {
+    return 1;
+  }
+
+  /**
+   * Implements MigrateSource::performRewind().
+   *
+   * @return void
+   */
+  public function performRewind() {
+    $this->resetPosition();
+    // Make sure we're on the 1st file-path.
+    $this->filePathsProcessed = array();
+    $this->migrateRowIndex = 0;
+    unset($this->migrateRows);
+    dsm('rewind');
+  }
+
+  /**
+   * Just reset the current position.
+   */
+  protected function resetPosition() {
+    $this->currentPosition = array(
+      'column' => 0,
+      'row' => 0,
+    );
+  }
+
+  /**
+   * Implements MigrateSource::getNextRow().
+   *
+   * @return null|object
+   */
+  public function getNextRow() {
+    dsm('get the fucking row');
+    // Get all the "Rows" (entities) in the File.
+    $rowsCount = $this->getMigrationRowsCountInFile();
+
+    // In case we're just starting.
+    if (!$rowsCount || $rowsCount == 0) {
+      if ($this->getNextFile()) {
+        $this->parseFile();
+      }
+      $rowsCount = $this->getMigrationRowsCountInFile();
+    }
+
+    // Make sure we have a loaded and parsed file.
+    if ($this->migrateRowIndex < $rowsCount) {
+        $row_values = array();
+
+        // Get the parsed row.
+        $row_values = $this->getParsedRow($this->migrateRowIndex);
+        $this->migrateRowIndex++;
+
+        return (object) $row_values;
+    }
+    else {
+      // Make sure we have a loaded file.
+      if ($this->getNextFile()) {
+        $this->parseFile();
+      }
+      else {
+        $this->unloadSpreadsheet();
+      }
+    }
+  }
+
+  /**
+   * Use this if we reached EOF on current file and we want to switch to the next file.
+   *
+   * @return bool
+   *   Returns TRUE of we have switched to the next file and FALSE if we're out of files
+   *   or if we have encountered some errors.
+   */
+  protected function getNextFile() {
+    // Unload whatever we're having.
+    $this->unloadSpreadsheet();
+
+    // Get 1st path, if we're just starting,
+    // otherwise get the next file.
+    if (empty($this->currentFile)) {
+      $paths = $this->filePaths;
+      $path = array_shift($paths);
+    }
+    else {
+      $current_index = array_search($this->currentFile, $this->filePaths);
+      if ($current_index !== FALSE) {
+        // There are two cases: we've processed all files or not.
+        if (count($this->filePaths) == ($current_index + 1)) {
+          return FALSE;
+        }
+        else {
+          $path = $this->filePaths[$current_index + 1];
+        }
+      }
+    }
+
+    // Now that we know what file we need, load it.
+    if ($this->loadSpreadsheet($path)) {
+      $this->resetPosition();
+
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  /**
+   * We might want to use this elsewhere.
+   * @param $type
+   *   Source Type.
+   * @return array
+   *   Array of fields.
+   */
+  static public function generateFields($type) {
+    $fields = array();
+    $fields['unmapped'] = t('Missed unmapped data that we still extract.');
+
+    switch ($type) {
+      case EITI_SOURCE_SUMMARY_DATA:
+        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: country name + start_date + end_date)');
+        $fields['country_name'] = t('Country Name');
+        $fields['start_date'] = t('Start Date');
+        $fields['end_date'] = t('End Date');
+        $fields['independent_administrator'] = t('Independent Administrator');
+        $fields['publish_date'] = t('Date that the EITI Report was published (i.e., made publicly available)');
+        $fields['sectors:oil'] = t('Sectors covered: Oil (bool)');
+        $fields['sectors:gas'] = t('Sectors covered: Gas (bool)');
+        $fields['sectors:mining'] = t('Sectors covered: Mining (bool)');
+        $fields['sectors:other'] = t('Sectors covered: Other (array, label [text] => value [text])');
+        $fields['web_links'] = t('All the web links to files (array, array of URLs)');
+        $fields['number:reporting_gov'] = t('Number of reporting government entities (int)');
+        $fields['number:reporting_comp'] = t('Number of reporting companies (int)');
+        $fields['currency:iso'] = t('Reporting Currency: ISO');
+        $fields['currency:conversion'] = t('Reporting Currency: Conversion rate utilised. (US $ 1 = ?)');
+        $fields['dissaggregation:revenue_stream'] = t('Disaggregtion of Data: By Revenue Stream (bool)');
+        $fields['dissaggregation:company'] = t('Disaggregtion of Data: By Company (bool)');
+        $fields['dissaggregation:project'] = t('Disaggregtion of Data: By Project (bool)');
+        $fields['contact:name'] = t('Contact details to person who has completed this template: Name (text)');
+        $fields['contact:organization'] = t('Contact details to person who has completed this template: Organization (text)');
+        $fields['contact:email'] = t('Contact details to person who has completed this template: Email (text)');
+        break;
+    }
+    return $fields;
+  }
+
+  /**
+   * Use this function to fetch the report version.
+   * Fetching rows later might depend on this one.
+   */
+  protected function updateReportVersion() {
+    $version = '';
+
+    if ($this->currentWorkbook) {
+      // We won't update the currentPosition, we'll just jump directly to
+      // identifying the report version.
+      $sheetIntro = $this->currentWorkbook->getSheetByName('Introduction');
+      if (empty($sheetIntro)) {
+        $sheetIntro = $this->currentWorkbook->getSheet(0);
+      }
+      $highestRow = $sheetIntro->getHighestRow();
+      $highestColumn = $sheetIntro->getHighestColumn();
+      $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+
+      // Iterate through and get the values, then preg_match'em.
+      for ($row = 0; $row <= $highestRow; ++$row) {
+        for ($col = 0; $col <= $highestColumnIndex; ++$col) {
+          $cellValue = trim($sheetIntro->getCellByColumnAndRow($col, $row)->getValue());
+          if (preg_match('/(v|Version|Version )([0-9]+(\.[0-9]+))+/', $cellValue, $matches)) {
+            $version = (isset($matches[2])) ? $matches[2] : $matches[0];
+            // If we found our version, break from 2 for loops.
+            break 2;
+          }
+        }
+      }
+    }
+    $this->currentReportVersion = $version;
+  }
+
+  /**
+   * Helper function that identifies how many entities are in the file.
+   */
+  protected function getMigrationRowsCountInFile() {
+    // If we have, just return the value.
+    if (!empty($this->migrateRowsCountInFile)) {
+      return $this->migrateRowsCountInFile;
+    }
+    // If we don't, return 0.
+    return 0;
+  }
+
+  /**
+   * Main parsing function, it passes through the worksheet and returns the
+   * so-called "Migration Rows" (arrays of data), that later is used for
+   * mapping.
+   */
+  protected function parseFile() {
+    switch ($this->sourceType) {
+      case EITI_SOURCE_SUMMARY_DATA:
+        $aboutSheet = $this->currentWorkbook->getSheetByName('1. About');
+        if (empty($aboutSheet)) {
+          // Second try, already via index.
+          $aboutSheet = $this->currentWorkbook->getSheet(1);
+        }
+
+        // If we have our sheet, by default set the count of Summary Data rows
+        // to 1, as we have 1 summary data per file.
+        if (!empty($aboutSheet)) {
+          $this->migrateRowsCountInFile = 1;
+
+          // Now let's parse the file.
+          $highestRow = $aboutSheet->getHighestRow();
+          $highestColumn = $aboutSheet->getHighestColumn();
+          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+
+          // Defaults.
+          $start_row = 5;
+          $start_column = 1;
+          $value_column = 3;
+
+          // Find the "Entry" and break out (Adjusting defaults).
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($aboutSheet->getCellByColumnAndRow($column, $row)->getValue());
+              if (strtolower($cellValue) == 'entry') {
+                // Here's where it all starts.
+                $start_row = $row + 1;
+                $start_column = $column - 2;
+                $value_column = $column;
+                break 2;
+              }
+            }
+          }
+
+          // Now let's walk through the right cells.
+          $migrationRow = array();
+          $lastRememberedGroup = '';
+          for ($row = $start_row; $row < $highestRow; $row++) {
+            $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+            $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+            $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+
+
+            // Before we do the lookup, let's make sure that the group is correct.
+            // If it's empty (or "add rows ..."), we use the previous group-value.
+            if ($groupCellValue == '' || stripos($groupCellValue, 'add rows')) {
+              $groupCellValue = $lastRememberedGroup;
+            }
+            else {
+              $lastRememberedGroup = $groupCellValue;
+            }
+
+            // Now, finally, let's do the look-up and assign the value.
+            $field = $this->lookupField($groupCellValue, $subgroupCellValue);
+            if (!empty($valueCellValue)) {
+              $migrationRow[$field][] = $valueCellValue;
+            }
+          }
+          // Create unique id.
+          $unique_array = array_merge(
+            $migrationRow['country_name'],
+            $migrationRow['start_date'],
+            $migrationRow['end_date']
+          );
+          $migrationRow['summary_id'] = md5(implode(':', $unique_array));
+          $this->migrateRows[] = $migrationRow;
+        }
+        else {
+          unset($this->migrateRowsCountInFile);
+        }
+        break;
+    }
+  }
+
+  /**
+   * Gets the specified row.
+   */
+  protected function getParsedRow($index) {
+    if (!empty($this->migrateRows) && isset($this->migrateRows[$index])) {
+      return $this->migrateRows[$index];
+    }
+  }
+
+  /**
+   * Helps us decide which field are we currently looking at.
+   *
+   * @return string
+   *   Returns string representing the field.
+   */
+  protected function lookupField($group, $subgroup) {
+    $mappings = $this->lookupMappings();
+    $group_position = TRUE;
+    $subgroup_position = TRUE;
+    $match = 'unmapped';
+    foreach ($mappings as $field => $mapping) {
+      foreach ($mapping['group'] as $group_hints) {
+        $group_position = stripos($group, $group_hints);
+        if ($group_position !== FALSE) {
+          break;
+        }
+      }
+      foreach ($mapping['subgroup'] as $subgroup_hints) {
+        $subgroup_position = stripos($subgroup, $subgroup_hints);
+        if ($subgroup_position !== FALSE) {
+          break;
+        }
+      }
+
+      // If at least one was found, use the $field, but don't break.
+      if ($group_position !== FALSE || $subgroup_position !== FALSE) {
+        $match = $field;
+      }
+      // If both match, use the field and break.
+      if ($group_position !== FALSE && $subgroup_position !== FALSE) {
+        $match = $field;
+        break;
+      }
+    }
+    return $match;
+  }
+
+  /**
+   * This is one important function, it returns the sacred hinting mappings.
+   *
+   * In lookupField() - we'll make a search and see if the current row has
+   * any matches on group, subgroup, or both. If it has, we can return the field.
+   *
+   * @return array
+   *   Where [key] - is the field from the self::generateFields(),
+   *   [value] - is an array made up of 2 arrays:
+   *     - $mappings['field']['group'] - array of hinting strings in group.
+   *     - $mappings['field']['subgroup'] - array of hinting strings in subgroup.
+   */
+  protected function lookupMappings() {
+    $mappings = array();
+    switch ($this->sourceType) {
+      case EITI_SOURCE_SUMMARY_DATA:
+        $mappings['country_name'] = array(
+          'group' => array('country'),
+          'subgroup' => array(),
+        );
+        $mappings['start_date'] = array(
+          'group' => array('fiscal year'),
+          'subgroup' => array('start'),
+        );
+        $mappings['end_date'] = array(
+          'group' => array('fiscal year'),
+          'subgroup' => array('end'),
+        );
+        $mappings['independent_administrator'] = array(
+          'group' => array('independent administrator'),
+          'subgroup' => array(),
+        );
+        $mappings['publish_date'] = array(
+          'group' => array('date', 'publish'),
+          'subgroup' => array(),
+        );
+        $mappings['sectors:oil'] = array(
+          'group' => array('sectors covered'),
+          'subgroup' => array('oil'),
+        );
+        $mappings['sectors:gas'] = array(
+          'group' => array('sectors covered'),
+          'subgroup' => array('gas'),
+        );
+        $mappings['sectors:mining'] = array(
+          'group' => array('sectors covered'),
+          'subgroup' => array('mining'),
+        );
+        $mappings['sectors:other'] = array(
+          'group' => array('sectors covered'),
+          'subgroup' => array('other'),
+        );
+        $mappings['web_links'] = array(
+          'group' => array('web links'),
+          'subgroup' => array(),
+        );
+        $mappings['number:reporting_gov'] = array(
+          'group' => array('number of reporting government'),
+          'subgroup' => array(),
+        );
+        $mappings['number:reporting_comp'] = array(
+          'group' => array('number of reporting companies'),
+          'subgroup' => array(),
+        );
+        $mappings['currency:iso'] = array(
+          'group' => array('currency'),
+          'subgroup' => array('iso'),
+        );
+        $mappings['currency:conversion'] = array(
+          'group' => array('currency'),
+          'subgroup' => array('conversion'),
+        );
+        $mappings['dissaggregation:revenue_stream'] = array(
+          'group' => array('disaggregtion of data'),
+          'subgroup' => array('revenue'),
+        );
+        $mappings['dissaggregation:company'] = array(
+          'group' => array('disaggregtion of data'),
+          'subgroup' => array('company'),
+        );
+        $mappings['dissaggregation:project'] = array(
+          'group' => array('disaggregtion of data'),
+          'subgroup' => array('project'),
+        );
+        $mappings['contact:name'] = array(
+          'group' => array('contact details'),
+          'subgroup' => array('name'),
+        );
+        $mappings['contact:organization'] = array(
+          'group' => array('contact details'),
+          'subgroup' => array('organisation'),
+        );
+        $mappings['contact:email'] = array(
+          'group' => array('contact details'),
+          'subgroup' => array('email'),
+        );
+        break;
+    }
+    return $mappings;
+  }
+
+  /**
+   * Returns a string representing the source query.
+   *
+   * @return string
+   */
+  public function __toString() {
+    return implode(PHP_EOL, $this->filePaths);
+  }
+}
