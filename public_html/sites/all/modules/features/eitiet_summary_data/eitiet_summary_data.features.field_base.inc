@@ -117,8 +117,8 @@ function eitiet_summary_data_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Yes',
-        1 => 'No',
+        0 => 'No',
+        1 => 'Yes',
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
@@ -200,8 +200,8 @@ function eitiet_summary_data_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Yes',
-        1 => 'No',
+        0 => 'No',
+        1 => 'Yes',
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
@@ -261,8 +261,8 @@ function eitiet_summary_data_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Yes',
-        1 => 'No',
+        0 => 'No',
+        1 => 'Yes',
         2 => 'Partially',
       ),
       'allowed_values_function' => '',
