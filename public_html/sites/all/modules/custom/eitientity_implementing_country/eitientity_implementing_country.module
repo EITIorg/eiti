@@ -391,7 +391,7 @@ function eitientity_implementing_country_lookup_by_name($name) {
 
   if (!empty($efq_results['implementing_country'])) {
     $ids = array_keys($efq_results['implementing_country']);
-    $entities = entity_load('implementing_country', $ids = FALSE, $conditions = array(), $reset = FALSE)
+    $entities = entity_load('implementing_country', $ids);
     return $entities;
   }
   return FALSE;

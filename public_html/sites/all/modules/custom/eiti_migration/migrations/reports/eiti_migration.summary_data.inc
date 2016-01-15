@@ -84,6 +84,7 @@ class EITISummaryDataMigration extends Migration {
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
     }
+    dsm($row, 'row prepareRow');
 
     // Fetch the country name and look-up if we already have such a country,
     // if now, we create the entity on the fly.
