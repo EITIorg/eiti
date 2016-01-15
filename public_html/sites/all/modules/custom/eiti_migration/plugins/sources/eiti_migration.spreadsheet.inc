@@ -231,7 +231,6 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
     $this->filePathsProcessed = array();
     $this->migrateRowIndex = 0;
     unset($this->migrateRows);
-    dsm('rewind');
   }
 
   /**
@@ -250,7 +249,6 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * @return null|object
    */
   public function getNextRow() {
-    dsm('get the fucking row');
     // Get all the "Rows" (entities) in the File.
     $rowsCount = $this->getMigrationRowsCountInFile();
 
@@ -457,7 +455,6 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
             $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
 
-
             // Before we do the lookup, let's make sure that the group is correct.
             // If it's empty (or "add rows ..."), we use the previous group-value.
             if ($groupCellValue == '' || stripos($groupCellValue, 'add rows')) {
@@ -473,12 +470,20 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $migrationRow[$field][] = $valueCellValue;
             }
           }
+
+          // Normalize date values.
+          $dateFields = array('start_date', 'end_date', 'publish_date');
+          foreach ($dateFields as $dateField) {
+            // Screw it, it's just 1 value anyway for them.
+            $excelDate = $migrationRow[$dateField][0];
+            $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
+            $migrationRow[$dateField] = $phpDate;
+          }
+
           // Create unique id.
-          $unique_array = array_merge(
-            $migrationRow['country_name'],
-            $migrationRow['start_date'],
-            $migrationRow['end_date']
-          );
+          $unique_array = $migrationRow['country_name'];
+          $unique_array[] = $migrationRow['start_date'];
+          $unique_array[] = $migrationRow['end_date'];
           $migrationRow['summary_id'] = md5(implode(':', $unique_array));
           $this->migrateRows[] = $migrationRow;
         }
@@ -512,25 +517,31 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
     foreach ($mappings as $field => $mapping) {
       foreach ($mapping['group'] as $group_hints) {
         $group_position = stripos($group, $group_hints);
-        if ($group_position !== FALSE) {
+        if ($group_position !== NULL && $group_position !== FALSE) {
           break;
         }
       }
       foreach ($mapping['subgroup'] as $subgroup_hints) {
         $subgroup_position = stripos($subgroup, $subgroup_hints);
-        if ($subgroup_position !== FALSE) {
+        if ($subgroup_position !== NULL && $subgroup_position !== FALSE) {
           break;
         }
       }
 
       // If at least one was found, use the $field, but don't break.
-      if ($group_position !== FALSE || $subgroup_position !== FALSE) {
+      if (($group_position !== NULL && $group_position !== FALSE) || ($subgroup_position !== NULL && $subgroup_position !== FALSE)) {
         $match = $field;
-      }
-      // If both match, use the field and break.
-      if ($group_position !== FALSE && $subgroup_position !== FALSE) {
-        $match = $field;
-        break;
+
+        // If both match, use the field and break.
+        if (($group_position !== NULL && $group_position !== FALSE) && ($subgroup_position !== NULL && $subgroup_position !== FALSE)) {
+          $match = $field;
+          break;
+        }
+        else {
+          // Reset these values for next iteration.
+          $group_position = NULL;
+          $subgroup_position = NULL;
+        }
       }
     }
     return $match;

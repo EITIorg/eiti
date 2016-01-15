@@ -83,8 +83,6 @@ class EITIMigrateDestinationSummaryData extends MigrateDestinationEntity {
    *  successful. FALSE on failure.
    */
   public function import(stdClass $entity, stdClass $row) {
-    dsm($entity, 'entity import');
-    dsm($row, 'row import');
     // Set some default properties.
     $defaults = array(
       'type' => $this->bundle,

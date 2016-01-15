@@ -84,14 +84,15 @@ class EITISummaryDataMigration extends Migration {
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
     }
-    dsm($row, 'row prepareRow');
 
     // Fetch the country name and look-up if we already have such a country,
     // if now, we create the entity on the fly.
     if (is_array($row->country_name)) {
       $country_name = array_pop($row->country_name);
     }
-    $country_name = $row->country_name;
+    else {
+      $country_name = $row->country_name;
+    }
     $countries = eitientity_implementing_country_lookup_by_name($country_name);
     if ($countries == FALSE) {
       $ic_values = array(
@@ -109,8 +110,35 @@ class EITISummaryDataMigration extends Migration {
       $row->country_name = $country_name->id;
     }
     else {
-      $existing_country = array_pop($countries);
+      $existing_country = reset($countries);
       $row->country_name = $existing_country->id;
+    }
+
+    // Normalize the sectors.
+    $booleanMappings = array(
+      'sectors:oil',
+      'sectors:gas',
+      'sectors:mining',
+    );
+    foreach ($booleanMappings as $booleanMapping) {
+      $oldBooleanValue = reset($row->{$booleanMapping});
+      $row->{$booleanMapping} = $this->getBooleanListValue($oldBooleanValue);
+    }
+    $otherSector = 'sectors:other';
+    $otherSectorValue = reset($row->{$otherSector});
+    $row->{$otherSector} = ($this->checkEmptyValue($otherSectorValue)) ? NULL : $otherSectorValue;
+
+    // Currency.
+    $currencyIso = 'currency:iso';
+    $row->{$currencyIso} = reset($row->{$currencyIso});
+    $currencyConversion = 'currency:conversion';
+    $row->{$currencyConversion} = reset($row->{$currencyConversion});
+
+    // Check if links are empty.
+    foreach ($row->web_links as $key => $web_link) {
+      if ($this->checkEmptyValue($web_link)) {
+        unset($row->web_links[$key]);
+      }
     }
   }
 
@@ -119,7 +147,58 @@ class EITISummaryDataMigration extends Migration {
    * before it's actually saved in the database.
    */
   public function prepare($entity, $row) {
-    dsm($entity, 'entity prepare');
-    dsm($row, 'row prepare');
+    // Extra data processing?
+    // dsm.
+  }
+
+  /**
+   * Helper function that transforms existing value to boolean-list.
+   */
+  private function getBooleanListValue($value) {
+    $correct_value = FALSE;
+    switch (strtolower($value)) {
+      case 'yes':
+        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_YES;
+        break;
+      case 'no':
+        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_NO;
+        break;
+      case 'partially':
+        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY;
+        break;
+      default:
+        $correct_value = NULL;
+        break;
+    }
+    return $correct_value;
+  }
+
+  /**
+   * Small helper function that checks if the value is empty or not.
+   */
+  private function checkEmptyValue($value) {
+    $is_empty = FALSE;
+    switch (strtolower($value)) {
+      case 'not applicable':
+      case 'not available':
+      case 'n/a':
+      case '<text>':
+      case '<url>':
+      case '':
+        $is_empty = TRUE;
+        break;
+
+      default:
+        $is_empty = FALSE;
+        break;
+    }
+
+    // More checking <tag>.
+    if ($is_empty === FALSE) {
+      if (preg_match('/<.+?>/', $value)) {
+        $is_empty = TRUE;
+      }
+    }
+    return $is_empty;
   }
 }
