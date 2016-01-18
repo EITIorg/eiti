@@ -22,7 +22,7 @@ function eitientity_indicator_entity_info() {
     'plural label' => t('Indicators'),
     'description' => t('Indicators...'),
 
-    'base table' => 'eitiindicator',
+    'base table' => 'eiti_indicator',
     'module' => 'eitientity_indicator',
 
     'entity class' => 'IndicatorEntity',
