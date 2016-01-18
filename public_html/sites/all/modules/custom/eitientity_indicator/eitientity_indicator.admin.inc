@@ -94,8 +94,8 @@ function indicator_form($form, &$form_state, $entity) {
   field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
 
   // Attach validate and submit callbacks.
-  $form['#validate'][] = '_identifier_entity_form_validate';
-  $form['#submit'][] = '_identifier_entity_form_submit';
+  $form['#validate'][] = '_indicator_entity_form_validate';
+  $form['#submit'][] = '_indicator_entity_form_submit';
 
   // Always hide the redirect.module fieldset.
   if (isset($form['redirect'])) {
@@ -111,7 +111,7 @@ function indicator_form($form, &$form_state, $entity) {
  * @see indicator_form()
  * @see entity_form_field_validate()
  */
-function _identifier_entity_form_validate($form, &$form_state) {
+function _indicator_entity_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
@@ -120,7 +120,7 @@ function _identifier_entity_form_validate($form, &$form_state) {
 /**
  * Form API submit callback for indicator_form().
  */
-function _identifier_entity_form_submit($form, &$form_state) {
+function _indicator_entity_form_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
 
   // Remove unneeded values.
