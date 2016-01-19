@@ -9,6 +9,14 @@
  */
 function eititaxonomies_taxonomy_default_vocabularies() {
   return array(
+    'company_commodities' => array(
+      'name' => 'Company Commodities',
+      'machine_name' => 'company_commodities',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'document_category' => array(
       'name' => 'Document Category',
       'machine_name' => 'document_category',
