@@ -1,0 +1,72 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_company_schema() {
+  $schema['eiti_company'] = array(
+    'description' => 'The base table for storing company entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The identifier for this entity.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The type of this entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => 'The name for this entity.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'country_id' => array(
+        'description' => 'The country id for this entity.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the entity is enabled.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the entity was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the entity was changed.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'entity_status' => array('id', 'status'),
+    ),
+    'foreign keys' => array(
+      'entity_eiti_implementing_country' => array(
+        'table' => 'eiti_implementing_country',
+        'columns' => array('country_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
