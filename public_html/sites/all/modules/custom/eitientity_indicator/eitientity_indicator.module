@@ -280,11 +280,9 @@ function eitientity_indicator_get_by_bundle($bundle) {
   $query->propertyOrderBy('name');
   $results = $query->execute();
 
-  foreach ($results['indicator'] as $result) {
-    /** @var IndicatorEntity $indicator */
-    $indicator = entity_load_single('indicator', $result->id);
-
-    $entities[$indicator->identifier()] = $indicator;
+  if (!empty($results['indicator'])) {
+    $ids = array_keys($results['indicator']);
+    $entities = entity_load('indicator', $ids);
   }
 
   return $entities;
