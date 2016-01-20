@@ -22,8 +22,9 @@ files[] = migrations/eiti_migration.person.inc
 files[] = migrations/eiti_migration.mention.inc
 
 ; Reports Import Process (Spreadsheets migration).
-;files[] = migrations/reports/eiti_migration.generic.inc
+files[] = migrations/reports/eiti_migration.generic.inc
 files[] = migrations/reports/eiti_migration.summary_data.inc
+files[] = migrations/reports/eiti_migration.indicator_values.inc
 
 ; Extra Handlers.
 files[] = includes/handlers/eiti_migration.redirect.inc
@@ -31,3 +32,4 @@ files[] = includes/handlers/eiti_migration.redirect.inc
 ; Plugins go here.
 files[] = plugins/sources/eiti_migration.spreadsheet.inc
 files[] = plugins/destinations/eiti_migration.summary_data.inc
+files[] = plugins/destinations/eiti_migration.indicator_values.inc

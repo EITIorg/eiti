@@ -375,6 +375,14 @@ function eiti_migration_migrate_api() {
     'group_name' => 'spreadsheets',
     'description' => t('Migrates the Summary Data from the specified spreadsheets.'),
   );
+  $migrations['migrations']['EITIIndicatorValuesMigration'] = array(
+    'class_name' => 'EITIIndicatorValuesMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Indicator Values from the specified spreadsheets.'),
+    'soft_dependencies' => array(
+      'EITISummaryDataMigration',
+    ),
+  );
 
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {

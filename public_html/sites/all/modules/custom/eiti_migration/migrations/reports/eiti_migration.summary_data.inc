@@ -7,7 +7,7 @@
  *
  */
 
-class EITISummaryDataMigration extends Migration {
+class EITISummaryDataMigration extends EITISpreadsheetMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
@@ -151,54 +151,4 @@ class EITISummaryDataMigration extends Migration {
     // dsm.
   }
 
-  /**
-   * Helper function that transforms existing value to boolean-list.
-   */
-  private function getBooleanListValue($value) {
-    $correct_value = FALSE;
-    switch (strtolower($value)) {
-      case 'yes':
-        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_YES;
-        break;
-      case 'no':
-        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_NO;
-        break;
-      case 'partially':
-        $correct_value = EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY;
-        break;
-      default:
-        $correct_value = NULL;
-        break;
-    }
-    return $correct_value;
-  }
-
-  /**
-   * Small helper function that checks if the value is empty or not.
-   */
-  private function checkEmptyValue($value) {
-    $is_empty = FALSE;
-    switch (strtolower($value)) {
-      case 'not applicable':
-      case 'not available':
-      case 'n/a':
-      case '<text>':
-      case '<url>':
-      case '':
-        $is_empty = TRUE;
-        break;
-
-      default:
-        $is_empty = FALSE;
-        break;
-    }
-
-    // More checking <tag>.
-    if ($is_empty === FALSE) {
-      if (preg_match('/<.+?>/', $value)) {
-        $is_empty = TRUE;
-      }
-    }
-    return $is_empty;
-  }
 }

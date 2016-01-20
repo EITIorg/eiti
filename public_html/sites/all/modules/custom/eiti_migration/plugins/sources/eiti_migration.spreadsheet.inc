@@ -99,6 +99,13 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   protected $migrateRowsCountInFile;
 
   /**
+   * Migration Row Count.
+   *
+   * @var int
+   */
+  protected $migrateRowsInTotal;
+
+  /**
    * Simple initialization.
    *
    * @param string|array $paths
@@ -217,7 +224,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * Returns a count of all available source records.
    */
   public function computeCount() {
-    return 1;
+    while ($this->getNextFile()) {
+      $this->parseFile();
+    }
+    $this->unloadSpreadsheet();
+    return $this->migrateRowsInTotal;
   }
 
   /**
@@ -230,6 +241,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
     // Make sure we're on the 1st file-path.
     $this->filePathsProcessed = array();
     $this->migrateRowIndex = 0;
+    $this->migrateRowsInTotal = 0;
     unset($this->migrateRows);
   }
 
@@ -333,7 +345,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
     switch ($type) {
       case EITI_SOURCE_SUMMARY_DATA:
-        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: country name + start_date + end_date)');
+        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: File Path)');
         $fields['country_name'] = t('Country Name');
         $fields['start_date'] = t('Start Date');
         $fields['end_date'] = t('End Date');
@@ -354,6 +366,16 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['contact:name'] = t('Contact details to person who has completed this template: Name (text)');
         $fields['contact:organization'] = t('Contact details to person who has completed this template: Organization (text)');
         $fields['contact:email'] = t('Contact details to person who has completed this template: Email (text)');
+        break;
+      case EITI_SOURCE_INDICATOR_VALUE:
+        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: File Path)');
+        $fields['row_id'] = t('Unique ID of the Row.');
+        $fields['group'] = t('The group column value.');
+        $fields['subgroup'] = t('The subgroup column value.');
+        $fields['entry'] = t('The entry / value of the indicator.');
+        $fields['unit'] = t('Unites in which those are measured.');
+        $fields['source'] = t('Direct URL to source, or to section in EITI Report.');
+        $fields['comment'] = t('Comments.');
         break;
     }
     return $fields;
@@ -393,6 +415,26 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   }
 
   /**
+   * Small function that generates unique ID.
+   * At this moment we take into account 3 things:
+   *  - File Path.
+   *  (- File Version.)
+   *  (- Last Date it was Updated.)
+   */
+  protected function getUniqueId() {
+    $uniqueId = '';
+    if ($this->currentWorkbook) {
+      $uniqueArray[] = $this->currentFile;
+      // $uniqueArray[] = $this->currentReportVersion;
+      // $uniqueArray[] = $this->currentWorkbook->getProperties()->getModified();
+      if ($this->currentWorkbook) {
+        return md5(implode(':', $uniqueArray));
+      }
+    }
+    return FALSE;
+  }
+
+  /**
    * Helper function that identifies how many entities are in the file.
    */
   protected function getMigrationRowsCountInFile() {
@@ -422,6 +464,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         // to 1, as we have 1 summary data per file.
         if (!empty($aboutSheet)) {
           $this->migrateRowsCountInFile = 1;
+          $this->migrateRowsInTotal++;
 
           // Now let's parse the file.
           $highestRow = $aboutSheet->getHighestRow();
@@ -429,7 +472,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 
           // Defaults.
-          $start_row = 5;
+          $start_row = 4;
           $start_column = 1;
           $value_column = 3;
 
@@ -453,7 +496,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           for ($row = $start_row; $row < $highestRow; $row++) {
             $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
             $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-            $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+            $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
 
             // Before we do the lookup, let's make sure that the group is correct.
             // If it's empty (or "add rows ..."), we use the previous group-value.
@@ -481,16 +524,89 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           }
 
           // Create unique id.
-          $unique_array = $migrationRow['country_name'];
-          $unique_array[] = $migrationRow['start_date'];
-          $unique_array[] = $migrationRow['end_date'];
-          $migrationRow['summary_id'] = md5(implode(':', $unique_array));
+          $migrationRow['summary_id'] = $this->getUniqueId();
           $this->migrateRows[] = $migrationRow;
         }
         else {
           unset($this->migrateRowsCountInFile);
         }
         break;
+
+      case EITI_SOURCE_INDICATOR_VALUE:
+        $contextualSheet = $this->currentWorkbook->getSheetByName('2. Contextual');
+        if (empty($contextualSheet)) {
+          // Second try, already via index.
+          $contextualSheet = $this->currentWorkbook->getSheet(2);
+        }
+
+        if (!empty($contextualSheet)) {
+
+
+          // Now let's parse the file.
+          $highestRow = $contextualSheet->getHighestRow();
+          $highestColumn = $contextualSheet->getHighestColumn();
+          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+
+          // Defaults.
+          $start_row = 4;
+          $start_column = 1;
+          $value_column = 3;
+
+          // Find the "Entry" and break out (Adjusting defaults).
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($contextualSheet->getCellByColumnAndRow($column, $row)->getValue());
+              if (strtolower($cellValue) == 'entry') {
+                // Here's where it all starts.
+                $start_row = $row + 1;
+                $start_column = $column - 2;
+                $value_column = $column;
+                break 2;
+              }
+            }
+          }
+
+          // Now let's walk through the right cells.
+          $lastRememberedGroup = '';
+          for ($row = $start_row; $row < $highestRow; $row++) {
+            $migrationRow = array();
+            $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+            $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+            $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
+            $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
+            $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
+            $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
+
+            // Before we do the lookup, let's make sure that the group is correct.
+            // If it's empty (or "add rows ..."), we use the previous group-value.
+            if ($groupCellValue == '' || (stripos($groupCellValue, 'modify entry') !== FALSE)
+              || (stripos($groupCellValue, 'add rows') !== FALSE)
+              || (stripos($groupCellValue, 'add/remove') !== FALSE)) {
+              $groupCellValue = $lastRememberedGroup;
+            }
+            else {
+              $lastRememberedGroup = $groupCellValue;
+            }
+
+            // In this case, we don't do any lookups, we just pass the values.
+            if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
+              $migrationRow['summary_id'] = $this->getUniqueId();
+              $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
+              $migrationRow['group'] = $groupCellValue;
+              $migrationRow['subgroup'] = $subgroupCellValue;
+              $migrationRow['entry'] = $valueCellValue;
+              $migrationRow['unit'] = $unitCellValue;
+              $migrationRow['source'] = $sourceCellValue;
+              $migrationRow['comment'] = $commentCellValue;
+
+              $this->migrateRows[] = $migrationRow;
+            }
+          }
+          $this->migrateRowsCountInFile = count($this->migrateRows);
+          $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
+        }
+        break;
+
     }
   }
 
