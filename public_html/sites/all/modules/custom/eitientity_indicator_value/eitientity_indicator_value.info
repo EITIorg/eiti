@@ -4,7 +4,6 @@ core = 7.x
 package = Custom
 
 dependencies[] = entity
-dependencies[] = inline_entity_form
 dependencies[] = eitientity_indicator
 
 ; Entity handlers.
