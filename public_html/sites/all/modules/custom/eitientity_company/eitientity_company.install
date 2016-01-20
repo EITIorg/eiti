@@ -35,7 +35,7 @@ function eitientity_company_schema() {
         'description' => 'The country id for this entity.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => '',
+        'default' => 0,
       ),
       'status' => array(
         'description' => 'Boolean indicating whether the entity is enabled.',
