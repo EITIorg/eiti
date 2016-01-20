@@ -7,44 +7,50 @@
 /**
  * Implements hook_schema().
  */
-function eitientity_indicator_schema() {
-  $schema['eiti_indicator'] = array(
-    'description' => 'The base table for storing indicator entities.',
+function eitientity_company_schema() {
+  $schema['eiti_company'] = array(
+    'description' => 'The base table for storing company entities.',
     'fields' => array(
       'id' => array(
-        'description' => 'The indicator identifier.',
+        'description' => 'The identifier for this entity.',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'type' => array(
-        'description' => 'The indicator type.',
+        'description' => 'The type of this entity.',
         'type' => 'varchar',
         'length' => 32,
         'not null' => TRUE,
         'default' => '',
       ),
       'name' => array(
-        'description' => 'The indicator name.',
+        'description' => 'The name for this entity.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
       ),
-      'parent' => array(
-        'description' => 'The indicator parent indicator id.',
+      'country_id' => array(
+        'description' => 'The country id for this entity.',
         'type' => 'int',
-        'not null' => FALSE,
-        'default' => NULL,
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'status' => array(
-        'description' => 'Boolean indicating whether the indicator is enabled.',
+        'description' => 'Boolean indicating whether the entity is enabled.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
       ),
       'created' => array(
-        'description' => 'The Unix timestamp when the indicator was created.',
+        'description' => 'The Unix timestamp when the entity was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the entity was changed.',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
@@ -54,9 +60,9 @@ function eitientity_indicator_schema() {
       'entity_status' => array('id', 'status'),
     ),
     'foreign keys' => array(
-      'entity_eiti_indicator' => array(
-        'table' => 'eiti_indicator',
-        'columns' => array('parent' => 'id'),
+      'entity_eiti_implementing_country' => array(
+        'table' => 'eiti_implementing_country',
+        'columns' => array('country_id' => 'id'),
       ),
     ),
     'primary key' => array('id'),

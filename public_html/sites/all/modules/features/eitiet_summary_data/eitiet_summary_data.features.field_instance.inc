@@ -116,6 +116,104 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_disagg_company'.
+  $field_instances['summary_data-summary_data-field_sd_disagg_company'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_disagg_company',
+    'label' => 'By Company',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_disagg_project'.
+  $field_instances['summary_data-summary_data-field_sd_disagg_project'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 24,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_disagg_project',
+    'label' => 'By Project',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_disagg_revenue_stream'.
+  $field_instances['summary_data-summary_data-field_sd_disagg_revenue_stream'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 22,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_disagg_revenue_stream',
+    'label' => 'By Revenue Stream',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'summary_data-summary_data-field_sd_file_links'.
   $field_instances['summary_data-summary_data-field_sd_file_links'] = array(
     'bundle' => 'summary_data',
@@ -464,6 +562,9 @@ function eitiet_summary_data_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('By Company');
+  t('By Project');
+  t('By Revenue Stream');
   t('Email address');
   t('File Links');
   t('Gas');

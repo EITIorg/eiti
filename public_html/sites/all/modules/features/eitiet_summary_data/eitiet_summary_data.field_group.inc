@@ -52,7 +52,11 @@ function eitiet_summary_data_field_group_info() {
   $field_group->data = array(
     'label' => 'Disaggregation of Data',
     'weight' => '9',
-    'children' => array(),
+    'children' => array(
+      0 => 'field_sd_disagg_project',
+      1 => 'field_sd_disagg_company',
+      2 => 'field_sd_disagg_revenue_stream',
+    ),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -158,8 +162,8 @@ function eitiet_summary_data_field_group_info() {
     'label' => 'Sectors Covered',
     'weight' => '4',
     'children' => array(
-      0 => 'field_sd_other_sector',
-      1 => 'field_sd_oil_sector',
+      0 => 'field_sd_oil_sector',
+      1 => 'field_sd_other_sector',
       2 => 'field_sd_mining_sector',
       3 => 'field_sd_gas_sector',
     ),

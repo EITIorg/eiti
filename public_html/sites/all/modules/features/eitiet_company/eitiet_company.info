@@ -1,0 +1,14 @@
+name = EITI Entity Type Company
+description = Company entity type settings and information.
+core = 7.x
+package = Custom
+version = 7.x-0.1
+dependencies[] = entityreference
+dependencies[] = features
+dependencies[] = options
+dependencies[] = text
+features[features_api][] = api:2
+features[field_base][] = field_c_commodities
+features[field_base][] = field_c_identification_number
+features[field_instance][] = company-company-field_c_commodities
+features[field_instance][] = company-company-field_c_identification_number

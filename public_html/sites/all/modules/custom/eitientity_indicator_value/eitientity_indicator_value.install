@@ -90,8 +90,8 @@ function eitientity_indicator_value_schema() {
       'entity_information' => array('id', 'indicator_id'),
     ),
     'foreign keys' => array(
-      'entity_eitiindicator' => array(
-        'table' => 'eitiindicator',
+      'entity_eiti_indicator' => array(
+        'table' => 'eiti_indicator',
         'columns' => array('indicator_id' => 'id'),
       ),
     ),

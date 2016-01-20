@@ -198,12 +198,18 @@ function eitientity_indicator_value_get_indicator_information() {
       continue;
     }
 
-    $parent_group = $indicator_groups_mapping[$indicator->parent];
-
-    $indicator_options[$parent_group][$indicator->identifier()] = filter_xss($indicator->label()) . ' [' . check_plain($indicator->type) . ']';
     $indicator_attributes[$indicator->identifier()] = array(
       'data-indicator-type' => check_plain($indicator->type),
     );
+
+    $indicator_label = filter_xss($indicator->label()) . ' [' . check_plain($indicator->type) . ']';
+    if (isset($indicator_groups_mapping[$indicator->parent])) {
+      $parent_group = $indicator_groups_mapping[$indicator->parent];
+      $indicator_options[$parent_group][$indicator->identifier()] = $indicator_label;
+    }
+    else {
+      $indicator_options[$indicator->identifier()] = $indicator_label;
+    }
   }
 
   $information = array(

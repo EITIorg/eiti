@@ -8,18 +8,18 @@
 /**
  * Form constructor for the survey add/edit form.
  *
- * @see eitientity_indicator_entity_info().
+ * @see eitientity_company_entity_info().
  *
  * @param array $form
  * @param array $form_state
- * @param IndicatorEntity $entity
+ * @param CompanyEntity $entity
  * @return array
  */
-function indicator_form($form, &$form_state, $entity) {
-  $entity_type = 'indicator';
+function company_form($form, &$form_state, $entity) {
+  $entity_type = 'company';
 
   if (isset($form_state['op']) && arg(0) != 'admin') {
-    drupal_set_title(eitientity_indicator_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
+    drupal_set_title(eitientity_company_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
 
   $form['name'] = array(
@@ -29,26 +29,13 @@ function indicator_form($form, &$form_state, $entity) {
     '#required' => TRUE,
   );
 
-  // Get a list of group indicators sorted by name.
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'indicator');
-  $query->entityCondition('bundle', 'group');
-  $query->propertyOrderBy('name');
-  $results = $query->execute();
-
-  $indicator_options = array('' => t('- None -'));
-  foreach ($results['indicator'] as $result) {
-    $indicator = entity_load_single($entity_type, $result->id);
-
-    $indicator_options[$indicator->identifier()] = filter_xss($indicator->label());
-  }
-
-  $form['parent'] = array(
-    '#type' => 'select',
-    '#title' => t('Parent'),
-    '#default_value' => $entity->parent,
-    '#options' => $indicator_options,
-    '#description' => t('The indicator parent group.'),
+  $form['country_id'] = array(
+    '#type' => 'ereference',
+    '#title' => t('Implementing Country'),
+    '#default_value' => $entity->country_id,
+    '#required' => TRUE,
+    '#referenced_type' => 'implementing_country',
+    '#autocomplete_path' => 'helpergeneric/ereference/implementing_country',
   );
 
   $form['status'] = array(
@@ -68,7 +55,7 @@ function indicator_form($form, &$form_state, $entity) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
-      '#submit' => array('_indicator_entity_form_delete_submit'),
+      '#submit' => array('_company_entity_form_delete_submit'),
     );
   }
 
@@ -94,8 +81,8 @@ function indicator_form($form, &$form_state, $entity) {
   field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
 
   // Attach validate and submit callbacks.
-  $form['#validate'][] = '_indicator_entity_form_validate';
-  $form['#submit'][] = '_indicator_entity_form_submit';
+  $form['#validate'][] = '_company_entity_form_validate';
+  $form['#submit'][] = '_company_entity_form_submit';
 
   // Always hide the redirect.module fieldset.
   if (isset($form['redirect'])) {
@@ -106,36 +93,31 @@ function indicator_form($form, &$form_state, $entity) {
 }
 
 /**
- * Form validation handler for indicator_form().
+ * Form validation handler for company_form().
  *
- * @see indicator_form()
+ * @see company_form()
  * @see entity_form_field_validate()
  */
-function _indicator_entity_form_validate($form, &$form_state) {
+function _company_entity_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
 }
 
 /**
- * Form API submit callback for indicator_form().
+ * Form API submit callback for company_form().
  */
-function _indicator_entity_form_submit($form, &$form_state) {
+function _company_entity_form_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
 
   // Remove unneeded values.
   form_state_values_clean($form_state);
-  /** @var IndicatorEntity $entity */
+  /** @var CompanyEntity $entity */
   $entity = entity_ui_form_submit_build_entity($form, $form_state);
 
   // Set the timestamp fields.
   if (empty($entity->created)) {
     $entity->created = REQUEST_TIME;
-  }
-
-  // Use NULL for parent; Form API doesn't like NULL.
-  if (empty($entity->parent)) {
-    $entity->parent = NULL;
   }
 
   // Save the entity.
@@ -144,7 +126,7 @@ function _indicator_entity_form_submit($form, &$form_state) {
   // Prepare the messages.
   $entity_label = $entity->label();
   $watchdog_args = array('@type' => $entity->entityType(), '%title' => $entity_label);
-  $t_args = array('@type' => eitientity_indicator_type_get_name($entity_type), '%title' => $entity_label);
+  $t_args = array('@type' => eitientity_company_type_get_name($entity_type), '%title' => $entity_label);
   $entity_uri = entity_uri($entity_type, $entity);
   $entity_link = l(t('view'), $entity_uri['path']);
 
@@ -153,23 +135,23 @@ function _indicator_entity_form_submit($form, &$form_state) {
   }
 
   if (empty($entity->is_new)) {
-    watchdog('indicator', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('company', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %title has been updated.', $t_args));
   }
   else {
-    watchdog('indicator', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
+    watchdog('company', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $entity_link);
     drupal_set_message(t('@type %title has been created.', $t_args));
   }
 }
 
 /**
- * Form submission handler for indicator_form().
+ * Form submission handler for company_form().
  *
  * Handles the 'Delete' button on the entity form.
  *
- * @see indicator_form()
+ * @see company_form()
  */
-function _indicator_entity_form_delete_submit($form, &$form_state) {
+function _company_entity_form_delete_submit($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
 
@@ -181,4 +163,48 @@ function _indicator_entity_form_delete_submit($form, &$form_state) {
 
   $entity_uri = entity_uri($entity_type, $entity);
   $form_state['redirect'] = array($entity_uri['path'] . '/delete', array('query' => $destination));
+}
+
+/**
+ * Menu callback: Creates overview page for custom identifier entities at admin/structure/%.
+ *
+ * @param $entity_type
+ * @return array
+ */
+function eitientity_company_entity_overview_types($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+  dpm($entity_info, '$entity_info');
+
+  $build = array();
+  if (empty($entity_info)) {
+    return $build;
+  }
+
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => '2'));
+  $rows = array();
+
+  if (module_exists('field_ui') && !empty($entity_info['fieldable'])) {
+    foreach ($entity_info['bundles'] as $bundle) {
+      $url_path = $bundle['admin']['path'];
+      if (isset($bundle['admin']['real path'])) {
+        $url_path = $bundle['admin']['real path'];
+      }
+
+      $row = array();
+      $row[] = $bundle['label'];
+      $row[] = array('data' => l(t('manage fields'), $url_path . '/fields'));
+      $row[] = array('data' => l(t('manage display'), $url_path . '/display'));
+
+      $rows[] = $row;
+    }
+  }
+
+  $build['table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No entity types available.'),
+  );
+
+  return $build;
 }
