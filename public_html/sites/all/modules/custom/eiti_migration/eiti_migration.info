@@ -25,6 +25,7 @@ files[] = migrations/eiti_migration.mention.inc
 files[] = migrations/reports/eiti_migration.generic.inc
 files[] = migrations/reports/eiti_migration.summary_data.inc
 files[] = migrations/reports/eiti_migration.indicator_values.inc
+files[] = migrations/reports/eiti_migration.companies.inc
 
 ; Extra Handlers.
 files[] = includes/handlers/eiti_migration.redirect.inc
@@ -33,3 +34,4 @@ files[] = includes/handlers/eiti_migration.redirect.inc
 files[] = plugins/sources/eiti_migration.spreadsheet.inc
 files[] = plugins/destinations/eiti_migration.summary_data.inc
 files[] = plugins/destinations/eiti_migration.indicator_values.inc
+files[] = plugins/destinations/eiti_migration.companies.inc

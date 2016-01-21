@@ -6,8 +6,9 @@
  * Inspired from the original spreadsheet.inc from migrate module.
  */
 
-define('EITI_SOURCE_SUMMARY_DATA', 'summarydata');
-define('EITI_SOURCE_INDICATOR_VALUE', 'indicatorvalue');
+define('EITI_SOURCE_SUMMARY_DATA', 'summary_data');
+define('EITI_SOURCE_INDICATOR_VALUE', 'indicator_value');
+define('EITI_SOURCE_COMPANY', 'company');
 
 
 /**
@@ -340,10 +341,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   static public function generateFields($type) {
     $fields = array();
     $fields['unmapped'] = t('Missed unmapped data that we still extract.');
+    $fields['file'] = t('File Path: Mainly for logging reasons.');
+    $fields['summary_id'] = t('Unique ID of this Summary Data (hash: File Path)');
 
     switch ($type) {
       case EITI_SOURCE_SUMMARY_DATA:
-        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: File Path)');
         $fields['country_name'] = t('Country Name');
         $fields['start_date'] = t('Start Date');
         $fields['end_date'] = t('End Date');
@@ -365,8 +367,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['contact:organization'] = t('Contact details to person who has completed this template: Organization (text)');
         $fields['contact:email'] = t('Contact details to person who has completed this template: Email (text)');
         break;
+
       case EITI_SOURCE_INDICATOR_VALUE:
-        $fields['summary_id'] = t('Unique ID of this Summary Data (hash: File Path)');
         $fields['row_id'] = t('Unique ID of the Row.');
         $fields['group'] = t('The group column value.');
         $fields['subgroup'] = t('The subgroup column value.');
@@ -374,6 +376,13 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['unit'] = t('Unites in which those are measured.');
         $fields['source'] = t('Direct URL to source, or to section in EITI Report.');
         $fields['comment'] = t('Comments.');
+        break;
+
+      case EITI_SOURCE_COMPANY:
+        $fields['column_id'] = t('Column ID.');
+        $fields['company_name'] = t('Company Name.');
+        $fields['company_id'] = t('Company Identification Number.');
+        $fields['commodity'] = t('Commodity the company works with.');
         break;
     }
     return $fields;
@@ -625,6 +634,68 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         }
         break;
 
+      case EITI_SOURCE_COMPANY:
+        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
+        if (empty($revenuesSheet)) {
+          // Second try, already via index.
+          $revenuesSheet = $this->currentWorkbook->getSheet(3);
+        }
+
+        if (!empty($revenuesSheet)) {
+          // Now let's parse the file.
+          $highestRow = $revenuesSheet->getHighestRow();
+          $highestColumn = $revenuesSheet->getHighestColumn();
+          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $this->migrateRowsCountInFile = 0;
+
+          // Defaults.
+          $start_row = 3;
+          $start_column = 8;
+
+          // Find the "Companies" and break out (Adjusting defaults).
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+              if (strtolower($cellValue) == 'c. companies' || strtolower($cellValue) == 'companies') {
+                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+                if (strtolower($value) == 'legal name') {
+                  $start_row = $row + 1;
+                }
+                else {
+                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
+                  if (strtolower($value) == 'legal name') {
+                    $start_row = $row + 2;
+                  }
+                }
+                $start_column = $column + 1;
+                break 2;
+              }
+            }
+          }
+
+          // Now let's walk through the right cells.
+          for ($column = $start_column; $column < $highestColumnIndex; $column++) {
+            $migrationRow = array();
+            $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
+            $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getCalculatedValue());
+            $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getCalculatedValue());
+
+            // In this case, we don't do any lookups, we just pass the values.
+            if (!empty($nameCellValue)) {
+              $migrationRow['summary_id'] = $this->getUniqueId();
+              $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
+              $migrationRow['company_name'] = $nameCellValue;
+              $migrationRow['company_id'] = $idCellValue;
+              $migrationRow['commodity'] = $commoditiesCellValue;
+              $migrationRow['file'] = $this->currentFile;
+
+              $this->migrateRows[] = $migrationRow;
+              $this->migrateRowsCountInFile++;
+            }
+          }
+          $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
+        }
+        break;
     }
   }
 

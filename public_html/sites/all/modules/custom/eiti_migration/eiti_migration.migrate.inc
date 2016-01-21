@@ -383,6 +383,14 @@ function eiti_migration_migrate_api() {
       'EITISummaryDataMigration',
     ),
   );
+  $migrations['migrations']['EITICompaniesMigration'] = array(
+    'class_name' => 'EITICompaniesMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Companies from the specified spreadsheets.'),
+    'soft_dependencies' => array(
+      'EITISummaryDataMigration',
+    ),
+  );
 
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {

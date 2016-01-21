@@ -47,6 +47,8 @@ class EITISpreadsheetMigration extends Migration {
       case 'n/a':
       case '<text>':
       case '<url>':
+      case '...':
+      case '…':
       case '-':
       case '':
         $is_empty = TRUE;
