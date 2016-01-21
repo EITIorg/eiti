@@ -47,6 +47,7 @@ class EITISpreadsheetMigration extends Migration {
       case 'n/a':
       case '<text>':
       case '<url>':
+      case '-':
       case '':
         $is_empty = TRUE;
         break;
@@ -77,6 +78,24 @@ class EITISpreadsheetMigration extends Migration {
     }
     asort($matchRating);
     end($matchRating);
-    return key($matchRating);
+    $bestMatchingID = key($matchRating);
+    if ($matchRating[$bestMatchingID] > 80) {
+      return $bestMatchingID;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Small helper function that is used to normalize certain values.
+   */
+  protected function normalizeValue($value) {
+    $normalizedValue = $value;
+    switch (strtolower($value)) {
+      case 'us$':
+      case 'us $':
+        $normalizedValue = 'USD';
+        break;
+    }
+    return $normalizedValue;
   }
 }

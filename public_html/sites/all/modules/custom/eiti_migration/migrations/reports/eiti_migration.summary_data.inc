@@ -14,9 +14,17 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     // Some metadata.
 
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources/sample.xlsx';
+    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
     $path = drupal_realpath($path);
-    $this->source = new EITIMigrateSourceSpreadsheet($path, EITI_SOURCE_SUMMARY_DATA);
+    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
+    $files_xls = file_scan_directory($path, '/.*\.xls$/');
+    $files = $files_xlsx + $files_xls;
+
+    $real_paths = array();
+    foreach ($files as $file_path => $file) {
+      $real_paths[] = drupal_realpath($file_path);
+    }
+    $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_SUMMARY_DATA);
 
     $bundle = 'summary_data';
     $this->destination = new EITIMigrateDestinationSummaryData($bundle);
@@ -74,6 +82,8 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       'field_sd_indicator_values',
     ));
 
+    // Load the currencies.
+    $this->allCurrencies = currency_load_all();
   }
 
   /**
@@ -88,7 +98,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     // Fetch the country name and look-up if we already have such a country,
     // if now, we create the entity on the fly.
     if (is_array($row->country_name)) {
-      $country_name = array_pop($row->country_name);
+      $country_name = reset($row->country_name);
     }
     else {
       $country_name = $row->country_name;
@@ -121,18 +131,51 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       'sectors:mining',
     );
     foreach ($booleanMappings as $booleanMapping) {
-      $oldBooleanValue = reset($row->{$booleanMapping});
-      $row->{$booleanMapping} = $this->getBooleanListValue($oldBooleanValue);
+      if (isset($row->{$booleanMapping})) {
+        $oldBooleanValue = reset($row->{$booleanMapping});
+        $row->{$booleanMapping} = $this->getBooleanListValue($oldBooleanValue);
+      }
     }
     $otherSector = 'sectors:other';
-    $otherSectorValue = reset($row->{$otherSector});
-    $row->{$otherSector} = ($this->checkEmptyValue($otherSectorValue)) ? NULL : $otherSectorValue;
+    if (isset($row->{$otherSector})) {
+      $otherSectorValue = reset($row->{$otherSector});
+      $row->{$otherSector} = ($this->checkEmptyValue($otherSectorValue)) ? NULL : $otherSectorValue;
+    }
 
     // Currency.
     $currencyIso = 'currency:iso';
-    $row->{$currencyIso} = reset($row->{$currencyIso});
+    if (isset($row->{$currencyIso})) {
+      $row->{$currencyIso} = reset($row->{$currencyIso});
+      $row->{$currencyIso} = $this->normalizeValue($row->{$currencyIso});
+      $match = NULL;
+
+      // Try and fetch the 3 char currency.
+      if (preg_match('/([A-Za-z])\w+/', $row->{$currencyIso}, $match)) {
+        $row->{$currencyIso} = $match[0];
+      }
+      elseif (preg_match('/([0-9])\w+/', $row->{$currencyIso}, $match)) {
+        $currency_ISO4217Number = $match[0];
+        $found_currency = FALSE;
+        foreach ($this->allCurrencies as $code => $currency) {
+          if ($currency->ISO4217Number == $currency_ISO4217Number) {
+            $row->{$currencyIso} = $code;
+            $found_currency = TRUE;
+            break;
+          }
+        }
+        if (!$found_currency) {
+          $msg = t('Could not figure out the currency: !value', array(
+            '!value' => $row->{$currencyIso}
+          ));
+          $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+          $row->{$currencyIso} = '';
+        }
+      }
+    }
     $currencyConversion = 'currency:conversion';
-    $row->{$currencyConversion} = reset($row->{$currencyConversion});
+    if (isset($row->{$currencyConversion})) {
+      $row->{$currencyConversion} = reset($row->{$currencyConversion});
+    }
 
     // Check if links are empty.
     foreach ($row->web_links as $key => $web_link) {

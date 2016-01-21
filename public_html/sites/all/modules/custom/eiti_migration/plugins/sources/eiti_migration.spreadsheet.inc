@@ -261,19 +261,15 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * @return null|object
    */
   public function getNextRow() {
-    // Get all the "Rows" (entities) in the File.
-    $rowsCount = $this->getMigrationRowsCountInFile();
-
     // In case we're just starting.
-    if (!$rowsCount || $rowsCount == 0) {
+    if (!$this->migrateRowsInTotal || $this->migrateRowsInTotal == 0) {
       if ($this->getNextFile()) {
         $this->parseFile();
       }
-      $rowsCount = $this->getMigrationRowsCountInFile();
     }
 
     // Make sure we have a loaded and parsed file.
-    if ($this->migrateRowIndex < $rowsCount) {
+    if ($this->migrateRowIndex < $this->migrateRowsInTotal) {
         $row_values = array();
 
         // Get the parsed row.
@@ -286,9 +282,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
       // Make sure we have a loaded file.
       if ($this->getNextFile()) {
         $this->parseFile();
+        return $this->getNextRow();
       }
       else {
         $this->unloadSpreadsheet();
+        return FALSE;
       }
     }
   }
@@ -463,9 +461,6 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         // If we have our sheet, by default set the count of Summary Data rows
         // to 1, as we have 1 summary data per file.
         if (!empty($aboutSheet)) {
-          $this->migrateRowsCountInFile = 1;
-          $this->migrateRowsInTotal++;
-
           // Now let's parse the file.
           $highestRow = $aboutSheet->getHighestRow();
           $highestColumn = $aboutSheet->getHighestColumn();
@@ -525,7 +520,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
           // Create unique id.
           $migrationRow['summary_id'] = $this->getUniqueId();
+          $migrationRow['file'] = $this->currentFile;
           $this->migrateRows[] = $migrationRow;
+
+          $this->migrateRowsCountInFile = 1;
+          $this->migrateRowsInTotal++;
         }
         else {
           unset($this->migrateRowsCountInFile);
@@ -541,11 +540,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
         if (!empty($contextualSheet)) {
 
-
           // Now let's parse the file.
           $highestRow = $contextualSheet->getHighestRow();
           $highestColumn = $contextualSheet->getHighestColumn();
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $this->migrateRowsCountInFile = 0;
 
           // Defaults.
           $start_row = 4;
@@ -564,6 +563,24 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 break 2;
               }
             }
+          }
+          // Also we have to make sure that there's a "Unit" column.
+          $unitColumnFound = FALSE;
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($contextualSheet->getCellByColumnAndRow($column, $row)->getValue());
+              if (strtolower($cellValue) == 'unit') {
+                // Here's where it all starts.
+                $unitColumnFound = TRUE;
+                break 2;
+              }
+            }
+          }
+          if (!$unitColumnFound) {
+            Migration::displayMessage(t('Indicator Values do not have the UNIT COLUMN.<br/>File: !file', array(
+              '!file' => $this->currentFile,
+            )));
+            return FALSE;
           }
 
           // Now let's walk through the right cells.
@@ -598,11 +615,12 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $migrationRow['unit'] = $unitCellValue;
               $migrationRow['source'] = $sourceCellValue;
               $migrationRow['comment'] = $commentCellValue;
+              $migrationRow['file'] = $this->currentFile;
 
               $this->migrateRows[] = $migrationRow;
+              $this->migrateRowsCountInFile++;
             }
           }
-          $this->migrateRowsCountInFile = count($this->migrateRows);
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
         }
         break;

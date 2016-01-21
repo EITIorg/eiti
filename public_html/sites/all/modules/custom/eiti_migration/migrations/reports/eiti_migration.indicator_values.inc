@@ -21,9 +21,16 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     parent::__construct($arguments);
 
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources/sample.xlsx';
-    $path = drupal_realpath($path);
-    $this->source = new EITIMigrateSourceSpreadsheet($path, EITI_SOURCE_INDICATOR_VALUE);
+    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
+    //$path = drupal_realpath($path);
+    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
+    $files_xls = file_scan_directory($path, '/.*\.xls$/');
+    $files = $files_xlsx + $files_xls;
+    $real_paths = array();
+    foreach ($files as $file_path => $file) {
+      $real_paths[] = drupal_realpath($file_path);
+    }
+    $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_INDICATOR_VALUE);
     $this->destination = new EITIMigrateDestinationIndicatorValue();
 
     $this->map = new MigrateSQLMap($this->machineName,
@@ -85,63 +92,78 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
 
     // Now let's handle the subgroup (that's what we definitely need).
     $all_indicators = $this->boolIndicators + $this->numericIndicators + $this->textIndicators + $this->enumIndicators;
-    $indicator_id = $this->findBestMatch($row->subgroup, $all_indicators);
-    $row->subgroup = $indicator_id;
-    $indicator = $all_indicators[$indicator_id];
+    if ($indicator_id = $this->findBestMatch($row->subgroup, $all_indicators)) {
+      $row->subgroup = $indicator_id;
+      $indicator = $all_indicators[$indicator_id];
 
-    // Now let's handle the other values.
-    switch ($indicator->type) {
-      case 'numeric':
-        $value = $row->entry;
-        if (!is_numeric($value)) {
-          if (!$this->checkEmptyValue($value)) {
-            $msg = t('Numeric expected, this value given instead: !value', array(
-              '!value' => $row->entry
-            ));
-            $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
-            return FALSE;
+      // Now let's handle the other values.
+      switch ($indicator->type) {
+        case 'numeric':
+          $value = $row->entry;
+          if (!is_numeric($value)) {
+            if (!$this->checkEmptyValue($value)) {
+              $msg = t('Indicator !name - Numeric expected, this value given instead: !value<br/>File: !file', array(
+                '!value' => drupal_placeholder($row->entry),
+                '!name' => '<strong>' . $indicator->name . '</strong>',
+                '!file' => $row->file,
+              ));
+              $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+              return FALSE;
+            }
+            else {
+              $value = NULL;
+              $row->value_numeric = $value;
+            }
           }
           else {
-            $value = NULL;
             $row->value_numeric = $value;
           }
-        }
-        else {
-          $row->value_numeric = $value;
-        }
-        break;
+          break;
 
-      case 'boolean':
-        $value = $this->getBooleanListValue($row->entry);
+        case 'boolean':
+          $value = $this->getBooleanListValue($row->entry);
 
-        if ($value == NULL) {
-          $msg = t('Boolean expected, this value given instead: !value', array(
-            '!value' => $row->entry
-          ));
-          $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
-        }
-        $row->value_boolean = $value;
-        break;
+          if ($value == NULL) {
+            $msg = t('Indicator !name - Boolean expected, this value given instead (treating as NULL): !value<br/>File: !file', array(
+              '!value' => drupal_placeholder($row->entry),
+              '!name' => '<strong>' . $indicator->name . '</strong>',
+              '!file' => $row->file,
+            ));
+            $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+          }
+          $row->value_boolean = $value;
+          break;
 
-      case 'text':
-        $row->value_text = $row->entry;
-        break;
+        case 'text':
+          $row->value_text = $row->entry;
+          break;
 
-      case 'enum':
-        $value = $this->getBooleanListValue($row->entry);
+        case 'enum':
+          $value = $this->getBooleanListValue($row->entry);
 
-        if ($value == NULL) {
-          $msg = t('Enum expected, this value given instead: !value', array(
-            '!value' => $row->entry
-          ));
-          $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
-        }
-        $row->value_enum = $value;
-        break;
+          if ($value == NULL) {
+            $msg = t('Indicator !name - Enum expected, this value given instead: !value<br/>File: !file', array(
+              '!value' => drupal_placeholder($row->entry),
+              '!name' => '<strong>' . $indicator->name . '</strong>',
+              '!file' => $row->file,
+            ));
+            $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+          }
+          $row->value_enum = $value;
+          break;
+      }
+      $row->value_unit = $this->normalizeValue($row->unit);
+      $row->original_value_numeric = $row->entry;
+      $row->original_value_unit = $this->normalizeValue($row->unit);
     }
-    $row->value_unit = $row->unit;
-    $row->original_value_numeric = $row->entry;
-    $row->original_value_unit = $row->unit;
+    else {
+      $msg = t('Indicator not found! Given indicator: !name<br/>File: !file', array(
+        '!name' => '<strong>' . $row->subgroup . '</strong>',
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
   }
 
   /**
