@@ -1,7 +1,7 @@
 var React = require('react');
 var BarChart = require('./BarChart');
 
-let StackedBar = React.createClass ({
+let ExtendedBar = React.createClass ({
 	getInitialState: function() {
 	    return {
 	    	chartData: [{
@@ -55,4 +55,4 @@ let StackedBar = React.createClass ({
 	}
 });
 
-module.exports = StackedBar;
+module.exports = ExtendedBar;

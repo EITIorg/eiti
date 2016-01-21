@@ -1,7 +1,7 @@
 var React = require('react');
-var BarChart = require('./BarChart');
+var PieChart = require('./PieChart');
 
-let StackedBar = React.createClass ({
+let ExtendedPie = React.createClass ({
 	getInitialState: function() {
 	    return {
 	    	chartData: [{
@@ -13,7 +13,7 @@ let StackedBar = React.createClass ({
 
     getDefaultProps: function() {
     	return {
-    		tooltip: function(x, y0, y, total) {
+    		tooltip: function(x, y, total) {
 			    return y.toString();
 			}
     	}
@@ -41,18 +41,15 @@ let StackedBar = React.createClass ({
 
 	render: function() {
 	    return (
-		    <BarChart
+		    <PieChart
 	            data={this.state.chartData}
 	            width={this.props.width}
 	            height={this.props.height}
 	            margin={this.props.margin}
-	        	xAxis={{label: this.props.xlabel}}
-                yAxis={{label: this.props.ylabel}} 
                 tooltipHtml={this.props.tooltip}
-                tooltipMode={'mouse'} 
-                legend={false} />
+                tooltipMode={'mouse'} />
 	    )
 	}
 });
 
-module.exports = StackedBar;
+module.exports = ExtendedPie;
