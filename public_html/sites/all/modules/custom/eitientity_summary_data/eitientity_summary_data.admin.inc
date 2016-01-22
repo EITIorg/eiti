@@ -20,22 +20,25 @@ function summary_data_form($form, &$form_state, $entity) {
   $entity_type = $entity->entityType();
 
   $query = new EntityFieldQuery();
-  $query_count = $query
+  $countries_count = $query
     ->entityCondition('entity_type', 'implementing_country')
     ->count()
     ->execute();
-  if (empty($query_count)) {
+  if (empty($countries_count)) {
     drupal_set_message(t('No implementing countries exist.'), 'warning');
-    return drupal_access_denied();
   }
 
   $query = new EntityFieldQuery();
-  $query_count = $query
+  $indicators_count = $query
     ->entityCondition('entity_type', 'indicator')
     ->count()
     ->execute();
-  if (empty($query_count)) {
+  if (empty($indicators_count)) {
     drupal_set_message(t('No indicators exist.'), 'warning');
+  }
+
+  // Denny access to the form if no implementing countries or indicators exist.
+  if (empty($countries_count) || empty($indicators_count)) {
     return drupal_access_denied();
   }
 
