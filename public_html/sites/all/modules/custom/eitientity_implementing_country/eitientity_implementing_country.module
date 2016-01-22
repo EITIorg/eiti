@@ -371,3 +371,28 @@ function eitientity_implementing_country_ctools_plugin_directory($owner, $plugin
 
   return NULL;
 }
+
+/**
+ * Helper function that returns existing implementing country by looking up
+ * its name.
+ *
+ * @param string $name
+ *   Name of the country.
+ *
+ * @return bool|stdCass
+ *   Loaded entity if was found or FALSE.
+ */
+function eitientity_implementing_country_lookup_by_name($name) {
+  $efq = new EntityFieldQuery();
+  $efq_results = $efq->entityCondition('entity_type', 'implementing_country')
+    ->propertyCondition('type', 'normal')
+    ->propertyCondition('name', $name, 'LIKE')
+    ->execute();
+
+  if (!empty($efq_results['implementing_country'])) {
+    $ids = array_keys($efq_results['implementing_country']);
+    $entities = entity_load('implementing_country', $ids);
+    return $entities;
+  }
+  return FALSE;
+}

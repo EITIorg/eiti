@@ -173,7 +173,6 @@ function _company_entity_form_delete_submit($form, &$form_state) {
  */
 function eitientity_company_entity_overview_types($entity_type) {
   $entity_info = entity_get_info($entity_type);
-  dpm($entity_info, '$entity_info');
 
   $build = array();
   if (empty($entity_info)) {

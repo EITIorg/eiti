@@ -38,6 +38,9 @@ function eiti_migration_migrate_api() {
       'mentions' => array(
         'title' => t('Migration to the Mention CT'),
       ),
+      'spreadsheets' => array(
+        'title' => t('Migration of spreadsheets (Reports) to custom entities.'),
+      ),
     ),
   );
 
@@ -361,6 +364,31 @@ function eiti_migration_migrate_api() {
     'description' => t('Migration responsible for migrating In the News nodes to the mention content-type.'),
     'soft_dependencies' => array(
       'EITIUsersMigration',
+    ),
+  );
+
+  // ###################################################
+  // ######## SPREADSHEETS / REPORTS MIGRATIONS ########
+  // ###################################################
+  $migrations['migrations']['EITISummaryDataMigration'] = array(
+    'class_name' => 'EITISummaryDataMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Summary Data from the specified spreadsheets.'),
+  );
+  $migrations['migrations']['EITIIndicatorValuesMigration'] = array(
+    'class_name' => 'EITIIndicatorValuesMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Indicator Values from the specified spreadsheets.'),
+    'soft_dependencies' => array(
+      'EITISummaryDataMigration',
+    ),
+  );
+  $migrations['migrations']['EITICompaniesMigration'] = array(
+    'class_name' => 'EITICompaniesMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Companies from the specified spreadsheets.'),
+    'soft_dependencies' => array(
+      'EITISummaryDataMigration',
     ),
   );
 
