@@ -1,0 +1,12 @@
+name = EITI Entity: GFS Code
+description = Exposes a custom entity to store GFS Codes.
+core = 7.x
+package = Custom
+
+configure = admin/structure/gfs_code
+
+dependencies[] = entity
+
+; Entity handlers.
+files[] = includes/GfsCodeEntity.inc
+files[] = includes/GfsCodeEntityUIController.inc
