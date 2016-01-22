@@ -148,7 +148,7 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
     if (module_exists('field_ui')) {
       $items[$this->bundle_path] = array(
         'title' => $plural_label,
-        'page callback' => 'country_entity_overview_types',
+        'page callback' => 'implementing_country_entity_overview_types',
         'page arguments' => array($this->entityType),
         'description' => 'Manage ' . $plural_label . '.',
         'access callback' => 'entity_access',
