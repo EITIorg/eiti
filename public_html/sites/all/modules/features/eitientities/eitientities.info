@@ -1,7 +1,7 @@
 name = eitientities
 description = All of the field bases and common functionalities between entities live here.
 core = 7.x
-package = Custom
+package = EITI Entities
 version = 7.x-1.0
 dependencies[] = countries
 dependencies[] = ctools

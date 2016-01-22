@@ -1,7 +1,7 @@
 name = eitict_article
 description = Article content-type lives here, with all its features.
 core = 7.x
-package = Custom
+package = EITI Entities
 version = 7.x-1.0
 dependencies[] = countries
 dependencies[] = ctools
