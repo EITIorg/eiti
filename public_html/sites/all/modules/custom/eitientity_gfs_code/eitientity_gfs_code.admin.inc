@@ -42,7 +42,6 @@ function gfs_code_form($form, &$form_state, $entity) {
   $query->entityCondition('entity_type', 'gfs_code');
   $query->propertyOrderBy('code');
   $results = $query->execute();
-  dpm($results, '$results');
 
   $gfs_code_options = array('' => t('- None -'));
   if (!empty($results['gfs_code'])) {
