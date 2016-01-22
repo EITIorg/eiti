@@ -24,6 +24,12 @@ function eitientity_implementing_country_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'iso' => array(
+        'description' => 'The ISO 3166-1 alpha-2 country code.',
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+      ),
       'type' => array(
         'description' => 'The country type.',
         'type' => 'varchar',
@@ -76,4 +82,18 @@ function eitientity_implementing_country_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Add ISO 3166-1 alpha-2 country code to Implementing Country entities.
+ */
+function eitientity_implementing_country_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The ISO 3166-1 alpha-2 country code.',
+    'type' => 'char',
+    'length' => 2,
+    'not null' => FALSE,
+    'default' => NULL,
+  );
+  db_add_field('eiti_implementing_country', 'iso', $field_schema);
 }

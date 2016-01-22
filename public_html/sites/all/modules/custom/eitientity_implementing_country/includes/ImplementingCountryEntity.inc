@@ -11,6 +11,7 @@ class ImplementingCountryEntity extends Entity {
   // Define some default values.
   public $id = NULL;
   public $name = '';
+  public $iso = '';
   public $language = LANGUAGE_NONE;
   public $type = '';
   public $user_id = NULL;

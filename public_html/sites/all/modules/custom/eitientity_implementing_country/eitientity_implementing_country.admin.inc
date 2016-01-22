@@ -40,9 +40,22 @@ function implementing_country_form($form, &$form_state, $entity) {
     '#weight' => 95,
   );
 
+  $entity_info = $entity->entityInfo();
+  $args = array('!entity' => $entity_info['label']);
+  $form['iso'] = array(
+    '#title' => t('ISO 3166-1 alpha-2 country code'),
+    '#description' => t('Please select the country; this will set the ISO code that will be used to reference this !entity page in various places!', $args),
+    '#type' => 'country',
+    '#default_value' => $entity->iso,
+    '#filters' => array(
+      'enabled' => COUNTRIES_ENABLED,
+    ),
+  );
+
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => t('Name'),
+    '#description' => t('Please provide the name that will be used for this country.'),
     '#default_value' => $entity->name,
   );
 
@@ -64,7 +77,7 @@ function implementing_country_form($form, &$form_state, $entity) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
-      '#submit' => array('country_entity_form_delete_submit'),
+      '#submit' => array('implementing_country_entity_form_delete_submit'),
     );
   }
 
