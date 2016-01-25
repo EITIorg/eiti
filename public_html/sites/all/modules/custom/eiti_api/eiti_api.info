@@ -1,0 +1,6 @@
+name = EITI API
+description = This module offers custom restful resources for EITI internal and external use.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = restful
