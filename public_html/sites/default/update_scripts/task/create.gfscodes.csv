@@ -1,0 +1,44 @@
+code,name,parent
+11E,Taxes,null
+111E,"Taxes on income, profits and capital gains",11E
+1112E1,"Ordinary taxes on income, profits and capital gains",111E
+1112E1,"Ordinary taxes on income, profits and capital gains",111E
+1112E2,"Extraordinary taxes on income, profits and capital gains",111E
+112E,Taxes on payroll and workforce,11E
+113E,Taxes on property,11E
+113E,Taxes on property,11E
+113E,Taxes on property,11E
+114E,Taxes on goods and services,11E
+1141E,"General taxes on goods and services (VAT, sales tax, turnover tax)",114E
+1142E,Excise taxes,114E
+1145E,Taxes on use of goods/permission to use goods or perform activities,114E
+114521E,Licence fees,1145E
+114522E,Emission and pollution taxes,1145E
+11451E,Motor vehicle taxes,1145E
+115E,Taxes on international trade and transactions,11E
+1151E,Customs and other import duties,115E
+1152E,Taxes on exports,115E
+1153E1,Profits of natural resource export monopolies,1152E
+116E,Other taxes payable by natural resource companies,11E
+12E,Social contributions,null
+1212E,Social security employer contributions,12E
+14E,Other revenue,null
+141E,Property income,14E
+1412E,Dividends,141E
+1412E1,From state-owned enterprises,1412E
+1412E2,From government participation (equity),1412E
+1413E,Withdrawals from income of quasi-corporations,141E
+1415E,Rent,141E
+1415E1,Royalties,1415E
+1415E2,Bonuses,1415E
+1415E,Production entitlements (in-kind or cash),141E
+1415E31,Delivered/paid directly to government,1415E
+1415E32,Delivered/paid to state-owned enterprise(s),1415E
+1415E4,Compulsory transfers to government (infrastructure and other),1415E
+1415E5,Other rent payments,1415E
+142E,Sales of goods and services,14E
+1421E,Sales of goods and services by government units,142E
+1422E,Administrative fees for government services,142E
+143E,"Fines, penalties, and forfeits",14E
+144E1,Voluntary transfers to government (donations),143E
+15E,Revenues not classified,null

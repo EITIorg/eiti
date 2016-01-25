@@ -114,6 +114,19 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
         'created' => REQUEST_TIME,
         'changed' => REQUEST_TIME,
       );
+
+      // Find the ISO2 standard.
+      $country_object = countries_country_lookup($country_name);
+      if ($country_object) {
+        $ic_values['iso'] = $country_object->iso2;
+      }
+      else {
+        $msg = t('Could not figure out the <strong>ISO2</strong> for !country', array(
+          '!country' => $country_name
+        ));
+        $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+      }
+
       $ic_entity = entity_create('implementing_country', $ic_values);
       $ic_entity->save();
       // Save the reference.
