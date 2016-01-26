@@ -133,7 +133,7 @@ function eitientity_indicator_type_get_name($bundle) {
 }
 
 /**
- * Access callback for custom score entities.
+ * Access callback for custom indicator entities.
  *
  * @param $op
  * @param IndicatorEntity $entity
@@ -189,7 +189,7 @@ function indicator_load($entity_id, $entity_type) {
 function eitientity_indicator_permission() {
   $perms = array();
 
-  $entity_type = 'score';
+  $entity_type = 'indicator';
   $entity_info = entity_get_info($entity_type);
 
   $operations = array('administer', 'view');
