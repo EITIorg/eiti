@@ -3,11 +3,12 @@
 
 // Provide a list of modules to be installed.
 $modules = array(
-  'eitientity_company',
   'eitientity_gfs_code',
   'eitientity_implementing_country',
   'eitientity_indicator',
   'eitientity_indicator_value',
+  'eitientity_organisation',
+  'eitientity_revenue_stream',
   'eitientity_summary_data',
   'helpergeneric',
 );
@@ -24,7 +25,7 @@ $feature_names = array(
   'eitict_mention',
   'eitict_person',
   'eitientities',
-  'eitiet_company',
+  'eitiet_organisation',
   'eitiet_summary_data',
   'eitii18n',
   'eitipermissions',
