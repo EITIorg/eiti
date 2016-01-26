@@ -12,6 +12,7 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
   protected $entity_path;
   protected $entity_id_count;
   protected $bundle_path;
+  protected $hide_content_ui;
 
   public function __construct($entity_type, $entity_info) {
     parent::__construct($entity_type, $entity_info);
@@ -19,6 +20,10 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
     $this->entity_path = $this->entityInfo['admin ui']['entity path'];
     $this->entity_id_count = count(explode('/', $this->entity_path));
     $this->bundle_path = $this->entityInfo['admin ui']['bundle path'];
+
+    if (isset($this->entityInfo['admin ui']['hide content ui'])) {
+      $this->hide_content_ui = $this->entityInfo['admin ui']['hide content ui'];
+    }
   }
 
   /**
@@ -83,58 +88,60 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
     /**
      * Add admin/content specific menu items.
      */
-    $items[$this->path] = array(
-        'title' => $plural_label,
-        'page callback' => 'drupal_get_form',
-        'page arguments' => array($this->entityType . '_overview_form', $this->entityType),
-        'description' => 'Manage ' . $plural_label . '.',
+    if (empty($this->hide_content_ui)) {
+      $items[$this->path] = array(
+          'title' => $plural_label,
+          'page callback' => 'drupal_get_form',
+          'page arguments' => array($this->entityType . '_overview_form', $this->entityType),
+          'description' => 'Manage ' . $plural_label . '.',
+          'access callback' => 'entity_access',
+          'access arguments' => array('access overview', $this->entityType),
+          'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
+        ) + $entity_ui_defaults;
+      $items[$this->path . '/overview'] = array(
+        'title' => 'Overview',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+      );
+
+      $items[$this->entity_path . '/add'] = array(
+        'title callback' => 'entity_ui_get_action_title',
+        'title arguments' => array('add', $this->entityType),
+        'page callback' => 'system_admin_menu_block_page',
         'access callback' => 'entity_access',
-        'access arguments' => array('access overview', $this->entityType),
-        'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
-      ) + $entity_ui_defaults;
-    $items[$this->path . '/overview'] = array(
-      'title' => 'Overview',
-      'type' => MENU_DEFAULT_LOCAL_TASK,
-      'weight' => -10,
-    );
+        'access arguments' => array('create', $this->entityType),
+        'file' => 'system.admin.inc',
+        'file path' => drupal_get_path('module', 'system'),
+      );
 
-    $items[$this->entity_path . '/add'] = array(
-      'title callback' => 'entity_ui_get_action_title',
-      'title arguments' => array('add', $this->entityType),
-      'page callback' => 'system_admin_menu_block_page',
-      'access callback' => 'entity_access',
-      'access arguments' => array('create', $this->entityType),
-      'file' => 'system.admin.inc',
-      'file path' => drupal_get_path('module', 'system'),
-    );
-
-    /**
-     * Add bundle_add specific menu items.
-     */
-    if (isset($this->entityInfo['bundles callback']) && function_exists($this->entityInfo['bundles callback'])) {
-      foreach ($this->entityInfo['bundles callback']() as $bundle_type => $bundle_info) {
-        $type_url_str = str_replace('_', '-', $bundle_type);
-        $items[$this->entity_path . '/add/' . $type_url_str] = array(
+      /**
+       * Add bundle_add specific menu items.
+       */
+      if (isset($this->entityInfo['bundles callback']) && function_exists($this->entityInfo['bundles callback'])) {
+        foreach ($this->entityInfo['bundles callback']() as $bundle_type => $bundle_info) {
+          $type_url_str = str_replace('_', '-', $bundle_type);
+          $items[$this->entity_path . '/add/' . $type_url_str] = array(
+              'title callback' => 'entity_ui_get_action_title',
+              'title arguments' => array('add', $this->entityType, $bundle_type),
+              'description' => $bundle_info['description'],
+              'page callback' => 'entity_ui_get_bundle_add_form',
+              'page arguments' => array($this->entityType, $bundle_type),
+              'access callback' => 'entity_access',
+              'access arguments' => array('create', $this->entityType),
+              'weight' => isset($bundle_info['weight']) ? $bundle_info['weight'] : 0,
+            ) + $defaults;
+        }
+      }
+      else {
+        $items[$this->entity_path . '/add/%'] = array(
             'title callback' => 'entity_ui_get_action_title',
-            'title arguments' => array('add', $this->entityType, $bundle_type),
-            'description' => $bundle_info['description'],
+            'title arguments' => array('add', $this->entityType, $this->entity_id_count + 1),
             'page callback' => 'entity_ui_get_bundle_add_form',
-            'page arguments' => array($this->entityType, $bundle_type),
+            'page arguments' => array($this->entityType, $this->entity_id_count + 1),
             'access callback' => 'entity_access',
             'access arguments' => array('create', $this->entityType),
-            'weight' => isset($bundle_info['weight']) ? $bundle_info['weight'] : 0,
           ) + $defaults;
       }
-    }
-    else {
-      $items[$this->entity_path . '/add/%'] = array(
-          'title callback' => 'entity_ui_get_action_title',
-          'title arguments' => array('add', $this->entityType, $this->entity_id_count + 1),
-          'page callback' => 'entity_ui_get_bundle_add_form',
-          'page arguments' => array($this->entityType, $this->entity_id_count + 1),
-          'access callback' => 'entity_access',
-          'access arguments' => array('create', $this->entityType),
-        ) + $defaults;
     }
 
     /**
