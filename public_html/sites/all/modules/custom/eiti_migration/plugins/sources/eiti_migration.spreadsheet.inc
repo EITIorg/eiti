@@ -9,6 +9,8 @@
 define('EITI_SOURCE_SUMMARY_DATA', 'summary_data');
 define('EITI_SOURCE_INDICATOR_VALUE', 'indicator_value');
 define('EITI_SOURCE_COMPANY', 'company');
+define('EITI_SOURCE_REVENUE_GOVERNMENT', 'revenue_government');
+define('EITI_SOURCE_REVENUE_COMPANY', 'revenue_company');
 
 
 /**
@@ -384,6 +386,24 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['company_id'] = t('Company Identification Number.');
         $fields['commodity'] = t('Commodity the company works with.');
         break;
+
+      case EITI_SOURCE_REVENUE_GOVERNMENT:
+        $fields['row_id'] = t('Unique ID of the Row.');
+        $fields['gfs_id'] = t('GFS ID of the GFS Code.');
+        $fields['gfs_status'] = t('GFS Code Status - whether it is included or not in the report.');
+        $fields['revenue_stream'] = t('Name of the Revenue Stream in the country.');
+        $fields['organization'] = t('Name of Receiving Government organization.');
+        $fields['revenue'] = t('Revenues disclosed by the Government.');
+        break;
+
+      case EITI_SOURCE_REVENUE_COMPANY:
+        $fields['position_id'] = t('Unique ID of the Row and Column (in form of row:column).');
+        $fields['gfs_id'] = t('GFS ID of the GFS Code.');
+        $fields['gfs_status'] = t('GFS Code Status - whether it is included or not in the report.');
+        $fields['revenue_stream'] = t('Name of the Revenue Stream in the country.');
+        $fields['company'] = t('Name of Receiving Government organization.');
+        $fields['revenue'] = t('Revenues disclosed by the Government.');
+        break;
     }
     return $fields;
   }
@@ -695,6 +715,77 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           }
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
         }
+        break;
+
+      case EITI_SOURCE_REVENUE_GOVERNMENT:
+        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
+        if (empty($revenuesSheet)) {
+          // Second try, already via index.
+          $revenuesSheet = $this->currentWorkbook->getSheet(3);
+        }
+
+        if (!empty($revenuesSheet)) {
+          // Now let's parse the file.
+          $highestRow = $revenuesSheet->getHighestRow();
+          $highestColumn = $revenuesSheet->getHighestColumn();
+          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $this->migrateRowsCountInFile = 0;
+
+          // Defaults.
+          $start_row = 9;
+          $start_column = 1;
+
+          // Find the "Companies" and break out (Adjusting defaults).
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+
+              if (strtolower($cellValue) == 'a. gfs classification of revenue streams' ||  strpos(strtolower($cellValue), 'gfs classification') !== FALSE) {
+                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+                if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                  $start_row = $row + 2;
+                }
+                else {
+                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
+                  if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                    $start_row = $row + 3;
+                  }
+                }
+                $start_column = $column;
+                break 2;
+              }
+            }
+          }
+
+          // Now let's walk through the right cells.
+          for ($row = $start_row; $row < $highestRow; $row++) {
+            $migrationRow = array();
+            $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+            $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 2, $row)->getValue());
+            $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue());
+            $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue());
+            $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 5, $row)->getCalculatedValue());
+
+            // In this case, we don't do any lookups, we just pass the values.
+            if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+              $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
+              $migrationRow['gfs_id'] = $GFSCodeCellValue;
+              $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
+              $migrationRow['revenue_stream'] = $revenueStreamCellValue;
+              $migrationRow['organization'] = $orgCellValue;
+              $migrationRow['revenue'] = $revenueCellValue ;
+              $migrationRow['file'] = $this->currentFile;
+
+              $this->migrateRows[] = $migrationRow;
+              $this->migrateRowsCountInFile++;
+            }
+          }
+//          dsm($this->migrateRows, 'all');
+          $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
+        }
+        break;
+
+      case EITI_SOURCE_REVENUE_COMPANY:
         break;
     }
   }

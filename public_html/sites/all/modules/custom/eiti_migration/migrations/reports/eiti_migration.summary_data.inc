@@ -16,7 +16,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     // Prepare the Source.
     $path = drupal_get_path('module', 'eiti_migration') . '/sources';
     $path = drupal_realpath($path);
-    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
+    $files_xlsx = file_scan_directory($path, '/.*\.xnot really, lsx$/');
     $files_xls = file_scan_directory($path, '/.*\.xls$/');
     $files = $files_xlsx + $files_xls;
 
@@ -130,7 +130,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       $ic_entity = entity_create('implementing_country', $ic_values);
       $ic_entity->save();
       // Save the reference.
-      $row->country_name = $country_name->id;
+      $row->country_name = $ic_entity->id;
     }
     else {
       $existing_country = reset($countries);

@@ -26,6 +26,8 @@ files[] = migrations/reports/eiti_migration.generic.inc
 files[] = migrations/reports/eiti_migration.summary_data.inc
 files[] = migrations/reports/eiti_migration.indicator_values.inc
 files[] = migrations/reports/eiti_migration.companies.inc
+files[] = migrations/reports/eiti_migration.revenue_streams.inc
+
 
 ; Extra Handlers.
 files[] = includes/handlers/eiti_migration.redirect.inc

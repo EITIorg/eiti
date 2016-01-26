@@ -391,6 +391,14 @@ function eiti_migration_migrate_api() {
       'EITISummaryDataMigration',
     ),
   );
+  $migrations['migrations']['EITIRevenueStreamsGovernmentMigration'] = array(
+    'class_name' => 'EITIRevenueStreamsGovernmentMigration',
+    'group_name' => 'spreadsheets',
+    'description' => t('Migrates the Government Revenue Streams from the specified spreadsheets.'),
+    'soft_dependencies' => array(
+      'EITISummaryDataMigration',
+    ),
+  );
 
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
