@@ -1,5 +1,5 @@
-name = EITI Entity: Company
-description = Exposes a custom entity to store companies.
+name = [DEPRECATED] EITI Entity: Company
+description = DEPRECATED: Use Organization entities instead.
 core = 7.x
 package = Custom
 

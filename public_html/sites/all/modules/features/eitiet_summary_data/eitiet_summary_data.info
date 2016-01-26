@@ -1,7 +1,7 @@
 name = EITI Entity Type SummaryData
 description = SummaryData entity type settings and information.
 core = 7.x
-package = Custom
+package = EITI Entities
 version = 7.x-0.2
 dependencies[] = ctools
 dependencies[] = eitientity_summary_data

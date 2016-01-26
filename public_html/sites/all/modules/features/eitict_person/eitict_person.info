@@ -1,7 +1,7 @@
 name = eitict_person
 description = Person contact type and related (ex: contact).
 core = 7.x
-package = Custom
+package = EITI Entities
 version = 7.x-1.0
 dependencies[] = ctools
 dependencies[] = eitict_article
