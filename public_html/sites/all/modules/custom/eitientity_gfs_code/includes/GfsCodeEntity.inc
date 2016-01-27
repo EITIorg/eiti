@@ -13,7 +13,7 @@ class GfsCodeEntity extends Entity {
   public $type = '';
   public $code = '';
   public $name = '';
-  public $parent = NULL;
+  public $parent = 0;
   public $status = TRUE;
   public $created = NULL;
 

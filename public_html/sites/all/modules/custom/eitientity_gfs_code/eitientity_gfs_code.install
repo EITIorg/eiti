@@ -41,8 +41,9 @@ function eitientity_gfs_code_schema() {
       'parent' => array(
         'description' => 'The entity parent entity id.',
         'type' => 'int',
-        'not null' => FALSE,
-        'default' => NULL,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'status' => array(
         'description' => 'Boolean indicating whether the entity is enabled.',
@@ -71,4 +72,24 @@ function eitientity_gfs_code_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function eitientity_gfs_code_update_7002() {
+  db_update('eiti_gfs_code')
+    ->fields(array(
+      'parent' => 0,
+    ))
+    ->condition('parent', NULL)
+    ->execute();
+
+  db_change_field('eiti_gfs_code', 'parent', 'parent', array(
+    'description' => 'The entity parent entity id.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
 }
