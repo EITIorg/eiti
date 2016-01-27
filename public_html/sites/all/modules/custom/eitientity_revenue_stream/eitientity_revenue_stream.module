@@ -12,6 +12,14 @@ define('EITIENTITY_REVENUE_STREAM_ADMIN_UI_PATH', 'admin/content/revenue_stream'
 define('EITIENTITY_REVENUE_STREAM_BUNDLE_ADMIN_UI_PATH', 'admin/structure/revenue_stream');
 
 /**
+ * Define report status constants (not included and not available ones will be skipped).
+ */
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_RECONCILED', 0);
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_PARTIALLY_RECONCILED', 1);
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_NOT_RECONCILED', 2);
+
+
+/**
  * Implements hook_entity_info().
  *
  * @return array

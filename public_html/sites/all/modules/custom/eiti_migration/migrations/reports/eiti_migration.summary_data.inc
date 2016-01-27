@@ -16,7 +16,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     // Prepare the Source.
     $path = drupal_get_path('module', 'eiti_migration') . '/sources';
     $path = drupal_realpath($path);
-    $files_xlsx = file_scan_directory($path, '/.*\.xnot really, lsx$/');
+    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
     $files_xls = file_scan_directory($path, '/.*\.xls$/');
     $files = $files_xlsx + $files_xls;
 

@@ -397,6 +397,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         break;
 
       case EITI_SOURCE_REVENUE_COMPANY:
+        $fields['column_id'] = t('Column ID of the queries company.');
         $fields['position_id'] = t('Unique ID of the Row and Column (in form of row:column).');
         $fields['gfs_id'] = t('GFS ID of the GFS Code.');
         $fields['gfs_status'] = t('GFS Code Status - whether it is included or not in the report.');
@@ -734,11 +735,15 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Defaults.
           $start_row = 9;
           $start_column = 1;
+          $currency = '';
 
-          // Find the "Companies" and break out (Adjusting defaults).
           for ($row = 0; $row < $highestRow; $row++) {
             for ($column = 0; $column < $highestColumnIndex; $column++) {
               $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+
+              if (strtolower($cellValue) == 'currency unit') {
+                $currency = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+              }
 
               if (strtolower($cellValue) == 'a. gfs classification of revenue streams' ||  strpos(strtolower($cellValue), 'gfs classification') !== FALSE) {
                 $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
@@ -752,6 +757,16 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                   }
                 }
                 $start_column = $column;
+                $revenue_column = $column + 3;
+
+                // Because some files are broken, we need to make sure we have the right revenue column.
+                if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue())), 'b. revenue streams') !== FALSE) {
+                  $revenue_column = $column + 3;
+                }
+                elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue())), 'b. revenue streams') !== FALSE) {
+                  $revenue_column = $column + 4;
+                }
+
                 break 2;
               }
             }
@@ -760,32 +775,122 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Now let's walk through the right cells.
           for ($row = $start_row; $row < $highestRow; $row++) {
             $migrationRow = array();
-            $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
-            $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 2, $row)->getValue());
-            $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue());
-            $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue());
-            $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column + 5, $row)->getCalculatedValue());
+            $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+            $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+            $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
+            $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
+            $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row)->getCalculatedValue());
 
             // In this case, we don't do any lookups, we just pass the values.
             if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
               $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
+              $migrationRow['summary_id'] = $this->getUniqueId();
               $migrationRow['gfs_id'] = $GFSCodeCellValue;
               $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
               $migrationRow['revenue_stream'] = $revenueStreamCellValue;
               $migrationRow['organization'] = $orgCellValue;
               $migrationRow['revenue'] = $revenueCellValue ;
               $migrationRow['file'] = $this->currentFile;
+              $migrationRow['currency'] = $currency;
 
               $this->migrateRows[] = $migrationRow;
               $this->migrateRowsCountInFile++;
             }
           }
-//          dsm($this->migrateRows, 'all');
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
         }
         break;
 
       case EITI_SOURCE_REVENUE_COMPANY:
+        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
+        if (empty($revenuesSheet)) {
+          // Second try, already via index.
+          $revenuesSheet = $this->currentWorkbook->getSheet(3);
+        }
+
+        if (!empty($revenuesSheet)) {
+          // Now let's parse the file.
+          $highestRow = $revenuesSheet->getHighestRow();
+          $highestColumn = $revenuesSheet->getHighestColumn();
+          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $this->migrateRowsCountInFile = 0;
+
+          // Defaults.
+          $start_row = 9;
+          $start_column = 1;
+          $currency = '';
+
+          for ($row = 0; $row < $highestRow; $row++) {
+            for ($column = 0; $column < $highestColumnIndex; $column++) {
+              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+
+              // Check the currency.
+              if (strtolower($cellValue) == 'currency unit') {
+                $currency = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+              }
+
+              // Check where the companies start.
+              if (strtolower($cellValue) == 'c. companies' || strtolower($cellValue) == 'companies') {
+                $companies_column = $column + 1;
+                continue;
+              }
+
+              // Check where the revenue data starts.
+              if (strtolower($cellValue) == 'a. gfs classification of revenue streams' ||  strpos(strtolower($cellValue), 'gfs classification') !== FALSE) {
+                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+                if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                  $start_row = $row + 2;
+                }
+                else {
+                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
+                  if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                    $start_row = $row + 3;
+                  }
+                }
+                $start_column = $column;
+                $revenue_column = $column + 3;
+
+                // Because some files are broken, we need to make sure we have the right revenue column.
+                if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue())), 'b. revenue streams') !== FALSE) {
+                  $revenue_column = $column + 3;
+                }
+                elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue())), 'b. revenue streams') !== FALSE) {
+                  $revenue_column = $column + 4;
+                }
+
+                break 2;
+              }
+            }
+          }
+
+          // Now let's walk through the right cells.
+          for ($column = $companies_column; $column < $highestColumnIndex; $column++) {
+            for ($row = $start_row; $row < $highestRow; $row++) {
+              $migrationRow = array();
+              $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+              $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
+              $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
+
+              // In this case, we don't do any lookups, we just pass the values.
+              if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
+                $migrationRow['position_id'] = $this->getUniqueId() . ':' . $row . ':' . $column;
+                $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
+                $migrationRow['summary_id'] = $this->getUniqueId();
+                $migrationRow['gfs_id'] = $GFSCodeCellValue;
+                $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
+                $migrationRow['revenue_stream'] = $revenueStreamCellValue;
+                $migrationRow['revenue'] = $revenueCellValue ;
+                $migrationRow['file'] = $this->currentFile;
+                $migrationRow['currency'] = $currency;
+
+                $this->migrateRows[] = $migrationRow;
+                $this->migrateRowsCountInFile++;
+              }
+            }
+          }
+          $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
+        }
         break;
     }
   }

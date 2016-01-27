@@ -1,7 +1,7 @@
 <?php
 
 
-class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
+class EITIMigrateDestinationRevenues extends MigrateDestinationEntity {
   /**
    * Static function that returns the schema field that identifies a destination
    * entity.
@@ -22,8 +22,8 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
    * @param array $options
    *  Options applied to entities.
    */
-  public function __construct(array $options = array()) {
-    parent::__construct('organisation', 'company', $options);
+  public function __construct($bundle, array $options = array()) {
+    parent::__construct('revenue_stream', $bundle, $options);
   }
 
   /**
@@ -38,11 +38,15 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
   public function fields($migration = NULL) {
     $fields = array();
 
-    $fields['name'] = t('Company Name.');
-    $fields['country_id'] = t('Country where the company is from.');
-    $fields['status'] = t('Company Status.');
-    $fields['created'] = t('Timestamp when the company was created.');
-    $fields['changed'] = t('Timestamp when the company was changed.');
+    $fields['gfs_code_id'] = t('GFS code ID.');
+    $fields['report_status'] = t('Report status.');
+    $fields['name'] = t('Name.');
+    $fields['organisation_id'] = t('Organization ID.');
+
+    $fields['revenue'] = t('Revenue in numbers.');
+    $fields['currency'] = t('Currency used in the report.');
+    $fields['original_revenue'] = t('Original Revenue in numbers.');
+    $fields['original_currency'] = t('Original Currency used in the report.');
 
     // Then add in anything provided by handlers
     $fields += migrate_handler_invoke_all('Entity', 'fields', $this->entityType, $this->bundle, $migration);
@@ -59,26 +63,25 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
   public function bulkRollback(array $ids) {
     migrate_instrument_start('entity_delete_multiple');
     $this->prepareRollback($ids);
-    entity_delete_multiple('organisation', $ids);
+    entity_delete_multiple('revenue_stream', $ids);
     $this->completeRollback($ids);
     migrate_instrument_stop('entity_delete_multiple');
   }
 
   /**
-   * Import a single company entity.
+   * Import a single indicator_value entity.
    *
    * @param $entity
    *  Entity object to build. Prefilled with any fields mapped in the Migration.
    * @param $row
    *  Raw source data object - passed through to prepare/complete handlers.
    * @return array
-   *  Array of key fields (id only in this case) of the company that was saved if
+   *  Array of key fields (id only in this case) of the indicator_value that was saved if
    *  successful. FALSE on failure.
    */
   public function import(stdClass $entity, stdClass $row) {
-    // Set some default properties.
     $defaults = array(
-      'type' => 'company',
+      'type' => $this->getBundle(),
       'status' => NODE_PUBLISHED,
       'created' => REQUEST_TIME,
       'changed' => REQUEST_TIME,
@@ -101,10 +104,10 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
     }
 
     // Validate field data prior to saving.
-    MigrateDestinationEntity::fieldAttachValidate('organisation', $entity);
+    MigrateDestinationEntity::fieldAttachValidate('revenue_stream', $entity);
 
     migrate_instrument_start('entity_save');
-    entity_save('organisation', $entity);
+    entity_save('revenue_stream', $entity);
     migrate_instrument_stop('entity_save');
 
     if (isset($entity->id) && $entity->id > 0) {

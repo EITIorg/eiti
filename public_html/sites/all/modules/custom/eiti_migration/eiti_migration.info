@@ -37,3 +37,4 @@ files[] = plugins/sources/eiti_migration.spreadsheet.inc
 files[] = plugins/destinations/eiti_migration.summary_data.inc
 files[] = plugins/destinations/eiti_migration.indicator_values.inc
 files[] = plugins/destinations/eiti_migration.companies.inc
+files[] = plugins/destinations/eiti_migration.revenues.inc
