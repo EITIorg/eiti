@@ -6,11 +6,17 @@
  * Inspired from the original spreadsheet.inc from migrate module.
  */
 
+// Source types.
 define('EITI_SOURCE_SUMMARY_DATA', 'summary_data');
 define('EITI_SOURCE_INDICATOR_VALUE', 'indicator_value');
 define('EITI_SOURCE_COMPANY', 'company');
 define('EITI_SOURCE_REVENUE_GOVERNMENT', 'revenue_government');
 define('EITI_SOURCE_REVENUE_COMPANY', 'revenue_company');
+
+// Sheet types.
+define('EITI_SHEET_TYPE_ABOUT', 'about');
+define('EITI_SHEET_TYPE_CONTEXTUAL', 'context');
+define('EITI_SHEET_TYPE_REVENUES', 'revenues');
 
 
 /**
@@ -482,11 +488,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   protected function parseFile() {
     switch ($this->sourceType) {
       case EITI_SOURCE_SUMMARY_DATA:
-        $aboutSheet = $this->currentWorkbook->getSheetByName('1. About');
-        if (empty($aboutSheet)) {
-          // Second try, already via index.
-          $aboutSheet = $this->currentWorkbook->getSheet(1);
-        }
+        // Get the sheet.
+        $aboutSheet = $this->getSheet(EITI_SHEET_TYPE_ABOUT);
 
         // If we have our sheet, by default set the count of Summary Data rows
         // to 1, as we have 1 summary data per file.
@@ -499,20 +502,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Defaults.
           $start_row = 4;
           $start_column = 1;
-          $value_column = 3;
 
-          // Find the "Entry" and break out (Adjusting defaults).
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($aboutSheet->getCellByColumnAndRow($column, $row)->getValue());
-              if (strtolower($cellValue) == 'entry') {
-                // Here's where it all starts.
-                $start_row = $row + 1;
-                $start_column = $column - 2;
-                $value_column = $column;
-                break 2;
-              }
-            }
+          // Find the "Entry" (Adjusting defaults).
+          if ($position = $this->findPositionInSheet($aboutSheet, array('Entry'))) {
+            $start_row = $position['row'] + 1;
+            $start_column = $position['column'] - 2;
           }
 
           // Now let's walk through the right cells.
@@ -562,14 +556,9 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         break;
 
       case EITI_SOURCE_INDICATOR_VALUE:
-        $contextualSheet = $this->currentWorkbook->getSheetByName('2. Contextual');
-        if (empty($contextualSheet)) {
-          // Second try, already via index.
-          $contextualSheet = $this->currentWorkbook->getSheet(2);
-        }
-
+        // Get our sheet.
+        $contextualSheet = $this->getSheet(EITI_SHEET_TYPE_CONTEXTUAL);
         if (!empty($contextualSheet)) {
-
           // Now let's parse the file.
           $highestRow = $contextualSheet->getHighestRow();
           $highestColumn = $contextualSheet->getHighestColumn();
@@ -579,33 +568,16 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Defaults.
           $start_row = 4;
           $start_column = 1;
-          $value_column = 3;
 
           // Find the "Entry" and break out (Adjusting defaults).
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($contextualSheet->getCellByColumnAndRow($column, $row)->getValue());
-              if (strtolower($cellValue) == 'entry') {
-                // Here's where it all starts.
-                $start_row = $row + 1;
-                $start_column = $column - 2;
-                $value_column = $column;
-                break 2;
-              }
-            }
+          // Find the "Entry" (Adjusting defaults).
+          if ($position = $this->findPositionInSheet($contextualSheet, array('Entry'))) {
+            $start_row = $position['row'] + 1;
+            $start_column = $position['column'] - 2;
           }
+
           // Also we have to make sure that there's a "Unit" column.
-          $unitColumnFound = FALSE;
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($contextualSheet->getCellByColumnAndRow($column, $row)->getValue());
-              if (strtolower($cellValue) == 'unit') {
-                // Here's where it all starts.
-                $unitColumnFound = TRUE;
-                break 2;
-              }
-            }
-          }
+          $unitColumnFound = ($this->findPositionInSheet($contextualSheet, array('unit')) !== FALSE);
           if (!$unitColumnFound) {
             Migration::displayMessage(t('Indicator Values do not have the UNIT COLUMN.<br/>File: !file', array(
               '!file' => $this->currentFile,
@@ -656,12 +628,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         break;
 
       case EITI_SOURCE_COMPANY:
-        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
-        if (empty($revenuesSheet)) {
-          // Second try, already via index.
-          $revenuesSheet = $this->currentWorkbook->getSheet(3);
-        }
-
+        // Get our sheet.
+        $revenuesSheet = $this->getSheet(EITI_SHEET_TYPE_REVENUES);
         if (!empty($revenuesSheet)) {
           // Now let's parse the file.
           $highestRow = $revenuesSheet->getHighestRow();
@@ -673,25 +641,19 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $start_row = 3;
           $start_column = 8;
 
-          // Find the "Companies" and break out (Adjusting defaults).
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
-              if (strtolower($cellValue) == 'c. companies' || strtolower($cellValue) == 'companies') {
-                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
-                if (strtolower($value) == 'legal name') {
-                  $start_row = $row + 1;
-                }
-                else {
-                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
-                  if (strtolower($value) == 'legal name') {
-                    $start_row = $row + 2;
-                  }
-                }
-                $start_column = $column + 1;
-                break 2;
+          // Find the "Companies" (Adjusting defaults).
+          if ($position = $this->findPositionInSheet($revenuesSheet, array('c. companies', 'companies'))) {
+            $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 1)->getValue());
+            if (strtolower($value) == 'legal name') {
+              $start_row = $position['row'] + 1;
+            }
+            else {
+              $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 2)->getValue());
+              if (strtolower($value) == 'legal name') {
+                $start_row = $position['row'] + 2;
               }
             }
+            $start_column = $position['column'] + 1;
           }
 
           // Now let's walk through the right cells.
@@ -719,12 +681,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         break;
 
       case EITI_SOURCE_REVENUE_GOVERNMENT:
-        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
-        if (empty($revenuesSheet)) {
-          // Second try, already via index.
-          $revenuesSheet = $this->currentWorkbook->getSheet(3);
-        }
-
+        // Get our sheet.
+        $revenuesSheet = $this->getSheet(EITI_SHEET_TYPE_REVENUES);
         if (!empty($revenuesSheet)) {
           // Now let's parse the file.
           $highestRow = $revenuesSheet->getHighestRow();
@@ -737,38 +695,32 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $start_column = 1;
           $currency = '';
 
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
+          // Find the currency, if it won't be found, we'll use the summary data one.
+          if ($currency_position = $this->findPositionInSheet($revenuesSheet, array('currency unit'))) {
+            $currency = trim($revenuesSheet->getCellByColumnAndRow($currency_position['column'], $currency_position['row'] + 1)->getValue());
+          }
 
-              if (strtolower($cellValue) == 'currency unit') {
-                $currency = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+          // Now we're looking up columns and making adjustments.
+          if ($position = $this->findPositionInSheet($revenuesSheet, array('a. gfs classification of revenue streams'), 'gfs classification')) {
+            $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 1)->getValue());
+            if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+              $start_row = $position['row'] + 2;
+            }
+            else {
+              $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 2)->getValue());
+              if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                $start_row = $position['row'] + 3;
               }
+            }
+            $start_column = $position['column'];
 
-              if (strtolower($cellValue) == 'a. gfs classification of revenue streams' ||  strpos(strtolower($cellValue), 'gfs classification') !== FALSE) {
-                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
-                if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
-                  $start_row = $row + 2;
-                }
-                else {
-                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
-                  if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
-                    $start_row = $row + 3;
-                  }
-                }
-                $start_column = $column;
-                $revenue_column = $column + 3;
-
-                // Because some files are broken, we need to make sure we have the right revenue column.
-                if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue())), 'b. revenue streams') !== FALSE) {
-                  $revenue_column = $column + 3;
-                }
-                elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue())), 'b. revenue streams') !== FALSE) {
-                  $revenue_column = $column + 4;
-                }
-
-                break 2;
-              }
+            // Because some files are broken, we need to make sure we have the right revenue column.
+            $revenue_column = $position['column'] + 3;
+            if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($position['column'] + 3, $position['row'])->getValue())), 'b. revenue streams') !== FALSE) {
+              $revenue_column = $position['column'] + 3;
+            }
+            elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($position['column'] + 4, $position['row'])->getValue())), 'b. revenue streams') !== FALSE) {
+              $revenue_column = $position['column'] + 4;
             }
           }
 
@@ -802,12 +754,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         break;
 
       case EITI_SOURCE_REVENUE_COMPANY:
-        $revenuesSheet = $this->currentWorkbook->getSheetByName('3. Revenues');
-        if (empty($revenuesSheet)) {
-          // Second try, already via index.
-          $revenuesSheet = $this->currentWorkbook->getSheet(3);
-        }
-
+        // Get our sheet.
+        $revenuesSheet = $this->getSheet(EITI_SHEET_TYPE_REVENUES);
         if (!empty($revenuesSheet)) {
           // Now let's parse the file.
           $highestRow = $revenuesSheet->getHighestRow();
@@ -820,46 +768,34 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $start_column = 1;
           $currency = '';
 
-          for ($row = 0; $row < $highestRow; $row++) {
-            for ($column = 0; $column < $highestColumnIndex; $column++) {
-              $cellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getValue());
-
-              // Check the currency.
-              if (strtolower($cellValue) == 'currency unit') {
-                $currency = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
+          // Find the currency, if it won't be found, we'll use the summary data one.
+          if ($currency_position = $this->findPositionInSheet($revenuesSheet, array('currency unit'))) {
+            $currency = trim($revenuesSheet->getCellByColumnAndRow($currency_position['column'], $currency_position['row'] + 1)->getValue());
+          }
+          // Now we're looking up columns and making adjustments.
+          if ($comp_position = $this->findPositionInSheet($revenuesSheet, array('c. companies', 'companies'))) {
+            $companies_column = $comp_position['column'] + 1;
+          }
+          if ($position = $this->findPositionInSheet($revenuesSheet, array('a. gfs classification of revenue streams'), 'gfs classification')) {
+            $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 1)->getValue());
+            if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+              $start_row = $position['row'] + 2;
+            }
+            else {
+              $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $position['row'] + 2)->getValue());
+              if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
+                $start_row = $position['row'] + 3;
               }
+            }
+            $start_column = $position['column'];
+            $revenue_column = $position['column'] + 3;
 
-              // Check where the companies start.
-              if (strtolower($cellValue) == 'c. companies' || strtolower($cellValue) == 'companies') {
-                $companies_column = $column + 1;
-                continue;
-              }
-
-              // Check where the revenue data starts.
-              if (strtolower($cellValue) == 'a. gfs classification of revenue streams' ||  strpos(strtolower($cellValue), 'gfs classification') !== FALSE) {
-                $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 1)->getValue());
-                if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
-                  $start_row = $row + 2;
-                }
-                else {
-                  $value = trim($revenuesSheet->getCellByColumnAndRow($column, $row + 2)->getValue());
-                  if (strtolower($value) == 'gfs codes of revenue streams from extractive companies') {
-                    $start_row = $row + 3;
-                  }
-                }
-                $start_column = $column;
-                $revenue_column = $column + 3;
-
-                // Because some files are broken, we need to make sure we have the right revenue column.
-                if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 3, $row)->getValue())), 'b. revenue streams') !== FALSE) {
-                  $revenue_column = $column + 3;
-                }
-                elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($column + 4, $row)->getValue())), 'b. revenue streams') !== FALSE) {
-                  $revenue_column = $column + 4;
-                }
-
-                break 2;
-              }
+            // Because some files are broken, we need to make sure we have the right revenue column.
+            if (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($position['column'] + 3, $position['row'])->getValue())), 'b. revenue streams') !== FALSE) {
+              $revenue_column = $position['column'] + 3;
+            }
+            elseif (strpos(strtolower(trim($revenuesSheet->getCellByColumnAndRow($position['column'] + 4, $position['row'])->getValue())), 'b. revenue streams') !== FALSE) {
+              $revenue_column = $position['column'] + 4;
             }
           }
 
@@ -896,12 +832,96 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   }
 
   /**
+   * Small helper function that looks up a cell in a sheet, that matches at least
+   * one of the given values in $values.\
+   *
+   * @param PHPExcel_Worksheet $sheet
+   *  PHPExcel Worksheet object.
+   *
+   * @param array $values
+   *  Values of possible matches.
+   *
+   * @param string $final
+   *  If we're very desperate, we can use this variable to match strpos().
+   *
+   * @return FALSE|array
+   *  Returns a position array which has both row and column values, or FALSE.
+   */
+  protected function findPositionInSheet($sheet, $values, $final = NULL) {
+    if (!empty($sheet)) {
+      $highestRow = $sheet->getHighestRow();
+      $highestColumn = $sheet->getHighestColumn();
+      $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+      for ($row = 0; $row < $highestRow; $row++) {
+        for ($column = 0; $column < $highestColumnIndex; $column++) {
+          $cellValue = trim($sheet->getCellByColumnAndRow($column, $row)->getValue());
+          foreach ($values as $value) {
+            if (strtolower($cellValue) == strtolower($value)) {
+              $position['row'] = $row;
+              $position['column'] = $column;
+              return $position;
+            }
+            // Finally check the $final variable.
+            if ($final && (strpos($cellValue, $final) !== FALSE)) {
+              $position['row'] = $row;
+              $position['column'] = $column;
+              return $position;
+            }
+          }
+        }
+      }
+    }
+    return FALSE;
+  }
+
+  /**
    * Gets the specified row.
    */
   protected function getParsedRow($index) {
     if (!empty($this->migrateRows) && isset($this->migrateRows[$index])) {
       return $this->migrateRows[$index];
     }
+  }
+
+  /**
+   * Small function that fetches specific sheet from the spreadsheet.
+   *
+   * @param string $sheet_type
+   *  One of the types defined as constants.
+   *
+   * @return NULL|PHPExcel_Worksheet
+   *  Loaded sheet if found, or NULL.
+   */
+  protected function getSheet($sheet_type) {
+    $sheet = NULL;
+
+    switch ($sheet_type) {
+      case EITI_SHEET_TYPE_ABOUT:
+        $sheet = $this->currentWorkbook->getSheetByName('1. About');
+        if (empty($sheet)) {
+          // Second try, already via index.
+          $sheet = $this->currentWorkbook->getSheet(1);
+        }
+        break;
+
+      case EITI_SHEET_TYPE_CONTEXTUAL:
+        $sheet = $this->currentWorkbook->getSheetByName('2. Contextual');
+        if (empty($sheet)) {
+          // Second try, already via index.
+          $sheet = $this->currentWorkbook->getSheet(2);
+        }
+        break;
+
+      case EITI_SHEET_TYPE_REVENUES:
+        $sheet = $this->currentWorkbook->getSheetByName('3. Revenues');
+        if (empty($sheet)) {
+          // Second try, already via index.
+          $sheet = $this->currentWorkbook->getSheet(3);
+        }
+        break;
+    }
+
+    return $sheet;
   }
 
   /**
