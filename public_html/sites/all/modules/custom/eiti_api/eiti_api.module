@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function eiti_api_ctools_plugin_directory($module, $plugin) {
+  // This goes for the restful services.
+  if ($module == 'restful') {
+    return 'plugins/' . $plugin;
+  }
+}

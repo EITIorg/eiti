@@ -78,4 +78,25 @@ class IndicatorValueEntity extends Entity {
         return 'N/A';
     }
   }
+
+  /**
+   * Getter callback for indicator_id.
+   *
+   * @return entity
+   *   Indicator entity.
+   */
+  public function indicatorid() {
+    return entity_load_single('indicator', $this->indicator_id);
+  }
+
+  /**
+   * Setter for indicator_id.
+   *
+   * @param entity $indicator
+   *
+   *  Indicator entity instance.
+   */
+  public function setIndicatorid($indicator) {
+    $this->indicator_id = is_object($indicator->id) ? $indicator->id : $indicator;
+  }
 }
