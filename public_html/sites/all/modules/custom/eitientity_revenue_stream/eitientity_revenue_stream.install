@@ -29,6 +29,11 @@ function eitientity_revenue_stream_schema() {
         'type' => 'int',
         'not null' => FALSE,
       ),
+      'organisation_id' => array(
+        'description' => 'The organisation identifier for this revenue_stream entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
       'report_status' => array(
         'description' => 'The status of this revenue_stream entity.',
         'type' => 'int',
@@ -73,6 +78,10 @@ function eitientity_revenue_stream_schema() {
       'entity_information' => array('id'),
     ),
     'foreign keys' => array(
+      'entity_eiti_organisation' => array(
+        'table' => 'eiti_organisation',
+        'columns' => array('organisation_id' => 'id'),
+      ),
       'entity_eiti_gfs_code' => array(
         'table' => 'eiti_gfs_code',
         'columns' => array('gfs_code_id' => 'id'),
@@ -82,4 +91,16 @@ function eitientity_revenue_stream_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Add Organisation to Revenue Stream entities.
+ */
+function eitientity_revenue_stream_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The organisation identifier for this revenue_stream entity.',
+    'type' => 'int',
+    'not null' => FALSE,
+  );
+  db_add_field('eiti_revenue_stream', 'organisation_id', $field_schema);
 }
