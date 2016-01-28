@@ -16,6 +16,7 @@ class GfsCodeEntity extends Entity {
   public $parent = 0;
   public $status = TRUE;
   public $created = NULL;
+  public $weight = 0;
 
   /**
    * URI method for entity_class_uri().

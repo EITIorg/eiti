@@ -59,7 +59,7 @@ function eitientity_revenue_stream_entity_info() {
 
     'admin ui' => array(
       'path' => EITIENTITY_REVENUE_STREAM_ADMIN_UI_PATH,
-      'hide content ui' => TRUE,
+      //'hide content ui' => TRUE,
       'entity path' => EITIENTITY_REVENUE_STREAM_UI_PATH,
       'bundle path' => EITIENTITY_REVENUE_STREAM_BUNDLE_ADMIN_UI_PATH,
       'controller class' => 'HelperEntityBundleableUIController',

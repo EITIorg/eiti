@@ -377,7 +377,8 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summary_data-summary_data-field_sd_mining_sector'.
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_mining_sector'.
   $field_instances['summary_data-summary_data-field_sd_mining_sector'] = array(
     'bundle' => 'summary_data',
     'default_value' => NULL,
@@ -560,6 +561,84 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_revenue_company'.
+  $field_instances['summary_data-summary_data-field_sd_revenue_company'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 26,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_revenue_company',
+    'label' => 'Reconciled Revenue Streams per Company',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_revenue_government'.
+  $field_instances['summary_data-summary_data-field_sd_revenue_government'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 25,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_revenue_government',
+    'label' => 'Revenue Stream as Disclosed by Government',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 12,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('By Company');
@@ -577,6 +656,8 @@ function eitiet_summary_data_field_default_field_instances() {
   t('Oil');
   t('Organisation');
   t('Other');
+  t('Reconciled Revenue Streams per Company');
+  t('Revenue Stream as Disclosed by Government');
 
   return $field_instances;
 }

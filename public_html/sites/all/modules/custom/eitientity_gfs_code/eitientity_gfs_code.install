@@ -57,6 +57,12 @@ function eitientity_gfs_code_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'weight' => array(
+        'description' => 'The weight of this entity in relation to other entities.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'indexes' => array(
       'entity_code' => array('id', 'code', 'status'),
@@ -75,7 +81,7 @@ function eitientity_gfs_code_schema() {
 }
 
 /**
- * Implements hook_update_N().
+ * Change parent property of GFS Code entities.
  */
 function eitientity_gfs_code_update_7002() {
   db_update('eiti_gfs_code')
@@ -89,6 +95,18 @@ function eitientity_gfs_code_update_7002() {
     'description' => 'The entity parent entity id.',
     'type' => 'int',
     'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+}
+
+/**
+ * Add weight property to GFS Code entities.
+ */
+function eitientity_gfs_code_update_7003() {
+  db_add_field('eiti_gfs_code', 'weight', array(
+    'description' => 'The weight of this entity in relation to other entities.',
+    'type' => 'int',
     'not null' => TRUE,
     'default' => 0,
   ));
