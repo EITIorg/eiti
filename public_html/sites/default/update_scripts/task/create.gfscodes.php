@@ -21,6 +21,9 @@ function __us_gfs_codes_import_csv($file_path) {
     return;
   }
 
+  $gfs_code_mapping = array();
+  $weight = 0;
+  $previous_parent = NULL;
   while (($row = fgetcsv($handle, 8192, ',')) !== FALSE) {
     $row_values = array();
 
@@ -41,6 +44,15 @@ function __us_gfs_codes_import_csv($file_path) {
       $row_values[$field_name] = $field_value;
     }
 
+    // NOTE: The CSV file needs to have the parent above the children!
+    if (!empty($row_values['parent']) && array_key_exists($row_values['parent'], $gfs_code_mapping)) {
+      $row_values['parent'] = $gfs_code_mapping[$row_values['parent']];
+    }
+
+    // Deal with the tree order. Lazy man version.
+    $weight++;
+    $row_values['weight'] = $weight;
+
     $row_values = array(
         'status' => NODE_PUBLISHED,
         'created' => REQUEST_TIME,
@@ -50,6 +62,7 @@ function __us_gfs_codes_import_csv($file_path) {
     /** @var GFSCodeEntity $new_entity */
     $new_entity = entity_create('gfs_code', $row_values);
     $new_entity->save();
+    $gfs_code_mapping[$new_entity->code] = $new_entity->id;
   }
   fclose($handle);
 }
