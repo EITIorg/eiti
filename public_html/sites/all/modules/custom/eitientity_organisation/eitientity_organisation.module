@@ -253,3 +253,27 @@ function eitientity_organisation_entity_ui_get_page_title($op, $entity_type, $en
   }
   return entity_ui_get_action_title($op, $entity_type, $bundle);
 }
+
+/**
+ * Helper function that returns existing organisation by looking up
+ * its name.
+ *
+ * @param string $name
+ *   Name of the organisation.
+ *
+ * @return bool|array
+ *   Loaded entities if found or FALSE.
+ */
+function eitientity_organisation_lookup_by_name($name) {
+  $efq = new EntityFieldQuery();
+  $efq_results = $efq->entityCondition('entity_type', 'organisation')
+    ->propertyCondition('name', $name, 'LIKE')
+    ->execute();
+
+  if (!empty($efq_results['organisation'])) {
+    $ids = array_keys($efq_results['organisation']);
+    $entities = entity_load('organisation', $ids);
+    return $entities;
+  }
+  return FALSE;
+}

@@ -256,7 +256,7 @@ function eitientity_gfs_code_get_by_code($bundle) {
   // Get a list of domains sorted by weight and name.
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'gfs_code');
-  $query->propertyCondition('bundle', $bundle);
+  $query->propertyCondition('type', $bundle);
   $query->propertyOrderBy('name');
   $results = $query->execute();
 
