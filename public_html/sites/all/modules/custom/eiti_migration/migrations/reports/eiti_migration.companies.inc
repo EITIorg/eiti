@@ -60,7 +60,7 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
-    $row->country_id = $summary_data_emw->country_id->value();
+    $row->country_id = $summary_data_emw->country_id->id->value();
 
     // Create the commodity term if needed.
     if (!$this->checkEmptyValue($row->commodity)) {

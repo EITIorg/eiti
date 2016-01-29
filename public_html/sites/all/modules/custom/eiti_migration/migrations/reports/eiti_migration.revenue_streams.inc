@@ -135,7 +135,7 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
         $row->organization = $org->id;
       }
       else {
-        $country_id = $summary_data_emw->country_id->value();
+        $country_id = $summary_data_emw->country_id->id->value();
         $values = array(
           'type' => 'agency',
           'name' => $row->organization,
@@ -214,13 +214,13 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
    * of the post-processing.
    */
   public function complete($entity, $row) {
-//    // One thing we need to do, is to look-up the summary_data id, load it and
-//    // save the indicator id in the field "field_sd_indicator_values".
-//    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
-//    $summary_data = entity_load_single('summary_data', $summary_data_id);
-//    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
-//    $summary_data_emw->field_sd_indicator_values[] = $entity->id;
-//    $summary_data_emw->save();
+    // One thing we need to do, is to look-up the summary_data id, load it and
+    // save the revenue stream id in the field "field_sd_revenue_government".
+    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    $summary_data = entity_load_single('summary_data', $summary_data_id);
+    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    $summary_data_emw->field_sd_revenue_government[] = $entity->id;
+    $summary_data_emw->save();
   }
 }
 
@@ -337,5 +337,19 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
   public function prepare($entity, $row) {
     // Extra data processing?
     // Not that we need to do anything here for now.
+  }
+
+  /**
+   * Finally the entity is saved, we have the id and we can now do some
+   * of the post-processing.
+   */
+  public function complete($entity, $row) {
+    // One thing we need to do, is to look-up the summary_data id, load it and
+    // save the revenue stream id in the field "field_sd_revenue_government".
+    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    $summary_data = entity_load_single('summary_data', $summary_data_id);
+    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    $summary_data_emw->field_sd_revenue_company[] = $entity->id;
+    $summary_data_emw->save();
   }
 }
