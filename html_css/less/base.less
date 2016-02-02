@@ -1,0 +1,23 @@
+@import 'main.less';
+
+html, body {
+  font-family: @default-font;
+}
+
+a {
+  .transition(all, 400ms, ease-in);
+  color: @theme-blue;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: @theme-orange;
+    text-decoration: none;
+  }
+}
+
+/* can be any inner section in a page or banner*/
+.section-inner {
+  margin: 0 auto;
+  width: 50em;
+}
