@@ -60,6 +60,7 @@ class SummaryDataEntityUIController extends EntityBundleableUIController {
       'type' => MENU_DEFAULT_LOCAL_TASK,
       'weight' => -10,
     );
+
     $items[$this->entity_path . '/' . $wildcard . '/edit'] = array(
       'page callback' => 'entity_ui_get_form',
       'page arguments' => array($this->entityType, $this->entity_id_count),

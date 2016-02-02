@@ -8,6 +8,10 @@
  */
 
 class EITICompaniesMigration extends EITISpreadsheetMigration {
+
+  /**
+   * Overrides the default constructor.
+   */
   public function __construct($arguments) {
     // We need to define some dummy sources that we'll populate later.
     $this->sourceFields['country'] = t('Pulled country value');
@@ -15,14 +19,18 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
     parent::__construct($arguments);
 
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
-    //$path = drupal_realpath($path);
-    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
-    $files_xls = file_scan_directory($path, '/.*\.xls$/');
-    $files = $files_xlsx + $files_xls;
-    $real_paths = array();
-    foreach ($files as $file_path => $file) {
-      $real_paths[] = drupal_realpath($file_path);
+    if (isset($arguments['single_file'])) {
+      $file = $arguments['single_file'];
+      $real_path = drupal_realpath($file->uri);
+      $real_paths = array($real_path);
+    }
+    else {
+      $real_paths = $this->getSpreadsheetFiles();
+    }
+
+    // Check the validity.
+    if (!$real_paths) {
+      throw new MigrateException(t("No files in the system to import from."), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
     }
     $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_COMPANY);
     $this->destination = new EITIMigrateDestinationCompanies();

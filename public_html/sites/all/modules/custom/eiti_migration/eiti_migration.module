@@ -17,12 +17,23 @@ function eiti_migration_menu() {
   $items['admin/content/migrate/configure-legacy'] = array(
     'title' => 'Legacy System',
     'type' => MENU_LOCAL_TASK,
-    'description' => 'Configure migration settings for the Legacy System',
+    'description' => 'Configure migration settings for the Legacy System.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('eiti_migration_settings'),
     'access arguments' => array(MIGRATE_ACCESS_ADVANCED),
     'file' => 'eiti_migration.admin.inc',
     'weight' => 200,
+  );
+  // Import System configs used for migration.
+  $items['admin/content/migrate/spreadsheets'] = array(
+    'title' => 'Spreadsheets Import',
+    'type' => MENU_LOCAL_TASK,
+    'description' => 'Configure migration settings for the Spreadsheets import process.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eiti_migration_spreadsheets_import_settings'),
+    'access arguments' => array(MIGRATE_ACCESS_ADVANCED),
+    'file' => 'eiti_migration.admin.inc',
+    'weight' => 210,
   );
   return $items;
 }
@@ -32,4 +43,177 @@ function eiti_migration_menu() {
  */
 function eiti_migration_migrate_overview() {
   return t('Please <a href="admin/content/migrate/configure-legacy">configure the Legacy System settings</a> on this machine before you run or register your migrations.');
+}
+
+/**
+ * This function imports spreadsheet files into Drupal as managed Report files.
+ *
+ * @param array $files
+ *  Array of full-defined paths to spreadsheet files.
+ *
+ * @param array $context
+ *  Batch operation context.
+ */
+function eiti_migration_spreadsheets_import($files, &$context) {
+  global $user;
+  if (!isset($context['sandbox']['current'])) {
+    $context['sandbox']['count'] = 0;
+    $context['sandbox']['current'] = 0;
+  }
+  // Get the total amount of items to process.
+  if (!isset($context['sandbox']['total'])) {
+    $context['sandbox']['total'] = count($files);
+  }
+
+  // Now, import the file.
+  $path = $files[$context['sandbox']['current']];
+  $new_filename = drupal_basename($path);
+  $new_filename = str_replace(' ', '_', $new_filename);
+  $new_filename = strtolower($new_filename);
+  $destination = 'public://spreadsheets/' . $new_filename;
+  if ($new_uri = file_unmanaged_copy($path , $destination, FILE_EXISTS_REPLACE)) {
+    $file = new stdClass();
+    $file->fid = NULL;
+    $file->uri = $new_uri;
+    $file->uid = $user->uid;
+    $file->filename = drupal_basename($new_uri);
+    $file->status = FILE_STATUS_PERMANENT;
+    // Just check if there's already a record, if there is, update it.
+    $existing_files = file_load_multiple(array(), array('uri' => $new_uri));
+    if (count($existing_files)) {
+      $existing = reset($existing_files);
+      $file->fid = $existing->fid;
+      $file->filename = $existing->filename;
+      $file->status = FILE_STATUS_PERMANENT;
+    }
+
+    file_save($file);
+    $context['message'] = t('Imported to Drupal: @path.', array('@path' => $new_uri));
+    $context['results'][] = $new_uri;
+  }
+  else {
+    $context['message'] = t('Failed to import to Drupal: @path.', array('@path' => $path));
+  }
+
+  $context['sandbox']['count']++;
+  $context['sandbox']['current']++;
+
+  if ($context['sandbox']['count'] != $context['sandbox']['total']) {
+    $context['finished'] = $context['sandbox']['count'] / $context['sandbox']['total'];
+  }
+}
+
+/**
+ * Simple batch operation callback function that just informes how many files were
+ * imported successfully.
+ */
+function eiti_migration_spreadsheets_import_finished($success, $results, $operations) {
+  if ($success) {
+    // Here we do something meaningful with the results.
+    $message = t("!count files were imported.", array(
+      '!count' => count($results),
+    ));
+    $message .= theme('item_list', array('items' => $results));
+    drupal_set_message($message);
+  }
+  else {
+    $error_operation = reset($operations);
+    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array(
+      '%error_operation' => $error_operation[0],
+      '@arguments' => print_r($error_operation[1], TRUE)
+    ));
+    drupal_set_message($message, 'error');
+  }
+}
+
+/**
+ * Small custom function that runs an import process (used as a batch callback).
+ *
+ * @param $migration
+ *   Migration machine name.
+ * @param $arguments
+ *   New arguments with which to run an import with.
+ * @param $context
+ *   Batch operation context.
+ */
+function _eiti_migration_spreadsheet_dynamic_upload_import($migration, $arguments, &$context) {
+  Migration::registerMigration($migration, $migration, $arguments);
+  $migrationInstance = Migration::getInstance($migration);
+  $result = $migrationInstance->processImport();
+
+  $context['message'] = t('Migration @migration: running.', array('@migration' => $migration));
+  $context['results'][] = $result;
+  $context['finished'] = 1;
+}
+
+/**
+ * Small callback that figures out what items should be rolled back, prior to the
+ * import process.
+ *
+ * @param $migration
+ *  Migration machine name.
+ * @param $summary_data
+ *  Summary data object.
+ * @param $old_summary_data_hash
+ *  Hash (or Migration ID) of the old summary data - helps identify orphan rows.
+ * @param bool $delete_file
+ *  Indicates whether we should delete the old report or not.
+ * @param $context
+ *  The batch operation context.
+ */
+function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summary_data, $old_summary_data_hash, $delete_file = FALSE, &$context) {
+  $migrationInstance = Migration::getInstance($migration);
+  $summary_data_id = $summary_data->id;
+
+  if ($migration == 'EITISummaryDataMigration') {
+    // If that's an EDIT, we rollback previous summary data and remove it from the map.
+    $migrationInstance->getDestination()->bulkRollback(array($summary_data_id));
+    $migrationInstance->getMap()->deleteDestination(array($summary_data_id));
+
+    // Delete the file, if the uploaded file has a different name.
+    if ($delete_file) {
+      $fid = $summary_data->field_sd_report_file['und'][0]['fid'];
+      $file = file_load($fid);
+      if ($file) {
+        file_delete($file, TRUE);
+      }
+    }
+  }
+  else {
+    $table = $migrationInstance->getMap()->getMapTable();
+    $query = db_select($table, 't');
+    $query->fields('t');
+    $query->condition('sourceid1', $old_summary_data_hash['sourceid1'] . '%', 'LIKE');
+    $rollback_ids = $query->execute()->fetchAllKeyed();
+    if (!empty($rollback_ids)){
+      $migrationInstance->getDestination()->bulkRollback(array_values($rollback_ids));
+      $migrationInstance->getMap()->deleteBulk(array_keys($rollback_ids));
+    }
+  }
+
+  $context['message'] = t('Previously imported content in Migration @migration: rolling back.', array('@migration' => $migration));
+  $context['results'][] = TRUE;
+  $context['finished'] = 1;
+}
+
+/**
+ * Simple batch operation callback function that just informs how many files were
+ * imported successfully.
+ */
+function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results, $operations) {
+  if ($success) {
+    // Here we do something meaningful with the results.
+    $message = t("!count operations successfully executed.", array(
+      '!count' => count($results),
+    ));
+    drupal_set_message($message);
+  }
+  else {
+    $error_operation = reset($operations);
+    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array(
+      '%error_operation' => $error_operation[0],
+      '@arguments' => print_r($error_operation[1], TRUE)
+    ));
+    drupal_set_message($message, 'error');
+  }
 }

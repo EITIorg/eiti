@@ -100,4 +100,29 @@ class EITISpreadsheetMigration extends Migration {
     }
     return $normalizedValue;
   }
+
+  /**
+   * Fetches all of the defined (and published) reports, that are ready for
+   * parsing.
+   */
+  protected function getSpreadsheetFiles() {
+    $query = new EntityFieldQuery;
+    $query->entityCondition('entity_type', 'file')
+      ->propertyCondition('status', FILE_STATUS_PERMANENT)
+      ->propertyCondition('type', 'report');
+
+    $results = $query->execute();
+    if (!empty($results['file'])) {
+      $fids = array_keys($results['file']);
+      $files = entity_load('file', $fids);
+
+      $real_paths = array();
+      foreach ($files as $fid => $file) {
+        $real_paths[$fid] = drupal_realpath($file->uri);
+      }
+
+      return $real_paths;
+    }
+    return FALSE;
+  }
 }
