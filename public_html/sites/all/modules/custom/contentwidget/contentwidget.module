@@ -196,8 +196,11 @@ function _contentwidget_settings_clean_values($values) {
   );
 
   $plugin = contentwidget_get_predefined_widget($values['widget']);
-  if ($function = ctools_plugin_get_function($plugin, 'settings storage')) {
+  if ($function = ctools_plugin_get_function($plugin, 'settings alter')) {
     $data['settings'] = $function($values['widget'], $values['settings']);
+  }
+  else if (!empty($values['settings'])) {
+    $data['settings'] = serialize($values['settings']);
   }
 
   return $data;

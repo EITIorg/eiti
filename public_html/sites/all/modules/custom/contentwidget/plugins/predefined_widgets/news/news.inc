@@ -14,6 +14,7 @@ $plugin = array(
   'description' => 'Will display a list of recent news.',
   'render callback' => 'contentblock_news_widget_render',
   'settings form' => 'contentblock_news_widget_settings',
+  'settings alter' => 'contentwidget_news_widget_settings_alter',
   'defaults' => array(),
 );
 
@@ -47,4 +48,13 @@ function contentblock_news_widget_settings(&$element, &$form_state, $plugin, $wi
   $settings_form = array();
 
   return $settings_form;
+}
+
+/**
+ * Returns an serialized string for storing the widget settings in the database.
+ */
+function contentwidget_news_widget_settings_alter($widget_name, $form_values) {
+  $settings = array();
+
+  return serialize($settings);
 }
