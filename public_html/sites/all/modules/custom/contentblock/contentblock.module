@@ -157,10 +157,10 @@ function contentblock_admin_paths() {
 function contentblock_get_types() {
   $items = array();
 
-  //$items['fixed'] = array(
-  //  'label' => t('Fixed'),
-  //  'description' => t('Fixed content blocks are regular blocks to be used by developers.'),
-  //);
+  $items['fixed'] = array(
+    'label' => t('Fixed'),
+    'description' => t('Fixed content blocks are regular blocks to be used by developers.'),
+  );
 
   $items['predefined'] = array(
     'label' => t('Predefined Widget'),
