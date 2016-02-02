@@ -1,0 +1,15 @@
+name = Content Block
+description = Exposes custom Content Blocks to be used on pages.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+dependencies[] = entity_translation
+dependencies[] = helperentity
+
+; Entity handlers.
+files[] = includes/ContentBlockEntity.inc
+files[] = includes/ContentBlockEntityController.inc
+files[] = includes/ContentBlockEntityUIController.inc
+files[] = includes/ContentBlockInlineEntityFormController.inc
+files[] = includes/EntityTranslationContentBlockHandler.inc
