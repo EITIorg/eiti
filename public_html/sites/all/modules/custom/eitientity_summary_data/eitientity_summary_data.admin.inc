@@ -16,9 +16,180 @@
  * @param SummaryDataEntity $entity
  * @return array
  */
-function summary_data_form($form, &$form_state, $entity) {
+function summary_data_form($form, &$form_state, $entity, $op) {
+  // We have to decide on the form type by the operation.
+  switch ($op) {
+    case 'add':
+      $form = summary_data_add_file_form($form, $form_state, $entity);
+      break;
+    case 'edit':
+      $form = summary_data_default_form($form, $form_state, $entity);
+      break;
+  }
+  return $form;
+}
+
+/**
+ * Summary data add form via file upload.
+ */
+function summary_data_add_file_form($form, &$form_state, $entity) {
+  $entity_type = $entity->entityType();
+  $form['report_upload'] = array(
+    '#title' => t('Spreadsheet Report'),
+    '#type' => 'managed_file',
+    '#description' => t('Please upload the spreadsheet report. We will handle the rest of the process.<br/>You will be able either to edit directly the summary data or to re-upload the updated report later.'),
+    '#upload_location' => 'public://spreadsheets_temporary/',
+    '#required' => TRUE,
+    '#upload_validators' => array('file_validate_extensions' => array('xls xlsx')),
+  );
+
+  $entity_uri = $entity->uri();
+  $cancel_path = (isset($entity_uri)) ? $entity_uri['path'] : 'admin/content/summary_data';
+  $form['actions'] = array('#type' => 'actions', '#weight' => 99);
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Next'),
+    '#submit' => array('_summary_data_add_file_form_submit'),
+  );
+  $form['actions']['cancel'] = array(
+    '#type' => 'link',
+    '#title' => t('Cancel'),
+    '#href' => $cancel_path,
+    '#weight' => 100,
+  );
+  $info = entity_get_info($entity_type);
+
+  // Set the appropriate title.
+  drupal_set_title(t('Add !label via Spreadsheet Upload', array('!label' => $info['label'])));
+
+  return $form;
+}
+
+/**
+ * Submit handler for the add summary data via file upload.
+ */
+function _summary_data_add_file_form_submit($form, $form_state) {
+  $fid = $form_state['values']['report_upload'];
+  $file = file_load($fid);
+  $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_REPLACE);
+  $file->status = FILE_STATUS_PERMANENT;
+  $file = file_save($file);
+
+  // Check if we have the module ready and enabled.
+  if (!module_enable(array('eiti_migration'))) {
+    drupal_set_message(t('Please enable the EITI Migrate module for this import to take place.'), ERROR_MESSAGE);
+  }
+  else {
+    $arguments = array('single_file' => $file);
+    // Specify which migrations should be ran dynamically and then reseted.
+    $migrations = array(
+      'EITISummaryDataMigration',
+      'EITIIndicatorValuesMigration',
+      'EITICompaniesMigration',
+      'EITIRevenueStreamsGovernmentMigration',
+      'EITIRevenueStreamsCompaniesMigration',
+    );
+    $summary_data_id = isset($form_state['summary_data']->id) ? $form_state['summary_data']->id : FALSE;
+
+    // Now create the batch process.
+    $batch = array(
+      'title' => t('Updating Summary Data'),
+      'finished' => 'eiti_migration_spreadsheets_dynamic_upload_finished',
+    );
+
+    // If this is an EDIT, we need to look-up the old hash, for rollback purposes.
+    if ($summary_data_id) {
+      $migrationInstance = Migration::getInstance('EITISummaryDataMigration');
+      $old_summary_data_hash = $migrationInstance->getMap()->lookupSourceID(array($summary_data_id));
+      $report_file = $form_state['summary_data']->field_sd_report_file['und'][0];
+      $delete_file = FALSE;
+      if ($report_file['fid'] !== $file->fid && $report_file_reloaded = file_load($report_file['fid'])) {
+        $delete_file = TRUE;
+      }
+    }
+
+    // Now complete the operation list.
+    foreach ($migrations as $migration) {
+      // If this is an EDIT, we want to rollback first all migrations and then import them.
+      if ($summary_data_id) {
+        $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_rollback',
+          array($migration, $form_state['summary_data'], $old_summary_data_hash, $delete_file));
+      }
+      // And in any case, later, we want to import.
+      $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_import',
+        array($migration, $arguments));
+    }
+    $batch['operations'][] = array('migrate_static_registration', array($migrations));
+
+    // Run the batch.
+    batch_set($batch);
+    batch_process('admin/content/summary_data');
+  }
+}
+
+/**
+ * Summary data default edit form.
+ */
+function summary_data_default_form($form, &$form_state, $entity) {
   $entity_type = $entity->entityType();
 
+  $edit_methods = array();
+  $edit_methods['spreadsheet'] = t('Spreadsheet Re-Upload');
+  $edit_methods['form'] = t('Form Edit');
+  $form['edit_method'] = array(
+    '#type' => 'radios',
+    '#title' => t('Summary Data Edit Method'),
+    '#description' => t("Please select the way you'd like to edit this Summary Data. You can either re-upload an updated version of excel spreadsheet or you can edit things manually in a form."),
+    '#options' => $edit_methods,
+  );
+
+  // Wrappers and the states (because AJAX doesn't play well with file_managed
+  // elements).
+  $form['form_wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Edit Summary Data'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="edit_method"]' => array('value' => 'form'),
+      ),
+    ),
+  );
+  $form['spreadsheet_wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('File Re-Upload'),
+    '#states' => array(
+      'visible' => array(
+        'input[name="edit_method"]' => array('value' => 'spreadsheet'),
+      ),
+    ),
+  );
+
+  // METHOD: UPLOAD.
+  $form['spreadsheet_wrapper']['report_upload'] = array(
+    '#title' => t('Spreadsheet Report'),
+    '#type' => 'managed_file',
+    '#description' => t('Please upload the spreadsheet report. We will handle the rest of the process.<br/>You will be able either to edit directly the summary data or to re-upload the updated report later.'),
+    '#upload_location' => 'public://spreadsheets_temporary/',
+    '#required' => TRUE,
+    '#upload_validators' => array('file_validate_extensions' => array('xls xlsx')),
+  );
+
+  $entity_uri = $entity->uri();
+  $cancel_path = (isset($entity_uri)) ? $entity_uri['path'] : 'admin/content/summary_data';
+  $form['spreadsheet_wrapper']['actions'] = array('#type' => 'actions', '#weight' => 99);
+  $form['spreadsheet_wrapper']['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Next'),
+    '#submit' => array('_summary_data_add_file_form_submit'),
+  );
+  $form['spreadsheet_wrapper']['actions']['cancel'] = array(
+    '#type' => 'link',
+    '#title' => t('Cancel'),
+    '#href' => $cancel_path,
+    '#weight' => 100,
+  );
+
+  // METHOD: FORM.
   $query = new EntityFieldQuery();
   $countries_count = $query
     ->entityCondition('entity_type', 'implementing_country')
@@ -52,7 +223,7 @@ function summary_data_form($form, &$form_state, $entity) {
   // );
 
   // Entity options for administrators
-  $form['options'] = array(
+  $form['form_wrapper']['options'] = array(
     '#type' => 'fieldset',
     '#title' => t('Publishing options'),
     '#collapsible' => TRUE,
@@ -64,7 +235,7 @@ function summary_data_form($form, &$form_state, $entity) {
     '#weight' => 95,
   );
 
-  $form['country_id'] = array(
+  $form['form_wrapper']['country_id'] = array(
     '#type' => 'ereference',
     '#title' => t('Implementing Country'),
     '#default_value' => $entity->country_id,
@@ -78,7 +249,7 @@ function summary_data_form($form, &$form_state, $entity) {
     $year_start_date = new DateObject($entity->year_start, NULL);
     $year_start_value = $year_start_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
   }
-  $form['year_start'] = array(
+  $form['form_wrapper']['year_start'] = array(
     '#type' => 'date_popup',
     '#title' => t('Start Date'),
     '#required' => TRUE,
@@ -93,7 +264,7 @@ function summary_data_form($form, &$form_state, $entity) {
     $year_end_date = new DateObject($entity->year_end, NULL);
     $year_end_value = $year_end_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
   }
-  $form['year_end'] = array(
+  $form['form_wrapper']['year_end'] = array(
     '#type' => 'date_popup',
     '#title' => t('End Date'),
     '#required' => TRUE,
@@ -108,7 +279,7 @@ function summary_data_form($form, &$form_state, $entity) {
     $published_date = new DateObject($entity->published, NULL);
     $published_value = $published_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
   }
-  $form['published'] = array(
+  $form['form_wrapper']['published'] = array(
     '#type' => 'date_popup',
     '#title' => t('Published on'),
     '#description' => t('Date that the EITI Report was published (i.e., made publicly available)'),
@@ -119,7 +290,7 @@ function summary_data_form($form, &$form_state, $entity) {
     '#date_year_range' => '-16:+2',
   );
 
-  $form['currency_code'] = array(
+  $form['form_wrapper']['currency_code'] = array(
     '#type' => 'select',
     '#title' => t('Currency'),
     '#required' => TRUE,
@@ -127,14 +298,14 @@ function summary_data_form($form, &$form_state, $entity) {
     '#default_value' => $entity->currency_code,
   );
 
-  $form['currency_rate'] = array(
+  $form['form_wrapper']['currency_rate'] = array(
     '#type' => 'textfield',
     '#title' => t('Currency Rate'),
     '#required' => TRUE,
     '#default_value' => $entity->currency_rate,
   );
 
-  $form['options']['status'] = array(
+  $form['form_wrapper']['options']['status'] = array(
     '#type' => 'checkbox',
     '#title' => t('Published'),
     '#default_value' => $entity->status,
@@ -142,14 +313,16 @@ function summary_data_form($form, &$form_state, $entity) {
   );
 
   // Add the buttons.
-  $form['actions'] = array('#type' => 'actions', '#weight' => 99);
-  $form['actions']['submit'] = array(
+  $form['form_wrapper']['actions'] = array('#type' => 'actions', '#weight' => 99);
+  $form['form_wrapper']['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
+    '#validate' => array('_summary_data_form_validate'),
+    '#submit' => array('_summary_data_form_submit'),
   );
 
   if ($entity->identifier() && entity_access('delete', $entity_type, $entity)) {
-    $form['actions']['delete'] = array(
+    $form['form_wrapper']['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete'),
       '#submit' => array('_summary_data_form_delete_submit'),
@@ -160,7 +333,7 @@ function summary_data_form($form, &$form_state, $entity) {
   $form_state['destination'] = drupal_get_destination();
   $entity_uri = $entity->uri();
   if ($entity_uri) {
-    $form['actions']['cancel'] = array(
+    $form['form_wrapper']['actions']['cancel'] = array(
       '#type' => 'link',
       '#title' => t('Cancel'),
       '#href' => $entity_uri['path'],
@@ -170,16 +343,12 @@ function summary_data_form($form, &$form_state, $entity) {
 
   if (!empty($_GET['destination'])) {
     $destination_parts = drupal_parse_url($_GET['destination']);
-    $form['actions']['cancel']['#href'] = $destination_parts['path'];
-    $form['actions']['cancel']['#options']['query'] = $destination_parts['query'];
+    $form['form_wrapper']['actions']['cancel']['#href'] = $destination_parts['path'];
+    $form['form_wrapper']['actions']['cancel']['#options']['query'] = $destination_parts['query'];
   }
 
   // Attach fields, if any, and allow DS to order form items.
-  field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
-
-  // Attach validate and submit callbacks.
-  $form['#validate'][] = '_summary_data_form_validate';
-  $form['#submit'][] = '_summary_data_form_submit';
+  field_attach_form($entity_type, $entity, $form['form_wrapper'], $form_state, entity_language($entity_type, $entity));
 
   if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
     if (isset($form['redirect'])) {
@@ -224,7 +393,7 @@ function _summary_data_form_date_popup_date_validate($element, &$form_state, $fo
 function _summary_data_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
-  field_attach_form_validate($entity_type, $entity, $form, $form_state);
+  field_attach_form_validate($entity_type, $entity, $form['wrapper'], $form_state);
 }
 
 /**

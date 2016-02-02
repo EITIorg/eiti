@@ -46,18 +46,35 @@ class EITIRevenueStreamMigration extends EITISpreadsheetMigration {
  * Migrates the Revenue Streams for Government Organizations.
  */
 class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
+
+  /**
+   * $var array
+   *
+   * Stores the pre-loaded summary-data entity metadata wrappers, with hash-keys
+   * pointing at them.
+   */
+  public $summary_data_emws;
+
+  /**
+   * Overrides the default constructor.
+   */
   public function __construct($arguments) {
     // We need to define some dummy sources that we'll populate later.
     parent::__construct($arguments);
 
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
-    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
-    $files_xls = file_scan_directory($path, '/.*\.xls$/');
-    $files = $files_xlsx + $files_xls;
-    $real_paths = array();
-    foreach ($files as $file_path => $file) {
-      $real_paths[] = drupal_realpath($file_path);
+    if (isset($arguments['single_file'])) {
+      $file = $arguments['single_file'];
+      $real_path = drupal_realpath($file->uri);
+      $real_paths = array($real_path);
+    }
+    else {
+      $real_paths = $this->getSpreadsheetFiles();
+    }
+
+    // Check the validity.
+    if (!$real_paths) {
+      throw new MigrateException(t("No files in the system to import from."), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
     }
     $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_REVENUE_GOVERNMENT);
     $this->destination = new EITIMigrateDestinationRevenues('government_agency');
@@ -99,9 +116,17 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
     }
 
     // Let's fetch the summary data so we can fetch additional data from it.
-    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
-    $summary_data = entity_load_single('summary_data', $summary_data_id);
-    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    if (!empty($this->summary_data_emws) && in_array($row->summary_id, array_keys($this->summary_data_emws))) {
+      $summary_data_emw = $this->summary_data_emws[$row->summary_id];
+    }
+    else {
+      $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      $summary_data = entity_load_single('summary_data', $summary_data_id);
+      $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+
+      // Store for others to retrieve it later.
+      $this->summary_data_emws[$row->summary_id] = $summary_data_emw;
+    }
 
     // Look-up the GFS code.
     if ($code = $this->GFSCodeLookup($row->gfs_id)) {
@@ -135,7 +160,7 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
         $row->organization = $org->id;
       }
       else {
-        $country_id = $summary_data_emw->country_id->value();
+        $country_id = $summary_data_emw->country_id->id->value();
         $values = array(
           'type' => 'agency',
           'name' => $row->organization,
@@ -214,13 +239,39 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
    * of the post-processing.
    */
   public function complete($entity, $row) {
-//    // One thing we need to do, is to look-up the summary_data id, load it and
-//    // save the indicator id in the field "field_sd_indicator_values".
-//    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
-//    $summary_data = entity_load_single('summary_data', $summary_data_id);
-//    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
-//    $summary_data_emw->field_sd_indicator_values[] = $entity->id;
-//    $summary_data_emw->save();
+    // One thing we need to do, is to look-up the summary_data id, load it and
+    // save the revenue stream id in the field "field_sd_revenue_government".
+    if (!empty($this->summary_data_emws) && in_array($row->summary_id, array_keys($this->summary_data_emws))) {
+      $summary_data_emw = &$this->summary_data_emws[$row->summary_id];
+      // Append the revenue.
+      $summary_data_emw->field_sd_revenue_government[] = $entity->id;
+    }
+    else {
+      $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      $summary_data = entity_load_single('summary_data', $summary_data_id);
+      $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+
+      // Append the revenue.
+      $summary_data_emw->field_sd_revenue_government[] = $entity->id;
+
+      // Store for others to retrieve it later.
+      $this->summary_data_emws[$row->summary_id] = $summary_data_emw;
+    }
+  }
+
+
+  /**
+   * Move expensive things here.
+   */
+  public function postImport() {
+    parent::postImport();
+
+    // Save previously updated summary data.
+    if (!empty($this->summary_data_emws)) {
+      foreach ($this->summary_data_emws as $hash => $summary_data_emw) {
+        $summary_data_emw->save();
+      }
+    }
   }
 }
 
@@ -231,17 +282,33 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
  * Migrates the Revenue Streams for the Companies.
  */
 class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
+
+  /**
+   * $var array
+   *
+   * Stores the pre-loaded summary-data entity metadata wrappers, with hash-keys
+   * pointing at them.
+   */
+  public $summary_data_emws;
+
+  /**
+   * Overrides the default constructor.
+   */
   public function __construct($arguments) {
     parent::__construct($arguments);
 
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
-    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
-    $files_xls = file_scan_directory($path, '/.*\.xls$/');
-    $files = $files_xlsx + $files_xls;
-    $real_paths = array();
-    foreach ($files as $file_path => $file) {
-      $real_paths[] = drupal_realpath($file_path);
+    if (isset($arguments['single_file'])) {
+      $file = $arguments['single_file'];
+      $real_path = drupal_realpath($file->uri);
+      $real_paths = array($real_path);
+    }
+    else {
+      $real_paths = $this->getSpreadsheetFiles();
+    }
+    // Check the validity.
+    if (!$real_paths) {
+      throw new MigrateException(t("No files in the system to import from."), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
     }
     $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_REVENUE_COMPANY);
     $this->destination = new EITIMigrateDestinationRevenues('company');
@@ -283,9 +350,17 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     }
 
     // Let's fetch the summary data so we can fetch additional data from it.
-    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
-    $summary_data = entity_load_single('summary_data', $summary_data_id);
-    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    if (!empty($this->summary_data_emws) && in_array($row->summary_id, array_keys($this->summary_data_emws))) {
+      $summary_data_emw = $this->summary_data_emws[$row->summary_id];
+    }
+    else {
+      $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      $summary_data = entity_load_single('summary_data', $summary_data_id);
+      $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+
+      // Store for others to retrieve it later.
+      $this->summary_data_emws[$row->summary_id] = $summary_data_emw;
+    }
 
     // Look-up the GFS code.
     if ($code = $this->GFSCodeLookup($row->gfs_id)) {
@@ -337,5 +412,44 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
   public function prepare($entity, $row) {
     // Extra data processing?
     // Not that we need to do anything here for now.
+  }
+
+  /**
+   * Finally the entity is saved, we have the id and we can now do some
+   * of the post-processing.
+   */
+  public function complete($entity, $row) {
+    // One thing we need to do, is to look-up the summary_data id, load it and
+    // save the revenue stream id in the field "field_sd_revenue_government".
+    if (!empty($this->summary_data_emws) && in_array($row->summary_id, array_keys($this->summary_data_emws))) {
+      $summary_data_emw = &$this->summary_data_emws[$row->summary_id];
+      // Append the revenue.
+      $summary_data_emw->field_sd_revenue_company[] = $entity->id;
+    }
+    else {
+      $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      $summary_data = entity_load_single('summary_data', $summary_data_id);
+      $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+
+      // Append the revenue.
+      $summary_data_emw->field_sd_revenue_company[] = $entity->id;
+
+      // Store for others to retrieve it later.
+      $this->summary_data_emws[$row->summary_id] = $summary_data_emw;
+    }
+  }
+
+  /**
+   * Move expensive things here.
+   */
+  public function postImport() {
+    parent::postImport();
+
+    // Save previously updated summary data.
+    if (!empty($this->summary_data_emws)) {
+      foreach ($this->summary_data_emws as $hash => $summary_data_emw) {
+        $summary_data_emw->save();
+      }
+    }
   }
 }

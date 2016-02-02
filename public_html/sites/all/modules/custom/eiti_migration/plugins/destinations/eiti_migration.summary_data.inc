@@ -83,6 +83,10 @@ class EITIMigrateDestinationSummaryData extends MigrateDestinationEntity {
    *  successful. FALSE on failure.
    */
   public function import(stdClass $entity, stdClass $row) {
+    if (!empty($row->migrate_map_destid1)) {
+      $entity->id = $row->migrate_map_destid1;
+    }
+
     // Set some default properties.
     $defaults = array(
       'type' => $this->bundle,

@@ -8,21 +8,29 @@
  */
 
 class EITISummaryDataMigration extends EITISpreadsheetMigration {
+
+  /**
+   * Overrides the default constructor.
+   */
   public function __construct($arguments) {
+    $this->sourceFields['file_fid'] = t('File from which the import was done.');
     parent::__construct($arguments);
 
-    // Some metadata.
-
     // Prepare the Source.
-    $path = drupal_get_path('module', 'eiti_migration') . '/sources';
-    $path = drupal_realpath($path);
-    $files_xlsx = file_scan_directory($path, '/.*\.xlsx$/');
-    $files_xls = file_scan_directory($path, '/.*\.xls$/');
-    $files = $files_xlsx + $files_xls;
+    if (isset($arguments['single_file'])) {
+      $file = $arguments['single_file'];
+      $real_path = drupal_realpath($file->uri);
+      $real_paths = array($real_path);
+      $this->importingFiles[$file->fid] = $real_path;
+    }
+    else {
+      $real_paths = $this->getSpreadsheetFiles();
+      $this->importingFiles = $real_paths;
+    }
 
-    $real_paths = array();
-    foreach ($files as $file_path => $file) {
-      $real_paths[] = drupal_realpath($file_path);
+    // Check the validity.
+    if (!$real_paths) {
+      throw new MigrateException(t("No files in the system to import from."), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
     }
     $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_SUMMARY_DATA);
 
@@ -66,6 +74,14 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $this->addFieldMapping('field_sd_gas_sector', 'sectors:gas');
     $this->addFieldMapping('field_sd_other_sector', 'sectors:other');
 
+    $this->addFieldMapping('field_sd_report_file', 'file_fid');
+    $this->addFieldMapping('field_sd_report_file:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_sd_report_file:preserve_files')
+      ->defaultValue(TRUE);
+    $this->addFieldMapping('field_sd_report_file:file_class')
+      ->defaultValue('MigrateFileFid');
+
     // Unmigrated mappings.
     $this->addUnmigratedSources(array(
       'dissaggregation:revenue_stream',
@@ -94,6 +110,9 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
     }
+
+    // Prepare the file.
+    $row->file_fid = array_search($row->file, $this->importingFiles);
 
     // Fetch the country name and look-up if we already have such a country,
     // if now, we create the entity on the fly.

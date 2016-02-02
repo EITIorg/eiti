@@ -15,7 +15,6 @@ files[] = eiti_migration.migrate.inc
 
 ; General Drupal 7 to Drupal 7 migration files.
 files[] = migrations/eiti_migration.core.inc
-files[] = migrations/eiti_migration.demo.inc
 files[] = migrations/eiti_migration.article.inc
 files[] = migrations/eiti_migration.document.inc
 files[] = migrations/eiti_migration.person.inc

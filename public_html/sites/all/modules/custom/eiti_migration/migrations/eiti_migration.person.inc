@@ -25,15 +25,15 @@ class EITIPersonMigration extends EITINodeMigration {
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('body', 'field_contact_desc');
     $this->addFieldMapping('body:format', 'field_contact_desc:format')
-     ->callbacks(array($this, 'mapFormat'));
+      ->callbacks(array($this, 'mapFormat'));
     $this->addFieldMapping('body:language', 'language');
 
     // Now let's handle the paths.
     $this->removeFieldMapping('path', 'path');
     $this->addFieldMapping('migrate_redirects', 'path');
     $this->addFieldMapping('pathauto')
-    ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
-    ->defaultValue(TRUE);
+      ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
+      ->defaultValue(TRUE);
 
     // Now the mappings.
     $this->addFieldMapping('field_person_picture', 'field_contact_img')
@@ -47,9 +47,9 @@ class EITIPersonMigration extends EITINodeMigration {
     $this->addFieldMapping('field_position', 'field_contact_role');
     $this->addFieldMapping('field_position:language', 'language');
     $this->addFieldMapping('field_position:create_term')
-     ->defaultValue(TRUE);
+      ->defaultValue(TRUE);
     $this->addFieldMapping('field_position:ignore_case')
-     ->defaultValue(TRUE);
+      ->defaultValue(TRUE);
 
      // Contacts.
     $this->addFieldMapping('field_email', 'field_contact_email');
@@ -64,7 +64,6 @@ class EITIPersonMigration extends EITINodeMigration {
 
     // Unmigrated sources.
     $this->addUnmigratedSources(array(
-      'field_ref_country_name_2',
       'field_contact_type',
       'field_contact_file',
       'field_contact_org',
