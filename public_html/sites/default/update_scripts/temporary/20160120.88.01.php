@@ -3,6 +3,10 @@
 
 // Provide a list of modules to be installed.
 $modules = array(
+  'contentblock',
+  'contentwidget',
+  'eiti_api',
+  'eiti_migration',
   'eitientity_gfs_code',
   'eitientity_implementing_country',
   'eitientity_indicator',
@@ -10,7 +14,9 @@ $modules = array(
   'eitientity_organisation',
   'eitientity_revenue_stream',
   'eitientity_summary_data',
+  'helperentity',
   'helpergeneric',
+  'helpertheme',
 );
 _us_module__install($modules);
 
@@ -25,6 +31,7 @@ $feature_names = array(
   'eitict_mention',
   'eitict_person',
   'eitientities',
+  'eitiet_contentblock',
   'eitiet_organisation',
   'eitiet_summary_data',
   'eitii18n',
