@@ -10,6 +10,28 @@ class RevenueStreamMetadataController extends EntityDefaultMetadataController {
       if (isset($bundle_info['status'])) {
         $bundle_info['status']['type'] = 'boolean';
       }
+      if (isset($bundle_info['gfs_code_id'])) {
+        $bundle_info['gfs_code_id'] = array(
+          'label' => t('GFS Code'),
+          'type' => 'gfs_code',
+          'description' => t('GFS Code specified.'),
+          'getter callback' => 'entity_property_getter_method',
+          'setter callback' => 'entity_property_setter_method',
+          'required' => TRUE,
+          'schema field' => 'gfs_code_id',
+        );
+      }
+      if (isset($bundle_info['organisation_id'])) {
+        $bundle_info['organisation_id'] = array(
+          'label' => t('Organisation'),
+          'type' => 'organisation',
+          'description' => t('Organisation specified.'),
+          'getter callback' => 'entity_property_getter_method',
+          'setter callback' => 'entity_property_setter_method',
+          'required' => TRUE,
+          'schema field' => 'organisation_id',
+        );
+      }
     }
 
     return $info;

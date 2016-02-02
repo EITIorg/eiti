@@ -19,7 +19,7 @@ class SummaryDataMetadataController extends EntityDefaultMetadataController {
           'getter callback' => 'entity_property_getter_method',
           'setter callback' => 'entity_property_setter_method',
           'required' => TRUE,
-          'schema field' => 'id',
+          'schema field' => 'country_id',
         );
       }
     }
