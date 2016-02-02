@@ -29,6 +29,18 @@ function helpergeneric_cleanup_ui() {
 }
 
 /**
+ * Implements hook_init().
+ *
+ * Disables the admin_menu.
+ */
+function helpergeneric_init() {
+  // Disable the admin menu.
+  if (function_exists('admin_menu_suppress') && helpergeneric_cleanup_ui()) {
+    admin_menu_suppress();
+  }
+}
+
+/**
  * Implements hook_menu().
  */
 function helpergeneric_menu() {
