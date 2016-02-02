@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Entity Type ContentBlock feature.
+ */
+
+include_once 'eitiet_contentblock.features.inc';
