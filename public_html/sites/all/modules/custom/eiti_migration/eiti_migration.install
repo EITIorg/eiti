@@ -4,5 +4,9 @@
  * Implements hook_install().
  */
 function eiti_migration_install() {
-  drupal_set_message('Please <a href="admin/content/migrate/configure-legacy">configure the Legacy System settings</a> on this machine before you run or register your migrations.');
+  $msg = 'Please <a href="!url">configure the Legacy System settings</a> on this machine before you run or register your migrations.';
+  $args = array(
+    '!url' => url('admin/content/migrate/configure-legacy'),
+  );
+  drupal_set_message(t($msg, $args));
 }
