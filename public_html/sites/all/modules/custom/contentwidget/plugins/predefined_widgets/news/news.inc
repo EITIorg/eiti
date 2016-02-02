@@ -34,7 +34,7 @@ function contentblock_news_widget_render($plugin, $widget_settings, $entity, $la
   $view->set_display($view_display_id);
 
   // Replaces the class for the view wrapper.
-  $css_class = 'news-widget two-columns-grid';
+  $css_class = drupal_html_class('contentwidget--' . $view_display_id);
   $view->display_handler->set_option('css_class', $css_class);
 
   return array('#markup' => $view->preview());
