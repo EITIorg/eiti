@@ -23,10 +23,10 @@ function eitiet_summary_data_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'country_id' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'year_start' => array(
           'weight' => '2',
@@ -35,7 +35,7 @@ function eitiet_summary_data_strongarm() {
           'weight' => '3',
         ),
         'published' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'currency_code' => array(
           'weight' => '7',

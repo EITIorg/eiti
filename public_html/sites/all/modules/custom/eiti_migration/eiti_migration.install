@@ -9,4 +9,17 @@ function eiti_migration_install() {
     '!url' => url('admin/content/migrate/configure-legacy'),
   );
   drupal_set_message(t($msg, $args));
+
+  // Prepare our folders.
+  $spreadsheets_path = 'public://spreadsheets';
+  if (!file_exists($spreadsheets_path)) {
+    drupal_mkdir($spreadsheets_path);
+  }
+  file_prepare_directory($spreadsheets_path);
+
+  $spreadsheets_temporary_path = 'public://spreadsheets_temporary';
+  if (!file_exists($spreadsheets_temporary_path)) {
+    drupal_mkdir($spreadsheets_temporary_path);
+  }
+  file_prepare_directory($spreadsheets_path);
 }

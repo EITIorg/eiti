@@ -21,11 +21,11 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contact details',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
-      0 => 'field_sd_contact_email_address',
-      1 => 'field_sd_contact_name',
-      2 => 'field_sd_contact_organisation',
+      0 => 'field_sd_contact_name',
+      1 => 'field_sd_contact_organisation',
+      2 => 'field_sd_contact_email_address',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -51,10 +51,10 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Disaggregation of Data',
-    'weight' => '9',
+    'weight' => '10',
     'children' => array(
-      0 => 'field_sd_disagg_company',
-      1 => 'field_sd_disagg_project',
+      0 => 'field_sd_disagg_project',
+      1 => 'field_sd_disagg_company',
       2 => 'field_sd_disagg_revenue_stream',
     ),
     'format_type' => 'fieldset',
@@ -80,7 +80,7 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Fiscal Year Covered in the Report',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'year_start',
       1 => 'year_end',
@@ -108,7 +108,7 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Reporting currency',
-    'weight' => '8',
+    'weight' => '9',
     'children' => array(
       0 => 'currency_code',
       1 => 'currency_rate',
@@ -160,12 +160,12 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Sectors Covered',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
-      0 => 'field_sd_gas_sector',
-      1 => 'field_sd_mining_sector',
-      2 => 'field_sd_oil_sector',
-      3 => 'field_sd_other_sector',
+      0 => 'field_sd_mining_sector',
+      1 => 'field_sd_oil_sector',
+      2 => 'field_sd_other_sector',
+      3 => 'field_sd_gas_sector',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -190,7 +190,7 @@ function eitiet_summary_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Web links to EITI Report, on the national EITI website',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_sd_file_links',
     ),

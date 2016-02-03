@@ -4,3 +4,10 @@ core = 7.x
 package = EITI Custom
 
 dependencies[] = restful
+dependencies[] = eitientity_gfs_code
+dependencies[] = eitientity_summary_data
+dependencies[] = eitientity_revenue_stream
+dependencies[] = eitientity_indicator
+dependencies[] = eitientity_indicator_value
+dependencies[] = eitientity_organisation
+dependencies[] = eitientity_implementing_country

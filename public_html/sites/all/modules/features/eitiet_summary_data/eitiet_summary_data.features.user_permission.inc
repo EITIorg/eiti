@@ -48,7 +48,10 @@ function eitiet_summary_data_user_default_permissions() {
   // Exported permission: 'summary_data entity view'.
   $permissions['summary_data entity view'] = array(
     'name' => 'summary_data entity view',
-    'roles' => array(),
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'eitientity_summary_data',
   );
 

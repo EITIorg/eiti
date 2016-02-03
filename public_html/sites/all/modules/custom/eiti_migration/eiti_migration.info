@@ -5,11 +5,25 @@ package = EITI Custom
 
 ; Functional dependencies.
 dependencies[] = migrate
+dependencies[] = migrate_ui
 dependencies[] = migrate_extras
 dependencies[] = migrate_d2d
+dependencies[] = phpexcel
 
 ; Migration-related dependencies.
 dependencies[] = eitict_article
+dependencies[] = eitict_document
+dependencies[] = eitict_mention
+dependencies[] = eitict_person
+dependencies[] = eitiet_file
+
+dependencies[] = eitientity_gfs_code
+dependencies[] = eitientity_summary_data
+dependencies[] = eitientity_revenue_stream
+dependencies[] = eitientity_indicator
+dependencies[] = eitientity_indicator_value
+dependencies[] = eitientity_organisation
+dependencies[] = eitientity_implementing_country
 
 files[] = eiti_migration.migrate.inc
 
