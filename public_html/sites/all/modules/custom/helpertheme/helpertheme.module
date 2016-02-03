@@ -166,7 +166,7 @@ function helpertheme_ds_layout_info() {
  * @param array $head_elements
  */
 function helpertheme_html_head_alter(&$head_elements) {
-  global $theme;
+  global $theme, $theme_path;
 
   // Force IE to always use most recent engine.
   if ($theme == 'eiti') {
@@ -198,7 +198,7 @@ function helpertheme_html_head_alter(&$head_elements) {
   // Add favicon related header tags.
   if (!theme_get_setting('favicon_path')) {
     module_load_include('inc', 'helpertheme', 'helpertheme.favicons');
-    $head_elements['favicons'] = _helpertheme_favicons();
+    $head_elements['favicons'] = _helpertheme_favicons($theme_path);
   }
 }
 

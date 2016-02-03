@@ -91,7 +91,6 @@ function theme_header_logo() {
   if (file_exists($file_path)) {
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
-      // '#path' => url($logo_path),
       '#path' => file_create_url($logo_path),
       '#alt' => '',
       '#attributes' => array(
@@ -100,10 +99,11 @@ function theme_header_logo() {
     );
   }
   else {
+    $logo_alt = $site_name;
     $items['header']['logo_markup']['svg'] = array(
       '#theme' => 'image',
       '#path' => url(drupal_get_path('theme', $theme) . '/logo.svg'),
-      '#alt' => '',
+      '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
       ),
@@ -113,7 +113,7 @@ function theme_header_logo() {
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
       '#path' => url(drupal_get_path('theme', $theme) . '/logo.png'),
-      '#alt' => '',
+      '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
       ),
@@ -122,12 +122,11 @@ function theme_header_logo() {
     );
   }
 
-
-  $items['header']['logo_markup']['site_name'] = array(
-    '#markup' => $site_name,
-    '#prefix' => '<span class="text">',
-    '#suffix' => "</span>",
-  );
+  //$items['header']['logo_markup']['site_name'] = array(
+  //  '#markup' => $site_name,
+  //  '#prefix' => '<span class="text">',
+  //  '#suffix' => "</span>",
+  //);
 
   // Render the HTML.
   return drupal_render($items);
