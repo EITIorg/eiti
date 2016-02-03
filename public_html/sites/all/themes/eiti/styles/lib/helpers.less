@@ -10,7 +10,7 @@
  * Border radius.
  *
  * @see: http://border-radius.com
- * @see: http://caniuse.com/border-radius
+ * @see: http://caniuse.com/#feat=border-radius
  * @see: http://www.w3.org/TR/css3-background/#corners
  */
 .border-radius(@radius) {
@@ -23,8 +23,7 @@
 /*
  * Box sizing.
  *
- * @see: http://caniuse.com/css3-boxsizing
- * @see: http://www.w3.org/TR/css3-ui/#box-sizing
+ * @see: http://caniuse.com/#feat=css3-boxsizing
  * @see: http://www.w3.org/TR/css3-ui/#box-sizing
  */
 .box-sizing(@type: border-box) {
@@ -39,7 +38,7 @@
  * @see: https://drafts.csswg.org/css-ui-4/#content-selection
  * @see: https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
  *
- * NOTE: This feature is non-standard.
+ * NOTE: This feature is non-standard!
  */
 .user-select(@type) {
   -webkit-user-select: @type;
@@ -53,6 +52,18 @@
   line-height: @line_height;
   height: @line_height * @rows;
   overflow: hidden;
+}
+
+/*
+ * CSS Transitions.
+ *
+ * @see: http://caniuse.com/#feat=css-transitions
+ * @see: https://drafts.csswg.org/css-transitions-1
+ * @see: https://drafts.csswg.org/css-transitions-1/#animatable-css
+ */
+.transition(@transition) {
+  -webkit-transition: @transition;
+  -o-transition: @transition;
 }
 
 // #################### Helpers ####################

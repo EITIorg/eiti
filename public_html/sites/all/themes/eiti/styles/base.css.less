@@ -4,7 +4,7 @@
  */
 
 html {
-  // Always show page scrollbar to prevent side-movement when hovering over
+  // Always show page scroll-bar to prevent side-movement when hovering over
   // items that are extending their height.
   overflow-y: scroll;
 
@@ -22,11 +22,13 @@ html {
  */
 a {
   .link-color(@clanchor, @clanchor__active, @clanchor__visited, @clanchor__hover);
+  .transition(color, 400ms, ease-in);
 
+  font-weight: bold;
   text-decoration: none;
   &:focus,
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
