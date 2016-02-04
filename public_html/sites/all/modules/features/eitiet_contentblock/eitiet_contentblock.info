@@ -8,6 +8,7 @@ dependencies[] = contentblock
 dependencies[] = contentwidget
 dependencies[] = ctools
 dependencies[] = ds
+dependencies[] = eitientities
 dependencies[] = entityqueue
 dependencies[] = entityreference
 dependencies[] = features

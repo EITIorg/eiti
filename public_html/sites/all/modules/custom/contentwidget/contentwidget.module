@@ -252,3 +252,44 @@ function contentwidget_field_formatter_view($entity_type, $entity, $field, $inst
 
   return $result;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Allow widgets to interact with the final form.
+ */
+function contentwidget_form_contentblock_edit_predefined_form_alter(&$form, &$form_state) {
+  ctools_include('context');
+  ctools_include('plugins');
+
+  if (!empty($include_hidden)) {
+    return ctools_get_plugins('contentwidget', 'predefined_widgets');
+  }
+
+  $plugins = ctools_get_plugins('contentwidget', 'predefined_widgets');
+  foreach ($plugins as $key => $plugin_info) {
+    if ($function = ctools_plugin_get_function($plugin_info, 'entity form alter')) {
+      $function($form, $form_state, $plugin_info);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_group_build_pre_render_alter.
+ */
+function contentwidget_field_group_build_pre_render_alter(&$element) {
+  ctools_include('context');
+  ctools_include('plugins');
+
+  if (!empty($include_hidden)) {
+    return ctools_get_plugins('contentwidget', 'predefined_widgets');
+  }
+
+  $plugins = ctools_get_plugins('contentwidget', 'predefined_widgets');
+  foreach ($plugins as $key => $plugin_info) {
+    if ($function = ctools_plugin_get_function($plugin_info, 'entity group alter')) {
+      $function($element);
+    }
+  }
+}
+
