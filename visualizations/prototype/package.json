@@ -17,10 +17,12 @@
     "license": "", 
     "dependencies": {
         "d3": "^3.5.3",
+        "immutable": "^3.7.5",
         "react": "^0.14.3",
         "react-dom": "^0.14.3",
         "react-d3": "^0.4.0",
-        "react-d3-components": "^0.6.0"
+        "react-d3-components": "^0.6.0",
+        "reflux": "^0.3.0"
     },
     "devDependencies": {
         "babel-core": "^5.4.7",

@@ -59,7 +59,9 @@ window.chartWidget.create = function(options, data) {
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	legend = {true}
 	           	/>
+	           	<h4>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
 	} else if(options.type == "StackedBar") {

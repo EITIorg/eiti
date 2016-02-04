@@ -94,103 +94,11 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-p{
-  margin-bottom: 100px;
-}
 
-.arc text {
-  font: 10px sans-serif;
-  text-anchor: middle;
-}
+   #main {
+    width: 1366px;
+   }
 
-.arc path {
-  stroke: #fff;
-}
-
-#viz7 {
-  width: 960px;
-  height: 500px;
-/*  background: #ddd; */
-}
-
-text {
-  pointer-events: none;
-}
-
-.grandparent text {
-  font-weight: bold;
-}
-
-rect {
-  fill: none;
-  stroke: #fff;
-}
-
-rect.parent,
-.grandparent rect {
-  stroke-width: 2px;
-}
-
-.grandparent rect {
-  fill: orange;
-}
-
-.grandparent:hover rect {
-  fill: #ee9700;
-}
-
-.children rect.parent,
-.grandparent rect {
-  cursor: pointer;
-}
-
-.children rect.parent {
-  fill: #bbb;
-  fill-opacity: .5;
-}
-
-.children:hover rect.child {
-  fill: #bbb;
-}
-
-svg {
-  font: 10px sans-serif;
-}
-
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-#viz10 {
-  height: 500px;
-}
-
-.node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
-}
-
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-}
-
-.link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
-}
-
-.link:hover {
-  stroke-opacity: .5;
-}
-
-.browser text {
-  text-anchor: end;
-}
 
 
 

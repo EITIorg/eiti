@@ -140,7 +140,7 @@ let BarChart = React.createClass({
             <Legend
               colors={props.colors}
               colorAccessor={props.colorAccessor}
-              data={props.data}
+              data={props.legendData}
               legendPosition={props.legendPosition}
               margins={props.margin}
               width={props.sideOffset} />
