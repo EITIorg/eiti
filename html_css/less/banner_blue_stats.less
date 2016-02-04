@@ -1,0 +1,37 @@
+@import 'main.less';
+.stat-banner{
+  background: @theme-blue;
+  overflow: hidden;
+  padding: @base-unit * 3 0;
+}
+.inner-container {
+  .section-inner (960px);
+}
+.stat-widget{
+  float: left;
+  margin: 0 5px;
+  width: @full-width / 4.4;
+}
+.stat-icon {
+  fill: @theme-blue-light;
+  float: left;
+  margin-right: @general-margin-space / 2;
+  width: @banner-stat-size;
+}
+.stat-value {
+  color: @text-inverse;
+  font-size: @stat-value;
+  font-weight: bold;
+  line-height: 90%;
+}
+.stat-unit {
+  text-transform: uppercase;
+}
+.stat-label {
+  clear: both;
+  color: @theme-blue-light;
+  font-size: @small-text;
+  border-top: 1px solid @theme-blue-light;
+  margin-top: @general-margin-space;
+  padding-top: @general-margin-space / 2;
+}
