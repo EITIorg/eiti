@@ -108,7 +108,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['htmltag']['clanchor'] = array(
-    '#value' => '@cldetail',
+    '#value' => '#f5822a',
     '#desc' => 'anchor tags',
     '#variants' => array(
       'clanchor__hover' => array(

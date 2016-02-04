@@ -166,7 +166,7 @@ function helpertheme_ds_layout_info() {
  * @param array $head_elements
  */
 function helpertheme_html_head_alter(&$head_elements) {
-  global $theme;
+  global $theme, $theme_path;
 
   // Force IE to always use most recent engine.
   if ($theme == 'eiti') {
@@ -198,7 +198,7 @@ function helpertheme_html_head_alter(&$head_elements) {
   // Add favicon related header tags.
   if (!theme_get_setting('favicon_path')) {
     module_load_include('inc', 'helpertheme', 'helpertheme.favicons');
-    $head_elements['favicons'] = _helpertheme_favicons();
+    $head_elements['favicons'] = _helpertheme_favicons($theme_path);
   }
 }
 
@@ -255,6 +255,45 @@ function helpertheme_preprocess_page(&$variables) {
    * Project specific CSS on all pages (including admin pages).
    */
   drupal_add_css($module_path . '/styles/helpertheme.wysiwyg.css', $css_options);
+
+  /*
+   * Load font Using Google Fonts API.
+   *
+   * @see http://www.google.com/fonts/specimen/Open+Sans
+   */
+  if (variable_get('helpertheme_load_external_fonts', TRUE)) {
+    $font_variants = array(
+      '400',
+      '400italic',
+      '700',
+      '700italic',
+    );
+    $options = array(
+      'external' => TRUE,
+      'query' => array(
+        'family' => 'Open Sans' . ':' . implode(',', $font_variants),
+        'subset' => array('latin'),
+      ),
+    );
+
+    // Get a list of enabled languages.
+    $languages = language_list('enabled');
+    $enabled_languages = $languages[1];
+
+    // Only load cyrillic and cyrillic extended character sets if the Russian language is enabled.
+    if (array_key_exists('ru', $enabled_languages)) {
+      $options['query']['subset'][] = 'cyrillic';
+      $options['query']['subset'][] = 'cyrillic-ext';
+    }
+
+    $options['query']['subset'] = implode(',', $options['query']['subset']);
+
+    global $is_https;
+    $url_scheme = ($is_https) ? 'https://' : 'http://';
+
+    $font_url = url($url_scheme . 'fonts.googleapis.com/css', $options);
+    drupal_add_css($font_url, $css_options);
+  }
 }
 
 /**

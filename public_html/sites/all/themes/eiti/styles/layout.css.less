@@ -1,0 +1,27 @@
+/**
+ * @file
+ * Contains layout specific CSS.
+ */
+
+// Limit the minimum size of the body in order to prevent issues on smaller devices.
+.xSmallOnly() {
+  body {
+    min-width: 20rem; // 20*16px = 320px
+  }
+}
+
+.main-content-inner {
+  min-height: 20em;
+}
+
+.main-content-inner {
+  .single-fluid-column(margin);
+}
+
+.main-navigation {
+  .row-separator();
+}
+
+@import './lib/custom-grid.less';
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';
