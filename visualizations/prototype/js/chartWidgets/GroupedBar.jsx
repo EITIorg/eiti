@@ -9,7 +9,6 @@ let GroupedBar = React.createClass ({
 	mixins: [Reflux.listenTo(BarStore,"barChange")],
 
 	barChange: function(param) {
-		console.log(param.toggle);
 		var key = param.toggle;
 		var oldData = this.state.chartData;
 		var newData = [];
@@ -30,7 +29,6 @@ let GroupedBar = React.createClass ({
 				}
 			});
 		}
-		console.log(newData);
 		this.setState({ chartData: newData });
 	},
 
