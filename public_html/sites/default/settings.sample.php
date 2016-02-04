@@ -36,7 +36,7 @@ $databases['default']['default'] = array(
   'database' => 'eiti_local',
   'username' => 'eiti_user',
   'password' => 'demo1',
-  'host'     => 'localhost',
+  'host'     => '127.0.0.1',
   'prefix'   => '',
 );
 
