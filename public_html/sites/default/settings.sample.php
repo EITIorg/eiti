@@ -57,12 +57,13 @@ $drupal_hash_salt = '';
 //$conf['stage_file_proxy_origin_dir'] = 'sites/default/files';
 
 /**
- * Sample code to deny access to unwanted visitors.
+ * Deny access to unwanted visitors.
  */
-//if (php_sapi_name() != 'cli') {
-//  if (empty($_COOKIE['KnockKnock']) || $_COOKIE['KnockKnock'] != 'Nobel') {
-//    // - Knock, Knock. - Who’s there? - Nobel. - Nobel who? - No bell, that’s why I knocked!
-//    print 'You are not welcome here!';
-//    exit();
-//  }
-//}
+$deny_access = FALSE;
+if ($deny_access && php_sapi_name() != 'cli') {
+  if (empty($_COOKIE['KnockKnock']) || $_COOKIE['KnockKnock'] != 'Nobel') {
+    // - Knock, Knock. - Who’s there? - Nobel. - Nobel who? - No bell, that’s why I knocked!
+    print 'You are not welcome here!';
+    exit();
+  }
+}
