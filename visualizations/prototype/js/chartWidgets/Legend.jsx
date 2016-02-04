@@ -2,6 +2,8 @@
 
 var React = require('react');
 var d3 = require('d3');
+import  * as Actions from './Actions.es6';
+import * as BarActions from './actions/barActions';
 
 module.exports = React.createClass({
 
@@ -28,6 +30,11 @@ module.exports = React.createClass({
     };
   },
 
+  handleClick: function(some, thing) {
+    Actions.invoke('UPDATE_GRAPH', some);
+    //BarActions.doLegend(some);
+  },
+
   render: function() {
 
     var props = this.props;
@@ -52,6 +59,7 @@ module.exports = React.createClass({
           key={idx}
           className={props.itemClassName}
           style={itemStyle}
+          onClick = {this.handleClick.bind(this, series.label)}
         >
           <span
             style={textStyle}
