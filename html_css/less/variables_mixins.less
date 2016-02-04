@@ -22,6 +22,7 @@
 @small-text: 0.7em;
 @default-text: 0.85em;
 @highlight-text: 0.9em;
+@stat-value: 2.9em;
 
 // dimensions
 @base-unit: 1em;
@@ -33,7 +34,7 @@
 // mixins
 
 // transition
-.transition (@prop: all, @time: 1s, @ease: linear) {
+.transition-link (@prop: color, @time: 1s, @ease: linear) {
 	-webkit-transition: @prop @time @ease;
 	-moz-transition: @prop @time @ease;
 	-o-transition: @prop @time @ease;
