@@ -143,15 +143,9 @@ function eitiet_contentblock_ds_layout_settings_info() {
       'title_field' => 'main',
       'field_cbwidget' => 'main',
     ),
-    'classes' => array(
-      'layout_class' => array(
-        'layout-block' => 'layout-block',
-        'layout-separator' => 'layout-separator',
-      ),
-    ),
+    'classes' => array(),
     'wrappers' => array(
       'main' => 'div',
-      'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',

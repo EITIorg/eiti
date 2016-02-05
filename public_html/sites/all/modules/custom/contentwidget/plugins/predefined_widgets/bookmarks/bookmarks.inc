@@ -104,6 +104,7 @@ function contentblock_featured_bookmarks_render($plugin, $widget_settings, $enti
  */
 function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
+  $default_size = isset($widget_settings['bookmarks']['widget_size']) ? $widget_settings['bookmarks']['widget_size'] : '';
 
   $available_sizes = array(
     '' => t('- Select -'),
@@ -117,7 +118,7 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
     '#type' => 'select',
     '#title' => t('Widget Size'),
     '#options' => $available_sizes,
-    '#default_value' => $widget_settings['bookmarks']['widget_size'],
+    '#default_value' => $default_size,
     '#ajax' => array(
       'callback' => 'contentblock_featured_bookmarks_settings_ajax',
       'wrapper' => 'widget-preview',
