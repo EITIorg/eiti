@@ -66,6 +66,16 @@ function summary_data_add_file_form($form, &$form_state, $entity) {
 }
 
 /**
+ * Callback validation.
+ */
+function _summary_data_add_file_form_validate($form, $form_state) {
+  if ($form_state['values']['edit_method'] == 'spreadsheet' && empty($form_state['values']['report_upload'])) {
+    $msg = t('Make sure you have specified a file.');
+    form_set_error('report_upload', $msg);
+  }
+}
+
+/**
  * Submit handler for the add summary data via file upload.
  */
 function _summary_data_add_file_form_submit($form, $form_state) {
@@ -170,7 +180,6 @@ function summary_data_default_form($form, &$form_state, $entity) {
     '#type' => 'managed_file',
     '#description' => t('Please upload the spreadsheet report. We will handle the rest of the process.<br/>You will be able either to edit directly the summary data or to re-upload the updated report later.'),
     '#upload_location' => 'public://spreadsheets_temporary/',
-    '#required' => TRUE,
     '#upload_validators' => array('file_validate_extensions' => array('xls xlsx')),
   );
 
@@ -180,6 +189,7 @@ function summary_data_default_form($form, &$form_state, $entity) {
   $form['spreadsheet_wrapper']['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Next'),
+    '#validate' => array('_summary_data_add_file_form_validate'),
     '#submit' => array('_summary_data_add_file_form_submit'),
   );
   $form['spreadsheet_wrapper']['actions']['cancel'] = array(
@@ -393,7 +403,7 @@ function _summary_data_form_date_popup_date_validate($element, &$form_state, $fo
 function _summary_data_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
-  field_attach_form_validate($entity_type, $entity, $form['wrapper'], $form_state);
+  field_attach_form_validate($entity_type, $entity, $form['form_wrapper'], $form_state);
 }
 
 /**
