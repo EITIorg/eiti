@@ -81,11 +81,14 @@ function eitiet_contentblock_strongarm() {
       'alternative' => array(
         'custom_settings' => FALSE,
       ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'language' => array(
           'weight' => '1',

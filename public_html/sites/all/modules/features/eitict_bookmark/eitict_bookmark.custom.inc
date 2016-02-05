@@ -34,3 +34,29 @@ function eitict_bookmark_inline_entity_form_entity_form_alter(&$entity_form, &$f
     $entity_form['status'] = array('#type' => 'value', '#value' => 1);
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function eitict_bookmark_preprocess_node(&$variables) {
+  if ($variables['type'] == 'bookmark') {
+    // Load the wrapper for convenience.
+    $node_emw = entity_metadata_wrapper('node', $variables['node']);
+    $reference_type = $node_emw->field_bm_reference_type->value();
+
+    // Create a unified URL for the bookmark, either internal or external.
+    switch ($reference_type) {
+      case 'external':
+        $link_value = $node_emw->field_bm_link->value();
+        $variables['bookmark_url'] = $link_value['url'];
+        break;
+      case 'internal':
+        $reference = $node_emw->field_bm_reference->value();
+        $variables['bookmark_url'] = url('node/' . $reference->nid);
+        break;
+    }
+    // Pass the hide-title value (which hides all the overlay content).
+    $variables['hide_title'] = $node_emw->field_bm_hide_title->value();
+    $variables['classes_array'][] = drupal_html_class($variables['view_mode']);
+  }
+}
