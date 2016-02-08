@@ -149,9 +149,9 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
       '#collapsible' => FALSE,
     );
 
-    $link_url = $widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count];
-    $link_title = $widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count];
-    $link_icon = $widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count];
+    $link_url = isset($widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count] : '';
+    $link_title = isset($widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count] : '';
+    $link_icon = isset($widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count] : '';
 
     $icons = helpertheme_get_svg_icons();
     $options = array('' => t('No Icon'));
