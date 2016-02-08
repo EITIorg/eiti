@@ -20,7 +20,7 @@ class SummaryDataEntityUIController extends HelperEntityBundleableUIController {
       'file path' =>  isset($this->entityInfo['admin ui']['file path']) ? $this->entityInfo['admin ui']['file path'] : drupal_get_path('module', $this->entityInfo['module']),
     );
 
-    $items[$this->entity_path . '/' . $this->wildcard . '/re-upload'] = array(
+    $items[$this->entity_path . '/' . $this->wildcard . '/upload'] = array(
         'page callback' => 'drupal_get_form',
         'page arguments' => array('summary_data_spreadsheet_upload_form', $this->entity_id_count),
         'load arguments' => array($this->entityType),
