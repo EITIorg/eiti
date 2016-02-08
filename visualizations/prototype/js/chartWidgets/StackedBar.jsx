@@ -30,7 +30,17 @@ let StackedBar = React.createClass ({
 				}
 			});
 		}
-		this.setState({ chartData: newData });
+
+		/* update active state for changed labels */
+		var newChartLabels = newData.map(function(item) {
+			return item.label;
+		});
+		var classData = this.state.rawData;
+		classData.forEach(function(item){
+			item.active = (newChartLabels.indexOf(item.label) < 0 ) ? false : true;
+		});
+		
+		this.setState({ chartData: newData, rawData: classData });
 	},
 
 	getInitialState: function() {
@@ -64,14 +74,24 @@ let StackedBar = React.createClass ({
 			req.onreadystatechange = function() {
 			    if (req.readyState == 4 && req.status == 200) {
 			    	var data = JSON.parse(req.responseText);
-			    	_this.setState({rawData: data, chartData: data});
+			    	var classData = data.map(function(item) {
+			    		var newItem = item;
+			    		newItem['active'] = true;
+			    		return newItem;
+			    	});
+			    	_this.setState({rawData: classData, chartData: data});
 			    }
 			  }
 			req.open("GET", this.props.dataURL, true);
 			req.send();
 		}
 		else if(this.props.chartData) {
-			this.setState({rawData: this.props.chartData, chartData: this.props.chartData});
+			var classData = this.props.chartData.map(function(item) {
+	    		var newItem = item;
+	    		newItem['active'] = true;
+	    		return newItem;
+	    	});
+			this.setState({rawData: classData, chartData: this.props.chartData});
 		}
 	},
 
