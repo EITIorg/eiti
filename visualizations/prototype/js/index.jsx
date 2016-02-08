@@ -49,8 +49,8 @@ window.chartWidget.create = function(options, data) {
 	} else if(options.type == "GroupedBar") {
 		render((
 			<div>
-				<h3>{options.name}</h3>
 				<GroupedBar
+					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
@@ -59,14 +59,16 @@ window.chartWidget.create = function(options, data) {
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	legend = {true}
 	           	/>
+	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
 	} else if(options.type == "StackedBar") {
 		render((
 			<div>
-				<h3>{options.name}</h3>
 				<StackedBar
+					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
@@ -75,7 +77,9 @@ window.chartWidget.create = function(options, data) {
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	legend = {true}
 	           	/>
+	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
 	}
