@@ -52,6 +52,14 @@ class IndicatorValueEntity extends Entity {
    * Returns the indicator value.
    */
   public function getValue() {
+    if (empty($this->indicator) && !empty($this->indicator_id)) {
+      $this->setUp();
+    }
+
+    if (empty($this->indicator)) {
+      return NULL;
+    }
+
     switch ($this->indicator->type) {
       case 'boolean':
         return $this->value_boolean;
@@ -69,6 +77,14 @@ class IndicatorValueEntity extends Entity {
    * Returns the indicator unit.
    */
   public function getUnit() {
+    if (empty($this->indicator) && !empty($this->indicator_id)) {
+      $this->setUp();
+    }
+
+    if (empty($this->indicator)) {
+      return NULL;
+    }
+
     switch ($this->indicator->type) {
       case 'numeric':
         return $this->value_unit;

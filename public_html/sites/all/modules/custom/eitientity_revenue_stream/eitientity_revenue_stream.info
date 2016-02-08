@@ -15,4 +15,5 @@ dependencies[] = eitientity_summary_data
 ; Entity handlers.
 files[] = includes/RevenueStreamEntity.inc
 files[] = includes/RevenueStreamExtraFieldsController.inc
+files[] = includes/RevenueStreamInlineEntityFormController.inc
 files[] = includes/RevenueStreamMetadataController.inc
