@@ -461,7 +461,7 @@ function eitiet_summary_data_field_default_field_bases() {
           'type' => 'none',
         ),
         'target_bundles' => array(
-          'government_agency' => 'government_agency',
+          'agency' => 'agency',
         ),
       ),
       'target_type' => 'revenue_stream',

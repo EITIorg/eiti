@@ -158,7 +158,7 @@ function eitientity_revenue_stream_get_types() {
     'description' => t('Summary Data Revenue Stream for Company.'),
   );
 
-  $items['government_agency'] = array(
+  $items['agency'] = array(
     'label' => t('Government Agency'),
     'description' => t('Summary Data Revenue Stream for Government Agency.'),
   );
