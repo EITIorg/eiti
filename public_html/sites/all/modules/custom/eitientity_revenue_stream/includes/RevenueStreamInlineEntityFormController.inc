@@ -127,19 +127,23 @@ class RevenueStreamInlineEntityFormController extends EntityInlineEntityFormCont
     form_state_values_clean($form_state);
     $entity_form_values = drupal_array_get_nested_value($form_state['values'], $entity_form['#parents']);
 
-    $gfs_code_entity = entity_load_single('gfs_code', $entity_form_values['gfs_code_id']);
-    if (empty($gfs_code_entity)) {
-      form_set_error($parents_path . 'gfs_code_id', t('Please select a GFS Code.'));
-      return;
+    if (!empty($entity_form_values['gfs_code_id'])) {
+      $gfs_code_entity = entity_load_single('gfs_code', $entity_form_values['gfs_code_id']);
+      if (empty($gfs_code_entity)) {
+        form_set_error($parents_path . 'gfs_code_id', t('Please select a GFS Code.'));
+        return;
+      }
+      $entity_form['#gfs_code_entity'] = $gfs_code_entity;
     }
-    $entity_form['#gfs_code_entity'] = $gfs_code_entity;
 
-    $organisation_entity = entity_load_single('organisation', $entity_form_values['organisation_id']);
-    if (empty($organisation_entity)) {
-      form_set_error($parents_path . 'organisation_id', t('Please select a GFS Code.'));
-      return;
+    if (!empty($entity_form_values['organisation_id'])) {
+      $organisation_entity = entity_load_single('organisation', $entity_form_values['organisation_id']);
+      if (empty($organisation_entity)) {
+        form_set_error($parents_path . 'organisation_id', t('Please select a GFS Code.'));
+        return;
+      }
+      $entity_form['#organisation_entity'] = $organisation_entity;
     }
-    $entity_form['#organisation_entity'] = $organisation_entity;
   }
 
   /**
@@ -150,3 +154,4 @@ class RevenueStreamInlineEntityFormController extends EntityInlineEntityFormCont
     parent::entityFormSubmit($entity_form, $form_state);
   }
 }
+
