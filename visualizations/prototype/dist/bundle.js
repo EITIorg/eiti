@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3c1d5ca632b33f72c34f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "369b445c13645f85876b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -21251,7 +21251,7 @@
 	      colorAccessor: function colorAccessor(d, idx) {
 	        return idx;
 	      },
-	      itemClassName: 'rd3-legend-item',
+	      itemClassName: 'legend-item-active',
 	      text: '#000'
 	    };
 	  },
@@ -21278,12 +21278,13 @@
 	      var itemStyle = {
 	        'color': props.colors(series.label)
 	      };
+	      var itemClassName = series.active == true ? 'legend-item-active' : 'legend-item';
 
 	      legendItems.push(React.createElement(
 	        'li',
 	        {
 	          key: idx,
-	          className: props.itemClassName,
+	          className: itemClassName,
 	          style: itemStyle,
 	          onClick: _this.handleClick.bind(_this, series.label) },
 	        React.createElement(
@@ -23644,7 +23645,17 @@
 					}
 				});
 			}
-			this.setState({ chartData: newData });
+
+			/* update active state for changed labels */
+			var newChartLabels = newData.map(function (item) {
+				return item.label;
+			});
+			var classData = this.state.rawData;
+			classData.forEach(function (item) {
+				item.active = newChartLabels.indexOf(item.label) < 0 ? false : true;
+			});
+
+			this.setState({ chartData: newData, rawData: classData });
 		},
 
 		getInitialState: function getInitialState() {
@@ -23672,13 +23683,23 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ rawData: data, chartData: data });
+						var classData = data.map(function (item) {
+							var newItem = item;
+							newItem['active'] = true;
+							return newItem;
+						});
+						_this.setState({ rawData: classData, chartData: data });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
 				req.send();
 			} else if (this.props.chartData) {
-				this.setState({ rawData: this.props.chartData, chartData: this.props.chartData });
+				var classData = this.props.chartData.map(function (item) {
+					var newItem = item;
+					newItem['active'] = true;
+					return newItem;
+				});
+				this.setState({ rawData: classData, chartData: this.props.chartData });
 			}
 		},
 
@@ -24080,7 +24101,17 @@
 					}
 				});
 			}
-			this.setState({ chartData: newData });
+
+			/* update active state for changed labels */
+			var newChartLabels = newData.map(function (item) {
+				return item.label;
+			});
+			var classData = this.state.rawData;
+			classData.forEach(function (item) {
+				item.active = newChartLabels.indexOf(item.label) < 0 ? false : true;
+			});
+
+			this.setState({ chartData: newData, rawData: classData });
 		},
 
 		getInitialState: function getInitialState() {
@@ -24113,13 +24144,23 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ rawData: data, chartData: data });
+						var classData = data.map(function (item) {
+							var newItem = item;
+							newItem['active'] = true;
+							return newItem;
+						});
+						_this.setState({ rawData: classData, chartData: data });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
 				req.send();
 			} else if (this.props.chartData) {
-				this.setState({ rawData: this.props.chartData, chartData: this.props.chartData });
+				var classData = this.props.chartData.map(function (item) {
+					var newItem = item;
+					newItem['active'] = true;
+					return newItem;
+				});
+				this.setState({ rawData: classData, chartData: this.props.chartData });
 			}
 		},
 

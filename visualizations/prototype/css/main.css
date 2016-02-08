@@ -122,7 +122,7 @@ textarea {
     float: right;
     margin-right: 100px;
 }   
-.legend li {
+.legend-item-active {
     float: left;
     border: 2px solid #4bb4a1;
     border-radius: 3px;
@@ -131,6 +131,19 @@ textarea {
     line-height: 70%;
     margin: 1px;
     cursor: pointer;
+}
+.legend-item {
+    float: left;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    font-size: 2em;
+    padding: 5px;
+    line-height: 70%;
+    margin: 1px;
+    cursor: pointer;
+}
+.legend-item li:hover {
+    border: 2px solid #4bb4a1;
 }
 
 
