@@ -281,19 +281,6 @@ function theme_footer_items() {
     ),
   );
 
-  // Load the ctools content type plugin.
-  ctools_include('plugins');
-  ctools_include('content');
-  $content_type = ctools_get_content_type('cbreference');
-  $content_subtype = ctools_content_get_subtype($content_type, 'cbreference');
-
-  $configuration = ctools_content_get_defaults($content_type, $content_subtype);
-  $configuration['machine_name'] = 'footer';
-
-  // Render the footer content.
-  $content = ctools_content_render('cbreference', 'cbreference', $configuration, array());
-  $footer_elements['content']['#markup'] = theme('panels_pane', array('content' => $content));
-
   // Render the HTML.
   $output = drupal_render($footer_elements);
 
