@@ -267,3 +267,114 @@ function eitientity_gfs_code_get_by_code($bundle) {
 
   return $entities;
 }
+
+/**
+ * Returns a GFS Codes tree.
+ *
+ * @param int $parent
+ *   The term ID under which to generate the tree. If 0, generate the tree
+ *   for the entire vocabulary.
+ * @param $max_depth
+ *   The number of levels of the tree to return. Leave NULL to return all levels.
+ *
+ * @return array
+ */
+function eitientity_gfs_code_get_tree($parent = 0, $max_depth = NULL) {
+  $children = &drupal_static(__FUNCTION__, array());
+  $parents = &drupal_static(__FUNCTION__ . ':parents', array());
+  $gfs_codes = &drupal_static(__FUNCTION__ . ':gfs_codes', array());
+
+  $query = db_select('eiti_gfs_code', 'gc');
+  $result = $query
+    ->fields('gc')
+    ->orderBy('gc.weight')
+    ->orderBy('gc.name')
+    ->execute();
+
+  foreach ($result as $gfs_code) {
+    $children[(string) $gfs_code->parent][] = (string) $gfs_code->id;
+    $parents[(string) $gfs_code->id][] = (string) $gfs_code->parent;
+    $gfs_codes[(string) $gfs_code->id] = $gfs_code;
+  }
+
+  $max_depth = (!isset($max_depth)) ? count($children) : $max_depth;
+  $tree = array();
+
+  // Keeps track of the parents we have to process, the last entry is used
+  // for the next processing step.
+  $process_parents = array();
+  $process_parents[] = $parent;
+
+  // Loops over the parent terms and adds its children to the tree array.
+  // Uses a loop instead of a recursion, because it's more efficient.
+  while (count($process_parents)) {
+    $parent = array_pop($process_parents);
+    // The number of parents determines the current depth.
+    $depth = count($process_parents);
+    if ($max_depth > $depth && !empty($children[$parent])) {
+      $has_children = FALSE;
+      $child = current($children[$parent]);
+      do {
+        if (empty($child)) {
+          break;
+        }
+        $gfs_code = $gfs_codes[$child];
+        if (isset($parents[$gfs_code->id])) {
+          // Clone the term so that the depth attribute remains correct
+          // in the event of multiple parents.
+          $gfs_code = clone $gfs_code;
+        }
+        $gfs_code->depth = $depth;
+        unset($gfs_code->parent);
+        $gfs_code->parents = $parents[$gfs_code->id];
+        $tree[] = $gfs_code;
+        if (!empty($children[$gfs_code->id])) {
+          $has_children = TRUE;
+
+          // We have to continue with this parent later.
+          $process_parents[] = $parent;
+          // Use the current term as parent for the next iteration.
+          $process_parents[] = $gfs_code->id;
+
+          // Reset pointers for child lists because we step in there more often
+          // with multi parents.
+          reset($children[$gfs_code->id]);
+          // Move pointer so that we get the correct term the next time.
+          next($children[$parent]);
+          break;
+        }
+      } while ($child = next($children[$parent]));
+
+      if (!$has_children) {
+        // We processed all terms in this hierarchy-level, reset pointer
+        // so that this function works the next time it gets called.
+        reset($children[$parent]);
+      }
+    }
+  }
+
+  return $tree;
+}
+
+/**
+ * @return array
+ */
+function eitientity_gfs_code_get_gfs_code_information() {
+  $information = &drupal_static(__FUNCTION__);
+
+  if (!empty($information)) {
+    return $information;
+  }
+
+  $results = eitientity_gfs_code_get_tree();
+  if (empty($results)) {
+    return array();
+  }
+
+  foreach ($results as $result) {
+    $label = ' [' . check_plain($result->code) . '] ' . filter_xss($result->name);
+    $information['options'][$result->id] = str_repeat('-', $result->depth) . $label;
+  }
+
+  return $information;
+}

@@ -37,14 +37,24 @@ function revenue_stream_form($form, &$form_state, $entity) {
     drupal_set_title(helperentity_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
 
+  $gfs_code_information = eitientity_gfs_code_get_gfs_code_information();
   $form['gfs_code_id'] = array(
-    '#type' => 'ereference',
+    '#type' => 'select',
+    '#required' => TRUE,
     '#title' => t('GFS Code'),
     '#default_value' => $entity->gfs_code_id,
-    '#required' => TRUE,
-    '#referenced_type' => 'gfs_code',
-    '#autocomplete_path' => 'helpergeneric/ereference/gfs_code',
+    '#options' => $gfs_code_information['options'],
   );
+
+  $form['organisation_id'] = array(
+    '#type' => 'ereference',
+    '#title' => t('Organisation'),
+    '#default_value' => $entity->organisation_id,
+    '#required' => TRUE,
+    '#referenced_type' => 'organisation',
+  );
+  $form['organisation_id']['#autocomplete_path'] = 'helpergeneric/ereference/organisation/' . $entity->type;
+
 
   $form['revenue'] = array(
     '#type' => 'textfield',

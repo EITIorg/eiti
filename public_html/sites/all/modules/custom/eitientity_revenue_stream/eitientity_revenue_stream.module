@@ -41,6 +41,9 @@ function eitientity_revenue_stream_entity_info() {
     'extra fields controller class' => 'RevenueStreamExtraFieldsController',
     'metadata controller class' => 'RevenueStreamMetadataController',
     //'i18n controller class' => 'EntityDefaultI18nStringController',
+    'inline entity form' => array(
+      'controller' => 'RevenueStreamInlineEntityFormController',
+    ),
 
     //'entity cache' => FALSE,
     //'field cache' => FALSE,
@@ -127,9 +130,11 @@ function eitientity_revenue_stream_label($entity, $entity_type) {
   $t_args['!type'] = $entity_info['label'];
 
   if (!is_null($entity->gfs_code_id)) {
-    /** @var GfsCodeEntity $country_entity */
-    $country_entity = entity_load_single('gfs_code', $entity->gfs_code_id);
-    $t_args['!gfs_code'] = $country_entity->code . ' [' . $country_entity->label() . ']';
+    /** @var GfsCodeEntity $gfs_code_entity */
+    $gfs_code_entity = entity_load_single('gfs_code', $entity->gfs_code_id);
+    if ($gfs_code_entity) {
+      $t_args['!gfs_code'] = $gfs_code_entity->code . ' [' . $gfs_code_entity->label() . ']';
+    }
   }
 
   if (empty($t_args['!gfs_code'])) {
@@ -158,7 +163,7 @@ function eitientity_revenue_stream_get_types() {
     'description' => t('Summary Data Revenue Stream for Company.'),
   );
 
-  $items['government_agency'] = array(
+  $items['agency'] = array(
     'label' => t('Government Agency'),
     'description' => t('Summary Data Revenue Stream for Government Agency.'),
   );
@@ -231,4 +236,69 @@ function eitientity_revenue_stream_menu_local_tasks_alter(&$data, $router_item, 
       );
     }
   }
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_gfs_code_label($entity_type, $entity) {
+  if (!empty($entity->gfs_code_id)) {
+    /** @var GfsCodeEntity $gfs_code_entity */
+    $gfs_code_entity = entity_load_single('gfs_code', $entity->gfs_code_id);
+    if (!empty($gfs_code_entity)) {
+      $label = ' [' . check_plain($gfs_code_entity->code) . '] ' . filter_xss($gfs_code_entity->name);
+      return $label;
+    }
+  }
+
+  return '';
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_organisation_label($entity_type, $entity) {
+  if (!empty($entity->organisation_id)) {
+    /** @var OrganisationEntity $organisation_entity */
+    $organisation_entity = entity_load_single('organisation', $entity->organisation_id);
+    if (!empty($organisation_entity)) {
+      return filter_xss($organisation_entity->label());
+    }
+  }
+
+  return '';
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_currency_value($entity_type, $entity) {
+  if (empty($entity->currency)) {
+    return '';
+  }
+
+  return check_plain($entity->currency);
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_revenue_value($entity_type, $entity) {
+  if (empty($entity->revenue)) {
+    return '';
+  }
+
+  return check_plain($entity->revenue);
 }

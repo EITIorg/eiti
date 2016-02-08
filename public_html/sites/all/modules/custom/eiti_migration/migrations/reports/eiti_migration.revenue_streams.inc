@@ -77,7 +77,7 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
       throw new MigrateException(t("No files in the system to import from."), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
     }
     $this->source = new EITIMigrateSourceSpreadsheet($real_paths, EITI_SOURCE_REVENUE_GOVERNMENT);
-    $this->destination = new EITIMigrateDestinationRevenues('government_agency');
+    $this->destination = new EITIMigrateDestinationRevenues('agency');
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
