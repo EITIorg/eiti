@@ -87,9 +87,24 @@ function helpergeneric_settings_form($form) {
 
 /**
  * Page callback: Outputs JSON for project specific group audience autocomplete suggestions.
+ *
+ * @param string $entity_type
  */
-function helpergeneric_ereference_autocomplete($entity_type, $string = '') {
+function helpergeneric_ereference_autocomplete($entity_type) {
   $matches = array();
+  $bundle = NULL;
+  $string = '';
+
+  // @TODO: Pass the form_id and use the cached form information to determine
+  //        the entity_type and bundle.
+  $args = func_get_args();
+  if (count($args) == 2) {
+    $string = $args[1];
+  }
+  if (count($args) == 3) {
+    $bundle = $args[1];
+    $string = $args[2];
+  }
 
   if (empty($string)) {
     drupal_json_output($matches);
@@ -102,9 +117,15 @@ function helpergeneric_ereference_autocomplete($entity_type, $string = '') {
 
   // Get a list of entity titles that contain the requested string.
   $query = new EntityFieldQuery();
-  $results = $query
+  $query
     ->entityCondition('entity_type', $entity_type)
-    ->propertyCondition($label_key, $string, 'CONTAINS')
+    ->propertyCondition($label_key, $string, 'CONTAINS');
+
+  if (!empty($bundle) && in_array($bundle, array_keys($entity_info['bundles']))) {
+    $query->entityCondition('bundle', $bundle);
+  }
+
+  $results = $query
     ->propertyOrderBy($label_key, 'ASC')
     ->range(0, 10)
     ->execute();
