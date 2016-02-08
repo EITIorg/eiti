@@ -6,14 +6,14 @@
 		<title>EITI Visualizations</title>
 		<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
 
-		<link rel="stylesheet" href="css/main.css">
+		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="http://codesuki.github.io/react-d3-components/style.css">
+		<link rel="stylesheet" href="css/main.css">
 	</head>
 
 	<body>
-		<div class="main">
+		<div id="main">
 	    	<div id="viz2"></div>
 	    	<div id="viz3"></div>
 	    	<div id="viz4"></div>
@@ -23,14 +23,14 @@
 		<script>
 			chartWidget.create({
 				type: "GroupedBar",		
-				name: "Viz #2 - Production Volume",
-				width: 800,
-				height: 600,
+				name: "Production Values",
+				width: 1300,
+				height: 400,
 				margin: {top: 10, bottom: 50, left: 100, right: 10},
 	            xlabel: "Year",
 	            ylabel: "Volume (liters)",
 	            container: "viz2",
-	            description: "Resources volumes included in 'Production volume and value (3.5.a)"
+	            description: "Resources volumes included in 'Production volume and value (3.5.a)'"
 			}, 
 			[{
 			    "label": "Oil",
@@ -77,9 +77,9 @@
 
 			chartWidget.create({
 				type: "StackedBar",		
-				name: "Viz #3 - Government Revenue By Type of Revenue",
-				width: 800,
-				height: 600,
+				name: "Comparative Gov Revenues",
+				width: 1300,
+				height: 400,
 				margin: {top: 10, bottom: 50, left: 100, right: 10},
 	            xlabel: "Year",
 	            ylabel: "Revenue (USD)",

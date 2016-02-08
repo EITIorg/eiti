@@ -1,5 +1,4 @@
 var React = require('react');
-var d3 = require('d3');
 var Reflux = require('reflux');
 
 var BarChart = require('./BarChart');
@@ -16,12 +15,14 @@ let GroupedBar = React.createClass ({
 			return item.label;
 		});
 		/* if key is currently in chartData, remove it; otherwise add it */
-		if(chartLabels.indexOf(key) >= 0) {
-			oldData.forEach(function(item) {
-				if(item.label !== key) {
-					newData.push(item);
-				}
-			});
+		if(chartLabels.indexOf(key) >= 0 ) {
+			if(chartLabels.length > 1) { // can't remove last selected object
+				oldData.forEach(function(item) {
+					if(item.label !== key) {
+						newData.push(item);
+					}
+				});
+			}
 		} else {
 			this.state.rawData.forEach(function(item) {
 				if(chartLabels.indexOf(item.label) >= 0 || item.label === key) {
@@ -73,6 +74,7 @@ let GroupedBar = React.createClass ({
 	    return (
 		    <BarChart
 		    	groupedBars
+		    	chartTitle={this.props.chartTitle}
 	            data={this.state.chartData}
 	            legendData={this.state.rawData}
 	            width={this.props.width}

@@ -1,6 +1,6 @@
 [
     {
-    "label": "1112E1 Ordinary taxes on income, profits and capital gains",
+    "label": "Total",
           "values": [
               {"x": "2008", "y": 239528270000},
               {"x": "2010", "y": 155612137000},
@@ -10,7 +10,7 @@
           ]
     },
     {
-    "label": "114521E Licence fees",
+    "label": "GDP",
           "values": [
               {"x": "2008", "y": 1841532000},
               {"x": "2010", "y": 1374367000},
@@ -20,7 +20,7 @@
           ]
     },
     {
-    "label": "114522E Emission and pollution taxes",
+    "label": "Aid",
           "values": [
               {"x": "2008", "y": 3664473000},
               {"x": "2010", "y": 2204785000},
@@ -31,7 +31,7 @@
           ]
     },
     {
-	"label": "1412E2 From government participation (equity)",
+	"label": "Remittance Inflows",
           "values": [        
               {"x": "2008", "y": 16940000000 },
               {"x": "2010", "y": 12818000000 },
@@ -41,7 +41,7 @@
           ]
     },
     {
-      "label": "1413E Withdrawals from income of quasi-corporations",
+      "label": "FDI",
           "values": [        
               {"x": "2008", "y": 155420129000 },
               {"x": "2010", "y": 103571650000 },
