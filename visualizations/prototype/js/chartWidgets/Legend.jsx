@@ -3,7 +3,6 @@
 var React = require('react');
 var d3 = require('d3');
 import  * as Actions from './Actions.es6';
-import * as BarActions from './actions/barActions';
 
 module.exports = React.createClass({
 
@@ -32,7 +31,6 @@ module.exports = React.createClass({
 
   handleClick: function(some, thing) {
     Actions.invoke('UPDATE_GRAPH', some);
-    //BarActions.doLegend(some);
   },
 
   render: function() {
@@ -41,17 +39,16 @@ module.exports = React.createClass({
 
     var textStyle = {
       'color': 'black',
-      'fontSize': '50%',
-      'verticalAlign': 'top'
+      'fontSize': '55%',
+      'verticalAlign': 'top',
+      'marginLeft': '-7px'
     };
 
     var legendItems = [];
 
     props.data.forEach( (series, idx) => {
       var itemStyle = {
-        'color': props.colors(series.label),
-        'lineHeight': '60%',
-        'fontSize': '150%'
+        'color': props.colors(series.label)
       };
 
       legendItems.push(
@@ -59,11 +56,9 @@ module.exports = React.createClass({
           key={idx}
           className={props.itemClassName}
           style={itemStyle}
-          onClick = {this.handleClick.bind(this, series.label)}
-        >
+          onClick = {this.handleClick.bind(this, series.label)}>
           <span
-            style={textStyle}
-          >
+            style={textStyle}>
             {series.label}
           </span>
         </li>
@@ -75,7 +70,6 @@ module.exports = React.createClass({
 
     var legendBlockStyle = {
       'wordWrap': 'break-word',
-      'width': props.width,
       'paddingLeft': '0',
       'marginBottom': '0',
       'marginTop': topMargin,

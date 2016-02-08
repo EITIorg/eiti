@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7e45710479bc0624465b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3c1d5ca632b33f72c34f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -886,9 +886,9 @@
 
 	var React = __webpack_require__(154);
 	var BarChart = __webpack_require__(166);
-	var PieChart = __webpack_require__(202);
-	var GroupedBar = __webpack_require__(205);
-	var StackedBar = __webpack_require__(209);
+	var PieChart = __webpack_require__(201);
+	var GroupedBar = __webpack_require__(204);
+	var StackedBar = __webpack_require__(208);
 
 	window.chartWidget.create = function (options, data) {
 		var chartData, dataURL;
@@ -941,12 +941,8 @@
 			(0, _reactDom.render)(React.createElement(
 				'div',
 				null,
-				React.createElement(
-					'h3',
-					null,
-					options.name
-				),
 				React.createElement(GroupedBar, {
+					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
@@ -959,7 +955,7 @@
 				}),
 				React.createElement(
 					'h4',
-					null,
+					{ className: 'chartDescription' },
 					options.description
 				)
 			), document.getElementById(options.container));
@@ -967,12 +963,8 @@
 			(0, _reactDom.render)(React.createElement(
 				'div',
 				null,
-				React.createElement(
-					'h3',
-					null,
-					options.name
-				),
 				React.createElement(StackedBar, {
+					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
@@ -980,8 +972,14 @@
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
-					chartData: chartData
-				})
+					chartData: chartData,
+					legend: true
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
 			), document.getElementById(options.container));
 		}
 	};
@@ -20658,13 +20656,13 @@
 	var Tooltip = __webpack_require__(172);
 	var Legend = __webpack_require__(173);
 
-	var DefaultPropsMixin = __webpack_require__(195);
-	var HeightWidthMixin = __webpack_require__(196);
-	var ArrayifyMixin = __webpack_require__(197);
-	var StackAccessorMixin = __webpack_require__(198);
-	var StackDataMixin = __webpack_require__(199);
-	var DefaultScalesMixin = __webpack_require__(200);
-	var TooltipMixin = __webpack_require__(201);
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var ArrayifyMixin = __webpack_require__(196);
+	var StackAccessorMixin = __webpack_require__(197);
+	var StackDataMixin = __webpack_require__(198);
+	var DefaultScalesMixin = __webpack_require__(199);
+	var TooltipMixin = __webpack_require__(200);
 
 	var DataSet = React.createClass({
 	    displayName: 'DataSet',
@@ -20752,7 +20750,7 @@
 	            },
 	            legend: false,
 	            legendPosition: 'right',
-	            sideOffset: 90
+	            sideOffset: 400
 	        };
 	    },
 
@@ -20809,6 +20807,7 @@
 	        var xAxis = _props2.xAxis;
 	        var yAxis = _props2.yAxis;
 	        var groupedBars = _props2.groupedBars;
+	        var chartTitle = _props2.chartTitle;
 	        var data = this._data;
 	        var innerWidth = this._innerWidth;
 	        var innerHeight = this._innerHeight;
@@ -20818,6 +20817,16 @@
 	        return React.createElement(
 	            'div',
 	            null,
+	            React.createElement(
+	                'h3',
+	                { className: "chartTitle" },
+	                chartTitle
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: "legend", style: { 'verticalAlign': 'top' } },
+	                this._renderLegend()
+	            ),
 	            React.createElement(
 	                Chart,
 	                { height: height, width: width, margin: margin },
@@ -20851,12 +20860,7 @@
 	                }, yAxis)),
 	                this.props.children
 	            ),
-	            React.createElement(Tooltip, this.state.tooltip),
-	            React.createElement(
-	                'div',
-	                { style: { display: 'table-cell', width: this.props.sideOffset, 'verticalAlign': 'top' } },
-	                this._renderLegend()
-	            )
+	            React.createElement(Tooltip, this.state.tooltip)
 	        );
 	    }
 	});
@@ -21222,10 +21226,6 @@
 
 	var Actions = _interopRequireWildcard(_ActionsEs6);
 
-	var _actionsBarActions = __webpack_require__(194);
-
-	var BarActions = _interopRequireWildcard(_actionsBarActions);
-
 	var React = __webpack_require__(154);
 	var d3 = __webpack_require__(168);
 
@@ -21258,7 +21258,6 @@
 
 	  handleClick: function handleClick(some, thing) {
 	    Actions.invoke('UPDATE_GRAPH', some);
-	    //BarActions.doLegend(some);
 	  },
 
 	  render: function render() {
@@ -21268,17 +21267,16 @@
 
 	    var textStyle = {
 	      'color': 'black',
-	      'fontSize': '50%',
-	      'verticalAlign': 'top'
+	      'fontSize': '55%',
+	      'verticalAlign': 'top',
+	      'marginLeft': '-7px'
 	    };
 
 	    var legendItems = [];
 
 	    props.data.forEach(function (series, idx) {
 	      var itemStyle = {
-	        'color': props.colors(series.label),
-	        'lineHeight': '60%',
-	        'fontSize': '150%'
+	        'color': props.colors(series.label)
 	      };
 
 	      legendItems.push(React.createElement(
@@ -21287,13 +21285,11 @@
 	          key: idx,
 	          className: props.itemClassName,
 	          style: itemStyle,
-	          onClick: _this.handleClick.bind(_this, series.label)
-	        },
+	          onClick: _this.handleClick.bind(_this, series.label) },
 	        React.createElement(
 	          'span',
 	          {
-	            style: textStyle
-	          },
+	            style: textStyle },
 	          series.label
 	        )
 	      ));
@@ -21303,7 +21299,6 @@
 
 	    var legendBlockStyle = {
 	      'wordWrap': 'break-word',
-	      'width': props.width,
 	      'paddingLeft': '0',
 	      'marginBottom': '0',
 	      'marginTop': topMargin,
@@ -22771,20 +22766,6 @@
 
 	'use strict';
 
-	var Reflux = __webpack_require__(175);
-
-	var doLegend = Reflux.createAction();
-
-	module.exports = {
-	  doLegend: doLegend
-	};
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var React = __webpack_require__(154);
 	var d3 = __webpack_require__(168);
 
@@ -22818,7 +22799,7 @@
 	module.exports = DefaultPropsMixin;
 
 /***/ },
-/* 196 */
+/* 195 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22845,7 +22826,7 @@
 	module.exports = HeightWidthMixin;
 
 /***/ },
-/* 197 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22876,7 +22857,7 @@
 	module.exports = ArrayifyMixin;
 
 /***/ },
-/* 198 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22916,7 +22897,7 @@
 	module.exports = StackAccessorMixin;
 
 /***/ },
-/* 199 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22960,7 +22941,7 @@
 	module.exports = StackDataMixin;
 
 /***/ },
-/* 200 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23143,7 +23124,7 @@
 	module.exports = DefaultScalesMixin;
 
 /***/ },
-/* 201 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23274,13 +23255,13 @@
 	module.exports = TooltipMixin;
 
 /***/ },
-/* 202 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(154);
-	var PieChart = __webpack_require__(203);
+	var PieChart = __webpack_require__(202);
 
 	var ExtendedPie = React.createClass({
 		displayName: 'ExtendedPie',
@@ -23334,7 +23315,7 @@
 	module.exports = ExtendedPie;
 
 /***/ },
-/* 203 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23345,10 +23326,10 @@
 	var Chart = __webpack_require__(169);
 	var Tooltip = __webpack_require__(172);
 
-	var DefaultPropsMixin = __webpack_require__(195);
-	var HeightWidthMixin = __webpack_require__(196);
-	var AccessorMixin = __webpack_require__(204);
-	var TooltipMixin = __webpack_require__(201);
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
 
 	var Wedge = React.createClass({
 		displayName: 'Wedge',
@@ -23583,7 +23564,7 @@
 	module.exports = PieChart;
 
 /***/ },
-/* 204 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23623,17 +23604,16 @@
 	module.exports = AccessorMixin;
 
 /***/ },
-/* 205 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(154);
-	var d3 = __webpack_require__(168);
 	var Reflux = __webpack_require__(175);
 
 	var BarChart = __webpack_require__(167);
-	var BarStore = __webpack_require__(206);
+	var BarStore = __webpack_require__(205);
 
 	var GroupedBar = React.createClass({
 		displayName: 'GroupedBar',
@@ -23641,7 +23621,6 @@
 		mixins: [Reflux.listenTo(BarStore, "barChange")],
 
 		barChange: function barChange(param) {
-			console.log(param.toggle);
 			var key = param.toggle;
 			var oldData = this.state.chartData;
 			var newData = [];
@@ -23650,11 +23629,14 @@
 			});
 			/* if key is currently in chartData, remove it; otherwise add it */
 			if (chartLabels.indexOf(key) >= 0) {
-				oldData.forEach(function (item) {
-					if (item.label !== key) {
-						newData.push(item);
-					}
-				});
+				if (chartLabels.length > 1) {
+					// can't remove last selected object
+					oldData.forEach(function (item) {
+						if (item.label !== key) {
+							newData.push(item);
+						}
+					});
+				}
 			} else {
 				this.state.rawData.forEach(function (item) {
 					if (chartLabels.indexOf(item.label) >= 0 || item.label === key) {
@@ -23662,7 +23644,6 @@
 					}
 				});
 			}
-			console.log(newData);
 			this.setState({ chartData: newData });
 		},
 
@@ -23704,6 +23685,7 @@
 		render: function render() {
 			return React.createElement(BarChart, {
 				groupedBars: true,
+				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
 				width: this.props.width,
@@ -23720,7 +23702,7 @@
 	module.exports = GroupedBar;
 
 /***/ },
-/* 206 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23737,25 +23719,18 @@
 
 	var Actions = _interopRequireWildcard(_ActionsEs6);
 
-	var _actionsBarActions = __webpack_require__(194);
-
-	var BarActions = _interopRequireWildcard(_actionsBarActions);
-
-	var _immutable = __webpack_require__(207);
-
-	var _mixinsStoreMixinsEs6 = __webpack_require__(208);
+	var _mixinsStoreMixinsEs6 = __webpack_require__(206);
 
 	var BarStore = (0, _reflux.createStore)({
 
 		initialData: {
-			legend: ['Oil']
+			toggle: ''
 		},
 
 		mixins: [_mixinsStoreMixinsEs6.StoreMixins],
 
 		init: function init() {
 			this.listenTo(Actions.get('UPDATE_GRAPH'), 'updateGraph');
-			//this.listenTo(BarActions.doLegend, this.updateLegend);
 		},
 
 		cleanStore: function cleanStore() {
@@ -23769,18 +23744,60 @@
 
 		updateGraph: function updateGraph(params) {
 			this.setData({ toggle: params });
-		},
-
-		updateLegend: function updateLegend(params) {
-			console.log('updateLegend got something!');
-			console.log(params);
-			this.setData({ legend: ['Oil', 'Gas', 'Extractives'] });
 		}
 
 	});
 
 	exports['default'] = BarStore;
 	module.exports = exports['default'];
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(175);
+
+	var _immutable = __webpack_require__(207);
+
+	var FALSE_DATA = {};
+
+	var StoreMixins = {
+		initialData: FALSE_DATA,
+		mixins: [],
+
+		init: function init() {
+			if (this.initialData === FALSE_DATA) {
+				throw new Error('Stores must specify an initialData static property');
+			}
+			this.data = this.initialData;
+		},
+
+		setData: function setData(newData) {
+			this.data = newData;
+			this.emit();
+		},
+
+		get: function get() {
+			return this.data;
+		},
+
+		emit: function emit() {
+			this.trigger(this.get());
+		},
+
+		getInitialState: function getInitialState() {
+			return this.get();
+		}
+
+	};
+
+	exports.StoreMixins = StoreMixins;
 
 /***/ },
 /* 207 */
@@ -24028,64 +24045,53 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-		value: true
-	});
-
-	var _reflux = __webpack_require__(175);
-
-	var _immutable = __webpack_require__(207);
-
-	var FALSE_DATA = {};
-
-	var StoreMixins = {
-		initialData: FALSE_DATA,
-		mixins: [],
-
-		init: function init() {
-			if (this.initialData === FALSE_DATA) {
-				throw new Error('Stores must specify an initialData static property');
-			}
-			this.data = this.initialData;
-		},
-
-		setData: function setData(newData) {
-			this.data = newData;
-			this.emit();
-		},
-
-		get: function get() {
-			return this.data;
-		},
-
-		emit: function emit() {
-			this.trigger(this.get());
-		},
-
-		getInitialState: function getInitialState() {
-			return this.get();
-		}
-
-	};
-
-	exports.StoreMixins = StoreMixins;
-
-/***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var React = __webpack_require__(154);
+	var Reflux = __webpack_require__(175);
+
 	var BarChart = __webpack_require__(167);
+	var BarStore = __webpack_require__(205);
 
 	var StackedBar = React.createClass({
 		displayName: 'StackedBar',
 
+		mixins: [Reflux.listenTo(BarStore, "barChange")],
+
+		barChange: function barChange(param) {
+			var key = param.toggle;
+			var oldData = this.state.chartData;
+			var newData = [];
+			var chartLabels = oldData.map(function (item) {
+				return item.label;
+			});
+			/* if key is currently in chartData, remove it; otherwise add it */
+			if (chartLabels.indexOf(key) >= 0) {
+				if (chartLabels.length > 1) {
+					// can't remove last selected object
+					oldData.forEach(function (item) {
+						if (item.label !== key) {
+							newData.push(item);
+						}
+					});
+				}
+			} else {
+				this.state.rawData.forEach(function (item) {
+					if (chartLabels.indexOf(item.label) >= 0 || item.label === key) {
+						newData.push(item);
+					}
+				});
+			}
+			this.setState({ chartData: newData });
+		},
+
 		getInitialState: function getInitialState() {
 			return {
 				chartData: [{
-					label: '',
+					label: 'Total',
+					values: [{ x: '', y: 0 }]
+				}],
+
+				rawData: [{
+					label: 'Total',
 					values: [{ x: '', y: 0 }]
 				}]
 			};
@@ -24107,19 +24113,21 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						_this.setState({ rawData: data, chartData: data });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
 				req.send();
 			} else if (this.props.chartData) {
-				this.setState({ chartData: this.props.chartData });
+				this.setState({ rawData: this.props.chartData, chartData: this.props.chartData });
 			}
 		},
 
 		render: function render() {
 			return React.createElement(BarChart, {
+				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
+				legendData: this.state.rawData,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
@@ -24127,7 +24135,7 @@
 				yAxis: { label: this.props.ylabel },
 				tooltipHtml: this.props.tooltip,
 				tooltipMode: 'mouse',
-				legend: false });
+				legend: this.props.legend || false });
 		}
 	});
 

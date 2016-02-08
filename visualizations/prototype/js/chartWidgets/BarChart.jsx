@@ -102,7 +102,7 @@ let BarChart = React.createClass({
           colorAccessor:  (d, idx) => idx,
           legend:         false,
           legendPosition: 'right',
-          sideOffset:     90
+          sideOffset:     400
         };
     },
 
@@ -160,7 +160,8 @@ let BarChart = React.createClass({
              x,
              xAxis,
              yAxis,
-             groupedBars} = this.props;
+             groupedBars,
+             chartTitle} = this.props;
 
         let [data,
              innerWidth,
@@ -174,6 +175,10 @@ let BarChart = React.createClass({
 
         return (
                 <div>
+                <h3 className={"chartTitle"}>{chartTitle}</h3>
+                <div className={"legend"} style={{ 'verticalAlign': 'top' }}>
+                    {this._renderLegend()}
+                </div>
                 <Chart height={height} width={width} margin={margin}>
                 <DataSet
             data={data}
@@ -211,9 +216,7 @@ let BarChart = React.createClass({
                 </Chart>
 
                 <Tooltip {...this.state.tooltip}/>
-                <div style={{ display: 'table-cell', width: this.props.sideOffset, 'verticalAlign': 'top' }}>
-                    {this._renderLegend()}
-                </div>
+                
                 </div>
         );
     }
