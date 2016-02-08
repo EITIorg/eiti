@@ -150,7 +150,6 @@ class RevenueStreamInlineEntityFormController extends EntityInlineEntityFormCont
    * Overrides EntityInlineEntityFormController::entityFormSubmit().
    */
   public function entityFormSubmit(&$entity_form, &$form_state) {
-    dpm($form_state, '$form_state');
     parent::entityFormSubmit($entity_form, $form_state);
   }
 }
