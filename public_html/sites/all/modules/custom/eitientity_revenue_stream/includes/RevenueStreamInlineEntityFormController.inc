@@ -154,4 +154,3 @@ class RevenueStreamInlineEntityFormController extends EntityInlineEntityFormCont
     parent::entityFormSubmit($entity_form, $form_state);
   }
 }
-
