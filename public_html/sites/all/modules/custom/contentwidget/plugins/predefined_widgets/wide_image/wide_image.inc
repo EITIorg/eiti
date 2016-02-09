@@ -10,7 +10,7 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Wide Image',
+  'title' => 'Wide Image (Header)',
   'description' => 'Display a wide image with an overlaid Header, Sub-Header and some links .',
   'render callback' => 'contentblock_wide_image_render',
   'settings form' => 'contentblock_wide_image_settings',
@@ -197,10 +197,14 @@ function contentwidget_wide_image_group_alter(&$element) {
   if (!empty($element['group_wide_image'])) {
     // Make sure that the group shows up only when the widget is "Wide Image".
     $element['group_wide_image']['#id'] = 'group-wide-image-details';
-    $element['group_wide_image']['#states'] = array(
-      'visible' => array(
-        'input[name="field_cbwidget[und][0][widget]"]' => array('value' => 'wide_image'),
-      ),
-    );
+    if (empty($element['group_wide_image']['#states']['visible'])) {
+      $element['group_wide_image']['#states'] = array(
+        'visible' => array()
+      );
+    }
+    else {
+      $element['group_wide_image']['#states']['visible'][] = 'or';
+    }
+    $element['group_wide_image']['#states']['visible'][] = array('input[name="field_cbwidget[und][0][widget]"]' => array('value' => 'wide_image'));
   }
 }
