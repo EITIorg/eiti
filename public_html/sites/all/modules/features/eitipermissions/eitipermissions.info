@@ -1,4 +1,4 @@
-name = eitipermissions
+name = EITI Permissions
 description = All the permissions and roles (and other user related stuff).
 core = 7.x
 package = EITI Custom

@@ -1,4 +1,4 @@
-name = eitict_article
+name = EITI Content Type Article
 description = Article content-type lives here, with all its features.
 core = 7.x
 package = EITI Entities

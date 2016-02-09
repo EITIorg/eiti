@@ -1,4 +1,4 @@
-name = eitict_mention
+name = EITI Content Type Mention
 description = Mention CT (previously: In the News)
 core = 7.x
 package = EITI Entities

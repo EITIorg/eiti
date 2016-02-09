@@ -1,4 +1,4 @@
-name = eititaxonomies
+name = EITI Taxonomies
 description = All vocabularies live here.
 core = 7.x
 package = EITI Custom

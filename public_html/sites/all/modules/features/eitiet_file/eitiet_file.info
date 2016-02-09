@@ -1,4 +1,5 @@
-name = eitiet_file
+name = EITI Entity Type File
+description = File Entity fields and settings
 core = 7.x
 package = EITI Entities
 version = 7.x-0.1

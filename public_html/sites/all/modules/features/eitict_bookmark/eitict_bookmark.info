@@ -1,4 +1,4 @@
-name = eitict_bookmark
+name = EITI Content Type Bookmark
 description = Bookmark content-type and related custom functionality.
 core = 7.x
 package = EITI Entities

@@ -1,4 +1,4 @@
-name = eitict_document
+name = EITI Content Type Document
 description = Holds the Document content-type and everything related.
 core = 7.x
 package = EITI Entities

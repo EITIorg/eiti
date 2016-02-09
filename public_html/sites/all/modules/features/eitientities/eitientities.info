@@ -1,4 +1,4 @@
-name = eitientities
+name = EITI Entities
 description = All of the field bases and common functionalities between entities live here.
 core = 7.x
 package = EITI Entities
