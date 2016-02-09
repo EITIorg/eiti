@@ -26,7 +26,7 @@ class SummaryDataEntityUIController extends HelperEntityBundleableUIController {
         'load arguments' => array($this->entityType),
         'access callback' => 'entity_access',
         'access arguments' => array('edit', $this->entityType, $this->entity_id_count),
-        'title' => 'Upload',
+        'title' => 'Re-Upload',
         'type' => MENU_LOCAL_TASK,
         'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
         'weight' => 0,

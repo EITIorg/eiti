@@ -43,12 +43,16 @@ function summary_data_form($form, &$form_state, $entity, $op) {
  * @return array
  */
 function summary_data_spreadsheet_upload_form($form, &$form_state, $entity) {
+  // Save the entity in the form_state.
+  $form_state['summary_data'] = $entity;
+
   $form['report_upload'] = array(
     '#title' => t('Spreadsheet Report'),
     '#type' => 'managed_file',
     '#description' => t('Please upload the spreadsheet report. We will handle the rest of the process.<br/>You will be able either to edit directly the summary data or to re-upload the updated report later.'),
     '#upload_location' => 'public://spreadsheets_temporary/',
     '#upload_validators' => array('file_validate_extensions' => array('xls xlsx')),
+    '#required' => TRUE,
   );
 
   $entity_uri = $entity->uri();
@@ -57,7 +61,6 @@ function summary_data_spreadsheet_upload_form($form, &$form_state, $entity) {
   $form['actions']['next'] = array(
     '#type' => 'submit',
     '#value' => t('Next'),
-    '#validate' => array('_summary_data_spreadsheet_upload_form_validate'),
     '#submit' => array('_summary_data_spreadsheet_upload_form_submit'),
   );
   $form['actions']['cancel'] = array(
@@ -68,19 +71,6 @@ function summary_data_spreadsheet_upload_form($form, &$form_state, $entity) {
   );
 
   return $form;
-}
-
-/**
- * Callback validation.
- *
- * @param array $form
- * @param array $form_state
- */
-function _summary_data_spreadsheet_upload_form_validate($form, $form_state) {
-  if ($form_state['values']['edit_method'] == 'spreadsheet' && empty($form_state['values']['report_upload'])) {
-    $msg = t('Make sure you have specified a file.');
-    form_set_error('report_upload', $msg);
-  }
 }
 
 /**
@@ -110,6 +100,7 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
       'EITIRevenueStreamsGovernmentMigration',
       'EITIRevenueStreamsCompaniesMigration',
     );
+
     $summary_data_id = isset($form_state['summary_data']->id) ? $form_state['summary_data']->id : FALSE;
 
     // Now create the batch process.
