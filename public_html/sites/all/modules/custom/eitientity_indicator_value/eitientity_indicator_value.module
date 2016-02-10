@@ -117,8 +117,16 @@ function eitientity_indicator_value_get_indicator_label($entity_type, $entity) {
   if (!empty($entity->indicator_id)) {
     /** @var IndicatorEntity $indicator_entity */
     $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
+
+    // Add indicator group name as prefix on IEF.
+    $parent_name = '';
+    if (!empty($indicator_entity->parent)) {
+      $parent_indicator_entity = entity_load_single('indicator', $indicator_entity->parent);
+      $parent_name = '<b>' . filter_xss($parent_indicator_entity->label()) . ' > </b>';
+    }
+
     if (!empty($indicator_entity)) {
-      return filter_xss($indicator_entity->label());
+      return $parent_name . filter_xss($indicator_entity->label());
     }
   }
 
