@@ -12,6 +12,7 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
   protected $entity_path;
   protected $entity_id_count;
   protected $bundle_path;
+  protected $wildcard;
   protected $hide_content_ui;
 
   public function __construct($entity_type, $entity_info) {
@@ -21,19 +22,20 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
     $this->entity_id_count = count(explode('/', $this->entity_path));
     $this->bundle_path = $this->entityInfo['admin ui']['bundle path'];
 
+    // Set this on the object so classes that extend hook_menu() can use it.
+    $this->wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%entity_object';
+
     if (isset($this->entityInfo['admin ui']['hide content ui'])) {
       $this->hide_content_ui = $this->entityInfo['admin ui']['hide content ui'];
     }
   }
 
   /**
-   * {@inheritdoc}
+   * Define menu items and page callbacks.
    */
   public function hook_menu() {
     $items = array();
 
-    // Set this on the object so classes that extend hook_menu() can use it.
-    $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%entity_object';
     $plural_label = isset($this->entityInfo['plural label']) ? $this->entityInfo['plural label'] : $this->entityInfo['label'] . 's';
 
     $defaults = array(
@@ -48,7 +50,7 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
     /**
      * Add entity specific menu items.
      */
-    $items[$this->entity_path . '/' . $wildcard] = array(
+    $items[$this->entity_path . '/' . $this->wildcard] = array(
         'title callback' => 'entity_ui_get_page_title',
         'title arguments' => array('view', $this->entityType, $this->entity_id_count),
         'page callback' => 'entity_ui_entity_page_view',
@@ -57,12 +59,12 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
         'access callback' => 'entity_access',
         'access arguments' => array('view', $this->entityType, $this->entity_id_count),
       ) + $defaults;
-    $items[$this->entity_path . '/' . $wildcard . '/view'] = array(
+    $items[$this->entity_path . '/' . $this->wildcard . '/view'] = array(
       'title' => 'View',
       'type' => MENU_DEFAULT_LOCAL_TASK,
       'weight' => -10,
     );
-    $items[$this->entity_path . '/' . $wildcard . '/edit'] = array(
+    $items[$this->entity_path . '/' . $this->wildcard . '/edit'] = array(
         'page callback' => 'entity_ui_get_form',
         'page arguments' => array($this->entityType, $this->entity_id_count),
         'load arguments' => array($this->entityType),
@@ -73,7 +75,7 @@ class HelperEntityBundleableUIController extends EntityBundleableUIController {
         'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
         'weight' => 0,
       ) + $defaults;
-    $items[$this->entity_path . '/' . $wildcard . '/delete'] = array(
+    $items[$this->entity_path . '/' . $this->wildcard . '/delete'] = array(
         'page callback' => 'drupal_get_form',
         'page arguments' => array($this->entityType . '_operation_form', $this->entityType, $this->entity_id_count, 'delete'),
         'load arguments' => array($this->entityType),

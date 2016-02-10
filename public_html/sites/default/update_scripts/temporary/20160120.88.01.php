@@ -27,6 +27,7 @@ drupal_flush_all_caches();
 // Prepare a list of features to be installed.
 $feature_names = array(
   'eitict_article',
+  'eitict_bookmark',
   'eitict_document',
   'eitict_mention',
   'eitict_person',

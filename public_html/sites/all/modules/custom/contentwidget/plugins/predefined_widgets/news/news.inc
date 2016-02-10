@@ -12,9 +12,8 @@
 $plugin = array(
   'title' => 'News Listing',
   'description' => 'Will display a list of recent news.',
+  'hidden' => TRUE,
   'render callback' => 'contentblock_news_widget_render',
-  'settings form' => 'contentblock_news_widget_settings',
-  'settings alter' => 'contentwidget_news_widget_settings_alter',
   'defaults' => array(),
 );
 
@@ -22,15 +21,12 @@ $plugin = array(
  * Render callback for the 'News Listing' predefined widget.
  */
 function contentblock_news_widget_render($plugin, $widget_settings, $entity, $langcode) {
-  // Provide some default values.
-  $widget_settings += $plugin['defaults'];
-
   $view_name = 'article';
   $view_display_id = 'news_listing';
 
   $view = views_get_view($view_name);
   if (!$view || !$view->access($view_display_id)) {
-    return;
+    return array();
   }
   $view->set_display($view_display_id);
 
@@ -39,22 +35,4 @@ function contentblock_news_widget_render($plugin, $widget_settings, $entity, $la
   $view->display_handler->set_option('css_class', $css_class);
 
   return array('#markup' => $view->preview());
-}
-
-/**
- * Settings form for the 'Top Projects' predefined widget.
- */
-function contentblock_news_widget_settings(&$element, &$form_state, $plugin, $widget_settings) {
-  $settings_form = array();
-
-  return $settings_form;
-}
-
-/**
- * Returns an serialized string for storing the widget settings in the database.
- */
-function contentwidget_news_widget_settings_alter($widget_name, $form_values) {
-  $settings = array();
-
-  return serialize($settings);
 }

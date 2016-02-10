@@ -14,7 +14,6 @@ $plugin = array(
   'description' => 'Displays a list of featured bookmarks in a square-stylized fashion.',
   'render callback' => 'contentblock_featured_bookmarks_render',
   'settings form' => 'contentblock_featured_bookmarks_settings',
-  'settings alter' => 'contentwidget_featured_bookmarks_settings_alter',
   'entity form alter' => 'contentwidget_featured_bookmarks_form_alter',
   'entity group alter' => 'contentwidget_featured_bookmarks_group_alter',
   'defaults' => array(),
@@ -24,9 +23,7 @@ $plugin = array(
  * Render callback for the 'Featured Bookmarks' predefined widget.
  */
 function contentblock_featured_bookmarks_render($plugin, $widget_settings, $entity, $langcode) {
-  // Provide some default values.
-  $widget_settings += $plugin['defaults'];
-  $size = $widget_settings['bookmarks']['widget_size'];
+  $size = $widget_settings['widget_size'];
 
   $referenced_ids = array();
   foreach ($entity->field_bookmark_list[$langcode] as $reference) {
@@ -104,7 +101,7 @@ function contentblock_featured_bookmarks_render($plugin, $widget_settings, $enti
  */
 function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
-  $default_size = isset($widget_settings['bookmarks']['widget_size']) ? $widget_settings['bookmarks']['widget_size'] : '';
+  $default_size = isset($widget_settings['widget_size']) ? $widget_settings['widget_size'] : '';
 
   $available_sizes = array(
     '' => t('- Select -'),
@@ -128,7 +125,7 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
   );
 
   // Show previews if user has selected a size.
-  if (!empty($widget_settings['bookmarks']['widget_size'])) {
+  if (!empty($widget_settings['widget_size'])) {
     $settings_form['widget_preview'] = array(
       '#type' => 'container',
       '#prefix' => '<div id="widget-preview">',
@@ -138,8 +135,8 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
       '#type' => 'html_tag',
       '#tag' => 'img',
       '#attributes' => array(
-        'class' => 'widget-size-' . $widget_settings['bookmarks']['widget_size'],
-        'src' => '/' . $plugin['path'] . '/layouts/layout-' . $widget_settings['bookmarks']['widget_size'] . '.png',
+        'class' => 'widget-size-' . $widget_settings['widget_size'],
+        'src' => '/' . $plugin['path'] . '/layouts/layout-' . $widget_settings['widget_size'] . '.png',
       ),
     );
   }
@@ -169,6 +166,7 @@ function contentblock_featured_bookmarks_settings_ajax($form, $form_state) {
 function contentwidget_featured_bookmarks_form_alter(&$form, &$form_state, $plugin) {
   // We need to make sure that this file is included anyway, because validation will trigger an error.
   form_load_include($form_state, 'inc', 'contentwidget', 'plugins/predefined_widgets/bookmarks/bookmarks');
+
   // Add our custom validation.
   $form['actions']['submit']['#validate'][] = 'contentwidget_featured_bookmarks_form_validate';
 }
@@ -179,7 +177,7 @@ function contentwidget_featured_bookmarks_form_alter(&$form, &$form_state, $plug
 function contentwidget_featured_bookmarks_form_validate($form, $form_state) {
   if ($form_state['values']['field_cbwidget']['und'][0]['widget'] == 'bookmarks') {
     $widget_settings = !empty($form_state['values']['field_cbwidget']['und'][0]['settings']) ? unserialize($form_state['values']['field_cbwidget']['und'][0]['settings']) : array();
-    $size = isset($widget_settings['bookmarks']['widget_size']) ? $widget_settings['bookmarks']['widget_size'] : 0;
+    $size = isset($widget_settings['widget_size']) ? $widget_settings['widget_size'] : 0;
     if (!empty($size)) {
       $ief = reset($form_state['inline_entity_form']);
       if (count($ief['entities']) < $size) {
@@ -199,7 +197,7 @@ function contentwidget_featured_bookmarks_form_validate($form, $form_state) {
 /**
  * Callback for the groups pre-render, allows us to interact with entity groups.
  */
-function contentwidget_featured_bookmarks_group_alter(&$element) {
+function contentwidget_featured_bookmarks_group_alter(&$element, $plugin) {
   // Make sure the group is there.
   if (!empty($element['group_bookmark'])) {
     // Make sure that the group shows up only when the widget is "Featured Bookmarks".

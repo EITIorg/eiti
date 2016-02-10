@@ -14,7 +14,6 @@ $plugin = array(
   'description' => 'Wide image with an overlaid quote.',
   'render callback' => 'contentblock_quote_render',
   'settings form' => 'contentblock_quote_settings',
-  'settings alter' => 'contentwidget_quote_settings_alter',
   'entity form alter' => 'contentwidget_quote_form_alter',
   'entity group alter' => 'contentwidget_quote_group_alter',
   'defaults' => array(
@@ -31,41 +30,46 @@ $plugin = array(
  * Render callback for the 'Quote' predefined widget.
  */
 function contentblock_quote_render($plugin, $widget_settings, $entity, $langcode) {
-  // Provide some default values.
-  $widget_settings += $plugin['defaults'];
-
   // Prepare the variables.
-  $quote_text = (!empty($widget_settings['quote']['quote']['quote_text'])) ? $widget_settings['quote']['quote']['quote_text'] : '';
-  $quote_from = (!empty($widget_settings['quote']['quote']['quote_from'])) ? $widget_settings['quote']['quote']['quote_from'] : FALSE;
-  $is_linked = (!empty($widget_settings['quote']['quote']['quote_is_link'])) ? $widget_settings['quote']['quote']['quote_is_link'] : FALSE;
-  $quote_link_url = (!empty($widget_settings['quote']['quote']['quote_link_url'])) ? $widget_settings['quote']['quote']['quote_link_url'] : '';
-  $image_file = (object) $entity->field_cbw_wide_image['und'][0];
-  $image_url = file_create_url($image_file->uri);
+  $quote_text = $widget_settings['quote']['quote_text'];
+  $quote_from = $widget_settings['quote']['quote_from'];
+  $quote_is_link = $widget_settings['quote']['quote_is_link'];
+  $quote_link_url = $widget_settings['quote']['quote_link_url'];
+
+  $image_url = '';
+  if (!empty($entity->field_cbw_wide_image[LANGUAGE_NONE][0])) {
+    $image_file = (object) $entity->field_cbw_wide_image[LANGUAGE_NONE][0];
+    $image_url = file_create_url($image_file->uri);
+  }
 
   // And now prepare the list of links.
   $block = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array('wide-image-wrapper')
-    )
+    ),
   );
-  $block['image'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'img',
-    '#attributes' => array(
-      'class' => array('background-image', 'wide-image'),
-      'src' => $image_url
-    )
-  );
+
+  if (!empty($image_url)) {
+    $block['image'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'img',
+      '#attributes' => array(
+        'class' => array('background-image', 'wide-image'),
+        'src' => $image_url,
+      ),
+    );
+  }
+
   $block['overlay'] = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array('overlay-wrapper'),
-    )
+    ),
   );
 
   // If it's not a URL, we simply render the quote in the overlay.
-  if ($is_linked && !empty($quote_link_url)) {
+  if ($quote_is_link && !empty($quote_link_url)) {
     // We need a quote that's linkable.
     $quote['quote'] = array(
       '#type' => 'html_tag',
@@ -122,10 +126,10 @@ function contentblock_quote_render($plugin, $widget_settings, $entity, $langcode
 function contentblock_quote_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
-  $quote_text = isset($widget_settings['quote']['quote']['quote_text']) ? $widget_settings['quote']['quote']['quote_text'] : '';
-  $quote_from = isset($widget_settings['quote']['quote']['quote_from']) ? $widget_settings['quote']['quote']['quote_from'] : '';
-  $quote_is_link = isset($widget_settings['quote']['quote']['quote_is_link']) ? $widget_settings['quote']['quote']['quote_is_link'] : FALSE;
-  $quote_link_url = isset($widget_settings['quote']['quote']['quote_link_url']) ? $widget_settings['quote']['quote']['quote_link_url'] : '';
+  $quote_text = $widget_settings['quote']['quote_text'];
+  $quote_from = $widget_settings['quote']['quote_from'];
+  $quote_is_link = $widget_settings['quote']['quote_is_link'];
+  $quote_link_url = $widget_settings['quote']['quote_link_url'];
 
   $settings_form['quote'] = array(
     '#type' => 'fieldset',
@@ -185,10 +189,10 @@ function contentwidget_quote_form_alter(&$form, &$form_state) {
  * Our small validation.
  */
 function contentwidget_featured_quote_form_validate($form, $form_state) {
-  if ($form_state['values']['field_cbwidget']['und'][0]['widget'] == 'quote') {
-    $widget_settings = !empty($form_state['values']['field_cbwidget']['und'][0]['settings']) ? unserialize($form_state['values']['field_cbwidget']['und'][0]['settings']) : array();
+  if ($form_state['values']['field_cbwidget'][LANGUAGE_NONE][0]['widget'] == 'quote') {
+    $widget_settings = !empty($form_state['values']['field_cbwidget'][LANGUAGE_NONE][0]['settings']) ? unserialize($form_state['values']['field_cbwidget'][LANGUAGE_NONE][0]['settings']) : array();
 
-    $quote_text = isset($widget_settings['quote']['quote']['quote_text']) ? $widget_settings['quote']['quote']['quote_text'] : '';
+    $quote_text = isset($widget_settings['quote']['quote_text']) ? $widget_settings['quote']['quote_text'] : '';
     if (empty($quote_text)) {
       $msg = t('A quote widgets requires a quote-text.');
       form_set_error('field_cbwidget][und][0][settings][quote][quote][quote_text', $msg);
