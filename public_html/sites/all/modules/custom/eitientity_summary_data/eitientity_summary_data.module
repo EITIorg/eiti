@@ -319,3 +319,20 @@ function eitientity_summary_data_date_popup_process_alter(&$element, &$form_stat
     array_push($element['#element_validate'], '_summary_data_form_date_popup_date_validate');
   }
 }
+
+/**
+ * Implements hook_admin_paths().
+ */
+function eitientity_summary_data_admin_paths() {
+  $paths = array(
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add/*' => TRUE,
+    //EITIENTITY_SUMMARYDATA_UI_PATH . '/*' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/edit' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/usage' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/upload' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/delete' => TRUE,
+  );
+
+  return $paths;
+}
