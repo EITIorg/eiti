@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitipanels feature.
+ */
+
+include_once 'eitipanels.features.inc';
