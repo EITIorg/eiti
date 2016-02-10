@@ -19,18 +19,16 @@
  */
 function summary_data_form($form, &$form_state, $entity, $op) {
   // We have to decide on the form type by the operation.
-  switch ($op) {
-    case 'add':
-      // Set the appropriate title.
-      $entity_type = $entity->entityType();
-      $info = entity_get_info($entity_type);
-      drupal_set_title(t('Add !label via Spreadsheet Upload', array('!label' => $info['label'])));
+  if ($op == 'edit' || !empty($_GET['manual'])) {
+    $form = summary_data_default_form($form, $form_state, $entity);
+  }
+  else if ($op == 'add') {
+    // Set the appropriate title.
+    $entity_type = $entity->entityType();
+    $info = entity_get_info($entity_type);
+    drupal_set_title(t('Add !label via Spreadsheet Upload', array('!label' => $info['label'])));
 
-      $form = summary_data_spreadsheet_upload_form($form, $form_state, $entity);
-      break;
-    case 'edit':
-      $form = summary_data_default_form($form, $form_state, $entity);
-      break;
+    $form = summary_data_spreadsheet_upload_form($form, $form_state, $entity);
   }
 
   return $form;
