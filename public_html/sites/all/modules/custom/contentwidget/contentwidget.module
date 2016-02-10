@@ -97,6 +97,9 @@ function contentwidget_field_widget_info() {
  *  Implements hook_field_widget_form().
  */
 function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  /** @var Entity $entity */
+  $entity = $form['#entity'];
+
   $selected_widget = isset($items[0]['widget']) ? $items[0]['widget'] : NULL;
   $selected_widget_settings = !empty($items[0]['settings']) ? unserialize($items[0]['settings']) : array();
 
@@ -111,9 +114,10 @@ function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance
 
   $element['widget'] = array(
     '#title' => $element['#title'],
-    '#type' => 'radios',
+    '#type' => 'select',
     '#default_value' => $selected_widget,
     '#required' => $element['#required'],
+    '#disabled' => isset($entity->is_new) ? FALSE : TRUE,
     '#options' => $options,
   );
 
@@ -167,16 +171,16 @@ function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance
  *   An associative array containing the current state of the widget form.
  */
 function contentwidget_field_widget_validate($element, &$form_state) {
-  $values = array();
+  $form_element_values = array();
   if (isset($form_state['values'][$element['#field_name']][$element['#language']][0])) {
-    $values = reset($form_state['values'][$element['#field_name']][$element['#language']]);
+    $form_element_values = reset($form_state['values'][$element['#field_name']][$element['#language']]);
   }
 
   // Clear all cache.
   cache_clear_all();
 
   // Prepare the data for storage.
-  $data = _contentwidget_settings_clean_values($values);
+  $data = _contentwidget_settings_clean_values($form_element_values);
   form_set_value($element, $data, $form_state);
 }
 
@@ -190,17 +194,18 @@ function contentwidget_field_widget_validate($element, &$form_state) {
  *   An associative array containing the settings for the ContentWidget.
  */
 function _contentwidget_settings_clean_values($values) {
+  $widget_name = $values['widget'];
   $data = array(
-    'widget' => $values['widget'],
+    'widget' => $widget_name,
     'settings' => NULL,
   );
 
-  $plugin = contentwidget_get_predefined_widget($values['widget']);
+  $plugin = contentwidget_get_predefined_widget($widget_name);
   if ($function = ctools_plugin_get_function($plugin, 'settings alter')) {
-    $data['settings'] = $function($values['widget'], $values['settings']);
+    $data['settings'] = $function($values['settings'][$widget_name]);
   }
-  else if (!empty($values['settings'])) {
-    $data['settings'] = serialize($values['settings']);
+  else if (!empty($values['settings'][$widget_name])) {
+    $data['settings'] = serialize($values['settings'][$widget_name]);
   }
 
   return $data;
@@ -288,8 +293,7 @@ function contentwidget_field_group_build_pre_render_alter(&$element) {
   $plugins = ctools_get_plugins('contentwidget', 'predefined_widgets');
   foreach ($plugins as $key => $plugin_info) {
     if ($function = ctools_plugin_get_function($plugin_info, 'entity group alter')) {
-      $function($element);
+      $function($element, $plugin_info);
     }
   }
 }
-

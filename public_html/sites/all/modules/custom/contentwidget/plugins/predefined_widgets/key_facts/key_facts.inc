@@ -14,7 +14,6 @@ $plugin = array(
   'description' => 'Widget that contains a couple of key facts.',
   'render callback' => 'contentblock_key_facts_render',
   'settings form' => 'contentblock_key_facts_settings',
-  'settings alter' => 'contentwidget_key_facts_settings_alter',
   'entity form alter' => 'contentwidget_key_facts_form_alter',
   'entity group alter' => 'contentwidget_key_facts_group_alter',
   'defaults' => array(),
@@ -24,9 +23,6 @@ $plugin = array(
  * Render callback for the 'Key Facts' predefined widget.
  */
 function contentblock_key_facts_render($plugin, $widget_settings, $entity, $langcode) {
-  // Provide some default values.
-  $widget_settings += $plugin['defaults'];
-
   // Prepare the variables.
   if (isset($entity->field_cbw_key_facts['und'][0]) && $image_file = (object) $entity->field_cbw_key_facts['und'][0]) {
     $image_url = file_create_url($image_file->uri);
@@ -34,7 +30,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
   else {
     $image_url = FALSE;
   }
-  $fact_max = (!empty($widget_settings['key_facts']['fact']['facts_number'])) ? $widget_settings['key_facts']['fact']['facts_number'] : 4;
+  $fact_max = (!empty($widget_settings['fact']['facts_number'])) ? $widget_settings['fact']['facts_number'] : 4;
 
   // Prepare the wrapper.
   $block = array(
@@ -158,7 +154,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
 function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
-  $facts_max = isset($widget_settings['key_facts']['fact']['facts_number']) ? $widget_settings['key_facts']['fact']['facts_number'] : 4;
+  $facts_max = isset($widget_settings['fact']['facts_number']) ? $widget_settings['fact']['facts_number'] : 4;
 
   $settings_form['fact'] = array(
     '#type' => 'fieldset',
@@ -279,7 +275,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
  *  Returns the value of the setting.
  */
 function _contentblock_key_fact_get_property_value($widget_settings, $delta, $key) {
-  $value = isset($widget_settings['key_facts']['fact']['fact_' . $delta][$key . '_' . $delta]) ? $widget_settings['key_facts']['fact']['fact_' . $delta][$key . '_' . $delta] : '';
+  $value = isset($widget_settings['fact']['fact_' . $delta][$key . '_' . $delta]) ? $widget_settings['fact']['fact_' . $delta][$key . '_' . $delta] : '';
   return $value;
 }
 

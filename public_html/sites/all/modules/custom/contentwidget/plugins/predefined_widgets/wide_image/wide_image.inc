@@ -14,7 +14,6 @@ $plugin = array(
   'description' => 'Display a wide image with an overlaid Header, Sub-Header and some links .',
   'render callback' => 'contentblock_wide_image_render',
   'settings form' => 'contentblock_wide_image_settings',
-  'settings alter' => 'contentwidget_wide_image_settings_alter',
   'entity form alter' => 'contentwidget_wide_image_form_alter',
   'entity group alter' => 'contentwidget_wide_image_group_alter',
   'defaults' => array(),
@@ -24,24 +23,25 @@ $plugin = array(
  * Render callback for the 'Wide Image' predefined widget.
  */
 function contentblock_wide_image_render($plugin, $widget_settings, $entity, $langcode) {
-  // Provide some default values.
-  $widget_settings += $plugin['defaults'];
-
   // Prepare the variables.
-  $image_file = (object) $entity->field_cbw_wide_image['und'][0];
-  $image_url = file_create_url($image_file->uri);
-  $header_small = (!empty($widget_settings['wide_image']['header_small'])) ? $widget_settings['wide_image']['header_small'] : FALSE;
-  $header_big = (!empty($widget_settings['wide_image']['header_big'])) ? $widget_settings['wide_image']['header_big'] : FALSE;
+
+  $image_url = '';
+  if (!empty($entity->field_cbw_wide_image[LANGUAGE_NONE][0])) {
+    $image_file = (object) $entity->field_cbw_wide_image['und'][0];
+    $image_url = file_create_url($image_file->uri);
+  }
+  $header_small = (!empty($widget_settings['header_small'])) ? $widget_settings['header_small'] : FALSE;
+  $header_big = (!empty($widget_settings['header_big'])) ? $widget_settings['header_big'] : FALSE;
 
   // And now prepare the list of links.
   $link_items = array();
-  for ($link_count = 0; $link_count < $widget_settings['wide_image']['links']['links_number']; $link_count++) {
+  for ($link_count = 0; $link_count < $widget_settings['links']['links_number']; $link_count++) {
     $link_items[] = theme_link(array(
-      'text' => $widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count],
-      'path' => $widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count],
+      'text' => $widget_settings['links']['link_' . $link_count]['title_' . $link_count],
+      'path' => $widget_settings['links']['link_' . $link_count]['link_' . $link_count],
       'options' => array(
         'attributes' => array(
-          'class' => array('link-with-icon', 'icon', $widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count])
+          'class' => array('link-with-icon', 'icon', $widget_settings['links']['link_' . $link_count]['icon_' . $link_count])
         ),
         'html' => FALSE,
       )
@@ -53,14 +53,18 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
       'class' => array('wide-image-wrapper')
     )
   );
-  $block['image'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'img',
-    '#attributes' => array(
-      'class' => array('background-image', 'wide-image'),
-      'src' => $image_url
-    )
-  );
+
+  if (!empty($image_url)) {
+    $block['image'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'img',
+      '#attributes' => array(
+        'class' => array('background-image', 'wide-image'),
+        'src' => $image_url
+      ),
+    );
+  }
+
   $block['overlay'] = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -100,9 +104,9 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
 function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
-  $header_small = isset($widget_settings['wide_image']['header_small']) ? $widget_settings['wide_image']['header_small'] : '';
-  $header_big = isset($widget_settings['wide_image']['header_big']) ? $widget_settings['wide_image']['header_big'] : '';
-  $links_max = isset($widget_settings['wide_image']['links']['links_number']) ? $widget_settings['wide_image']['links']['links_number'] : 4;
+  $header_small = isset($widget_settings['header_small']) ? $widget_settings['header_small'] : '';
+  $header_big = isset($widget_settings['header_big']) ? $widget_settings['header_big'] : '';
+  $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
 
   $settings_form['header_small'] = array(
     '#type' => 'textfield',
@@ -149,9 +153,9 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
       '#collapsible' => FALSE,
     );
 
-    $link_url = isset($widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['link_' . $link_count] : '';
-    $link_title = isset($widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['title_' . $link_count] : '';
-    $link_icon = isset($widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count]) ? $widget_settings['wide_image']['links']['link_' . $link_count]['icon_' . $link_count] : '';
+    $link_url = isset($widget_settings['links']['link_' . $link_count]['link_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['link_' . $link_count] : '';
+    $link_title = isset($widget_settings['links']['link_' . $link_count]['title_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['title_' . $link_count] : '';
+    $link_icon = isset($widget_settings['links']['link_' . $link_count]['icon_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['icon_' . $link_count] : '';
 
     $icons = helpertheme_get_svg_icons();
     $options = array('' => t('No Icon'));
