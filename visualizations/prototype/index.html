@@ -12,7 +12,7 @@
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/prototype.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
         <!-- Latest compiled and minified CSS -->
     <!-- Custom styles for this template -->
@@ -118,7 +118,6 @@
 
               function() {
             /********** VIZ #2 **********/
-            debugger;
             var margin8 = {top: 20, right: 20, bottom: 30, left: 40},
                 width8 = 600 - margin8.left - margin8.right,
                 height8 = 300 - margin8.top - margin8.bottom;
@@ -567,6 +566,8 @@
                 .attr("dy", ".75em");
 
             d3.json("data/viz7.json", function(error, root) {
+              debugger;
+              console.log(root);
               if(error) return console.warn(error);
               initialize(root);
               accumulate(root);

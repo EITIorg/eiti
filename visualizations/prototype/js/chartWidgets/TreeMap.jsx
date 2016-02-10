@@ -9,57 +9,6 @@ let HeightWidthMixin = require('./HeightWidthMixin');
 let AccessorMixin = require('./AccessorMixin');
 let TooltipMixin = require('./TooltipMixin');
 
-let DataSet = React.createClass({
-	propTypes: {
-		colorScale: React.PropTypes.func.isRequired,
-		strokeWidth: React.PropTypes.number,
-		stroke: React.PropTypes.string,
-		fill: React.PropTypes.string,
-		opacity: React.PropTypes.number,
-		x: React.PropTypes.func.isRequired
-	},
-
-	getDefaultProps() {
-		return {
-			strokeWidth: 2,
-			stroke: '#000',
-			fill: 'none',
-			opacity: 0.3
-		};
-	},
-
-	render() {
-		let {height,
-			 width,
-			 margin,
-			 formatNumber,
-			 transitioning,
-			 colorScale,
-			 radius,
-			 strokeWidth,
-			 stroke,
-			 fill,
-			 opacity,
-			 x,
-			 y,
-			 onMouseEnter,
-			 onMouseLeave} = this.props;
-
-		var x = d3.scale.linear()
-            .domain([0, width])
-            .range([0, width]);
-
-        var y = d3.scale.linear()
-            .domain([0, height])
-            .range([0, height]);		
-
-		return (
-			<g>
-			</g>
-		);
-	}
-});
-
 let TreeMap = React.createClass({
 	mixins: [DefaultPropsMixin,
 			 HeightWidthMixin,
@@ -76,15 +25,37 @@ let TreeMap = React.createClass({
 		};
 	},
 
-	_tooltipHtml(d, position) {
-        let html = this.props.tooltipHtml(this.props.x(d), this.props.y(d));
-
-        return [html, 0, 0];
+	componentWillMount: function() {
+		if(this.props.dataURL) {
+			var _this = this;
+			/* Old school AJAX request to try to stay away from jQuery */
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function() {
+			    if (req.readyState == 4 && req.status == 200) {
+			    	var data = JSON.parse(req.responseText);
+			    	var classData = data.map(function(item) {
+			    		var newItem = item;
+			    		newItem['active'] = true;
+			    		return newItem;
+			    	});
+			    	_this.setState({rawData: classData, chartData: data});
+			    }
+			  }
+			req.open("GET", this.props.dataURL, true);
+			req.send();
+		}
+		else if(this.props.chartData) {
+			var classData = this.props.chartData.map(function(item) {
+	    		var newItem = item;
+	    		newItem['active'] = true;
+	    		return newItem;
+	    	});
+			this.setState({rawData: classData, chartData: this.props.chartData});
+		}
 	},
 
 	render() {
-		let {data,
-			 width,
+		let {width,
 			 height,
 			 margin,
 			 colorScale,
@@ -97,22 +68,8 @@ let TreeMap = React.createClass({
 		return (
 			<div>
 				<Chart height={height} width={width} margin={margin}>
-				<g>
-				<DataSet
-					width={width}
-					height={height}
-					colorScale={colorScale}
-					x={x}
-					y={y}
-					onMouseEnter={this.onMouseEnter}
-					onMouseLeave={this.onMouseLeave}
-				/>
-				</g>
-				{ this.props.children }
 				</Chart>
-
-                <Tooltip {...this.state.tooltip}/>
-				</div>
+			</div>
 		);
 	}
 });

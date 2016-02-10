@@ -8,7 +8,7 @@ module.exports = {
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js'    
+		filename: 'chartWidgets.js'    
 	},
 	plugins: [
     	new webpack.HotModuleReplacementPlugin(),

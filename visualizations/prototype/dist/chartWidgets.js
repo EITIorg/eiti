@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5ab98374300825da550d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6f6316bbe48f804877a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -889,6 +889,7 @@
 	var PieChart = __webpack_require__(201);
 	var GroupedBar = __webpack_require__(204);
 	var StackedBar = __webpack_require__(208);
+	var TreeMap = __webpack_require__(209);
 
 	window.chartWidget.create = function (options, data) {
 		var chartData, dataURL;
@@ -974,6 +975,25 @@
 					dataURL: dataURL,
 					chartData: chartData,
 					legend: true
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
+			), document.getElementById(options.container));
+		} else if (options.type == "TreeMap") {
+			(0, _reactDom.render)(React.createElement(
+				'div',
+				null,
+				React.createElement(TreeMap, {
+					chartTitle: options.name,
+					width: options.width,
+					height: options.height,
+					margin: options.margin,
+					className: options.className,
+					dataURL: dataURL,
+					chartData: chartData
 				}),
 				React.createElement(
 					'h4',
@@ -24178,6 +24198,62 @@
 	});
 
 	module.exports = StackedBar;
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(154);
+	var d3 = __webpack_require__(168);
+
+	var Chart = __webpack_require__(169);
+	var Tooltip = __webpack_require__(172);
+
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
+
+	var TreeMap = React.createClass({
+		displayName: 'TreeMap',
+
+		mixins: [DefaultPropsMixin, HeightWidthMixin, AccessorMixin, TooltipMixin],
+
+		propTypes: {
+			sort: React.PropTypes.any
+		},
+
+		getDefaultProps: function getDefaultProps() {
+			return {
+				sort: undefined
+			};
+		},
+
+		render: function render() {
+			var _props = this.props;
+			var data = _props.data;
+			var width = _props.width;
+			var height = _props.height;
+			var margin = _props.margin;
+			var colorScale = _props.colorScale;
+			var sort = _props.sort;
+			var x = _props.x;
+			var y = _props.y;
+			var values = _props.values;
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(Chart, { height: height, width: width, margin: margin }),
+				'//',
+				React.createElement(Tooltip, this.state.tooltip)
+			);
+		}
+	});
+
+	module.exports = TreeMap;
 
 /***/ }
 /******/ ]);

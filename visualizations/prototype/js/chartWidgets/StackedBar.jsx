@@ -46,14 +46,11 @@ let StackedBar = React.createClass ({
 	getInitialState: function() {
 	    return {
 	    	chartData: [{
-			    label: 'Total',
+			    label: '',
 			    values: [{x: '', y: 0}]
 		    }],
 
-		    rawData: [{
-			    label: 'Total',
-			    values: [{x: '', y: 0}]
-		    }]
+		    showLegend: false
 	    }
     },
 
@@ -79,7 +76,7 @@ let StackedBar = React.createClass ({
 			    		newItem['active'] = true;
 			    		return newItem;
 			    	});
-			    	_this.setState({rawData: classData, chartData: data});
+			    	_this.setState({rawData: classData, chartData: data, showLegend: true});
 			    }
 			  }
 			req.open("GET", this.props.dataURL, true);
@@ -91,7 +88,7 @@ let StackedBar = React.createClass ({
 	    		newItem['active'] = true;
 	    		return newItem;
 	    	});
-			this.setState({rawData: classData, chartData: this.props.chartData});
+			this.setState({rawData: classData, chartData: this.props.chartData, showLegend: true});
 		}
 	},
 
@@ -108,7 +105,7 @@ let StackedBar = React.createClass ({
                 yAxis={{label: this.props.ylabel}} 
                 tooltipHtml={this.props.tooltip}
                 tooltipMode={'mouse'} 
-                legend={this.props.legend || false} />
+                legend={this.props.legend && this.state.showLegend} />
 	    )
 	}
 });

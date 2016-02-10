@@ -5,6 +5,7 @@ let BarChart = require('./chartWidgets/ExtendedBar');
 let PieChart = require('./chartWidgets/ExtendedPie');
 let GroupedBar = require('./chartWidgets/GroupedBar');
 let StackedBar = require('./chartWidgets/StackedBar');
+let TreeMap = require('./chartWidgets/TreeMap');
 
 import { render } from 'react-dom';
 
@@ -81,6 +82,21 @@ window.chartWidget.create = function(options, data) {
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
+		), document.getElementById(options.container))
+	} else if(options.type == "TreeMap") {
+		render((
+			<div>
+				<TreeMap
+					chartTitle = {options.name}
+					width = {options.width}
+					height = {options.height}
+					margin = {options.margin}
+					className = {options.className}
+	            	dataURL = {dataURL}
+	            	chartData = {chartData}
+				/>
+				<h4 className={'chartDescription'}>{options.description}</h4>
+			</div>
 		), document.getElementById(options.container))
 	}
 }
