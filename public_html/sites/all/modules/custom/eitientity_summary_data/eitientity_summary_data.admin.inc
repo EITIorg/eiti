@@ -19,7 +19,7 @@
  */
 function summary_data_form($form, &$form_state, $entity, $op) {
   // We have to decide on the form type by the operation.
-  if ($op == 'edit' || !empty($_GET['manual'])) {
+  if ($op == 'edit' || ($op == 'add' && !empty($_GET['manual']))) {
     $form = summary_data_default_form($form, $form_state, $entity);
   }
   else if ($op == 'add') {
