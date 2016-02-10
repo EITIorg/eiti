@@ -44,19 +44,28 @@ function eitict_bookmark_preprocess_node(&$variables) {
     $node_emw = entity_metadata_wrapper('node', $variables['node']);
     $reference_type = $node_emw->field_bm_reference_type->value();
 
+    $variables['bookmark_url'] = '';
     // Create a unified URL for the bookmark, either internal or external.
     switch ($reference_type) {
       case 'external':
-        $link_value = $node_emw->field_bm_link->value();
-        $variables['bookmark_url'] = $link_value['url'];
+        if (!empty($node_emw->field_bm_reference)) {
+          $link_value = $node_emw->field_bm_reference->value();
+          $variables['bookmark_url'] = $link_value['url'];
+        }
         break;
       case 'internal':
-        $reference = $node_emw->field_bm_reference->value();
-        $variables['bookmark_url'] = url('node/' . $reference->nid);
+        if (!empty($node_emw->field_bm_reference)) {
+          $reference = $node_emw->field_bm_reference->value();
+          if (!empty($reference)) {
+            $variables['bookmark_url'] = url('node/' . $reference->nid);
+          }
+        }
         break;
     }
     // Pass the hide-title value (which hides all the overlay content).
-    $variables['hide_title'] = $node_emw->field_bm_hide_title->value();
+    if (!empty($node_emw->field_bm_hide_title)) {
+      $variables['hide_title'] = $node_emw->field_bm_hide_title->value();
+    }
     $variables['classes_array'][] = drupal_html_class($variables['view_mode']);
   }
 }
