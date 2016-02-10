@@ -181,7 +181,7 @@ function contentwidget_field_widget_validate($element, &$form_state) {
 
   // Prepare the data for storage.
   $data = _contentwidget_settings_clean_values($form_element_values);
-  form_set_value($element, $data, $form_state);
+  form_set_value($element, serialize($data), $form_state);
 }
 
 /**
@@ -205,7 +205,7 @@ function _contentwidget_settings_clean_values($values) {
     $data['settings'] = $function($values['settings'][$widget_name]);
   }
   else if (!empty($values['settings'][$widget_name])) {
-    $data['settings'] = serialize($values['settings'][$widget_name]);
+    $data['settings'] = $values['settings'][$widget_name];
   }
 
   return $data;
@@ -246,7 +246,12 @@ function contentwidget_field_formatter_view($entity_type, $entity, $field, $inst
       $widget_name = isset($widget_info['widget']) ? $widget_info['widget'] : NULL;
       $widget_settings = !empty($widget_info['settings']) ? unserialize($widget_info['settings']) : array();
 
+      // Load the plugin.
       $plugin = contentwidget_get_predefined_widget($widget_name);
+
+      // Merge the plugin defaults.
+      $widget_settings = drupal_array_merge_deep($widget_settings, $plugin['defaults']);
+
       if ($function = ctools_plugin_get_function($plugin, 'render callback')) {
         // Because of entity_translation, the provided $langcode is the original entity language.
         $entity_langcode = entity_translation_get_existing_language($entity_type, $entity);
