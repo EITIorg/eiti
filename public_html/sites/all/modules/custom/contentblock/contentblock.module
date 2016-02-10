@@ -140,6 +140,7 @@ function contentblock_admin_paths() {
   $paths = array(
     CONTENTBLOCK_UI_PATH . '/add' => TRUE,
     CONTENTBLOCK_UI_PATH . '/add/*' => TRUE,
+    //CONTENTBLOCK_UI_PATH . '/*' => FALSE,
     CONTENTBLOCK_UI_PATH . '/*/edit' => TRUE,
     CONTENTBLOCK_UI_PATH . '/*/usage' => TRUE,
     CONTENTBLOCK_UI_PATH . '/*/delete' => TRUE,
