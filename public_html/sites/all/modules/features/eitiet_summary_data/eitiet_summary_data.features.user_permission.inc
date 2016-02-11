@@ -14,8 +14,9 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity access overview'] = array(
     'name' => 'summary_data entity access overview',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_summary_data',
   );
@@ -24,8 +25,9 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity administer'] = array(
     'name' => 'summary_data entity administer',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_summary_data',
   );
@@ -34,8 +36,9 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity create'] = array(
     'name' => 'summary_data entity create',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_summary_data',
   );
@@ -44,8 +47,9 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity delete'] = array(
     'name' => 'summary_data entity delete',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_summary_data',
   );
@@ -54,8 +58,9 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity edit'] = array(
     'name' => 'summary_data entity edit',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_summary_data',
   );

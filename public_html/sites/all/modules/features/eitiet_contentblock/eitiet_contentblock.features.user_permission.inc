@@ -13,35 +13,45 @@ function eitiet_contentblock_user_default_permissions() {
   // Exported permission: 'contentblock entity access overview'.
   $permissions['contentblock entity access overview'] = array(
     'name' => 'contentblock entity access overview',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 
   // Exported permission: 'contentblock entity administer'.
   $permissions['contentblock entity administer'] = array(
     'name' => 'contentblock entity administer',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 
   // Exported permission: 'contentblock entity create'.
   $permissions['contentblock entity create'] = array(
     'name' => 'contentblock entity create',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 
   // Exported permission: 'contentblock entity delete'.
   $permissions['contentblock entity delete'] = array(
     'name' => 'contentblock entity delete',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 
   // Exported permission: 'contentblock entity edit'.
   $permissions['contentblock entity edit'] = array(
     'name' => 'contentblock entity edit',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 

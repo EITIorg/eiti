@@ -1,4 +1,4 @@
-name = eitipanels
+name = EITI Panels
 description = Panel Pages and related.
 core = 7.x
 package = EITI Custom
