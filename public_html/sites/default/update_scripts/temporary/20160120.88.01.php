@@ -3,7 +3,6 @@
 
 // Provide a list of modules to be installed.
 $modules = array(
-  'contentblock',
   'contentwidget',
   'eiti_api',
   'eiti_migration',
@@ -30,14 +29,17 @@ $feature_names = array(
   'eitict_bookmark',
   'eitict_document',
   'eitict_mention',
+  'eitict_page',
   'eitict_person',
   'eitientities',
-  'eitiet_contentblock',
+  'eitiet_file',
   'eitiet_organisation',
   'eitiet_summary_data',
   'eitii18n',
+  'eitipanels',
   'eitipermissions',
   'eititaxonomies',
+  'eitiwidgets',
 );
 _us_features__install($feature_names);
 
