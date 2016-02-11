@@ -286,7 +286,18 @@ function eitientity_revenue_stream_get_currency_value($entity_type, $entity) {
     return '';
   }
 
-  return check_plain($entity->currency);
+  $currency = currency_load($entity->currency);
+  if (empty($currency)) {
+    drupal_set_message(t('Currency not found: @currency_code', array(
+      '@currency_code' => $entity->currency,
+    )));
+    return check_plain($entity->currency);
+  }
+
+  return t('@currency_title (@currency_code)', array(
+    '@currency_title' => $currency->translateTitle(),
+    '@currency_code' => $currency->ISO4217Code,
+  ));
 }
 
 /**

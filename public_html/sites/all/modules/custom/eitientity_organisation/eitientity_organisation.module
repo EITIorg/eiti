@@ -86,7 +86,7 @@ function eitientity_organisation_admin_paths() {
   $paths = array(
     EITIENTITY_ORGANISATION_UI_PATH . '/add' => TRUE,
     EITIENTITY_ORGANISATION_UI_PATH . '/add/*' => TRUE,
-    EITIENTITY_ORGANISATION_UI_PATH . '/*' => TRUE,
+    //EITIENTITY_ORGANISATION_UI_PATH . '/*' => TRUE,
     EITIENTITY_ORGANISATION_UI_PATH . '/*/edit' => TRUE,
     EITIENTITY_ORGANISATION_UI_PATH . '/*/usage' => TRUE,
     EITIENTITY_ORGANISATION_UI_PATH . '/*/delete' => TRUE,

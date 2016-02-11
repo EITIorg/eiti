@@ -140,7 +140,7 @@ function eitientity_summary_data_label($entity, $entity_type) {
     return t('!country: !year_start', $t_args);
   }
 
-  return t('!country: !year_start - !year_end', $t_args);
+  return t('!country: !year_end', $t_args);
 }
 
 /**

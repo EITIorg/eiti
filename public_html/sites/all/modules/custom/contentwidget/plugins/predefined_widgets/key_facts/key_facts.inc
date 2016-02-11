@@ -16,7 +16,11 @@ $plugin = array(
   'settings form' => 'contentblock_key_facts_settings',
   'entity form alter' => 'contentwidget_key_facts_form_alter',
   'entity group alter' => 'contentwidget_key_facts_group_alter',
-  'defaults' => array(),
+  'defaults' => array(
+    'fact' => array(
+      'facts_number' => 4,
+    ),
+  ),
 );
 
 /**
@@ -30,7 +34,6 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
   else {
     $image_url = FALSE;
   }
-  $fact_max = (!empty($widget_settings['fact']['facts_number'])) ? $widget_settings['fact']['facts_number'] : 4;
 
   // Prepare the wrapper.
   $block = array(
@@ -58,7 +61,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
 
   // And now prepare the list of facts that we'll render in theme_item_list.
   $fact_items = array();
-  for ($fact_count = 0; $fact_count < $fact_max; $fact_count++) {
+  for ($fact_count = 0; $fact_count < $widget_settings['fact']['facts_number']; $fact_count++) {
     $fact = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -154,8 +157,6 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
 function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
-  $facts_max = isset($widget_settings['fact']['facts_number']) ? $widget_settings['fact']['facts_number'] : 4;
-
   $settings_form['fact'] = array(
     '#type' => 'fieldset',
     '#title' => t('Key Facts:'),
@@ -166,9 +167,9 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
   $settings_form['fact']['facts_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Key Facts'),
-    '#options' => drupal_map_assoc(range(0, 4)),
+    '#options' => drupal_map_assoc(range(1, 4)),
     '#description' => t('Please specify the number of facts you want to use.'),
-    '#default_value' => $facts_max,
+    '#default_value' => $widget_settings['fact']['facts_number'],
     '#ajax' => array(
       'callback' => 'contentblock_key_facts_settings_ajax',
       'event' => 'change',
@@ -190,7 +191,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
   );
   $computed_options = contentblock_key_fact_get_computed_values('options');
 
-  for ($fact_count = 0; $fact_count < $facts_max; $fact_count++) {
+  for ($fact_count = 0; $fact_count < $widget_settings['fact']['facts_number']; $fact_count++) {
     $settings_form['fact']['fact_' . $fact_count] = array(
       '#type' => 'fieldset',
       '#title' => t('Key Fact #!number:', array('!number' => ($fact_count + 1))),
@@ -218,6 +219,8 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#options' => $type_options,
       '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'type'),
     );
+
+    $field_name_prefix = 'field_fppq_widget[und][0][settings][key_facts][fact]';
     $settings_form['fact']['fact_' . $fact_count]['value_' . $fact_count] = array(
       '#type' => 'textfield',
       '#title' => t('Key Fact Value'),
@@ -226,7 +229,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'value'),
       '#states' => array(
         'visible' => array(
-          array('input[name="field_cbwidget[und][0][settings][key_facts][fact][fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'manual')),
+          array('input[name="' . $field_name_prefix . '[fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'manual')),
         ),
       ),
     );
@@ -239,7 +242,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#suffix' => '</div>',
       '#states' => array(
         'visible' => array(
-          array('input[name="field_cbwidget[und][0][settings][key_facts][fact][fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'manual')),
+          array('input[name="' . $field_name_prefix . '[fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'manual')),
         ),
       ),
     );
@@ -251,7 +254,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'compute_value'),
       '#states' => array(
         'visible' => array(
-          array('input[name="field_cbwidget[und][0][settings][key_facts][fact][fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'computed')),
+          array('input[name="' . $field_name_prefix . '[fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'computed')),
         ),
       ),
     );
@@ -342,7 +345,7 @@ function contentblock_key_fact_get_countries_count() {
  */
 function contentblock_key_facts_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
-  return $form['field_cbwidget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
+  return $form['field_fppq_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
 }
 
 /**
@@ -361,6 +364,6 @@ function contentwidget_key_facts_group_alter(&$element) {
     else {
       $element['group_wide_image']['#states']['visible'][] = 'or';
     }
-    $element['group_wide_image']['#states']['visible'][] = array('input[name="field_cbwidget[und][0][widget]"]' => array('value' => 'key_facts'));
+    $element['group_wide_image']['#states']['visible'][] = array('input[name="field_fppq_widget[und][0][widget]"]' => array('value' => 'key_facts'));
   }
 }
