@@ -11,8 +11,8 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-key_facts-field_fppq_widget'.
-  $field_instances['fieldable_panels_pane-key_facts-field_fppq_widget'] = array(
+  // 'fieldable_panels_pane-key_facts-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-key_facts-field_fpp_widget'] = array(
     'bundle' => 'key_facts',
     'deleted' => 0,
     'description' => '',
@@ -26,7 +26,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_widget',
+    'field_name' => 'field_fpp_widget',
     'label' => 'Widget',
     'required' => 0,
     'settings' => array(
@@ -84,8 +84,8 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-quote-field_fppq_background_image'.
-  $field_instances['fieldable_panels_pane-quote-field_fppq_background_image'] = array(
+  // 'fieldable_panels_pane-quote-field_fpp_background_image'.
+  $field_instances['fieldable_panels_pane-quote-field_fpp_background_image'] = array(
     'bundle' => 'quote',
     'deleted' => 0,
     'description' => '',
@@ -102,7 +102,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_background_image',
+    'field_name' => 'field_fpp_background_image',
     'label' => 'Background Image',
     'required' => 0,
     'settings' => array(
@@ -164,8 +164,8 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'fieldable_panels_pane-quote-field_fppq_quote'.
-  $field_instances['fieldable_panels_pane-quote-field_fppq_quote'] = array(
+  // Exported field_instance: 'fieldable_panels_pane-quote-field_fpp_quote'.
+  $field_instances['fieldable_panels_pane-quote-field_fpp_quote'] = array(
     'bundle' => 'quote',
     'default_value' => NULL,
     'deleted' => 0,
@@ -180,7 +180,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_quote',
+    'field_name' => 'field_fpp_quote',
     'label' => 'Quote',
     'required' => 1,
     'settings' => array(
@@ -199,8 +199,8 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'fieldable_panels_pane-quote-field_fppq_source'.
-  $field_instances['fieldable_panels_pane-quote-field_fppq_source'] = array(
+  // Exported field_instance: 'fieldable_panels_pane-quote-field_fpp_source'.
+  $field_instances['fieldable_panels_pane-quote-field_fpp_source'] = array(
     'bundle' => 'quote',
     'default_value' => NULL,
     'deleted' => 0,
@@ -215,7 +215,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_source',
+    'field_name' => 'field_fpp_source',
     'label' => 'Source',
     'required' => 1,
     'settings' => array(
@@ -235,8 +235,8 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-quote-field_fppq_source_url'.
-  $field_instances['fieldable_panels_pane-quote-field_fppq_source_url'] = array(
+  // 'fieldable_panels_pane-quote-field_fpp_source_url'.
+  $field_instances['fieldable_panels_pane-quote-field_fpp_source_url'] = array(
     'bundle' => 'quote',
     'default_value' => NULL,
     'deleted' => 0,
@@ -251,7 +251,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_source_url',
+    'field_name' => 'field_fpp_source_url',
     'label' => 'Source URL',
     'required' => 0,
     'settings' => array(
@@ -288,8 +288,8 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-visualization-field_fppq_widget'.
-  $field_instances['fieldable_panels_pane-visualization-field_fppq_widget'] = array(
+  // 'fieldable_panels_pane-visualization-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-visualization-field_fpp_widget'] = array(
     'bundle' => 'visualization',
     'deleted' => 0,
     'description' => '',
@@ -303,7 +303,7 @@ function eitiwidgets_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fppq_widget',
+    'field_name' => 'field_fpp_widget',
     'label' => 'Widget',
     'required' => 1,
     'settings' => array(

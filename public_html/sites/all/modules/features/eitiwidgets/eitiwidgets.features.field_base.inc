@@ -10,13 +10,13 @@
 function eitiwidgets_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_fppq_background_image'.
-  $field_bases['field_fppq_background_image'] = array(
+  // Exported field_base: 'field_fpp_background_image'.
+  $field_bases['field_fpp_background_image'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_fppq_background_image',
+    'field_name' => 'field_fpp_background_image',
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -35,13 +35,13 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_fppq_quote'.
-  $field_bases['field_fppq_quote'] = array(
+  // Exported field_base: 'field_fpp_quote'.
+  $field_bases['field_fpp_quote'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_fppq_quote',
+    'field_name' => 'field_fpp_quote',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -56,13 +56,13 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_fppq_source'.
-  $field_bases['field_fppq_source'] = array(
+  // Exported field_base: 'field_fpp_source'.
+  $field_bases['field_fpp_source'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_fppq_source',
+    'field_name' => 'field_fpp_source',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -78,13 +78,13 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_fppq_source_url'.
-  $field_bases['field_fppq_source_url'] = array(
+  // Exported field_base: 'field_fpp_source_url'.
+  $field_bases['field_fpp_source_url'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_fppq_source_url',
+    'field_name' => 'field_fpp_source_url',
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -108,13 +108,13 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_fppq_widget'.
-  $field_bases['field_fppq_widget'] = array(
+  // Exported field_base: 'field_fpp_widget'.
+  $field_bases['field_fpp_widget'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_fppq_widget',
+    'field_name' => 'field_fpp_widget',
     'indexes' => array(
       'widget' => array(
         0 => 'widget',
