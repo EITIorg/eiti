@@ -71,7 +71,8 @@ function contentwidget_field_info() {
     'contentwidget' => array(
       'label' => t('ContentWidget'),
       'description' => t('Can be used to configure and display a ContentWidget plugin onto an entity.'),
-      'settings' => array('available_widgets' => ''),
+      'settings' => array(),
+      'instance_settings' => array('available_widgets' => ''),
       'default_widget' => 'cwsettings',
       'default_formatter' => 'cwrendered',
     ),
