@@ -26,8 +26,8 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
   // Prepare the variables.
 
   $image_url = '';
-  if (!empty($entity->field_cbw_wide_image[LANGUAGE_NONE][0])) {
-    $image_file = (object) $entity->field_cbw_wide_image['und'][0];
+  if (FALSE && !empty($entity->field_fppq_background_image[LANGUAGE_NONE][0])) {
+    $image_file = (object) $entity->field_fppq_background_image[LANGUAGE_NONE][0];
     $image_url = file_create_url($image_file->uri);
   }
   $header_small = (!empty($widget_settings['header_small'])) ? $widget_settings['header_small'] : FALSE;
@@ -190,25 +190,5 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
  */
 function contentblock_wide_image_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
-  return $form['field_cbwidget'][LANGUAGE_NONE][0]['settings']['wide_image']['links'];
-}
-
-/**
- * Callback for the groups pre-render, allows us to interact with entity groups.
- */
-function contentwidget_wide_image_group_alter(&$element) {
-  // Make sure the group is there.
-  if (!empty($element['group_wide_image'])) {
-    // Make sure that the group shows up only when the widget is "Wide Image".
-    $element['group_wide_image']['#id'] = 'group-wide-image-details';
-    if (empty($element['group_wide_image']['#states']['visible'])) {
-      $element['group_wide_image']['#states'] = array(
-        'visible' => array()
-      );
-    }
-    else {
-      $element['group_wide_image']['#states']['visible'][] = 'or';
-    }
-    $element['group_wide_image']['#states']['visible'][] = array('input[name="field_cbwidget[und][0][widget]"]' => array('value' => 'wide_image'));
-  }
+  return $form['field_fppq_widget'][LANGUAGE_NONE][0]['settings']['wide_image']['links'];
 }

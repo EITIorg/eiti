@@ -114,6 +114,22 @@ function eitientity_implementing_country_entity_info() {
 }
 
 /**
+ * Implements hook_admin_paths().
+ */
+function eitientity_implementing_country_admin_paths() {
+  $paths = array(
+    EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/add' => TRUE,
+    EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/add/*' => TRUE,
+    //EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/*' => TRUE,
+    EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/*/edit' => TRUE,
+    EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/*/usage' => TRUE,
+    EITIENTITY_IMPLEMENTING_COUNTRY_UI_PATH . '/*/delete' => TRUE,
+  );
+
+  return $paths;
+}
+
+/**
  * Menu loader function: load a country from its path.
  *
  * @see entity_object_load()
