@@ -16,14 +16,19 @@
 @footer-bg: #002c47; //footer background
 @divider-grey: #d3d3d3; //content divider
 @text-inverse: #ffffff; //text on dark backgrounds
+@label-text: #575757; // text for stat labels
+@highlight-text-color: #424242;
+@country-stat-blue: #0092cf;
 
 // font sizes
 @nav-text-size: 0.8em;
 @footer-link-size: 0.8em;
 @small-text: 0.7em;
 @default-text: 0.85em;
-@highlight-text: 0.9em;
+@highlight-text-size: 1em;
+@title-text: 1.6em;
 @stat-value: 2.9em;
+@text-heavy: 700;
 
 // dimensions
 @base-unit: 1em;
@@ -31,6 +36,7 @@
 @social-icon-size: 20px;
 @full-width: 100%;
 @banner-stat-size: 43px;
+@country-stat-icons: 18px;
 
 // mixins
 
@@ -43,14 +49,24 @@
 	transition: @prop @time @ease;
 }
 
+
 // unstyled unordered lists
 .list-unstyled () {
   list-style: none;
   margin-left: 0;
+	margin-top: 0;
   padding-left: 0;
 }
 
 .section-inner (@innerwidth) {
   margin: 0 auto;
   width: @innerwidth;
+}
+
+// icons
+.floated-icon(@float, @margin-right, @margin-left) {
+	display: block; //so we can control margins
+	float: @float;
+	margin-left: @margin-left;
+	margin-right: @margin-right;
 }
