@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Widgets feature.
+ */
+
+include_once 'eitiwidgets.features.inc';
