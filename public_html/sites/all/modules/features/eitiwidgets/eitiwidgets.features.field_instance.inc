@@ -358,6 +358,41 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-wide_image-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-wide_image-field_fpp_widget'] = array(
+    'bundle' => 'wide_image',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 1,
+    'settings' => array(
+      'available_widgets' => array(
+        'wide_image' => 'wide_image',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A field replacing fieldable panel pane title.');
