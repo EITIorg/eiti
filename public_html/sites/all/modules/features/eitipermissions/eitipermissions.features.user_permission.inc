@@ -570,13 +570,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create demo content'.
-  $permissions['create demo content'] = array(
-    'name' => 'create demo content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
@@ -692,13 +685,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any demo content'.
-  $permissions['delete any demo content'] = array(
-    'name' => 'delete any demo content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any document content'.
   $permissions['delete any document content'] = array(
     'name' => 'delete any document content',
@@ -806,13 +792,6 @@ function eitipermissions_user_default_permissions() {
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own demo content'.
-  $permissions['delete own demo content'] = array(
-    'name' => 'delete own demo content',
-    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1111,13 +1090,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any demo content'.
-  $permissions['edit any demo content'] = array(
-    'name' => 'edit any demo content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any document content'.
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
@@ -1225,13 +1197,6 @@ function eitipermissions_user_default_permissions() {
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own demo content'.
-  $permissions['edit own demo content'] = array(
-    'name' => 'edit own demo content',
-    'roles' => array(),
     'module' => 'node',
   );
 
