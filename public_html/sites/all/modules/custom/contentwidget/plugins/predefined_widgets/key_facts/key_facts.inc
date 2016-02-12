@@ -220,7 +220,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'type'),
     );
 
-    $field_name_prefix = 'field_fppq_widget[und][0][settings][key_facts][fact]';
+    $field_name_prefix = 'field_fpp_widget[und][0][settings][key_facts][fact]';
     $settings_form['fact']['fact_' . $fact_count]['value_' . $fact_count] = array(
       '#type' => 'textfield',
       '#title' => t('Key Fact Value'),
@@ -345,25 +345,5 @@ function contentblock_key_fact_get_countries_count() {
  */
 function contentblock_key_facts_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
-  return $form['field_fppq_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
-}
-
-/**
- * Callback for the groups pre-render, allows us to interact with entity groups.
- */
-function contentwidget_key_facts_group_alter(&$element) {
-  // Make sure the group is there.
-  if (!empty($element['group_wide_image'])) {
-    // Make sure that the group shows up only when the widget is "Wide Image".
-    $element['group_wide_image']['#id'] = 'group-wide-image-details';
-    if (empty($element['group_wide_image']['#states']['visible'])) {
-      $element['group_wide_image']['#states'] = array(
-        'visible' => array()
-      );
-    }
-    else {
-      $element['group_wide_image']['#states']['visible'][] = 'or';
-    }
-    $element['group_wide_image']['#states']['visible'][] = array('input[name="field_fppq_widget[und][0][widget]"]' => array('value' => 'key_facts'));
-  }
+  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
 }

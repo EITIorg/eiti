@@ -190,5 +190,5 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
  */
 function contentblock_wide_image_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
-  return $form['field_fppq_widget'][LANGUAGE_NONE][0]['settings']['wide_image']['links'];
+  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['wide_image']['links'];
 }

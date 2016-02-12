@@ -26,7 +26,8 @@ function contentblock_featured_bookmarks_render($plugin, $widget_settings, $enti
   $size = $widget_settings['widget_size'];
 
   $referenced_ids = array();
-  foreach ($entity->field_bookmark_list[$langcode] as $reference) {
+
+  foreach ($entity->field_fpp_bookmark_list[$langcode] as $reference) {
     $referenced_ids[] = $reference['target_id'];
   }
   $referenced_entities = entity_load('node', $referenced_ids);
@@ -157,55 +158,5 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
  */
 function contentblock_featured_bookmarks_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
-  return $form['field_cbwidget'][LANGUAGE_NONE][0]['settings']['bookmarks']['widget_preview'];
-}
-
-/**
- * Alters the predefined entity form.
- */
-function contentwidget_featured_bookmarks_form_alter(&$form, &$form_state, $plugin) {
-  // We need to make sure that this file is included anyway, because validation will trigger an error.
-  form_load_include($form_state, 'inc', 'contentwidget', 'plugins/predefined_widgets/bookmarks/bookmarks');
-
-  // Add our custom validation.
-  $form['actions']['submit']['#validate'][] = 'contentwidget_featured_bookmarks_form_validate';
-}
-
-/**
- * Our custom validation callback for the general entity form.
- */
-function contentwidget_featured_bookmarks_form_validate($form, $form_state) {
-  if ($form_state['values']['field_cbwidget']['und'][0]['widget'] == 'bookmarks') {
-    $widget_settings = !empty($form_state['values']['field_cbwidget']['und'][0]['settings']) ? unserialize($form_state['values']['field_cbwidget']['und'][0]['settings']) : array();
-    $size = isset($widget_settings['widget_size']) ? $widget_settings['widget_size'] : 0;
-    if (!empty($size)) {
-      $ief = reset($form_state['inline_entity_form']);
-      if (count($ief['entities']) < $size) {
-        $msg = t('Please make sure you have specified at least @num bookmarks - because of the widget size you have specified.', array(
-          '@num' => $size,
-        ));
-        form_set_error('field_bookmark_list][und', $msg);
-      }
-    }
-    else {
-      $msg = t('Please specify the widget size.');
-      form_set_error('field_cbwidget][und][0][settings][bookmarks][widget_size', $msg);
-    }
-  }
-}
-
-/**
- * Callback for the groups pre-render, allows us to interact with entity groups.
- */
-function contentwidget_featured_bookmarks_group_alter(&$element, $plugin) {
-  // Make sure the group is there.
-  if (!empty($element['group_bookmark'])) {
-    // Make sure that the group shows up only when the widget is "Featured Bookmarks".
-    $element['group_bookmark']['#id'] = 'group-event-details';
-    $element['group_bookmark']['#states'] = array(
-      'visible' => array(
-        'input[name="field_cbwidget[und][0][widget]"]' => array('value' => 'bookmarks'),
-      ),
-    );
-  }
+  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['bookmarks']['widget_preview'];
 }

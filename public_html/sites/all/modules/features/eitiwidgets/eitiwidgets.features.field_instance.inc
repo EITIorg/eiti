@@ -11,6 +11,86 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'.
+  $field_instances['fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'] = array(
+    'bundle' => 'featured_bookmarks',
+    'deleted' => 0,
+    'description' => 'Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_bookmark_list',
+    'label' => 'Bookmark List',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'bookmarks',
+          'label_singular' => 'bookmark',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 1,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_bookmarks-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-featured_bookmarks-field_fpp_widget'] = array(
+    'bundle' => 'featured_bookmarks',
+    'deleted' => 0,
+    'description' => 'Bookmark widget configuration.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 0,
+    'settings' => array(
+      'available_widgets' => array(
+        'bookmarks' => 'bookmarks',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-key_facts-field_fpp_widget'.
   $field_instances['fieldable_panels_pane-key_facts-field_fpp_widget'] = array(
     'bundle' => 'key_facts',
@@ -169,7 +249,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'quote',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -359,6 +439,87 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-wide_image-field_fpp_background_image'.
+  $field_instances['fieldable_panels_pane-wide_image-field_fpp_background_image'] = array(
+    'bundle' => 'wide_image',
+    'deleted' => 0,
+    'description' => 'Please specify the wide background image used for the header.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_background_image',
+    'label' => 'Background Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-wide_image-field_fpp_widget'.
   $field_instances['fieldable_panels_pane-wide_image-field_fpp_widget'] = array(
     'bundle' => 'wide_image',
@@ -397,7 +558,12 @@ function eitiwidgets_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('A field replacing fieldable panel pane title.');
   t('Background Image');
+  t('Bookmark List');
+  t('Bookmark widget configuration.');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
+  t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
+  t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
+  t('Please specify the wide background image used for the header.');
   t('Quote');
   t('Source');
   t('Source URL');
