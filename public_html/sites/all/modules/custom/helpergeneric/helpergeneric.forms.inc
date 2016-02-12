@@ -249,6 +249,24 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes',
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes_status',
 
+        // Hide panelizer.module variables.
+        'panelizer_defaults_file_audio',
+        'panelizer_defaults_file_document',
+        'panelizer_defaults_file_image',
+        'panelizer_defaults_file_report',
+        'panelizer_defaults_file_video',
+        'panelizer_defaults_node_article',
+        'panelizer_defaults_node_bookmark',
+        'panelizer_defaults_node_document',
+        'panelizer_defaults_node_mention',
+        'panelizer_defaults_node_person',
+        'panelizer_defaults_taxonomy_term_bookmark_type',
+        'panelizer_defaults_taxonomy_term_company_commodities',
+        'panelizer_defaults_taxonomy_term_document_category',
+        'panelizer_defaults_taxonomy_term_person_positions',
+        'panelizer_defaults_taxonomy_term_tags',
+        'panelizer_defaults_user_user',
+
         // Hide recaptcha.module variables.
         'recaptcha_private_key',
         'recaptcha_public_key',
