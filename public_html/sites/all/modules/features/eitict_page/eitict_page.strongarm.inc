@@ -51,7 +51,14 @@ function eitict_page_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '2',
+        ),
+      ),
       'display' => array(),
     ),
   );
@@ -119,6 +126,37 @@ function eitict_page_strongarm() {
     ),
   );
   $export['panelizer_defaults_node_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_node:page_allowed_layouts_default';
+  $strongarm->value = 1;
+  $export['panelizer_node:page_allowed_layouts_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_node:page_allowed_types_default';
+  $strongarm->value = 1;
+  $export['panelizer_node:page_allowed_types_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_node:page_default';
+  $strongarm->value = array(
+    'entity_field_extra' => 'entity_field_extra',
+    'entity_field' => 'entity_field',
+    'custom' => 'custom',
+    'entity_form_field' => 'entity_form_field',
+    'block' => 'block',
+    'token' => 'token',
+    'entity_view' => 'entity_view',
+    'fieldable_panels_pane' => 'fieldable_panels_pane',
+    'other' => 'other',
+  );
+  $export['panelizer_node:page_default'] = $strongarm;
 
   return $export;
 }
