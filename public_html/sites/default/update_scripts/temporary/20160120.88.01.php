@@ -1,5 +1,7 @@
 <?php
 
+// Do not create the default FPP bundle.
+variable_get('fieldable_panels_panes_skip_default_type', TRUE);
 
 // Provide a list of modules to be installed.
 $modules = array(
