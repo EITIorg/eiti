@@ -79,6 +79,7 @@ $modules = array(
     //'admin_views',
   //'coder',
     //'coder_review',
+  'coffee',
   //'contextual',
   'devel',
     //'devel_generate',
