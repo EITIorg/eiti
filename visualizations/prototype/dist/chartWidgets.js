@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6f6316bbe48f804877a8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0d308a4ce50eeaccfaf1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24216,6 +24216,217 @@
 	var AccessorMixin = __webpack_require__(203);
 	var TooltipMixin = __webpack_require__(200);
 
+	var DataSet = React.createClass({
+		displayName: 'DataSet',
+
+		componentDidMount: function componentDidMount() {
+			var _props = this.props;
+			var width = _props.width;
+			var height = _props.height;
+			var margin = _props.margin;
+
+			var el = this.getDOMNode();
+
+			var svg = d3.select(el).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.bottom + margin.top).style("margin-left", -margin.left + "px").style("margin-right", -margin.right + "px").append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").style("shape-rendering", "crispEdges");
+
+			var grandparent = svg.append("g").attr("class", "grandparent");
+
+			grandparent.append("rect").attr("y", -margin.top).attr("width", width).attr("height", margin.top);
+
+			grandparent.append("text").attr("x", 6).attr("y", 6 - margin.top).attr("dy", ".75em");
+
+			this.setState({ svg: svg, grandparent: grandparent });
+		},
+
+		componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+			var data = this.props.data;
+			this.initialize(data);
+			this.accumulate(data);
+			this.layout(data);
+			this.display(data);
+		},
+
+		initialize: function initialize(root) {
+			root.x = root.y = 0;
+			root.dx = this.props.width;
+			root.dy = this.props.height;
+			root.depth = 0;
+		},
+
+		// Aggregate the values for internal nodes. This is normally done by the
+		// treemap layout, but not here because of our custom implementation.
+		// We also take a snapshot of the original children (_children) to avoid
+		// the children being overwritten when when layout is computed.
+		accumulate: function accumulate(d) {
+			var self = this;
+			return (d._children = d.children) ? d.value = d.children.reduce(function (p, v) {
+				return p + self.accumulate(v);
+			}, 0) : d.value;
+		},
+
+		// Compute the treemap layout recursively such that each group of siblings
+		// uses the same size (1×1) rather than the dimensions of the parent cell.
+		// This optimizes the layout for the current zoom state. Note that a wrapper
+		// object is created for the parent node for each group of siblings so that
+		// the parent’s dimensions are not discarded as we recurse. Since each group
+		// of sibling was laid out in 1×1, we must rescale to fit using absolute
+		// coordinates. This lets us use a viewport to zoom.
+		layout: function layout(d) {
+			if (d._children) {
+				this.props.treemap.nodes({ _children: d._children });
+				var self = this;
+				d._children.forEach(function (c) {
+					c.x = d.x + c.x * d.dx;
+					c.y = d.y + c.y * d.dy;
+					c.dx *= d.dx;
+					c.dy *= d.dy;
+					c.parent = d;
+					self.layout(c);
+				});
+			}
+		},
+
+		display: function display(d) {
+			var _state = this.state;
+			var svg = _state.svg;
+			var grandparent = _state.grandparent;
+			var _props2 = this.props;
+			var x = _props2.x;
+			var y = _props2.y;
+			var formatNumber = _props2.formatNumber;
+
+			var transitioning;
+			var self = this;
+
+			grandparent.datum(d.parent).on("click", this.transition).select("text").text(this.name(d));
+
+			var g1 = svg.insert("g", ".grandparent").datum(d).attr("class", "depth");
+
+			var g = g1.selectAll("g").data(d._children).enter().append("g");
+
+			g.filter(function (d) {
+				return d._children;
+			}).classed("children", true).on("click", this.transition);
+
+			g.selectAll(".child").data(function (d) {
+				return d._children || [d];
+			}).enter().append("rect").attr("class", "child").call(this.rect);
+
+			g.append("rect").attr("class", "parent").call(this.rect).append("title").text(function (d) {
+				return formatNumber(d.value);
+			});
+
+			g.append("text").attr("dy", ".75em").text(function (d) {
+				return d.name;
+			}).call(this.text);
+
+			function transition(d) {
+				console.log('transition triggered!');
+				if (transitioning || !d) return;
+				transitioning = true;
+
+				var g2 = self.display(d),
+				    t1 = g1.transition().duration(750),
+				    t2 = g2.transition().duration(750);
+
+				// Update the domain only after entering new elements.
+				x.domain([d.x, d.x + d.dx]);
+				y.domain([d.y, d.y + d.dy]);
+
+				// Enable anti-aliasing during the transition.
+				svg.style("shape-rendering", null);
+
+				// Draw child nodes on top of parent nodes.
+				svg.selectAll(".depth").sort(function (a, b) {
+					return a.depth - b.depth;
+				});
+
+				// Fade-in entering text.
+				g2.selectAll("text").style("fill-opacity", 0);
+
+				// Transition to the new view.
+				t1.selectAll("text").call(text).style("fill-opacity", 0);
+				t2.selectAll("text").call(text).style("fill-opacity", 1);
+				t1.selectAll("rect").call(rect);
+				t2.selectAll("rect").call(rect);
+
+				// Remove the old node when the transition is finished.
+				t1.remove().each("end", function () {
+					svg.style("shape-rendering", "crispEdges");
+					transitioning = false;
+				});
+			}
+
+			return g;
+		},
+
+		text: (function (_text) {
+			function text(_x) {
+				return _text.apply(this, arguments);
+			}
+
+			text.toString = function () {
+				return _text.toString();
+			};
+
+			return text;
+		})(function (text) {
+			var _props3 = this.props;
+			var x = _props3.x;
+			var y = _props3.y;
+
+			text.attr("x", function (d) {
+				return x(d.x) + 6;
+			}).attr("y", function (d) {
+				return y(d.y) + 6;
+			});
+		}),
+
+		rect: (function (_rect) {
+			function rect(_x2) {
+				return _rect.apply(this, arguments);
+			}
+
+			rect.toString = function () {
+				return _rect.toString();
+			};
+
+			return rect;
+		})(function (rect) {
+			var _props4 = this.props;
+			var x = _props4.x;
+			var y = _props4.y;
+
+			rect.attr("x", function (d) {
+				return x(d.x);
+			}).attr("y", function (d) {
+				return y(d.y);
+			}).attr("width", function (d) {
+				return x(d.x + d.dx) - x(d.x);
+			}).attr("height", function (d) {
+				return y(d.y + d.dy) - y(d.y);
+			});
+		}),
+
+		name: (function (_name) {
+			function name(_x3) {
+				return _name.apply(this, arguments);
+			}
+
+			name.toString = function () {
+				return _name.toString();
+			};
+
+			return name;
+		})(function (d) {
+			return d.parent ? name(d.parent) + "." + d.name : d.name;
+		}),
+
+		render: function render() {
+			return React.createElement('div', null);
+		}
+	});
+
 	var TreeMap = React.createClass({
 		displayName: 'TreeMap',
 
@@ -24231,24 +24442,68 @@
 			};
 		},
 
+		getInitialState: function getInitialState() {
+			return {
+				chartData: {
+					"name": "",
+					"children": []
+				}
+			};
+		},
+
+		componentWillMount: function componentWillMount() {
+			if (this.props.dataURL) {
+				var _this = this;
+				/* Old school AJAX request to try to stay away from jQuery */
+				var req = new XMLHttpRequest();
+				req.onreadystatechange = function () {
+					if (req.readyState == 4 && req.status == 200) {
+						var data = JSON.parse(req.responseText);
+						_this.setState({ chartData: data });
+					}
+				};
+				req.open("GET", this.props.dataURL, true);
+				req.send();
+			} else if (this.props.chartData) {
+				this.setState({ chartData: this.props.chartData });
+				console.log(this.state);
+			}
+		},
+
 		render: function render() {
-			var _props = this.props;
-			var data = _props.data;
-			var width = _props.width;
-			var height = _props.height;
-			var margin = _props.margin;
-			var colorScale = _props.colorScale;
-			var sort = _props.sort;
-			var x = _props.x;
-			var y = _props.y;
-			var values = _props.values;
+			var _props5 = this.props;
+			var width = _props5.width;
+			var height = _props5.height;
+			var margin = _props5.margin;
+			var colorScale = _props5.colorScale;
+			var sort = _props5.sort;
+			var values = _props5.values;
+
+			var formatNumber = d3.format(",d");
+
+			var x = d3.scale.linear().domain([0, width]).range([0, width]);
+
+			var y = d3.scale.linear().domain([0, height]).range([0, height]);
+
+			var treemap = d3.layout.treemap().children(function (d, depth) {
+				return depth ? null : d._children;
+			}).sort(function (a, b) {
+				return a.value - b.value;
+			}).ratio(height / width * 0.5 * (1 + Math.sqrt(5))).round(false);
 
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Chart, { height: height, width: width, margin: margin }),
-				'//',
-				React.createElement(Tooltip, this.state.tooltip)
+				React.createElement(DataSet, {
+					data: this.state.chartData,
+					width: width,
+					height: height - margin.top - margin.bottom,
+					margin: margin,
+					formatNumber: formatNumber,
+					x: x,
+					y: y,
+					treemap: treemap
+				})
 			);
 		}
 	});
