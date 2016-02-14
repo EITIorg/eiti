@@ -140,9 +140,13 @@ h1{
 // quote banner
 .banner-quote {
   padding: @base-unit * 6 0;
+  background-size: 100%;
+
   &.peru {
     background: url("../images/quote-banners/peru-quote-banner.png") no-repeat;
-    background-size: 100%;
+  }
+  &.homepage {
+    background: url("../images/homepage-images/homepage-quote-banner.png") no-repeat;
   }
 }
 
@@ -396,4 +400,136 @@ h1{
   width: @social-icon-size;
   height: @social-icon-size;
   float: left;
+}
+
+
+// homepage
+
+.homepage-top-banner {
+  background: url('../images/homepage-images/home-banner.png') no-repeat;
+  background-size: @full-width;
+  height: 680px;
+  overflow: hidden;
+}
+
+.homepage-banner-inner {
+  .section-inner (800px);
+  padding-bottom: 10em;
+  margin-top: 10em;
+  position: relative;
+}
+
+.homepage-title{
+  color: @theme-blue-light;
+  font-weigth: 300;
+  text-transform: uppercase;
+}
+.homepage-subtitle{
+  color: @text-inverse;
+  font-size: 41px;
+  font-weigth: 300;
+  line-height: 44px;
+}
+
+.separator-transparent {
+  background: rgba(255, 255, 255, 0.4);
+  height: 1px;
+  margin: @base-unit 0;
+  width: @full-width;
+}
+.homebanner-links-container{
+  margin: @base-unit 0;
+  overflow: hidden;
+}
+.banner-stat-widget {
+  float: left;
+  width: @full-width / 4;
+}
+
+.banner-stat-icon {
+  display: block;
+  float: left;
+  margin-right: @base-unit / 2;
+  margin-top: 2px;
+  width: @small-icon-size;
+}
+
+.banner-stat-link{
+  color: @text-inverse;
+  font-weight: normal;
+  text-transform: uppercase;
+  &.inverse {
+    color: @theme-grey;
+    &:hover {
+      color: @theme-orange;
+    }
+  }
+}
+
+.content-col-half{
+  float: left;
+  margin-right:2px;
+  overflow: hidden;
+  position: relative;
+  width: @full-width / 2.2;
+}
+
+.post-thumb-title {
+  .transition-link();
+  bottom: @base-unit * 2;
+  color: @text-inverse;
+  left: @base-unit;
+  position: absolute;
+  width: 80%;
+  &:hover {
+    color: @theme-orange;
+  }
+}
+
+.post-thumb-date {
+  bottom: @base-unit;
+  position: absolute;
+}
+
+.post-thumb-large {
+  .transition-link(opacity, 1s, linear);
+  height: @post-large-height;
+  opacity: 1;
+  width: @full-width;
+  &:hover {
+    opacity: 0.8;
+    .post-thumb-title {
+      color: @theme-orange;
+    }
+  }
+}
+
+.post-thumb-small {
+  .transition-link(opacity, 1s, linear);
+  height: @post-large-height / 2;
+  overflow: hidden;
+  position: relative;
+  img {
+    width: 100%;
+  }
+  &:hover {
+    opacity: 0.8;
+    .post-thumb-title {
+      color: @theme-orange;
+    }
+  }
+}
+
+// homepage map section
+.map-container {
+  border-top: 1px solid @divider-grey;
+  height: 700px;
+}
+
+.section-subtitle {
+  color: @theme-grey;
+  font-size: @title-text / 3;
+  font-weight: bold;
+  margin-bottom: -@base-unit * 2;
+  text-transform: uppercase;
 }
