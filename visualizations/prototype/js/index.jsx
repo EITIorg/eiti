@@ -6,6 +6,7 @@ let PieChart = require('./chartWidgets/ExtendedPie');
 let GroupedBar = require('./chartWidgets/GroupedBar');
 let StackedBar = require('./chartWidgets/StackedBar');
 let TreeMap = require('./chartWidgets/TreeMap');
+let BubbleChart = require('./chartWidgets/BubbleChart');
 
 import { render } from 'react-dom';
 
@@ -90,6 +91,22 @@ window.chartWidget.create = function(options, data) {
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
+					margin = {options.margin}
+					className = {options.className}
+	            	dataURL = {dataURL}
+	            	chartData = {chartData}
+				/>
+				<h4 className={'chartDescription'}>{options.description}</h4>
+			</div>
+		), document.getElementById(options.container))
+	} else if(options.type == "BubbleChart") {
+		render((
+			<div>
+				<BubbleChart
+					chartTitle = {options.name}
+					width = {options.width}
+					height = {options.height}
+					diameter = {options.diameter}
 					margin = {options.margin}
 					className = {options.className}
 	            	dataURL = {dataURL}

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0d308a4ce50eeaccfaf1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ef2919d8afe47963f134"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -890,6 +890,7 @@
 	var GroupedBar = __webpack_require__(204);
 	var StackedBar = __webpack_require__(208);
 	var TreeMap = __webpack_require__(209);
+	var BubbleChart = __webpack_require__(210);
 
 	window.chartWidget.create = function (options, data) {
 		var chartData, dataURL;
@@ -990,6 +991,26 @@
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
+					margin: options.margin,
+					className: options.className,
+					dataURL: dataURL,
+					chartData: chartData
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
+			), document.getElementById(options.container));
+		} else if (options.type == "BubbleChart") {
+			(0, _reactDom.render)(React.createElement(
+				'div',
+				null,
+				React.createElement(BubbleChart, {
+					chartTitle: options.name,
+					width: options.width,
+					height: options.height,
+					diameter: options.diameter,
 					margin: options.margin,
 					className: options.className,
 					dataURL: dataURL,
@@ -24509,6 +24530,156 @@
 	});
 
 	module.exports = TreeMap;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactDom = __webpack_require__(8);
+
+	var React = __webpack_require__(154);
+	var d3 = __webpack_require__(168);
+
+	var Chart = __webpack_require__(169);
+	var Tooltip = __webpack_require__(172);
+
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
+
+	var DataSet = React.createClass({
+		displayName: 'DataSet',
+
+		componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+			var _props = this.props;
+			var data = _props.data;
+			var diameter = _props.diameter;
+			var width = _props.width;
+			var height = _props.height;
+
+			var el = (0, _reactDom.findDOMNode)(this);
+
+			var svg = d3.select(el).append("svg").attr("width", width).attr("height", height).attr("class", "bubble");
+
+			svg.selectAll("*").remove(); // clear nodes with state change
+
+			var format = d3.format(",d"),
+			    color = d3.scale.category20c();
+
+			var bubble = d3.layout.pack().sort(null).size([diameter, diameter]).padding(1.5);
+
+			var node = svg.selectAll(".node").data(bubble.nodes(this.classes(data)).filter(function (d) {
+				return !d.children;
+			})).enter().append("g").attr("class", "node").attr("transform", function (d) {
+				return "translate(" + d.x + "," + d.y + ")";
+			});
+
+			node.append("title").text(function (d) {
+				return d.className + ": " + format(d.value);
+			});
+
+			node.append("circle").attr("r", function (d) {
+				return d.r;
+			}).style("fill", function (d) {
+				return color(d.packageName);
+			});
+
+			node.append("text").attr("dy", ".3em").style("text-anchor", "middle").text(function (d) {
+				return d.className.substring(0, d.r / 3);
+			});
+
+			//d3.select(self.frameElement).style("height", height + "px");
+		},
+
+		// Returns a flattened hierarchy containing all leaf nodes under the root.
+		classes: function classes(root) {
+			var classes = [];
+
+			function recurse(name, node) {
+				if (node.children) {
+					node.children.forEach(function (child) {
+						recurse(node.name, child);
+					});
+				} else {
+					classes.push({ packageName: name, className: node.name, value: node.size });
+				}
+			}
+
+			recurse(null, root);
+			return { children: classes };
+		},
+
+		render: function render() {
+			return React.createElement('div', null);
+		}
+	});
+
+	var BubbleChart = React.createClass({
+		displayName: 'BubbleChart',
+
+		mixins: [DefaultPropsMixin, HeightWidthMixin, AccessorMixin, TooltipMixin],
+
+		getInitialState: function getInitialState() {
+			return {
+				chartData: {
+					"name": "",
+					"children": [{
+						"name": "",
+						"size": 0
+					}]
+				}
+			};
+		},
+
+		componentWillMount: function componentWillMount() {
+			if (this.props.dataURL) {
+				var _this = this;
+				/* Old school AJAX request to try to stay away from jQuery */
+				var req = new XMLHttpRequest();
+				req.onreadystatechange = function () {
+					if (req.readyState == 4 && req.status == 200) {
+						var data = JSON.parse(req.responseText);
+						_this.setState({ chartData: data });
+					}
+				};
+				req.open("GET", this.props.dataURL, true);
+				req.send();
+			} else if (this.props.chartData) {
+				this.setState({ chartData: this.props.chartData });
+			}
+		},
+
+		render: function render() {
+			var _props2 = this.props;
+			var width = _props2.width;
+			var height = _props2.height;
+			var margin = _props2.margin;
+			var diameter = _props2.diameter;
+			var chartTitle = _props2.chartTitle;
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'h3',
+					{ className: "chartTitle" },
+					chartTitle
+				),
+				React.createElement(DataSet, {
+					data: this.state.chartData,
+					width: width,
+					height: height,
+					margin: margin,
+					diameter: diameter
+				})
+			);
+		}
+	});
+
+	module.exports = BubbleChart;
 
 /***/ }
 /******/ ]);

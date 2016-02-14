@@ -14,7 +14,7 @@
 
 	<body>
 		<div id="main">
-			<div id="treemap"></div>
+			<div id="bubble"></div>
 	    	<div id="viz2"></div>
 	    	<div id="viz3"></div>
 	    	<div id="viz4"></div>
@@ -23,14 +23,15 @@
 		<script src="dist/chartWidgets.js"></script>
 		<script>
 			chartWidget.create({
-				type: "TreeMap",		
-				name: "Sample Treemap",
+				type: "BubbleChart",		
+				name: "Sample BubbleChart",
 				width: 600,
-				height: 300,
+				height: 600,
+				diameter: 600,
 				margin: {top: 20, right: 0, bottom: 0, left: 0},
-	            container: "treemap"
+	            container: "bubble"
 			},
-			'data/viz7.json');
+			'data/viz6.json');
 			chartWidget.create({
 				type: "GroupedBar",		
 				name: "Production Values",
