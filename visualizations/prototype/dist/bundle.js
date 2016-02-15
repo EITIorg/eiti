@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "369b445c13645f85876b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5ab98374300825da550d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24117,14 +24117,11 @@
 		getInitialState: function getInitialState() {
 			return {
 				chartData: [{
-					label: 'Total',
+					label: '',
 					values: [{ x: '', y: 0 }]
 				}],
 
-				rawData: [{
-					label: 'Total',
-					values: [{ x: '', y: 0 }]
-				}]
+				showLegend: false
 			};
 		},
 
@@ -24149,7 +24146,7 @@
 							newItem['active'] = true;
 							return newItem;
 						});
-						_this.setState({ rawData: classData, chartData: data });
+						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -24160,7 +24157,7 @@
 					newItem['active'] = true;
 					return newItem;
 				});
-				this.setState({ rawData: classData, chartData: this.props.chartData });
+				this.setState({ rawData: classData, chartData: this.props.chartData, showLegend: true });
 			}
 		},
 
@@ -24176,7 +24173,7 @@
 				yAxis: { label: this.props.ylabel },
 				tooltipHtml: this.props.tooltip,
 				tooltipMode: 'mouse',
-				legend: this.props.legend || false });
+				legend: this.props.legend && this.state.showLegend });
 		}
 	});
 
