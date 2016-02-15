@@ -23,7 +23,7 @@ h1{
 .main-navigation {
   float: right;
   overflow: hidden;
-  margin-top: @general-margin-space * 2;
+  margin-top: @general-margin-space * 3.5;
   ul {
     .list-unstyled();
 
@@ -103,6 +103,11 @@ h1{
   padding:  0 0 @base-unit * 3 0;
 }
 
+.layout-content-wrapper {
+  clear: both;
+  overflow: hidden;
+  padding:  0 0 @base-unit * 6 0;
+}
 .content-section {
   overflow: hidden;
   padding: @base-unit 0;
@@ -140,13 +145,18 @@ h1{
 // quote banner
 .banner-quote {
   padding: @base-unit * 6 0;
-  background-size: 100%;
 
   &.peru {
     background: url("../images/quote-banners/peru-quote-banner.png") no-repeat;
+    background-size: 100%;
   }
   &.homepage {
     background: url("../images/homepage-images/homepage-quote-banner.png") no-repeat;
+    background-size: 100%;
+  }
+  &.beneficial-ownership {
+    background: url("../images/quote-banners/beneficial-ownership-quote-banner.png") no-repeat;
+    background-size: 100%;
   }
 }
 
@@ -172,6 +182,12 @@ h1{
   font-size: @title-text / 1.5;
   margin-top: @base-unit * 2;
   text-align:center;
+}
+
+//
+.small-section-title {
+  color: @theme-blue;
+  font-weight: normal;
 }
 
 // section bordered title
@@ -532,4 +548,74 @@ h1{
   font-weight: bold;
   margin-bottom: -@base-unit * 2;
   text-transform: uppercase;
+}
+
+
+//  thematic page
+
+.thematic-top-banner {
+  height: 380px;
+  overflow: hidden;
+  &.beneficial-ownership {
+    background: url('../images/thematic-banners/beneficial-ownership-banner.png') no-repeat;
+    background-size: @full-width;
+  }
+}
+
+.thematic-banner-inner {
+  .section-inner (800px);
+  padding-bottom: 10em;
+  margin-top: 5em;
+  position: relative;
+}
+
+.stat-banner{
+  background: url('../images/stat-banner-bg.png') no-repeat;
+  background-size: 100%;
+  overflow: hidden;
+  padding: @base-unit * 3 0;
+}
+.inner-container {
+  .section-inner (960px);
+}
+.stat-widget{
+  float: left;
+  margin: 0 5px;
+  width: @full-width / 4.4;
+}
+.stat-icon {
+  fill: @theme-blue-light;
+  float: left;
+  margin-right: @general-margin-space / 2;
+  width: @banner-stat-size;
+}
+.stat-value {
+  color: @text-inverse;
+  font-size: @stat-value;
+  font-weight: bold;
+  line-height: 90%;
+}
+.stat-unit {
+  text-transform: uppercase;
+}
+.stat-label {
+  clear: both;
+  color: @theme-blue-light;
+  font-size: @small-text;
+  border-top: 1px solid @theme-blue-light;
+  margin-top: @general-margin-space;
+  padding-top: @general-margin-space / 2;
+}
+
+// stat banner links
+.stat-links-banner {
+  background: @banner-lightgrey-bg;
+  border-top: 1px solid @divider-grey;
+  height: 30px;
+  padding: @base-unit 0;
+}
+.stat-link-widget {
+  float: left;
+  margin-right: 20px;
+  width: @full-width  / 6;
 }
