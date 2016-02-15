@@ -1,0 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import 'variables_mixins.less';
+
+html,
+body {
+  font-family: 'Open Sans';
+}
+a {
+  .transition-color(400ms);
+  color: #0093cf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
