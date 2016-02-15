@@ -15,6 +15,7 @@
 	<body>
 		<div id="main">
 			<div id="bubble"></div>
+			<div id="sankey"></div>
 	    	<div id="viz2"></div>
 	    	<div id="viz3"></div>
 	    	<div id="viz4"></div>
@@ -32,6 +33,15 @@
 	            container: "bubble"
 			},
 			'data/viz6.json');
+			chartWidget.create({
+				type: "Sankey",		
+				name: "Sample Sankey",
+				width: 600,
+				height: 300,
+				margin: {top: 1, right: 1, bottom: 6, left: 1},
+	            container: "sankey"
+			},
+			'data/viz10.json');
 			chartWidget.create({
 				type: "GroupedBar",		
 				name: "Production Values",
