@@ -26,11 +26,11 @@ function eitict_person_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
+        'module' => 'helpergeneric',
         'settings' => array(
-          'trim_length' => 600,
+          'trim_length' => 256,
         ),
-        'type' => 'text_summary_or_trimmed',
+        'type' => 'helpergeneric_clean_summary',
         'weight' => 1,
       ),
     ),
@@ -52,7 +52,7 @@ function eitict_person_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 7,
     ),
   );
 
@@ -90,7 +90,7 @@ function eitict_person_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -132,7 +132,7 @@ function eitict_person_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -276,7 +276,7 @@ function eitict_person_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -358,7 +358,7 @@ function eitict_person_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -396,7 +396,7 @@ function eitict_person_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
