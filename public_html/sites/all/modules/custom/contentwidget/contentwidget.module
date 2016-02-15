@@ -286,3 +286,25 @@ function contentwidget_field_presave($entity_type, $entity, $field, $instance, $
     $items[0]['settings'] = serialize($items[0]['settings']);
   }
 }
+
+/**
+ * Implements hook_libraries_info().
+ */
+function contentwidget_libraries_info() {
+  $libraries = array();
+
+  $libraries['eiti-charts'] = array(
+    'title' => 'EITI-Charts',
+    'version' => '1.0',
+    'files' => array(
+      'js' => array(
+        'bundle.js',
+      ),
+      'css' => array(
+        'main.css',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
