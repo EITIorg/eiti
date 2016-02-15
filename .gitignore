@@ -40,3 +40,7 @@
 # Ignore development things for visualizations
 /visualizations/prototype/node_modules
 /visualizations/prototype/js/rd3
+
+# Ignore development things for Map
+/map/prototype/node_modules
+

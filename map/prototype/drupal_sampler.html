@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+    <div class="container">
+          <h3>Loader</h3>
+          <button type="button" class="btn btn-primary btn-sm">Homepage Choropleth</button>
+          <button type="button" class="btn btn-primary btn-sm">First Indicator</button>
+          <button type="button" class="btn btn-primary btn-sm">Second Indicator</button>
+          <button type="button" class="btn btn-primary btn-sm">Third Indicator</button>
+          <button type="button" class="btn btn-primary btn-sm">Fourth Indicator</button>
+
+          <h2>Map Widget Result</h2>
+          <div id="map1" style="height:500px;width:1000px;"></div>
+          <br/>
+          <br/>
+
+    </div>
+    <br />
+    <script src="dist/mapWidgets.js"></script>
+    <script>
+    mapWidget.createHomePage({
+        name: "Homepage Map",
+        container: "map1",
+        position: [12.897489183755892, -10.76171875],
+        zoom: 2,
+        maxZoom: 5,
+        minZoom: 2
+    });
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,966 @@
+export var countryStatus = [{
+    "Name": "Afghanistan",
+    "ISO2": "AF",
+    "ISO3": "AFG",
+    "EITI_Status": 2
+}, {
+    "Name": "Albania",
+    "ISO2": "AL",
+    "ISO3": "ALB",
+    "EITI_Status": 1
+}, {
+    "Name": "Algeria",
+    "ISO2": "DZ",
+    "ISO3": "DZA",
+    "EITI_Status": 4
+}, {
+    "Name": "Andorra",
+    "ISO2": "AD",
+    "ISO3": "AND",
+    "EITI_Status": 4
+}, {
+    "Name": "Angola",
+    "ISO2": "AO",
+    "ISO3": "AGO",
+    "EITI_Status": 4
+}, {
+    "Name": "Antigua and Barbuda",
+    "ISO2": "AG",
+    "ISO3": "ATG",
+    "EITI_Status": 4
+}, {
+    "Name": "Argentina",
+    "ISO2": "AR",
+    "ISO3": "ARG",
+    "EITI_Status": 4
+}, {
+    "Name": "Armenia",
+    "ISO2": "AM",
+    "ISO3": "ARM",
+    "EITI_Status": 4
+}, {
+    "Name": "Australia",
+    "ISO2": "AU",
+    "ISO3": "AUS",
+    "EITI_Status": 4
+}, {
+    "Name": "Austria",
+    "ISO2": "AT",
+    "ISO3": "AUT",
+    "EITI_Status": 4
+}, {
+    "Name": "Azerbaijan",
+    "ISO2": "AZ",
+    "ISO3": "AZE",
+    "EITI_Status": 2
+}, {
+    "Name": "Bahamas, The",
+    "ISO2": "BS",
+    "ISO3": "BHS",
+    "EITI_Status": 4
+}, {
+    "Name": "Bahrain",
+    "ISO2": "BH",
+    "ISO3": "BHR",
+    "EITI_Status": 4
+}, {
+    "Name": "Bangladesh",
+    "ISO2": "BD",
+    "ISO3": "BGD",
+    "EITI_Status": 4
+}, {
+    "Name": "Barbados",
+    "ISO2": "BB",
+    "ISO3": "BRB",
+    "EITI_Status": 4
+}, {
+    "Name": "Belarus",
+    "ISO2": "BY",
+    "ISO3": "BLR",
+    "EITI_Status": 4
+}, {
+    "Name": "Belgium",
+    "ISO2": "BE",
+    "ISO3": "BEL",
+    "EITI_Status": 4
+}, {
+    "Name": "Belize",
+    "ISO2": "BZ",
+    "ISO3": "BLZ",
+    "EITI_Status": 4
+}, {
+    "Name": "Benin",
+    "ISO2": "BJ",
+    "ISO3": "BEN",
+    "EITI_Status": 4
+}, {
+    "Name": "Bhutan",
+    "ISO2": "BT",
+    "ISO3": "BTN",
+    "EITI_Status": 4
+}, {
+    "Name": "Bolivia",
+    "ISO2": "BO",
+    "ISO3": "BOL",
+    "EITI_Status": 4
+}, {
+    "Name": "Bosnia and Herzegovina",
+    "ISO2": "BA",
+    "ISO3": "BIH",
+    "EITI_Status": 4
+}, {
+    "Name": "Botswana",
+    "ISO2": "BW",
+    "ISO3": "BWA",
+    "EITI_Status": 4
+}, {
+    "Name": "Brazil",
+    "ISO2": "BR",
+    "ISO3": "BRA",
+    "EITI_Status": 4
+}, {
+    "Name": "Brunei",
+    "ISO2": "BN",
+    "ISO3": "BRN",
+    "EITI_Status": 4
+}, {
+    "Name": "Bulgaria",
+    "ISO2": "BG",
+    "ISO3": "BGR",
+    "EITI_Status": 4
+}, {
+    "Name": "Burkina Faso",
+    "ISO2": "BF",
+    "ISO3": "BFA",
+    "EITI_Status": 1
+}, {
+    "Name": "Burundi",
+    "ISO2": "BI",
+    "ISO3": "BDI",
+    "EITI_Status": 4
+}, {
+    "Name": "Cambodia",
+    "ISO2": "KH",
+    "ISO3": "KHM",
+    "EITI_Status": 4
+}, {
+    "Name": "Cameroon",
+    "ISO2": "CM",
+    "ISO3": "CMR",
+    "EITI_Status": 1
+}, {
+    "Name": "Canada",
+    "ISO2": "CA",
+    "ISO3": "CAN",
+    "EITI_Status": 4
+}, {
+    "Name": "Cape Verde",
+    "ISO2": "CV",
+    "ISO3": "CPV",
+    "EITI_Status": 4
+}, {
+    "Name": "Central African Republic",
+    "ISO2": "CF",
+    "ISO3": "CAF",
+    "EITI_Status": 3
+}, {
+    "Name": "Chad",
+    "ISO2": "TD",
+    "ISO3": "TCD",
+    "EITI_Status": 1
+}, {
+    "Name": "Chile",
+    "ISO2": "CL",
+    "ISO3": "CHL",
+    "EITI_Status": 4
+}, {
+    "Name": "China, People's Republic of",
+    "ISO2": "CN",
+    "ISO3": "CHN",
+    "EITI_Status": 4
+}, {
+    "Name": "Colombia",
+    "ISO2": "CO",
+    "ISO3": "COL",
+    "EITI_Status": 4
+}, {
+    "Name": "Comoros",
+    "ISO2": "KM",
+    "ISO3": "COM",
+    "EITI_Status": 4
+}, {
+    "Name": "Congo, (Congo Â– Kinshasa)",
+    "ISO2": "CD",
+    "ISO3": "COD",
+    "EITI_Status": 1
+}, {
+    "Name": "Congo, (Congo Â– Brazzaville)",
+    "ISO2": "CG",
+    "ISO3": "COG",
+    "EITI_Status": 1
+}, {
+    "Name": "Costa Rica",
+    "ISO2": "CR",
+    "ISO3": "CRI",
+    "EITI_Status": 4
+}, {
+    "Name": "Cote d'Ivoire (Ivory Coast)",
+    "ISO2": "CI",
+    "ISO3": "CIV",
+    "EITI_Status": 1
+}, {
+    "Name": "Croatia",
+    "ISO2": "HR",
+    "ISO3": "HRV",
+    "EITI_Status": 4
+}, {
+    "Name": "Cuba",
+    "ISO2": "CU",
+    "ISO3": "CUB",
+    "EITI_Status": 4
+}, {
+    "Name": "Cyprus",
+    "ISO2": "CY",
+    "ISO3": "CYP",
+    "EITI_Status": 4
+}, {
+    "Name": "Czech Republic",
+    "ISO2": "CZ",
+    "ISO3": "CZE",
+    "EITI_Status": 4
+}, {
+    "Name": "Denmark",
+    "ISO2": "DK",
+    "ISO3": "DNK",
+    "EITI_Status": 4
+}, {
+    "Name": "Djibouti",
+    "ISO2": "DJ",
+    "ISO3": "DJI",
+    "EITI_Status": 4
+}, {
+    "Name": "Dominica",
+    "ISO2": "DM",
+    "ISO3": "DMA",
+    "EITI_Status": 4
+}, {
+    "Name": "Dominican Republic",
+    "ISO2": "DO",
+    "ISO3": "DOM",
+    "EITI_Status": 4
+}, {
+    "Name": "Ecuador",
+    "ISO2": "EC",
+    "ISO3": "ECU",
+    "EITI_Status": 4
+}, {
+    "Name": "Egypt",
+    "ISO2": "EG",
+    "ISO3": "EGY",
+    "EITI_Status": 4
+}, {
+    "Name": "El Salvador",
+    "ISO2": "SV",
+    "ISO3": "SLV",
+    "EITI_Status": 4
+}, {
+    "Name": "Equatorial Guinea",
+    "ISO2": "GQ",
+    "ISO3": "GNQ",
+    "EITI_Status": 4
+}, {
+    "Name": "Eritrea",
+    "ISO2": "ER",
+    "ISO3": "ERI",
+    "EITI_Status": 4
+}, {
+    "Name": "Estonia",
+    "ISO2": "EE",
+    "ISO3": "EST",
+    "EITI_Status": 4
+}, {
+    "Name": "Ethiopia",
+    "ISO2": "ET",
+    "ISO3": "ETH",
+    "EITI_Status": 2
+}, {
+    "Name": "Fiji",
+    "ISO2": "FJ",
+    "ISO3": "FJI",
+    "EITI_Status": 4
+}, {
+    "Name": "Finland",
+    "ISO2": "FI",
+    "ISO3": "FIN",
+    "EITI_Status": 4
+}, {
+    "Name": "France",
+    "ISO2": "FR",
+    "ISO3": "FRA",
+    "EITI_Status": 4
+}, {
+    "Name": "Gabon",
+    "ISO2": "GA",
+    "ISO3": "GAB",
+    "EITI_Status": 4
+}, {
+    "Name": "Gambia, The",
+    "ISO2": "GM",
+    "ISO3": "GMB",
+    "EITI_Status": 4
+}, {
+    "Name": "Georgia",
+    "ISO2": "GE",
+    "ISO3": "GEO",
+    "EITI_Status": 4
+}, {
+    "Name": "Germany",
+    "ISO2": "DE",
+    "ISO3": "DEU",
+    "EITI_Status": 4
+}, {
+    "Name": "Ghana",
+    "ISO2": "GH",
+    "ISO3": "GHA",
+    "EITI_Status": 1
+}, {
+    "Name": "Greece",
+    "ISO2": "GR",
+    "ISO3": "GRC",
+    "EITI_Status": 4
+}, {
+    "Name": "Grenada",
+    "ISO2": "GD",
+    "ISO3": "GRD",
+    "EITI_Status": 4
+}, {
+    "Name": "Guatemala",
+    "ISO2": "GT",
+    "ISO3": "GTM",
+    "EITI_Status": 1
+}, {
+    "Name": "Guinea",
+    "ISO2": "GN",
+    "ISO3": "GIN",
+    "EITI_Status": 1
+}, {
+    "Name": "Guinea-Bissau",
+    "ISO2": "GW",
+    "ISO3": "GNB",
+    "EITI_Status": 4
+}, {
+    "Name": "Guyana",
+    "ISO2": "GY",
+    "ISO3": "GUY",
+    "EITI_Status": 4
+}, {
+    "Name": "Haiti",
+    "ISO2": "HT",
+    "ISO3": "HTI",
+    "EITI_Status": 4
+}, {
+    "Name": "Honduras",
+    "ISO2": "HN",
+    "ISO3": "HND",
+    "EITI_Status": 2
+}, {
+    "Name": "Hungary",
+    "ISO2": "HU",
+    "ISO3": "HUN",
+    "EITI_Status": 4
+}, {
+    "Name": "Iceland",
+    "ISO2": "IS",
+    "ISO3": "ISL",
+    "EITI_Status": 4
+}, {
+    "Name": "India",
+    "ISO2": "IN",
+    "ISO3": "IND",
+    "EITI_Status": 4
+}, {
+    "Name": "Indonesia",
+    "ISO2": "ID",
+    "ISO3": "IDN",
+    "EITI_Status": 1
+}, {
+    "Name": "Iran",
+    "ISO2": "IR",
+    "ISO3": "IRN",
+    "EITI_Status": 4
+}, {
+    "Name": "Iraq",
+    "ISO2": "IQ",
+    "ISO3": "IRQ",
+    "EITI_Status": 1
+}, {
+    "Name": "Ireland",
+    "ISO2": "IE",
+    "ISO3": "IRL",
+    "EITI_Status": 4
+}, {
+    "Name": "Israel",
+    "ISO2": "IL",
+    "ISO3": "ISR",
+    "EITI_Status": 4
+}, {
+    "Name": "Italy",
+    "ISO2": "IT",
+    "ISO3": "ITA",
+    "EITI_Status": 4
+}, {
+    "Name": "Jamaica",
+    "ISO2": "JM",
+    "ISO3": "JAM",
+    "EITI_Status": 4
+}, {
+    "Name": "Japan",
+    "ISO2": "JP",
+    "ISO3": "JPN",
+    "EITI_Status": 4
+}, {
+    "Name": "Jordan",
+    "ISO2": "JO",
+    "ISO3": "JOR",
+    "EITI_Status": 4
+}, {
+    "Name": "Kazakhstan",
+    "ISO2": "KZ",
+    "ISO3": "KAZ",
+    "EITI_Status": 1
+}, {
+    "Name": "Kenya",
+    "ISO2": "KE",
+    "ISO3": "KEN",
+    "EITI_Status": 4
+}, {
+    "Name": "Kiribati",
+    "ISO2": "KI",
+    "ISO3": "KIR",
+    "EITI_Status": 4
+}, {
+    "Name": "Korea, North",
+    "ISO2": "KP",
+    "ISO3": "PRK",
+    "EITI_Status": 4
+}, {
+    "Name": "Korea, South",
+    "ISO2": "KR",
+    "ISO3": "KOR",
+    "EITI_Status": 4
+}, {
+    "Name": "Kuwait",
+    "ISO2": "KW",
+    "ISO3": "KWT",
+    "EITI_Status": 4
+}, {
+    "Name": "Kyrgyzstan",
+    "ISO2": "KG",
+    "ISO3": "KGZ",
+    "EITI_Status": 1
+}, {
+    "Name": "Laos",
+    "ISO2": "LA",
+    "ISO3": "LAO",
+    "EITI_Status": 4
+}, {
+    "Name": "Latvia",
+    "ISO2": "LV",
+    "ISO3": "LVA",
+    "EITI_Status": 4
+}, {
+    "Name": "Lebanon",
+    "ISO2": "LB",
+    "ISO3": "LBN",
+    "EITI_Status": 4
+}, {
+    "Name": "Lesotho",
+    "ISO2": "LS",
+    "ISO3": "LSO",
+    "EITI_Status": 4
+}, {
+    "Name": "Liberia",
+    "ISO2": "LR",
+    "ISO3": "LBR",
+    "EITI_Status": 1
+}, {
+    "Name": "Libya",
+    "ISO2": "LY",
+    "ISO3": "LBY",
+    "EITI_Status": 4
+}, {
+    "Name": "Liechtenstein",
+    "ISO2": "LI",
+    "ISO3": "LIE",
+    "EITI_Status": 4
+}, {
+    "Name": "Lithuania",
+    "ISO2": "LT",
+    "ISO3": "LTU",
+    "EITI_Status": 4
+}, {
+    "Name": "Luxembourg",
+    "ISO2": "LU",
+    "ISO3": "LUX",
+    "EITI_Status": 4
+}, {
+    "Name": "Macedonia",
+    "ISO2": "MK",
+    "ISO3": "MKD",
+    "EITI_Status": 4
+}, {
+    "Name": "Madagascar",
+    "ISO2": "MG",
+    "ISO3": "MDG",
+    "EITI_Status": 2
+}, {
+    "Name": "Malawi",
+    "ISO2": "MW",
+    "ISO3": "MWI",
+    "EITI_Status": 2
+}, {
+    "Name": "Malaysia",
+    "ISO2": "MY",
+    "ISO3": "MYS",
+    "EITI_Status": 4
+}, {
+    "Name": "Maldives",
+    "ISO2": "MV",
+    "ISO3": "MDV",
+    "EITI_Status": 4
+}, {
+    "Name": "Mali",
+    "ISO2": "ML",
+    "ISO3": "MLI",
+    "EITI_Status": 1
+}, {
+    "Name": "Malta",
+    "ISO2": "MT",
+    "ISO3": "MLT",
+    "EITI_Status": 4
+}, {
+    "Name": "Marshall Islands",
+    "ISO2": "MH",
+    "ISO3": "MHL",
+    "EITI_Status": 4
+}, {
+    "Name": "Mauritania",
+    "ISO2": "MR",
+    "ISO3": "MRT",
+    "EITI_Status": 1
+}, {
+    "Name": "Mauritius",
+    "ISO2": "MU",
+    "ISO3": "MUS",
+    "EITI_Status": 4
+}, {
+    "Name": "Mexico",
+    "ISO2": "MX",
+    "ISO3": "MEX",
+    "EITI_Status": 4
+}, {
+    "Name": "Micronesia",
+    "ISO2": "FM",
+    "ISO3": "FSM",
+    "EITI_Status": 4
+}, {
+    "Name": "Moldova",
+    "ISO2": "MD",
+    "ISO3": "MDA",
+    "EITI_Status": 4
+}, {
+    "Name": "Monaco",
+    "ISO2": "MC",
+    "ISO3": "MCO",
+    "EITI_Status": 4
+}, {
+    "Name": "Mongolia",
+    "ISO2": "MN",
+    "ISO3": "MNG",
+    "EITI_Status": 1
+}, {
+    "Name": "Montenegro",
+    "ISO2": "ME",
+    "ISO3": "MNE",
+    "EITI_Status": 4
+}, {
+    "Name": "Morocco",
+    "ISO2": "MA",
+    "ISO3": "MAR",
+    "EITI_Status": 4
+}, {
+    "Name": "Mozambique",
+    "ISO2": "MZ",
+    "ISO3": "MOZ",
+    "EITI_Status": 1
+}, {
+    "Name": "Myanmar (Burma)",
+    "ISO2": "MM",
+    "ISO3": "MMR",
+    "EITI_Status": 2
+}, {
+    "Name": "Namibia",
+    "ISO2": "NA",
+    "ISO3": "NAM",
+    "EITI_Status": 4
+}, {
+    "Name": "Nauru",
+    "ISO2": "NR",
+    "ISO3": "NRU",
+    "EITI_Status": 4
+}, {
+    "Name": "Nepal",
+    "ISO2": "NP",
+    "ISO3": "NPL",
+    "EITI_Status": 4
+}, {
+    "Name": "Netherlands",
+    "ISO2": "NL",
+    "ISO3": "NLD",
+    "EITI_Status": 4
+}, {
+    "Name": "New Zealand",
+    "ISO2": "NZ",
+    "ISO3": "NZL",
+    "EITI_Status": 4
+}, {
+    "Name": "Nicaragua",
+    "ISO2": "NI",
+    "ISO3": "NIC",
+    "EITI_Status": 4
+}, {
+    "Name": "Niger",
+    "ISO2": "NE",
+    "ISO3": "NER",
+    "EITI_Status": 1
+}, {
+    "Name": "Nigeria",
+    "ISO2": "NG",
+    "ISO3": "NGA",
+    "EITI_Status": 1
+}, {
+    "Name": "Norway",
+    "ISO2": "NO",
+    "ISO3": "NOR",
+    "EITI_Status": 1
+}, {
+    "Name": "Oman",
+    "ISO2": "OM",
+    "ISO3": "OMN",
+    "EITI_Status": 4
+}, {
+    "Name": "Pakistan",
+    "ISO2": "PK",
+    "ISO3": "PAK",
+    "EITI_Status": 4
+}, {
+    "Name": "Palau",
+    "ISO2": "PW",
+    "ISO3": "PLW",
+    "EITI_Status": 4
+}, {
+    "Name": "Panama",
+    "ISO2": "PA",
+    "ISO3": "PAN",
+    "EITI_Status": 4
+}, {
+    "Name": "Papua New Guinea",
+    "ISO2": "PG",
+    "ISO3": "PNG",
+    "EITI_Status": 2
+}, {
+    "Name": "Paraguay",
+    "ISO2": "PY",
+    "ISO3": "PRY",
+    "EITI_Status": 4
+}, {
+    "Name": "Peru",
+    "ISO2": "PE",
+    "ISO3": "PER",
+    "EITI_Status": 1
+}, {
+    "Name": "Philippines",
+    "ISO2": "PH",
+    "ISO3": "PHL",
+    "EITI_Status": 2
+}, {
+    "Name": "Poland",
+    "ISO2": "PL",
+    "ISO3": "POL",
+    "EITI_Status": 4
+}, {
+    "Name": "Portugal",
+    "ISO2": "PT",
+    "ISO3": "PRT",
+    "EITI_Status": 4
+}, {
+    "Name": "Qatar",
+    "ISO2": "QA",
+    "ISO3": "QAT",
+    "EITI_Status": 4
+}, {
+    "Name": "Romania",
+    "ISO2": "RO",
+    "ISO3": "ROU",
+    "EITI_Status": 4
+}, {
+    "Name": "Russia",
+    "ISO2": "RU",
+    "ISO3": "RUS",
+    "EITI_Status": 4
+}, {
+    "Name": "Rwanda",
+    "ISO2": "RW",
+    "ISO3": "RWA",
+    "EITI_Status": 4
+}, {
+    "Name": "Saint Kitts and Nevis",
+    "ISO2": "KN",
+    "ISO3": "KNA",
+    "EITI_Status": 4
+}, {
+    "Name": "Saint Lucia",
+    "ISO2": "LC",
+    "ISO3": "LCA",
+    "EITI_Status": 4
+}, {
+    "Name": "Saint Vincent and the Grenadines",
+    "ISO2": "VC",
+    "ISO3": "VCT",
+    "EITI_Status": 4
+}, {
+    "Name": "Samoa",
+    "ISO2": "WS",
+    "ISO3": "WSM",
+    "EITI_Status": 4
+}, {
+    "Name": "San Marino",
+    "ISO2": "SM",
+    "ISO3": "SMR",
+    "EITI_Status": 4
+}, {
+    "Name": "Sao Tome and Principe",
+    "ISO2": "ST",
+    "ISO3": "STP",
+    "EITI_Status": 2
+}, {
+    "Name": "Saudi Arabia",
+    "ISO2": "SA",
+    "ISO3": "SAU",
+    "EITI_Status": 4
+}, {
+    "Name": "Senegal",
+    "ISO2": "SN",
+    "ISO3": "SEN",
+    "EITI_Status": 2
+}, {
+    "Name": "Serbia",
+    "ISO2": "RS",
+    "ISO3": "SRB",
+    "EITI_Status": 4
+}, {
+    "Name": "Seychelles",
+    "ISO2": "SC",
+    "ISO3": "SYC",
+    "EITI_Status": 2
+}, {
+    "Name": "Sierra Leone",
+    "ISO2": "SL",
+    "ISO3": "SLE",
+    "EITI_Status": 1
+}, {
+    "Name": "Singapore",
+    "ISO2": "SG",
+    "ISO3": "SGP",
+    "EITI_Status": 4
+}, {
+    "Name": "Slovakia",
+    "ISO2": "SK",
+    "ISO3": "SVK",
+    "EITI_Status": 4
+}, {
+    "Name": "Slovenia",
+    "ISO2": "SI",
+    "ISO3": "SVN",
+    "EITI_Status": 4
+}, {
+    "Name": "Solomon Islands",
+    "ISO2": "SB",
+    "ISO3": "SLB",
+    "EITI_Status": 2
+}, {
+    "Name": "Somalia",
+    "ISO2": "SO",
+    "ISO3": "SOM",
+    "EITI_Status": 4
+}, {
+    "Name": "South Africa",
+    "ISO2": "ZA",
+    "ISO3": "ZAF",
+    "EITI_Status": 4
+}, {
+    "Name": "Spain",
+    "ISO2": "ES",
+    "ISO3": "ESP",
+    "EITI_Status": 4
+}, {
+    "Name": "Sri Lanka",
+    "ISO2": "LK",
+    "ISO3": "LKA",
+    "EITI_Status": 4
+}, {
+    "Name": "Sudan",
+    "ISO2": "SD",
+    "ISO3": "SDN",
+    "EITI_Status": 4
+}, {
+    "Name": "Suriname",
+    "ISO2": "SR",
+    "ISO3": "SUR",
+    "EITI_Status": 4
+}, {
+    "Name": "Swaziland",
+    "ISO2": "SZ",
+    "ISO3": "SWZ",
+    "EITI_Status": 4
+}, {
+    "Name": "Sweden",
+    "ISO2": "SE",
+    "ISO3": "SWE",
+    "EITI_Status": 4
+}, {
+    "Name": "Switzerland",
+    "ISO2": "CH",
+    "ISO3": "CHE",
+    "EITI_Status": 4
+}, {
+    "Name": "Syria",
+    "ISO2": "SY",
+    "ISO3": "SYR",
+    "EITI_Status": 4
+}, {
+    "Name": "Tajikistan",
+    "ISO2": "TJ",
+    "ISO3": "TJK",
+    "EITI_Status": 2
+}, {
+    "Name": "Tanzania",
+    "ISO2": "TZ",
+    "ISO3": "TZA",
+    "EITI_Status": 1
+}, {
+    "Name": "Thailand",
+    "ISO2": "TH",
+    "ISO3": "THA",
+    "EITI_Status": 4
+}, {
+    "Name": "Timor-Leste (East Timor)",
+    "ISO2": "TL",
+    "ISO3": "TLS",
+    "EITI_Status": 1
+}, {
+    "Name": "Togo",
+    "ISO2": "TG",
+    "ISO3": "TGO",
+    "EITI_Status": 1
+}, {
+    "Name": "Tonga",
+    "ISO2": "TO",
+    "ISO3": "TON",
+    "EITI_Status": 4
+}, {
+    "Name": "Trinidad and Tobago",
+    "ISO2": "TT",
+    "ISO3": "TTO",
+    "EITI_Status": 1
+}, {
+    "Name": "Tunisia",
+    "ISO2": "TN",
+    "ISO3": "TUN",
+    "EITI_Status": 4
+}, {
+    "Name": "Turkey",
+    "ISO2": "TR",
+    "ISO3": "TUR",
+    "EITI_Status": 4
+}, {
+    "Name": "Turkmenistan",
+    "ISO2": "TM",
+    "ISO3": "TKM",
+    "EITI_Status": 4
+}, {
+    "Name": "Tuvalu",
+    "ISO2": "TV",
+    "ISO3": "TUV",
+    "EITI_Status": 4
+}, {
+    "Name": "Uganda",
+    "ISO2": "UG",
+    "ISO3": "UGA",
+    "EITI_Status": 4
+}, {
+    "Name": "Ukraine",
+    "ISO2": "UA",
+    "ISO3": "UKR",
+    "EITI_Status": 2
+}, {
+    "Name": "United Arab Emirates",
+    "ISO2": "AE",
+    "ISO3": "ARE",
+    "EITI_Status": 4
+}, {
+    "Name": "United Kingdom",
+    "ISO2": "GB",
+    "ISO3": "GBR",
+    "EITI_Status": 2
+}, {
+    "Name": "United States",
+    "ISO2": "US",
+    "ISO3": "USA",
+    "EITI_Status": 2
+}, {
+    "Name": "Uruguay",
+    "ISO2": "UY",
+    "ISO3": "URY",
+    "EITI_Status": 4
+}, {
+    "Name": "Uzbekistan",
+    "ISO2": "UZ",
+    "ISO3": "UZB",
+    "EITI_Status": 4
+}, {
+    "Name": "Vanuatu",
+    "ISO2": "VU",
+    "ISO3": "VUT",
+    "EITI_Status": 4
+}, {
+    "Name": "Vatican City",
+    "ISO2": "VA",
+    "ISO3": "VAT",
+    "EITI_Status": 4
+}, {
+    "Name": "Venezuela",
+    "ISO2": "VE",
+    "ISO3": "VEN",
+    "EITI_Status": 4
+}, {
+    "Name": "Vietnam",
+    "ISO2": "VN",
+    "ISO3": "VNM",
+    "EITI_Status": 4
+}, {
+    "Name": "Yemen",
+    "ISO2": "YE",
+    "ISO3": "YEM",
+    "EITI_Status": 3
+}, {
+    "Name": "Zambia",
+    "ISO2": "ZM",
+    "ISO3": "ZMB",
+    "EITI_Status": 1
+}, {
+    "Name": "Zimbabwe",
+    "ISO2": "ZW",
+    "ISO3": "ZWE",
+    "EITI_Status": 4
+}];
