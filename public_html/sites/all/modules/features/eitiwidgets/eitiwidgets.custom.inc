@@ -50,3 +50,13 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
       break;
   }
 }
+
+/**
+ * Implements hook_fieldable_panels_pane_view().
+ */
+function eitiwidgets_fieldable_panels_pane_view($panels_pane, $view_mode, $langcode) {
+  // Hide original title when title_field is used (not displayed) on the entity.
+  if (isset($panels_pane->title_field) && isset($panels_pane->content['title'])) {
+    unset($panels_pane->content['title']);
+  }
+}
