@@ -13,19 +13,12 @@ all : update install prepare protect clean destroy cc cf fm offline online
 update:
 	@echo 'Running database updates...'
 	@drush updatedb --yes
-
 	@echo 'Running update scripts...'
 	@drush update-scripts-run --run-all --yes
-
 	@echo 'Revert all enabled feature modules...'
 	@drush features-revert-all --yes
-
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
-
-	@#@echo 'Securing the site settings...'
-	@#@chmod a-w sites/default/settings*.php sites/default
-
 	@echo 'Done!'
 
 
@@ -46,17 +39,13 @@ export INFO_TEXT
 install:
 	@# Make sure the environment is prepared.
 	@test -f 'sites/default/settings.custom.php' || (echo "$$INFO_TEXT"; exit 8)
-
 	@echo 'Installing a new environment...'
 	@echo ' - this might take a couple of minutes.'
 	@drush install --yes
-
 	@echo 'Setting up the new environment...'
 	@drush update-scripts-run --run-all --yes
-
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
-
 	@echo 'Securing the site settings.'
 	@chmod a-w sites/default/settings*.php sites/default
 	@echo ''
