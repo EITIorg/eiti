@@ -58,15 +58,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'access devel information'.
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'access media browser'.
   $permissions['access media browser'] = array(
     'name' => 'access media browser',
@@ -115,15 +106,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: 'admin_classes'.
-  $permissions['admin_classes'] = array(
-    'name' => 'admin_classes',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'ds_ui',
-  );
-
   // Exported permission: 'admin_display_suite'.
   $permissions['admin_display_suite'] = array(
     'name' => 'admin_display_suite',
@@ -131,24 +113,6 @@ function eitipermissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'ds',
-  );
-
-  // Exported permission: 'admin_fields'.
-  $permissions['admin_fields'] = array(
-    'name' => 'admin_fields',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'ds_ui',
-  );
-
-  // Exported permission: 'admin_view_modes'.
-  $permissions['admin_view_modes'] = array(
-    'name' => 'admin_view_modes',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'ds_ui',
   );
 
   // Exported permission: 'administer actions'.
@@ -284,15 +248,6 @@ function eitipermissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'menu',
-  );
-
-  // Exported permission: 'administer module filter'.
-  $permissions['administer module filter'] = array(
-    'name' => 'administer module filter',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'module_filter',
   );
 
   // Exported permission: 'administer modules'.
@@ -1332,15 +1287,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'execute php code'.
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'flush caches'.
   $permissions['flush caches'] = array(
     'name' => 'flush caches',
@@ -1641,15 +1587,6 @@ function eitipermissions_user_default_permissions() {
     'name' => 'select account cancellation method',
     'roles' => array(),
     'module' => 'user',
-  );
-
-  // Exported permission: 'switch users'.
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
   );
 
   // Exported permission: 'toggle field translatability'.
