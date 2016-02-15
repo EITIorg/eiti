@@ -19,10 +19,10 @@ function eitict_page_features_component_export_alter(&$component_export, $compon
       // Hide variables that should not be exported.
       $entries_list = array(
         // We use "the same allowed layouts as standard Panels pages".
-        'panelizer_implementing_country:normal_allowed_layouts',
+        'panelizer_node:page_allowed_layouts',
 
         // We use "the same allowed content as standard Panels pages".
-        'panelizer_implementing_country:normal_allowed_types',
+        'panelizer_node:page_allowed_types',
       );
   }
 
