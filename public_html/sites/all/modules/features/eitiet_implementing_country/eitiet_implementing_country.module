@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Entity Type Implementing Country feature.
+ */
+
+include_once 'eitiet_implementing_country.custom.inc';
+include_once 'eitiet_implementing_country.features.inc';

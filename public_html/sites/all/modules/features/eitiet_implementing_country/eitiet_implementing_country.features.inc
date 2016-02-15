@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * eitipanels.features.inc
+ * eitiet_implementing_country.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function eitipanels_ctools_plugin_api($module = NULL, $api = NULL) {
-  if ($module == "page_manager" && $api == "pages_default") {
+function eitiet_implementing_country_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "panelizer" && $api == "panelizer") {
     return array("version" => "1");
   }
   if ($module == "strongarm" && $api == "strongarm") {

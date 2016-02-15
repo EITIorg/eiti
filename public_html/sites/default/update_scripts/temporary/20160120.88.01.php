@@ -1,5 +1,7 @@
 <?php
 
+// Do not create the default FPP bundle.
+variable_get('fieldable_panels_panes_skip_default_type', TRUE);
 
 // Provide a list of modules to be installed.
 $modules = array(
@@ -33,6 +35,7 @@ $feature_names = array(
   'eitict_person',
   'eitientities',
   'eitiet_file',
+  'eitiet_implementing_country',
   'eitiet_organisation',
   'eitiet_summary_data',
   'eitii18n',
