@@ -17,6 +17,7 @@ features[filter][] = clean_summary
 features[filter][] = filtered_html
 features[filter][] = plain_text
 features[language][] = en
+features[language][] = es
 features[language][] = fr
 features[language][] = ru
 features[variable][] = filter_fallback_format
