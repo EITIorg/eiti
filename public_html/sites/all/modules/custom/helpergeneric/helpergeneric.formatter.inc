@@ -13,7 +13,7 @@ function helpergeneric_field_formatter_info() {
     'label' => t('HelperGeneric: Clean summary or trimmed'),
     'field types' => array('text_with_summary'),
     'settings' => array(
-      'trim_length' => 600,
+      'trim_length' => variable_get('teaser_length', 600),
     ),
   );
 

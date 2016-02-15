@@ -138,7 +138,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'site_mail',
         'site_name',
         'site_slogan',
-        'teaser_length',
+        //'teaser_length',
         'theme_default',
 
         // Cache specific variables.

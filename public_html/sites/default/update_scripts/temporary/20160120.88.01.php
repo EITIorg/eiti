@@ -41,6 +41,7 @@ $feature_names = array(
   'eitii18n',
   'eitipanels',
   'eitipermissions',
+  'eitisettings',
   'eititaxonomies',
   'eitiwidgets',
 );

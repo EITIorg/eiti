@@ -21,12 +21,12 @@ function eitict_person_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contact Details',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
-      0 => 'field_phone_number',
-      1 => 'field_email',
+      0 => 'field_email',
+      1 => 'field_website',
       2 => 'field_fax_number',
-      3 => 'field_website',
+      3 => 'field_phone_number',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
