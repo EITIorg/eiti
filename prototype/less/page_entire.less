@@ -64,10 +64,14 @@ h1{
 .inner-banner-container {
   .section-inner (960px);
   height: 100%;
-  overflow: hidden;
 }
-// banners by country-profile-logo
 
+.inner-general-container {
+  .section-inner (960px);
+  height: 100%;
+}
+
+// banners by country-profile-logo
 .banner-peru {
   background:@country-banner-background url('../images/country-banners/country-banner-peru.png') no-repeat right top;
 }
@@ -114,6 +118,9 @@ h1{
 
   &.margin-bottom{
     margin-bottom: @base-unit * 3;
+  }
+  &.margin-top{
+    margin-top: @base-unit * 3;
   }
 }
 
@@ -487,7 +494,7 @@ h1{
   margin-right:2px;
   overflow: hidden;
   position: relative;
-  width: @full-width / 2.2;
+  width: @full-width / 2.01;
 }
 
 .post-thumb-title {
@@ -522,7 +529,8 @@ h1{
 
 .post-thumb-small {
   .transition-link(opacity, 1s, linear);
-  height: @post-large-height / 2;
+  height: @post-large-height / 2.01;
+  margin-bottom: 2px;
   overflow: hidden;
   position: relative;
   img {
