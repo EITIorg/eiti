@@ -9,9 +9,11 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 html {
     color: #222;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -105,10 +107,10 @@ textarea {
 
 .chartTitle {
     display: inline-block;
-    margin-left: 150px;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #4bb4a1;
+    margin-left: 0;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #0093cf;
 }
 
 .chartDescription {
@@ -120,28 +122,38 @@ textarea {
 
 .legend {
     float: right;
-    margin-right: 100px;
-}   
+    margin-top: 10px;
+    margin-right: 50px;
+    width: 550px;
+}
 .legend-item-active {
     float: left;
-    border: 2px solid #4bb4a1;
+    border: 2px solid #85be33;
     border-radius: 3px;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 5px;
     line-height: 70%;
     margin: 1px;
     cursor: pointer;
+    width: 17%;
 }
+
 .legend-item {
     float: left;
-    border: 2px solid #ddd;
+    border: 2px solid #d3d3d3;
     border-radius: 3px;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 5px;
     line-height: 70%;
     margin: 1px;
     cursor: pointer;
+    width: 17%;
 }
+
+.legend-item:hover {
+  background: #d3d3d3;
+}
+
 .legend-item li:hover {
     border: 2px solid #4bb4a1;
 }
@@ -152,7 +164,7 @@ textarea {
   width: 100%;
   height: 100%;
 }
-#waveformchart { 
+#waveformchart {
     width: 100%;
     height: 140px;
     background-color: #333;
@@ -179,13 +191,13 @@ textarea {
 .axis path {
     stroke: #ccc;
 }
-#waveformchart .bar{ 
+#waveformchart .bar{
     -ms-transform: scale(1,1); /* IE 9 */
     -webkit-transform: scale(1,1); /* Safari */
     transform: scale(1,1);
 }
 
-#waveformchart .bar:hover { 
+#waveformchart .bar:hover {
     height: 100%;
     -ms-transform: scale(2,100); /* IE 9 */
     -webkit-transform: scale(2,100); /* Safari */
@@ -195,7 +207,7 @@ textarea {
     transform-origin: 50% 50%;
 }
 
-.bar:hover {    
+.bar:hover {
     stroke: #333;
 }
 
