@@ -1,6 +1,8 @@
 let React = require('react');
 let d3 = require('d3');
 
+import { findDOMNode } from 'react-dom';
+
 let Chart = require('./Chart');
 let Tooltip = require('./Tooltip');
 
@@ -10,10 +12,12 @@ let AccessorMixin = require('./AccessorMixin');
 let TooltipMixin = require('./TooltipMixin');
 
 let DataSet = React.createClass({
-	componentDidMount: function() {
-		let {width, height, margin} = this.props;
+	componentDidUpdate: function(nextProps, nextState) {
+		let {data, width, height, margin, x, y, treemap, formatNumber} = this.props;
+		var self = this,
+			transitioning;
 
-	    let el = this.getDOMNode();
+		let el = findDOMNode(this);
 
 	    let svg = d3.select(el).append("svg")
                 .attr("width", width + margin.left + margin.right)
@@ -37,134 +41,121 @@ let DataSet = React.createClass({
             .attr("y", 6 - margin.top)
             .attr("dy", ".75em");
 
-        this.setState({svg: svg, grandparent: grandparent});       
-	},
+        initialize(data);
+		accumulate(data);
+		layout(data);
+		display(data);
 
-	componentDidUpdate: function(nextProps, nextState) {
-		let data = this.props.data;
-		this.initialize(data);
-		this.accumulate(data);
-		this.layout(data);
-		this.display(data);
-	},
-
-	initialize: function(root) {
-        root.x = root.y = 0;
-        root.dx = this.props.width;
-        root.dy = this.props.height;
-        root.depth = 0;
-    },
-
-    // Aggregate the values for internal nodes. This is normally done by the
-	// treemap layout, but not here because of our custom implementation.
-	// We also take a snapshot of the original children (_children) to avoid
-	// the children being overwritten when when layout is computed.
-    accumulate: function(d) {
-    	var self = this;
-        return (d._children = d.children)
-            ? d.value = d.children.reduce(function(p, v) { return p + self.accumulate(v); }, 0)
-            : d.value;
-    },
-
-	// Compute the treemap layout recursively such that each group of siblings
-	// uses the same size (1×1) rather than the dimensions of the parent cell.
-	// This optimizes the layout for the current zoom state. Note that a wrapper
-	// object is created for the parent node for each group of siblings so that
-	// the parent’s dimensions are not discarded as we recurse. Since each group
-	// of sibling was laid out in 1×1, we must rescale to fit using absolute
-	// coordinates. This lets us use a viewport to zoom.
-	layout: function(d) {
-		if (d._children) {
-		  this.props.treemap.nodes({_children: d._children});
-		  var self = this;
-		  d._children.forEach(function(c) {
-		    c.x = d.x + c.x * d.dx;
-		    c.y = d.y + c.y * d.dy;
-		    c.dx *= d.dx;
-		    c.dy *= d.dy;
-		    c.parent = d;
-		    self.layout(c);
-		  });
+		function initialize(root) {
+			root.x = root.y = 0;
+			root.dx = width;
+			root.dy = height;
+			root.depth = 0;
 		}
-	},
 
-	display: function(d) {
-		let {svg, grandparent} = this.state;
-		let {x, y, formatNumber} = this.props;
-		var transitioning;
-		var self = this;
+		// Aggregate the values for internal nodes. This is normally done by the
+		// treemap layout, but not here because of our custom implementation.
+		// We also take a snapshot of the original children (_children) to avoid
+		// the children being overwritten when when layout is computed.
+		function accumulate(d) {
+		return (d._children = d.children)
+		    ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0)
+		    : d.value;
+		}
 
-	    grandparent
-	        .datum(d.parent)
-	        .on("click", this.transition)
-	      	.select("text")
-	        .text(this.name(d));
+		// Compute the treemap layout recursively such that each group of siblings
+		// uses the same size (1×1) rather than the dimensions of the parent cell.
+		// This optimizes the layout for the current zoom state. Note that a wrapper
+		// object is created for the parent node for each group of siblings so that
+		// the parent’s dimensions are not discarded as we recurse. Since each group
+		// of sibling was laid out in 1×1, we must rescale to fit using absolute
+		// coordinates. This lets us use a viewport to zoom.
+		function layout(d) {
+			if (d._children) {
+			  treemap.nodes({_children: d._children});
+			  d._children.forEach(function(c) {
+			    c.x = d.x + c.x * d.dx;
+			    c.y = d.y + c.y * d.dy;
+			    c.dx *= d.dx;
+			    c.dy *= d.dy;
+			    c.parent = d;
+			    layout(c);
+			  });
+			}
+		}
 
-	    var g1 = svg.insert("g", ".grandparent")
-	        .datum(d)
-	        .attr("class", "depth");
+		function display(d) {
+			grandparent
+			    .datum(d.parent)
+			    .on("click", transition)
+			  	.select("text")
+			    .text(self.name(d));
 
-	    var g = g1.selectAll("g")
-	        .data(d._children)
-	      	.enter().append("g");
+			var g1 = svg.insert("g", ".grandparent")
+			    .datum(d)
+			    .attr("class", "depth");
 
-	    g.filter(function(d) { return d._children; })
-	        .classed("children", true)
-	        .on("click", this.transition);
+			var g = g1.selectAll("g")
+			    .data(d._children)
+			  	.enter().append("g");
 
-	    g.selectAll(".child")
-	        .data(function(d) { return d._children || [d]; })
-	      	.enter().append("rect")
-	        .attr("class", "child")
-	        .call(this.rect);
+			g.filter(function(d) { return d._children; })
+			    .classed("children", true)
+			    .on("click", transition);
 
-	    g.append("rect")
-	        .attr("class", "parent")
-	        .call(this.rect)
-	      	.append("title")
-	        .text(function(d) { return formatNumber(d.value); });
+			g.selectAll(".child")
+			    .data(function(d) { return d._children || [d]; })
+			  	.enter().append("rect")
+			    .attr("class", "child rect")
+			    .call(self.rect);
 
-	    g.append("text")
-	        .attr("dy", ".75em")
-	        .text(function(d) { return d.name; })
-	        .call(this.text);
+			g.append("rect")
+			    .attr("class", "parent rect")
+			    .call(self.rect)
+			  	.append("title")
+			    .text(function(d) { return formatNumber(d.value); });
 
-	    function transition(d) {
-	    	console.log('transition triggered!');
-			if (transitioning || !d) return;
-			transitioning = true;
+			g.append("text")
+			    .attr("dy", ".75em")
+			    .text(function(d) { return d.name; })
+			    .call(self.text);
 
-			var g2 = self.display(d),
-			t1 = g1.transition().duration(750),
-			t2 = g2.transition().duration(750);
+			function transition(d) {
+			  if (transitioning || !d) return;
+			  transitioning = true;
 
-			// Update the domain only after entering new elements.
-			x.domain([d.x, d.x + d.dx]);
-			y.domain([d.y, d.y + d.dy]);
+			  var g2 = display(d),
+			      t1 = g1.transition().duration(750),
+			      t2 = g2.transition().duration(750);
 
-			// Enable anti-aliasing during the transition.
-			svg.style("shape-rendering", null);
+			  // Update the domain only after entering new elements.
+			  x.domain([d.x, d.x + d.dx]);
+			  y.domain([d.y, d.y + d.dy]);
 
-			// Draw child nodes on top of parent nodes.
-			svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+			  // Enable anti-aliasing during the transition.
+			  svg.style("shape-rendering", null);
 
-			// Fade-in entering text.
-			g2.selectAll("text").style("fill-opacity", 0);
+			  // Draw child nodes on top of parent nodes.
+			  svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
 
-			// Transition to the new view.
-			t1.selectAll("text").call(text).style("fill-opacity", 0);
-			t2.selectAll("text").call(text).style("fill-opacity", 1);
-			t1.selectAll("rect").call(rect);
-			t2.selectAll("rect").call(rect);
+			  // Fade-in entering text.
+			  g2.selectAll("text").style("fill-opacity", 0);
 
-			// Remove the old node when the transition is finished.
-			t1.remove().each("end", function() {
-			svg.style("shape-rendering", "crispEdges");
-			transitioning = false;
-			});
-	    }
+			  // Transition to the new view.
+			  t1.selectAll("text").call(self.text).style("fill-opacity", 0);
+			  t2.selectAll("text").call(self.text).style("fill-opacity", 1);
+			  t1.selectAll("rect").call(self.rect);
+			  t2.selectAll("rect").call(self.rect);
 
-	    return g;
+			  // Remove the old node when the transition is finished.
+			  t1.remove().each("end", function() {
+			    svg.style("shape-rendering", "crispEdges");
+			    transitioning = false;
+			  });
+			}
+
+			return g;
+		}
 	},
 
 	text: function(text) {
@@ -183,7 +174,7 @@ let DataSet = React.createClass({
 
 	name: function(d) {
 		return d.parent
-	    ? name(d.parent) + "." + d.name
+	    ? this.name(d.parent) + "." + d.name
 	    : d.name;
 	},
 
@@ -235,7 +226,6 @@ let TreeMap = React.createClass({
 		}
 		else if(this.props.chartData) {			
 			this.setState({chartData: this.props.chartData});
-			console.log(this.state);
 		}
 	},
 
@@ -245,7 +235,8 @@ let TreeMap = React.createClass({
 			 margin,
 			 colorScale,
 			 sort,
-			 values} = this.props;
+			 values,
+			 chartTitle} = this.props;
 
 		let formatNumber = d3.format(",d");
 
@@ -265,6 +256,7 @@ let TreeMap = React.createClass({
 
 		return (
 			<div>				
+					<h3 className={"chartTitle"}>{chartTitle}</h3>
 					<DataSet
             		data={this.state.chartData}
             		width={width}

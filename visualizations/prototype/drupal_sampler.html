@@ -14,6 +14,7 @@
 
 	<body>
 		<div id="main">
+			<div id="treemap"></div>
 			<div id="bubble"></div>
 			<div id="sankey"></div>
 	    	<div id="viz2"></div>
@@ -23,6 +24,15 @@
 		</div>
 		<script src="dist/chartWidgets.js"></script>
 		<script>
+			chartWidget.create({
+				type: "TreeMap",		
+				name: "Sample Treemap",
+				width: 600,
+				height: 300,
+				margin: {top: 20, right: 0, bottom: 0, left: 0},
+	            container: "treemap"
+			},
+			'data/viz7.json');
 			chartWidget.create({
 				type: "BubbleChart",		
 				name: "Sample BubbleChart",

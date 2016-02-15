@@ -250,11 +250,15 @@ svg {
   fill: #ddd;
 }
 
+#treemap svg{
+  background: #ddd;
+}
+
 .grandparent text {
   font-weight: bold;
 }
 
-.child {
+.rect {
   fill: none;
   stroke: #fff;
 }
