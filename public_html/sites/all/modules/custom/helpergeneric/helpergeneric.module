@@ -199,11 +199,12 @@ function helpergeneric_htmlpurifier_info() {
       // Whether or not to permit iframe tags in untrusted documents.
       // This directive must be accompanied by a whitelist of permitted
       // iframes, such as %URI.SafeIframeRegexp.
-      'HTML.SafeIframe' => TRUE,
+      'HTML.SafeIframe' => FALSE,
 
       // A regex that will be matched against an iframe URI.
       // This directive only has an effect if %HTML.SafeIframe is enabled.
-      // 'URI.SafeIframeRegexp' => '%^https?://(www.youtube.com/embed/|player.vimeo.com/video/)%',
+      'URI.SafeIframeRegexp' => NULL,
+      //'URI.SafeIframeRegexp' => '%^https?://(www.youtube.com/embed/|player.vimeo.com/video/)%',
 
       // Disables the embedding of external resources.
       'URI.DisableExternalResources' => TRUE,
