@@ -15,6 +15,9 @@
           chartWidget.create(widgetSetting, widgetData);
         }
       }
+
+      // Initialize the tabs.
+      $('.tabs-widget-wrapper').tabs();
     }
   };
 

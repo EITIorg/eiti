@@ -367,6 +367,126 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-tabs_with_widgets-field_fpp_content_widgets'.
+  $field_instances['fieldable_panels_pane-tabs_with_widgets-field_fpp_content_widgets'] = array(
+    'bundle' => 'tabs_with_widgets',
+    'deleted' => 0,
+    'description' => 'Please specify a list of widgets that will be used as the content of the tabs.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_content_widgets',
+    'label' => 'Content Widgets',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'Widgets',
+          'label_singular' => 'Widget',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 1,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-tabs_with_widgets-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-tabs_with_widgets-field_fpp_widget'] = array(
+    'bundle' => 'tabs_with_widgets',
+    'deleted' => 0,
+    'description' => 'Tab widget settings.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 0,
+    'settings' => array(
+      'available_widgets' => array(
+        'tabs' => 'tabs',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-tabs_with_widgets-title_field'.
+  $field_instances['fieldable_panels_pane-tabs_with_widgets-title_field'] = array(
+    'bundle' => 'tabs_with_widgets',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A field replacing fieldable panel pane title.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Tab Collection Title',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_body'.
   $field_instances['fieldable_panels_pane-text-field_fpp_body'] = array(
     'bundle' => 'text',
@@ -633,7 +753,9 @@ function eitiwidgets_field_default_field_instances() {
   t('Body');
   t('Bookmark List');
   t('Bookmark widget configuration.');
+  t('Content Widgets');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
+  t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
   t('Please specify the wide background image used for the header.');
@@ -641,6 +763,8 @@ function eitiwidgets_field_default_field_instances() {
   t('Source');
   t('Source URL');
   t('Source of the quote: a person, a website, etc.');
+  t('Tab Collection Title');
+  t('Tab widget settings.');
   t('Title');
   t('Widget');
 

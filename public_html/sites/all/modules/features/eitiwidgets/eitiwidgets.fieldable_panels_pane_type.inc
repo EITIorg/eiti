@@ -37,6 +37,14 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
   $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'tabs_with_widgets';
+  $fieldable_panels_pane_type->title = 'Tabs with Widgets';
+  $fieldable_panels_pane_type->description = 'Basically allows you to create multiple tabs with different widgets inside.';
+  $export['tabs_with_widgets'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
   $fieldable_panels_pane_type->name = 'text';
   $fieldable_panels_pane_type->title = 'Text';
   $fieldable_panels_pane_type->description = 'A simple text widget.';

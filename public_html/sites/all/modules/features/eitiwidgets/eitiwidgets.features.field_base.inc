@@ -95,6 +95,49 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_fpp_content_widgets'.
+  $field_bases['field_fpp_content_widgets'] = array(
+    'active' => 1,
+    'cardinality' => 6,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_content_widgets',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'entityqueue' => array(
+            'status' => 0,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'featured_bookmarks' => 'featured_bookmarks',
+          'key_facts' => 'key_facts',
+          'quote' => 'quote',
+          'visualization' => 'visualization',
+          'wide_image' => 'wide_image',
+        ),
+      ),
+      'target_type' => 'fieldable_panels_pane',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
   // Exported field_base: 'field_fpp_quote'.
   $field_bases['field_fpp_quote'] = array(
     'active' => 1,

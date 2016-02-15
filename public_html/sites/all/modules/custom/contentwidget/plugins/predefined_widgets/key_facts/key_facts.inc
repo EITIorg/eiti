@@ -157,6 +157,14 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
 function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
+  // Special case: we're in IEF. We want to get the REAL settings.
+  if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == 'contentblock_key_facts_settings_ajax') {
+    $parents = $form_state['triggering_element']['#parents'];
+    $get_rid_off_arr = array('fact', 'facts_number');
+    $parents = array_diff($parents, $get_rid_off_arr);
+    $widget_settings = drupal_array_get_nested_value($form_state['values'], $parents);
+  }
+
   $settings_form['fact'] = array(
     '#type' => 'fieldset',
     '#title' => t('Key Facts:'),
@@ -180,7 +188,6 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
   );
 
   // Create the fact widget and all that it includes.
-
   // Get the options here (we don't want to do it in the loop).
   $icons = helpertheme_get_svg_icons();
   $icon_options = array('' => t('No Icon'));
@@ -220,7 +227,17 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'type'),
     );
 
-    $field_name_prefix = 'field_fpp_widget[und][0][settings][key_facts][fact]';
+    // For cases where field parents are set.
+    if (!empty($element['#field_parents'])) {
+      $parents = $element['#field_parents'];
+      $field_name = array_shift($parents);
+      $field_parents_path = $field_name . '[' . implode('][', $parents) . ']';
+      $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][und][0][settings][key_facts][fact]';
+    }
+    else {
+      $field_name_prefix = $element['#field_name'] . '[und][0][settings][key_facts][fact]';
+    }
+
     $settings_form['fact']['fact_' . $fact_count]['value_' . $fact_count] = array(
       '#type' => 'textfield',
       '#title' => t('Key Fact Value'),
@@ -344,6 +361,16 @@ function contentblock_key_fact_get_countries_count() {
  * Ajax callback for the settings form.
  */
 function contentblock_key_facts_settings_ajax($form, $form_state) {
-  // TODO: maybe we should check the language.
-  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
+  $parents = $form_state['triggering_element']['#parents'];
+  $key = array_search('facts_number', $parents, TRUE);
+  unset($parents[$key]);
+  $exists = FALSE;
+  $value = drupal_array_get_nested_value($form, $parents, $exists);
+
+  if ($exists) {
+    return $value;
+  }
+  else {
+    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
+  }
 }
