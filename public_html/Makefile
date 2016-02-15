@@ -23,8 +23,8 @@ update:
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
 
-	#@echo 'Securing the site settings...'
-	#@chmod a-w sites/default/settings*.php sites/default
+	@#@echo 'Securing the site settings...'
+	@#@chmod a-w sites/default/settings*.php sites/default
 
 	@echo 'Done!'
 
