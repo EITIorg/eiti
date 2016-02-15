@@ -22,14 +22,14 @@ abstract class EITIGenericToArticleMigration extends EITINodeMigration {
     // Now the mappings.
     $this->addFieldMapping('title_field', 'title');
     $this->addFieldMapping('title_field:language', 'language');
-    $this->addFieldMapping('body:language', 'language');
+    $this->addFieldMapping('body:language', 'language', FALSE);
 
     // Now let's handle the paths.
     $this->removeFieldMapping('path', 'path');
     $this->addFieldMapping('migrate_redirects', 'path');
-    $this->addFieldMapping('pathauto')
-    ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
-    ->defaultValue(TRUE);
+    $this->addFieldMapping('pathauto', 'pathauto', FALSE)
+      ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
+      ->defaultValue(TRUE);
   }
 }
 
@@ -54,7 +54,7 @@ class EITINewsToArticleMigration extends EITIGenericToArticleMigration {
       ->sourceMigration('EITINewsFeaturedImageMigration');
     $this->addFieldMapping('field_featured_image:file_class')->defaultValue('MigrateFileFid');
 
-    $this->addFieldMapping('body:summary', 'field_teaser');
+    $this->addFieldMapping('body:summary', 'field_teaser', FALSE);
 
     $this->addFieldMapping('field_image_gallery', 'field_image_gallery')
       ->sourceMigration('EITINewsImageGalleryMigration');
@@ -126,7 +126,7 @@ class EITIBlogToArticleMigration extends EITIGenericToArticleMigration {
       ->sourceMigration('EITIBlogFeaturedImageMigration');
     $this->addFieldMapping('field_featured_image:file_class')->defaultValue('MigrateFileFid');
 
-    $this->addFieldMapping('body:summary', 'field_teaser');
+    $this->addFieldMapping('body:summary', 'field_teaser', FALSE);
 
     $this->addFieldMapping('field_image_gallery', 'field_image_gallery')
       ->sourceMigration('EITIBlogImageGalleryMigration');
@@ -217,7 +217,7 @@ class EITIEventsToArticleMigration extends EITIGenericToArticleMigration {
       ->sourceMigration('EITIEventFeaturedImageMigration');
     $this->addFieldMapping('field_featured_image:file_class')->defaultValue('MigrateFileFid');
 
-    $this->addFieldMapping('body:summary', 'body:summary');
+    $this->addFieldMapping('body:summary', 'body:summary', FALSE);
 
     $this->addFieldMapping('field_attachments', 'upload')
      ->sourceMigration('EITIEventUploadFilesMigration');
@@ -489,6 +489,16 @@ class EITIIMCEFilesMigration extends DrupalFile7Migration {
     $query->innerJoin('file_usage', 'fu', "f.fid = fu.fid AND fu.module = 'imce'");
 
     return $query;
+  }
+
+  /**
+   * Complete function.
+   */
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
   }
 }
 

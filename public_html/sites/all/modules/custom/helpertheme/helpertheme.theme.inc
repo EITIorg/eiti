@@ -91,7 +91,6 @@ function theme_header_logo() {
   if (file_exists($file_path)) {
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
-      // '#path' => url($logo_path),
       '#path' => file_create_url($logo_path),
       '#alt' => '',
       '#attributes' => array(
@@ -100,10 +99,11 @@ function theme_header_logo() {
     );
   }
   else {
+    $logo_alt = $site_name;
     $items['header']['logo_markup']['svg'] = array(
       '#theme' => 'image',
       '#path' => url(drupal_get_path('theme', $theme) . '/logo.svg'),
-      '#alt' => '',
+      '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
       ),
@@ -113,7 +113,7 @@ function theme_header_logo() {
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
       '#path' => url(drupal_get_path('theme', $theme) . '/logo.png'),
-      '#alt' => '',
+      '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
       ),
@@ -122,12 +122,11 @@ function theme_header_logo() {
     );
   }
 
-
-  $items['header']['logo_markup']['site_name'] = array(
-    '#markup' => $site_name,
-    '#prefix' => '<span class="text">',
-    '#suffix' => "</span>",
-  );
+  //$items['header']['logo_markup']['site_name'] = array(
+  //  '#markup' => $site_name,
+  //  '#prefix' => '<span class="text">',
+  //  '#suffix' => "</span>",
+  //);
 
   // Render the HTML.
   return drupal_render($items);
@@ -145,6 +144,49 @@ function theme_header_items() {
       ),
     ),
   );
+
+  // Get the menu links.
+  $menu_name = 'main-menu';
+  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
+    // Mark this element as potentially having contextual links attached to it.
+    $menu_elements['nav']['#prefix'] = '<nav role="navigation" class="main-navigation">';
+    $menu_elements['nav']['#suffix'] = '</nav>';
+
+    $menu_elements['nav']['subject'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'h2',
+      '#value' => 'Main Menu',
+      '#attributes' => array('class' => array('element-invisible')),
+    );
+
+    // Initialize the template variable as a renderable array.
+    // $menu_elements['nav']['contextual_links'] = array(
+    //   '#type' => 'contextual_links',
+    //   '#contextual_links' => array(
+    //     'menu' => array('admin/structure/menu/manage', array('user-menu')),
+    //   ),
+    // );
+
+    $menu_elements['nav']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'action-link',
+      '#attributes' => array(
+        'class' => array(
+          'header-links',
+          'links',
+          'clearfix',
+        )
+      ),
+    );
+  }
+
+  // Prepare the search-form.
+  $menu_elements['search']['#prefix'] = '<div class="search-form">';
+  $menu_elements['search']['#suffix'] = '</div>';
+  $search_form = drupal_get_form('search_form');
+  unset($search_form['basic']['keys']['#title']);
+  $menu_elements['search']['form'] = $search_form;
 
   // Add the language switcher links.
   if (drupal_multilingual()) {
@@ -181,42 +223,6 @@ function theme_header_items() {
         ),
       );
     }
-  }
-
-  // Get the menu links.
-  $menu_name = 'user-menu';
-  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
-    // Mark this element as potentially having contextual links attached to it.
-    $menu_elements['nav']['#prefix'] = '<nav role="navigation" id="user-navigation" class="user-navigation contextual-links-region">';
-    $menu_elements['nav']['#suffix'] = '</nav>';
-
-    $menu_elements['nav']['subject'] = array(
-      '#type' => 'html_tag',
-      '#tag' => 'h2',
-      '#value' => 'User Menu',
-      '#attributes' => array('class' => array('element-invisible')),
-    );
-
-    // Initialize the template variable as a renderable array.
-    // $menu_elements['nav']['contextual_links'] = array(
-    //   '#type' => 'contextual_links',
-    //   '#contextual_links' => array(
-    //     'menu' => array('admin/structure/menu/manage', array('user-menu')),
-    //   ),
-    // );
-
-    $menu_elements['nav']['links'] = array(
-      '#theme' => 'links__enhanced',
-      '#links' => $links,
-      '#links_prefix' => 'action-link',
-      '#attributes' => array(
-        'class' => array(
-          'header-links',
-          'links',
-          'clearfix',
-        )
-      ),
-    );
   }
 
   // Render the HTML.
@@ -281,19 +287,6 @@ function theme_footer_items() {
       ),
     ),
   );
-
-  // Load the ctools content type plugin.
-  ctools_include('plugins');
-  ctools_include('content');
-  $content_type = ctools_get_content_type('cbreference');
-  $content_subtype = ctools_content_get_subtype($content_type, 'cbreference');
-
-  $configuration = ctools_content_get_defaults($content_type, $content_subtype);
-  $configuration['machine_name'] = 'footer';
-
-  // Render the footer content.
-  $content = ctools_content_render('cbreference', 'cbreference', $configuration, array());
-  $footer_elements['content']['#markup'] = theme('panels_pane', array('content' => $content));
 
   // Render the HTML.
   $output = drupal_render($footer_elements);

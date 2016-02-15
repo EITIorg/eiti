@@ -22,14 +22,14 @@ class EITIMentionMigration extends EITINodeMigration {
     // Now the mappings.
     $this->addFieldMapping('title_field', 'title');
     $this->addFieldMapping('title_field:language', 'language');
-    $this->addFieldMapping('language', 'language');
-    $this->addFieldMapping('body', 'field_news_description');
-    $this->addFieldMapping('body:language', 'language');
+    $this->addFieldMapping('language', 'language', FALSE);
+    $this->addFieldMapping('body', 'field_news_description', FALSE);
+    $this->addFieldMapping('body:language', 'language', FALSE);
 
     // Now let's handle the paths.
     $this->removeFieldMapping('path', 'path');
     $this->addFieldMapping('migrate_redirects', 'path');
-    $this->addFieldMapping('pathauto')
+    $this->addFieldMapping('pathauto', 'pathauto', FALSE)
     ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
     ->defaultValue(TRUE);
 

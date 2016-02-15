@@ -330,7 +330,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -373,7 +373,7 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -448,7 +448,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -490,7 +490,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -557,7 +557,60 @@ function eitiet_summary_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'summary_data-summary_data-field_sd_report_file'.
+  $field_instances['summary_data-summary_data-field_sd_report_file'] = array(
+    'bundle' => 'summary_data',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 27,
+      ),
+    ),
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_report_file',
+    'label' => 'Report File',
+    'required' => 1,
+    'settings' => array(
+      'description_field' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => 'spreadsheets',
+      'file_extensions' => 'xls xlsx',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 0,
+          'report' => 'report',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 0,
     ),
   );
 
@@ -589,14 +642,21 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'inline_entity_form',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 0,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'revenue streams',
+          'label_singular' => 'revenue stream',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 0,
+        ),
       ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 13,
+      'type' => 'inline_entity_form',
+      'weight' => 14,
     ),
   );
 
@@ -628,14 +688,21 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'inline_entity_form',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 0,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'revenue streams',
+          'label_singular' => 'revenue stream',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 0,
+        ),
       ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 12,
+      'type' => 'inline_entity_form',
+      'weight' => 13,
     ),
   );
 
@@ -657,6 +724,7 @@ function eitiet_summary_data_field_default_field_instances() {
   t('Organisation');
   t('Other');
   t('Reconciled Revenue Streams per Company');
+  t('Report File');
   t('Revenue Stream as Disclosed by Government');
 
   return $field_instances;

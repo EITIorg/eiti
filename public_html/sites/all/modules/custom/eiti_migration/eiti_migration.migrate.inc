@@ -16,7 +16,7 @@ function eiti_migration_migrate_api() {
   $legacy_public = variable_get('eiti_migration_files_public', '');
   if ($legacy_database == '' || $legacy_username == '' || $legacy_password == '') {
     drupal_set_message('Please <a href="admin/content/migrate/configure-legacy">configure the Legacy System settings</a> on this machine before you run or register your migrations. Make sure you complete all the fields.');
-    return array();
+    return array('api' => 2);
   }
 
   // The basics go here.

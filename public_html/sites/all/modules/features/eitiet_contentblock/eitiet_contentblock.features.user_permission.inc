@@ -14,7 +14,7 @@ function eitiet_contentblock_user_default_permissions() {
   $permissions['contentblock entity access overview'] = array(
     'name' => 'contentblock entity access overview',
     'roles' => array(
-      'admin user' => 'admin user',
+      'administrator' => 'administrator',
     ),
     'module' => 'contentblock',
   );
@@ -22,7 +22,9 @@ function eitiet_contentblock_user_default_permissions() {
   // Exported permission: 'contentblock entity administer'.
   $permissions['contentblock entity administer'] = array(
     'name' => 'contentblock entity administer',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'contentblock',
   );
 
@@ -30,7 +32,7 @@ function eitiet_contentblock_user_default_permissions() {
   $permissions['contentblock entity create'] = array(
     'name' => 'contentblock entity create',
     'roles' => array(
-      'admin user' => 'admin user',
+      'administrator' => 'administrator',
     ),
     'module' => 'contentblock',
   );
@@ -39,7 +41,7 @@ function eitiet_contentblock_user_default_permissions() {
   $permissions['contentblock entity delete'] = array(
     'name' => 'contentblock entity delete',
     'roles' => array(
-      'admin user' => 'admin user',
+      'administrator' => 'administrator',
     ),
     'module' => 'contentblock',
   );
@@ -48,7 +50,7 @@ function eitiet_contentblock_user_default_permissions() {
   $permissions['contentblock entity edit'] = array(
     'name' => 'contentblock entity edit',
     'roles' => array(
-      'admin user' => 'admin user',
+      'administrator' => 'administrator',
     ),
     'module' => 'contentblock',
   );
@@ -59,7 +61,6 @@ function eitiet_contentblock_user_default_permissions() {
     'roles' => array(
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
-      'editor user' => 'editor user',
     ),
     'module' => 'contentblock',
   );

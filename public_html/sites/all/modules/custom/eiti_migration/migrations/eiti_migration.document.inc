@@ -26,17 +26,17 @@ class EITIDocumentMigration extends EITINodeMigration {
     // Now the mappings.
     $this->addFieldMapping('title_field', 'title');
     $this->addFieldMapping('title_field:language', 'language');
-    $this->addFieldMapping('language', 'language');
-    $this->addFieldMapping('body', 'field_document_desc');
-    $this->addFieldMapping('body:format', 'field_document_desc:format')
+    $this->addFieldMapping('language', 'language', FALSE);
+    $this->addFieldMapping('body', 'field_document_desc', FALSE);
+    $this->addFieldMapping('body:format', 'field_document_desc:format', FALSE)
      ->callbacks(array($this, 'mapFormat'));
-    $this->addFieldMapping('body:summary', 'field_teaser');
-    $this->addFieldMapping('body:language', 'language');
+    $this->addFieldMapping('body:summary', 'field_teaser', FALSE);
+    $this->addFieldMapping('body:language', 'language', FALSE);
 
     // Now let's handle the paths.
     $this->removeFieldMapping('path', 'path');
     $this->addFieldMapping('migrate_redirects', 'path');
-    $this->addFieldMapping('pathauto')
+    $this->addFieldMapping('pathauto', 'pathauto', FALSE)
     ->description('We want to enable pathauto generated paths. Old ones are just redirects.')
     ->defaultValue(TRUE);
 

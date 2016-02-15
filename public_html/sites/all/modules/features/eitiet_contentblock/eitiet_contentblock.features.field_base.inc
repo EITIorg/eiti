@@ -10,21 +10,91 @@
 function eitiet_contentblock_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_cbblocks'
+  // Exported field_base: 'field_bookmark_list'.
+  $field_bases['field_bookmark_list'] = array(
+    'active' => 1,
+    'cardinality' => 7,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_bookmark_list',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'entityqueue' => array(
+            'status' => 0,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'bookmark' => 'bookmark',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_bookmarks'.
+  $field_bases['field_bookmarks'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_bookmarks',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'entityqueue' => array(
+            'status' => 0,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'bookmark' => 'bookmark',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_cbblocks'.
   $field_bases['field_cbblocks'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cbblocks',
-    'foreign keys' => array(
-      'contentblock' => array(
-        'columns' => array(
-          'target_id' => 'id',
-        ),
-        'table' => 'contentblock',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -60,21 +130,13 @@ function eitiet_contentblock_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_cbbody'
+  // Exported field_base: 'field_cbbody'.
   $field_bases['field_cbbody'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cbbody',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -89,21 +151,13 @@ function eitiet_contentblock_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_cbimage'
+  // Exported field_base: 'field_cbimage'.
   $field_bases['field_cbimage'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cbimage',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -122,14 +176,13 @@ function eitiet_contentblock_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_cblinks'
+  // Exported field_base: 'field_cblinks'.
   $field_bases['field_cblinks'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cblinks',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -153,14 +206,38 @@ function eitiet_contentblock_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_cbwidget'
+  // Exported field_base: 'field_cbw_wide_image'.
+  $field_bases['field_cbw_wide_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_cbw_wide_image',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
+  // Exported field_base: 'field_cbwidget'.
   $field_bases['field_cbwidget'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cbwidget',
-    'foreign keys' => array(),
     'indexes' => array(
       'widget' => array(
         0 => 'widget',

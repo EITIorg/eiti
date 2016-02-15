@@ -51,10 +51,10 @@ function contentwidget_get_predefined_widgets($include_hidden = FALSE) {
 /**
  * Fetch metadata on a specific predefined widget type.
  *
- * @param $predefined_widget type
+ * @param string $predefined_widget
  *   Name of a predefined widget type.
  *
- * @return
+ * @return array
  *   An array with information about the requested predefined widget type.
  */
 function contentwidget_get_predefined_widget($predefined_widget) {
@@ -72,10 +72,35 @@ function contentwidget_field_info() {
       'label' => t('ContentWidget'),
       'description' => t('Can be used to configure and display a ContentWidget plugin onto an entity.'),
       'settings' => array(),
+      'instance_settings' => array('available_widgets' => ''),
       'default_widget' => 'cwsettings',
       'default_formatter' => 'cwrendered',
     ),
   );
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function contentwidget_field_instance_settings_form($field, $instance) {
+  $settings = $instance['settings'];
+
+  // Prepare the list of widget options.
+  $options = array();
+  foreach (contentwidget_get_predefined_widgets() as $key => $info) {
+    $options[$key] = $info['title'];
+  }
+
+  $form['available_widgets'] = array(
+    '#title' => t('Available Widgets'),
+    '#description' => t('Leave empty for all widgets.'),
+    '#type' => 'select',
+    '#multiple' => TRUE,
+    '#default_value' => $settings['available_widgets'],
+    '#options' => $options,
+  );
+
+  return $form;
 }
 
 /**
@@ -97,23 +122,32 @@ function contentwidget_field_widget_info() {
  *  Implements hook_field_widget_form().
  */
 function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  $selected_widget = isset($items[0]['widget']) ? $items[0]['widget'] : NULL;
-  $selected_widget_settings = !empty($items[0]['settings']) ? unserialize($items[0]['settings']) : array();
+  /** @var Entity $entity */
+  $entity = $form['#entity'];
+
+  $selected_widget_info = array_shift($items);
+  $selected_widget = isset($selected_widget_info['widget']) ? $selected_widget_info['widget'] : NULL;
+  $selected_widget_settings = !empty($selected_widget_info['settings'][$selected_widget]) ? $selected_widget_info['settings'][$selected_widget] : array();
 
   // Input name to be used by the Form API #states.
   $input_name = "{$element['#field_name']}[{$element['#language']}][0][widget]";
 
   // Prepare the list of widget options.
   $options = array();
+  $available_widgets = $instance['settings']['available_widgets'];
   foreach (contentwidget_get_predefined_widgets() as $key => $info) {
+    if (!empty($available_widgets) && !in_array($key, $available_widgets)) {
+      continue;
+    }
     $options[$key] = $info['title'];
   }
 
   $element['widget'] = array(
     '#title' => $element['#title'],
-    '#type' => 'radios',
+    '#type' => 'select',
     '#default_value' => $selected_widget,
     '#required' => $element['#required'],
+    '#disabled' => isset($entity->is_new) ? FALSE : TRUE,
     '#options' => $options,
   );
 
@@ -134,14 +168,14 @@ function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance
         ),
       );
 
-      // Get the widget settings form.
+      // Merge the plugin defaults.
+      $widget_settings = $plugin['defaults'];
       if ($widget_name == $selected_widget) {
-        $widget_settings = $selected_widget_settings + $plugin['defaults'];
+        $widget_settings = drupal_array_merge_deep($widget_settings, $selected_widget_settings);
       }
-      else {
-        $widget_settings = $plugin['defaults'];
-      }
-      $widget_settings_form = $function($element, $form_state, $plugin, $widget_settings);
+
+      // Get the widget 'settings form'.
+      $widget_settings_form = call_user_func_array($function, array(&$element, &$form_state, $plugin, $widget_settings));
 
       if (!empty($widget_settings_form)) {
         $element['settings'][$widget_name] += $widget_settings_form;
@@ -167,40 +201,7 @@ function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance
  *   An associative array containing the current state of the widget form.
  */
 function contentwidget_field_widget_validate($element, &$form_state) {
-  $values = array();
-  if (isset($form_state['values'][$element['#field_name']][$element['#language']][0])) {
-    $values = reset($form_state['values'][$element['#field_name']][$element['#language']]);
-  }
-
-  // Clear all cache.
-  cache_clear_all();
-
-  // Prepare the data for storage.
-  $data = _contentwidget_settings_clean_values($values);
-  form_set_value($element, $data, $form_state);
-}
-
-/**
- * Transforms submitted form values into field storage format.
- *
- * @param $values
- *   An associative array containing submitted values of the widget form.
- *
- * @return array
- *   An associative array containing the settings for the ContentWidget.
- */
-function _contentwidget_settings_clean_values($values) {
-  $data = array(
-    'widget' => $values['widget'],
-    'settings' => NULL,
-  );
-
-  $plugin = contentwidget_get_predefined_widget($values['widget']);
-  if ($function = ctools_plugin_get_function($plugin, 'settings storage')) {
-    $data['settings'] = $function($values['widget'], $values['settings']);
-  }
-
-  return $data;
+  // @TODO: Add some validation magic for individual widgets.
 }
 
 /**
@@ -234,18 +235,54 @@ function contentwidget_field_formatter_view($entity_type, $entity, $field, $inst
 
   switch ($display['type']) {
     case 'cwrendered':
-      $widget_info = array_shift($items);
-      $widget_name = isset($widget_info['widget']) ? $widget_info['widget'] : NULL;
-      $widget_settings = !empty($widget_info['settings']) ? unserialize($widget_info['settings']) : array();
+      $current_widget_info = array_shift($items);
+      $current_widget_name = isset($current_widget_info['widget']) ? $current_widget_info['widget'] : NULL;
+      $current_widget_settings = !empty($current_widget_info['settings'][$current_widget_name]) ? $current_widget_info['settings'][$current_widget_name] : array();
 
-      $plugin = contentwidget_get_predefined_widget($widget_name);
+      // Load the plugin.
+      $plugin = contentwidget_get_predefined_widget($current_widget_name);
+
+      // Merge the plugin defaults.
+      $widget_settings = drupal_array_merge_deep($plugin['defaults'], $current_widget_settings);
+
       if ($function = ctools_plugin_get_function($plugin, 'render callback')) {
         // Because of entity_translation, the provided $langcode is the original entity language.
         $entity_langcode = entity_translation_get_existing_language($entity_type, $entity);
-        $result[] = $function($plugin, $widget_settings, $entity, $entity_langcode);
+        $result[] = call_user_func_array($function, array($plugin, $widget_settings, $entity, $entity_langcode));
       }
+
       break;
   }
 
   return $result;
+}
+
+/**
+ * Implements hook_field_load().
+ */
+function contentwidget_field_load($entity_type, $entities, $field, $instances, $langcode, &$items, $age) {
+  if ($field['type'] != 'contentwidget') {
+    return;
+  }
+
+  foreach ($entities as $id => $entity) {
+    foreach ($items[$id] as $delta => &$item) {
+      // We store widget settings in a serialized string.
+      if (!empty($item['settings']) && is_string($item['settings'])) {
+        $item['settings'] = unserialize($item['settings']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_presave().
+ *
+ * Adds the target type to the field data structure when saving.
+ */
+function contentwidget_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  // We store widget settings in a serialized string.
+  if (!empty($items[0]['settings']) && is_array($items[0]['settings'])) {
+    $items[0]['settings'] = serialize($items[0]['settings']);
+  }
 }

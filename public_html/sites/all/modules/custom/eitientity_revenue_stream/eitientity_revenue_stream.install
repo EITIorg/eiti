@@ -104,3 +104,15 @@ function eitientity_revenue_stream_update_7001(&$sandbox) {
   );
   db_add_field('eiti_revenue_stream', 'organisation_id', $field_schema);
 }
+
+/**
+ * Rename 'government_agency' to 'agency'.
+ */
+function eitientity_revenue_stream_update_7002(&$sandbox) {
+  db_update('eiti_revenue_stream')
+    ->fields(array(
+      'type' => 'agency',
+    ))
+    ->condition('type', 'government_agency')
+    ->execute();
+}

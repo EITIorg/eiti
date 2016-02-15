@@ -140,7 +140,7 @@ function contentblock_admin_paths() {
   $paths = array(
     CONTENTBLOCK_UI_PATH . '/add' => TRUE,
     CONTENTBLOCK_UI_PATH . '/add/*' => TRUE,
-    CONTENTBLOCK_UI_PATH . '/*' => TRUE,
+    //CONTENTBLOCK_UI_PATH . '/*' => FALSE,
     CONTENTBLOCK_UI_PATH . '/*/edit' => TRUE,
     CONTENTBLOCK_UI_PATH . '/*/usage' => TRUE,
     CONTENTBLOCK_UI_PATH . '/*/delete' => TRUE,
@@ -520,9 +520,6 @@ function contentblock_ctools_plugin_directory($module, $plugin) {
   }
   if ($module == 'ctools' && $plugin == 'content_types') {
     return 'plugins/' . $plugin;
-  }
-  if ($module == 'panelizer' && $plugin == 'entity') {
-    return 'plugins/panelizer/entity';
   }
 }
 

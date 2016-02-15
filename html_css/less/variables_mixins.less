@@ -7,6 +7,7 @@
 // colors
 @theme-grey: #676767;  //navigation, content text
 @theme-grey-light: #e8ecee; //header background
+@country-banner-background: #d6d6d8; //top banner in country profiles
 @theme-blue: #0093cf; //blue section titles
 @theme-blue-light: #9de1fd; //blue text on dark backgrounds, footer blue text
 @theme-orange: #f5822a; //country page stats and links
@@ -22,17 +23,19 @@
 @small-text: 0.7em;
 @default-text: 0.85em;
 @highlight-text: 0.9em;
+@stat-value: 2.9em;
 
 // dimensions
 @base-unit: 1em;
 @general-margin-space: 10px;
 @social-icon-size: 20px;
 @full-width: 100%;
+@banner-stat-size: 43px;
 
 // mixins
 
 // transition
-.transition (@prop: all, @time: 1s, @ease: linear) {
+.transition-link (@prop: color, @time: 1s, @ease: linear) {
 	-webkit-transition: @prop @time @ease;
 	-moz-transition: @prop @time @ease;
 	-o-transition: @prop @time @ease;

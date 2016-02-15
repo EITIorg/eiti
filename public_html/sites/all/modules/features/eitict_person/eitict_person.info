@@ -1,4 +1,4 @@
-name = eitict_person
+name = EITI Content Type Person
 description = Person contact type and related (ex: contact).
 core = 7.x
 package = EITI Entities

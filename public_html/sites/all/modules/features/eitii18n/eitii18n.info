@@ -1,5 +1,5 @@
-name = eitii18n
-description = EITI Internationalization Feature
+name = EITI I18N Settings
+description = Internationalization Settings.
 core = 7.x
 package = EITI Custom
 version = 7.x-1.0

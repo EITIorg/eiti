@@ -9,6 +9,14 @@
  */
 function eititaxonomies_taxonomy_default_vocabularies() {
   return array(
+    'bookmark_type' => array(
+      'name' => 'Bookmark Type',
+      'machine_name' => 'bookmark_type',
+      'description' => 'Types of the bookmarks.',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'company_commodities' => array(
       'name' => 'Company Commodities',
       'machine_name' => 'company_commodities',

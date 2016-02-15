@@ -3,6 +3,10 @@
 # To execute a target ('command'), just type `make` followed by the
 # name of the command.
 
+# Avoid conflicts with files of the same name
+# @see: http://www.gnu.org/savannah-checkouts/gnu/make/manual/html_node/Phony-Targets.html
+all : update install prepare protect clean destroy cc cf fm offline online
+.PHONY : all
 
 # The default target, if no target argument is provided to `make`.
 # Update an environment with the latest changes from code.

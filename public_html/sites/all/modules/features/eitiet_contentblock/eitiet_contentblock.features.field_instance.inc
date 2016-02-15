@@ -10,7 +10,7 @@
 function eitiet_contentblock_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'contentblock-fixed-field_cbblocks'
+  // Exported field_instance: 'contentblock-fixed-field_cbblocks'.
   $field_instances['contentblock-fixed-field_cbblocks'] = array(
     'bundle' => 'fixed',
     'default_value' => NULL,
@@ -48,7 +48,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-fixed-field_cbbody'
+  // Exported field_instance: 'contentblock-fixed-field_cbbody'.
   $field_instances['contentblock-fixed-field_cbbody'] = array(
     'bundle' => 'fixed',
     'default_value' => NULL,
@@ -84,7 +84,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-fixed-field_cbimage'
+  // Exported field_instance: 'contentblock-fixed-field_cbimage'.
   $field_instances['contentblock-fixed-field_cbimage'] = array(
     'bundle' => 'fixed',
     'deleted' => 0,
@@ -165,7 +165,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-fixed-field_cblinks'
+  // Exported field_instance: 'contentblock-fixed-field_cblinks'.
   $field_instances['contentblock-fixed-field_cblinks'] = array(
     'bundle' => 'fixed',
     'default_value' => NULL,
@@ -186,6 +186,7 @@ function eitiet_contentblock_field_default_field_instances() {
     'label' => 'Link',
     'required' => 0,
     'settings' => array(
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
@@ -200,6 +201,7 @@ function eitiet_contentblock_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'rel_remove' => 'default',
       'title' => 'none',
+      'title_label_use_field_label' => FALSE,
       'title_maxlength' => 128,
       'title_value' => '',
       'url' => 0,
@@ -215,7 +217,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-fixed-title_field'
+  // Exported field_instance: 'contentblock-fixed-title_field'.
   $field_instances['contentblock-fixed-title_field'] = array(
     'bundle' => 'fixed',
     'default_value' => NULL,
@@ -255,7 +257,124 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-predefined-field_cbwidget'
+  // Exported field_instance: 'contentblock-predefined-field_bookmark_list'.
+  $field_instances['contentblock-predefined-field_bookmark_list'] = array(
+    'bundle' => 'predefined',
+    'deleted' => 0,
+    'description' => 'Please specify the list of bookmarks you want to use. Keep in mind, you can re-use previously defined bookmarks.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'contentblock',
+    'field_name' => 'field_bookmark_list',
+    'label' => 'Bookmark List',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'bookmarks',
+          'label_singular' => 'bookmark',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 1,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'contentblock-predefined-field_cbw_wide_image'.
+  $field_instances['contentblock-predefined-field_cbw_wide_image'] = array(
+    'bundle' => 'predefined',
+    'deleted' => 0,
+    'description' => 'Please upload the wide image which will serve as a background.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'contentblock',
+    'field_name' => 'field_cbw_wide_image',
+    'label' => 'Wide Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => 'wide-image',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'contentblock-predefined-field_cbwidget'.
   $field_instances['contentblock-predefined-field_cbwidget'] = array(
     'bundle' => 'predefined',
     'deleted' => 0,
@@ -266,7 +385,7 @@ function eitiet_contentblock_field_default_field_instances() {
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -283,11 +402,11 @@ function eitiet_contentblock_field_default_field_instances() {
       'module' => 'contentwidget',
       'settings' => array(),
       'type' => 'cwsettings',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
-  // Exported field_instance: 'contentblock-predefined-title_field'
+  // Exported field_instance: 'contentblock-predefined-title_field'.
   $field_instances['contentblock-predefined-title_field'] = array(
     'bundle' => 'predefined',
     'default_value' => NULL,
@@ -296,14 +415,9 @@ function eitiet_contentblock_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'contentblock',
-        'settings' => array(
-          'title_class' => 'contentblock-title',
-          'title_link' => '',
-          'title_style' => 'h3',
-        ),
-        'type' => 'title_with_icon',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'contentblock',
@@ -329,7 +443,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-text-field_cbbody'
+  // Exported field_instance: 'contentblock-text-field_cbbody'.
   $field_instances['contentblock-text-field_cbbody'] = array(
     'bundle' => 'text',
     'default_value' => NULL,
@@ -365,7 +479,7 @@ function eitiet_contentblock_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'contentblock-text-title_field'
+  // Exported field_instance: 'contentblock-text-title_field'.
   $field_instances['contentblock-text-title_field'] = array(
     'bundle' => 'text',
     'default_value' => NULL,
@@ -411,10 +525,14 @@ function eitiet_contentblock_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Blocks');
   t('Body');
+  t('Bookmark List');
   t('Image');
   t('Link');
+  t('Please specify the list of bookmarks you want to use. Keep in mind, you can re-use previously defined bookmarks.');
+  t('Please upload the wide image which will serve as a background.');
   t('Title');
   t('To create new content blocks you can go to "Content > Content Blocks > Add content block".');
+  t('Wide Image');
   t('Widget');
 
   return $field_instances;

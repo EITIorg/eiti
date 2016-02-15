@@ -117,7 +117,9 @@ function eitientity_summary_data_label($entity, $entity_type) {
 
   if (!is_null($entity->country_id)) {
     $country_entity = entity_load_single('implementing_country', $entity->country_id);
-    $t_args['!country'] = entity_label('implementing_country', $country_entity);
+    if ($country_entity) {
+      $t_args['!country'] = entity_label('implementing_country', $country_entity);
+    }
   }
 
   if (empty($t_args['!country'])) {
@@ -138,7 +140,7 @@ function eitientity_summary_data_label($entity, $entity_type) {
     return t('!country: !year_start', $t_args);
   }
 
-  return t('!country: !year_start - !year_end', $t_args);
+  return t('!country: !year_end', $t_args);
 }
 
 /**
@@ -316,4 +318,21 @@ function eitientity_summary_data_date_popup_process_alter(&$element, &$form_stat
   if (!in_array('_summary_data_form_date_popup_date_validate', $element['#element_validate'])) {
     array_push($element['#element_validate'], '_summary_data_form_date_popup_date_validate');
   }
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function eitientity_summary_data_admin_paths() {
+  $paths = array(
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add/*' => TRUE,
+    //EITIENTITY_SUMMARYDATA_UI_PATH . '/*' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/edit' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/usage' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/upload' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/delete' => TRUE,
+  );
+
+  return $paths;
 }
