@@ -26,6 +26,8 @@ update:
 	#@echo 'Securing the site settings...'
 	#@chmod a-w sites/default/settings*.php sites/default
 
+	@echo 'Done!'
+
 
 define INFO_TEXT
 The environment specific configuration file 'sites/default/settings.custom.php'
