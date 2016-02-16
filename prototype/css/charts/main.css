@@ -126,7 +126,7 @@ textarea {
     margin-right: 50px;
     width: 550px;
 }
-.legend-item-active {
+.grouped-item-active {
     float: left;
     border: 2px solid #85be33;
     border-radius: 3px;
@@ -138,7 +138,7 @@ textarea {
     width: 17%;
 }
 
-.legend-item {
+.grouped-item {
     float: left;
     border: 2px solid #d3d3d3;
     border-radius: 3px;
@@ -150,11 +150,43 @@ textarea {
     width: 17%;
 }
 
-.legend-item:hover {
+.grouped-item:hover {
   background: #d3d3d3;
 }
 
-.legend-item li:hover {
+.grouped-item li:hover {
+    border: 2px solid #4bb4a1;
+}
+
+.stacked-item-active {
+    float: left;
+    border: 2px solid #85be33;
+    border-radius: 3px;
+    font-size: 1.5em;
+    padding: 5px;
+    line-height: 70%;
+    margin: 1px;
+    cursor: pointer;
+    width: 17%;
+}
+
+.stacked-item {
+    float: left;
+    border: 2px solid #d3d3d3;
+    border-radius: 3px;
+    font-size: 1.5em;
+    padding: 5px;
+    line-height: 70%;
+    margin: 1px;
+    cursor: pointer;
+    width: 17%;
+}
+
+.stacked-item:hover {
+  background: #d3d3d3;
+}
+
+.stacked-item li:hover {
     border: 2px solid #4bb4a1;
 }
 
@@ -258,11 +290,15 @@ textarea {
   fill: #ddd;
 }
 
+#treemap svg{
+  background: #ddd;
+}
+
 .grandparent text {
   font-weight: bold;
 }
 
-.child {
+.rect {
   fill: none;
   stroke: #fff;
 }
@@ -292,6 +328,31 @@ rect.parent,
 
 .children:hover rect.child {
   fill: #bbb;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+.browser text {
+  text-anchor: end;
 }
 
 

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d5472421cfb6348b30a2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fe6fde2f7eddefb27fca"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -905,7 +905,7 @@
 		if (options.type == "Bar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -915,7 +915,6 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
@@ -925,7 +924,7 @@
 		} else if (options.type == "Pie") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -935,7 +934,6 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				})
@@ -943,18 +941,18 @@
 		} else if (options.type == "GroupedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(GroupedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass
 				}),
 				React.createElement(
 					'h4',
@@ -965,18 +963,18 @@
 		} else if (options.type == "StackedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(StackedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass
 				}),
 				React.createElement(
 					'h4',
@@ -987,13 +985,12 @@
 		} else if (options.type == "TreeMap") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(TreeMap, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -1006,14 +1003,13 @@
 		} else if (options.type == "BubbleChart") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(BubbleChart, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					diameter: options.diameter,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -1026,13 +1022,12 @@
 		} else if (options.type == "Sankey") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(Sankey, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -20847,6 +20842,7 @@
 	            return React.createElement(Legend, {
 	                colors: props.colors,
 	                colorAccessor: props.colorAccessor,
+	                legendClass: props.legendClass,
 	                data: props.legendData,
 	                legendPosition: props.legendPosition,
 	                margins: props.margin,
@@ -21312,7 +21308,7 @@
 	      colorAccessor: function colorAccessor(d, idx) {
 	        return idx;
 	      },
-	      itemClassName: 'legend-item-active',
+	      legendClass: 'legend-item',
 	      text: '#000'
 	    };
 	  },
@@ -21339,7 +21335,7 @@
 	      var itemStyle = {
 	        'color': props.colors(series.label)
 	      };
-	      var itemClassName = series.active == true ? 'legend-item-active' : 'legend-item';
+	      var itemClassName = series.active == true ? props.legendClass + '-active' : props.legendClass;
 
 	      legendItems.push(React.createElement(
 	        'li',
@@ -23770,6 +23766,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
@@ -24227,6 +24224,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
