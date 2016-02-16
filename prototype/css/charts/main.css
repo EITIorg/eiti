@@ -123,31 +123,31 @@ textarea {
 .legend {
     float: right;
     margin-top: 10px;
-    margin-right: 50px;
-    width: 550px;
+    margin-right: 0;
+    width: 520px;
 }
 .grouped-item-active {
     float: left;
     border: 2px solid #85be33;
-    border-radius: 3px;
-    font-size: 1.5em;
+    border-radius: 2px;
+    font-size: 1.3em;
     padding: 5px;
     line-height: 70%;
     margin: 1px;
     cursor: pointer;
-    width: 17%;
+    width: 22%;
 }
 
 .grouped-item {
     float: left;
     border: 2px solid #d3d3d3;
-    border-radius: 3px;
-    font-size: 1.5em;
+    border-radius: 2px;
+    font-size: 1.3em;
     padding: 5px;
     line-height: 70%;
     margin: 1px;
     cursor: pointer;
-    width: 17%;
+    width: 22%;
 }
 
 .grouped-item:hover {
