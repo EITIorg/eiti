@@ -52,6 +52,7 @@ h1{
 .country-page-top-banner {
   height: 310px;
   background: @country-banner-background;
+  overflow: hidden;
 }
 
 .country-profile-logo {
@@ -79,6 +80,7 @@ h1{
 // country stat thin banner
 .country-stat-banner{
   margin: @base-unit 0;
+  overflow: hidden;
 }
 .country-stat-widget {
   float: left;
@@ -281,6 +283,11 @@ h1{
 
 .visit-link {
   font-size: @small-text;
+}
+
+.resource-name {
+  line-height: 110%;
+  margin-bottom: 6px;
 }
 
 .additional-resource-title {
@@ -566,6 +573,10 @@ h1{
   overflow: hidden;
   &.beneficial-ownership {
     background: url('../images/thematic-banners/beneficial-ownership-banner.png') no-repeat;
+    background-size: @full-width;
+  }
+  &.production {
+    background: url('../images/thematic-banners/production-banner.png') no-repeat;
     background-size: @full-width;
   }
 }
