@@ -19,8 +19,21 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
  */
 function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
   switch ($form_state['entity']->bundle) {
-    case 'quote':
-//      dsm($form);
+    case 'tabs_with_widgets':
+      $tabs_number = isset($form_state['values']['field_fpp_widget']['und'][0]['settings']['tabs']['tabs_number']) ? $form_state['values']['field_fpp_widget']['und'][0]['settings']['tabs']['tabs_number'] : 4;
+
+      $ief_id = key($form_state['inline_entity_form']);
+      $entity_count = count($form_state['inline_entity_form'][$ief_id]['entities']);
+
+      // Add a visual cue of cardinality count.
+      $message = t('You have added @entities_count out of @cardinality_count allowed @label.', array(
+        '@entities_count' => $entity_count,
+        '@cardinality_count' => $tabs_number,
+        '@label' => t('Widgets'),
+      ));
+      $form['field_fpp_content_widgets'][LANGUAGE_NONE]['cardinality_count'] = array(
+        '#markup' => '<div class="ief-cardinality-count" id="ief-cardinality">' . $message . '</div>',
+      );
       break;
   }
 }

@@ -20,15 +20,16 @@ function eitict_bookmark_form_bookmark_node_form_alter(&$form, &$form_state) {
  * Implements hook_inline_entity_form_entity_form_alter()
  */
 function eitict_bookmark_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
-  if ($form_state['entity_type'] == 'contentblock' && !empty($entity_form['field_bm_reference_type'])) {
+  if (isset($form_state['entity']) && $form_state['entity']->bundle == 'featured_bookmarks' && !empty($entity_form['field_bm_reference_type'])) {
+    $field_prefix = 'field_fpp_bookmark_list[und][form][field_bm_reference_type][und]';
     $entity_form['field_bm_link']['#states'] = array(
       'visible' => array(
-        array('input[name="field_bookmark_list[und][form][field_bm_reference_type][und]"]' => array('value' => 'external')),
+        array('input[name="' . $field_prefix . '"]' => array('value' => 'external')),
       )
     );
     $entity_form['field_bm_reference']['#states'] = array(
       'visible' => array(
-        array('input[name="field_bookmark_list[und][form][field_bm_reference_type][und]"]' => array('value' => 'internal')),
+        array('input[name="' . $field_prefix . '"]' => array('value' => 'internal')),
       )
     );
     $entity_form['status'] = array('#type' => 'value', '#value' => 1);
