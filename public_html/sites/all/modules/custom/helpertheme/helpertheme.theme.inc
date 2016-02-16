@@ -161,7 +161,7 @@ function theme_header_identity() {
     $logo_alt = $site_name;
     $items['header']['logo_markup']['svg'] = array(
       '#theme' => 'image',
-      '#path' => url(drupal_get_path('theme', $theme) . '/logo.svg'),
+      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.svg'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
@@ -172,7 +172,7 @@ function theme_header_identity() {
     );
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
-      '#path' => url(drupal_get_path('theme', $theme) . '/logo.png'),
+      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.png'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
