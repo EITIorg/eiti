@@ -1,6 +1,13 @@
+Fieldable Panels Panes 7.x-1.x-dev, xxxx-xx-xx
+----------------------------------------------
+#2534200 by bwood, cboyden: Disable support for the Redirect module.
+#2207625 by Chris Burge, casaran, Peacog, AndersNielsen: Added permission for
+  listing FPPs.
+
+
 Fieldable Panels Panes 7.x-1.7, 2015-09-02
 ------------------------------------------
-By Chris Burges, dsnopek, DamienMcKenna: Added "check editable" callback for
+By Chris Burge, dsnopek, DamienMcKenna: Added "check editable" callback for
   CTools pane definition, refactored FPP object loading.
 
 
