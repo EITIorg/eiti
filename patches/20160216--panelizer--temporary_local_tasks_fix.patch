@@ -1,0 +1,17 @@
+Index: public_html/sites/all/modules/contrib/panelizer/plugins/entity/PanelizerEntityDefault.class.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/panelizer/plugins/entity/PanelizerEntityDefault.class.php	(date 1455631425000)
++++ public_html/sites/all/modules/contrib/panelizer/plugins/entity/PanelizerEntityDefault.class.php	(revision )
+@@ -417,7 +417,8 @@
+ 
+       if ($this->supports_revisions) {
+         $rev_base = $base;
+-        $rev_base['load arguments'] = array($position + 2);
++        // @HACK: There are some issues with local_tasks on `node/%node/panelizer/default/*`.
++        $rev_base['load arguments'] = array($position);
+         $items[$this->plugin['entity path'] . '/revisions/%panelizer_node_revision/panelizer'] = array(
+           'title' => 'Customize display',
+           // Make sure this is accessible to panelize entities with no defaults.
