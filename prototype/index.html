@@ -80,7 +80,7 @@
 <!-- end: homepage banner -->
 
 <!-- start: blog section-->
-<div class="content-section margin-top">
+<div class="content-section">
   <div class="inner-general-container">
     <div class="content-col-half">
       <!-- start: post big photo container -->
@@ -169,8 +169,8 @@
 <div class="banner-quote homepage">
   <div class="inner-container">
     <div class="banner-blockquote">
-      <p>Peace and security are better guaranteed when the citizens have access to basic social amenities,
-        hope in their futurenwhich can come by prudent management of natural resources by their governments”</p>
+      <p>Peace and security are better guaranteed when the citizens have access to basic social amenities,
+        hope in their futurenwhich can come by prudent management of natural resources by their governments</p>
     </div>
     <div class="quote-author">
       Clare Short, Chair of the EITI
@@ -368,7 +368,7 @@ Mineral production is the process of extracting ore or minerals from the ground.
     chartWidget.create({
         type: "Bar",
         name: "",
-        width: 640,
+        width: 740,
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "",
@@ -380,57 +380,88 @@ Mineral production is the process of extracting ore or minerals from the ground.
       [{
           label: 'Countries',
           values: [
-  {
-    "x": "Cameroon",
-    "y": 24200000
-  },
-  {
-    "x": "Côte d'Ivoire",
-    "y": 9132866
-  },
-  {
-    "x": "Peru",
-    "y": 22956000
-  },
-  {
-    "x": "Trinidad and Tobago",
-    "y": 29600000
-  },
-  {
-    "x": "Azerbaijan",
-    "y": 323290870
-  },
-  {
-    "x": "Ghana",
-    "y": 36048260
-  },
-  {
-    "x": "Iraq",
-    "y": 1087515111
-  },
-  {
-    "x": "Kazakhstan",
-    "y": 520033696
-  },
-  {
-    "x": "Mongolia",
-    "y": 7407000
-  },
-  {
-    "x": "Niger",
-    "y": 6497944.129
-  },
-  {
-    "x": "Norway",
-    "y": 534297697.1
-  },
-  {
-    "x": "Republic of the Congo",
-    "y": 88384000
-  }
-]
+            {
+              "x": "Niger",
+              "y": 6497944.129
+            },
+            {
+              "x": "Mongolia",
+              "y": 7407000
+            },
+            {
+              "x": "Côte d'Ivoire",
+              "y": 9132866
+            },
+            {
+              "x": "Peru",
+              "y": 22956000
+            },
+            {
+              "x": "Cameroon",
+              "y": 24200000
+            },
+            {
+              "x": "Trinidad and Tobago",
+              "y": 29600000
+            },
+            {
+              "x": "Ghana",
+              "y": 36048260
+            },
+            {
+              "x": "R. of the Congo",
+              "y": 88384000
+            },
+            {
+              "x": "Azerbaijan",
+              "y": 323290870
+            },
+            {
+              "x": "Kazakhstan",
+              "y": 520033696
+            },
+            {
+              "x": "Norway",
+              "y": 534297697.1
+            },
+            {
+              "x": "Iraq",
+              "y": 1087515111
+            }
+          ]
       }]);
+
 d3.selectAll(".x g.tick text")[0].forEach(function(k,v){console.log();if(v%2){ d3.select(k).attr("y", 25)} })
+
+var checkCollision = function(r1, r2) {
+  //debugger;
+/*  console.log("previous");
+  console.log(r1.left, r1.right);
+  console.log(r1.top, r1.bottom);
+  console.log("current");
+  console.log(r2.left, r2.right);
+  console.log(r2.top, r2.bottom);*/
+   return !(r2.left-10 > r1.right || 
+           r2.right < r1.left || 
+           r2.top > r1.bottom ||
+           r2.bottom < r1.top);
+};
+/*
+var prevRect = undefined;
+var prevPrevRect = undefined;
+d3.selectAll(".x g.tick text")[0].forEach(
+  function(k,v){
+    var inc = 0;
+    if(prevRect && checkCollision(prevRect, d3.select(k)[0][0].getBoundingClientRect())) {
+      inc = 15;
+    }
+    if(prevPrevRect && checkCollision(prevPrevRect, d3.select(k)[0][0].getBoundingClientRect())) {
+      inc = 30;
+    }
+    d3.select(k).attr("y", 15 + inc);
+    prevPrevRect = prevRect;
+    prevRect = d3.select(k)[0][0].getBoundingClientRect();
+  });*/
 
     </script>
 </body>
