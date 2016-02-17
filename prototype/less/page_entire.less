@@ -19,7 +19,7 @@ h1{
 }
 
 // styles for all 4 footer widgets
-.main-navigation {
+.main-navigation-eiti {
   float: right;
   overflow: hidden;
   margin-top: @general-margin-space * 3.5;
@@ -665,4 +665,100 @@ h1{
 // chart container
 .section-chart-container{
   margin-top:35px;
+}
+
+// map
+.layout-map-content-wrapper {
+  background: @map-top-banner-bg;
+}
+
+.map-banner-top {
+  background: @map-top-banner-bg;
+  margin:0;
+  padding: 2px 0 0 0;
+  height: 60px;
+  z-index: 2;
+  width: 100%;
+}
+.map-toggle {
+  background: none;
+  border: none;
+}
+.map-toggle-icon {
+  color: @text-inverse;
+  border:1px solid @text-inverse;
+  float: left;
+  margin-left: -18px;
+  margin-top: 14px;
+  padding: 4px;
+  &:hover {
+    color:@theme-blue-light;
+    border:1px solid @theme-blue-light;
+  }
+}
+.map-panel-banner {
+  background: @map-panel-banner-bg;
+  border-top: 2px solid @map-panel-border;
+  height: 150px;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  position: absolute;
+  width: 100%;
+  z-index:3;
+}
+
+.map-title {
+  color: @text-inverse;
+  font-size: @map-title-text;
+  font-weight: normal;
+  margin:19px 0 0 -70px;
+  text-transform: uppercase;
+}
+
+.main-map {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+.map-option-widget{
+  .list-unstyled();
+  list-style: none;
+  display: table;
+  width: 100%;
+  li {
+    display: table-cell;
+    float: left;
+    display: block;
+    border: 1px solid @map-panel-border;
+    height: 100px;
+    overflow: hidden;
+    padding: 30px 10px 30px 30px;
+    width: 20%;
+    &:hover {
+      background: @theme-blue;
+      .option-label {
+        .transition-link();
+        color: @text-inverse;
+      }
+      .option-icon {
+        opacity:1;
+      }
+    }
+  }
+}
+.option-label {
+  color: @theme-green;
+  display: block;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+.option-icon{
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  width: 50px;
+
 }
