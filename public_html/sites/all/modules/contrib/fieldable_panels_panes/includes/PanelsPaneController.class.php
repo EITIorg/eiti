@@ -326,7 +326,7 @@ class PanelsPaneController extends DrupalDefaultEntityController {
   public function create($values) {
     $entity = (object) array(
       'bundle' => $values['bundle'],
-      'language' => LANGUAGE_NONE,
+      'language' => 'en',  // HACK: Temporarily create all FPP entities with EN as language.
       'is_new' => TRUE,
     );
 
