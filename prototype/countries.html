@@ -11,13 +11,36 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 <link rel="stylesheet" href="css/charts/main.css">
 <title>EITI - Peru</title>
+<style>
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .3;
+}
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  font-size:9pt;
+}
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+</style>
 <body>
 
 <header role="banner" class="main-header">
   <div class="inner-container">
   <!-- start: logo section  -->
   <h1 class="site-name">
-    <a href="#" title="Visit the homepage" class="link" rel="home">
+    <a href="index.html" title="Visit the homepage" class="link" rel="home">
       <img role="presentation" src="images/eiti-logo.png" alt="EITI logo">
       <span class="text"></span>
     </a>
@@ -26,11 +49,11 @@
   <!-- start: main nav  -->
   <nav role="navigation" class="main-navigation">
     <ul>
-        <li><a href="">EITI Map</a></li>
-        <li><a href="">About EITI</a></li>
-        <li><a href="">EITI Analysis</a></li>
-        <li><a href="">Publications</a></li>
-        <li><a href="">Global Conference</a></li>
+        <li><a href="map.html">EITI Map</a></li>
+        <li><a href="https://eiti.org/about" target="_blank">About EITI</a></li>
+        <li><a href="https://eiti.org/blog" target="_blank">EITI Analysis</a></li>
+        <li><a href="https://eiti.org/resources" target="_blank">Publications</a></li>
+        <li><a href="http://www.lima2016.eiti.org" target="_blank">Global Conference</a></li>
     </ul>
   </nav>
 
@@ -90,7 +113,7 @@
 <!-- end: thin country stat banner-->
 
 <!-- start: country into text widget -->
-<div class="content-section">
+<div class="content-section margin-bottom">
   <div class="inner-container">
     <h3 class="content-section-title">
       EITI Introduction
@@ -100,14 +123,13 @@
     </p>
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-      <a target="_blank">
-        Learn more
-      </a>
+        <h4 class="more-information">Further Information</h4>
+        <ul class="innovation-list">
+          <li><a href="https://eiti.org/news/peru-ten-years-transparency-oil-gas-and-mining" target="_blank">10 years of EITI reporting in Peru</a></li>
+          <li><a href="http://progrep.eiti.org/2015/country-focus/peru-story" target="_blank">Bringing transparency closer to people</a></li>
+        </ul>
     </div>
-    <ul class="innovation-list">
-      <li><a href="https://eiti.org/news/peru-ten-years-transparency-oil-gas-and-mining" target="_blank">10 years of EITI reporting in Peru</a></li>
-      <li><a href="http://progrep.eiti.org/2015/country-focus/peru-story" target="_blank">Bringing transparency closer to people</a></li>
-    </ul>
+
 
   </div>
   <!-- end: country into text widget -->
@@ -136,15 +158,10 @@
       <img class="title-icon" src="images/icon-dump/eiti_naturalresources.svg" alt="natural resources icon">
       <h3>Natural Resources</h3>
     </div>
-    <p>
+    <p class="wysiwyg-paragraph">
       Peru has rich deposits of copper, gold, silver, lead, zinc, natural gas and petroleum. Abundant mineral resources are found mainly in the mountainous areas. It is considered one of the top ten richest mineral countries in the world.
     </p>
-    <div class="learn-more-section">
-      <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-      <a href="#" target="_blank">
-        Learn more about resource details
-      </a>
-    </div>
+
 
     <table class="resources-table">
     	<thead>
@@ -220,16 +237,15 @@
     <br/>
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-      <a target="_blank">
-        Further Information
-      </a>
+      <h4 class="more-information">Further Information</h4>
+      <ul class="innovation-list">
+        <li><a href="http://data.worldbank.org/country/peru?display=graph" target="_blank">Peru’s country data/World Bank</a></li>
+        <li><a href="http://www.minem.gob.pe/_publicacion.php?idSector=1&idPublicacion=511" target="_blank">Ministry of Energy Statistics </a></li>
+        <li><a href="http://www.snmpe.org.pe/informes-y-publicaciones-snmpe/reporte-estadistico-mineroenergetico/ano-2014-fecha-de-publicacion-abril-2015.html" target="_blank">Industry association (SNMPE) publications: Statistical Report</a></li>
+        <li><a href="http://www.centro-de-informacion.snmpe.pe/Catalogo-en-Linea.html" target="_blank">Industry association (SNMPE) publications: Online Catalog</a></li>
+      </ul>
     </div>
-    <ul class="innovation-list">
-      <li><a href="http://data.worldbank.org/country/peru?display=graph" target="_blank">Peru’s country data/World Bank</a></li>
-      <li><a href="http://www.minem.gob.pe/_publicacion.php?idSector=1&idPublicacion=511" target="_blank">Ministry of Energy Statistics </a></li>
-      <li><a href="http://www.snmpe.org.pe/informes-y-publicaciones-snmpe/reporte-estadistico-mineroenergetico/ano-2014-fecha-de-publicacion-abril-2015.html" target="_blank">Industry association (SNMPE) publications: Statistical Report</a></li>
-      <li><a href="http://www.centro-de-informacion.snmpe.pe/Catalogo-en-Linea.html" target="_blank">Industry association (SNMPE) publications: Online Catalog</a></li>
-    </ul>
+
 
 
   </div>
@@ -319,14 +335,13 @@ The three main taxes and fees imposed on companies operating in the extractive s
       <br /><br />
       <div class="learn-more-section">
         <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-        <a target="_blank">
-          Further Information
-        </a>
+        <h4 class="more-information">Further Information</h4>
+        <ul class="innovation-list">
+          <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/#" target="_blank">Peru Petro statistics </a></li>
+          <li><a href="http://www.ingemmet.gob.pe/-/memoria-anual-2014" target="_blank">Ingemmet annual report </a></li>
+        </ul>
       </div>
-      <ul class="innovation-list">
-        <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/#" target="_blank">Peru Petro statistics </a></li>
-        <li><a href="http://www.ingemmet.gob.pe/-/memoria-anual-2014" target="_blank">Ingemmet annual report </a></li>
-      </ul>
+
 
 
       <!-- end: LICENSE section -->
@@ -334,7 +349,7 @@ The three main taxes and fees imposed on companies operating in the extractive s
 </div>
 
 <!-- start: PRODUCTION section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -349,15 +364,14 @@ The three main taxes and fees imposed on companies operating in the extractive s
     </p>
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-      <a target="_blank">
-        Learn More
-      </a>
+      <h4 class="more-information">Further Information</h4>
+      <ul class="innovation-list">
+        <li><a href="http://www.minem.gob.pe/_estadistica.php?idSector=1&idEstadistica=9288" target="_blank">Mining production</a></li>
+        <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/#" target="_blank">Hydrocarbon production: Oil </a></li>
+        <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/ImportantInformation/Statistics/Hydrocarbon%20Production/Cont_GasProduction" target="_blank">Hydrocarbon production: Gas </a></li>
+      </ul>
     </div>
-    <ul class="innovation-list">
-      <li><a href="http://www.minem.gob.pe/_estadistica.php?idSector=1&idEstadistica=9288" target="_blank">Mining production</a></li>
-      <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/#" target="_blank">Hydrocarbon production: Oil </a></li>
-      <li><a href="http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/ImportantInformation/Statistics/Hydrocarbon%20Production/Cont_GasProduction" target="_blank">Hydrocarbon production: Gas </a></li>
-    </ul>
+
 
     <div class="section-chart-container">
         <div id="chart_production"></div>
@@ -369,7 +383,7 @@ The three main taxes and fees imposed on companies operating in the extractive s
 
 
 <!-- start: GOV REVENUE section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -385,9 +399,13 @@ The three main taxes and fees imposed on companies operating in the extractive s
 
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.svg" alt="learn more">
-      <a href="https://eiti.org/news/peru-ten-years-transparency-oil-gas-and-mining" target="_blank">
-        Learn more
-      </a>
+      <h4 class="more-information">Learn More</h4>
+      <ul class="innovation-list">
+        <li><a href="https://eiti.org/news/peru-ten-years-transparency-oil-gas-and-mining" target="_blank">
+          Peru: ten years of transparency in oil, gas and mining
+        </a></li>
+      </ul>
+
     </div>
 
     <div class="section-chart-container">
@@ -433,7 +451,7 @@ Regional and municipal governments receive, via transfers from the central gover
 
 
 <!-- start: IMPLEMENTATION of EITI section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -457,7 +475,7 @@ Regional and municipal governments receive, via transfers from the central gover
 
 
 <!-- start: INNOVATIONS section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -468,7 +486,7 @@ Regional and municipal governments receive, via transfers from the central gover
     <!-- end: section title -->
 
     <p class="wysiwyg-paragraph">
-   In 2015, the regions of Piura and Moquegua piloted EITI implementation. Both regions formed multi-stakeholder groups and commissioned, together with Peru EITI, pilot EITI Reports. These Reports feature reconciled transfers from the central government to regions and municipalities and, more crucial to building trust, disclosed information on how these subnational governments have used extractive revenues. The two reports also contained historical data on revenue and expenditures dating back to 2007. The EITI Reports highlighted that, only about 15% of revenues from the mining and hydrocarbon sector has been used for developmental spending, such as infrastructure or economic diversification. The rest has been spent on current expenditures such as salaries and servicing debts. Local citizens are using this information to engage with their regional authorities on alternative ways to spend these resources. 
+   In 2015, the regions of Piura and Moquegua piloted EITI implementation. Both regions formed multi-stakeholder groups and commissioned, together with Peru EITI, pilot EITI Reports. These Reports feature reconciled transfers from the central government to regions and municipalities and, more crucial to building trust, disclosed information on how these subnational governments have used extractive revenues. The two reports also contained historical data on revenue and expenditures dating back to 2007. The EITI Reports highlighted that, only about 15% of revenues from the mining and hydrocarbon sector has been used for developmental spending, such as infrastructure or economic diversification. The rest has been spent on current expenditures such as salaries and servicing debts. Local citizens are using this information to engage with their regional authorities on alternative ways to spend these resources.
     </p>
 
     <div class="country-section-media">
@@ -482,7 +500,7 @@ Regional and municipal governments receive, via transfers from the central gover
 
 
 <!-- start: GOVERNANCE section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -497,21 +515,22 @@ Regional and municipal governments receive, via transfers from the central gover
     </p>
     <p class="wysiwyg-paragraph">
       The <strong>EITI National Committee</strong> (called Comision Multisectorial de la EITI, in Spanish) is chaired by <strong>EITI Champion</strong> Ing.Guillermo Shinno, Vice-Minister of Mines. Ministry of Energy and Mines and composed of:</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Fernando Castillo</span> - Ministry of Energy, Technical Secretary of the Commission;</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Ministry of Finance</span> - Sr. Hugo Oropeza - DG Social Management;</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Universities:  Pacific University</span> - Sr Carlos Casas;</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Civil Society: Grupo Propuesta Ciudadana</span> - Sr Epifanio Baca; Derecho, Ambiente y Recuros</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Naturales</span>- Sra Pilar Camero</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Industry - Sociedad de Mineria, Petroleo y Energia - Sra. Carmen Mendoza; Sra Caterina Podestá</p>
-      <p class="wysiwyg-paragraph"><span class="wysiwyg-highlight">Industry- Southern Peru Copper Co.</span> - Sr. Carlos Aranda; Anglo American- Sr Eduardo Rubio; Repsol - Sr Jorge Luis Mercado
-    </p>
+      <ul>
+        <li><span class="wysiwyg-highlight">Fernando Castillo</span> - Ministry of Energy, Technical Secretary of the Commission;</li>
+        <li><span class="wysiwyg-highlight">Ministry of Finance</span> - Sr. Hugo Oropeza - DG Social Management;</li>
+        <li><span class="wysiwyg-highlight">Universities:  Pacific University</span> - Sr Carlos Casas;</li>
+        <li><span class="wysiwyg-highlight">Civil Society: Grupo Propuesta Ciudadana</span> - Sr Epifanio Baca; Derecho, Ambiente y Recuros</li>
+        <li><span class="wysiwyg-highlight">Naturales</span>- Sra Pilar Camero</li>
+        <li><span class="wysiwyg-highlight">Industry - Sociedad de Mineria, Petroleo y Energia - Sra. Carmen Mendoza; Sra Caterina Podestá</li>
+        <li><span class="wysiwyg-highlight">Industry- Southern Peru Copper Co.</span> - Sr. Carlos Aranda; Anglo American- Sr Eduardo Rubio; Repsol - Sr Jorge Luis Mercado</li>
+      </ul>
   </div>
 </div>
 <!-- end: GOVERNANCE section -->
 
 
 <!-- start: KEY DOCUMENTS section -->
-<div class="content-section margin-bottom">
+<div class="content-section">
   <div class="inner-container">
 
     <!-- start: section title -->
@@ -585,7 +604,7 @@ EITI Reports</a></li>
 
 
   <div class="footer-top-section">
-    <a href=""><img class="footer-logo" src="images/footer_logo.png"/></a>
+    <a href="index.html"><img class="footer-logo" src="images/footer_logo.png"/></a>
     <span class="footer-slogan">See how natural resources are managed and used in your country</span>
   <div>
 
@@ -606,10 +625,10 @@ EITI Reports</a></li>
     <div class="layout-footer-widget">
       <div class="footer-widget">
       <ul>
-        <li><a href="">About EITI</a></li>
-        <li><a href="">EITI Countries and Map</a></li>
-        <li><a href="">EITI Publications</a></li>
-        <li><a href="">EITI News and Events</a></li>
+        <li><a href="https://eiti.org/eiti" target="_blank">About EITI</a></li>
+        <li><a href="countries.html#PER" target="_blank">EITI Countries and Map</a></li>
+        <li><a href="https://eiti.org/resources" target="_blank">EITI Publications</a></li>
+        <li><a href="https://eiti.org/news-events" target="_blank">EITI News and Events</a></li>
       </ul>
     </div>
     </div>
@@ -631,10 +650,10 @@ EITI Reports</a></li>
     <div class="layout-footer-widget">
       <div class="footer-widget">
         <ul>
-          <li><a href="">Contact us</a></li>
-          <li><a href="">History</a></li>
-          <li><a href="">Jobs at EITI</a></li>
-          <li><a href="">Privacy Policy</a></li>
+          <li><a href="https://eiti.org/contact" target="_blank">Contact us</a></li>
+          <li><a href="https://eiti.org/eiti/history" target="_blank">History</a></li>
+          <li><a href="https://eiti.org/jobs" target="_blank">Jobs at EITI</a></li>
+          <li><a href="https://eiti.org/privacy-psolicy" target="_blank">Privacy Policy</a></li>
         </ul>
 
       <div class="footer-widget-title">Content Use Policy</div>
@@ -674,47 +693,31 @@ EITI Reports</a></li>
               description: ""
       },
       [{
-          "label": "Oil",
-                "values": [
-                    {"x": "2009", "y": 122661511},
-                    {"x": "2010", "y": 104366635},
-                    {"x": "2011", "y": 97494031},
-                    {"x": "2012", "y": 89183936},
-                    {"x": "2013", "y": 84943990}
-                ]
-          },
-          {
           "label": "Gas",
                 "values": [
-                    {"x": "2009", "y": 100110308},
-                    {"x": "2010", "y": 107250281},
-                    {"x": "2011", "y": 101266314},
-                    {"x": "2012", "y": 114722664},
-                    {"x": "2013", "y": 108745838}
+                    {"x": "2008", "y": 1095196071},
+                    {"x": "2009", "y": 498084744},
+                    {"x": "2010", "y": 1140017166}
                 ]
           },
           {
           "label": "NGL",
                 "values": [
-                    {"x": "2009", "y": 16941870},
-                    {"x": "2010", "y": 15505360},
-                    {"x": "2011", "y": 16314039},
-                    {"x": "2012", "y": 17798865},
-                    {"x": "2013", "y": 17718292}
-
+                    {"x": "2008", "y": 4374586842},
+                    {"x": "2009", "y": 3265934655},
+                    {"x": "2010", "y": 4547089022}
                 ]
           },
           {
-        "label": "Condensate",
+          "label": "Gold",
                 "values": [
-                    {"x": "2009", "y": 3923854 },
-                    {"x": "2010", "y": 4163009 },
-                    {"x": "2011", "y": 4583334 },
-              {"x": "2012", "y": 4574854 },
-                    {"x": "2013", "y": 3991160 }
+                    {"x": "2008", "y": 3726795277},
+                    {"x": "2009", "y": 4202969161},
+                    {"x": "2010", "y": 4289524923}
                 ]
           }
       ]);
+
       chartWidget.create({
         type: "StackedBar",
         name: "Government revenue by tax type",
@@ -730,7 +733,7 @@ EITI Reports</a></li>
 
       chartWidget.create({
         type: "GroupedBar",
-        name: "Gov’t revenue from extractives compared",
+        name: "Government revenue from extractives compared",
         width: 800,
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
@@ -743,55 +746,60 @@ EITI Reports</a></li>
         {
         "label": "Total",
               "values": [
-                  {"x": "2008", "y": 1841532000},
-                  {"x": "2010", "y": 1374367000},
-                  {"x": "2011", "y": 1517294000},
-                  {"x": "2012", "y": 1780413000},
-                  {"x": "2013", "y": 1700043000}
+                  {"x": "2008", "y": 3573697356},
+                  {"x": "2009", "y": 2965369767},
+                  {"x": "2010", "y": 4358147652},
+                  {"x": "2011", "y": 5884357012},
+                  {"x": "2012", "y": 5480853241},
+                  {"x": "2013", "y": 5511486805}
               ]
         },
         {
         "label": "GDP",
               "values": [
-                  {"x": "2008", "y": 155420129000 },
-                  {"x": "2010", "y": 103571650000 },
-                  {"x": "2011", "y": 128083414000 },
-                  {"x": "2012", "y": 146929996000 },
-                  {"x": "2013", "y": 124825251000 }
+                  {"x": "2008", "y": 121572308726.00},
+                  {"x": "2009", "y": 121192333743.00},
+                  {"x": "2010", "y": 148522048128.00},
+                  {"x": "2011", "y": 170564249005.00},
+                  {"x": "2012", "y": 192679697094.00},
+                  {"x": "2013", "y": 201848484664.00}
               ]
         },
         {
         "label": "Aid",
               "values": [
-                  {"x": "2008", "y": 3664473000},
-                  {"x": "2010", "y": 2204785000},
-                  {"x": "2011", "y": 2220255000},
-                  {"x": "2012", "y": 2255251000},
-                  {"x": "2013", "y": 3180095000}
-
+                  {"x": "2008", "y": 3200000000},
+                  {"x": "2009", "y": 5400000000},
+                  {"x": "2010", "y": 4500000000},
+                  {"x": "2011", "y": 734000000},
+                  {"x": "2012", "y": 1200000000},
+                  {"x": "2013", "y": 792000000}
               ]
         },
         {
-      "label": "Remittance Inflows",
+        "label": "Remittance Inflows",
               "values": [
-                  {"x": "2008", "y": 239528270000},
-                  {"x": "2010", "y": 155612137000},
-                  {"x": "2011", "y": 205936428000},
-                  {"x": "2012", "y": 228670845630},
-                  {"x": "2013", "y": 201503788000}
+                  {"x": "2008", "y": 2600000000},
+                  {"x": "2009", "y": 2600000000},
+                  {"x": "2010", "y": 2700000000},
+                  {"x": "2011", "y": 2700000000},
+                  {"x": "2012", "y": 2800000000},
+                  {"x": "2013", "y": 0}
               ]
         },
         {
           "label": "FDI",
               "values": [
-                  {"x": "2008", "y": 16940000000 },
-                  {"x": "2010", "y": 12818000000 },
-                  {"x": "2011", "y": 13352000000 },
-                  {"x": "2012", "y": 13887000000 },
-                  {"x": "2013", "y": 14421000000 }
+                  {"x": "2008", "y": 7200000000},
+                  {"x": "2009", "y": 6900000000},
+                  {"x": "2010", "y": 9000000000},
+                  {"x": "2011", "y": 8200000000},
+                  {"x": "2012", "y": 12500000000},
+                  {"x": "2013", "y": 0}
               ]
         }
     ]
+
 
       );
 
@@ -804,11 +812,11 @@ EITI Reports</a></li>
         margin: {top: 20, right: 0, bottom: 0, left: 0},
         container: "bubble"
       },
-      'data/bubble.json');
+      'data/disbursed_revenue_PERU.json');
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company",
+        name: "Disbursements by Company (Top 10)",
         width: 800,
         height: 300,
         margin: {top: 1, right: 1, bottom: 6, left: 1},

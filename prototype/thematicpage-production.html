@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet/less" type="text/css" href="less/main.less" />
 <link rel="stylesheet/less" type="text/css" href="less/page_entire.less" />
+<link rel="stylesheet" href="css/charts/main.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 <title>Production Thematic Page</title>
 <body>
@@ -13,7 +14,7 @@
   <div class="inner-container">
   <!-- start: logo section  -->
   <h1 class="site-name">
-    <a href="#" title="Visit the homepage" class="link" rel="home">
+    <a href="index.html" title="Visit the homepage" class="link" rel="home">
       <img role="presentation" src="images/eiti-logo.png" alt="EITI logo">
       <span class="text"></span>
     </a>
@@ -22,11 +23,11 @@
   <!-- start: main nav  -->
   <nav role="navigation" class="main-navigation">
     <ul>
-        <li><a href="">EITI Map</a></li>
-        <li><a href="">About EITI</a></li>
-        <li><a href="">EITI Analysis</a></li>
-        <li><a href="">Publications</a></li>
-        <li><a href="">Global Conference</a></li>
+        <li><a href="map.html">EITI Map</a></li>
+        <li><a href="https://eiti.org/about" target="_blank">About EITI</a></li>
+        <li><a href="https://eiti.org/blog" target="_blank">EITI Analysis</a></li>
+        <li><a href="https://eiti.org/resources" target="_blank">Publications</a></li>
+        <li><a href="http://www.lima2016.eiti.org" target="_blank">Global Conference</a></li>
     </ul>
   </nav>
 
@@ -41,6 +42,7 @@
   <!-- start: thematic page banner -->
   <div class="thematic-top-banner production">
     <div class="thematic-banner-inner">
+      <img class="title-icon" src="images/icon-dump/eiti_productionpage.svg" alt="production icon">
         <h2 class="homepage-title">Exploration and production</h2>
         <p class="homepage-subtitle">
           Exploration and production of oil, gas and mineral resources.
@@ -138,14 +140,8 @@
       </div>
       <!-- end: section title -->
 
-
-      <p class="wysiwyg-paragraph">
-        Introduction paragraph goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-
       <!-- start: viz #1 -->
-      <div class="section-viz">
-        Show the “Production per commodity” viz. By default, oil is selected. shows the countries on the x-axis, and the volumes on the y-axis. Select 2013 as default year. possibility change year. Select other commodities in drop-down menu.
+      <div id="chart_production">
       </div>
       <!-- end: viz #1 -->
 
@@ -188,9 +184,7 @@
   <div class="content-section margin-bottom">
     <div class="inner-container">
 
-      <h3 class="content-section-title">
-      Section Title Needed
-      </h3>
+
       <p class="wysiwyg-paragraph">
         Mineral production is the process of extracting ore or minerals from the ground. During the exploration phase, companies typically engage in prospecting to identify potential deposits. Once located, the reserves must be modelled by the company and certified by an accredited agency before application for a production license. Once the required studies (such as environmental impact assessments, feasibility studies, etc.) are completed and the mine is developed, commercial production commences. EITI countries disclose figures on volumes of production, exports and their market value.
       </p>
@@ -307,7 +301,7 @@
   <div class="inner-container">
 
   <div class="footer-top-section">
-    <a href=""><img class="footer-logo" src="images/footer_logo.png"/></a>
+    <a href="index.html"><img class="footer-logo" src="images/footer_logo.png"/></a>
     <span class="footer-slogan">See how natural resources are managed and used in your country</span>
   <div>
 
@@ -327,12 +321,12 @@
     <!-- start: footer widget 2 -->
     <div class="layout-footer-widget">
       <div class="footer-widget">
-      <ul>
-        <li><a href="">About EITI</a></li>
-        <li><a href="">EITI Countries and Map</a></li>
-        <li><a href="">EITI Publications</a></li>
-        <li><a href="">EITI News and Events</a></li>
-      </ul>
+        <ul>
+          <li><a href="https://eiti.org/eiti" target="_blank">About EITI</a></li>
+          <li><a href="countries.html#PER" target="_blank">EITI Countries and Map</a></li>
+          <li><a href="https://eiti.org/resources" target="_blank">EITI Publications</a></li>
+          <li><a href="https://eiti.org/news-events" target="_blank">EITI News and Events</a></li>
+        </ul>
     </div>
     </div>
 
@@ -353,10 +347,10 @@
     <div class="layout-footer-widget">
       <div class="footer-widget">
         <ul>
-          <li><a href="">Contact us</a></li>
-          <li><a href="">History</a></li>
-          <li><a href="">Jobs at EITI</a></li>
-          <li><a href="">Privacy Policy</a></li>
+          <li><a href="https://eiti.org/contact" target="_blank">Contact us</a></li>
+          <li><a href="https://eiti.org/eiti/history" target="_blank">History</a></li>
+          <li><a href="https://eiti.org/jobs" target="_blank">Jobs at EITI</a></li>
+          <li><a href="https://eiti.org/privacy-psolicy" target="_blank">Privacy Policy</a></li>
         </ul>
 
       <div class="footer-widget-title">Content Use Policy</div>
@@ -378,7 +372,78 @@
   </div>
   <!-- end: footer inner container  -->
 </footer>
+    <script src="js/charts/chartWidgets.js"></script>
 
+    <script>
+
+    chartWidget.create({
+        type: "Bar",
+        name: "Production by Country (Oil, 2013)",
+        width: 880,
+        height: 400,
+        margin: {top: 10, bottom: 50, left: 100, right: 10},
+              xlabel: "",
+              ylabel: "barrels",
+              container: "chart_production",
+              description: "",
+              legendClass: "grouped-item"
+      },
+      [{
+          label: 'Countries',
+          values: [
+  {
+    "x": "Cameroon",
+    "y": 24200000
+  },
+  {
+    "x": "Côte d'Ivoire",
+    "y": 9132866
+  },
+  {
+    "x": "Peru",
+    "y": 22956000
+  },
+  {
+    "x": "Trinidad and Tobago",
+    "y": 29600000
+  },
+  {
+    "x": "Azerbaijan",
+    "y": 323290870
+  },
+  {
+    "x": "Ghana",
+    "y": 36048260
+  },
+  {
+    "x": "Iraq",
+    "y": 1087515111
+  },
+  {
+    "x": "Kazakhstan",
+    "y": 520033696
+  },
+  {
+    "x": "Mongolia",
+    "y": 7407000
+  },
+  {
+    "x": "Niger",
+    "y": 6497944.129
+  },
+  {
+    "x": "Norway",
+    "y": 534297697.1
+  },
+  {
+    "x": "Republic of the Congo",
+    "y": 88384000
+  }
+]
+      }]);
+d3.selectAll(".x g.tick text")[0].forEach(function(k,v){console.log();if(v%2){ d3.select(k).attr("y", 25)} })
+
+    </script>
 
 </body>
 </html>

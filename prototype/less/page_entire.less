@@ -6,7 +6,6 @@
   border-bottom: 2px solid @divider-grey;
   overflow: hidden;
 }
-
 .inner-container {
   .section-inner (960px);
 }
@@ -193,7 +192,10 @@ h1{
   text-align:center;
 }
 
-//
+.section-title {
+  color: @theme-blue;
+}
+
 .small-section-title {
   color: @theme-blue;
   font-weight: normal;
@@ -219,6 +221,10 @@ h1{
   .floated-icon(left, @base-unit / 2, 0);
   margin-top: 3px;
   width: 16px;
+}
+.more-information{
+  font-size: @more-information-text;
+  margin-bottom: 0;
 }
 
 // natural resources table
@@ -480,7 +486,7 @@ h1{
   display: block;
   float: left;
   margin-right: @base-unit / 2;
-  margin-top: 2px;
+  margin-top: -1px;
   width: @small-icon-size;
 }
 
@@ -489,7 +495,7 @@ h1{
   font-weight: normal;
   text-transform: uppercase;
   &.inverse {
-    color: @theme-grey;
+    color: @theme-blue;
     &:hover {
       color: @theme-orange;
     }
@@ -503,7 +509,23 @@ h1{
   position: relative;
   width: @full-width / 2.01;
 }
-
+.content-col-one-third {
+  float: left;
+  width: 30%;
+}
+.content-col-two-thirds {
+  float: left;
+  width: 70%;
+}
+.content-image{
+  max-width: 100%;
+}
+.graph-image {
+  float: right;
+  margin-top: 100px;
+  max-width: 50%;
+  bottom: 0;
+}
 .post-thumb-title {
   .transition-link();
   bottom: @base-unit * 2;
@@ -630,7 +652,7 @@ h1{
 .stat-links-banner {
   background: @banner-lightgrey-bg;
   border-top: 1px solid @divider-grey;
-  height: 30px;
+  height: 25px;
   padding: @base-unit 0;
 }
 .stat-link-widget {

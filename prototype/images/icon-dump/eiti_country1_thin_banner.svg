@@ -1,6 +1,6 @@
-<svg id="country1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+<svg id="country1thinbanner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
 <style type="text/css">
-	.st0{fill:none;stroke:#9DE1FD;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#85BE33;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
 <circle class="st0" cx="43.5" cy="14" r="10.6"/>
 <circle class="st0" cx="39.7" cy="11" r="2.3"/>
