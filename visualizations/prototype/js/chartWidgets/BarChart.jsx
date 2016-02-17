@@ -181,10 +181,12 @@ let BarChart = React.createClass({
                         this._innerHeight,
                         this._xScale,
                         this._yScale];
-        var colorDomain = this.props.legendData.map(function(item) {
-          return item.label;
-        });
-        colorScale = colorScale.domain(colorDomain);
+        if(this.props.legendData) {
+          var colorDomain = this.props.legendData.map(function(item) {
+            return item.label;
+          });
+          colorScale = colorScale.domain(colorDomain);          
+        }
 
         return (
                 <div>

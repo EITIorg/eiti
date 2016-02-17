@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0dc85c8b4ce2d00c1335"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b05bd0f6cc2029050cbd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -20879,10 +20879,12 @@
 	        var xScale = this._xScale;
 	        var yScale = this._yScale;
 
-	        var colorDomain = this.props.legendData.map(function (item) {
-	            return item.label;
-	        });
-	        colorScale = colorScale.domain(colorDomain);
+	        if (this.props.legendData) {
+	            var colorDomain = this.props.legendData.map(function (item) {
+	                return item.label;
+	            });
+	            colorScale = colorScale.domain(colorDomain);
+	        }
 
 	        return React.createElement(
 	            'div',
