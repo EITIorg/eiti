@@ -2,20 +2,40 @@
   "name": "disbursement",
   "children": [
         {
-          "name": "SUNAT",
-          "size":17274799781
-        },
-        { 
-          "name": "SUNAT/MEF",
-          "size": 2208787458
-        },
-        {
-          "name": "INGEMMET",
-          "size": 60940836
+          "name": "child1",
+          "children": [
+            {
+              "name": "SUNAT",
+              "size":17274799781
+            }
+          ]
         },
         {
-          "name": "Perupetro",
-          "size": 8229383759
+          "name": "child2",
+          "children": [
+            { 
+              "name": "SUNAT/MEF",
+              "size": 2208787458
+            }
+          ]
+        },
+        {
+          "name": "child3",
+          "children": [
+            {
+              "name": "INGEMMET",
+              "size": 60940836
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "Perupetro",
+              "size": 8229383759
+            }
+          ]
         }
-  ]
+    ]
 }

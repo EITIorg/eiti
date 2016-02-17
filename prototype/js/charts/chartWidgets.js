@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "43d4f0ed3dd2347bffda"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0dc85c8b4ce2d00c1335"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -21335,8 +21335,6 @@
 	    var _this = this;
 
 	    var props = this.props;
-	    //console.log(props.data);
-	    //var colorScale = colors.domain(props.data.)
 
 	    var textStyle = {
 	      'color': 'black',
@@ -24588,7 +24586,7 @@
 			});
 
 			node.append("title").text(function (d) {
-				return d.className + ": " + format(d.value);
+				return d.className + ": $" + format(d.value);
 			});
 
 			node.append("circle").attr("r", function (d) {
@@ -24729,7 +24727,7 @@
 
 	    var formatNumber = d3.format(",.0f"),
 	        format = function format(d) {
-	      return formatNumber(d) + " TWh";
+	      return "$" + formatNumber(d);
 	    },
 	        color = d3.scale.category20();
 
