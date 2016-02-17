@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d5472421cfb6348b30a2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "43d4f0ed3dd2347bffda"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -905,7 +905,7 @@
 		if (options.type == "Bar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -915,7 +915,6 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
@@ -925,7 +924,7 @@
 		} else if (options.type == "Pie") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -935,7 +934,6 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				})
@@ -943,18 +941,18 @@
 		} else if (options.type == "GroupedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(GroupedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass
 				}),
 				React.createElement(
 					'h4',
@@ -965,18 +963,18 @@
 		} else if (options.type == "StackedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(StackedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass
 				}),
 				React.createElement(
 					'h4',
@@ -987,13 +985,12 @@
 		} else if (options.type == "TreeMap") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(TreeMap, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -1006,14 +1003,13 @@
 		} else if (options.type == "BubbleChart") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(BubbleChart, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					diameter: options.diameter,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -1026,13 +1022,12 @@
 		} else if (options.type == "Sankey") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(Sankey, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
 					chartData: chartData
 				}),
@@ -20754,6 +20749,7 @@
 	        var onMouseEnter = _props.onMouseEnter;
 	        var onMouseLeave = _props.onMouseLeave;
 	        var groupedBars = _props.groupedBars;
+	        var colorByLabel = _props.colorByLabel;
 
 	        var bars = undefined;
 	        if (groupedBars) {
@@ -20775,13 +20771,14 @@
 	        } else {
 	            bars = data.map(function (stack) {
 	                return values(stack).map(function (e, index) {
+	                    var color = colorByLabel ? colorScale(label(stack)) : colorScale(x(e));
 	                    return React.createElement(Bar, {
 	                        key: label(stack) + '.' + index,
 	                        width: xScale.rangeBand(),
 	                        height: yScale(yScale.domain()[0]) - yScale(y(e)),
 	                        x: xScale(x(e)),
 	                        y: yScale(y0(e) + y(e)),
-	                        fill: colorScale(label(stack)),
+	                        fill: color,
 	                        data: e,
 	                        onMouseEnter: onMouseEnter,
 	                        onMouseLeave: onMouseLeave
@@ -20809,6 +20806,7 @@
 	            colorAccessor: function colorAccessor(d, idx) {
 	                return idx;
 	            },
+	            colorByLabel: true,
 	            legend: false,
 	            legendPosition: 'right',
 	            sideOffset: 400
@@ -20844,9 +20842,14 @@
 	        var props = this.props;
 
 	        if (props.legend) {
+	            var colorDomain = props.legendData.map(function (item) {
+	                return item.label;
+	            });
+	            var colorScale = props.colorScale.domain(colorDomain);
 	            return React.createElement(Legend, {
-	                colors: props.colors,
+	                colors: colorScale,
 	                colorAccessor: props.colorAccessor,
+	                legendClass: props.legendClass,
 	                data: props.legendData,
 	                legendPosition: props.legendPosition,
 	                margins: props.margin,
@@ -20868,12 +20871,18 @@
 	        var xAxis = _props2.xAxis;
 	        var yAxis = _props2.yAxis;
 	        var groupedBars = _props2.groupedBars;
+	        var colorByLabel = _props2.colorByLabel;
 	        var chartTitle = _props2.chartTitle;
 	        var data = this._data;
 	        var innerWidth = this._innerWidth;
 	        var innerHeight = this._innerHeight;
 	        var xScale = this._xScale;
 	        var yScale = this._yScale;
+
+	        var colorDomain = this.props.legendData.map(function (item) {
+	            return item.label;
+	        });
+	        colorScale = colorScale.domain(colorDomain);
 
 	        return React.createElement(
 	            'div',
@@ -20903,7 +20912,8 @@
 	                    x: x,
 	                    onMouseEnter: this.onMouseEnter,
 	                    onMouseLeave: this.onMouseLeave,
-	                    groupedBars: groupedBars
+	                    groupedBars: groupedBars,
+	                    colorByLabel: colorByLabel
 	                }),
 	                React.createElement(Axis, _extends({
 	                    className: "x axis",
@@ -21312,7 +21322,7 @@
 	      colorAccessor: function colorAccessor(d, idx) {
 	        return idx;
 	      },
-	      itemClassName: 'legend-item-active',
+	      legendClass: 'legend-item',
 	      text: '#000'
 	    };
 	  },
@@ -21325,6 +21335,8 @@
 	    var _this = this;
 
 	    var props = this.props;
+	    //console.log(props.data);
+	    //var colorScale = colors.domain(props.data.)
 
 	    var textStyle = {
 	      'color': 'black',
@@ -21339,7 +21351,7 @@
 	      var itemStyle = {
 	        'color': props.colors(series.label)
 	      };
-	      var itemClassName = series.active == true ? 'legend-item-active' : 'legend-item';
+	      var itemClassName = series.active == true ? props.legendClass + '-active' : props.legendClass;
 
 	      legendItems.push(React.createElement(
 	        'li',
@@ -23724,6 +23736,11 @@
 				chartData: [{
 					label: '',
 					values: [{ x: '', y: 0 }]
+				}],
+
+				rawData: [{
+					label: '',
+					values: [{ x: '', y: 0 }]
 				}]
 			};
 		},
@@ -23770,6 +23787,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
@@ -24182,6 +24200,11 @@
 					values: [{ x: '', y: 0 }]
 				}],
 
+				rawData: [{
+					label: '',
+					values: [{ x: '', y: 0 }]
+				}],
+
 				showLegend: false
 			};
 		},
@@ -24227,6 +24250,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,

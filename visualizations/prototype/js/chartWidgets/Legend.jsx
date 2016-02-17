@@ -24,7 +24,7 @@ module.exports = React.createClass({
       className:    'rd3-legend',
       colors:        d3.scale.category20(),
       colorAccessor: (d, idx) => idx,
-      itemClassName: 'legend-item-active',
+      legendClass: 'legend-item',
       text:          '#000'
     };
   },
@@ -50,7 +50,7 @@ module.exports = React.createClass({
       var itemStyle = {
         'color': props.colors(series.label)
       };
-      var itemClassName = series.active == true ? 'legend-item-active' : 'legend-item';
+      var itemClassName = series.active == true ? props.legendClass + '-active' : props.legendClass;
 
       legendItems.push(
         <li

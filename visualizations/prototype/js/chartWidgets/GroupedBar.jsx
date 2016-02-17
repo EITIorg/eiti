@@ -48,6 +48,11 @@ let GroupedBar = React.createClass ({
 	    	chartData: [{
 			    label: '',
 			    values: [{x: '', y: 0}]
+		    }],
+
+		    rawData: [{
+			    label: '',
+			    values: [{x: '', y: 0}]
 		    }]		  
 	    }
     },
@@ -97,6 +102,7 @@ let GroupedBar = React.createClass ({
 		    	chartTitle={this.props.chartTitle}
 	            data={this.state.chartData}
 	            legendData={this.state.rawData}
+	            legendClass={this.props.legendClass}
 	            width={this.props.width}
 	            height={this.props.height}
 	            margin={this.props.margin}

@@ -21,13 +21,12 @@ window.chartWidget.create = function(options, data) {
 	}
 	if(options.type == "Bar") {
 		render((
-			<div>
+			<div className={options.className}>
 				<h3>{options.name}</h3>
 				<BarChart
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 					xlabel = {options.xlabel}
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
@@ -37,13 +36,12 @@ window.chartWidget.create = function(options, data) {
 		), document.getElementById(options.container))
 	} else if(options.type == "Pie") {
 		render((
-			<div>
+			<div className={options.className}>
 				<h3>{options.name}</h3>
 				<PieChart
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 	           	/>
@@ -51,49 +49,48 @@ window.chartWidget.create = function(options, data) {
 		), document.getElementById(options.container))
 	} else if(options.type == "GroupedBar") {
 		render((
-			<div>
+			<div className={options.className}>
 				<GroupedBar
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 					xlabel = {options.xlabel}
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 	            	legend = {true}
+	            	legendClass = {options.legendClass}
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
 	} else if(options.type == "StackedBar") {
 		render((
-			<div>
+			<div className={options.className}>
 				<StackedBar
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 					xlabel = {options.xlabel}
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 	            	legend = {true}
+	            	legendClass = {options.legendClass}
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
 	} else if(options.type == "TreeMap") {
 		render((
-			<div>
+			<div className={options.className}>
 				<TreeMap
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 				/>
@@ -102,14 +99,13 @@ window.chartWidget.create = function(options, data) {
 		), document.getElementById(options.container))
 	} else if(options.type == "BubbleChart") {
 		render((
-			<div>
+			<div className={options.className}>
 				<BubbleChart
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					diameter = {options.diameter}
 					margin = {options.margin}
-					className = {options.className}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 				/>
@@ -118,13 +114,12 @@ window.chartWidget.create = function(options, data) {
 		), document.getElementById(options.container))
 	} else if(options.type == "Sankey") {
 		render((
-			<div>
+			<div className={options.className}>
 				<Sankey
 					chartTitle = {options.name}
 					width = {options.width}
 					height = {options.height}
 					margin = {options.margin}
-					className = {options.className}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
 				/>

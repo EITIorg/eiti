@@ -40,45 +40,47 @@ let DataSet = React.createClass({
              y0,
              onMouseEnter,
              onMouseLeave,
-             groupedBars} = this.props;
+             groupedBars,
+             colorByLabel} = this.props;
 
         let bars;
         if (groupedBars) {
-            bars = data.map((stack, serieIndex) => {
-                return values(stack).map((e, index) => {
-                    return (
-                        <Bar
-                            key={`${label(stack)}.${index}`}
-                            width={xScale.rangeBand() / data.length}
-                            height={yScale(yScale.domain()[0]) - yScale(y(e))}
-                            x={xScale(x(e)) + ((xScale.rangeBand() * serieIndex) / data.length)}
-                            y={yScale(y(e))}
-                            fill={colorScale(label(stack))}
-                            data={e}
-                            onMouseEnter={onMouseEnter}
-                            onMouseLeave={onMouseLeave}
-                            />
-                    );
-                });
+          bars = data.map((stack, serieIndex) => {
+            return values(stack).map((e, index) => {
+              return (
+                <Bar
+                  key={`${label(stack)}.${index}`}
+                  width={xScale.rangeBand() / data.length}
+                  height={yScale(yScale.domain()[0]) - yScale(y(e))}
+                  x={xScale(x(e)) + ((xScale.rangeBand() * serieIndex) / data.length)}
+                  y={yScale(y(e))}
+                  fill={colorScale(label(stack))}
+                  data={e}
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  />
+              );
             });
+          });
         } else {
-            bars = data.map(stack => {
-                return values(stack).map((e, index) => {
-                    return (
-                        <Bar
-                            key={`${label(stack)}.${index}`}
-                            width={xScale.rangeBand()}
-                            height={yScale(yScale.domain()[0]) - yScale(y(e))}
-                            x={xScale(x(e))}
-                            y={yScale(y0(e) + y(e))}
-                            fill={colorScale(label(stack))}
-                            data={e}
-                            onMouseEnter={onMouseEnter}
-                            onMouseLeave={onMouseLeave}
-                            />
-                    );
-                });
+          bars = data.map(stack => {
+            return values(stack).map((e, index) => {
+              let color = colorByLabel ? colorScale(label(stack)) : colorScale(x(e));
+              return (
+                <Bar
+                  key={`${label(stack)}.${index}`}
+                  width={xScale.rangeBand()}
+                  height={yScale(yScale.domain()[0]) - yScale(y(e))}
+                  x={xScale(x(e))}
+                  y={yScale(y0(e) + y(e))}
+                  fill={color}
+                  data={e}
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  />
+              );
             });
+          });
         }
 
         return (
@@ -100,6 +102,7 @@ let BarChart = React.createClass({
         return {
           colors:         d3.scale.category20(),
           colorAccessor:  (d, idx) => idx,
+          colorByLabel:   true,
           legend:         false,
           legendPosition: 'right',
           sideOffset:     400
@@ -135,11 +138,16 @@ let BarChart = React.createClass({
     _renderLegend() {
         var props = this.props;
             
-        if (props.legend) {      
+        if (props.legend) {    
+          var colorDomain = props.legendData.map(function(item) {
+            return item.label;
+          });
+          var colorScale = props.colorScale.domain(colorDomain);  
           return (
             <Legend
-              colors={props.colors}
+              colors={colorScale}
               colorAccessor={props.colorAccessor}
+              legendClass={props.legendClass}
               data={props.legendData}
               legendPosition={props.legendPosition}
               margins={props.margin}
@@ -161,6 +169,7 @@ let BarChart = React.createClass({
              xAxis,
              yAxis,
              groupedBars,
+             colorByLabel,
              chartTitle} = this.props;
 
         let [data,
@@ -172,6 +181,10 @@ let BarChart = React.createClass({
                         this._innerHeight,
                         this._xScale,
                         this._yScale];
+        var colorDomain = this.props.legendData.map(function(item) {
+          return item.label;
+        });
+        colorScale = colorScale.domain(colorDomain);
 
         return (
                 <div>
@@ -193,6 +206,7 @@ let BarChart = React.createClass({
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             groupedBars={groupedBars}
+            colorByLabel={colorByLabel}
                 />
 
                 <Axis
