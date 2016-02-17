@@ -1,38 +1,217 @@
 {
-  "nodes": [{
-    "name": "Royalty"
-  }, {
-    "name": "Corporate Income Tax"
-  }, {
-    "name": "Local Government"
-  }, {
-    "name": "Environmental Fund"
-  }, {
-    "name": "Federal Governement"
-  }],
-  "links": [{
+  "nodes": [
+  {
+    "name": "Hunt Oil Company of Perú L.L.C. Sucursal del Perú"
+  },
+  {
+    "name": "Petrobras Energía Perú S.A.A."
+  },
+  {
+    "name": "Pluspetrol Camisea S.A."
+  },
+  {
+    "name": "Pluspetrol Lote 56 S.A."
+  },
+  {
+    "name": "Pluspetrol Norte S.A."
+  },
+  {
+    "name": "SK Innovation Sucursal Peruana"
+  },
+  {
+    "name": "Sonatrach Perú Corporation S.A.C."
+  },
+  {
+    "name": "Sociedad Minera Cerro Verde S.A.A."
+  },
+  {
+    "name": "Compañía Minera Antamina S.A."
+  },
+  {
+    "name": "Southern Perú Copper Corporation"
+  },
+  {
+    "name": "Regalías de Hidrocarburos"
+  },
+  {
+    "name": "Impuesto a la renta"
+  },
+  {
+    "name": "Gravamen Especial a la Minería"
+  },
+  {
+    "name": "Derechos de Vigencia"
+  },
+  {
+    "name": "Impuesto Especial a la Minería"
+  },
+  {
+    "name": "Regalia Mineras"
+  },
+  {
+    "name": "Perupetro"
+  },
+  {
+    "name": "SUNAT"
+  },
+  {
+    "name": "SUNAT/MEF"
+  },
+  {
+    "name": "INGEMMET"
+  }
+],
+  "links": [
+  {
     "source": 0,
-    "target": 2,
-    "value": 300
-  }, {
+    "target": 11,
+    "value": 162893565.5
+  },
+  {
     "source": 0,
-    "target": 3,
-    "value": 100
-  }, {
-    "source": 0,
-    "target": 4,
-    "value": 100
-  }, {
+    "target": 10,
+    "value": 328715310
+  },
+  {
     "source": 1,
-    "target": 2,
-    "value": 200
-  }, {
+    "target": 11,
+    "value": 48114026.6
+  },
+  {
     "source": 1,
-    "target": 3,
-    "value": 50
-  }, {
-    "source": 1,
-    "target": 4,
-    "value": 150
-  }]
+    "target": 10,
+    "value": 196769472
+  },
+  {
+    "source": 2,
+    "target": 11,
+    "value": 88859759.1
+  },
+  {
+    "source": 2,
+    "target": 10,
+    "value": 170920261
+  },
+  {
+    "source": 3,
+    "target": 11,
+    "value": 79555682.2
+  },
+  {
+    "source": 3,
+    "target": 10,
+    "value": 155186196
+  },
+  {
+    "source": 4,
+    "target": 11,
+    "value": 46480008
+  },
+  {
+    "source": 4,
+    "target": 10,
+    "value": 193560052
+  },
+  {
+    "source": 5,
+    "target": 11,
+    "value": 121641777
+  },
+  {
+    "source": 5,
+    "target": 10,
+    "value": 236198730
+  },
+  {
+    "source": 6,
+    "target": 11,
+    "value": 191870817
+  },
+  {
+    "source": 6,
+    "target": 10,
+    "value": 130442584
+  },
+  {
+    "source": 7,
+    "target": 11,
+    "value": 261517152
+  },
+  {
+    "source": 7,
+    "target": 12,
+    "value": 65255454.94
+  },
+  {
+    "source": 7,
+    "target": 13,
+    "value": 448502
+  },
+  {
+    "source": 8,
+    "target": 11,
+    "value": 494088218
+  },
+  {
+    "source": 8,
+    "target": 12,
+    "value": 163416219.7
+  },
+  {
+    "source": 8,
+    "target": 13,
+    "value": 314565
+  },
+  {
+    "source": 9,
+    "target": 11,
+    "value": 305380179.5
+  },
+  {
+    "source": 9,
+    "target": 14,
+    "value": 39712156.19
+  },
+  {
+    "source": 9,
+    "target": 13,
+    "value": 602478
+  },
+  {
+    "source": 9,
+    "target": 15,
+    "value": 42562658.17
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 1411792605
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 1800401185
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 228671674.6
+  },
+  {
+    "source": 13,
+    "target": 19,
+    "value": 1365545
+  },
+  {
+    "source": 14,
+    "target": 18,
+    "value": 39712156.19
+  },
+  {
+    "source": 15,
+    "target": 18,
+    "value": 42562658.17
+  }
+]
+  
 }
