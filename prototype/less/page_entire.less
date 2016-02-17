@@ -528,7 +528,7 @@ h1{
 }
 .post-thumb-title {
   .transition-link();
-  bottom: @base-unit * 2;
+  bottom: @base-unit * 1;
   color: @text-inverse;
   left: @base-unit;
   position: absolute;
@@ -544,10 +544,14 @@ h1{
 }
 
 .post-thumb-large {
-  .transition-link(opacity, 1s, linear);
+  .transition-link(opacity, .5s, linear);
   height: @post-large-height;
   opacity: 1;
   width: @full-width;
+  .post-thumb-title {
+    font-size:30px;
+    text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
+  }
   &:hover {
     opacity: 0.8;
     .post-thumb-title {
@@ -564,6 +568,10 @@ h1{
   position: relative;
   img {
     width: 100%;
+  }
+  .post-thumb-title {
+    font-size:20px;
+    text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
   }
   &:hover {
     opacity: 0.8;
