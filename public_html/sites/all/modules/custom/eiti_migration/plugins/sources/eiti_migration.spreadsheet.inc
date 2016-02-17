@@ -18,6 +18,10 @@ define('EITI_SHEET_TYPE_ABOUT', 'about');
 define('EITI_SHEET_TYPE_CONTEXTUAL', 'context');
 define('EITI_SHEET_TYPE_REVENUES', 'revenues');
 
+// Parsing types.
+define('EITI_PARSING_STANDARD', 'standard');
+define('EITI_PARSING_COUNT', 'count');
+
 
 /**
  * This is a tweaked version, adjusted to multiple sheets, specifically for the
@@ -233,8 +237,28 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * Returns a count of all available source records.
    */
   public function computeCount() {
-    while ($this->getNextFile()) {
-      $this->parseFile();
+    // Because it's just count, we just fetch the file path, without loading it.
+    while ($this->getNextFile(FALSE)) {
+      // Because the count takes a LOT of time, we'll cache it.
+      $id = $this->getUniqueId('complex');
+      $cid = 'cache_migration:' . $id . ':' . $this->sourceType;
+      $data = cache_get($cid);
+
+      // If the cache is empty, we have to do the resource consuming loadSpreadsheet,
+      // and parse it with EITI_PARSING_COUNT parameter (which is 5-10% faster).
+      if (empty($data)) {
+        $this->loadSpreadsheet($this->currentFile);
+        $this->parseFile(EITI_PARSING_COUNT);
+        $data = array(
+          'total' => $this->migrateRowsInTotal,
+        );
+
+        // Let's put the $data together.
+        cache_set($cid, $data, 'cache', CACHE_TEMPORARY);
+      }
+      else {
+        $this->migrateRowsInTotal = $data->data['total'];
+      }
     }
     $this->unloadSpreadsheet();
     return $this->migrateRowsInTotal;
@@ -307,7 +331,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    *   Returns TRUE of we have switched to the next file and FALSE if we're out of files
    *   or if we have encountered some errors.
    */
-  protected function getNextFile() {
+  protected function getNextFile($full_load = TRUE) {
     // Unload whatever we're having.
     $this->unloadSpreadsheet();
 
@@ -329,11 +353,14 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         }
       }
     }
-
     // Now that we know what file we need, load it.
-    if ($this->loadSpreadsheet($path)) {
+    if ($full_load && $this->loadSpreadsheet($path)) {
       $this->resetPosition();
-
+      return TRUE;
+    }
+    if (!$full_load) {
+      // We need to do this, as it's usually done in the $this->loadSpreadsheet().
+      $this->currentFile = $path;
       return TRUE;
     }
     return FALSE;
@@ -452,20 +479,18 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * Small function that generates unique ID.
    * At this moment we take into account 3 things:
    *  - File Path.
-   *  (- File Version.)
-   *  (- Last Date it was Updated.)
+   *
+   * @param string $type
+   *  It can either be 'simple' (default) or 'complex'.
+   *
+   * @return bool|string
    */
-  protected function getUniqueId() {
-    $uniqueId = '';
-    if ($this->currentWorkbook) {
-      $uniqueArray[] = $this->currentFile;
-      // $uniqueArray[] = $this->currentReportVersion;
-      // $uniqueArray[] = $this->currentWorkbook->getProperties()->getModified();
-      if ($this->currentWorkbook) {
-        return md5(implode(':', $uniqueArray));
-      }
+  protected function getUniqueId($type = 'simple') {
+    $uniqueArray[] = $this->currentFile;
+    if ($type !== 'simple') {
+       $uniqueArray[] = filemtime($this->currentFile);
     }
-    return FALSE;
+    return md5(implode(':', $uniqueArray));
   }
 
   /**
@@ -484,8 +509,12 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
    * Main parsing function, it passes through the worksheet and returns the
    * so-called "Migration Rows" (arrays of data), that later is used for
    * mapping.
+   *
+   * @param string $parsing_type
+   *  String that described the way in which we want to parse the file.
+   *  It can either be EITI_PARSING_STANDARD or EITI_PARSING_COUNT.
    */
-  protected function parseFile() {
+  protected function parseFile($parsing_type = EITI_PARSING_STANDARD) {
     switch ($this->sourceType) {
       case EITI_SOURCE_SUMMARY_DATA:
         // Get the sheet.
@@ -494,61 +523,68 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         // If we have our sheet, by default set the count of Summary Data rows
         // to 1, as we have 1 summary data per file.
         if (!empty($aboutSheet)) {
-          // Now let's parse the file.
-          $highestRow = $aboutSheet->getHighestRow();
-          $highestColumn = $aboutSheet->getHighestColumn();
-          $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          if ($parsing_type == EITI_PARSING_STANDARD) {
+            // Now let's parse the file.
+            $highestRow = $aboutSheet->getHighestRow();
+            $highestColumn = $aboutSheet->getHighestColumn();
+            $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 
-          // Defaults.
-          $start_row = 4;
-          $start_column = 1;
+            // Defaults.
+            $start_row = 4;
+            $start_column = 1;
 
-          // Find the "Entry" (Adjusting defaults).
-          if ($position = $this->findPositionInSheet($aboutSheet, array('Entry'))) {
-            $start_row = $position['row'] + 1;
-            $start_column = $position['column'] - 2;
-          }
-
-          // Now let's walk through the right cells.
-          $migrationRow = array();
-          $lastRememberedGroup = '';
-          for ($row = $start_row; $row < $highestRow; $row++) {
-            $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
-            $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-            $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
-
-            // Before we do the lookup, let's make sure that the group is correct.
-            // If it's empty (or "add rows ..."), we use the previous group-value.
-            if ($groupCellValue == '' || stripos($groupCellValue, 'add rows')) {
-              $groupCellValue = $lastRememberedGroup;
-            }
-            else {
-              $lastRememberedGroup = $groupCellValue;
+            // Find the "Entry" (Adjusting defaults).
+            if ($position = $this->findPositionInSheet($aboutSheet, array('Entry'))) {
+              $start_row = $position['row'] + 1;
+              $start_column = $position['column'] - 2;
             }
 
-            // Now, finally, let's do the look-up and assign the value.
-            $field = $this->lookupField($groupCellValue, $subgroupCellValue);
-            if (!empty($valueCellValue)) {
-              $migrationRow[$field][] = $valueCellValue;
+            // Now let's walk through the right cells.
+            $migrationRow = array();
+            $lastRememberedGroup = '';
+            for ($row = $start_row; $row < $highestRow; $row++) {
+              $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+              $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
+
+              // Before we do the lookup, let's make sure that the group is correct.
+              // If it's empty (or "add rows ..."), we use the previous group-value.
+              if ($groupCellValue == '' || stripos($groupCellValue, 'add rows')) {
+                $groupCellValue = $lastRememberedGroup;
+              }
+              else {
+                $lastRememberedGroup = $groupCellValue;
+              }
+
+              // Now, finally, let's do the look-up and assign the value.
+              $field = $this->lookupField($groupCellValue, $subgroupCellValue);
+              if (!empty($valueCellValue)) {
+                $migrationRow[$field][] = $valueCellValue;
+              }
             }
+
+            // Normalize date values.
+            $dateFields = array('start_date', 'end_date', 'publish_date');
+            foreach ($dateFields as $dateField) {
+              // Screw it, it's just 1 value anyway for them.
+              $excelDate = $migrationRow[$dateField][0];
+              $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
+              $migrationRow[$dateField] = $phpDate;
+            }
+
+            // Create unique id.
+            $migrationRow['summary_id'] = $this->getUniqueId();
+            $migrationRow['file'] = $this->currentFile;
+            $this->migrateRows[] = $migrationRow;
+
+            $this->migrateRowsCountInFile = 1;
+            $this->migrateRowsInTotal++;
           }
-
-          // Normalize date values.
-          $dateFields = array('start_date', 'end_date', 'publish_date');
-          foreach ($dateFields as $dateField) {
-            // Screw it, it's just 1 value anyway for them.
-            $excelDate = $migrationRow[$dateField][0];
-            $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
-            $migrationRow[$dateField] = $phpDate;
+          elseif ($parsing_type == EITI_PARSING_COUNT) {
+            $this->migrateRows[] = array('counted');
+            $this->migrateRowsCountInFile = 1;
+            $this->migrateRowsInTotal++;
           }
-
-          // Create unique id.
-          $migrationRow['summary_id'] = $this->getUniqueId();
-          $migrationRow['file'] = $this->currentFile;
-          $this->migrateRows[] = $migrationRow;
-
-          $this->migrateRowsCountInFile = 1;
-          $this->migrateRowsInTotal++;
         }
         else {
           unset($this->migrateRowsCountInFile);
@@ -588,39 +624,57 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Now let's walk through the right cells.
           $lastRememberedGroup = '';
           for ($row = $start_row; $row < $highestRow; $row++) {
-            $migrationRow = array();
-            $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
-            $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-            $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
-            $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
-            $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
-            $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
+            if ($parsing_type == EITI_PARSING_STANDARD) {
+              $migrationRow = array();
+              $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+              $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
+              $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
+              $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
+              $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
 
-            // Before we do the lookup, let's make sure that the group is correct.
-            // If it's empty (or "add rows ..."), we use the previous group-value.
-            if ($groupCellValue == '' || (stripos($groupCellValue, 'modify entry') !== FALSE)
-              || (stripos($groupCellValue, 'add rows') !== FALSE)
-              || (stripos($groupCellValue, 'add/remove') !== FALSE)) {
-              $groupCellValue = $lastRememberedGroup;
+              // Before we do the lookup, let's make sure that the group is correct.
+              // If it's empty (or "add rows ..."), we use the previous group-value.
+              if ($groupCellValue == '' || (stripos($groupCellValue, 'modify entry') !== FALSE)
+                || (stripos($groupCellValue, 'add rows') !== FALSE)
+                || (stripos($groupCellValue, 'add/remove') !== FALSE)) {
+                $groupCellValue = $lastRememberedGroup;
+              }
+              else {
+                $lastRememberedGroup = $groupCellValue;
+              }
+
+              // In this case, we don't do any lookups, we just pass the values.
+              if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
+                $migrationRow['summary_id'] = $this->getUniqueId();
+                $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
+                $migrationRow['group'] = $groupCellValue;
+                $migrationRow['subgroup'] = $subgroupCellValue;
+                $migrationRow['entry'] = $valueCellValue;
+                $migrationRow['unit'] = $unitCellValue;
+                $migrationRow['source'] = $sourceCellValue;
+                $migrationRow['comment'] = $commentCellValue;
+                $migrationRow['file'] = $this->currentFile;
+
+                $this->migrateRows[] = $migrationRow;
+                $this->migrateRowsCountInFile++;
+              }
             }
-            else {
-              $lastRememberedGroup = $groupCellValue;
-            }
-
-            // In this case, we don't do any lookups, we just pass the values.
-            if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
-              $migrationRow['summary_id'] = $this->getUniqueId();
-              $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
-              $migrationRow['group'] = $groupCellValue;
-              $migrationRow['subgroup'] = $subgroupCellValue;
-              $migrationRow['entry'] = $valueCellValue;
-              $migrationRow['unit'] = $unitCellValue;
-              $migrationRow['source'] = $sourceCellValue;
-              $migrationRow['comment'] = $commentCellValue;
-              $migrationRow['file'] = $this->currentFile;
-
-              $this->migrateRows[] = $migrationRow;
-              $this->migrateRowsCountInFile++;
+            elseif ($parsing_type == EITI_PARSING_COUNT) {
+              $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+              if ($groupCellValue == '' || (stripos($groupCellValue, 'modify entry') !== FALSE)
+                || (stripos($groupCellValue, 'add rows') !== FALSE)
+                || (stripos($groupCellValue, 'add/remove') !== FALSE)) {
+                $groupCellValue = $lastRememberedGroup;
+              }
+              else {
+                $lastRememberedGroup = $groupCellValue;
+              }
+              if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
+                $this->migrateRows[] = array('counted');
+                $this->migrateRowsCountInFile++;
+              }
             }
           }
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
@@ -658,22 +712,31 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
           // Now let's walk through the right cells.
           for ($column = $start_column; $column < $highestColumnIndex; $column++) {
-            $migrationRow = array();
-            $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
-            $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getCalculatedValue());
-            $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getCalculatedValue());
+            if ($parsing_type == EITI_PARSING_STANDARD) {
+              $migrationRow = array();
+              $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
+              $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getCalculatedValue());
+              $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getCalculatedValue());
 
-            // In this case, we don't do any lookups, we just pass the values.
-            if (!empty($nameCellValue)) {
-              $migrationRow['summary_id'] = $this->getUniqueId();
-              $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
-              $migrationRow['company_name'] = $nameCellValue;
-              $migrationRow['company_id'] = $idCellValue;
-              $migrationRow['commodity'] = $commoditiesCellValue;
-              $migrationRow['file'] = $this->currentFile;
+              // In this case, we don't do any lookups, we just pass the values.
+              if (!empty($nameCellValue)) {
+                $migrationRow['summary_id'] = $this->getUniqueId();
+                $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
+                $migrationRow['company_name'] = $nameCellValue;
+                $migrationRow['company_id'] = $idCellValue;
+                $migrationRow['commodity'] = $commoditiesCellValue;
+                $migrationRow['file'] = $this->currentFile;
 
-              $this->migrateRows[] = $migrationRow;
-              $this->migrateRowsCountInFile++;
+                $this->migrateRows[] = $migrationRow;
+                $this->migrateRowsCountInFile++;
+              }
+            }
+            elseif ($parsing_type == EITI_PARSING_COUNT) {
+              $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
+              if (!empty($nameCellValue)) {
+                $this->migrateRows[] = array('counted');
+                $this->migrateRowsCountInFile++;
+              }
             }
           }
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
@@ -726,27 +789,37 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
           // Now let's walk through the right cells.
           for ($row = $start_row; $row < $highestRow; $row++) {
-            $migrationRow = array();
-            $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
-            $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
-            $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
-            $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
-            $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row)->getCalculatedValue());
+            if ($parsing_type == EITI_PARSING_STANDARD) {
+              $migrationRow = array();
+              $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+              $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
+              $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
+              $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row)->getCalculatedValue());
 
-            // In this case, we don't do any lookups, we just pass the values.
-            if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
-              $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
-              $migrationRow['summary_id'] = $this->getUniqueId();
-              $migrationRow['gfs_id'] = $GFSCodeCellValue;
-              $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
-              $migrationRow['revenue_stream'] = $revenueStreamCellValue;
-              $migrationRow['organization'] = $orgCellValue;
-              $migrationRow['revenue'] = $revenueCellValue ;
-              $migrationRow['file'] = $this->currentFile;
-              $migrationRow['currency'] = $currency;
+              // In this case, we don't do any lookups, we just pass the values.
+              if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+                $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
+                $migrationRow['summary_id'] = $this->getUniqueId();
+                $migrationRow['gfs_id'] = $GFSCodeCellValue;
+                $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
+                $migrationRow['revenue_stream'] = $revenueStreamCellValue;
+                $migrationRow['organization'] = $orgCellValue;
+                $migrationRow['revenue'] = $revenueCellValue ;
+                $migrationRow['file'] = $this->currentFile;
+                $migrationRow['currency'] = $currency;
 
-              $this->migrateRows[] = $migrationRow;
-              $this->migrateRowsCountInFile++;
+                $this->migrateRows[] = $migrationRow;
+                $this->migrateRowsCountInFile++;
+              }
+            }
+            elseif ($parsing_type == EITI_PARSING_COUNT) {
+              $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+              $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+              if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+                $this->migrateRows[] = array('counted');
+                $this->migrateRowsCountInFile++;
+              }
             }
           }
           $this->migrateRowsInTotal += $this->migrateRowsCountInFile;
@@ -802,26 +875,37 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Now let's walk through the right cells.
           for ($column = $companies_column; $column < $highestColumnIndex; $column++) {
             for ($row = $start_row; $row < $highestRow; $row++) {
-              $migrationRow = array();
-              $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
-              $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
-              $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
-              $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
+              if ($parsing_type == EITI_PARSING_STANDARD) {
+                $migrationRow = array();
+                $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+                $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+                $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
+                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
 
-              // In this case, we don't do any lookups, we just pass the values.
-              if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
-                $migrationRow['position_id'] = $this->getUniqueId() . ':' . $row . ':' . $column;
-                $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
-                $migrationRow['summary_id'] = $this->getUniqueId();
-                $migrationRow['gfs_id'] = $GFSCodeCellValue;
-                $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
-                $migrationRow['revenue_stream'] = $revenueStreamCellValue;
-                $migrationRow['revenue'] = $revenueCellValue ;
-                $migrationRow['file'] = $this->currentFile;
-                $migrationRow['currency'] = $currency;
+                // In this case, we don't do any lookups, we just pass the values.
+                if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
+                  $migrationRow['position_id'] = $this->getUniqueId() . ':' . $row . ':' . $column;
+                  $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
+                  $migrationRow['summary_id'] = $this->getUniqueId();
+                  $migrationRow['gfs_id'] = $GFSCodeCellValue;
+                  $migrationRow['gfs_status'] = $GFSCodeStatusCellValue;
+                  $migrationRow['revenue_stream'] = $revenueStreamCellValue;
+                  $migrationRow['revenue'] = $revenueCellValue ;
+                  $migrationRow['file'] = $this->currentFile;
+                  $migrationRow['currency'] = $currency;
 
-                $this->migrateRows[] = $migrationRow;
-                $this->migrateRowsCountInFile++;
+                  $this->migrateRows[] = $migrationRow;
+                  $this->migrateRowsCountInFile++;
+                }
+              }
+              elseif ($parsing_type == EITI_PARSING_COUNT) {
+                $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+                $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
+                if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
+                  $this->migrateRows[] = array('counted');
+                  $this->migrateRowsCountInFile++;
+                }
               }
             }
           }

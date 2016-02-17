@@ -467,6 +467,13 @@ class EITINewsAttachedFilesMigration extends DrupalFile7Migration {
 
     return $query;
   }
+
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
+  }
 }
 
 /**
@@ -526,6 +533,13 @@ class EITINewsUploadFilesMigration extends DrupalFile7Migration {
 
     return $query;
   }
+
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
+  }
 }
 
 /**
@@ -551,6 +565,13 @@ class EITIBlogUploadFilesMigration extends DrupalFile7Migration {
 
     return $query;
   }
+
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
+  }
 }
 
 /**
@@ -575,6 +596,13 @@ class EITIEventUploadFilesMigration extends DrupalFile7Migration {
     $query->innerJoin('node', 'n', "n.nid = fu.entity_id AND n.type = 'event'");
 
     return $query;
+  }
+
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
   }
 }
 

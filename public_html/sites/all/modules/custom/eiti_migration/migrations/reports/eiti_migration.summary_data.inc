@@ -97,9 +97,6 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       'path',
       'field_sd_indicator_values',
     ));
-
-    // Load the currencies.
-    $this->allCurrencies = currency_load_all();
   }
 
   /**
@@ -178,7 +175,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $currencyIso = 'currency:iso';
     if (isset($row->{$currencyIso})) {
       $row->{$currencyIso} = reset($row->{$currencyIso});
-      $row->{$currencyIso} = $this->normalizeValue($row->{$currencyIso});
+      $row->{$currencyIso} = $this->normalizeUnit($row->{$currencyIso});
       $match = NULL;
 
       // Try and fetch the 3 char currency.
