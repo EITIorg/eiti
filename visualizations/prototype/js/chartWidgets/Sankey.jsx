@@ -27,7 +27,7 @@ let DataSet = React.createClass({
         svg.selectAll("*").remove(); // clear nodes with state change
 
 		let formatNumber = d3.format(",.0f"),
-            format = function(d) { return formatNumber(d) + " TWh"; },
+            format = function(d) { return "$" + formatNumber(d); },
             color = d3.scale.category20();
 
         let sankey = d3.sankey()
