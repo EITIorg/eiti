@@ -117,48 +117,53 @@
     <h3 class="content-section-title">
       See how natural resources are managed and used in your country
     </h3>
+  </div>
+  <!-- end: country into text widget -->
+</div>
+<!-- end: country intro text widget -->
 
-    <!-- start: thin links banner -->
-    <div class="">
+<div>
+  <!-- start: thin links banner -->
+  <div class="stat-links-banner">
+    <div class="inner-container">
+
       <!-- start: link  -->
       <div class="banner-stat-widget">
-        <a class="banner-stat-link inverse" href="#">
-          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_whoweare.svg"></span>
+        <a class="banner-stat-link inverse" href="https://eiti.org/about" target="_blank">
+          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_whoweare_thin_banner.svg"></span>
           who we are</a>
       </div>
       <!-- end: link  -->
 
       <!-- start: link  -->
       <div class="banner-stat-widget">
-        <a class="banner-stat-link inverse" href="">
-          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_howwework.svg"></span>
+        <a class="banner-stat-link inverse" href="https://eiti.org/eiti/principles" target="_blank">
+          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_howwework_thin_banner.svg"></span>
           how we work</a>
       </div>
       <!-- end: link  -->
 
       <!-- start: link  -->
       <div class="banner-stat-widget">
-        <a class="banner-stat-link inverse" href="">
-          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_country1.svg"></span>
+        <a class="banner-stat-link inverse" href="map.html">
+          <span class="banner-stat-icon"><img src="images/icon-dump/eiti_country1_thin_banner.svg"></span>
           the eiti map</a>
       </div>
       <!-- end: link  -->
 
     </div>
-    <!-- end: thin links banner -->
-
   </div>
-  <!-- end: country into text widget -->
-
+  <!-- end: thin links banner -->
 </div>
-<!-- end: country intro text widget -->
 
-<!-- start: map container -->
-<div class="section map-container" >
-  <div id="map1" style="height:700px;;display:block;margin:auto;"></div>
 
-</div>
-<!-- end: map container -->
+      <!-- start: map container -->
+      <div class="section map-container" >
+        <div id="map1" style="height:700px;;display:block;margin:auto;"></div>
+      </div>
+      <!-- end: map container -->
+
+
 
 <!--start: blockquote banner  -->
 <div class="banner-quote homepage">
@@ -219,12 +224,30 @@ Mineral production is the process of extracting ore or minerals from the ground.
   </a>
 </div>
 
-  <div class="section-chart-container">
-      <div id="chart_production" style="height:500px;width:1100px;display:block;margin:auto;"></div>
-  </div>
   </div>
 </div>
 <!-- end: PRODUCTION section -->
+
+
+<!-- start: oil chart -->
+<!-- start: map section -->
+<div class="content-section">
+  <div class="inner-general-container">
+    <h3 class="section-title">Production by Country (Oil, 2013)</div>
+    <div class="content-col-one-third">
+      <img class="graph-image" src="images/homepage-images/oil-barrels.png" alt="oil barrels">
+    </div>
+    <div class="content-col-two-thirds">
+      <div class="section-chart-container">
+          <div id="chart_production" style="height:500px;width:1100px;display:block;margin:auto;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end: map section -->
+<!-- end: oil chart -->
+
+
 <!-- start: PRODUCTION section -->
 <div class="content-section margin-bottom">
   <div class="inner-container">
@@ -344,8 +367,8 @@ Mineral production is the process of extracting ore or minerals from the ground.
     });
     chartWidget.create({
         type: "Bar",
-        name: "Production by Country (Oil, 2013)",
-        width: 880,
+        name: "",
+        width: 640,
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "",
