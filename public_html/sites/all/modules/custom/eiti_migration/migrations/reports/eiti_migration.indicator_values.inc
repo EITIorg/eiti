@@ -93,16 +93,29 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
       return FALSE;
     }
 
+    // We'll need this a bit later for normalization.
+    $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    $summary_data = entity_load_single('summary_data', $summary_data_id);
+    $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    $rate_to_usd = $summary_data_emw->currency_rate->value();
+
     // Let's try and find the group and subgroup (indicator).
 
     // If we need, we first find the group (but we don't really need that).
     // $group_id = $this->findBestMatch($row->group, $this->groupIndicators);
+
+    // Let's check for aliases..
+    $row->subgroup = $this->normalizeIndicator($row->subgroup);
 
     // Now let's handle the subgroup (that's what we definitely need).
     $all_indicators = $this->boolIndicators + $this->numericIndicators + $this->textIndicators + $this->enumIndicators;
     if ($indicator_id = $this->findBestMatch($row->subgroup, $all_indicators)) {
       $row->subgroup = $indicator_id;
       $indicator = $all_indicators[$indicator_id];
+
+      $row->value_unit = $this->normalizeUnit($row->unit);
+      $row->original_value_numeric = $row->entry;
+      $row->original_value_unit = $this->normalizeUnit($row->unit);
 
       // Now let's handle the other values.
       switch ($indicator->type) {
@@ -119,25 +132,33 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
               return FALSE;
             }
             else {
-              $value = NULL;
-              $row->value_numeric = $value;
+              // $value = NULL;
+              // $row->value_numeric = $value;
+              $msg = t('Indicator !name - has an empty value. Skipping the item.<br/>File: !file', array(
+                '!value' => drupal_placeholder($row->entry),
+                '!name' => '<strong>' . $indicator->name . '</strong>',
+                '!file' => $row->file,
+              ));
+              $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+              return FALSE;
             }
           }
           else {
-            $row->value_numeric = $value;
+            // Transform the value and save it.
+            $row->value_numeric = $this->normalizeValue($value, $row->value_unit, $rate_to_usd);
           }
           break;
 
         case 'boolean':
           $value = $this->getBooleanListValue($row->entry);
-
           if ($value == NULL) {
-            $msg = t('Indicator !name - Boolean expected, this value given instead (treating as NULL): !value<br/>File: !file', array(
+            $msg = t('Indicator !name - Boolean expected, this value given instead (treating as NULL): !value.<br />Skipping the item.<br/>File: !file', array(
               '!value' => drupal_placeholder($row->entry),
               '!name' => '<strong>' . $indicator->name . '</strong>',
               '!file' => $row->file,
             ));
-            $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+            $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+            return FALSE;
           }
           $row->value_boolean = $value;
           break;
@@ -150,19 +171,17 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
           $value = $this->getBooleanListValue($row->entry);
 
           if ($value == NULL) {
-            $msg = t('Indicator !name - Enum expected, this value given instead: !value<br/>File: !file', array(
+            $msg = t('Indicator !name - Enum expected, this value given instead (treating as NULL): !value<br/>Skipping item.<br/>File: !file', array(
               '!value' => drupal_placeholder($row->entry),
               '!name' => '<strong>' . $indicator->name . '</strong>',
               '!file' => $row->file,
             ));
-            $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+            $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+            return FALSE;
           }
           $row->value_enum = $value;
           break;
       }
-      $row->value_unit = $this->normalizeValue($row->unit);
-      $row->original_value_numeric = $row->entry;
-      $row->original_value_unit = $this->normalizeValue($row->unit);
     }
     else {
       $msg = t('Indicator not found! Given indicator: !name<br/>File: !file', array(

@@ -141,6 +141,13 @@ class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
 
     return $query;
   }
+
+  public function complete($entity, $row) {
+    if ($entity->type == 'report') {
+      $entity->type = 'document';
+      file_save($entity);
+    }
+  }
 }
 
 /**

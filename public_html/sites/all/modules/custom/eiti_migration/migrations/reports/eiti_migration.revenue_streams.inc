@@ -60,6 +60,9 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
    */
   public function __construct($arguments) {
     // We need to define some dummy sources that we'll populate later.
+    $this->sourceFields['original_revenue'] = t('Original Numeric Revenue Value.');
+    $this->sourceFields['original_currency'] = t('Original Currency');
+
     parent::__construct($arguments);
 
     // Prepare the Source.
@@ -99,8 +102,8 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
     $this->addFieldMapping('organisation_id', 'organization');
     $this->addFieldMapping('revenue', 'revenue');
     $this->addFieldMapping('currency', 'currency');
-    $this->addFieldMapping('original_revenue', 'revenue');
-    $this->addFieldMapping('original_currency', 'currency');
+    $this->addFieldMapping('original_revenue', 'original_revenue');
+    $this->addFieldMapping('original_currency', 'original_currency');
 
     // Store all the codes here.
     $this->codes = eitientity_gfs_code_get_by_code('gfs_code');
@@ -141,13 +144,14 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
       return FALSE;
     }
 
-    // We want to skip the not applicable and not included values.
+    // We don't want to skip the not applicable and not included values. Just inform.
     if ((strtolower($row->gfs_status) == 'not applicable') || (strtolower($row->gfs_status) == 'not included')) {
-      $msg = t('Revenue stream !name - is not applicable or not included, therefore, skipped.<br/>File: !file', array(
+      $msg = t('Revenue stream !name - is not applicable or not included.<br/>Skipped this item.<br/>File: !file', array(
         '!name' => '<strong>' . $code->code . ' (' . $code->name . ') ' . '</strong>',
         '!file' => $row->file,
       ));
-      $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+      $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+      return FALSE;
     }
 
     // Let's go on with the status.
@@ -191,6 +195,19 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
       $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
       return FALSE;
     }
+
+    // Normalize the currency to USD (but keep the originals in the original fields).
+    $row->original_revenue = $row->revenue;
+    $row->original_currency = $row->currency;
+
+    $multiplier = $this->getCurrencyMultiplier($row->currency);
+    $row->revenue *= $multiplier;
+    if ($row->currency !== 'USD') {
+      $row->currency = 'USD';
+      $rate = $summary_data_emw->currency_rate->value();
+      $row->revenue = round($row->revenue / $rate);
+    }
+
   }
 
   /**
@@ -295,6 +312,9 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
    * Overrides the default constructor.
    */
   public function __construct($arguments) {
+    $this->sourceFields['original_revenue'] = t('Original Numeric Revenue Value.');
+    $this->sourceFields['original_currency'] = t('Original Currency');
+
     parent::__construct($arguments);
 
     // Prepare the Source.
@@ -333,8 +353,8 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     $this->addFieldMapping('organisation_id', 'column_id')->sourceMigration(array('EITICompaniesMigration'));
     $this->addFieldMapping('revenue', 'revenue');
     $this->addFieldMapping('currency', 'currency');
-    $this->addFieldMapping('original_revenue', 'revenue');
-    $this->addFieldMapping('original_currency', 'currency');
+    $this->addFieldMapping('original_revenue', 'original_revenue');
+    $this->addFieldMapping('original_currency', 'original_currency');
 
     // Store all the codes here.
     $this->codes = eitientity_gfs_code_get_by_code('gfs_code');
@@ -348,7 +368,6 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
     }
-
     // Let's fetch the summary data so we can fetch additional data from it.
     if (!empty($this->summary_data_emws) && in_array($row->summary_id, array_keys($this->summary_data_emws))) {
       $summary_data_emw = $this->summary_data_emws[$row->summary_id];
@@ -375,13 +394,14 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
       return FALSE;
     }
 
-    // We want to skip the not applicable and not included values.
+    // We don't want to skip the not applicable and not included values. Just inform.
     if ((strtolower($row->gfs_status) == 'not applicable') || (strtolower($row->gfs_status) == 'not included')) {
-      $msg = t('Revenue stream !name - is not applicable or not included, therefore, skipped.<br/>File: !file', array(
+      $msg = t('Revenue stream !name - is not applicable or not included.<br/>Skipped this item.<br/>File: !file', array(
         '!name' => '<strong>' . $code->code . ' (' . $code->name . ') ' . '</strong>',
         '!file' => $row->file,
       ));
-      $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+      $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+      return FALSE;
     }
 
     // Let's go on with the status.
@@ -402,6 +422,17 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
       ));
       $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
       return FALSE;
+    }
+
+    // Normalize the currency to USD (but keep the originals in the original fields).
+    $row->original_revenue = $row->revenue;
+    $row->original_currency = $row->currency;
+    $multiplier = $this->getCurrencyMultiplier($row->currency);
+    $row->revenue *= $multiplier;
+    if ($row->currency !== 'USD') {
+      $row->currency = 'USD';
+      $rate = $summary_data_emw->currency_rate->value();
+      $row->revenue = round($row->revenue / $rate);
     }
   }
 
