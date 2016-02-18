@@ -41,14 +41,15 @@ window.mapWidget.createMapPage = function(options) {
 
       var html = '<div>' +
         '<table class="country_info">' + 
-        '  <thead><tr style="background-color:#f4f4f4"><th colspan="3"><img src="img/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
-        '  <tbody>' + '    <tr><td colspan="2">GDP: ' + formatnumber(country.GDP) + ' </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + 
-        '    <tr><td colspan="3">&nbsp;<strong>Country Commodity Total</strong><hr style="margin:2px;border-color:#77cde4"/></td></tr>' + 
-        '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil</td>' + 
+        '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="img/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
+        '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + 
+        '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + 
+        '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + 
         '        <td><strong>' + country.refined + '</strong><img src="images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Refined Oil</td>' + 
-        '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' + 
+        '        </tr>' + 
         '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + 
-        '        <td></td><td></td></tr>' + '    <tr><td colspan="3"><hr style="margin:2px;border-color:#77cde4"/><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + 
+        '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' 
+        + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + 
         '  </tbody>' + 
         '</table>' + 
         '</div>';

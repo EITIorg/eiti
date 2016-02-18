@@ -471,7 +471,7 @@ export var countryStatus = [
     "Name": "Colombia",
     "ISO2": "CO",
     "ISO3": "COL",
-    "EITI_Status": 4,
+    "EITI_Status": 2,
     "Pop": 42321000,
     "GDP": 380063000000,
     "oil": "#N/A",
