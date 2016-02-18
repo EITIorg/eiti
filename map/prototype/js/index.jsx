@@ -15,7 +15,7 @@ import { helpers } from './helpers.js' ;
 window.mapWidget.createHomePage = function(options) {
 
 	var map = (
-			<Map center={options.position} zoom={options.zoom} maxZoom={options.maxZoom} minZoom={options.minZoom} >
+			<Map center={options.position} zoom={options.zoom} maxZoom={options.maxZoom} minZoom={options.minZoom} scrollWheelZoom={false}>
 				<TileLayer url='' onLeafletLoad={helpers.addLegend}/>
 				<GeoJson data={countriesData} onEachFeature={helpers.onEachFeature} style={helpers.style}>
 				</GeoJson>

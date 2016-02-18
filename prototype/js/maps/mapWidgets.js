@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "db13e7bc0d880e4b511c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8358e0dd2aea30e817f3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -927,7 +927,7 @@
 
 	  var map = _react2.default.createElement(
 	    _reactLeaflet.Map,
-	    { center: options.position, zoom: options.zoom, maxZoom: options.maxZoom, minZoom: options.minZoom },
+	    { center: options.position, zoom: options.zoom, maxZoom: options.maxZoom, minZoom: options.minZoom, scrollWheelZoom: false },
 	    _react2.default.createElement(_reactLeaflet.TileLayer, { url: '', onLeafletLoad: _helpers.helpers.addLegend }),
 	    _react2.default.createElement(_reactLeaflet.GeoJson, { data: _countries.countriesData, onEachFeature: _helpers.helpers.onEachFeature, style: _helpers.helpers.style })
 	  );
