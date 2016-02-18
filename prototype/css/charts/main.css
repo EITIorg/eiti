@@ -547,7 +547,10 @@ rect.parent,
     }
 }
 
+/*
+  Styles added for the bubble chart elements
 
+*/
 .link {
   fill: none;
   stroke: #000;
@@ -557,11 +560,14 @@ rect.parent,
 .link:hover {
   stroke-opacity: .3;
 }
+
 .node text {
   pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
-  font-size:9pt;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size:11pt;
+  font-weight: 600;
 }
+
 .node rect {
   cursor: move;
   fill-opacity: .9;
