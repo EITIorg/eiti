@@ -1,0 +1,73 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,300');
+
+    .mainMap {
+        width: 400px;
+        height: 500px;
+    }
+    .leaflet-container {
+        background: #fff;
+        border:1px solid #dddddd;
+        font-family: 'Open Sans', serif;
+    }
+
+    .legend {
+      text-align: left;
+      line-height: 18px;
+      color: #555;
+      width: 320px;
+    }
+    .legend i {
+      width: 10px;
+      height: 10px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+      margin-bottom: 15px;
+      margin-top: 4px;
+    }
+
+    .country_info TH {
+      padding:10px 10px 10px 10px;
+
+    }
+
+    .country_info TD {
+      padding:5px 5px 5px 5px;
+
+    }
+    .country_info TR {
+      margin:2px 5px 2px 5px;
+
+    }
+
+    .leaflet-popup-content {
+      padding:5px;
+      margin:0;
+    }
+
+    .leaflet-popup-content hr{
+      background: #eeeeee;
+      border: none;
+      display: block;
+      height: 2px;
+      margin-top:4px;
+      margin-bottom:4px;
+      width 100%;
+    }
+
+    .leaflet-popup-content th.commodity-col {
+      border:1px solid #f00;
+    }
+
+.leaflet-popup-content a:hover{
+    text-decoration: none;
+}
+
+    .leaflet-popup-content-wrapper {
+        padding: 1px;
+        text-align: left;
+        border-radius: 0px;
+    }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  box-shadow: 0 3px 14px rgba(0,0,0,0.15);
+}
