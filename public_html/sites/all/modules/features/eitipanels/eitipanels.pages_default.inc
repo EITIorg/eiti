@@ -16,7 +16,10 @@ function eitipanels_default_page_manager_pages() {
   $page->admin_title = 'Articles';
   $page->admin_description = '';
   $page->path = 'news-events';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -71,7 +74,10 @@ function eitipanels_default_page_manager_pages() {
   $page->admin_title = 'Countries';
   $page->admin_description = 'A panel page which has the countries map.';
   $page->path = 'countries';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -184,7 +190,10 @@ function eitipanels_default_page_manager_pages() {
   $page->admin_title = 'Resources';
   $page->admin_description = 'Resources like Documents (so far) live here.';
   $page->path = 'resources';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
