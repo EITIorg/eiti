@@ -206,6 +206,13 @@ h1{
   border-bottom: 1px solid @divider-grey;
   color: @theme-blue;
   font-weight: normal;
+  overflow: hidden;
+  padding-bottom:10px;
+  h3 {
+    float: left;
+    width: 80%;
+    margin:0;
+  }
 }
 
 .title-icon {
@@ -595,6 +602,19 @@ h1{
   text-transform: uppercase;
 }
 
+.info-list {
+  list-style: none;
+  list-style-image: url('../images/icon-dump/list-bullet.png');
+
+  li {
+    font-size: 15px;
+    a {
+      display:block;
+    }
+  }
+
+}
+
 
 //  thematic page
 
@@ -773,4 +793,14 @@ h1{
   margin-bottom: @general-margin-space * 2;
   opacity: 0.9;
   width: 50px;
+}
+
+.export {
+  .transition-link(opacity, .5s, linear);
+  float: right;
+  opacity: 1;
+  width: 20px;
+  &:hover {
+    opacity: 0.7;
+  }
 }

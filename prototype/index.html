@@ -212,6 +212,9 @@
     <div class="fancy-section-title">
       <img class="title-icon" src="images/icon-dump/eiti_taxallocation.svg" alt="natural resources icon">
       <h3>Production</h3>
+      <div class="export">
+        <img src="images/icon-dump/eiti_export.svg">
+      </div>
     </div>
     <!-- end: section title -->
 
@@ -256,6 +259,9 @@ Mineral production is the process of extracting ore or minerals from the ground.
     <div class="fancy-section-title">
       <img class="title-icon" src="images/icon-dump/eiti_bo3.svg" alt="natural resources icon">
       <h3>Beneficial Ownership</h3>
+      <div class="export">
+        <img src="images/icon-dump/eiti_export.svg">
+      </div>
     </div>
     <!-- end: section title -->
     <p class="wysiwyg-paragraph">
@@ -441,8 +447,8 @@ var checkCollision = function(r1, r2) {
   console.log("current");
   console.log(r2.left, r2.right);
   console.log(r2.top, r2.bottom);*/
-   return !(r2.left-10 > r1.right || 
-           r2.right < r1.left || 
+   return !(r2.left-10 > r1.right ||
+           r2.right < r1.left ||
            r2.top > r1.bottom ||
            r2.bottom < r1.top);
 };
