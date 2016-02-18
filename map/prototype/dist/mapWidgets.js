@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "128516d27a74f09cda67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "47dcf72ff28151f8f95f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -950,7 +950,7 @@
 	    });
 	    if (country === undefined || country.EITI_Status == 4) return;
 
-	    var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="img/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + '        <td><strong>' + country.refined + '</strong><img src="images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Refined Oil</td>' + '        </tr>' + '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + '  </tbody>' + '</table>' + '</div>';
+	    var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + '        <td><strong>' + country.refined + '</strong><img src="images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Refined Oil</td>' + '        </tr>' + '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + '  </tbody>' + '</table>' + '</div>';
 
 	    var popup = L.popup({ autoPan: true, closeButton: false, maxWidth: 400 }).setLatLng(e.latlng).setContent(html) //'<strong>' + layer.feature.properties.name + '</strong>');
 	    .openOn(layer._map);
@@ -29830,15 +29830,15 @@
 	        var map = e.target._map;
 
 	        info.onAdd = function (map) {
-	            if (this._div === undefined) {
-	                this._div = L.DomUtil.create('div', 'info legend');
+	            if (map.options.legend === undefined) {
+	                map.options.legend = L.DomUtil.create('div', 'info legend');
+	                this.update();
 	            }
-	            this.update();
-	            return this._div;
+	            return map.options.legend;
 	        };
 
 	        info.update = function (props) {
-	            this._div.innerHTML = '<i style="background:#65c32d"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>' + '<i style="background:#42abd8"></i> <strong>EITI Compliant Country</strong><br/>confirmed to have met all EITI requirements <br/>' + '<i style="background:#ff6600"></i> <strong>Suspended</strong><br/>Compliant/Candidate status is temporarily suspended <br/>' + '<i style="background:#dddddd"></i> Other <br/>';
+	            map.options.legend.innerHTML = '<i style="background:#65c32d"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>' + '<i style="background:#42abd8"></i> <strong>EITI Compliant Country</strong><br/>confirmed to have met all EITI requirements <br/>' + '<i style="background:#ff6600"></i> <strong>Suspended</strong><br/>Compliant/Candidate status is temporarily suspended <br/>' + '<i style="background:#dddddd"></i> Other <br/>';
 	        };
 
 	        info.addTo(map);

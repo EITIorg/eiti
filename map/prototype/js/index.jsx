@@ -41,7 +41,7 @@ window.mapWidget.createMapPage = function(options) {
 
       var html = '<div>' +
         '<table class="country_info">' + 
-        '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="img/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
+        '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
         '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + 
         '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + 
         '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + 

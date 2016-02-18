@@ -59,19 +59,19 @@ export var helpers = {
         });
     },
     addLegend: function(e) {
-    var info = L.control({position: 'bottomleft'});
+        var info = L.control({position: 'bottomleft'});
         var map = e.target._map;
 
         info.onAdd = function (map) {
-            if(this._div === undefined) {
-        this._div = L.DomUtil.create('div', 'info legend');
-      }
-            this.update();
-            return this._div;
+            if(map.options.legend === undefined) {
+                map.options.legend = L.DomUtil.create('div', 'info legend');
+                this.update();
+            }
+            return map.options.legend;
         };
 
         info.update = function (props) {
-            this._div.innerHTML = ('<i style="background:#65c32d"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>') + 
+            map.options.legend.innerHTML = ('<i style="background:#65c32d"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>') + 
                 ('<i style="background:#42abd8"></i> <strong>EITI Compliant Country</strong><br/>confirmed to have met all EITI requirements <br/>') + 
                 ('<i style="background:#ff6600"></i> <strong>Suspended</strong><br/>Compliant/Candidate status is temporarily suspended <br/>') + 
                 ('<i style="background:#dddddd"></i> Other <br/>');
