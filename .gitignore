@@ -44,3 +44,5 @@
 # Ignore development things for Map
 /map/prototype/node_modules
 
+
+prototype/images/icon-dump/.DS_Store

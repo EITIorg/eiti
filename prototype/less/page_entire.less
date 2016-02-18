@@ -710,7 +710,7 @@ h1{
   height: 150px;
   left: 0;
   right: 0;
-  margin-top: 0;
+  margin-top: -1px;
   position: absolute;
   width: 100%;
   z-index:3;
@@ -734,15 +734,18 @@ h1{
   .list-unstyled();
   list-style: none;
   display: table;
+  margin-left: -14px;
+  margin-top: @general-margin-space * 2.2;
   width: 100%;
   li {
-    display: table-cell;
+    border: 1px solid @map-options-border;
     float: left;
     display: block;
-    border: 1px solid @map-panel-border;
     height: 100px;
+    line-height: 110%;
+    margin-left: -1px;
     overflow: hidden;
-    padding: 30px 10px 30px 30px;
+    padding: 30px 5px 30px 20px;
     width: 20%;
     &:hover {
       background: @theme-blue;
@@ -759,14 +762,14 @@ h1{
 .option-label {
   color: @theme-green;
   display: block;
-  margin-top: 10px;
+  font-size: 13px;
+  margin-top: @general-margin-space;
   text-transform: uppercase;
 }
 .option-icon{
   float: left;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  margin-right: @general-margin-space;
+  margin-bottom: @general-margin-space * 2;
   opacity: 0.9;
   width: 50px;
-
 }
