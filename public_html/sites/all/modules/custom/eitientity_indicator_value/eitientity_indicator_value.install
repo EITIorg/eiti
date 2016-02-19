@@ -19,10 +19,8 @@ function eitientity_indicator_value_schema() {
       ),
       'indicator_id' => array(
         'description' => 'The indicator id for this entity.',
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
+        'type' => 'int',
+        'not null' => FALSE,
       ),
       'value_boolean' => array(
         'description' => 'The boolean value for this entity.',
@@ -99,4 +97,16 @@ function eitientity_indicator_value_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Convert {eiti_indicator_value}.indicator_id to integer.
+ */
+function eitientity_indicator_value_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The indicator id for this entity.',
+    'type' => 'int',
+    'not null' => TRUE,
+  );
+  db_change_field('eiti_indicator_value', 'indicator_id', 'indicator_id', $field_schema);
 }
