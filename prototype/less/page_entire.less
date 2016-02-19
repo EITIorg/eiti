@@ -78,6 +78,9 @@ h1{
 .banner-ph {
   background:@country-banner-background url('../images/country-banners/country-banner-ph.png') no-repeat right top;
 }
+.banner-gh {
+  background:@country-banner-background url('../images/country-banners/country-banner-gh.png') no-repeat right top;
+}
 
 // country stat thin banner
 .country-stat-banner{
@@ -108,7 +111,7 @@ h1{
 .layout-country-content-wrapper {
   clear: both;
   overflow: hidden;
-  padding:  0 0 @base-unit * 3 0;
+  padding: 0;
 }
 
 .layout-content-wrapper {
@@ -118,7 +121,6 @@ h1{
 }
 .content-section {
   overflow: hidden;
-  padding: @base-unit 0;
 
   &.margin-bottom{
     margin-bottom: @base-unit * 3;
@@ -163,6 +165,10 @@ h1{
   }
   &.ph {
     background: url("../images/quote-banners/ph-quote-banner.png") no-repeat;
+    background-size: 100%;
+  }
+  &.gh {
+    background: url("../images/quote-banners/gh-quote-banner.png") no-repeat;
     background-size: 100%;
   }
   &.homepage {
@@ -331,6 +337,9 @@ h1{
   float: left;
   margin-right: @base-unit;
   width: @full-width / 4;
+  &.no-title {
+    margin-top:60px;
+  }
 }
 .contact-widget-title{
   color: @theme-blue;
