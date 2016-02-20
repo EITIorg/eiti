@@ -23,7 +23,7 @@
 
 <div class="main-header-wrapper">
   <header role="banner" class="main-header clearfix">
-    <div class="main-header-inner container-inline clearfix">
+    <div class="main-header-inner clearfix">
       <?php print theme('header_identity'); ?>
       <?php print theme('header_items'); ?>
     </div>
