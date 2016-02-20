@@ -12,6 +12,7 @@
 define('HELPERTHEME_SVG_ICON_NAME_PREFIX', 'helpertheme_svg_icon_');
 
 include_once 'helpertheme.extra.inc';
+include_once 'helpertheme.forms.inc';
 include_once 'helpertheme.themeoverrides.inc';
 
 /**
@@ -303,10 +304,14 @@ function helpertheme_preprocess_page(&$variables) {
  */
 function helpertheme_theme() {
   return array(
+    'html_container' => array(
+      'file' => 'helpertheme.theme.inc',
+      'render element' => 'element',
+    ),
     'svg_sprite' => array(
       'file' => 'helpertheme.theme.inc',
     ),
-    'header_logo' => array(
+    'header_identity' => array(
       'file' => 'helpertheme.theme.inc',
     ),
     'header_items' => array(
@@ -318,7 +323,22 @@ function helpertheme_theme() {
     'footer_items' => array(
       'file' => 'helpertheme.theme.inc',
     ),
+    'main_footer' => array(
+      'file' => 'helpertheme.theme.inc',
+      'template' => 'main-footer',
+    ),
   );
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function helpertheme_element_info() {
+  $types['html_container'] = array(
+    '#theme_wrappers' => array('html_container'),
+    '#process' => array('form_process_container'),
+  );
+  return $types;
 }
 
 /**
@@ -381,6 +401,8 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
       //break;
     default:
       $available_icons += array(
+        'search',
+
         'facebook',
         'linkedin',
         'twitter',

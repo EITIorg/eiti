@@ -52,6 +52,7 @@ function _helpertheme_prepare_tree($item, $is_sublevel = FALSE) {
   $link = $item['link']['localized_options'];
   $link['href'] = $item['link']['href'];
   $link['title'] = $item['link']['title'];
+  $link['mlid'] = $item['link']['mlid'];
 
   // Add classes in order to ease the styling of links.
   $link['attributes']['class'][] = 'link';

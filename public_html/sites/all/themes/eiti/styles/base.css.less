@@ -4,33 +4,28 @@
  */
 
 html {
-  // Always show page scroll-bar to prevent side-movement when hovering over
-  // items that are extending their height.
-  overflow-y: scroll;
-
   // Set the base font style.
   color: @clnormal;
   font-family: @fstack_default;
 }
 
-.main-content {
-  margin-bottom: 1em;
-}
-
 /**
  * Set the base style for anchor tags.
  */
-//a {
-//  .link-color(@clanchor, @clanchor__active, @clanchor__visited, @clanchor__hover);
-//  .transition(color, 400ms, ease-in);
-//
-//  font-weight: bold;
-//  text-decoration: none;
-//  &:focus,
-//  &:hover {
-//    text-decoration: none;
-//  }
-//}
+a {
+  .link-color(@clanchor, @clanchor__active, @clanchor__visited, @clanchor__hover);
+  .transition(color, 400ms, ease-in);
+
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+
+  .field & {
+    font-weight: bold;
+  }
+}
 
 /**
  * Define border style.
@@ -86,8 +81,8 @@ hr {
   z-index: 10;
 
   a {
-    background: @clactive;
-    color: @clmain;
+    background: #0093cf;
+    color: #f5822a;
     display: block;
     padding: 1em;
     text-decoration: none;
@@ -152,22 +147,6 @@ hr {
       width: auto;
     }
   }
-}
-
-/**
- * TODO: Make web fonts in all browsers.
- */
-@font-face {
-  font-family: 'Veneer Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Veneer Regular'), local('VeneerRegular'), url(~"@{theme_path}fonts/veneer-webfont.ttf") format('ttf');
-}
-@font-face {
-  font-family: 'Veneer Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Veneer Regular'), local('VeneerRegular'), url(~"@{theme_path}fonts/veneer-webfont.woff") format('woff');
 }
 
 @import './lib/custom-responsive.less';

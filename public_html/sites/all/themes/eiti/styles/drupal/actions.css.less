@@ -27,12 +27,12 @@
       margin-left: 0.5em;
     }
     a {
-      background-color: @clmain;
+      background-color: @clmain__header;
       border-radius: 0.5em;
-      border: @border_width solid @clcontent__separator;
+      border: @border_width solid @clmain__separator;
       line-height: 1.5;
       text-shadow: 0 @border_width 0 white;
-      box-shadow: 1px 1px 3px @clcontent__separator;
+      box-shadow: 1px 1px 3px @clmain__separator;
     }
     a:hover,
     li.active a {
@@ -43,7 +43,7 @@
   .secondary {
     // .clearfix-mixin();
     background-color: white;
-    border: @border_width solid @clcontent__separator;
+    border: @border_width solid @clmain__separator;
     border-radius: 0.5em;
     float: right;
     font-size: 0.9em;
@@ -63,7 +63,7 @@
       border-radius: 0.2em;
       padding: 0.1em 0.5em;
       &.active {
-        background-color: @clmain;
+        background-color: @clmain__header;
       }
     }
   }

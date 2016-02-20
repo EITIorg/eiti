@@ -20,38 +20,31 @@ function helpertheme_color_palette() {
   );
 
   $colors['primary']['clmain'] = array(
-    '#value' => '#f0f0f0',
-    '#desc' => 'page background',
-    '#variants' => array(
-      'clmain__alt' => array(
-        '#value' => '#eceaea',
-        '#desc' => 'alternative background color',
-      ),
-    ),
-  );
-
-  $colors['primary']['clcontent'] = array(
     '#value' => '#ffffff',
-    '#desc' => 'content background',
+    '#desc' => 'page content background color',
     '#variants' => array(
-      'clcontent__separator' => array(
+      'clmain__header' => array(
+        '#value' => '#f0f0f0',
+        '#desc' => 'alternative content background color',
+      ),
+      'clmain__separator' => array(
         '#value' => '#d5d5d5',
         '#desc' => 'border header and content',
-      ),
-      'clcontent__featured' => array(
-        '#value' => '#c4c4c4',
-        '#desc' => 'featured blocks',
       ),
     ),
   );
 
   $colors['primary']['clnormal'] = array(
-    '#value' => '#555555',
-    '#desc' => 'normal text',
+    '#value' => '#676767',
+    '#desc' => 'default text color',
     '#variants' => array(
       'clnormal__dark' => array(
-        '#value' => 'darken(@clnormal, 40%)',
+        '#value' => 'darken(@clnormal, 30%)',
         '#desc' => 'important text',
+      ),
+      'clnormal__alt' => array(
+        '#value' => '#57ba47',
+        '#desc' => 'alternative color for footer text',
       ),
     ),
   );
@@ -82,10 +75,25 @@ function helpertheme_color_palette() {
     '#weight' => 20,
   );
 
-  $colors['secondary']['clpassive'] = array(
-    '#value' => '#7c7c7c',
-    '#desc' => 'passive items',
+  $colors['secondary']['claltmain'] = array(
+    '#value' => '#002c47',
+    '#desc' => 'alternative content background',
     '#variants' => array(
+    ),
+  );
+
+  $colors['secondary']['claltnormal'] = array(
+    '#value' => '#9de1fd',
+    '#desc' => 'alternative text color',
+    '#variants' => array(
+      'claltnormal__light' => array(
+        '#value' => '#ffffff',
+        '#desc' => 'alternative important text text',
+      ),
+      'claltnormal__alt' => array(
+        '#value' => '#57ba47',
+        '#desc' => 'alternative color for footer text',
+      ),
     ),
   );
 
@@ -94,12 +102,11 @@ function helpertheme_color_palette() {
     '#desc' => 'highlighted items',
     '#variants' => array(
       'clactive__alt' => array(
-        '#value' => '#f69c00',
-        '#desc' => 'alternative color',
+        '#value' => '#f5822a',
+        '#desc' => 'alternative color for highlighted items',
       ),
     ),
   );
-
 
   // HTML tag specific colors.
   $colors['htmltag'] = array(
@@ -108,11 +115,11 @@ function helpertheme_color_palette() {
   );
 
   $colors['htmltag']['clanchor'] = array(
-    '#value' => '#f5822a',
-    '#desc' => 'anchor tags',
+    '#value' => '#0093cf',
+    '#desc' => 'color for anchor tags',
     '#variants' => array(
       'clanchor__hover' => array(
-        '#value' => 'darken(@clanchor, 15%)',
+        '#value' => '@clactive__alt',
         '#desc' => 'focused anchor tags',
       ),
       'clanchor__visited' => array(
@@ -122,10 +129,6 @@ function helpertheme_color_palette() {
       'clanchor__active' => array(
         '#value' => 'darken(@clanchor, 25%)',
         '#desc' => 'active anchor tags',
-      ),
-      'clanchor__alt' => array(
-        '#value' => '#0074bd',
-        '#desc' => 'alternative anchor tags',
       ),
     ),
   );

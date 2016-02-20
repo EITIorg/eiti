@@ -61,6 +61,7 @@ function helpergeneric_settings_form($form) {
     '#type' => 'fieldset',
     '#title' => t('Site details'),
   );
+
   $form['site_information']['site_name'] = array(
     '#type' => 'textfield',
     '#title' => t('Site name'),
@@ -68,18 +69,47 @@ function helpergeneric_settings_form($form) {
     '#default_value' => variable_get('site_name', 'Drupal'),
     '#required' => TRUE
   );
-   $form['site_information']['site_slogan'] = array(
-     '#type' => 'textfield',
-     '#title' => t('Slogan'),
-     '#default_value' => variable_get('site_slogan', ''),
-     '#description' => t("How this is used depends on your site's theme."),
-   );
+
+  $form['site_information']['site_slogan'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Slogan'),
+    '#default_value' => variable_get('site_slogan', ''),
+    '#description' => t('This is not used anywhere.'),
+    '#disabled' => TRUE,
+  );
+
   $form['site_information']['site_mail'] = array(
     '#type' => 'textfield',
     '#title' => t('E-mail address'),
     '#default_value' => variable_get('site_mail', ini_get('sendmail_from')),
     '#description' => t("The <em>From</em> address in automated e-mails sent during registration and new password requests, and other notifications. (Use an address ending in your site's domain to help prevent this e-mail being flagged as spam.)"),
     '#required' => TRUE,
+  );
+
+  $form['footer_details'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Footer details'),
+  );
+
+  $form['footer_details']['site_footer_slogan'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Footer Slogan'),
+    '#default_value' => variable_get('site_footer_slogan', ''),
+    '#description' => t('This slogan is shown next to the site log in the page footer.'),
+  );
+
+  $form['footer_details']['site_footer_contact'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Footer Contact Information'),
+    '#default_value' => variable_get('site_footer_contact', ''),
+    '#description' => t('This contact information is shown in the page footer.'),
+  );
+
+  $form['footer_details']['site_footer_legal'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Footer Legal Information'),
+    '#default_value' => variable_get('site_footer_legal', ''),
+    '#description' => t('This legal information is shown in the page footer.'),
   );
 
   return system_settings_form($form);

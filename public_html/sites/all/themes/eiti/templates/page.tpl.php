@@ -20,16 +20,18 @@
  */
 ?>
 
-<header role="banner" class="main-header clearfix">
-  <div class="main-header-inner clearfix">
-    <div class="burger-toggle"></div>
-    <?php print theme('header_logo'); ?>
-    <?php print theme('header_items'); ?>
-  </div>
-</header>
 
-<div class="main-content-wrapper clearfix">
-  <section role="main" id="main-content" class="main-content">
+<div class="main-header-wrapper">
+  <header role="banner" class="main-header clearfix">
+    <div class="main-header-inner container-inline clearfix">
+      <?php print theme('header_identity'); ?>
+      <?php print theme('header_items'); ?>
+    </div>
+  </header>
+</div>
+
+<div class="main-content-wrapper">
+  <section role="main" id="main-content" class="main-content clearfix">
     <div class="main-content-inner clearfix">
       <?php print render($browser_warnings); ?>
 
@@ -66,9 +68,5 @@
 </div>
 
 <?php if (arg(0) != 'admin'): ?>
-  <footer role="contentinfo" class="main-footer">
-    <div class="main-footer-inner clearfix">
-      <?php print theme('footer_items'); ?>
-    </div>
-  </footer>
+<div class="main-footer-wrapper"><?php print theme('main_footer'); ?></div>
 <?php endif; ?>

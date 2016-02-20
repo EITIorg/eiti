@@ -24,7 +24,7 @@ stylesheets[all][] = styles/reset.css.less
 
 ; Stylesheets.
 stylesheets[all][] = styles/main.css.less
-stylesheets[all][] = styles/menu.css.less
+stylesheets[all][] = styles/header-footer.css.less
 stylesheets[all][] = styles/other.css.less
 stylesheets[all][] = styles/listings.css.less
 stylesheets[all][] = styles/layout.css.less

@@ -1,10 +1,19 @@
 
 html {
-  background-color: @clmain;
+  // Footer background color is used in order for the footer color to fill the bottom of short pages.
+  background-color: @claltmain;
+
+  // Always show page scroll-bar to prevent side-movement when hovering over
+  // items that are extending their height.
+  overflow-y: scroll;
+}
+
+.main-header-wrapper {
+  background-color: @clmain__header;
 }
 
 .main-content-wrapper {
-  background-color: @clcontent;
+  background-color: @clmain;
 }
 
 .maintenance-page {

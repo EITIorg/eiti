@@ -21,10 +21,7 @@ function eiti_menu_tree__main_menu__sublevel(array $variables) {
 /**
  * Implements theme_menu_link() for main_menu.
  */
-function eiti_menu_link__main_menu(array $variables) {
-  // Use drupal static cache so that it can be cleared from external functions.
-  $top_level_nav = &drupal_static('eiti_menu_link__main_menu', array());
-
+function eiti_menu_link__styled_menu(array $variables) {
   // Remove the 'leaf' class.
   if (in_array('leaf', $variables['element']['#attributes']['class'])) {
     $variables['element']['#attributes']['class'] = array_diff($variables['element']['#attributes']['class'], array('leaf'));
@@ -119,10 +116,28 @@ function __eiti_menu_link__level(array &$variables, $level = NULL) {
     $output .= '<div class="navigation-sublevel clearfix">' . $sub_menu . '</div>';
   }
 
+  // Get the svg icon for this menu link.
+  $svgicon = '';
+  $mlid = $element['#original_link']['mlid'];
+  $selected_icon = variable_get(HELPERTHEME_SVG_ICON_NAME_PREFIX . $mlid, '');
+  if (!empty($selected_icon)) {
+    $svgicon = helpertheme_get_svg_icons($selected_icon, array('width' => '1.5em', 'height' => '1.5em')) . ' ';
+  }
+
   // Render the menu link.
-  $link_title = '<span class="text">' . check_plain($element['#title']) . '</span>';
+  $link_title = $svgicon . '<span class="text">' . check_plain($element['#title']) . '</span>';
   $link = l($link_title, $element['#href'], array_merge_recursive($element['#localized_options'], array('html' => TRUE)));
 
   $tag = 'li';
   return "<$tag" . drupal_attributes($element['#attributes']) . '>' . $link . $output . "</$tag>\n";
+}
+
+
+/**
+ * Returns HTML for a set of links.
+ *
+ * @see theme_links().
+ */
+function eiti_links__enhanced($variables) {
+  return _helpertheme_links__enhanced($variables);
 }
