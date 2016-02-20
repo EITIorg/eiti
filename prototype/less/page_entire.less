@@ -58,6 +58,9 @@ h1{
   margin-top:70px;
   img {
     width: 30%;
+    &.square-logo {
+      width: 148px;
+    }
   }
 }
 
@@ -81,6 +84,10 @@ h1{
 .banner-gh {
   background:@country-banner-background url('../images/country-banners/country-banner-gh.png') no-repeat right top;
 }
+.banner-mn {
+  background:@country-banner-background url('../images/country-banners/country-banner-mn.png') no-repeat right top;
+}
+
 
 // country stat thin banner
 .country-stat-banner{
@@ -155,6 +162,14 @@ h1{
   font-weight: bold;
 }
 
+.content-list {
+  color: @theme-grey;
+  font-size: @default-text;
+   li {
+     margin-bottom: 4px;
+   }
+}
+
 // quote banner
 .banner-quote {
   padding: @base-unit * 6 0;
@@ -169,6 +184,10 @@ h1{
   }
   &.gh {
     background: url("../images/quote-banners/gh-quote-banner.png") no-repeat;
+    background-size: 100%;
+  }
+  &.mn {
+    background: url("../images/quote-banners/mn-quote-banner.png") no-repeat;
     background-size: 100%;
   }
   &.homepage {
