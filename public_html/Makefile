@@ -5,8 +5,7 @@
 
 # Avoid conflicts with files of the same name
 # @see: http://www.gnu.org/savannah-checkouts/gnu/make/manual/html_node/Phony-Targets.html
-all : update install prepare protect clean destroy cc cf fm offline online
-.PHONY : all
+.PHONY : update install prepare protect clean destroy cc cf fm offline online
 
 # The default target, if no target argument is provided to `make`.
 # Update an environment with the latest changes from code.
@@ -46,8 +45,8 @@ install:
 	@drush update-scripts-run --run-all --yes
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
-	@echo 'Securing the site settings.'
-	@chmod a-w sites/default/settings*.php sites/default
+	@#@echo 'Securing the site settings.'
+	@#@chmod a-w sites/default/settings*.php sites/default
 	@echo ''
 	@echo 'Run `drush uli` for a one time login link for UID1.'
 	@echo 'Or use eitiUser/eitiUser for credentials!'
