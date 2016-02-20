@@ -96,9 +96,18 @@
   }
 }
 
+.footer-column {
+  margin: 1em 0;
+}
+.xMediumOnly() {
+  .footer-column:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
 .footer-identity {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   .footer-logo {
     vertical-align: bottom;
   }
@@ -109,11 +118,18 @@
     font-weight: lighter;
   }
 }
+.xSmallOnly() {
+  .footer-identity {
+    .footer-slogan {
+      margin-top: 1em;
+    }
+  }
+}
 
 .xMediumAndUp() {
   .footer-identity {
-    padding-top: 2em;
-    padding-bottom: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
     .footer-slogan {
       display: inline;
       margin-left: 1em;
