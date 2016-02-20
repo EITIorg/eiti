@@ -31,6 +31,7 @@ window.chartWidget.create = function(options, data) {
 	            	ylabel = {options.ylabel}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	processor = {options.processor}
 	           	/>
 	        </div>
 		), document.getElementById(options.container))
@@ -44,6 +45,7 @@ window.chartWidget.create = function(options, data) {
 					margin = {options.margin}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	processor = {options.processor}
 	           	/>
 	        </div>
 		), document.getElementById(options.container))
@@ -61,6 +63,7 @@ window.chartWidget.create = function(options, data) {
 	            	chartData = {chartData}
 	            	legend = {true}
 	            	legendClass = {options.legendClass}
+	            	processor = {options.processor}
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
@@ -79,6 +82,7 @@ window.chartWidget.create = function(options, data) {
 	            	chartData = {chartData}
 	            	legend = {true}
 	            	legendClass = {options.legendClass}
+	            	processor = {options.processor}
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
@@ -93,6 +97,7 @@ window.chartWidget.create = function(options, data) {
 					margin = {options.margin}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	processor = {options.processor}
 				/>
 				<h4 className={'chartDescription'}>{options.description}</h4>
 			</div>
@@ -108,6 +113,7 @@ window.chartWidget.create = function(options, data) {
 					margin = {options.margin}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	processor = {options.processor}
 				/>
 				<h4 className={'chartDescription'}>{options.description}</h4>
 			</div>
@@ -122,6 +128,7 @@ window.chartWidget.create = function(options, data) {
 					margin = {options.margin}
 	            	dataURL = {dataURL}
 	            	chartData = {chartData}
+	            	processor = {options.processor}
 				/>
 				<h4 className={'chartDescription'}>{options.description}</h4>
 			</div>

@@ -49,7 +49,11 @@
 				width: 600,
 				height: 300,
 				margin: {top: 1, right: 1, bottom: 6, left: 1},
-	            container: "sankey"
+	            container: "sankey",
+	            processor: function(input) {
+	            	console.log(input);
+					return input;
+	            }
 			},
 			'data/viz10.json');
 			chartWidget.create({

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b05bd0f6cc2029050cbd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3c94d07c9391a487af94"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -918,7 +918,8 @@
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				})
 			), document.getElementById(options.container));
 		} else if (options.type == "Pie") {
@@ -935,7 +936,8 @@
 					height: options.height,
 					margin: options.margin,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				})
 			), document.getElementById(options.container));
 		} else if (options.type == "GroupedBar") {
@@ -952,7 +954,8 @@
 					dataURL: dataURL,
 					chartData: chartData,
 					legend: true,
-					legendClass: options.legendClass
+					legendClass: options.legendClass,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -974,7 +977,8 @@
 					dataURL: dataURL,
 					chartData: chartData,
 					legend: true,
-					legendClass: options.legendClass
+					legendClass: options.legendClass,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -992,7 +996,8 @@
 					height: options.height,
 					margin: options.margin,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -1011,7 +1016,8 @@
 					diameter: options.diameter,
 					margin: options.margin,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -1029,7 +1035,8 @@
 					height: options.height,
 					margin: options.margin,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -23365,7 +23372,12 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -23761,12 +23773,15 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							data = _this.props.processor(data);
+						}
 						var classData = data.map(function (item) {
 							var newItem = item;
 							newItem['active'] = true;
 							return newItem;
 						});
-						_this.setState({ rawData: classData, chartData: data });
+						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -24225,6 +24240,9 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							data = _this.props.processor(data);
+						}
 						var classData = data.map(function (item) {
 							var newItem = item;
 							newItem['active'] = true;
@@ -24485,7 +24503,12 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -24652,7 +24675,12 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -24827,7 +24855,12 @@
 	      req.onreadystatechange = function () {
 	        if (req.readyState == 4 && req.status == 200) {
 	          var data = JSON.parse(req.responseText);
-	          _this.setState({ chartData: data });
+	          if (_this.props.processor) {
+	            var processedData = _this.props.processor(data);
+	            _this.setState({ chartData: processedData });
+	          } else {
+	            _this.setState({ chartData: data });
+	          }
 	        }
 	      };
 	      req.open("GET", this.props.dataURL, true);

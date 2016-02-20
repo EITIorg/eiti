@@ -28,7 +28,12 @@ let ExtendedPie = React.createClass ({
 			req.onreadystatechange = function() {
 			    if (req.readyState == 4 && req.status == 200) {
 			    	var data = JSON.parse(req.responseText);
-			    	_this.setState({chartData: data});
+			    	if(_this.props.processor) {
+		               var processedData = _this.props.processor(data);
+			    	  _this.setState({chartData: processedData});
+		            } else {
+		              _this.setState({chartData: data});
+		            }
 			    }
 			  }
 			req.open("GET", this.props.dataURL, true);

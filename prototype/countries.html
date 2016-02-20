@@ -818,7 +818,11 @@ EITI Reports</a></li>
         height: 600,
         diameter: 600,
         margin: {top: 20, right: 0, bottom: 0, left: 0},
-        container: "bubble"
+        container: "bubble",
+        processor: function(input) {
+          console.log(input);
+          return input;
+        }
       },
       'data/disbursed_revenue_PERU.json');
 
@@ -828,7 +832,7 @@ EITI Reports</a></li>
         width: 800,
         height: 300,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
-              container: "sankey"
+        container: "sankey"
       },
       'data/sankey.json');
 

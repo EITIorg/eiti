@@ -76,6 +76,9 @@ let StackedBar = React.createClass ({
 			req.onreadystatechange = function() {
 			    if (req.readyState == 4 && req.status == 200) {
 			    	var data = JSON.parse(req.responseText);
+			    	if(_this.props.processor) {
+		               data = _this.props.processor(data);
+		            } 
 			    	var classData = data.map(function(item) {
 			    		var newItem = item;
 			    		newItem['active'] = true;
@@ -83,7 +86,7 @@ let StackedBar = React.createClass ({
 			    	});
 			    	_this.setState({rawData: classData, chartData: data, showLegend: true});
 			    }
-			  }
+			}
 			req.open("GET", this.props.dataURL, true);
 			req.send();
 		}
