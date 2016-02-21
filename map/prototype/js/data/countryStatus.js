@@ -10,7 +10,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Albania",
@@ -23,7 +23,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Algeria",
@@ -36,7 +36,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Andorra",
@@ -49,7 +49,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Angola",
@@ -62,7 +62,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Antigua and Barbuda",
@@ -75,7 +75,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Argentina",
@@ -88,7 +88,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Armenia",
@@ -101,7 +101,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Australia",
@@ -114,7 +114,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Austria",
@@ -127,7 +127,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Azerbaijan",
@@ -140,7 +140,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bahamas, The",
@@ -153,7 +153,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bahrain",
@@ -166,7 +166,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bangladesh",
@@ -179,7 +179,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Barbados",
@@ -192,7 +192,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Belarus",
@@ -205,7 +205,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Belgium",
@@ -218,7 +218,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Belize",
@@ -231,7 +231,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Benin",
@@ -244,7 +244,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bhutan",
@@ -257,7 +257,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bolivia",
@@ -270,7 +270,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bosnia and Herzegovina",
@@ -283,7 +283,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Botswana",
@@ -296,7 +296,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Brazil",
@@ -309,7 +309,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Brunei",
@@ -322,7 +322,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Bulgaria",
@@ -335,7 +335,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Burkina Faso",
@@ -348,7 +348,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Burundi",
@@ -361,7 +361,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cambodia",
@@ -374,7 +374,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cameroon",
@@ -387,7 +387,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Canada",
@@ -400,7 +400,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cape Verde",
@@ -413,7 +413,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Central African Republic",
@@ -426,7 +426,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Chad",
@@ -439,7 +439,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Chile",
@@ -452,7 +452,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "China, People's Republic of",
@@ -465,7 +465,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Colombia",
@@ -478,7 +478,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Comoros",
@@ -491,7 +491,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Congo, (Congo Ã‚â€“ Kinshasa)",
@@ -504,7 +504,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Congo, (Congo Ã‚â€“ Brazzaville)",
@@ -517,7 +517,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Costa Rica",
@@ -530,7 +530,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cote d'Ivoire (Ivory Coast)",
@@ -543,7 +543,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Croatia",
@@ -556,7 +556,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cuba",
@@ -569,7 +569,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Cyprus",
@@ -582,7 +582,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Czech Republic",
@@ -595,7 +595,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Denmark",
@@ -608,7 +608,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Djibouti",
@@ -621,7 +621,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Dominica",
@@ -634,7 +634,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Dominican Republic",
@@ -647,7 +647,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Ecuador",
@@ -660,7 +660,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Egypt",
@@ -673,7 +673,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "El Salvador",
@@ -686,7 +686,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Equatorial Guinea",
@@ -699,7 +699,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Eritrea",
@@ -712,7 +712,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Estonia",
@@ -725,7 +725,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Ethiopia",
@@ -738,7 +738,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Fiji",
@@ -751,7 +751,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Finland",
@@ -764,7 +764,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "France",
@@ -777,7 +777,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Gabon",
@@ -790,7 +790,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Gambia, The",
@@ -803,7 +803,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Georgia",
@@ -816,7 +816,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Germany",
@@ -829,7 +829,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Ghana",
@@ -842,7 +842,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Greece",
@@ -855,7 +855,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Grenada",
@@ -868,7 +868,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Guatemala",
@@ -881,7 +881,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Guinea",
@@ -894,7 +894,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Guinea-Bissau",
@@ -907,7 +907,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Guyana",
@@ -920,7 +920,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Haiti",
@@ -933,7 +933,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Honduras",
@@ -946,7 +946,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Hungary",
@@ -959,7 +959,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Iceland",
@@ -972,7 +972,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "India",
@@ -985,7 +985,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Indonesia",
@@ -998,7 +998,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Iran",
@@ -1011,7 +1011,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Iraq",
@@ -1024,7 +1024,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Ireland",
@@ -1037,7 +1037,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Israel",
@@ -1050,7 +1050,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Italy",
@@ -1063,7 +1063,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Jamaica",
@@ -1076,7 +1076,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Japan",
@@ -1089,7 +1089,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Jordan",
@@ -1102,7 +1102,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Kazakhstan",
@@ -1115,7 +1115,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Kenya",
@@ -1128,7 +1128,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Kiribati",
@@ -1141,7 +1141,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Korea, North",
@@ -1154,7 +1154,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Korea, South",
@@ -1167,7 +1167,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Kuwait",
@@ -1180,7 +1180,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Kyrgyzstan",
@@ -1193,7 +1193,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Laos",
@@ -1206,7 +1206,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Latvia",
@@ -1219,7 +1219,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Lebanon",
@@ -1232,7 +1232,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Lesotho",
@@ -1245,7 +1245,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Liberia",
@@ -1258,7 +1258,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Libya",
@@ -1271,7 +1271,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Liechtenstein",
@@ -1284,7 +1284,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Lithuania",
@@ -1297,7 +1297,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Luxembourg",
@@ -1310,7 +1310,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Macedonia",
@@ -1323,7 +1323,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Madagascar",
@@ -1336,7 +1336,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Malawi",
@@ -1349,7 +1349,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Malaysia",
@@ -1362,7 +1362,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Maldives",
@@ -1375,7 +1375,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mali",
@@ -1388,7 +1388,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Malta",
@@ -1401,7 +1401,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Marshall Islands",
@@ -1414,7 +1414,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mauritania",
@@ -1427,7 +1427,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mauritius",
@@ -1440,7 +1440,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mexico",
@@ -1453,7 +1453,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Micronesia",
@@ -1466,7 +1466,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Moldova",
@@ -1479,7 +1479,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Monaco",
@@ -1492,7 +1492,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mongolia",
@@ -1505,7 +1505,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Montenegro",
@@ -1518,7 +1518,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Morocco",
@@ -1531,7 +1531,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Mozambique",
@@ -1544,7 +1544,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Myanmar (Burma)",
@@ -1557,7 +1557,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Namibia",
@@ -1570,7 +1570,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Nauru",
@@ -1583,7 +1583,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Nepal",
@@ -1596,7 +1596,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Netherlands",
@@ -1609,7 +1609,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "New Zealand",
@@ -1622,7 +1622,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Nicaragua",
@@ -1635,7 +1635,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Niger",
@@ -1648,7 +1648,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Nigeria",
@@ -1661,7 +1661,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Norway",
@@ -1674,7 +1674,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Oman",
@@ -1687,7 +1687,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Pakistan",
@@ -1700,7 +1700,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Palau",
@@ -1713,7 +1713,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Panama",
@@ -1726,7 +1726,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Papua New Guinea",
@@ -1739,7 +1739,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Paraguay",
@@ -1752,7 +1752,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Peru",
@@ -1765,7 +1765,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Philippines",
@@ -1778,7 +1778,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": true
   },
   {
     "Name": "Poland",
@@ -1791,7 +1791,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Portugal",
@@ -1804,7 +1804,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Qatar",
@@ -1817,7 +1817,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Romania",
@@ -1830,7 +1830,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Russia",
@@ -1843,7 +1843,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Rwanda",
@@ -1856,7 +1856,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Saint Kitts and Nevis",
@@ -1869,7 +1869,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Saint Lucia",
@@ -1882,7 +1882,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Saint Vincent and the Grenadines",
@@ -1895,7 +1895,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Samoa",
@@ -1908,7 +1908,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "San Marino",
@@ -1921,7 +1921,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Sao Tome and Principe",
@@ -1934,7 +1934,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Saudi Arabia",
@@ -1947,7 +1947,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Senegal",
@@ -1960,7 +1960,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Serbia",
@@ -1973,7 +1973,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Seychelles",
@@ -1986,7 +1986,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Sierra Leone",
@@ -1999,7 +1999,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Singapore",
@@ -2012,7 +2012,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Slovakia",
@@ -2025,7 +2025,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Slovenia",
@@ -2038,7 +2038,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Solomon Islands",
@@ -2051,7 +2051,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Somalia",
@@ -2064,7 +2064,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "South Africa",
@@ -2077,7 +2077,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Spain",
@@ -2090,7 +2090,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Sri Lanka",
@@ -2103,7 +2103,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Sudan",
@@ -2116,7 +2116,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Suriname",
@@ -2129,7 +2129,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Swaziland",
@@ -2142,7 +2142,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Sweden",
@@ -2155,7 +2155,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Switzerland",
@@ -2168,7 +2168,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Syria",
@@ -2181,7 +2181,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Tajikistan",
@@ -2194,7 +2194,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Tanzania",
@@ -2207,7 +2207,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Thailand",
@@ -2220,7 +2220,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Timor-Leste (East Timor)",
@@ -2233,7 +2233,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Togo",
@@ -2246,7 +2246,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Tonga",
@@ -2259,7 +2259,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Trinidad and Tobago",
@@ -2272,7 +2272,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Tunisia",
@@ -2285,7 +2285,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Turkey",
@@ -2298,7 +2298,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Turkmenistan",
@@ -2311,7 +2311,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Tuvalu",
@@ -2324,7 +2324,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Uganda",
@@ -2337,7 +2337,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Ukraine",
@@ -2350,7 +2350,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "United Arab Emirates",
@@ -2363,7 +2363,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "United Kingdom",
@@ -2376,7 +2376,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "United States",
@@ -2389,7 +2389,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Uruguay",
@@ -2402,7 +2402,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Uzbekistan",
@@ -2415,7 +2415,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Vanuatu",
@@ -2428,7 +2428,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Vatican City",
@@ -2441,7 +2441,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Venezuela",
@@ -2454,7 +2454,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Vietnam",
@@ -2467,7 +2467,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Yemen",
@@ -2480,7 +2480,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Zambia",
@@ -2493,7 +2493,7 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   },
   {
     "Name": "Zimbabwe",
@@ -2506,6 +2506,6 @@ export var countryStatus = [
     "refined": 0,
     "other": 0,
     "mineral": 0,
-    "": 0
+    "enabled": false
   }
 ];

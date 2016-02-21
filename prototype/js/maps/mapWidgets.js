@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "47dcf72ff28151f8f95f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d3649b496c2f036d5fd0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -944,13 +944,13 @@
 	  };
 	  var showTooltip = function showTooltip(e) {
 	    var layer = e.target;
-	    //debugger;
 	    var country = _countryStatus.countryStatus.find(function (v) {
 	      return v.ISO3 === layer.feature.id;
 	    });
 	    if (country === undefined || country.EITI_Status == 4) return;
 
-	    var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + '        <td><strong>' + country.refined + '</strong><img src="images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Refined Oil</td>' + '        </tr>' + '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + '  </tbody>' + '</table>' + '</div>';
+	    var country_url = country.enabled ? 'country_' + country.ISO3 + '.html' : 'countries.html';
+	    var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.GDP) + ' USD </td><td>Population: ' + formatnumber(country.Pop) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Crude Oil (b)</td>' + '        <td><strong>' + country.refined + '</strong><img src="images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Refined Oil</td>' + '        </tr>' + '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="' + country_url + '" style="color:#0b82d6">Open Country Page </td></tr>' + '  </tbody>' + '</table>' + '</div>';
 
 	    var popup = L.popup({ autoPan: true, closeButton: false, maxWidth: 400 }).setLatLng(e.latlng).setContent(html) //'<strong>' + layer.feature.properties.name + '</strong>');
 	    .openOn(layer._map);
@@ -27451,7 +27451,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Albania",
 	  "ISO2": "AL",
@@ -27463,7 +27463,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Algeria",
 	  "ISO2": "DZ",
@@ -27475,7 +27475,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Andorra",
 	  "ISO2": "AD",
@@ -27487,7 +27487,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Angola",
 	  "ISO2": "AO",
@@ -27499,7 +27499,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Antigua and Barbuda",
 	  "ISO2": "AG",
@@ -27511,7 +27511,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Argentina",
 	  "ISO2": "AR",
@@ -27523,7 +27523,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Armenia",
 	  "ISO2": "AM",
@@ -27535,7 +27535,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Australia",
 	  "ISO2": "AU",
@@ -27547,7 +27547,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Austria",
 	  "ISO2": "AT",
@@ -27559,7 +27559,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Azerbaijan",
 	  "ISO2": "AZ",
@@ -27571,7 +27571,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bahamas, The",
 	  "ISO2": "BS",
@@ -27583,7 +27583,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bahrain",
 	  "ISO2": "BH",
@@ -27595,7 +27595,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bangladesh",
 	  "ISO2": "BD",
@@ -27607,7 +27607,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Barbados",
 	  "ISO2": "BB",
@@ -27619,7 +27619,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Belarus",
 	  "ISO2": "BY",
@@ -27631,7 +27631,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Belgium",
 	  "ISO2": "BE",
@@ -27643,7 +27643,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Belize",
 	  "ISO2": "BZ",
@@ -27655,7 +27655,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Benin",
 	  "ISO2": "BJ",
@@ -27667,7 +27667,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bhutan",
 	  "ISO2": "BT",
@@ -27679,7 +27679,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bolivia",
 	  "ISO2": "BO",
@@ -27691,7 +27691,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bosnia and Herzegovina",
 	  "ISO2": "BA",
@@ -27703,7 +27703,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Botswana",
 	  "ISO2": "BW",
@@ -27715,7 +27715,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Brazil",
 	  "ISO2": "BR",
@@ -27727,7 +27727,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Brunei",
 	  "ISO2": "BN",
@@ -27739,7 +27739,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Bulgaria",
 	  "ISO2": "BG",
@@ -27751,7 +27751,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Burkina Faso",
 	  "ISO2": "BF",
@@ -27763,7 +27763,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Burundi",
 	  "ISO2": "BI",
@@ -27775,7 +27775,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cambodia",
 	  "ISO2": "KH",
@@ -27787,7 +27787,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cameroon",
 	  "ISO2": "CM",
@@ -27799,7 +27799,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Canada",
 	  "ISO2": "CA",
@@ -27811,7 +27811,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cape Verde",
 	  "ISO2": "CV",
@@ -27823,7 +27823,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Central African Republic",
 	  "ISO2": "CF",
@@ -27835,7 +27835,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Chad",
 	  "ISO2": "TD",
@@ -27847,7 +27847,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Chile",
 	  "ISO2": "CL",
@@ -27859,7 +27859,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "China, People's Republic of",
 	  "ISO2": "CN",
@@ -27871,7 +27871,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Colombia",
 	  "ISO2": "CO",
@@ -27883,7 +27883,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Comoros",
 	  "ISO2": "KM",
@@ -27895,7 +27895,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Congo, (Congo Ã‚â€“ Kinshasa)",
 	  "ISO2": "CD",
@@ -27907,7 +27907,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Congo, (Congo Ã‚â€“ Brazzaville)",
 	  "ISO2": "CG",
@@ -27919,7 +27919,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Costa Rica",
 	  "ISO2": "CR",
@@ -27931,7 +27931,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cote d'Ivoire (Ivory Coast)",
 	  "ISO2": "CI",
@@ -27943,7 +27943,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Croatia",
 	  "ISO2": "HR",
@@ -27955,7 +27955,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cuba",
 	  "ISO2": "CU",
@@ -27967,7 +27967,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Cyprus",
 	  "ISO2": "CY",
@@ -27979,7 +27979,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Czech Republic",
 	  "ISO2": "CZ",
@@ -27991,7 +27991,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Denmark",
 	  "ISO2": "DK",
@@ -28003,7 +28003,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Djibouti",
 	  "ISO2": "DJ",
@@ -28015,7 +28015,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Dominica",
 	  "ISO2": "DM",
@@ -28027,7 +28027,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Dominican Republic",
 	  "ISO2": "DO",
@@ -28039,7 +28039,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Ecuador",
 	  "ISO2": "EC",
@@ -28051,7 +28051,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Egypt",
 	  "ISO2": "EG",
@@ -28063,7 +28063,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "El Salvador",
 	  "ISO2": "SV",
@@ -28075,7 +28075,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Equatorial Guinea",
 	  "ISO2": "GQ",
@@ -28087,7 +28087,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Eritrea",
 	  "ISO2": "ER",
@@ -28099,7 +28099,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Estonia",
 	  "ISO2": "EE",
@@ -28111,7 +28111,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Ethiopia",
 	  "ISO2": "ET",
@@ -28123,7 +28123,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Fiji",
 	  "ISO2": "FJ",
@@ -28135,7 +28135,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Finland",
 	  "ISO2": "FI",
@@ -28147,7 +28147,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "France",
 	  "ISO2": "FR",
@@ -28159,7 +28159,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Gabon",
 	  "ISO2": "GA",
@@ -28171,7 +28171,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Gambia, The",
 	  "ISO2": "GM",
@@ -28183,7 +28183,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Georgia",
 	  "ISO2": "GE",
@@ -28195,7 +28195,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Germany",
 	  "ISO2": "DE",
@@ -28207,7 +28207,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Ghana",
 	  "ISO2": "GH",
@@ -28219,7 +28219,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Greece",
 	  "ISO2": "GR",
@@ -28231,7 +28231,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Grenada",
 	  "ISO2": "GD",
@@ -28243,7 +28243,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Guatemala",
 	  "ISO2": "GT",
@@ -28255,7 +28255,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Guinea",
 	  "ISO2": "GN",
@@ -28267,7 +28267,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Guinea-Bissau",
 	  "ISO2": "GW",
@@ -28279,7 +28279,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Guyana",
 	  "ISO2": "GY",
@@ -28291,7 +28291,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Haiti",
 	  "ISO2": "HT",
@@ -28303,7 +28303,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Honduras",
 	  "ISO2": "HN",
@@ -28315,7 +28315,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Hungary",
 	  "ISO2": "HU",
@@ -28327,7 +28327,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Iceland",
 	  "ISO2": "IS",
@@ -28339,7 +28339,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "India",
 	  "ISO2": "IN",
@@ -28351,7 +28351,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Indonesia",
 	  "ISO2": "ID",
@@ -28363,7 +28363,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Iran",
 	  "ISO2": "IR",
@@ -28375,7 +28375,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Iraq",
 	  "ISO2": "IQ",
@@ -28387,7 +28387,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Ireland",
 	  "ISO2": "IE",
@@ -28399,7 +28399,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Israel",
 	  "ISO2": "IL",
@@ -28411,7 +28411,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Italy",
 	  "ISO2": "IT",
@@ -28423,7 +28423,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Jamaica",
 	  "ISO2": "JM",
@@ -28435,7 +28435,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Japan",
 	  "ISO2": "JP",
@@ -28447,7 +28447,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Jordan",
 	  "ISO2": "JO",
@@ -28459,7 +28459,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Kazakhstan",
 	  "ISO2": "KZ",
@@ -28471,7 +28471,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Kenya",
 	  "ISO2": "KE",
@@ -28483,7 +28483,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Kiribati",
 	  "ISO2": "KI",
@@ -28495,7 +28495,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Korea, North",
 	  "ISO2": "KP",
@@ -28507,7 +28507,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Korea, South",
 	  "ISO2": "KR",
@@ -28519,7 +28519,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Kuwait",
 	  "ISO2": "KW",
@@ -28531,7 +28531,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Kyrgyzstan",
 	  "ISO2": "KG",
@@ -28543,7 +28543,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Laos",
 	  "ISO2": "LA",
@@ -28555,7 +28555,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Latvia",
 	  "ISO2": "LV",
@@ -28567,7 +28567,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Lebanon",
 	  "ISO2": "LB",
@@ -28579,7 +28579,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Lesotho",
 	  "ISO2": "LS",
@@ -28591,7 +28591,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Liberia",
 	  "ISO2": "LR",
@@ -28603,7 +28603,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Libya",
 	  "ISO2": "LY",
@@ -28615,7 +28615,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Liechtenstein",
 	  "ISO2": "LI",
@@ -28627,7 +28627,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Lithuania",
 	  "ISO2": "LT",
@@ -28639,7 +28639,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Luxembourg",
 	  "ISO2": "LU",
@@ -28651,7 +28651,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Macedonia",
 	  "ISO2": "MK",
@@ -28663,7 +28663,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Madagascar",
 	  "ISO2": "MG",
@@ -28675,7 +28675,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Malawi",
 	  "ISO2": "MW",
@@ -28687,7 +28687,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Malaysia",
 	  "ISO2": "MY",
@@ -28699,7 +28699,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Maldives",
 	  "ISO2": "MV",
@@ -28711,7 +28711,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mali",
 	  "ISO2": "ML",
@@ -28723,7 +28723,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Malta",
 	  "ISO2": "MT",
@@ -28735,7 +28735,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Marshall Islands",
 	  "ISO2": "MH",
@@ -28747,7 +28747,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mauritania",
 	  "ISO2": "MR",
@@ -28759,7 +28759,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mauritius",
 	  "ISO2": "MU",
@@ -28771,7 +28771,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mexico",
 	  "ISO2": "MX",
@@ -28783,7 +28783,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Micronesia",
 	  "ISO2": "FM",
@@ -28795,7 +28795,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Moldova",
 	  "ISO2": "MD",
@@ -28807,7 +28807,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Monaco",
 	  "ISO2": "MC",
@@ -28819,7 +28819,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mongolia",
 	  "ISO2": "MN",
@@ -28831,7 +28831,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Montenegro",
 	  "ISO2": "ME",
@@ -28843,7 +28843,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Morocco",
 	  "ISO2": "MA",
@@ -28855,7 +28855,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Mozambique",
 	  "ISO2": "MZ",
@@ -28867,7 +28867,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Myanmar (Burma)",
 	  "ISO2": "MM",
@@ -28879,7 +28879,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Namibia",
 	  "ISO2": "NA",
@@ -28891,7 +28891,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Nauru",
 	  "ISO2": "NR",
@@ -28903,7 +28903,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Nepal",
 	  "ISO2": "NP",
@@ -28915,7 +28915,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Netherlands",
 	  "ISO2": "NL",
@@ -28927,7 +28927,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "New Zealand",
 	  "ISO2": "NZ",
@@ -28939,7 +28939,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Nicaragua",
 	  "ISO2": "NI",
@@ -28951,7 +28951,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Niger",
 	  "ISO2": "NE",
@@ -28963,7 +28963,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Nigeria",
 	  "ISO2": "NG",
@@ -28975,7 +28975,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Norway",
 	  "ISO2": "NO",
@@ -28987,7 +28987,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Oman",
 	  "ISO2": "OM",
@@ -28999,7 +28999,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Pakistan",
 	  "ISO2": "PK",
@@ -29011,7 +29011,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Palau",
 	  "ISO2": "PW",
@@ -29023,7 +29023,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Panama",
 	  "ISO2": "PA",
@@ -29035,7 +29035,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Papua New Guinea",
 	  "ISO2": "PG",
@@ -29047,7 +29047,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Paraguay",
 	  "ISO2": "PY",
@@ -29059,7 +29059,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Peru",
 	  "ISO2": "PE",
@@ -29071,7 +29071,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Philippines",
 	  "ISO2": "PH",
@@ -29083,7 +29083,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": true
 	}, {
 	  "Name": "Poland",
 	  "ISO2": "PL",
@@ -29095,7 +29095,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Portugal",
 	  "ISO2": "PT",
@@ -29107,7 +29107,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Qatar",
 	  "ISO2": "QA",
@@ -29119,7 +29119,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Romania",
 	  "ISO2": "RO",
@@ -29131,7 +29131,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Russia",
 	  "ISO2": "RU",
@@ -29143,7 +29143,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Rwanda",
 	  "ISO2": "RW",
@@ -29155,7 +29155,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Saint Kitts and Nevis",
 	  "ISO2": "KN",
@@ -29167,7 +29167,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Saint Lucia",
 	  "ISO2": "LC",
@@ -29179,7 +29179,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Saint Vincent and the Grenadines",
 	  "ISO2": "VC",
@@ -29191,7 +29191,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Samoa",
 	  "ISO2": "WS",
@@ -29203,7 +29203,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "San Marino",
 	  "ISO2": "SM",
@@ -29215,7 +29215,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Sao Tome and Principe",
 	  "ISO2": "ST",
@@ -29227,7 +29227,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Saudi Arabia",
 	  "ISO2": "SA",
@@ -29239,7 +29239,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Senegal",
 	  "ISO2": "SN",
@@ -29251,7 +29251,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Serbia",
 	  "ISO2": "RS",
@@ -29263,7 +29263,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Seychelles",
 	  "ISO2": "SC",
@@ -29275,7 +29275,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Sierra Leone",
 	  "ISO2": "SL",
@@ -29287,7 +29287,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Singapore",
 	  "ISO2": "SG",
@@ -29299,7 +29299,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Slovakia",
 	  "ISO2": "SK",
@@ -29311,7 +29311,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Slovenia",
 	  "ISO2": "SI",
@@ -29323,7 +29323,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Solomon Islands",
 	  "ISO2": "SB",
@@ -29335,7 +29335,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Somalia",
 	  "ISO2": "SO",
@@ -29347,7 +29347,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "South Africa",
 	  "ISO2": "ZA",
@@ -29359,7 +29359,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Spain",
 	  "ISO2": "ES",
@@ -29371,7 +29371,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Sri Lanka",
 	  "ISO2": "LK",
@@ -29383,7 +29383,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Sudan",
 	  "ISO2": "SD",
@@ -29395,7 +29395,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Suriname",
 	  "ISO2": "SR",
@@ -29407,7 +29407,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Swaziland",
 	  "ISO2": "SZ",
@@ -29419,7 +29419,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Sweden",
 	  "ISO2": "SE",
@@ -29431,7 +29431,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Switzerland",
 	  "ISO2": "CH",
@@ -29443,7 +29443,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Syria",
 	  "ISO2": "SY",
@@ -29455,7 +29455,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Tajikistan",
 	  "ISO2": "TJ",
@@ -29467,7 +29467,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Tanzania",
 	  "ISO2": "TZ",
@@ -29479,7 +29479,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Thailand",
 	  "ISO2": "TH",
@@ -29491,7 +29491,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Timor-Leste (East Timor)",
 	  "ISO2": "TL",
@@ -29503,7 +29503,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Togo",
 	  "ISO2": "TG",
@@ -29515,7 +29515,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Tonga",
 	  "ISO2": "TO",
@@ -29527,7 +29527,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Trinidad and Tobago",
 	  "ISO2": "TT",
@@ -29539,7 +29539,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Tunisia",
 	  "ISO2": "TN",
@@ -29551,7 +29551,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Turkey",
 	  "ISO2": "TR",
@@ -29563,7 +29563,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Turkmenistan",
 	  "ISO2": "TM",
@@ -29575,7 +29575,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Tuvalu",
 	  "ISO2": "TV",
@@ -29587,7 +29587,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Uganda",
 	  "ISO2": "UG",
@@ -29599,7 +29599,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Ukraine",
 	  "ISO2": "UA",
@@ -29611,7 +29611,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "United Arab Emirates",
 	  "ISO2": "AE",
@@ -29623,7 +29623,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "United Kingdom",
 	  "ISO2": "GB",
@@ -29635,7 +29635,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "United States",
 	  "ISO2": "US",
@@ -29647,7 +29647,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Uruguay",
 	  "ISO2": "UY",
@@ -29659,7 +29659,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Uzbekistan",
 	  "ISO2": "UZ",
@@ -29671,7 +29671,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Vanuatu",
 	  "ISO2": "VU",
@@ -29683,7 +29683,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Vatican City",
 	  "ISO2": "VA",
@@ -29695,7 +29695,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Venezuela",
 	  "ISO2": "VE",
@@ -29707,7 +29707,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Vietnam",
 	  "ISO2": "VN",
@@ -29719,7 +29719,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Yemen",
 	  "ISO2": "YE",
@@ -29731,7 +29731,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Zambia",
 	  "ISO2": "ZM",
@@ -29743,7 +29743,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}, {
 	  "Name": "Zimbabwe",
 	  "ISO2": "ZW",
@@ -29755,7 +29755,7 @@
 	  "refined": 0,
 	  "other": 0,
 	  "mineral": 0,
-	  "": 0
+	  "enabled": false
 	}];
 
 /***/ },
@@ -29807,7 +29807,13 @@
 	    },
 	    showTooltip: function showTooltip(e) {
 	        var layer = e.target;
-	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent('<a href="countries.html#' + layer.feature.id + '"><strong>' + layer.feature.properties.name + '</strong>').openOn(layer._map);
+	        var country = _countryStatus.countryStatus.find(function (v) {
+	            return v.ISO3 === layer.feature.id;
+	        });
+
+	        var country_url = country.enabled ? 'country_' + country.ISO3 + '.html' : 'countries.html';
+
+	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent('<a href="country_' + layer.feature.id + '.html"><strong>' + layer.feature.properties.name + '</strong>').openOn(layer._map);
 	    },
 
 	    resetTooltip: function resetTooltip(e) {
@@ -29815,7 +29821,7 @@
 	    },
 
 	    zoomToFeature: function zoomToFeature(e) {
-	        window.location = 'countries.html#' + e.target.feature.id;
+	        window.location = 'country_' + layer.feature.id + '.html';
 	    },
 
 	    onEachFeature: function onEachFeature(feature, layer) {

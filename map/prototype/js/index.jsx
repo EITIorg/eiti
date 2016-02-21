@@ -35,10 +35,10 @@ window.mapWidget.createMapPage = function(options) {
 };
   var showTooltip = function (e) {
       var layer = e.target;
-      //debugger;
       var country = countryStatus.find(function(v){return v.ISO3===layer.feature.id});
       if(country === undefined || country.EITI_Status == 4) return;
 
+      var country_url = (country.enabled) ? 'country_' + country.ISO3 + '.html':'countries.html';
       var html = '<div>' +
         '<table class="country_info">' + 
         '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
@@ -49,7 +49,7 @@ window.mapWidget.createMapPage = function(options) {
         '        </tr>' + 
         '    <tr><td><strong>' + country.mineral + '</strong><img src="images/icon-dump/eiti_popup_mineral.svg" style="margin:0px 2px 0px 2px;width:18px"/> Mineral</td>' + 
         '        <td><strong>' + country.other + '</strong><img src="images/icon-dump/eiti_popup_other.svg" style="margin:0px 2px 0px 2px;width:18px"/> Other</td></tr>' 
-        + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="countries.html' + country.ISO3 + '" style="color:#0b82d6">Open Country Page </td></tr>' + 
+        + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/> <a href="' + country_url + '" style="color:#0b82d6">Open Country Page </td></tr>' + 
         '  </tbody>' + 
         '</table>' + 
         '</div>';

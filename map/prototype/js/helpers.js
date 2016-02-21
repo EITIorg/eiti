@@ -36,9 +36,13 @@ export var helpers = {
     },
     showTooltip: function (e) {
         var layer = e.target;
+        var country = countryStatus.find(function(v){ return v.ISO3 === layer.feature.id;});
+
+        var country_url = (country.enabled) ? 'country_' + country.ISO3 + '.html':'countries.html';
+
         var popup = L.popup({autoPan:false, closeButton:false})
             .setLatLng(e.latlng)
-            .setContent('<a href="countries.html#' + layer.feature.id + '"><strong>' + layer.feature.properties.name + '</strong>')
+            .setContent('<a href="country_' + layer.feature.id + '.html"><strong>' + layer.feature.properties.name + '</strong>')
             .openOn(layer._map);
     },
 
@@ -48,7 +52,7 @@ export var helpers = {
 
 
     zoomToFeature: function(e){
-        window.location = 'countries.html#' + e.target.feature.id;
+        window.location = 'country_' + layer.feature.id + '.html';
     },
 
     onEachFeature: function (feature, layer) {
