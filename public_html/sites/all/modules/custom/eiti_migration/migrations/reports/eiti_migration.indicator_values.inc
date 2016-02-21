@@ -102,14 +102,20 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     // Let's try and find the group and subgroup (indicator).
 
     // If we need, we first find the group (but we don't really need that).
-    // $group_id = $this->findBestMatch($row->group, $this->groupIndicators);
+    $group_id = $this->findBestMatch($row->group, $this->groupIndicators);
 
     // Let's check for aliases..
     $row->subgroup = $this->normalizeIndicator($row->subgroup);
 
     // Now let's handle the subgroup (that's what we definitely need).
     $all_indicators = $this->boolIndicators + $this->numericIndicators + $this->textIndicators + $this->enumIndicators;
-    if ($indicator_id = $this->findBestMatch($row->subgroup, $all_indicators)) {
+    $indicators_in_group = array();
+    foreach ($all_indicators as $id => $indicator) {
+      if ($indicator->parent == $group_id) {
+        $indicators_in_group[$id] = $indicator;
+      }
+    }
+    if ($indicator_id = $this->findBestMatch($row->subgroup, $indicators_in_group)) {
       $row->subgroup = $indicator_id;
       $indicator = $all_indicators[$indicator_id];
 

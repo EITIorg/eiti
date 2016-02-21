@@ -298,7 +298,7 @@ function contentwidget_libraries_info() {
     'version' => '1.0',
     'files' => array(
       'js' => array(
-        'bundle.js',
+        'chartWidgets.js',
       ),
       'css' => array(
         'main.css',

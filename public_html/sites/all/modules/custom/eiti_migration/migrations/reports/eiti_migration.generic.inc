@@ -93,7 +93,7 @@ class EITISpreadsheetMigration extends Migration {
     asort($matchRating);
     end($matchRating);
     $bestMatchingID = key($matchRating);
-    if ($matchRating[$bestMatchingID] > 80) {
+    if ($matchRating[$bestMatchingID] > 90) {
       return $bestMatchingID;
     }
     return FALSE;
@@ -218,13 +218,20 @@ class EITISpreadsheetMigration extends Migration {
    */
   protected function normalizeIndicator($indicator) {
     $adjusted_indicator = $indicator;
-    switch ($indicator) {
-      case 'Natural Gas, value':
+    switch (strtolower($indicator)) {
+      case 'natural gas, value':
         $adjusted_indicator = 'Gas, value';
         break;
-      case 'Natural Gas, volume':
+      case 'natural gas, volume':
         $adjusted_indicator = 'Gas, volume';
         break;
+      case 'crude oil, volume':
+        $adjusted_indicator = 'Oil, volume';
+        break;
+      case 'crude oil, value':
+        $adjusted_indicator = 'Oil, value';
+        break;
+
     }
     return $adjusted_indicator;
   }

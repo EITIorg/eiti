@@ -579,7 +579,10 @@ function eitiwidgets_field_default_field_instances() {
     'label' => 'Widget',
     'required' => 1,
     'settings' => array(
-      'available_widgets' => array(),
+      'available_widgets' => array(
+        'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
+        'viz_groupedbar_static' => 'viz_groupedbar_static',
+      ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),

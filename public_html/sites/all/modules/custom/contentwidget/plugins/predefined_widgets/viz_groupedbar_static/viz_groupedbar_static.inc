@@ -127,7 +127,6 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
     '#default_value' => $widget_settings['barchart_settings']['y-axis']
   );
 
-  pc($widget_settings);
   $groups_number = $widget_settings['groups_number'];
   $values_number = $widget_settings['values_number'];
 
@@ -179,7 +178,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
       '#title' => t('Group Label'),
       '#prefix' => '<div class="container-inline">',
       '#suffix' => '</div>',
-      '#default_value' => $widget_settings['barchart_value']['group_' . $delta]['group_name_' . $delta],
+      '#default_value' => isset($widget_settings['barchart_value']['group_' . $delta]['group_name_' . $delta]) ? $widget_settings['barchart_value']['group_' . $delta]['group_name_' . $delta] : '',
     );
     for ($v_delta = 0; $v_delta < $values_number; $v_delta++) {
       $settings_form['barchart_value']['group_' . $delta]['x_' . $v_delta] = array(
@@ -188,7 +187,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
         '#description' => t('I.E: Year (2015), Country (Norway), etc.'),
         '#prefix' => '<div class="container-inline">',
         '#size' => 10,
-        '#default_value' => $widget_settings['barchart_value']['group_' . $delta]['x_' . $v_delta],
+        '#default_value' => isset($widget_settings['barchart_value']['group_' . $delta]['x_' . $v_delta]) ? $widget_settings['barchart_value']['group_' . $delta]['x_' . $v_delta] : '',
       );
       $settings_form['barchart_value']['group_' . $delta]['y_' . $v_delta] = array(
         '#type' => 'textfield',
@@ -196,7 +195,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
         '#description' => t('Basically the value (numbers).'),
         '#suffix' => '</div>',
         '#size' => 10,
-        '#default_value' => $widget_settings['barchart_value']['group_' . $delta]['y_' . $v_delta],
+        '#default_value' => isset($widget_settings['barchart_value']['group_' . $delta]['y_' . $v_delta]) ? $widget_settings['barchart_value']['group_' . $delta]['y_' . $v_delta] : '',
       );
     }
   }
@@ -208,6 +207,6 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
  * Small custom ajax callback.
  */
 function contentblock_viz_groupedbarchart_static_settings_values_ajax($form, $form_state) {
-  return $form['field_fppq_widget'][LANGUAGE_NONE][0]['settings']['viz_groupedbar_static']['barchart_value'];
+  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_groupedbar_static']['barchart_value'];
 }
 
