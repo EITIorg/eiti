@@ -11,8 +11,33 @@
       for (var key in settings.contentwidgets) {
         if (settings.contentwidgets[key].hasOwnProperty('type') && ($.inArray(settings.contentwidgets[key].type, chartTypes) >= 0)) {
           var widgetSetting = settings.contentwidgets[key];
-          var widgetData = widgetSetting.widgetData;
-          chartWidget.create(widgetSetting, widgetData);
+          if (widgetSetting.hasOwnProperty('widgetData')) {
+            var widgetData = widgetSetting.widgetData;
+            chartWidget.create(widgetSetting, widgetData);
+          }
+          else {
+            // Set the processor function that returns JSON.data.
+            widgetSetting.processor = function(input) {
+              return input.data;
+            };
+            // Now this case is much more FUN!
+            if (widgetSetting.expose_year) {
+              var yearSelectorStr = '.' + widgetSetting.year_selector_class;
+
+              var $selector = $(yearSelectorStr).on('change', function(evObj) {
+                var value = $(this).val();
+                widgetSetting.name = widgetSetting.name_year + ' ' + value;
+                widgetSetting.description = widgetSetting.description_year + ' ' + value;
+                chartWidget.create(widgetSetting, widgetSetting.endpoint + '&filter[year][0]=' + value);
+              });
+              $selector.val(widgetSetting.current_year);
+              chartWidget.create(widgetSetting, widgetSetting.endpoint_year);
+            }
+            else {
+              // Otherwise just return.
+              chartWidget.create(widgetSetting, widgetSetting.endpoint);
+            }
+          }
         }
       }
 

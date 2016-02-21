@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "369b445c13645f85876b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3c94d07c9391a487af94"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -889,6 +889,9 @@
 	var PieChart = __webpack_require__(201);
 	var GroupedBar = __webpack_require__(204);
 	var StackedBar = __webpack_require__(208);
+	var TreeMap = __webpack_require__(209);
+	var BubbleChart = __webpack_require__(210);
+	var Sankey = __webpack_require__(211);
 
 	window.chartWidget.create = function (options, data) {
 		var chartData, dataURL;
@@ -902,7 +905,7 @@
 		if (options.type == "Bar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -912,17 +915,17 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				})
 			), document.getElementById(options.container));
 		} else if (options.type == "Pie") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(
 					'h3',
 					null,
@@ -932,26 +935,27 @@
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					dataURL: dataURL,
-					chartData: chartData
+					chartData: chartData,
+					processor: options.processor
 				})
 			), document.getElementById(options.container));
 		} else if (options.type == "GroupedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(GroupedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -962,18 +966,77 @@
 		} else if (options.type == "StackedBar") {
 			(0, _reactDom.render)(React.createElement(
 				'div',
-				null,
+				{ className: options.className },
 				React.createElement(StackedBar, {
 					chartTitle: options.name,
 					width: options.width,
 					height: options.height,
 					margin: options.margin,
-					className: options.className,
 					xlabel: options.xlabel,
 					ylabel: options.ylabel,
 					dataURL: dataURL,
 					chartData: chartData,
-					legend: true
+					legend: true,
+					legendClass: options.legendClass,
+					processor: options.processor
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
+			), document.getElementById(options.container));
+		} else if (options.type == "TreeMap") {
+			(0, _reactDom.render)(React.createElement(
+				'div',
+				{ className: options.className },
+				React.createElement(TreeMap, {
+					chartTitle: options.name,
+					width: options.width,
+					height: options.height,
+					margin: options.margin,
+					dataURL: dataURL,
+					chartData: chartData,
+					processor: options.processor
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
+			), document.getElementById(options.container));
+		} else if (options.type == "BubbleChart") {
+			(0, _reactDom.render)(React.createElement(
+				'div',
+				{ className: options.className },
+				React.createElement(BubbleChart, {
+					chartTitle: options.name,
+					width: options.width,
+					height: options.height,
+					diameter: options.diameter,
+					margin: options.margin,
+					dataURL: dataURL,
+					chartData: chartData,
+					processor: options.processor
+				}),
+				React.createElement(
+					'h4',
+					{ className: 'chartDescription' },
+					options.description
+				)
+			), document.getElementById(options.container));
+		} else if (options.type == "Sankey") {
+			(0, _reactDom.render)(React.createElement(
+				'div',
+				{ className: options.className },
+				React.createElement(Sankey, {
+					chartTitle: options.name,
+					width: options.width,
+					height: options.height,
+					margin: options.margin,
+					dataURL: dataURL,
+					chartData: chartData,
+					processor: options.processor
 				}),
 				React.createElement(
 					'h4',
@@ -20693,6 +20756,7 @@
 	        var onMouseEnter = _props.onMouseEnter;
 	        var onMouseLeave = _props.onMouseLeave;
 	        var groupedBars = _props.groupedBars;
+	        var colorByLabel = _props.colorByLabel;
 
 	        var bars = undefined;
 	        if (groupedBars) {
@@ -20714,13 +20778,14 @@
 	        } else {
 	            bars = data.map(function (stack) {
 	                return values(stack).map(function (e, index) {
+	                    var color = colorByLabel ? colorScale(label(stack)) : colorScale(x(e));
 	                    return React.createElement(Bar, {
 	                        key: label(stack) + '.' + index,
 	                        width: xScale.rangeBand(),
 	                        height: yScale(yScale.domain()[0]) - yScale(y(e)),
 	                        x: xScale(x(e)),
 	                        y: yScale(y0(e) + y(e)),
-	                        fill: colorScale(label(stack)),
+	                        fill: color,
 	                        data: e,
 	                        onMouseEnter: onMouseEnter,
 	                        onMouseLeave: onMouseLeave
@@ -20748,6 +20813,7 @@
 	            colorAccessor: function colorAccessor(d, idx) {
 	                return idx;
 	            },
+	            colorByLabel: true,
 	            legend: false,
 	            legendPosition: 'right',
 	            sideOffset: 400
@@ -20783,9 +20849,14 @@
 	        var props = this.props;
 
 	        if (props.legend) {
+	            var colorDomain = props.legendData.map(function (item) {
+	                return item.label;
+	            });
+	            var colorScale = props.colorScale.domain(colorDomain);
 	            return React.createElement(Legend, {
-	                colors: props.colors,
+	                colors: colorScale,
 	                colorAccessor: props.colorAccessor,
+	                legendClass: props.legendClass,
 	                data: props.legendData,
 	                legendPosition: props.legendPosition,
 	                margins: props.margin,
@@ -20807,12 +20878,20 @@
 	        var xAxis = _props2.xAxis;
 	        var yAxis = _props2.yAxis;
 	        var groupedBars = _props2.groupedBars;
+	        var colorByLabel = _props2.colorByLabel;
 	        var chartTitle = _props2.chartTitle;
 	        var data = this._data;
 	        var innerWidth = this._innerWidth;
 	        var innerHeight = this._innerHeight;
 	        var xScale = this._xScale;
 	        var yScale = this._yScale;
+
+	        if (this.props.legendData) {
+	            var colorDomain = this.props.legendData.map(function (item) {
+	                return item.label;
+	            });
+	            colorScale = colorScale.domain(colorDomain);
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -20842,7 +20921,8 @@
 	                    x: x,
 	                    onMouseEnter: this.onMouseEnter,
 	                    onMouseLeave: this.onMouseLeave,
-	                    groupedBars: groupedBars
+	                    groupedBars: groupedBars,
+	                    colorByLabel: colorByLabel
 	                }),
 	                React.createElement(Axis, _extends({
 	                    className: "x axis",
@@ -21251,7 +21331,7 @@
 	      colorAccessor: function colorAccessor(d, idx) {
 	        return idx;
 	      },
-	      itemClassName: 'legend-item-active',
+	      legendClass: 'legend-item',
 	      text: '#000'
 	    };
 	  },
@@ -21278,7 +21358,7 @@
 	      var itemStyle = {
 	        'color': props.colors(series.label)
 	      };
-	      var itemClassName = series.active == true ? 'legend-item-active' : 'legend-item';
+	      var itemClassName = series.active == true ? props.legendClass + '-active' : props.legendClass;
 
 	      legendItems.push(React.createElement(
 	        'li',
@@ -23292,7 +23372,12 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -23663,6 +23748,11 @@
 				chartData: [{
 					label: '',
 					values: [{ x: '', y: 0 }]
+				}],
+
+				rawData: [{
+					label: '',
+					values: [{ x: '', y: 0 }]
 				}]
 			};
 		},
@@ -23683,12 +23773,15 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							data = _this.props.processor(data);
+						}
 						var classData = data.map(function (item) {
 							var newItem = item;
 							newItem['active'] = true;
 							return newItem;
 						});
-						_this.setState({ rawData: classData, chartData: data });
+						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -23709,6 +23802,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
@@ -24117,14 +24211,16 @@
 		getInitialState: function getInitialState() {
 			return {
 				chartData: [{
-					label: 'Total',
+					label: '',
 					values: [{ x: '', y: 0 }]
 				}],
 
 				rawData: [{
-					label: 'Total',
+					label: '',
 					values: [{ x: '', y: 0 }]
-				}]
+				}],
+
+				showLegend: false
 			};
 		},
 
@@ -24144,12 +24240,15 @@
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							data = _this.props.processor(data);
+						}
 						var classData = data.map(function (item) {
 							var newItem = item;
 							newItem['active'] = true;
 							return newItem;
 						});
-						_this.setState({ rawData: classData, chartData: data });
+						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
 				req.open("GET", this.props.dataURL, true);
@@ -24160,7 +24259,7 @@
 					newItem['active'] = true;
 					return newItem;
 				});
-				this.setState({ rawData: classData, chartData: this.props.chartData });
+				this.setState({ rawData: classData, chartData: this.props.chartData, showLegend: true });
 			}
 		},
 
@@ -24169,6 +24268,7 @@
 				chartTitle: this.props.chartTitle,
 				data: this.state.chartData,
 				legendData: this.state.rawData,
+				legendClass: this.props.legendClass,
 				width: this.props.width,
 				height: this.props.height,
 				margin: this.props.margin,
@@ -24176,11 +24276,924 @@
 				yAxis: { label: this.props.ylabel },
 				tooltipHtml: this.props.tooltip,
 				tooltipMode: 'mouse',
-				legend: this.props.legend || false });
+				legend: this.props.legend && this.state.showLegend });
 		}
 	});
 
 	module.exports = StackedBar;
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactDom = __webpack_require__(8);
+
+	var React = __webpack_require__(154);
+	var d3 = __webpack_require__(168);
+
+	var Chart = __webpack_require__(169);
+	var Tooltip = __webpack_require__(172);
+
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
+
+	var DataSet = React.createClass({
+		displayName: 'DataSet',
+
+		componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+			var _props = this.props;
+			var data = _props.data;
+			var width = _props.width;
+			var height = _props.height;
+			var margin = _props.margin;
+			var x = _props.x;
+			var y = _props.y;
+			var treemap = _props.treemap;
+			var formatNumber = _props.formatNumber;
+
+			var self = this,
+			    transitioning;
+
+			var el = (0, _reactDom.findDOMNode)(this);
+
+			var svg = d3.select(el).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.bottom + margin.top).style("margin-left", -margin.left + "px").style("margin-right", -margin.right + "px").append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").style("shape-rendering", "crispEdges");
+
+			var grandparent = svg.append("g").attr("class", "grandparent");
+
+			grandparent.append("rect").attr("y", -margin.top).attr("width", width).attr("height", margin.top);
+
+			grandparent.append("text").attr("x", 6).attr("y", 6 - margin.top).attr("dy", ".75em");
+
+			initialize(data);
+			accumulate(data);
+			layout(data);
+			display(data);
+
+			function initialize(root) {
+				root.x = root.y = 0;
+				root.dx = width;
+				root.dy = height;
+				root.depth = 0;
+			}
+
+			// Aggregate the values for internal nodes. This is normally done by the
+			// treemap layout, but not here because of our custom implementation.
+			// We also take a snapshot of the original children (_children) to avoid
+			// the children being overwritten when when layout is computed.
+			function accumulate(d) {
+				return (d._children = d.children) ? d.value = d.children.reduce(function (p, v) {
+					return p + accumulate(v);
+				}, 0) : d.value;
+			}
+
+			// Compute the treemap layout recursively such that each group of siblings
+			// uses the same size (1×1) rather than the dimensions of the parent cell.
+			// This optimizes the layout for the current zoom state. Note that a wrapper
+			// object is created for the parent node for each group of siblings so that
+			// the parent’s dimensions are not discarded as we recurse. Since each group
+			// of sibling was laid out in 1×1, we must rescale to fit using absolute
+			// coordinates. This lets us use a viewport to zoom.
+			function layout(d) {
+				if (d._children) {
+					treemap.nodes({ _children: d._children });
+					d._children.forEach(function (c) {
+						c.x = d.x + c.x * d.dx;
+						c.y = d.y + c.y * d.dy;
+						c.dx *= d.dx;
+						c.dy *= d.dy;
+						c.parent = d;
+						layout(c);
+					});
+				}
+			}
+
+			function display(d) {
+				grandparent.datum(d.parent).on("click", transition).select("text").text(self.name(d));
+
+				var g1 = svg.insert("g", ".grandparent").datum(d).attr("class", "depth");
+
+				var g = g1.selectAll("g").data(d._children).enter().append("g");
+
+				g.filter(function (d) {
+					return d._children;
+				}).classed("children", true).on("click", transition);
+
+				g.selectAll(".child").data(function (d) {
+					return d._children || [d];
+				}).enter().append("rect").attr("class", "child rect").call(self.rect);
+
+				g.append("rect").attr("class", "parent rect").call(self.rect).append("title").text(function (d) {
+					return formatNumber(d.value);
+				});
+
+				g.append("text").attr("dy", ".75em").text(function (d) {
+					return d.name;
+				}).call(self.text);
+
+				function transition(d) {
+					if (transitioning || !d) return;
+					transitioning = true;
+
+					var g2 = display(d),
+					    t1 = g1.transition().duration(750),
+					    t2 = g2.transition().duration(750);
+
+					// Update the domain only after entering new elements.
+					x.domain([d.x, d.x + d.dx]);
+					y.domain([d.y, d.y + d.dy]);
+
+					// Enable anti-aliasing during the transition.
+					svg.style("shape-rendering", null);
+
+					// Draw child nodes on top of parent nodes.
+					svg.selectAll(".depth").sort(function (a, b) {
+						return a.depth - b.depth;
+					});
+
+					// Fade-in entering text.
+					g2.selectAll("text").style("fill-opacity", 0);
+
+					// Transition to the new view.
+					t1.selectAll("text").call(self.text).style("fill-opacity", 0);
+					t2.selectAll("text").call(self.text).style("fill-opacity", 1);
+					t1.selectAll("rect").call(self.rect);
+					t2.selectAll("rect").call(self.rect);
+
+					// Remove the old node when the transition is finished.
+					t1.remove().each("end", function () {
+						svg.style("shape-rendering", "crispEdges");
+						transitioning = false;
+					});
+				}
+
+				return g;
+			}
+		},
+
+		text: function text(_text) {
+			var _props2 = this.props;
+			var x = _props2.x;
+			var y = _props2.y;
+
+			_text.attr("x", function (d) {
+				return x(d.x) + 6;
+			}).attr("y", function (d) {
+				return y(d.y) + 6;
+			});
+		},
+
+		rect: function rect(_rect) {
+			var _props3 = this.props;
+			var x = _props3.x;
+			var y = _props3.y;
+
+			_rect.attr("x", function (d) {
+				return x(d.x);
+			}).attr("y", function (d) {
+				return y(d.y);
+			}).attr("width", function (d) {
+				return x(d.x + d.dx) - x(d.x);
+			}).attr("height", function (d) {
+				return y(d.y + d.dy) - y(d.y);
+			});
+		},
+
+		name: function name(d) {
+			return d.parent ? this.name(d.parent) + "." + d.name : d.name;
+		},
+
+		render: function render() {
+			return React.createElement('div', null);
+		}
+	});
+
+	var TreeMap = React.createClass({
+		displayName: 'TreeMap',
+
+		mixins: [DefaultPropsMixin, HeightWidthMixin, AccessorMixin, TooltipMixin],
+
+		propTypes: {
+			sort: React.PropTypes.any
+		},
+
+		getDefaultProps: function getDefaultProps() {
+			return {
+				sort: undefined
+			};
+		},
+
+		getInitialState: function getInitialState() {
+			return {
+				chartData: {
+					"name": "",
+					"children": []
+				}
+			};
+		},
+
+		componentWillMount: function componentWillMount() {
+			if (this.props.dataURL) {
+				var _this = this;
+				/* Old school AJAX request to try to stay away from jQuery */
+				var req = new XMLHttpRequest();
+				req.onreadystatechange = function () {
+					if (req.readyState == 4 && req.status == 200) {
+						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
+					}
+				};
+				req.open("GET", this.props.dataURL, true);
+				req.send();
+			} else if (this.props.chartData) {
+				this.setState({ chartData: this.props.chartData });
+			}
+		},
+
+		render: function render() {
+			var _props4 = this.props;
+			var width = _props4.width;
+			var height = _props4.height;
+			var margin = _props4.margin;
+			var colorScale = _props4.colorScale;
+			var sort = _props4.sort;
+			var values = _props4.values;
+			var chartTitle = _props4.chartTitle;
+
+			var formatNumber = d3.format(",d");
+
+			var x = d3.scale.linear().domain([0, width]).range([0, width]);
+
+			var y = d3.scale.linear().domain([0, height]).range([0, height]);
+
+			var treemap = d3.layout.treemap().children(function (d, depth) {
+				return depth ? null : d._children;
+			}).sort(function (a, b) {
+				return a.value - b.value;
+			}).ratio(height / width * 0.5 * (1 + Math.sqrt(5))).round(false);
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'h3',
+					{ className: "chartTitle" },
+					chartTitle
+				),
+				React.createElement(DataSet, {
+					data: this.state.chartData,
+					width: width,
+					height: height - margin.top - margin.bottom,
+					margin: margin,
+					formatNumber: formatNumber,
+					x: x,
+					y: y,
+					treemap: treemap
+				})
+			);
+		}
+	});
+
+	module.exports = TreeMap;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactDom = __webpack_require__(8);
+
+	var React = __webpack_require__(154);
+	var d3 = __webpack_require__(168);
+
+	var Chart = __webpack_require__(169);
+	var Tooltip = __webpack_require__(172);
+
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
+
+	var DataSet = React.createClass({
+		displayName: 'DataSet',
+
+		componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+			var _props = this.props;
+			var data = _props.data;
+			var diameter = _props.diameter;
+			var width = _props.width;
+			var height = _props.height;
+
+			var el = (0, _reactDom.findDOMNode)(this);
+
+			var svg = d3.select(el).append("svg").attr("width", width).attr("height", height).attr("class", "bubble");
+
+			svg.selectAll("*").remove(); // clear nodes with state change
+
+			var format = d3.format(",d"),
+			    color = d3.scale.category20c();
+
+			var bubble = d3.layout.pack().sort(null).size([diameter, diameter]).padding(1.5);
+
+			var node = svg.selectAll(".node").data(bubble.nodes(this.classes(data)).filter(function (d) {
+				return !d.children;
+			})).enter().append("g").attr("class", "node").attr("transform", function (d) {
+				return "translate(" + d.x + "," + d.y + ")";
+			});
+
+			node.append("title").text(function (d) {
+				return d.className + ": $" + format(d.value);
+			});
+
+			node.append("circle").attr("r", function (d) {
+				return d.r;
+			}).style("fill", function (d) {
+				return color(d.packageName);
+			});
+
+			node.append("text").attr("dy", ".3em").style("text-anchor", "middle").text(function (d) {
+				return d.className.substring(0, d.r / 3);
+			});
+
+			//d3.select(self.frameElement).style("height", height + "px");
+		},
+
+		// Returns a flattened hierarchy containing all leaf nodes under the root.
+		classes: function classes(root) {
+			var classes = [];
+
+			function recurse(name, node) {
+				if (node.children) {
+					node.children.forEach(function (child) {
+						recurse(node.name, child);
+					});
+				} else {
+					classes.push({ packageName: name, className: node.name, value: node.size });
+				}
+			}
+
+			recurse(null, root);
+			return { children: classes };
+		},
+
+		render: function render() {
+			return React.createElement('div', null);
+		}
+	});
+
+	var BubbleChart = React.createClass({
+		displayName: 'BubbleChart',
+
+		mixins: [DefaultPropsMixin, HeightWidthMixin, AccessorMixin, TooltipMixin],
+
+		getInitialState: function getInitialState() {
+			return {
+				chartData: {
+					"name": "",
+					"children": [{
+						"name": "",
+						"size": 0
+					}]
+				}
+			};
+		},
+
+		componentWillMount: function componentWillMount() {
+			if (this.props.dataURL) {
+				var _this = this;
+				/* Old school AJAX request to try to stay away from jQuery */
+				var req = new XMLHttpRequest();
+				req.onreadystatechange = function () {
+					if (req.readyState == 4 && req.status == 200) {
+						var data = JSON.parse(req.responseText);
+						if (_this.props.processor) {
+							var processedData = _this.props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
+					}
+				};
+				req.open("GET", this.props.dataURL, true);
+				req.send();
+			} else if (this.props.chartData) {
+				this.setState({ chartData: this.props.chartData });
+			}
+		},
+
+		render: function render() {
+			var _props2 = this.props;
+			var width = _props2.width;
+			var height = _props2.height;
+			var margin = _props2.margin;
+			var diameter = _props2.diameter;
+			var chartTitle = _props2.chartTitle;
+
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'h3',
+					{ className: "chartTitle" },
+					chartTitle
+				),
+				React.createElement(DataSet, {
+					data: this.state.chartData,
+					width: width,
+					height: height,
+					margin: margin,
+					diameter: diameter
+				})
+			);
+		}
+	});
+
+	module.exports = BubbleChart;
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactDom = __webpack_require__(8);
+
+	var React = __webpack_require__(154);
+	var d3 = __webpack_require__(168);
+
+	var Chart = __webpack_require__(169);
+	var Tooltip = __webpack_require__(172);
+	var SankeyImport = __webpack_require__(212);
+
+	var DefaultPropsMixin = __webpack_require__(194);
+	var HeightWidthMixin = __webpack_require__(195);
+	var AccessorMixin = __webpack_require__(203);
+	var TooltipMixin = __webpack_require__(200);
+
+	var DataSet = React.createClass({
+	  displayName: 'DataSet',
+
+	  componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+	    var _props = this.props;
+	    var data = _props.data;
+	    var width = _props.width;
+	    var height = _props.height;
+	    var margin = _props.margin;
+
+	    var el = (0, _reactDom.findDOMNode)(this);
+
+	    var svg = d3.select(el).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	    svg.selectAll("*").remove(); // clear nodes with state change
+
+	    var formatNumber = d3.format(",.0f"),
+	        format = function format(d) {
+	      return "$" + formatNumber(d);
+	    },
+	        color = d3.scale.category20();
+
+	    var sankey = d3.sankey().nodeWidth(15).nodePadding(10).size([width, height]);
+
+	    var path = sankey.link();
+
+	    sankey.nodes(data.nodes).links(data.links).layout(32);
+
+	    var link = svg.append("g").selectAll(".link").data(data.links).enter().append("path").attr("class", "link").attr("d", path).style("stroke-width", function (d) {
+	      return Math.max(1, d.dy);
+	    }).sort(function (a, b) {
+	      return b.dy - a.dy;
+	    });
+
+	    link.append("title").text(function (d) {
+	      return d.source.name + " → " + d.target.name + "\n" + format(d.value);
+	    });
+
+	    var node = svg.append("g").selectAll(".node").data(data.nodes).enter().append("g").attr("class", "node").attr("transform", function (d) {
+	      return "translate(" + d.x + "," + d.y + ")";
+	    }).call(d3.behavior.drag().origin(function (d) {
+	      return d;
+	    }).on("dragstart", function () {
+	      this.parentNode.appendChild(this);
+	    }).on("drag", dragmove));
+
+	    node.append("rect").attr("height", function (d) {
+	      return d.dy;
+	    }).attr("width", sankey.nodeWidth()).style("fill", function (d) {
+	      return d.color = color(d.name.replace(/ .*/, ""));
+	    }).style("stroke", function (d) {
+	      return d3.rgb(d.color).darker(2);
+	    }).append("title").text(function (d) {
+	      return d.name + "\n" + format(d.value);
+	    });
+
+	    node.append("text").attr("x", -6).attr("y", function (d) {
+	      return d.dy / 2;
+	    }).attr("dy", ".35em").attr("text-anchor", "end").attr("transform", null).text(function (d) {
+	      return d.name;
+	    }).filter(function (d) {
+	      return d.x < width / 2;
+	    }).attr("x", 6 + sankey.nodeWidth()).attr("text-anchor", "start");
+
+	    function dragmove(d) {
+	      d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+	      sankey.relayout();
+	      link.attr("d", path);
+	    }
+	  },
+
+	  // Returns a flattened hierarchy containing all leaf nodes under the root.
+	  classes: function classes(root) {
+	    var classes = [];
+
+	    function recurse(name, node) {
+	      if (node.children) {
+	        node.children.forEach(function (child) {
+	          recurse(node.name, child);
+	        });
+	      } else {
+	        classes.push({ packageName: name, className: node.name, value: node.size });
+	      }
+	    }
+
+	    recurse(null, root);
+	    return { children: classes };
+	  },
+
+	  render: function render() {
+	    return React.createElement('div', null);
+	  }
+	});
+
+	var Sankey = React.createClass({
+	  displayName: 'Sankey',
+
+	  mixins: [DefaultPropsMixin, HeightWidthMixin, AccessorMixin, TooltipMixin],
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      chartData: {
+	        "nodes": [],
+	        "links": []
+	      }
+	    };
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    if (this.props.dataURL) {
+	      var _this = this;
+	      /* Old school AJAX request to try to stay away from jQuery */
+	      var req = new XMLHttpRequest();
+	      req.onreadystatechange = function () {
+	        if (req.readyState == 4 && req.status == 200) {
+	          var data = JSON.parse(req.responseText);
+	          if (_this.props.processor) {
+	            var processedData = _this.props.processor(data);
+	            _this.setState({ chartData: processedData });
+	          } else {
+	            _this.setState({ chartData: data });
+	          }
+	        }
+	      };
+	      req.open("GET", this.props.dataURL, true);
+	      req.send();
+	    } else if (this.props.chartData) {
+	      this.setState({ chartData: this.props.chartData });
+	    }
+	  },
+
+	  render: function render() {
+	    var _props2 = this.props;
+	    var width = _props2.width;
+	    var height = _props2.height;
+	    var margin = _props2.margin;
+	    var chartTitle = _props2.chartTitle;
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h3',
+	        { className: "chartTitle" },
+	        chartTitle
+	      ),
+	      React.createElement(DataSet, {
+	        data: this.state.chartData,
+	        width: width - margin.left - margin.right,
+	        height: height - margin.top - margin.bottom,
+	        margin: margin
+	      })
+	    );
+	  }
+	});
+
+	module.exports = Sankey;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	d3.sankey = function () {
+	  var sankey = {},
+	      nodeWidth = 24,
+	      nodePadding = 8,
+	      size = [1, 1],
+	      nodes = [],
+	      links = [];
+
+	  sankey.nodeWidth = function (_) {
+	    if (!arguments.length) return nodeWidth;
+	    nodeWidth = +_;
+	    return sankey;
+	  };
+
+	  sankey.nodePadding = function (_) {
+	    if (!arguments.length) return nodePadding;
+	    nodePadding = +_;
+	    return sankey;
+	  };
+
+	  sankey.nodes = function (_) {
+	    if (!arguments.length) return nodes;
+	    nodes = _;
+	    return sankey;
+	  };
+
+	  sankey.links = function (_) {
+	    if (!arguments.length) return links;
+	    links = _;
+	    return sankey;
+	  };
+
+	  sankey.size = function (_) {
+	    if (!arguments.length) return size;
+	    size = _;
+	    return sankey;
+	  };
+
+	  sankey.layout = function (iterations) {
+	    computeNodeLinks();
+	    computeNodeValues();
+	    computeNodeBreadths();
+	    computeNodeDepths(iterations);
+	    computeLinkDepths();
+	    return sankey;
+	  };
+
+	  sankey.relayout = function () {
+	    computeLinkDepths();
+	    return sankey;
+	  };
+
+	  sankey.link = function () {
+	    var curvature = .5;
+
+	    function link(d) {
+	      var x0 = d.source.x + d.source.dx,
+	          x1 = d.target.x,
+	          xi = d3.interpolateNumber(x0, x1),
+	          x2 = xi(curvature),
+	          x3 = xi(1 - curvature),
+	          y0 = d.source.y + d.sy + d.dy / 2,
+	          y1 = d.target.y + d.ty + d.dy / 2;
+	      return "M" + x0 + "," + y0 + "C" + x2 + "," + y0 + " " + x3 + "," + y1 + " " + x1 + "," + y1;
+	    }
+
+	    link.curvature = function (_) {
+	      if (!arguments.length) return curvature;
+	      curvature = +_;
+	      return link;
+	    };
+
+	    return link;
+	  };
+
+	  // Populate the sourceLinks and targetLinks for each node.
+	  // Also, if the source and target are not objects, assume they are indices.
+	  function computeNodeLinks() {
+	    nodes.forEach(function (node) {
+	      node.sourceLinks = [];
+	      node.targetLinks = [];
+	    });
+	    links.forEach(function (link) {
+	      var source = link.source,
+	          target = link.target;
+	      if (typeof source === "number") source = link.source = nodes[link.source];
+	      if (typeof target === "number") target = link.target = nodes[link.target];
+	      source.sourceLinks.push(link);
+	      target.targetLinks.push(link);
+	    });
+	  }
+
+	  // Compute the value (size) of each node by summing the associated links.
+	  function computeNodeValues() {
+	    nodes.forEach(function (node) {
+	      node.value = Math.max(d3.sum(node.sourceLinks, value), d3.sum(node.targetLinks, value));
+	    });
+	  }
+
+	  // Iteratively assign the breadth (x-position) for each node.
+	  // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+	  // nodes with no incoming links are assigned breadth zero, while
+	  // nodes with no outgoing links are assigned the maximum breadth.
+	  function computeNodeBreadths() {
+	    var remainingNodes = nodes,
+	        nextNodes,
+	        x = 0;
+
+	    while (remainingNodes.length) {
+	      nextNodes = [];
+	      remainingNodes.forEach(function (node) {
+	        node.x = x;
+	        node.dx = nodeWidth;
+	        node.sourceLinks.forEach(function (link) {
+	          if (nextNodes.indexOf(link.target) < 0) {
+	            nextNodes.push(link.target);
+	          }
+	        });
+	      });
+	      remainingNodes = nextNodes;
+	      ++x;
+	    }
+
+	    //
+	    moveSinksRight(x);
+	    scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+	  }
+
+	  function moveSourcesRight() {
+	    nodes.forEach(function (node) {
+	      if (!node.targetLinks.length) {
+	        node.x = d3.min(node.sourceLinks, function (d) {
+	          return d.target.x;
+	        }) - 1;
+	      }
+	    });
+	  }
+
+	  function moveSinksRight(x) {
+	    nodes.forEach(function (node) {
+	      if (!node.sourceLinks.length) {
+	        node.x = x - 1;
+	      }
+	    });
+	  }
+
+	  function scaleNodeBreadths(kx) {
+	    nodes.forEach(function (node) {
+	      node.x *= kx;
+	    });
+	  }
+
+	  function computeNodeDepths(iterations) {
+	    var nodesByBreadth = d3.nest().key(function (d) {
+	      return d.x;
+	    }).sortKeys(d3.ascending).entries(nodes).map(function (d) {
+	      return d.values;
+	    });
+
+	    //
+	    initializeNodeDepth();
+	    resolveCollisions();
+	    for (var alpha = 1; iterations > 0; --iterations) {
+	      relaxRightToLeft(alpha *= .99);
+	      resolveCollisions();
+	      relaxLeftToRight(alpha);
+	      resolveCollisions();
+	    }
+
+	    function initializeNodeDepth() {
+	      var ky = d3.min(nodesByBreadth, function (nodes) {
+	        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+	      });
+
+	      nodesByBreadth.forEach(function (nodes) {
+	        nodes.forEach(function (node, i) {
+	          node.y = i;
+	          node.dy = node.value * ky;
+	        });
+	      });
+
+	      links.forEach(function (link) {
+	        link.dy = link.value * ky;
+	      });
+	    }
+
+	    function relaxLeftToRight(alpha) {
+	      nodesByBreadth.forEach(function (nodes, breadth) {
+	        nodes.forEach(function (node) {
+	          if (node.targetLinks.length) {
+	            var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+	            node.y += (y - center(node)) * alpha;
+	          }
+	        });
+	      });
+
+	      function weightedSource(link) {
+	        return center(link.source) * link.value;
+	      }
+	    }
+
+	    function relaxRightToLeft(alpha) {
+	      nodesByBreadth.slice().reverse().forEach(function (nodes) {
+	        nodes.forEach(function (node) {
+	          if (node.sourceLinks.length) {
+	            var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+	            node.y += (y - center(node)) * alpha;
+	          }
+	        });
+	      });
+
+	      function weightedTarget(link) {
+	        return center(link.target) * link.value;
+	      }
+	    }
+
+	    function resolveCollisions() {
+	      nodesByBreadth.forEach(function (nodes) {
+	        var node,
+	            dy,
+	            y0 = 0,
+	            n = nodes.length,
+	            i;
+
+	        // Push any overlapping nodes down.
+	        nodes.sort(ascendingDepth);
+	        for (i = 0; i < n; ++i) {
+	          node = nodes[i];
+	          dy = y0 - node.y;
+	          if (dy > 0) node.y += dy;
+	          y0 = node.y + node.dy + nodePadding;
+	        }
+
+	        // If the bottommost node goes outside the bounds, push it back up.
+	        dy = y0 - nodePadding - size[1];
+	        if (dy > 0) {
+	          y0 = node.y -= dy;
+
+	          // Push any overlapping nodes back up.
+	          for (i = n - 2; i >= 0; --i) {
+	            node = nodes[i];
+	            dy = node.y + node.dy + nodePadding - y0;
+	            if (dy > 0) node.y -= dy;
+	            y0 = node.y;
+	          }
+	        }
+	      });
+	    }
+
+	    function ascendingDepth(a, b) {
+	      return a.y - b.y;
+	    }
+	  }
+
+	  function computeLinkDepths() {
+	    nodes.forEach(function (node) {
+	      node.sourceLinks.sort(ascendingTargetDepth);
+	      node.targetLinks.sort(ascendingSourceDepth);
+	    });
+	    nodes.forEach(function (node) {
+	      var sy = 0,
+	          ty = 0;
+	      node.sourceLinks.forEach(function (link) {
+	        link.sy = sy;
+	        sy += link.dy;
+	      });
+	      node.targetLinks.forEach(function (link) {
+	        link.ty = ty;
+	        ty += link.dy;
+	      });
+	    });
+
+	    function ascendingSourceDepth(a, b) {
+	      return a.source.y - b.source.y;
+	    }
+
+	    function ascendingTargetDepth(a, b) {
+	      return a.target.y - b.target.y;
+	    }
+	  }
+
+	  function center(node) {
+	    return node.y + node.dy / 2;
+	  }
+
+	  function value(link) {
+	    return link.value;
+	  }
+
+	  return sankey;
+	};
 
 /***/ }
 /******/ ]);
