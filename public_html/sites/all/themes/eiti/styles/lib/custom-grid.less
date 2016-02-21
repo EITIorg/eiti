@@ -12,6 +12,13 @@
   width: (@gen_column_width + @gen_gutter_width) * @count;
 }
 
+.single-fluid-row-wrapper(@count: @gen_total_columns) {
+  margin: 0 auto;
+  padding-left: @gen_gutter_width / 2;
+  padding-right: @gen_gutter_width / 2;
+  width: (@gen_column_width + @gen_gutter_width) * @count;
+}
+
 .column(@count) {
   display: inline;
   float: left;
