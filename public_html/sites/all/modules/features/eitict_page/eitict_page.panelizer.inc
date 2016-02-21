@@ -39,36 +39,11 @@ function eitict_page_panelizer_defaults() {
     ),
   );
   $display->cache = array();
-  $display->title = '%node:title';
+  $display->title = '';
   $display->uuid = 'efb8cb46-fccb-4a8f-babc-54b05753da30';
   $display->content = array();
   $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-e964963d-dd5a-408e-8de8-b36eee6be82d';
-    $pane->panel = 'main';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'No content message',
-      'title' => '',
-      'body' => 'No content has been configured for this page.',
-      'format' => 'plain_text',
-      'substitute' => 0,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = 'e964963d-dd5a-408e-8de8-b36eee6be82d';
-    $display->content['new-e964963d-dd5a-408e-8de8-b36eee6be82d'] = $pane;
-    $display->panels['main'][0] = 'new-e964963d-dd5a-408e-8de8-b36eee6be82d';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:page:default:default'] = $panelizer;
