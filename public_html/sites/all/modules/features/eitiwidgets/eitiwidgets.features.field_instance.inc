@@ -641,7 +641,7 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the wide background image used for the header.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -722,7 +722,7 @@ function eitiwidgets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
