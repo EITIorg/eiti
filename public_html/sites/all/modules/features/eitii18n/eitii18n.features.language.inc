@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * eitisettings.features.language.inc
+ * eitii18n.features.language.inc
  */
 
 /**
  * Implements hook_locale_default_languages().
  */
-function eitisettings_locale_default_languages() {
+function eitii18n_locale_default_languages() {
   $languages = array();
 
   // Exported language: en.
