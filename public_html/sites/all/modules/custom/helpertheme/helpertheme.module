@@ -213,6 +213,9 @@ function helpertheme_preprocess_html(&$variables) {
   $variables['html_attributes']['dir'] = $variables['language']->dir;
   $variables['html_attributes']['xmlns:svg'] = 'http://www.w3.org/2000/svg';
   $variables['html_attributes']['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
+
+  // Allow modules to add classes.
+  $variables['classes_array'] = array_merge($variables['classes_array'], helpertheme_get_html_classes());
 }
 
 /**
@@ -295,6 +298,9 @@ function helpertheme_preprocess_page(&$variables) {
     $font_url = url($url_scheme . 'fonts.googleapis.com/css', $options);
     drupal_add_css($font_url, $css_options);
   }
+
+  // Allow modules to hide the page title.
+  $variables['page_title_visible'] = helpertheme_page_title_get_status();
 }
 
 /**
@@ -401,6 +407,10 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
       //break;
     default:
       $available_icons += array(
+        'calendar_add',
+        'information',
+        'globe_wireframe',
+        'question',
         'search',
 
         'facebook',
@@ -423,4 +433,13 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
     $icons_list[$name] = theme('svg_sprite', array('symbol' => $name) + $options);
   }
   return $icons_list;
+}
+
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function helpertheme_panels_pre_render($panels_display, $renderer) {
+  $class = drupal_html_class('page-layout--' . $panels_display->layout);
+  helpertheme_set_html_classes($class);
 }

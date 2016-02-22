@@ -55,7 +55,10 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
   $block['overlay'] = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array('overlay-wrapper'),
+      'class' => array(
+        'single-fluid-row-wrapper',
+        'overlay-wrapper',
+      ),
     )
   );
 

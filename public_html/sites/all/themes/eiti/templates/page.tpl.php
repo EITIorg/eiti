@@ -51,7 +51,7 @@
         <?php if ($title || $title_prefix || $title_suffix): ?>
           <div class="page-title-wrapper">
             <?php print render($title_prefix); ?>
-            <?php if ($title): ?>
+            <?php if ($title && $page_title_visible): ?>
               <h1 class="page-title"><?php print $title; ?></h1>
             <?php endif; ?>
             <?php print render($title_suffix); ?>

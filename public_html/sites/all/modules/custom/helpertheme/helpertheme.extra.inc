@@ -75,3 +75,55 @@ function _helpertheme_prepare_tree($item, $is_sublevel = FALSE) {
 
   return $link;
 }
+
+/**
+ * Get the page title visibility.
+ */
+function helpertheme_page_title_get_status() {
+  if (drupal_is_front_page()) {
+    return FALSE;
+  }
+
+  return (bool) helpertheme_page_title_set_status();
+}
+
+/**
+ * Set the page title visibility.
+ */
+function helpertheme_page_title_set_status($value = NULL) {
+  static $status;
+  if (!isset($value) && isset($status)) {
+    return $status;
+  }
+
+  if (isset($value)) {
+    $status = $value;
+    return $status;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Get the extra classes for the page HTML tag.
+ */
+function helpertheme_get_html_classes() {
+  return helpertheme_set_html_classes();
+}
+
+/**
+ * Set extra classes for the page HTML tag.
+ */
+function helpertheme_set_html_classes($new = NULL) {
+  static $classes = array();
+  if (!isset($new)) {
+    return $classes;
+  }
+
+  if (is_string($new)) {
+    $new = array($new);
+  }
+
+  $classes = array_merge($classes, $new);
+  return $classes;
+}

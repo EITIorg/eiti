@@ -73,3 +73,28 @@ function eitiwidgets_fieldable_panels_pane_view($panels_pane, $view_mode, $langc
     unset($panels_pane->content['title']);
   }
 }
+
+/**
+ * Implements hook_panels_pane_content_alter().
+ */
+function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts) {
+  if (!isset($content->content['#fieldable_panels_pane'])) {
+    return;
+  }
+  $entity = $content->content['#fieldable_panels_pane'];
+
+  // Get the field language.
+  $langcode = $content->content['#language'];
+  $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $langcode);
+
+  if (!isset($entity->field_fpp_widget[$field_language][0])) {
+    return;
+  }
+  $field_values = reset($entity->field_fpp_widget[$field_language]);
+
+  if (!isset($pane->css['css_class'])) {
+    $pane->css['css_class'] = '';
+  }
+
+  $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $field_values['widget']);
+}
