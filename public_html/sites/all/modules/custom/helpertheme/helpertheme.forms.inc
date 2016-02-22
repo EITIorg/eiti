@@ -4,6 +4,40 @@
  * Define helper functions.
  */
 
+/**
+ * Implements hook_features_component_export_alter().
+ *
+ * Filter the available components in the (re)create feature form.
+ *
+ * @param array $component_export
+ * @param string $component
+ */
+function helpertheme_features_component_export_alter(&$component_export, $component) {
+  $entries_list = array();
+  switch ($component) {
+    case 'variable':
+      // Hide variables that should not be exported.
+      $entries_list = array(
+        'site_footer_contact',
+        'site_footer_legal',
+        'site_footer_slogan',
+      );
+  }
+
+  $removed_entries_list = array();
+  foreach ($entries_list as $name) {
+    if (isset($component_export['options']['sources'][$name])) {
+      unset($component_export['options']['sources'][$name]);
+      $removed_entries_list[] = check_plain($name);
+    }
+
+    if ($component == 'dependencies') {
+      if (isset($component_export['options']['detected'][$name])) {
+        unset($component_export['options']['detected'][$name]);
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter() for menu_edit_item().
