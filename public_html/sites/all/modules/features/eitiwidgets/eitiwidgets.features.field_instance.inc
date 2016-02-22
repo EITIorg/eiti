@@ -18,13 +18,10 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 0,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -63,11 +60,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Bookmark widget configuration.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',

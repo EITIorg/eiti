@@ -109,16 +109,6 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_fieldable_panels_pane_view().
- */
-function eitiwidgets_fieldable_panels_pane_view($panels_pane, $view_mode, $langcode) {
-  // Hide original title when title_field is used (not displayed) on the entity.
-  if (isset($panels_pane->title_field) && isset($panels_pane->content['title'])) {
-    unset($panels_pane->content['title']);
-  }
-}
-
-/**
  * Implements hook_panels_pane_content_alter().
  */
 function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts) {
@@ -131,7 +121,7 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
     $pane->css['css_class'] = '';
   }
 
-  // Get the field language.
+  // Add Widget type as a CSS class onto the FPP pane wrapper.
   $langcode = $content->content['#language'];
   $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $langcode);
   if (isset($entity->field_fpp_widget[$field_language][0])) {

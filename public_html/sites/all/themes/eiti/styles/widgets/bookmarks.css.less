@@ -1,0 +1,66 @@
+
+// @TODO: Cleanup!
+.predefined-widget--bookmarks {
+  .bookmark-items-wrapper {
+    margin: 0;
+    padding: 0;
+
+    // Add some spacing.
+    padding-bottom: 1px;
+    padding-top: 1px;
+
+    li {
+      display: inline-block;
+      float: left;
+
+      // Add some spacing.
+      padding: 1px;
+    }
+  }
+
+  .custom-layout {
+    .link-color(@claltnormal__light, @clactive__alt);
+    .transition(color, 400ms, ease-in);
+    text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
+
+    // Allow the .overlay-wrapper to be positioned relatively.
+    position: relative;
+
+  }
+
+  .overlay-wrapper {
+    padding: 1.5em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .overlay-wrapper {
+    .title {
+      margin: 0;
+    }
+  }
+
+  .field-name-field-bm-image {
+    .transition(opacity, 400ms, ease-in);
+    opacity: 1;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.xMediumAndDown() {
+  .predefined-widget--bookmarks {
+    .bookmark-items-wrapper {
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+}
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
