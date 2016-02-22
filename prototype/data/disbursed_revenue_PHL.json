@@ -1,0 +1,68 @@
+{
+  "name": "disbursement",
+  "children": [
+        {
+          "name": "child1",
+          "children": [
+            {
+              "name": "BIR - Bureau of Internal Revenue",
+              "size": 21362108023
+            }
+          ]
+        },
+        {
+          "name": "child2",
+          "children": [
+            { 
+              "name": "BOC - Bureau of Customs",
+              "size": 740782128
+            }
+          ]
+        },
+        {
+          "name": "child3",
+          "children": [
+            {
+              "name": "DOE - Department of Energy",
+              "size": 28994846929
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "LGU - Local Government Units",
+              "size": 372165870
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "MGB - Mines and Geosciences Bureau",
+              "size": 964588147
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "NCIP - National Commission on Indigenous Peoples",
+              "size": 258603651
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "PPA - Philippine Ports Authority",
+              "size": 70402518
+            }
+          ]
+        }
+    ]
+}

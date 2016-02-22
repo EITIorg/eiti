@@ -367,8 +367,8 @@ The Philippines is a leading producer of mineral commodities such as nickel (the
       </ul>
     </div>
 
-    <div class="section-chart-container section-viz">
-      Bar chart of production volumes of commodities over time. Data drawn from summary data.
+    <div class="section-chart-container">
+        <div id="chart_production"></div>
     </div>
 
     <div class="learn-more-section">
@@ -421,13 +421,12 @@ The latest EITI disclosures (2013) show that the Philippines received USD 982 mi
 
     </div>
 
-    <div class="section-chart-container section-viz">
-        stacked chart goes here
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_1"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-        histogram chart goes here:  Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-Revenue data comes from EITI summary data sheet.
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_2"></div>
     </div>
 
   </div>
@@ -461,20 +460,12 @@ Revenue data comes from EITI summary data sheet.
         </ul>
     </div>
 
-    <div class="section-chart-container section-viz">
-      Bubble chart that shows where revenue is disbursed
-Data from summary data sheet
-
-Alternative to be considered:
-Treemap chart: Company payments. Showing revenue by company.
-Data comes from summary data sheet.
-http://bl.ocks.org/mbostock/4063582
-
-
+    <div class="section-chart-container">
+      <div id="bubble"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-Disbursement (Sankey diagram)
+    <div class="section-chart-container">
+      <div id="sankey"></div>
     </div>
 
     <div class="learn-more-section">
@@ -734,33 +725,27 @@ The Government of the Philippines committed to implement EITI on 6 July 2012, th
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Value (Oil: bbl, Gas: million cu.ft, Gold: kg )",
               container: "chart_production",
               legendClass: "grouped-item",
               description: ""
       },
       [{
-          "label": "Gas",
+          "label": "Oild",
                 "values": [
-                    {"x": "2008", "y": 1095196071},
-                    {"x": "2009", "y": 498084744},
-                    {"x": "2010", "y": 1140017166}
+                    {"x": "2012", "y": 1637548}
                 ]
           },
           {
-          "label": "NGL",
+          "label": "Gas",
                 "values": [
-                    {"x": "2008", "y": 4374586842},
-                    {"x": "2009", "y": 3265934655},
-                    {"x": "2010", "y": 4547089022}
+                    {"x": "2012", "y": 134563}
                 ]
           },
           {
           "label": "Gold",
                 "values": [
-                    {"x": "2008", "y": 3726795277},
-                    {"x": "2009", "y": 4202969161},
-                    {"x": "2010", "y": 4289524923}
+                    {"x": "2012", "y": 14596}
                 ]
           }
       ]);
@@ -772,11 +757,11 @@ The Government of the Philippines committed to implement EITI on 6 July 2012, th
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Revenue (USD)",
+              ylabel: "Revenue (PHP)",
               legendClass: "stacked-item",
               container: "chart_comparative_gov_1"
       },
-      'data/government_income_by_type_of_revenue.json');
+      'data/government_income_by_type_of_revenue_PHL.json');
 
       chartWidget.create({
         type: "GroupedBar",
@@ -785,7 +770,7 @@ The Government of the Philippines committed to implement EITI on 6 July 2012, th
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Value (PHP)",
               legendClass: "grouped-item",
               container: "chart_comparative_gov_2"
       },
@@ -793,56 +778,19 @@ The Government of the Philippines committed to implement EITI on 6 July 2012, th
         {
         "label": "Extractives",
               "values": [
-                  {"x": "2008", "y": 3573697356},
-                  {"x": "2009", "y": 2965369767},
-                  {"x": "2010", "y": 4358147652},
-                  {"x": "2011", "y": 5884357012},
-                  {"x": "2012", "y": 5480853241},
-                  {"x": "2013", "y": 5511486805}
+                  {"x": "2012", "y": 1542831453}
               ]
         },
         {
         "label": "GDP",
               "values": [
-                  {"x": "2008", "y": 121572308726.00},
-                  {"x": "2009", "y": 121192333743.00},
-                  {"x": "2010", "y": 148522048128.00},
-                  {"x": "2011", "y": 170564249005.00},
-                  {"x": "2012", "y": 192679697094.00},
-                  {"x": "2013", "y": 201848484664.00}
+                  {"x": "2012", "y": 271927428132.00}
               ]
         },
         {
         "label": "Aid",
               "values": [
-                  {"x": "2008", "y": 3200000000},
-                  {"x": "2009", "y": 5400000000},
-                  {"x": "2010", "y": 4500000000},
-                  {"x": "2011", "y": 734000000},
-                  {"x": "2012", "y": 1200000000},
-                  {"x": "2013", "y": 792000000}
-              ]
-        },
-        {
-        "label": "Remittance Inflows",
-              "values": [
-                  {"x": "2008", "y": 2600000000},
-                  {"x": "2009", "y": 2600000000},
-                  {"x": "2010", "y": 2700000000},
-                  {"x": "2011", "y": 2700000000},
-                  {"x": "2012", "y": 2800000000},
-                  {"x": "2013", "y": 0}
-              ]
-        },
-        {
-          "label": "FDI",
-              "values": [
-                  {"x": "2008", "y": 7200000000},
-                  {"x": "2009", "y": 6900000000},
-                  {"x": "2010", "y": 9000000000},
-                  {"x": "2011", "y": 8200000000},
-                  {"x": "2012", "y": 12500000000},
-                  {"x": "2013", "y": 0}
+                  {"x": "2012", "y": 1960000000}
               ]
         }
     ]
@@ -860,17 +808,17 @@ The Government of the Philippines committed to implement EITI on 6 July 2012, th
         margin: {top: 20, right: 0, bottom: 0, left: 0},
         container: "bubble"
       },
-      'data/disbursed_revenue_PERU.json');
+      'data/disbursed_revenue_PHL.json');
 
       chartWidget.create({
         type: "Sankey",
         name: "Disbursements by Company (Top 10, in PEN)",
         width: 800,
-        height: 300,
+        height: 600,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
               container: "sankey"
       },
-      'data/sankey.json');
+      'data/sankey_PHL.json');
 
     </script>
 </body>
