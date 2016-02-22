@@ -37,14 +37,18 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
   // Load the libraries, leaflet first.
   $library_leaflet = libraries_load('leaflet');
   if (empty($library_leaflet)) {
-    $block->content = t('Please make sure the <strong>leaflet</strong> library exists and has proper permission settings.');
+    $block->content = array(
+      '#markup' => t('Please make sure the <strong>leaflet</strong> library exists and has proper permission settings.'),
+    );
     return $block;
   }
 
   // Now our custom EITI Maps.
   $library_maps = libraries_load('eiti-maps');
   if (empty($library_maps)) {
-    $block->content = t('Please make sure the <strong>eiti-maps</strong> library exists and has proper permission settings.');
+    $block->content = array(
+      '#markup' => t('Please make sure the <strong>eiti-maps</strong> library exists and has proper permission settings.'),
+    );
     return $block;
   }
 
