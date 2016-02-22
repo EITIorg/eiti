@@ -127,18 +127,18 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
   }
   $entity = $content->content['#fieldable_panels_pane'];
 
-  // Get the field language.
-  $langcode = $content->content['#language'];
-  $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $langcode);
-
-  if (!isset($entity->field_fpp_widget[$field_language][0])) {
-    return;
-  }
-  $field_values = reset($entity->field_fpp_widget[$field_language]);
-
   if (!isset($pane->css['css_class'])) {
     $pane->css['css_class'] = '';
   }
 
-  $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $field_values['widget']);
+  // Get the field language.
+  $langcode = $content->content['#language'];
+  $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $langcode);
+  if (isset($entity->field_fpp_widget[$field_language][0])) {
+    $field_values = reset($entity->field_fpp_widget[$field_language]);
+    $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $field_values['widget']);
+  }
+  else {
+    $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
+  }
 }
