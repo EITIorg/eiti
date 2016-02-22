@@ -68,17 +68,10 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
       )
     )
   );
+
   if (!empty($image_url)) {
-    $block_style = "background-image: url(${image_url})";
+    $block_style = "background-image: url(${image_url});";
     $block['#attributes']['style'] = $block_style;
-    //$block['image'] = array(
-    //  '#type' => 'html_tag',
-    //  '#tag' => 'img',
-    //  '#attributes' => array(
-    //    'class' => array('background-image', 'wide-image'),
-    //    'src' => $image_url
-    //  ),
-    //);
   }
 
   $block['overlay'] = array(

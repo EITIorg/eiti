@@ -13,11 +13,46 @@ function eitict_bookmark_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_bookmark';
+  $strongarm->value = 0;
+  $export['diff_enable_revisions_page_node_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_bookmark';
+  $strongarm->value = 0;
+  $export['diff_show_preview_changes_node_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_bookmark';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_bookmark';
+  $strongarm->value = 0;
+  $export['entity_translation_hide_translation_links_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_node_metadata_bookmark';
+  $strongarm->value = '0';
+  $export['entity_translation_node_metadata_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__bookmark';
   $strongarm->value = array(
     'view_modes' => array(
       'full' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'bm_large_tile' => array(
         'custom_settings' => TRUE,
@@ -41,6 +76,12 @@ function eitict_bookmark_strongarm() {
         'custom_settings' => FALSE,
       ),
       'revision' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -102,7 +143,7 @@ function eitict_bookmark_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_bookmark';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_bookmark'] = $strongarm;
 
   return $export;
