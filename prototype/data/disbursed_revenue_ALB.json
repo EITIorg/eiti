@@ -1,0 +1,71 @@
+{
+  "name": "disbursement",
+  "children": [{
+    "name": "child1",
+    "children": [{
+      "name": "Ministry of Econcomic Development, Trade, Tourism and Enterpreneurship",
+      "size": 146060548.7
+    }]
+  }, {
+    "name": "child2",
+    "children": [{
+      "name": "Albanian Custom Administrate & General Directory of Taxes",
+      "size": 137306897.1
+    }]
+  }, {
+    "name": "child3",
+    "children": [{
+      "name": "Albpetrol Sh.a.",
+      "size": 70754254.58
+    }]
+  }, {
+    "name": "child4",
+    "children": [{
+      "name": "Unassigned",
+      "size": 63461257.44
+    }]
+  }, {
+    "name": "child5",
+    "children": [{
+      "name": "General Directory of Taxes",
+      "size": 55908538.3
+    }]
+  }, {
+    "name": "child6",
+    "children": [{
+      "name": "Albanian Customs Administrate",
+      "size": 51640635.07
+    }]
+  }, {
+    "name": "child7",
+    "children": [{
+      "name": "General Tax Directorate",
+      "size": 13126322.27
+    }]
+  }, {
+    "name": "child8",
+    "children": [{
+      "name": "KESH on behalf of the Ministry of Economic Development, Trade, Tourism and Enterpreneurship",
+      "size": 1121777.865
+    }]
+  }, {
+    "name": "child9",
+    "children": [{
+      "name": "National Agency of Natural Resources and Albpetrol Sh.a.",
+      "size": 900490.3323
+    }]
+  }, {
+    "name": "child10",
+    "children": [{
+      "name": "Albanian Energy Regulator (ERE)",
+      "size": 888566.0391
+    }]
+  }, {
+    "name": "child11",
+    "children": [{
+      "name": "General Directory of Tax Office",
+      "size": 759433.656
+    }]
+  }
+  ]
+}

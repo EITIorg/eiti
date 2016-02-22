@@ -354,8 +354,8 @@ Mongolia has the world’s fourth largest coal reserves, thermal and coking coal
 Mongolia is a leading producer of mineral commodities such as coal (the world’s 20th largest producer in 2014) and copper, but produces and exports a total of 15 mineral and petroleum commodities including gold, iron ore, zinc, molybdenum, fluorspar, tungsten, silver, tin, gypsum, zeolite, lead and clinker. Mongolia was primarily a copper exporter until 2006, although surging coal exports to China dominated output from 2007 to 2012. Oyu Tolgoi’s ramping up of production since 2013 has led to growing exports of copper concentrate, which offset a slump in coal output. Exploration activity is focused on the North, South and East of the country, with long distances requiring complex associated infrastructure to develop new mines.
     </p>
 
-    <div class="section-chart-container section-viz">
-      Bar chart of production volumes of commodities over time. Data drawn from summary data.
+    <div class="section-chart-container">
+        <div id="chart_production"></div>
     </div>
 
     <div class="learn-more-section">
@@ -403,15 +403,15 @@ Mongolia is a leading producer of mineral commodities such as coal (the world’
 
     </div>
 
-    <div class="section-chart-container section-viz">
-      Stacked chart: “Government revenue by tax type” of breaking out composition of revenue in stack.
+
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_1"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-      Histogram chart: Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-Revenue data comes from EITI summary data sheet.
-
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_2"></div>
     </div>
+
 
   </div>
 </div>
@@ -436,18 +436,15 @@ Revenue data comes from EITI summary data sheet.
       Provincial and district governments receive 25% of VAT (aside from imports), 5% of mining royalties and 30% of oil and gas royalties through the General Local Development Fund. Provincial governments also play a key role in extractive industries oversight, approving new licence applications for instance. The new Law on Glass Accounts requires full disclosure of expenditures by all levels of government.
 </p>
 
-    <div class="section-chart-container section-viz">
-      Bubble chart that shows where revenue is disbursed
-      Alternative to be considered:
-Treemap chart: Company payments. Showing revenue by company.
-Data comes from summary data sheet.
-http://bl.ocks.org/mbostock/4063582
 
+    <div class="section-chart-container">
+      <div id="bubble"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-  Disbursement (Sankey diagram)
+    <div class="section-chart-container">
+      <div id="sankey"></div>
     </div>
+
 
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.png" alt="learn more">
@@ -675,33 +672,63 @@ http://bl.ocks.org/mbostock/4063582
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Value (Oil: bbl, NGL: tonne, Gold: kg, Coal, Iron ore, Flourite: tonne)",
               container: "chart_production",
               legendClass: "grouped-item",
               description: ""
       },
       [{
-          "label": "Gas",
+          "label": "Oil",
                 "values": [
-                    {"x": "2008", "y": 1095196071},
-                    {"x": "2009", "y": 498084744},
-                    {"x": "2010", "y": 1140017166}
+                    {"x": "2009", "y": 0},
+                    {"x": "2011", "y": 2548900 },
+                    {"x": "2012", "y": 2636000 },
+                    {"x": "2013", "y": 5878000 }
                 ]
           },
           {
           "label": "NGL",
                 "values": [
-                    {"x": "2008", "y": 4374586842},
-                    {"x": "2009", "y": 3265934655},
-                    {"x": "2010", "y": 4547089022}
+                    {"x": "2009", "y": 1},
+                    {"x": "2011", "y": 0},
+                    {"x": "2012", "y": 0},
+                    {"x": "2013", "y": 0}
                 ]
           },
           {
           "label": "Gold",
                 "values": [
-                    {"x": "2008", "y": 3726795277},
-                    {"x": "2009", "y": 4202969161},
-                    {"x": "2010", "y": 4289524923}
+                    {"x": "2009", "y": 0},
+                    {"x": "2011", "y": 5702 },
+                    {"x": "2012", "y": 5995 },
+                    {"x": "2013", "y": 8904 }
+                ]
+          },
+          {
+          "label": "Coal",
+                "values": [
+                    {"x": "2009", "y": 13164000 },
+                    {"x": "2011", "y": 32029700 },
+                    {"x": "2012", "y": 31139000 },
+                    {"x": "2013", "y": 30123000 }
+                ]
+          },
+          {
+          "label": "Iron ore",
+                "values": [
+                    {"x": "2009", "y": 1379000 },
+                    {"x": "2011", "y": 5678300 },
+                    {"x": "2012", "y": 7561000 },
+                    {"x": "2013", "y": 6124000 }
+                ]
+          },
+          {
+          "label": "Flourite",
+                "values": [
+                    {"x": "2009", "y": 344200 },
+                    {"x": "2011", "y": 0},
+                    {"x": "2012", "y": 0},
+                    {"x": "2013", "y": 0}
                 ]
           }
       ]);
@@ -717,7 +744,7 @@ http://bl.ocks.org/mbostock/4063582
               legendClass: "stacked-item",
               container: "chart_comparative_gov_1"
       },
-      'data/government_income_by_type_of_revenue.json');
+      'data/government_income_by_type_of_revenue_MNG.json');
 
       chartWidget.create({
         type: "GroupedBar",
@@ -734,55 +761,50 @@ http://bl.ocks.org/mbostock/4063582
         {
         "label": "Extractives",
               "values": [
-                  {"x": "2008", "y": 3573697356},
-                  {"x": "2009", "y": 2965369767},
-                  {"x": "2010", "y": 4358147652},
-                  {"x": "2011", "y": 5884357012},
-                  {"x": "2012", "y": 5480853241},
-                  {"x": "2013", "y": 5511486805}
+                  {"x": "2009", "y": 515033355},
+                  {"x": "2010", "y": 943184358.4},
+                  {"x": "2011", "y": 1716796567},
+                  {"x": "2012", "y": 1188764489},
+                  {"x": "2013", "y": 1014838201}
               ]
         },
         {
         "label": "GDP",
               "values": [
-                  {"x": "2008", "y": 121572308726.00},
-                  {"x": "2009", "y": 121192333743.00},
-                  {"x": "2010", "y": 148522048128.00},
-                  {"x": "2011", "y": 170564249005.00},
-                  {"x": "2012", "y": 192679697094.00},
-                  {"x": "2013", "y": 201848484664.00}
+                  {"x": "2009", "y": 4583850368.00},
+                  {"x": "2010", "y": 7189482030.00},
+                  {"x": "2011", "y": 10409797336.00},
+                  {"x": "2012", "y": 12292770631.00},
+                  {"x": "2013", "y": 12545217934.00}
               ]
         },
         {
         "label": "Aid",
               "values": [
-                  {"x": "2008", "y": 3200000000},
-                  {"x": "2009", "y": 5400000000},
-                  {"x": "2010", "y": 4500000000},
-                  {"x": "2011", "y": 734000000},
-                  {"x": "2012", "y": 1200000000},
-                  {"x": "2013", "y": 792000000}
+                  {"x": "2009", "y": 1000000000},
+                  {"x": "2010", "y": 681800000},
+                  {"x": "2011", "y": 386200000},
+                  {"x": "2012", "y": 316300000},
+                  {"x": "2013", "y": 481200000}
               ]
         },
         {
         "label": "Remittance Inflows",
               "values": [
-                  {"x": "2008", "y": 2600000000},
-                  {"x": "2009", "y": 2600000000},
-                  {"x": "2010", "y": 2700000000},
-                  {"x": "2011", "y": 2700000000},
-                  {"x": "2012", "y": 2800000000},
+                  {"x": "2009", "y": 215400000},
+                  {"x": "2010", "y": 283400000},
+                  {"x": "2011", "y": 279000000},
+                  {"x": "2012", "y": 327100000},
                   {"x": "2013", "y": 0}
               ]
         },
         {
           "label": "FDI",
               "values": [
-                  {"x": "2008", "y": 7200000000},
-                  {"x": "2009", "y": 6900000000},
-                  {"x": "2010", "y": 9000000000},
-                  {"x": "2011", "y": 8200000000},
-                  {"x": "2012", "y": 12500000000},
+                  {"x": "2009", "y": 671500000},
+                  {"x": "2010", "y": 1800000000},
+                  {"x": "2011", "y": 4700000000},
+                  {"x": "2012", "y": 4600000000},
                   {"x": "2013", "y": 0}
               ]
         }
@@ -794,18 +816,18 @@ http://bl.ocks.org/mbostock/4063582
       d3.selectAll("#chart_comparative_gov_2 .grouped-item-active")[0].forEach(function(v){if(v.innerText=='GDP')v.click()} );
       chartWidget.create({
         type: "BubbleChart",
-        name: "Disbursed Revenue (in PEN)",
+        name: "Disbursed Revenue (in USD)",
         width: 1000,
         height: 600,
         diameter: 600,
         margin: {top: 20, right: 0, bottom: 0, left: 0},
         container: "bubble"
       },
-      'data/disbursed_revenue_PERU.json');
+      'data/disbursed_revenue_MNG.json');
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company (Top 10, in PEN)",
+        name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
         height: 300,
         margin: {top: 1, right: 1, bottom: 6, left: 1},

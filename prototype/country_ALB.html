@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 <link rel="stylesheet" href="css/charts/main.css">
 <title>EITI - Albania</title>
+<style>
+#sankey .node text {
+  pointer-events: none;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size:9pt;
+  font-weight: 600;
+}
+</style>
 <body>
 
 <header role="banner" class="main-header">
@@ -306,10 +314,9 @@ Production of crude oil has more than doubled since 2003. In 2014, crude oil pro
         </ul>
       </div>
       <!-- end: learn more section -->
-
-      <div class="section-chart-container section-viz">
-        Bar chart of production volumes of commodities over time. Data drawn from summary data.
-      </div>
+    <div class="section-chart-container">
+        <div id="chart_production"></div>
+    </div>
 
   </div>
 </div>
@@ -334,13 +341,13 @@ Production of crude oil has more than doubled since 2003. In 2014, crude oil pro
 A share of oil and bonuses are collected by the state owned companies – Albpetrol and AKBN, whereas a royalty tax, profit tax, dividends and other payments are collected by the government. The government’s income from extractive industries and hydro-power sector amounted at USD 120,4 mln in 2014. The government’s share of oil production was 94304 tons in 2014, worth USD 37.3 million.
     </p>
 
-    <div class="section-chart-container section-viz">
-      Stacked chart: “Government revenue by tax type” of breaking out composition of revenue in stack.
+
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_1"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-      Histogram chart: Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-  Revenue data comes from EITI summary data sheet.
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_2"></div>
     </div>
 
   </div>
@@ -366,18 +373,12 @@ A share of oil and bonuses are collected by the state owned companies – Albpet
 25% of royalties are allocated to local governments in proportion to their contribution, within the terms of the annual budget law. According to the recent EITI report, these transfers amounted to USD 1.1 million in 2014.
 </p>
 
-
-    <div class="section-chart-container section-viz">
-      Bubble chart that shows where revenue is disbursed
-      Data from summary data sheet
-
-      Alternative to be considered:
-      Treemap chart: Company payments. Showing revenue by company.
-      Data comes from summary data sheet.
-      http://bl.ocks.org/mbostock/4063582
+    <div class="section-chart-container">
+      <div id="bubble"></div>
     </div>
-    <div class="section-chart-container section-viz">
-      Disbursement (Sankey diagram)
+
+    <div class="section-chart-container">
+      <div id="sankey"></div>
     </div>
 
   </div>
@@ -631,33 +632,41 @@ A share of oil and bonuses are collected by the state owned companies – Albpet
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Value (Oil: tonne, Gas: sm3, Chromium, Nickel: tonne)",
               container: "chart_production",
               legendClass: "grouped-item",
               description: ""
       },
       [{
+          "label": "Oil",
+                "values": [
+                    {"x": "2012", "y": 1029300},
+                    {"x": "2013", "y": 1203637},
+                    {"x": "2014", "y": 1386124}
+                ]
+          },
+          {
           "label": "Gas",
                 "values": [
-                    {"x": "2008", "y": 1095196071},
-                    {"x": "2009", "y": 498084744},
-                    {"x": "2010", "y": 1140017166}
+                    {"x": "2012", "y": 13100000},
+                    {"x": "2013", "y": 23000000},
+                    {"x": "2014", "y": 18000000}
                 ]
           },
           {
-          "label": "NGL",
+          "label": "Chromium",
                 "values": [
-                    {"x": "2008", "y": 4374586842},
-                    {"x": "2009", "y": 3265934655},
-                    {"x": "2010", "y": 4547089022}
+                    {"x": "2012", "y": 360000},
+                    {"x": "2013", "y": 526230},
+                    {"x": "2014", "y": 712374}
                 ]
           },
           {
-          "label": "Gold",
+          "label": "Nickel",
                 "values": [
-                    {"x": "2008", "y": 3726795277},
-                    {"x": "2009", "y": 4202969161},
-                    {"x": "2010", "y": 4289524923}
+                    {"x": "2012", "y": 0},
+                    {"x": "2013", "y": 201940},
+                    {"x": "2014", "y": 535128}
                 ]
           }
       ]);
@@ -673,7 +682,7 @@ A share of oil and bonuses are collected by the state owned companies – Albpet
               legendClass: "stacked-item",
               container: "chart_comparative_gov_1"
       },
-      'data/government_income_by_type_of_revenue.json');
+      'data/government_income_by_type_of_revenue_ALB.json');
 
       chartWidget.create({
         type: "GroupedBar",
@@ -690,56 +699,41 @@ A share of oil and bonuses are collected by the state owned companies – Albpet
         {
         "label": "Extractives",
               "values": [
-                  {"x": "2008", "y": 3573697356},
-                  {"x": "2009", "y": 2965369767},
-                  {"x": "2010", "y": 4358147652},
-                  {"x": "2011", "y": 5884357012},
-                  {"x": "2012", "y": 5480853241},
-                  {"x": "2013", "y": 5511486805}
+                  {"x": "2012", "y": 64766957.35},
+                  {"x": "2013", "y": 312251155},
+                  {"x": "2014", "y": 164910609}
               ]
         },
         {
         "label": "GDP",
               "values": [
-                  {"x": "2008", "y": 121572308726.00},
-                  {"x": "2009", "y": 121192333743.00},
-                  {"x": "2010", "y": 148522048128.00},
-                  {"x": "2011", "y": 170564249005.00},
-                  {"x": "2012", "y": 192679697094.00},
-                  {"x": "2013", "y": 201848484664.00}
+                  {"x": "2012", "y": 12319784787},
+                  {"x": "2013", "y": 12781029643},
+                  {"x": "2014", "y": 13211513726}
               ]
         },
         {
         "label": "Aid",
               "values": [
-                  {"x": "2008", "y": 3200000000},
-                  {"x": "2009", "y": 5400000000},
-                  {"x": "2010", "y": 4500000000},
-                  {"x": "2011", "y": 734000000},
-                  {"x": "2012", "y": 1200000000},
-                  {"x": "2013", "y": 792000000}
+                  {"x": "2012", "y": 300700000},
+                  {"x": "2013", "y": 763700000},
+                  {"x": "2014", "y": 0}
               ]
         },
         {
         "label": "Remittance Inflows",
               "values": [
-                  {"x": "2008", "y": 2600000000},
-                  {"x": "2009", "y": 2600000000},
-                  {"x": "2010", "y": 2700000000},
-                  {"x": "2011", "y": 2700000000},
-                  {"x": "2012", "y": 2800000000},
-                  {"x": "2013", "y": 0}
+                  {"x": "2012", "y": 0},
+                  {"x": "2013", "y": 0},
+                  {"x": "2014", "y": 1000000000}
               ]
         },
         {
           "label": "FDI",
               "values": [
-                  {"x": "2008", "y": 7200000000},
-                  {"x": "2009", "y": 6900000000},
-                  {"x": "2010", "y": 9000000000},
-                  {"x": "2011", "y": 8200000000},
-                  {"x": "2012", "y": 12500000000},
-                  {"x": "2013", "y": 0}
+                  {"x": "2012", "y": 978200000},
+                  {"x": "2013", "y": 0},
+                  {"x": "2014", "y": 0}
               ]
         }
     ]
@@ -750,24 +744,24 @@ A share of oil and bonuses are collected by the state owned companies – Albpet
       d3.selectAll("#chart_comparative_gov_2 .grouped-item-active")[0].forEach(function(v){if(v.innerText=='GDP')v.click()} );
       chartWidget.create({
         type: "BubbleChart",
-        name: "Disbursed Revenue (in PEN)",
+        name: "Disbursed Revenue (in USD)",
         width: 1000,
         height: 600,
         diameter: 600,
         margin: {top: 20, right: 0, bottom: 0, left: 0},
         container: "bubble"
       },
-      'data/disbursed_revenue_PERU.json');
+      'data/disbursed_revenue_ALB.json');
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company (Top 10, in PEN)",
+        name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
-        height: 300,
+        height: 600,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
               container: "sankey"
       },
-      'data/sankey.json');
+      'data/sankey_ALB.json');
 
     </script>
 </body>

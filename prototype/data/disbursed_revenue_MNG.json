@@ -1,0 +1,149 @@
+{
+  "name": "disbursement",
+  "children": [{
+    "name": "child1",
+    "children": [{
+      "name": "Unassigned",
+      "size": 1716796567
+    }]
+  }, {
+    "name": "child2",
+    "children": [{
+      "name": "General Department of Taxation",
+      "size": 1188020061
+    }]
+  }, {
+    "name": "child3",
+    "children": [{
+      "name": "Mineral Resources Authority, Petroleum Authority",
+      "size": 469375688.3
+    }]
+  }, {
+    "name": "child4",
+    "children": [{
+      "name": "Ministry of Finance",
+      "size": 451397137.5
+    }]
+  }, {
+    "name": "child5",
+    "children": [{
+      "name": "Customs Office",
+      "size": 137093567.9
+    }]
+  }, {
+    "name": "child6",
+    "children": [{
+      "name": "General Department of Social Insurance",
+      "size": 110129812.9
+    }]
+  }, {
+    "name": "child7",
+    "children": [{
+      "name": "Various",
+      "size": 106868913.6
+    }]
+  }, {
+    "name": "child8",
+    "children": [{
+      "name": "Local Department of Taxation",
+      "size": 70260497.21
+    }]
+  }, {
+    "name": "child9",
+    "children": [{
+      "name": "Mineral Resources Authority",
+      "size": 39522240.9
+    }]
+  }, {
+    "name": "child10",
+    "children": [{
+      "name": "Ministry of Finance, Petroleum Authority",
+      "size": 17468388.97
+    }]
+  }, {
+    "name": "child11",
+    "children": [{
+      "name": "Local Authorities",
+      "size": 13711770.04
+    }]
+  }, {
+    "name": "child12",
+    "children": [{
+      "name": "(blank)",
+      "size": 11289206.78
+    }]
+  }, {
+    "name": "child13",
+    "children": [{
+      "name": "Ministry of Labour",
+      "size": 10735662.35
+    }]
+  }, {
+    "name": "child14",
+    "children": [{
+      "name": "General Tax Office, Specialised Inspection Organistaion & State Social Insurance office",
+      "size": 10734894.4
+    }]
+  }, {
+    "name": "child15",
+    "children": [{
+      "name": "Ministries and Agencies",
+      "size": 6597611.044
+    }]
+  }, {
+    "name": "child16",
+    "children": [{
+      "name": "Ministry of Environment, Green development and Tourism",
+      "size": 2688885.146
+    }]
+  }, {
+    "name": "child17",
+    "children": [{
+      "name": "Petroleum Authority",
+      "size": 1548934.838
+    }]
+  }, {
+    "name": "child18",
+    "children": [{
+      "name": "General Department of Taxation, Petroleum Authority",
+      "size": 303082.3392
+    }]
+  }, {
+    "name": "child19",
+    "children": [{
+      "name": "General Department of Taxation, Customs Office",
+      "size": 129031.3208
+    }]
+  }, {
+    "name": "child20",
+    "children": [{
+      "name": "General Department of Social Insurance, Petroleum Authority",
+      "size": 75333.05802
+    }]
+  }, {
+    "name": "child21",
+    "children": [{
+      "name": "Customs Office, Petroleum Authority",
+      "size": 20063.16222
+    }]
+  }, {
+    "name": "child16",
+    "children": [{
+      "name": "Mineral Resources Authority, Petroleum Authority, Ministry of Labour, General Department of Taxation",
+      "size": 13031.38259
+    }]
+  }, {
+    "name": "child16",
+    "children": [{
+      "name": "Ministries, Agencies, Local Authorities",
+      "size": 7253.255817
+    }]
+  }, {
+    "name": "child16",
+    "children": [{
+      "name": "Ministy of Finance, General Department of Taxation, Inspection Authority, Customs Office, MRAM, Nuclear Authority",
+      "size": 5972.829415
+    }]
+  }
+  ]
+}

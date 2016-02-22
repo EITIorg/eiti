@@ -1,0 +1,491 @@
+{
+  "nodes": [
+  {
+    "name": "Bankers Petroleum Albania Ltd."
+  },
+  {
+    "name": "Dega n‘ Shqip‘ri e Stream Oil & Gas Ltd."
+  },
+  {
+    "name": "Petromanas Albania GmbH"
+  },
+  {
+    "name": "Phoenix Petroleum"
+  },
+  {
+    "name": "Fushe-Kruje Cement Factory"
+  },
+  {
+    "name": "Beralb Sh.a."
+  },
+  {
+    "name": "KESH sh.a."
+  },
+  {
+    "name": "Kurum International sh.a"
+  },
+  {
+    "name": "HEC-i T‘rvolit shpk"
+  },
+  {
+    "name": "Energji Ashta shpk"
+  },
+  {
+    "name": "Royalties"
+  },
+  {
+    "name": "Bonuses"
+  },
+  {
+    "name": "Share of oil production"
+  },
+  {
+    "name": "Tax penalties on Royalty"
+  },
+  {
+    "name": "Other payments to the State and local government units"
+  },
+  {
+    "name": "VAT"
+  },
+  {
+    "name": "Profit tax"
+  },
+  {
+    "name": "Tax on dividend"
+  },
+  {
+    "name": "Regulatory Tariffs paid to ERE"
+  },
+  {
+    "name": "Concessionary fee for Hydropower plants under concessions"
+  },
+  {
+    "name": "Custom Administrate & General Directory of Taxes"
+  },
+  {
+    "name": "National Agency of Natural Resources and Albpetrol Sh.a."
+  },
+  {
+    "name": "Albpetrol Sh.a."
+  },
+  {
+    "name": "General Directory of Tax Office"
+  },
+  {
+    "name": "Unassigned"
+  },
+  {
+    "name": "General Directory of Taxes"
+  },
+  {
+    "name": "Albanian Energy Regulator (ERE)"
+  },
+  {
+    "name": "KESH on behalf of the Ministry of Economic Development"
+  }
+],
+  "links": [
+  {
+    "source": 0,
+    "target": 10,
+    "value": 56203345.97
+  },
+  {
+    "source": 0,
+    "target": 11,
+    "value": 99981.04265
+  },
+  {
+    "source": 0,
+    "target": 12,
+    "value": 28161582.94
+  },
+  {
+    "source": 0,
+    "target": 13,
+    "value": 251886.2559
+  },
+  {
+    "source": 0,
+    "target": 14,
+    "value": 34081355.45
+  },
+  {
+    "source": 1,
+    "target": 10,
+    "value": 1912037.915
+  },
+  {
+    "source": 1,
+    "target": 11,
+    "value": 28436.01896
+  },
+  {
+    "source": 1,
+    "target": 12,
+    "value": 7978379.147
+  },
+  {
+    "source": 1,
+    "target": 13,
+    "value": 4464.454976
+  },
+  {
+    "source": 1,
+    "target": 14,
+    "value": 204426.5403
+  },
+  {
+    "source": 2,
+    "target": 10,
+    "value": 33592.41706
+  },
+  {
+    "source": 2,
+    "target": 11,
+    "value": 99981.04265
+  },
+  {
+    "source": 2,
+    "target": 14,
+    "value": 5998663.507
+  },
+  {
+    "source": 3,
+    "target": 15,
+    "value": 8284.36019
+  },
+  {
+    "source": 3,
+    "target": 10,
+    "value": 64502.36967
+  },
+  {
+    "source": 3,
+    "target": 11,
+    "value": 49146.91943
+  },
+  {
+    "source": 3,
+    "target": 12,
+    "value": 1078957.346
+  },
+  {
+    "source": 3,
+    "target": 13,
+    "value": 2777.251185
+  },
+  {
+    "source": 4,
+    "target": 16,
+    "value": 2664530.806
+  },
+  {
+    "source": 4,
+    "target": 10,
+    "value": 391668.2464
+  },
+  {
+    "source": 4,
+    "target": 13,
+    "value": 36710.90047
+  },
+  {
+    "source": 4,
+    "target": 14,
+    "value": 315251.1848
+  },
+  {
+    "source": 5,
+    "target": 16,
+    "value": 2440637000
+  },
+  {
+    "source": 5,
+    "target": 17,
+    "value": 5985331500
+  },
+  {
+    "source": 5,
+    "target": 10,
+    "value": 12577393500
+  },
+  {
+    "source": 6,
+    "target": 16,
+    "value": 13715000000
+  },
+  {
+    "source": 6,
+    "target": 15,
+    "value": 28454405000
+  },
+  {
+    "source": 6,
+    "target": 18,
+    "value": 6710749500
+  },
+  {
+    "source": 7,
+    "target": 16,
+    "value": 5589545.024
+  },
+  {
+    "source": 7,
+    "target": 15,
+    "value": 34132.70142
+  },
+  {
+    "source": 7,
+    "target": 18,
+    "value": 10037.91469
+  },
+  {
+    "source": 7,
+    "target": 13,
+    "value": 103014.218
+  },
+  {
+    "source": 8,
+    "target": 16,
+    "value": 349943.128
+  },
+  {
+    "source": 8,
+    "target": 15,
+    "value": 529554.5024
+  },
+  {
+    "source": 8,
+    "target": 19,
+    "value": 89279.62085
+  },
+  {
+    "source": 8,
+    "target": 18,
+    "value": 7592.417062
+  },
+  {
+    "source": 9,
+    "target": 15,
+    "value": 1284322.275
+  },
+  {
+    "source": 9,
+    "target": 19,
+    "value": 314663.5071
+  },
+  {
+    "source": 9,
+    "target": 18,
+    "value": 32862.55924
+  },
+  {
+    "source": 9,
+    "target": 13,
+    "value": 1781.990521
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 56203345.97
+  },
+  {
+    "source": 11,
+    "target": 21,
+    "value": 99981.04265
+  },
+  {
+    "source": 12,
+    "target": 22,
+    "value": 28161582.94
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 251886.2559
+  },
+  {
+    "source": 14,
+    "target": 24,
+    "value": 34081355.45
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 1912037.915
+  },
+  {
+    "source": 11,
+    "target": 21,
+    "value": 28436.01896
+  },
+  {
+    "source": 12,
+    "target": 22,
+    "value": 7978379.147
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 4464.454976
+  },
+  {
+    "source": 14,
+    "target": 24,
+    "value": 204426.5403
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 33592.41706
+  },
+  {
+    "source": 11,
+    "target": 21,
+    "value": 99981.04265
+  },
+  {
+    "source": 14,
+    "target": 24,
+    "value": 5998663.507
+  },
+  {
+    "source": 15,
+    "target": 25,
+    "value": 8284.36019
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 64502.36967
+  },
+  {
+    "source": 11,
+    "target": 21,
+    "value": 49146.91943
+  },
+  {
+    "source": 12,
+    "target": 22,
+    "value": 1078957.346
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 2777.251185
+  },
+  {
+    "source": 16,
+    "target": 25,
+    "value": 2664530.806
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 391668.2464
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 36710.90047
+  },
+  {
+    "source": 14,
+    "target": 24,
+    "value": 315251.1848
+  },
+  {
+    "source": 16,
+    "target": 25,
+    "value": 2440637000
+  },
+  {
+    "source": 17,
+    "target": 25,
+    "value": 5985331500
+  },
+  {
+    "source": 10,
+    "target": 20,
+    "value": 12577393500
+  },
+  {
+    "source": 16,
+    "target": 25,
+    "value": 13715000000
+  },
+  {
+    "source": 15,
+    "target": 25,
+    "value": 28454405000
+  },
+  {
+    "source": 18,
+    "target": 26,
+    "value": 6710749500
+  },
+  {
+    "source": 16,
+    "target": 25,
+    "value": 5589545.024
+  },
+  {
+    "source": 15,
+    "target": 25,
+    "value": 34132.70142
+  },
+  {
+    "source": 18,
+    "target": 26,
+    "value": 10037.91469
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 103014.218
+  },
+  {
+    "source": 16,
+    "target": 25,
+    "value": 349943.128
+  },
+  {
+    "source": 15,
+    "target": 25,
+    "value": 529554.5024
+  },
+  {
+    "source": 19,
+    "target": 27,
+    "value": 89279.62085
+  },
+  {
+    "source": 18,
+    "target": 26,
+    "value": 7592.417062
+  },
+  {
+    "source": 15,
+    "target": 25,
+    "value": 1284322.275
+  },
+  {
+    "source": 19,
+    "target": 27,
+    "value": 314663.5071
+  },
+  {
+    "source": 18,
+    "target": 26,
+    "value": 32862.55924
+  },
+  {
+    "source": 13,
+    "target": 23,
+    "value": 1781.990521
+  }
+]
+  
+}

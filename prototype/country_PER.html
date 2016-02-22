@@ -736,7 +736,7 @@ EITI Reports</a></li>
               legendClass: "stacked-item",
               container: "chart_comparative_gov_1"
       },
-      'data/government_income_by_type_of_revenue.json');
+      'data/government_income_by_type_of_revenue_PER.json');
 
       chartWidget.create({
         type: "GroupedBar",
@@ -813,7 +813,7 @@ EITI Reports</a></li>
       d3.selectAll("#chart_comparative_gov_2 .grouped-item-active")[0].forEach(function(v){if(v.innerText=='GDP')v.click()} );
       chartWidget.create({
         type: "BubbleChart",
-        name: "Disbursed Revenue (in PEN)",
+        name: "Disbursed Revenue 2008-2013 (in USD)",
         width: 1000,
         height: 600,
         diameter: 600,
@@ -828,13 +828,13 @@ EITI Reports</a></li>
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company (Top 10, in PEN)",
+        name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
         height: 300,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
         container: "sankey"
       },
-      'data/sankey.json');
+      'data/sankey_PER.json');
 
     </script>
 </body>
