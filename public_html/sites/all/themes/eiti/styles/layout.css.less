@@ -81,6 +81,36 @@
   }
 }
 
+// HACK: Allow widgets to expand the full width of the page.
+.page-layout--widelayout {
+  .main-content {
+    width: 100%;
+  }
+  .main-content-inner {
+    display: block;
+    float: none;
+    margin: 0;
+    position: static;
+    width: 100%;
+  }
+}
+
+.xSmallOnly() {
+  .single-fluid-row-wrapper {
+    .single-fluid-column(margin);
+  }
+}
+.xMediumOnly() {
+  .single-fluid-row-wrapper {
+    .single-fluid-row-wrapper(8);
+  }
+}
+.xNormalAndUp() {
+  .single-fluid-row-wrapper {
+    .single-fluid-row-wrapper(12);
+  }
+}
+
 @import './lib/custom-grid.less';
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';

@@ -79,7 +79,6 @@ abstract class RestfulDataProviderEITICharts extends \RestfulBase implements \Re
       // Execute the query, add filters and stuff.
       $results = $query->execute();
       if (is_a($query, 'EntityFieldQuery')) {
-        pc($results, 're');
         $results = reset($results);
       }
       else {

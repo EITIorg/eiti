@@ -18,13 +18,10 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 0,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -63,11 +60,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Bookmark widget configuration.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -367,6 +364,110 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-table-field_fpp_table'.
+  $field_instances['fieldable_panels_pane-table-field_fpp_table'] = array(
+    'bundle' => 'table',
+    'default_value' => array(
+      0 => array(
+        'tablefield' => array(
+          'cell_0_0' => 'Commodity',
+          'cell_0_1' => 'Reserves',
+          'cell_0_2' => 'Unit',
+          'cell_0_3' => 'Significance',
+          'cell_1_0' => '',
+          'cell_1_1' => '',
+          'cell_1_2' => '',
+          'cell_1_3' => '',
+          'cell_2_0' => '',
+          'cell_2_1' => '',
+          'cell_2_2' => '',
+          'cell_2_3' => '',
+          'cell_3_0' => '',
+          'cell_3_1' => '',
+          'cell_3_2' => '',
+          'cell_3_3' => '',
+          'cell_4_0' => '',
+          'cell_4_1' => '',
+          'cell_4_2' => '',
+          'cell_4_3' => '',
+          'import' => array(
+            'file' => '',
+            'import' => 'Upload CSV',
+          ),
+          'rebuild' => array(
+            'count_cols' => 4,
+            'count_rows' => 5,
+            'rebuild' => 'Rebuild Table',
+          ),
+        ),
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'tablefield',
+        'settings' => array(),
+        'type' => 'tablefield_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_table',
+    'label' => 'Table',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'tablefield',
+      'settings' => array(),
+      'type' => 'tablefield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-table-title_field'.
+  $field_instances['fieldable_panels_pane-table-title_field'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A field replacing fieldable panel pane title.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => FALSE,
+        'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance:
   // 'fieldable_panels_pane-tabs_with_widgets-field_fpp_content_widgets'.
   $field_instances['fieldable_panels_pane-tabs_with_widgets-field_fpp_content_widgets'] = array(
@@ -504,7 +605,7 @@ function eitiwidgets_field_default_field_instances() {
     ),
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_body',
-    'label' => 'Body',
+    'label' => 'Description',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -555,7 +656,7 @@ function eitiwidgets_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -10,
+      'weight' => 0,
     ),
   );
 
@@ -641,14 +742,10 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the wide background image used for the header.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 1,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -722,7 +819,7 @@ function eitiwidgets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
@@ -753,10 +850,10 @@ function eitiwidgets_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('A field replacing fieldable panel pane title.');
   t('Background Image');
-  t('Body');
   t('Bookmark List');
   t('Bookmark widget configuration.');
   t('Content Widgets');
+  t('Description');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
@@ -768,6 +865,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Source of the quote: a person, a website, etc.');
   t('Tab Collection Title');
   t('Tab widget settings.');
+  t('Table');
   t('Title');
   t('Widget');
 

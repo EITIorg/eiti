@@ -4,6 +4,8 @@
  * A description of what your module does.
  */
 
+include_once 'contentwidget.extras.inc';
+
 /**
  *  Implements hook_ctools_plugin_directory().
  */
@@ -61,6 +63,39 @@ function contentwidget_get_predefined_widget($predefined_widget) {
   ctools_include('context');
   ctools_include('plugins');
   return ctools_get_plugins('contentwidget', 'predefined_widgets', $predefined_widget);
+}
+
+/**
+ * Helper function that returns the context for a predefined widget instance.
+ *
+ * @param string $entity_type
+ * @param stdClass $entity
+ * @param string $entity_display_language
+ * @param string $widget_field_name
+ * @return array
+ */
+function contentwidget_get_predefined_widget_context($entity_type, $entity, $entity_display_language, $widget_field_name) {
+  $context = array(
+    'entity' => $entity,
+    'entity_type' => $entity_type,
+    'entity_display_language' => $entity_display_language,
+    'widget_field_name' => $widget_field_name,
+  );
+
+  $field_language = field_language($entity_type, $entity, 'field_fpp_widget', $entity_display_language);
+
+  $field_values = reset($entity->{$widget_field_name}[$field_language]);
+  $plugin_name = isset($field_values['widget']) ? $field_values['widget'] : NULL;
+  $context['plugin_name'] = $plugin_name;
+
+  // Load the ctools plugin.
+  $context['plugin'] = contentwidget_get_predefined_widget($plugin_name);
+
+  // Merge the plugin defaults.
+  $context['instance_settings'] = !empty($field_values['settings'][$plugin_name]) ? $field_values['settings'][$plugin_name] : array();
+  $context['instance_settings'] = drupal_array_merge_deep($context['plugin']['defaults'], $context['instance_settings']);
+
+  return $context;
 }
 
 /**

@@ -286,6 +286,13 @@ function eitipermissions_user_default_permissions() {
     'module' => 'panels',
   );
 
+  // Exported permission: 'administer panelizer'.
+  $permissions['administer panelizer'] = array(
+    'name' => 'administer panelizer',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'administer panels layouts'.
   $permissions['administer panels layouts'] = array(
     'name' => 'administer panels layouts',
@@ -501,6 +508,13 @@ function eitipermissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'configure tablefield'.
+  $permissions['configure tablefield'] = array(
+    'name' => 'configure tablefield',
+    'roles' => array(),
+    'module' => 'tablefield',
   );
 
   // Exported permission: 'create article content'.
@@ -1287,6 +1301,13 @@ function eitipermissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'export tablefield'.
+  $permissions['export tablefield'] = array(
+    'name' => 'export tablefield',
+    'roles' => array(),
+    'module' => 'tablefield',
+  );
+
   // Exported permission: 'flush caches'.
   $permissions['flush caches'] = array(
     'name' => 'flush caches',
@@ -1540,6 +1561,13 @@ function eitipermissions_user_default_permissions() {
     'module' => 'eitientity_organisation',
   );
 
+  // Exported permission: 'rebuild tablefield'.
+  $permissions['rebuild tablefield'] = array(
+    'name' => 'rebuild tablefield',
+    'roles' => array(),
+    'module' => 'tablefield',
+  );
+
   // Exported permission: 'rename features'.
   $permissions['rename features'] = array(
     'name' => 'rename features',
@@ -1685,6 +1713,13 @@ function eitipermissions_user_default_permissions() {
     'module' => 'panels',
   );
 
+  // Exported permission: 'use media wysiwyg'.
+  $permissions['use media wysiwyg'] = array(
+    'name' => 'use media wysiwyg',
+    'roles' => array(),
+    'module' => 'media_wysiwyg',
+  );
+
   // Exported permission: 'use page manager'.
   $permissions['use page manager'] = array(
     'name' => 'use page manager',
@@ -1730,6 +1765,20 @@ function eitipermissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'panels',
+  );
+
+  // Exported permission: 'use text format clean_summary'.
+  $permissions['use text format clean_summary'] = array(
+    'name' => 'use text format clean_summary',
+    'roles' => array(),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format filtered_html'.
+  $permissions['use text format filtered_html'] = array(
+    'name' => 'use text format filtered_html',
+    'roles' => array(),
+    'module' => 'filter',
   );
 
   // Exported permission: 'view files'.

@@ -14,7 +14,11 @@ html {
  */
 a {
   .link-color(@clanchor, @clanchor__active, @clanchor__visited, @clanchor__hover);
+
   .transition(color, 400ms, ease-in);
+  svg {
+    .transition(fill, 400ms, ease-in);
+  }
 
   text-decoration: none;
   &:focus,

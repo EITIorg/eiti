@@ -95,7 +95,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
       // Hide variables that should not be exported.
       $entries_list = array(
         // Custom variables.
-
+        'helpergeneric_cleanup_ui_force',
 
         // Hide CORE variables.
         'cache',
@@ -187,6 +187,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'features_feature_locked',
         'features_ignored_orphans',
         'features_lock_mode',
+        'features_modules_changed',
         'features_semaphore',
 
         // Hide htmlpurifier.module variables.
@@ -249,6 +250,9 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes',
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes_status',
 
+        // Hide node.module variables.
+        'node_cron_last',
+
         // Hide panelizer.module variables.
         'panelizer_defaults_file_audio',
         'panelizer_defaults_file_document',
@@ -273,6 +277,10 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
 
         // Hide update.module variables.
         'update_last_check',
+
+        // Hide user.module specific variables.
+        'user_pictures',
+        'user_register',
 
         // Hide update_scripts.module variables.
         'update_scripts_clear_cache',
@@ -302,6 +310,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
       );
 
       $variable_name_prefixes = array(
+        'additional_settings__active_tab_',
       );
       foreach ($component_export['options']['sources'] as $name) {
         foreach ($variable_name_prefixes as $prefix) {

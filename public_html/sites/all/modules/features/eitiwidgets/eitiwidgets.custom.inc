@@ -36,6 +36,50 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
       );
       break;
   }
+
+  // Define to which FPP we want to allow Icon Selection.
+  $fpp_bundles_with_icons = array('text');
+
+  // Now add the icon selector.
+  if (in_array($form['#entity']->bundle, $fpp_bundles_with_icons)) {
+    $form['title_icon'] = array(
+      '#type' => 'container',
+    );
+    $form['title_icon']['title_icon_checkbox'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use an Icon'),
+      '#description' => t('Do you want to use an icon in the title?'),
+      '#default_value' => isset($form_state['conf']['use_icon']) ? $form_state['conf']['use_icon'] : FALSE,
+    );
+    $icons = helpertheme_get_svg_icons();
+    $icon_options = drupal_map_assoc(array_keys($icons));
+    $field_name = 'title_icon_checkbox';
+    $form['title_icon']['title_icon_selector'] = array(
+      '#type' => 'radioicons',
+      '#title' => t('Icon'),
+      '#options' => $icon_options,
+      '#icons' => $icons,
+      '#default_value' => isset($form_state['conf']['icon']) ? $form_state['conf']['icon'] : '',
+      '#states' => array(
+        'visible' => array(
+          array('input[name="' . $field_name . '"]' => array('checked' => TRUE)),
+        ),
+      )
+    );
+    $form['#submit'][] = 'eitiwidgets_fpp_form_icon_submit';
+  }
+}
+
+/**
+ * Submit callback for the icon option.
+ */
+function eitiwidgets_fpp_form_icon_submit(&$form, &$form_state) {
+  // We just push the icon option into $form_state['conf'], which is serialized
+  // and stored per ctools content_types instance.
+  if (isset($form_state['values']['title_icon_checkbox']) && $form_state['values']['title_icon_checkbox']) {
+    $form_state['conf']['icon'] = $form_state['values']['title_icon_selector'];
+    $form_state['conf']['use_icon'] = $form_state['values']['title_icon_checkbox'];
+  }
 }
 
 /**
@@ -65,11 +109,26 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_fieldable_panels_pane_view().
+ * Implements hook_panels_pane_content_alter().
  */
-function eitiwidgets_fieldable_panels_pane_view($panels_pane, $view_mode, $langcode) {
-  // Hide original title when title_field is used (not displayed) on the entity.
-  if (isset($panels_pane->title_field) && isset($panels_pane->content['title'])) {
-    unset($panels_pane->content['title']);
+function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts) {
+  if (!isset($content->content['#fieldable_panels_pane'])) {
+    return;
+  }
+  $entity = $content->content['#fieldable_panels_pane'];
+
+  if (!isset($pane->css['css_class'])) {
+    $pane->css['css_class'] = '';
+  }
+
+  // Add Widget type as a CSS class onto the FPP pane wrapper.
+  $langcode = $content->content['#language'];
+  $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $langcode);
+  if (isset($entity->field_fpp_widget[$field_language][0])) {
+    $field_values = reset($entity->field_fpp_widget[$field_language]);
+    $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $field_values['widget']);
+  }
+  else {
+    $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
   }
 }
