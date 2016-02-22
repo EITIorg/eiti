@@ -76,7 +76,7 @@ function theme_svg_sprite(array $elements) {
     $elements['sprite_name'] = 'icons';
   }
 
-  // Set the sprite path.
+  // Prepare the sprite file path.
   $sprite_file_name = $elements['sprite_name'] . '.svg';
   $elements['path'] = drupal_get_path('module', 'helpertheme') . '/sprites/' . $sprite_file_name;
 
@@ -104,11 +104,17 @@ function theme_svg_sprite(array $elements) {
   $elements['#attributes']['class'][] = 'icon';
   $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['symbol']);
 
-  $args = array();
+  // A dummy query-string is added to filenames, to gain control over
+  // browser-caching. The string changes on every update or full cache
+  // flush, forcing browsers to load a new copy of the files, as the
+  // URL changed.
+  $query_string = variable_get('css_js_query_string', '0');
+
+  $path_suffix = '?' . $query_string;
   if (!is_null($elements['symbol'])) {
-    $args['fragment'] = $elements['symbol'];
+    $path_suffix .= '#' . $elements['symbol'];
   }
-  $elements['#use']['xlink:href'] = url($elements['path'], $args);
+  $elements['#use']['xlink:href'] = file_create_url($elements['path']) . $path_suffix;
 
   return '<svg' . drupal_attributes($elements['#attributes']) . '><use' . drupal_attributes($elements['#use']) . '/></svg>';
 }
