@@ -44,7 +44,7 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
     }
 
     // Get the SVG icon markup.
-    $svgicon = helpertheme_get_svg_icons($item_icon, array('width' => '1.5em', 'height' => '1.5em'));
+    $svgicon = helpertheme_get_svg_icons($item_icon, array('width' => '2em', 'height' => '2em'));
 
     $item_options = array(
       'attributes' => array(
