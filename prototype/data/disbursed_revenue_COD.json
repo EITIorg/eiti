@@ -1,0 +1,114 @@
+{
+  "name": "disbursement",
+  "children": [{
+    "name": "child1",
+    "children": [{
+      "name": "DGDA",
+      "size": 1526483160
+    }]
+  }, {
+    "name": "child2",
+    "children": [{
+      "name": "DGRAD",
+      "size": 995088450
+    }]
+  }, {
+    "name": "child3",
+    "children": [{
+      "name": "DGI",
+      "size": 889087582
+    }]
+  }, {
+    "name": "child4",
+    "children": [{
+      "name": "DGRAD - Direction Générale des Recettes Administratives, Judiciaires, Domaniales et de Participation",
+      "size": 716324186
+    }]
+  }, {
+    "name": "child5",
+    "children": [{
+      "name": "DGI - Direction Générale des Impôts",
+      "size": 562307210
+    }]
+  }, {
+    "name": "child6",
+    "children": [{
+      "name": "EP",
+      "size": 407554898
+    }]
+  }, {
+    "name": "child7",
+    "children": [{
+      "name": "DRKAT",
+      "size": 380479748
+    }]
+  }, {
+    "name": "child8",
+    "children": [{
+      "name": "Gecamines, SODIMICO, SCMK-Mn or SOKIMO",
+      "size": 328578630
+    }]
+  }, {
+    "name": "child9",
+    "children": [{
+      "name": "DGDA - Direction Générale des Douanes et Accises",
+      "size": 262868410
+    }]
+  }, {
+    "name": "child10",
+    "children": [{
+      "name": "Entreprises Publiques",
+      "size": 189308039
+    }]
+  }, {
+    "name": "child11",
+    "children": [{
+      "name": "EPE (Mining EPEs)",
+      "size": 182258126
+    }]
+  }, {
+    "name": "child12",
+    "children": [{
+      "name": "DRKAT - Direction Provinciale des Recettes du Katanga",
+      "size": 102899271
+    }]
+  }, {
+    "name": "child13",
+    "children": [{
+      "name": "EPE (COHYDRO)",
+      "size": 8725289
+    }]
+  }, {
+    "name": "child14",
+    "children": [{
+      "name": "BCC",
+      "size": 6000000
+    }]
+  }, {
+    "name": "child15",
+    "children": [{
+      "name": "Various",
+      "size": 5287950
+    }]
+  }, {
+    "name": "child16",
+    "children": [{
+      "name": "SGH",
+      "size": 3136318
+    }]
+  }, {
+    "name": "child17",
+    "children": [{
+        "name": "Ministere des Hydrocarbures",
+        "size": 2043608
+      }
+
+    ]
+  }, {
+    "name": "child18",
+    "children": [{
+      "name": "MECNT",
+      "size": 615733
+    }]
+  }]
+}

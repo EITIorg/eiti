@@ -370,8 +370,8 @@ The mining rights stipulated in the Mining Code are: Search Permit, Operation Pe
       </div>
       <!-- end: learn more section -->
 
-      <div class="section-chart-container section-viz">
-        Bar chart of production volumes of commodities over time. Data drawn from summary data.
+      <div class="section-chart-container">
+        <div id="chart_production"></div>
       </div>
 
   </div>
@@ -397,14 +397,6 @@ The mining rights stipulated in the Mining Code are: Search Permit, Operation Pe
       The 2014 EITI Report shows a more resilient mining sector, characterised by increased production, employment and revenues. The USD 2 billion in government revenues in 2014 stands in stark contrast to the paltry USD 400 million that the government reported it received from the oil, gas and mining sector, when EITI implementation began in 2007. USD 1.5 billion or 72% of all collected revenues went to the treasury in 2014. 10% or roughly USD 200 million went to provincial governments and local communities, while SOEs and other government agencies collecting taxes on behalf of the government withheld 18% of collected revenues.
     </p>
 
-    <div class="section-chart-container section-viz">
-      Stacked chart: “Government revenue by tax type” of breaking out composition of revenue in stack.
-    </div>
-
-    <div class="section-chart-container section-viz">
-      Histogram chart: Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-  Revenue data comes from EITI summary data sheet.
-    </div>
 
     <div class="learn-more-section">
       <img class="learn-more-icon" src="images/icon-dump/learn-more.png" alt="learn more">
@@ -415,13 +407,12 @@ The mining rights stipulated in the Mining Code are: Search Permit, Operation Pe
         </ul>
     </div>
 
-
-    <div class="section-chart-container section-viz">
-  Stacked chart: “Government revenue by tax type” of breaking out composition of revenue in stack.
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_1"></div>
     </div>
-    <div class="section-chart-container section-viz">
-      Histogram chart: Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-      Revenue data comes from EITI summary data sheet.
+
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_2"></div>
     </div>
 
   </div>
@@ -452,19 +443,12 @@ Article 242 of the Mining Code provides for a sharing mechanism of mining royalt
 </ul>
 </p>
 
-
-    <div class="section-chart-container section-viz">
-      Bubble chart that shows where revenue is disbursed
-      Data from summary data sheet
-
-      Alternative to be considered:
-      Treemap chart: Company payments. Showing revenue by company.
-      Data comes from summary data sheet.
-      http://bl.ocks.org/mbostock/4063582
+    <div class="section-chart-container">
+      <div id="bubble"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-      Disbursement (Sankey diagram)
+    <div class="section-chart-container">
+      <div id="sankey"></div>
     </div>
 
   </div>
@@ -650,33 +634,30 @@ Oversight of EITI is ensured by a multi-stakeholder group, the "Comité executif
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Value (Oil: bbl, Gold: tons, Diamond: carats)",
               container: "chart_production",
               legendClass: "grouped-item",
               description: ""
       },
       [{
-          "label": "Gas",
+          "label": "Oil",
                 "values": [
-                    {"x": "2008", "y": 1095196071},
-                    {"x": "2009", "y": 498084744},
-                    {"x": "2010", "y": 1140017166}
-                ]
-          },
-          {
-          "label": "NGL",
-                "values": [
-                    {"x": "2008", "y": 4374586842},
-                    {"x": "2009", "y": 3265934655},
-                    {"x": "2010", "y": 4547089022}
+                    {"x": "2012", "y": 8545000},
+                    {"x": "2013", "y": 8351000}
                 ]
           },
           {
           "label": "Gold",
                 "values": [
-                    {"x": "2008", "y": 3726795277},
-                    {"x": "2009", "y": 4202969161},
-                    {"x": "2010", "y": 4289524923}
+                    {"x": "2012", "y": 2546},
+                    {"x": "2013", "y": 2860}
+                ]
+          },
+          {
+          "label": "Diamond",
+                "values": [
+                    {"x": "2012", "y": 20140000},
+                    {"x": "2013", "y": 0}
                 ]
           }
       ]);
@@ -692,7 +673,7 @@ Oversight of EITI is ensured by a multi-stakeholder group, the "Comité executif
               legendClass: "stacked-item",
               container: "chart_comparative_gov_1"
       },
-      'data/government_income_by_type_of_revenue.json');
+      'data/government_income_by_type_of_revenue_COD.json');
 
       chartWidget.create({
         type: "GroupedBar",
@@ -709,56 +690,41 @@ Oversight of EITI is ensured by a multi-stakeholder group, the "Comité executif
         {
         "label": "Extractives",
               "values": [
-                  {"x": "2008", "y": 3573697356},
-                  {"x": "2009", "y": 2965369767},
-                  {"x": "2010", "y": 4358147652},
-                  {"x": "2011", "y": 5884357012},
-                  {"x": "2012", "y": 5480853241},
-                  {"x": "2013", "y": 5511486805}
+                  {"x": "2010", "y": 811962999},
+                  {"x": "2011", "y": 1358366355},
+                  {"x": "2012", "y": 1396183756},
+                  {"x": "2013", "y": 1334643213},
+                  {"x": "2014", "y": 1667890285}
               ]
         },
         {
         "label": "GDP",
               "values": [
-                  {"x": "2008", "y": 121572308726.00},
-                  {"x": "2009", "y": 121192333743.00},
-                  {"x": "2010", "y": 148522048128.00},
-                  {"x": "2011", "y": 170564249005.00},
-                  {"x": "2012", "y": 192679697094.00},
-                  {"x": "2013", "y": 201848484664.00}
+                  {"x": "2010", "y": 20523285374},
+                  {"x": "2011", "y": 23849009738},
+                  {"x": "2012", "y": 27463220380},
+                  {"x": "2013", "y": 30014905126},
+                  {"x": "2014", "y": 33121070959}
               ]
         },
         {
         "label": "Aid",
               "values": [
-                  {"x": "2008", "y": 3200000000},
-                  {"x": "2009", "y": 5400000000},
-                  {"x": "2010", "y": 4500000000},
-                  {"x": "2011", "y": 734000000},
-                  {"x": "2012", "y": 1200000000},
-                  {"x": "2013", "y": 792000000}
-              ]
-        },
-        {
-        "label": "Remittance Inflows",
-              "values": [
-                  {"x": "2008", "y": 2600000000},
-                  {"x": "2009", "y": 2600000000},
-                  {"x": "2010", "y": 2700000000},
-                  {"x": "2011", "y": 2700000000},
+                  {"x": "2010", "y": 3700000000},
+                  {"x": "2011", "y": 4900000000},
                   {"x": "2012", "y": 2800000000},
-                  {"x": "2013", "y": 0}
+                  {"x": "2013", "y": 2200000000},
+                  {"x": "2014", "y": 0}
               ]
         },
         {
           "label": "FDI",
               "values": [
-                  {"x": "2008", "y": 7200000000},
-                  {"x": "2009", "y": 6900000000},
-                  {"x": "2010", "y": 9000000000},
-                  {"x": "2011", "y": 8200000000},
-                  {"x": "2012", "y": 12500000000},
-                  {"x": "2013", "y": 0}
+                  {"x": "2010", "y": 3100000000},
+                  {"x": "2011", "y": 1700000000},
+                  {"x": "2012", "y": 3400000000},
+                  {"x": "2013", "y": 0},
+                  {"x": "2014", "y": 0}
               ]
         }
     ]
@@ -769,18 +735,18 @@ Oversight of EITI is ensured by a multi-stakeholder group, the "Comité executif
       d3.selectAll("#chart_comparative_gov_2 .grouped-item-active")[0].forEach(function(v){if(v.innerText=='GDP')v.click()} );
       chartWidget.create({
         type: "BubbleChart",
-        name: "Disbursed Revenue (in PEN)",
+        name: "Disbursed Revenue (in USD)",
         width: 1000,
         height: 600,
         diameter: 600,
         margin: {top: 20, right: 0, bottom: 0, left: 0},
         container: "bubble"
       },
-      'data/disbursed_revenue_PERU.json');
+      'data/disbursed_revenue_COD.json');
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company (Top 10, in PEN)",
+        name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
         height: 300,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
