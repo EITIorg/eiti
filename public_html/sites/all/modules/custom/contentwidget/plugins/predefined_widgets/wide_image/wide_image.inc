@@ -23,13 +23,13 @@ $plugin = array(
  * Render callback for the 'Wide Image' predefined widget.
  */
 function contentblock_wide_image_render($plugin, $widget_settings, $entity, $langcode) {
-  // Prepare the variables.
-
   $image_url = '';
-  if (!empty($entity->field_fpp_background_image[LANGUAGE_NONE][0])) {
-    $image_file = (object) $entity->field_fpp_background_image[LANGUAGE_NONE][0];
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
     $image_url = file_create_url($image_file->uri);
   }
+
   $header_small = (!empty($widget_settings['header_small'])) ? $widget_settings['header_small'] : FALSE;
   $header_big = (!empty($widget_settings['header_big'])) ? $widget_settings['header_big'] : FALSE;
 
@@ -219,6 +219,7 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
  * Ajax callback for the settings form.
  */
 function contentblock_wide_image_settings_ajax($form, $form_state) {
-  // TODO: maybe we should check the language.
-  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['wide_image']['links'];
+  $entity = $form['#entity'];
+  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+  return $form['field_fpp_widget'][$widget_field_language][0]['settings']['wide_image']['links'];
 }
