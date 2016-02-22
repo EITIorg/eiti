@@ -1,0 +1,1692 @@
+{
+  "nodes": [
+  {
+    "name": "MUTANDA MINING SARL"
+  },
+  {
+    "name": "KAMOTO COPPER COMPANY SA"
+  },
+  {
+    "name": "TENKE FUNGURUME MINING SA"
+  },
+  {
+    "name": "FRONTIER SA"
+  },
+  {
+    "name": "BOSS MINING SAS"
+  },
+  {
+    "name": "RUASHI MINING SAS"
+  },
+  {
+    "name": "MMG KINSEVERE SARL (ex-AMCK MINING SPRL)"
+  },
+  {
+    "name": "KIBALI GOLDMINES SA"
+  },
+  {
+    "name": "SOCIETE D'EXPLOITATION DE KIPOI"
+  },
+  {
+    "name": "CONGO DONGFANG INTERNATIONAL MINING SARL"
+  },
+  {
+    "name": "Impôt sur les bénéfices et profits (IBP)"
+  },
+  {
+    "name": "Impôt Professionnel sur les Rémunérations (IPR) / Impôt Exceptionnel sur la Rémunération des Expatriés (IER)"
+  },
+  {
+    "name": "Impôt mobilier (IM)"
+  },
+  {
+    "name": "Droits superficiaires annuels par carré"
+  },
+  {
+    "name": "Impôt sur la superficie des concessions minières et des hydrocarbures."
+  },
+  {
+    "name": "Droits et Taxes à l'importation (Total Quittance)"
+  },
+  {
+    "name": "Droits et Taxes à l'exportation (Total Quittance)"
+  },
+  {
+    "name": "Taxe concentrés"
+  },
+  {
+    "name": "Redevances minières (RM)"
+  },
+  {
+    "name": "Taxe sur autorisation d'exploitation des eaux naturelles de surface ou souterraines (iii)"
+  },
+  {
+    "name": "Taxe voiries et drainage"
+  },
+  {
+    "name": "Pénalités versées au DGRAD"
+  },
+  {
+    "name": "Pénalités versées au trésor"
+  },
+  {
+    "name": "Avis de Mise en Recouvrement (AMR A)"
+  },
+  {
+    "name": "Avis de Mise en Recouvrement (AMR B)"
+  },
+  {
+    "name": "Royalties."
+  },
+  {
+    "name": "Pas-de-porte / Bonus de Transfert"
+  },
+  {
+    "name": "Prestations de services"
+  },
+  {
+    "name": "Police des mines et hydrocarbures (iii)"
+  },
+  {
+    "name": "Impôt sur le Chiffre d’affaires à l’intérieur (ICAI)"
+  },
+  {
+    "name": "Redevance supplémentaires sur les réserves additionnelles (iv)"
+  },
+  {
+    "name": "Frais de consultance"
+  },
+  {
+    "name": "Pénalités et amendes transactionnelles pour le Trésor"
+  },
+  {
+    "name": "Pénalités et amendes transactionnelles pour la DGDA"
+  },
+  {
+    "name": "IBP sur prestations des personnes non résidentes en RDC (iii)"
+  },
+  {
+    "name": "Loyers d’amodiation et/ou rente mensuelle"
+  },
+  {
+    "name": "Contribution au budget de l’Etat"
+  },
+  {
+    "name": "Cession d’actifs ou parts sociales"
+  },
+  {
+    "name": "Autorisation d'exportation des minerais à l'état brut"
+  },
+  {
+    "name": "DGI"
+  },
+  {
+    "name": "DGRAD"
+  },
+  {
+    "name": "DRKAT"
+  },
+  {
+    "name": "DGDA"
+  },
+  {
+    "name": "EP"
+  }
+],
+  "links": 
+[
+  {
+    "source": 0,
+    "target": 10,
+    "value": 23380999
+  },
+  {
+    "source": 0,
+    "target": 11,
+    "value": 21815383
+  },
+  {
+    "source": 0,
+    "target": 12,
+    "value": 5377015
+  },
+  {
+    "source": 0,
+    "target": 13,
+    "value": 122101
+  },
+  {
+    "source": 0,
+    "target": 14,
+    "value": 2034
+  },
+  {
+    "source": 0,
+    "target": 15,
+    "value": 69306839
+  },
+  {
+    "source": 0,
+    "target": 16,
+    "value": 23163369
+  },
+  {
+    "source": 0,
+    "target": 17,
+    "value": 11809694
+  },
+  {
+    "source": 0,
+    "target": 18,
+    "value": 28349687
+  },
+  {
+    "source": 0,
+    "target": 19,
+    "value": 934415
+  },
+  {
+    "source": 0,
+    "target": 20,
+    "value": 18459817
+  },
+  {
+    "source": 0,
+    "target": 21,
+    "value": 17909
+  },
+  {
+    "source": 0,
+    "target": 22,
+    "value": 544383
+  },
+  {
+    "source": 0,
+    "target": 23,
+    "value": 5895723
+  },
+  {
+    "source": 0,
+    "target": 24,
+    "value": 1245767
+  },
+  {
+    "source": 1,
+    "target": 10,
+    "value": 23257000
+  },
+  {
+    "source": 1,
+    "target": 11,
+    "value": 34908023
+  },
+  {
+    "source": 1,
+    "target": 12,
+    "value": 6890370
+  },
+  {
+    "source": 1,
+    "target": 13,
+    "value": 26902
+  },
+  {
+    "source": 1,
+    "target": 15,
+    "value": 141857999
+  },
+  {
+    "source": 1,
+    "target": 16,
+    "value": 10581933
+  },
+  {
+    "source": 1,
+    "target": 18,
+    "value": 19631369
+  },
+  {
+    "source": 1,
+    "target": 25,
+    "value": 63388937
+  },
+  {
+    "source": 1,
+    "target": 26,
+    "value": 15000000
+  },
+  {
+    "source": 1,
+    "target": 27,
+    "value": 131115
+  },
+  {
+    "source": 1,
+    "target": 20,
+    "value": 15000000
+  },
+  {
+    "source": 1,
+    "target": 21,
+    "value": 333278
+  },
+  {
+    "source": 1,
+    "target": 22,
+    "value": 889480
+  },
+  {
+    "source": 1,
+    "target": 23,
+    "value": 8135043
+  },
+  {
+    "source": 1,
+    "target": 24,
+    "value": 3138685
+  },
+  {
+    "source": 1,
+    "target": 28,
+    "value": 56369
+  },
+  {
+    "source": 2,
+    "target": 10,
+    "value": 10650303
+  },
+  {
+    "source": 2,
+    "target": 11,
+    "value": 22580806
+  },
+  {
+    "source": 2,
+    "target": 12,
+    "value": 40302
+  },
+  {
+    "source": 2,
+    "target": 29,
+    "value": 47
+  },
+  {
+    "source": 2,
+    "target": 13,
+    "value": 798652
+  },
+  {
+    "source": 2,
+    "target": 14,
+    "value": 12770
+  },
+  {
+    "source": 2,
+    "target": 15,
+    "value": 83389926
+  },
+  {
+    "source": 2,
+    "target": 16,
+    "value": 16791766
+  },
+  {
+    "source": 2,
+    "target": 17,
+    "value": 4326768
+  },
+  {
+    "source": 2,
+    "target": 18,
+    "value": 31654109
+  },
+  {
+    "source": 2,
+    "target": 30,
+    "value": 2278300
+  },
+  {
+    "source": 2,
+    "target": 27,
+    "value": 254888
+  },
+  {
+    "source": 2,
+    "target": 31,
+    "value": 17195545
+  },
+  {
+    "source": 2,
+    "target": 20,
+    "value": 13631164
+  },
+  {
+    "source": 2,
+    "target": 32,
+    "value": 578741
+  },
+  {
+    "source": 2,
+    "target": 33,
+    "value": 232430
+  },
+  {
+    "source": 2,
+    "target": 21,
+    "value": 23486
+  },
+  {
+    "source": 2,
+    "target": 24,
+    "value": 2588
+  },
+  {
+    "source": 2,
+    "target": 28,
+    "value": 594301
+  },
+  {
+    "source": 3,
+    "target": 10,
+    "value": 6206723
+  },
+  {
+    "source": 3,
+    "target": 34,
+    "value": 780317
+  },
+  {
+    "source": 3,
+    "target": 11,
+    "value": 5587717
+  },
+  {
+    "source": 3,
+    "target": 13,
+    "value": 104805
+  },
+  {
+    "source": 3,
+    "target": 14,
+    "value": 1430
+  },
+  {
+    "source": 3,
+    "target": 15,
+    "value": 16877984
+  },
+  {
+    "source": 3,
+    "target": 16,
+    "value": 4922032
+  },
+  {
+    "source": 3,
+    "target": 17,
+    "value": 14499970
+  },
+  {
+    "source": 3,
+    "target": 18,
+    "value": 8626955
+  },
+  {
+    "source": 3,
+    "target": 20,
+    "value": 18500000
+  },
+  {
+    "source": 3,
+    "target": 21,
+    "value": 56964
+  },
+  {
+    "source": 3,
+    "target": 23,
+    "value": 1211864
+  },
+  {
+    "source": 3,
+    "target": 24,
+    "value": 176717
+  },
+  {
+    "source": 4,
+    "target": 10,
+    "value": 6167196
+  },
+  {
+    "source": 4,
+    "target": 34,
+    "value": 1120469
+  },
+  {
+    "source": 4,
+    "target": 11,
+    "value": 6822317
+  },
+  {
+    "source": 4,
+    "target": 12,
+    "value": 1072869
+  },
+  {
+    "source": 4,
+    "target": 13,
+    "value": 278546
+  },
+  {
+    "source": 4,
+    "target": 14,
+    "value": 4644
+  },
+  {
+    "source": 4,
+    "target": 15,
+    "value": 32926873
+  },
+  {
+    "source": 4,
+    "target": 16,
+    "value": 5314272
+  },
+  {
+    "source": 4,
+    "target": 17,
+    "value": 10593946
+  },
+  {
+    "source": 4,
+    "target": 18,
+    "value": 7668873
+  },
+  {
+    "source": 4,
+    "target": 25,
+    "value": 8677901
+  },
+  {
+    "source": 4,
+    "target": 27,
+    "value": 983915
+  },
+  {
+    "source": 4,
+    "target": 20,
+    "value": 8500000
+  },
+  {
+    "source": 4,
+    "target": 23,
+    "value": 2388294
+  },
+  {
+    "source": 4,
+    "target": 24,
+    "value": 526335
+  },
+  {
+    "source": 4,
+    "target": 28,
+    "value": 187154
+  },
+  {
+    "source": 5,
+    "target": 10,
+    "value": 5317132
+  },
+  {
+    "source": 5,
+    "target": 11,
+    "value": 8329755
+  },
+  {
+    "source": 5,
+    "target": 12,
+    "value": 807495
+  },
+  {
+    "source": 5,
+    "target": 13,
+    "value": 9528
+  },
+  {
+    "source": 5,
+    "target": 14,
+    "value": 149
+  },
+  {
+    "source": 5,
+    "target": 15,
+    "value": 27981626
+  },
+  {
+    "source": 5,
+    "target": 16,
+    "value": 3603381
+  },
+  {
+    "source": 5,
+    "target": 17,
+    "value": 1085535
+  },
+  {
+    "source": 5,
+    "target": 18,
+    "value": 7296586
+  },
+  {
+    "source": 5,
+    "target": 25,
+    "value": 7482394
+  },
+  {
+    "source": 5,
+    "target": 27,
+    "value": 15248
+  },
+  {
+    "source": 5,
+    "target": 20,
+    "value": 2490839
+  },
+  {
+    "source": 5,
+    "target": 21,
+    "value": 888023
+  },
+  {
+    "source": 5,
+    "target": 22,
+    "value": 206925
+  },
+  {
+    "source": 5,
+    "target": 23,
+    "value": 2212114
+  },
+  {
+    "source": 5,
+    "target": 24,
+    "value": 154208
+  },
+  {
+    "source": 6,
+    "target": 10,
+    "value": 7848258
+  },
+  {
+    "source": 6,
+    "target": 34,
+    "value": 2625696
+  },
+  {
+    "source": 6,
+    "target": 11,
+    "value": 11754743
+  },
+  {
+    "source": 6,
+    "target": 12,
+    "value": 782439
+  },
+  {
+    "source": 6,
+    "target": 13,
+    "value": 108667
+  },
+  {
+    "source": 6,
+    "target": 14,
+    "value": 4138
+  },
+  {
+    "source": 6,
+    "target": 15,
+    "value": 14643254
+  },
+  {
+    "source": 6,
+    "target": 16,
+    "value": 3887655
+  },
+  {
+    "source": 6,
+    "target": 18,
+    "value": 8579372
+  },
+  {
+    "source": 6,
+    "target": 35,
+    "value": 7307470
+  },
+  {
+    "source": 6,
+    "target": 20,
+    "value": 2766148
+  },
+  {
+    "source": 6,
+    "target": 32,
+    "value": 630368
+  },
+  {
+    "source": 6,
+    "target": 33,
+    "value": 157592
+  },
+  {
+    "source": 6,
+    "target": 21,
+    "value": 27254
+  },
+  {
+    "source": 6,
+    "target": 22,
+    "value": 22667
+  },
+  {
+    "source": 6,
+    "target": 23,
+    "value": 722501
+  },
+  {
+    "source": 6,
+    "target": 24,
+    "value": 166746
+  },
+  {
+    "source": 6,
+    "target": 28,
+    "value": 91212
+  },
+  {
+    "source": 7,
+    "target": 10,
+    "value": 2165606
+  },
+  {
+    "source": 7,
+    "target": 11,
+    "value": 5018486
+  },
+  {
+    "source": 7,
+    "target": 13,
+    "value": 1211140
+  },
+  {
+    "source": 7,
+    "target": 15,
+    "value": 56255553
+  },
+  {
+    "source": 7,
+    "target": 16,
+    "value": 84411
+  },
+  {
+    "source": 7,
+    "target": 18,
+    "value": 15411547
+  },
+  {
+    "source": 7,
+    "target": 21,
+    "value": 161719
+  },
+  {
+    "source": 7,
+    "target": 23,
+    "value": 600299
+  },
+  {
+    "source": 7,
+    "target": 24,
+    "value": 397774
+  },
+  {
+    "source": 7,
+    "target": 36,
+    "value": 1319
+  },
+  {
+    "source": 8,
+    "target": 10,
+    "value": 16403355
+  },
+  {
+    "source": 8,
+    "target": 34,
+    "value": 2018887
+  },
+  {
+    "source": 8,
+    "target": 37,
+    "value": 111000000
+  },
+  {
+    "source": 8,
+    "target": 11,
+    "value": 3642970
+  },
+  {
+    "source": 8,
+    "target": 12,
+    "value": 353317
+  },
+  {
+    "source": 8,
+    "target": 13,
+    "value": 37572
+  },
+  {
+    "source": 8,
+    "target": 14,
+    "value": 628
+  },
+  {
+    "source": 8,
+    "target": 15,
+    "value": 5987935
+  },
+  {
+    "source": 8,
+    "target": 16,
+    "value": 1112070
+  },
+  {
+    "source": 8,
+    "target": 17,
+    "value": 3252233
+  },
+  {
+    "source": 8,
+    "target": 18,
+    "value": 2253325
+  },
+  {
+    "source": 8,
+    "target": 25,
+    "value": 3188810
+  },
+  {
+    "source": 8,
+    "target": 20,
+    "value": 1361181
+  },
+  {
+    "source": 8,
+    "target": 21,
+    "value": 103359
+  },
+  {
+    "source": 8,
+    "target": 22,
+    "value": 184794
+  },
+  {
+    "source": 8,
+    "target": 23,
+    "value": 986838
+  },
+  {
+    "source": 9,
+    "target": 10,
+    "value": 5259657
+  },
+  {
+    "source": 9,
+    "target": 11,
+    "value": 360024
+  },
+  {
+    "source": 9,
+    "target": 13,
+    "value": 5221
+  },
+  {
+    "source": 9,
+    "target": 14,
+    "value": 246
+  },
+  {
+    "source": 9,
+    "target": 15,
+    "value": 10144182
+  },
+  {
+    "source": 9,
+    "target": 16,
+    "value": 3691236
+  },
+  {
+    "source": 9,
+    "target": 17,
+    "value": 6463000
+  },
+  {
+    "source": 9,
+    "target": 18,
+    "value": 5972498
+  },
+  {
+    "source": 9,
+    "target": 38,
+    "value": 1394870
+  },
+  {
+    "source": 9,
+    "target": 20,
+    "value": 4521000
+  },
+  {
+    "source": 9,
+    "target": 32,
+    "value": 44771
+  },
+  {
+    "source": 9,
+    "target": 33,
+    "value": 179585
+  },
+  {
+    "source": 9,
+    "target": 21,
+    "value": 38933
+  },
+  {
+    "source": 9,
+    "target": 22,
+    "value": 58399
+  },
+  {
+    "source": 9,
+    "target": 23,
+    "value": 194103
+  },
+  {
+    "source": 9,
+    "target": 24,
+    "value": 54795
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 23380999
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 21815383
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 5377015
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 122101
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 2034
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 69306839
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 23163369
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 11809694
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 28349687
+  },
+  {
+    "source": 19,
+    "target": 40,
+    "value": 934415
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 18459817
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 17909
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 544383
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 5895723
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 1245767
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 23257000
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 34908023
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 6890370
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 26902
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 141857999
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 10581933
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 19631369
+  },
+  {
+    "source": 25,
+    "target": 43,
+    "value": 63388937
+  },
+  {
+    "source": 26,
+    "target": 43,
+    "value": 15000000
+  },
+  {
+    "source": 27,
+    "target": 43,
+    "value": 131115
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 15000000
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 333278
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 889480
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 8135043
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 3138685
+  },
+  {
+    "source": 28,
+    "target": 40,
+    "value": 56369
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 10650303
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 22580806
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 40302
+  },
+  {
+    "source": 29,
+    "target": 39,
+    "value": 47
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 798652
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 12770
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 83389926
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 16791766
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 4326768
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 31654109
+  },
+  {
+    "source": 30,
+    "target": 43,
+    "value": 2278300
+  },
+  {
+    "source": 27,
+    "target": 43,
+    "value": 254888
+  },
+  {
+    "source": 31,
+    "target": 43,
+    "value": 17195545
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 13631164
+  },
+  {
+    "source": 32,
+    "target": 42,
+    "value": 578741
+  },
+  {
+    "source": 33,
+    "target": 42,
+    "value": 232430
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 23486
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 2588
+  },
+  {
+    "source": 28,
+    "target": 40,
+    "value": 594301
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 6206723
+  },
+  {
+    "source": 34,
+    "target": 39,
+    "value": 780317
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 5587717
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 104805
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 1430
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 16877984
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 4922032
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 14499970
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 8626955
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 18500000
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 56964
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 1211864
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 176717
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 6167196
+  },
+  {
+    "source": 34,
+    "target": 39,
+    "value": 1120469
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 6822317
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 1072869
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 278546
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 4644
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 32926873
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 5314272
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 10593946
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 7668873
+  },
+  {
+    "source": 25,
+    "target": 43,
+    "value": 8677901
+  },
+  {
+    "source": 27,
+    "target": 43,
+    "value": 983915
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 8500000
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 2388294
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 526335
+  },
+  {
+    "source": 28,
+    "target": 40,
+    "value": 187154
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 5317132
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 8329755
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 807495
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 9528
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 149
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 27981626
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 3603381
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 1085535
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 7296586
+  },
+  {
+    "source": 25,
+    "target": 43,
+    "value": 7482394
+  },
+  {
+    "source": 27,
+    "target": 43,
+    "value": 15248
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 2490839
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 888023
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 206925
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 2212114
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 154208
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 7848258
+  },
+  {
+    "source": 34,
+    "target": 39,
+    "value": 2625696
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 11754743
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 782439
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 108667
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 4138
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 14643254
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 3887655
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 8579372
+  },
+  {
+    "source": 35,
+    "target": 43,
+    "value": 7307470
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 2766148
+  },
+  {
+    "source": 32,
+    "target": 42,
+    "value": 630368
+  },
+  {
+    "source": 33,
+    "target": 42,
+    "value": 157592
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 27254
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 22667
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 722501
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 166746
+  },
+  {
+    "source": 28,
+    "target": 40,
+    "value": 91212
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 2165606
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 5018486
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 1211140
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 56255553
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 84411
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 15411547
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 161719
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 600299
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 397774
+  },
+  {
+    "source": 36,
+    "target": 40,
+    "value": 1319
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 16403355
+  },
+  {
+    "source": 34,
+    "target": 39,
+    "value": 2018887
+  },
+  {
+    "source": 37,
+    "target": 43,
+    "value": 111000000
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 3642970
+  },
+  {
+    "source": 12,
+    "target": 39,
+    "value": 353317
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 37572
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 628
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 5987935
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 1112070
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 3252233
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 2253325
+  },
+  {
+    "source": 25,
+    "target": 43,
+    "value": 3188810
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 1361181
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 103359
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 184794
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 986838
+  },
+  {
+    "source": 10,
+    "target": 39,
+    "value": 5259657
+  },
+  {
+    "source": 11,
+    "target": 39,
+    "value": 360024
+  },
+  {
+    "source": 13,
+    "target": 40,
+    "value": 5221
+  },
+  {
+    "source": 14,
+    "target": 41,
+    "value": 246
+  },
+  {
+    "source": 15,
+    "target": 42,
+    "value": 10144182
+  },
+  {
+    "source": 16,
+    "target": 42,
+    "value": 3691236
+  },
+  {
+    "source": 17,
+    "target": 41,
+    "value": 6463000
+  },
+  {
+    "source": 18,
+    "target": 40,
+    "value": 5972498
+  },
+  {
+    "source": 38,
+    "target": 40,
+    "value": 1394870
+  },
+  {
+    "source": 20,
+    "target": 41,
+    "value": 4521000
+  },
+  {
+    "source": 32,
+    "target": 42,
+    "value": 44771
+  },
+  {
+    "source": 33,
+    "target": 42,
+    "value": 179585
+  },
+  {
+    "source": 21,
+    "target": 40,
+    "value": 38933
+  },
+  {
+    "source": 22,
+    "target": 40,
+    "value": 58399
+  },
+  {
+    "source": 23,
+    "target": 39,
+    "value": 194103
+  },
+  {
+    "source": 24,
+    "target": 39,
+    "value": 54795
+  }
+]
+
+
+  
+}

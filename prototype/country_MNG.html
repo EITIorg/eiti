@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 <link rel="stylesheet" href="css/charts/main.css">
 <title>EITI - Mongolia</title>
+<style>
+#sankey .node text {
+  pointer-events: none;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size:9pt;
+  font-weight: 600;
+}
+</style>
 <body>
 
 <header role="banner" class="main-header">
@@ -829,11 +837,11 @@ Mongolia is a leading producer of mineral commodities such as coal (the world’
         type: "Sankey",
         name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
-        height: 300,
+        height: 700,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
               container: "sankey"
       },
-      'data/sankey.json');
+      'data/sankey_MNG.json');
 
     </script>
 </body>
