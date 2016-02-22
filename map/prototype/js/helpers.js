@@ -42,7 +42,7 @@ export var helpers = {
 
         var popup = L.popup({autoPan:false, closeButton:false})
             .setLatLng(e.latlng)
-            .setContent('<a href="country_' + layer.feature.id + '.html"><strong>' + layer.feature.properties.name + '</strong>')
+            .setContent('<a href="' + country_url + '"><strong>' + layer.feature.properties.name + '</strong>')
             .openOn(layer._map);
     },
 
@@ -75,8 +75,8 @@ export var helpers = {
         };
 
         info.update = function (props) {
-            map.options.legend.innerHTML = ('<i style="background:#65c32d"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>') + 
-                ('<i style="background:#42abd8"></i> <strong>EITI Compliant Country</strong><br/>confirmed to have met all EITI requirements <br/>') + 
+            map.options.legend.innerHTML = ('<i style="background:#42abd8"></i> <strong>EITI Candidate Country</strong> <br/>implementing EITI, not yet compliant <br/>') + 
+                ('<i style="background:#65c32d"></i> <strong>EITI Compliant Country</strong><br/>confirmed to have met all EITI requirements <br/>') + 
                 ('<i style="background:#ff6600"></i> <strong>Suspended</strong><br/>Compliant/Candidate status is temporarily suspended <br/>') + 
                 ('<i style="background:#dddddd"></i> Other <br/>');
         };
