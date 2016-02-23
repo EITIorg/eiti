@@ -27,13 +27,14 @@ window.mapWidget.createHomePage = function(options) {
 
 window.mapWidget.createMapPage = function(options) {
   var formatnumber =function(number) {
-    if(isNaN(number)) return 0;
-    let n = 0;
-    let x = 3;
-    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-    return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-};
+      if(isNaN(number)) return 0;
+      let n = 0;
+      let x = 3;
+      var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+      return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+  };
   var showTooltip = function (e) {
+    helpers.resetTooltip();
       var layer = e.target;
       var country = countryStatus.find(function(v){return v.ISO3===layer.feature.id});
       if(country === undefined || country.EITI_Status == 4) return;
@@ -64,7 +65,7 @@ window.mapWidget.createMapPage = function(options) {
       layer.on({
           mouseover: showTooltip,
           mouseout: helpers.resetTooltip,
-          click: helpers.zoomToFeature
+          click: showTooltip
       });
   };
 

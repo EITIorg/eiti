@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f7cda695376af23a2adb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ee44ea0681cafc332576"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -943,6 +943,7 @@
 	    return number.toFixed(Math.max(0, ~ ~n)).replace(new RegExp(re, 'g'), '$&,');
 	  };
 	  var showTooltip = function showTooltip(e) {
+	    _helpers.helpers.resetTooltip();
 	    var layer = e.target;
 	    var country = _countryStatus.countryStatus.find(function (v) {
 	      return v.ISO3 === layer.feature.id;
@@ -960,7 +961,7 @@
 	    layer.on({
 	      mouseover: showTooltip,
 	      mouseout: _helpers.helpers.resetTooltip,
-	      click: _helpers.helpers.zoomToFeature
+	      click: showTooltip
 	    });
 	  };
 
