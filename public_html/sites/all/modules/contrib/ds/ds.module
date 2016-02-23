@@ -692,11 +692,11 @@ function ds_entity_variables(&$vars) {
 
       // Add extras classes to the region.
       if (empty($layout['flexible'])) {
-        $vars[$region_name . '_classes'] = !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
+        $vars[$region_name . '_classes'] .= !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
 
         // Token support for region classes.
         if (module_exists('token') && isset($vars[$object])) {
-          $vars[$region_name . '_classes'] = token_replace($vars[$region_name . '_classes'], array($object => $vars[$object]), array('clear' => TRUE, 'sanitize' => TRUE));
+          $vars[$region_name . '_classes'] .= token_replace($vars[$region_name . '_classes'], array($object => $vars[$object]), array('clear' => TRUE, 'sanitize' => TRUE));
         }
       }
       // Add a wrapper to the region.
