@@ -1,0 +1,41 @@
+{
+  "name": "disbursement",
+  "children": [
+        {
+          "name": "child1",
+          "children": [
+            {
+              "name": "Ghana Revenue Authority",
+              "size": 3609714510
+            }
+          ]
+        },
+        {
+          "name": "child2",
+          "children": [
+            { 
+              "name": "Ministry of Finance and Economic Planning",
+              "size": 46870623
+            }
+          ]
+        },
+        {
+          "name": "child3",
+          "children": [
+            {
+              "name": "Non- Tax Revenue Division",
+              "size": 14215850
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "District / Municipal Assemblies",
+              "size": 3321788
+            }
+          ]
+        }
+    ]
+}
