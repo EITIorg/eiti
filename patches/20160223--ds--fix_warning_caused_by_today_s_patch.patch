@@ -1,0 +1,18 @@
+Index: public_html/sites/all/modules/contrib/ds/ds.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/ds/ds.module	(date 1456165994000)
++++ public_html/sites/all/modules/contrib/ds/ds.module	(revision )
+@@ -692,6 +692,10 @@
+ 
+       // Add extras classes to the region.
+       if (empty($layout['flexible'])) {
++        if (!isset($vars[$region_name . '_classes'])) {
++          $vars[$region_name . '_classes'] = '';
++        }
++
+         $vars[$region_name . '_classes'] .= !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
+ 
+         // Token support for region classes.

@@ -692,6 +692,10 @@ function ds_entity_variables(&$vars) {
 
       // Add extras classes to the region.
       if (empty($layout['flexible'])) {
+        if (!isset($vars[$region_name . '_classes'])) {
+          $vars[$region_name . '_classes'] = '';
+        }
+
         $vars[$region_name . '_classes'] .= !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
 
         // Token support for region classes.
