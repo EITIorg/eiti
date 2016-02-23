@@ -716,7 +716,9 @@ function ds_entity_variables(&$vars) {
     $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
 
     // Add layout attributes if any.
-    $vars['layout_attributes'] = '';
+    if (!isset($vars['layout_attributes'])) {
+      $vars['layout_attributes'] = '';
+    }
     if (!empty($layout['settings']['layout_attributes'])) {
       if (isset($vars[$object])) {
         $vars['layout_attributes'] .= ' ' . token_replace($layout['settings']['layout_attributes'], array($object => $vars[$object]), array('clear' => TRUE, 'sanitize' => TRUE));

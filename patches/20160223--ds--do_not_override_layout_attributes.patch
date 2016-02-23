@@ -1,0 +1,18 @@
+Index: public_html/sites/all/modules/contrib/ds/ds.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/ds/ds.module	(revision dfcf197789b3eac7417110ddcd1ebb2da25a8aff)
++++ public_html/sites/all/modules/contrib/ds/ds.module	(revision )
+@@ -716,7 +716,9 @@
+     $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
+ 
+     // Add layout attributes if any.
++    if (!isset($vars['layout_attributes'])) {
+-    $vars['layout_attributes'] = '';
++      $vars['layout_attributes'] = '';
++    }
+     if (!empty($layout['settings']['layout_attributes'])) {
+       if (isset($vars[$object])) {
+         $vars['layout_attributes'] .= ' ' . token_replace($layout['settings']['layout_attributes'], array($object => $vars[$object]), array('clear' => TRUE, 'sanitize' => TRUE));
