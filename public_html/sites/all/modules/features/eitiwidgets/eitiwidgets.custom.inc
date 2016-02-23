@@ -157,7 +157,8 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   // Constrain the pane content.
   $variables['main_classes'] = 'single-fluid-row-wrapper';
 
-  if (!empty($entity->field_fpp_background_image)) {
+  // @TODO: Use on all bundles.
+  if (!empty($entity->field_fpp_background_image) && $entity->bundle == 'quote') {
     $image_url = NULL;
 
     // Get the background image URL.
