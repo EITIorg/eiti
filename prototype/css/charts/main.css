@@ -121,10 +121,11 @@ textarea {
 }
 
 .legend {
-    float: right;
-    margin-top: 10px;
+    margin-top: 0;
+    margin-bottom:20px;
     margin-right: 0;
-    width: 520px;
+    overflow: hidden;
+    width: 100%;
 }
 .grouped-item-active {
     float: left;
