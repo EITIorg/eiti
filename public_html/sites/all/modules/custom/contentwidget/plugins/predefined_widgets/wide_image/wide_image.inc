@@ -27,6 +27,7 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
     $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
+    // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
     $image_url = file_create_url($image_file->uri);
   }
 

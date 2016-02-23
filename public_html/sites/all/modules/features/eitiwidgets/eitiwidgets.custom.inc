@@ -132,3 +132,44 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
     $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
   }
 }
+
+/**
+ * Implements hook_entity_view().
+ */
+function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type != 'fieldable_panels_pane') {
+    return;
+  }
+
+  // Remove empty title tags!
+  // @TODO: Fix for title.module integration.
+  if (isset($entity->content['title']['#value']) && $entity->content['title']['#value'] == '') {
+    unset($entity->content['title']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_fieldable_panels_pane().
+ */
+function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
+  $entity = $variables['elements']['#fieldable_panels_pane'];
+
+  // Constrain the pane content.
+  $variables['main_classes'] = 'single-fluid-row-wrapper';
+
+  if (!empty($entity->field_fpp_background_image)) {
+    $image_url = NULL;
+
+    // Get the background image URL.
+    $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $entity->language);
+    if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+      $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
+      // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
+      $image_url = file_create_url($image_file->uri);
+    }
+
+    if ($image_url) {
+      $variables['attributes_array']['style'] = 'background-image: url("' . $image_url . '");';
+    }
+  }
+}
