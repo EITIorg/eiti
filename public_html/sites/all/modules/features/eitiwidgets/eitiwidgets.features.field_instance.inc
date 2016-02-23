@@ -364,6 +364,59 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-table-field_fpp_source_url'.
+  $field_instances['fieldable_panels_pane-table-field_fpp_source_url'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify the source of this data (a link to a page or a file).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_source_url',
+    'label' => 'Source URL',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-table-field_fpp_table'.
   $field_instances['fieldable_panels_pane-table-field_fpp_table'] = array(
     'bundle' => 'table',
@@ -623,6 +676,59 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-text-field_fpp_useful_links'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_useful_links'] = array(
+    'bundle' => 'text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify any useful links (internal or external).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_useful_links',
+    'label' => 'Useful Links',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-text-title_field'.
   $field_instances['fieldable_panels_pane-text-title_field'] = array(
     'bundle' => 'text',
@@ -856,8 +962,10 @@ function eitiwidgets_field_default_field_instances() {
   t('Description');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
+  t('Please specify any useful links (internal or external).');
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
+  t('Please specify the source of this data (a link to a page or a file).');
   t('Please specify the wide background image used for the header.');
   t('Quote');
   t('Source');
@@ -867,6 +975,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Tab widget settings.');
   t('Table');
   t('Title');
+  t('Useful Links');
   t('Widget');
 
   return $field_instances;
