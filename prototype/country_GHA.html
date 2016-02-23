@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 <link rel="stylesheet" href="css/charts/main.css">
 <title>EITI - Ghana</title>
+<style>
+#sankey .node text {
+  pointer-events: none;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size:9pt;
+  font-weight: 600;
+}
+</style>
 <body>
 
 <header role="banner" class="main-header">
@@ -307,9 +315,10 @@ Ghana is the <a href="http://www.goldfacts.org/en/economic_impact/countries/ghan
     The extractive sector contributed to 64% of Ghana’s total export values in 2014.
   </p>
 
-    <div class="section-chart-container section-viz">
-      Bar chart of production volumes of commodities over time. Data drawn from summary data.
+    <div class="section-chart-container">
+        <div id="chart_production"></div>
     </div>
+
 
   </div>
 </div>
@@ -348,15 +357,14 @@ Ghana is the <a href="http://www.goldfacts.org/en/economic_impact/countries/ghan
       </ul>
 
     </div>
-
-    <div class="section-chart-container section-viz">
-        stacked chart goes here
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_1"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-        histogram chart goes here:  Government Revenue Comparison chart: “Gov’t revenue from extractives compared to….” (comparison sources include:  GDP, Aid, FDI, Remittances).
-Revenue data comes from EITI summary data sheet.
+    <div class="section-chart-container">
+      <div id="chart_comparative_gov_2"></div>
     </div>
+
 
   </div>
 </div>
@@ -385,18 +393,12 @@ Subnational governments receive royalties and taxes from mining companies, const
     </p>
 
 
-    <div class="section-chart-container section-viz">
-      Bubble chart that shows where revenue is disbursed
-Data from summary data sheet
-
-Alternative to be considered:
-Treemap chart: Company payments. Showing revenue by company.
-Data comes from summary data sheet.
-http://bl.ocks.org/mbostock/4063582
+    <div class="section-chart-container">
+      <div id="bubble"></div>
     </div>
 
-    <div class="section-chart-container section-viz">
-Disbursement (Sankey diagram)
+    <div class="section-chart-container">
+      <div id="sankey"></div>
     </div>
 
     <div class="learn-more-section">
@@ -633,33 +635,59 @@ Disbursement (Sankey diagram)
         height: 400,
         margin: {top: 10, bottom: 50, left: 100, right: 10},
               xlabel: "Year",
-              ylabel: "Value (USD)",
+              ylabel: "Oil: Barrels, Gold: oz, Bauxite, Manganese: Mt",
               container: "chart_production",
               legendClass: "grouped-item",
               description: ""
       },
       [{
-          "label": "Gas",
+          "label": "Oil",
                 "values": [
-                    {"x": "2008", "y": 1095196071},
-                    {"x": "2009", "y": 498084744},
-                    {"x": "2010", "y": 1140017166}
-                ]
-          },
-          {
-          "label": "NGL",
-                "values": [
-                    {"x": "2008", "y": 4374586842},
-                    {"x": "2009", "y": 3265934655},
-                    {"x": "2010", "y": 4547089022}
+                    {"x": "2009", "y": 0},
+                    {"x": "2010", "y": 1181088},
+                    {"x": "2011", "y": 24195895},
+                    {"x": "2012", "y": 26430964},
+                    {"x": "2013", "y": 36048260}
                 ]
           },
           {
           "label": "Gold",
                 "values": [
-                    {"x": "2008", "y": 3726795277},
-                    {"x": "2009", "y": 4202969161},
-                    {"x": "2010", "y": 4289524923}
+                    {"x": "2009", "y": 2524113},
+                    {"x": "2010", "y": 2556556},
+                    {"x": "2011", "y": 2662943},
+                    {"x": "2012", "y": 4324255},
+                    {"x": "2013", "y": 4396987}
+                ]
+          },
+          {
+          "label": "Bauxite",
+                "values": [
+                    {"x": "2009", "y": 381320},
+                    {"x": "2010", "y": 1028431},
+                    {"x": "2011", "y": 1729416},
+                    {"x": "2012", "y": 0},
+                    {"x": "2013", "y": 0}
+                ]
+          },
+          {
+          "label": "Manganese",
+                "values": [
+                    {"x": "2009", "y": 1152776},
+                    {"x": "2010", "y": 605832},
+                    {"x": "2011", "y": 370162},
+                    {"x": "2012", "y": 0},
+                    {"x": "2013", "y": 0}
+                ]
+          },
+          {
+          "label": "Diamond",
+                "values": [
+                    {"x": "2009", "y": 0},
+                    {"x": "2010", "y": 0},
+                    {"x": "2011", "y": 0},
+                    {"x": "2012", "y": 215117},
+                    {"x": "2013", "y": 160820}
                 ]
           }
       ]);
@@ -688,63 +716,134 @@ Disbursement (Sankey diagram)
               legendClass: "grouped-item",
               container: "chart_comparative_gov_2"
       },
-      [
-        {
-        "label": "Extractives",
-              "values": [
-                  {"x": "2008", "y": 3573697356},
-                  {"x": "2009", "y": 2965369767},
-                  {"x": "2010", "y": 4358147652},
-                  {"x": "2011", "y": 5884357012},
-                  {"x": "2012", "y": 5480853241},
-                  {"x": "2013", "y": 5511486805}
-              ]
-        },
-        {
-        "label": "GDP",
-              "values": [
-                  {"x": "2008", "y": 121572308726.00},
-                  {"x": "2009", "y": 121192333743.00},
-                  {"x": "2010", "y": 148522048128.00},
-                  {"x": "2011", "y": 170564249005.00},
-                  {"x": "2012", "y": 192679697094.00},
-                  {"x": "2013", "y": 201848484664.00}
-              ]
-        },
-        {
-        "label": "Aid",
-              "values": [
-                  {"x": "2008", "y": 3200000000},
-                  {"x": "2009", "y": 5400000000},
-                  {"x": "2010", "y": 4500000000},
-                  {"x": "2011", "y": 734000000},
-                  {"x": "2012", "y": 1200000000},
-                  {"x": "2013", "y": 792000000}
-              ]
-        },
-        {
-        "label": "Remittance Inflows",
-              "values": [
-                  {"x": "2008", "y": 2600000000},
-                  {"x": "2009", "y": 2600000000},
-                  {"x": "2010", "y": 2700000000},
-                  {"x": "2011", "y": 2700000000},
-                  {"x": "2012", "y": 2800000000},
-                  {"x": "2013", "y": 0}
-              ]
-        },
-        {
-          "label": "FDI",
-              "values": [
-                  {"x": "2008", "y": 7200000000},
-                  {"x": "2009", "y": 6900000000},
-                  {"x": "2010", "y": 9000000000},
-                  {"x": "2011", "y": 8200000000},
-                  {"x": "2012", "y": 12500000000},
-                  {"x": "2013", "y": 0}
-              ]
-        }
-    ]
+      [  
+   {  
+      "label":"Extractives",
+      "values":[  
+         {  
+            "x":"2009",
+            "y":111915170
+         },
+         {  
+            "x":"2010",
+            "y":210184337
+         },
+         {  
+            "x":"2011",
+            "y":942698325
+         },
+         {  
+            "x":"2012",
+            "y":1127438264
+         },
+         {  
+            "x":"2013",
+            "y":1196266552
+         }
+      ]
+   },
+   {  
+      "label":"GDP",
+      "values":[  
+         {  
+            "x":"2009",
+            "y":25977847814
+         },
+         {  
+            "x":"2010",
+            "y":32174772956
+         },
+         {  
+            "x":"2011",
+            "y":39566292433
+         },
+         {  
+            "x":"2012",
+            "y":41939728979
+         },
+         {  
+            "x":"2013",
+            "y":47805069495
+         }
+      ]
+   },
+   {  
+      "label":"Aid",
+      "values":[  
+         {  
+            "x":"2009",
+            "y":2078125205
+         },
+         {  
+            "x":"2010",
+            "y":1549957626
+         },
+         {  
+            "x":"2011",
+            "y":1335781115
+         },
+         {  
+            "x":"2012",
+            "y":2025497310
+         },
+         {  
+            "x":"2013",
+            "y":1335666932
+         },
+
+      ]
+   },
+   {  
+      "label":"Remittance Inflows",
+      "values":[  
+         {  
+            "x":"2009",
+            "y":122755159
+         },
+         {  
+            "x":"2010",
+            "y":144882112
+         },
+         {  
+            "x":"2011",
+            "y":152000000
+         },
+         {  
+            "x":"2012",
+            "y":155355748
+         },
+         {  
+            "x":"2013",
+            "y":890730000
+         }
+      ]
+   },
+   {  
+      "label":"FDI",
+      "values":[  
+         {  
+            "x":"2009",
+            "y":3119488569
+         },
+         {  
+            "x":"2010",
+            "y":2692410343
+         },
+         {  
+            "x":"2011",
+            "y":3247590000
+         },
+         {  
+            "x":"2012",
+            "y":3367254068
+         },
+         {  
+            "x":"2013",
+            "y":1219400000
+         }
+      ]
+   }
+]
 
 
       );
@@ -752,7 +851,7 @@ Disbursement (Sankey diagram)
       d3.selectAll("#chart_comparative_gov_2 .grouped-item-active")[0].forEach(function(v){if(v.innerText=='GDP')v.click()} );
       chartWidget.create({
         type: "BubbleChart",
-        name: "Disbursed Revenue (in PEN)",
+        name: "Disbursed Revenue (in USD)",
         width: 1000,
         height: 600,
         diameter: 600,
@@ -763,9 +862,9 @@ Disbursement (Sankey diagram)
 
       chartWidget.create({
         type: "Sankey",
-        name: "Disbursements by Company (Top 10, in PEN)",
+        name: "Disbursements by Company (Top 10, in USD)",
         width: 800,
-        height: 300,
+        height: 600,
         margin: {top: 1, right: 1, bottom: 6, left: 1},
               container: "sankey"
       },
