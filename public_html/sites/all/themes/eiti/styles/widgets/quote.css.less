@@ -1,0 +1,26 @@
+
+// TODO: Add quotes!
+.predefined-widget--quote {
+  background-color: @clnormal__dark;
+  color: @claltnormal__light;
+
+  .fieldable-panels-pane {
+    padding: 6em 0;
+
+    // @HACK: Remove onclick from eitiwidgets_preprocess_fieldable_panels_pane().
+    cursor: pointer;
+  }
+
+  .field-name-field-fpp-quote {
+    font-size: 1.6em;
+    line-height: 1.3;
+  }
+
+  footer {
+    margin: 2em 0;
+    text-align: center;
+  }
+  cite {
+    font-style: normal;
+  }
+}

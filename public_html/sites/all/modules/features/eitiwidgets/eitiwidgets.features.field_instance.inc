@@ -168,14 +168,14 @@ function eitiwidgets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
           'image_style' => 'large',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -249,11 +249,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -284,11 +284,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Source of the quote: a person, a website, etc.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -324,7 +324,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
