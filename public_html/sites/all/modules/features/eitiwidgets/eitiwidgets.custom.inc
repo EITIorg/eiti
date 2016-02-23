@@ -182,6 +182,7 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
         $variables['layout_attributes'] = '';
       }
       $variables['layout_attributes'] .= ' onclick="location.href=\'' . url($url) . '\'"';
+      $variables['classes_array'][] = 'linked';
     }
   }
 }

@@ -7,8 +7,10 @@
   .fieldable-panels-pane {
     padding: 6em 0;
 
-    // @HACK: Remove onclick from eitiwidgets_preprocess_fieldable_panels_pane().
-    cursor: pointer;
+    &.linked {
+      // @HACK: Remove onclick from eitiwidgets_preprocess_fieldable_panels_pane().
+      cursor: pointer;
+    }
   }
 
   .field-name-field-fpp-quote {
