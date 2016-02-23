@@ -79,6 +79,9 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
    */
   public function processProductionFields($data) {
     $output = array();
+    // Needed for normalization.
+    $x_all = array();
+    $x_group = array();
     foreach ($data as $item) {
       if (!key_exists($item->indicator_id, $output)) {
         $output[$item->indicator_id] = array(
@@ -89,6 +92,22 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
         'x' => $item->name,
         'y' => round(floatval($item->value_numeric)),
       );
+
+      // Used for normalization.
+      if (!in_array($item->name, $x_all)) {
+        $x_all[] = $item->name;
+      }
+      $x_group[$item->indicator_id][] = $item->name;
+    }
+    // Make a small normalization.
+    foreach ($x_group as $indicator_id => $x_values) {
+      $x_diff = array_diff($x_all, $x_values);
+      foreach ($x_diff as $x) {
+        $output[$indicator_id]['values'][] = array(
+          'x' => $x,
+          'y' => 0,
+        );
+      }
     }
     $output = array_values($output);
     return $output;
