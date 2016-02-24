@@ -64,13 +64,14 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
-        'wide-image-background',
         'clearfix',
-      )
+      ),
     )
   );
 
   if (!empty($image_url)) {
+    $block['#attributes']['class'][] = 'wide-image-background';
+
     $block_style = "background-image: url(${image_url});";
     $block['#attributes']['style'] = $block_style;
   }
@@ -132,6 +133,7 @@ function contentblock_wide_image_settings(&$element, &$form_state, $plugin, $wid
   $header_big = isset($widget_settings['header_big']) ? $widget_settings['header_big'] : '';
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
 
+  // @TODO: Rename!
   $settings_form['header_small'] = array(
     '#type' => 'textfield',
     '#title' => t('Small Header'),
