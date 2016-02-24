@@ -138,6 +138,27 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_fpp_icon'.
+  $field_bases['field_fpp_icon'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_icon',
+    'indexes' => array(
+      'icon' => array(
+        0 => 'icon',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'helperfield',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'helperfield_icon',
+  );
+
   // Exported field_base: 'field_fpp_quote'.
   $field_bases['field_fpp_quote'] = array(
     'active' => 1,

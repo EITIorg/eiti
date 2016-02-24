@@ -18,9 +18,25 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
  * A place where we alter our FPP forms.
  */
 function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
-  switch ($form_state['entity']->bundle) {
+  $entity = $form_state['entity'];
+
+  // Hide the FPP view mode selector.
+  if (isset($form['view_mode']['#default_value'])) {
+    $form['view_mode'] = array(
+      '#type' => 'value',
+      '#value' => $form['view_mode']['#default_value'],
+    );
+  }
+
+  // Hide the FPP link form element since the title is not used.
+  if (isset($form['link'])) {
+    unset($form['link']);
+  }
+
+  switch ($entity->bundle) {
     case 'tabs_with_widgets':
-      $tabs_number = isset($form_state['values']['field_fpp_widget']['und'][0]['settings']['tabs']['tabs_number']) ? $form_state['values']['field_fpp_widget']['und'][0]['settings']['tabs']['tabs_number'] : 4;
+      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+      $tabs_number = isset($form_state['values']['field_fpp_widget'][$field_language][0]['settings']['tabs']['tabs_number']) ? $form_state['values']['field_fpp_widget'][$field_language][0]['settings']['tabs']['tabs_number'] : 4;
 
       $ief_id = key($form_state['inline_entity_form']);
       $entity_count = count($form_state['inline_entity_form'][$ief_id]['entities']);
@@ -31,54 +47,10 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
         '@cardinality_count' => $tabs_number,
         '@label' => t('Widgets'),
       ));
-      $form['field_fpp_content_widgets'][LANGUAGE_NONE]['cardinality_count'] = array(
+      $form['field_fpp_content_widgets'][$field_language]['cardinality_count'] = array(
         '#markup' => '<div class="ief-cardinality-count" id="ief-cardinality">' . $message . '</div>',
       );
       break;
-  }
-
-  // Define to which FPP we want to allow Icon Selection.
-  $fpp_bundles_with_icons = array('text');
-
-  // Now add the icon selector.
-  if (in_array($form['#entity']->bundle, $fpp_bundles_with_icons)) {
-    $form['title_icon'] = array(
-      '#type' => 'container',
-    );
-    $form['title_icon']['title_icon_checkbox'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Use an Icon'),
-      '#description' => t('Do you want to use an icon in the title?'),
-      '#default_value' => isset($form_state['conf']['use_icon']) ? $form_state['conf']['use_icon'] : FALSE,
-    );
-    $icons = helpertheme_get_svg_icons();
-    $icon_options = drupal_map_assoc(array_keys($icons));
-    $field_name = 'title_icon_checkbox';
-    $form['title_icon']['title_icon_selector'] = array(
-      '#type' => 'radioicons',
-      '#title' => t('Icon'),
-      '#options' => $icon_options,
-      '#icons' => $icons,
-      '#default_value' => isset($form_state['conf']['icon']) ? $form_state['conf']['icon'] : '',
-      '#states' => array(
-        'visible' => array(
-          array('input[name="' . $field_name . '"]' => array('checked' => TRUE)),
-        ),
-      )
-    );
-    $form['#submit'][] = 'eitiwidgets_fpp_form_icon_submit';
-  }
-}
-
-/**
- * Submit callback for the icon option.
- */
-function eitiwidgets_fpp_form_icon_submit(&$form, &$form_state) {
-  // We just push the icon option into $form_state['conf'], which is serialized
-  // and stored per ctools content_types instance.
-  if (isset($form_state['values']['title_icon_checkbox']) && $form_state['values']['title_icon_checkbox']) {
-    $form_state['conf']['icon'] = $form_state['values']['title_icon_selector'];
-    $form_state['conf']['use_icon'] = $form_state['values']['title_icon_checkbox'];
   }
 }
 
@@ -86,10 +58,13 @@ function eitiwidgets_fpp_form_icon_submit(&$form, &$form_state) {
  * Our custom form validations.
  */
 function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
-  switch ($form_state['entity']->bundle) {
+  $entity = $form_state['entity'];
+
+  switch ($entity->bundle) {
     // General entity form validation for the "Featured Bookmarks".
     case 'featured_bookmarks':
-      $list_size = isset($form_state['values']['field_fpp_widget']['und'][0]['settings']['bookmarks']['widget_size']) ? $form_state['values']['field_fpp_widget']['und'][0]['settings']['bookmarks']['widget_size'] : 0;
+      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+      $list_size = isset($form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size']) ? $form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size'] : 0;
 
       if (!empty($list_size)) {
         $ief = reset($form_state['inline_entity_form']);
@@ -102,7 +77,7 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
       }
       else {
         $msg = t('Please specify the widget size.');
-        form_set_error('field_fpp_widget][und][0][settings][bookmarks][widget_size', $msg);
+        form_set_error('field_fpp_widget][' . $field_language . '][0][settings][bookmarks][widget_size', $msg);
       }
       break;
   }

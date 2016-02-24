@@ -653,7 +653,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -672,6 +672,44 @@ function eitiwidgets_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_icon'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_icon'] = array(
+    'bundle' => 'text',
+    'default_value' => array(
+      0 => array(
+        'icon' => 'arrow',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'helperfield',
+        'settings' => array(),
+        'type' => 'helperfield_icon_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_icon',
+    'label' => 'Icon',
+    'required' => 0,
+    'settings' => array(
+      'available_icons' => array(),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'helperfield',
+      'settings' => array(),
+      'type' => 'helperfield_radio_selector',
       'weight' => 1,
     ),
   );
@@ -692,7 +730,7 @@ function eitiwidgets_field_default_field_instances() {
           'size' => '1em',
         ),
         'type' => 'link_icon',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -728,7 +766,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -748,7 +786,7 @@ function eitiwidgets_field_default_field_instances() {
           'title_style' => 'h2',
         ),
         'type' => 'title_linked',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -967,6 +1005,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Bookmark widget configuration.');
   t('Content Widgets');
   t('Description');
+  t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');

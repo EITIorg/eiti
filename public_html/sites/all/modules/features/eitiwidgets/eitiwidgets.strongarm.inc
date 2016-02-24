@@ -169,7 +169,7 @@ function eitiwidgets_strongarm() {
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
       ),
       'display' => array(),
