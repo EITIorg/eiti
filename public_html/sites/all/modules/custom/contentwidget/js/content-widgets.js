@@ -26,8 +26,14 @@
 
               var $selector = $(yearSelectorStr).on('change', function(evObj) {
                 var value = $(this).val();
-                widgetSetting.name = widgetSetting.name_year + ' ' + value;
-                widgetSetting.description = widgetSetting.description_year + ' ' + value;
+                widgetSetting.name = Drupal.t('@title for @year', {
+                  '@title': widgetSetting.name_original,
+                  '@year': value
+                });
+                widgetSetting.description = Drupal.t('@description for @year', {
+                  '@description': widgetSetting.description_original,
+                  '@year': value
+                });
                 chartWidget.create(widgetSetting, widgetSetting.endpoint + '&filter[year][0]=' + value);
               });
               $selector.val(widgetSetting.current_year);
