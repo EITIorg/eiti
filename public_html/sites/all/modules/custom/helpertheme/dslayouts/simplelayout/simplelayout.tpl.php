@@ -11,7 +11,7 @@
   <?php print render($title_suffix['contextual_links']); ?>
   <?php endif; ?>
 
-  <<?php print $main_wrapper; if (is_array($main_attributes)) { print drupal_attributes($main_attributes);} ?> class="group-main <?php print $main_classes; ?>">
+  <<?php print $main_wrapper; if (isset($main_attributes)) { print drupal_attributes($main_attributes);} ?> class="group-main <?php print $main_classes; ?>">
     <?php print $main; ?>
   </<?php print $main_wrapper ?>>
 
