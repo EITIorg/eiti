@@ -53,10 +53,13 @@ function eitict_page_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
+        ),
+        'language' => array(
+          'weight' => '1',
         ),
       ),
       'display' => array(),
