@@ -155,6 +155,7 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   $entity = $variables['elements']['#fieldable_panels_pane'];
 
   // Constrain the pane content.
+  $variables['classes_array'][] = 'clearfix';
   $variables['main_classes'] = 'single-fluid-row-wrapper';
 
   // @TODO: Use on all bundles.
@@ -179,11 +180,11 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $entity->language);
     if (!empty($entity->field_fpp_source_url[$source_url_field_language][0]['url'])) {
       $url = $entity->field_fpp_source_url[$source_url_field_language][0]['url'];
-      if (!isset($variables['layout_attributes'])) {
-        $variables['layout_attributes'] = '';
-      }
-      $variables['layout_attributes'] .= ' onclick="location.href=\'' . url($url) . '\'"';
-      $variables['classes_array'][] = 'linked';
+      $variables['main_wrapper'] = 'a';
+      $variables['main_attributes'] = array(
+        'href' => url($url),
+      );
+      $variables['main_classes'] .= ' linked-wrapper';
     }
   }
 }

@@ -8,13 +8,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
+  }
 
-    padding: 6em 0;
-
-    &.linked {
-      // @HACK: Remove onclick from eitiwidgets_preprocess_fieldable_panels_pane().
-      cursor: pointer;
-    }
+  .linked-wrapper {
+    .link-color(@claltnormal__light, @clactive__alt);
+    margin-top: 6em;
+    margin-bottom: 6em;
   }
 
   .field-name-field-fpp-quote {
@@ -30,3 +29,7 @@
     font-style: normal;
   }
 }
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
