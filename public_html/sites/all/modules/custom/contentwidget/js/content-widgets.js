@@ -57,7 +57,8 @@
   Drupal.contentWidgets = {
     getChartWidgetTypes: function() {
       return [
-        'GroupedBar'
+        'GroupedBar',
+        'StackedBar'
       ];
     }
   }

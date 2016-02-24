@@ -794,6 +794,7 @@ function eitiwidgets_field_default_field_instances() {
       'available_widgets' => array(
         'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
         'viz_groupedbar_static' => 'viz_groupedbar_static',
+        'viz_stackedbar_dynamic' => 'viz_stackedbar_dynamic',
       ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,

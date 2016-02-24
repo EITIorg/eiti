@@ -250,7 +250,7 @@ function eitientity_gfs_code_entity_ui_get_page_title($op, $entity_type, $entity
  * @param string $bundle
  * @return array
  */
-function eitientity_gfs_code_get_by_code($bundle) {
+function eitientity_gfs_code_get_by_bundle($bundle) {
   $entities = array();
 
   // Get a list of domains sorted by weight and name.
