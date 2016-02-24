@@ -30,7 +30,7 @@ function eitict_page_panelizer_defaults() {
   $panelizer->link_to_entity = FALSE;
   $panelizer->extra = array();
   $display = new panels_display();
-  $display->layout = 'simplelayout';
+  $display->layout = 'widelayout';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(

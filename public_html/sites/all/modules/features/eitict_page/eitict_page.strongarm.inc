@@ -115,18 +115,15 @@ function eitict_page_strongarm() {
     'view modes' => array(
       'page_manager' => array(
         'status' => 0,
-        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 1,
-        'substitute' => '',
         'default' => 1,
         'choice' => 0,
       ),
     ),
-    'help' => '',
   );
   $export['panelizer_defaults_node_page'] = $strongarm;
 

@@ -30,7 +30,7 @@ function eitiet_implementing_country_panelizer_defaults() {
   $panelizer->link_to_entity = FALSE;
   $panelizer->extra = array();
   $display = new panels_display();
-  $display->layout = 'simplelayout';
+  $display->layout = 'widelayout';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -40,37 +40,12 @@ function eitiet_implementing_country_panelizer_defaults() {
     ),
   );
   $display->cache = array();
-  $display->title = '%implementing_country:name';
+  $display->title = '';
   $display->uuid = '6f0cc01b-7a30-4800-9a35-90a9a807394b';
   $display->content = array();
   $display->panels = array();
-    $pane = new stdClass();
-    $pane->pid = 'new-97a9eecc-1656-4690-99c2-f1e9ad61780d';
-    $pane->panel = 'main';
-    $pane->type = 'custom';
-    $pane->subtype = 'custom';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'admin_title' => 'No content message',
-      'title' => '',
-      'body' => 'No content has been configured for this country page.',
-      'format' => 'plain_text',
-      'substitute' => 0,
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '97a9eecc-1656-4690-99c2-f1e9ad61780d';
-    $display->content['new-97a9eecc-1656-4690-99c2-f1e9ad61780d'] = $pane;
-    $display->panels['main'][0] = 'new-97a9eecc-1656-4690-99c2-f1e9ad61780d';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-97a9eecc-1656-4690-99c2-f1e9ad61780d';
+  $display->hide_title = PANELS_TITLE_NONE;
+  $display->title_pane = '0';
   $panelizer->display = $display;
   $export['implementing_country:normal:default:default'] = $panelizer;
 
