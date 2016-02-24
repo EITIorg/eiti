@@ -704,7 +704,7 @@ function ds_entity_variables(&$vars) {
         }
       }
       // Add a wrapper to the region.
-      if (empty($layout['flexible'])) {
+      if (empty($layout['flexible']) && !isset($vars[$region_name . '_wrapper'])) {
         $vars[$region_name . '_wrapper'] = isset($layout['settings']['wrappers'][$region_name]) ? $layout['settings']['wrappers'][$region_name] : 'div';
       }
     }
@@ -713,7 +713,9 @@ function ds_entity_variables(&$vars) {
     $vars['rendered_by_ds'] = TRUE;
 
     // Add a layout wrapper.
-    $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
+    if (!isset($vars['layout_wrapper'])) {
+      $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
+    }
 
     // Add layout attributes if any.
     if (!isset($vars['layout_attributes'])) {
