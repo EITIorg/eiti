@@ -407,6 +407,7 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
       //break;
     default:
       $available_icons += array(
+        'arrow',
         'calendar_add',
         'information',
         'globe_wireframe',

@@ -429,6 +429,10 @@ function theme_helpergeneric_formatter_link_icon($variables) {
   unset($link_options['title']);
   unset($link_options['url']);
 
+  if (isset($link_options['attributes']['class']) && is_string($link_options['attributes']['class'])) {
+    $link_options['attributes']['class'] = array($link_options['attributes']['class']);
+  }
+
   // Add an SVG icon.
   $svgicon = '';
   if (!empty($display_settings['settings']['icon'])) {
@@ -437,15 +441,12 @@ function theme_helpergeneric_formatter_link_icon($variables) {
     $options = array(
       'width' => $size,
       'height' => $size,
-      'class' => 'icon',
       'sprite_name' => 'icons',  // @TODO: FIX!
     );
     $svgicon = helpertheme_get_svg_icons($icon, $options);
+    $link_options['attributes']['class'][] = 'link-title-with-icon';
   }
 
-  if (isset($link_options['attributes']['class'])) {
-    $link_options['attributes']['class'] = array($link_options['attributes']['class']);
-  }
   // Display a normal link if both title and URL are available.
   if (!empty($variables['element']['title']) && !empty($variables['element']['url'])) {
     return l($svgicon . $variables['element']['title'], $variables['element']['url'], $link_options);

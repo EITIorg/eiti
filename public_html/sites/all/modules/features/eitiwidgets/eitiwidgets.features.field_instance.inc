@@ -685,10 +685,13 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify any useful links (internal or external).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
+        'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'icon' => 'arrow',
+          'size' => '1em',
+        ),
+        'type' => 'link_icon',
         'weight' => 2,
       ),
     ),
@@ -794,7 +797,6 @@ function eitiwidgets_field_default_field_instances() {
       'available_widgets' => array(
         'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
         'viz_groupedbar_static' => 'viz_groupedbar_static',
-        'viz_stackedbar_dynamic' => 'viz_stackedbar_dynamic',
       ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -960,7 +962,6 @@ function eitiwidgets_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('');
   t('Background Image');
   t('Bookmark List');
   t('Bookmark widget configuration.');
