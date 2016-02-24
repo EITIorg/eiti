@@ -40,7 +40,7 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
     $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
     $query->leftJoin('eiti_indicator_value', 'iv', 'fiv.field_sd_indicator_values_target_id = iv.id');
     $query->leftJoin('eiti_indicator', 'i', 'i.id = iv.indicator_id');
-    $query->fields('ic', array('iso', ' name'));
+    $query->fields('ic', array('iso', 'name'));
     $query->fields('iv', array('id', 'indicator_id', 'value_numeric', 'value_unit'));
     $query->fields('sd', array('id', 'year_end', 'status'));
     $query->addField('i', 'name', 'commodity_name');

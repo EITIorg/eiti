@@ -106,7 +106,7 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
     $this->addFieldMapping('original_currency', 'original_currency');
 
     // Store all the codes here.
-    $this->codes = eitientity_gfs_code_get_by_code('gfs_code');
+    $this->codes = eitientity_gfs_code_get_by_bundle('gfs_code');
   }
 
   /**
@@ -357,7 +357,7 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     $this->addFieldMapping('original_currency', 'original_currency');
 
     // Store all the codes here.
-    $this->codes = eitientity_gfs_code_get_by_code('gfs_code');
+    $this->codes = eitientity_gfs_code_get_by_bundle('gfs_code');
   }
 
   /**
