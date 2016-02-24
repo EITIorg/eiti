@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3c94d07c9391a487af94"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a32778e94593582c3ba2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -20668,22 +20668,35 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						_this.setState({ chartData: data });
+						if (props.processor) {
+							var processedData = props.processor(data);
+							_this.setState({ chartData: processedData });
+						} else {
+							_this.setState({ chartData: data });
+						}
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				this.setState({ chartData: this.props.chartData });
+			} else if (props.chartData) {
+				this.setState({ chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -23364,27 +23377,35 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						if (_this.props.processor) {
-							var processedData = _this.props.processor(data);
+						if (props.processor) {
+							var processedData = props.processor(data);
 							_this.setState({ chartData: processedData });
 						} else {
 							_this.setState({ chartData: data });
 						}
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				this.setState({ chartData: this.props.chartData });
+			} else if (props.chartData) {
+				this.setState({ chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -23765,16 +23786,16 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						if (_this.props.processor) {
-							data = _this.props.processor(data);
+						if (props.processor) {
+							data = props.processor(data);
 						}
 						var classData = data.map(function (item) {
 							var newItem = item;
@@ -23784,16 +23805,24 @@
 						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				var classData = this.props.chartData.map(function (item) {
+			} else if (props.chartData) {
+				var classData = props.chartData.map(function (item) {
 					var newItem = item;
 					newItem['active'] = true;
 					return newItem;
 				});
-				this.setState({ rawData: classData, chartData: this.props.chartData });
+				this.setState({ rawData: classData, chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -24232,16 +24261,16 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						if (_this.props.processor) {
-							data = _this.props.processor(data);
+						if (props.processor) {
+							data = props.processor(data);
 						}
 						var classData = data.map(function (item) {
 							var newItem = item;
@@ -24251,16 +24280,24 @@
 						_this.setState({ rawData: classData, chartData: data, showLegend: true });
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				var classData = this.props.chartData.map(function (item) {
+			} else if (props.chartData) {
+				var classData = props.chartData.map(function (item) {
 					var newItem = item;
 					newItem['active'] = true;
 					return newItem;
 				});
-				this.setState({ rawData: classData, chartData: this.props.chartData, showLegend: true });
+				this.setState({ rawData: classData, chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -24495,27 +24532,35 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						if (_this.props.processor) {
-							var processedData = _this.props.processor(data);
+						if (props.processor) {
+							var processedData = props.processor(data);
 							_this.setState({ chartData: processedData });
 						} else {
 							_this.setState({ chartData: data });
 						}
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				this.setState({ chartData: this.props.chartData });
+			} else if (props.chartData) {
+				this.setState({ chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -24587,6 +24632,7 @@
 		displayName: 'DataSet',
 
 		componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+			console.log("updating component");
 			var _props = this.props;
 			var data = _props.data;
 			var diameter = _props.diameter;
@@ -24595,9 +24641,9 @@
 
 			var el = (0, _reactDom.findDOMNode)(this);
 
-			var svg = d3.select(el).append("svg").attr("width", width).attr("height", height).attr("class", "bubble");
+			d3.select(el).select("svg").remove(); // clear nodes with state change
 
-			svg.selectAll("*").remove(); // clear nodes with state change
+			var svg = d3.select(el).append("svg").attr("width", width).attr("height", height).attr("class", "bubble");
 
 			var format = d3.format(",d"),
 			    color = d3.scale.category20c();
@@ -24667,27 +24713,35 @@
 			};
 		},
 
-		componentWillMount: function componentWillMount() {
-			if (this.props.dataURL) {
+		updateData: function updateData(props) {
+			if (props.dataURL) {
 				var _this = this;
 				/* Old school AJAX request to try to stay away from jQuery */
 				var req = new XMLHttpRequest();
 				req.onreadystatechange = function () {
 					if (req.readyState == 4 && req.status == 200) {
 						var data = JSON.parse(req.responseText);
-						if (_this.props.processor) {
-							var processedData = _this.props.processor(data);
+						if (props.processor) {
+							var processedData = props.processor(data);
 							_this.setState({ chartData: processedData });
 						} else {
 							_this.setState({ chartData: data });
 						}
 					}
 				};
-				req.open("GET", this.props.dataURL, true);
+				req.open("GET", props.dataURL, true);
 				req.send();
-			} else if (this.props.chartData) {
-				this.setState({ chartData: this.props.chartData });
+			} else if (props.chartData) {
+				this.setState({ chartData: props.chartData });
 			}
+		},
+
+		componentWillMount: function componentWillMount() {
+			this.updateData(this.props);
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this.updateData(nextProps);
 		},
 
 		render: function render() {
@@ -24751,9 +24805,9 @@
 
 	    var el = (0, _reactDom.findDOMNode)(this);
 
-	    var svg = d3.select(el).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	    d3.select(el).select("svg").remove(); // clear nodes with state change
 
-	    svg.selectAll("*").remove(); // clear nodes with state change
+	    var svg = d3.select(el).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	    var formatNumber = d3.format(",.0f"),
 	        format = function format(d) {
@@ -24847,27 +24901,35 @@
 	    };
 	  },
 
-	  componentWillMount: function componentWillMount() {
-	    if (this.props.dataURL) {
+	  updateData: function updateData(props) {
+	    if (props.dataURL) {
 	      var _this = this;
 	      /* Old school AJAX request to try to stay away from jQuery */
 	      var req = new XMLHttpRequest();
 	      req.onreadystatechange = function () {
 	        if (req.readyState == 4 && req.status == 200) {
 	          var data = JSON.parse(req.responseText);
-	          if (_this.props.processor) {
-	            var processedData = _this.props.processor(data);
+	          if (props.processor) {
+	            var processedData = props.processor(data);
 	            _this.setState({ chartData: processedData });
 	          } else {
 	            _this.setState({ chartData: data });
 	          }
 	        }
 	      };
-	      req.open("GET", this.props.dataURL, true);
+	      req.open("GET", props.dataURL, true);
 	      req.send();
-	    } else if (this.props.chartData) {
-	      this.setState({ chartData: this.props.chartData });
+	    } else if (props.chartData) {
+	      this.setState({ chartData: props.chartData });
 	    }
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    this.updateData(this.props);
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    this.updateData(nextProps);
 	  },
 
 	  render: function render() {
