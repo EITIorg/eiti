@@ -86,13 +86,13 @@ function eitict_bookmark_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'bookmark';
   $ds_layout->view_mode = 'bm_large_tile';
-  $ds_layout->layout = 'panels-simplelayout';
+  $ds_layout->layout = 'simplelayout';
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
         0 => 'field_bm_image',
-        1 => 'group_overlay',
-        2 => 'field_bm_bookmark_type',
+        1 => 'field_bm_bookmark_type',
+        2 => 'group_overlay',
         4 => 'title_field',
       ),
       'ds_hidden' => array(
@@ -103,8 +103,8 @@ function eitict_bookmark_ds_layout_settings_info() {
     ),
     'fields' => array(
       'field_bm_image' => 'main',
-      'group_overlay' => 'main',
       'field_bm_bookmark_type' => 'main',
+      'group_overlay' => 'main',
       'field_bm_hide_title' => 'ds_hidden',
       'title_field' => 'main',
       'field_bm_reference' => 'ds_hidden',
@@ -129,30 +129,8 @@ function eitict_bookmark_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'bookmark';
   $ds_layout->view_mode = 'bm_medium_tile';
-  $ds_layout->layout = 'panels-simplelayout';
+  $ds_layout->layout = 'simplelayout';
   $ds_layout->settings = array(
-    'regions' => array(
-      'main' => array(
-        0 => 'field_bm_image',
-        1 => 'field_bm_bookmark_type',
-        2 => 'title_field',
-        6 => 'group_overlay',
-      ),
-      'ds_hidden' => array(
-        3 => 'field_bm_hide_title',
-        4 => 'field_bm_reference',
-        5 => 'field_bm_reference_type',
-      ),
-    ),
-    'fields' => array(
-      'field_bm_image' => 'main',
-      'field_bm_bookmark_type' => 'main',
-      'title_field' => 'main',
-      'field_bm_hide_title' => 'ds_hidden',
-      'field_bm_reference' => 'ds_hidden',
-      'field_bm_reference_type' => 'ds_hidden',
-      'group_overlay' => 'main',
-    ),
     'classes' => array(),
     'wrappers' => array(
       'main' => 'div',
@@ -163,6 +141,28 @@ function eitict_bookmark_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'regions' => array(
+      'main' => array(
+        0 => 'field_bm_image',
+        1 => 'field_bm_bookmark_type',
+        2 => 'title_field',
+        3 => 'group_overlay',
+      ),
+      'ds_hidden' => array(
+        0 => 'field_bm_hide_title',
+        1 => 'field_bm_reference',
+        2 => 'field_bm_reference_type',
+      ),
+    ),
+    'fields' => array(
+      'field_bm_image' => 'main',
+      'field_bm_bookmark_type' => 'main',
+      'title_field' => 'main',
+      'group_overlay' => 'main',
+      'field_bm_hide_title' => 'ds_hidden',
+      'field_bm_reference' => 'ds_hidden',
+      'field_bm_reference_type' => 'ds_hidden',
+    ),
   );
   $export['node|bookmark|bm_medium_tile'] = $ds_layout;
 
@@ -172,8 +172,18 @@ function eitict_bookmark_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'bookmark';
   $ds_layout->view_mode = 'bm_small_tile';
-  $ds_layout->layout = 'panels-simplelayout';
+  $ds_layout->layout = 'simplelayout';
   $ds_layout->settings = array(
+    'classes' => array(),
+    'wrappers' => array(
+      'main' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
     'regions' => array(
       'main' => array(
         0 => 'field_bm_image',
@@ -182,9 +192,9 @@ function eitict_bookmark_ds_layout_settings_info() {
         3 => 'group_overlay',
       ),
       'ds_hidden' => array(
-        4 => 'field_bm_hide_title',
-        5 => 'field_bm_reference',
-        6 => 'field_bm_reference_type',
+        0 => 'field_bm_hide_title',
+        1 => 'field_bm_reference',
+        2 => 'field_bm_reference_type',
       ),
     ),
     'fields' => array(
@@ -196,16 +206,6 @@ function eitict_bookmark_ds_layout_settings_info() {
       'field_bm_reference' => 'ds_hidden',
       'field_bm_reference_type' => 'ds_hidden',
     ),
-    'classes' => array(),
-    'wrappers' => array(
-      'main' => 'div',
-      'ds_hidden' => 'div',
-    ),
-    'layout_wrapper' => 'div',
-    'layout_attributes' => '',
-    'layout_attributes_merge' => 1,
-    'layout_link_attribute' => '',
-    'layout_link_custom' => '',
   );
   $export['node|bookmark|bm_small_tile'] = $ds_layout;
 

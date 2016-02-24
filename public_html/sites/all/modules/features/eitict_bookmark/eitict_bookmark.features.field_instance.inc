@@ -292,14 +292,16 @@ function eitict_bookmark_field_default_field_instances() {
       ),
       'bm_medium_tile' => array(
         'label' => 'hidden',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_default',
         'weight' => 12,
       ),
       'bm_small_tile' => array(
         'label' => 'hidden',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'link_default',
         'weight' => 14,
       ),
       'default' => array(

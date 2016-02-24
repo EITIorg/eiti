@@ -23,8 +23,8 @@ function eitict_bookmark_field_group_info() {
     'label' => 'Overlay',
     'weight' => '1',
     'children' => array(
-      0 => 'field_bm_bookmark_type',
-      1 => 'title_field',
+      0 => 'title_field',
+      1 => 'field_bm_bookmark_type',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -56,8 +56,8 @@ function eitict_bookmark_field_group_info() {
     'label' => 'Overlay',
     'weight' => '15',
     'children' => array(
-      0 => 'field_bm_bookmark_type',
-      1 => 'title_field',
+      0 => 'title_field',
+      1 => 'field_bm_bookmark_type',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -89,8 +89,8 @@ function eitict_bookmark_field_group_info() {
     'label' => 'Overlay',
     'weight' => '3',
     'children' => array(
-      0 => 'field_bm_bookmark_type',
-      1 => 'title_field',
+      0 => 'title_field',
+      1 => 'field_bm_bookmark_type',
     ),
     'format_type' => 'div',
     'format_settings' => array(
