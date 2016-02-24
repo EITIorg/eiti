@@ -210,28 +210,36 @@ let TreeMap = React.createClass({
 		}
 	},
 
-	componentWillMount: function() {
-		if(this.props.dataURL) {
+	updateData: function(props) {
+		if(props.dataURL) {
 			var _this = this;
 			/* Old school AJAX request to try to stay away from jQuery */
 			var req = new XMLHttpRequest();
 			req.onreadystatechange = function() {
 			    if (req.readyState == 4 && req.status == 200) {
 			    	var data = JSON.parse(req.responseText);
-			    	if(_this.props.processor) {
-		               var processedData = _this.props.processor(data);
-			    	  _this.setState({chartData: processedData});
+			    	if(props.processor) {
+               			var processedData = props.processor(data);
+			    	  	_this.setState({chartData: processedData});
 		            } else {
-		              _this.setState({chartData: data});
+		              	_this.setState({chartData: data});
 		            }
 			    }
 			  }
-			req.open("GET", this.props.dataURL, true);
+			req.open("GET", props.dataURL, true);
 			req.send();
 		}
-		else if(this.props.chartData) {			
-			this.setState({chartData: this.props.chartData});
+		else if(props.chartData) {			
+			this.setState({chartData: props.chartData});
 		}
+	},
+
+	componentWillMount: function() {
+		this.updateData(this.props);
+	},
+
+	componentWillReceiveProps: function(nextProps) {
+		this.updateData(nextProps);
 	},
 
 	render() {

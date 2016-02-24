@@ -18,24 +18,24 @@ let DataSet = React.createClass({
 
 		let el = findDOMNode(this);
 
-	    let svg = d3.select(el).append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    d3.select(el).select("svg").remove(); // clear nodes with state change
 
-        svg.selectAll("*").remove(); // clear nodes with state change
+	    let svg = d3.select(el).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		let formatNumber = d3.format(",.0f"),
             format = function(d) { return "$" + formatNumber(d); },
             color = d3.scale.category20();
 
-        let sankey = d3.sankey()
-            .nodeWidth(15)
-            .nodePadding(10)
-            .size([width, height]);
+    let sankey = d3.sankey()
+        .nodeWidth(15)
+        .nodePadding(10)
+        .size([width, height]);
 
-        let path = sankey.link();
+    let path = sankey.link();
 
 		sankey
               .nodes(data.nodes)
@@ -129,30 +129,37 @@ let Sankey = React.createClass({
 		}
 	},
 
-	componentWillMount: function() {
-		if(this.props.dataURL) {
-			var _this = this;
-			/* Old school AJAX request to try to stay away from jQuery */
-			var req = new XMLHttpRequest();
-			req.onreadystatechange = function() {
-			    if (req.readyState == 4 && req.status == 200) {
-			    	var data = JSON.parse(req.responseText);
-            if(_this.props.processor) {
-               var processedData = _this.props.processor(data);
-			    	  _this.setState({chartData: processedData});
-            } else {
-              _this.setState({chartData: data});
-            }
+	updateData: function(props) {
+    if(props.dataURL) {
+      var _this = this;
+      /* Old school AJAX request to try to stay away from jQuery */
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+          if (req.readyState == 4 && req.status == 200) {
+            var data = JSON.parse(req.responseText);
+            if(props.processor) {
+                    var processedData = props.processor(data);
+                _this.setState({chartData: processedData});
+                } else {
+                    _this.setState({chartData: data});
+                }
+          }
+        }
+      req.open("GET", props.dataURL, true);
+      req.send();
+    }
+    else if(props.chartData) {      
+      this.setState({chartData: props.chartData});
+    }
+  },
 
-			    }
-			  }
-			req.open("GET", this.props.dataURL, true);
-			req.send();
-		}
-		else if(this.props.chartData) {			
-			this.setState({chartData: this.props.chartData});
-		}
-	},
+  componentWillMount: function() {
+    this.updateData(this.props);
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.updateData(nextProps);
+  },
 
 	render() {
 		let {width,

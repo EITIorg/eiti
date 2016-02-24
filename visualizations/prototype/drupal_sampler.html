@@ -15,6 +15,12 @@
 	<body>
 		<div id="main">
 			<div id="treemap"></div>
+			<div>
+				<select id="selection">
+					<option value="data/viz6.json">2006</option>
+  					<option value="data/viz6test.json">2007</option>
+				</select>
+			</div>
 			<div id="bubble"></div>
 			<div id="sankey"></div>
 	    	<div id="viz2"></div>
@@ -22,8 +28,23 @@
 	    	<div id="viz4"></div>
 	    	<div id="viz5"></div>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 		<script src="dist/chartWidgets.js"></script>
 		<script>
+			$( "#selection" ).change(function() {
+				var data = $("#selection").val();
+				console.log(data);
+			  	chartWidget.create({
+					type: "BubbleChart",		
+					name: "Sample BubbleChart 2",
+					width: 600,
+					height: 600,
+					diameter: 600,
+					margin: {top: 20, right: 0, bottom: 0, left: 0},
+		            container: "bubble"
+				},
+				data);
+			});
 			chartWidget.create({
 				type: "TreeMap",		
 				name: "Sample Treemap",
@@ -51,7 +72,6 @@
 				margin: {top: 1, right: 1, bottom: 6, left: 1},
 	            container: "sankey",
 	            processor: function(input) {
-	            	console.log(input);
 					return input;
 	            }
 			},

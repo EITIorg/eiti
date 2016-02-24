@@ -66,16 +66,16 @@ let GroupedBar = React.createClass ({
 
     },
 
-	componentWillMount: function() {
-		if(this.props.dataURL) {
+	updateData: function(props) {
+		if(props.dataURL) {
 			var _this = this;
 			/* Old school AJAX request to try to stay away from jQuery */
 			var req = new XMLHttpRequest();
 			req.onreadystatechange = function() {
 			    if (req.readyState == 4 && req.status == 200) {
 			    	var data = JSON.parse(req.responseText);
-			    	if(_this.props.processor) {
-		               data = _this.props.processor(data);
+			    	if(props.processor) {
+		               data = props.processor(data);
 		            } 
 			    	var classData = data.map(function(item) {
 			    		var newItem = item;
@@ -85,17 +85,25 @@ let GroupedBar = React.createClass ({
 			    	_this.setState({rawData: classData, chartData: data, showLegend: true});
 			    }
 			}
-			req.open("GET", this.props.dataURL, true);
+			req.open("GET", props.dataURL, true);
 			req.send();
 		}
-		else if(this.props.chartData) {
-			var classData = this.props.chartData.map(function(item) {
+		else if(props.chartData) {
+			var classData = props.chartData.map(function(item) {
 	    		var newItem = item;
 	    		newItem['active'] = true;
 	    		return newItem;
 	    	});
-			this.setState({rawData: classData, chartData: this.props.chartData});
+			this.setState({rawData: classData, chartData: props.chartData});
 		}
+	},
+
+	componentWillMount: function() {
+		this.updateData(this.props);
+	},
+
+	componentWillReceiveProps: function(nextProps) {
+		this.updateData(nextProps);
 	},
 
 	render: function() {
