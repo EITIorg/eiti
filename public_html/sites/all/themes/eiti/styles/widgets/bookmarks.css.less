@@ -9,7 +9,7 @@
     padding-bottom: 1px;
     padding-top: 1px;
 
-    li {
+    & > li {
       display: inline-block;
       float: left;
 
@@ -18,7 +18,8 @@
     }
   }
 
-  .custom-layout {
+  .linked-wrapper {
+    display: block;
     .link-color(@claltnormal__light, @clactive__alt);
     .transition(color, 400ms, ease-in);
     text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
