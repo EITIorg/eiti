@@ -15,10 +15,16 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
   public function getDefinedChartData() {
     $chartData = parent::getDefinedChartData();
     $chartData['production'] = array(
-      'label' => t('Production per Country per Year'),
+      'label' => t('Global Production of all Countries per Year'),
       'description' => t('Production volumes grouped by commodities and filtered per year.'),
       'query_builder' => 'getProductionQuery',
-      'public_fields_info' => 'processProductionFields',
+      'public_fields_info' => 'processGlobalProductionFields',
+    );
+    $chartData['production_per_country'] = array(
+      'label' => t('Country Production of all years'),
+      'description' => t('Production volumes grouped by commodities and filtered per country.'),
+      'query_builder' => 'getProductionQuery',
+      'public_fields_info' => 'processCountryProductionFields',
     );
     return $chartData;
   }
@@ -52,32 +58,42 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
    */
   protected function checkProductionFilters($query) {
     $request = $this->getRequest();
-    foreach ($request['filter'] as $id => $filter) {
-      switch ($id) {
-        case 'year':
-          // If you know any better way how to get start / end timestamps of a given year, PM me (Nikro).
-          $year = reset($filter);
-          $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $year . '-01-01 00:00:00');
-          $startTimestamp = $startDate->getTimestamp();
+    if (!empty($request['filter'])) {
+      foreach ($request['filter'] as $id => $filter) {
+        // Normalize the filter.
+        if (!is_array($filter)) {
+          $filter = explode(',', $filter);
+        }
+        switch ($id) {
+          case 'year':
+            // If you know any better way how to get start / end timestamps of a given year, PM me (Nikro).
+            $year = reset($filter);
+            $startDate = DateTime::createFromFormat('Y-m-d H:i:s', $year . '-01-01 00:00:00');
+            $startTimestamp = $startDate->getTimestamp();
 
-          $endDate = DateTime::createFromFormat('Y-m-d H:i:s', ($year + 1) . '-01-01 00:00:00');
-          $endTimestamp = $endDate->getTimestamp();
+            $endDate = DateTime::createFromFormat('Y-m-d H:i:s', ($year + 1) . '-01-01 00:00:00');
+            $endTimestamp = $endDate->getTimestamp();
 
-          $query->condition('sd.year_end', array($startTimestamp, $endTimestamp), 'BETWEEN');
-          break;
+            $query->condition('sd.year_end', array($startTimestamp, $endTimestamp), 'BETWEEN');
+            break;
 
-        case 'indicator':
-          $filer_arr = explode(',', $filter);
-          $query->condition('indicator_id', $filer_arr , 'IN');
-          break;
+          case 'indicator':
+            $query->condition('indicator_id', $filter , 'IN');
+            break;
+
+          case 'country_iso':
+            $query->condition('iso', $filter, 'IN');
+            $query->orderBy('year_end', 'ASC');
+            break;
+        }
       }
     }
   }
 
   /**
-   * Polishes the production grouped bar chart fields.
+   * Polishes the global production grouped bar chart fields.
    */
-  public function processProductionFields($data) {
+  public function processGlobalProductionFields($data) {
     $output = array();
     // Needed for normalization.
     $x_all = array();
@@ -112,4 +128,45 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
     $output = array_values($output);
     return $output;
   }
+
+  /**
+   * Polishes the global production grouped bar chart fields.
+   */
+  function processCountryProductionFields($data) {
+    $output = array();
+    // Needed for normalization.
+    $x_all = array();
+    $x_group = array();
+    foreach ($data as $item) {
+      $year = format_date($item->year_end, 'custom', 'Y');
+      if (!key_exists($item->indicator_id, $output)) {
+        $output[$item->indicator_id] = array(
+          'label' => $item->commodity_name
+        );
+      }
+      $output[$item->indicator_id]['values'][] = array(
+        'x' => $year,
+        'y' => round(floatval($item->value_numeric)),
+      );
+
+      // Used for normalization.
+      if (!in_array($year, $x_all)) {
+        $x_all[] = $year;
+      }
+      $x_group[$item->indicator_id][] = $year;
+    }
+    // Make a small normalization.
+    foreach ($x_group as $indicator_id => $x_values) {
+      $x_diff = array_diff($x_all, $x_values);
+      foreach ($x_diff as $x) {
+        $output[$indicator_id]['values'][] = array(
+          'x' => $x,
+          'y' => 0,
+        );
+      }
+    }
+    $output = array_values($output);
+    return $output;
+  }
 }
+

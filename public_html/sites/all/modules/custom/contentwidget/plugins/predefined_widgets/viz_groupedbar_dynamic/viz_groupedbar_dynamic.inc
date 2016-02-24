@@ -16,7 +16,7 @@ $plugin = array(
   'settings form' => 'contentblock_viz_groupedbarchart_dynamic_settings',
   'defaults' => array(
     'extra_settings' => array(
-      'expose_year' => TRUE,
+      'expose_year' => FALSE,
       'commodities' => array(),
     ),
   ),
@@ -30,21 +30,6 @@ function contentblock_viz_groupedbarchart_dynamic_render($plugin, $widget_settin
 
   // Prepare the ID.
   $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
-  if ($widget_settings['extra_settings']['expose_year']) {
-    $available_years_options = contentblock_viz_groupedbarchart_production_get_years_range();
-    $last_year = array_slice($available_years_options, -1);
-    $default_year = reset($last_year);
-
-    $block['widget_year_selector'] = array(
-      '#type' => 'select',
-      '#title' => t('Reporting Year'),
-      '#options' => $available_years_options,
-      '#default_value' => $default_year,
-      '#attributes' => array(
-        'class' => array('widget-selector', drupal_html_class($viz_id . '-year-selector')),
-      )
-    );
-  }
   $block['widget'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
@@ -63,30 +48,77 @@ function contentblock_viz_groupedbarchart_dynamic_render($plugin, $widget_settin
   $endpoint = $endpoints[$widget_settings['barchart_settings']['data_type']];
 
   // Send the settings, so that later we can load them in our behaviour.
+  $js_settings = contentblock_viz_groupedbarchart_dynamic_get_data_types('js settings');
+  $js_settings = $js_settings[$widget_settings['barchart_settings']['data_type']];
   $settings = array(
-    $viz_id => array(
-      'type' => 'GroupedBar',
-      'name' => t('Production Chart for !year', array('!year' => $default_year)),
-      'width' => 1300,
-      'height' => 400,
-      'margin' => array(
-        'top' => 10,
-        'bottom' => 50,
-        'left' => 100,
-        'right' => 10
-      ),
-      'xlabel' => t('Countries'),
-      'ylabel' => t('Production Volumes (Sm3)'),
-      'description' => t('Production volumes for !year.', array('!year' => $default_year)),
-      'container' => $viz_id,
-      'expose_year' => $widget_settings['extra_settings']['expose_year'],
-      'endpoint' =>  $endpoint . '?filter[indicator]=' . implode(',', $widget_settings['extra_settings']['commodities']),
-      'endpoint_year' =>  $endpoint . '?filter[year][0]=' . $default_year . '&filter[indicator]=' . implode(',', $widget_settings['extra_settings']['commodities']),
-      'current_year' => $default_year,
-      'year_selector_class' => drupal_html_class($viz_id . '-year-selector'),
-      'description_year' => t('Production volumes for'),
-      'name_year' => t('Production Chart for'),
+    'type' => 'GroupedBar',
+    'name' => $js_settings['title'],
+    'width' => 1300,
+    'height' => 400,
+    'margin' => array(
+      'top' => 10,
+      'bottom' => 50,
+      'left' => 100,
+      'right' => 10
     ),
+    'xlabel' => $js_settings['x-axis'],
+    'ylabel' => $js_settings['y-axis'],
+    'description' => $js_settings['description'],
+    'container' => $viz_id,
+    'expose_year' => $widget_settings['extra_settings']['expose_year'],
+    'endpoint' => $endpoint,
+  );
+
+  // As dynamic as we tried to be, this is a little exception.
+  if ($widget_settings['barchart_settings']['data_type'] == 'production_countries') {
+    // We want to pass the commodities to the filter.
+    $settings['endpoint'] = $endpoint . '?filter[indicator]=' . implode(',', $widget_settings['extra_settings']['commodities']);
+  }
+  elseif ($widget_settings['barchart_settings']['data_type'] == 'production_per_country') {
+    // We want to pass the commodities to the filter and the country from the context.
+    $settings['endpoint'] = $endpoint . '?filter[indicator]=' . implode(',', $widget_settings['extra_settings']['commodities']);
+    // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
+    $country = menu_get_object('implementing_country');
+    if (!empty($country)) {
+      $settings['endpoint'] .= '&filter[country_iso]=' . $country->iso;
+    }
+  }
+
+  // Adjust settings for the expose year case.
+  if ($widget_settings['extra_settings']['expose_year']) {
+    $available_years_options = contentblock_viz_groupedbarchart_production_get_years_range();
+    $last_year = array_slice($available_years_options, -1);
+    $default_year = reset($last_year);
+
+    $block['widget_year_selector'] = array(
+      '#type' => 'select',
+      '#title' => t('Reporting Year'),
+      '#options' => $available_years_options,
+      '#default_value' => $default_year,
+      '#attributes' => array(
+        'class' => array('widget-selector', drupal_html_class($viz_id . '-year-selector')),
+      )
+    );
+
+    // And we want to alter some settings in this case.
+    $settings['description_original'] = $settings['description'];
+    $settings['name_original'] =  $settings['name'];
+    $settings['name'] = t('@title for !year', array(
+      '@title' => $settings['name'],
+      '!year' => $default_year
+    ));
+    $settings['description'] = t('@description for !year.', array(
+      '@description' => $settings['description'],
+      '!year' => $default_year,
+    ));
+    $settings['endpoint_year'] = $endpoint . '?filter[year][0]=' . $default_year . '&filter[indicator]=' . implode(',', $widget_settings['extra_settings']['commodities']);
+    $settings['current_year'] = $default_year;
+    $settings['year_selector_class'] = drupal_html_class($viz_id . '-year-selector');
+  }
+
+  // Wrap things up.
+  $settings = array(
+    $viz_id => $settings,
   );
   drupal_add_js(array('contentwidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
@@ -99,6 +131,13 @@ function contentblock_viz_groupedbarchart_dynamic_render($plugin, $widget_settin
 function contentblock_viz_groupedbarchart_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
+  // Extract these for possible re-use.
+  $entity = $element['#entity'];
+  $entity_type = $element['#entity_type'];
+  $language = $element['#language'];
+  $field = $element['#field_name'];
+  $ctools_contexts = isset($form_state['contexts']['panelizer']) ? $form_state['contexts']['panelizer'] : array();
+
   // Settings.
   $settings_form['barchart_settings'] = array(
     '#type' => 'fieldset',
@@ -106,7 +145,14 @@ function contentblock_viz_groupedbarchart_dynamic_settings(&$element, &$form_sta
     '#description' => t('Generic grouped bar chart settings.')
   );
 
+  // We want to cut out those who's context is required.
   $type_options = contentblock_viz_groupedbarchart_dynamic_get_data_types('options');
+  $items = contentblock_viz_groupedbarchart_dynamic_get_data_types();
+  foreach ($type_options as $option_key => $label) {
+    if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
+      unset($type_options[$option_key]);
+    }
+  }
   array_unshift($type_options, t('- Select -'));
   $settings_form['barchart_settings']['data_type'] = array(
     '#type' => 'select',
@@ -171,20 +217,34 @@ function contentblock_viz_groupedbarchart_dynamic_ajax_settings($form, $form_sta
  * Returns all data type options.
  *
  * @param string $return
- *   This can be either: 'options', 'endpoint', 'extra settings'.
+ *   This can be either: 'options', 'endpoint', 'extra settings' and 'js settings'.
  *
  * @return array
  *   The Return array depends on the $return parameter you specify, either it's
  *   an array of labels for the options, or it's an array of api endpoints.
  */
-function contentblock_viz_groupedbarchart_dynamic_get_data_types($return) {
+function contentblock_viz_groupedbarchart_dynamic_get_data_types($return = FALSE) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
-  $items['production_country'] = array(
-    'label' => t('Production: By Country'),
-    'endpoint' => 'api/v1.0/grouped_bar/production',
-    'extra settings' => 'contentblock_viz_groupedbarchart_production_countries_settings'
+  $items['production_countries'] = array(
+    'label' => t('Global: Production Countries'),
+    'endpoint' => '/api/v1.0/grouped_bar/production',
+    'extra settings' => 'contentblock_viz_groupedbarchart_production_countries_settings',
+    'x-axis' => t('Countries'),
+    'y-axis' => t('Production Volumes (Sm3)'),
+    'title' => t('Global Production Chart'),
+    'description' => t('Production volumes for all the countries'),
+  );
+  $items['production_per_country'] = array(
+    'label' => t('Country: Production'),
+    'endpoint' => '/api/v1.0/grouped_bar/production_per_country',
+    'extra settings' => 'contentblock_viz_groupedbarchart_production_per_country_settings',
+    'x-axis' => t('Years'),
+    'y-axis' => t('Production Volumes for all the Reported Years'),
+    'title' => t('Production Chart'),
+    'description' => t('Production volumes'),
+    'context required' => 'entity:implementing_country',
   );
 
   $output = array();
@@ -199,6 +259,12 @@ function contentblock_viz_groupedbarchart_dynamic_get_data_types($return) {
       case 'extra settings':
         $output[$key] = $item['extra settings'];
         break;
+      case 'js settings':
+        $output[$key]['x-axis'] = $item['x-axis'];
+        $output[$key]['y-axis'] = $item['y-axis'];
+        $output[$key]['title'] = $item['title'];
+        $output[$key]['description'] = $item['description'];
+        break;
     }
   }
 
@@ -210,7 +276,7 @@ function contentblock_viz_groupedbarchart_dynamic_get_data_types($return) {
 }
 
 /**
- * Extra settings for the production by country.
+ * Extra settings for the production by country (for all the countries).
  */
 function contentblock_viz_groupedbarchart_production_countries_settings(&$form, &$form_state, &$widget_settings) {
   $form['expose_year'] = array(
@@ -242,6 +308,15 @@ function contentblock_viz_groupedbarchart_production_countries_settings(&$form, 
     '#options' => $commodities_options,
     '#default_value' => isset($widget_settings['extra_settings']['commodities']) ? $widget_settings['extra_settings']['commodities'] : TRUE,
   );
+}
+
+/**
+ * Extra settings for the production per country (for one predefined country)
+ */
+function contentblock_viz_groupedbarchart_production_per_country_settings(&$form, &$form_state, &$widget_settings) {
+  // We basically re-use previously define settings callback with little adjustments.
+  contentblock_viz_groupedbarchart_production_countries_settings($form, $form_state, $widget_settings);
+  unset($form['expose_year']);
 }
 
 /**
