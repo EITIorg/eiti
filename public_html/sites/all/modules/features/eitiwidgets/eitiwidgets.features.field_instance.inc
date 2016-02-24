@@ -127,7 +127,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'key_facts',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -488,7 +488,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'table',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -607,7 +607,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'tabs_with_widgets',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -653,7 +653,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -734,13 +734,18 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'text',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -807,7 +812,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'visualization',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -954,7 +959,7 @@ function eitiwidgets_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('A field replacing fieldable panel pane title.');
+  t('');
   t('Background Image');
   t('Bookmark List');
   t('Bookmark widget configuration.');
