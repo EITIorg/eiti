@@ -188,3 +188,13 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_panelizer_overview_links_alter().
+ */
+function eitiwidgets_panelizer_overview_links_alter(&$links_array, $entity_type, $entity, $view_mode) {
+  // Do not show 'reset' link on panelizer overview pages for panelized entities..
+  if (isset($links_array['reset'])) {
+    unset($links_array['reset']);
+  }
+}
