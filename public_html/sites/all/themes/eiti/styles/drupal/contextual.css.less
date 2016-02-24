@@ -30,11 +30,20 @@ div.contextual-links-wrapper {
     right: -2em;
     top: 1em;
   }
+}
 
-  .contextual-links-region .contextual-links-region & {
-    top: 2em;
+.panelizer-view-mode.contextual-links-region {
+  padding-top: 2em;
+  & > .contextual-links-wrapper {
+    & > a.contextual-links-trigger {
+      background-position: 2px -36px;
+      &:hover {
+        background-position: 2px -54px;
+      }
+    }
   }
 }
+
 html.js div.contextual-links-wrapper {
   display: block;
 }
