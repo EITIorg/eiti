@@ -31,6 +31,7 @@ stylesheets[all][] = styles/layout.css.less
 
 ; @TODO: Implement a proper hook and move widget specific styles to the widget page.
 stylesheets[all][] = styles/widgets/bookmarks.css.less
+stylesheets[all][] = styles/widgets/header.css.less
 stylesheets[all][] = styles/widgets/quote.css.less
 stylesheets[all][] = styles/widgets/text.css.less
 stylesheets[all][] = styles/widgets/wide_image.css.less

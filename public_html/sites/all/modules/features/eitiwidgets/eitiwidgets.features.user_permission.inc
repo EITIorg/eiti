@@ -31,6 +31,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'create fieldable header'.
+  $permissions['create fieldable header'] = array(
+    'name' => 'create fieldable header',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable key_facts'.
   $permissions['create fieldable key_facts'] = array(
     'name' => 'create fieldable key_facts',
@@ -94,6 +101,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable header'.
+  $permissions['delete fieldable header'] = array(
+    'name' => 'delete fieldable header',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable key_facts'.
   $permissions['delete fieldable key_facts'] = array(
     'name' => 'delete fieldable key_facts',
@@ -153,6 +167,13 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable fieldable_panels_pane'.
   $permissions['edit fieldable fieldable_panels_pane'] = array(
     'name' => 'edit fieldable fieldable_panels_pane',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable header'.
+  $permissions['edit fieldable header'] = array(
+    'name' => 'edit fieldable header',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );

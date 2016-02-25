@@ -126,6 +126,7 @@ function eitiwidgets_field_default_field_bases() {
         ),
         'target_bundles' => array(
           'featured_bookmarks' => 'featured_bookmarks',
+          'header' => 'header',
           'key_facts' => 'key_facts',
           'quote' => 'quote',
           'visualization' => 'visualization',
