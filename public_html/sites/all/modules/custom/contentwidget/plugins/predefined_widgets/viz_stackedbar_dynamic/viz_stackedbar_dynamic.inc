@@ -15,6 +15,9 @@ $plugin = array(
   'render callback' => 'contentblock_viz_stackedbar_dynamic_render',
   'settings form' => 'contentblock_viz_stackedbar_dynamic_settings',
   'defaults' => array(
+    'stackedbar_settings' => array(
+      'data_type' => '',
+    ),
     'extra_settings' => array(
       'taxes' => array(),
     ),
@@ -26,6 +29,12 @@ $plugin = array(
  */
 function contentblock_viz_stackedbar_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
   $block = array();
+
+  // If we're in Panelizer, we don't want to create the whole chart there, bail.
+  $menu_item = menu_get_item();
+  if (in_array('panelizer', $menu_item['map'])) {
+    return array('#markup' => t('Configured Stacked Bar Widget - with dynamic data (from Summary Data).'));
+  }
 
   // Prepare the ID.
   $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
@@ -52,7 +61,7 @@ function contentblock_viz_stackedbar_dynamic_render($plugin, $widget_settings, $
   $settings = array(
     'type' => 'StackedBar',
     'name' => $js_settings['title'],
-    'width' => 1300,
+    'width' => 800,
     'height' => 400,
     'margin' => array(
       'top' => 10,
@@ -116,6 +125,7 @@ function contentblock_viz_stackedbar_dynamic_settings(&$element, &$form_state, $
     }
   }
   array_unshift($type_options, t('- Select -'));
+  $wrapper_id = 'extra-settings-stacked-dynamic';
   $settings_form['stackedbar_settings']['data_type'] = array(
     '#type' => 'select',
     '#title' => t('Data Type'),
@@ -125,7 +135,7 @@ function contentblock_viz_stackedbar_dynamic_settings(&$element, &$form_state, $
     '#ajax' => array(
       'callback' => 'contentblock_viz_stackedbar_dynamic_ajax_settings',
       'event' => 'change',
-      'wrapper' => 'extra-settings',
+      'wrapper' => $wrapper_id,
       'method' => 'replace',
       'effect' => 'fade',
     ),
@@ -136,7 +146,7 @@ function contentblock_viz_stackedbar_dynamic_settings(&$element, &$form_state, $
   $settings_form['extra_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Extra Settings'),
-    '#prefix' => '<div id="extra-settings">',
+    '#prefix' => '<div id="' . $wrapper_id . '">',
     '#suffix' => '</div>',
   );
 
@@ -166,7 +176,6 @@ function contentblock_viz_stackedbar_dynamic_ajax_settings($form, $form_state) {
 
   $exists = FALSE;
   $value = drupal_array_get_nested_value($form, $parents, $exists);
-
   if ($exists) {
     return $value;
   }

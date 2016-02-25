@@ -22,6 +22,7 @@ $plugin = array(
       'description' => '',
       'x-axis' => '',
       'y-axis' => '',
+      'data_type' => '',
     ),
     'barchart_value' => array(),
   ),
@@ -32,6 +33,13 @@ $plugin = array(
  */
 function contentblock_viz_groupedbarchart_static_render($plugin, $widget_settings, $entity, $langcode) {
   $block = array();
+
+  // If we're in Panelizer, we don't want to create the whole chart there, bail.
+  $menu_item = menu_get_item();
+  if (in_array('panelizer', $menu_item['map'])) {
+    return array('#markup' => t('Configured Stacked Bar Widget - with static data (manually entered).'));
+  }
+
 
   // Prepare the ID.
   $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
@@ -70,7 +78,7 @@ function contentblock_viz_groupedbarchart_static_render($plugin, $widget_setting
     $viz_id => array(
       'type' => 'GroupedBar',
       'name' => $widget_settings['barchart_settings']['name'],
-      'width' => 1300,
+      'width' => 800,
       'height' => 400,
       'margin' => array(
         'top' => 10,

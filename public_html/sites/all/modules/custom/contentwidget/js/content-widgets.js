@@ -18,6 +18,9 @@
           else {
             // Set the processor function that returns JSON.data.
             widgetSetting.processor = function(input) {
+              if (input.data.length == 0) {
+                return false;
+              }
               return input.data;
             };
             // Now this case is much more FUN!
