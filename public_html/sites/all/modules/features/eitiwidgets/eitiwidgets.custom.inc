@@ -106,6 +106,7 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
   else {
     $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
   }
+  $pane->css['css_class'] .= ' predefined-widget';
 }
 
 /**
