@@ -70,10 +70,13 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
   );
 
   if (!empty($image_url)) {
-    $block['#attributes']['class'][] = 'wide-image-background';
+    $block['#attributes']['class'][] = 'with-background-image';
 
     $block_style = "background-image: url(${image_url});";
     $block['#attributes']['style'] = $block_style;
+  }
+  else {
+    $block['#attributes']['class'][] = 'no-background-image';
   }
 
   $block['overlay'] = array(
@@ -116,7 +119,7 @@ function contentblock_wide_image_render($plugin, $widget_settings, $entity, $lan
     '#type' => 'ul',
     '#title' => '',
     '#attributes' => array(
-      'class' => array('wide-image-links-wrapper'),
+      'class' => array('links-wrapper'),
     ),
   );
 

@@ -267,6 +267,8 @@ function helpertheme_preprocess_page(&$variables) {
    */
   if (variable_get('helpertheme_load_external_fonts', TRUE)) {
     $font_variants = array(
+      '300',
+      '300italic',
       '400',
       '400italic',
       '700',
