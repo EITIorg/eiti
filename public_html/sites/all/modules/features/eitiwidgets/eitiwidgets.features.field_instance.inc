@@ -892,7 +892,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'title',
           'title_link' => '',
           'title_style' => 'h2',
         ),
