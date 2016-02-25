@@ -61,7 +61,8 @@
     getChartWidgetTypes: function() {
       return [
         'GroupedBar',
-        'StackedBar'
+        'StackedBar',
+        'BubbleChart',
       ];
     }
   }
