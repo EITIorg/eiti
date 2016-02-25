@@ -1,11 +1,20 @@
 
 .predefined-widget--text {
   .pane-title-wrapper {
-    color: @claltnormal;
+    border-bottom: 1px solid @clmain__separator;
+    color: @clanchor;
+    padding: 1em 0;
+    .title {
+      display: inline;
+      font-size: 1.25em;
+      font-weight: 300;
+      margin: 0;
+    }
     .icon {
-      fill: @claltnormal;
-      float: left;
+      fill: @clanchor;
+      display: inline;
       margin-right: 0.5em;
+      vertical-align: bottom;
     }
   }
 }

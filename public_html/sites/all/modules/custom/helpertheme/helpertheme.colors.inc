@@ -28,7 +28,7 @@ function helpertheme_color_palette() {
         '#desc' => 'alternative content background color',
       ),
       'clmain__separator' => array(
-        '#value' => '#d5d5d5',
+        '#value' => '#d3d3d3',
         '#desc' => 'border header and content',
       ),
     ),

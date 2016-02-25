@@ -114,7 +114,12 @@ function _helperfield__helperfield_icon__hook_field_formatter_view($entity_type,
   switch ($display['type']) {
     case 'helperfield_icon_default':
       foreach ($items as $delta => $item) {
-        $markup = helpertheme_get_svg_icons($item['icon']);
+        // @TODO: Move to the formatter configuration form.
+        $options = array(
+          'height' => '1.5em',
+          'width' => '1.5em',
+        );
+        $markup = helpertheme_get_svg_icons($item['icon'], $options);
         if (!empty($markup)) {
           $element[$delta] = array('#markup' => $markup);
         }

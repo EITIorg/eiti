@@ -91,6 +91,7 @@ function theme_svg_sprite(array $elements) {
       continue;
     }
 
+    // Provide defaults
     switch ($key) {
       case 'width':
       case 'height':
