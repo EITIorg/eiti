@@ -11,7 +11,7 @@
  */
 $plugin = array(
   'title' => 'Tabs',
-  'description' => 'Widget that contains a couple of key facts.',
+  'description' => 'Widget that contains a couple of widgets.',
   'render callback' => 'contentblock_tabs_render',
   'settings form' => 'contentblock_tabs_settings',
   'entity form alter' => 'contentwidget_tabs_form_alter',
@@ -25,6 +25,12 @@ $plugin = array(
  * Render callback for the 'Tabs' predefined widget.
  */
 function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode) {
+  // If we're in Panelizer, we don't want to create the whole widget here, bail.
+  $menu_item = menu_get_item();
+  if (in_array('panelizer', $menu_item['map'])) {
+    return array('#markup' => t('Tabs - Widget that contains a couple of widgets.'));
+  }
+
   // Prepare the variables.
   $referenced_ids = array();
 
