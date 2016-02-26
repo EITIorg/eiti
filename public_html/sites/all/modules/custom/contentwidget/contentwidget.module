@@ -177,6 +177,9 @@ function contentwidget_field_widget_form(&$form, &$form_state, $field, $instance
     $options[$key] = $info['title'];
   }
 
+  if (count($available_widgets) == 1) {
+    $selected_widget = reset($available_widgets);
+  }
   $element['widget'] = array(
     '#title' => $element['#title'],
     '#type' => 'select',

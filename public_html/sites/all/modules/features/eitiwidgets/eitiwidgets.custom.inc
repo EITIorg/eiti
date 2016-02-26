@@ -4,8 +4,11 @@
  * Implements hook_form_alter().
  */
 function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
-  // Yeah it's long.
-  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
+  $fpp_forms = array(
+    'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form',
+    'fieldable_panels_panes_entity_edit_form'
+  );
+  if (in_array($form_id, $fpp_forms)) {
     // Alter our form.
     eitiwidgets_fpp_form_alter($form, $form_state);
 
@@ -28,9 +31,19 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
     );
   }
 
-  // Hide the FPP link form element since the title is not used.
+  // Hide unused FPP specific form elements.
+  // @see: fieldable_panels_panes_entity_edit_form_submit()
   if (isset($form['link'])) {
-    unset($form['link']);
+    $form['link'] = array(
+      '#type' => 'value',
+      '#value' => '',
+    );
+  }
+  if (isset($form['path'])) {
+    $form['path'] = array(
+      '#type' => 'value',
+      '#value' => '',
+    );
   }
 
   switch ($entity->bundle) {
