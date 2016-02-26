@@ -201,7 +201,9 @@ function eitientity_revenue_stream_access($op, $entity = NULL, $account = NULL, 
     return FALSE;
   }
 
-  $op = 'administer';
+  if ($op == 'access overview') {
+    $op = 'administer';
+  }
   if (user_access("$entity_type entity $op")) {
     return TRUE;
   }
@@ -215,7 +217,7 @@ function eitientity_revenue_stream_access($op, $entity = NULL, $account = NULL, 
  * @return array
  */
 function eitientity_revenue_stream_permission() {
-  return _helperentity_entity_type_permission('revenue_stream', array('administer'));
+  return _helperentity_entity_type_permission('revenue_stream', array('administer', 'create', 'view', 'edit', 'delete'));
 }
 
 /**

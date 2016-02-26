@@ -91,7 +91,7 @@ class IndicatorEntityUIController extends EntityBundleableUIController {
       'description' => 'Manage ' . $plural_label . '.',
       'access callback' => 'entity_access',
       'access arguments' => array('access overview', $this->entityType),
-      'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
+      'type' => MENU_NORMAL_ITEM,
     ) + $entity_ui_defaults;
     $items[$this->path . '/overview'] = array(
       'title' => 'Overview',

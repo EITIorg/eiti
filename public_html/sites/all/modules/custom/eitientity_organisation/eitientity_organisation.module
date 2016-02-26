@@ -177,26 +177,7 @@ function organisation_load($entity_id, $entity_type) {
  * Implements hook_permission().
  */
 function eitientity_organisation_permission() {
-  $perms = array();
-
-  $entity_type = 'organisation';
-  $entity_info = entity_get_info($entity_type);
-
-  $operations = array('administer', 'view');
-  foreach ($operations as $op) {
-    $permission_string = "$entity_type entity $op";
-    $action = ucfirst($op);
-    $t_args = array('%entity' => $entity_info['plural label']);
-    $perms[$permission_string] = array(
-      'title' => t("$action %entity", $t_args),
-    );
-
-    if ($op == 'administer') {
-      $perms[$permission_string]['restrict access'] = TRUE;
-    }
-  }
-
-  return $perms;
+  return _helperentity_entity_type_permission('organisation', array('administer', 'create', 'view', 'edit', 'delete'));
 }
 
 /**

@@ -25,7 +25,6 @@ function eitiet_summary_data_user_default_permissions() {
   $permissions['summary_data entity administer'] = array(
     'name' => 'summary_data entity administer',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),

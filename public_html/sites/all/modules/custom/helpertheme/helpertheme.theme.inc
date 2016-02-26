@@ -204,7 +204,7 @@ function theme_header_identity() {
  * Returns HTML for the header items.
  */
 function theme_header_items() {
-  $menu_elements = array(
+  $elements = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
@@ -214,8 +214,39 @@ function theme_header_items() {
   );
 
   // Get the menu links.
+  $menu_name = 'user-menu';
+  if (user_is_logged_in() && $links = helpertheme_menu_navigation_links($menu_name, 1)) {
+    $elements['user_navigation'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'nav',
+      '#title' => t('User Menu'),
+      '#title_attributes' => array('class' => array('element-invisible')),
+      '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+      '#attributes' => array(
+        'role' => 'navigation',
+        'class' => array(
+          'user-navigation',
+        ),
+      ),
+    );
+
+    $elements['user_navigation']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'action-link',
+      '#attributes' => array(
+        'class' => array(
+          'header-user-links',
+          'links',
+          'clearfix',
+        )
+      ),
+    );
+  }
+
+  // Get the menu links.
   $menu_name = 'main-menu';
-  $menu_elements['navigation'] = array(
+  $elements['navigation'] = array(
     '#type' => 'html_container',
     '#tag' => 'nav',
     '#title' => t('Main Menu'),
@@ -230,7 +261,7 @@ function theme_header_items() {
   );
   if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
     $links['#extras']['svgicon_size'] = '1.5em';  // @TODO: Remove this hack!
-    $menu_elements['navigation']['links'] = array(
+    $elements['navigation']['links'] = array(
       '#theme' => 'links__enhanced',
       '#links' => $links,
       '#links_prefix' => 'action-link',
@@ -242,7 +273,7 @@ function theme_header_items() {
     );
   }
   else {
-    $menu_elements['navigation']['empty'] = array(
+    $elements['navigation']['empty'] = array(
       '#markup' => t('Main Menu not configured!'),
     );
   }
@@ -259,10 +290,10 @@ function theme_header_items() {
     $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
     $lang_links = language_negotiation_get_switch_links('language', $path);
     if (isset($lang_links->links)) {
-      $menu_elements['lang']['#prefix'] = '<nav role="navigation" id="language-switcher" class="language-switcher">';
-      $menu_elements['lang']['#suffix'] = '</nav>';
+      $elements['lang']['#prefix'] = '<nav role="navigation" id="language-switcher" class="language-switcher">';
+      $elements['lang']['#suffix'] = '</nav>';
 
-      $menu_elements['lang']['subject'] = array(
+      $elements['lang']['subject'] = array(
         '#type' => 'html_tag',
         '#tag' => 'h2',
         '#value' => 'Languages',
@@ -277,7 +308,7 @@ function theme_header_items() {
         }
       }
 
-      $menu_elements['lang']['links'] = array(
+      $elements['lang']['links'] = array(
         '#theme' => 'links__language_switcher',
         '#links' => $lang_links->links,
         '#attributes' => array(
@@ -292,7 +323,7 @@ function theme_header_items() {
   }
 
   // Render the HTML.
-  $output = drupal_render($menu_elements);
+  $output = drupal_render($elements);
 
   // Remove whitespace between items. Helps with styling in-line elements.
   return preg_replace('/\>\s+\</', '><', $output);

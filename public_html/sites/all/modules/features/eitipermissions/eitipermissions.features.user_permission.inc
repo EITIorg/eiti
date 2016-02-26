@@ -31,9 +31,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'access all views'.
   $permissions['access all views'] = array(
     'name' => 'access all views',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'views',
   );
 
@@ -63,7 +61,6 @@ function eitipermissions_user_default_permissions() {
     'name' => 'access media browser',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'media',
@@ -72,27 +69,21 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'access rules debug'.
   $permissions['access rules debug'] = array(
     'name' => 'access rules debug',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'rules',
   );
 
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
   // Exported permission: 'access site reports'.
   $permissions['access site reports'] = array(
     'name' => 'access site reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
@@ -109,18 +100,14 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'admin_display_suite'.
   $permissions['admin_display_suite'] = array(
     'name' => 'admin_display_suite',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'ds',
   );
 
   // Exported permission: 'administer actions'.
   $permissions['administer actions'] = array(
     'name' => 'administer actions',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
@@ -136,54 +123,42 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer content types'.
   $permissions['administer content types'] = array(
     'name' => 'administer content types',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'administer entity translation'.
   $permissions['administer entity translation'] = array(
     'name' => 'administer entity translation',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'entity_translation',
   );
 
   // Exported permission: 'administer entityqueue'.
   $permissions['administer entityqueue'] = array(
     'name' => 'administer entityqueue',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'entityqueue',
   );
 
   // Exported permission: 'administer features'.
   $permissions['administer features'] = array(
     'name' => 'administer features',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'features',
   );
 
   // Exported permission: 'administer fieldgroups'.
   $permissions['administer fieldgroups'] = array(
     'name' => 'administer fieldgroups',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'field_group',
   );
 
   // Exported permission: 'administer file types'.
   $permissions['administer file types'] = array(
     'name' => 'administer file types',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'file_entity',
   );
 
@@ -199,45 +174,35 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer filters'.
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'filter',
   );
 
   // Exported permission: 'administer image styles'.
   $permissions['administer image styles'] = array(
     'name' => 'administer image styles',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'image',
   );
 
   // Exported permission: 'administer languages'.
   $permissions['administer languages'] = array(
     'name' => 'administer languages',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'locale',
   );
 
   // Exported permission: 'administer less'.
   $permissions['administer less'] = array(
     'name' => 'administer less',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'less',
   );
 
   // Exported permission: 'administer media browser'.
   $permissions['administer media browser'] = array(
     'name' => 'administer media browser',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'media',
   );
 
@@ -253,9 +218,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer modules'.
   $permissions['administer modules'] = array(
     'name' => 'administer modules',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
@@ -271,9 +234,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer page manager'.
   $permissions['administer page manager'] = array(
     'name' => 'administer page manager',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'page_manager',
   );
 
@@ -314,18 +275,14 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer pathauto'.
   $permissions['administer pathauto'] = array(
     'name' => 'administer pathauto',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'pathauto',
   );
 
   // Exported permission: 'administer permissions'.
   $permissions['administer permissions'] = array(
     'name' => 'administer permissions',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'user',
   );
 
@@ -350,63 +307,49 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer restful'.
   $permissions['administer restful'] = array(
     'name' => 'administer restful',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'restful',
   );
 
   // Exported permission: 'administer rules'.
   $permissions['administer rules'] = array(
     'name' => 'administer rules',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'rules',
   );
 
   // Exported permission: 'administer search'.
   $permissions['administer search'] = array(
     'name' => 'administer search',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'search',
   );
 
   // Exported permission: 'administer site configuration'.
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
   // Exported permission: 'administer software updates'.
   $permissions['administer software updates'] = array(
     'name' => 'administer software updates',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
   // Exported permission: 'administer taxonomy'.
   $permissions['administer taxonomy'] = array(
     'name' => 'administer taxonomy',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
@@ -431,9 +374,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer views'.
   $permissions['administer views'] = array(
     'name' => 'administer views',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'views',
   );
 
@@ -450,36 +391,28 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'block IP addresses'.
   $permissions['block IP addresses'] = array(
     'name' => 'block IP addresses',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
   // Exported permission: 'bypass file access'.
   $permissions['bypass file access'] = array(
     'name' => 'bypass file access',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'bypass node access'.
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'bypass rules access'.
   $permissions['bypass rules access'] = array(
     'name' => 'bypass rules access',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'rules',
   );
 
@@ -597,27 +530,21 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'currency.currency.administer'.
   $permissions['currency.currency.administer'] = array(
     'name' => 'currency.currency.administer',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'currency',
   );
 
   // Exported permission: 'currency.currency_exchanger.administer'.
   $permissions['currency.currency_exchanger.administer'] = array(
     'name' => 'currency.currency_exchanger.administer',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'currency',
   );
 
   // Exported permission: 'currency.currency_locale_pattern.administer'.
   $permissions['currency.currency_locale_pattern.administer'] = array(
     'name' => 'currency.currency_locale_pattern.administer',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'currency',
   );
 
@@ -910,9 +837,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'display drupal links'.
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'admin_menu',
   );
 
@@ -1320,9 +1245,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'generate features'.
   $permissions['generate features'] = array(
     'name' => 'generate features',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'features',
   );
 
@@ -1330,7 +1253,6 @@ function eitipermissions_user_default_permissions() {
   $permissions['gfs_code entity administer'] = array(
     'name' => 'gfs_code entity administer',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
@@ -1359,9 +1281,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'helpergeneric administer menus'.
   $permissions['helpergeneric administer menus'] = array(
     'name' => 'helpergeneric administer menus',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'helpergeneric',
   );
 
@@ -1374,78 +1294,18 @@ function eitipermissions_user_default_permissions() {
     'module' => 'helpergeneric',
   );
 
-  // Exported permission: 'helpergeneric user fields'.
-  $permissions['helpergeneric user fields'] = array(
-    'name' => 'helpergeneric user fields',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+  // Exported permission: 'helpergeneric administer urls'.
+  $permissions['helpergeneric administer urls'] = array(
+    'name' => 'helpergeneric administer urls',
+    'roles' => array(),
     'module' => 'helpergeneric',
   );
 
-  // Exported permission: 'implementing_country entity access overview'.
-  $permissions['implementing_country entity access overview'] = array(
-    'name' => 'implementing_country entity access overview',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_implementing_country',
-  );
-
-  // Exported permission: 'implementing_country entity administer'.
-  $permissions['implementing_country entity administer'] = array(
-    'name' => 'implementing_country entity administer',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_implementing_country',
-  );
-
-  // Exported permission: 'implementing_country entity create'.
-  $permissions['implementing_country entity create'] = array(
-    'name' => 'implementing_country entity create',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_implementing_country',
-  );
-
-  // Exported permission: 'implementing_country entity delete'.
-  $permissions['implementing_country entity delete'] = array(
-    'name' => 'implementing_country entity delete',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_implementing_country',
-  );
-
-  // Exported permission: 'implementing_country entity edit'.
-  $permissions['implementing_country entity edit'] = array(
-    'name' => 'implementing_country entity edit',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_implementing_country',
-  );
-
-  // Exported permission: 'implementing_country entity view'.
-  $permissions['implementing_country entity view'] = array(
-    'name' => 'implementing_country entity view',
-    'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'eitientity_implementing_country',
+  // Exported permission: 'helpergeneric administer users'.
+  $permissions['helpergeneric administer users'] = array(
+    'name' => 'helpergeneric administer users',
+    'roles' => array(),
+    'module' => 'helpergeneric',
   );
 
   // Exported permission: 'indicator entity administer'.
@@ -1493,9 +1353,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'features',
   );
 
@@ -1503,7 +1361,6 @@ function eitipermissions_user_default_permissions() {
   $permissions['manipulate all entityqueues'] = array(
     'name' => 'manipulate all entityqueues',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
@@ -1514,7 +1371,6 @@ function eitipermissions_user_default_permissions() {
   $permissions['manipulate entityqueues'] = array(
     'name' => 'manipulate entityqueues',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
@@ -1534,31 +1390,8 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'notify of path changes'.
   $permissions['notify of path changes'] = array(
     'name' => 'notify of path changes',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'pathauto',
-  );
-
-  // Exported permission: 'organisation entity administer'.
-  $permissions['organisation entity administer'] = array(
-    'name' => 'organisation entity administer',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
-    'module' => 'eitientity_organisation',
-  );
-
-  // Exported permission: 'organisation entity view'.
-  $permissions['organisation entity view'] = array(
-    'name' => 'organisation entity view',
-    'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'eitientity_organisation',
   );
 
   // Exported permission: 'rebuild tablefield'.
@@ -1571,9 +1404,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'rename features'.
   $permissions['rename features'] = array(
     'name' => 'rename features',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'features',
   );
 
@@ -1581,9 +1412,44 @@ function eitipermissions_user_default_permissions() {
   $permissions['revenue_stream entity administer'] = array(
     'name' => 'revenue_stream entity administer',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_revenue_stream',
+  );
+
+  // Exported permission: 'revenue_stream entity create'.
+  $permissions['revenue_stream entity create'] = array(
+    'name' => 'revenue_stream entity create',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eitientity_revenue_stream',
+  );
+
+  // Exported permission: 'revenue_stream entity delete'.
+  $permissions['revenue_stream entity delete'] = array(
+    'name' => 'revenue_stream entity delete',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eitientity_revenue_stream',
+  );
+
+  // Exported permission: 'revenue_stream entity edit'.
+  $permissions['revenue_stream entity edit'] = array(
+    'name' => 'revenue_stream entity edit',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eitientity_revenue_stream',
+  );
+
+  // Exported permission: 'revenue_stream entity view'.
+  $permissions['revenue_stream entity view'] = array(
+    'name' => 'revenue_stream entity view',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'eitientity_revenue_stream',
   );
@@ -1620,9 +1486,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'toggle field translatability'.
   $permissions['toggle field translatability'] = array(
     'name' => 'toggle field translatability',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'entity_translation',
   );
 
@@ -1673,27 +1537,21 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'update scripts manage'.
   $permissions['update scripts manage'] = array(
     'name' => 'update scripts manage',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'update_scripts',
   );
 
   // Exported permission: 'update scripts run task scripts'.
   $permissions['update scripts run task scripts'] = array(
     'name' => 'update scripts run task scripts',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'update_scripts',
   );
 
   // Exported permission: 'use advanced search'.
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'search',
   );
 
@@ -1723,9 +1581,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use page manager'.
   $permissions['use page manager'] = array(
     'name' => 'use page manager',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'page_manager',
   );
 
@@ -1741,9 +1597,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use panels dashboard'.
   $permissions['use panels dashboard'] = array(
     'name' => 'use panels dashboard',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 

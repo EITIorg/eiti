@@ -72,7 +72,7 @@ function helpergeneric_menu() {
     'page arguments' => array('helpergeneric_settings_form'),
     'access arguments' => array('helpergeneric administer settings'),
     'file' => 'helpergeneric.admin.inc',
-    'weight' => -32,
+    'weight' => -50,
   );
   // Used to expose contextual links on site name/logo.
   $items['admin/settings/generic/edit'] = array(
@@ -80,6 +80,24 @@ function helpergeneric_menu() {
     'weight' => -10,
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+  );
+
+  $items['admin/settings/gfs-codes'] = array(
+    'title' => 'GFS Codes',
+    'description' => 'Administer GFS Codes',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/gfs_code'),
+    'access arguments' => array('gfs_code entity administer'),
+    'weight' => -44,
+  );
+
+  $items['admin/settings/indicators'] = array(
+    'title' => 'Indicators',
+    'description' => 'Administer Indicators',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/indicator'),
+    'access arguments' => array('indicator entity administer'),
+    'weight' => -43,
   );
 
   $items['admin/settings/main-menu'] = array(
@@ -91,22 +109,31 @@ function helpergeneric_menu() {
     'weight' => -19,
   );
 
-  $items['admin/settings/user-menu'] = array(
-    'title' => 'Edit User menu',
-    'description' => 'Edit the user menu links.',
+  $items['admin/settings/menu-footer-information'] = array(
+    'title' => 'Edit Footer Information menu',
+    'description' => 'Edit the footer information menu links.',
     'page callback' => 'drupal_goto',
-    'page arguments' => array('admin/structure/menu/manage/user-menu'),
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-information'),
     'access arguments' => array('administer menu'),
     'weight' => -18,
   );
 
-  $items['admin/settings/menu-footer'] = array(
-    'title' => 'Edit Footer menu',
-    'description' => 'Edit the footer menu links.',
+  $items['admin/settings/menu-footer-navigation'] = array(
+    'title' => 'Edit Footer Navigation menu',
+    'description' => 'Edit the footer navigation menu links.',
     'page callback' => 'drupal_goto',
-    'page arguments' => array('admin/structure/menu/manage/menu-footer'),
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-navigation'),
     'access arguments' => array('administer menu'),
-    'weight' => -18,
+    'weight' => -17,
+  );
+
+  $items['admin/settings/menu-footer-social'] = array(
+    'title' => 'Edit Footer Social menu',
+    'description' => 'Edit the footer social menu links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-social'),
+    'access arguments' => array('administer menu'),
+    'weight' => -16,
   );
 
   // Page callback that outputs JSON for embedded content specific autocomplete suggestions.
@@ -231,9 +258,14 @@ function helpergeneric_menu_alter(&$items) {
   $items['admin/structure/taxonomy']['access arguments'] = array('helpergeneric access taxonomy');
   $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name']['access arguments'] = array('helpergeneric access taxonomy');
 
+  // Change access on redirect.module and pathauto.module pages.
+  $items['admin/config/search/redirect/settings']['access arguments'] = array('helpergeneric administer urls');
+  $items['admin/config/search/path/delete_bulk']['access arguments'] = array('helpergeneric administer urls');
+
   // Change access on user field and display settings. Replaces "administer users".
-  $items['admin/config/people/accounts/fields']['access arguments'] = array('helpergeneric user fields');
-  $items['admin/config/people/accounts/display']['access arguments'] = array('helpergeneric user fields');
+  $items['admin/config/people/accounts']['access arguments'] = array('helpergeneric administer users');
+  $items['admin/config/people/accounts/fields']['access arguments'] = array('helpergeneric administer users');
+  $items['admin/config/people/accounts/display']['access arguments'] = array('helpergeneric administer users');
 
   // Display the "Edit" link in user pages contextual links.
   $items['user/%user/edit']['context'] = MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE;
@@ -244,6 +276,10 @@ function helpergeneric_menu_alter(&$items) {
  */
 function helpergeneric_permission() {
   return array(
+    'helpergeneric access taxonomy' => array(
+      'title' => t('Access vocabularies only.'),
+      'description' => t('Allow users to access the vocabularies.'),
+    ),
     'helpergeneric administer settings' => array(
       'title' => t('Administer project settings'),
       'description' => t('Allow users to change project specific settings.'),
@@ -252,14 +288,15 @@ function helpergeneric_permission() {
       'title' => t('Administer menus only.'),
       'description' => t('Allow users to change the menus. This overrides the "administer menu" permission to remove menu editing permission.'),
     ),
-    'helpergeneric access taxonomy' => array(
-      'title' => t('Access vocabularies only.'),
-      'description' => t('Allow users to access the vocabularies.'),
-    ),
-    'helpergeneric user fields' => array(
-      'title' => t('Administer user fields'),
+    'helpergeneric administer urls' => array(
+      'title' => t('Administer URLs. This overrides "administer redirects" permission on URL related admin pages.'),
       'restrict access' => TRUE,
-      'description' => t('Allow users to access the vocabularies.'),
+      'description' => t('Allow users to access URL related module administration pages.'),
+    ),
+    'helpergeneric administer users' => array(
+      'title' => t('Administer users settings. This overrides "administer users" permission on user related admin pages.'),
+      'restrict access' => TRUE,
+      'description' => t('Allow users to access the user configuration pages.'),
     ),
   );
 }

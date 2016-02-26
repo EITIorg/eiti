@@ -52,5 +52,69 @@ function eitiet_implementing_country_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'implementing_country entity access overview'.
+  $permissions['implementing_country entity access overview'] = array(
+    'name' => 'implementing_country entity access overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
+  // Exported permission: 'implementing_country entity administer'.
+  $permissions['implementing_country entity administer'] = array(
+    'name' => 'implementing_country entity administer',
+    'roles' => array(
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
+  // Exported permission: 'implementing_country entity create'.
+  $permissions['implementing_country entity create'] = array(
+    'name' => 'implementing_country entity create',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
+  // Exported permission: 'implementing_country entity delete'.
+  $permissions['implementing_country entity delete'] = array(
+    'name' => 'implementing_country entity delete',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
+  // Exported permission: 'implementing_country entity edit'.
+  $permissions['implementing_country entity edit'] = array(
+    'name' => 'implementing_country entity edit',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
+  // Exported permission: 'implementing_country entity view'.
+  $permissions['implementing_country entity view'] = array(
+    'name' => 'implementing_country entity view',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eitientity_implementing_country',
+  );
+
   return $permissions;
 }

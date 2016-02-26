@@ -6,6 +6,7 @@ package = Custom
 configure = admin/structure/organisation
 
 dependencies[] = entity
+dependencies[] = helperentity
 
 ; Entity handlers.
 files[] = includes/OrganisationEntity.inc
