@@ -274,6 +274,41 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-icon_links-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-icon_links-field_fpp_widget'] = array(
+    'bundle' => 'icon_links',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 0,
+    'settings' => array(
+      'available_widgets' => array(
+        'icon_link' => 'icon_link',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-key_facts-field_fpp_widget'.
   $field_instances['fieldable_panels_pane-key_facts-field_fpp_widget'] = array(
     'bundle' => 'key_facts',
