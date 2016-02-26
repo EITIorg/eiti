@@ -371,39 +371,37 @@ function helpergeneric_features_api_alter(&$components) {
  * @param string $form_id
  */
 function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
-  if (!helpergeneric_cleanup_ui()) {
-    return;
-  }
+  if (helpergeneric_cleanup_ui()) {
+    // Do not display as vertical tabs.
+    unset($form['additional_settings']['#type']);
 
-  // Do not display as vertical tabs.
-  unset($form['additional_settings']['#type']);
+    if (isset($form['author'])) {
+      $form['author']['#access'] = FALSE;
+    }
 
-  if (isset($form['author'])) {
-    $form['author']['#access'] = FALSE;
-  }
+    if (isset($form['menu'])) {
+      $form['menu']['#access'] = FALSE;
+    }
 
-  if (isset($form['menu'])) {
-    $form['menu']['#access'] = FALSE;
-  }
+    if (isset($form['path'])) {
+      $form['path']['#access'] = FALSE;
+    }
 
-  if (isset($form['path'])) {
-    $form['path']['#access'] = FALSE;
-  }
+    if (isset($form['redirect'])) {
+      $form['redirect']['#access'] = FALSE;
+    }
 
-  if (isset($form['redirect'])) {
-    $form['redirect']['#access'] = FALSE;
-  }
+    if (isset($form['revision_information'])) {
+      $form['revision_information']['#access'] = FALSE;
+    }
 
-  if (isset($form['revision_information'])) {
-    $form['revision_information']['#access'] = FALSE;
-  }
+    if (isset($form['options']['promote'])) {
+      $form['options']['promote']['#access'] = FALSE;
+    }
 
-  if (isset($form['options']['promote'])) {
-    $form['options']['promote']['#access'] = FALSE;
-  }
-
-  if (isset($form['options']['sticky'])) {
-    $form['options']['sticky']['#access'] = FALSE;
+    if (isset($form['options']['sticky'])) {
+      $form['options']['sticky']['#access'] = FALSE;
+    }
   }
 
   // Restrict summary length.
@@ -417,15 +415,18 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  * @param string $form_id
  */
-function helpergeneric_node_form_summary_validate($form, &$form_state, $form_id) {
-  if (empty($form_state['values']['body'][LANGUAGE_NONE][0]['summary'])) {
-    return;
-  }
+function helpergeneric_node_form_summary_validate($form, &$form_state) {
+  $entity = $form_state['node'];
 
-  $teaser_length = variable_get('teaser_length', 600);
-  $summary_length = drupal_strlen(trim($form_state['values']['body'][LANGUAGE_NONE][0]['summary']));
-  if ($summary_length > $teaser_length) {
-    form_set_error('body][und][0][summary', t('The Summary must be less than %max characters, you provided %count characters.', array('%max' => $teaser_length, '%count' => $summary_length)));
+  if (isset($entity->body)) {
+    $body_field_language = field_language('node', $entity, 'body', $entity->language);
+    if (!empty($form_state['values']['body'][$body_field_language][0]['summary'])) {
+      $teaser_length = variable_get('teaser_length', 600);
+      $summary_length = drupal_strlen(trim($form_state['values']['body'][$body_field_language][0]['summary']));
+      if ($summary_length > $teaser_length) {
+        form_set_error('body][und][0][summary', t('The Summary must be less than %max characters, you provided %count characters.', array('%max' => $teaser_length, '%count' => $summary_length)));
+      }
+    }
   }
 }
 
