@@ -170,7 +170,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
 
   $settings_form['fact'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Key Facts:'),
+    '#title' => t('Key Facts'),
     '#collapsible' => FALSE,
     '#prefix' => '<div id="fact-wrapper">',
     '#suffix' => '</div>',

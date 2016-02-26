@@ -86,7 +86,8 @@ function eitiwidgets_field_group_info() {
     'label' => 'Title Wrapper',
     'weight' => '0',
     'children' => array(
-      0 => 'title_field',
+      0 => 'field_fpp_icon',
+      1 => 'title_field',
     ),
     'format_type' => 'div',
     'format_settings' => array(
