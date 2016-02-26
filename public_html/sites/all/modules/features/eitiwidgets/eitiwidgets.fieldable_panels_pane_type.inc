@@ -82,13 +82,5 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type->description = 'Use this content to create any type of charts, graphs, basically any visual component.';
   $export['visualization'] = $fieldable_panels_pane_type;
 
-  $fieldable_panels_pane_type = new stdClass();
-  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
-  $fieldable_panels_pane_type->api_version = 1;
-  $fieldable_panels_pane_type->name = 'wide_image';
-  $fieldable_panels_pane_type->title = '[DEPRECATED] Wide Image (replaced by Header)';
-  $fieldable_panels_pane_type->description = '';
-  $export['wide_image'] = $fieldable_panels_pane_type;
-
   return $export;
 }

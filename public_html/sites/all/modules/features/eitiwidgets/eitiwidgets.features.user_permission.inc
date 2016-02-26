@@ -73,13 +73,6 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'create fieldable wide_image'.
-  $permissions['create fieldable wide_image'] = array(
-    'name' => 'create fieldable wide_image',
-    'roles' => array(),
-    'module' => 'fieldable_panels_panes',
-  );
-
   // Exported permission: 'delete fieldable featured_bookmarks'.
   $permissions['delete fieldable featured_bookmarks'] = array(
     'name' => 'delete fieldable featured_bookmarks',
@@ -136,13 +129,6 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'delete fieldable wide_image'.
-  $permissions['delete fieldable wide_image'] = array(
-    'name' => 'delete fieldable wide_image',
-    'roles' => array(),
-    'module' => 'fieldable_panels_panes',
-  );
-
   // Exported permission: 'edit fieldable featured_bookmarks'.
   $permissions['edit fieldable featured_bookmarks'] = array(
     'name' => 'edit fieldable featured_bookmarks',
@@ -195,13 +181,6 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable visualization'.
   $permissions['edit fieldable visualization'] = array(
     'name' => 'edit fieldable visualization',
-    'roles' => array(),
-    'module' => 'fieldable_panels_panes',
-  );
-
-  // Exported permission: 'edit fieldable wide_image'.
-  $permissions['edit fieldable wide_image'] = array(
-    'name' => 'edit fieldable wide_image',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
