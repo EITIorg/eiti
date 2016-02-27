@@ -12,6 +12,22 @@
 }
 .contextual-links-region-active {
   outline: #999 dashed 1px;
+  &.panelizer-view-mode {
+    box-shadow: 0 0 1em 0.5em #999;
+    outline: #666 dashed 2px;
+    position: relative;
+    &:before {
+      background-color: #DFDFDF;
+      content: @contentblock_section_title;
+      display: block;
+      line-height: 2em;
+      min-height: 2em;
+      position: absolute;
+      text-align: center;
+      top: -2em;
+      width: 100%;
+    }
+  }
 }
 
 /**
