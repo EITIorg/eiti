@@ -169,7 +169,7 @@ function helpertheme_ds_layout_info() {
 function helpertheme_html_head_alter(&$head_elements) {
   global $theme, $theme_path;
 
-  if ($theme == 'eiti') {
+  if ($theme != 'eiti') {
     return;
   }
 
