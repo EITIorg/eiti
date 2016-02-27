@@ -1606,7 +1606,10 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use text format filtered_html'.
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+    ),
     'module' => 'filter',
   );
 
