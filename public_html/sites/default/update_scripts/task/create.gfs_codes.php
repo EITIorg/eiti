@@ -68,4 +68,4 @@ function __us_gfs_codes_import_csv($file_path) {
 }
 
 /** @var string $script_directory */
-__us_gfs_codes_import_csv($script_directory . '/create.gfscodes.csv');
+__us_gfs_codes_import_csv($script_directory . '/create.gfs_codes.csv');
