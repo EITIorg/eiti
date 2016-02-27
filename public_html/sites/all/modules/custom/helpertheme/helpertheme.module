@@ -169,19 +169,21 @@ function helpertheme_ds_layout_info() {
 function helpertheme_html_head_alter(&$head_elements) {
   global $theme, $theme_path;
 
-  // Force IE to always use most recent engine.
   if ($theme == 'eiti') {
-    $head_elements['mobile_viewport'] = array(
-      '#tag' => 'meta',
-      '#type' => 'html_tag',
-      '#attributes' => array(
-        'http-equiv' => 'X-UA-Compatible',
-        'content' => 'IE=Edge',
-      ),
-      '#prefix' => "<!--[if gte IE 8]>\n",
-      '#suffix' => "<![endif]-->\n",
-    );
+    return;
   }
+
+  // Force IE to always use most recent engine.
+  $head_elements['mobile_viewport'] = array(
+    '#tag' => 'meta',
+    '#type' => 'html_tag',
+    '#attributes' => array(
+      'http-equiv' => 'X-UA-Compatible',
+      'content' => 'IE=Edge',
+    ),
+    '#prefix' => "<!--[if gte IE 8]>\n",
+    '#suffix' => "<![endif]-->\n",
+  );
 
   /*
    * The viewport meta tag is needed to instruct the mobile devices to keep the viewport.
