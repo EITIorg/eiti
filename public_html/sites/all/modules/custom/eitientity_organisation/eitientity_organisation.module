@@ -141,6 +141,11 @@ function eitientity_organisation_access($op, $entity = NULL, $account = NULL, $e
     return FALSE;
   }
 
+  // Fix for panelizer.
+  if ($op == 'update') {
+    $op = 'edit';
+  }
+
   if ($op == 'view') {
     $allow = FALSE;
     if (user_access("$entity_type entity administer")) {
@@ -153,7 +158,6 @@ function eitientity_organisation_access($op, $entity = NULL, $account = NULL, $e
     return $allow;
   }
 
-  $op = 'administer';
   if (user_access("$entity_type entity $op")) {
     return TRUE;
   }

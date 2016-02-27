@@ -71,7 +71,6 @@ function eitientity_indicator_value_access($op, $entity = NULL, $account = NULL,
     return $allow;
   }
 
-
   $op = 'administer';
   if (user_access("$entity_type entity $op")) {
     return TRUE;
