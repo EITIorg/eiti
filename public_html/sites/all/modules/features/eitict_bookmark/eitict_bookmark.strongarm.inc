@@ -34,8 +34,15 @@ function eitict_bookmark_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ds_extras_view_modes_bookmark';
+  $strongarm->value = array();
+  $export['ds_extras_view_modes_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_hide_translation_links_bookmark';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['entity_translation_hide_translation_links_bookmark'] = $strongarm;
 
   $strongarm = new stdClass();

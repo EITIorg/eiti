@@ -52,6 +52,7 @@ features[node][] = bookmark
 features[variable][] = diff_enable_revisions_page_node_bookmark
 features[variable][] = diff_show_preview_changes_node_bookmark
 features[variable][] = diff_view_mode_preview_node_bookmark
+features[variable][] = ds_extras_view_modes_bookmark
 features[variable][] = entity_translation_hide_translation_links_bookmark
 features[variable][] = entity_translation_node_metadata_bookmark
 features[variable][] = field_bundle_settings_node__bookmark
