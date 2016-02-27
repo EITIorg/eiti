@@ -1126,8 +1126,11 @@ function eitiwidgets_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'available_widgets' => array(
+        'viz_bubble_dynamic' => 'viz_bubble_dynamic',
         'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
         'viz_groupedbar_static' => 'viz_groupedbar_static',
+        'viz_sankey_dynamic' => 'viz_sankey_dynamic',
+        'viz_stackedbar_dynamic' => 'viz_stackedbar_dynamic',
       ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,

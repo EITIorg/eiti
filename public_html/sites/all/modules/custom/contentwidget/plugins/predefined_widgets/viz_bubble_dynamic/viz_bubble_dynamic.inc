@@ -63,10 +63,10 @@ function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $enti
     'height' => 400,
     'diameter' => 600,
     'margin' => array(
-      'top' => 10,
-      'bottom' => 50,
-      'left' => 100,
-      'right' => 10
+      'top' => 20,
+      'bottom' => 0,
+      'left' => 0,
+      'right' => 0
     ),
     'container' => $viz_id,
     'endpoint' => $endpoint,
@@ -78,6 +78,9 @@ function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $enti
     $country = menu_get_object('implementing_country');
     if (!empty($country)) {
       $settings['endpoint'] .= '?filter[country_iso]=' . $country->iso;
+    }
+    else {
+      return array('#markup' => t('This widget requires country context.'));
     }
     $years = contentblock_viz_bubbles_dynamic_get_years_min_max();
     $settings['name'] .= t(" (@min - @max)", array(
@@ -121,6 +124,13 @@ function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plug
   foreach ($type_options as $option_key => $label) {
     if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
+
+      if (!isset($form_state['pane'])) {
+        $settings_form['sankey_settings']['no-pane'] = array(
+          '#markup' => '<strong>'. t('Please configure this pane inside of the panelizer, because it requires panelizer context.') . '</strong>',
+        );
+        return $settings_form;
+      }
     }
   }
   array_unshift($type_options, t('- Select -'));

@@ -160,6 +160,13 @@ function contentblock_viz_groupedbarchart_dynamic_settings(&$element, &$form_sta
   foreach ($type_options as $option_key => $label) {
     if (isset($items[$option_key]['context required']) && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
+
+      if (!isset($form_state['pane'])) {
+        $settings_form['sankey_settings']['no-pane'] = array(
+          '#markup' => '<strong>'. t('Please configure this pane inside of the panelizer, because it requires panelizer context.') . '</strong>',
+        );
+        return $settings_form;
+      }
     }
   }
   array_unshift($type_options, t('- Select -'));

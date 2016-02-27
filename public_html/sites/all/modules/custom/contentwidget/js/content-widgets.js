@@ -63,6 +63,7 @@
         'GroupedBar',
         'StackedBar',
         'BubbleChart',
+        'Sankey'
       ];
     }
   }
