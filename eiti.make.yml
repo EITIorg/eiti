@@ -33,7 +33,7 @@ projects:
   entityform: 2.0-rc1
   entityreference: 1.1
   features: 2.7
-  field_group: 1.4
+  field_group: 1.5
   file_entity: 2.0-beta2
   filefield_paths: 1.0
   globalredirect: 1.5
