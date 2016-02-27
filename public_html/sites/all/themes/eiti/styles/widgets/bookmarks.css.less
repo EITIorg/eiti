@@ -56,12 +56,28 @@
   }
 }
 
+.xSmallOnly() {
+  .predefined-widget--bookmarks {
+    .bookmark-items-wrapper {
+      max-width: 19em;
+    }
+  }
+}
+.xMediumOnly() {
+  .predefined-widget--bookmarks {
+    .bookmark-items-wrapper {
+      max-width: 29em;
+    }
+  }
+}
 .xMediumAndDown() {
   .predefined-widget--bookmarks {
     .bookmark-items-wrapper {
       text-align: center;
-      max-width: 480px;
-      margin: 0 auto;
+      & > li {
+        float: none;
+        margin: 0 auto;
+      }
     }
   }
 }
