@@ -190,6 +190,9 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'features_modules_changed',
         'features_semaphore',
 
+        // Hide fieldable_panels_panes.module variables.
+        'fieldable_panels_panes_skip_default_type',
+
         // Hide htmlpurifier.module variables.
         'htmlpurifier_version_current',
 

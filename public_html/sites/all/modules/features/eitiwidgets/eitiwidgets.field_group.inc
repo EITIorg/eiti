@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function eitiwidgets_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -38,7 +38,7 @@ function eitiwidgets_field_group_info() {
       ),
     ),
   );
-  $export['group_blockquote|fieldable_panels_pane|quote|default'] = $field_group;
+  $field_groups['group_blockquote|fieldable_panels_pane|quote|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -71,7 +71,7 @@ function eitiwidgets_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_title_wrapper|fieldable_panels_pane|text|default'] = $field_group;
+  $field_groups['group_title_wrapper|fieldable_panels_pane|text|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -104,7 +104,12 @@ function eitiwidgets_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_title_wrapper|fieldable_panels_pane|visualization|default'] = $field_group;
+  $field_groups['group_title_wrapper|fieldable_panels_pane|visualization|default'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Blockquote');
+  t('Title Wrapper');
+
+  return $field_groups;
 }

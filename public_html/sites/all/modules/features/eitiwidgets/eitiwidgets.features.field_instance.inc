@@ -937,11 +937,7 @@ function eitiwidgets_field_default_field_instances() {
   // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_icon'.
   $field_instances['fieldable_panels_pane-text-field_fpp_icon'] = array(
     'bundle' => 'text',
-    'default_value' => array(
-      0 => array(
-        'icon' => 'arrow',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
