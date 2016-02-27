@@ -56,7 +56,7 @@ projects:
       branch: 7.x-3.x
       revision: 5f3482e4fe176a6dde3393379f25fec4b25c8787
   libraries: 2.2
-  link: 1.3
+  link: 1.4
   media: 2.0-beta1
   panels: 3.5
   panelizer: 3.1
