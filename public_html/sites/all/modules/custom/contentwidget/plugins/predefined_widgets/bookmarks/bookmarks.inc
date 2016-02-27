@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Featured Bookmarks',
   'description' => 'Displays a list of featured bookmarks in a square-stylized fashion.',
-  'render callback' => 'contentblock_featured_bookmarks_render',
-  'settings form' => 'contentblock_featured_bookmarks_settings',
+  'render callback' => 'contentwidget_featured_bookmarks_render',
+  'settings form' => 'contentwidget_featured_bookmarks_settings',
   'entity form alter' => 'contentwidget_featured_bookmarks_form_alter',
   'entity group alter' => 'contentwidget_featured_bookmarks_group_alter',
   'hook_entity_view' => 'contentwidget_featured_bookmarks_hook_entity_view',
@@ -24,7 +24,7 @@ $plugin = array(
 /**
  * Render callback for the 'Featured Bookmarks' predefined widget.
  */
-function contentblock_featured_bookmarks_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_featured_bookmarks_render($plugin, $widget_settings, $entity, $langcode) {
   $size = $widget_settings['widget_size'];
 
   $referenced_ids = array();
@@ -44,7 +44,7 @@ function contentblock_featured_bookmarks_render($plugin, $widget_settings, $enti
   }
 
   // Get the dimensions of each bookmark.
-  list($large_tiles_ids, $medium_tiles_ids, $small_tiles_ids) = _contentblock_featured_bookmarks_get_dimensions($size);
+  list($large_tiles_ids, $medium_tiles_ids, $small_tiles_ids) = _contentwidget_featured_bookmarks_get_dimensions($size);
 
   // Load entities with their different modes.
   $entities_renderable_arr = array();
@@ -109,7 +109,7 @@ function contentblock_featured_bookmarks_render($plugin, $widget_settings, $enti
  * @param $size
  * @return array
  */
-function _contentblock_featured_bookmarks_get_dimensions($size) {
+function _contentwidget_featured_bookmarks_get_dimensions($size) {
   $small_tiles_ids = $medium_tiles_ids = $large_tiles_ids = array();
 
   switch ($size) {
@@ -143,7 +143,7 @@ function _contentblock_featured_bookmarks_get_dimensions($size) {
 /**
  * Settings form for the 'Top Projects' predefined widget.
  */
-function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $default_size = isset($widget_settings['widget_size']) ? $widget_settings['widget_size'] : '';
 
@@ -161,7 +161,7 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
     '#options' => $available_sizes,
     '#default_value' => $default_size,
     '#ajax' => array(
-      'callback' => 'contentblock_featured_bookmarks_settings_ajax',
+      'callback' => 'contentwidget_featured_bookmarks_settings_ajax',
       'wrapper' => 'widget-preview',
       'method' => 'replace',
       'effect' => 'fade'
@@ -199,7 +199,7 @@ function contentblock_featured_bookmarks_settings(&$element, &$form_state, $plug
 /**
  * Ajax callback for the settings form.
  */
-function contentblock_featured_bookmarks_settings_ajax($form, $form_state) {
+function contentwidget_featured_bookmarks_settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
   $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
   return $form['field_fpp_widget'][$widget_field_language][0]['settings']['bookmarks']['widget_preview'];
