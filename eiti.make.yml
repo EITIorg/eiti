@@ -80,7 +80,7 @@ projects:
       type: git
       url: http://git.drupal.org/project/wysiwyg.git
       branch: 7.x-2.x
-      revision: 4efd47771a7fce77eb0364c747e3c76a6a65c460
+      revision: 949039351d71d24d60faee4f63c6527e54761ee1
 
   # Contrib modules for developers:
   # NOTE: "Administration menu", "Features" and "Diff" modules also need to be
