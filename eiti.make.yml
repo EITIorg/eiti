@@ -26,7 +26,10 @@ projects:
   currency: 2.6
   date: 2.9
   diff: 3.2
-  ds: 2.13
+  ds:
+    version: 2.13
+    patch:
+      - ./patches/20160227--ds--do_not_override_variables_added_by_preprocess_functions.patch
   email: 1.3
   elements: 1.4
   entity: 1.6
