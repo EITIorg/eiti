@@ -33,18 +33,14 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
 
   // Hide unused FPP specific form elements.
   // @see: fieldable_panels_panes_entity_edit_form_submit()
-  if (isset($form['link'])) {
-    $form['link'] = array(
-      '#type' => 'value',
-      '#value' => '',
-    );
-  }
-  if (isset($form['path'])) {
-    $form['path'] = array(
-      '#type' => 'value',
-      '#value' => '',
-    );
-  }
+  $form['link'] = array(
+    '#type' => 'value',
+    '#value' => '',
+  );
+  $form['path'] = array(
+    '#type' => 'value',
+    '#value' => '',
+  );
 
   switch ($entity->bundle) {
     case 'tabs_with_widgets':
