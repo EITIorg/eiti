@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Visualization: Grouped Bar chart static',
   'description' => 'A grouped bar chart with a manual input data.',
-  'render callback' => 'contentblock_viz_groupedbarchart_static_render',
-  'settings form' => 'contentblock_viz_groupedbarchart_static_settings',
+  'render callback' => 'contentwidget_viz_groupedbarchart_static_render',
+  'settings form' => 'contentwidget_viz_groupedbarchart_static_settings',
   'defaults' => array(
     'groups_number' => 1,
     'values_number' => 1,
@@ -31,7 +31,7 @@ $plugin = array(
 /**
  * Render callback for the 'Bar Chart' predefined widget.
  */
-function contentblock_viz_groupedbarchart_static_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settings, $entity, $langcode) {
   $block = array();
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
@@ -101,7 +101,7 @@ function contentblock_viz_groupedbarchart_static_render($plugin, $widget_setting
 /**
  * Settings form for the 'Bar Chart' predefined widget.
  */
-function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_viz_groupedbarchart_static_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   // Settings.
@@ -145,7 +145,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
     '#options' => drupal_map_assoc(range(1, 10)),
     '#default_value' => $values_number,
     '#ajax' => array(
-      'callback' => 'contentblock_viz_groupedbarchart_static_settings_values_ajax',
+      'callback' => 'contentwidget_viz_groupedbarchart_static_settings_values_ajax',
       'event' => 'change',
       'wrapper' => 'grouped-barchart',
       'method' => 'replace',
@@ -159,7 +159,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
     '#options' => drupal_map_assoc(range(1, 8)),
     '#default_value' => $groups_number,
     '#ajax' => array(
-      'callback' => 'contentblock_viz_groupedbarchart_static_settings_values_ajax',
+      'callback' => 'contentwidget_viz_groupedbarchart_static_settings_values_ajax',
       'event' => 'change',
       'wrapper' => 'grouped-barchart',
       'method' => 'replace',
@@ -214,7 +214,7 @@ function contentblock_viz_groupedbarchart_static_settings(&$element, &$form_stat
 /**
  * Small custom ajax callback.
  */
-function contentblock_viz_groupedbarchart_static_settings_values_ajax($form, $form_state) {
+function contentwidget_viz_groupedbarchart_static_settings_values_ajax($form, $form_state) {
   return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_groupedbar_static']['barchart_value'];
 }
 

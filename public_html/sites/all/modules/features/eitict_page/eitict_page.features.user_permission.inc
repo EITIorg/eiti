@@ -13,7 +13,9 @@ function eitict_page_user_default_permissions() {
   // Exported permission: 'administer panelizer node page content'.
   $permissions['administer panelizer node page content'] = array(
     'name' => 'administer panelizer node page content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'panelizer',
   );
 
@@ -41,7 +43,9 @@ function eitict_page_user_default_permissions() {
   // Exported permission: 'administer panelizer node page overview'.
   $permissions['administer panelizer node page overview'] = array(
     'name' => 'administer panelizer node page overview',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'panelizer',
   );
 

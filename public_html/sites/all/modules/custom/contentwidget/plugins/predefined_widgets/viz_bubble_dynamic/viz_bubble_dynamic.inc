@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Visualization: Bubble Chart dynamic',
   'description' => 'A bubble chart with data pulled from the Summary Data.',
-  'render callback' => 'contentblock_viz_bubble_dynamic_render',
-  'settings form' => 'contentblock_viz_bubble_dynamic_settings',
+  'render callback' => 'contentwidget_viz_bubble_dynamic_render',
+  'settings form' => 'contentwidget_viz_bubble_dynamic_settings',
   'defaults' => array(
     'bubble_settings' => array(
       'data_type' => '',
@@ -25,7 +25,7 @@ $plugin = array(
 /**
  * Render callback for the 'Bubble Chart' predefined widget.
  */
-function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
   $block = array();
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
@@ -50,11 +50,11 @@ function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $enti
     drupal_set_message(t('Please make sure you have the "eiti-charts" library.'));
   }
 
-  $endpoints = contentblock_viz_bubble_dynamic_get_data_types('endpoint');
+  $endpoints = contentwidget_viz_bubble_dynamic_get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['bubble_settings']['data_type']];
 
   // Send the settings, so that later we can load them in our behaviour.
-  $js_settings = contentblock_viz_bubble_dynamic_get_data_types('js settings');
+  $js_settings = contentwidget_viz_bubble_dynamic_get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['bubble_settings']['data_type']];
   $settings = array(
     'type' => 'BubbleChart',
@@ -82,7 +82,7 @@ function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $enti
     else {
       return array('#markup' => t('This widget requires country context.'));
     }
-    $years = contentblock_viz_bubbles_dynamic_get_years_min_max();
+    $years = contentwidget_viz_bubbles_dynamic_get_years_min_max();
     $settings['name'] .= t(" (@min - @max)", array(
       '@min' => format_date($years['min'], 'custom', 'Y'),
       '@max' => format_date($years['max'], 'custom', 'Y'),
@@ -101,7 +101,7 @@ function contentblock_viz_bubble_dynamic_render($plugin, $widget_settings, $enti
 /**
  * Settings form for the 'Bubble Chart' predefined widget.
  */
-function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_viz_bubble_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   // Extract these for possible re-use.
@@ -119,8 +119,8 @@ function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plug
   );
 
   // We want to cut out those who's context is required.
-  $type_options = contentblock_viz_bubble_dynamic_get_data_types('options');
-  $items = contentblock_viz_bubble_dynamic_get_data_types();
+  $type_options = contentwidget_viz_bubble_dynamic_get_data_types('options');
+  $items = contentwidget_viz_bubble_dynamic_get_data_types();
   foreach ($type_options as $option_key => $label) {
     if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
@@ -142,7 +142,7 @@ function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plug
     '#default_value' => isset($widget_settings['bubble_settings']['data_type']) ? $widget_settings['bubble_settings']['data_type'] : '',
     '#options' => $type_options,
     '#ajax' => array(
-      'callback' => 'contentblock_viz_bubble_dynamic_ajax_settings',
+      'callback' => 'contentwidget_viz_bubble_dynamic_ajax_settings',
       'event' => 'change',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
@@ -151,7 +151,7 @@ function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plug
   );
 
   // Check if there are any extra settings.
-  $extra_settings = contentblock_viz_bubble_dynamic_get_data_types('extra settings');
+  $extra_settings = contentwidget_viz_bubble_dynamic_get_data_types('extra settings');
   $settings_form['extra_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Extra Settings'),
@@ -173,7 +173,7 @@ function contentblock_viz_bubble_dynamic_settings(&$element, &$form_state, $plug
 /**
  * Small custom ajax callback.
  */
-function contentblock_viz_bubble_dynamic_ajax_settings($form, $form_state) {
+function contentwidget_viz_bubble_dynamic_ajax_settings($form, $form_state) {
   $parents = $form_state['triggering_element']['#parents'];
 
   // Polish the #parents.
@@ -204,7 +204,7 @@ function contentblock_viz_bubble_dynamic_ajax_settings($form, $form_state) {
  *   The Return array depends on the $return parameter you specify, either it's
  *   an array of labels for the options, or it's an array of api endpoints.
  */
-function contentblock_viz_bubble_dynamic_get_data_types($return = FALSE) {
+function contentwidget_viz_bubble_dynamic_get_data_types($return = FALSE) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
@@ -212,7 +212,7 @@ function contentblock_viz_bubble_dynamic_get_data_types($return = FALSE) {
     'label' => t('Country: Disbursed Revenues'),
     'endpoint' => '/api/v1.0/bubble/disbursed_revenues',
     'title' => t('Disbursed Revenue'),
-    'extra settings' => 'contentblock_viz_bubbles_dynamic_disbursed_revenues_settings',
+    'extra settings' => 'contentwidget_viz_bubbles_dynamic_disbursed_revenues_settings',
     'context required' => 'entity:implementing_country',
   );
 
@@ -244,14 +244,14 @@ function contentblock_viz_bubble_dynamic_get_data_types($return = FALSE) {
 /**
  * Extra settings for our disbursed revenues bubble widget.
  */
-function contentblock_viz_bubbles_dynamic_disbursed_revenues_settings(&$form, &$form_state) {
+function contentwidget_viz_bubbles_dynamic_disbursed_revenues_settings(&$form, &$form_state) {
   $form['no-settings'] = array('#markup' => t('No extra settings for this bubble chart.'));
 }
 
 /**
  * Small helper callback that returns the range of available years.
  */
-function contentblock_viz_bubbles_dynamic_get_years_min_max() {
+function contentwidget_viz_bubbles_dynamic_get_years_min_max() {
   // Better to make just 1 query and then a PHP loop, vs having 2 or 4 queries;
   $query = db_select('eiti_summary_data', 'sd');
   $query->fields('sd', array('year_start', 'year_end'));

@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Tabs',
   'description' => 'Widget that contains a couple of widgets.',
-  'render callback' => 'contentblock_tabs_render',
-  'settings form' => 'contentblock_tabs_settings',
+  'render callback' => 'contentwidget_tabs_render',
+  'settings form' => 'contentwidget_tabs_settings',
   'entity form alter' => 'contentwidget_tabs_form_alter',
   'entity group alter' => 'contentwidget_tabs_group_alter',
   'defaults' => array(
@@ -24,7 +24,7 @@ $plugin = array(
 /**
  * Render callback for the 'Tabs' predefined widget.
  */
-function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_tabs_render($plugin, $widget_settings, $entity, $langcode) {
   // If we're in Panelizer, we don't want to create the whole widget here, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map'])) {
@@ -65,12 +65,12 @@ function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode)
     // Prepare the links (tab header).
     $tab_link = array(
       '#theme' => 'link',
-      '#text' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_title'),
+      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_title'),
       '#path' => '',
       '#options' => array(
         'fragment' => 'ief-tab-' . $entity->fpid . '-' . $tab_delta,
         'attributes' => array(
-          'class' => array(drupal_html_class('icon-' . _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'icon'))),
+          'class' => array(drupal_html_class('icon-' . _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'icon'))),
         ),
         'html' => TRUE,
       ),
@@ -86,12 +86,12 @@ function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode)
       ),
     );
     $tab['description'] = array(
-      '#markup' => check_markup(_contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_description'))
+      '#markup' => check_markup(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_description'))
     );
     $tab['primary_link'] = array(
       '#theme' => 'link',
-      '#text' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_title'),
-      '#path' => url(_contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_url')),
+      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_title'),
+      '#path' => url(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_url')),
       '#options' => array(
         'attributes' => array(
           'class' => array('primary-tab-link'),
@@ -101,8 +101,8 @@ function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode)
     );
     $tab['secondary_link'] = array(
       '#theme' => 'link',
-      '#text' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
-      '#path' => url(_contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
+      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
+      '#path' => url(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
       '#options' => array(
         'attributes' => array(
           'class' => array('secondary-tab-link'),
@@ -112,8 +112,8 @@ function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode)
     );
     $tab['secondary_link'] = array(
       '#theme' => 'link',
-      '#text' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
-      '#path' => url(_contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
+      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
+      '#path' => url(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
       '#options' => array(
         'attributes' => array(
           'class' => array('secondary-tab-link'),
@@ -140,7 +140,7 @@ function contentblock_tabs_render($plugin, $widget_settings, $entity, $langcode)
 /**
  * Settings form for the 'Tabs' predefined widget.
  */
-function contentblock_tabs_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_tabs_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   $settings_form['tabs_number'] = array(
@@ -150,7 +150,7 @@ function contentblock_tabs_settings(&$element, &$form_state, $plugin, $widget_se
     '#description' => t('Please specify the number of tabs you want to use.'),
     '#default_value' => $widget_settings['tabs_number'],
     '#ajax' => array(
-      'callback' => 'contentblock_tabs_settings_ajax',
+      'callback' => 'contentwidget_tabs_settings_ajax',
       'event' => 'change',
       'wrapper' => 'tabs-wrapper',
       'method' => 'replace',
@@ -186,49 +186,49 @@ function contentblock_tabs_settings(&$element, &$form_state, $plugin, $widget_se
       '#title' => t('Icon'),
       '#options' => $icon_options,
       '#icons' => $icons,
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'icon'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'icon'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['tab_title_' . $tab_delta] = array(
       '#type' => 'textfield',
       '#title' => t('Tab Title'),
       '#description' => t('Title of the tab (displayed under the icon).'),
       '#size' => 50,
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_title'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_title'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['tab_description_' . $tab_delta] = array(
       '#type' => 'textarea',
       '#title' => t("Tab's Description"),
       '#description' => t('Give this tab some context, or contextual description.'),
       '#size' => 50,
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_description'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'tab_description'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['link_primary_title_' . $tab_delta] = array(
       '#type' => 'textfield',
       '#title' => t('Primary Link: Title'),
       '#size' => 30,
       '#prefix' => '<div class="container-inline">',
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_title'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_title'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['link_primary_url_' . $tab_delta] = array(
       '#type' => 'textfield',
       '#title' => t('URL'),
       '#size' => 30,
       '#suffix' => '</div>',
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_url'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_primary_url'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['link_secondary_title_' . $tab_delta] = array(
       '#type' => 'textfield',
       '#title' => t('Secondary Link: Title'),
       '#size' => 30,
       '#prefix' => '<div class="container-inline">',
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
     );
     $settings_form['tabs']['tab_' . $tab_delta]['link_secondary_url_' . $tab_delta] = array(
       '#type' => 'textfield',
       '#title' => t('URL'),
       '#size' => 30,
       '#suffix' => '</div>',
-      '#default_value' => _contentblock_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url'),
+      '#default_value' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url'),
     );
   }
   return $settings_form;
@@ -249,7 +249,7 @@ function contentblock_tabs_settings(&$element, &$form_state, $plugin, $widget_se
  * @return
  *  Returns the value of the setting.
  */
-function _contentblock_key_tab_get_property_value($widget_settings, $delta, $key) {
+function _contentwidget_key_tab_get_property_value($widget_settings, $delta, $key) {
   $value = isset($widget_settings['tabs']['tab_' . $delta][$key . '_' . $delta]) ? $widget_settings['tabs']['tab_' . $delta][$key . '_' . $delta] : '';
   return $value;
 }
@@ -257,7 +257,7 @@ function _contentblock_key_tab_get_property_value($widget_settings, $delta, $key
 /**
  * Ajax callback for the settings form.
  */
-function contentblock_tabs_settings_ajax($form, $form_state) {
+function contentwidget_tabs_settings_ajax($form, $form_state) {
   // TODO: maybe we should check the language.
   return array(
     '#type' => 'ajax',

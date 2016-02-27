@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Header',
   'description' => 'Display a header with sub-header and some links, with an optional background.',
-  'render callback' => 'contentblock_header_render',
-  'settings form' => 'contentblock_header_settings',
+  'render callback' => 'contentwidget_header_render',
+  'settings form' => 'contentwidget_header_settings',
   'entity form alter' => 'contentwidget_header_form_alter',
   'entity group alter' => 'contentwidget_header_group_alter',
   'defaults' => array(),
@@ -22,7 +22,7 @@ $plugin = array(
 /**
  * Render callback for the 'Header' predefined widget.
  */
-function contentblock_header_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_header_render($plugin, $widget_settings, $entity, $langcode) {
   $image_url = '';
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -129,7 +129,7 @@ function contentblock_header_render($plugin, $widget_settings, $entity, $langcod
 /**
  * Settings form for the 'Top Projects' predefined widget.
  */
-function contentblock_header_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   $header_small = isset($widget_settings['header_small']) ? $widget_settings['header_small'] : '';
@@ -166,7 +166,7 @@ function contentblock_header_settings(&$element, &$form_state, $plugin, $widget_
     '#description' => t('Please specify the number of links you want to use.'),
     '#default_value' => $links_max,
     '#ajax' => array(
-      'callback' => 'contentblock_header_settings_ajax',
+      'callback' => 'contentwidget_header_settings_ajax',
       'event' => 'change',
       'wrapper' => 'links-wrapper',
       'method' => 'replace',
@@ -217,7 +217,7 @@ function contentblock_header_settings(&$element, &$form_state, $plugin, $widget_
 /**
  * Ajax callback for the settings form.
  */
-function contentblock_header_settings_ajax($form, $form_state) {
+function contentwidget_header_settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
   $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
   return $form['field_fpp_widget'][$widget_field_language][0]['settings']['header']['links'];

@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Icon Link',
   'description' => 'Use this widget to add multiple icon-links blocks.',
-  'render callback' => 'contentblock_icon_link_render',
-  'settings form' => 'contentblock_icon_link_settings',
+  'render callback' => 'contentwidget_icon_link_render',
+  'settings form' => 'contentwidget_icon_link_settings',
   'entity form alter' => 'contentwidget_icon_link_form_alter',
   'entity group alter' => 'contentwidget_icon_link_group_alter',
   'hook_entity_view' => 'contentwidget_icon_link_hook_entity_view',
@@ -26,7 +26,7 @@ $plugin = array(
 /**
  * Render callback for the 'Icon Link' predefined widget.
  */
-function contentblock_icon_link_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_icon_link_render($plugin, $widget_settings, $entity, $langcode) {
   $size = $widget_settings['icon_links_number'];
 
   // Iterate through the link icons (formatting already inspired from the prototype).
@@ -46,7 +46,7 @@ function contentblock_icon_link_render($plugin, $widget_settings, $entity, $lang
       ),
     );
     // TODO: Specify the path to the correct SVG icon.
-    $icon = _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'icon');
+    $icon = _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'icon');
     $path_to_icon = '';
     $icon_link['icon_link']['icon_wrapper']['icon'] = array(
       '#type' => 'html_tag',
@@ -63,10 +63,10 @@ function contentblock_icon_link_render($plugin, $widget_settings, $entity, $lang
         'class' => array('widget-text')
       ),
     );
-    $title = _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'title');
-    $title_as_link = _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'title_as_link');
+    $title = _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'title');
+    $title_as_link = _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'title_as_link');
     if ($title_as_link == TRUE) {
-      $title = l($title, _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'url'));
+      $title = l($title, _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'url'));
     }
     $icon_link['icon_link']['text_wrapper']['title'] = array(
       '#type' => 'html_tag',
@@ -77,13 +77,13 @@ function contentblock_icon_link_render($plugin, $widget_settings, $entity, $lang
       )
     );
     $icon_link['icon_link']['text_wrapper']['description'] = array(
-      '#markup' => filter_xss(_contentblock_key_icon_link_get_property_value($widget_settings, $link, 'description')),
+      '#markup' => filter_xss(_contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'description')),
     );
     if ($title_as_link == FALSE) {
       $icon_link['icon_link']['text_wrapper']['url'] = array(
         '#theme' => 'link',
         '#text' => t('Visit Link'),
-        '#path' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'url'),
+        '#path' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'url'),
         '#options' => array(
           'attributes' => array('class' => array('visit-link')),
           'html' => FALSE,
@@ -115,7 +115,7 @@ function contentblock_icon_link_render($plugin, $widget_settings, $entity, $lang
 /**
  * Settings form for the 'Icon Link' predefined widget.
  */
-function contentblock_icon_link_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_icon_link_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $default_size = isset($widget_settings['icon_links_number']) ? $widget_settings['icon_links_number'] : '';
 
@@ -130,7 +130,7 @@ function contentblock_icon_link_settings(&$element, &$form_state, $plugin, $widg
     '#options' => $available_sizes,
     '#default_value' => $default_size,
     '#ajax' => array(
-      'callback' => 'contentblock_icon_link_settings_ajax',
+      'callback' => 'contentwidget_icon_link_settings_ajax',
       'wrapper' => 'icon-links-wrapper',
       'method' => 'replace',
       'effect' => 'fade'
@@ -162,30 +162,30 @@ function contentblock_icon_link_settings(&$element, &$form_state, $plugin, $widg
       '#options' => $icon_options,
       '#icons' => $icons,
       '#required' => TRUE,
-      '#default_value' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'icon'),
+      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'icon'),
     );
     $settings_form['icon_links_wrapper']['link_' . $link]['title_' . $link] = array(
       '#type' => 'textfield',
       '#title' => t('Title'),
       '#required' => TRUE,
-      '#default_value' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'title'),
+      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'title'),
     );
     $settings_form['icon_links_wrapper']['link_' . $link]['title_as_link_' . $link] = array(
       '#type' => 'checkbox',
       '#title' => t('Title as a Link'),
       '#description' => t('If you want to use the title as the link (and not the default "Visit Link >"), check this box.'),
-      '#default_value' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'title_as_link'),
+      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'title_as_link'),
     );
     $settings_form['icon_links_wrapper']['link_' . $link]['description_' . $link] = array(
       '#type' => 'textarea',
       '#title' => t('Description'),
-      '#default_value' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'description'),
+      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'description'),
     );
     $settings_form['icon_links_wrapper']['link_' . $link]['url_' . $link] = array(
       '#type' => 'textfield',
       '#title' => t('URL'),
       '#required' => TRUE,
-      '#default_value' => _contentblock_key_icon_link_get_property_value($widget_settings, $link, 'url'),
+      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $link, 'url'),
       '#description' => t('You can specify either an internal or external URL (if it is an external, make sure to specify the full path: i.e. http://google.com'),
     );
   }
@@ -196,7 +196,7 @@ function contentblock_icon_link_settings(&$element, &$form_state, $plugin, $widg
 /**
  * Ajax callback for the settings form.
  */
-function contentblock_icon_link_settings_ajax($form, $form_state) {
+function contentwidget_icon_link_settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
   $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
   return $form['field_fpp_widget'][$widget_field_language][0]['settings']['icon_link']['icon_links_wrapper'];
@@ -217,7 +217,7 @@ function contentblock_icon_link_settings_ajax($form, $form_state) {
  * @return
  *  Returns the value of the setting.
  */
-function _contentblock_key_icon_link_get_property_value($widget_settings, $delta, $key) {
+function _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, $key) {
   $value = isset($widget_settings['icon_links_wrapper']['link_' . $delta][$key . '_' . $delta]) ? $widget_settings['icon_links_wrapper']['link_' . $delta][$key . '_' . $delta] : '';
   return $value;
 }

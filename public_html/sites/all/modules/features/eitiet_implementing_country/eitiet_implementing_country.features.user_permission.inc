@@ -13,7 +13,9 @@ function eitiet_implementing_country_user_default_permissions() {
   // Exported permission: 'administer panelizer implementing_country normal content'.
   $permissions['administer panelizer implementing_country normal content'] = array(
     'name' => 'administer panelizer implementing_country normal content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'panelizer',
   );
 
@@ -41,7 +43,9 @@ function eitiet_implementing_country_user_default_permissions() {
   // Exported permission: 'administer panelizer implementing_country normal overview'.
   $permissions['administer panelizer implementing_country normal overview'] = array(
     'name' => 'administer panelizer implementing_country normal overview',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'panelizer',
   );
 

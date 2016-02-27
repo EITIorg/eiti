@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Visualization: Sankey Chart dynamic',
   'description' => 'A sankey chart with data pulled from the Summary Data.',
-  'render callback' => 'contentblock_viz_sankey_dynamic_render',
-  'settings form' => 'contentblock_viz_sankey_dynamic_settings',
+  'render callback' => 'contentwidget_viz_sankey_dynamic_render',
+  'settings form' => 'contentwidget_viz_sankey_dynamic_settings',
   'defaults' => array(
     'sankey_settings' => array(
       'data_type' => '',
@@ -25,7 +25,7 @@ $plugin = array(
 /**
  * Render callback for the 'Sankey Chart' predefined widget.
  */
-function contentblock_viz_sankey_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_viz_sankey_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
   $block = array();
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
@@ -50,11 +50,11 @@ function contentblock_viz_sankey_dynamic_render($plugin, $widget_settings, $enti
     drupal_set_message(t('Please make sure you have the "eiti-charts" library.'));
   }
 
-  $endpoints = contentblock_viz_sankey_dynamic_get_data_types('endpoint');
+  $endpoints = contentwidget_viz_sankey_dynamic_get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['sankey_settings']['data_type']];
 
   // Send the settings, so that later we can load them in our behaviour.
-  $js_settings = contentblock_viz_sankey_dynamic_get_data_types('js settings');
+  $js_settings = contentwidget_viz_sankey_dynamic_get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['sankey_settings']['data_type']];
   $settings = array(
     'type' => 'Sankey',
@@ -104,7 +104,7 @@ function contentblock_viz_sankey_dynamic_render($plugin, $widget_settings, $enti
 /**
  * Settings form for the 'Sankey Chart' predefined widget.
  */
-function contentblock_viz_sankey_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_viz_sankey_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $plugin_filepath = $plugin['path'] . '/' . $plugin['file'];;
   $form_state['build_info']['files'][$plugin_filepath] = $plugin_filepath;
@@ -124,8 +124,8 @@ function contentblock_viz_sankey_dynamic_settings(&$element, &$form_state, $plug
   );
 
   // We want to cut out those who's context is required.
-  $type_options = contentblock_viz_sankey_dynamic_get_data_types('options');
-  $items = contentblock_viz_sankey_dynamic_get_data_types();
+  $type_options = contentwidget_viz_sankey_dynamic_get_data_types('options');
+  $items = contentwidget_viz_sankey_dynamic_get_data_types();
   foreach ($type_options as $option_key => $label) {
     if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
@@ -147,7 +147,7 @@ function contentblock_viz_sankey_dynamic_settings(&$element, &$form_state, $plug
     '#default_value' => isset($widget_settings['sankey_settings']['data_type']) ? $widget_settings['sankey_settings']['data_type'] : '',
     '#options' => $type_options,
     '#ajax' => array(
-      'callback' => 'contentblock_viz_sankey_dynamic_ajax_settings',
+      'callback' => 'contentwidget_viz_sankey_dynamic_ajax_settings',
       'event' => 'change',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
@@ -156,7 +156,7 @@ function contentblock_viz_sankey_dynamic_settings(&$element, &$form_state, $plug
   );
 
   // Check if there are any extra settings.
-  $extra_settings = contentblock_viz_sankey_dynamic_get_data_types('extra settings');
+  $extra_settings = contentwidget_viz_sankey_dynamic_get_data_types('extra settings');
   $settings_form['extra_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Extra Settings'),
@@ -178,7 +178,7 @@ function contentblock_viz_sankey_dynamic_settings(&$element, &$form_state, $plug
 /**
  * Small custom ajax callback.
  */
-function contentblock_viz_sankey_dynamic_ajax_settings($form, $form_state) {
+function contentwidget_viz_sankey_dynamic_ajax_settings($form, $form_state) {
   $parents = $form_state['triggering_element']['#parents'];
 
   // Polish the #parents.
@@ -209,7 +209,7 @@ function contentblock_viz_sankey_dynamic_ajax_settings($form, $form_state) {
  *   The Return array depends on the $return parameter you specify, either it's
  *   an array of labels for the options, or it's an array of api endpoints.
  */
-function contentblock_viz_sankey_dynamic_get_data_types($return = FALSE) {
+function contentwidget_viz_sankey_dynamic_get_data_types($return = FALSE) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
@@ -217,7 +217,7 @@ function contentblock_viz_sankey_dynamic_get_data_types($return = FALSE) {
     'label' => t('Country: Disbursed Revenues By Company'),
     'endpoint' => '/api/v1.0/sankey/disbursed_by_companies_per_country',
     'title' => t('Disbursements by Company'),
-    'extra settings' => 'contentblock_viz_sankeys_dynamic_disbursed_revenues_settings',
+    'extra settings' => 'contentwidget_viz_sankeys_dynamic_disbursed_revenues_settings',
     'context required' => 'entity:implementing_country',
   );
 
@@ -249,10 +249,10 @@ function contentblock_viz_sankey_dynamic_get_data_types($return = FALSE) {
 /**
  * Extra settings for our disbursed revenues sankey widget.
  */
-function contentblock_viz_sankeys_dynamic_disbursed_revenues_settings(&$form, &$form_state, $widget_settings, $ctools_contexts) {
+function contentwidget_viz_sankeys_dynamic_disbursed_revenues_settings(&$form, &$form_state, $widget_settings, $ctools_contexts) {
 //  $form['no-settings'] = array('#markup' => t('No extra settings for this sankey chart.'));
   $country = $ctools_contexts->data;
-  $years = contentblock_viz_sankeys_dynamic_get_years_min_max($country->id);
+  $years = contentwidget_viz_sankeys_dynamic_get_years_min_max($country->id);
   $min_year = format_date($years['min'], 'custom', 'Y');
   $max_year = format_date($years['max'], 'custom', 'Y');
   $years_options = drupal_map_assoc(range($min_year, $max_year));
@@ -261,7 +261,7 @@ function contentblock_viz_sankeys_dynamic_disbursed_revenues_settings(&$form, &$
     '#type' => 'fieldset',
     '#title' => t('Years'),
     '#description' => t('Years to select the data from.'),
-    '#element_validate' => array('contentblock_viz_sankey_form_validation'),
+    '#element_validate' => array('contentwidget_viz_sankey_form_validation'),
   );
   $form['years']['years_from'] = array(
     '#type' => 'select',
@@ -290,7 +290,7 @@ function contentblock_viz_sankeys_dynamic_disbursed_revenues_settings(&$form, &$
 /**
  * Our small custom validation.
  */
-function contentblock_viz_sankey_form_validation($element, $form_state) {
+function contentwidget_viz_sankey_form_validation($element, $form_state) {
   $parents_year_from = $element['years_from']['#parents'];
   $parents_year_to = $element['years_to']['#parents'];
   $year_from = drupal_array_get_nested_value($form_state['values'], $parents_year_from);
@@ -303,7 +303,7 @@ function contentblock_viz_sankey_form_validation($element, $form_state) {
 /**
  * Small helper callback that returns the range of available years.
  */
-function contentblock_viz_sankeys_dynamic_get_years_min_max($country_id) {
+function contentwidget_viz_sankeys_dynamic_get_years_min_max($country_id) {
   // Better to make just 1 query and then a PHP loop, vs having 2 or 4 queries;
   $query = db_select('eiti_summary_data', 'sd');
   $query->fields('sd', array('year_start', 'year_end'));

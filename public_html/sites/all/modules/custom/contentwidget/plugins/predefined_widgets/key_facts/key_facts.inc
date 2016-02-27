@@ -12,8 +12,8 @@
 $plugin = array(
   'title' => 'Key Facts',
   'description' => 'Widget that contains a couple of key facts.',
-  'render callback' => 'contentblock_key_facts_render',
-  'settings form' => 'contentblock_key_facts_settings',
+  'render callback' => 'contentwidget_key_facts_render',
+  'settings form' => 'contentwidget_key_facts_settings',
   'entity form alter' => 'contentwidget_key_facts_form_alter',
   'entity group alter' => 'contentwidget_key_facts_group_alter',
   'defaults' => array(
@@ -26,7 +26,7 @@ $plugin = array(
 /**
  * Render callback for the 'Key Facts' predefined widget.
  */
-function contentblock_key_facts_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_key_facts_render($plugin, $widget_settings, $entity, $langcode) {
   // Prepare the variables.
   if (isset($entity->field_cbw_key_facts['und'][0]) && $image_file = (object) $entity->field_cbw_key_facts['und'][0]) {
     $image_url = file_create_url($image_file->uri);
@@ -69,7 +69,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
       '#type' => 'container',
       '#attributes' => array(
         'class' => array(
-          drupal_html_class('icon-' . _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'icon')),
+          drupal_html_class('icon-' . _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'icon')),
           drupal_html_class('fact-wrapper-' . $fact_count),
         ),
       ),
@@ -84,7 +84,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
     // There are 2 cases: manually entered data, and computed data (which requires
     // a callback function that returns either the value, or array with value and
     // the suffix.
-    $value_type = _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'type');
+    $value_type = _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'type');
     if ($value_type == 'manual') {
       $fact['value_wrapper']['value'] = array(
         '#type' => 'html_tag',
@@ -92,7 +92,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
         '#attributes' => array(
           'class' => array('value'),
         ),
-        '#value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'value'),
+        '#value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'value'),
       );
       $fact['value_wrapper']['suffix'] = array(
         '#type' => 'html_tag',
@@ -100,12 +100,12 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
         '#attributes' => array(
           'class' => array('value-suffix')
         ),
-        '#value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'value_suffix'),
+        '#value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'value_suffix'),
       );
     }
     elseif ($value_type == 'computed'){
-      $value_key = _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'compute_value');
-      $functions = contentblock_key_fact_get_computed_values('functions');
+      $value_key = _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'compute_value');
+      $functions = contentwidget_key_fact_get_computed_values('functions');
       if (function_exists($functions[$value_key])) {
         $value = $functions[$value_key]();
       }
@@ -138,7 +138,7 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
       '#attributes' => array(
         'class' => array('fact-description')
       ),
-      '#value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'fact_description'),
+      '#value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'fact_description'),
     );
     $fact_items[] = drupal_render($fact);
   }
@@ -157,11 +157,11 @@ function contentblock_key_facts_render($plugin, $widget_settings, $entity, $lang
 /**
  * Settings form for the 'Ket Facts' predefined widget.
  */
-function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   // Special case: we're in IEF. We want to get the REAL settings.
-  if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == 'contentblock_key_facts_settings_ajax') {
+  if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == 'contentwidget_key_facts_settings_ajax') {
     $parents = $form_state['triggering_element']['#parents'];
     $get_rid_off_arr = array('fact', 'facts_number');
     $parents = array_diff($parents, $get_rid_off_arr);
@@ -182,7 +182,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
     '#description' => t('Please specify the number of facts you want to use.'),
     '#default_value' => $widget_settings['fact']['facts_number'],
     '#ajax' => array(
-      'callback' => 'contentblock_key_facts_settings_ajax',
+      'callback' => 'contentwidget_key_facts_settings_ajax',
       'event' => 'change',
       'wrapper' => 'fact-wrapper',
       'method' => 'replace',
@@ -199,7 +199,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
     'manual' => t('Manual'),
     'computed' => t('Computed'),
   );
-  $computed_options = contentblock_key_fact_get_computed_values('options');
+  $computed_options = contentwidget_key_fact_get_computed_values('options');
 
   for ($fact_count = 0; $fact_count < $widget_settings['fact']['facts_number']; $fact_count++) {
     $settings_form['fact']['fact_' . $fact_count] = array(
@@ -213,21 +213,21 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#title' => t('Icon'),
       '#options' => $icon_options,
       '#icons' => $icons,
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'icon'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'icon'),
     );
     $settings_form['fact']['fact_' . $fact_count]['fact_description_' . $fact_count] = array(
       '#type' => 'textfield',
       '#title' => t('Description'),
       '#description' => t('Description of this key fact.'),
       '#size' => 50,
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'fact_description'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'fact_description'),
     );
     $settings_form['fact']['fact_' . $fact_count]['type_' . $fact_count] = array(
       '#type' => 'radios',
       '#title' => t('Fact Type'),
       '#description' => t('Type of the fact.'),
       '#options' => $type_options,
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'type'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'type'),
     );
 
     // For cases where field parents are set.
@@ -246,7 +246,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#title' => t('Key Fact Value'),
       '#size' => 10,
       '#prefix' => '<div class="container-inline">',
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'value'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'value'),
       '#states' => array(
         'visible' => array(
           array('input[name="' . $field_name_prefix . '[fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'manual')),
@@ -258,7 +258,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#title' => t('Value Suffix'),
       '#description' => t('Example: "T", "B$", "%", etc.'),
       '#size' => 10,
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'value_suffix'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'value_suffix'),
       '#suffix' => '</div>',
       '#states' => array(
         'visible' => array(
@@ -271,7 +271,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
       '#title' => t('Computed Value'),
       '#description' => t('Pick the value you want to output.'),
       '#options' => $computed_options,
-      '#default_value' => _contentblock_key_fact_get_property_value($widget_settings, $fact_count, 'compute_value'),
+      '#default_value' => _contentwidget_key_fact_get_property_value($widget_settings, $fact_count, 'compute_value'),
       '#states' => array(
         'visible' => array(
           array('input[name="' . $field_name_prefix . '[fact_' . $fact_count . '][type_' . $fact_count .']"]' => array('value' => 'computed')),
@@ -297,7 +297,7 @@ function contentblock_key_facts_settings(&$element, &$form_state, $plugin, $widg
  * @return
  *  Returns the value of the setting.
  */
-function _contentblock_key_fact_get_property_value($widget_settings, $delta, $key) {
+function _contentwidget_key_fact_get_property_value($widget_settings, $delta, $key) {
   $value = isset($widget_settings['fact']['fact_' . $delta][$key . '_' . $delta]) ? $widget_settings['fact']['fact_' . $delta][$key . '_' . $delta] : '';
   return $value;
 }
@@ -312,7 +312,7 @@ function _contentblock_key_fact_get_property_value($widget_settings, $delta, $ke
  *   The Return array depends on the $return parameter you specify, either it's
  * an array of labels for the options, or it's an array of callback functions.
  */
-function contentblock_key_fact_get_computed_values($return) {
+function contentwidget_key_fact_get_computed_values($return) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
@@ -321,7 +321,7 @@ function contentblock_key_fact_get_computed_values($return) {
   // which has 2 keys: value and suffix.
   $items['eiti_countries'] = array(
     'label' => t('Global: Countries Count'),
-    'function' => 'contentblock_key_fact_get_countries_count',
+    'function' => 'contentwidget_key_fact_get_countries_count',
   );
 
   $output = array();
@@ -346,7 +346,7 @@ function contentblock_key_fact_get_computed_values($return) {
 /**
  * Custom function that returns the count of implementing countries.
  */
-function contentblock_key_fact_get_countries_count() {
+function contentwidget_key_fact_get_countries_count() {
   $query = new EntityFieldQuery();
   $result = $query
     ->entityCondition('entity_type', 'implementing_country')
@@ -363,7 +363,7 @@ function contentblock_key_fact_get_countries_count() {
 /**
  * Ajax callback for the settings form.
  */
-function contentblock_key_facts_settings_ajax($form, $form_state) {
+function contentwidget_key_facts_settings_ajax($form, $form_state) {
   $parents = $form_state['triggering_element']['#parents'];
   $key = array_search('facts_number', $parents, TRUE);
   unset($parents[$key]);

@@ -56,6 +56,15 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'access contextual links'.
+  $permissions['access contextual links'] = array(
+    'name' => 'access contextual links',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'contextual',
+  );
+
   // Exported permission: 'access media browser'.
   $permissions['access media browser'] = array(
     'name' => 'access media browser',
@@ -114,9 +123,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer advanced pane settings'.
   $permissions['administer advanced pane settings'] = array(
     'name' => 'administer advanced pane settings',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -241,9 +248,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer pane access'.
   $permissions['administer pane access'] = array(
     'name' => 'administer pane access',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -257,18 +262,14 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer panels layouts'.
   $permissions['administer panels layouts'] = array(
     'name' => 'administer panels layouts',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
   // Exported permission: 'administer panels styles'.
   $permissions['administer panels styles'] = array(
     'name' => 'administer panels styles',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -427,7 +428,6 @@ function eitipermissions_user_default_permissions() {
   $permissions['change layouts in place editing'] = array(
     'name' => 'change layouts in place editing',
     'roles' => array(
-      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
@@ -1565,9 +1565,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use ipe with page manager'.
   $permissions['use ipe with page manager'] = array(
     'name' => 'use ipe with page manager',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -1588,9 +1586,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use panels caching features'.
   $permissions['use panels caching features'] = array(
     'name' => 'use panels caching features',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 

@@ -80,7 +80,7 @@ function eiti_preprocess_page(&$variables) {
   if (in_array(arg(0), array('admin', 'eform', 'user'))) {
     $style_main_content = TRUE;
   }
-  else if (arg(2) != NULL && in_array(arg(0), array('node', 'contentblock'))) {
+  else if (arg(2) != NULL && in_array(arg(0), array('node'))) {
     $style_main_content = TRUE;
   }
 
@@ -99,15 +99,6 @@ function eiti_preprocess_page(&$variables) {
       default:
         // Do nothing!
         break;
-    }
-  }
-
-  // HACK: Fix contextual links not displaying on user pages.
-  // @see: helpergeneric_user_view_alter()
-  if (arg(0) == 'user') {
-    $router_item = menu_get_item();
-    if ($router_item['path'] == 'user/%') {
-      $variables['main_content_classes'] .= ' contextual-links-region';
     }
   }
 }
@@ -222,23 +213,6 @@ function eiti_form_alter(&$form, &$form_state, $form_id) {
   else if (is_array($form['#attributes']['class'])) {
     if (!in_array($identifier, $form['#attributes']['class'])) {
       $form['#attributes']['class'][] = $identifier;
-    }
-  }
-}
-
-/**
- * Preprocess variables for contentblock
- */
-function eiti_preprocess_entity(&$variables, $hook) {
-  if ($variables['entity_type'] == 'contentblock' && $variables['contentblock']->type == 'predefined') {
-    // widget fields are not translatable.
-    if (isset($variables['contentblock']->field_cbwidget[LANGUAGE_NONE][0]['widget'])) {
-      $widget = $variables['contentblock']->field_cbwidget[LANGUAGE_NONE][0]['widget'];
-      $variables['classes_array'][] = drupal_clean_css_identifier('contentwidget-' . $widget);
-
-      if (in_array($widget, array('topdonors', 'topprojects', 'lastupdated'))) {
-        $variables['classes_array'][] = 'contentwidget-fullwidth';
-      }
     }
   }
 }
