@@ -177,7 +177,7 @@ function organisation_load($entity_id, $entity_type) {
  * Implements hook_permission().
  */
 function eitientity_organisation_permission() {
-  return _helperentity_entity_type_permission('organisation', array('administer', 'create', 'view', 'edit', 'delete'));
+  return _helperentity_entity_type_permission('organisation');
 }
 
 /**

@@ -16,6 +16,7 @@ features[field_base][] = field_o_commodities
 features[field_base][] = field_o_identification_number
 features[field_instance][] = organisation-company-field_o_commodities
 features[field_instance][] = organisation-company-field_o_identification_number
+features[user_permission][] = organisation entity access overview
 features[user_permission][] = organisation entity administer
 features[user_permission][] = organisation entity create
 features[user_permission][] = organisation entity delete

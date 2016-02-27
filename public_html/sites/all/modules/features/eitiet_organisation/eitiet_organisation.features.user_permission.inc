@@ -10,6 +10,15 @@
 function eitiet_organisation_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'organisation entity access overview'.
+  $permissions['organisation entity access overview'] = array(
+    'name' => 'organisation entity access overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'eitientity_organisation',
+  );
+
   // Exported permission: 'organisation entity administer'.
   $permissions['organisation entity administer'] = array(
     'name' => 'organisation entity administer',
