@@ -75,13 +75,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'media',
   );
 
-  // Exported permission: 'access rules debug'.
-  $permissions['access rules debug'] = array(
-    'name' => 'access rules debug',
-    'roles' => array(),
-    'module' => 'rules',
-  );
-
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -312,13 +305,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'restful',
   );
 
-  // Exported permission: 'administer rules'.
-  $permissions['administer rules'] = array(
-    'name' => 'administer rules',
-    'roles' => array(),
-    'module' => 'rules',
-  );
-
   // Exported permission: 'administer search'.
   $permissions['administer search'] = array(
     'name' => 'administer search',
@@ -408,13 +394,6 @@ function eitipermissions_user_default_permissions() {
     'name' => 'bypass node access',
     'roles' => array(),
     'module' => 'node',
-  );
-
-  // Exported permission: 'bypass rules access'.
-  $permissions['bypass rules access'] = array(
-    'name' => 'bypass rules access',
-    'roles' => array(),
-    'module' => 'rules',
   );
 
   // Exported permission: 'cancel account'.
