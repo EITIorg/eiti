@@ -386,7 +386,7 @@ function helpertheme_less_variables_alter(&$less_variables, $system_name) {
   // Add absolute paths for images; including the trailing slash.
   $less_variables['@base_path'] = '"' . base_path() . '"';
   $less_variables['@theme_path'] = '"' . base_path() . $GLOBALS['theme_path'] . '/"';
-  $less_variables['@contentblock_section_title'] = '"' . t('edit page content/widgets') . '"';
+  $less_variables['@contextual_section_title'] = '"' . t('edit page content/widgets') . '"';
 }
 
 /**
