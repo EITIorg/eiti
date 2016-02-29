@@ -1,5 +1,6 @@
 <?php
 
+
 // Delete all links from menu.
 _us_menu__delete_links('user-menu');
 

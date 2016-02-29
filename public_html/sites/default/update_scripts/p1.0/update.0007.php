@@ -4,6 +4,7 @@
 $modules = array(
   'contentwidget',
   'eiti_api',
+  'eiti_ctools_extra',
   'eiti_migration',
   'eitientity_gfs_code',
   'eitientity_implementing_country',
@@ -13,6 +14,7 @@ $modules = array(
   'eitientity_revenue_stream',
   'eitientity_summary_data',
   'helperentity',
+  'helperfield',
   'helpergeneric',
   'helpertheme',
 );

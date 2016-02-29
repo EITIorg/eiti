@@ -18,26 +18,34 @@ defaults:
 
 
 projects:
-  drupal: 7.41
+  drupal: 7.43
 
   # Drupal contrib modules:
   admin_menu: 3.0-rc5
   ctools: 1.9
+  countries: 2.3
   currency: 2.6
   date: 2.9
   diff: 3.2
-  ds: 2.11
-  email: 1.3
+  ds:
+    version: 2.1
+    patch:
+      - ./patches/20160227--ds--do_not_override_variables_added_by_preprocess_functions.patch
   elements: 1.4
+  email: 1.3
+  entity_translation: 7.x-1.0-beta4
   entity: 1.6
   entityform: 2.0-rc1
+  entityqueue: 1.1
   entityreference: 1.1
   features: 2.7
-  field_group: 1.4
+  field_group: 1.5
+  fieldable_panels_panes: 1.7
   file_entity: 2.0-beta2
   filefield_paths: 1.0
   globalredirect: 1.5
-  hierarchical_select: 3.0-beta2
+  # hierarchical_select: 3.0-beta2
+  # html5_tools: ~
   htmlpurifier:
     do_recursion: 0
     download:
@@ -47,8 +55,10 @@ projects:
       revision: 802b9f91da9bb968bce86007404ebf26f1c85efd
     patch:
       - https://www.drupal.org/files/issues/htmlpurifier-add_custom_version_callback-2555427-2-D7.patch
+  i18n: 1.13
   imagecache_actions: 1.5
   inline_entity_form: 1.6
+  leaflet: 1.3
   less:
     download:
       type: git
@@ -56,16 +66,22 @@ projects:
       branch: 7.x-3.x
       revision: 5f3482e4fe176a6dde3393379f25fec4b25c8787
   libraries: 2.2
-  link: 1.3
+  link: 1.4
   media: 2.0-beta1
+  # migrate: ~
+  migrate_d2d: 2.1
+  migrate_extras: 2.5
   panels: 3.5
   panelizer: 3.1
   pathauto: 1.3
-  profile2: 1.3
+  phpexcel: 3.11
+  # profile2: 1.3
   redirect: 1.0-rc3
   rel: 1.0-alpha2
-  rules: 2.9
+  restful: 1.6
+  # rules: 2.9
   strongarm: 2.0
+  tablefield: 2.4
   title:
     download:
       type: git
@@ -74,13 +90,14 @@ projects:
       revision: d6f2000bbf54686faccc95e7b970d7a00db1dfd8
   token: 1.6
   transliteration: 3.2
+  variable: 2.5
   views: 3.13
   wysiwyg:
     download:
       type: git
       url: http://git.drupal.org/project/wysiwyg.git
       branch: 7.x-2.x
-      revision: 4efd47771a7fce77eb0364c747e3c76a6a65c460
+      revision: 949039351d71d24d60faee4f63c6527e54761ee1
 
   # Contrib modules for developers:
   # NOTE: "Administration menu", "Features" and "Diff" modules also need to be
