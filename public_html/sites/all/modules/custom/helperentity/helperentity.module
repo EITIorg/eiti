@@ -1,0 +1,132 @@
+<?php
+/**
+ * @file
+ * Custom helper module for creating custom entities.
+ */
+
+/**
+ * Menu callback: Creates overview page for custom identifier entities at admin/structure/%.
+ *
+ * @param $entity_type
+ * @return array
+ */
+function helperentity_entity_overview_types($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+
+  $build = array();
+  if (empty($entity_info)) {
+    return $build;
+  }
+
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => '2'));
+  $rows = array();
+
+  if (module_exists('field_ui') && !empty($entity_info['fieldable'])) {
+    foreach ($entity_info['bundles'] as $bundle) {
+      $url_path = $bundle['admin']['path'];
+      if (isset($bundle['admin']['real path'])) {
+        $url_path = $bundle['admin']['real path'];
+      }
+
+      $row = array();
+      $row[] = $bundle['label'];
+      $row[] = array('data' => l(t('manage fields'), $url_path . '/fields'));
+      $row[] = array('data' => l(t('manage display'), $url_path . '/display'));
+
+      $rows[] = $row;
+    }
+  }
+
+  $build['table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No entity types available.'),
+  );
+
+  return $build;
+}
+
+/**
+ * Helper for hook_permission().
+ *
+ * @param string $entity_type
+ * @param array $operations
+ * @return array
+ */
+function _helperentity_entity_type_permission($entity_type, $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete')) {
+  $perms = array();
+  if (empty($entity_type)) {
+    return $perms;
+  }
+
+  $entity_info = entity_get_info($entity_type);
+  if (empty($entity_info)) {
+    return $perms;
+  }
+
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%label' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %label", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+
+    if ($op == 'access overview') {
+      $perms[$permission_string]['title'] = t('Access the %label overview page', $t_args);
+      $perms[$permission_string]['description'] = t('Get an overview of all %label.', $t_args);
+    }
+  }
+
+  return $perms;
+}
+
+
+/**
+ * Gets the page title for the passed operation.
+ * @see entity_ui_get_page_title()
+ *
+ * @param string $op
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ * @return string
+ */
+function helperentity_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
+  module_load_include('inc', 'entity', 'includes/entity.ui');
+
+  $label = entity_label($entity_type, $entity);
+
+  // Get the entity information.
+  $entity_info = entity_get_info($entity_type);
+  $t_args = array(
+    '@entity_type_label' => drupal_strtolower($entity_info['label']),
+    '%label' => $label,
+  );
+
+  switch ($op) {
+    case 'view':
+      return $label;
+    case 'edit':
+      return t('Edit @entity_type_label %label', $t_args);
+    case 'clone':
+      return t('Clone @entity_type_label %label', $t_args);
+    case 'revert':
+      return t('Revert @entity_type_label %label', $t_args);
+    case 'delete':
+      return t('Delete @entity_type_label %label', $t_args);
+    case 'export':
+      return t('Export @entity_type_label %label', $t_args);
+  }
+  if (isset($entity)) {
+    list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  }
+  else {
+    $bundle = NULL;
+  }
+  return entity_ui_get_action_title($op, $entity_type, $bundle);
+}

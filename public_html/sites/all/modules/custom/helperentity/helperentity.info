@@ -1,0 +1,7 @@
+name = Helper: Entity
+description = Custom helper module for creating custom entities.
+core = 7.x
+package = "Custom"
+
+files[] = includes/HelperEntity.inc
+files[] = includes/HelperEntityBundleableUIController.inc

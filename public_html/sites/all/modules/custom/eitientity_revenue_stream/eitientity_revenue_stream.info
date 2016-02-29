@@ -1,0 +1,19 @@
+name = EITI Entity: Revenue Stream
+description = Exposes a custom entity to store revenue streams for summary data.
+core = 7.x
+package = Custom
+
+configure = admin/structure/revenue_stream
+
+dependencies[] = currency
+dependencies[] = entity
+dependencies[] = helperentity
+dependencies[] = helpergeneric
+dependencies[] = eitientity_summary_data
+
+
+; Entity handlers.
+files[] = includes/RevenueStreamEntity.inc
+files[] = includes/RevenueStreamExtraFieldsController.inc
+files[] = includes/RevenueStreamInlineEntityFormController.inc
+files[] = includes/RevenueStreamMetadataController.inc

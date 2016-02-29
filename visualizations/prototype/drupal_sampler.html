@@ -1,0 +1,225 @@
+
+<!doctype html>
+<meta charset="utf-8">
+<html class="no-js" lang="">
+	<head>
+		<title>EITI Visualizations</title>
+		<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
+
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body>
+		<div id="main">
+			<div id="treemap"></div>
+			<div>
+				<select id="selection">
+					<option value="data/viz6.json">2006</option>
+  					<option value="data/viz6test.json">2007</option>
+				</select>
+			</div>
+			<div id="bubble"></div>
+			<div id="sankey"></div>
+	    	<div id="viz2"></div>
+	    	<div id="viz3"></div>
+	    	<div id="viz4"></div>
+	    	<div id="viz5"></div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+		<script src="dist/chartWidgets.js"></script>
+		<script>
+			$( "#selection" ).change(function() {
+				var data = $("#selection").val();
+				console.log(data);
+			  	chartWidget.create({
+					type: "BubbleChart",		
+					name: "Sample BubbleChart 2",
+					width: 600,
+					height: 600,
+					diameter: 600,
+					margin: {top: 20, right: 0, bottom: 0, left: 0},
+		            container: "bubble"
+				},
+				data);
+			});
+			chartWidget.create({
+				type: "TreeMap",		
+				name: "Sample Treemap",
+				width: 600,
+				height: 300,
+				margin: {top: 20, right: 0, bottom: 0, left: 0},
+	            container: "treemap"
+			},
+			'data/viz7.json');
+			chartWidget.create({
+				type: "BubbleChart",		
+				name: "Sample BubbleChart",
+				width: 600,
+				height: 600,
+				diameter: 600,
+				margin: {top: 20, right: 0, bottom: 0, left: 0},
+	            container: "bubble"
+			},
+			'data/viz6.json');
+			chartWidget.create({
+				type: "Sankey",		
+				name: "Sample Sankey",
+				width: 600,
+				height: 300,
+				margin: {top: 1, right: 1, bottom: 6, left: 1},
+	            container: "sankey",
+	            processor: function(input) {
+					return input;
+	            }
+			},
+			'data/viz10.json');
+			chartWidget.create({
+				type: "GroupedBar",		
+				name: "Production Values",
+				width: 1300,
+				height: 400,
+				margin: {top: 10, bottom: 50, left: 100, right: 10},
+	            xlabel: "Year",
+	            ylabel: "Volume (liters)",
+	            container: "viz2",
+	            description: "Resources volumes included in 'Production volume and value (3.5.a)'"
+			}, 
+			[{
+			    "label": "Oil",
+			          "values": [
+			              {"x": "2009", "y": 122661511},
+			              {"x": "2010", "y": 104366635},
+			              {"x": "2011", "y": 97494031},
+			              {"x": "2012", "y": 89183936},
+			              {"x": "2013", "y": 84943990} 
+			          ]
+			    },
+			    {
+			    "label": "Gas",
+			          "values": [
+			              {"x": "2009", "y": 100110308},
+			              {"x": "2010", "y": 107250281},
+			              {"x": "2011", "y": 101266314},
+			              {"x": "2012", "y": 114722664},
+			              {"x": "2013", "y": 108745838}
+			          ]
+			    },
+			    {
+			    "label": "NGL",
+			          "values": [
+			              {"x": "2009", "y": 16941870},
+			              {"x": "2010", "y": 15505360},
+			              {"x": "2011", "y": 16314039},
+			              {"x": "2012", "y": 17798865},
+			              {"x": "2013", "y": 17718292}
+						        
+			          ]
+			    },
+			    {
+				"label": "Condensate",
+			          "values": [        
+			              {"x": "2009", "y": 3923854 },
+			              {"x": "2010", "y": 4163009 },
+			              {"x": "2011", "y": 4583334 },              
+						  {"x": "2012", "y": 4574854 },
+			              {"x": "2013", "y": 3991160 }
+			          ]
+			    }
+			]);
+
+			chartWidget.create({
+				type: "StackedBar",		
+				name: "Comparative Gov Revenues",
+				width: 1300,
+				height: 400,
+				margin: {top: 10, bottom: 50, left: 100, right: 10},
+	            xlabel: "Year",
+	            ylabel: "Revenue (USD)",
+	            container: "viz3"
+			},
+			[{
+			    "label": "Total",
+			          "values": [
+			              {"x": "2008", "y": 239528270000},
+			              {"x": "2010", "y": 155612137000},
+			              {"x": "2011", "y": 205936428000},
+			              {"x": "2012", "y": 228670845630},
+			              {"x": "2013", "y": 201503788000} 
+			          ]
+			    },
+			    {
+			    "label": "GDP",
+			          "values": [
+			              {"x": "2008", "y": 1841532000},
+			              {"x": "2010", "y": 1374367000},
+			              {"x": "2011", "y": 1517294000},
+			              {"x": "2012", "y": 1780413000},
+			              {"x": "2013", "y": 1700043000}
+			          ]
+			    },
+			    {
+			    "label": "Aid",
+			          "values": [
+			              {"x": "2008", "y": 3664473000},
+			              {"x": "2010", "y": 2204785000},
+			              {"x": "2011", "y": 2220255000},
+			              {"x": "2012", "y": 2255251000},
+			              {"x": "2013", "y": 3180095000}
+						        
+			          ]
+			    },
+			    {
+				"label": "Remittance Inflows",
+			          "values": [        
+			              {"x": "2008", "y": 16940000000 },
+			              {"x": "2010", "y": 12818000000 },
+			              {"x": "2011", "y": 13352000000 },              
+						  {"x": "2012", "y": 13887000000 },
+			              {"x": "2013", "y": 14421000000 }
+			          ]
+			    },
+			    {
+			      "label": "FDI",
+			          "values": [        
+			              {"x": "2008", "y": 155420129000 },
+			              {"x": "2010", "y": 103571650000 },
+			              {"x": "2011", "y": 128083414000 },              
+			              {"x": "2012", "y": 146929996000 },
+			              {"x": "2013", "y": 124825251000 }
+			          ]
+			    }
+			]);
+
+			chartWidget.create({
+				type: "Bar",		
+				name: "Sample Bar Chart",
+				width: 800,
+				height: 600,
+				margin: {top: 10, bottom: 50, left: 50, right: 10},
+	            xlabel: "Year",
+	            ylabel: "Countries",
+	            container: "viz4"
+			},
+			[{
+			    label: 'Clients',
+			    values: [{x: '2013', y: 10}, {x: '2014', y: 4}, {x: '2015', y: 3}]
+			}]);
+
+			chartWidget.create({
+				type: "Pie",		
+				name: "Sample Pie Chart",
+				width: 800,
+				height: 600,
+				margin: {top: 10, bottom: 10, left: 100, right: 100},
+	            container: "viz5"
+			},
+			{
+			    label: 'Resources',
+			    values: [{x: 'Oil', y: 10}, {x: 'Gas', y: 4}, {x: 'Cobalt', y: 3}]
+			});
+		</script>
+	</body>
+</html>

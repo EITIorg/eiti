@@ -1,0 +1,73 @@
+@import 'main.less';
+.footer-row {
+  clear: both; // I think we normally use a mixing for this right?
+  overflow: hidden;
+  width: @full-width;
+  &.bottom-space {
+    margin-bottom: @general-margin-space;
+  }
+}
+
+.footer-widget {
+  a {
+    color: @text-inverse;
+    font-size: @footer-link-size;
+    font-weight: bold;
+    text-transform: uppercase;
+    &:hover {
+      color: @theme-orange;
+    }
+  }
+
+  p {
+    color: @theme-blue-light;
+    font-size: @small-text;
+    margin: 0;
+    &.inverse {
+      color: @text-inverse;
+    }
+  }
+
+  ul {
+    .list-unstyled();
+  }
+}
+
+.social-widget-title{
+  color: @theme-blue-light;
+  font-size: @small-text;
+}
+
+.footer-widget-title {
+  color: @text-inverse;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.footer-social-icons {
+  display: block;
+  margin-top: @general-margin-space / 2;
+
+  li{
+    float: left;
+    height: @social-icon-size;
+    margin-right: @general-margin-space / 2;
+    width: @social-icon-size;
+
+    img {
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+  }
+}
+
+.social-icon {
+  width: @social-icon-size;
+  height: @social-icon-size;
+  float: left;
+}

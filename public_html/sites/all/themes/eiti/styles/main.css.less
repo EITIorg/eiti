@@ -1,0 +1,34 @@
+
+html {
+  // Footer background color is used in order for the footer color to fill the bottom of short pages.
+  background-color: @claltmain;
+
+  // Always show page scroll-bar to prevent side-movement when hovering over
+  // items that are extending their height.
+  overflow-y: scroll;
+}
+
+.main-header-wrapper {
+  background-color: @clmain__header;
+}
+
+.main-content-wrapper {
+  background-color: @clmain;
+}
+
+.maintenance-page {
+  .main-header {
+    position: relative;
+  }
+  .main-content {
+    float: none;
+    margin: 1em 0;
+    padding: 0 1em 1em;
+    min-height: 10em;
+    width: auto;
+  }
+}
+
+
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';

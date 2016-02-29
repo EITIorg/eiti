@@ -1,0 +1,112 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_indicator_value_schema() {
+  $schema['eiti_indicator_value'] = array(
+    'description' => 'The base table for storing indicator value entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The identifier for this entity.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'indicator_id' => array(
+        'description' => 'The indicator id for this entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'value_boolean' => array(
+        'description' => 'The boolean value for this entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'value_enum' => array(
+        'description' => 'The enum value for this entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'value_numeric' => array(
+        'description' => 'The numeric value for this entity.',
+        'type' => 'float',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'value_unit' => array(
+        'description' => 'The unit for this entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'original_value_numeric' => array(
+        'description' => 'The original numeric value for this entity.',
+        'type' => 'float',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'original_value_unit' => array(
+        'description' => 'The original unit for this entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'value_text' => array(
+        'description' => 'The text value for this entity.',
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'source' => array(
+        'description' => 'The source for this entity.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'comments' => array(
+        'description' => 'The comments for this entity.',
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+    ),
+    'indexes' => array(
+      'entity_information' => array('id', 'indicator_id'),
+    ),
+    'foreign keys' => array(
+      'entity_eiti_indicator' => array(
+        'table' => 'eiti_indicator',
+        'columns' => array('indicator_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Convert {eiti_indicator_value}.indicator_id to integer.
+ */
+function eitientity_indicator_value_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The indicator id for this entity.',
+    'type' => 'int',
+    'not null' => TRUE,
+  );
+  db_change_field('eiti_indicator_value', 'indicator_id', 'indicator_id', $field_schema);
+}

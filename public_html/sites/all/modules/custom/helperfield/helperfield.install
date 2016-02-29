@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the contentwidget module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function helperfield_field_schema($field) {
+  $columns = array();
+
+  switch ($field['type']) {
+    case 'helperfield_icon':
+      $columns = array(
+        'icon' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+      );
+      break;
+  }
+
+  return array(
+    'columns' => $columns,
+    'indexes' => array(
+      'icon' => array('icon'),
+    ),
+  );
+}

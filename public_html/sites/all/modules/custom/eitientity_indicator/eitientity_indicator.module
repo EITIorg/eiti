@@ -1,0 +1,289 @@
+<?php
+/**
+ * @file
+ * Exposes a custom entity to store indicators.
+ */
+
+/**
+ * Define administrative URLs.
+ */
+define('EITIENTITY_INDICATOR_UI_PATH', 'indicator');
+define('EITIENTITY_INDICATOR_ADMIN_UI_PATH', 'admin/structure/indicator');
+
+/**
+ * Implements hook_entity_info().
+ */
+function eitientity_indicator_entity_info() {
+  $entity_info = array();
+
+  $menu_wildcard = '%indicator';
+  $entity_info['indicator'] = array(
+    'label' => t('Indicator'),
+    'plural label' => t('Indicators'),
+    'description' => t('Indicators...'),
+
+    'base table' => 'eiti_indicator',
+    'module' => 'eitientity_indicator',
+
+    'entity class' => 'IndicatorEntity',
+    'controller class' => 'EntityAPIController',
+    //'i18n controller class' => 'EntityDefaultI18nStringController',
+
+    'static cache' => TRUE,
+    'fieldable' => FALSE,
+
+    'access callback' => 'eitientity_indicator_access',
+    'uri callback' => 'entity_class_uri',
+
+    'entity keys' => array(
+      'id' => 'id',
+      //'revision' => 'vid',
+      'bundle' => 'type',
+      'label' => 'name',
+      //'language' => 'language',
+    ),
+
+    'bundles' => array(),
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'bundles callback' => 'eitientity_indicator_get_types',
+
+    'admin ui' => array(
+      'path' => EITIENTITY_INDICATOR_ADMIN_UI_PATH,
+      'entity path' => EITIENTITY_INDICATOR_UI_PATH,
+      'controller class' => 'IndicatorEntityUIController',
+      'menu wildcard' => $menu_wildcard,
+      'file' => 'eitientity_indicator.admin.inc',
+    ),
+
+    'view modes' => array(
+      //'full' => array(
+      //  'label' => t('Full'),
+      //  'custom settings' => FALSE,
+      //),
+    ),
+  );
+
+  foreach ($entity_info['indicator']['bundles callback']() as $type => $bundle_info) {
+    $entity_info['indicator']['bundles'][$type] = array(
+      'label' => $bundle_info['label'],
+    );
+  }
+
+  return $entity_info;
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function eitientity_indicator_admin_paths() {
+  $paths = array(
+    EITIENTITY_INDICATOR_UI_PATH . '/add' => TRUE,
+    EITIENTITY_INDICATOR_UI_PATH . '/add/*' => TRUE,
+    EITIENTITY_INDICATOR_UI_PATH . '/*' => TRUE,
+    EITIENTITY_INDICATOR_UI_PATH . '/*/edit' => TRUE,
+    EITIENTITY_INDICATOR_UI_PATH . '/*/usage' => TRUE,
+    EITIENTITY_INDICATOR_UI_PATH . '/*/delete' => TRUE,
+  );
+
+  return $paths;
+}
+
+/**
+ * Returns a list of indicator types.
+ */
+function eitientity_indicator_get_types() {
+  $items = array();
+
+  $items['group'] = array(
+    'label' => t('Group'),
+    'description' => t('Group indicators are used for grouping other indicators.'),
+  );
+
+  $items['boolean'] = array(
+    'label' => t('Boolean'),
+    'description' => t('Boolean indicators are used for yes/no indicators.'),
+  );
+
+  $items['enum'] = array(
+    'label' => t('Enum'),
+    'description' => t('Enum indicators are used for yes/no/partially indicators.'),
+  );
+
+  $items['numeric'] = array(
+    'label' => t('Numeric'),
+    'description' => t('Numeric indicators are used for quantities of something.'),
+  );
+
+  $items['text'] = array(
+    'label' => t('Text'),
+    'description' => t('Text indicators are used for storing text.'),
+  );
+
+  return $items;
+}
+
+/**
+ * Returns the entity type name.
+ */
+function eitientity_indicator_type_get_name($bundle) {
+  $bundles = eitientity_indicator_get_types();
+  return (isset($bundles[$bundle]['label'])) ? $bundles[$bundle]['label'] : FALSE;
+}
+
+/**
+ * Access callback for custom indicator entities.
+ *
+ * @param $op
+ * @param IndicatorEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_indicator_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'update', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  if ($op == 'view') {
+    $allow = FALSE;
+    if (user_access("$entity_type entity administer")) {
+      $allow = TRUE;
+    }
+    else if ($entity->status && user_access("$entity_type entity $op")) {
+      $allow = TRUE;
+    }
+
+    return $allow;
+  }
+
+  $op = 'administer';
+  if (user_access("$entity_type entity $op")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Menu loader function: load an identifier from its path.
+ *
+ * @see entity_object_load()
+ *
+ * @param $entity_id
+ * @param $entity_type
+ * @return mixed
+ */
+function indicator_load($entity_id, $entity_type) {
+  return entity_object_load($entity_id, $entity_type);
+}
+/**
+ * Implements hook_permission().
+ */
+function eitientity_indicator_permission() {
+  $perms = array();
+
+  $entity_type = 'indicator';
+  $entity_info = entity_get_info($entity_type);
+
+  $operations = array('administer', 'view');
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%entity' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %entity", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+  }
+
+  return $perms;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function eitientity_indicator_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to 'indicator/add' on 'admin/content/indicator' page.
+  if ($root_path == EITIENTITY_INDICATOR_ADMIN_UI_PATH) {
+    $item = menu_get_item(EITIENTITY_INDICATOR_UI_PATH . '/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Gets the page title for the passed operation.
+ * @see entity_ui_get_page_title()
+ */
+function eitientity_indicator_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
+  module_load_include('inc', 'entity', 'includes/entity.ui');
+
+  $label = entity_label($entity_type, $entity);
+
+  // Get the entity information.
+  $entity_info = entity_get_info($entity_type);
+  $t_args = array(
+    '@entity_type_label' => drupal_strtolower($entity_info['label']),
+    '%label' => $label,
+  );
+
+  switch ($op) {
+    case 'view':
+      return $label;
+    case 'edit':
+      return t('Edit @entity_type_label %label', $t_args);
+    case 'clone':
+      return t('Clone @entity_type_label %label', $t_args);
+    case 'revert':
+      return t('Revert @entity_type_label %label', $t_args);
+    case 'delete':
+      return t('Delete @entity_type_label %label', $t_args);
+    case 'export':
+      return t('Export @entity_type_label %label', $t_args);
+  }
+  if (isset($entity)) {
+    list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  }
+  else {
+    $bundle = NULL;
+  }
+  return entity_ui_get_action_title($op, $entity_type, $bundle);
+}
+
+/**
+ * Returns a list of indicators by type.
+ *
+ * @param string $bundle
+ * @return array
+ */
+function eitientity_indicator_get_by_bundle($bundle) {
+  $entities = array();
+
+  // Get a list of domains sorted by weight and name.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'indicator');
+  $query->entityCondition('bundle', $bundle);
+  $query->propertyOrderBy('name');
+  $results = $query->execute();
+
+  if (!empty($results['indicator'])) {
+    $ids = array_keys($results['indicator']);
+    $entities = entity_load('indicator', $ids);
+  }
+
+  return $entities;
+}

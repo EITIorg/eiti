@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+html,
+body {
+  font-family: 'Open Sans';
+}
+a {
+  -webkit-transition: all 400ms ease-in;
+  -moz-transition: all 400ms ease-in;
+  -o-transition: all 400ms ease-in;
+  -ms-transition: all 400ms ease-in;
+  transition: all 400ms ease-in;
+  color: #0093cf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.main-navigation {
+  float: right;
+  overflow: hidden;
+}
+.main-navigation ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.main-navigation ul li {
+  display: inline-block;
+  float: left;
+}
+.main-navigation ul li a {
+  color: #676767;
+  font-size: 0.8em;
+  font-weight: bolder;
+  padding: 1em;
+  text-transform: uppercase;
+}
+.main-navigation ul li a:hover {
+  color: #f5822a;
+}

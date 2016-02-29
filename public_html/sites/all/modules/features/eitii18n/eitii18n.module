@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitii18n feature.
+ */
+
+include_once 'eitii18n.features.inc';

@@ -1,0 +1,11 @@
+name = EITI Entity: Implementing Country
+description = Provides an Implementing Country entity.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+
+; Entity handlers.
+files[] = includes/ImplementingCountryEntity.inc
+files[] = includes/ImplementingCountryEntityUIController.inc
+files[] = includes/ImplementingCountryMetadataController.inc

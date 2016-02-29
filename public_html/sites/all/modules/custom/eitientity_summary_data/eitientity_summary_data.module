@@ -1,0 +1,343 @@
+<?php
+/**
+ * @file
+ * Exposes a custom entity to store summary data.
+ */
+
+/**
+ * Define administrative URLs.
+ */
+define('EITIENTITY_SUMMARYDATA_UI_PATH', 'summary_data');
+define('EITIENTITY_SUMMARYDATA_ADMIN_UI_PATH', 'admin/content/summary_data');
+define('EITIENTITY_SUMMARYDATA_BUNDLE_ADMIN_UI_PATH', 'admin/structure/summary_data');
+
+/**
+ * Date format for summary_data entities.
+ */
+define('EITIENTITY_SUMMARYDATA_DATE_FORMAT', 'Y-m-d');
+
+/**
+ * Implements hook_entity_info().
+ *
+ * @return array
+ */
+function eitientity_summary_data_entity_info() {
+  $entity_info = array();
+
+  $menu_wildcard = '%summary_data';
+  $entity_info['summary_data'] = array(
+    'label' => t('Summary Data'),
+    'plural label' => t('Summary Data'),
+    'description' => t('Summary Data represent a single report.'),
+
+    'base table' => 'eiti_summary_data',
+    'module' => 'eitientity_summary_data',
+
+    'entity class' => 'SummaryDataEntity',
+    'controller class' => 'EntityAPIController',
+    'extra fields controller class' => 'SummaryDataExtraFieldsController',
+    'metadata controller class' => 'SummaryDataMetadataController',
+    //'i18n controller class' => 'EntityDefaultI18nStringController',
+
+    //'entity cache' => FALSE,
+    //'field cache' => FALSE,
+    'static cache' => FALSE,
+    'fieldable' => TRUE,
+
+    'access callback' => 'eitientity_summary_data_access',
+    'uri callback' => 'entity_class_uri',
+    'label callback' => 'eitientity_summary_data_label',
+
+    'entity keys' => array(
+      'id' => 'id',
+      //'revision' => 'vid',
+      'bundle' => 'type',
+      //'label' => 'name',
+      //'language' => 'language',
+    ),
+
+    'bundles' => array(),
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'bundles callback' => 'eitientity_summary_data_get_types',
+
+    'admin ui' => array(
+      'path' => EITIENTITY_SUMMARYDATA_ADMIN_UI_PATH,
+      'entity path' => EITIENTITY_SUMMARYDATA_UI_PATH,
+      'bundle path' => EITIENTITY_SUMMARYDATA_BUNDLE_ADMIN_UI_PATH,
+      'controller class' => 'SummaryDataEntityUIController',
+      'menu wildcard' => $menu_wildcard,
+      'file' => 'eitientity_summary_data.admin.inc',
+    ),
+
+    //'view modes' => array(
+    //  'full' => array(
+    //    'label' => t('Full'),
+    //    'custom settings' => FALSE,
+    //  ),
+    //),
+  );
+
+  foreach ($entity_info['summary_data']['bundles callback']() as $type => $bundle_info) {
+    $entity_info['summary_data']['bundles'][$type] = array(
+      'label' => $bundle_info['label'],
+      'admin' => array(
+        'path' => EITIENTITY_SUMMARYDATA_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
+      ),
+    );
+  }
+
+  return $entity_info;
+}
+
+/**
+ * Menu loader function: load summary data from its path.
+ *
+ * @see entity_object_load()
+ *
+ * @param $entity_id
+ * @param $entity_type
+ * @return FALSE|SummaryDataEntity
+ */
+function summary_data_load($entity_id, $entity_type) {
+  return entity_object_load($entity_id, $entity_type);
+}
+
+/**
+ * Returns the label callback.
+ *
+ * @param SummaryDataEntity $entity
+ * @param $entity_type
+ *
+ * @return string
+ */
+function eitientity_summary_data_label($entity, $entity_type) {
+  $t_args = array();
+
+  if (!is_null($entity->country_id)) {
+    $country_entity = entity_load_single('implementing_country', $entity->country_id);
+    if ($country_entity) {
+      $t_args['!country'] = entity_label('implementing_country', $country_entity);
+    }
+  }
+
+  if (empty($t_args['!country'])) {
+    return '';
+  }
+
+  $t_args['!year_start'] = '';
+  if (!is_null($entity->year_start)) {
+    $t_args['!year_start'] = format_date($entity->year_start, 'custom', 'Y');
+  }
+
+  $t_args['!year_end'] = '';
+  if (!is_null($entity->year_end)) {
+    $t_args['!year_end'] = format_date($entity->year_end, 'custom', 'Y');
+  }
+
+  if ($t_args['!year_start'] == $t_args['!year_end']) {
+    return t('!country: !year_start', $t_args);
+  }
+
+  return t('!country: !year_end', $t_args);
+}
+
+/**
+ * Returns a list of summary_data types.
+ *
+ * @return array
+ */
+function eitientity_summary_data_get_types() {
+  $items = array();
+
+  $items['summary_data'] = array(
+    'label' => t('Summary Data'),
+    'description' => t('Summary Data represent a single report.'),
+  );
+
+  return $items;
+}
+
+/**
+ * Returns the entity type name.
+ *
+ * @param $bundle
+ * @return false|string
+ */
+function eitientity_summary_data_type_get_name($bundle) {
+  $bundles = eitientity_summary_data_get_types();
+  return (isset($bundles[$bundle]['label'])) ? $bundles[$bundle]['label'] : FALSE;
+}
+
+/**
+ * Access callback for custom summary_data entities.
+ *
+ * @param $op
+ * @param SummaryDataEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_summary_data_access($op, $entity = NULL, $account = NULL, $entity_type) {
+
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  // Fix for panelizer.
+  if ($op == 'update') {
+    $op = 'edit';
+  }
+
+  if ($op == 'view') {
+    $allow = FALSE;
+    if (user_access("$entity_type entity administer")) {
+      $allow = TRUE;
+    }
+    else if ($entity->status && user_access("$entity_type entity $op")) {
+      $allow = TRUE;
+    }
+
+    return $allow;
+  }
+
+  if (user_access("$entity_type entity $op")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * @return array
+ */
+function eitientity_summary_data_permission() {
+  $perms = array();
+
+  $entity_type = 'summary_data';
+  $entity_info = entity_get_info($entity_type);
+
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%entity' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %entity", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+  }
+
+  return $perms;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * @param $data
+ * @param $router_item
+ * @param $root_path
+ */
+function eitientity_summary_data_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to the entity add page on the entity overview page.
+  if ($root_path == EITIENTITY_SUMMARYDATA_ADMIN_UI_PATH) {
+    $item = menu_get_item(EITIENTITY_SUMMARYDATA_UI_PATH . '/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Gets the page title for the passed operation.
+ * @see entity_ui_get_page_title()
+ *
+ * @param string $op
+ * @param string $entity_type
+ * @param SummaryDataEntity $entity
+ * @return string
+ */
+function eitientity_summary_data_entity_ui_get_page_title($op, $entity_type, $entity = NULL) {
+  module_load_include('inc', 'entity', 'includes/entity.ui');
+
+  $label = entity_label($entity_type, $entity);
+
+  // Get the entity information.
+  $entity_info = entity_get_info($entity_type);
+  $t_args = array(
+    '@entity_type_label' => drupal_strtolower($entity_info['label']),
+    '%label' => $label,
+  );
+
+  switch ($op) {
+    case 'view':
+      return $label;
+    case 'edit':
+      return t('Edit @entity_type_label %label', $t_args);
+    case 'clone':
+      return t('Clone @entity_type_label %label', $t_args);
+    case 'revert':
+      return t('Revert @entity_type_label %label', $t_args);
+    case 'delete':
+      return t('Delete @entity_type_label %label', $t_args);
+    case 'export':
+      return t('Export @entity_type_label %label', $t_args);
+  }
+  if (isset($entity)) {
+    list(, , $bundle) = entity_extract_ids($entity_type, $entity);
+  }
+  else {
+    $bundle = NULL;
+  }
+  return entity_ui_get_action_title($op, $entity_type, $bundle);
+}
+
+
+/**
+ * Implements hook_date_popup_process_alter().
+ *
+ * @param $element
+ * @param $form_state
+ * @param $context
+ */
+function eitientity_summary_data_date_popup_process_alter(&$element, &$form_state, $context) {
+  if ($context['form']['#form_id'] != 'summary_data_form') {
+    return;
+  }
+
+  // Convert the date string to unix timestamp.
+  if (!in_array('_summary_data_form_date_popup_date_validate', $element['#element_validate'])) {
+    array_push($element['#element_validate'], '_summary_data_form_date_popup_date_validate');
+  }
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function eitientity_summary_data_admin_paths() {
+  $paths = array(
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/add/*' => TRUE,
+    //EITIENTITY_SUMMARYDATA_UI_PATH . '/*' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/edit' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/usage' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/upload' => TRUE,
+    EITIENTITY_SUMMARYDATA_UI_PATH . '/*/delete' => TRUE,
+  );
+
+  return $paths;
+}

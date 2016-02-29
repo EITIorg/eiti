@@ -1,0 +1,45 @@
+
+// @TODO: Cleanup!
+table {
+  @header_color: #ebf5fd;
+  @border_color: #eeeeee;
+  @even_color: #f8f8f8;
+
+  border-color: @border_color;
+  border-style: solid none;
+  border-width: 1px;
+  margin: 1em 0;
+  width: 100%;
+
+  tr {
+    font-size: 0.75em;
+    &.even {
+      background-color: @even_color;
+    }
+    &.odd {
+      background-color: #ffffff;
+    }
+  }
+
+  th,
+  td {
+    padding: 0.6em 1em;
+    border-color: @border_color;
+    border-style: none solid;
+    border-width: 1px;
+  }
+  th {
+    background-color: @header_color;
+    text-align: left;
+  }
+}
+
+// @HACK: We don't have responsive tables, so we overflow the content and display a scrollbar.
+.xMediumAndDown() {
+  .large-table-wrapper {
+    overflow-y: auto;
+  }
+}
+
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';

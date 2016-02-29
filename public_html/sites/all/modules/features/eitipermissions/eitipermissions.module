@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Permissions and User settings feature.
+ */
+
+include_once 'eitipermissions.features.inc';

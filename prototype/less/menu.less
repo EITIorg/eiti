@@ -1,0 +1,28 @@
+@import 'main.less';
+
+// styles for all 4 footer widgets
+.main-navigation {
+  float: right;
+  overflow: hidden;
+  ul {
+    .list-unstyled();
+
+    li {
+      display: inline-block;
+      float: left;
+
+      a{
+        color: @theme-grey;
+        font-size: @nav-text-size;
+        font-weight: bolder;
+        padding: @base-unit;
+        text-transform:uppercase;
+
+        &:hover {
+          color: @theme-orange;
+        }
+
+      }
+    }
+  }
+}

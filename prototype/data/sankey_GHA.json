@@ -1,0 +1,313 @@
+{
+  "nodes": [
+  {
+    "name": "Ghana Manganese Ltd"
+  },
+  {
+    "name": "Goldfields Tarkwa"
+  },
+  {
+    "name": "GSR Wassa"
+  },
+  {
+    "name": "Chirano"
+  },
+  {
+    "name": "Newmont Ghana Gold"
+  },
+  {
+    "name": "Abosso"
+  },
+  {
+    "name": "Tullow(Ghana) Ltd"
+  },
+  {
+    "name": "Kosmos Energy Ghana Hc"
+  },
+  {
+    "name": "Ghana National Petroleum Corporation"
+  },
+  {
+    "name": "Anadarko WCTP Ghana Ltd"
+  },
+  {
+    "name": "Corporate Income Tax"
+  },
+  {
+    "name": "Property rate"
+  },
+  {
+    "name": "Royalties"
+  },
+  {
+    "name": "Surface Rental"
+  },
+  {
+    "name": "Carried Interest"
+  },
+  {
+    "name": "AdditionalParticipating Interest"
+  },
+  {
+    "name": "Ghana Revenue Authority(Domestic Tax Revenue Division)"
+  },
+  {
+    "name": "District Assembly"
+  },
+  {
+    "name": "Ghana Revenue Authority(DTR D)"
+  }
+],
+  "links": [
+  {
+    "source": 0,
+    "target": 10,
+    "value": 14103770.53
+  },
+  {
+    "source": 0,
+    "target": 11,
+    "value": 26654.21
+  },
+  {
+    "source": 0,
+    "target": 12,
+    "value": 5414078.95
+  },
+  {
+    "source": 1,
+    "target": 10,
+    "value": 59285283.16
+  },
+  {
+    "source": 1,
+    "target": 11,
+    "value": 294686.32
+  },
+  {
+    "source": 1,
+    "target": 12,
+    "value": 51283737.76
+  },
+  {
+    "source": 2,
+    "target": 10,
+    "value": 25126457.89
+  },
+  {
+    "source": 2,
+    "target": 11,
+    "value": 29473.68
+  },
+  {
+    "source": 2,
+    "target": 12,
+    "value": 13837790.95
+  },
+  {
+    "source": 3,
+    "target": 10,
+    "value": 42198230
+  },
+  {
+    "source": 3,
+    "target": 11,
+    "value": 92105.26
+  },
+  {
+    "source": 3,
+    "target": 12,
+    "value": 22179559.57
+  },
+  {
+    "source": 4,
+    "target": 10,
+    "value": 93745286.84
+  },
+  {
+    "source": 4,
+    "target": 12,
+    "value": 25415268.56
+  },
+  {
+    "source": 5,
+    "target": 10,
+    "value": 2941994.21
+  },
+  {
+    "source": 5,
+    "target": 11,
+    "value": 32123.68
+  },
+  {
+    "source": 5,
+    "target": 12,
+    "value": 11856258.02
+  },
+  {
+    "source": 6,
+    "target": 10,
+    "value": 106909371.6
+  },
+  {
+    "source": 6,
+    "target": 13,
+    "value": 116358.75
+  },
+  {
+    "source": 7,
+    "target": 10,
+    "value": 55004842
+  },
+  {
+    "source": 7,
+    "target": 13,
+    "value": 16953.9
+  },
+  {
+    "source": 8,
+    "target": 14,
+    "value": 332511716.3
+  },
+  {
+    "source": 8,
+    "target": 12,
+    "value": 175006166.5
+  },
+  {
+    "source": 8,
+    "target": 15,
+    "value": 121062195.7
+  },
+  {
+    "source": 9,
+    "target": 10,
+    "value": 55071284
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 14103770.53
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 26654.21
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 5414078.95
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 59285283.16
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 294686.32
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 51283737.76
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 25126457.89
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 29473.68
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 13837790.95
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 42198230
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 92105.26
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 22179559.57
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 93745286.84
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 25415268.56
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 2941994.21
+  },
+  {
+    "source": 11,
+    "target": 17,
+    "value": 32123.68
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 11856258.02
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 106909371.6
+  },
+  {
+    "source": 13,
+    "target": 16,
+    "value": 116358.75
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 55004842
+  },
+  {
+    "source": 13,
+    "target": 16,
+    "value": 16953.9
+  },
+  {
+    "source": 14,
+    "target": 16,
+    "value": 332511716.3
+  },
+  {
+    "source": 12,
+    "target": 18,
+    "value": 175006166.5
+  },
+  {
+    "source": 15,
+    "target": 18,
+    "value": 121062195.7
+  },
+  {
+    "source": 10,
+    "target": 16,
+    "value": 55071284
+  }
+]
+}

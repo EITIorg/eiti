@@ -1,0 +1,25 @@
+<svg id="latestdata2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+<style type="text/css">
+	.st0{fill:none;stroke:#4B4A4A;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#4B4A4A;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<polyline class="st0" points="141.3,111.3 124.5,135.4 111.6,124.8 "/>
+<circle class="st1" cx="125.1" cy="124.8" r="32.4"/>
+<rect x="19.7" y="3.2" class="st1" width="18.9" height="21.6"/>
+<rect x="103.5" y="3.2" class="st1" width="18.9" height="21.6"/>
+<polygon class="st1" points="122.4,14.1 122.4,24.9 103.5,24.9 103.5,14.1 38.6,14.1 38.6,24.9 19.7,24.9 19.7,14.1 3.5,14.1
+	3.5,41.1 138.6,41.1 138.6,14.1 "/>
+<rect x="22.4" y="60" class="st1" width="24.3" height="24.3"/>
+<rect x="22.4" y="84.3" class="st1" width="24.3" height="24.3"/>
+<rect x="22.4" y="108.6" class="st1" width="24.3" height="24.3"/>
+<rect x="46.7" y="60" class="st1" width="24.3" height="24.3"/>
+<rect x="46.7" y="84.3" class="st1" width="24.3" height="24.3"/>
+<rect x="46.7" y="108.6" class="st1" width="24.3" height="24.3"/>
+<rect x="71" y="60" class="st1" width="24.3" height="24.3"/>
+<rect x="71" y="84.3" class="st1" width="24.3" height="24.3"/>
+<rect x="95.4" y="60" class="st1" width="24.3" height="24.3"/>
+<path class="st1" d="M92.7,124.8c0-17.9,14.5-32.4,32.4-32.4c4.8,0,9.4,1.1,13.5,3V14.1h-16.2v10.8h-18.9V14.1H38.6v10.8H19.7V14.1
+	H3.5v137.8h103.7C98.4,146,92.7,136.1,92.7,124.8z"/>
+<path class="st1" d="M119.7,92.9v-8.6H95.4v24.3H97C101.8,100.4,110,94.5,119.7,92.9z"/>
+<path class="st1" d="M92.7,124.8c0-4.6,1-9,2.7-12.9v-3.3H71v24.3h22.7C93.1,130.3,92.7,127.6,92.7,124.8z"/>
+</svg>

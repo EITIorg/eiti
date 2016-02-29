@@ -1,0 +1,119 @@
+
+.predefined-widget--header {
+  position: relative;
+  overflow: hidden;
+
+  .links-wrapper {
+    border-top: 1px solid #DFDFDF;
+    margin: 1em 0;
+    padding: 1em 0 0;
+
+    li {
+      display: inline-block;
+      line-height: 2em;
+    }
+    .link {
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+  }
+
+  .no-background-image {
+    color: @clanchor;
+    .title {
+      font-weight: normal;
+    }
+
+    .link {
+      .link-color(@clanchor, @clanchor__hover);
+
+      .icon {
+        margin-right: 0.5em;
+        fill: @clnormal__alt;
+      }
+      &:hover .icon {
+        fill: @clanchor__hover;
+      }
+    }
+  }
+
+  .with-background-image {
+    background-color: #000000;
+    color: @claltnormal__light;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+
+    .overlay-wrapper {
+      padding-bottom: 1em;
+      padding-top: 1em;
+    }
+  }
+
+  .with-background-image {
+    .title {
+      color: @claltnormal;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      font-size: 2em;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    .links-wrapper {
+      .link {
+        .link-color(@claltnormal__light, @clanchor__hover);
+
+        .icon {
+          margin-right: 0.5em;
+          fill: @claltnormal;
+        }
+        &:hover .icon {
+          fill: @clanchor__hover;
+        }
+      }
+    }
+  }
+}
+
+.xMediumAndDown() {
+  .predefined-widget--header {
+    .links-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      li {
+        flex: 50%;
+        min-width: 19em;
+        line-height: 3em;
+      }
+    }
+    .with-background-image {
+      background-size: 160% auto;  // Make images larger on small screens.
+    }
+  }
+}
+.xNormalAndUp() {
+  .predefined-widget--header {
+    .subtitle {
+      font-size: 2.5em;
+    }
+    .links-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+    }
+    .with-background-image {
+      .overlay-wrapper {
+        padding-bottom: 10%;
+        padding-top: 10%;
+      }
+    }
+  }
+}
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

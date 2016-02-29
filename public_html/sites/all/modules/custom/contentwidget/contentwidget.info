@@ -1,0 +1,7 @@
+name = Content Widget
+description = Provides custom predefined widgets for Content Blocks.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+dependencies[] = entity_translation

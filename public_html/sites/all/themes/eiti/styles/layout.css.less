@@ -1,0 +1,116 @@
+/**
+ * @file
+ * Contains layout specific CSS.
+ */
+
+// Limit the minimum size of the body in order to prevent issues on smaller devices.
+.xSmallOnly() {
+  body {
+    min-width: 20rem; // 20*16px = 320px
+  }
+}
+
+.main-content-inner {
+  min-height: 20em;
+}
+
+.main-content-inner {
+  .single-fluid-column(margin);
+}
+
+.xSmallOnly() {
+  .main-header-inner,
+  .main-content-inner,
+  .main-footer {
+    .single-fluid-column();
+  }
+
+  .footer-column {
+    .row-separator();
+  }
+}
+
+.xMediumOnly() {
+  .main-header,
+  .main-content,
+  .main-footer {
+    .row-wrapper(8);
+  }
+
+  .site-identity-wrapper {
+    .column(2);
+  }
+  .header-items {
+    .column(6);
+  }
+
+  .main-content-inner,
+  .footer-identity {
+    .single-fluid-column();
+  }
+
+
+  .footer-column {
+    .column(4);
+    .row-separator();
+  }
+}
+
+.xNormalAndUp() {
+  .main-header,
+  .main-content,
+  .main-footer {
+    .row-wrapper();
+  }
+
+  .site-identity-wrapper {
+    .column(2);
+  }
+  .header-items {
+    .column(10);
+  }
+
+  .main-content-inner,
+  .footer-identity {
+    .single-fluid-column();
+  }
+
+  .footer-column {
+    .column(3);
+  }
+}
+
+// HACK: Allow widgets to expand the full width of the page.
+.page-layout--widelayout {
+  .main-content {
+    width: 100%;
+  }
+  .main-content-inner {
+    display: block;
+    float: none;
+    margin: 0;
+    position: static;
+    width: 100%;
+  }
+}
+
+// Use `single-fluid-row-wrapper` class on pages that should expand the full width of the page.
+.xSmallOnly() {
+  .single-fluid-row-wrapper {
+    .single-fluid-column(margin);
+  }
+}
+.xMediumOnly() {
+  .single-fluid-row-wrapper {
+    .single-fluid-row-wrapper(8);
+  }
+}
+.xNormalAndUp() {
+  .single-fluid-row-wrapper {
+    .single-fluid-row-wrapper(12);
+  }
+}
+
+@import './lib/custom-grid.less';
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';

@@ -1,0 +1,136 @@
+
+.element-no-margin {
+  margin: 0;
+}
+
+.element-inline {
+  display: inline;
+}
+
+.view-empty {
+  margin: 1em 0;
+}
+
+.label-inline {
+  display: inline;
+  font-weight: bold;
+}
+
+.container-inline {
+  div, nav, ul, label {
+    display: inline;
+  }
+  .fieldset-wrapper {
+    display: block;
+    padding: 1em;
+  }
+}
+
+ul.tips,
+div.description,
+.form-item div.description {
+  color: #666;
+  font-size: 0.923em;
+  line-height: 1.231em;
+  margin: 5px 0;
+}
+
+.field {
+  margin: 1em 0;
+  .fieldable-panels-pane > & {
+    margin: 0;
+  }
+}
+
+.media-browser-launch-processed {
+  margin: 1em 0;
+}
+
+.layout-inline {
+  display: inline-block;
+}
+
+.layout-separator {
+  margin-bottom: 1em;
+}
+.layout-separator-top {
+  margin-top: 1em;
+}
+.layout-separator-inner {
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+.more-link {
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-bottom: 1em;
+  text-align: right;
+  a {
+    //.link-color();
+  }
+}
+
+.xMediumAndDown() {
+  // Fix wysiwyg image table align hack on mobile browsers.
+  table[align="left"],
+  table[align="right"] {
+    float: none;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em;
+    width: 100% !important;
+    td {
+      padding: 0;
+    }
+  }
+}
+
+.field-widget-inline-entity-form {
+  .fieldset-wrapper {
+    padding-top: 1em;
+  }
+  .ajax-progress-throbber,
+  .message {
+    display: inline !important;
+  }
+
+  .ief-cardinality-count {
+    text-align: right;
+    font-size: 0.9em;
+  }
+
+  .ief-tabledrag-header {
+    border-right: none;
+  }
+
+  .ief-sort-order-header {
+    border-left: none;
+  }
+
+  .ief-tabledrag-handle {
+    padding-right: 0;
+    width: 20px;
+  }
+
+  .ief-tabledrag-handle a.tabledrag-handle {
+    padding-right: .5em;
+  }
+
+  fieldset.ief-entity-fieldset {
+    margin: 0;
+  }
+
+  .ief-row-form > td {
+    padding: 0;
+  }
+
+  .ief-row-form .ief-form-row {
+    border-bottom: 10px solid #ccc;
+    padding: 20px;
+  }
+}
+
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';

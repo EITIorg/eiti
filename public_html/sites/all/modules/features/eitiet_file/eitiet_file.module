@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eitiet_file feature.
+ */
+
+include_once 'eitiet_file.features.inc';

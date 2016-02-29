@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_indicator_schema() {
+  $schema['eiti_indicator'] = array(
+    'description' => 'The base table for storing indicator entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The indicator identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The indicator type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => 'The indicator name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'parent' => array(
+        'description' => 'The indicator parent indicator id.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the indicator is enabled.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the indicator was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'entity_status' => array('id', 'status'),
+    ),
+    'foreign keys' => array(
+      'entity_eiti_indicator' => array(
+        'table' => 'eiti_indicator',
+        'columns' => array('parent' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

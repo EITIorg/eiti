@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+html,
+body {
+  font-family: 'Open Sans';
+}
+a {
+  -webkit-transition: all 400ms ease-in;
+  transition: all 400ms ease-in;
+  color: #0093cf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.footer-top-section .footer-logo {
+  margin-right: 1em;
+}
+.footer-top-section .footer-slogan {
+  color: #57ba47;
+  font-size: 1.2em;
+  font-weight: lighter;
+}

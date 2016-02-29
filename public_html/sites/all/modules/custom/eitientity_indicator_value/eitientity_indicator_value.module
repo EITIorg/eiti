@@ -1,0 +1,315 @@
+<?php
+/**
+ * @file
+ * Exposes a custom entity to store indicators.
+ */
+
+define('EITIENTITY_INDICATOR_VALUE_VALUE_NO', '0');
+define('EITIENTITY_INDICATOR_VALUE_VALUE_YES', '1');
+define('EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY', '2');
+
+/**
+ * Implements hook_entity_info().
+ */
+function eitientity_indicator_value_entity_info() {
+  $entity_info = array();
+
+  $entity_info['indicator_value'] = array(
+    'label' => t('Indicator Value'),
+    'plural label' => t('Indicator Values'),
+    'description' => t('Indicators value represent a single data point.'),
+
+    'base table' => 'eiti_indicator_value',
+    'module' => 'eitientity_indicator_value',
+
+    'entity class' => 'IndicatorValueEntity',
+    'controller class' => 'EntityAPIController',
+    'metadata controller class' => 'IndicatorValueMetadataController',
+    'inline entity form' => array(
+      'controller' => 'IndicatorValueInlineEntityFormController',
+    ),
+
+    'static cache' => FALSE,
+    'fieldable' => FALSE,
+
+    'access callback' => 'eitientity_indicator_value_access',
+    'uri callback' => 'entity_class_uri',
+
+    'entity keys' => array(
+      'id' => 'id',
+    ),
+
+  );
+
+  return $entity_info;
+}
+
+/**
+ * Access callback for custom indicator_value entities.
+ *
+ * @param $op
+ * @param ImplementingCountryEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_indicator_value_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  $operations = array('administer', 'create', 'view', 'edit', 'update', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  if ($op == 'view') {
+    $allow = FALSE;
+    if (user_access("$entity_type entity administer") || user_access("$entity_type entity $op")) {
+      $allow = TRUE;
+    }
+    return $allow;
+  }
+
+  $op = 'administer';
+  if (user_access("$entity_type entity $op")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function eitientity_indicator_value_permission() {
+  $perms = array();
+
+  $entity_type = 'indicator_value';
+  $entity_info = entity_get_info($entity_type);
+
+  $operations = array('administer', 'view');
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%entity' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %entity", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+  }
+
+  return $perms;
+}
+
+
+/**
+ * @param string $entity_type
+ * @param IndicatorValueEntity $entity
+ *
+ * @return string
+ */
+function eitientity_indicator_value_get_indicator_label($entity_type, $entity) {
+  if (!empty($entity->indicator_id)) {
+    /** @var IndicatorEntity $indicator_entity */
+    $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
+
+    // Add indicator group name as prefix on IEF.
+    $parent_name = '';
+    if (!empty($indicator_entity->parent)) {
+      $parent_indicator_entity = entity_load_single('indicator', $indicator_entity->parent);
+      $parent_name = '<b>' . filter_xss($parent_indicator_entity->label()) . ' > </b>';
+    }
+
+    if (!empty($indicator_entity)) {
+      return $parent_name . filter_xss($indicator_entity->label());
+    }
+  }
+
+  return '';
+}
+
+/**
+ * @param string $entity_type
+ * @param IndicatorValueEntity $entity
+ *
+ * @return string
+ */
+function eitientity_indicator_value_get_indicator_value_value($entity_type, $entity) {
+  if (empty($entity->indicator_id)) {
+    return '';
+  }
+
+  /** @var IndicatorEntity $indicator_entity */
+  $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
+  if (empty($indicator_entity)) {
+    return '';
+  }
+
+  return $entity->getValue();
+}
+
+/**
+ * @param string $entity_type
+ * @param IndicatorValueEntity $entity
+ *
+ * @return string
+ */
+function eitientity_indicator_value_get_indicator_value_unit($entity_type, $entity) {
+  if (empty($entity->indicator_id)) {
+    return '';
+  }
+
+  /** @var IndicatorEntity $indicator_entity */
+  $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
+  if (empty($indicator_entity)) {
+    return '';
+  }
+
+  return $entity->getUnit();
+}
+
+/**
+ * @return array
+ */
+function eitientity_indicator_value_get_indicator_information() {
+  $information = &drupal_static(__FUNCTION__);
+
+  if (!empty($information)) {
+    return $information;
+  }
+
+  $indicator_groups_mapping = array();
+  $indicator_options = array();
+  $indicator_attributes = array();
+
+  // Get a list of domains sorted by weight and name.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'indicator');
+  $query->propertyOrderBy('name');
+  $results = $query->execute();
+
+  // @TODO: Optimize!
+  // Prepare indicator groups.
+  foreach ($results['indicator'] as $result) {
+    /** @var IndicatorEntity $indicator */
+    $indicator = entity_load_single('indicator', $result->id);
+
+    if ($indicator->type != 'group') {
+      continue;
+    }
+
+    $indicator_options[filter_xss($indicator->label())] = array();
+    $indicator_groups_mapping[$indicator->identifier()] = filter_xss($indicator->label());
+  }
+
+  foreach ($results['indicator'] as $result) {
+    /** @var IndicatorEntity $indicator */
+    $indicator = entity_load_single('indicator', $result->id);
+
+    if ($indicator->type == 'group') {
+      continue;
+    }
+
+    $indicator_attributes[$indicator->identifier()] = array(
+      'data-indicator-type' => check_plain($indicator->type),
+    );
+
+    $indicator_label = filter_xss($indicator->label()) . ' [' . check_plain($indicator->type) . ']';
+    if (isset($indicator_groups_mapping[$indicator->parent])) {
+      $parent_group = $indicator_groups_mapping[$indicator->parent];
+      $indicator_options[$parent_group][$indicator->identifier()] = $indicator_label;
+    }
+    else {
+      $indicator_options[$indicator->identifier()] = $indicator_label;
+    }
+  }
+
+  $information = array(
+    'options' => $indicator_options,
+    'attributes' => $indicator_attributes
+  );
+  return $information;
+}
+
+
+/**
+ * Provides theme registration for themes across .inc files.
+ */
+function eitientity_indicator_value_theme() {
+  return array(
+    // From form.inc.
+    'select_indicators' => array(
+      'render element' => 'element',
+    ),
+  );
+}
+
+/**
+ * Returns HTML for a select form element, with extra attributes.
+ *
+ * @see theme_select()
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #title, #value, #options, #description, #extra,
+ *     #multiple, #required, #name, #attributes, #size.
+ *
+ * @return string
+ */
+function theme_select_indicators($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'size'));
+  _form_set_class($element, array('form-select'));
+
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . eitientity_indicator_value_form_select_options($element) . '</select>';
+}
+
+
+/**
+ * @see form_select_options()
+ *
+ * @return string
+ */
+function eitientity_indicator_value_form_select_options($element, $choices = NULL) {
+  if (!isset($choices)) {
+    $choices = $element['#options'];
+  }
+  // array_key_exists() accommodates the rare event where $element['#value'] is NULL.
+  // isset() fails in this situation.
+  $value_valid = isset($element['#value']) || array_key_exists('#value', $element);
+  $value_is_array = $value_valid && is_array($element['#value']);
+  $options = '';
+  foreach ($choices as $key => $choice) {
+    if (is_array($choice)) {
+      $options .= '<optgroup label="' . check_plain($key) . '">';
+      $options .= eitientity_indicator_value_form_select_options($element, $choice);
+      $options .= '</optgroup>';
+    }
+    elseif (is_object($choice)) {
+      $options .= form_select_options($element, $choice->option);
+    }
+    else {
+      $key = (string) $key;
+      if ($value_valid && (!$value_is_array && (string) $element['#value'] === $key || ($value_is_array && in_array($key, $element['#value'])))) {
+        $selected = ' selected="selected"';
+      }
+      else {
+        $selected = '';
+      }
+
+      $choice_attributes = array();
+      if (isset($element['#options_attributes'][$key])) {
+        $choice_attributes = $element['#options_attributes'][$key];
+      }
+
+      $options .= '<option value="' . check_plain($key) . '"' . $selected . drupal_attributes($choice_attributes) . '>' . check_plain($choice) . '</option>';
+    }
+  }
+  return $options;
+
+}

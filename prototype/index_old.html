@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EITI - Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" href="css/charts/main.css">
+    <link rel="stylesheet" href="css/maps/main.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+          <div id="map1" style="height:500px;width:1000px;display:block;margin:auto;"></div>
+          <div id="chart_production" style="height:500px;width:1000px;display:block;margin:auto;"></div>
+    </div>
+    <br />
+
+    <script src="js/charts/chartWidgets.js"></script>
+    <script src="js/maps/mapWidgets.js"></script>
+
+    <script>
+    mapWidget.createHomePage({
+        name: "Homepage Map",
+        container: "map1",
+        position: [12.897489183755892, -12.76171875],
+        zoom: 2,
+        maxZoom: 5,
+        minZoom: 2
+    });
+
+      chartWidget.create({
+        type: "GroupedBar",   
+        name: "Production Volume Ratio",
+        width: 800,
+        height: 400,
+        margin: {top: 10, bottom: 50, left: 100, right: 10},
+              xlabel: "Year",
+              ylabel: "Volume",
+              container: "chart_production",
+              description: ""
+      }, 
+      [{
+          "label": "Oil",
+                "values": [
+                    {"x": "2009", "y": 122661511},
+                    {"x": "2010", "y": 104366635},
+                    {"x": "2011", "y": 97494031},
+                    {"x": "2012", "y": 89183936},
+                    {"x": "2013", "y": 84943990} 
+                ]
+          },
+          {
+          "label": "Gas",
+                "values": [
+                    {"x": "2009", "y": 100110308},
+                    {"x": "2010", "y": 107250281},
+                    {"x": "2011", "y": 101266314},
+                    {"x": "2012", "y": 114722664},
+                    {"x": "2013", "y": 108745838}
+                ]
+          },
+          {
+          "label": "NGL",
+                "values": [
+                    {"x": "2009", "y": 16941870},
+                    {"x": "2010", "y": 15505360},
+                    {"x": "2011", "y": 16314039},
+                    {"x": "2012", "y": 17798865},
+                    {"x": "2013", "y": 17718292}
+                    
+                ]
+          },
+          {
+        "label": "Condensate",
+                "values": [        
+                    {"x": "2009", "y": 3923854 },
+                    {"x": "2010", "y": 4163009 },
+                    {"x": "2011", "y": 4583334 },              
+              {"x": "2012", "y": 4574854 },
+                    {"x": "2013", "y": 3991160 }
+                ]
+          }
+      ]);
+    
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+
+</html>

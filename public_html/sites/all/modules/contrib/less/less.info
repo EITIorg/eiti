@@ -1,0 +1,16 @@
+
+name = "LESS CSS Preprocessor"
+description = "Allows themes or modules to use LESS files."
+
+core = 7.x
+
+configure = admin/config/development/less
+
+dependencies[] = libraries
+
+files[] = class.lessjs.inc
+
+; Information added by drush on 2014-05-30
+version = "7.x-3.0+8-dev"
+project = "less"
+datestamp = "1401500705"

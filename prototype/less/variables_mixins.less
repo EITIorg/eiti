@@ -1,0 +1,82 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+// fonts
+@default-font:'Open Sans', serif;
+@quote-font: 'Bitter', serif;
+
+// colors
+@theme-grey: #676767;  //navigation, content text
+@theme-grey-light: #e8ecee; //header background
+@country-banner-background: #d6d6d8; //top banner in country profiles
+@theme-blue: #0093cf; //blue section titles
+@theme-blue-light: #9de1fd; //blue text on dark backgrounds, footer blue text
+@theme-orange: #f5822a; //country page stats and links
+@theme-green: #85be33; //country page stats
+@footer-green: #57ba47; //footer slogan
+@footer-bg: #002c47; //footer background
+@divider-grey: #d3d3d3; //content divider
+@banner-lightgrey-bg: #fafafa; //thin banner next to stat banner
+@text-inverse: #ffffff; //text on dark backgrounds
+@label-text: #575757; // text for stat labels
+@highlight-text-color: #424242;
+@country-stat-blue: #0092cf;
+
+@map-top-banner-bg: #015c8f;
+@map-panel-banner-bg: #005382;
+@map-panel-border: #004a75;
+@map-options-border: #006e9b;
+
+// font sizess
+@nav-text-size: 0.8em;
+@footer-link-size: 0.8em;
+@small-text: 0.7em;
+@default-text: 0.85em;
+@highlight-text-size: 1em;
+@title-text: 1.6em;
+@more-information-text: 1.2em;
+@stat-value: 2.9em;
+@text-heavy: 700;
+@map-title-text: 1.3em;
+
+// dimensions
+@base-unit: 1em;
+@general-margin-space: 10px;
+@social-icon-size: 30px;
+@small-icon-size: 30px;
+@full-width: 100%;
+@banner-stat-size: 43px;
+@country-stat-icons: 18px;
+@post-large-height: 440px;
+
+// mixins
+
+// transition
+.transition-link (@prop: color, @time: 1s, @ease: linear) {
+	-webkit-transition: @prop @time @ease;
+	-moz-transition: @prop @time @ease;
+	-o-transition: @prop @time @ease;
+	-ms-transition: @prop @time @ease;
+	transition: @prop @time @ease;
+}
+
+
+// unstyled unordered lists
+.list-unstyled () {
+  list-style: none;
+  margin-left: 0;
+	margin-top: 0;
+  padding-left: 0;
+}
+
+.section-inner (@innerwidth) {
+  margin: 0 auto;
+  width: @innerwidth;
+}
+
+// icons
+.floated-icon(@float, @margin-right, @margin-left) {
+	display: block; //so we can control margins
+	float: @float;
+	margin-left: @margin-left;
+	margin-right: @margin-right;
+}

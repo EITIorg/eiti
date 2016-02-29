@@ -1,0 +1,339 @@
+<?php
+/**
+ * @file
+ * Custom generic helper module.
+ */
+
+include_once 'helpergeneric.elements.inc';
+include_once 'helpergeneric.forms.inc';
+include_once 'helpergeneric.formatter.inc';
+
+/**
+ * Determines if we should cleanup the UI in a way that developers can disable.
+ *
+ * NOTE: This is NOT for security, you should still set proper access settings.
+ */
+function helpergeneric_cleanup_ui() {
+  // Allow anyone with the cookie to force ui cleanup settings.
+  if (isset($_COOKIE['helpergeneric_cleanup_ui_force'])) {
+    return (bool) $_COOKIE['helpergeneric_cleanup_ui_force'];
+  }
+
+  // If variable is set, force ui cleanup settings only for UID1.
+  $forced_value = variable_get('helpergeneric_cleanup_ui_force', NULL);
+  if ($GLOBALS['user']->uid == 1 && isset($forced_value)) {
+    return (bool) $forced_value;
+  }
+
+  return TRUE;
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Disables the admin_menu.
+ */
+function helpergeneric_init() {
+  // Disable the admin menu.
+  if (function_exists('admin_menu_suppress') && helpergeneric_cleanup_ui()) {
+    admin_menu_suppress();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function helpergeneric_menu() {
+  $items = array();
+
+  $items['admin/settings'] = array(
+    'title' => 'Settings',
+    'description' => 'Administer Project settings.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('helpergeneric administer settings'),
+    'weight' => 30,
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  $items['admin/settings/ui'] = array(
+    'title' => 'UI Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('helpergeneric_ui_settings_form'),
+    'access arguments' => array('helpergeneric administer settings'),
+    'file' => 'helpergeneric.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/settings/generic'] = array(
+    'title' => 'Generic settings',
+    'description' => 'Project generic settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('helpergeneric_settings_form'),
+    'access arguments' => array('helpergeneric administer settings'),
+    'file' => 'helpergeneric.admin.inc',
+    'weight' => -50,
+  );
+  // Used to expose contextual links on site name/logo.
+  $items['admin/settings/generic/edit'] = array(
+    'title' => 'Configure',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+  );
+
+  $items['admin/settings/gfs-codes'] = array(
+    'title' => 'GFS Codes',
+    'description' => 'Administer GFS Codes',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/gfs_code'),
+    'access arguments' => array('gfs_code entity administer'),
+    'weight' => -44,
+  );
+
+  $items['admin/settings/indicators'] = array(
+    'title' => 'Indicators',
+    'description' => 'Administer Indicators',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/indicator'),
+    'access arguments' => array('indicator entity administer'),
+    'weight' => -43,
+  );
+
+  $items['admin/settings/main-menu'] = array(
+    'title' => 'Edit Main menu',
+    'description' => 'Edit the main menu links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/main-menu'),
+    'access arguments' => array('administer menu'),
+    'weight' => -19,
+  );
+
+  $items['admin/settings/menu-footer-information'] = array(
+    'title' => 'Edit Footer Information menu',
+    'description' => 'Edit the footer information menu links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-information'),
+    'access arguments' => array('administer menu'),
+    'weight' => -18,
+  );
+
+  $items['admin/settings/menu-footer-navigation'] = array(
+    'title' => 'Edit Footer Navigation menu',
+    'description' => 'Edit the footer navigation menu links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-navigation'),
+    'access arguments' => array('administer menu'),
+    'weight' => -17,
+  );
+
+  $items['admin/settings/menu-footer-social'] = array(
+    'title' => 'Edit Footer Social menu',
+    'description' => 'Edit the footer social menu links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/menu-footer-social'),
+    'access arguments' => array('administer menu'),
+    'weight' => -16,
+  );
+
+  // Page callback that outputs JSON for embedded content specific autocomplete suggestions.
+  $items['helpergeneric/ereference/%'] = array(
+    'title' => 'Autocomplete',
+    'page callback' => 'helpergeneric_ereference_autocomplete',
+    'page arguments' => array(2),
+    'access callback' => 'helpergeneric_ereference_autocomplete_access',
+    'access arguments' => array(2),
+    'type' => MENU_CALLBACK,
+    'file' => 'helpergeneric.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Access callback for ereference autocomplete endpoints.
+ */
+function helpergeneric_ereference_autocomplete_access($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+  if (empty($entity_info)) {
+    return FALSE;
+  }
+
+  return entity_access('create', $entity_type);
+}
+
+/**
+ * Implements hook_htmlpurifier_info()
+ * @see: http://htmlpurifier.org/live/configdoc/plain.html
+ */
+function helpergeneric_htmlpurifier_info() {
+  $info = array();
+
+  $info['htmlpurifier_custom'] = array(
+    'name' => 'Custom HTML Purifier Settings',
+    'description' => 'Provides some default configuration. Turn off the following Drupal filters: "Convert URLs into links", "Convert line breaks into HTML", "Correct faulty and chopped off HTML".',
+    'allowed' => array(
+      'Cache.DefinitionImpl',
+      'Cache.SerializerPath',
+
+      'Attr.EnableID',
+      'AutoFormat.AutoParagraph',
+      'AutoFormat.Linkify',
+      'Cache.DefinitionImpl',
+      'Core.AggressivelyFixLt',
+      'HTML.FlashAllowFullScreen',
+      'HTML.SafeEmbed',
+      'HTML.SafeObject',
+      'HTML.SafeIframe',
+      'URI.SafeIframeRegexp',
+      'URI.DisableExternalResources',
+    ),
+    'settings' => array(
+      // List of allowed link frame targets.
+      'Attr.AllowedFrameTargets' => array('_self', '_blank'),
+
+      // Allows the ID attribute in HTML.
+      'Attr.EnableID' => FALSE,
+
+      // This directive turns on auto-paragraphing, where double newlines are
+      // converted in to paragraphs whenever possible.
+      // The same as "Convert line breaks into HTML" Drupal filter.
+      'AutoFormat.AutoParagraph' => TRUE,
+
+      // This directive turns on linkification, auto-linking http, ftp and
+      // https URLs.
+      // The same as "Convert URLs into links" Drupal filter.
+      'AutoFormat.Linkify' => TRUE,
+
+      // This directive defines which method to use when caching definitions,
+      // the complex data-type that makes HTML Purifier tick
+      'Cache.DefinitionImpl' => 'Drupal',
+
+      // If your users make very well-formed HTML, you can set this directive false. :D
+      'Core.AggressivelyFixLt' => TRUE,
+
+      // Allows flash applications to be viewed in full screen.
+      'HTML.FlashAllowFullScreen' => TRUE,
+
+      // Whether or not to permit embed tags in documents, with a number of
+      // extra security features added to prevent script execution.
+      'HTML.SafeEmbed' => TRUE,
+
+      // Whether or not to permit object tags in documents, with a number of
+      // extra security features added to prevent script execution.
+      'HTML.SafeObject' => TRUE,
+
+      // Whether or not to permit iframe tags in untrusted documents.
+      // This directive must be accompanied by a whitelist of permitted
+      // iframes, such as %URI.SafeIframeRegexp.
+      'HTML.SafeIframe' => FALSE,
+
+      // A regex that will be matched against an iframe URI.
+      // This directive only has an effect if %HTML.SafeIframe is enabled.
+      'URI.SafeIframeRegexp' => NULL,
+      //'URI.SafeIframeRegexp' => '%^https?://(www.youtube.com/embed/|player.vimeo.com/video/)%',
+
+      // Disables the embedding of external resources.
+      'URI.DisableExternalResources' => TRUE,
+    ),
+
+    'weight' => -20,
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function helpergeneric_menu_alter(&$items) {
+  // Change access argument in order to provide more granular permissions.
+  $items['admin/structure/menu']['access arguments'] = array('helpergeneric administer menus');
+  $items['admin/structure/menu/add']['access arguments'] = array('helpergeneric administer menus');
+  $items['admin/structure/menu/manage/%menu/edit']['access arguments'] = array('helpergeneric administer menus');
+  $items['admin/structure/menu/manage/%menu/delete']['access arguments'] = array('helpergeneric administer menus');
+  $items['admin/structure/menu/settings']['access arguments'] = array('helpergeneric administer menus');
+
+  // Change access on taxonomy pages.
+  $items['admin/structure/taxonomy']['access arguments'] = array('helpergeneric access taxonomy');
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name']['access arguments'] = array('helpergeneric access taxonomy');
+
+  // Change access on redirect.module and pathauto.module pages.
+  $items['admin/config/search/redirect/settings']['access arguments'] = array('helpergeneric administer urls');
+  $items['admin/config/search/path/delete_bulk']['access arguments'] = array('helpergeneric administer urls');
+
+  // Change access on user field and display settings. Replaces "administer users".
+  $items['admin/config/people/accounts']['access arguments'] = array('helpergeneric administer users');
+  $items['admin/config/people/accounts/fields']['access arguments'] = array('helpergeneric administer users');
+  $items['admin/config/people/accounts/display']['access arguments'] = array('helpergeneric administer users');
+
+  // Display the "Edit" link in user pages contextual links.
+  $items['user/%user/edit']['context'] = MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function helpergeneric_permission() {
+  return array(
+    'helpergeneric access taxonomy' => array(
+      'title' => t('Access vocabularies only.'),
+      'description' => t('Allow users to access the vocabularies.'),
+    ),
+    'helpergeneric administer settings' => array(
+      'title' => t('Administer project settings'),
+      'description' => t('Allow users to change project specific settings.'),
+    ),
+    'helpergeneric administer menus' => array(
+      'title' => t('Administer menus only.'),
+      'description' => t('Allow users to change the menus. This overrides the "administer menu" permission to remove menu editing permission.'),
+    ),
+    'helpergeneric administer urls' => array(
+      'title' => t('Administer URLs. This overrides "administer redirects" permission on URL related admin pages.'),
+      'restrict access' => TRUE,
+      'description' => t('Allow users to access URL related module administration pages.'),
+    ),
+    'helpergeneric administer users' => array(
+      'title' => t('Administer users settings. This overrides "administer users" permission on user related admin pages.'),
+      'restrict access' => TRUE,
+      'description' => t('Allow users to access the user configuration pages.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function helpergeneric_entity_view_alter(&$build, $entity_type) {
+  if ($entity_type != 'node' || empty($build['#node'])) {
+    return;
+  }
+
+  /** @var stdClass $entity */
+  $entity = $build['#node'];
+
+  // Add contextual links for this node, except when the node is already being
+  // displayed on its own page. Modules may alter this behavior (for example,
+  // to restrict contextual links to certain view modes) by implementing
+  // hook_node_view_alter().
+  if ($entity->nid) {
+    $build['#contextual_links'][$entity_type] = array($entity_type, array($entity->nid));
+  }
+}
+
+/**
+ * Implements hook_user_view_alter().
+ */
+function helpergeneric_user_view_alter(&$build) {
+  if (empty($build['#account']->uid)) {
+    return;
+  }
+
+  /** @var stdClass $account */
+  $account = $build['#account'];
+
+  // Display user contextual links.
+  if (user_edit_access($account) && $build['#view_mode'] == 'full') {
+    $build['#contextual_links']['user'] = array('user', array($account->uid));
+  }
+}

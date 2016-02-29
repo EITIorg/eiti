@@ -1,0 +1,12 @@
+name = EITI Entity: Indicator Value
+description = Exposes a custom entity to store indicator values.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+dependencies[] = eitientity_indicator
+
+; Entity handlers.
+files[] = includes/IndicatorValueEntity.inc
+files[] = includes/IndicatorValueInlineEntityFormController.inc
+files[] = includes/IndicatorValueMetadataController.inc

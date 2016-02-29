@@ -1,0 +1,91 @@
+[
+    {
+    "label": "Delivered/paid directly to government",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 492175.9697},
+              {"x": "2014", "y": 629601.8957} 
+          ]
+    },
+    {
+    "label": "Delivered/paid to state-owned enterprise(s)",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 33393951},
+              {"x": "2014", "y": 37360303} 
+          ]
+    },
+    {
+    "label": "Bonuses",
+          "values": [
+              {"x": "2012", "y": 3695990},
+              {"x": "2013", "y": 569082},
+              {"x": "2014", "y": 331408} 
+          ]
+    },
+    {
+    "label": "Royalties",
+          "values": [
+              {"x": "2012", "y": 55842767},
+              {"x": "2013", "y": 71936792},
+              {"x": "2014", "y": 65370104} 
+          ]
+    },
+    {
+    "label": "Administrative fees for government services",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 206414},
+              {"x": "2014", "y": 682151} 
+          ]
+    },
+    {
+    "label": "Extraordinary taxes on income, profits and capital gains",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 541929},
+              {"x": "2014", "y": 1041526} 
+          ]
+    },
+    {
+    "label": "General taxes on goods and services (VAT, sales tax, turnover tax)",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 22353396},
+              {"x": "2014", "y": 5676909} 
+          ]
+    },
+    {
+    "label": "Ordinary taxes on income, profits and capital gains",
+          "values": [
+              {"x": "2012", "y": 5161848},
+              {"x": "2013", "y": 13860719},
+              {"x": "2014", "y": 12434056} 
+          ]
+    },
+    {
+    "label": "Withdrawals from income of quasi-corporations",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 146060548},
+              {"x": "2014", "y": 0} 
+          ]
+    },
+    {
+    "label": "Fines, penalties, and forfeits",
+          "values": [
+              {"x": "2012", "y": 66350},
+              {"x": "2013", "y": 193746},
+              {"x": "2014", "y": 565687} 
+          ]
+    },
+    {
+    "label": "Revenues not classified",
+          "values": [
+              {"x": "2012", "y": 0},
+              {"x": "2013", "y": 22642398},
+              {"x": "2014", "y": 40818859} 
+          ]
+    }
+
+]

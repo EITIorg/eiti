@@ -1,0 +1,99 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the ImplementingCountryEntity entity module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_implementing_country_schema() {
+  $schema['eiti_implementing_country'] = array(
+    'description' => 'The base table for country entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The country primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The country name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'iso' => array(
+        'description' => 'The ISO 3166-1 alpha-2 country code.',
+        'type' => 'char',
+        'length' => 2,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The country type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'language' => array(
+        'description' => 'The country {languages}.language.',
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'user_id' => array(
+        'description' => 'The {users}.uid that owns this country; initially, this is the user that created it.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the country is published (visible to non-administrators).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the country was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the country was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'entity_status_type' => array('status', 'type', 'id'),
+    ),
+    'foreign keys' => array(
+      'entity_author' => array(
+        'table' => 'users',
+        'columns' => array('user_id' => 'user_id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add ISO 3166-1 alpha-2 country code to Implementing Country entities.
+ */
+function eitientity_implementing_country_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The ISO 3166-1 alpha-2 country code.',
+    'type' => 'char',
+    'length' => 2,
+    'not null' => FALSE,
+    'default' => NULL,
+  );
+  db_add_field('eiti_implementing_country', 'iso', $field_schema);
+}

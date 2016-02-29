@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Entity Type SummaryData feature.
+ */
+
+include_once 'eitiet_summary_data.features.inc';

@@ -1,0 +1,450 @@
+<?php
+/**
+ * @file
+ * Define theme helper functions.
+ *
+ * @TODO: When the theme is finished switch to a custom and small version of modernizr.
+ */
+
+/**
+ * Default icon for main menu items and the variable name prefix used to store icons.
+ */
+define('HELPERTHEME_SVG_ICON_NAME_PREFIX', 'helpertheme_svg_icon_');
+
+include_once 'helpertheme.extra.inc';
+include_once 'helpertheme.forms.inc';
+include_once 'helpertheme.themeoverrides.inc';
+
+/**
+ * Implements hook_libraries_info().
+ *
+ * @TODO: Use different library variants for development and production.
+ *
+ * @return array
+ */
+function helpertheme_libraries_info() {
+  $libraries['modernizr'] = array(
+    'name' => 'Modernizr (custom build)',
+    'vendor url' => 'http://modernizr.com',
+    'download url' => 'http://modernizr.com/download/',
+    'version arguments' => array(
+      'file' => 'modernizr-custom.js',
+      'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
+      'lines' => 100,
+      'cols' => 100,
+    ),
+    'files' => array('js' => array('modernizr-custom.js')),
+    'variants' => array(
+      'minified' => array(
+        'files' => array('js' => array('modernizr-custom.min.js')),
+      ),
+    ),
+  );
+
+  $libraries['svg4everybody'] = array(
+    'name' => ' SVG for Everybody',
+    'vendor url' => 'https://github.com/jonathantneal/svg4everybody',
+    'download url' => 'https://github.com/jonathantneal/svg4everybody/archive/master.tar.gz',
+    'version arguments' => array(
+      'file' => 'VERSION.txt',
+      'pattern' => '/([0-9a-zA-Z\.-]+)/',
+      'lines' => 1,
+      'cols' => 100,
+    ),
+    'files' => array('js' => array('svg4everybody.js')),
+    'variants' => array(
+      'minified' => array(
+        'files' => array('js' => array('svg4everybody.min.js')),
+      ),
+      'ie8' => array(
+        'files' => array('js' => array('svg4everybody.ie8.js')),
+      ),
+      'ie8-minified' => array(
+        'files' => array('js' => array('svg4everybody.ie8.min.js')),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * @return array
+ */
+function helpertheme_menu() {
+  $items = array();
+
+  $items['admin/reports/helpertheme'] = array(
+    'title' => 'HelperTheme Reports',
+    'description' => 'View theme statistics and reports.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access site reports'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  $items['admin/reports/helpertheme/colors'] = array(
+    'title' => 'Color Palette',
+    'description' => 'Theme color palette demo page.',
+    'page callback' => '_helpertheme_color_palette_demo_page',
+    'access arguments' => array('access site reports'),
+    'file' => 'helpertheme.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ * @param string $module
+ * @param string $plugin
+ * @return string
+ */
+function helpertheme_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'panels' && $plugin == 'layouts') {
+    return 'plugins/' . $plugin;
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_ds_layout_info().
+ *
+ * @return array
+ */
+function helpertheme_ds_layout_info() {
+  $path = drupal_get_path('module', 'helpertheme');
+
+  $layouts = array();
+
+  $layouts['simplelayout'] = array(
+    'label' => t('HelperTheme: Simple Layout'),
+    'path' => $path . '/dslayouts/simplelayout',
+    'regions' => array(
+      'main' => t('Main'),
+    ),
+  );
+
+  $layouts['doublelayout'] = array(
+    'label' => t('HelperTheme: Double Layout'),
+    'path' => $path . '/dslayouts/doublelayout',
+    'regions' => array(
+      'left' => t('Left'),
+      'right' => t('Right'),
+    ),
+  );
+
+  $layouts['mobject'] = array(
+    'label' => t('HelperTheme: CSS Media Object'),
+    'path' => $path . '/dslayouts/mobject',
+    'regions' => array(
+      'side' => t('Side'),
+      'main' => t('Main'),
+    ),
+  );
+
+  $layouts['mobjectstacked'] = array(
+    'label' => t('HelperTheme: CSS Media Object (stacked)'),
+    'path' => $path . '/dslayouts/mobjectstacked',
+    'regions' => array(
+      'above' => t('Above'),
+      'side' => t('Side'),
+      'main' => t('Main'),
+      'below' => t('Below'),
+    ),
+  );
+
+  return $layouts;
+}
+
+/**
+ * Implementation of hook_html_head_alter().
+ *
+ * @param array $head_elements
+ */
+function helpertheme_html_head_alter(&$head_elements) {
+  global $theme, $theme_path;
+
+  if ($theme != 'eiti') {
+    return;
+  }
+
+  // Force IE to always use most recent engine.
+  $head_elements['mobile_viewport'] = array(
+    '#tag' => 'meta',
+    '#type' => 'html_tag',
+    '#attributes' => array(
+      'http-equiv' => 'X-UA-Compatible',
+      'content' => 'IE=Edge',
+    ),
+    '#prefix' => "<!--[if gte IE 8]>\n",
+    '#suffix' => "<![endif]-->\n",
+  );
+
+  /*
+   * The viewport meta tag is needed to instruct the mobile devices to keep the viewport.
+   * @see: http://mobile.smashingmagazine.com/2013/03/18/retrofit-a-website-to-be-responsive-with-rwd-retrofit/
+   */
+  $head_elements['mobile_viewport'] = array(
+    '#tag' => 'meta',
+    '#type' => 'html_tag',
+    '#attributes' => array(
+      'name' => 'viewport',
+      'content' => 'initial-scale=1.0, width=device-width',
+    ),
+  );
+
+  // Add favicon related header tags.
+  if (!theme_get_setting('favicon_path')) {
+    module_load_include('inc', 'helpertheme', 'helpertheme.favicons');
+    $head_elements['favicons'] = _helpertheme_favicons($theme_path);
+  }
+}
+
+/**
+ * Preprocess variables for html.tpl.php
+ *
+ * @param array $variables
+ */
+function helpertheme_preprocess_html(&$variables) {
+  $variables['html_attributes']['lang'] = $variables['language']->language;
+  $variables['html_attributes']['dir'] = $variables['language']->dir;
+  $variables['html_attributes']['xmlns:svg'] = 'http://www.w3.org/2000/svg';
+  $variables['html_attributes']['xmlns:xlink'] = 'http://www.w3.org/1999/xlink';
+
+  // Allow modules to add classes.
+  $variables['classes_array'] = array_merge($variables['classes_array'], helpertheme_get_html_classes());
+}
+
+/**
+ * Preprocess variables for page.tpl.php
+ *
+ * @param array $variables
+ */
+function helpertheme_preprocess_page(&$variables) {
+  // Check to see whether or not the page template should be changed.
+  if (!empty($_REQUEST['page-template'])) {
+    // Only accept simple page template names.
+    if (preg_match('/^[a-z0-9_]+$/', $_REQUEST['page-template'])) {
+      $variables['theme_hook_suggestion'] = 'page__' . $_REQUEST['page-template'];
+    }
+  }
+
+  // Tell "Modernizr" that the HTML5 styles should not be inserted.
+  // We already have those styles from normalize.css
+  drupal_add_js("html5 = { 'shivCSS': false };", 'inline');
+
+  // Load the "Modernizr" JavaScript library.
+  libraries_load('modernizr', 'minified');
+
+  // Load the "SVG for Everybody" JavaScript library.
+  libraries_load('svg4everybody', 'minified');
+
+  // Get path to the current module.
+  $module_path = drupal_get_path('module', 'helpertheme');
+
+  // Set the default css options.
+  $css_options = array(
+    'group' => CSS_SYSTEM,
+    'every_page' => TRUE,
+    'media' => 'all',
+  );
+
+  // Fix Admin UI style.
+  drupal_add_css($module_path . '/styles/helpertheme.admin.css', $css_options);
+
+  /*
+   * Project specific CSS on all pages (including admin pages).
+   */
+  drupal_add_css($module_path . '/styles/helpertheme.wysiwyg.css', $css_options);
+
+  /*
+   * Load font Using Google Fonts API.
+   *
+   * @see http://www.google.com/fonts/specimen/Open+Sans
+   */
+  if (variable_get('helpertheme_load_external_fonts', TRUE)) {
+    $font_variants = array(
+      '300',
+      '300italic',
+      '400',
+      '400italic',
+      '700',
+      '700italic',
+    );
+    $options = array(
+      'external' => TRUE,
+      'query' => array(
+        'family' => 'Open Sans' . ':' . implode(',', $font_variants),
+        'subset' => array('latin'),
+      ),
+    );
+
+    // Get a list of enabled languages.
+    $languages = language_list('enabled');
+    $enabled_languages = $languages[1];
+
+    // Only load cyrillic and cyrillic extended character sets if the Russian language is enabled.
+    if (array_key_exists('ru', $enabled_languages)) {
+      $options['query']['subset'][] = 'cyrillic';
+      $options['query']['subset'][] = 'cyrillic-ext';
+    }
+
+    $options['query']['subset'] = implode(',', $options['query']['subset']);
+
+    global $is_https;
+    $url_scheme = ($is_https) ? 'https://' : 'http://';
+
+    $font_url = url($url_scheme . 'fonts.googleapis.com/css', $options);
+    drupal_add_css($font_url, $css_options);
+  }
+
+  // Allow modules to hide the page title.
+  $variables['page_title_visible'] = helpertheme_page_title_get_status();
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * @return array
+ */
+function helpertheme_theme() {
+  return array(
+    'html_container' => array(
+      'file' => 'helpertheme.theme.inc',
+      'render element' => 'element',
+    ),
+    'svg_sprite' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'header_identity' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'header_items' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'main_navigation' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'footer_items' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'main_footer' => array(
+      'file' => 'helpertheme.theme.inc',
+      'template' => 'main-footer',
+    ),
+  );
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function helpertheme_element_info() {
+  $types['html_container'] = array(
+    '#theme_wrappers' => array('html_container'),
+    '#process' => array('form_process_container'),
+  );
+  return $types;
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * @param array $theme_registry
+ */
+function helpertheme_theme_registry_alter(&$theme_registry) {
+  // @HACK: Override the theme registry. Might cause issues with other modules.
+  $theme_registry['form_element']['function'] = 'helpertheme_theme_form_element';
+  $theme_registry['form_element_label']['function'] = 'helpertheme_form_element_label';
+  $theme_registry['menu_local_action']['function'] = 'helpertheme_menu_local_action';
+}
+
+/**
+ * Implements hook_less_variables_alter().
+ *
+ * @param array $less_variables
+ * @param string $system_name
+ */
+function helpertheme_less_variables_alter(&$less_variables, $system_name) {
+  // Get the list of colors for the theme.
+  module_load_include('inc', 'helpertheme', 'helpertheme.colors');
+  foreach (helpertheme_color_palette() as $group_key => $color_group) {
+    foreach (element_children($color_group) as $color_key) {
+      $less_variables['@' . $color_key] = $color_group[$color_key]['#value'];
+
+      // Get variants if any.
+      if (!empty($color_group[$color_key]['#variants'])) {
+        foreach ($color_group[$color_key]['#variants'] as $variant_key => $variant) {
+          $less_variables['@' . $variant_key] = $variant['#value'];
+        }
+      }
+    }
+  }
+
+  // Add absolute paths for images; including the trailing slash.
+  $less_variables['@base_path'] = '"' . base_path() . '"';
+  $less_variables['@theme_path'] = '"' . base_path() . $GLOBALS['theme_path'] . '/"';
+  $less_variables['@contextual_section_title'] = '"' . t('edit page content/widgets') . '"';
+}
+
+/**
+ * Returns an array of SVG sprite icons.
+ *
+ * @TODO: Read list of available icons from the sprite.
+ *
+ * @param null|string $icon
+ * @param array $options
+ * @return array|string
+ *   A list of HTML markup containing rendered SVG icons or markup for a single
+ *   SVG icon.
+ */
+function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
+  $options += array('sprite_name' => 'icons');
+
+  $available_icons = array();
+  switch($options['sprite_name']) {
+    case 'icons':
+      //break;
+    default:
+      $available_icons += array(
+        'arrow',
+        'calendar_add',
+        'information',
+        'globe_wireframe',
+        'question',
+        'search',
+
+        'facebook',
+        'linkedin',
+        'twitter',
+        'youtube',
+      );
+  }
+
+  if (isset($icon)) {
+    if (!in_array($icon, $available_icons)) {
+      return '';
+    }
+
+    return theme('svg_sprite', array('symbol' => $icon) + $options);
+  }
+
+  $icons_list = array();
+  foreach ($available_icons as $name) {
+    $icons_list[$name] = theme('svg_sprite', array('symbol' => $name) + $options);
+  }
+  return $icons_list;
+}
+
+
+/**
+ * Implements hook_panels_pre_render().
+ */
+function helpertheme_panels_pre_render($panels_display, $renderer) {
+  $class = drupal_html_class('page-layout--' . $panels_display->layout);
+  helpertheme_set_html_classes($class);
+}

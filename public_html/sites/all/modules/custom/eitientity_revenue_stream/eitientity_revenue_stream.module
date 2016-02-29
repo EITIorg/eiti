@@ -1,0 +1,317 @@
+<?php
+/**
+ * @file
+ * Exposes a custom entity to store revenue streams for summary data.
+ */
+
+/**
+ * Define administrative URLs.
+ */
+define('EITIENTITY_REVENUE_STREAM_UI_PATH', 'revenue_stream');
+define('EITIENTITY_REVENUE_STREAM_ADMIN_UI_PATH', 'admin/content/revenue_stream');
+define('EITIENTITY_REVENUE_STREAM_BUNDLE_ADMIN_UI_PATH', 'admin/structure/revenue_stream');
+
+/**
+ * Define report status constants (not included and not available ones will be skipped).
+ */
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_RECONCILED', 0);
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_PARTIALLY_RECONCILED', 1);
+define('EITIENTITY_REVENUE_STREAM_REPORT_INCLUDED_NOT_RECONCILED', 2);
+
+
+/**
+ * Implements hook_entity_info().
+ *
+ * @return array
+ */
+function eitientity_revenue_stream_entity_info() {
+  $entity_info = array();
+
+  $menu_wildcard = '%revenue_stream';
+  $entity_info['revenue_stream'] = array(
+    'label' => t('Revenue Stream'),
+    'plural label' => t('Revenue Streams'),
+    'description' => t('Revenue Streams represent a single data point.'),
+
+    'base table' => 'eiti_revenue_stream',
+    'module' => 'eitientity_revenue_stream',
+
+    'entity class' => 'RevenueStreamEntity',
+    'controller class' => 'EntityAPIController',
+    'extra fields controller class' => 'RevenueStreamExtraFieldsController',
+    'metadata controller class' => 'RevenueStreamMetadataController',
+    //'i18n controller class' => 'EntityDefaultI18nStringController',
+    'inline entity form' => array(
+      'controller' => 'RevenueStreamInlineEntityFormController',
+    ),
+
+    //'entity cache' => FALSE,
+    //'field cache' => FALSE,
+    'static cache' => FALSE,
+    'fieldable' => TRUE,
+
+    'access callback' => 'eitientity_revenue_stream_access',
+    'uri callback' => 'entity_class_uri',
+    'label callback' => 'eitientity_revenue_stream_label',
+
+    'entity keys' => array(
+      'id' => 'id',
+      //'revision' => 'vid',
+      'bundle' => 'type',
+      //'label' => 'name',
+      //'language' => 'language',
+    ),
+
+    'bundles' => array(),
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'bundles callback' => 'eitientity_revenue_stream_get_types',
+
+    'admin ui' => array(
+      'path' => EITIENTITY_REVENUE_STREAM_ADMIN_UI_PATH,
+      'hide content ui' => TRUE,
+      'entity path' => EITIENTITY_REVENUE_STREAM_UI_PATH,
+      'bundle path' => EITIENTITY_REVENUE_STREAM_BUNDLE_ADMIN_UI_PATH,
+      'controller class' => 'HelperEntityBundleableUIController',
+      'menu wildcard' => $menu_wildcard,
+      'file' => 'eitientity_revenue_stream.admin.inc',
+    ),
+
+    //'view modes' => array(
+    //  'full' => array(
+    //    'label' => t('Full'),
+    //    'custom settings' => FALSE,
+    //  ),
+    //),
+  );
+
+  foreach ($entity_info['revenue_stream']['bundles callback']() as $type => $bundle_info) {
+    $entity_info['revenue_stream']['bundles'][$type] = array(
+      'label' => $bundle_info['label'],
+      'admin' => array(
+        'path' => EITIENTITY_REVENUE_STREAM_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
+      ),
+    );
+  }
+
+  return $entity_info;
+}
+
+/**
+ * Menu loader function: load revenue streams from its path.
+ *
+ * @see entity_object_load()
+ *
+ * @param $entity_id
+ * @param $entity_type
+ * @return FALSE|RevenueStreamEntity
+ */
+function revenue_stream_load($entity_id, $entity_type) {
+  return entity_object_load($entity_id, $entity_type);
+}
+
+/**
+ * Returns the label callback.
+ *
+ * @param RevenueStreamEntity $entity
+ * @param $entity_type
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_label($entity, $entity_type) {
+  if (!is_object($entity)) {
+    return '';
+  }
+
+  $entity_info = $entity->entityInfo();
+
+  $t_args = array();
+  $t_args['!type'] = $entity_info['label'];
+
+  if (!is_null($entity->gfs_code_id)) {
+    /** @var GfsCodeEntity $gfs_code_entity */
+    $gfs_code_entity = entity_load_single('gfs_code', $entity->gfs_code_id);
+    if ($gfs_code_entity) {
+      $t_args['!gfs_code'] = $gfs_code_entity->code . ' [' . $gfs_code_entity->label() . ']';
+    }
+  }
+
+  if (empty($t_args['!gfs_code'])) {
+    return '';
+  }
+
+  $t_args['!name'] = '';
+  if (!empty($entity->name)) {
+    $t_args['!name'] = check_plain($entity->name);
+    return t('!type: !gfs_code - !name', $t_args);
+  }
+
+  return t('!type: !gfs_code', $t_args);
+}
+
+/**
+ * Returns a list of revenue_stream types.
+ *
+ * @return array
+ */
+function eitientity_revenue_stream_get_types() {
+  $items = array();
+
+  $items['company'] = array(
+    'label' => t('Company'),
+    'description' => t('Summary Data Revenue Stream for Company.'),
+  );
+
+  $items['agency'] = array(
+    'label' => t('Government Agency'),
+    'description' => t('Summary Data Revenue Stream for Government Agency.'),
+  );
+
+  return $items;
+}
+
+/**
+ * Returns the entity type name.
+ *
+ * @param $bundle
+ * @return false|string
+ */
+function eitientity_revenue_stream_type_get_name($bundle) {
+  $bundles = eitientity_revenue_stream_get_types();
+  return (isset($bundles[$bundle]['label'])) ? $bundles[$bundle]['label'] : FALSE;
+}
+
+/**
+ * Access callback for custom revenue_stream entities.
+ *
+ * @param $op
+ * @param RevenueStreamEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_revenue_stream_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  if ($op == 'access overview') {
+    $op = 'administer';
+  }
+  if (user_access("$entity_type entity $op")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * @return array
+ */
+function eitientity_revenue_stream_permission() {
+  return _helperentity_entity_type_permission('revenue_stream', array('administer', 'create', 'view', 'edit', 'delete'));
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * @param $data
+ * @param $router_item
+ * @param $root_path
+ */
+function eitientity_revenue_stream_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to the entity add page on the entity overview page.
+  if ($root_path == EITIENTITY_REVENUE_STREAM_ADMIN_UI_PATH) {
+    $item = menu_get_item(EITIENTITY_REVENUE_STREAM_UI_PATH . '/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_gfs_code_label($entity_type, $entity) {
+  if (!empty($entity->gfs_code_id)) {
+    /** @var GfsCodeEntity $gfs_code_entity */
+    $gfs_code_entity = entity_load_single('gfs_code', $entity->gfs_code_id);
+    if (!empty($gfs_code_entity)) {
+      $label = ' [' . check_plain($gfs_code_entity->code) . '] ' . filter_xss($gfs_code_entity->name);
+      return $label;
+    }
+  }
+
+  return '';
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_organisation_label($entity_type, $entity) {
+  if (!empty($entity->organisation_id)) {
+    /** @var OrganisationEntity $organisation_entity */
+    $organisation_entity = entity_load_single('organisation', $entity->organisation_id);
+    if (!empty($organisation_entity)) {
+      return filter_xss($organisation_entity->label());
+    }
+  }
+
+  return '';
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_currency_value($entity_type, $entity) {
+  if (empty($entity->currency)) {
+    return '';
+  }
+
+  $currency = currency_load($entity->currency);
+  if (empty($currency)) {
+    drupal_set_message(t('Currency not found: @currency_code', array(
+      '@currency_code' => $entity->currency,
+    )));
+    return check_plain($entity->currency);
+  }
+
+  return t('@currency_title (@currency_code)', array(
+    '@currency_title' => $currency->translateTitle(),
+    '@currency_code' => $currency->ISO4217Code,
+  ));
+}
+
+/**
+ * @param string $entity_type
+ * @param RevenueStreamEntity $entity
+ *
+ * @return string
+ */
+function eitientity_revenue_stream_get_revenue_value($entity_type, $entity) {
+  if (empty($entity->revenue)) {
+    return '';
+  }
+
+  return check_plain($entity->revenue);
+}

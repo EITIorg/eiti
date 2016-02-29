@@ -1,0 +1,159 @@
+<?php
+/**
+ * @file
+ * Exposes custom fields, field formatters and form elements.
+ */
+
+/**
+ * Helper function that loads include files that are used by particular hooks.
+ *
+ * @param string $type
+ * @return array
+ */
+function helperfield_load_includes($type) {
+  $loaded_includes = array();
+
+  $directory = drupal_get_path('module', 'helperfield') . '/' . $type;
+  $include_list = file_scan_directory($directory, '/\.inc$/');
+  foreach ($include_list as $include) {
+    $loaded_includes[$include->name] = module_load_include('inc', 'helperfield', $type . '/' . $include->name);
+  }
+
+  return $loaded_includes;
+}
+
+/**
+ * Return the helper function name for a particular include.
+ *
+ * @param array $field
+ * @param string $hook
+ * @return null|string
+ */
+function helperfield_get_hook_helper_function($field, $hook) {
+  helperfield_load_includes('fields');
+
+  $name = $field['type'];
+  $function_name = '_helperfield__' . $name . '__' . $hook;
+  if (function_exists($function_name)) {
+    return $function_name;
+  }
+
+  return NULL;
+}
+
+/**
+ *  Implements hook_field_info().
+ */
+function helperfield_field_info() {
+  $return = array();
+
+  foreach (helperfield_load_includes('fields') as $name => $file) {
+    $function_name = '_helperfield__' . $name . '__' . 'hook_field_info';
+    if (function_exists($function_name)) {
+      $return += call_user_func_array($function_name, array());
+    }
+  }
+
+  return $return;
+}
+
+/**
+ *  Implements hook_field_widget_info().
+ */
+function helperfield_field_widget_info() {
+  $return = array();
+
+  foreach (helperfield_load_includes('fields') as $name => $file) {
+    $function_name = '_helperfield__' . $name . '__' . 'hook_field_widget_info';
+    if (function_exists($function_name)) {
+      $return += call_user_func_array($function_name, array());
+    }
+  }
+
+  return $return;
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function helperfield_field_instance_settings_form($field, $instance) {
+  $return = array();
+
+  foreach (helperfield_load_includes('fields') as $name => $file) {
+    $function_name = '_helperfield__' . $name . '__' . 'hook_field_instance_settings_form';
+    if (function_exists($function_name)) {
+      $return += call_user_func_array($function_name, array($field, $instance));
+    }
+  }
+
+  return $return;
+
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function helperfield_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $return = array();
+
+  foreach (helperfield_load_includes('fields') as $name => $file) {
+    $function_name = '_helperfield__' . $name . '__' . 'hook_field_widget_form';
+    if (function_exists($function_name)) {
+      $return += call_user_func_array($function_name, array(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element));
+    }
+  }
+
+  return $return;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function helperfield_field_formatter_info() {
+  $return = array();
+
+  foreach (helperfield_load_includes('fields') as $name => $file) {
+    $function_name = '_helperfield__' . $name . '__' . 'hook_field_formatter_info';
+    if (function_exists($function_name)) {
+      $return += call_user_func_array($function_name, array());
+    }
+  }
+
+  return $return;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function helperfield_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $function_name = helperfield_get_hook_helper_function($field, 'hook_field_formatter_view');
+  if ($function_name) {
+    return call_user_func_array($function_name, array($entity_type, $entity, $field, $instance, $langcode, $items, $display));
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function helperfield_field_is_empty($item, $field) {
+  $function_name = helperfield_get_hook_helper_function($field, 'hook_field_is_empty');
+  if ($function_name) {
+    return call_user_func_array($function_name, array($item, $field));
+  }
+
+  return FALSE;
+}
+
+/**
+ * Form element validation handler for cwsettings element.
+ *
+ * @param $element
+ *   The field widget form element as constructed by hook_field_widget_form().
+ * @param $form_state
+ *   An associative array containing the current state of the widget form.
+ */
+function helperfield_field_widget_element_validate($element, &$form_state) {
+  // @TODO: Add some validation magic.
+}

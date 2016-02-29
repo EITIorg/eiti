@@ -1,0 +1,118 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_revenue_stream_schema() {
+  $schema['eiti_revenue_stream'] = array(
+    'description' => 'The base table for storing revenue_stream entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The identifier for this revenue_stream.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The type of this revenue_stream entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'gfs_code_id' => array(
+        'description' => 'The gfs_code identifier for this revenue_stream entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'organisation_id' => array(
+        'description' => 'The organisation identifier for this revenue_stream entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'report_status' => array(
+        'description' => 'The status of this revenue_stream entity.',
+        'type' => 'int',
+      ),
+      'name' => array(
+        'description' => 'The name for this revenue_stream entity.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'revenue' => array(
+        'description' => 'The revenue value for this revenue_stream entity.',
+        'type' => 'float',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'currency' => array(
+        'description' => 'The currency for this revenue_stream entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'original_revenue' => array(
+        'description' => 'The original revenue value for this revenue_stream entity.',
+        'type' => 'float',
+        'size' => 'big',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'original_currency' => array(
+        'description' => 'The original currency for this revenue_stream entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+    ),
+    'indexes' => array(
+      'entity_information' => array('id'),
+    ),
+    'foreign keys' => array(
+      'entity_eiti_organisation' => array(
+        'table' => 'eiti_organisation',
+        'columns' => array('organisation_id' => 'id'),
+      ),
+      'entity_eiti_gfs_code' => array(
+        'table' => 'eiti_gfs_code',
+        'columns' => array('gfs_code_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add Organisation to Revenue Stream entities.
+ */
+function eitientity_revenue_stream_update_7001(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The organisation identifier for this revenue_stream entity.',
+    'type' => 'int',
+    'not null' => FALSE,
+  );
+  db_add_field('eiti_revenue_stream', 'organisation_id', $field_schema);
+}
+
+/**
+ * Rename 'government_agency' to 'agency'.
+ */
+function eitientity_revenue_stream_update_7002(&$sandbox) {
+  db_update('eiti_revenue_stream')
+    ->fields(array(
+      'type' => 'agency',
+    ))
+    ->condition('type', 'government_agency')
+    ->execute();
+}

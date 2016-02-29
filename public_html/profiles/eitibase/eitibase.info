@@ -1,0 +1,11 @@
+name = Extractive Industries Transparency Initiative base install profile
+description = Minimal EITI with only a few modules enabled.
+version = 2
+core = 7.x
+
+dependencies[] = block
+dependencies[] = dblog
+dependencies[] = update_scripts
+
+; Make this the default install profile.
+exclusive = TRUE

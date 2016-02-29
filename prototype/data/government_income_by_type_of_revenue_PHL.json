@@ -1,0 +1,56 @@
+[
+    {
+    "label": "Ordinary taxes on income, profits and capital gains",
+          "values": [
+              {"x": "2012", "y": 19749752242} 
+          ]
+    },
+    {
+    "label": "Taxes on Property",
+          "values": [
+              {"x": "2012", "y": 107655640} 
+          ]
+    },
+    {
+    "label": "Excise Taxes",
+          "values": [
+              {"x": "2012", "y": 1481636266} 
+          ]
+    },
+    {
+	  "label": "License Fees",
+          "values": [        
+              {"x": "2012", "y": 211650889} 
+          ]
+    },
+    {
+    "label": "Customs and other import duties",
+          "values": [        
+              {"x": "2012", "y": 824770772} 
+          ]
+    },
+    {
+    "label": "Other taxes payable by natural resource companies",
+          "values": [        
+              {"x": "2012", "y": 44404053} 
+          ]
+    },
+    {
+    "label": "Royalties",
+          "values": [        
+              {"x": "2012", "y": 30340482914} 
+          ]
+    },
+    {
+    "label": "Fines, penalties, and forfeits",
+          "values": [        
+              {"x": "2012", "y": 3144490} 
+          ]
+    },
+    {
+    "label": "Revenues not classified",
+          "values": [        
+              {"x": "2012", "y": 12390275000} 
+          ]
+    }
+]

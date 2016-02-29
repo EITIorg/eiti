@@ -1,0 +1,13 @@
+name = EITI Entity: Organisation
+description = Exposes a custom entity to store Organisations.
+core = 7.x
+package = Custom
+
+configure = admin/structure/organisation
+
+dependencies[] = entity
+dependencies[] = helperentity
+
+; Entity handlers.
+files[] = includes/OrganisationEntity.inc
+files[] = includes/OrganisationEntityUIController.inc

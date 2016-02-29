@@ -1,0 +1,113 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_gfs_code_schema() {
+  $schema['eiti_gfs_code'] = array(
+    'description' => 'The base table for storing GFS Code entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The entity identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The entity type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => 'The entity name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'code' => array(
+        'description' => 'The entity GFS code.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'parent' => array(
+        'description' => 'The entity parent entity id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the entity is enabled.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the entity was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'weight' => array(
+        'description' => 'The weight of this entity in relation to other entities.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'entity_code' => array('id', 'code', 'status'),
+      'entity_status' => array('id', 'status'),
+    ),
+    'foreign keys' => array(
+      'entity_eiti_gfs_code' => array(
+        'table' => 'eiti_gfs_code',
+        'columns' => array('parent' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Change parent property of GFS Code entities.
+ */
+function eitientity_gfs_code_update_7002() {
+  db_update('eiti_gfs_code')
+    ->fields(array(
+      'parent' => 0,
+    ))
+    ->condition('parent', NULL)
+    ->execute();
+
+  db_change_field('eiti_gfs_code', 'parent', 'parent', array(
+    'description' => 'The entity parent entity id.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+}
+
+/**
+ * Add weight property to GFS Code entities.
+ */
+function eitientity_gfs_code_update_7003() {
+  db_add_field('eiti_gfs_code', 'weight', array(
+    'description' => 'The weight of this entity in relation to other entities.',
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+}

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the eititaxonomies feature.
+ */
+
+include_once 'eititaxonomies.features.inc';

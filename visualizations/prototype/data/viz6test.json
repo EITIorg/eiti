@@ -1,0 +1,21 @@
+{
+  "name": "disbursement",
+  "children": [
+        {
+          "name": "The Petroleum Tax Office",
+          "size": 262139000 
+        },
+        { 
+          "name": "The Norwegian Petroleum Directorate",
+          "size": 21178254000
+        },
+        {
+          "name": "Directorate of Exercise",
+          "size": 1031251468630
+        },
+        {
+          "name": "Gorgeous Bank",
+          "size": 710866858000
+        }
+  ]
+}

@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+html,
+body {
+  font-family: 'Open Sans';
+}
+a {
+  -webkit-transition: all 400ms ease-in;
+  transition: all 400ms ease-in;
+  color: #0093cf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.footer-widget a {
+  color: #ffffff;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.footer-widget a:hover {
+  color: #f5822a;
+}
+.footer-widget p {
+  color: #9de1fd;
+  font-size: 0.7em;
+  margin: 0;
+}
+.footer-widget p.inverse {
+  color: #ffffff;
+}
+.footer-widget ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
