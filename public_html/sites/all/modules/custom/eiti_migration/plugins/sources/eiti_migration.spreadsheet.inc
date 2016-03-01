@@ -189,6 +189,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
       $reader->setLoadAllSheets();
       // Load the source file.
       $this->currentWorkbook = $reader->load($path);
+
       // We also want to save the file, if successful, as current.
       $this->currentFile = $path;
       // Also we want to fetch the version of the report.
@@ -545,7 +546,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             for ($row = $start_row; $row < $highestRow; $row++) {
               $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-              $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
+              $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getFormattedValue());
 
               // Before we do the lookup, let's make sure that the group is correct.
               // If it's empty (or "add rows ..."), we use the previous group-value.
@@ -628,7 +629,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $migrationRow = array();
               $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-              $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getCalculatedValue());
+              $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getFormattedValue());
               $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
               $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
               $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
@@ -715,8 +716,8 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             if ($parsing_type == EITI_PARSING_STANDARD) {
               $migrationRow = array();
               $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
-              $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getCalculatedValue());
-              $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getCalculatedValue());
+              $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getFormattedValue());
+              $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getFormattedValue());
 
               // In this case, we don't do any lookups, we just pass the values.
               if (!empty($nameCellValue)) {
@@ -751,6 +752,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $highestRow = $revenuesSheet->getHighestRow();
           $highestColumn = $revenuesSheet->getHighestColumn();
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $calculationEngine = $this->currentWorkbook->getCalculationEngine();
           $this->migrateRowsCountInFile = 0;
 
           // Defaults.
@@ -795,10 +797,28 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
               $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
               $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
-              $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row)->getCalculatedValue());
 
-              // In this case, we don't do any lookups, we just pass the values.
+              // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
+              // creates infinite loop and kills the process.
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+                $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+                if ($revenueCell->isFormula()) {
+                  $formula = $revenueCell->getValue();
+                  try {
+                    $revenueCellValue = $calculationEngine->calculateFormula($formula);
+                  }
+                  catch (PHPExcel_Exception $e) {
+                    Migration::displayMessage(t('The formula references a non-existing file (but we\'ll try to get an OLD value).<br/>Error: !error <br/> File: !filename', array(
+                      '!error' => $e->getMessage(),
+                      '!filename' => $this->currentFile,
+                    )));
+                    $revenueCellValue = $revenueCell->getOldCalculatedValue();
+                  }
+                }
+                else {
+                  $revenueCellValue = $revenueCell->getValue();
+                }
+
                 $migrationRow['row_id'] = $this->getUniqueId() . ':' . $row;
                 $migrationRow['summary_id'] = $this->getUniqueId();
                 $migrationRow['gfs_id'] = $GFSCodeCellValue;
@@ -834,6 +854,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           $highestRow = $revenuesSheet->getHighestRow();
           $highestColumn = $revenuesSheet->getHighestColumn();
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+          $calculationEngine = $this->currentWorkbook->getCalculationEngine();
           $this->migrateRowsCountInFile = 0;
 
           // Defaults.
@@ -880,7 +901,31 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
                 $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
-                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
+
+                // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
+                // creates infinite loop and kills the process.
+                if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+                  if ($revenueCell->isFormula()) {
+                    $formula = $revenueCell->getValue();
+                    try {
+                      $revenueCellValue = $calculationEngine->calculateFormula($formula);
+                    }
+                    catch (PHPExcel_Exception $e) {
+                      Migration::displayMessage(t('The formula references a non-existing file (but we\'ll try to get an OLD value).<br/>Error: !error <br/> File: !filename', array(
+                        '!error' => $e->getMessage(),
+                        '!filename' => $this->currentFile,
+                      )));
+                      $revenueCellValue = $revenueCell->getOldCalculatedValue();
+                    }
+                  }
+                  else {
+                    $revenueCellValue = $revenueCell->getValue();
+                  }
+                }
+                else {
+                  $revenueCellValue = 0;
+                }
 
                 // In this case, we don't do any lookups, we just pass the values.
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
@@ -901,7 +946,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               elseif ($parsing_type == EITI_PARSING_COUNT) {
                 $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
-                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getCalculatedValue());
+                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
                   $this->migrateRows[] = array('counted');
                   $this->migrateRowsCountInFile++;
