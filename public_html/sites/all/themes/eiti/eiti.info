@@ -33,8 +33,13 @@ stylesheets[all][] = styles/layout.css.less
 stylesheets[all][] = styles/widgets/all.css.less
 stylesheets[all][] = styles/widgets/bookmarks.css.less
 stylesheets[all][] = styles/widgets/header.css.less
+stylesheets[all][] = styles/widgets/icon_links.css.less
+stylesheets[all][] = styles/widgets/key_facts.css.less
 stylesheets[all][] = styles/widgets/quote.css.less
+stylesheets[all][] = styles/widgets/table.css.less
+stylesheets[all][] = styles/widgets/tabs_with_widgets.css.less
 stylesheets[all][] = styles/widgets/text.css.less
+stylesheets[all][] = styles/widgets/visualization.css.less
 stylesheets[all][] = styles/widgets/wide_image.css.less
 
 stylesheets[print][] = styles/print.css.less
