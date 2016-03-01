@@ -26,7 +26,7 @@ function eitict_page_panelizer_defaults() {
   $panelizer->access = array();
   $panelizer->view_mode = 'default';
   $panelizer->css_class = '';
-  $panelizer->title_element = 'H2';
+  $panelizer->title_element = 'h1';
   $panelizer->link_to_entity = FALSE;
   $panelizer->extra = array();
   $display = new panels_display();
@@ -43,7 +43,7 @@ function eitict_page_panelizer_defaults() {
   $display->uuid = 'efb8cb46-fccb-4a8f-babc-54b05753da30';
   $display->content = array();
   $display->panels = array();
-  $display->hide_title = PANELS_TITLE_NONE;
+  $display->hide_title = 99;
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:page:default:default'] = $panelizer;

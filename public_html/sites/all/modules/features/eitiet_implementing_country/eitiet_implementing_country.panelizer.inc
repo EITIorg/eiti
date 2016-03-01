@@ -26,7 +26,7 @@ function eitiet_implementing_country_panelizer_defaults() {
   $panelizer->access = array();
   $panelizer->view_mode = 'default';
   $panelizer->css_class = '';
-  $panelizer->title_element = 'H2';
+  $panelizer->title_element = 'h1';
   $panelizer->link_to_entity = FALSE;
   $panelizer->extra = array();
   $display = new panels_display();
@@ -44,7 +44,7 @@ function eitiet_implementing_country_panelizer_defaults() {
   $display->uuid = '6f0cc01b-7a30-4800-9a35-90a9a807394b';
   $display->content = array();
   $display->panels = array();
-  $display->hide_title = PANELS_TITLE_NONE;
+  $display->hide_title = 99;
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['implementing_country:normal:default:default'] = $panelizer;

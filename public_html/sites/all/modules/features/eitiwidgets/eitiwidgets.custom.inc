@@ -1,5 +1,7 @@
 <?php
 
+define('EITIWIDGETS_PANELS_TITLE_ENTITY', 99);
+
 /**
  * Implements hook_form_alter().
  */
@@ -14,6 +16,10 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
 
     // Append our custom validation.
     $form['#validate'][] = 'eitiwidgets_fpp_form_validation';
+  }
+
+  if ($form_id == 'panelizer_edit_content_form') {
+    $form['display_title']['hide_title']['#options'][EITIWIDGETS_PANELS_TITLE_ENTITY] = t('Inherited from entity');
   }
 }
 
@@ -181,5 +187,37 @@ function eitiwidgets_panelizer_overview_links_alter(&$links_array, $entity_type,
   // Do not show 'reset' link on panelizer overview pages for panelized entities..
   if (isset($links_array['reset'])) {
     unset($links_array['reset']);
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_panelizer_view_mode().
+ */
+function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
+  $element = $variables['element'];
+  $entity = $element['#panelizer_entity'];
+  $panelizer = $element['#panelizer'];
+
+  if (isset($panelizer->display->hide_title) && $panelizer->display->hide_title == EITIWIDGETS_PANELS_TITLE_ENTITY) {
+    $entity_label = NULL;
+    if (method_exists($entity, 'label')) {
+      $entity_label = $entity->label();
+    }
+    else if ($panelizer->entity_type == 'node') {
+      $entity_label = entity_label('node', $entity);
+    }
+
+    if ($entity_label) {
+      $variables['title'] = $entity_label;
+    }
+  }
+
+  // Add classes to the page title.
+  if (!empty($variables['title'])) {
+    if (isset($variables['title_element']) && $variables['title_element'] == 'h1') {
+      $variables['title_attributes_array']['class'][] = 'page-title';
+      $variables['title_wrapper_attributes']['class'][] = 'single-fluid-row-wrapper';
+    }
   }
 }
