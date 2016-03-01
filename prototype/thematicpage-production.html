@@ -50,7 +50,7 @@
         <div class="separator-transparent"></div>
         <!-- start: stats in banner -->
         <div class="homebanner-links-container">
-
+<!--
           <div class="banner-stat-widget">
             <a class="banner-stat-link" href="https://eiti.org/about">
               <span class="banner-stat-icon"><img src="images/icon-dump/eiti_whoweare.svg"></span>
@@ -70,7 +70,7 @@
             <a class="banner-stat-link" href="">
               <span class="banner-stat-icon"><img src="images/icon-dump/eiti_latestdata.svg"></span>
               upcoming events</a>
-          </div>
+          </div>-->
 
         </div>
         <!-- end: stats in banner -->
@@ -158,30 +158,6 @@
 <!-- end: thematic title section -->
 
 
-<!-- start: Section 2 Further Information -->
-<div class="content-section margin-top">
-  <div class="inner-container">
-
-    <!-- start: section title -->
-    <div class="fancy-section-title">
-      <h3>Further Information</h3>
-      <div class="export">
-        <img src="images/icon-dump/eiti_export.svg">
-      </div>
-    </div>
-    <!-- end: section title -->
-
-    <ul class="info-list">
-      <li><a href="http://www.jorc.org/" target="_blank">Joint Ore Reserves Committee website</a></li>
-      <li><a href="http://minerals.usgs.gov/minerals/pubs/mcs/2016/mcs2016.pdf" target="_blank">US Geological Service (2016), Mineral commodity summaries 2016</a></li>
-      <li><a href="http://www.bgr.bund.de/EN/Themen/Min_rohstoffe/CTC/Home/CTC_node_en.html" target="_blank">Mineral certification at BGR</a></li>
-      <li><a href="https://www.eia.gov/cfapps/ipdbproject/IEDIndex3.cfm?tid=5&pid=57&aid=6" target="_blank">US Energy Information Administration, International Energy Statistics</a></li>
-      <li><a href="http://www.iea.org/statistics/" target="_blank">International Energy Agency, Statistics</a></li>
-    </ul>
-
-  </div>
-</div>
-<!-- end: Section 2 Further Information -->
 
 
 
@@ -230,6 +206,30 @@
   </div>
 <!-- end: thematic title section -->
 
+<!-- start: Section 2 Further Information -->
+<div class="content-section margin-bottom">
+  <div class="inner-container">
+
+    <!-- start: section title -->
+    <div class="fancy-section-title">
+      <h3>Further Information</h3>
+      <div class="export">
+        <img src="images/icon-dump/eiti_export.svg">
+      </div>
+    </div>
+    <!-- end: section title -->
+
+    <ul class="info-list">
+      <li><a href="http://www.jorc.org/" target="_blank">Joint Ore Reserves Committee website</a></li>
+      <li><a href="http://minerals.usgs.gov/minerals/pubs/mcs/2016/mcs2016.pdf" target="_blank">US Geological Service (2016), Mineral commodity summaries 2016</a></li>
+      <li><a href="http://www.bgr.bund.de/EN/Themen/Min_rohstoffe/CTC/Home/CTC_node_en.html" target="_blank">Mineral certification at BGR</a></li>
+      <li><a href="https://www.eia.gov/cfapps/ipdbproject/IEDIndex3.cfm?tid=5&pid=57&aid=6" target="_blank">US Energy Information Administration, International Energy Statistics</a></li>
+      <li><a href="http://www.iea.org/statistics/" target="_blank">International Energy Agency, Statistics</a></li>
+    </ul>
+
+  </div>
+</div>
+<!-- end: Section 2 Further Information -->
 
 
 <!--start: blockquote banner  -->
@@ -397,55 +397,55 @@
       [{
           label: 'Countries',
           values: [
-  {
-    "x": "Cameroon",
-    "y": 24200000
-  },
-  {
-    "x": "Côte d'Ivoire",
-    "y": 9132866
-  },
-  {
-    "x": "Peru",
-    "y": 22956000
-  },
-  {
-    "x": "Trinidad and Tobago",
-    "y": 29600000
-  },
-  {
-    "x": "Azerbaijan",
-    "y": 323290870
-  },
-  {
-    "x": "Ghana",
-    "y": 36048260
-  },
-  {
-    "x": "Iraq",
-    "y": 1087515111
-  },
-  {
-    "x": "Kazakhstan",
-    "y": 520033696
-  },
-  {
-    "x": "Mongolia",
-    "y": 7407000
-  },
-  {
-    "x": "Niger",
-    "y": 6497944.129
-  },
-  {
-    "x": "Norway",
-    "y": 534297697.1
-  },
-  {
-    "x": "Republic of the Congo",
-    "y": 88384000
-  }
-]
+            {
+              "x": "Niger",
+              "y": 6497944.129
+            },
+            {
+              "x": "Mongolia",
+              "y": 7407000
+            },
+            {
+              "x": "Côte d'Ivoire",
+              "y": 9132866
+            },
+            {
+              "x": "Peru",
+              "y": 22956000
+            },
+            {
+              "x": "Cameroon",
+              "y": 24200000
+            },
+            {
+              "x": "Trinidad and Tobago",
+              "y": 29600000
+            },
+            {
+              "x": "Ghana",
+              "y": 36048260
+            },
+            {
+              "x": "R. of the Congo",
+              "y": 88384000
+            },
+            {
+              "x": "Azerbaijan",
+              "y": 323290870
+            },
+            {
+              "x": "Kazakhstan",
+              "y": 520033696
+            },
+            {
+              "x": "Norway",
+              "y": 534297697.1
+            },
+            {
+              "x": "Iraq",
+              "y": 1087515111
+            }
+          ]
       }]);
 d3.selectAll(".x g.tick text")[0].forEach(function(k,v){console.log();if(v%2){ d3.select(k).attr("y", 25)} })
 
