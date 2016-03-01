@@ -546,7 +546,14 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             for ($row = $start_row; $row < $highestRow; $row++) {
               $groupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $subgroupCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-              $valueCellValue = trim($aboutSheet->getCellByColumnAndRow($start_column + 2, $row)->getFormattedValue());
+
+              $valueCell = $aboutSheet->getCellByColumnAndRow($start_column + 2, $row);
+              if ($valueCell->isFormula()) {
+                $valueCellValue = trim($valueCell->getFormattedValue());
+              }
+              else {
+                $valueCellValue = trim($valueCell->getValue());
+              }
 
               // Before we do the lookup, let's make sure that the group is correct.
               // If it's empty (or "add rows ..."), we use the previous group-value.
@@ -629,10 +636,16 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $migrationRow = array();
               $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-              $valueCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 2, $row)->getFormattedValue());
               $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
               $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
               $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
+              $valueCell = $contextualSheet->getCellByColumnAndRow($start_column + 2, $row);
+              if ($valueCell->isFormula()) {
+                $valueCellValue = trim($valueCell->getFormattedValue());
+              }
+              else {
+                $valueCellValue = trim($valueCell->getValue());
+              }
 
               // Before we do the lookup, let's make sure that the group is correct.
               // If it's empty (or "add rows ..."), we use the previous group-value.
@@ -946,10 +959,25 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               elseif ($parsing_type == EITI_PARSING_COUNT) {
                 $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
-                $revenueCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
-                if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue) && !empty($revenueCellValue) && $revenueCellValue !== '-') {
-                  $this->migrateRows[] = array('counted');
-                  $this->migrateRowsCountInFile++;
+
+                if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+                  if ($revenueCell->isFormula()) {
+                    $formula = $revenueCell->getValue();
+                    try {
+                      $revenueCellValue = $calculationEngine->calculateFormula($formula);
+                    }
+                    catch (PHPExcel_Exception $e) {
+                      $revenueCellValue = $revenueCell->getOldCalculatedValue();
+                    }
+                  }
+                  else {
+                    $revenueCellValue = $revenueCell->getValue();
+                  }
+                  if (!empty($revenueCellValue) && $revenueCellValue !== '-') {
+                    $this->migrateRows[] = array('counted');
+                    $this->migrateRowsCountInFile++;
+                  }
                 }
               }
             }
