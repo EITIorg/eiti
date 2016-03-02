@@ -288,7 +288,7 @@ function theme_header_items() {
   //unset($search_form['basic']['keys']['#title']);
 
   // Add the language switcher links.
-  if (FALSE && drupal_multilingual()) {
+  if (drupal_multilingual()) {
     $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
     $lang_links = language_negotiation_get_switch_links('language', $path);
     if (isset($lang_links->links)) {
