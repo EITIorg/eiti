@@ -124,7 +124,12 @@ function theme_svg_sprite(array $elements) {
  * Returns HTML for the header logo.
  */
 function theme_header_identity() {
-  global $theme;
+  // Always reference the EITI theme, and not the current active theme.
+  $theme = 'eiti';
+  $theme_path = drupal_get_path('theme', $theme);
+
+  // Get the logo paths if it has been changed.
+  $logo_path = theme_get_setting('logo_path', $theme);
 
   // Text for homepage header logo link.
   $site_link_title = t(variable_get('site_link_title', 'Visit the main page'));
@@ -149,9 +154,6 @@ function theme_header_identity() {
     '#suffix' => "</a>",
   );
 
-  // Get the logo paths if it has been changed.
-  $logo_path = theme_get_setting('logo_path', $theme);
-
   $file_path = drupal_realpath($logo_path);
   if (file_exists($file_path)) {
     $items['header']['logo_markup']['png'] = array(
@@ -168,7 +170,7 @@ function theme_header_identity() {
     $logo_alt = $site_name;
     $items['header']['logo_markup']['svg'] = array(
       '#theme' => 'image',
-      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.svg'),
+      '#path' => file_create_url($theme_path . '/logo.svg'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
@@ -179,7 +181,7 @@ function theme_header_identity() {
     );
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
-      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.png'),
+      '#path' => file_create_url($theme_path . '/logo.png'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
@@ -389,6 +391,8 @@ function theme_footer_items() {
  * @param $variables
  */
 function helpertheme_preprocess_main_footer(&$variables) {
+  // Always reference the EITI theme, and not the current active theme.
+  $theme_path = drupal_get_path('theme', 'eiti');
 
   $variables['identity'] = array(
     '#type' => 'html_container',
@@ -401,12 +405,10 @@ function helpertheme_preprocess_main_footer(&$variables) {
     ),
   );
 
-  // Always reference the EITI theme, and not the current active theme.
-  $theme = 'eiti';
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
   $variables['identity']['logo_markup']['png'] = array(
     '#theme' => 'image',
-    '#path' => url(drupal_get_path('theme', $theme) . '/images/logo-white.png'),
+    '#path' => file_create_url($theme_path . '/images/logo-white.png'),
     '#alt' => $site_name,
     '#attributes' => array(
       'role' => 'presentation',
