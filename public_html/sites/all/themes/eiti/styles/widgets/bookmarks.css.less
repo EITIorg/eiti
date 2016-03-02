@@ -23,9 +23,11 @@
   }
 
   .linked-wrapper {
-    display: block;
     .link-color(@claltnormal__light, @clactive__alt);
     .transition(color, 400ms, ease-in);
+
+    display: block;
+    background-color: @claltmain;
     text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
 
     // Allow the .overlay-wrapper to be positioned relatively.
