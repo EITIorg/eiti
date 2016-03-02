@@ -54,7 +54,7 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
     ```
     vagrant ssh
     ```
-    NOTE: On windows you can run `vagrant ssh-config` to view the information required for [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/). 
+    NOTE: On windows you can run `vagrant ssh-config` to view the information required for [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).
 
 6.  For now the visualisations can be be access on [eiti-visualizations-local.dev](http://eiti-visualizations-local.dev/).
     To setup the Drupal project continue with the next set of instructions.
@@ -73,17 +73,17 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
         ```
         # Prepare environment for local development.
         make prepare-local
-        
+
         # Prepare environment for staging.
         make prepare-staging
-        
+
         # Prepare environment for preprod.
         make prepare-preprod
-        
+
         # Prepare environment for production.
         make prepare-production
         ```
-        For staging, preprod and production environments you will need to update the database credentials in `settings.custom.php`. 
+        For staging, preprod and production environments you will need to update the database credentials in `settings.custom.php`.
 
     *   Check the database connection settings of the project:
         ```
@@ -117,4 +117,4 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
 ## More Info:
 
 * Please follow the [**GitFlow** Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-* Please configure your IDE with [EditorConfig](http://editorconfig.org/). This helps define and maintain consistent coding styles between different editors and IDEs. 
+* Please configure your IDE with [EditorConfig](http://editorconfig.org/). This helps define and maintain consistent coding styles between different editors and IDEs.
