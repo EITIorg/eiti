@@ -204,7 +204,7 @@ function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
     if (method_exists($entity, 'label')) {
       $entity_label = $entity->label();
     }
-    else if ($panelizer->entity_type == 'node') {
+    else if (isset($element['#entity_type']) && $element['#entity_type'] == 'node') {
       $entity_label = entity_label('node', $entity);
     }
 
