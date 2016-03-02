@@ -43,7 +43,7 @@ function eitict_bookmark_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'above',
@@ -116,7 +116,7 @@ function eitict_bookmark_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'above',
@@ -195,7 +195,7 @@ function eitict_bookmark_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -309,7 +309,7 @@ function eitict_bookmark_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -403,7 +403,7 @@ function eitict_bookmark_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -479,7 +479,7 @@ function eitict_bookmark_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
@@ -554,8 +554,13 @@ function eitict_bookmark_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => '',
+        ),
+        'type' => 'title_linked',
         'weight' => 0,
       ),
       'full' => array(
