@@ -82,12 +82,9 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $this->addFieldMapping('field_sd_report_file:file_class')
       ->defaultValue('MigrateFileFid');
 
-    // Unmigrated mappings.
-    $this->addUnmigratedSources(array(
-      'dissaggregation:revenue_stream',
-      'dissaggregation:company',
-      'dissaggregation:project',
-    ));
+    $this->addFieldMapping('field_sd_disagg_revenue_stream', 'dissaggregation:revenue_stream');
+    $this->addFieldMapping('field_sd_disagg_company', 'dissaggregation:company');
+    $this->addFieldMapping('field_sd_disagg_project', 'dissaggregation:project');
 
     $this->addUnmigratedDestinations(array(
       'status',
@@ -119,6 +116,13 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     else {
       $country_name = $row->country_name;
     }
+    if (empty($country_name)) {
+      $msg = t('There is no country name.<br/>Import stopped.<br/>File: !filename', array(
+        '!filename' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $countries = eitientity_implementing_country_lookup_by_name($country_name);
     if ($countries == FALSE) {
       $ic_values = array(
@@ -137,10 +141,12 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
         $ic_values['iso'] = $country_object->iso2;
       }
       else {
-        $msg = t('Could not figure out the <strong>ISO2</strong> for !country', array(
-          '!country' => $country_name
+        $msg = t('Could not figure out the <strong>ISO2</strong> for !country. <br/>Import stopped.<br/>File: !filename', array(
+          '!country' => $country_name,
+          '!filename' => $row->file,
         ));
-        $this->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+        $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+        return FALSE;
       }
 
       $ic_entity = entity_create('implementing_country', $ic_values);
@@ -158,6 +164,9 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       'sectors:oil',
       'sectors:gas',
       'sectors:mining',
+      'dissaggregation:revenue_stream',
+      'dissaggregation:company',
+      'dissaggregation:project'
     );
     foreach ($booleanMappings as $booleanMapping) {
       if (isset($row->{$booleanMapping})) {
