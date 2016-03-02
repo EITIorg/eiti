@@ -730,7 +730,13 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $migrationRow = array();
               $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
               $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getFormattedValue());
-              $commoditiesCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 2)->getFormattedValue());
+              $commoditiesCell = $revenuesSheet->getCellByColumnAndRow($column, $start_row + 2);
+              if ($commoditiesCell->isFormula()) {
+                $commoditiesCellValue = $commoditiesCell->getFormattedValue();
+              }
+              else {
+                $commoditiesCellValue = $commoditiesCell->getValue();
+              }
 
               // In this case, we don't do any lookups, we just pass the values.
               if (!empty($nameCellValue)) {
