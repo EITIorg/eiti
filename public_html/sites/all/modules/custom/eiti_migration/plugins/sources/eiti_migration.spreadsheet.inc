@@ -879,6 +879,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
           // Defaults.
           $start_row = 9;
           $start_column = 1;
+          $companies_column = 9;
           $currency = '';
 
           // Find the currency, if it won't be found, we'll use the summary data one.
@@ -924,7 +925,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
                 // creates infinite loop and kills the process.
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
-                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($column, $row);
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
@@ -967,7 +968,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
 
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
-                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+                  $revenueCell = $revenuesSheet->getCellByColumnAndRow($column, $row);
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
