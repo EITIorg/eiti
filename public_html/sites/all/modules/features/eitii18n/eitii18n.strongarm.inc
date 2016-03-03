@@ -103,6 +103,9 @@ function eitii18n_strongarm() {
   $strongarm->value = array(
     0 => 'site_name',
     1 => 'site_slogan',
+    2 => 'site_footer_slogan',
+    3 => 'site_footer_contact',
+    4 => 'site_footer_legal',
   );
   $export['variable_realm_list_language'] = $strongarm;
 

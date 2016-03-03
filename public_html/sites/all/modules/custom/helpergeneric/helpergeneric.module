@@ -356,3 +356,52 @@ function helpergeneric_parents_array_to_string($parents = array()) {
   $base_name = array_shift($parents);
   return $base_name . '[' . implode('][', $parents) . ']';
 }
+
+/**
+ * Implements hook_variable_group_info().
+ */
+function helpergeneric_variable_group_info() {
+
+  $groups['eiti_site_information'] = array(
+    'title' => t('EITI Site information'),
+    'description' => t('EITI Site information'),
+    'access' => 'helpergeneric administer settings',
+    'path' => array(
+      'admin/settings/generic',
+    ),
+  );
+
+  return $groups;
+}
+
+/**
+ * Implements hook_variable_info().
+ */
+function helpergeneric_variable_info($options) {
+
+  $variables['site_footer_slogan'] = array(
+    'type' => 'string',
+    'group' => 'eiti_site_information',
+    'title' => t('Footer Slogan', array(), $options),
+    'description' => t('This slogan is shown next to the site log in the page footer.', array(), $options),
+    'required' => TRUE,
+  );
+
+  $variables['site_footer_contact'] = array(
+    'type' => 'string',
+    'group' => 'eiti_site_information',
+    'title' => t('Footer Contact Information', array(), $options),
+    'description' => t('This contact information is shown in the page footer.', array(), $options),
+    'required' => TRUE,
+  );
+
+  $variables['site_footer_legal'] = array(
+    'type' => 'string',
+    'group' => 'eiti_site_information',
+    'title' => t('Footer Legal Information', array(), $options),
+    'description' => t('This legal information is shown in the page footer.', array(), $options),
+    'required' => TRUE,
+  );
+
+  return $variables;
+}
