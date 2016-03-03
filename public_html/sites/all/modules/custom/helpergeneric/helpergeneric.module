@@ -337,3 +337,22 @@ function helpergeneric_user_view_alter(&$build) {
     $build['#contextual_links']['user'] = array('user', array($account->uid));
   }
 }
+
+/**
+ * Returns a sting formatted to be used by Form API #states or form_set_error().
+ *
+ * @param array $parents
+ * @return string
+ */
+function helpergeneric_parents_array_to_string($parents = array()) {
+  if (empty($parents) || !is_array($parents)) {
+    return '';
+  }
+
+  if (count($parents) == 1) {
+    return array_pop($parents);
+  }
+
+  $base_name = array_shift($parents);
+  return $base_name . '[' . implode('][', $parents) . ']';
+}
