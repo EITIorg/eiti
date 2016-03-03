@@ -215,6 +215,9 @@ function contentwidget_viz_groupedbarchart_static_settings(&$element, &$form_sta
  * Small custom ajax callback.
  */
 function contentwidget_viz_groupedbarchart_static_settings_values_ajax($form, $form_state) {
-  return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_groupedbar_static']['barchart_value'];
+  $entity = $form_state['entity'];
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
+  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+  return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_groupedbar_static']['barchart_value'];
 }
 

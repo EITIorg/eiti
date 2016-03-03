@@ -224,7 +224,10 @@ function contentwidget_viz_groupedbarchart_dynamic_ajax_settings($form, $form_st
     return $value;
   }
   else {
-    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_groupedbar_dynamic']['extra_settings'];
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_groupedbar_dynamic']['extra_settings'];
   }
 }
 

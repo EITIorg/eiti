@@ -190,7 +190,10 @@ function contentwidget_viz_bubble_dynamic_ajax_settings($form, $form_state) {
     return $value;
   }
   else {
-    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_bubble_dynamic']['extra_settings'];
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_bubble_dynamic']['extra_settings'];
   }
 }
 

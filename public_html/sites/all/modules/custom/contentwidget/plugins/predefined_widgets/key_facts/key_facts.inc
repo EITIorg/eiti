@@ -28,7 +28,10 @@ $plugin = array(
  */
 function contentwidget_key_facts_render($plugin, $widget_settings, $entity, $langcode) {
   // Prepare the variables.
-  if (isset($entity->field_cbw_key_facts['und'][0]) && $image_file = (object) $entity->field_cbw_key_facts['und'][0]) {
+  $entity_type = 'fieldable_panels_pane';
+  $entity_language = entity_language($entity_type, $entity);
+  $field_language = field_language($entity_type, $entity, 'field_cbw_key_facts', $entity_language);
+  if (isset($entity->field_cbw_key_facts[$field_language][0]) && $image_file = (object) $entity->field_cbw_key_facts[$field_language][0]) {
     $image_url = file_create_url($image_file->uri);
   }
   else {
@@ -374,6 +377,9 @@ function contentwidget_key_facts_settings_ajax($form, $form_state) {
     return $value;
   }
   else {
-    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['key_facts']['fact'];
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['key_facts']['fact'];
   }
 }

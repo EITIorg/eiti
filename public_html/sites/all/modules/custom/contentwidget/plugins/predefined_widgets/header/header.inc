@@ -219,6 +219,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
  */
 function contentwidget_header_settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
-  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
+  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
   return $form['field_fpp_widget'][$widget_field_language][0]['settings']['header']['links'];
 }
