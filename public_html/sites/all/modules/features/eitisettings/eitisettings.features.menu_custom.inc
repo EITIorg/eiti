@@ -16,7 +16,7 @@ function eitisettings_menu_default_menu_custom() {
     'title' => 'Main menu',
     'description' => 'The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Exported menu: menu-footer-information.
   $menus['menu-footer-information'] = array(
@@ -24,7 +24,7 @@ function eitisettings_menu_default_menu_custom() {
     'title' => 'Footer Information',
     'description' => '',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Exported menu: menu-footer-navigation.
   $menus['menu-footer-navigation'] = array(
@@ -32,7 +32,7 @@ function eitisettings_menu_default_menu_custom() {
     'title' => 'Footer Navigation',
     'description' => '',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Exported menu: menu-footer-social.
   $menus['menu-footer-social'] = array(
@@ -40,7 +40,7 @@ function eitisettings_menu_default_menu_custom() {
     'title' => 'Footer Social',
     'description' => '',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Exported menu: user-menu.
   $menus['user-menu'] = array(
