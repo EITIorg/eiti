@@ -70,7 +70,7 @@ function eitipermissions_user_default_permissions() {
     'name' => 'access media browser',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
+      'internal editor' => 'internal editor',
     ),
     'module' => 'media',
   );
@@ -1551,7 +1551,10 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use media wysiwyg'.
   $permissions['use media wysiwyg'] = array(
     'name' => 'use media wysiwyg',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+    ),
     'module' => 'media_wysiwyg',
   );
 
