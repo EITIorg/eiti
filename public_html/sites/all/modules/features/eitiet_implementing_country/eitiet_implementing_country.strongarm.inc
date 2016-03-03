@@ -13,6 +13,19 @@ function eitiet_implementing_country_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_settings_implementing_country__normal';
+  $strongarm->value = array(
+    'default_language' => 'und',
+    'hide_language_selector' => 0,
+    'exclude_language_none' => 0,
+    'lock_language' => 0,
+    'shared_fields_original_only' => 0,
+  );
+  $export['entity_translation_settings_implementing_country__normal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_implementing_country__normal';
   $strongarm->value = array(
     'view_modes' => array(),
@@ -39,15 +52,18 @@ function eitiet_implementing_country_strongarm() {
     'view modes' => array(
       'page_manager' => array(
         'status' => 0,
+        'substitute' => 0,
         'default' => 0,
         'choice' => 0,
       ),
       'default' => array(
         'status' => 1,
+        'substitute' => '',
         'default' => 1,
         'choice' => 0,
       ),
     ),
+    'help' => '',
   );
   $export['panelizer_defaults_implementing_country_normal'] = $strongarm;
 
@@ -81,6 +97,13 @@ function eitiet_implementing_country_strongarm() {
     'other' => 'other',
   );
   $export['panelizer_implementing_country:normal_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_implementing_country:normal:default_selection';
+  $strongarm->value = 'implementing_country:normal:default:default';
+  $export['panelizer_implementing_country:normal:default_selection'] = $strongarm;
 
   return $export;
 }

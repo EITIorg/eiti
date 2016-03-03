@@ -1,7 +1,7 @@
 name = EITI Panels
 description = Panel Pages and related.
 core = 7.x
-package = EITI Custom
+package = EITI General
 version = 7.x-1.0
 dependencies[] = ctools
 dependencies[] = page_manager

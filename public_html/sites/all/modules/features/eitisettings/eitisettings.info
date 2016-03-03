@@ -1,8 +1,8 @@
 name = EITI Settings
 description = Project General Settings
 core = 7.x
-package = EITI Custom
-version = 7.x-0.5
+package = EITI General
+version = 7.x-0.6
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = filter

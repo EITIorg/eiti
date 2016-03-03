@@ -75,15 +75,15 @@ class PanelsPaneController extends DrupalDefaultEntityController {
     if ($op == 'create') {
       return user_access('create fieldable ' . $bundle);
     }
-    elseif ($op == 'view') {
+    if ($op == 'view') {
       ctools_include('context');
       return ctools_access($entity->view_access, fieldable_panels_panes_get_base_context($entity));
     }
-    elseif ($op == 'update') {
+    if ($op == 'update') {
       ctools_include('context');
       return user_access('edit fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
     }
-    elseif ($op == 'delete') {
+    if ($op == 'delete') {
       ctools_include('context');
       return user_access('delete fieldable ' . $bundle) && ctools_access($entity->edit_access, fieldable_panels_panes_get_base_context($entity));
     }

@@ -201,7 +201,8 @@ function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plu
  */
 function contentwidget_featured_bookmarks_settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
-  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
+  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
   return $form['field_fpp_widget'][$widget_field_language][0]['settings']['bookmarks']['widget_preview'];
 }
 
@@ -214,7 +215,8 @@ function contentwidget_featured_bookmarks_hook_entity_view($context) {
   // We need to prepare the referenced bookmarks.
   if (isset($context['referenced_entity'])) {
     $bookmark_entity = $context['referenced_entity'];
-    $field_language = field_language('node', $bookmark_entity, 'field_bm_hide_title', $bookmark_entity->language);
+    $bookmark_language = entity_language('node', $bookmark_entity);
+    $field_language = field_language('node', $bookmark_entity, 'field_bm_hide_title', $bookmark_language);
 
     // Hide the entity overlay.
     if (!empty($bookmark_entity->field_bm_hide_title[$field_language][0]['value'])) {
