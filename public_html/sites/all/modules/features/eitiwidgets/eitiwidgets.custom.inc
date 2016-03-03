@@ -19,7 +19,11 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'panelizer_edit_content_form') {
+    // Add extra title display option.
     $form['display_title']['hide_title']['#options'][EITIWIDGETS_PANELS_TITLE_ENTITY] = t('Inherited from entity');
+
+    // Hide preview button.
+    $form['preview']['#access'] = FALSE;
   }
 }
 

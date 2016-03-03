@@ -43,7 +43,7 @@ function eitict_page_panelizer_defaults() {
   $display->uuid = 'efb8cb46-fccb-4a8f-babc-54b05753da30';
   $display->content = array();
   $display->panels = array();
-  $display->hide_title = 99;
+  $display->hide_title = '99';
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['node:page:default:default'] = $panelizer;

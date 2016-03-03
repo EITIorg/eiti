@@ -10,11 +10,81 @@
 function eitiwidgets_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access fieldable panels panes master list'.
+  $permissions['access fieldable panels panes master list'] = array(
+    'name' => 'access fieldable panels panes master list',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'administer fieldable panels panes'.
   $permissions['administer fieldable panels panes'] = array(
     'name' => 'administer fieldable panels panes',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane featured_bookmarks defaults'.
+  $permissions['administer panelizer fieldable_panels_pane featured_bookmarks defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane featured_bookmarks defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane header defaults'.
+  $permissions['administer panelizer fieldable_panels_pane header defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane header defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane icon_links defaults'.
+  $permissions['administer panelizer fieldable_panels_pane icon_links defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane icon_links defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane key_facts defaults'.
+  $permissions['administer panelizer fieldable_panels_pane key_facts defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane key_facts defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane quote defaults'.
+  $permissions['administer panelizer fieldable_panels_pane quote defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane quote defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane table defaults'.
+  $permissions['administer panelizer fieldable_panels_pane table defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane table defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane tabs_with_widgets defaults'.
+  $permissions['administer panelizer fieldable_panels_pane tabs_with_widgets defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane tabs_with_widgets defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane text defaults'.
+  $permissions['administer panelizer fieldable_panels_pane text defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane text defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer fieldable_panels_pane visualization defaults'.
+  $permissions['administer panelizer fieldable_panels_pane visualization defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane visualization defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
   );
 
   // Exported permission: 'create fieldable featured_bookmarks'.
@@ -228,6 +298,15 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable visualization',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'translate fieldable_panels_pane entities'.
+  $permissions['translate fieldable_panels_pane entities'] = array(
+    'name' => 'translate fieldable_panels_pane entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'entity_translation',
   );
 
   return $permissions;

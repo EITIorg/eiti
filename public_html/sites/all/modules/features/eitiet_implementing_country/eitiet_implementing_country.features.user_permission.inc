@@ -120,5 +120,14 @@ function eitiet_implementing_country_user_default_permissions() {
     'module' => 'eitientity_implementing_country',
   );
 
+  // Exported permission: 'translate implementing_country entities'.
+  $permissions['translate implementing_country entities'] = array(
+    'name' => 'translate implementing_country entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'entity_translation',
+  );
+
   return $permissions;
 }

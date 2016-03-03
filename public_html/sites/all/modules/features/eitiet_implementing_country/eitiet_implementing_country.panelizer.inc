@@ -44,7 +44,7 @@ function eitiet_implementing_country_panelizer_defaults() {
   $display->uuid = '6f0cc01b-7a30-4800-9a35-90a9a807394b';
   $display->content = array();
   $display->panels = array();
-  $display->hide_title = 99;
+  $display->hide_title = '99';
   $display->title_pane = '0';
   $panelizer->display = $display;
   $export['implementing_country:normal:default:default'] = $panelizer;

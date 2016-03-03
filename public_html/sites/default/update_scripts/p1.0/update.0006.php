@@ -1,8 +1,5 @@
 <?php
 
-// Do not create the default FPP bundle.
-variable_set('fieldable_panels_panes_skip_default_type', TRUE);
-
 // Provide a list of modules to be installed.
 $modules = array(
   'locale',
@@ -50,10 +47,10 @@ _us_module__install($modules);
 drupal_flush_all_caches();
 
 // Prepare a list of features to be installed.
- $feature_names = array(
-   'eitii18n',
- );
- _us_features__install($feature_names);
+$feature_names = array(
+  'eitii18n',
+);
+_us_features__install($feature_names);
 
 
 // Revert all features and clear system caches.

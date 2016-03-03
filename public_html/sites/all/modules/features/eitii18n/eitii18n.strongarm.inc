@@ -16,10 +16,13 @@ function eitii18n_strongarm() {
   $strongarm->name = 'entity_translation_entity_types';
   $strongarm->value = array(
     'node' => 'node',
+    'taxonomy_term' => 'taxonomy_term',
+    'implementing_country' => 'implementing_country',
+    'fieldable_panels_pane' => 'fieldable_panels_pane',
     'file' => 'file',
-    'taxonomy_term' => 0,
-    'comment' => 0,
-    'country' => 0,
+    'organisation' => 0,
+    'revenue_stream' => 0,
+    'summary_data' => 0,
     'user' => 0,
   );
   $export['entity_translation_entity_types'] = $strongarm;
@@ -82,9 +85,26 @@ function eitii18n_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'locale_field_language_fallback';
+  $strongarm->value = 1;
+  $export['locale_field_language_fallback'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'translation_language_type';
   $strongarm->value = 'language_content';
   $export['translation_language_type'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'variable_realm_list_language';
+  $strongarm->value = array(
+    0 => 'site_name',
+    1 => 'site_slogan',
+  );
+  $export['variable_realm_list_language'] = $strongarm;
 
   return $export;
 }
