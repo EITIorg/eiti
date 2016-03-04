@@ -14,6 +14,7 @@ function eitientities_user_default_permissions() {
   $permissions['gfs_code entity administer'] = array(
     'name' => 'gfs_code entity administer',
     'roles' => array(
+      'administrator' => 'administrator',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),

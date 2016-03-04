@@ -154,7 +154,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'create fieldable visualization'.
   $permissions['create fieldable visualization'] = array(
     'name' => 'create fieldable visualization',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -225,7 +227,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'delete fieldable visualization'.
   $permissions['delete fieldable visualization'] = array(
     'name' => 'delete fieldable visualization',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -296,7 +300,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable visualization'.
   $permissions['edit fieldable visualization'] = array(
     'name' => 'edit fieldable visualization',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
