@@ -4,12 +4,14 @@
 (function($) {
   Drupal.behaviors.semiInteractiveMap = {
     attach: function (context, settings) {
-      context = $(context);
+      if (!settings.semiInteractiveMap.container || !settings.semiInteractiveMap.position) {
+        return;
+      }
 
       mapWidget.createHomePage({
-        name: "Homepage Map",
-        container: "map1",
-        position: [12.897489183755892, -12.76171875],
+        name: Drupal.t('Homepage Map'),
+        container: settings.semiInteractiveMap.container,
+        position: settings.semiInteractiveMap.position,
         zoom: 2,
         maxZoom: 5,
         minZoom: 2
