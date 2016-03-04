@@ -1,4 +1,4 @@
-# This file can be used to install, update, or destroy an environment.
+# This file can be used to install, update, backup or destroy an environment.
 
 # To execute a target ('command'), just type `make` followed by the
 # name of the command.
