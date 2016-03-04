@@ -49,7 +49,7 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
   // Load the library.
   $library = libraries_load('eiti-charts');
   if (empty($library)) {
-    drupal_set_message(t('Please make sure you have the "eiti-charts" library.'));
+    return array('#markup' => t('Charts library could not be loaded.'));
   }
 
   $endpoints = contentwidget_viz_stackedbar_dynamic_get_data_types('endpoint');
