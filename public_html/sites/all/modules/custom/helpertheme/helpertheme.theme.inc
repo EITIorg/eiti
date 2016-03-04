@@ -48,6 +48,14 @@ function theme_html_container($variables) {
   if (isset($element['#title'])) {
     $title_tag = isset($element['#title_tag']) ? $element['#title_tag'] : 'h2';
     $title_attributes = isset($element['#title_attributes']) ? $element['#title_attributes'] : array();
+
+    if (isset($element['#title_icon']['symbol'])) {
+      $element['#title_icon']['options'] = isset($element['#title_icon']['options']) ? $element['#title_icon']['options'] : array();
+      // Get the SVG icon markup.
+      $svgicon = helpertheme_get_svg_icons($element['#title_icon']['symbol'], $element['#title_icon']['options']);
+      $element['#title'] = $svgicon . ' <span class="text">' . $element['#title'] . '<span>';
+    }
+
     $prefix['title'] = array(
       '#type' => 'html_tag',
       '#tag' => $title_tag,
@@ -246,6 +254,59 @@ function theme_header_items() {
     );
   }
 
+
+  // Add the language switcher links.
+  if (drupal_multilingual()) {
+    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+    $lang_links = language_negotiation_get_switch_links('language', $path);
+    if (isset($lang_links->links)) {
+      $elements['language_switcher'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'nav',
+        '#title' => t('Languages'),
+        '#title_attributes' => array('class' => array('language-switcher-title')),
+        '#title_icon' => array(
+          'symbol' => 'message',
+          'options' => array('width' => '1.5em', 'height' => '1.5em'),
+        ),
+        '#attributes' => array(
+          'role' => 'navigation',
+          'class' => array(
+            'language-switcher',
+          ),
+        ),
+      );
+
+      $elements['language_switcher']['wrapper'] = array(
+        '#type' => 'html_container',
+        '#attributes' => array(
+          'class' => array(
+            'locale-links-wrapper',
+          ),
+        ),
+      );
+
+      // Add language info to all links.
+      $languages = language_list();
+      foreach ($lang_links->links as &$link) {
+        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
+          $link['language'] = $languages[$link['attributes']['lang']];
+        }
+      }
+
+      $elements['language_switcher']['wrapper']['links'] = array(
+        '#theme' => 'links__language_switcher',
+        '#links' => $lang_links->links,
+        '#attributes' => array(
+          'class' => array(
+            'language-switcher-' . $lang_links->provider,
+            'locale-links',
+          ),
+        ),
+      );
+    }
+  }
+
   // Get the menu links.
   $menu_name = 'main-menu';
   $elements['navigation'] = array(
@@ -286,43 +347,6 @@ function theme_header_items() {
   //$menu_elements['search']['#suffix'] = '</div>';
   //$search_form = drupal_get_form('search_form');
   //unset($search_form['basic']['keys']['#title']);
-
-  // Add the language switcher links.
-  if (drupal_multilingual()) {
-    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
-    $lang_links = language_negotiation_get_switch_links('language', $path);
-    if (isset($lang_links->links)) {
-      $elements['lang']['#prefix'] = '<nav role="navigation" id="language-switcher" class="language-switcher">';
-      $elements['lang']['#suffix'] = '</nav>';
-
-      $elements['lang']['subject'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'h2',
-        '#value' => 'Languages',
-        '#attributes' => array('class' => array('element-invisible')),
-      );
-
-      // Add language info to all links.
-      $languages = language_list();
-      foreach ($lang_links->links as &$link) {
-        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
-          $link['language'] = $languages[$link['attributes']['lang']];
-        }
-      }
-
-      $elements['lang']['links'] = array(
-        '#theme' => 'links__language_switcher',
-        '#links' => $lang_links->links,
-        '#attributes' => array(
-          'class' => array(
-            'language-switcher' . $lang_links->provider,
-            'header-links',
-            'locale-links',
-          ),
-        ),
-      );
-    }
-  }
 
   // Render the HTML.
   $output = drupal_render($elements);

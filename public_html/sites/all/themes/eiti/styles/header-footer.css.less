@@ -87,7 +87,7 @@
 .xSmallOnly() {
   .main-navigation {
     .header-links {
-      margin: 1em -0.5em;  // HACK: Subtract link padding!
+      margin: 0 -0.5em;  // HACK: Subtract link padding!
       line-height: 1.75em;
     }
     .link-toplevel {
@@ -106,18 +106,103 @@
   }
 }
 
-.language-switcher {
-  line-height: normal;
+// Add spacing around all icons in the header.
+.header-items {
+  .main-navigation .icon {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  .language-switcher .icon {
+    margin-left: 0.5em;
+  }
+}
 
-  .locale-links {
-    padding: 0;
+.xMediumAndUp() {
+  .main-navigation {
+    float: right;
+  }
+  .language-switcher {
+    float: right;
+  }
+}
+
+// @TODO: Finish the styling!
+.language-switcher {
+  .language-switcher-title {
+    font-size: medium;
     margin: 0;
   }
 
-  li {
-    display: inline;
-    &:not(:last-child) {
-      margin-right: 0.5em;
+  .icon {
+    display: none;
+    padding: 0.5em;
+  }
+
+  .locale-links {
+
+    padding: 0.5em 0;
+    margin: 0;
+
+    li {
+      display: inline;
+      line-height: normal;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .language-link {
+    padding: 0 0.5em;
+  }
+}
+.xNormalAndUp() {
+  .language-switcher {
+    line-height: 2em;
+    margin: 1.5em 0;
+  }
+}
+.xMediumAndUp() {
+  .language-switcher {
+    position: relative;
+
+    .language-switcher-title {
+      cursor: pointer;
+
+      .icon {
+        display: inherit;
+      }
+      .text {
+        .visually-hidden();
+      }
+    }
+
+    .locale-links-wrapper {
+      // We do this in order to align the dropdown with the options.
+      position: absolute;
+      bottom: 0.5em;  // Matches the icon padding.
+      right: 0;
+      height: 0;
+
+      z-index: 10;
+    }
+
+    .locale-links {
+      background-color: @clmain__header;
+      border: 1px solid @clnormal;
+      text-align: right;
+
+      li {
+        display: block;
+      }
+    }
+
+    .locale-links-wrapper {
+      display: none;
+    }
+    &:hover {
+      .locale-links-wrapper {
+        display: block;
+      }
     }
   }
 }

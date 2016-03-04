@@ -410,19 +410,7 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
     case 'icons':
       //break;
     default:
-      $available_icons += array(
-        'arrow',
-        'calendar_add',
-        'information',
-        'globe_wireframe',
-        'question',
-        'search',
-
-        'facebook',
-        'linkedin',
-        'twitter',
-        'youtube',
-      );
+      $available_icons += helpertheme_get_icons_list('icons');
   }
 
   if (isset($icon)) {
@@ -440,6 +428,33 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
   return $icons_list;
 }
 
+/**
+ * Returns a list of available icons.
+ *
+ * NOTE: Always run update_sprites.sh when new svg files are added.
+ *
+ * @param string $group
+ * @return array
+ */
+function helpertheme_get_icons_list($group) {
+  // Detect helper files.
+  $pattern_array = array(
+    drupal_get_path('module', 'helpertheme'),
+    'sprites',
+    $group,
+    '*.svg',
+  );
+  $svg_files = glob(implode(DIRECTORY_SEPARATOR, $pattern_array));
+
+  $available_icons = array();
+  if (!empty($svg_files)) {
+    foreach ($svg_files as $path) {
+      $available_icons[] = basename($path, '.svg');
+    }
+  }
+
+  return $available_icons;
+}
 
 /**
  * Implements hook_panels_pre_render().
