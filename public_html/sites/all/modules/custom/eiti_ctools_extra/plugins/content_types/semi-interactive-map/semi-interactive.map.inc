@@ -57,7 +57,8 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
 
   // Now build the content.
   $content = array(
-    '#type' => 'container',
+    '#type' => 'html_container',
+    '#tag' => 'section',
     '#attributes' => array(
       'class' => array(
         'semi-interactive-map-wrapper',
