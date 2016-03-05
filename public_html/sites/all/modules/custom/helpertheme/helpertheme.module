@@ -226,6 +226,11 @@ function helpertheme_preprocess_html(&$variables) {
  * @param array $variables
  */
 function helpertheme_preprocess_page(&$variables) {
+  global $theme;
+  if ($theme != 'eiti') {
+    return;
+  }
+
   // Check to see whether or not the page template should be changed.
   if (!empty($_REQUEST['page-template'])) {
     // Only accept simple page template names.
