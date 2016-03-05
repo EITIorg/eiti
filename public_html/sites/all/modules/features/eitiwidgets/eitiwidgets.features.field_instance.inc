@@ -968,7 +968,7 @@ function eitiwidgets_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 20,
       ),
       'type' => 'text_textarea',
       'weight' => 3,
@@ -1157,12 +1157,14 @@ function eitiwidgets_field_default_field_instances() {
         'weight' => 1,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_widget',
     'label' => 'Widget',
     'required' => 1,
     'settings' => array(
       'available_widgets' => array(
+        'plotly_bar_chart' => 'plotly_bar_chart',
         'viz_bubble_dynamic' => 'viz_bubble_dynamic',
         'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
         'viz_groupedbar_static' => 'viz_groupedbar_static',
