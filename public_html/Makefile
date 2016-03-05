@@ -44,6 +44,8 @@ install:
 	@echo 'Setting up the new environment...'
 	@drush update-scripts-run --run-all --yes
 	@drush update-scripts-run task/create.indicators.php task/create.gfs_codes.php task/create.user_menu_links.php --yes
+	@echo 'Revert all enabled feature modules...'
+	@drush features-revert-all --yes
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
 	@#@echo 'Securing the site settings.'
