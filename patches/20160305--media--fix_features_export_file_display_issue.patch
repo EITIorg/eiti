@@ -1,0 +1,27 @@
+Index: public_html/sites/all/modules/contrib/media/media.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/media/media.module	(date 1457183976000)
++++ public_html/sites/all/modules/contrib/media/media.module	(revision )
+@@ -1222,19 +1222,6 @@
+ }
+ 
+ /**
+- * Implements hook_ctools_plugin_api().
+- *
+- * Lets CTools know which plugin APIs are implemented by Media module.
+- */
+-function media_ctools_plugin_api($module, $api) {
+-  if ($module == 'file_entity' && $api == 'file_default_displays') {
+-    return array(
+-      'version' => 1,
+-    );
+-  }
+-}
+-
+-/**
+  * Implements hook_form_FORM_ID_alter().
+  *
+  * This alter enhances the default admin/content/file page, addding JS and CSS.

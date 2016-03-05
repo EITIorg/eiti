@@ -1,0 +1,20 @@
+Index: public_html/sites/all/modules/contrib/media_youtube/media_youtube.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/media_youtube/media_youtube.module	(date 1457183976000)
++++ public_html/sites/all/modules/contrib/media_youtube/media_youtube.module	(revision )
+@@ -66,12 +66,3 @@
+ function media_youtube_file_mimetype_mapping_alter(&$mapping) {
+   $mapping['mimetypes'][] = 'video/youtube';
+ }
+-
+-/**
+- * Implements hook_ctools_plugin_api().
+- */
+-function media_youtube_ctools_plugin_api($module, $api) {
+-  if ($module == 'file_entity' && $api == 'file_default_displays') {
+-    return array('version' => 1);
+-  }
+-}

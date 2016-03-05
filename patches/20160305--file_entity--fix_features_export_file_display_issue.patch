@@ -1,0 +1,17 @@
+Index: public_html/sites/all/modules/contrib/file_entity/file_entity.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/file_entity/file_entity.module	(date 1457183976000)
++++ public_html/sites/all/modules/contrib/file_entity/file_entity.module	(revision )
+@@ -1581,9 +1581,6 @@
+   if (($module == 'file_entity' && $api == 'file_type') || ($module == 'page_manager' && $api == 'pages_default') || $module == 'panelizer') {
+     return array('version' => 1);
+   }
+-  if ($module == 'file_entity' && $api == 'file_default_displays') {
+-    return array('version' => 1);
+-  }
+ }
+ 
+ /**
