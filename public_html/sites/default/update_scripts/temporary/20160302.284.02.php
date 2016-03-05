@@ -53,6 +53,12 @@ $modules = array(
 );
 _us_module__install($modules);
 
+// Prepare a list of features to be installed.
+$feature_names = array(
+  'eitifiles',
+);
+_us_features__install($feature_names);
+
 // Enable Field Templates. (Customize the labels and the HTML output of your fields.)
 variable_set('ds_extras_field_template', 1);
 
