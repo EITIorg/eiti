@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * eitiet_file.features.field_base.inc
+ * eitifiles.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function eitiet_file_field_default_field_bases() {
+function eitifiles_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'field_file_image_alt_text'.

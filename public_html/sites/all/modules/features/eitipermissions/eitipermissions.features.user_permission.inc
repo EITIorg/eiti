@@ -99,6 +99,15 @@ function eitipermissions_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'add media from remote sources'.
+  $permissions['add media from remote sources'] = array(
+    'name' => 'add media from remote sources',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'media_internet',
+  );
+
   // Exported permission: 'admin_display_suite'.
   $permissions['admin_display_suite'] = array(
     'name' => 'admin_display_suite',
@@ -204,6 +213,13 @@ function eitipermissions_user_default_permissions() {
     'name' => 'administer media browser',
     'roles' => array(),
     'module' => 'media',
+  );
+
+  // Exported permission: 'administer media wysiwyg view mode'.
+  $permissions['administer media wysiwyg view mode'] = array(
+    'name' => 'administer media wysiwyg view mode',
+    'roles' => array(),
+    'module' => 'media_wysiwyg_view_mode',
   );
 
   // Exported permission: 'administer menu'.

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * eitiet_file.features.user_permission.inc
+ * eitifiles.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function eitiet_file_user_default_permissions() {
+function eitifiles_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: 'delete any audio files'.

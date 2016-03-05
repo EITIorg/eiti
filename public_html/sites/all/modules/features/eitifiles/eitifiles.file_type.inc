@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * eitiet_file.file_type.inc
+ * eitifiles.file_type.inc
  */
 
 /**
  * Implements hook_file_default_types().
  */
-function eitiet_file_file_default_types() {
+function eitifiles_file_default_types() {
   $export = array();
 
   $file_type = new stdClass();
