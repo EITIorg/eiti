@@ -9,6 +9,7 @@ dependencies[] = eitientities
 dependencies[] = features
 dependencies[] = file
 dependencies[] = file_entity
+dependencies[] = filefield_paths
 dependencies[] = image
 dependencies[] = media
 dependencies[] = node

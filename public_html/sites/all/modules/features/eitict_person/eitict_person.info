@@ -10,6 +10,7 @@ dependencies[] = eitientities
 dependencies[] = email
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = filefield_paths
 dependencies[] = helpergeneric
 dependencies[] = html5_tools
 dependencies[] = image
