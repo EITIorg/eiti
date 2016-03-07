@@ -443,7 +443,7 @@ function theme_helpergeneric_formatter_link_icon($variables) {
       'height' => $size,
       'sprite_name' => 'icons',  // @TODO: FIX!
     );
-    $svgicon = helpertheme_get_svg_icons($icon, $options);
+    $svgicon = helpertheme_get_svg_icon($icon, $options);
     $link_options['attributes']['class'][] = 'link-title-with-icon';
   }
 

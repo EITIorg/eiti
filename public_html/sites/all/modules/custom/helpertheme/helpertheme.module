@@ -434,6 +434,21 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
 }
 
 /**
+ * Return Markup for a single SVG icon.
+ *
+ * @param strin g$icon
+ * @param array $options
+ * @return string
+ */
+function helpertheme_get_svg_icon($icon, $options = array()) {
+  if (!is_null($icon)) {
+    return '';
+  }
+
+  return helpertheme_get_svg_icons($icon, $options);
+}
+
+/**
  * Returns a list of available icons.
  *
  * NOTE: Always run update_sprites.sh when new svg files are added.

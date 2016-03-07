@@ -52,7 +52,7 @@ function theme_html_container($variables) {
     if (isset($element['#title_icon']['symbol'])) {
       $element['#title_icon']['options'] = isset($element['#title_icon']['options']) ? $element['#title_icon']['options'] : array();
       // Get the SVG icon markup.
-      $svgicon = helpertheme_get_svg_icons($element['#title_icon']['symbol'], $element['#title_icon']['options']);
+      $svgicon = helpertheme_get_svg_icon($element['#title_icon']['symbol'], $element['#title_icon']['options']);
       $element['#title'] = $svgicon . ' <span class="text">' . $element['#title'] . '<span>';
     }
 

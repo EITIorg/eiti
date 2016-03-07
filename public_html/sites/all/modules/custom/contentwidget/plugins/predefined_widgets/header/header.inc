@@ -45,7 +45,7 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
     }
 
     // Get the SVG icon markup.
-    $svgicon = helpertheme_get_svg_icons($item_icon, array('width' => '2em', 'height' => '2em'));
+    $svgicon = helpertheme_get_svg_icon($item_icon, array('width' => '2em', 'height' => '2em'));
 
     $item_options = array(
       'attributes' => array(

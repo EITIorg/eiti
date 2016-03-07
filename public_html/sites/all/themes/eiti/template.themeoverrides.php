@@ -121,7 +121,7 @@ function __eiti_menu_link__level(array &$variables, $level = NULL) {
   $mlid = $element['#original_link']['mlid'];
   $selected_icon = variable_get(HELPERTHEME_SVG_ICON_NAME_PREFIX . $mlid, '');
   if (!empty($selected_icon)) {
-    $svgicon = helpertheme_get_svg_icons($selected_icon, array('width' => '1.5em', 'height' => '1.5em')) . ' ';
+    $svgicon = helpertheme_get_svg_icon($selected_icon, array('width' => '1.5em', 'height' => '1.5em')) . ' ';
   }
 
   // Render the menu link.

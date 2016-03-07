@@ -245,7 +245,7 @@ function helpertheme_menu_local_action($variables) {
  * @return string
  */
 function _helpertheme_menu_link_title($title, $icon, $size) {
-  $svgicon = helpertheme_get_svg_icons($icon, array('width' => $size, 'height' => $size));
+  $svgicon = helpertheme_get_svg_icon($icon, array('width' => $size, 'height' => $size));
 
   return $svgicon . '<span class="title">' . check_plain($title) . '</span>';
 }
