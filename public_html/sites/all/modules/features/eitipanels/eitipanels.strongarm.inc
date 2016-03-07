@@ -741,7 +741,7 @@ function eitipanels_strongarm() {
     'entity_view-rules_config' => 0,
     'fieldable_panels_pane-featured_bookmarks' => 'fieldable_panels_pane-featured_bookmarks',
     'fieldable_panels_pane-header' => 'fieldable_panels_pane-header',
-    'fieldable_panels_pane-icon_links' => 'fieldable_panels_pane-icon_links',
+    'fieldable_panels_pane-icon_blocks' => 'fieldable_panels_pane-icon_blocks',
     'fieldable_panels_pane-key_facts' => 'fieldable_panels_pane-key_facts',
     'fieldable_panels_pane-quote' => 'fieldable_panels_pane-quote',
     'fieldable_panels_pane-table' => 'fieldable_panels_pane-table',

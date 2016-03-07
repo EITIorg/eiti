@@ -38,9 +38,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'panelizer',
   );
 
-  // Exported permission: 'administer panelizer fieldable_panels_pane icon_links defaults'.
-  $permissions['administer panelizer fieldable_panels_pane icon_links defaults'] = array(
-    'name' => 'administer panelizer fieldable_panels_pane icon_links defaults',
+  // Exported permission: 'administer panelizer fieldable_panels_pane icon_blocks defaults'.
+  $permissions['administer panelizer fieldable_panels_pane icon_blocks defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane icon_blocks defaults',
     'roles' => array(),
     'module' => 'panelizer',
   );
@@ -105,9 +105,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'create fieldable icon_links'.
-  $permissions['create fieldable icon_links'] = array(
-    'name' => 'create fieldable icon_links',
+  // Exported permission: 'create fieldable icon_blocks'.
+  $permissions['create fieldable icon_blocks'] = array(
+    'name' => 'create fieldable icon_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
@@ -178,9 +178,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'delete fieldable icon_links'.
-  $permissions['delete fieldable icon_links'] = array(
-    'name' => 'delete fieldable icon_links',
+  // Exported permission: 'delete fieldable icon_blocks'.
+  $permissions['delete fieldable icon_blocks'] = array(
+    'name' => 'delete fieldable icon_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
@@ -251,9 +251,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'edit fieldable icon_links'.
-  $permissions['edit fieldable icon_links'] = array(
-    'name' => 'edit fieldable icon_links',
+  // Exported permission: 'edit fieldable icon_blocks'.
+  $permissions['edit fieldable icon_blocks'] = array(
+    'name' => 'edit fieldable icon_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );

@@ -94,7 +94,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'featured_bookmarks',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -172,7 +172,7 @@ function eitiwidgets_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
+      'max_filesize' => '32 MB',
       'max_resolution' => '',
       'min_resolution' => '',
       'title_field' => 0,
@@ -193,8 +193,11 @@ function eitiwidgets_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),
@@ -242,7 +245,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'header',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -275,9 +278,9 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-icon_links-field_fpp_widget'.
-  $field_instances['fieldable_panels_pane-icon_links-field_fpp_widget'] = array(
-    'bundle' => 'icon_links',
+  // 'fieldable_panels_pane-icon_blocks-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-icon_blocks-field_fpp_widget'] = array(
+    'bundle' => 'icon_blocks',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -295,7 +298,7 @@ function eitiwidgets_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'available_widgets' => array(
-        'icon_link' => 'icon_link',
+        'icon_blocks' => 'icon_blocks',
       ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -309,12 +312,12 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'fieldable_panels_pane-icon_links-title_field'.
-  $field_instances['fieldable_panels_pane-icon_links-title_field'] = array(
-    'bundle' => 'icon_links',
+  // Exported field_instance: 'fieldable_panels_pane-icon_blocks-title_field'.
+  $field_instances['fieldable_panels_pane-icon_blocks-title_field'] = array(
+    'bundle' => 'icon_blocks',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -468,7 +471,7 @@ function eitiwidgets_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
+      'max_filesize' => '32 MB',
       'max_resolution' => '',
       'min_resolution' => '',
       'title_field' => 0,
@@ -489,8 +492,11 @@ function eitiwidgets_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),
@@ -628,7 +634,7 @@ function eitiwidgets_field_default_field_instances() {
     'bundle' => 'quote',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A field replacing fieldable panel pane title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1227,7 +1233,6 @@ function eitiwidgets_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('A field replacing fieldable panel pane title.');
   t('Background Image');
   t('Body');
   t('Bookmark List');

@@ -1,0 +1,61 @@
+
+.predefined-widget--icon-blocks {
+
+  .icon-blocks-wrapper {
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      padding: 1em 2em;
+    }
+  }
+
+
+  .icon-block-wrapper {
+    .title {
+      margin: 0;
+    }
+    .link {
+      .link-color(@clanchor, @clanchor__hover);
+    }
+
+    .icon {
+      margin-right: 0.5em;
+      fill: @clanchor;
+    }
+  }
+
+}
+
+.xMediumAndDown() {
+  .predefined-widget--icon-blocks {
+    .icon-blocks-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      li {
+        flex: 50%;
+      }
+    }
+    .with-background-image {
+      background-size: 160% auto;  // Make images larger on small screens.
+    }
+  }
+}
+.xNormalAndUp() {
+  .predefined-widget--icon-blocks {
+    .icon-blocks-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      li {
+        flex: 50%;
+      }
+    }
+  }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

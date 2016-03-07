@@ -39,7 +39,7 @@ function eitiwidgets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__icon_links';
+  $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__icon_blocks';
   $strongarm->value = array(
     'default_language' => 'und',
     'hide_language_selector' => 0,
@@ -47,7 +47,7 @@ function eitiwidgets_strongarm() {
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
-  $export['entity_translation_settings_fieldable_panels_pane__icon_links'] = $strongarm;
+  $export['entity_translation_settings_fieldable_panels_pane__icon_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -216,7 +216,7 @@ function eitiwidgets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_fieldable_panels_pane__icon_links';
+  $strongarm->name = 'field_bundle_settings_fieldable_panels_pane__icon_blocks';
   $strongarm->value = array(
     'view_modes' => array(
       'full' => array(
@@ -247,7 +247,7 @@ function eitiwidgets_strongarm() {
       'display' => array(),
     ),
   );
-  $export['field_bundle_settings_fieldable_panels_pane__icon_links'] = $strongarm;
+  $export['field_bundle_settings_fieldable_panels_pane__icon_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -489,12 +489,12 @@ function eitiwidgets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_icon_links';
+  $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_icon_blocks';
   $strongarm->value = array(
     'status' => 0,
     'view modes' => array(),
   );
-  $export['panelizer_defaults_fieldable_panels_pane_icon_links'] = $strongarm;
+  $export['panelizer_defaults_fieldable_panels_pane_icon_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
