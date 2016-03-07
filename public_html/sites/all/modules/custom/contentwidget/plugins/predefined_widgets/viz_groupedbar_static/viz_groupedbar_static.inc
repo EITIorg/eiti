@@ -36,7 +36,7 @@ function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settin
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
-  if (in_array('panelizer', $menu_item['map'])) {
+  if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
     return array('#markup' => t('Configured Stacked Bar Widget - with static data (manually entered).'));
   }
 
