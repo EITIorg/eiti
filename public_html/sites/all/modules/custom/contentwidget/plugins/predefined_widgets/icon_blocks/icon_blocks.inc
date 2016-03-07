@@ -38,7 +38,7 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
       '#attributes' => array(
         'class' => array(
           'icon-block-wrapper',
-          drupal_html_class('icon-block-wrapper--' . $delta),
+          'icon-block-wrapper--' . $delta,
           'mobject',
         ),
       ),
@@ -54,7 +54,7 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
       ),
     );
 
-    $icon = _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'icon');
+    $icon = _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'icon');
     $options = array(
       'height' => '3em',
       'width' => '3em',
@@ -64,7 +64,6 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
     );
 
     // Now, the rest.
-
     $icon_block['icon_blocks']['text_wrapper'] = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -76,15 +75,15 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
     );
 
     // Get the block title.
-    $title = _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'title');
-    $title_as_link = _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'title_as_link');
+    $title = _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'title');
+    $title_as_link = _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'title_as_link');
     if ($title_as_link == TRUE) {
       $link_options = array(
         'html' => FALSE,
         'absolute' => TRUE,
         'external' => TRUE,
       );
-      $title = l($title, _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'url'), $link_options);
+      $title = l($title, _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'url'), $link_options);
     }
     $icon_block['icon_blocks']['text_wrapper']['title'] = array(
       '#type' => 'html_tag',
@@ -98,7 +97,7 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
     );
 
     $icon_block['icon_blocks']['text_wrapper']['description'] = array(
-      '#markup' => filter_xss(_contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'description')),
+      '#markup' => filter_xss(_contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'description')),
     );
 
     $items[$delta] = render($icon_block);
@@ -158,42 +157,42 @@ function contentwidget_icon_blocks_settings(&$element, &$form_state, $plugin, $w
 
   // Create the forms for the icon links.
   for ($delta = 0; $delta < $widget_settings['icon_blocks_number']; $delta++) {
-    $settings_form['icon_blocks_wrapper']['link_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta] = array(
       '#type' => 'fieldset',
       '#title' => t('Icon Link #@number:', array('@number' => ($delta + 1))),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
     );
-    $settings_form['icon_blocks_wrapper']['link_' . $delta]['icon_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta]['icon'] = array(
       '#type' => 'radioicons',
       '#title' => t('Icon'),
       '#options' => $icon_options,
       '#icons' => $icons,
       '#required' => TRUE,
-      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'icon'),
+      '#default_value' => _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'icon'),
     );
-    $settings_form['icon_blocks_wrapper']['link_' . $delta]['title_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta]['title'] = array(
       '#type' => 'textfield',
       '#title' => t('Title'),
       '#required' => TRUE,
-      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'title'),
+      '#default_value' => _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'title'),
     );
-    $settings_form['icon_blocks_wrapper']['link_' . $delta]['title_as_link_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta]['title_as_link'] = array(
       '#type' => 'checkbox',
       '#title' => t('Title as a Link'),
       '#description' => t('If you want to use the title as the link (and not the default "Visit Link >"), check this box.'),
-      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'title_as_link'),
+      '#default_value' => _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'title_as_link'),
     );
-    $settings_form['icon_blocks_wrapper']['link_' . $delta]['description_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta]['description'] = array(
       '#type' => 'textarea',
       '#title' => t('Description'),
-      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'description'),
+      '#default_value' => _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'description'),
     );
-    $settings_form['icon_blocks_wrapper']['link_' . $delta]['url_' . $delta] = array(
+    $settings_form['icon_blocks_wrapper'][$delta]['url'] = array(
       '#type' => 'textfield',
       '#title' => t('URL'),
       '#required' => TRUE,
-      '#default_value' => _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, 'url'),
+      '#default_value' => _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, 'url'),
       '#description' => t('You can specify either an internal or external URL (if it is an external, make sure to specify the full path: i.e. http://google.com'),
     );
   }
@@ -223,10 +222,9 @@ function contentwidget_icon_blocks_settings_ajax($form, $form_state) {
  * @param $key
  *  Key of the setting we want to return.
  *
- * @return
+ * @return string
  *  Returns the value of the setting.
  */
-function _contentwidget_key_icon_link_get_property_value($widget_settings, $delta, $key) {
-  $value = isset($widget_settings['icon_blocks_wrapper']['link_' . $delta][$key . '_' . $delta]) ? $widget_settings['icon_blocks_wrapper']['link_' . $delta][$key . '_' . $delta] : '';
-  return $value;
+function _contentwidget_icon_blocks_get_property_value($widget_settings, $delta, $key) {
+  return isset($widget_settings['icon_blocks_wrapper'][$delta][$key]) ? $widget_settings['icon_blocks_wrapper'][$delta][$key] : '';
 }
