@@ -350,9 +350,9 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'fieldable_panels_pane-key_facts-field_fpp_widget'.
-  $field_instances['fieldable_panels_pane-key_facts-field_fpp_widget'] = array(
-    'bundle' => 'key_facts',
+  // 'fieldable_panels_pane-fact_blocks-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_widget'] = array(
+    'bundle' => 'fact_blocks',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -370,7 +370,7 @@ function eitiwidgets_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'available_widgets' => array(
-        'key_facts' => 'key_facts',
+        'fact_blocks' => 'fact_blocks',
       ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -384,9 +384,9 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'fieldable_panels_pane-key_facts-title_field'.
-  $field_instances['fieldable_panels_pane-key_facts-title_field'] = array(
-    'bundle' => 'key_facts',
+  // Exported field_instance: 'fieldable_panels_pane-fact_blocks-title_field'.
+  $field_instances['fieldable_panels_pane-fact_blocks-title_field'] = array(
+    'bundle' => 'fact_blocks',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',

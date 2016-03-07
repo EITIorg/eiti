@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Provides a custom Key Facts widget.
+ * Provides a custom Fact Blocks widget.
  */
 
 /**
@@ -10,23 +10,21 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Key Facts',
-  'description' => 'Widget that contains a couple of key facts.',
-  'render callback' => 'contentwidget_key_facts_render',
-  'settings form' => 'contentwidget_key_facts_settings',
-  'entity form alter' => 'contentwidget_key_facts_form_alter',
-  'entity group alter' => 'contentwidget_key_facts_group_alter',
+  'title' => 'Fact Blocks',
+  'description' => 'Widget that contains a couple of Fact Blocks.',
+  'render callback' => 'contentwidget_fact_blocks_render',
+  'settings form' => 'contentwidget_fact_blocks_settings',
+  'entity form alter' => 'contentwidget_fact_blocks_form_alter',
+  'entity group alter' => 'contentwidget_fact_blocks_group_alter',
   'defaults' => array(
-    'fact' => array(
-      'facts_number' => 4,
-    ),
+    'facts_number' => 4,
   ),
 );
 
 /**
- * Render callback for the 'Key Facts' predefined widget.
+ * Render callback for the 'Fact Blocks' predefined widget.
  */
-function contentwidget_key_facts_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget_fact_blocks_render($plugin, $widget_settings, $entity, $langcode) {
   $image_url = '';
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -185,11 +183,11 @@ function contentwidget_key_facts_render($plugin, $widget_settings, $entity, $lan
 /**
  * Settings form for the 'Ket Facts' predefined widget.
  */
-function contentwidget_key_facts_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget_fact_blocks_settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   // Special case: we're in IEF. We want to get the REAL settings.
-  if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == 'contentwidget_key_facts_settings_ajax') {
+  if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == 'contentwidget_fact_blocks_settings_ajax') {
     $parents = $form_state['triggering_element']['#parents'];
     $get_rid_off_arr = array('facts_number');
     $parents = array_diff($parents, $get_rid_off_arr);
@@ -198,21 +196,22 @@ function contentwidget_key_facts_settings(&$element, &$form_state, $plugin, $wid
 
   $settings_form = array(
     '#type' => 'fieldset',
-    '#title' => t('Key Facts'),
+    '#title' => t('Fact Blocks'),
     '#collapsible' => FALSE,
-    '#prefix' => '<div id="fact-wrapper">',
+    '#prefix' => '<div id="fact-blocks-wrapper">',
     '#suffix' => '</div>',
   );
+
   $settings_form['facts_number'] = array(
     '#type' => 'select',
-    '#title' => t('Number of Key Facts'),
+    '#title' => t('Number of Fact Blocks'),
     '#options' => drupal_map_assoc(range(1, 4)),
     '#description' => t('Please specify the number of facts you want to use.'),
     '#default_value' => $widget_settings['facts_number'],
     '#ajax' => array(
-      'callback' => 'contentwidget_key_facts_settings_ajax',
+      'callback' => 'contentwidget_fact_blocks_settings_ajax',
       'event' => 'change',
-      'wrapper' => 'fact-wrapper',
+      'wrapper' => 'fact-blocks-wrapper',
       'method' => 'replace',
       'effect' => 'fade',
     ),
@@ -263,13 +262,14 @@ function contentwidget_key_facts_settings(&$element, &$form_state, $plugin, $wid
       $parents = $element['#field_parents'];
       $field_name = array_shift($parents);
       $field_parents_path = $field_name . '[' . implode('][', $parents) . ']';
-      dpm($field_parents_path, '$field_parents_path');
-      $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][und][0][settings][key_facts]';
+
+      $entity_language = entity_language('fieldable_panels_pane', $form_state['entity']);
+      $widget_field_language = field_language('fieldable_panels_pane', $form_state['entity'], 'field_fpp_widget', $entity_language);
+      $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][' . $widget_field_language . '][0][settings][fact_blocks]';
     }
     else {
-      $field_name_prefix = $element['#field_name'] . '[und][0][settings][key_facts]';
+      $field_name_prefix = $element['#field_name'] . '[und][0][settings][fact_blocks]';
     }
-    dpm($field_name_prefix, '$field_name_prefix');
 
     $settings_form[$delta]['value'] = array(
       '#type' => 'textfield',
@@ -310,7 +310,6 @@ function contentwidget_key_facts_settings(&$element, &$form_state, $plugin, $wid
     );
   }
 
-  dpm($settings_form, 'xxx');
   return $settings_form;
 }
 
@@ -394,7 +393,7 @@ function contentwidget_key_fact_get_countries_count() {
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_key_facts_settings_ajax($form, $form_state) {
+function contentwidget_fact_blocks_settings_ajax($form, $form_state) {
   $parents = $form_state['triggering_element']['#parents'];
   $key = array_search('facts_number', $parents, TRUE);
   unset($parents[$key]);
@@ -408,6 +407,6 @@ function contentwidget_key_facts_settings_ajax($form, $form_state) {
     $entity = $form_state['entity'];
     $entity_language = entity_language('fieldable_panels_pane', $entity);
     $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
-    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['key_facts'];
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['fact_blocks'];
   }
 }

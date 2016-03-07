@@ -45,9 +45,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'panelizer',
   );
 
-  // Exported permission: 'administer panelizer fieldable_panels_pane key_facts defaults'.
-  $permissions['administer panelizer fieldable_panels_pane key_facts defaults'] = array(
-    'name' => 'administer panelizer fieldable_panels_pane key_facts defaults',
+  // Exported permission: 'administer panelizer fieldable_panels_pane fact_blocks defaults'.
+  $permissions['administer panelizer fieldable_panels_pane fact_blocks defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane fact_blocks defaults',
     'roles' => array(),
     'module' => 'panelizer',
   );
@@ -114,9 +114,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'create fieldable key_facts'.
-  $permissions['create fieldable key_facts'] = array(
-    'name' => 'create fieldable key_facts',
+  // Exported permission: 'create fieldable fact_blocks'.
+  $permissions['create fieldable fact_blocks'] = array(
+    'name' => 'create fieldable fact_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
@@ -189,9 +189,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'delete fieldable key_facts'.
-  $permissions['delete fieldable key_facts'] = array(
-    'name' => 'delete fieldable key_facts',
+  // Exported permission: 'delete fieldable fact_blocks'.
+  $permissions['delete fieldable fact_blocks'] = array(
+    'name' => 'delete fieldable fact_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
@@ -264,9 +264,9 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
-  // Exported permission: 'edit fieldable key_facts'.
-  $permissions['edit fieldable key_facts'] = array(
-    'name' => 'edit fieldable key_facts',
+  // Exported permission: 'edit fieldable fact_blocks'.
+  $permissions['edit fieldable fact_blocks'] = array(
+    'name' => 'edit fieldable fact_blocks',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );

@@ -742,7 +742,7 @@ function eitipanels_strongarm() {
     'fieldable_panels_pane-featured_bookmarks' => 'fieldable_panels_pane-featured_bookmarks',
     'fieldable_panels_pane-header' => 'fieldable_panels_pane-header',
     'fieldable_panels_pane-icon_blocks' => 'fieldable_panels_pane-icon_blocks',
-    'fieldable_panels_pane-key_facts' => 'fieldable_panels_pane-key_facts',
+    'fieldable_panels_pane-fact_blocks' => 'fieldable_panels_pane-fact_blocks',
     'fieldable_panels_pane-quote' => 'fieldable_panels_pane-quote',
     'fieldable_panels_pane-table' => 'fieldable_panels_pane-table',
     'fieldable_panels_pane-tabs_with_widgets' => 'fieldable_panels_pane-tabs_with_widgets',
