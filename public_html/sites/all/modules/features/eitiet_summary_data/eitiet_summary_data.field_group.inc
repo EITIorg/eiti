@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function eitiet_summary_data_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -38,7 +38,7 @@ function eitiet_summary_data_field_group_info() {
       'formatter' => 'collapsible',
     ),
   );
-  $export['group_sd_contact_details|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_contact_details|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -67,7 +67,7 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_data_disaggregation|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_data_disaggregation|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -95,7 +95,7 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_fiscal_year|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_fiscal_year|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -123,7 +123,7 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_reporting_currency|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_reporting_currency|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -147,7 +147,7 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_sectors_covered|summary_data|summary_data|default'] = $field_group;
+  $field_groups['group_sd_sectors_covered|summary_data|summary_data|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -177,7 +177,7 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_sectors_covered|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_sectors_covered|summary_data|summary_data|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -204,7 +204,16 @@ function eitiet_summary_data_field_group_info() {
       ),
     ),
   );
-  $export['group_sd_web_links|summary_data|summary_data|form'] = $field_group;
+  $field_groups['group_sd_web_links|summary_data|summary_data|form'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Contact details');
+  t('Disaggregation of Data');
+  t('Fiscal Year Covered in the Report');
+  t('Reporting currency');
+  t('Sectors Covered');
+  t('Web links to EITI Report, on the national EITI website');
+
+  return $field_groups;
 }
