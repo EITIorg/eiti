@@ -441,7 +441,7 @@ function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
  * @return string
  */
 function helpertheme_get_svg_icon($icon, $options = array()) {
-  if (!is_null($icon)) {
+  if (is_null($icon)) {
     return '';
   }
 
