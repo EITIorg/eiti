@@ -52,6 +52,11 @@ class EITISpreadsheetMigration extends Migration {
    * Small helper function that checks if the value is empty or not.
    */
   protected function checkEmptyValue($value) {
+    // Simple empty check.
+    if (empty($value)) {
+      return TRUE;
+    }
+
     $is_empty = FALSE;
     switch (strtolower($value)) {
       case 'not applicable':

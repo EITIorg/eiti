@@ -157,6 +157,7 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
 
         case 'boolean':
           $value = $this->getBooleanListValue($row->entry);
+
           if ($value == NULL) {
             $msg = t('Indicator !name - Boolean expected, this value given instead (treating as NULL): !value.<br />Skipping the item.<br/>File: !file', array(
               '!value' => drupal_placeholder($row->entry),

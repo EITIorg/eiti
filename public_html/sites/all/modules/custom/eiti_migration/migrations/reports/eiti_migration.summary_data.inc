@@ -159,6 +159,15 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       $row->country_name = $existing_country->id;
     }
 
+    // More sanity check.
+    if ($this->checkEmptyValue($row->start_date) || $this->checkEmptyValue($row->end_date)) {
+      $msg = t('Wrong dates (start or end).<br/>File: !filename', array(
+        '!filename' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
+
     // Normalize the sectors.
     $booleanMappings = array(
       'sectors:oil',
@@ -215,10 +224,26 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       $row->{$currencyConversion} = reset($row->{$currencyConversion});
     }
 
-    // Check if links are empty.
-    foreach ($row->web_links as $key => $web_link) {
-      if ($this->checkEmptyValue($web_link)) {
-        unset($row->web_links[$key]);
+    // Check some fields for empty values.
+    $checkIfEmptyArr = array(
+      'web_links',
+      'contact:email',
+      'contact:name',
+      'contact:organization',
+      'independent_administrator',
+      'number:reporting_gov',
+      'number:reporting_comp',
+    );
+    foreach ($checkIfEmptyArr as $fieldToCheck) {
+      if (is_array($row->{$fieldToCheck})) {
+        foreach ($row->{$fieldToCheck} as $key => $fieldValue) {
+          if ($this->checkEmptyValue($fieldValue)) {
+            unset($row->{$fieldToCheck}[$key]);
+          }
+        }
+      }
+      elseif ($this->checkEmptyValue($row->{$fieldToCheck})) {
+        unset($row->{$fieldToCheck});
       }
     }
   }
