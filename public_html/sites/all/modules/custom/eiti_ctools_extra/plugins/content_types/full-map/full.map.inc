@@ -15,19 +15,19 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => t('Semi-Interactive Map'),
+  'title' => t('Full Map'),
   'single' => TRUE,
-  'description' => t('Add a semi-interactive map. Initially intended to be used on the homepage.'),
+  'description' => t('Add a fully interactive map. Initially intended to be used on a separate map page'),
   'category' => t('EITI Maps'),
-  'render callback' => 'eiti_ctools_extra_map_semi_interactive_render',
-  'edit form' => 'eiti_ctools_extra_map_semi_interactive_edit_form',
+  'render callback' => 'eiti_ctools_extra_map_full_render',
+  'edit form' => 'eiti_ctools_extra_map_full_edit_form',
   'render last' => TRUE,
 );
 
 /**
- * Output function for the 'Semi-Interactive Map' content type.
+ * Output function for the 'Full Map' content type.
  */
-function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_args, $context) {
+function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $context) {
   $block = new stdClass();
 
   // We need this because we store the JS init file in the plugin folder.
@@ -52,38 +52,25 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
   }
 
   // Add our init js.
-  drupal_add_js($plugin_info['path'] . '/semi-interactive-map.init.js');
+  drupal_add_js($plugin_info['path'] . '/full-map.init.js');
 
   // Now build the content.
   $content = array(
-    '#type' => 'html_container',
-    '#tag' => 'section',
+    '#type' => 'container',
     '#attributes' => array(
-      'class' => array(
-        'semi-interactive-map-wrapper',
-        'media-resizable-wrapper',
-      ),
+      'class' => array('full-map-wrapper', 'map-container')
     )
   );
   // For now, this is hardcoded, we should change it later.
-  $map_html_id = drupal_html_id('map1');
   $content['map-div'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#attributes' => array(
-      'id' => $map_html_id,
-      'class' => array(
-        'semi-interactive-map',
-        'media-resizable-element',
-      ),
+      'id' => array(drupal_html_id('map1')),
+      'style' => array('height:500px;display:block;margin:auto'),
+      'class' => array('main-map')
     )
   );
-  $widget_js_settings = array(
-    'container' => $map_html_id,
-    'position' => array(12.897489, -12.761718),
-  );
-  drupal_add_js(array('semiInteractiveMap' => $widget_js_settings), 'setting');
-
   $block->content = $content;
   return $block;
 }
@@ -93,7 +80,7 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
  *
  * @TODO: make configurable stats.
  */
-function eiti_ctools_extra_map_semi_interactive_edit_form($form, &$form_state) {
+function eiti_ctools_extra_map_full_edit_form($form, &$form_state) {
   // Empty so that we can have title override.
   return $form;
 }
