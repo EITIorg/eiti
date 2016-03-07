@@ -108,7 +108,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'create fieldable icon_blocks'.
   $permissions['create fieldable icon_blocks'] = array(
     'name' => 'create fieldable icon_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -181,7 +183,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'delete fieldable icon_blocks'.
   $permissions['delete fieldable icon_blocks'] = array(
     'name' => 'delete fieldable icon_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -254,7 +258,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable icon_blocks'.
   $permissions['edit fieldable icon_blocks'] = array(
     'name' => 'edit fieldable icon_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 

@@ -285,7 +285,7 @@ function eitiwidgets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
@@ -323,7 +323,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
