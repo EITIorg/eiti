@@ -11,6 +11,163 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-fact_blocks-field_fpp_background_image'.
+  $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_background_image'] = array(
+    'bundle' => 'fact_blocks',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_background_image',
+    'label' => 'Background Image',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '32 MB',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-fact_blocks-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_widget'] = array(
+    'bundle' => 'fact_blocks',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 0,
+    'settings' => array(
+      'available_widgets' => array(
+        'fact_blocks' => 'fact_blocks',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-fact_blocks-title_field'.
+  $field_instances['fieldable_panels_pane-fact_blocks-title_field'] = array(
+    'bundle' => 'fact_blocks',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => FALSE,
+        'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'.
   $field_instances['fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'] = array(
     'bundle' => 'featured_bookmarks',
@@ -315,78 +472,6 @@ function eitiwidgets_field_default_field_instances() {
   // Exported field_instance: 'fieldable_panels_pane-icon_blocks-title_field'.
   $field_instances['fieldable_panels_pane-icon_blocks-title_field'] = array(
     'bundle' => 'icon_blocks',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'title_field',
-    'label' => 'Title',
-    'required' => FALSE,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'hide_label' => array(
-        'entity' => FALSE,
-        'page' => FALSE,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'fieldable_panels_pane-fact_blocks-field_fpp_widget'.
-  $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_widget'] = array(
-    'bundle' => 'fact_blocks',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'contentwidget',
-        'settings' => array(),
-        'type' => 'cwrendered',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fpp_widget',
-    'label' => 'Widget',
-    'required' => 0,
-    'settings' => array(
-      'available_widgets' => array(
-        'fact_blocks' => 'fact_blocks',
-      ),
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'contentwidget',
-      'settings' => array(),
-      'type' => 'cwsettings',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'fieldable_panels_pane-fact_blocks-title_field'.
-  $field_instances['fieldable_panels_pane-fact_blocks-title_field'] = array(
-    'bundle' => 'fact_blocks',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',

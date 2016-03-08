@@ -24,6 +24,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'administer panelizer fieldable_panels_pane fact_blocks defaults'.
+  $permissions['administer panelizer fieldable_panels_pane fact_blocks defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane fact_blocks defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'administer panelizer fieldable_panels_pane featured_bookmarks defaults'.
   $permissions['administer panelizer fieldable_panels_pane featured_bookmarks defaults'] = array(
     'name' => 'administer panelizer fieldable_panels_pane featured_bookmarks defaults',
@@ -41,13 +48,6 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'administer panelizer fieldable_panels_pane icon_blocks defaults'.
   $permissions['administer panelizer fieldable_panels_pane icon_blocks defaults'] = array(
     'name' => 'administer panelizer fieldable_panels_pane icon_blocks defaults',
-    'roles' => array(),
-    'module' => 'panelizer',
-  );
-
-  // Exported permission: 'administer panelizer fieldable_panels_pane fact_blocks defaults'.
-  $permissions['administer panelizer fieldable_panels_pane fact_blocks defaults'] = array(
-    'name' => 'administer panelizer fieldable_panels_pane fact_blocks defaults',
     'roles' => array(),
     'module' => 'panelizer',
   );
@@ -87,6 +87,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'create fieldable fact_blocks'.
+  $permissions['create fieldable fact_blocks'] = array(
+    'name' => 'create fieldable fact_blocks',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable featured_bookmarks'.
   $permissions['create fieldable featured_bookmarks'] = array(
     'name' => 'create fieldable featured_bookmarks',
@@ -111,13 +118,6 @@ function eitiwidgets_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'fieldable_panels_panes',
-  );
-
-  // Exported permission: 'create fieldable fact_blocks'.
-  $permissions['create fieldable fact_blocks'] = array(
-    'name' => 'create fieldable fact_blocks',
-    'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -162,6 +162,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable fact_blocks'.
+  $permissions['delete fieldable fact_blocks'] = array(
+    'name' => 'delete fieldable fact_blocks',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable featured_bookmarks'.
   $permissions['delete fieldable featured_bookmarks'] = array(
     'name' => 'delete fieldable featured_bookmarks',
@@ -186,13 +193,6 @@ function eitiwidgets_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'fieldable_panels_panes',
-  );
-
-  // Exported permission: 'delete fieldable fact_blocks'.
-  $permissions['delete fieldable fact_blocks'] = array(
-    'name' => 'delete fieldable fact_blocks',
-    'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -237,6 +237,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'edit fieldable fact_blocks'.
+  $permissions['edit fieldable fact_blocks'] = array(
+    'name' => 'edit fieldable fact_blocks',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'edit fieldable featured_bookmarks'.
   $permissions['edit fieldable featured_bookmarks'] = array(
     'name' => 'edit fieldable featured_bookmarks',
@@ -261,13 +268,6 @@ function eitiwidgets_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'fieldable_panels_panes',
-  );
-
-  // Exported permission: 'edit fieldable fact_blocks'.
-  $permissions['edit fieldable fact_blocks'] = array(
-    'name' => 'edit fieldable fact_blocks',
-    'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
 

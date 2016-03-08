@@ -13,6 +13,19 @@ function eitiwidgets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__fact_blocks';
+  $strongarm->value = array(
+    'default_language' => 'und',
+    'hide_language_selector' => 0,
+    'exclude_language_none' => 0,
+    'lock_language' => 0,
+    'shared_fields_original_only' => 0,
+  );
+  $export['entity_translation_settings_fieldable_panels_pane__fact_blocks'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__featured_bookmarks';
   $strongarm->value = array(
     'default_language' => 'und',
@@ -48,19 +61,6 @@ function eitiwidgets_strongarm() {
     'shared_fields_original_only' => 0,
   );
   $export['entity_translation_settings_fieldable_panels_pane__icon_blocks'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__fact_blocks';
-  $strongarm->value = array(
-    'default_language' => 'und',
-    'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
-    'lock_language' => 0,
-    'shared_fields_original_only' => 0,
-  );
-  $export['entity_translation_settings_fieldable_panels_pane__fact_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -126,6 +126,39 @@ function eitiwidgets_strongarm() {
     'shared_fields_original_only' => 0,
   );
   $export['entity_translation_settings_fieldable_panels_pane__visualization'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_fieldable_panels_pane__fact_blocks';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'preview' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(
+        'redirect' => array(
+          'weight' => '2',
+        ),
+        'language' => array(
+          'weight' => '0',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_fieldable_panels_pane__fact_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -248,39 +281,6 @@ function eitiwidgets_strongarm() {
     ),
   );
   $export['field_bundle_settings_fieldable_panels_pane__icon_blocks'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_fieldable_panels_pane__fact_blocks';
-  $strongarm->value = array(
-    'view_modes' => array(
-      'full' => array(
-        'custom_settings' => FALSE,
-      ),
-      'preview' => array(
-        'custom_settings' => FALSE,
-      ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
-      'token' => array(
-        'custom_settings' => FALSE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'redirect' => array(
-          'weight' => '2',
-        ),
-        'language' => array(
-          'weight' => '0',
-        ),
-      ),
-      'display' => array(),
-    ),
-  );
-  $export['field_bundle_settings_fieldable_panels_pane__fact_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -463,6 +463,22 @@ function eitiwidgets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_fact_blocks';
+  $strongarm->value = array(
+    'status' => 0,
+    'view modes' => array(
+      'default' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+    ),
+  );
+  $export['panelizer_defaults_fieldable_panels_pane_fact_blocks'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_featured_bookmarks';
   $strongarm->value = array(
     'status' => 0,
@@ -495,22 +511,6 @@ function eitiwidgets_strongarm() {
     'view modes' => array(),
   );
   $export['panelizer_defaults_fieldable_panels_pane_icon_blocks'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_fact_blocks';
-  $strongarm->value = array(
-    'status' => 0,
-    'view modes' => array(
-      'default' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-    ),
-  );
-  $export['panelizer_defaults_fieldable_panels_pane_fact_blocks'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

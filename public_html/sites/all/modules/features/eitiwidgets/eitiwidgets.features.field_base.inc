@@ -125,9 +125,9 @@ function eitiwidgets_field_default_field_bases() {
           'type' => 'none',
         ),
         'target_bundles' => array(
+          'fact_blocks' => 'fact_blocks',
           'featured_bookmarks' => 'featured_bookmarks',
           'header' => 'header',
-          'fact_blocks' => 'fact_blocks',
           'quote' => 'quote',
           'visualization' => 'visualization',
           'wide_image' => 'wide_image',
