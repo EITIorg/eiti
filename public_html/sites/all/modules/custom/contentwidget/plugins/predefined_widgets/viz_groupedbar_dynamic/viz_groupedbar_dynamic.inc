@@ -44,6 +44,7 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $viz_id,
+      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
     )
   );
 
