@@ -44,6 +44,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $second_query->addField('org_g', 'name', 'agency');
     $second_query->addField('grs', 'gfs_code_id', 'gfs_code_id');
     $second_query->condition('sd.status', TRUE);
+    $this->checkProductionFilters($second_query);
 
     $query->join($second_query, 'sq', 'sq.gfs_code_id = crs.gfs_code_id');
     $query->fields('sd', array('id', 'year_end', 'status'));
@@ -106,7 +107,6 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $request = $this->getRequest();
     $limit = $request['filter']['limit'];
 
-    $output = array();
     // Get all the nodes first.
     $nodes = array();
     foreach ($data as $item) {
@@ -174,7 +174,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
       $g_a_flux = $gfs_name_index . ':' . $agency_index;
 
       // Added GFS -> Government Agency
-      if ($company_index) {
+      if ($company_index !== FALSE) {
         // Yes we do it again, because the lookup haystack is now refreshed.
         if (!in_array($c_g_flux, array_keys($links))) {
           $links[$c_g_flux] = array(
@@ -200,7 +200,6 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
         }
       }
     }
-
     return array(
       'nodes' => $nodes,
       'links' => array_values($links),
