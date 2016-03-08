@@ -110,29 +110,18 @@ function contentwidget_tabs_render($plugin, $widget_settings, $entity, $langcode
         'html' => FALSE,
       ),
     );
-    $tab['secondary_link'] = array(
-      '#theme' => 'link',
-      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
-      '#path' => url(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
-      '#options' => array(
-        'attributes' => array(
-          'class' => array('secondary-tab-link'),
-        ),
-        'html' => FALSE,
-      ),
-    );
     $tab['widget'] = $referenced_entities_view_arr[$tab_delta];
     $tabs_content[] = $tab;
   }
 
-  $block['tabs_links'] = array(
-    '#theme' => 'item_list',
-    '#items' => $tab_links,
-    '#type' => 'ul',
-    '#title' => '',
-    '#attributes' => array('class' => array('tab-links')),
-  );
-  $block['tabs_content'] = $tabs_content;
+  //$block['tabs_links'] = array(
+  //  '#theme' => 'item_list',
+  //  '#items' => $tab_links,
+  //  '#type' => 'ul',
+  //  '#title' => '',
+  //  '#attributes' => array('class' => array('tab-links')),
+  //);
+  //$block['tabs_content'] = $tabs_content;
 
   return $block;
 }
