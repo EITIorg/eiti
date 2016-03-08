@@ -100,6 +100,15 @@ function helpergeneric_menu() {
     'weight' => -43,
   );
 
+  $items['admin/settings/taxonomy'] = array(
+    'title' => 'Taxonomy',
+    'description' => 'Administer Taxonomy',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/taxonomy'),
+    'access arguments' => array('helpergeneric access taxonomy'),
+    'weight' => -43,
+  );
+
   $items['admin/settings/main-menu'] = array(
     'title' => 'Edit Main menu',
     'description' => 'Edit the main menu links.',
