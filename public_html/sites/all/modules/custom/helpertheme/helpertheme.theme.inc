@@ -86,10 +86,6 @@ function theme_svg_icon(array $elements) {
 
   // Set a default attributes.
   foreach (array('class', 'height', 'width') as $key) {
-    if (array_key_exists($key, $elements['#options']) && !empty($elements['#options'][$key])) {
-      continue;
-    }
-
     if (!empty($elements['#options'][$key])) {
       $elements['#attributes'][$key] = $elements['#options'][$key];
       continue;
