@@ -95,6 +95,13 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
 
     // We'll need this a bit later for normalization.
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    if (empty($summary_data_id)) {
+      $msg = t('Indicators not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
     $rate_to_usd = $summary_data_emw->currency_rate->value();
@@ -217,6 +224,13 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     // One thing we need to do, is to look-up the summary_data id, load it and
     // save the indicator id in the field "field_sd_indicator_values".
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    if (empty($summary_data_id)) {
+      $msg = t('Indicators not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
     $summary_data_emw->field_sd_indicator_values[] = $entity->id;

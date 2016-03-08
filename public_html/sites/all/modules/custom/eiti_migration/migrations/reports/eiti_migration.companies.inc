@@ -66,6 +66,13 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
 
     // Let's fetch the summary data so we can have the country id.
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    if (empty($summary_data_id)) {
+      $msg = t('Companies not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
     $row->country_id = $summary_data_emw->country_id->id->value();
