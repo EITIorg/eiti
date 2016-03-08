@@ -1,0 +1,13 @@
+<svg id="keydocuments" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+<style type="text/css">
+	.st0{fill:none;stroke:#0093cf;stroke-width:5;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<line class="st0" x1="38.6" y1="68.8" x2="103.3" y2="68.8"/>
+<line class="st0" x1="38.6" y1="48.1" x2="64.5" y2="48.1"/>
+<line class="st0" x1="38.6" y1="89.5" x2="103.3" y2="89.5"/>
+<line class="st0" x1="38.6" y1="110.2" x2="103.3" y2="110.2"/>
+<line class="st0" x1="38.6" y1="130.9" x2="103.3" y2="130.9"/>
+<polygon class="st0" points="124,53.2 87.8,17 17.9,17 17.9,154.1 124,154.1 "/>
+<polyline class="st0" points="87.8,17 87.8,53.2 124,53.2 "/>
+<polygon class="st0" points="17.9,17 87.8,17 111.1,40.3 111.1,4.1 5,4.1 5,141.2 17.9,141.2 "/>
+</svg>

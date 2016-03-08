@@ -98,8 +98,7 @@ function helpergeneric_field_formatter_settings_form($field, $instance, $view_mo
   }
 
   if ($display['type'] == 'link_icon') {
-    // @TODO: Get full list of available icons.
-    $icons = helpertheme_get_svg_icons(NULL, array('sprite_name' => 'icons'));
+    $icons = helpertheme_get_svg_icons(NULL);
     $options = array('' => t('No Icon'));
     $options += drupal_map_assoc(array_keys($icons));
     $element['icon'] = array(

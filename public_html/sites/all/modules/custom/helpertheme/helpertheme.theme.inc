@@ -74,28 +74,24 @@ function theme_html_container($variables) {
  * @param array $elements
  * @return null|string
  */
-function theme_svg_sprite(array $elements) {
-  if (empty($elements['symbol'])) {
-    return NULL;
+function theme_svg_icon(array $elements) {
+  if (empty($elements['#info']['name'])) {
+    return '';
   }
 
   // Provide a fallback sprite.
-  if (empty($elements['sprite_name'])) {
-    $elements['sprite_name'] = 'icons';
+  if (empty($elements['#info']['group'])) {
+    $elements['#info']['group'] = 'icons';
   }
 
-  // Prepare the sprite file path.
-  $sprite_file_name = $elements['sprite_name'] . '.svg';
-  $elements['path'] = drupal_get_path('module', 'helpertheme') . '/sprites/' . $sprite_file_name;
-
   // Set a default attributes.
-  foreach (array('class', 'height', 'width', 'viewBox') as $key) {
-    if (array_key_exists($key, $elements) && is_null($elements[$key])) {
+  foreach (array('class', 'height', 'width') as $key) {
+    if (array_key_exists($key, $elements['#options']) && !empty($elements['#options'][$key])) {
       continue;
     }
 
-    if (!empty($elements[$key])) {
-      $elements['#attributes'][$key] = $elements[$key];
+    if (!empty($elements['#options'][$key])) {
+      $elements['#attributes'][$key] = $elements['#options'][$key];
       continue;
     }
 
@@ -111,19 +107,55 @@ function theme_svg_sprite(array $elements) {
   // @TODO: improve accessibility.
   $elements['#attributes']['role'] = 'presentation';
   $elements['#attributes']['class'][] = 'icon';
-  $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['symbol']);
+  $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['#info']['name']);
+
+  if (empty($elements['#info']['in_sprite'])) {
+    // Prepare the sprite file path.
+    $svg_file_name = $elements['#info']['group'] . '/' . $elements['#info']['name'] . '.svg';
+    $svg_file_path = drupal_get_path('module', 'helpertheme') . '/images/' . $svg_file_name;
+
+    $image_options = array(
+      'path' => $svg_file_path,
+    );
+    foreach (array_keys($elements['#attributes']) as $key) {
+      if ($key == 'width' || $key == 'height') {
+        $font_base_size = 16;
+        $image_options[$key] = preg_replace('/[^\d]+em/', '', $elements['#attributes'][$key]) * $font_base_size;
+        continue;
+      }
+
+      $image_options[$key] = $elements['#attributes'][$key];
+    }
+
+    return theme('image', $image_options);
+  }
+  else {
+    return theme('svg_sprite', $elements);
+  }
+}
+
+/**
+ * Returns HTML for the svg sprite icons.
+ *
+ * @param array $elements
+ * @return null|string
+ */
+function theme_svg_sprite(array $elements) {
+  // Prepare the sprite file path.
+  $sprite_file_name = $elements['#info']['group'] . '.svg';
+  $sprite_file_path = drupal_get_path('module', 'helpertheme') . '/sprites/' . $sprite_file_name;
 
   // A dummy query-string is added to filenames, to gain control over
   // browser-caching. The string changes on every update or full cache
   // flush, forcing browsers to load a new copy of the files, as the
   // URL changed.
   $query_string = variable_get('css_js_query_string', '0');
-
   $path_suffix = '?' . $query_string;
-  if (!is_null($elements['symbol'])) {
-    $path_suffix .= '#' . $elements['symbol'];
-  }
-  $elements['#use']['xlink:href'] = file_create_url($elements['path']) . $path_suffix;
+
+  // Specify the sprite element.
+  $path_suffix .= '#' . $elements['#info']['name'];
+
+  $elements['#use']['xlink:href'] = file_create_url($sprite_file_path) . $path_suffix;
 
   return '<svg' . drupal_attributes($elements['#attributes']) . '><use' . drupal_attributes($elements['#use']) . '/></svg>';
 }
