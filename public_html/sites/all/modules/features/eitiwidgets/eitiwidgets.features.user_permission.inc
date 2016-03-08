@@ -90,7 +90,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'create fieldable fact_blocks'.
   $permissions['create fieldable fact_blocks'] = array(
     'name' => 'create fieldable fact_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -165,7 +167,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'delete fieldable fact_blocks'.
   $permissions['delete fieldable fact_blocks'] = array(
     'name' => 'delete fieldable fact_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -240,7 +244,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable fact_blocks'.
   $permissions['edit fieldable fact_blocks'] = array(
     'name' => 'edit fieldable fact_blocks',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
