@@ -21,6 +21,7 @@ function fieldable_panels_panes_entity_info() {
   foreach (ctools_export_crud_load_all('fieldable_panels_pane_type') as $type) {
     $bundles[$type->name] = array(
       'label' => $type->title,
+      'description' => $type->description,
       'admin' => array(
         'path' => 'admin/structure/fieldable-panels-panes/%fieldable_panels_pane_type',
         'bundle argument' => 3,
@@ -769,6 +770,9 @@ function fieldable_panels_panes_ctools_access_get($argument) {
     return;
   }
 
+  list($op, $fpid) = explode(':', $argument);
+  $entity = fieldable_panels_panes_load($fpid);
+
   // First, see if there's a cache:
   ctools_include('object-cache');
   $access = ctools_object_cache_get('fieldable_panels_panes', $argument);
@@ -1427,4 +1431,15 @@ function fieldable_panels_panes_views_plugins() {
     ),
   );
   return $plugins;
+}
+
+/**
+ * Implements hook_file_download_access().
+ */
+function fieldable_panels_panes_file_download_access($field, $entity_type, $entity) {
+  if ($entity_type == 'fieldable_panels_pane') {
+    // Use the CTools API to check access.
+    ctools_include('context');
+    return ctools_access($entity->view_access, fieldable_panels_panes_get_base_context($entity));
+  }
 }

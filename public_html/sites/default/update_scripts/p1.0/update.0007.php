@@ -36,7 +36,7 @@ $feature_names = array(
   'eitict_page',
   'eitict_person',
   'eitientities',
-  'eitiet_file',
+  'eitifiles',
   'eitiet_implementing_country',
   'eitiet_organisation',
   'eitiet_summary_data',
