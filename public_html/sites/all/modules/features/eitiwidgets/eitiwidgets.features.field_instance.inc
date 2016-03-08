@@ -751,6 +751,40 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-table-field_fpp_icon'.
+  $field_instances['fieldable_panels_pane-table-field_fpp_icon'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'helperfield',
+        'settings' => array(),
+        'type' => 'helperfield_icon_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_icon',
+    'label' => 'Icon',
+    'required' => 0,
+    'settings' => array(
+      'available_icons' => array(),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'helperfield',
+      'settings' => array(),
+      'type' => 'helperfield_radio_selector',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance:
   // 'fieldable_panels_pane-table-field_fpp_source_url'.
   $field_instances['fieldable_panels_pane-table-field_fpp_source_url'] = array(
@@ -760,11 +794,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => 'Please specify the source of this data (a link to a page or a file).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -801,7 +835,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -847,11 +881,11 @@ function eitiwidgets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'tablefield',
         'settings' => array(),
         'type' => 'tablefield_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -868,7 +902,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'tablefield',
       'settings' => array(),
       'type' => 'tablefield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -881,10 +915,14 @@ function eitiwidgets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',

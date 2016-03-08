@@ -173,8 +173,7 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     }
   }
 
-  // @TODO: Only link the blockquote!
-  if (!empty($entity->field_fpp_source_url)) {
+  if ($entity->bundle == 'quote' && !empty($entity->field_fpp_source_url)) {
     $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $entity_language);
     if (!empty($entity->field_fpp_source_url[$source_url_field_language][0]['url'])) {
       $url = $entity->field_fpp_source_url[$source_url_field_language][0]['url'];
