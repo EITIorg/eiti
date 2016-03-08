@@ -222,6 +222,11 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $currencyConversion = 'currency:conversion';
     if (isset($row->{$currencyConversion})) {
       $row->{$currencyConversion} = reset($row->{$currencyConversion});
+
+      // Sanitize the cases like 13,3 (assuming that's a decimal separator).
+      if (strpos($row->{$currencyConversion}, ',') !== FALSE) {
+        $row->{$currencyConversion} = str_replace(',', '.', $row->{$currencyConversion});
+      }
     }
 
     // Check some fields for empty values.

@@ -134,6 +134,12 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
       switch ($indicator->type) {
         case 'numeric':
           $value = $row->entry;
+
+          // Sanitize the cases like 13,3 (assuming that's a decimal separator).
+          if (strpos($value, ',') !== FALSE) {
+            $value = str_replace(',', '.', $value);
+          }
+
           if (!is_numeric($value)) {
             if (!$this->checkEmptyValue($value)) {
               $msg = t('Indicator !name - Numeric expected, this value given instead: !value<br/>File: !file', array(
@@ -145,8 +151,6 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
               return FALSE;
             }
             else {
-              // $value = NULL;
-              // $row->value_numeric = $value;
               $msg = t('Indicator !name - has an empty value. Skipping the item.<br/>File: !file', array(
                 '!value' => drupal_placeholder($row->entry),
                 '!name' => '<strong>' . $indicator->name . '</strong>',
