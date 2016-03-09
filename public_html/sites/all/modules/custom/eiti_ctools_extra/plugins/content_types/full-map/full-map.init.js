@@ -6,11 +6,27 @@
     attach: function (context, settings) {
       context = $(context);
 
+      var map_container = $('#' + settings.fullMap.container, context);
+      if (!map_container.length) {
+        return;
+      }
+
+      var default_zoom = 2;
+
+      // Set the default zoom based on the map size.
+      var map_container_width = map_container.width();
+      if (map_container_width <= 480) {
+        default_zoom = 0;
+      }
+      else if (map_container_width > 480 && map_container_width <= 800) {
+        default_zoom = 1;
+      }
+
       mapWidget.createMapPage({
         name: "Homepage Map",
-        container: "map1",
-        position: [12.897489183755892, -12.76171875],
-        zoom: 2,
+        container: settings.fullMap.container,
+        position: settings.fullMap.position,
+        zoom: default_zoom,
         maxZoom: 5,
         minZoom: 2
       });

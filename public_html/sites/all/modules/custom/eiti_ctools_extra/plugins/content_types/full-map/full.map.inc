@@ -56,22 +56,33 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
 
   // Now build the content.
   $content = array(
-    '#type' => 'container',
+    '#type' => 'html_container',
+    '#tag' => 'section',
     '#attributes' => array(
-      'class' => array('full-map-wrapper', 'map-container')
+      'class' => array(
+        'full-map-wrapper',
+        'map-container',
+        'media-resizable-wrapper',
+      ),
     )
   );
   // For now, this is hardcoded, we should change it later.
+  $map_html_id = drupal_html_id('map1');
   $content['map-div'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#attributes' => array(
-      'id' => array(drupal_html_id('map1')),
-      'style' => array('height:500px;display:block;margin:auto'),
-      'class' => array('main-map')
+      'id' => $map_html_id,
+      'class' => array('main-map', 'media-resizable-element')
     )
   );
+  $widget_js_settings = array(
+    'container' => $map_html_id,
+    'position' => array(12.897489183755892, -12.76171875),
+  );
+  drupal_add_js(array('fullMap' => $widget_js_settings), 'setting');
   $block->content = $content;
+
   return $block;
 }
 
