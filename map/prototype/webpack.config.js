@@ -1,30 +1,56 @@
-var webpack = require("webpack");
-var	path = require("path");
+/* eslint-disable */
+var webpack = require('webpack');
 
 module.exports = {
-	entry: [
-		'webpack-hot-middleware/client',
-		path.resolve(__dirname, "js/index.jsx")
-	],
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'mapWidgets.js'    
-	},
-	plugins: [
-    	new webpack.HotModuleReplacementPlugin(),
-    	new webpack.NoErrorsPlugin()
-    ],
-	module: {
-		loaders: [{
-			test: /\.(js|jsx|es6)$/,
-			loaders: ['babel-loader']
-		}, {
-			test: /\.jpe?g$|\.gif$|\.eot$|\.png$|\.svg$|\.woff$|\.woff2$|\.ttf$|\.wav$|\.mp3$/,
-			loader: "file"
-		}
-		]
-	},
-	resolve: {
-		extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx",".es6"]
-	}
+  debug: true,
+  devtool: 'source-map',
+  entry: {
+    app: __dirname + '/js/index.js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          plugins: [
+            ['react-transform', {
+              transforms: [{
+                transform: 'react-transform-hmr',
+                imports: ['react'],
+                locals: ['module']
+              }]
+            }]
+          ]
+        }
+      },
+    ]
+  },
+  output: {
+    path: __dirname + '/dist/',
+    filename: 'mapWidgets.js',
+    publicPath: 'http://localhost:8000/dist'
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"development"'
+      }
+    }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    colors: true,
+    contentBase: __dirname,
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    port: 8000,
+    progress: true,
+    stats: {
+      cached: false
+    }
+  }
 };
