@@ -405,6 +405,7 @@ function eiti_migration_migrate_api() {
     'description' => t('Migrates the Company Revenue Streams from the specified spreadsheets.'),
     'soft_dependencies' => array(
       'EITISummaryDataMigration',
+      'EITIRevenueStreamsGovernmentMigration',
       'EITICompaniesMigration',
     ),
   );

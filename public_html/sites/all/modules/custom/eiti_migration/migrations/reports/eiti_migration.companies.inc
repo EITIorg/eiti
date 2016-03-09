@@ -116,7 +116,12 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
    * before it's actually saved in the database.
    */
   public function prepare($entity, $row) {
-    // Extra data processing?
-    // Not that we need to do anything here for now.
+    // Check if the name is there.
+    if ($this->checkEmptyValue($entity->name)) {
+      // Now cancel the creation of the node.
+      throw new MigrateException(t('Companies with no name, are NOT imported (probably that is a sub-totals column).<br/>File: !file', array(
+        '!file' => $row->file,
+      )), Migration::MESSAGE_NOTICE, MigrateMap::STATUS_IGNORED);
+    }
   }
 }
