@@ -67,13 +67,16 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
     )
   );
   // For now, this is hardcoded, we should change it later.
-  $map_html_id = drupal_html_id('map1');
+  $map_html_id = drupal_html_id('map_all');
   $content['map-div'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $map_html_id,
-      'class' => array('main-map', 'media-resizable-element')
+      'class' => array(
+        'main-map',
+        'media-resizable-element'
+      )
     )
   );
   $widget_js_settings = array(
