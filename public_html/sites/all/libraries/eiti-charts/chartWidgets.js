@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a32778e94593582c3ba2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fd3fcc7bd1875d8b0a87"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -17617,15 +17617,21 @@
 	 * @typechecks
 	 */
 
+	/* eslint-disable fb-www/typeof-undefined */
+
 	/**
 	 * Same as document.activeElement but wraps in a try-catch block. In IE it is
 	 * not safe to call document.activeElement if there is nothing focused.
 	 *
-	 * The activeElement will be null only if the document body is not yet defined.
+	 * The activeElement will be null only if the document or document body is not
+	 * yet defined.
 	 */
-	"use strict";
+	'use strict';
 
 	function getActiveElement() /*?DOMElement*/{
+	  if (typeof document === 'undefined') {
+	    return null;
+	  }
 	  try {
 	    return document.activeElement || document.body;
 	  } catch (e) {
@@ -19624,7 +19630,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.5';
+	module.exports = '0.14.6';
 
 /***/ },
 /* 153 */
@@ -24842,7 +24848,7 @@
 	    node.append("rect").attr("height", function (d) {
 	      return d.dy;
 	    }).attr("width", sankey.nodeWidth()).style("fill", function (d) {
-	      return d.color = color(d.name.replace(/ .*/, ""));
+	      return d.color = color((d.name || " ").replace(/ .*/, ""));
 	    }).style("stroke", function (d) {
 	      return d3.rgb(d.color).darker(2);
 	    }).append("title").text(function (d) {

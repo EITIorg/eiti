@@ -66,7 +66,7 @@ let DataSet = React.createClass({
           node.append("rect")
               .attr("height", function(d) { return d.dy; })
               .attr("width", sankey.nodeWidth())
-              .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+              .style("fill", function(d) { return d.color = color((d.name||" ").replace(/ .*/, "")); })
               .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
               .append("title")
               .text(function(d) { return d.name + "\n" + format(d.value); });
