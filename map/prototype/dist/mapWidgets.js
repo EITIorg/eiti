@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1dfea571796eb89cd881"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b36c989296ee5ee07963"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -39843,7 +39843,7 @@
 	            country_link = '<a href="' + country_url + '"><strong>Open Country Page</strong></a>';
 	        }
 	
-	        var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.gdp) + ' USD </td><td>Population: ' + formatnumber(country.population) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.resources_oil) + '</strong><img src="images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil </td>' + '        <td></td>' + '        </tr>' + '    <tr><td></td>' + '        <td></td></tr>' + '    <tr><td colspan="2"><img src="images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/>' + country_link + '</td></tr>' + '  </tbody>' + '</table>' + '</div>';
+	        var html = '<div>' + '<table class="country_info">' + '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="http://demo.eiti.org/images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="height:20px;margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.gdp) + ' USD </td><td>Population: ' + formatnumber(country.population) + '</td></tr>' + '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + '    <tr><td><strong>' + formatnumber(country.resources_oil) + '</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil </td>' + '        <td></td>' + '        </tr>' + '    <tr><td></td>' + '        <td></td></tr>' + '    <tr><td colspan="2"><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/>' + country_link + '</td></tr>' + '  </tbody>' + '</table>' + '</div>';
 	
 	        var popup = L.popup({ autoPan: true, closeButton: false, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    }
