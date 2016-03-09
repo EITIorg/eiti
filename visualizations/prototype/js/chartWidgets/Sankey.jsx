@@ -136,14 +136,26 @@ let Sankey = React.createClass({
       var req = new XMLHttpRequest();
       req.onreadystatechange = function() {
           if (req.readyState == 4 && req.status == 200) {
-            var data = JSON.parse(req.responseText);
+            var data = JSON.parse(req.responseText), 
+                nodedata = [], 
+                linkdata = [],
+                processedData;
             if(props.processor) {
-                    var processedData = props.processor(data);
-                _this.setState({chartData: processedData});
-                } else {
-                    _this.setState({chartData: data});
-                }
-          }
+                    data = props.processor(data);
+                } 
+            }
+            var nodes = data.nodes;
+            for (var node in nodes) {
+              nodedata.push(nodes[node]);
+            }
+            var links = data.links;
+            for (var link in links) {
+              linkdata.push({ "source": nodedata.indexOf(nodes[links[link].source]),
+                              "target": nodedata.indexOf(nodes[links[link].target]),
+                              "value": links[link].value});
+            }
+            processedData = {"nodes" : nodedata, "links": linkdata};
+            _this.setState({chartData: processedData});
         }
       req.open("GET", props.dataURL, true);
       req.send();
