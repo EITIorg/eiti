@@ -28,7 +28,7 @@
         position: settings.fullMap.position,
         zoom: default_zoom,
         maxZoom: 5,
-        minZoom: 2
+        minZoom: 0
       });
     }
   };

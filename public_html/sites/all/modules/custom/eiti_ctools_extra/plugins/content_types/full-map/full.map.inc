@@ -60,12 +60,13 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
     '#tag' => 'section',
     '#attributes' => array(
       'class' => array(
+        'eiti-map-wrapper',
         'full-map-wrapper',
-        'map-container',
         'media-resizable-wrapper',
       ),
     )
   );
+
   // For now, this is hardcoded, we should change it later.
   $map_html_id = drupal_html_id('map_all');
   $content['map-div'] = array(
@@ -79,11 +80,13 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
       )
     )
   );
+
   $widget_js_settings = array(
     'container' => $map_html_id,
-    'position' => array(12.897489183755892, -12.76171875),
+    'position' => array(12.897489, -12.761718),
   );
   drupal_add_js(array('fullMap' => $widget_js_settings), 'setting');
+
   $block->content = $content;
 
   return $block;

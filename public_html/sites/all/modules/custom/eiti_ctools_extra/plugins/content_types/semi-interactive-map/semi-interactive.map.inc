@@ -60,6 +60,7 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
     '#tag' => 'section',
     '#attributes' => array(
       'class' => array(
+        'eiti-map-wrapper',
         'semi-interactive-map-wrapper',
         'media-resizable-wrapper',
       ),
