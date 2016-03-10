@@ -65,7 +65,7 @@ function helpertheme_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
   );
 
   $icons = helpertheme_get_svg_icons();
-  $options = array('' => t('<none>'));
+  $options = array('' => t('No Icon'));
   $options += drupal_map_assoc(array_keys($icons));
 
   $selected_icon = variable_get(HELPERTHEME_SVG_ICON_NAME_PREFIX . $mlid, '');
@@ -84,7 +84,7 @@ function helpertheme_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
 /**
  * Submit handler for menu_edit_item form. Save icon for menu link.
  *
- * @TODO: Remove variable after a memnu link is deleted.
+ * @TODO: Remove variable after a menu link is deleted.
  */
 function helpertheme_form_menu_edit_item_save_icon($form, &$form_state) {
   $mlid = $form_state['values']['mlid'];
