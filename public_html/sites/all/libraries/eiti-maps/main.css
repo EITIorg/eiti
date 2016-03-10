@@ -1,92 +1,79 @@
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,300');
 
-    .mainMap {
-        width: 400px;
-        height: 500px;
-    }
-    .leaflet-container {
-        background: #fff;
-        border:1px solid #dddddd;
-        font-family: 'Open Sans', serif;
-    }
+/**
+ * @TODO: CLEANUP!!!
+ */
 
-    .legend {
-      text-align: left;
-      line-height: 18px;
-      color: #555;
-      width: 320px;
-    }
-    .legend i {
-      width: 10px;
-      height: 10px;
-      float: left;
-      margin-right: 8px;
-      opacity: 0.7;
-      margin-bottom: 15px;
-      margin-top: 4px;
-    }
-
-    .country_info TH {
-      padding:10px 10px 10px 10px;
-
-    }
-
-    .country_info TD {
-      padding:5px 5px 5px 5px;
-
-    }
-    .country_info TR {
-      margin:2px 5px 2px 5px;
-
-    }
-
-    .leaflet-popup-content {
-      padding:5px;
-      margin:0;
-    }
-
-    .leaflet-popup-content hr{
-      background: #eeeeee;
-      border: none;
-      display: block;
-      height: 2px;
-      margin-top:4px;
-      margin-bottom:4px;
-      width 100%;
-    }
-
-    .leaflet-popup-content th.commodity-col {
-      border:1px solid #f00;
-    }
-
-.leaflet-popup-content a:hover{
-    text-decoration: none;
+.eiti-map-wrapper .leaflet-container {
+  background: #fff;
+  border:1px solid #dddddd;
+  height: 500px;
+  width: 100%;
 }
 
-.leaflet-popup-content-wrapper {
-    padding: 1px;
-    text-align: left;
-    border-radius: 0px;
+.eiti-map-wrapper .mainMap {
+  width: 400px;
+  height: 500px;
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-  box-shadow: 0 3px 14px rgba(0,0,0,0.15);
+.eiti-map-wrapper .legend {
+  text-align: left;
+  line-height: 18px;
+  color: #555;
+  width: 320px;
 }
 
-.leaflet-popup-content {
-  padding:10;
-  margin:10;
-}
-.leaflet-popup-content-wrapper {
-    padding: 1px;
-    text-align: left;
-    border-radius: 0px;
-}
-.leaflet-container {
-    height:500px;
-    width:1300px;
-    display:block;
-    margin:auto;
+.eiti-map-wrapper .legend i {
+  width: 10px;
+  height: 10px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+  margin-bottom: 15px;
+  margin-top: 4px;
 }
 
+.eiti-map-wrapper .country_info th {
+  padding: 10px 10px 10px 10px;
 
+}
+
+.eiti-map-wrapper .country_info td {
+  padding: 5px 5px 5px 5px;
+}
+
+.eiti-map-wrapper .country_info tr {
+  margin: 2px 5px 2px 5px;
+}
+
+.eiti-map-wrapper .leaflet-popup-content {
+  padding: 1em;
+  margin: 1em;
+}
+
+.eiti-map-wrapper .leaflet-popup-content hr {
+  background: #eeeeee;
+  border: none;
+  display: block;
+  height: 2px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.eiti-map-wrapper .leaflet-popup-content th.commodity-col {
+  border: 1px solid #f00;
+}
+
+.eiti-map-wrapper .leaflet-popup-content a:hover {
+  text-decoration: none;
+}
+
+.eiti-map-wrapper .leaflet-popup-content-wrapper {
+  padding: 1px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.eiti-map-wrapper .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+}
