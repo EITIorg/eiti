@@ -163,6 +163,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $nodes = array_values($nodes);
     $lookup_haystack = array_column($nodes, 'name');
     $links = array();
+    $nodes_involved = array();
 
     // Now that we know that we want to limit to certain companies, let's put together
     // the second part of the flows.
@@ -198,8 +199,24 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
         else {
           $links[$g_a_flux]['value'] += floatval($item->revenue);
         }
+
+        // Added to involved.
+        if (!in_array($company_index, $nodes_involved)) {
+          $nodes_involved[] = $company_index;
+        }
+        if (!in_array($gfs_name_index, $nodes_involved)) {
+          $nodes_involved[] = $gfs_name_index;
+        }
+        if (!in_array($agency_index, $nodes_involved)) {
+          $nodes_involved[] = $agency_index;
+        }
       }
     }
+
+    // Now remove the ones that are not involved.
+    $nodes_involved = array_flip($nodes_involved);
+    $nodes = array_intersect_key($nodes, $nodes_involved);
+
     return array(
       'nodes' => $nodes,
       'links' => array_values($links),
