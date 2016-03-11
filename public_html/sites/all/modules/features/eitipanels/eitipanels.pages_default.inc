@@ -121,6 +121,29 @@ function eitipanels_default_page_manager_pages() {
   $display->uuid = '04f6876c-de28-4915-a320-6fabd7c8184d';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-34dc8bb3-7161-4f4f-9afa-4cddca1d14cf';
+    $pane->panel = 'middle';
+    $pane->type = 'full.map';
+    $pane->subtype = 'full.map';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '34dc8bb3-7161-4f4f-9afa-4cddca1d14cf';
+    $display->content['new-34dc8bb3-7161-4f4f-9afa-4cddca1d14cf'] = $pane;
+    $display->panels['middle'][0] = 'new-34dc8bb3-7161-4f4f-9afa-4cddca1d14cf';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
@@ -135,7 +158,10 @@ function eitipanels_default_page_manager_pages() {
   $page->admin_title = 'Homepage';
   $page->admin_description = 'Homepage for the EITI website.';
   $page->path = 'homepage';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(

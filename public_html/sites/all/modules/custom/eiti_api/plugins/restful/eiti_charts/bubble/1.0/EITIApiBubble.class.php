@@ -73,7 +73,11 @@ class EITIApiBubble extends RestfulDataProviderEITICharts {
    * Polishes the country governmental stacked bar chart fields.
    */
   public function processCountryDisbursedRevenues($data) {
+    $request = $this->getRequest();
+    $limit = isset($request['filter']['limit']) ? $request['filter']['limit'] : FALSE;
     $output = array();
+    $org_revenues = array();
+
     // Needed for normalization.
     $child_count = 0;
     foreach ($data as $item) {
@@ -88,11 +92,23 @@ class EITIApiBubble extends RestfulDataProviderEITICharts {
             )
           ),
         );
+        $org_revenues[$item->org_id] = floatval($item->revenue);
       }
       else {
         $output[$item->org_id]['children'][0]['size'] += $item->revenue;
+        $org_revenues[$item->org_id] += floatval($item->revenue);
       }
     }
+
+    // Now we want to sort and filter out the orgs.
+    if ($limit) {
+      arsort($org_revenues);
+      $org_revenues_ids = array_keys($org_revenues);
+      $org_revenues_ids = array_slice($org_revenues_ids, 0, $limit, TRUE);
+      $org_revenues = array_flip($org_revenues_ids);
+      $output = array_intersect_key($output, $org_revenues);
+    }
+
     $output = array_values($output);
 
     return array(

@@ -1,4 +1,4 @@
-# This file can be used to install, update, or destroy an environment.
+# This file can be used to install, update, backup or destroy an environment.
 
 # To execute a target ('command'), just type `make` followed by the
 # name of the command.
@@ -44,6 +44,8 @@ install:
 	@echo 'Setting up the new environment...'
 	@drush update-scripts-run --run-all --yes
 	@drush update-scripts-run task/create.indicators.php task/create.gfs_codes.php task/create.user_menu_links.php --yes
+	@echo 'Revert all enabled feature modules...'
+	@drush features-revert-all --yes
 	@echo 'Clearing the website cache...'
 	@drush cache-clear all
 	@#@echo 'Securing the site settings.'
@@ -116,13 +118,23 @@ clean:
 destroy:
 	@# Make sure the environment is prepared.
 	@test -f 'sites/default/settings.custom.php' || (echo 'No settings.custom.php file.'; exit 16)
-
 	@echo -e '\E[33m'"[WARNING] This will ERASE the database and the user uploaded files."'\033[0m'
 	@read -p 'Press [Enter] key to continue or CTRL+C to cancel...'
 	@echo 'Erasing the database content...'
 	@drush sql-drop --yes
 	@echo 'Erasing the user uploaded files...'
 	@rm -rf sites/default/files/*
+
+
+# Backup the environment.
+backup:
+	@# Make sure the environment is prepared.
+	@test -f 'sites/default/settings.custom.php' || (echo 'No settings.custom.php file.'; exit 16)
+	@echo 'Creating a database dump...'
+	@drush dump
+	@echo 'Creating a site files archive...'
+	@drush tar
+	@echo 'Files archive created.'
 
 
 # Clear the site cache.

@@ -2,10 +2,8 @@
  * Here is where we init the widgets and do more widget-related stuff.
  */
 (function($) {
-  Drupal.behaviors.contentWidgets = {
+  Drupal.behaviors.contentWidgetInit = {
     attach: function (context, settings) {
-      context = $(context);
-
       // Initialize the widgets.
       var chartTypes = Drupal.contentWidgets.getChartWidgetTypes();
       for (var key in settings.contentwidgets) {
@@ -49,9 +47,16 @@
           }
         }
       }
+    }
+  };
 
+
+  Drupal.behaviors.contentWidgetTabs = {
+    attach: function (context, settings) {
       // Initialize the tabs.
-      $('.tabs-widget-wrapper').tabs();
+      if ($('.tabs-widget-wrapper', context).length) {
+        $('.tabs-widget-wrapper', context).tabs();
+      }
     }
   };
 

@@ -283,10 +283,17 @@ function contentwidget_field_formatter_view($entity_type, $entity, $field, $inst
       // Merge the plugin defaults.
       $widget_settings = drupal_array_merge_deep($plugin['defaults'], $current_widget_settings);
 
-      if ($function = ctools_plugin_get_function($plugin, 'render callback')) {
-        // Because of entity_translation, the provided $langcode is the original entity language.
-        $entity_langcode = entity_translation_get_existing_language($entity_type, $entity);
-        $result[] = call_user_func_array($function, array($plugin, $widget_settings, $entity, $entity_langcode));
+      // If we're in Panelizer, we don't want to create the whole chart there, bail.
+      $menu_item = menu_get_item();
+      if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
+        $result[] = array('#markup' => $plugin['title'] . ' - ' . $plugin['description']);
+      }
+      else {
+        if ($function = ctools_plugin_get_function($plugin, 'render callback')) {
+          // Because of entity_translation, the provided $langcode is the original entity language.
+          $entity_langcode = entity_translation_get_existing_language($entity_type, $entity);
+          $result[] = call_user_func_array($function, array($plugin, $widget_settings, $entity, $entity_langcode));
+        }
       }
 
       break;

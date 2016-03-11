@@ -41,7 +41,7 @@ function eitientities_image_default_styles() {
   $styles['bm-medium'] = array(
     'label' => 'Bookmark: Medium',
     'effects' => array(
-      3 => array(
+      2 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 478,
@@ -56,7 +56,7 @@ function eitientities_image_default_styles() {
   $styles['bm-small'] = array(
     'label' => 'Bookmark: Small',
     'effects' => array(
-      2 => array(
+      3 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 238,

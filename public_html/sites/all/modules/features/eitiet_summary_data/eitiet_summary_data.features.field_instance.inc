@@ -575,6 +575,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'weight' => 27,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_report_file',
     'label' => 'Report File',
@@ -584,7 +585,29 @@ function eitiet_summary_data_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'spreadsheets',
       'file_extensions' => 'xls xlsx',
-      'max_filesize' => '',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => 'spreadsheets',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '32 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -593,6 +616,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
           'youtube' => 0,
         ),
         'allowed_types' => array(
@@ -603,9 +627,11 @@ function eitiet_summary_data_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 0,
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),

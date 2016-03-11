@@ -226,6 +226,11 @@ function helpertheme_preprocess_html(&$variables) {
  * @param array $variables
  */
 function helpertheme_preprocess_page(&$variables) {
+  global $theme;
+  if ($theme != 'eiti') {
+    return;
+  }
+
   // Check to see whether or not the page template should be changed.
   if (!empty($_REQUEST['page-template'])) {
     // Only accept simple page template names.
@@ -318,6 +323,12 @@ function helpertheme_theme() {
       'file' => 'helpertheme.theme.inc',
       'render element' => 'element',
     ),
+    'svg_icon' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
+    'svg_inline' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
     'svg_sprite' => array(
       'file' => 'helpertheme.theme.inc',
     ),
@@ -394,7 +405,7 @@ function helpertheme_less_variables_alter(&$less_variables, $system_name) {
 /**
  * Returns an array of SVG sprite icons.
  *
- * @TODO: Read list of available icons from the sprite.
+ * @TODO: Optimize!!!
  *
  * @param null|string $icon
  * @param array $options
@@ -403,43 +414,106 @@ function helpertheme_less_variables_alter(&$less_variables, $system_name) {
  *   SVG icon.
  */
 function helpertheme_get_svg_icons($icon = NULL, $options = array()) {
-  $options += array('sprite_name' => 'icons');
-
-  $available_icons = array();
-  switch($options['sprite_name']) {
-    case 'icons':
-      //break;
-    default:
-      $available_icons += array(
-        'arrow',
-        'calendar_add',
-        'information',
-        'globe_wireframe',
-        'question',
-        'search',
-
-        'facebook',
-        'linkedin',
-        'twitter',
-        'youtube',
-      );
+  $icon_group = 'icons';
+  if (isset($options['icon_group'])) {
+    $icon_group = $options['icon_group'];
   }
 
+  // Get a list of available icons.
+  $available_icons = helpertheme_get_icons_list($icon_group, FALSE);
+
   if (isset($icon)) {
-    if (!in_array($icon, $available_icons)) {
+    if (!array_key_exists($icon, $available_icons)) {
       return '';
     }
 
-    return theme('svg_sprite', array('symbol' => $icon) + $options);
+    return theme('svg_icon', array('#info' => $available_icons[$icon], '#options' => $options));
   }
 
   $icons_list = array();
-  foreach ($available_icons as $name) {
-    $icons_list[$name] = theme('svg_sprite', array('symbol' => $name) + $options);
+  foreach (array_keys($available_icons) as $icon) {
+    $icons_list[$icon] = theme('svg_icon', array('#info' => $available_icons[$icon], '#options' => $options));
   }
+
   return $icons_list;
 }
 
+/**
+ * Return Markup for a single SVG icon.
+ *
+ * @param string $icon
+ * @param array $options
+ * @return string
+ */
+function helpertheme_get_svg_icon($icon, $options = array()) {
+  if (empty($icon)) {
+    return '';
+  }
+
+  return helpertheme_get_svg_icons($icon, $options);
+}
+
+/**
+ * Returns a list of available icons.
+ *
+ * NOTE: Always run update_sprites.sh when new svg files are added.
+ *
+ * @param string $group
+ * @param bool $sprite_icons_only
+ * @return array
+ */
+function helpertheme_get_icons_list($group, $sprite_icons_only = TRUE) {
+  $available_icons = array();
+
+  // Detect helper files.
+  $pattern_array = array(
+    drupal_get_path('module', 'helpertheme'),
+    'sprites',
+    $group,
+    '*.svg',
+  );
+  $svg_files = glob(implode(DIRECTORY_SEPARATOR, $pattern_array));
+
+  if (!empty($svg_files)) {
+    foreach ($svg_files as $path) {
+      $name = basename($path, '.svg');
+      $available_icons[$name] = array(
+        'in_sprite' => TRUE,
+        'group' => $group,
+        'name' => $name,
+        'path' => $path,
+      );
+    }
+  }
+
+  if (!$sprite_icons_only) {
+    // Detect helper files.
+    $pattern_array = array(
+      drupal_get_path('module', 'helpertheme'),
+      'images',
+      $group,
+      '*.svg',
+    );
+    $svg_files = glob(implode(DIRECTORY_SEPARATOR, $pattern_array));
+
+    if (!empty($svg_files)) {
+      foreach ($svg_files as $path) {
+        $name = basename($path, '.svg');
+        if (array_key_exists($name, $available_icons)) {
+          continue;
+        }
+        $available_icons[$name] = array(
+          'in_sprite' => FALSE,
+          'group' => $group,
+          'name' => $name,
+          'path' => $path,
+        );
+      }
+    }
+  }
+
+  return $available_icons;
+}
 
 /**
  * Implements hook_panels_pre_render().

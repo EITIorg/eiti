@@ -1,0 +1,17 @@
+Index: public_html/sites/all/modules/contrib/panels/panels.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/panels/panels.module	(revision 42e3d6063c5d744759273eb95865b9e4e2a39110)
++++ public_html/sites/all/modules/contrib/panels/panels.module	(revision )
+@@ -1098,6 +1098,9 @@
+     case PANELS_TITLE_PANE:
+       $output .= 'PANELS_TITLE_PANE';
+       break;
++    default:
++      $output .= '\'' . $display->hide_title . '\'';
++      break;
+   }
+   $output .= ";\n";
+ 

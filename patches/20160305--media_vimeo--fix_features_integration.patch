@@ -1,0 +1,20 @@
+Index: public_html/sites/all/modules/contrib/media_vimeo/media_vimeo.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/media_vimeo/media_vimeo.module	(date 1457183976000)
++++ public_html/sites/all/modules/contrib/media_vimeo/media_vimeo.module	(revision )
+@@ -66,12 +66,3 @@
+ function media_vimeo_file_mimetype_mapping_alter(&$mapping) {
+   $mapping['mimetypes'][] = 'video/vimeo';
+ }
+-
+-/**
+- * Implements hook_ctools_plugin_api().
+- */
+-function media_vimeo_ctools_plugin_api($module, $api) {
+-  if ($module == 'file_entity' && $api == 'file_default_displays') {
+-    return array('version' => 1);
+-  }
+-}

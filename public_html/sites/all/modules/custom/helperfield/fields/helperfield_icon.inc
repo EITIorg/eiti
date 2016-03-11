@@ -119,7 +119,7 @@ function _helperfield__helperfield_icon__hook_field_formatter_view($entity_type,
           'height' => '1.5em',
           'width' => '1.5em',
         );
-        $markup = helpertheme_get_svg_icons($item['icon'], $options);
+        $markup = helpertheme_get_svg_icon($item['icon'], $options);
         if (!empty($markup)) {
           $element[$delta] = array('#markup' => $markup);
         }

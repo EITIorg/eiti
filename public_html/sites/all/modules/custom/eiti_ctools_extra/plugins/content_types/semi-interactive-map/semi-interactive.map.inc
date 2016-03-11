@@ -29,7 +29,6 @@ $plugin = array(
  */
 function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_args, $context) {
   $block = new stdClass();
-  $block->content = 'test';
 
   // We need this because we store the JS init file in the plugin folder.
   $plugin_info = ctools_get_plugins('ctools', 'content_types', $subtype);
@@ -57,20 +56,35 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
 
   // Now build the content.
   $content = array(
-    '#type' => 'container',
+    '#type' => 'html_container',
+    '#tag' => 'section',
     '#attributes' => array(
-      'class' => array('semi-interactive-map-wrapper', 'section', 'map-container')
+      'class' => array(
+        'eiti-map-wrapper',
+        'semi-interactive-map-wrapper',
+        'media-resizable-wrapper',
+      ),
     )
   );
   // For now, this is hardcoded, we should change it later.
+  $map_html_id = drupal_html_id('map1');
   $content['map-div'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#attributes' => array(
-      'id' => array(drupal_html_id('map1')),
-      'style' => array('height:700px;;display:block;margin:auto;')
+      'id' => $map_html_id,
+      'class' => array(
+        'semi-interactive-map',
+        'media-resizable-element',
+      ),
     )
   );
+  $widget_js_settings = array(
+    'container' => $map_html_id,
+    'position' => array(12.897489, -12.761718),
+  );
+  drupal_add_js(array('semiInteractiveMap' => $widget_js_settings), 'setting');
+
   $block->content = $content;
   return $block;
 }

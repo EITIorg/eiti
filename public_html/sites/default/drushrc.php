@@ -49,11 +49,19 @@ $command_specific['sql-dump'] = array(
 );
 
 // Create a custom sql-dump command.
-// @TODO: FIX, it does not work properly.
+$basename = '';
 $drupal_root = drush_get_context('DRUSH_SELECTED_DRUPAL_ROOT');
-$base_file_name = preg_replace('/[^a-zA-Z0-9_-\.]/', '', basename($drupal_root)) . '.' . date('Ymd-Hi');
+if (!empty($drupal_root)) {
+  $basename = basename($drupal_root);
+  if ($basename == 'public_html') {
+    $basename = basename(dirname($drupal_root));
+  }
+  $base_file_name = $basename . '--';
+}
+$base_file_name .= date('Ymd-Hi');
+
 $options['shell-aliases']['dump'] = "sql-dump --result-file=${base_file_name}.sql";
-$options['shell-aliases']['tar'] = "tar -C sites/default -czf ${base_file_name}.files.tgz files";
+$options['shell-aliases']['tar'] = "!tar -C sites/default -czf ${base_file_name}.files.tgz files";
 
 $options['shell-aliases']['offline'] = 'variable-set -y --always-set maintenance_mode 1';
 $options['shell-aliases']['online'] = 'variable-set -y --always-set maintenance_mode 0';

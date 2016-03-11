@@ -37,13 +37,6 @@
     .row-wrapper(8);
   }
 
-  .site-identity-wrapper {
-    .column(2);
-  }
-  .header-items {
-    .column(6);
-  }
-
   .main-content-inner,
   .footer-identity {
     .single-fluid-column();
@@ -83,14 +76,14 @@
 // HACK: Allow widgets to expand the full width of the page.
 .page-layout--widelayout {
   .main-content {
-    width: 100%;
+    width: auto;
   }
   .main-content-inner {
     display: block;
     float: none;
     margin: 0;
     position: static;
-    width: 100%;
+    width: auto;
   }
 }
 

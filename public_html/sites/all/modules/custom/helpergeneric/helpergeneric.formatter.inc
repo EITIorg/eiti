@@ -98,8 +98,7 @@ function helpergeneric_field_formatter_settings_form($field, $instance, $view_mo
   }
 
   if ($display['type'] == 'link_icon') {
-    // @TODO: Get full list of available icons.
-    $icons = helpertheme_get_svg_icons(NULL, array('sprite_name' => 'icons'));
+    $icons = helpertheme_get_svg_icons(NULL);
     $options = array('' => t('No Icon'));
     $options += drupal_map_assoc(array_keys($icons));
     $element['icon'] = array(
@@ -443,7 +442,7 @@ function theme_helpergeneric_formatter_link_icon($variables) {
       'height' => $size,
       'sprite_name' => 'icons',  // @TODO: FIX!
     );
-    $svgicon = helpertheme_get_svg_icons($icon, $options);
+    $svgicon = helpertheme_get_svg_icon($icon, $options);
     $link_options['attributes']['class'][] = 'link-title-with-icon';
   }
 

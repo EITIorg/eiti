@@ -18,7 +18,9 @@ $plugin = array(
     'bubble_settings' => array(
       'data_type' => '',
     ),
-    'extra_settings' => array(),
+    'extra_settings' => array(
+      'bubbles_number' => 5,
+    ),
   ),
 );
 
@@ -30,7 +32,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
-  if (in_array('panelizer', $menu_item['map'])) {
+  if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
     return array('#markup' => t('Configured Bubble Widget - with dynamic data (from Summary Data).'));
   }
 
@@ -41,13 +43,14 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $viz_id,
+      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
     )
   );
 
   // Load the library.
   $library = libraries_load('eiti-charts');
   if (empty($library)) {
-    drupal_set_message(t('Please make sure you have the "eiti-charts" library.'));
+    return array('#markup' => t('Charts library could not be loaded.'));
   }
 
   $endpoints = contentwidget_viz_bubble_dynamic_get_data_types('endpoint');
@@ -60,10 +63,10 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     'type' => 'BubbleChart',
     'name' => $js_settings['title'],
     'width' => 600,
-    'height' => 400,
+    'height' => 600,
     'diameter' => 600,
     'margin' => array(
-      'top' => 20,
+      'top' => 10,
       'bottom' => 0,
       'left' => 0,
       'right' => 0
@@ -78,6 +81,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     $country = menu_get_object('implementing_country');
     if (!empty($country)) {
       $settings['endpoint'] .= '?filter[country_iso]=' . $country->iso;
+      $settings['endpoint'] .= '&filter[limit]=' . $widget_settings['extra_settings']['bubbles_number'];
     }
     else {
       return array('#markup' => t('This widget requires country context.'));
@@ -190,7 +194,10 @@ function contentwidget_viz_bubble_dynamic_ajax_settings($form, $form_state) {
     return $value;
   }
   else {
-    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_bubble_dynamic']['extra_settings'];
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_bubble_dynamic']['extra_settings'];
   }
 }
 
@@ -244,8 +251,15 @@ function contentwidget_viz_bubble_dynamic_get_data_types($return = FALSE) {
 /**
  * Extra settings for our disbursed revenues bubble widget.
  */
-function contentwidget_viz_bubbles_dynamic_disbursed_revenues_settings(&$form, &$form_state) {
-  $form['no-settings'] = array('#markup' => t('No extra settings for this bubble chart.'));
+function contentwidget_viz_bubbles_dynamic_disbursed_revenues_settings(&$form, &$form_state, $widget_settings) {
+  $bubble_numbers = drupal_map_assoc(array(5, 10, 15));
+  $form['bubbles_number'] = array(
+    '#type' => 'select',
+    '#title' => t('Number of Bubbles'),
+    '#description' => t("Please specify the number of bubbles you want to include. Note: <em>We can't include all bubbles, because the output will be unreadable</em>."),
+    '#options' => $bubble_numbers,
+    '#default_value' => isset($widget_settings['extra_settings']['bubbles_number']) ? $widget_settings['extra_settings']['bubbles_number'] : 10,
+  );
 }
 
 /**

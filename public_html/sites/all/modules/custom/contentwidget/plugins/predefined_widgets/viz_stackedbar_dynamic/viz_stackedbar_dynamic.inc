@@ -32,7 +32,7 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
 
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
-  if (in_array('panelizer', $menu_item['map'])) {
+  if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
     return array('#markup' => t('Configured Stacked Bar Widget - with dynamic data (from Summary Data).'));
   }
 
@@ -43,13 +43,14 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $viz_id,
+      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
     )
   );
 
   // Load the library.
   $library = libraries_load('eiti-charts');
   if (empty($library)) {
-    drupal_set_message(t('Please make sure you have the "eiti-charts" library.'));
+    return array('#markup' => t('Charts library could not be loaded.'));
   }
 
   $endpoints = contentwidget_viz_stackedbar_dynamic_get_data_types('endpoint');
@@ -190,7 +191,10 @@ function contentwidget_viz_stackedbar_dynamic_ajax_settings($form, $form_state) 
     return $value;
   }
   else {
-    return $form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['viz_stackedbar_dynamic']['extra_settings'];
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_stackedbar_dynamic']['extra_settings'];
   }
 }
 
@@ -204,7 +208,7 @@ function contentwidget_viz_stackedbar_dynamic_ajax_settings($form, $form_state) 
  *   The Return array depends on the $return parameter you specify, either it's
  *   an array of labels for the options, or it's an array of api endpoints.
  */
-function contentwidget_viz_stackedbar_dynamic_get_data_types($return = FALSE) {
+function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
   $items = array();
 
   // ####### DEFINE ITEMS ######

@@ -28,29 +28,27 @@ iframe {
  *
  * @see http://www.w3.org/TR/CSS2/box.html#padding-properties
  */
-// .xSmallOnly() {}
-@media (max-width: 33em) {
-  .media-resizable-wrapper {
-    @aspect_ratio: (9 / 16) * 100%;
-    display: block; // We need a block element for this to work.
-    height: 0;
+.media-resizable-wrapper {
+  @aspect_ratio: (9 / 16) * 100%;
+  display: block; // We need a block element for this to work.
+  height: 0;
+  padding-top: @aspect_ratio;
+  position: relative;
+
+  .media-resizable-element {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &.aspect-3-4 {
+    @aspect_ratio: (3 / 4) * 100%;
     padding-top: @aspect_ratio;
-    position: relative;
-
-    .media-resizable-element {
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-    }
-
-    &.aspect-3-4 {
-      @aspect_ratio: (3 / 4) * 100%;
-      padding-top: @aspect_ratio;
-    }
   }
 }
+
 
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';

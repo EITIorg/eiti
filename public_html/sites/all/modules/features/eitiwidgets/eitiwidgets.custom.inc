@@ -1,5 +1,7 @@
 <?php
 
+define('EITIWIDGETS_PANELS_TITLE_ENTITY', 99);
+
 /**
  * Implements hook_form_alter().
  */
@@ -15,6 +17,14 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
     // Append our custom validation.
     $form['#validate'][] = 'eitiwidgets_fpp_form_validation';
   }
+
+  if ($form_id == 'panelizer_edit_content_form') {
+    // Add extra title display option.
+    $form['display_title']['hide_title']['#options'][EITIWIDGETS_PANELS_TITLE_ENTITY] = t('Inherited from entity');
+
+    // Hide preview button.
+    $form['preview']['#access'] = FALSE;
+  }
 }
 
 /**
@@ -22,6 +32,7 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
  */
 function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
   $entity = $form_state['entity'];
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
 
   // Hide the FPP view mode selector.
   if (isset($form['view_mode']['#default_value'])) {
@@ -44,7 +55,7 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
 
   switch ($entity->bundle) {
     case 'tabs_with_widgets':
-      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
       $tabs_number = isset($form_state['values']['field_fpp_widget'][$field_language][0]['settings']['tabs']['tabs_number']) ? $form_state['values']['field_fpp_widget'][$field_language][0]['settings']['tabs']['tabs_number'] : 4;
 
       $ief_id = key($form_state['inline_entity_form']);
@@ -68,11 +79,12 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
  */
 function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
   $entity = $form_state['entity'];
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
 
   switch ($entity->bundle) {
     // General entity form validation for the "Featured Bookmarks".
     case 'featured_bookmarks':
-      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity->language);
+      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
       $list_size = isset($form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size']) ? $form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size'] : 0;
 
       if (!empty($list_size)) {
@@ -81,7 +93,7 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
           $msg = t('Please make sure you have specified at least @num bookmarks - because of the widget size you have specified.', array(
             '@num' => $list_size,
           ));
-          form_set_error('field_fpp_bookmark_list][und', $msg);
+          form_set_error('field_fpp_bookmark_list', $msg);
         }
       }
       else {
@@ -138,6 +150,7 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
  */
 function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   $entity = $variables['elements']['#fieldable_panels_pane'];
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
 
   // Constrain the pane content.
   $variables['classes_array'][] = 'clearfix';
@@ -148,7 +161,7 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     $image_url = NULL;
 
     // Get the background image URL.
-    $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $entity->language);
+    $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $entity_language);
     if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
       $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
       // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
@@ -160,9 +173,8 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     }
   }
 
-  // @TODO: Only link the blockquote!
-  if (!empty($entity->field_fpp_source_url)) {
-    $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $entity->language);
+  if ($entity->bundle == 'quote' && !empty($entity->field_fpp_source_url)) {
+    $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $entity_language);
     if (!empty($entity->field_fpp_source_url[$source_url_field_language][0]['url'])) {
       $url = $entity->field_fpp_source_url[$source_url_field_language][0]['url'];
       $variables['main_wrapper'] = 'a';
@@ -181,5 +193,37 @@ function eitiwidgets_panelizer_overview_links_alter(&$links_array, $entity_type,
   // Do not show 'reset' link on panelizer overview pages for panelized entities..
   if (isset($links_array['reset'])) {
     unset($links_array['reset']);
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_panelizer_view_mode().
+ */
+function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
+  $element = $variables['element'];
+  $entity = $element['#panelizer_entity'];
+  $panelizer = $element['#panelizer'];
+
+  if (isset($panelizer->display->hide_title) && $panelizer->display->hide_title == EITIWIDGETS_PANELS_TITLE_ENTITY) {
+    $entity_label = NULL;
+    if (method_exists($entity, 'label')) {
+      $entity_label = $entity->label();
+    }
+    else if (isset($element['#entity_type']) && $element['#entity_type'] == 'node') {
+      $entity_label = entity_label('node', $entity);
+    }
+
+    if ($entity_label) {
+      $variables['title'] = $entity_label;
+    }
+  }
+
+  // Add classes to the page title.
+  if (!empty($variables['title'])) {
+    if (isset($variables['title_element']) && $variables['title_element'] == 'h1') {
+      $variables['title_attributes_array']['class'][] = 'page-title';
+      $variables['title_wrapper_attributes']['class'][] = 'single-fluid-row-wrapper';
+    }
   }
 }

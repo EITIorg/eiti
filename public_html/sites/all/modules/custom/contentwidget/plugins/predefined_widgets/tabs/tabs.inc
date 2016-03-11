@@ -110,29 +110,18 @@ function contentwidget_tabs_render($plugin, $widget_settings, $entity, $langcode
         'html' => FALSE,
       ),
     );
-    $tab['secondary_link'] = array(
-      '#theme' => 'link',
-      '#text' => _contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_title'),
-      '#path' => url(_contentwidget_key_tab_get_property_value($widget_settings, $tab_delta, 'link_secondary_url')),
-      '#options' => array(
-        'attributes' => array(
-          'class' => array('secondary-tab-link'),
-        ),
-        'html' => FALSE,
-      ),
-    );
     $tab['widget'] = $referenced_entities_view_arr[$tab_delta];
     $tabs_content[] = $tab;
   }
 
-  $block['tabs_links'] = array(
-    '#theme' => 'item_list',
-    '#items' => $tab_links,
-    '#type' => 'ul',
-    '#title' => '',
-    '#attributes' => array('class' => array('tab-links')),
-  );
-  $block['tabs_content'] = $tabs_content;
+  //$block['tabs_links'] = array(
+  //  '#theme' => 'item_list',
+  //  '#items' => $tab_links,
+  //  '#type' => 'ul',
+  //  '#title' => '',
+  //  '#attributes' => array('class' => array('tab-links')),
+  //);
+  //$block['tabs_content'] = $tabs_content;
 
   return $block;
 }
@@ -258,12 +247,14 @@ function _contentwidget_key_tab_get_property_value($widget_settings, $delta, $ke
  * Ajax callback for the settings form.
  */
 function contentwidget_tabs_settings_ajax($form, $form_state) {
-  // TODO: maybe we should check the language.
+  $entity = $form_state['entity'];
+  $entity_language = entity_language('fieldable_panels_pane', $entity);
+  $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
   return array(
     '#type' => 'ajax',
     '#commands' => array(
-      ajax_command_replace("#tabs-wrapper", render($form['field_fpp_widget'][LANGUAGE_NONE][0]['settings']['tabs']['tabs'])),
-      ajax_command_replace("#ief-cardinality", render($form['field_fpp_content_widgets'][LANGUAGE_NONE]['cardinality_count'])),
+      ajax_command_replace("#tabs-wrapper", render($form['field_fpp_widget'][$widget_field_language][0]['settings']['tabs']['tabs'])),
+      ajax_command_replace("#ief-cardinality", render($form['field_fpp_content_widgets'][$widget_field_language]['cardinality_count'])),
     )
   );
 }

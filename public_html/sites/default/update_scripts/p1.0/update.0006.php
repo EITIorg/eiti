@@ -1,35 +1,32 @@
 <?php
 
-// Do not create the default FPP bundle.
-variable_set('fieldable_panels_panes_skip_default_type', TRUE);
-
 // Provide a list of modules to be installed.
 $modules = array(
   'locale',
   //'translation', // REPLACED BY 'entity_translation'
 
   // Note: Enable only the modules when you're 100% sure we need them.
-  //'i18n',
-  //'i18n_block',
-  //'i18n_contact',
-  //'i18n_field',
-  //'i18n_forum',
-  //'i18n_menu',
-  //'i18n_node',
-  //'i18n_panels',
-  //'i18n_path',
-  //'i18n_redirect',
-  //'i18n_select',
-  //'i18n_string',
-  //'i18n_sync',
-  //'i18n_taxonomy',
-  //'i18n_translation',
-  //'i18n_user',
-  //'i18n_variable',
+  'i18n',
+    //'i18n_block',
+    //'i18n_contact',
+    //'i18n_field',
+    //'i18n_forum',
+    'i18n_menu',
+    //'i18n_node',
+    'i18n_panels',
+    //'i18n_path',
+    //'i18n_redirect',
+    'i18n_select',
+    'i18n_string',
+    //'i18n_sync',
+    'i18n_taxonomy',
+    'i18n_translation',
+    //'i18n_user',
+    'i18n_variable',
 
   'entity_translation',
-  //'entity_translation_i18n_menu',
-  //'entity_translation_upgrade',
+    'entity_translation_i18n_menu',
+    //'entity_translation_upgrade',
 
   //'l10n_client',
   //'l10n_update',
@@ -38,11 +35,12 @@ $modules = array(
   //'translation_table',
 
   'variable',
-  //'variable_admin',
-  //'variable_example',
-  //'variable_realm',
-  //'variable_store',
-  //'variable_views',
+    //'variable_admin',
+    //'variable_example',
+    'variable_realm',
+    'variable_store',
+    //'variable_views',
+
 );
 _us_module__install($modules);
 
@@ -50,26 +48,7 @@ _us_module__install($modules);
 drupal_flush_all_caches();
 
 // Prepare a list of features to be installed.
- $feature_names = array(
-   'eitii18n',
- );
- _us_features__install($feature_names);
-
-
-// Revert all features and clear system caches.
-_us_features__revert_all();
-drupal_flush_all_caches();
-
-
-// The translation system only translates strings in the i18n_string_allowed_formats variable.
-$translatable_formats = array();
-foreach (filter_formats() as $key => $format_info) {
-  if (in_array($key, array('plain_text'))) {
-    $translatable_formats[$key] = $key;
-  }
-}
-variable_set('i18n_string_allowed_formats', $translatable_formats);
-
-// Make sure only enabled languages are displayed.
-variable_set('entity_translation_languages_enabled', TRUE);
-variable_set('i18n_language_list', I18N_LANGUAGE_ENABLED);
+$feature_names = array(
+  'eitii18n',
+);
+_us_features__install($feature_names);

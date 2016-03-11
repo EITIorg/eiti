@@ -367,6 +367,14 @@ function helpergeneric_features_api_alter(&$components) {
 }
 
 /**
+ * Implements hook_form_features_export_form_alter().
+ */
+function helpergeneric_form_features_export_form_alter(&$form, &$form_state, $form_id) {
+  // Always expand Advanced Options fieldset on feature export forms.
+  $form['advanced']['#collapsed'] = FALSE;
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for node_form().
  *
  * @param array $form

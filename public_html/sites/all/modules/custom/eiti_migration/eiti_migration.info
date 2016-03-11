@@ -15,7 +15,7 @@ dependencies[] = eitict_article
 dependencies[] = eitict_document
 dependencies[] = eitict_mention
 dependencies[] = eitict_person
-dependencies[] = eitiet_file
+dependencies[] = eitifiles
 
 dependencies[] = eitientity_gfs_code
 dependencies[] = eitientity_summary_data

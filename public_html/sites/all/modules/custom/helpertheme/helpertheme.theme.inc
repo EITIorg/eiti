@@ -48,6 +48,14 @@ function theme_html_container($variables) {
   if (isset($element['#title'])) {
     $title_tag = isset($element['#title_tag']) ? $element['#title_tag'] : 'h2';
     $title_attributes = isset($element['#title_attributes']) ? $element['#title_attributes'] : array();
+
+    if (isset($element['#title_icon']['symbol'])) {
+      $element['#title_icon']['options'] = isset($element['#title_icon']['options']) ? $element['#title_icon']['options'] : array();
+      // Get the SVG icon markup.
+      $svgicon = helpertheme_get_svg_icon($element['#title_icon']['symbol'], $element['#title_icon']['options']);
+      $element['#title'] = $svgicon . ' <span class="text">' . $element['#title'] . '<span>';
+    }
+
     $prefix['title'] = array(
       '#type' => 'html_tag',
       '#tag' => $title_tag,
@@ -66,28 +74,30 @@ function theme_html_container($variables) {
  * @param array $elements
  * @return null|string
  */
-function theme_svg_sprite(array $elements) {
-  if (empty($elements['symbol'])) {
-    return NULL;
+function theme_svg_icon(array $elements) {
+  if (empty($elements['#info']['name'])) {
+    return '';
   }
 
   // Provide a fallback sprite.
-  if (empty($elements['sprite_name'])) {
-    $elements['sprite_name'] = 'icons';
+  if (empty($elements['#info']['group'])) {
+    $elements['#info']['group'] = 'icons';
   }
 
-  // Prepare the sprite file path.
-  $sprite_file_name = $elements['sprite_name'] . '.svg';
-  $elements['path'] = drupal_get_path('module', 'helpertheme') . '/sprites/' . $sprite_file_name;
+  $cache_key = implode(':', array(
+    'svg',
+    $elements['#info']['group'],
+    $elements['#info']['name'],
+    md5(serialize($elements)),
+  ));
+  if ($cache = cache_get($cache_key)) {
+    return $cache->data;
+  }
 
   // Set a default attributes.
-  foreach (array('class', 'height', 'width', 'viewBox') as $key) {
-    if (array_key_exists($key, $elements) && is_null($elements[$key])) {
-      continue;
-    }
-
-    if (!empty($elements[$key])) {
-      $elements['#attributes'][$key] = $elements[$key];
+  foreach (array('class', 'height', 'width') as $key) {
+    if (!empty($elements['#options'][$key])) {
+      $elements['#attributes'][$key] = $elements['#options'][$key];
       continue;
     }
 
@@ -103,28 +113,83 @@ function theme_svg_sprite(array $elements) {
   // @TODO: improve accessibility.
   $elements['#attributes']['role'] = 'presentation';
   $elements['#attributes']['class'][] = 'icon';
-  $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['symbol']);
+  $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['#info']['name']);
+
+  if (empty($elements['#info']['in_sprite'])) {
+    $markup = theme('svg_inline', $elements);
+  }
+  else {
+    $markup = theme('svg_sprite', $elements);
+  }
+
+  if (!empty($markup)) {
+    cache_set($cache_key, $markup);
+  }
+
+  return $markup;
+}
+
+/**
+ * Returns HTML for the svg sprite icons.
+ *
+ * @param array $elements
+ * @return string
+ */
+function theme_svg_sprite(array $elements) {
+  // Prepare the sprite file path.
+  $sprite_file_name = $elements['#info']['group'] . '.svg';
+  $sprite_file_path = drupal_get_path('module', 'helpertheme') . '/sprites/' . $sprite_file_name;
 
   // A dummy query-string is added to filenames, to gain control over
   // browser-caching. The string changes on every update or full cache
   // flush, forcing browsers to load a new copy of the files, as the
   // URL changed.
   $query_string = variable_get('css_js_query_string', '0');
-
   $path_suffix = '?' . $query_string;
-  if (!is_null($elements['symbol'])) {
-    $path_suffix .= '#' . $elements['symbol'];
-  }
-  $elements['#use']['xlink:href'] = file_create_url($elements['path']) . $path_suffix;
+
+  // Specify the sprite element.
+  $path_suffix .= '#' . $elements['#info']['name'];
+
+  $elements['#use']['xlink:href'] = file_create_url($sprite_file_path) . $path_suffix;
 
   return '<svg' . drupal_attributes($elements['#attributes']) . '><use' . drupal_attributes($elements['#use']) . '/></svg>';
+}
+
+/**
+ * Returns markup for an inline svg icon.
+ *
+ * @param array $elements
+ * @return string
+ */
+function theme_svg_inline(array $elements) {
+  $sprite_file_path = $elements['#info']['path'];
+
+  if ($svg_contents = @file_get_contents($sprite_file_path)) {
+    $xml = new SimpleXMLElement($svg_contents);
+
+    foreach ($elements['#attributes'] as $name => $value) {
+      $value = implode(' ', (array) $value);
+      $xml->addAttribute($name, $value);
+    }
+
+    $update_xml_string = $xml->asXML();
+    $update_xml_string = str_replace('<?xml version="1.0"?>', '', $update_xml_string);
+    return $update_xml_string;
+  }
+
+  return '';
 }
 
 /**
  * Returns HTML for the header logo.
  */
 function theme_header_identity() {
-  global $theme;
+  // Always reference the EITI theme, and not the current active theme.
+  $theme = 'eiti';
+  $theme_path = drupal_get_path('theme', $theme);
+
+  // Get the logo paths if it has been changed.
+  $logo_path = theme_get_setting('logo_path', $theme);
 
   // Text for homepage header logo link.
   $site_link_title = t(variable_get('site_link_title', 'Visit the main page'));
@@ -149,9 +214,6 @@ function theme_header_identity() {
     '#suffix' => "</a>",
   );
 
-  // Get the logo paths if it has been changed.
-  $logo_path = theme_get_setting('logo_path', $theme);
-
   $file_path = drupal_realpath($logo_path);
   if (file_exists($file_path)) {
     $items['header']['logo_markup']['png'] = array(
@@ -168,7 +230,7 @@ function theme_header_identity() {
     $logo_alt = $site_name;
     $items['header']['logo_markup']['svg'] = array(
       '#theme' => 'image',
-      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.svg'),
+      '#path' => file_create_url($theme_path . '/logo.svg'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
@@ -179,7 +241,7 @@ function theme_header_identity() {
     );
     $items['header']['logo_markup']['png'] = array(
       '#theme' => 'image',
-      '#path' => file_create_url(drupal_get_path('theme', $theme) . '/logo.png'),
+      '#path' => file_create_url($theme_path . '/logo.png'),
       '#alt' => $logo_alt,
       '#attributes' => array(
         'role' => 'presentation',
@@ -244,6 +306,59 @@ function theme_header_items() {
     );
   }
 
+
+  // Add the language switcher links.
+  if (drupal_multilingual()) {
+    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+    $lang_links = language_negotiation_get_switch_links('language', $path);
+    if (isset($lang_links->links)) {
+      $elements['language_switcher'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'nav',
+        '#title' => t('Languages'),
+        '#title_attributes' => array('class' => array('language-switcher-title')),
+        '#title_icon' => array(
+          'symbol' => 'message',
+          'options' => array('width' => '1.5em', 'height' => '1.5em'),
+        ),
+        '#attributes' => array(
+          'role' => 'navigation',
+          'class' => array(
+            'language-switcher',
+          ),
+        ),
+      );
+
+      $elements['language_switcher']['wrapper'] = array(
+        '#type' => 'html_container',
+        '#attributes' => array(
+          'class' => array(
+            'locale-links-wrapper',
+          ),
+        ),
+      );
+
+      // Add language info to all links.
+      $languages = language_list();
+      foreach ($lang_links->links as &$link) {
+        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
+          $link['language'] = $languages[$link['attributes']['lang']];
+        }
+      }
+
+      $elements['language_switcher']['wrapper']['links'] = array(
+        '#theme' => 'links__language_switcher',
+        '#links' => $lang_links->links,
+        '#attributes' => array(
+          'class' => array(
+            'language-switcher-' . $lang_links->provider,
+            'locale-links',
+          ),
+        ),
+      );
+    }
+  }
+
   // Get the menu links.
   $menu_name = 'main-menu';
   $elements['navigation'] = array(
@@ -284,43 +399,6 @@ function theme_header_items() {
   //$menu_elements['search']['#suffix'] = '</div>';
   //$search_form = drupal_get_form('search_form');
   //unset($search_form['basic']['keys']['#title']);
-
-  // Add the language switcher links.
-  if (FALSE && drupal_multilingual()) {
-    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
-    $lang_links = language_negotiation_get_switch_links('language', $path);
-    if (isset($lang_links->links)) {
-      $elements['lang']['#prefix'] = '<nav role="navigation" id="language-switcher" class="language-switcher">';
-      $elements['lang']['#suffix'] = '</nav>';
-
-      $elements['lang']['subject'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'h2',
-        '#value' => 'Languages',
-        '#attributes' => array('class' => array('element-invisible')),
-      );
-
-      // Add language info to all links.
-      $languages = language_list();
-      foreach ($lang_links->links as &$link) {
-        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
-          $link['language'] = $languages[$link['attributes']['lang']];
-        }
-      }
-
-      $elements['lang']['links'] = array(
-        '#theme' => 'links__language_switcher',
-        '#links' => $lang_links->links,
-        '#attributes' => array(
-          'class' => array(
-            'language-switcher' . $lang_links->provider,
-            'header-links',
-            'locale-links',
-          ),
-        ),
-      );
-    }
-  }
 
   // Render the HTML.
   $output = drupal_render($elements);
@@ -389,6 +467,8 @@ function theme_footer_items() {
  * @param $variables
  */
 function helpertheme_preprocess_main_footer(&$variables) {
+  // Always reference the EITI theme, and not the current active theme.
+  $theme_path = drupal_get_path('theme', 'eiti');
 
   $variables['identity'] = array(
     '#type' => 'html_container',
@@ -401,12 +481,10 @@ function helpertheme_preprocess_main_footer(&$variables) {
     ),
   );
 
-  // Always reference the EITI theme, and not the current active theme.
-  $theme = 'eiti';
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
   $variables['identity']['logo_markup']['png'] = array(
     '#theme' => 'image',
-    '#path' => url(drupal_get_path('theme', $theme) . '/images/logo-white.png'),
+    '#path' => file_create_url($theme_path . '/images/logo-white.png'),
     '#alt' => $site_name,
     '#attributes' => array(
       'role' => 'presentation',

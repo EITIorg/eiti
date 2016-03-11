@@ -1,5 +1,8 @@
 <?php
 
+// Do not create the default FPP bundle.
+variable_set('fieldable_panels_panes_skip_default_type', TRUE);
+
 // Provide a list of modules to be installed.
 $modules = array(
   'contentwidget',
@@ -33,7 +36,7 @@ $feature_names = array(
   'eitict_page',
   'eitict_person',
   'eitientities',
-  'eitiet_file',
+  'eitifiles',
   'eitiet_implementing_country',
   'eitiet_organisation',
   'eitiet_summary_data',

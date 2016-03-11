@@ -1,7 +1,7 @@
 name = EITI I18N Settings
 description = Internationalization Settings.
 core = 7.x
-package = EITI Custom
+package = EITI General
 version = 7.x-1.0
 dependencies[] = ctools
 dependencies[] = entity_translation
@@ -22,4 +22,6 @@ features[variable][] = entity_translation_workflow_enabled
 features[variable][] = i18n_language_list
 features[variable][] = i18n_string_allowed_formats
 features[variable][] = language_types
+features[variable][] = locale_field_language_fallback
 features[variable][] = translation_language_type
+features[variable][] = variable_realm_list_language

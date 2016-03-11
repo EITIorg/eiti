@@ -118,6 +118,7 @@ function eitict_article_field_default_field_instances() {
         'weight' => 2,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_attachments',
     'label' => 'Attachments',
@@ -127,7 +128,29 @@ function eitict_article_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'documents',
       'file_extensions' => 'xls xlsx doc docx ppt pptx pdf jpeg jpg gif png rtf txt',
-      'max_filesize' => '20MB',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => 'documents',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '32 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -136,18 +159,22 @@ function eitict_article_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
           'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
           'document' => 'document',
           'image' => 0,
+          'report' => 0,
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
           'media_internet' => 'media_internet',
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 'media_library--document_library',
+          'media_library--image_library' => 0,
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),
@@ -276,6 +303,7 @@ function eitict_article_field_default_field_instances() {
         'weight' => 8,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_featured_image',
     'label' => 'Featured Image',
@@ -286,7 +314,29 @@ function eitict_article_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'file_directory' => 'image_featured',
       'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '4mb',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => 'image_featured',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '32 MB',
       'max_resolution' => '',
       'min_resolution' => '',
       'title_field' => 0,
@@ -298,18 +348,22 @@ function eitict_article_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
           'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
           'document' => 0,
           'image' => 'image',
+          'report' => 0,
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
           'media_internet' => 'media_internet',
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),
@@ -341,6 +395,7 @@ function eitict_article_field_default_field_instances() {
         'weight' => 3,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_image_gallery',
     'label' => 'Image Gallery',
@@ -373,7 +428,7 @@ function eitict_article_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
+      'max_filesize' => '32 MB',
       'max_resolution' => '',
       'min_resolution' => '',
       'title_field' => 0,
@@ -385,6 +440,8 @@ function eitict_article_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
@@ -394,8 +451,11 @@ function eitict_article_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_default--media_browser_1' => 'media_default--media_browser_1',
-          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
           'upload' => 'upload',
         ),
       ),
