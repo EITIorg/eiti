@@ -14,9 +14,18 @@ let TooltipMixin = require('./TooltipMixin');
 
 let DataSet = React.createClass({
 	componentDidUpdate: function(nextProps, nextState) {
-		let {data, width, height, margin} = this.props;
-
 		let el = findDOMNode(this);
+    console.log(el);
+    var otherEl = el.parentNode.parentNode.parentNode;
+    console.log(otherEl);
+    console.log(otherEl.clientHeight);
+    console.log(otherEl.clientWidth);
+
+    this.drawSankey(el);
+  },
+
+  drawSankey: function(el) {
+    let {data, width, height, margin} = this.props;
 
     d3.select(el).select("svg").remove(); // clear nodes with state change
 
@@ -144,11 +153,11 @@ let Sankey = React.createClass({
                     data = props.processor(data);
                 } 
             }
-            var nodes = data.nodes;
+            var nodes = data.nodes || {};
             for (var node in nodes) {
               nodedata.push(nodes[node]);
             }
-            var links = data.links;
+            var links = data.links || {};
             for (var link in links) {
               linkdata.push({ "source": nodedata.indexOf(nodes[links[link].source]),
                               "target": nodedata.indexOf(nodes[links[link].target]),
