@@ -1,0 +1,11 @@
+
+# @see: https://github.com/svg/svgo
+
+plugins:
+  - removeStyleElement: true
+  - removeEmptyAttrs: true
+  - removeMetadata: true
+  - removeUnusedNS: true
+  - removeAttrs:
+      attrs: '(class|id|style)'
+  - convertShapeToPath: true

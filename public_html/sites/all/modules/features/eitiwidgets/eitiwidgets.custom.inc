@@ -128,6 +128,11 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
     $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
   }
   $pane->css['css_class'] .= ' predefined-widget';
+
+  // Some widgets have a background image rendered inside.
+  if (!empty($entity->field_fpp_background_image)) {
+    $pane->css['css_class'] .= ' has-background-image';
+  }
 }
 
 /**

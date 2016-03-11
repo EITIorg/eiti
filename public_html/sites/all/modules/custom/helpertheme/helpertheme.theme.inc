@@ -84,6 +84,16 @@ function theme_svg_icon(array $elements) {
     $elements['#info']['group'] = 'icons';
   }
 
+  $cache_key = implode(':', array(
+    'svg',
+    $elements['#info']['group'],
+    $elements['#info']['name'],
+    md5(serialize($elements)),
+  ));
+  if ($cache = cache_get($cache_key)) {
+    return $cache->data;
+  }
+
   // Set a default attributes.
   foreach (array('class', 'height', 'width') as $key) {
     if (!empty($elements['#options'][$key])) {
@@ -106,35 +116,24 @@ function theme_svg_icon(array $elements) {
   $elements['#attributes']['class'][] = drupal_html_class('symbol--' . $elements['#info']['name']);
 
   if (empty($elements['#info']['in_sprite'])) {
-    // Prepare the sprite file path.
-    $svg_file_name = $elements['#info']['group'] . '/' . $elements['#info']['name'] . '.svg';
-    $svg_file_path = drupal_get_path('module', 'helpertheme') . '/images/' . $svg_file_name;
-
-    $image_options = array(
-      'path' => $svg_file_path,
-    );
-    foreach (array_keys($elements['#attributes']) as $key) {
-      if ($key == 'width' || $key == 'height') {
-        $font_base_size = 16;
-        $image_options[$key] = preg_replace('/[^\d]+em/', '', $elements['#attributes'][$key]) * $font_base_size;
-        continue;
-      }
-
-      $image_options[$key] = $elements['#attributes'][$key];
-    }
-
-    return theme('image', $image_options);
+    $markup = theme('svg_inline', $elements);
   }
   else {
-    return theme('svg_sprite', $elements);
+    $markup = theme('svg_sprite', $elements);
   }
+
+  if (!empty($markup)) {
+    cache_set($cache_key, $markup);
+  }
+
+  return $markup;
 }
 
 /**
  * Returns HTML for the svg sprite icons.
  *
  * @param array $elements
- * @return null|string
+ * @return string
  */
 function theme_svg_sprite(array $elements) {
   // Prepare the sprite file path.
@@ -154,6 +153,31 @@ function theme_svg_sprite(array $elements) {
   $elements['#use']['xlink:href'] = file_create_url($sprite_file_path) . $path_suffix;
 
   return '<svg' . drupal_attributes($elements['#attributes']) . '><use' . drupal_attributes($elements['#use']) . '/></svg>';
+}
+
+/**
+ * Returns markup for an inline svg icon.
+ *
+ * @param array $elements
+ * @return string
+ */
+function theme_svg_inline(array $elements) {
+  $sprite_file_path = $elements['#info']['path'];
+
+  if ($svg_contents = @file_get_contents($sprite_file_path)) {
+    $xml = new SimpleXMLElement($svg_contents);
+
+    foreach ($elements['#attributes'] as $name => $value) {
+      $value = implode(' ', (array) $value);
+      $xml->addAttribute($name, $value);
+    }
+
+    $update_xml_string = $xml->asXML();
+    $update_xml_string = str_replace('<?xml version="1.0"?>', '', $update_xml_string);
+    return $update_xml_string;
+  }
+
+  return '';
 }
 
 /**

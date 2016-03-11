@@ -326,6 +326,9 @@ function helpertheme_theme() {
     'svg_icon' => array(
       'file' => 'helpertheme.theme.inc',
     ),
+    'svg_inline' => array(
+      'file' => 'helpertheme.theme.inc',
+    ),
     'svg_sprite' => array(
       'file' => 'helpertheme.theme.inc',
     ),
