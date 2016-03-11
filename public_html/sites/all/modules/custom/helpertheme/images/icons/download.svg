@@ -1,9 +1,0 @@
-<svg id="download" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-<style type="text/css">
-	.st0{fill:none;stroke:#4C4B4B;stroke-width:5;stroke-linecap:round;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#4B4A4A;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-</style>
-<polyline class="st0" points="87.3,78.1 60.4,105 33.6,78.2 "/>
-<line class="st0" x1="60.5" y1="105" x2="60.5" y2="3"/>
-<polyline class="st1" points="79.3,46 116.9,46 116.9,156.1 4.1,156.1 4.1,46 41.7,46 "/>
-</svg>
