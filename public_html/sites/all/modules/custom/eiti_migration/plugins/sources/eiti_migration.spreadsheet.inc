@@ -1059,12 +1059,25 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   protected function getSheet($sheet_type) {
     $sheet = NULL;
 
+    // Check the book.
+    if (empty($this->currentWorkbook)) {
+      return NULL;
+    }
+
+    // Figure out whether we have "Introduction" tab or not.
+    $introSheet = $this->currentWorkbook->getSheetByName('Introduction');
+    $indexAdjustments = 0;
+    if (empty($introSheet)) {
+      $indexAdjustments = -1;
+    }
+
+
     switch ($sheet_type) {
       case EITI_SHEET_TYPE_ABOUT:
         $sheet = $this->currentWorkbook->getSheetByName('1. About');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(0);
+          $sheet = $this->currentWorkbook->getSheet(1 + $indexAdjustments);
         }
         break;
 
@@ -1072,7 +1085,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('2. Contextual');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(1);
+          $sheet = $this->currentWorkbook->getSheet(2 + $indexAdjustments);
         }
         break;
 
@@ -1080,7 +1093,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('3. Revenues');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(2);
+          $sheet = $this->currentWorkbook->getSheet(3 + $indexAdjustments);
         }
         break;
     }
