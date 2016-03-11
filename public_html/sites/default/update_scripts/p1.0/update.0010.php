@@ -30,10 +30,10 @@ _us_views__disable('media_default');
 // variable_set('jquery_update_jquery_admin_version', '1.8');
 
 // Set the fallback format to plain text.
-variable_set('filter_fallback_format', 'filtered_html');
+variable_set('filter_fallback_format', 'plain_text');
 
 // Limit the teaser length.
-variable_set('teaser_length', 360);
+variable_set('teaser_length', 256);
 
 // Set the "Add media" wysiwyg button title.
 variable_set('media_wysiwyg_wysiwyg_icon_title', 'Add/Update media');
