@@ -817,9 +817,15 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
               $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
 
+              // Break the parsing if we've hit the Notes.
+              if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                break;
+              }
+
               // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
               // creates infinite loop and kills the process.
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+
                 $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
                 if ($revenueCell->isFormula()) {
                   $formula = $revenueCell->getValue();
@@ -855,6 +861,10 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             elseif ($parsing_type == EITI_PARSING_COUNT) {
               $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+              // Break the parsing if we've hit the Notes.
+              if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                break;
+              }
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
                 $this->migrateRows[] = array('counted');
                 $this->migrateRowsCountInFile++;
@@ -922,6 +932,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
                 $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
 
+                // Break the parsing if we've hit the Notes.
+                if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                  break;
+                }
+
                 // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
                 // creates infinite loop and kills the process.
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
@@ -966,6 +981,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               elseif ($parsing_type == EITI_PARSING_COUNT) {
                 $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+
+                // Break the parsing if we've hit the Notes.
+                if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                  break;
+                }
 
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
                   $revenueCell = $revenuesSheet->getCellByColumnAndRow($column, $row);
