@@ -182,7 +182,17 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
           break;
 
         case 'text':
-          $row->value_text = $row->entry;
+          if (!$this->checkEmptyValue($row->entry)) {
+            $row->value_text = $row->entry;
+          }
+          else {
+            $msg = t('Indicator !name - has an empty value.<br />Skipping the item.<br/>File: !file', array(
+              '!name' => '<strong>' . $indicator->name . '</strong>',
+              '!file' => $row->file,
+            ));
+            $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+            return FALSE;
+          }
           break;
 
         case 'enum':

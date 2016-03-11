@@ -1064,7 +1064,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('1. About');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(1);
+          $sheet = $this->currentWorkbook->getSheet(0);
         }
         break;
 
@@ -1072,7 +1072,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('2. Contextual');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(2);
+          $sheet = $this->currentWorkbook->getSheet(1);
         }
         break;
 
@@ -1080,7 +1080,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('3. Revenues');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(3);
+          $sheet = $this->currentWorkbook->getSheet(2);
         }
         break;
     }
