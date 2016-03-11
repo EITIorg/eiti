@@ -22,12 +22,11 @@ function append_symbol {
     svgo --config=./svgo.config.yml -i $original_svg_path -o $svg_path
   fi
 
-
   if [[ $DEBUG && -f "$original_svg_path" ]]; then
     cat $original_svg_path | sed -e 's/<svg /<symbol id="'$symbol_name.orig'" /' -e 's/\/svg>/\/symbol>\n/' | tr -d '[\n\r\t]' >> $sprite_path
     cat $svg_path | sed -e 's/<svg /<symbol id="'$symbol_name'" /' -e 's/\/svg>/\/symbol>\n/' | tr -d '[\n\r\t]' >> $sprite_path
   else
-    cat $svg_path | sed -e 's/<svg /<symbol id="'$symbol_name.min'" /' -e 's/\/svg>/\/symbol>\n/' | tr -d '[\n\r\t]' >> $sprite_path
+    cat $svg_path | sed -e 's/<svg /<symbol id="'$symbol_name'" /' -e 's/\/svg>/\/symbol>\n/' | tr -d '[\n\r\t]' >> $sprite_path
   fi
 }
 
