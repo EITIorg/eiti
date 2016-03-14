@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Search feature.
+ */
+
+include_once 'eitisearch.features.inc';
