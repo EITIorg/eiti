@@ -124,6 +124,13 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
     }
     else {
       $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      if (empty($summary_data_id)) {
+        $msg = t('Revenue streams not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+          '!file' => $row->file,
+        ));
+        $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+        return FALSE;
+      }
       $summary_data = entity_load_single('summary_data', $summary_data_id);
       $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
 
@@ -374,6 +381,13 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     }
     else {
       $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+      if (empty($summary_data_id)) {
+        $msg = t('Revenue streams not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+          '!file' => $row->file,
+        ));
+        $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+        return FALSE;
+      }
       $summary_data = entity_load_single('summary_data', $summary_data_id);
       $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
 
@@ -441,8 +455,13 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
    * before it's actually saved in the database.
    */
   public function prepare($entity, $row) {
-    // Extra data processing?
-    // Not that we need to do anything here for now.
+    // We don't want import streams that don't have organisation_id.
+    if (empty($entity->organisation_id)) {
+      // Now cancel the creation of the node.
+      throw new MigrateException(t('Revenue streams not imported because organisation_id is empty (probably it is related to sub-totals column).<br/>File: !file', array(
+        '!file' => $row->file,
+      )), Migration::MESSAGE_NOTICE, MigrateMap::STATUS_IGNORED);
+    }
   }
 
   /**

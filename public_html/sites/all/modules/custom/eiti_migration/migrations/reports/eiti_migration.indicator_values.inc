@@ -95,6 +95,13 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
 
     // We'll need this a bit later for normalization.
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    if (empty($summary_data_id)) {
+      $msg = t('Indicators not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
     $rate_to_usd = $summary_data_emw->currency_rate->value();
@@ -127,6 +134,12 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
       switch ($indicator->type) {
         case 'numeric':
           $value = $row->entry;
+
+          // Sanitize the cases like 13,3 (assuming that's a decimal separator).
+          if (strpos($value, ',') !== FALSE) {
+            $value = str_replace(',', '.', $value);
+          }
+
           if (!is_numeric($value)) {
             if (!$this->checkEmptyValue($value)) {
               $msg = t('Indicator !name - Numeric expected, this value given instead: !value<br/>File: !file', array(
@@ -138,8 +151,6 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
               return FALSE;
             }
             else {
-              // $value = NULL;
-              // $row->value_numeric = $value;
               $msg = t('Indicator !name - has an empty value. Skipping the item.<br/>File: !file', array(
                 '!value' => drupal_placeholder($row->entry),
                 '!name' => '<strong>' . $indicator->name . '</strong>',
@@ -157,6 +168,7 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
 
         case 'boolean':
           $value = $this->getBooleanListValue($row->entry);
+
           if ($value == NULL) {
             $msg = t('Indicator !name - Boolean expected, this value given instead (treating as NULL): !value.<br />Skipping the item.<br/>File: !file', array(
               '!value' => drupal_placeholder($row->entry),
@@ -170,7 +182,17 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
           break;
 
         case 'text':
-          $row->value_text = $row->entry;
+          if (!$this->checkEmptyValue($row->entry)) {
+            $row->value_text = $row->entry;
+          }
+          else {
+            $msg = t('Indicator !name - has an empty value.<br />Skipping the item.<br/>File: !file', array(
+              '!name' => '<strong>' . $indicator->name . '</strong>',
+              '!file' => $row->file,
+            ));
+            $this->queueMessage($msg, MigrationBase::MESSAGE_WARNING);
+            return FALSE;
+          }
           break;
 
         case 'enum':
@@ -216,6 +238,13 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     // One thing we need to do, is to look-up the summary_data id, load it and
     // save the indicator id in the field "field_sd_indicator_values".
     $summary_data_id = $this->handleSourceMigration('EITISummaryDataMigration', $row->summary_id);
+    if (empty($summary_data_id)) {
+      $msg = t('Indicators not imported because there were issues with the Summary Data import.<br/>File: !file', array(
+        '!file' => $row->file,
+      ));
+      $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      return FALSE;
+    }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
     $summary_data_emw->field_sd_indicator_values[] = $entity->id;
