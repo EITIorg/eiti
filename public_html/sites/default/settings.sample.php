@@ -50,6 +50,18 @@ $databases['default']['default'] = array(
 $drupal_hash_salt = '';
 
 /**
+ * Environments should have different settings, override the Search API settings.
+ */
+//$conf['search_api_override_mode'] = 'load';
+//$conf['search_api_override_servers']['solr_server'] = array(
+//  'name' => '(overridden) Solr Server for production',
+//  'description' => '(overridden) The Solr search server configured for the production environment.',
+//  'options' => array(
+//    'path' => '/solr/eiti_production',
+//  ),
+//);
+
+/**
  * "Stage File Proxy" is recommended for development environments to easily
  * retrieve files from the origin environment of the DB.
  */
