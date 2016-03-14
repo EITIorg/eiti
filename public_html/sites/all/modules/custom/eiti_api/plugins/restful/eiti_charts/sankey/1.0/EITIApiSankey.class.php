@@ -43,10 +43,11 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $second_query->leftJoin('eiti_organisation', 'org_g', 'org_g.id = grs.organisation_id');
     $second_query->addField('org_g', 'name', 'agency');
     $second_query->addField('grs', 'gfs_code_id', 'gfs_code_id');
+    $second_query->addField('grs', 'name', 'grs_name');
     $second_query->condition('sd.status', TRUE);
     $this->checkProductionFilters($second_query);
 
-    $query->join($second_query, 'sq', 'sq.gfs_code_id = crs.gfs_code_id');
+    $query->join($second_query, 'sq', 'sq.gfs_code_id = crs.gfs_code_id AND crs.name = sq.grs_name');
     $query->fields('sd', array('id', 'year_end', 'status'));
     $query->fields('ic', array('iso', 'name'));
     $query->fields('sq', array('agency'));
@@ -104,6 +105,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
    * Polishes the country governmental stacked bar chart fields.
    */
   public function processCountryDisbursedRevenues($data) {
+    pc($data);
     $request = $this->getRequest();
     $limit = $request['filter']['limit'];
 
@@ -130,28 +132,21 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
 
     // Now let's create the links.
     $lookup_haystack = array_column($nodes, 'name');
-    $links = array();
+    $company_values = array();
     foreach ($data as $item) {
       $company_index = array_search($item->company, $lookup_haystack);
-      $gfs_name_index = array_search($item->gfs_name, $lookup_haystack);
 
-      $c_g_flux = $company_index . ':' . $gfs_name_index;
       // Append the value or sum it to existing fluxes.
-      if (!in_array($c_g_flux, array_keys($links))) {
-        $links[$c_g_flux] = array(
-          'source' => $company_index,
-          'target' => $gfs_name_index,
-          'value' => floatval($item->revenue),
-        );
+      if (!in_array($company_index, array_keys($company_values))) {
+        $company_values[$company_index] = floatval($item->revenue);
       }
       else {
-        $links[$c_g_flux]['value'] += floatval($item->revenue);
+        $company_values[$company_index] += floatval($item->revenue);
       }
     }
 
     // Now we can filter out (limit) the companies.
-    $company_values = array_column($links, 'value', 'source');
-    arsort($company_values);
+    arsort($company_values, SORT_NUMERIC);
     $filtered_c_sources = array_slice($company_values, 0, $limit, TRUE);
     $filtered_c_sources = array_keys($filtered_c_sources);
     $all_c_sources = array_keys($company_values);
