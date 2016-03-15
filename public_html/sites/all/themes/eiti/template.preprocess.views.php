@@ -69,31 +69,33 @@ function __eiti_preprocess_views_view__search(&$variables) {
 
         // Add "Filter by Content type" facets block.
         $facet_name = 'type';
-        $elements[$facet_name] = array(
-          '#type' => 'html_container',
-          '#tag' => 'div',
-          '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
-          '#title_tag' => 'h3',
-          '#title_attributes' => array('class' => array('facet-title')),
-          '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
-          '#attributes' => array(
-          ),
-        );
-        $elements[$facet_name]['filters'] = $realm[$facet_name];
+        if (isset($realm[$facet_name])) {
+          $elements[$facet_name] = array(
+            '#type' => 'html_container',
+            '#tag' => 'div',
+            '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
+            '#title_tag' => 'h3',
+            '#title_attributes' => array('class' => array('facet-title')),
+            '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
+            '#attributes' => array(),
+          );
+          $elements[$facet_name]['filters'] = $realm[$facet_name];
+        }
 
         // Add "Filter by Related Country" facets block.
         $facet_name = 'field_related_country';
-        $elements[$facet_name] = array(
-          '#type' => 'html_container',
-          '#tag' => 'div',
-          '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
-          '#title_tag' => 'h3',
-          '#title_attributes' => array('class' => array('facet-title')),
-          '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
-          '#attributes' => array(
-          ),
-        );
-        $elements[$facet_name]['filters'] = $realm[$facet_name];
+        if (isset($realm[$facet_name])) {
+          $elements[$facet_name] = array(
+            '#type' => 'html_container',
+            '#tag' => 'div',
+            '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
+            '#title_tag' => 'h3',
+            '#title_attributes' => array('class' => array('facet-title')),
+            '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
+            '#attributes' => array(),
+          );
+          $elements[$facet_name]['filters'] = $realm[$facet_name];
+        }
 
         $variables['attachment_before'] .= render($elements);
       }
