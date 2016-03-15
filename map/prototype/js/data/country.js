@@ -9,6 +9,10 @@ export var countryInfo =[
     "resources_oil":"NA",
     "online_portal":1,
     "online_registry":1,
+    "value":623763167,
+    "value_per_capita":480013849,
+    "revenue":131402338,
+    "revenue_compared":309046850,
     "enabled":false
   },
   {
@@ -21,6 +25,10 @@ export var countryInfo =[
     "resources_oil":"0",
     "online_portal":0,
     "online_registry":0,
+    "value":77501022,
+    "value_per_capita":421395623,
+    "revenue":77541401,
+    "revenue_compared":57288526,
     "enabled":true
   },
   {
@@ -29,10 +37,14 @@ export var countryInfo =[
     "ISO3":"DZA",
     "status":4,
     "population":"31471000",
-    "gdp":"209704000000",
+    "gdp":"2.09704E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1044811653,
+    "value_per_capita":250483404,
+    "revenue":940563033,
+    "revenue_compared":1060946780,
     "enabled":false
   },
   {
@@ -45,6 +57,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":430498174,
+    "value_per_capita":147777338,
+    "revenue":293644871,
+    "revenue_compared":272051378,
     "enabled":false
   },
   {
@@ -53,10 +69,14 @@ export var countryInfo =[
     "ISO3":"AGO",
     "status":4,
     "population":"12878000",
-    "gdp":"138357000000",
+    "gdp":"1.38357E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":801526502,
+    "value_per_capita":770059833,
+    "revenue":8741961,
+    "revenue_compared":982452322,
     "enabled":false
   },
   {
@@ -69,6 +89,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":38182532,
+    "value_per_capita":128793181,
+    "revenue":295408583,
+    "revenue_compared":67388268,
     "enabled":false
   },
   {
@@ -77,10 +101,14 @@ export var countryInfo =[
     "ISO3":"ARG",
     "status":4,
     "population":"37032000",
-    "gdp":"614384000000",
+    "gdp":"6.14384E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":1,
+    "value":227837152,
+    "value_per_capita":272414584,
+    "revenue":510625446,
+    "revenue_compared":188518903,
     "enabled":false
   },
   {
@@ -93,6 +121,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":318154446,
+    "value_per_capita":448717314,
+    "revenue":495526757,
+    "revenue_compared":895789961,
     "enabled":false
   },
   {
@@ -101,10 +133,14 @@ export var countryInfo =[
     "ISO3":"AUS",
     "status":4,
     "population":"23840314",
-    "gdp":"1563950000000",
+    "gdp":"1.56395E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":1,
+    "value":857692145,
+    "value_per_capita":289982714,
+    "revenue":12169553,
+    "revenue_compared":419604992,
     "enabled":false
   },
   {
@@ -113,10 +149,14 @@ export var countryInfo =[
     "ISO3":"AUT",
     "status":4,
     "population":"8091800",
-    "gdp":"428699000000",
+    "gdp":"4.28699E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":569754434,
+    "value_per_capita":844234295,
+    "revenue":184723867,
+    "revenue_compared":857042266,
     "enabled":false
   },
   {
@@ -129,6 +169,10 @@ export var countryInfo =[
     "resources_oil":"0",
     "online_portal":0,
     "online_registry":0,
+    "value":254719522,
+    "value_per_capita":739275774,
+    "revenue":430555223,
+    "revenue_compared":843662036,
     "enabled":false
   },
   {
@@ -141,6 +185,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":749604108,
+    "value_per_capita":65306916,
+    "revenue":583742895,
+    "revenue_compared":178618226,
     "enabled":false
   },
   {
@@ -153,6 +201,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":43036384,
+    "value_per_capita":459738390,
+    "revenue":678936872,
+    "revenue_compared":975082199,
     "enabled":false
   },
   {
@@ -161,10 +213,14 @@ export var countryInfo =[
     "ISO3":"BGD",
     "status":4,
     "population":"129155000",
-    "gdp":"149990000000",
+    "gdp":"1.4999E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":705982508,
+    "value_per_capita":58017463,
+    "revenue":290502987,
+    "revenue_compared":767110173,
     "enabled":false
   },
   {
@@ -177,6 +233,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":371440883,
+    "value_per_capita":1022999721,
+    "revenue":275431882,
+    "revenue_compared":57515156,
     "enabled":false
   },
   {
@@ -189,6 +249,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":969751221,
+    "value_per_capita":739135411,
+    "revenue":482065589,
+    "revenue_compared":227349452,
     "enabled":false
   },
   {
@@ -197,10 +261,14 @@ export var countryInfo =[
     "ISO3":"BEL",
     "status":4,
     "population":"10239000",
-    "gdp":"521402000000",
+    "gdp":"5.21402E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":202695257,
+    "value_per_capita":939413358,
+    "revenue":224730848,
+    "revenue_compared":274994420,
     "enabled":false
   },
   {
@@ -213,6 +281,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":730500017,
+    "value_per_capita":528394217,
+    "revenue":372830071,
+    "revenue_compared":771459033,
     "enabled":false
   },
   {
@@ -225,6 +297,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":641803859,
+    "value_per_capita":950657817,
+    "revenue":657233450,
+    "revenue_compared":86417141,
     "enabled":false
   },
   {
@@ -237,6 +313,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":334900406,
+    "value_per_capita":212375619,
+    "revenue":623846204,
+    "revenue_compared":1035812702,
     "enabled":false
   },
   {
@@ -249,6 +329,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":371787290,
+    "value_per_capita":324680581,
+    "revenue":583638240,
+    "revenue_compared":914264711,
     "enabled":false
   },
   {
@@ -261,6 +345,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":476769003,
+    "value_per_capita":141417177,
+    "revenue":371190873,
+    "revenue_compared":778729824,
     "enabled":false
   },
   {
@@ -273,6 +361,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":71700107,
+    "value_per_capita":327618461,
+    "revenue":618979943,
+    "revenue_compared":481709430,
     "enabled":false
   },
   {
@@ -281,10 +373,14 @@ export var countryInfo =[
     "ISO3":"BRA",
     "status":4,
     "population":"170115000",
-    "gdp":"2392080000000",
+    "gdp":"2.39208E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":974940179,
+    "value_per_capita":912612316,
+    "revenue":26525389,
+    "revenue_compared":906901970,
     "enabled":false
   },
   {
@@ -297,6 +393,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":898112498,
+    "value_per_capita":228806773,
+    "revenue":530750228,
+    "revenue_compared":753758159,
     "enabled":false
   },
   {
@@ -309,6 +409,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1026403276,
+    "value_per_capita":536484163,
+    "revenue":892288647,
+    "revenue_compared":1089989410,
     "enabled":false
   },
   {
@@ -321,6 +425,10 @@ export var countryInfo =[
     "resources_oil":"NA",
     "online_portal":0,
     "online_registry":0,
+    "value":538778563,
+    "value_per_capita":918824605,
+    "revenue":425159238,
+    "revenue_compared":478990149,
     "enabled":false
   },
   {
@@ -333,6 +441,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":706721547,
+    "value_per_capita":304480522,
+    "revenue":390275276,
+    "revenue_compared":152789899,
     "enabled":false
   },
   {
@@ -345,6 +457,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":245548352,
+    "value_per_capita":132162054,
+    "revenue":810381065,
+    "revenue_compared":1047065026,
     "enabled":false
   },
   {
@@ -357,6 +473,10 @@ export var countryInfo =[
     "resources_oil":"24200000",
     "online_portal":0,
     "online_registry":0,
+    "value":1059181503,
+    "value_per_capita":814007053,
+    "revenue":149816349,
+    "revenue_compared":684029954,
     "enabled":false
   },
   {
@@ -365,10 +485,14 @@ export var countryInfo =[
     "ISO3":"CAN",
     "status":4,
     "population":"31147000",
-    "gdp":"1838960000000",
+    "gdp":"1.83896E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":505256816,
+    "value_per_capita":747717149,
+    "revenue":258788251,
+    "revenue_compared":558288893,
     "enabled":false
   },
   {
@@ -381,6 +505,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":439992134,
+    "value_per_capita":372744451,
+    "revenue":226613872,
+    "revenue_compared":554546401,
     "enabled":false
   },
   {
@@ -393,6 +521,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":177665088,
+    "value_per_capita":515564317,
+    "revenue":293435851,
+    "revenue_compared":74193364,
     "enabled":false
   },
   {
@@ -405,6 +537,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":531020860,
+    "value_per_capita":541467336,
+    "revenue":913715198,
+    "revenue_compared":50642976,
     "enabled":false
   },
   {
@@ -413,10 +549,14 @@ export var countryInfo =[
     "ISO3":"CHL",
     "status":4,
     "population":"15211000",
-    "gdp":"276674000000",
+    "gdp":"2.76674E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":995589758,
+    "value_per_capita":615181261,
+    "revenue":330428747,
+    "revenue_compared":854545729,
     "enabled":false
   },
   {
@@ -429,6 +569,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":20326360,
+    "value_per_capita":841304929,
+    "revenue":628379541,
+    "revenue_compared":691699495,
     "enabled":false
   },
   {
@@ -437,10 +581,14 @@ export var countryInfo =[
     "ISO3":"COL",
     "status":2,
     "population":"42321000",
-    "gdp":"380063000000",
+    "gdp":"3.80063E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":282919697,
+    "value_per_capita":694351189,
+    "revenue":802711818,
+    "revenue_compared":474955066,
     "enabled":false
   },
   {
@@ -453,6 +601,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":354997627,
+    "value_per_capita":1080946844,
+    "revenue":646502626,
+    "revenue_compared":834492410,
     "enabled":false
   },
   {
@@ -465,6 +617,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":879633890,
+    "value_per_capita":844577974,
+    "revenue":856178830,
+    "revenue_compared":879321305,
     "enabled":true
   },
   {
@@ -477,6 +633,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":635030682,
+    "value_per_capita":1010145544,
+    "revenue":411676289,
+    "revenue_compared":794518058,
     "enabled":false
   },
   {
@@ -489,6 +649,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":522389323,
+    "value_per_capita":1051906329,
+    "revenue":162655766,
+    "revenue_compared":427190909,
     "enabled":false
   },
   {
@@ -501,6 +665,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1034371175,
+    "value_per_capita":513488414,
+    "revenue":26331528,
+    "revenue_compared":545158528,
     "enabled":false
   },
   {
@@ -513,6 +681,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":51633171,
+    "value_per_capita":356975545,
+    "revenue":421308637,
+    "revenue_compared":375539719,
     "enabled":false
   },
   {
@@ -525,6 +697,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":789224471,
+    "value_per_capita":355809640,
+    "revenue":94579969,
+    "revenue_compared":584202368,
     "enabled":false
   },
   {
@@ -537,6 +713,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":621737932,
+    "value_per_capita":1011361435,
+    "revenue":157887191,
+    "revenue_compared":364478871,
     "enabled":false
   },
   {
@@ -545,10 +725,14 @@ export var countryInfo =[
     "ISO3":"CZE",
     "status":4,
     "population":"10278100",
-    "gdp":"208328000000",
+    "gdp":"2.08328E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1022154400,
+    "value_per_capita":929694647,
+    "revenue":152510312,
+    "revenue_compared":38813933,
     "enabled":false
   },
   {
@@ -557,10 +741,14 @@ export var countryInfo =[
     "ISO3":"DNK",
     "status":4,
     "population":"5330000",
-    "gdp":"335878000000",
+    "gdp":"3.35878E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1074356225,
+    "value_per_capita":1017190665,
+    "revenue":175639506,
+    "revenue_compared":976035795,
     "enabled":false
   },
   {
@@ -573,6 +761,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":297613293,
+    "value_per_capita":741505495,
+    "revenue":253448900,
+    "revenue_compared":388875469,
     "enabled":false
   },
   {
@@ -585,6 +777,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":81318897,
+    "value_per_capita":9054983,
+    "revenue":863565154,
+    "revenue_compared":584905529,
     "enabled":false
   },
   {
@@ -597,6 +793,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":712156536,
+    "value_per_capita":593842485,
+    "revenue":497653398,
+    "revenue_compared":730928263,
     "enabled":false
   },
   {
@@ -609,6 +809,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":770124961,
+    "value_per_capita":353535286,
+    "revenue":1079400189,
+    "revenue_compared":66748616,
     "enabled":false
   },
   {
@@ -621,6 +825,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":938196937,
+    "value_per_capita":607116432,
+    "revenue":378682410,
+    "revenue_compared":142191473,
     "enabled":false
   },
   {
@@ -633,6 +841,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":747668898,
+    "value_per_capita":247321530,
+    "revenue":204395079,
+    "revenue_compared":777798943,
     "enabled":false
   },
   {
@@ -644,7 +856,11 @@ export var countryInfo =[
     "gdp":"17135584685",
     "resources_oil":"#N/A",
     "online_portal":0,
-    "online_registry":0,
+    "online_registry":1,
+    "value":620694157,
+    "value_per_capita":856657112,
+    "revenue":341088601,
+    "revenue_compared":720535545,
     "enabled":false
   },
   {
@@ -657,6 +873,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":302096283,
+    "value_per_capita":459704452,
+    "revenue":188434955,
+    "revenue_compared":731589861,
     "enabled":false
   },
   {
@@ -669,6 +889,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":229835731,
+    "value_per_capita":654402886,
+    "revenue":601251091,
+    "revenue_compared":124628827,
     "enabled":false
   },
   {
@@ -681,6 +905,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":122351254,
+    "value_per_capita":484980514,
+    "revenue":517482441,
+    "revenue_compared":143938768,
     "enabled":false
   },
   {
@@ -693,6 +921,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":797034437,
+    "value_per_capita":764040533,
+    "revenue":1068655526,
+    "revenue_compared":276716004,
     "enabled":false
   },
   {
@@ -701,10 +933,14 @@ export var countryInfo =[
     "ISO3":"FIN",
     "status":4,
     "population":"5171300",
-    "gdp":"269190000000",
+    "gdp":"2.6919E+11",
     "resources_oil":"#N/A",
-    "online_portal":0,
+    "online_portal":1,
     "online_registry":0,
+    "value":387793376,
+    "value_per_capita":567854487,
+    "revenue":479713213,
+    "revenue_compared":114448966,
     "enabled":false
   },
   {
@@ -713,10 +949,14 @@ export var countryInfo =[
     "ISO3":"FRA",
     "status":4,
     "population":"59225700",
-    "gdp":"2810250000000",
+    "gdp":"2.81025E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":158997144,
+    "value_per_capita":1026273693,
+    "revenue":1039978805,
+    "revenue_compared":526061480,
     "enabled":false
   },
   {
@@ -728,7 +968,11 @@ export var countryInfo =[
     "gdp":"17590716232",
     "resources_oil":"#N/A",
     "online_portal":0,
-    "online_registry":0,
+    "online_registry":1,
+    "value":754601129,
+    "value_per_capita":483878525,
+    "revenue":446382032,
+    "revenue_compared":845461870,
     "enabled":false
   },
   {
@@ -741,6 +985,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":325271894,
+    "value_per_capita":604710758,
+    "revenue":778783502,
+    "revenue_compared":798560911,
     "enabled":false
   },
   {
@@ -753,6 +1001,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":340088753,
+    "value_per_capita":303947645,
+    "revenue":144548711,
+    "revenue_compared":565467264,
     "enabled":false
   },
   {
@@ -761,10 +1013,14 @@ export var countryInfo =[
     "ISO3":"DEU",
     "status":4,
     "population":"82164700",
-    "gdp":"3745320000000",
+    "gdp":"3.74532E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":831354240,
+    "value_per_capita":234241754,
+    "revenue":511770800,
+    "revenue_compared":1007439861,
     "enabled":false
   },
   {
@@ -777,6 +1033,10 @@ export var countryInfo =[
     "resources_oil":"36048260",
     "online_portal":0,
     "online_registry":0,
+    "value":687918793,
+    "value_per_capita":29185522,
+    "revenue":1043159098,
+    "revenue_compared":717425770,
     "enabled":true
   },
   {
@@ -785,10 +1045,14 @@ export var countryInfo =[
     "ISO3":"GRC",
     "status":4,
     "population":"10545700",
-    "gdp":"239510000000",
+    "gdp":"2.3951E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":557900735,
+    "value_per_capita":729693725,
+    "revenue":680675153,
+    "revenue_compared":723242766,
     "enabled":false
   },
   {
@@ -801,6 +1065,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":704527564,
+    "value_per_capita":801732129,
+    "revenue":15525346,
+    "revenue_compared":347794205,
     "enabled":false
   },
   {
@@ -813,6 +1081,10 @@ export var countryInfo =[
     "resources_oil":"3645181",
     "online_portal":0,
     "online_registry":0,
+    "value":212032171,
+    "value_per_capita":648761078,
+    "revenue":305784453,
+    "revenue_compared":600887874,
     "enabled":false
   },
   {
@@ -825,6 +1097,10 @@ export var countryInfo =[
     "resources_oil":"NA",
     "online_portal":0,
     "online_registry":0,
+    "value":768055208,
+    "value_per_capita":639570136,
+    "revenue":97406270,
+    "revenue_compared":923559129,
     "enabled":false
   },
   {
@@ -837,6 +1113,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1003451154,
+    "value_per_capita":33673807,
+    "revenue":912181945,
+    "revenue_compared":431578655,
     "enabled":false
   },
   {
@@ -849,6 +1129,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":768243768,
+    "value_per_capita":146607393,
+    "revenue":66845471,
+    "revenue_compared":761281290,
     "enabled":false
   },
   {
@@ -861,6 +1145,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":78814619,
+    "value_per_capita":873240714,
+    "revenue":689326284,
+    "revenue_compared":695263688,
     "enabled":false
   },
   {
@@ -873,6 +1161,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":44055716,
+    "value_per_capita":435849726,
+    "revenue":525038356,
+    "revenue_compared":799292933,
     "enabled":false
   },
   {
@@ -881,10 +1173,14 @@ export var countryInfo =[
     "ISO3":"HUN",
     "status":4,
     "population":"10043200",
-    "gdp":"134402000000",
+    "gdp":"1.34402E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1079407004,
+    "value_per_capita":698331121,
+    "revenue":110242161,
+    "revenue_compared":694930754,
     "enabled":false
   },
   {
@@ -897,6 +1193,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":352594183,
+    "value_per_capita":85788069,
+    "revenue":99175955,
+    "revenue_compared":901843277,
     "enabled":false
   },
   {
@@ -905,10 +1205,14 @@ export var countryInfo =[
     "ISO3":"IND",
     "status":4,
     "population":"1013662000",
-    "gdp":"1861800000000",
+    "gdp":"1.8618E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":189198478,
+    "value_per_capita":310511624,
+    "revenue":129215862,
+    "revenue_compared":622717706,
     "enabled":false
   },
   {
@@ -917,10 +1221,14 @@ export var countryInfo =[
     "ISO3":"IDN",
     "status":1,
     "population":"212107000",
-    "gdp":"910479000000",
+    "gdp":"9.10479E+11",
     "resources_oil":"327745203",
     "online_portal":0,
     "online_registry":0,
+    "value":616580543,
+    "value_per_capita":311921601,
+    "revenue":711418181,
+    "revenue_compared":175535746,
     "enabled":false
   },
   {
@@ -933,6 +1241,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":500950338,
+    "value_per_capita":801632347,
+    "revenue":314585834,
+    "revenue_compared":820679188,
     "enabled":false
   },
   {
@@ -941,10 +1253,14 @@ export var countryInfo =[
     "ISO3":"IRQ",
     "status":1,
     "population":"23115000",
-    "gdp":"232497000000",
+    "gdp":"2.32497E+11",
     "resources_oil":"1087515111",
     "online_portal":0,
     "online_registry":0,
+    "value":742890837,
+    "value_per_capita":2814444,
+    "revenue":16604924,
+    "revenue_compared":435883147,
     "enabled":false
   },
   {
@@ -953,10 +1269,14 @@ export var countryInfo =[
     "ISO3":"IRL",
     "status":4,
     "population":"3775100",
-    "gdp":"238260000000",
+    "gdp":"2.3826E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":100343994,
+    "value_per_capita":672234239,
+    "revenue":565383571,
+    "revenue_compared":1083412546,
     "enabled":false
   },
   {
@@ -965,10 +1285,14 @@ export var countryInfo =[
     "ISO3":"ISR",
     "status":4,
     "population":"6217000",
-    "gdp":"292408000000",
+    "gdp":"2.92408E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":868053759,
+    "value_per_capita":198214517,
+    "revenue":355844686,
+    "revenue_compared":909324392,
     "enabled":false
   },
   {
@@ -977,10 +1301,14 @@ export var countryInfo =[
     "ISO3":"ITA",
     "status":4,
     "population":"57680000",
-    "gdp":"2133540000000",
+    "gdp":"2.13354E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":673870995,
+    "value_per_capita":806041709,
+    "revenue":956427829,
+    "revenue_compared":846537422,
     "enabled":false
   },
   {
@@ -993,6 +1321,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":887154186,
+    "value_per_capita":336305995,
+    "revenue":541433833,
+    "revenue_compared":1048254137,
     "enabled":false
   },
   {
@@ -1001,10 +1333,14 @@ export var countryInfo =[
     "ISO3":"JPN",
     "status":4,
     "population":"126714000",
-    "gdp":"4919560000000",
+    "gdp":"4.91956E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":346308678,
+    "value_per_capita":668746766,
+    "revenue":319620760,
+    "revenue_compared":758283329,
     "enabled":false
   },
   {
@@ -1017,6 +1353,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":11360292,
+    "value_per_capita":958297806,
+    "revenue":322402771,
+    "revenue_compared":846787654,
     "enabled":false
   },
   {
@@ -1025,10 +1365,14 @@ export var countryInfo =[
     "ISO3":"KAZ",
     "status":1,
     "population":"#N/A",
-    "gdp":"231876000000",
+    "gdp":"2.31876E+11",
     "resources_oil":"0",
     "online_portal":0,
     "online_registry":0,
+    "value":251920390,
+    "value_per_capita":169369041,
+    "revenue":375125209,
+    "revenue_compared":1087785048,
     "enabled":false
   },
   {
@@ -1041,6 +1385,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":132392662,
+    "value_per_capita":679457044,
+    "revenue":26859381,
+    "revenue_compared":139072156,
     "enabled":false
   },
   {
@@ -1053,6 +1401,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":245166458,
+    "value_per_capita":641113654,
+    "revenue":402508357,
+    "revenue_compared":227573290,
     "enabled":false
   },
   {
@@ -1065,6 +1417,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":300152341,
+    "value_per_capita":906414652,
+    "revenue":967419142,
+    "revenue_compared":858590004,
     "enabled":false
   },
   {
@@ -1077,6 +1433,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1042358792,
+    "value_per_capita":720708242,
+    "revenue":896578363,
+    "revenue_compared":638633481,
     "enabled":false
   },
   {
@@ -1085,10 +1445,14 @@ export var countryInfo =[
     "ISO3":"KWT",
     "status":4,
     "population":"1972000",
-    "gdp":"174161000000",
+    "gdp":"1.74161E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":651946754,
+    "value_per_capita":186671482,
+    "revenue":917864938,
+    "revenue_compared":821937129,
     "enabled":false
   },
   {
@@ -1101,6 +1465,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":253260970,
+    "value_per_capita":1062538822,
+    "revenue":109053039,
+    "revenue_compared":974176371,
     "enabled":false
   },
   {
@@ -1113,6 +1481,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":846840066,
+    "value_per_capita":267216177,
+    "revenue":791666016,
+    "revenue_compared":982171312,
     "enabled":false
   },
   {
@@ -1125,6 +1497,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":728853828,
+    "value_per_capita":871469112,
+    "revenue":970810007,
+    "revenue_compared":647204053,
     "enabled":false
   },
   {
@@ -1137,6 +1513,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":933716576,
+    "value_per_capita":11929222,
+    "revenue":297483397,
+    "revenue_compared":654716535,
     "enabled":false
   },
   {
@@ -1149,6 +1529,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":548739358,
+    "value_per_capita":1061225282,
+    "revenue":943472512,
+    "revenue_compared":497427581,
     "enabled":false
   },
   {
@@ -1161,6 +1545,10 @@ export var countryInfo =[
     "resources_oil":"NA",
     "online_portal":0,
     "online_registry":0,
+    "value":1070694863,
+    "value_per_capita":746938545,
+    "revenue":214778057,
+    "revenue_compared":289119344,
     "enabled":false
   },
   {
@@ -1173,6 +1561,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1020803216,
+    "value_per_capita":174699670,
+    "revenue":614614184,
+    "revenue_compared":355255751,
     "enabled":false
   },
   {
@@ -1185,6 +1577,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":229074415,
+    "value_per_capita":315499392,
+    "revenue":248835152,
+    "revenue_compared":665818724,
     "enabled":false
   },
   {
@@ -1197,6 +1593,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":930697607,
+    "value_per_capita":998229735,
+    "revenue":836285472,
+    "revenue_compared":946749773,
     "enabled":false
   },
   {
@@ -1209,6 +1609,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":50605560,
+    "value_per_capita":601241403,
+    "revenue":648961353,
+    "revenue_compared":58916443,
     "enabled":false
   },
   {
@@ -1221,6 +1625,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":991642252,
+    "value_per_capita":712055437,
+    "revenue":69212503,
+    "revenue_compared":1042952914,
     "enabled":false
   },
   {
@@ -1233,6 +1641,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":59540081,
+    "value_per_capita":31084081,
+    "revenue":871762416,
+    "revenue_compared":449877176,
     "enabled":false
   },
   {
@@ -1245,6 +1657,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":142965054,
+    "value_per_capita":282391850,
+    "revenue":698932703,
+    "revenue_compared":688232534,
     "enabled":false
   },
   {
@@ -1253,10 +1669,14 @@ export var countryInfo =[
     "ISO3":"MYS",
     "status":4,
     "population":"22244000",
-    "gdp":"323343000000",
+    "gdp":"3.23343E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":803226052,
+    "value_per_capita":717935490,
+    "revenue":316452326,
+    "revenue_compared":949639951,
     "enabled":false
   },
   {
@@ -1269,6 +1689,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":993954442,
+    "value_per_capita":451131745,
+    "revenue":115285359,
+    "revenue_compared":737330633,
     "enabled":false
   },
   {
@@ -1281,6 +1705,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":560276377,
+    "value_per_capita":720596106,
+    "revenue":873576986,
+    "revenue_compared":471091723,
     "enabled":false
   },
   {
@@ -1293,6 +1721,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":469808782,
+    "value_per_capita":554870875,
+    "revenue":614207366,
+    "revenue_compared":894074595,
     "enabled":false
   },
   {
@@ -1305,6 +1737,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":314411157,
+    "value_per_capita":618898288,
+    "revenue":277756926,
+    "revenue_compared":839743676,
     "enabled":false
   },
   {
@@ -1317,6 +1753,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":143078267,
+    "value_per_capita":615389983,
+    "revenue":180553423,
+    "revenue_compared":195277964,
     "enabled":false
   },
   {
@@ -1329,6 +1769,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":127286659,
+    "value_per_capita":19469737,
+    "revenue":132873516,
+    "revenue_compared":273385421,
     "enabled":false
   },
   {
@@ -1337,10 +1781,14 @@ export var countryInfo =[
     "ISO3":"MEX",
     "status":4,
     "population":"98881000",
-    "gdp":"1258770000000",
+    "gdp":"1.25877E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":285993953,
+    "value_per_capita":541567307,
+    "revenue":406130613,
+    "revenue_compared":494198731,
     "enabled":false
   },
   {
@@ -1353,6 +1801,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1036314029,
+    "value_per_capita":877641777,
+    "revenue":760583736,
+    "revenue_compared":151463577,
     "enabled":false
   },
   {
@@ -1365,6 +1817,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":734695589,
+    "value_per_capita":120399184,
+    "revenue":186947661,
+    "revenue_compared":316894685,
     "enabled":false
   },
   {
@@ -1377,6 +1833,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":182421848,
+    "value_per_capita":858509296,
+    "revenue":931148172,
+    "revenue_compared":232690063,
     "enabled":false
   },
   {
@@ -1389,6 +1849,10 @@ export var countryInfo =[
     "resources_oil":"7407000",
     "online_portal":0,
     "online_registry":0,
+    "value":297450162,
+    "value_per_capita":20529766,
+    "revenue":526312743,
+    "revenue_compared":688221558,
     "enabled":true
   },
   {
@@ -1401,6 +1865,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":641551530,
+    "value_per_capita":832507287,
+    "revenue":1027879775,
+    "revenue_compared":193129258,
     "enabled":false
   },
   {
@@ -1409,10 +1877,14 @@ export var countryInfo =[
     "ISO3":"MAR",
     "status":4,
     "population":"28351000",
-    "gdp":"107317000000",
+    "gdp":"1.07317E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":752006823,
+    "value_per_capita":309764979,
+    "revenue":909256588,
+    "revenue_compared":446319068,
     "enabled":false
   },
   {
@@ -1425,6 +1897,10 @@ export var countryInfo =[
     "resources_oil":"NA",
     "online_portal":0,
     "online_registry":0,
+    "value":255576001,
+    "value_per_capita":844724722,
+    "revenue":234998774,
+    "revenue_compared":198923790,
     "enabled":false
   },
   {
@@ -1437,6 +1913,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":797505810,
+    "value_per_capita":888776499,
+    "revenue":826729441,
+    "revenue_compared":847655687,
     "enabled":false
   },
   {
@@ -1449,6 +1929,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1069193709,
+    "value_per_capita":657713021,
+    "revenue":75091711,
+    "revenue_compared":207457679,
     "enabled":false
   },
   {
@@ -1461,6 +1945,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":954188859,
+    "value_per_capita":385174104,
+    "revenue":1041046593,
+    "revenue_compared":189003787,
     "enabled":false
   },
   {
@@ -1473,6 +1961,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":735675629,
+    "value_per_capita":589503311,
+    "revenue":848215399,
+    "revenue_compared":8583847,
     "enabled":false
   },
   {
@@ -1481,10 +1973,14 @@ export var countryInfo =[
     "ISO3":"NLD",
     "status":4,
     "population":"15864000",
-    "gdp":"864169000000",
+    "gdp":"8.64169E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":946706570,
+    "value_per_capita":120655391,
+    "revenue":653817972,
+    "revenue_compared":884966550,
     "enabled":false
   },
   {
@@ -1493,10 +1989,14 @@ export var countryInfo =[
     "ISO3":"NZL",
     "status":4,
     "population":"3862000",
-    "gdp":"187937000000",
+    "gdp":"1.87937E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":432058646,
+    "value_per_capita":754216067,
+    "revenue":966900029,
+    "revenue_compared":448993181,
     "enabled":false
   },
   {
@@ -1509,6 +2009,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":234044503,
+    "value_per_capita":254539804,
+    "revenue":107763609,
+    "revenue_compared":458554412,
     "enabled":false
   },
   {
@@ -1521,6 +2025,10 @@ export var countryInfo =[
     "resources_oil":"0",
     "online_portal":0,
     "online_registry":0,
+    "value":489197937,
+    "value_per_capita":60480571,
+    "revenue":422998011,
+    "revenue_compared":22870978,
     "enabled":false
   },
   {
@@ -1529,10 +2037,14 @@ export var countryInfo =[
     "ISO3":"NGA",
     "status":1,
     "population":"111506000",
-    "gdp":"514965000000",
+    "gdp":"5.14965E+11",
     "resources_oil":"162343156",
     "online_portal":0,
     "online_registry":0,
+    "value":1055245230,
+    "value_per_capita":675638126,
+    "revenue":528095236,
+    "revenue_compared":56034746,
     "enabled":false
   },
   {
@@ -1541,10 +2053,14 @@ export var countryInfo =[
     "ISO3":"NOR",
     "status":1,
     "population":"4478500",
-    "gdp":"522349000000",
+    "gdp":"5.22349E+11",
     "resources_oil":"0",
     "online_portal":0,
     "online_registry":0,
+    "value":470559595,
+    "value_per_capita":507719075,
+    "revenue":812673841,
+    "revenue_compared":756196554,
     "enabled":false
   },
   {
@@ -1557,6 +2073,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":36037310,
+    "value_per_capita":699907626,
+    "revenue":407616376,
+    "revenue_compared":985693287,
     "enabled":false
   },
   {
@@ -1565,10 +2085,14 @@ export var countryInfo =[
     "ISO3":"PAK",
     "status":4,
     "population":"156483000",
-    "gdp":"231087000000",
+    "gdp":"2.31087E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":213598861,
+    "value_per_capita":85876709,
+    "revenue":988323218,
+    "revenue_compared":643908588,
     "enabled":false
   },
   {
@@ -1581,6 +2105,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":288841173,
+    "value_per_capita":101832369,
+    "revenue":205562017,
+    "revenue_compared":452108758,
     "enabled":false
   },
   {
@@ -1593,6 +2121,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":775135161,
+    "value_per_capita":528505247,
+    "revenue":294807414,
+    "revenue_compared":526403387,
     "enabled":false
   },
   {
@@ -1605,6 +2137,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":217484584,
+    "value_per_capita":410642755,
+    "revenue":468718028,
+    "revenue_compared":668557572,
     "enabled":false
   },
   {
@@ -1617,6 +2153,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":689518754,
+    "value_per_capita":1048698486,
+    "revenue":477140040,
+    "revenue_compared":816560705,
     "enabled":false
   },
   {
@@ -1625,10 +2165,14 @@ export var countryInfo =[
     "ISO3":"PER",
     "status":1,
     "population":"25662000",
-    "gdp":"201848000000",
+    "gdp":"2.01848E+11",
     "resources_oil":"22956000",
     "online_portal":0,
     "online_registry":0,
+    "value":112892518,
+    "value_per_capita":523618187,
+    "revenue":305879205,
+    "revenue_compared":838711375,
     "enabled":true
   },
   {
@@ -1637,10 +2181,14 @@ export var countryInfo =[
     "ISO3":"PHL",
     "status":2,
     "population":"75967000",
-    "gdp":"271927000000",
+    "gdp":"2.71927E+11",
     "resources_oil":"1637548",
     "online_portal":0,
     "online_registry":0,
+    "value":49804226,
+    "value_per_capita":498112094,
+    "revenue":19339200,
+    "revenue_compared":665323264,
     "enabled":true
   },
   {
@@ -1649,10 +2197,14 @@ export var countryInfo =[
     "ISO3":"POL",
     "status":4,
     "population":"38653600",
-    "gdp":"524059000000",
+    "gdp":"5.24059E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":218533684,
+    "value_per_capita":1083340826,
+    "revenue":780340664,
+    "revenue_compared":749603473,
     "enabled":false
   },
   {
@@ -1661,10 +2213,14 @@ export var countryInfo =[
     "ISO3":"PRT",
     "status":4,
     "population":"9997600",
-    "gdp":"226073000000",
+    "gdp":"2.26073E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":588095097,
+    "value_per_capita":70460521,
+    "revenue":517290674,
+    "revenue_compared":194971910,
     "enabled":false
   },
   {
@@ -1673,10 +2229,14 @@ export var countryInfo =[
     "ISO3":"QAT",
     "status":4,
     "population":"599000",
-    "gdp":"201885000000",
+    "gdp":"2.01885E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1002948919,
+    "value_per_capita":351241661,
+    "revenue":1065367513,
+    "revenue_compared":988142487,
     "enabled":false
   },
   {
@@ -1685,10 +2245,14 @@ export var countryInfo =[
     "ISO3":"ROU",
     "status":4,
     "population":"22455500",
-    "gdp":"191587000000",
+    "gdp":"1.91587E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":246275135,
+    "value_per_capita":60063683,
+    "revenue":1000646957,
+    "revenue_compared":438441193,
     "enabled":false
   },
   {
@@ -1701,6 +2265,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":195318518,
+    "value_per_capita":772387100,
+    "revenue":832459473,
+    "revenue_compared":388371578,
     "enabled":false
   },
   {
@@ -1713,6 +2281,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1026682296,
+    "value_per_capita":604375042,
+    "revenue":368208129,
+    "revenue_compared":215821068,
     "enabled":false
   },
   {
@@ -1725,6 +2297,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":391029885,
+    "value_per_capita":753933366,
+    "revenue":599762113,
+    "revenue_compared":409987158,
     "enabled":false
   },
   {
@@ -1737,6 +2313,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":956369272,
+    "value_per_capita":923982792,
+    "revenue":609667686,
+    "revenue_compared":345862018,
     "enabled":false
   },
   {
@@ -1749,6 +2329,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":469932789,
+    "value_per_capita":513519175,
+    "revenue":478142372,
+    "revenue_compared":103382982,
     "enabled":false
   },
   {
@@ -1761,6 +2345,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":361782629,
+    "value_per_capita":728970420,
+    "revenue":804366379,
+    "revenue_compared":845795722,
     "enabled":false
   },
   {
@@ -1773,6 +2361,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":985690889,
+    "value_per_capita":642025189,
+    "revenue":369874336,
+    "revenue_compared":893534126,
     "enabled":false
   },
   {
@@ -1785,6 +2377,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":910156578,
+    "value_per_capita":32468199,
+    "revenue":667653583,
+    "revenue_compared":667385831,
     "enabled":false
   },
   {
@@ -1793,10 +2389,14 @@ export var countryInfo =[
     "ISO3":"SAU",
     "status":4,
     "population":"21607000",
-    "gdp":"744336000000",
+    "gdp":"7.44336E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":275368958,
+    "value_per_capita":218036056,
+    "revenue":160791530,
+    "revenue_compared":470460144,
     "enabled":false
   },
   {
@@ -1809,6 +2409,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":289126898,
+    "value_per_capita":249858745,
+    "revenue":1032087659,
+    "revenue_compared":810341676,
     "enabled":false
   },
   {
@@ -1821,6 +2425,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":838778084,
+    "value_per_capita":202941869,
+    "revenue":337224720,
+    "revenue_compared":971722482,
     "enabled":false
   },
   {
@@ -1833,6 +2441,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":653491662,
+    "value_per_capita":395532195,
+    "revenue":321958672,
+    "revenue_compared":46835936,
     "enabled":false
   },
   {
@@ -1845,6 +2457,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":802512618,
+    "value_per_capita":50115702,
+    "revenue":733519739,
+    "revenue_compared":945138165,
     "enabled":false
   },
   {
@@ -1853,10 +2469,14 @@ export var countryInfo =[
     "ISO3":"SGP",
     "status":4,
     "population":"3567000",
-    "gdp":"302246000000",
+    "gdp":"3.02246E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":772792456,
+    "value_per_capita":178446232,
+    "revenue":1009703147,
+    "revenue_compared":703454594,
     "enabled":false
   },
   {
@@ -1869,6 +2489,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1028948482,
+    "value_per_capita":163868541,
+    "revenue":516302081,
+    "revenue_compared":483918843,
     "enabled":false
   },
   {
@@ -1881,6 +2505,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":847154877,
+    "value_per_capita":606583995,
+    "revenue":1049806180,
+    "revenue_compared":1054346140,
     "enabled":false
   },
   {
@@ -1893,6 +2521,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":217312593,
+    "value_per_capita":196002477,
+    "revenue":389978022,
+    "revenue_compared":78538234,
     "enabled":false
   },
   {
@@ -1905,6 +2537,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":172523883,
+    "value_per_capita":351017827,
+    "revenue":637497961,
+    "revenue_compared":66503224,
     "enabled":false
   },
   {
@@ -1913,10 +2549,14 @@ export var countryInfo =[
     "ISO3":"ZAF",
     "status":4,
     "population":"40377000",
-    "gdp":"366244000000",
+    "gdp":"3.66244E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":578842992,
+    "value_per_capita":104043112,
+    "revenue":1022509346,
+    "revenue_compared":1020850103,
     "enabled":false
   },
   {
@@ -1925,10 +2565,14 @@ export var countryInfo =[
     "ISO3":"ESP",
     "status":4,
     "population":"39441700",
-    "gdp":"1369260000000",
+    "gdp":"1.36926E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":898765116,
+    "value_per_capita":101340060,
+    "revenue":931632585,
+    "revenue_compared":892709930,
     "enabled":false
   },
   {
@@ -1941,6 +2585,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":443140228,
+    "value_per_capita":868587370,
+    "revenue":914917271,
+    "revenue_compared":109100236,
     "enabled":false
   },
   {
@@ -1953,6 +2601,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":549736860,
+    "value_per_capita":841601795,
+    "revenue":445567471,
+    "revenue_compared":147545178,
     "enabled":false
   },
   {
@@ -1965,6 +2617,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":288220842,
+    "value_per_capita":655606872,
+    "revenue":42901665,
+    "revenue_compared":421010471,
     "enabled":false
   },
   {
@@ -1977,6 +2633,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":543144547,
+    "value_per_capita":1036275991,
+    "revenue":312704838,
+    "revenue_compared":333773385,
     "enabled":false
   },
   {
@@ -1985,10 +2645,14 @@ export var countryInfo =[
     "ISO3":"SWE",
     "status":4,
     "population":"8861400",
-    "gdp":"578742000000",
+    "gdp":"5.78742E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":321248761,
+    "value_per_capita":15083261,
+    "revenue":547926157,
+    "revenue_compared":322555402,
     "enabled":false
   },
   {
@@ -1997,10 +2661,14 @@ export var countryInfo =[
     "ISO3":"CHE",
     "status":4,
     "population":"7160400",
-    "gdp":"684919000000",
+    "gdp":"6.84919E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":406424482,
+    "value_per_capita":755743360,
+    "revenue":98196486,
+    "revenue_compared":108960716,
     "enabled":false
   },
   {
@@ -2013,6 +2681,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":602490719,
+    "value_per_capita":812210535,
+    "revenue":124006429,
+    "revenue_compared":988698758,
     "enabled":false
   },
   {
@@ -2025,6 +2697,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":143631098,
+    "value_per_capita":1012013870,
+    "revenue":971278613,
+    "revenue_compared":663878402,
     "enabled":false
   },
   {
@@ -2037,6 +2713,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":362973248,
+    "value_per_capita":352054817,
+    "revenue":61961935,
+    "revenue_compared":849862643,
     "enabled":false
   },
   {
@@ -2045,10 +2725,14 @@ export var countryInfo =[
     "ISO3":"THA",
     "status":4,
     "population":"61399000",
-    "gdp":"420167000000",
+    "gdp":"4.20167E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":451342051,
+    "value_per_capita":651095079,
+    "revenue":280766385,
+    "revenue_compared":570498874,
     "enabled":false
   },
   {
@@ -2061,6 +2745,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":278307631,
+    "value_per_capita":421855186,
+    "revenue":327943267,
+    "revenue_compared":314647297,
     "enabled":false
   },
   {
@@ -2073,6 +2761,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":712311975,
+    "value_per_capita":525858403,
+    "revenue":1065364967,
+    "revenue_compared":1026559443,
     "enabled":false
   },
   {
@@ -2085,6 +2777,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":133838117,
+    "value_per_capita":608851640,
+    "revenue":490854370,
+    "revenue_compared":472332549,
     "enabled":false
   },
   {
@@ -2097,6 +2793,10 @@ export var countryInfo =[
     "resources_oil":"29600000",
     "online_portal":0,
     "online_registry":0,
+    "value":473028041,
+    "value_per_capita":713265123,
+    "revenue":679944264,
+    "revenue_compared":563326363,
     "enabled":false
   },
   {
@@ -2109,6 +2809,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":515539035,
+    "value_per_capita":596159652,
+    "revenue":614821560,
+    "revenue_compared":193791315,
     "enabled":false
   },
   {
@@ -2117,10 +2821,14 @@ export var countryInfo =[
     "ISO3":"TUR",
     "status":4,
     "population":"66591000",
-    "gdp":"823243000000",
+    "gdp":"8.23243E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":182959452,
+    "value_per_capita":769932105,
+    "revenue":303252699,
+    "revenue_compared":130975871,
     "enabled":false
   },
   {
@@ -2133,6 +2841,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":995942254,
+    "value_per_capita":330178865,
+    "revenue":251816610,
+    "revenue_compared":936116079,
     "enabled":false
   },
   {
@@ -2145,6 +2857,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":979609568,
+    "value_per_capita":605122417,
+    "revenue":48730806,
+    "revenue_compared":804454269,
     "enabled":false
   },
   {
@@ -2157,6 +2873,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":330267067,
+    "value_per_capita":583740191,
+    "revenue":571823924,
+    "revenue_compared":358473627,
     "enabled":false
   },
   {
@@ -2165,10 +2885,14 @@ export var countryInfo =[
     "ISO3":"UKR",
     "status":2,
     "population":"50456000",
-    "gdp":"183310000000",
+    "gdp":"1.8331E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":302600260,
+    "value_per_capita":150496048,
+    "revenue":450705562,
+    "revenue_compared":444664138,
     "enabled":false
   },
   {
@@ -2177,10 +2901,14 @@ export var countryInfo =[
     "ISO3":"ARE",
     "status":4,
     "population":"2441000",
-    "gdp":"387192000000",
+    "gdp":"3.87192E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":323538406,
+    "value_per_capita":408578948,
+    "revenue":560087589,
+    "revenue_compared":521759393,
     "enabled":false
   },
   {
@@ -2189,10 +2917,14 @@ export var countryInfo =[
     "ISO3":"GBR",
     "status":2,
     "population":"59623400",
-    "gdp":"2712300000000",
+    "gdp":"2.7123E+12",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":201117222,
+    "value_per_capita":412071403,
+    "revenue":460984525,
+    "revenue_compared":545900350,
     "enabled":false
   },
   {
@@ -2201,10 +2933,14 @@ export var countryInfo =[
     "ISO3":"USA",
     "status":2,
     "population":"278357000",
-    "gdp":"16768100000000",
+    "gdp":"1.67681E+13",
     "resources_oil":"#N/A",
     "online_portal":1,
     "online_registry":1,
+    "value":1008797347,
+    "value_per_capita":821782598,
+    "revenue":228386432,
+    "revenue_compared":652861764,
     "enabled":false
   },
   {
@@ -2217,6 +2953,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":283609175,
+    "value_per_capita":892399857,
+    "revenue":1056421988,
+    "revenue_compared":101037631,
     "enabled":false
   },
   {
@@ -2229,6 +2969,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":342419376,
+    "value_per_capita":967670250,
+    "revenue":880159486,
+    "revenue_compared":640389927,
     "enabled":false
   },
   {
@@ -2241,6 +2985,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":996691290,
+    "value_per_capita":1028245613,
+    "revenue":556003497,
+    "revenue_compared":294777874,
     "enabled":false
   },
   {
@@ -2253,6 +3001,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":312422435,
+    "value_per_capita":578097407,
+    "revenue":596451338,
+    "revenue_compared":939820252,
     "enabled":false
   },
   {
@@ -2265,6 +3017,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1040862005,
+    "value_per_capita":16810654,
+    "revenue":146471104,
+    "revenue_compared":660893253,
     "enabled":false
   },
   {
@@ -2273,10 +3029,14 @@ export var countryInfo =[
     "ISO3":"VNM",
     "status":4,
     "population":"79832000",
-    "gdp":"171222000000",
+    "gdp":"1.71222E+11",
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":160514695,
+    "value_per_capita":730755858,
+    "revenue":185850199,
+    "revenue_compared":1053328211,
     "enabled":false
   },
   {
@@ -2289,6 +3049,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":1009113480,
+    "value_per_capita":322969465,
+    "revenue":349185475,
+    "revenue_compared":1060052047,
     "enabled":false
   },
   {
@@ -2301,6 +3065,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":833236024,
+    "value_per_capita":584743586,
+    "revenue":652202478,
+    "revenue_compared":749148530,
     "enabled":false
   },
   {
@@ -2313,6 +3081,10 @@ export var countryInfo =[
     "resources_oil":"#N/A",
     "online_portal":0,
     "online_registry":0,
+    "value":553542164,
+    "value_per_capita":953097516,
+    "revenue":786226645,
+    "revenue_compared":89994097,
     "enabled":false
   }
 ]
