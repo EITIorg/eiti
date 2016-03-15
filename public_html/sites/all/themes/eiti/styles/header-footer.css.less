@@ -3,6 +3,7 @@
 
 .site-identity-wrapper {
   .site-name {
+    font-size: inherit;
     margin: 0;
   }
 }
@@ -22,6 +23,10 @@
   .site-identity-wrapper {
     line-height: 5em;
   }
+}
+
+.header-items nav {
+  font-size: 0.75em;
 }
 
 .user-navigation {
@@ -45,20 +50,17 @@
     fill: @clnormal;
   }
 }
-.xMediumAndDown() {
+.xSmallOnly() {
   .main-header-inner {
-    .site-name {
-      font-size: 1em;
-    }
     .site-logo {
-      height: 1em;
+      height: 2em;
     }
   }
 }
 .xNormalAndUp() {
   .main-header-inner {
     .site-logo {
-      height: 2em;
+      height: 4em;
     }
   }
 }
@@ -129,7 +131,8 @@
 // @TODO: Finish the styling!
 .language-switcher {
   .language-switcher-title {
-    font-size: medium;
+    display: inline;
+    font-size: inherit;
     margin: 0;
   }
 
@@ -155,12 +158,6 @@
     padding: 0 0.5em;
   }
 }
-.xNormalAndUp() {
-  .language-switcher {
-    line-height: 2em;
-    margin: 1.5em 0;
-  }
-}
 .xMediumAndUp() {
   .language-switcher {
     position: relative;
@@ -179,7 +176,7 @@
     .locale-links-wrapper {
       // We do this in order to align the dropdown with the options.
       position: absolute;
-      bottom: 0.5em;  // Matches the icon padding.
+      top: 50%;  // HACK: align .locale-links properly inside .locale-links-wrapper.
       right: 0;
       height: 0;
 
@@ -190,6 +187,8 @@
       background-color: @clmain__header;
       border: 1px solid @clnormal;
       text-align: right;
+
+      margin-top: 1em;  // HACK: align .locale-links properly inside .locale-links-wrapper.
 
       li {
         display: block;
