@@ -34,6 +34,26 @@ table {
   }
 }
 
+.content-search-page {
+
+  .views-exposed-widgets {
+    margin: 1em 0;
+    & * {
+      display: inline;
+    }
+  }
+
+  .views-exposed-widget {
+    float: none;
+    padding: 0;
+
+    .form-submit {
+      border: 0;
+      margin-top: 0;
+    }
+  }
+}
+
 // @HACK: We don't have responsive tables, so we overflow the content and display a scrollbar.
 .xMediumAndDown() {
   .large-table-wrapper {
