@@ -77,8 +77,10 @@ function eitisearch_views_default_views() {
   );
 
   /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'content-search';
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'content-search-page';
+  $handler->display->display_options['path'] = 'search';
   $translatables['search'] = array(
     t('Master'),
     t('Content Search'),

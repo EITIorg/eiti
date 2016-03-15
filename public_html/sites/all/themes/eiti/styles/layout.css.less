@@ -104,6 +104,19 @@
   }
 }
 
+.xNormalAndUp() {
+  .content-search-page {
+    .attachment-column-wrapper {
+      .column(3);
+      .first-child-column();
+    }
+    .main-column-wrapper {
+      .column(9);
+      .last-child-column();
+    }
+  }
+}
+
 @import './lib/custom-grid.less';
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';
