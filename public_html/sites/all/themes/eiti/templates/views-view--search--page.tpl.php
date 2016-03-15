@@ -39,11 +39,14 @@
     </div>
   <?php endif; ?>
 
-  <?php if ($attachment_before): ?>
-    <div class="attachment attachment-before attachment-column-wrapper">
-      <?php print $attachment_before; ?>
-    </div>
-  <?php endif; ?>
+  <div class="attachment-column-wrapper">
+    <?php if ($attachment_before): ?>
+      <div class="attachment attachment-before">
+        <?php print $attachment_before; ?>
+      </div>
+    <?php endif; ?>
+    &nbsp;<?php // @HACK: Always show the search filters column. ?>
+  </div>
 
   <div class="main-column-wrapper">
     <?php if ($exposed): ?>
