@@ -114,7 +114,7 @@ class EITISpreadsheetMigration extends Migration {
     $million = 1000000;
     $sm3_to_barrels = 6.29; // They always change their mind.
     $barrels_per_day_to_year = 365.242199;
-    $barrels_to_sm3 = 0.159;
+    $barrels_to_sm3 = 0.15898757;
     $gj_to_sm3 = 35.5;
     switch ($unit) {
       case 'USD':

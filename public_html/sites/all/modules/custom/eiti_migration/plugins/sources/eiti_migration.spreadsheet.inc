@@ -827,9 +827,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
 
                 $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+
                 if ($revenueCell->isFormula()) {
                   $formula = $revenueCell->getValue();
                   try {
+                    $calculationEngine->flushInstance();
                     $revenueCellValue = $calculationEngine->calculateFormula($formula);
                   }
                   catch (PHPExcel_Exception $e) {
@@ -944,6 +946,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
+                      $calculationEngine->flushInstance();
                       $revenueCellValue = $calculationEngine->calculateFormula($formula);
                     }
                     catch (PHPExcel_Exception $e) {
@@ -992,6 +995,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
+                      $calculationEngine->flushInstance();
                       $revenueCellValue = $calculationEngine->calculateFormula($formula);
                     }
                     catch (PHPExcel_Exception $e) {
