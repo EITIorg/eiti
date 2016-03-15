@@ -15,6 +15,7 @@ features[ctools][] = ds:ds:1
 features[ctools][] = facetapi:facetapi_defaults:1
 features[ctools][] = views:views_default:3.0
 features[facetapi][] = search_api@node_search:block:field_related_country
+features[facetapi][] = search_api@node_search:block:type
 features[features_api][] = api:2
 features[search_api_index][] = node_search
 features[search_api_server][] = solr_server
