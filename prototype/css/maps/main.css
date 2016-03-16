@@ -89,4 +89,119 @@
     margin:auto;
 }
 
+.map-container {
+  font-family: 'Open Sans', serif;
+}
+.map-option-wrapper {
+  text-align: center;
+  background: #005382;
+}
+.map-option-widget {
+  display: inline-block;
+  list-style: none;
+  overflow: visible;
+  padding: 10px 0;
+  width:1300px;
+}
+.map-option-widget li {
+  border:1px solid #0192c7;
+  color: #0192c7;
+  margin-left: -1px;
+  text-align: left;
+  text-transform: uppercase;
+  -webkit-transition: color 400ms ease-in-out;
+  -moz-transition: color 400ms ease-in-out;
+  -o-transition: color 400ms ease-in-out;
+  transition: color 400ms ease-in-out;
+}
+.map-option-widget li:nth-child(1) {
+  background: url('../../images/map-icons/overview-map.png') no-repeat;
+  background-position: 10px 13px;
+}
+.map-option-widget li:nth-child(2) {
+  background: url('../../images/map-icons/benefactors.png') no-repeat;
+  background-position: 10px 13px;
+}
+.map-option-widget li:nth-child(3) {
+  background: url('../../images/map-icons/tax.png') no-repeat;
+  background-position: 10px 13px;
+}
+.map-option-widget li:nth-child(4) {
+  background: url('../../images/map-icons/production.png') no-repeat;
+  background-position: 10px 13px;
+}
+.map-option-widget li:nth-child(5) {
+  background: url('../../images/map-icons/gov-revenue.png') no-repeat;
+  background-position: 10px 13px;
+}
 
+.map-option-widget li:first-child {
+  margin-left: 0;
+}
+.map-option-widget li:hover {
+  color: #ffffff;
+}
+
+.map-container ul li {
+  float: left;
+  font-size: 14px;
+  padding: 20px 11px 20px 65px;
+  position: relative;
+  width: 14%;
+}
+.map-container ul li:hover {
+  background-color: #023554;
+}
+.map-container ul ul {
+  background: #023554;
+  display: none;
+  list-style: square;
+  position: absolute;
+  z-index: 999;
+}
+
+.map-container ul ul li {
+  background: none;
+  display: block;
+  float: left;
+  padding: 0;
+  white-space: nowrap;
+  width: 20%;
+}
+.map-container ul li:hover {
+  border-bottom: 1px solid #023554;
+  border-top: 1px solid #023554;
+}
+.map-container ul li:hover ul {
+  display: block;
+  left: 0;
+  padding: 15px;
+  top: 60px;
+  width: 300px;
+}
+.map-container ul li:last-child:hover ul {
+  display: block;
+  left: auto;
+  position: absolute;
+  right: 0;
+}
+/*sub nav*/
+.map-container ul ul li {
+   background: #023554;
+   border: none;
+   color: #999999;
+   display: block;
+   float: left;
+   margin-right: 20px;
+   padding: 10px 15px;
+   position: relative;
+   text-transform: capitalize;
+   width: auto;
+ }
+ .map-container ul li ul li:hover {
+   background: #000;
+   color: #ffffff;
+ }
+.map-container ul li .map-option-items li {
+   background: none;
+ }
