@@ -1,0 +1,63 @@
+
+.country-banner-wrapper {
+  &.no-background-image {
+    margin: 2em 0;
+  }
+
+  .page-title {
+    color: @clnormal__dark;
+    display: inline;
+    margin-left: 1em;
+  }
+}
+
+.country-information-wrapper {
+
+  .info {
+    margin: 1em 0;
+  }
+
+  .icon {
+    fill: @clnormal__alt;
+  }
+  .value {
+    font-weight: bold;
+  }
+}
+
+.xMediumOnly() {
+  .country-banner-wrapper {
+    &.with-background-image {
+      // NOTE: We only have a single line in this widget.
+      line-height: 10em;
+    }
+  }
+  .country-information-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    .info {
+      flex: 50%;
+    }
+  }
+}
+.xNormalAndUp() {
+  .country-banner-wrapper {
+    &.with-background-image {
+      // NOTE: We only have a single line in this widget.
+      line-height: 20em;
+    }
+  }
+  .country-information-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    .info {
+      flex: 25%;
+    }
+  }
+}
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

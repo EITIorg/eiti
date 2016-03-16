@@ -19,23 +19,15 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 4,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'implementing_country',
     'field_name' => 'field_ic_change_status_date',
-    'label' => 'Change Status Date',
+    'label' => 'EITI Member Since',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -70,13 +62,9 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -144,7 +132,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -156,13 +144,9 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -230,7 +214,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -243,16 +227,15 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'implementing_country',
     'field_name' => 'field_ic_status',
-    'label' => 'Country Status',
+    'label' => 'EITI Status',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -276,10 +259,9 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -322,10 +304,10 @@ function eitiet_implementing_country_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Change Status Date');
-  t('Country Status');
   t('Country Website');
   t('Cover');
+  t('EITI Member Since');
+  t('EITI Status');
   t('Logo');
   t('Please specify the country\'s EITI membership status.');
   t('Please specify the local EITI country-specific website.');
