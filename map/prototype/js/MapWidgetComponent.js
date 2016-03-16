@@ -158,37 +158,37 @@ export default class MapWidgetComponent extends Component {
     const geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     var buttons;
     if(this.props.options.buttons) {
-        buttons = (<div class="map-option-wrapper">
-          <ul class="map-option-widget">
+        buttons = (<div className="map-option-wrapper">
+          <ul className="map-option-widget">
             <li>
               Overview
-              <ul class="map-option-items">
+              <ul className="map-option-items">
                 <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>Status</li>
               </ul>
             </li>
             <li>
               Resources
-              <ul class="map-option-items">
+              <ul className="map-option-items">
                 <li data-indicatorid="resources_oil" data-valuetypes="range" onClick={::this.addLayer}>Oil</li>
               </ul>
             </li>
             <li>
               Tax & Legal Framework
-              <ul class="map-option-items">
+              <ul className="map-option-items">
                 <li data-indicatorid="online_portal" data-valuetypes="fixed" onClick={::this.addLayer}>License Registry</li>
                 <li data-indicatorid="online_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Contracts</li>
               </ul>
             </li>
             <li>
               Production
-              <ul class="map-option-items">
+              <ul className="map-option-items">
                 <li data-indicatorid="value" data-valuetypes="range" onClick={::this.addLayer}>Value</li>
                 <li data-indicatorid="value_per_capita" data-valuetypes="range" onClick={::this.addLayer}>Value per capita</li>
               </ul>
             </li>
             <li>
               Revenues
-              <ul class="map-option-items">
+              <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>Revenue</li>
                 <li data-indicatorid="revenue_compared" data-valuetypes="range" onClick={::this.addLayer}>Revenue Per Capita</li>
               </ul>

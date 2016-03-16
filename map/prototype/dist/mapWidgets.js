@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "428f8d54c8c0c9d9b58a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b0c656647e744b8ce2ca"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -20307,17 +20307,17 @@
 	      if (this.props.options.buttons) {
 	        buttons = _react3.default.createElement(
 	          'div',
-	          { 'class': 'map-option-wrapper' },
+	          { className: 'map-option-wrapper' },
 	          _react3.default.createElement(
 	            'ul',
-	            { 'class': 'map-option-widget' },
+	            { className: 'map-option-widget' },
 	            _react3.default.createElement(
 	              'li',
 	              null,
 	              'Overview',
 	              _react3.default.createElement(
 	                'ul',
-	                { 'class': 'map-option-items' },
+	                { className: 'map-option-items' },
 	                _react3.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
@@ -20331,7 +20331,7 @@
 	              'Resources',
 	              _react3.default.createElement(
 	                'ul',
-	                { 'class': 'map-option-items' },
+	                { className: 'map-option-items' },
 	                _react3.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'resources_oil', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
@@ -20345,7 +20345,7 @@
 	              'Tax & Legal Framework',
 	              _react3.default.createElement(
 	                'ul',
-	                { 'class': 'map-option-items' },
+	                { className: 'map-option-items' },
 	                _react3.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_portal', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
@@ -20364,7 +20364,7 @@
 	              'Production',
 	              _react3.default.createElement(
 	                'ul',
-	                { 'class': 'map-option-items' },
+	                { className: 'map-option-items' },
 	                _react3.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
@@ -20383,7 +20383,7 @@
 	              'Revenues',
 	              _react3.default.createElement(
 	                'ul',
-	                { 'class': 'map-option-items' },
+	                { className: 'map-option-items' },
 	                _react3.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'revenue', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
