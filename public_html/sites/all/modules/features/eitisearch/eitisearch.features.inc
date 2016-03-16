@@ -35,8 +35,8 @@ function eitisearch_default_search_api_index() {
     "server" : "solr_server",
     "item_type" : "node",
     "options" : {
-      "datasource" : { "bundles" : [ "article", "document", "mention", "person" ] },
-      "index_directly" : 1,
+      "datasource" : { "bundles" : [ "article", "document" ] },
+      "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
         "body:value" : { "type" : "text" },
