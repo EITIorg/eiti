@@ -55,10 +55,6 @@
       width 100%;
     }
 
-    .leaflet-popup-content th.commodity-col {
-      border:1px solid #f00;
-    }
-
 .leaflet-popup-content a:hover{
     text-decoration: none;
 }
@@ -95,16 +91,20 @@
 .map-option-wrapper {
   text-align: center;
   background: #005382;
+  margin-bottom: 0;
 }
 .map-option-widget {
   display: inline-block;
   list-style: none;
+  margin: 0 auto;
   overflow: visible;
-  padding: 10px 0;
-  width:1300px;
+  padding: 0;
+  width: 1300px;
 }
 .map-option-widget li {
-  border:1px solid #0192c7;
+  background: url('../../images/map-icons/map-sprite.png') no-repeat;
+  border:1px solid #0a6997;
+  border-top: 1px solid #014b7a;
   color: #0192c7;
   margin-left: -1px;
   text-align: left;
@@ -114,27 +114,45 @@
   -o-transition: color 400ms ease-in-out;
   transition: color 400ms ease-in-out;
 }
+.map-option-widget li.active {
+  background-color: #023554;
+  color: #ffffff;
+}
 .map-option-widget li:nth-child(1) {
-  background: url('../../images/map-icons/overview-map.png') no-repeat;
-  background-position: 10px 13px;
+  background-position: 14px 13px;
+}
+.map-option-widget li:nth-child(1):hover,
+.map-option-widget li:nth-child(1).active {
+  background-position: 14px -39px;
 }
 .map-option-widget li:nth-child(2) {
-  background: url('../../images/map-icons/benefactors.png') no-repeat;
-  background-position: 10px 13px;
+  background-position: 14px -405px;
+}
+.map-option-widget li:nth-child(2):hover,
+.map-option-widget li:nth-child(2).active {
+  background-position: 14px -458px;
 }
 .map-option-widget li:nth-child(3) {
-  background: url('../../images/map-icons/tax.png') no-repeat;
-  background-position: 10px 13px;
+  background-position: 14px -203px;
+}
+.map-option-widget li:nth-child(3):hover,
+.map-option-widget li:nth-child(3).active {
+  background-position: 14px -254px;
 }
 .map-option-widget li:nth-child(4) {
-  background: url('../../images/map-icons/production.png') no-repeat;
-  background-position: 10px 13px;
+  background-position: 14px -96px;
+}
+.map-option-widget li:nth-child(4):hover,
+.map-option-widget li:nth-child(4).active {
+  background-position: 14px -150px;
 }
 .map-option-widget li:nth-child(5) {
-  background: url('../../images/map-icons/gov-revenue.png') no-repeat;
-  background-position: 10px 13px;
+  background-position: 14px -304px;
 }
-
+.map-option-widget li:nth-child(5):hover,
+.map-option-widget li:nth-child(5).active {
+  background-position: 14px -353px;
+}
 .map-option-widget li:first-child {
   margin-left: 0;
 }
@@ -145,7 +163,7 @@
 .map-container ul li {
   float: left;
   font-size: 14px;
-  padding: 20px 11px 20px 65px;
+  padding: 20px 12px 20px 65px;
   position: relative;
   width: 14%;
 }
@@ -157,16 +175,7 @@
   display: none;
   list-style: square;
   position: absolute;
-  z-index: 999;
-}
-
-.map-container ul ul li {
-  background: none;
-  display: block;
-  float: left;
-  padding: 0;
-  white-space: nowrap;
-  width: 20%;
+  z-index: 1001;
 }
 .map-container ul li:hover {
   border-bottom: 1px solid #023554;
@@ -177,7 +186,7 @@
   left: 0;
   padding: 15px;
   top: 60px;
-  width: 300px;
+  width: 88%;
 }
 .map-container ul li:last-child:hover ul {
   display: block;
@@ -188,20 +197,29 @@
 /*sub nav*/
 .map-container ul ul li {
    background: #023554;
-   border: none;
+   border: 1px solid #023554;
    color: #999999;
    display: block;
-   float: left;
+   float: none;
    margin-right: 20px;
    padding: 10px 15px;
    position: relative;
    text-transform: capitalize;
    width: auto;
+   background: none;
  }
- .map-container ul li ul li:hover {
-   background: #000;
+.map-container ul li ul li:hover,
+.map-container ul li ul li.active {
    color: #ffffff;
+ }
+.map-container ul li .map-option-items {
+   list-style: circle;
  }
 .map-container ul li .map-option-items li {
    background: none;
+   cursor: pointer;
+ }
+ .map-container ul li .map-option-items li:before {
+   content:'▸';
+   margin-right: 3px;
  }
