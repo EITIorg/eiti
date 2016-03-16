@@ -175,8 +175,6 @@
   list-style: square;
   position: absolute;
   z-index: 1001;
-<<<<<<< HEAD
-=======
 }
 
 .map-container ul ul li {
@@ -184,9 +182,6 @@
   display: block;
   float: left;
   padding: 0;
-  white-space: nowrap;
-  width: 20%;
->>>>>>> origin/develop
 }
 .map-container ul li:hover {
   border-bottom: 1px solid #023554;
