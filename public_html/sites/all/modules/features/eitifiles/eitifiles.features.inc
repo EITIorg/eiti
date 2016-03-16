@@ -39,13 +39,14 @@ function eitifiles_image_default_styles() {
   $styles['bg-wide'] = array(
     'label' => 'Background: Wide (1920px by 640px)',
     'effects' => array(
-      1 => array(
-        'name' => 'image_scale_and_crop',
+      3 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 1920,
-          'height' => 640,
+          'height' => '',
+          'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -10,
       ),
       2 => array(
         'name' => 'canvasactions_definecanvas',
@@ -57,8 +58,8 @@ function eitifiles_image_default_styles() {
           'exact' => array(
             'width' => 1920,
             'height' => '',
-            'xpos' => 'center',
-            'ypos' => 'center',
+            'xpos' => 'right',
+            'ypos' => 'top',
           ),
           'relative' => array(
             'leftdiff' => '',
@@ -67,7 +68,7 @@ function eitifiles_image_default_styles() {
             'bottomdiff' => '',
           ),
         ),
-        'weight' => 2,
+        'weight' => -9,
       ),
     ),
   );

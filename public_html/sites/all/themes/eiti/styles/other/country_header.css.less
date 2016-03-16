@@ -1,18 +1,29 @@
 
 .country-banner-wrapper {
+  &.with-background-image {
+    background-color: @clmain__separator;
+    color: @clnormal__dark;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top right;
+  }
   &.no-background-image {
     margin: 2em 0;
   }
 
+  img {
+    margin-right: 2em;
+  }
   .page-title {
     color: @clnormal__dark;
     display: inline;
-    margin-left: 1em;
+    margin: 0;
+
+    line-height: 100%;  // HACK: Make sure the page title doesn't change the wrapper height.
   }
 }
 
 .country-information-wrapper {
-
   .info {
     margin: 1em 0;
   }
@@ -25,6 +36,13 @@
   }
 }
 
+.xSmallOnly() {
+  .country-banner-wrapper {
+    &.with-background-image {
+      padding: 2em 0;
+    }
+  }
+}
 .xMediumOnly() {
   .country-banner-wrapper {
     &.with-background-image {

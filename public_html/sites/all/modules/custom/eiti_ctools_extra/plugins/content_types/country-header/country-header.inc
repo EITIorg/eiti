@@ -74,9 +74,10 @@ function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $
       '#attributes' => array(
         'class' => array(
           'country-logo-wrapper',
-          'single-fluid-row-wrapper',
         ),
-      )
+      ),
+      '#prefix' => '<div class="single-fluid-row-wrapper">',
+      '#suffix' => '</div>',
     );
     $block['banner']['logo']['logo'] = array(
       '#theme' => 'image',
