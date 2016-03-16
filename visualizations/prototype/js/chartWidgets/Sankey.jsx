@@ -1,5 +1,6 @@
 let React = require('react');
 let d3 = require('d3');
+let Papa = require('papaparse');
 
 import { findDOMNode } from 'react-dom';
 
@@ -13,15 +14,22 @@ let AccessorMixin = require('./AccessorMixin');
 let TooltipMixin = require('./TooltipMixin');
 
 let DataSet = React.createClass({
-	componentDidUpdate: function(nextProps, nextState) {
-		let el = findDOMNode(this);
-    console.log(el);
-    var otherEl = el.parentNode.parentNode.parentNode;
-    console.log(otherEl);
-    console.log(otherEl.clientHeight);
-    console.log(otherEl.clientWidth);
+  getInitialState: function () {
+      return {
+        table: ""
+      };
+  },
 
-    this.drawSankey(el);
+	componentDidUpdate: function(nextProps, nextState) {
+    let {width, height, margin} = this.props;
+		let el = findDOMNode(this),
+        parentEl = el.parentNode.parentNode.parentNode;
+
+    if(parentEl.clientWidth >= width + margin.left + margin.right) {
+      this.drawSankey(el);
+    } else {
+      this.drawTable(el);
+    }    
   },
 
   drawSankey: function(el) {
@@ -99,26 +107,46 @@ let DataSet = React.createClass({
 	},	
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
-    classes: function(root) {
-      var classes = [];      
+  classes: function(root) {
+    var classes = [];      
 
-      function recurse(name, node) {
-        if (node.children) {
-        	node.children.forEach(function(child) { 
-        		recurse(node.name, child); 
-        	});
-        } else {
-        	classes.push({packageName: name, className: node.name, value: node.size});
-        }
+    function recurse(name, node) {
+      if (node.children) {
+      	node.children.forEach(function(child) { 
+      		recurse(node.name, child); 
+      	});
+      } else {
+      	classes.push({packageName: name, className: node.name, value: node.size});
       }
+    }
 
-      recurse(null, root);
-      return {children: classes};
-    },
+    recurse(null, root);
+    return {children: classes};
+  },
+
+  drawTable: function(el) {
+    let data = this.props.data;
+    console.log(data);
+    let table = <table>
+                  <thead>
+                    <tr>
+                      <th> Company Revenue Stream </th>
+                      <th> Receiving Entity </th>
+                      <th> Amount </th>                                    
+                    </tr>
+                  </thead>
+                </table>;
+    if(this.state.table == "") {
+      this.setState({table: table});
+    }
+  },
 
 	render() {
+
 		return (
-                <div></div>
+                <div>
+                    {this.state.table}
+                </div>
         );
     }
 });
@@ -153,11 +181,11 @@ let Sankey = React.createClass({
                     data = props.processor(data);
                 } 
             }
-            var nodes = data.nodes || {};
+            var nodes = (data) ?  data.nodes : {};
             for (var node in nodes) {
               nodedata.push(nodes[node]);
             }
-            var links = data.links || {};
+            var links = (data) ? data.links : {};
             for (var link in links) {
               linkdata.push({ "source": nodedata.indexOf(nodes[links[link].source]),
                               "target": nodedata.indexOf(nodes[links[link].target]),
@@ -182,6 +210,39 @@ let Sankey = React.createClass({
     this.updateData(nextProps);
   },
 
+  doExport: function(anything) {
+    let output = [];
+    this.state.chartData.links.forEach(function(link) {
+        if(link.source.sourceLinks.length > 0 && link.source.targetLinks.length == 0) {  // Company names
+            var company = link.source.name;
+            link.source.sourceLinks.forEach(function (item) {
+                var outputObj = { "Company Name" : company,
+                                  "Revenue Stream" : item.target.name,
+                                  "Receiving Entity" : item.target.sourceLinks[0].target.name,
+                                  "Amount" : item.value
+                                };
+                if(output.indexOf(outputObj) == -1) {
+                  output.push(outputObj);
+                }
+            });
+        }
+    });
+
+    var csv = Papa.unparse(output);
+
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob) {
+        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+    } else {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'download.csv');
+    tempLink.click();
+  },
+
 	render() {
 		let {width,
 			 height,
@@ -190,7 +251,8 @@ let Sankey = React.createClass({
 
 		return (
 			<div>	
-					<h3 className={"chartTitle"}>{chartTitle}</h3>			
+					<h3 className={"chartTitle"}>{chartTitle}</h3>		
+          <button onClick={this.doExport.bind(this, "input")}>	Export Data </button>
 					<DataSet
             		data={this.state.chartData}
             		width={width - margin.left - margin.right}
