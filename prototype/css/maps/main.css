@@ -95,7 +95,7 @@
 .map-option-widget {
   display: inline-block;
   list-style: none;
-  margin: 0 auto;
+  margin: 4px auto 0 auto;
   overflow: visible;
   padding: 0;
   width: 1300px;
@@ -109,7 +109,7 @@
   color: #0192c7;
   float: left;
   font-size: 14px;
-  padding: 20px 11px 20px 65px;
+  padding: 20px 12px 20px 65px;
   position: relative;
   width: 14%;
   margin-left: -1px;
@@ -126,13 +126,14 @@
 }
 .map-option-widget li:nth-child(1) {
   background-position: 14px 13px;
+  border-left: none;
 }
 .map-option-widget li:nth-child(1):hover,
 .map-option-widget li:nth-child(1).active {
-  background-position: 14px -39px;
+  background-position: 14px -37px;
 }
 .map-option-widget li:nth-child(2) {
-  background-position: 14px -405px;
+  background-position: 14px -406px;
 }
 .map-option-widget li:nth-child(2):hover,
 .map-option-widget li:nth-child(2).active {
@@ -154,6 +155,7 @@
 }
 .map-option-widget li:nth-child(5) {
   background-position: 14px -304px;
+  border-right: none;
 }
 .map-option-widget li:nth-child(5):hover,
 .map-option-widget li:nth-child(5).active {
@@ -208,7 +210,7 @@
    margin-right: 20px;
    position: relative;
    text-transform: capitalize;
-   width: auto;
+   width: 100%;
  }
 .map-option-items li:hover,
 .map-option-items li.active {
@@ -219,6 +221,6 @@
    cursor: pointer;
  }
  .map-option-items li:before {
-   content:'▸';
-   margin-right: 3px;
+   content:'\25B8';
+   margin-right: 4px;
  }
