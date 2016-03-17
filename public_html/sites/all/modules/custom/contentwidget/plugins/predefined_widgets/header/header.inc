@@ -83,15 +83,18 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
-        'single-fluid-row-wrapper',
         'overlay-wrapper',
       ),
     ),
   );
+  $block['overlay']['headers'] = array(
+    '#type' => 'container',
+  );
+
 
   // Only if it's set, we want to show the tag.
   if ($header_small) {
-    $block['overlay']['header_small'] = array(
+    $block['overlay']['headers']['header_small'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h2',
       '#value' => $header_small,
@@ -103,7 +106,7 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
 
   // Only if it's set, we want to show the tag.
   if ($header_big) {
-    $block['overlay']['header_big'] = array(
+    $block['overlay']['headers']['header_big'] = array(
       '#type' => 'html_tag',
       '#tag' => 'p',
       '#value' => $header_big,
@@ -113,15 +116,32 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
     );
   }
 
-  $block['overlay']['links'] = array(
+  $block['overlay']['links_wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array('links-wrapper'),
+    ),
+  );
+  $block['overlay']['links_wrapper']['links'] = array(
     '#theme' => 'item_list',
     '#items' => $link_items,
     '#type' => 'ul',
     '#title' => '',
     '#attributes' => array(
-      'class' => array('links-wrapper'),
+      'class' => array('links'),
     ),
   );
+
+  if (empty($image_url)) {
+    if (!empty($block['overlay']['headers'])) {
+      $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    }
+
+    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  }
+  else {
+    $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  }
 
   return $block;
 }
