@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+let Papa = require('papaparse');
 
 var BarChart = require('./BarChart');
 var BarStore = require('./stores/BarStore');
@@ -108,21 +109,59 @@ let StackedBar = React.createClass ({
 		this.updateData(nextProps);
 	},
 
+	doExport: function(xlabel) {
+	    let output = [];
+	    let data = this.state.chartData;
+	    
+	    data[0].values.forEach(function(item) {
+	    	var outputObj = {};
+	    	outputObj[xlabel] = item.x;
+	    	outputObj[data[0].label] = item.y;
+	    	output.push(outputObj);
+	    });
+
+	    let dataLength = data.length; 
+	    for(var i=1; i<dataLength; i++) {
+	    	var j = 0;
+	    	data[i].values.forEach(function(item) {
+	    		output[j][data[i].label] = item.y;
+	    		j++;
+	    	});
+	    }
+
+	    var csv = Papa.unparse(output);
+
+	    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+	    var csvURL =  null;
+	    if (navigator.msSaveBlob) {
+	        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+	    } else {
+	        csvURL = window.URL.createObjectURL(csvData);
+	    }
+	    var tempLink = document.createElement('a');
+	    tempLink.href = csvURL;
+	    tempLink.setAttribute('download', 'download.csv');
+	    tempLink.click();
+	},
+
 	render: function() {
 	    return (
-		    <BarChart
-	            chartTitle={this.props.chartTitle}
-	            data={this.state.chartData}
-	            legendData={this.state.rawData}
-	            legendClass={this.props.legendClass}
-	            width={this.props.width}
-	            height={this.props.height}
-	            margin={this.props.margin}
-	        	xAxis={{label: this.props.xlabel}}
-                yAxis={{label: this.props.ylabel}} 
-                tooltipHtml={this.props.tooltip}
-                tooltipMode={'mouse'} 
-                legend={this.props.legend && this.state.showLegend} />
+	    	<div>
+			    <BarChart
+		            chartTitle={this.props.chartTitle}
+		            data={this.state.chartData}
+		            legendData={this.state.rawData}
+		            legendClass={this.props.legendClass}
+		            width={this.props.width}
+		            height={this.props.height}
+		            margin={this.props.margin}
+		        	xAxis={{label: this.props.xlabel}}
+	                yAxis={{label: this.props.ylabel}} 
+	                tooltipHtml={this.props.tooltip}
+	                tooltipMode={'mouse'} 
+	                legend={this.props.legend && this.state.showLegend} />
+		        <button className="export" onClick={this.doExport.bind(this, this.props.xlabel)}> Export Data </button>
+	        </div>
 	    )
 	}
 });
