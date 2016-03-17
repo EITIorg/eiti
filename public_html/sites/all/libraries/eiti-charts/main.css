@@ -25,7 +25,7 @@
     overflow: hidden;
     width: 100%;
 }
-.eiti-visualization-wrapper .grouped-item-active {
+.eiti-visualization-wrapper .legend-item-active {
     float: left;
     border: 2px solid #85be33;
     border-radius: 2px;
@@ -37,7 +37,7 @@
     width: 22%;
 }
 
-.eiti-visualization-wrapper .grouped-item {
+.eiti-visualization-wrapper .legend-item {
     float: left;
     border: 2px solid #d3d3d3;
     border-radius: 2px;
@@ -48,7 +48,7 @@
     cursor: pointer;
     width: 22%;
 }
-.eiti-visualization-wrapper .grouped-item-long {
+.eiti-visualization-wrapper .legend-item-long {
     float: left;
     border: 2px solid #d3d3d3;
     border-radius: 2px;
@@ -60,47 +60,13 @@
     width: 32%;
 }
 
-.eiti-visualization-wrapper .grouped-item:hover {
+.eiti-visualization-wrapper .legend-item:hover {
     background: #f0f0f0;
 }
 
-.eiti-visualization-wrapper .grouped-item li:hover {
+.eiti-visualization-wrapper .legend-item li:hover {
     border: 2px solid #4bb4a1;
 }
-
-.eiti-visualization-wrapper .stacked-item-active {
-    border: 2px solid #85be33;
-    border-radius: 3px;
-    cursor: pointer;
-    float: left;
-    font-size: 1.5em;
-    line-height: 70%;
-    margin: 1px;
-    padding: 5px;
-    width: 45%;
-}
-
-.eiti-visualization-wrapper .stacked-item {
-    border: 2px solid #d3d3d3;
-    border-radius: 3px;
-    cursor: pointer;
-    float: left;
-    font-size: 1.5em;
-    line-height: 70%;
-    margin: 1px;
-    padding: 5px;
-    width: 45%;
-}
-
-.eiti-visualization-wrapper .stacked-item:hover,
-.eiti-visualization-wrapper .stacked-item-active:hover{
-    background: #f0f0f0;
-}
-
-.eiti-visualization-wrapper .stacked-item li:hover {
-    border: 2px solid #4bb4a1;
-}
-
 
 .eiti-visualization-wrapper #waveformchart svg {
     position: absolute;
