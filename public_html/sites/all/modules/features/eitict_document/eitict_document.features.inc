@@ -24,7 +24,7 @@ function eitict_document_node_info() {
     'document' => array(
       'name' => t('Document'),
       'base' => 'node_content',
-      'description' => t('Use this for EITI Standards, Workplans, Factsheets, etc.'),
+      'description' => t('Use this for documents and publications (The EITI Standard, Workplans, Factsheets, etc.)'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
