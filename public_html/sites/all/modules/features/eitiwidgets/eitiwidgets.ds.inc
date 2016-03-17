@@ -69,6 +69,13 @@ function eitiwidgets_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_fpp_source_url' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(

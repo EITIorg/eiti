@@ -1,36 +1,48 @@
 
 // @TODO: Cleanup!
 table {
-  @header_color: #ebf5fd;
+  @header_color: #ffffff;
   @border_color: #eeeeee;
   @even_color: #f8f8f8;
 
-  border-color: @border_color;
-  border-style: solid none;
-  border-width: 1px;
+  background-color: @header_color;
+  border-style: none;
   margin: 1em 0;
   width: 100%;
 
   tr {
-    font-size: 0.75em;
-    &.even {
-      background-color: @even_color;
-    }
-    &.odd {
-      background-color: #ffffff;
-    }
+    font-size: 0.875em;
   }
 
   th,
   td {
-    padding: 0.6em 1em;
-    border-color: @border_color;
-    border-style: none solid;
-    border-width: 1px;
+    border: 1px solid @clmain__separator;
+    padding: 0.5em;
   }
+
   th {
-    background-color: @header_color;
+    border-style: none none solid;
+    color: @clactive__alt;
+    font-weight: lighter;
+    font-style: italic;
     text-align: left;
+  }
+
+  td {
+    &:first-of-type {
+      border-left-style: none;
+    }
+    &:last-of-type {
+      border-right-style: none;
+    }
+  }
+}
+.xNormalAndUp() {
+  table {
+    th,
+    td {
+      padding: 0.5em 1em;
+    }
   }
 }
 

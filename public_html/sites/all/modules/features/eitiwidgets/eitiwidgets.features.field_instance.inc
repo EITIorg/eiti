@@ -795,9 +795,12 @@ function eitiwidgets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'icon' => 'arrow',
+          'size' => '1em',
+        ),
+        'type' => 'link_icon',
         'weight' => 4,
       ),
     ),
