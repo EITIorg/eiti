@@ -102,9 +102,16 @@
 }
 .map-option-widget li {
   background: url('../../images/map-icons/map-sprite.png') no-repeat;
-  border:1px solid #0a6997;
-  border-top: 1px solid #014b7a;
+  border-left:1px solid #0a6997;
+  border-right:1px solid #0a6997;
+  border-top: none;
+  border-bottom: none;
   color: #0192c7;
+  float: left;
+  font-size: 14px;
+  padding: 20px 11px 20px 65px;
+  position: relative;
+  width: 14%;
   margin-left: -1px;
   text-align: left;
   text-transform: uppercase;
@@ -156,23 +163,16 @@
   margin-left: 0;
 }
 .map-option-widget li:hover {
+  background-color: #023554;
   color: #ffffff;
 }
 
-.map-container ul li {
-  float: left;
-  font-size: 14px;
-  padding: 20px 12px 20px 65px;
-  position: relative;
-  width: 14%;
-}
-.map-container ul li:hover {
-  background-color: #023554;
-}
 .map-container ul ul {
   background: #023554;
+  border-top: none;
   display: none;
   list-style: square;
+  margin-top: -1px;
   position: absolute;
   z-index: 1001;
 }
@@ -183,16 +183,13 @@
   float: left;
   padding: 0;
 }
-.map-container ul li:hover {
-  border-bottom: 1px solid #023554;
-  border-top: 1px solid #023554;
-}
+
 .map-container ul li:hover ul {
   display: block;
   left: 0;
-  padding: 15px;
+  padding: 14px;
   top: 60px;
-  width: 88%;
+  width: 89%;
 }
 .map-container ul li:last-child:hover ul {
   display: block;
@@ -201,32 +198,27 @@
   right: 0;
 }
 /*sub nav*/
-.map-container ul ul li {
-   background: #023554;
-   border: 1px solid #023554;
+.map-option-items li {
+   border-left: 1px solid #023554;
+   border-right: 1px solid #023554;
    color: #999999;
    display: block;
    float: none;
+   margin-bottom: 10px;
    margin-right: 20px;
-   padding: 10px 15px;
    position: relative;
    text-transform: capitalize;
    width: auto;
-   background: none;
  }
-.map-container ul li ul li:hover,
-.map-container ul li ul li.active {
+.map-option-items li:hover,
+.map-option-items li.active {
    color: #ffffff;
  }
-.map-container ul li .map-option-items {
-   list-style: circle;
- }
-.map-container ul li .map-option-items li {
-   cursor: pointer;
+.map-option-items li {
    background: none;
    cursor: pointer;
  }
- .map-container ul li .map-option-items li:before {
+ .map-option-items li:before {
    content:'▸';
    margin-right: 3px;
  }
