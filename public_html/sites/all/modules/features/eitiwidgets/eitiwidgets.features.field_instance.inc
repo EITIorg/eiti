@@ -435,6 +435,78 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-icon_blocks-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-icon_blocks-field_fpp_body'] = array(
+    'bundle' => 'icon_blocks',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-icon_blocks-field_fpp_icon'.
+  $field_instances['fieldable_panels_pane-icon_blocks-field_fpp_icon'] = array(
+    'bundle' => 'icon_blocks',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'helperfield',
+        'settings' => array(),
+        'type' => 'helperfield_icon_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_icon',
+    'label' => 'Icon',
+    'required' => 0,
+    'settings' => array(
+      'available_icons' => array(),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'helperfield',
+      'settings' => array(),
+      'type' => 'helperfield_radio_selector',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-icon_blocks-field_fpp_widget'.
   $field_instances['fieldable_panels_pane-icon_blocks-field_fpp_widget'] = array(
     'bundle' => 'icon_blocks',
@@ -446,7 +518,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'contentwidget',
         'settings' => array(),
         'type' => 'cwrendered',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -465,7 +537,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'contentwidget',
       'settings' => array(),
       'type' => 'cwsettings',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -478,9 +550,14 @@ function eitiwidgets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',

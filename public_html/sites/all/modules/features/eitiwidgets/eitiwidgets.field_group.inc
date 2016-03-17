@@ -43,6 +43,35 @@ function eitiwidgets_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_title_display|fieldable_panels_pane|icon_blocks|form';
+  $field_group->group_name = 'group_title_display';
+  $field_group->entity_type = 'fieldable_panels_pane';
+  $field_group->bundle = 'icon_blocks';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Title Display',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_fpp_icon',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Title Display',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-title-display field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_title_display|fieldable_panels_pane|icon_blocks|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_title_display|fieldable_panels_pane|table|form';
   $field_group->group_name = 'group_title_display';
   $field_group->entity_type = 'fieldable_panels_pane';
@@ -126,6 +155,39 @@ function eitiwidgets_field_group_info() {
     ),
   );
   $field_groups['group_title_display|fieldable_panels_pane|visualization|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_title_wrapper|fieldable_panels_pane|icon_blocks|default';
+  $field_group->group_name = 'group_title_wrapper';
+  $field_group->entity_type = 'fieldable_panels_pane';
+  $field_group->bundle = 'icon_blocks';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Title Wrapper',
+    'weight' => '0',
+    'children' => array(
+      0 => 'field_fpp_icon',
+      1 => 'title_field',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Title Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'pane-title-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_title_wrapper|fieldable_panels_pane|icon_blocks|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
