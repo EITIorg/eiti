@@ -371,7 +371,7 @@ function eitisettings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'teaser_length';
-  $strongarm->value = '256';
+  $strongarm->value = 256;
   $export['teaser_length'] = $strongarm;
 
   return $export;
