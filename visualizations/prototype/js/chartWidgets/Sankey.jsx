@@ -1,6 +1,7 @@
 let React = require('react');
 let d3 = require('d3');
 let Papa = require('papaparse');
+let _ = require('lodash');
 
 import { findDOMNode } from 'react-dom';
 
@@ -28,7 +29,7 @@ let DataSet = React.createClass({
     if(parentEl.clientWidth >= width + margin.left + margin.right) {
       this.drawSankey(el);
     } else {
-      this.drawTable(el);
+      this.drawSankey(el);
     }    
   },
 
@@ -130,7 +131,8 @@ let DataSet = React.createClass({
     let table = <table>
                   <thead>
                     <tr>
-                      <th> Company Revenue Stream </th>
+                      <th> Company </th>
+                      <th> Revenue Stream </th>
                       <th> Receiving Entity </th>
                       <th> Amount </th>                                    
                     </tr>
@@ -221,13 +223,12 @@ let Sankey = React.createClass({
                                   "Receiving Entity" : item.target.sourceLinks[0].target.name,
                                   "Amount" : item.value
                                 };
-                if(output.indexOf(outputObj) == -1) {
-                  output.push(outputObj);
-                }
+                output.push(outputObj);
             });
         }
     });
 
+    output = _.uniqWith(output, _.isEqual);
     var csv = Papa.unparse(output);
 
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -252,13 +253,12 @@ let Sankey = React.createClass({
 		return (
 			<div>	
 					<h3 className={"chartTitle"}>{chartTitle}</h3>		
-          <button onClick={this.doExport.bind(this, "input")}>	Export Data </button>
 					<DataSet
             		data={this.state.chartData}
             		width={width - margin.left - margin.right}
             		height={height - margin.top - margin.bottom}
-            		margin={margin}             		
-            		/>
+            		margin={margin} />
+          <button className="export" onClick={this.doExport.bind(this, "input")}> Export Data </button>
 			</div>
 		);
 	}
