@@ -230,14 +230,16 @@ function eitiwidgets_ds_layout_settings_info() {
     'regions' => array(
       'main' => array(
         0 => 'group_title_wrapper',
-        1 => 'field_fpp_icon',
-        2 => 'title_field',
-        3 => 'field_fpp_table',
-        4 => 'field_fpp_source_url',
+        1 => 'field_fpp_body',
+        2 => 'field_fpp_icon',
+        3 => 'title_field',
+        4 => 'field_fpp_table',
+        5 => 'field_fpp_source_url',
       ),
     ),
     'fields' => array(
       'group_title_wrapper' => 'main',
+      'field_fpp_body' => 'main',
       'field_fpp_icon' => 'main',
       'title_field' => 'main',
       'field_fpp_table' => 'main',
