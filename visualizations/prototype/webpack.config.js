@@ -2,17 +2,21 @@ var webpack = require("webpack");
 var	path = require("path");
 
 module.exports = {
-	entry: [
-		'webpack-hot-middleware/client',
-		path.resolve(__dirname, "js/index.jsx")
-	],
+	entry: {
+		"chartWidgets": path.resolve(__dirname, "js/index.jsx"),
+		"chartWidgets.min": path.resolve(__dirname, "js/index.jsx")
+	},
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'chartWidgets.js'    
+		filename: "[name].js"
 	},
 	plugins: [
     	new webpack.HotModuleReplacementPlugin(),
-    	new webpack.NoErrorsPlugin()
+    	new webpack.NoErrorsPlugin(),
+    	new webpack.optimize.UglifyJsPlugin({
+	      include: /\.min\.js$/,
+	      minimize: true
+	    })
     ],
 	module: {
 		loaders: [{

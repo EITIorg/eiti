@@ -4,7 +4,9 @@ var React = require('react');
 let BarChart = require('./chartWidgets/ExtendedBar');
 let PieChart = require('./chartWidgets/ExtendedPie');
 let GroupedBar = require('./chartWidgets/GroupedBar');
+let GroupedBarExport = require('./chartWidgets/GroupedBarExport');
 let StackedBar = require('./chartWidgets/StackedBar');
+let StackedBarExport = require('./chartWidgets/StackedBarExport');
 let TreeMap = require('./chartWidgets/TreeMap');
 let BubbleChart = require('./chartWidgets/BubbleChart');
 let Sankey = require('./chartWidgets/Sankey');
@@ -68,6 +70,17 @@ window.chartWidget.create = function(options, data) {
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
 	        </div>
 		), document.getElementById(options.container))
+	} else if(options.type == "GroupedBarExport") {
+		render((
+			<div className={options.className}>
+				<GroupedBarExport
+					xlabel = {options.xlabel}
+	            	dataURL = {dataURL}
+	            	chartData = {chartData}
+	            	processor = {options.processor}
+	           	/>
+	        </div>
+		), document.getElementById(options.container))
 	} else if(options.type == "StackedBar") {
 		render((
 			<div className={options.className}>
@@ -85,6 +98,17 @@ window.chartWidget.create = function(options, data) {
 	            	processor = {options.processor}
 	           	/>
 	           	<h4 className={'chartDescription'}>{options.description}</h4>
+	        </div>
+		), document.getElementById(options.container))
+	} else if(options.type == "StackedBarExport") {
+		render((
+			<div className={options.className}>
+				<StackedBarExport
+					xlabel = {options.xlabel}
+	            	dataURL = {dataURL}
+	            	chartData = {chartData}
+	            	processor = {options.processor}
+	           	/>
 	        </div>
 		), document.getElementById(options.container))
 	} else if(options.type == "TreeMap") {
