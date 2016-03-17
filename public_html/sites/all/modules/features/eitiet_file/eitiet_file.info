@@ -1,6 +1,0 @@
-name = [DEPRECATED] eitiet_file
-description = [DEPRECATED] eitiet_file
-core = 7.x
-package = EITI General
-version = 7.x-0.1
-features[features_api][] = api:2

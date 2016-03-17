@@ -105,7 +105,6 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
    * Polishes the country governmental stacked bar chart fields.
    */
   public function processCountryDisbursedRevenues($data) {
-    pc($data);
     $request = $this->getRequest();
     $limit = $request['filter']['limit'];
 

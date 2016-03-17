@@ -8,12 +8,12 @@
 
     li {
       display: inline-block;
-      padding: 1em 2em;
     }
   }
 
-
   .icon-block-wrapper {
+    margin: 1em;
+
     .title {
       margin: 0;
     }
@@ -27,6 +27,11 @@
     }
   }
 
+  .icon-block-links {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
 }
 
 .xMediumAndDown() {
@@ -48,11 +53,15 @@
   .predefined-widget--icon-blocks {
     .icon-blocks-wrapper {
       display: flex;
-      flex-wrap: nowrap;
+      flex-flow: row wrap;
       justify-content: space-around;
       li {
         flex: 50%;
       }
+    }
+
+    .icon-block-wrapper {
+      margin: 1em 3em;
     }
   }
 }
