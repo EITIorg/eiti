@@ -50,6 +50,10 @@ function form_process_radioicons($element, &$form_state) {
   );
   $element[$option_key] += _helpergeneric_build_radioicons($element);
 
+  $element['#attached']['css'] = array(
+    drupal_get_path('module', 'helpergeneric') . '/helpergeneric.admin.css',
+  );
+
   return $element;
 }
 
