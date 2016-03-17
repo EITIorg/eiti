@@ -1,22 +1,27 @@
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,300');
 
-    .mainMap {
-        width: 400px;
-        height: 500px;
-    }
-    .leaflet-container {
+
+
+
+
+.eiti-map-wrapper .leaflet-container {
         background: #fff;
         border:1px solid #dddddd;
         font-family: 'Open Sans', serif;
     }
 
-    .legend {
+.eiti-map-wrapper .mainMap {
+        width: 400px;
+        height: 500px;
+    }
+
+.eiti-map-wrapper .legend {
       text-align: left;
       line-height: 18px;
       color: #555;
       width: 320px;
     }
-    .legend i {
+
+ .eiti-map-wrapper .legend i {
       width: 10px;
       height: 10px;
       float: left;
@@ -25,26 +30,26 @@
       margin-top: 4px;
     }
 
-    .country_info TH {
+.eiti-map-wrapper .country_info th {
       padding:10px 10px 10px 10px;
 
     }
 
-    .country_info TD {
+.eiti-map-wrapper .country_info td {
       padding:5px 5px 5px 5px;
 
     }
-    .country_info TR {
+.eiti-map-wrapper .country_info td {
       margin:2px 5px 2px 5px;
 
     }
 
-    .leaflet-popup-content {
+.eiti-map-wrapper .leaflet-popup-content {
       padding:5px;
       margin:0;
     }
 
-    .leaflet-popup-content hr{
+.eiti-map-wrapper .leaflet-popup-content hr{
       background: #eeeeee;
       border: none;
       display: block;
@@ -54,30 +59,30 @@
       width 100%;
     }
 
-.leaflet-popup-content a:hover{
+.eiti-map-wrapper .leaflet-popup-content a:hover{
     text-decoration: none;
 }
 
-.leaflet-popup-content-wrapper {
+.eiti-map-wrapper .leaflet-popup-content-wrapper {
     padding: 1px;
     text-align: left;
     border-radius: 0px;
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.eiti-map-wrapper .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   box-shadow: 0 3px 14px rgba(0,0,0,0.15);
 }
 
-.leaflet-popup-content {
+.eiti-map-wrapper .leaflet-popup-content {
   padding:10;
   margin:10;
 }
-.leaflet-popup-content-wrapper {
+.eiti-map-wrapper .leaflet-popup-content-wrapper {
     padding: 1px;
     text-align: left;
     border-radius: 0px;
 }
-.leaflet-container {
+.eiti-map-wrapper .leaflet-container {
     height:500px;
     width:1300px;
     display:block;
@@ -87,12 +92,12 @@
 .map-container {
   font-family: 'Open Sans', serif;
 }
-.map-option-wrapper {
+.eiti-map-wrapper .map-option-wrapper {
   text-align: center;
   background: #005382;
   margin-bottom: 0;
 }
-.map-option-widget {
+.eiti-map-wrapper .map-option-widget {
   display: inline-block;
   list-style: none;
   margin: 4px auto 0 auto;
@@ -100,7 +105,7 @@
   padding: 0;
   width: 1300px;
 }
-.map-option-widget li {
+.eiti-map-wrapper .map-option-widget li {
   background: url('../../images/map-icons/map-sprite.png') no-repeat;
   border-left:1px solid #0a6997;
   border-right:1px solid #0a6997;
@@ -120,56 +125,56 @@
   -o-transition: color 400ms ease-in-out;
   transition: color 400ms ease-in-out;
 }
-.map-option-widget li.active {
+.eiti-map-wrapper .map-option-widget li.active {
   background-color: #023554;
   color: #ffffff;
 }
-.map-option-widget li:nth-child(1) {
+.eiti-map-wrapper .map-option-widget li:nth-child(1) {
   background-position: 14px 13px;
   border-left: none;
 }
-.map-option-widget li:nth-child(1):hover,
-.map-option-widget li:nth-child(1).active {
+.eiti-map-wrapper .map-option-widget li:nth-child(1):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(1).active {
   background-position: 14px -37px;
 }
-.map-option-widget li:nth-child(2) {
+.eiti-map-wrapper .map-option-widget li:nth-child(2) {
   background-position: 14px -406px;
 }
-.map-option-widget li:nth-child(2):hover,
-.map-option-widget li:nth-child(2).active {
+.eiti-map-wrapper .map-option-widget li:nth-child(2):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(2).active {
   background-position: 14px -458px;
 }
-.map-option-widget li:nth-child(3) {
+.eiti-map-wrapper .map-option-widget li:nth-child(3) {
   background-position: 14px -203px;
 }
-.map-option-widget li:nth-child(3):hover,
-.map-option-widget li:nth-child(3).active {
+.eiti-map-wrapper .map-option-widget li:nth-child(3):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(3).active {
   background-position: 14px -254px;
 }
-.map-option-widget li:nth-child(4) {
+.eiti-map-wrapper .map-option-widget li:nth-child(4) {
   background-position: 14px -96px;
 }
-.map-option-widget li:nth-child(4):hover,
-.map-option-widget li:nth-child(4).active {
+.eiti-map-wrapper .map-option-widget li:nth-child(4):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(4).active {
   background-position: 14px -150px;
 }
-.map-option-widget li:nth-child(5) {
+.eiti-map-wrapper .map-option-widget li:nth-child(5) {
   background-position: 14px -304px;
   border-right: none;
 }
-.map-option-widget li:nth-child(5):hover,
-.map-option-widget li:nth-child(5).active {
+.eiti-map-wrapper .map-option-widget li:nth-child(5):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(5).active {
   background-position: 14px -353px;
 }
-.map-option-widget li:first-child {
+.eiti-map-wrapper .map-option-widget li:first-child {
   margin-left: 0;
 }
-.map-option-widget li:hover {
+.eiti-map-wrapper .map-option-widget li:hover {
   background-color: #023554;
   color: #ffffff;
 }
 
-.map-container ul ul {
+.eiti-map-wrapper .map-container ul ul {
   background: #023554;
   border-top: none;
   display: none;
@@ -179,28 +184,28 @@
   z-index: 1001;
 }
 
-.map-container ul ul li {
+.eiti-map-wrapper .map-container ul ul li {
   background: none;
   display: block;
   float: left;
   padding: 0;
 }
 
-.map-container ul li:hover ul {
+.eiti-map-wrapper .map-container ul li:hover ul {
   display: block;
   left: 0;
   padding: 14px;
   top: 60px;
   width: 89%;
 }
-.map-container ul li:last-child:hover ul {
+.eiti-map-wrapper .map-container ul li:last-child:hover ul {
   display: block;
   left: auto;
   position: absolute;
   right: 0;
 }
 /*sub nav*/
-.map-option-items li {
+.eiti-map-wrapper .map-option-items li {
    border-left: 1px solid #023554;
    border-right: 1px solid #023554;
    color: #999999;
@@ -212,15 +217,15 @@
    text-transform: capitalize;
    width: 100%;
  }
-.map-option-items li:hover,
-.map-option-items li.active {
+.eiti-map-wrapper .map-option-items li:hover,
+.eiti-map-wrapper .map-option-items li.active {
    color: #ffffff;
  }
-.map-option-items li {
+.eiti-map-wrapper .map-option-items li {
    background: none;
    cursor: pointer;
  }
- .map-option-items li:before {
+ .eiti-map-wrapper .map-option-items li:before {
    content:'\25B8';
    margin-right: 4px;
  }
