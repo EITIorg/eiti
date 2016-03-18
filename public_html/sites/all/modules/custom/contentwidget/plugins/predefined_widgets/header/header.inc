@@ -174,17 +174,19 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
 
   $settings_form['links'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Links:'),
+    '#title' => t('Links'),
     '#collapsible' => FALSE,
     '#prefix' => '<div id="links-wrapper">',
     '#suffix' => '</div>',
   );
+
   $settings_form['links']['links_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Links'),
-    '#options' => drupal_map_assoc(range(0, 4)),
+    '#options' => drupal_map_assoc(range(1, 4)),
     '#description' => t('Please specify the number of links you want to use.'),
     '#default_value' => $links_max,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'contentwidget_header_settings_ajax',
       'event' => 'change',
@@ -215,6 +217,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#options' => $options,
       '#icons' => $icons,
       '#default_value' => $link_icon,
+      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['title_' . $link_count] = array(
       '#type' => 'textfield',
@@ -222,6 +225,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#size' => 30,
       '#prefix' => '<div class="container-inline">',
       '#default_value' => $link_title,
+      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['link_' . $link_count] = array(
       '#type' => 'textfield',
@@ -229,6 +233,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#suffix' => '</div>',
       '#size' => 50,
       '#default_value' => $link_url,
+      '#required' => TRUE,
     );
   }
   return $settings_form;
