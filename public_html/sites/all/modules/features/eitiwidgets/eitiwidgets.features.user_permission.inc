@@ -80,6 +80,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'administer panelizer fieldable_panels_pane value_chain defaults'.
+  $permissions['administer panelizer fieldable_panels_pane value_chain defaults'] = array(
+    'name' => 'administer panelizer fieldable_panels_pane value_chain defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'administer panelizer fieldable_panels_pane visualization defaults'.
   $permissions['administer panelizer fieldable_panels_pane visualization defaults'] = array(
     'name' => 'administer panelizer fieldable_panels_pane visualization defaults',
@@ -151,6 +158,15 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'create fieldable text'.
   $permissions['create fieldable text'] = array(
     'name' => 'create fieldable text',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'create fieldable value_chain'.
+  $permissions['create fieldable value_chain'] = array(
+    'name' => 'create fieldable value_chain',
     'roles' => array(
       'administrator' => 'administrator',
     ),
@@ -236,6 +252,15 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable value_chain'.
+  $permissions['delete fieldable value_chain'] = array(
+    'name' => 'delete fieldable value_chain',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable visualization'.
   $permissions['delete fieldable visualization'] = array(
     'name' => 'delete fieldable visualization',
@@ -309,6 +334,15 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable text'.
   $permissions['edit fieldable text'] = array(
     'name' => 'edit fieldable text',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable value_chain'.
+  $permissions['edit fieldable value_chain'] = array(
+    'name' => 'edit fieldable value_chain',
     'roles' => array(
       'administrator' => 'administrator',
     ),

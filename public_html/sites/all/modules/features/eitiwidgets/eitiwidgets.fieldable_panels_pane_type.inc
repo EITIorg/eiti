@@ -39,7 +39,7 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type->api_version = 1;
   $fieldable_panels_pane_type->name = 'icon_blocks';
   $fieldable_panels_pane_type->title = 'Icon Blocks';
-  $fieldable_panels_pane_type->description = 'If you want to create a list of icon, use this pane.';
+  $fieldable_panels_pane_type->description = 'If you want to create a list of icon, use this widget.';
   $export['icon_blocks'] = $fieldable_panels_pane_type;
 
   $fieldable_panels_pane_type = new stdClass();
@@ -73,6 +73,14 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type->title = 'Text';
   $fieldable_panels_pane_type->description = 'A simple text widget.';
   $export['text'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'value_chain';
+  $fieldable_panels_pane_type->title = 'Value Chain';
+  $fieldable_panels_pane_type->description = 'If you want to create a value chain, use this widget.';
+  $export['value_chain'] = $fieldable_panels_pane_type;
 
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
