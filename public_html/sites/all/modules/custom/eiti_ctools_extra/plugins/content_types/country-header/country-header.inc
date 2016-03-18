@@ -59,6 +59,17 @@ function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $
     $block['banner']['#attributes']['class'][] = 'no-background-image';
   }
 
+  $block['banner']['name_and_logo'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'country-logo-wrapper',
+      ),
+    ),
+    '#prefix' => '<div class="single-fluid-row-wrapper">',
+    '#suffix' => '</div>',
+  );
+
   // Add the country "logo" image.
   if (!empty($entity->field_ic_logo)) {
     $logo_file_info = $entity_wrapper->field_ic_logo->value();
@@ -69,29 +80,19 @@ function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $
     $style_name = 'logo-scaled';
     $logo_url = image_style_url($style_name, $logo_file_uri);
 
-    $block['banner']['logo'] = array(
-      '#type' => 'container',
-      '#attributes' => array(
-        'class' => array(
-          'country-logo-wrapper',
-        ),
-      ),
-      '#prefix' => '<div class="single-fluid-row-wrapper">',
-      '#suffix' => '</div>',
-    );
-    $block['banner']['logo']['logo'] = array(
+    $block['banner']['name_and_logo']['logo'] = array(
       '#theme' => 'image',
       '#path' => $logo_url,
       '#alt' => $logo_file_alt_text,
     );
-
-    $block['banner']['logo']['name'] = array(
-      '#theme' => 'html_tag',
-      '#tag' => 'h1',
-      '#value' => $entity_wrapper->label(),
-      '#attributes' => array('class' => array('page-title')),
-    );
   }
+
+  $block['banner']['name_and_logo']['name'] = array(
+    '#theme' => 'html_tag',
+    '#tag' => 'h1',
+    '#value' => $entity_wrapper->label(),
+    '#attributes' => array('class' => array('page-title')),
+  );
 
   $block['info'] = array(
     '#type' => 'container',
