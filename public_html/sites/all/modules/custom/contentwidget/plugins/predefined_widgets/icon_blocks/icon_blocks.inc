@@ -268,15 +268,16 @@ function _contentwidget_get_icon_block_elements(&$form_state, $block_settings, $
     $link_title = isset($block_settings['links'][$delta]['title']) ? $block_settings['links'][$delta]['title'] : '';
     $link_elements['title'] = array(
       '#type' => 'textfield',
-      '#title' => t('Title #!number', array('!number' => ($delta + 1))),
+      '#title' => t('Title'),
       '#default_value' => $link_title,
       '#required' => TRUE,
+      '#size' => 30,
     );
 
     $link_url = isset($block_settings['links'][$delta]['url']) ? $block_settings['links'][$delta]['url'] : '';
     $link_elements['url'] = array(
       '#type' => 'textfield',
-      '#title' => t('URL #!number', array('!number' => ($delta + 1))),
+      '#title' => t('URL'),
       '#default_value' => $link_url,
       '#required' => TRUE,
     );
