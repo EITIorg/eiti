@@ -7,6 +7,8 @@ var linkMap = {
     "MNG" : 7
 };
 
+import _ from 'underscore';
+
 export var helpers = {
 
     getPaletteDivergent: function(index) {
@@ -33,7 +35,7 @@ export var helpers = {
         if(feature !== undefined) {
             //console.log(feature.indicator_value);
             if(feature.indicator_type == 'fixed') {
-                var completeType = feature.metadata.find(function(v){ return (v.id == feature.indicator_value)})
+                var completeType = _.find(feature.metadata, function(v){ return (v.id == feature.indicator_value)});
                 return completeType.color;
             }
             else
@@ -43,10 +45,7 @@ export var helpers = {
 
                 if(this.isNumeric(feature.indicator_value)) {
                     var value = Number(feature.indicator_value);
-                    var completeType = feature.metadata.find(function(v){ 
-                        return value > v.range.start && value <= v.range.end;
-                        //return (value > v.range.start && value =< v.range.end);
-                    });
+                    var completeType = _.find(feature.metadata, function(v){ return value > v.range.start && value <= v.range.end;});
 
                     return completeType !== undefined ? completeType.color : '#dddddd';
 
@@ -103,18 +102,10 @@ export var helpers = {
     },
 
     showInfobox: function(e, countryInfo) {
-        var formatnumber =function(number) {
-            number = Number(number);
-            if(isNaN(number)) return 0;
-            let n = 0;
-            let x = 3;
-            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-            return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-        };
-
         helpers.resetTooltip();
+
         var layer = e.target;
-        var country = countryInfo.find(function(v){ return v.ISO3 === layer.feature.id;});
+        var country = _.find(countryInfo, function(v){ return v.ISO3 === layer.feature.id;});
         var country_link = '';
     
         var country_url = (country.status < 4 && linkMap[layer.feature.id]) ? '/implementing_country/' + linkMap[layer.feature.id] + '':'';
@@ -126,13 +117,15 @@ export var helpers = {
         {
             country_link = '<a href="' + country_url + '"><strong>Open Country Page</strong></a>';
         }
+        debugger;
+        var flagStyle = country.ISO2.toLowerCase()
 
         var html = '<div>' +
             '<table class="country_info">' + 
-            '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="http://demo.eiti.org/images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="height:20px;margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
-            '  <tbody>' + '    <tr><td>GDP: ' + formatnumber(country.gdp) + ' USD </td><td>Population: ' + formatnumber(country.population) + '</td></tr>' + 
+            '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="/images/' + layer.feature.id.toLowerCase() + '.gif" style="height:20px;margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
+            '  <tbody>' + '    <tr><td>GDP: ' + this.formatNumber(country.gdp) + ' USD </td><td>Population: ' + this.formatNumber(country.population) + '</td></tr>' + 
             '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + 
-            '    <tr><td><strong>' + formatnumber(country.resources_oil) + '</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil </td>' + 
+            '    <tr><td><strong>' + this.formatNumber(country.resources_oil) + '</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil </td>' + 
             '        <td></td>' + 
             '        </tr>' + 
             '    <tr><td></td>' + 
@@ -146,6 +139,14 @@ export var helpers = {
             .setLatLng(e.latlng)
             .setContent(html)
             .openOn(layer._map);
+    },
+    formatNumber: function(number) {
+        number = Number(number);
+        if(isNaN(number)) return 0;
+        let n = 0;
+        let x = 3;
+        var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+        return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
     }
 
 };

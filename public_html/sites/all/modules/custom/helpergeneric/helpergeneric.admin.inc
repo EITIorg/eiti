@@ -86,6 +86,15 @@ function helpergeneric_settings_form($form) {
     '#required' => TRUE,
   );
 
+  $form['site_information']['site_frontpage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Default front page'),
+    '#default_value' => (variable_get('site_frontpage')!='node'?drupal_get_path_alias(variable_get('site_frontpage', 'node')):''),
+    '#size' => 40,
+    '#description' => t('Optionally, specify a relative URL to display as the front page.  Leave blank to display the default content feed.'),
+    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
+  );
+
   $form['footer_details'] = array(
     '#type' => 'fieldset',
     '#title' => t('Footer details'),

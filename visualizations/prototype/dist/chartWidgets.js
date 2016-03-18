@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "020097d2c73be953b90f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "354214ee2e6aea6723f7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -1026,6 +1026,18 @@
 				)
 			), document.getElementById(options.container));
 		} else if (options.type == "Sankey") {
+			console.log(options.container);
+			var cont = document.getElementById(options.container);
+			console.log(cont);
+			console.log(cont.clientHeight);
+			console.log(cont.offsetHeight);
+			console.log(cont.scrollHeight);
+			var contParent = cont.parentNode;
+			console.log(contParent);
+			console.log(contParent.clientHeight);
+			console.log(contParent.offsetHeight);
+			console.log(contParent.scrollHeight);
+
 			(0, _reactDom.render)(React.createElement(
 				'div',
 				{ className: options.className },
@@ -24797,13 +24809,22 @@
 	  displayName: 'DataSet',
 
 	  componentDidUpdate: function componentDidUpdate(nextProps, nextState) {
+	    var el = (0, _reactDom.findDOMNode)(this);
+	    console.log(el);
+	    var otherEl = el.parentNode.parentNode.parentNode;
+	    console.log(otherEl);
+	    console.log(otherEl.clientHeight);
+	    console.log(otherEl.clientWidth);
+
+	    this.drawSankey(el);
+	  },
+
+	  drawSankey: function drawSankey(el) {
 	    var _props = this.props;
 	    var data = _props.data;
 	    var width = _props.width;
 	    var height = _props.height;
 	    var margin = _props.margin;
-
-	    var el = (0, _reactDom.findDOMNode)(this);
 
 	    d3.select(el).select("svg").remove(); // clear nodes with state change
 

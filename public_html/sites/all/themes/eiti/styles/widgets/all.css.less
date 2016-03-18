@@ -1,8 +1,5 @@
 
-// @TODO: Cleanup!
 .predefined-widget {
-  margin-bottom: 1em;
-
   .pane-title-wrapper {
     border-bottom: 1px solid @clmain__separator;
     color: @clanchor;
@@ -18,9 +15,16 @@
     .icon {
       fill: @clanchor;
       display: inline;
-      margin-right: 0.5em;
+      margin-right: 1em;
       vertical-align: bottom;
     }
+  }
+}
+
+.xNormalAndUp() {
+  // Force the map height on large displays.
+  .semi-interactive-map-wrapper.media-resizable-wrapper {
+    padding-top: 40em;
   }
 }
 

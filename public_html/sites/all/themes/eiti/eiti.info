@@ -29,9 +29,10 @@ stylesheets[all][] = styles/other.css.less
 stylesheets[all][] = styles/listings.css.less
 stylesheets[all][] = styles/layout.css.less
 
+stylesheets[all][] = styles/other/country_header.css.less
+
 ; @TODO: Implement a proper hook and move widget specific styles to the widget page.
 stylesheets[all][] = styles/widgets/all.css.less
-stylesheets[all][] = styles/widgets/other.css.less
 stylesheets[all][] = styles/widgets/bookmarks.css.less
 stylesheets[all][] = styles/widgets/fact_blocks.css.less
 stylesheets[all][] = styles/widgets/header.css.less

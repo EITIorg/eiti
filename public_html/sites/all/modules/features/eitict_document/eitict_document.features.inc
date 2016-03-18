@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function eitict_document_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "ds" && $api == "ds") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -21,7 +24,7 @@ function eitict_document_node_info() {
     'document' => array(
       'name' => t('Document'),
       'base' => 'node_content',
-      'description' => t('Use this for EITI Standards, Workplans, Factsheets, etc.'),
+      'description' => t('Use this for documents and publications (The EITI Standard, Workplans, Factsheets, etc.)'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

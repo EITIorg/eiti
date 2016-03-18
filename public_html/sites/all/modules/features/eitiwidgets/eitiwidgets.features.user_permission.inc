@@ -135,7 +135,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'create fieldable table'.
   $permissions['create fieldable table'] = array(
     'name' => 'create fieldable table',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -212,7 +214,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'delete fieldable table'.
   $permissions['delete fieldable table'] = array(
     'name' => 'delete fieldable table',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 
@@ -289,7 +293,9 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable table'.
   $permissions['edit fieldable table'] = array(
     'name' => 'edit fieldable table',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'fieldable_panels_panes',
   );
 

@@ -7,11 +7,25 @@ import { helpers } from './helpers.js' ;
 import _ from 'underscore';
 
 // TODO: Move all metadata to definition/configuration
+// Overview
 import { status } from './data/status.js';
-import { online_portal } from './data/online_portal.js';
-import { online_registry } from './data/online_registry.js';
+
+// Resources
 import { resources_oil } from './data/resources_oil.js';
 
+// Tax & Legal Framework
+import { online_portal } from './data/online_portal.js';
+import { online_registry } from './data/online_registry.js';
+
+// Production
+import { value } from './data/value.js';
+import { value_per_capita } from './data/value_per_capita.js';
+
+// Revenues
+import { revenue } from './data/revenue.js';
+import { revenue_compared } from './data/revenue_compared.js';
+
+//Info box Information
 import { countryInfo } from './data/country.js';
 
 
@@ -38,35 +52,22 @@ export default class MapWidgetComponent extends Component {
     var countryDataProcessed = {"type":"FeatureCollection","features":[]};
 
     countriesData.features.forEach(function(country) {
-      var datapoint = data.find(function(v){ return v.ISO3 === country.id;});
+      var datapoint = _.find(data, function(v){ return v.ISO3 === country.id;});
       if(datapoint) {
         country['indicator_value'] = datapoint[indicator_id];
         country['indicator_type'] = valuetypes;
-        switch(indicator_id) {
-          case "status": 
-            country['metadata'] = status;
-          break;
-          case "resources_oil":
-            country['metadata'] = resources_oil;
-          break;
-          case "online_portal":
-            country['metadata'] = online_portal;
-          break;
-          case "online_registry":
-            country['metadata'] = online_registry;
-          break;
-        }
+        country['metadata'] = ::this.getValues(indicator_id);
       }
       countryDataProcessed.features.push(country);
-    });
+    }.bind(this));
     return countryDataProcessed;
   }
 
   addLayer(e) {
     if(this.removeLayer) this.removeLayer();
     const map = this.refs['map'].leafletElement;
-    var indicator_id = e.target.dataset.indicatorid;
-    var valuetypes = e.target.dataset.valuetypes;
+    var indicator_id = e.target.dataset ? e.target.dataset.indicatorid : e.target.getAttribute("data-indicatorid");
+    var valuetypes =  e.target.dataset ? e.target.dataset.valuetypes : e.target.getAttribute("data-valuetypes");
     ::this.addLegend(map, indicator_id);
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
     const hoverDecider = this.props.options.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
@@ -74,12 +75,45 @@ export default class MapWidgetComponent extends Component {
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
   }
 
+  // TODO: Replace with retrieval from endpoint data
+
+  getValues(indicator_id) {
+    //debugger;
+    var values;
+    switch(indicator_id) {
+      case "status": 
+        values = status;
+      break;
+      case "resources_oil":
+        values = resources_oil;
+      break;
+      case "online_portal":
+        values = online_portal;
+      break;
+      case "online_registry":
+        values = online_registry;
+      break;
+      case "value":
+        values = value;
+      break;
+      case "value_per_capita":
+        values = value_per_capita;
+      break;
+      case "revenue":
+        values = revenue;
+      break;
+      case "revenue_compared":
+        values = revenue_compared;
+      break;
+    }
+    return values;
+  }
+
   removeLayer() {
     const map = this.refs['map'].leafletElement;
     const geoJsonLayer = this.refs['geoJsonLayer'].leafletElement;
     map.removeLayer(geoJsonLayer);
   }
-
 
   addLegend(map, indicator_id) {
       var info = L.control({position: 'bottomleft'});
@@ -95,20 +129,8 @@ export default class MapWidgetComponent extends Component {
 
       info.update = function (props) {
           var indicatorMetadata;
-          switch(indicator_id || this.state.indicator_id) {
-            case "status": 
-              indicatorMetadata = status;
-            break;
-            case "resources_oil":
-              indicatorMetadata = resources_oil;
-            break;
-            case "online_portal":
-              indicatorMetadata = online_portal;
-            break;
-            case "online_registry":
-              indicatorMetadata = online_registry;
-            break;
-          }
+          indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
+
           var mergedHTML = "";
           indicatorMetadata.forEach(function(v) {
             mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+ v.title + '</strong> <br/>'+ (v.subtitle || '') + '<br/>' ) ;
@@ -136,11 +158,42 @@ export default class MapWidgetComponent extends Component {
     const geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     var buttons;
     if(this.props.options.buttons) {
-        buttons = (<div>
-          <input type="button" data-indicatorid="status" data-valuetypes="fixed" value="Load Overview" onClick={::this.addLayer}/>
-          <input type="button" data-indicatorid="resources_oil" data-valuetypes="range" value="Load Resources Oil" onClick={::this.addLayer}/>
-          <input type="button" data-indicatorid="online_portal" data-valuetypes="fixed" value="License Registry" onClick={::this.addLayer}/>
-          <input type="button" data-indicatorid="online_registry" data-valuetypes="fixed" value="Contracts" onClick={::this.addLayer}/>
+        buttons = (<div className="map-option-wrapper">
+          <ul className="map-option-widget">
+            <li>
+              Overview
+              <ul className="map-option-items">
+                <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>Status</li>
+              </ul>
+            </li>
+            <li>
+              Resources
+              <ul className="map-option-items">
+                <li data-indicatorid="resources_oil" data-valuetypes="range" onClick={::this.addLayer}>Oil</li>
+              </ul>
+            </li>
+            <li>
+              Tax & Legal Framework
+              <ul className="map-option-items">
+                <li data-indicatorid="online_portal" data-valuetypes="fixed" onClick={::this.addLayer}>License Registry</li>
+                <li data-indicatorid="online_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Contracts</li>
+              </ul>
+            </li>
+            <li>
+              Production
+              <ul className="map-option-items">
+                <li data-indicatorid="value" data-valuetypes="range" onClick={::this.addLayer}>Value</li>
+                <li data-indicatorid="value_per_capita" data-valuetypes="range" onClick={::this.addLayer}>Value per capita</li>
+              </ul>
+            </li>
+            <li>
+              Revenues
+              <ul className="map-option-items">
+                <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>Revenue</li>
+                <li data-indicatorid="revenue_compared" data-valuetypes="range" onClick={::this.addLayer}>Revenue Per Capita</li>
+              </ul>
+            </li>
+          </ul>
         </div>);
     }
 

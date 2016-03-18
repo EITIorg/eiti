@@ -4,9 +4,12 @@
   overflow: hidden;
 
   .links-wrapper {
-    border-top: 1px solid #DFDFDF;
-    margin: 1em 0;
-    padding: 1em 0 0;
+    padding: 1em 0;
+  }
+
+  .links {
+    margin: 0 auto;
+    padding: 0;
 
     li {
       display: inline-block;
@@ -22,6 +25,12 @@
     color: @clanchor;
     .title {
       font-weight: normal;
+    }
+
+    .links-wrapper {
+      border-top: 1px solid @clmain__separator;
+      background-color: #FAFAFA;
+      padding: 1em 0;
     }
 
     .link {
@@ -48,9 +57,7 @@
       padding-bottom: 1em;
       padding-top: 1em;
     }
-  }
 
-  .with-background-image {
     .title {
       color: @claltnormal;
       font-weight: 300;
@@ -63,16 +70,19 @@
     }
 
     .links-wrapper {
-      .link {
-        .link-color(@claltnormal__light, @clanchor__hover);
+      border-top: 1px solid #DFDFDF;
+      margin: 1em 0;
+    }
 
-        .icon {
-          margin-right: 0.5em;
-          fill: @claltnormal;
-        }
-        &:hover .icon {
-          fill: @clanchor__hover;
-        }
+    .link {
+      .link-color(@claltnormal__light, @clanchor__hover);
+
+      .icon {
+        margin-right: 0.5em;
+        fill: @claltnormal;
+      }
+      &:hover .icon {
+        fill: @clanchor__hover;
       }
     }
   }
@@ -80,7 +90,7 @@
 
 .xMediumAndDown() {
   .predefined-widget--header {
-    .links-wrapper {
+    .links {
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
@@ -100,7 +110,7 @@
     .subtitle {
       font-size: 2.5em;
     }
-    .links-wrapper {
+    .links {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-around;

@@ -817,13 +817,21 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
               $orgCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column + 1, $row)->getValue());
 
+              // Break the parsing if we've hit the Notes.
+              if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                break;
+              }
+
               // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
               // creates infinite loop and kills the process.
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
+
                 $revenueCell = $revenuesSheet->getCellByColumnAndRow($revenue_column + 2, $row);
+
                 if ($revenueCell->isFormula()) {
                   $formula = $revenueCell->getValue();
                   try {
+                    $calculationEngine->flushInstance();
                     $revenueCellValue = $calculationEngine->calculateFormula($formula);
                   }
                   catch (PHPExcel_Exception $e) {
@@ -855,6 +863,10 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             elseif ($parsing_type == EITI_PARSING_COUNT) {
               $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
               $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
+              // Break the parsing if we've hit the Notes.
+              if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                break;
+              }
               if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
                 $this->migrateRows[] = array('counted');
                 $this->migrateRowsCountInFile++;
@@ -922,6 +934,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
                 $revenueStreamCellValue = trim($revenuesSheet->getCellByColumnAndRow($revenue_column, $row)->getValue());
 
+                // Break the parsing if we've hit the Notes.
+                if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                  break;
+                }
+
                 // This helps us avoid the TOTAL SUM (which is not a part of GFS parsing and sometimes the formula
                 // creates infinite loop and kills the process.
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
@@ -929,6 +946,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
+                      $calculationEngine->flushInstance();
                       $revenueCellValue = $calculationEngine->calculateFormula($formula);
                     }
                     catch (PHPExcel_Exception $e) {
@@ -967,11 +985,17 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $GFSCodeCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column, $row)->getValue());
                 $GFSCodeStatusCellValue = trim($revenuesSheet->getCellByColumnAndRow($start_column + 2, $row)->getValue());
 
+                // Break the parsing if we've hit the Notes.
+                if (strtolower($GFSCodeCellValue) == 'e. notes' || strtolower($GFSCodeCellValue) == 'notes') {
+                  break;
+                }
+
                 if (!empty($GFSCodeCellValue) && !empty($GFSCodeStatusCellValue)) {
                   $revenueCell = $revenuesSheet->getCellByColumnAndRow($column, $row);
                   if ($revenueCell->isFormula()) {
                     $formula = $revenueCell->getValue();
                     try {
+                      $calculationEngine->flushInstance();
                       $revenueCellValue = $calculationEngine->calculateFormula($formula);
                     }
                     catch (PHPExcel_Exception $e) {
@@ -1059,12 +1083,25 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
   protected function getSheet($sheet_type) {
     $sheet = NULL;
 
+    // Check the book.
+    if (empty($this->currentWorkbook)) {
+      return NULL;
+    }
+
+    // Figure out whether we have "Introduction" tab or not.
+    $introSheet = $this->currentWorkbook->getSheetByName('Introduction');
+    $indexAdjustments = 0;
+    if (empty($introSheet)) {
+      $indexAdjustments = -1;
+    }
+
+
     switch ($sheet_type) {
       case EITI_SHEET_TYPE_ABOUT:
         $sheet = $this->currentWorkbook->getSheetByName('1. About');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(1);
+          $sheet = $this->currentWorkbook->getSheet(1 + $indexAdjustments);
         }
         break;
 
@@ -1072,7 +1109,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('2. Contextual');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(2);
+          $sheet = $this->currentWorkbook->getSheet(2 + $indexAdjustments);
         }
         break;
 
@@ -1080,7 +1117,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $sheet = $this->currentWorkbook->getSheetByName('3. Revenues');
         if (empty($sheet)) {
           // Second try, already via index.
-          $sheet = $this->currentWorkbook->getSheet(3);
+          $sheet = $this->currentWorkbook->getSheet(3 + $indexAdjustments);
         }
         break;
     }

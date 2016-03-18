@@ -1,0 +1,10 @@
+
+.form-type-radioicons {
+  max-height: 20em;
+  overflow-y: auto;
+}
+
+/** HACK: Display all things inline. */
+.form-element-inline-wrapper * {
+  display: inline;
+}

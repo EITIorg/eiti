@@ -17,9 +17,18 @@ function eitiwidgets_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'icon_blocks';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'field_fpp_widget' => array(
+    'field_fpp_icon' => array(
       'formatter_settings' => array(
-        'ft' => array(),
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
       ),
     ),
   );
@@ -66,6 +75,13 @@ function eitiwidgets_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_fpp_source_url' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -153,10 +169,18 @@ function eitiwidgets_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
-        0 => 'field_fpp_widget',
+        0 => 'group_title_wrapper',
+        1 => 'field_fpp_body',
+        2 => 'field_fpp_icon',
+        3 => 'title_field',
+        4 => 'field_fpp_widget',
       ),
     ),
     'fields' => array(
+      'group_title_wrapper' => 'main',
+      'field_fpp_body' => 'main',
+      'field_fpp_icon' => 'main',
+      'title_field' => 'main',
       'field_fpp_widget' => 'main',
     ),
     'classes' => array(),
@@ -223,14 +247,16 @@ function eitiwidgets_ds_layout_settings_info() {
     'regions' => array(
       'main' => array(
         0 => 'group_title_wrapper',
-        1 => 'field_fpp_icon',
-        2 => 'title_field',
-        3 => 'field_fpp_table',
-        4 => 'field_fpp_source_url',
+        1 => 'field_fpp_body',
+        2 => 'field_fpp_icon',
+        3 => 'title_field',
+        4 => 'field_fpp_table',
+        5 => 'field_fpp_source_url',
       ),
     ),
     'fields' => array(
       'group_title_wrapper' => 'main',
+      'field_fpp_body' => 'main',
       'field_fpp_icon' => 'main',
       'title_field' => 'main',
       'field_fpp_table' => 'main',

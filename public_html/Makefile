@@ -5,7 +5,7 @@
 
 # Avoid conflicts with files of the same name
 # @see: http://www.gnu.org/savannah-checkouts/gnu/make/manual/html_node/Phony-Targets.html
-.PHONY : update install prepare protect clean destroy cc cf fm offline online
+.PHONY : update install prepare-local prepare-staging prepare-preprod prepare-production prepare clean destroy backup cc cf fm offline online
 
 # The default target, if no target argument is provided to `make`.
 # Update an environment with the latest changes from code.

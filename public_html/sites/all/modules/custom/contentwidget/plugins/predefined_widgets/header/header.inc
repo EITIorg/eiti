@@ -83,15 +83,18 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
-        'single-fluid-row-wrapper',
         'overlay-wrapper',
       ),
     ),
   );
+  $block['overlay']['headers'] = array(
+    '#type' => 'container',
+  );
+
 
   // Only if it's set, we want to show the tag.
   if ($header_small) {
-    $block['overlay']['header_small'] = array(
+    $block['overlay']['headers']['header_small'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h2',
       '#value' => $header_small,
@@ -103,7 +106,7 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
 
   // Only if it's set, we want to show the tag.
   if ($header_big) {
-    $block['overlay']['header_big'] = array(
+    $block['overlay']['headers']['header_big'] = array(
       '#type' => 'html_tag',
       '#tag' => 'p',
       '#value' => $header_big,
@@ -113,15 +116,32 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
     );
   }
 
-  $block['overlay']['links'] = array(
+  $block['overlay']['links_wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array('links-wrapper'),
+    ),
+  );
+  $block['overlay']['links_wrapper']['links'] = array(
     '#theme' => 'item_list',
     '#items' => $link_items,
     '#type' => 'ul',
     '#title' => '',
     '#attributes' => array(
-      'class' => array('links-wrapper'),
+      'class' => array('links'),
     ),
   );
+
+  if (empty($image_url)) {
+    if (!empty($block['overlay']['headers'])) {
+      $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    }
+
+    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  }
+  else {
+    $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  }
 
   return $block;
 }
@@ -154,17 +174,19 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
 
   $settings_form['links'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Links:'),
+    '#title' => t('Links'),
     '#collapsible' => FALSE,
     '#prefix' => '<div id="links-wrapper">',
     '#suffix' => '</div>',
   );
+
   $settings_form['links']['links_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Links'),
-    '#options' => drupal_map_assoc(range(0, 4)),
+    '#options' => drupal_map_assoc(range(1, 4)),
     '#description' => t('Please specify the number of links you want to use.'),
     '#default_value' => $links_max,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'contentwidget_header_settings_ajax',
       'event' => 'change',
@@ -195,6 +217,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#options' => $options,
       '#icons' => $icons,
       '#default_value' => $link_icon,
+      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['title_' . $link_count] = array(
       '#type' => 'textfield',
@@ -202,6 +225,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#size' => 30,
       '#prefix' => '<div class="container-inline">',
       '#default_value' => $link_title,
+      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['link_' . $link_count] = array(
       '#type' => 'textfield',
@@ -209,6 +233,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
       '#suffix' => '</div>',
       '#size' => 50,
       '#default_value' => $link_url,
+      '#required' => TRUE,
     );
   }
   return $settings_form;

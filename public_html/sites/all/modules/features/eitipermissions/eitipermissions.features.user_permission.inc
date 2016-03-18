@@ -321,13 +321,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'restful',
   );
 
-  // Exported permission: 'administer search'.
-  $permissions['administer search'] = array(
-    'name' => 'administer search',
-    'roles' => array(),
-    'module' => 'search',
-  );
-
   // Exported permission: 'administer site configuration'.
   $permissions['administer site configuration'] = array(
     'name' => 'administer site configuration',
@@ -637,17 +630,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'search content'.
-  $permissions['search content'] = array(
-    'name' => 'search content',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'search',
-  );
-
   // Exported permission: 'select account cancellation method'.
   $permissions['select account cancellation method'] = array(
     'name' => 'select account cancellation method',
@@ -732,13 +714,6 @@ function eitipermissions_user_default_permissions() {
     'name' => 'update scripts run task scripts',
     'roles' => array(),
     'module' => 'update_scripts',
-  );
-
-  // Exported permission: 'use advanced search'.
-  $permissions['use advanced search'] = array(
-    'name' => 'use advanced search',
-    'roles' => array(),
-    'module' => 'search',
   );
 
   // Exported permission: 'use ctools import'.

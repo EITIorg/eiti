@@ -31,8 +31,6 @@ function eitisettings_wysiwyg_default_profiles() {
           'JustifyCenter' => 1,
           'JustifyRight' => 1,
           'JustifyBlock' => 1,
-          'BidiLtr' => 1,
-          'BidiRtl' => 1,
           'BulletedList' => 1,
           'NumberedList' => 1,
           'Outdent' => 1,

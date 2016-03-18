@@ -22,6 +22,15 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
     // Add extra title display option.
     $form['display_title']['hide_title']['#options'][EITIWIDGETS_PANELS_TITLE_ENTITY] = t('Inherited from entity');
 
+    // Hide the "Manually set" title type (visibility) option.
+    unset($form['display_title']['hide_title']['#options'][PANELS_TITLE_FIXED]);
+
+    // Hide the "From pane" title type (visibility) option.
+    unset($form['display_title']['hide_title']['#options'][PANELS_TITLE_PANE]);
+
+    // Hide the " Substitutions" fieldset.
+    $form['display_title']['contexts']['#access'] = FALSE;
+
     // Hide preview button.
     $form['preview']['#access'] = FALSE;
   }
@@ -128,6 +137,11 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
     $pane->css['css_class'] .= ' ' . drupal_html_class('predefined-widget--' . $entity->bundle);
   }
   $pane->css['css_class'] .= ' predefined-widget';
+
+  // Some widgets have a background image rendered inside.
+  if (!empty($entity->field_fpp_background_image)) {
+    $pane->css['css_class'] .= ' has-background-image';
+  }
 }
 
 /**
