@@ -302,6 +302,45 @@ function eitiet_implementing_country_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'implementing_country-normal-name_field'.
+  $field_instances['implementing_country-normal-name_field'] = array(
+    'bundle' => 'normal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'implementing_country',
+    'field_name' => 'name_field',
+    'label' => 'Name',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Country Website');
@@ -309,6 +348,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('EITI Member Since');
   t('EITI Status');
   t('Logo');
+  t('Name');
   t('Please specify the country\'s EITI membership status.');
   t('Please specify the local EITI country-specific website.');
   t('Please specify the local country-specific EITI logo.');
