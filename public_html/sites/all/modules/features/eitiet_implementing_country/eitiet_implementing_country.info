@@ -55,6 +55,3 @@ features[variable][] = panelizer_implementing_country:normal:default_selection
 features[variable][] = panelizer_implementing_country:normal_allowed_layouts_default
 features[variable][] = panelizer_implementing_country:normal_allowed_types_default
 features[variable][] = panelizer_implementing_country:normal_default
-features_exclude[field_instance][taxonomy_term-country_status-description_field] = taxonomy_term-country_status-description_field
-features_exclude[field_instance][taxonomy_term-country_status-name_field] = taxonomy_term-country_status-name_field
-features_exclude[taxonomy][country_status] = country_status
