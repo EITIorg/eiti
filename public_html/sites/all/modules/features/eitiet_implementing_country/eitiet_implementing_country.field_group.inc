@@ -21,7 +21,7 @@ function eitiet_implementing_country_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Metadata',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_ic_change_status_date',
       1 => 'field_ic_status',
