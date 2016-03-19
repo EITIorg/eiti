@@ -9,6 +9,10 @@
  * Class EITIApiImplementingCountry
  */
 class EITIApiImplementingCountry extends RestfulEntityBase {
+  public $reports;
+  public $licenses;
+  public $revenues;
+
   /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
    */
@@ -16,9 +20,6 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $public_fields = parent::publicFieldsInfo();
 
     // Let's expose some data, as few as needed.
-//    $public_fields['indicator_id'] = array(
-//      'property' => 'name',
-//    );
     $public_fields['iso2'] = array(
       'property' => 'iso',
     );
@@ -39,10 +40,15 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $public_fields['reports'] = array(
       'callback' => array($this, 'getReports'),
     );
+    $public_fields['licenses'] = array(
+      'callback' => array($this, 'getLicenses'),
+    );
+    $public_fields['revenues'] = array(
+      'callback' => array($this, 'getRevenues'),
+    );
 
     return $public_fields;
   }
-
 
   /**
    * Overrides the default getList method.
@@ -50,7 +56,11 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   public function getList() {
     // This is the point where we make the extra query and then the callback
     // will fetch the extra reports from this 2nd query.
-    $this->reports = $this->queryForReports();
+    $data = $this->queryIndicatorValues();
+
+    $this->reports = $data['reports'];
+    $this->licenses = $data['licenses'];
+    $this->revenues = $this->queryRevenues();
 
     $return = parent::getList();
     return $return;
@@ -82,10 +92,35 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   function getReports($emw) {
     $iso2 = $emw->iso->value();
-    if (isset($this->reports[$iso2])) {
-      return $this->reports[$iso2];
-    }
-    else return NULL;
+    return isset($this->reports[$iso2]) ? $this->reports[$iso2] : NULL;
+  }
+
+  /**
+   * Gets licenses related to this implementing country.
+   *
+   * @param $emw
+   *   EntityMetadataWrapper object (Implementing Country).
+   *
+   * @return mixed
+   *   Either NULL or an array of licenses.
+   */
+  function getLicenses($emw) {
+    $iso2 = $emw->iso->value();
+    return isset($this->licenses[$iso2]) ? $this->licenses[$iso2] : NULL;
+  }
+
+  /**
+   * Gets revenues related to this implementing country.
+   *
+   * @param $emw
+   *   EntityMetadataWrapper object (Implementing Country).
+   *
+   * @return mixed
+   *   Either NULL or an array of revenues grouped by ISO2, by year.
+   */
+  function getRevenues($emw) {
+    $iso2 = $emw->iso->value();
+    return isset($this->revenues[$iso2]) ? $this->revenues[$iso2] : NULL;
   }
 
   /**
@@ -107,7 +142,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    * Helper function that basically builds and executes the query to retrieve all
    * of the reports.
    */
-  function queryForReports() {
+  function queryIndicatorValues() {
     $query = db_select('eiti_summary_data', 'sd');
 
     // One big query.
@@ -121,19 +156,124 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $query->addField('ic', 'iso', 'iso2');
     $query->addField('ic', 'id', 'id');
     $query->addField('iv', 'value_numeric', 'value');
+    $query->addField('iv', 'value_text', 'value_text');
     $query->addField('iv', 'value_unit', 'unit');
+    $query->addField('iv', 'source', 'source');
 
     $query->condition('sd.status', TRUE);
-    $query->isNotNull('iv.value_numeric');
 
     $result = $query->execute();
-    $output = array();
+    $records = array();
 
+    // Just grab all the data.
     while ($record = $result->fetchAssoc()) {
-      $year = format_date($record['year'], 'custom', 'Y');
-      $output[$record['iso2']][$year] = $record;
+      $records[] = $record;
     }
 
-    return $output;
+    // Now let's polish it.
+    $reports = array();
+    $licenses = array();
+    $licenses_indicators = array(
+      'Public registry of licences, oil',
+      'Public registry of licences, mining',
+      'If incomplete or not available, provide an explanation',
+    );
+    foreach ($records as $record) {
+      $year = format_date($record['year'], 'custom', 'Y');
+      $iso2 = $record['iso2'];
+
+      // Add simple values.
+      if (!is_null($record['value'])) {
+        unset($record['year']);
+        unset($record['iso2']);
+        $reports[$iso2][$year][] = $record;
+      }
+
+      // Now let's check for licenses, if they have a valid URL.
+      if (in_array($record['commodity'], $licenses_indicators)) {
+        if (valid_url($record['value_text'], TRUE)) {
+          $licenses[$iso2][$year][] = $record['value_text'];
+        }
+        elseif (valid_url($record['source'], TRUE)) {
+          $licenses[$iso2][$year][] = $record['source'];
+        }
+      }
+    }
+
+    return array(
+      'reports' => $reports,
+      'licenses' => $licenses,
+    );
+  }
+
+  /**
+   * Helper function that basically builds and executes the query to retrieve all
+   * of the revenues from the SummaryData.
+   */
+  function queryRevenues() {
+    $revenues = array();
+
+    // First we want to see the sum of all the governmental agencies for each country
+    // for each year.
+    $query = db_select('eiti_summary_data', 'sd');
+
+    $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
+    $query->leftJoin('field_data_field_sd_revenue_government', 'fgrs', 'fgrs.entity_id = sd.id');
+    $query->leftJoin('eiti_revenue_stream', 'grs', 'fgrs.field_sd_revenue_government_target_id = grs.id');
+
+    // Now let's add some expressions.
+    $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
+    $query->addExpression("sum(grs.revenue)", 'sum');
+    $query->addField('ic', 'iso', 'iso2');
+
+    $query->condition('sd.status', TRUE);
+    $query->condition('grs.type', 'agency');
+    $query->condition('grs.revenue', 0, '>');
+
+    $query->groupBy('year');
+    $query->groupBy('iso2');
+
+    $results = $query->execute();
+    $records = array();
+    while ($record = $results->fetchAssoc()) {
+      $records[] = $record;
+    }
+
+    // Now let's form a well-polished array: iso2 > year > revenues (government).
+    foreach ($records as $record) {
+      $revenues[$record['iso2']][$record['year']]['government'] = $record['sum'];
+    }
+
+    // Second we want to see the sum of all the reporting companies for each country
+    // for each year.
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
+    $query->leftJoin('field_data_field_sd_revenue_company', 'cgrs', 'cgrs.entity_id = sd.id');
+    $query->leftJoin('eiti_revenue_stream', 'crs', 'cgrs.field_sd_revenue_company_target_id = crs.id');
+
+    // Now let's add some expressions.
+    $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
+    $query->addExpression("sum(crs.revenue)", 'sum');
+    $query->addField('ic', 'iso', 'iso2');
+
+    $query->condition('sd.status', TRUE);
+    $query->condition('crs.type', 'company');
+    $query->condition('crs.revenue', 0, '>');
+
+    $query->groupBy('year');
+    $query->groupBy('iso2');
+
+    $results = $query->execute();
+    $records = array();
+    while ($record = $results->fetchAssoc()) {
+      $records[] = $record;
+    }
+
+    // Now let's form a well-polished array: iso2 > year > revenues (company).
+    foreach ($records as $record) {
+      $revenues[$record['iso2']][$record['year']]['company'] = $record['sum'];
+    }
+
+    return $revenues;
   }
 }
