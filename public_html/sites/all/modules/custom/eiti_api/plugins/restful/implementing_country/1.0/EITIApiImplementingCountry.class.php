@@ -178,6 +178,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'Public registry of licences, mining',
       'If incomplete or not available, provide an explanation',
     );
+
     foreach ($records as $record) {
       $year = format_date($record['year'], 'custom', 'Y');
       $iso2 = $record['iso2'];
@@ -191,10 +192,10 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
 
       // Now let's check for licenses, if they have a valid URL.
       if (in_array($record['commodity'], $licenses_indicators)) {
-        if (valid_url($record['value_text'], TRUE)) {
+        if (valid_url($record['value_text'])) {
           $licenses[$iso2][$year][] = $record['value_text'];
         }
-        elseif (valid_url($record['source'], TRUE)) {
+        if (valid_url($record['source'])) {
           $licenses[$iso2][$year][] = $record['source'];
         }
       }
