@@ -34,7 +34,6 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $query->leftJoin('field_data_field_sd_revenue_company', 'fcrs', 'fcrs.entity_id = sd.id');
     $query->leftJoin('eiti_revenue_stream', 'crs', 'fcrs.field_sd_revenue_company_target_id = crs.id');
     $query->leftJoin('eiti_organisation', 'org_c', 'org_c.id = crs.organisation_id');
-    $query->leftJoin('eiti_gfs_code', 'gfs', 'crs.gfs_code_id = gfs.id');
 
     $second_query = db_select('eiti_summary_data', 'sd');
     $second_query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
@@ -53,7 +52,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $query->fields('sq', array('agency'));
     $query->fields('crs', array('revenue'));
     $query->addField('org_c', 'name', 'company');
-    $query->addField('gfs', 'name', 'gfs_name');
+    $query->addField('crs', 'name', 'revenue_name');
 
     $query->condition('sd.status', TRUE);
     $query->condition('crs.revenue', 0, '>');
@@ -108,10 +107,19 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     $request = $this->getRequest();
     $limit = $request['filter']['limit'];
 
+    $unnamed_revenue = t('UNNAMED REVENUE');
+
     // Get all the nodes first.
     $nodes = array();
     foreach ($data as $item) {
       $lookup_haystack = array_column($nodes, 'name');
+
+      // Just add unnamed revenue if empty.
+      if (empty($item->revenue_name)) {
+        $item->revenue_name = $unnamed_revenue;
+      }
+
+      // Now let's make the nodes.
       if (!in_array($item->company, $lookup_haystack)) {
         $nodes[] = array(
           'name' => $item->company,
@@ -122,9 +130,9 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
           'name' => $item->agency,
         );
       }
-      if (!in_array($item->gfs_name, $lookup_haystack)) {
+      if (!in_array($item->revenue_name, $lookup_haystack)) {
         $nodes[] = array(
-          'name' => $item->gfs_name,
+          'name' => $item->revenue_name,
         );
       }
     }
@@ -162,8 +170,13 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
     // Now that we know that we want to limit to certain companies, let's put together
     // the second part of the flows.
     foreach ($data as $item) {
+      // Just add unnamed revenue if empty.
+      if (empty($item->revenue_name)) {
+        $item->revenue_name = $unnamed_revenue;
+      }
+
       $company_index = array_search($item->company, $lookup_haystack);
-      $gfs_name_index = array_search($item->gfs_name, $lookup_haystack);
+      $gfs_name_index = array_search($item->revenue_name, $lookup_haystack);
       $agency_index = array_search($item->agency, $lookup_haystack);
       $c_g_flux = $company_index . ':' . $gfs_name_index;
       $g_a_flux = $gfs_name_index . ':' . $agency_index;
