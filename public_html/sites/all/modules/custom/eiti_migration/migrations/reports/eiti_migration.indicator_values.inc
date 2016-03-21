@@ -64,7 +64,7 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     $this->addFieldMapping('original_value_numeric', 'original_value_numeric');
     $this->addFieldMapping('original_value_unit', 'original_value_unit');
     $this->addFieldMapping('source', 'source');
-    $this->addFieldMapping('comment', 'comment');
+    $this->addFieldMapping('comments', 'comment');
 
     // Now let's fetch the indicators and store those in our object.
     $groups = eitientity_indicator_get_by_bundle('group');
