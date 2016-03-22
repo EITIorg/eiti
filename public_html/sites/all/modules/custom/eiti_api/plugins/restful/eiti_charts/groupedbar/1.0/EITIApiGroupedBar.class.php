@@ -26,6 +26,12 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
       'query_builder' => 'getProductionQuery',
       'public_fields_info' => 'processCountryProductionFields',
     );
+    $chartData['external_per_country'] = array(
+      'label' => t('Country\'s External Indicators for all years'),
+      'description' => t('External indicators values per year.'),
+      'query_builder' => 'getExternalIndicatorsQuery',
+      'public_fields_info' => 'processCountryProductionFields',
+    );
     return $chartData;
   }
 
@@ -33,6 +39,33 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
    * Creates the query for the production grouped bar chart.
    */
   public function getProductionQuery() {
+    $query = db_select('eiti_summary_data', 'sd');
+
+    // One big query.
+    $query->leftJoin('field_data_field_sd_indicator_values', 'fiv', 'fiv.entity_id = sd.id');
+    $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
+    $query->leftJoin('eiti_indicator_value', 'iv', 'fiv.field_sd_indicator_values_target_id = iv.id');
+    $query->leftJoin('eiti_indicator', 'i', 'i.id = iv.indicator_id');
+    $query->fields('ic', array('iso', 'name'));
+    $query->fields('iv', array('id', 'indicator_id', 'value_numeric', 'value_unit'));
+    $query->fields('sd', array('id', 'year_end', 'status'));
+    $query->addField('i', 'name', 'commodity_name');
+    $query->condition('sd.status', TRUE);
+    $query->isNotNull('iv.value_numeric');
+
+    // Check for the filters.
+    $this->checkProductionFilters($query);
+
+    return $query;
+  }
+
+  /**
+   * Creates the query for the external indicators grouped bar chart.
+   *
+   * It's not very different from the original query, but we use a copy,
+   * because maybe later we'll want to make certain changes here.
+   */
+  public function getExternalIndicatorsQuery() {
     $query = db_select('eiti_summary_data', 'sd');
 
     // One big query.
@@ -168,5 +201,7 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
     $output = array_values($output);
     return $output;
   }
+
 }
+
 
