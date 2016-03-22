@@ -19,7 +19,7 @@ $plugin = array(
       'data_type' => '',
     ),
     'extra_settings' => array(
-      'taxes' => array(),
+      'gfs' => array(),
     ),
   ),
 );
@@ -78,9 +78,13 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
   );
 
   // As dynamic as we tried to be, this is a little exception.
-  if ($widget_settings['stackedbar_settings']['data_type'] == 'government_taxes') {
+  if ($widget_settings['stackedbar_settings']['data_type'] == 'government_revenues') {
     // We want to pass the commodities to the filter and the country from the context.
-    $settings['endpoint'] = $endpoint . '?filter[gfs_code]=' . implode(',', $widget_settings['extra_settings']['taxes']);
+    $gfs_values = array();
+    foreach ($widget_settings['extra_settings']['gfs'] as $gfs_group) {
+      $gfs_values += array_flip($gfs_group);
+    }
+    $settings['endpoint'] = $endpoint . '?filter[gfs_code]=' . implode(',', $gfs_values);
     // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
     $country = menu_get_object('implementing_country');
     if (!empty($country)) {
@@ -212,14 +216,14 @@ function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
-  $items['government_taxes'] = array(
-    'label' => t('Country: Government Tax Revenue'),
-    'endpoint' => '/api/v1.0/stacked_bar/government_taxes',
-    'extra settings' => 'contentwidget_viz_stackedbar_government_taxes_country_settings',
+  $items['government_revenues'] = array(
+    'label' => t('Country: Government Revenue'),
+    'endpoint' => '/api/v1.0/stacked_bar/government_revenues',
+    'extra settings' => 'contentwidget_viz_stackedbar_government_revenues_country_settings',
     'x-axis' => t('Years'),
     'y-axis' => t('Government Revenue (normalized to USD)'),
-    'title' => t('Government Tax Revenue'),
-    'description' => t('Revenue the government obtained from taxes (by tax type)'),
+    'title' => t('Government Revenues'),
+    'description' => t('Revenues the government obtained.'),
     'context required' => 'entity:implementing_country',
   );
 
@@ -252,40 +256,64 @@ function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
 }
 
 /**
- * Extra settings for the Governmental Taxes per Country.
+ * Extra settings for the Governmental Revenues per Country.
  */
-function contentwidget_viz_stackedbar_government_taxes_country_settings(&$form, &$form_state, &$widget_settings, $ctools_contexts = array()) {
-  // Load all GFS codes so we can Identify the parent Taxes GFS.
+function contentwidget_viz_stackedbar_government_revenues_country_settings(&$form, &$form_state, &$widget_settings, $ctools_contexts = array()) {
+  // Load all GFS codes so we can identify all the parents.
   $gfs_codes_all = eitientity_gfs_code_get_by_bundle('gfs_code');
-  $gfs_taxes_parent = array();
+  $gfs_parents = array();
   foreach ($gfs_codes_all as $gfs) {
-    if ($gfs->code == '11E') {
-      $gfs_taxes_parent = $gfs;
-      break;
+    if (empty($gfs->parent) && !in_array($gfs->code, $gfs_parents)) {
+      $gfs_parents[$gfs->id] = $gfs;
     }
   }
-  // Now that we've located it, load the tree.
-  $gfs_tree = eitientity_gfs_code_get_tree($gfs_taxes_parent->id);
-  $gfs_options = array();
-  foreach ($gfs_tree as $gfs) {
-    $gfs_options[$gfs->id] = t('@name (@code)', array(
-      '@name' => $gfs->name,
-      '@code' => $gfs->code,
-    ));
-  }
-  // And now we want to eliminate all the groups (if anyone has this GFS as a parent, it's OUT).
-  // Why? Because they have no values.
-  $gfs_ids = array_keys($gfs_options);
-  foreach ($gfs_codes_all as $gfs) {
-    if (in_array($gfs->parent, $gfs_ids)) {
-      unset($gfs_options[$gfs->parent]);
-    }
-  }
-  $form['taxes'] = array(
-    '#type' => 'checkboxes',
-    '#title' => t('Please select the taxes you want to display.'),
-    '#description' => t('You may specify the taxes you want to be displayed in the widget.'),
-    '#options' => $gfs_options,
-    '#default_value' => isset($widget_settings['extra_settings']['taxes']) ? $widget_settings['extra_settings']['taxes'] : TRUE,
+
+  $gfs_parents = array_reverse($gfs_parents);
+  $form['gfs'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Please select revenues you want to display.'),
+    '#description' => t('You may specify the revenues (GFS Codes) you want to be displayed in the widget.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
   );
+
+  foreach ($gfs_parents as $id => $gfs_parent) {
+    // Now that we've located it, load the tree.
+    $gfs_tree = eitientity_gfs_code_get_tree($id);
+    $gfs_options = array();
+    foreach ($gfs_tree as $gfs) {
+      $gfs_options[$gfs->id] = t('@name (@code)', array(
+        '@name' => $gfs->name,
+        '@code' => $gfs->code,
+      ));
+    }
+    // And now we want to eliminate all the groups (if anyone has this GFS as a parent, it's OUT).
+    // Why? Because they have no values.
+    $gfs_ids = array_keys($gfs_options);
+    foreach ($gfs_codes_all as $gfs) {
+      if (in_array($gfs->parent, $gfs_ids)) {
+        unset($gfs_options[$gfs->parent]);
+      }
+    }
+    if (!empty($gfs_ids)) {
+      $form['gfs']['gfs_parent_' . $id] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('GFS Group: @name (@code)', array(
+          '@name' => $gfs_parent->name,
+          '@code' => $gfs_parent->code,
+        )),
+        '#options' => $gfs_options,
+        '#default_value' => isset($widget_settings['extra_settings']['gfs']['gfs_parent_' . $id]) ? $widget_settings['extra_settings']['gfs']['gfs_parent_' . $id] : TRUE,
+      );
+    }
+    else {
+      $form['gfs']['gfs_parent_' . $id] = array(
+        '#markup' => t('<strong>GFS Group: @name (@code)</strong> <em>- No GFS Codes -</em>', array(
+          '@name' => $gfs_parent->name,
+          '@code' => $gfs_parent->code,
+        ))
+      );
+    }
+  }
+
 }
