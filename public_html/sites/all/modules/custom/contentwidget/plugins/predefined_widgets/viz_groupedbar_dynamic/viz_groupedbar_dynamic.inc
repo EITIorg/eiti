@@ -93,6 +93,15 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
       $settings['endpoint'] .= '&filter[country_iso]=' . $country->iso;
     }
   }
+  elseif ($widget_settings['barchart_settings']['data_type'] == 'external_per_country') {
+    // We want to pass the commodities to the filter and the country from the context.
+    $settings['endpoint'] = $endpoint . '?filter[indicator]=' . implode(',', $widget_settings['extra_settings']['external_indicators']);
+    // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
+    $country = menu_get_object('implementing_country');
+    if (!empty($country)) {
+      $settings['endpoint'] .= '&filter[country_iso]=' . $country->iso;
+    }
+  }
 
   // Adjust settings for the expose year case.
   if ($widget_settings['extra_settings']['expose_year']) {
@@ -265,6 +274,16 @@ function contentwidget_viz_groupedbarchart_dynamic_get_data_types($return = FALS
     'description' => t('Production volumes'),
     'context required' => 'entity:implementing_country',
   );
+  $items['external_per_country'] = array(
+    'label' => t('Country: External Indicators'),
+    'endpoint' => '/api/v1.0/grouped_bar/external_per_country',
+    'extra settings' => 'contentwidget_viz_groupedbarchart_external_per_country_settings',
+    'x-axis' => t('Years'),
+    'y-axis' => t('USD'),
+    'title' => t('External Indicators Chart'),
+    'description' => t('External Indicators for all the Reported Years'),
+    'context required' => 'entity:implementing_country',
+  );
 
   $output = array();
   foreach ($items as $key => $item) {
@@ -330,12 +349,50 @@ function contentwidget_viz_groupedbarchart_production_countries_settings(&$form,
 }
 
 /**
- * Extra settings for the production per country (for one predefined country)
+ * Extra settings for the production per country (for one predefined country).
  */
 function contentwidget_viz_groupedbarchart_production_per_country_settings(&$form, &$form_state, &$widget_settings) {
   // We basically re-use previously define settings callback with little adjustments.
   contentwidget_viz_groupedbarchart_production_countries_settings($form, $form_state, $widget_settings);
   unset($form['expose_year']);
+}
+
+/**
+ * Extra settings for the external indicators per country (for one predefined country).
+ */
+function contentwidget_viz_groupedbarchart_external_per_country_settings(&$form, &$form_state, &$widget_settings) {
+  $numerics = eitientity_indicator_get_by_bundle('numeric');
+  $groups = eitientity_indicator_get_by_bundle('group');
+  $external_group_id = '';
+  foreach ($groups as $id => $group) {
+    if ($group->name == 'External indicators') {
+      $external_group_id = $id;
+      break;
+    }
+  }
+  $external_indicators = array(
+    'Extractives',
+    'GDP',
+    'Aid',
+    'FDI',
+    'Remittances',
+    'Total Gov Revenue',
+  );
+  $external_options = array();
+  foreach ($numerics as $id => $indicator) {
+    if (in_array($indicator->name, $external_indicators) && $indicator->parent == $external_group_id) {
+      $external_options[$id] = $indicator->name;
+    }
+  }
+  $form['external_indicators'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Please select the external indicators you want to use.'),
+    '#description' => t('If you check this box, users will be able to filter data by the <strong>external indicators</strong>.
+        <br/>Note: <em>If you want to use these values, make sure you have them in the Summary Data files.
+        If you don\'t, then edit the Summary Data and create the indicator values manually.</em>'),
+    '#options' => $external_options,
+    '#default_value' => isset($widget_settings['extra_settings']['external_indicators']) ? $widget_settings['extra_settings']['external_indicators'] : TRUE,
+  );
 }
 
 /**
