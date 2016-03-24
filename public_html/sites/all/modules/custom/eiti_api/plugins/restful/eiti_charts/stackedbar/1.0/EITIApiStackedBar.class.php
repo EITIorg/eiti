@@ -14,19 +14,19 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
    */
   public function getDefinedChartData() {
     $chartData = parent::getDefinedChartData();
-    $chartData['government_taxes'] = array(
-      'label' => t('Country Governmental Tax-based Revenue'),
+    $chartData['government_revenues'] = array(
+      'label' => t('Country Governmental Revenue'),
       'description' => t('Revenue disclosed by a Government of a specific country.'),
-      'query_builder' => 'getGovernmentTaxRevenue',
-      'public_fields_info' => 'processCountryGovernmentalTaxRevenue',
+      'query_builder' => 'getGovernmentRevenue',
+      'public_fields_info' => 'processCountryGovernmentalRevenue',
     );
     return $chartData;
   }
 
   /**
-   * Creates the query for the country-based governmental tax revenue stacked bar chart.
+   * Creates the query for the country-based governmental revenue stacked bar chart.
    */
-  public function getGovernmentTaxRevenue() {
+  public function getGovernmentRevenue() {
     $query = db_select('eiti_summary_data', 'sd');
 
     // One big query.
@@ -76,7 +76,7 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
   /**
    * Polishes the country governmental stacked bar chart fields.
    */
-  public function processCountryGovernmentalTaxRevenue($data) {
+  public function processCountryGovernmentalRevenue($data) {
     $output = array();
     // Needed for normalization.
     $x_all = array();

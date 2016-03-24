@@ -64,9 +64,9 @@ variable_set('helpergeneric_cleanup_ui_force', FALSE);
 
 // Provide a list of modules to be disabled and uninstalled.
 $modules = array(
-  //'entitycache',
-  //'memcache',
-  //'memcache_admin',
+  'entitycache',
+  'memcache',
+    'memcache_admin',
 );
 // Uninstall modules
 _us_module__uninstall($modules);

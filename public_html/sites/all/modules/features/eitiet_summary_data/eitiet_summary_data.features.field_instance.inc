@@ -606,7 +606,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
-      'filefield_paths_enabled' => 1,
+      'filefield_paths_enabled' => 0,
       'max_filesize' => '32 MB',
       'user_register_form' => FALSE,
     ),

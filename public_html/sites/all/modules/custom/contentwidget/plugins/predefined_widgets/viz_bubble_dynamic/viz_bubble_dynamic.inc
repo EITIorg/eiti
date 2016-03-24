@@ -86,7 +86,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     else {
       return array('#markup' => t('This widget requires country context.'));
     }
-    $years = contentwidget_viz_bubbles_dynamic_get_years_min_max();
+    $years = contentwidget_viz_bubbles_dynamic_get_years_min_max($country->id);
     $settings['name'] .= t(" (@min - @max)", array(
       '@min' => format_date($years['min'], 'custom', 'Y'),
       '@max' => format_date($years['max'], 'custom', 'Y'),
@@ -265,11 +265,12 @@ function contentwidget_viz_bubbles_dynamic_disbursed_revenues_settings(&$form, &
 /**
  * Small helper callback that returns the range of available years.
  */
-function contentwidget_viz_bubbles_dynamic_get_years_min_max() {
+function contentwidget_viz_bubbles_dynamic_get_years_min_max($country_id) {
   // Better to make just 1 query and then a PHP loop, vs having 2 or 4 queries;
   $query = db_select('eiti_summary_data', 'sd');
   $query->fields('sd', array('year_start', 'year_end'));
   $query->condition('status', TRUE);
+  $query->condition('country_id', $country_id);
   $result = $query->execute();
   $results = $result->fetchAll();
 

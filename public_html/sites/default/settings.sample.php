@@ -62,6 +62,38 @@ $drupal_hash_salt = '';
 //);
 
 /**
+ * Memcache daemon configuration.
+ */
+$use_memcache = FALSE;
+if ($use_memcache) {
+  // Use the DB name for unique memcache key prefix.
+  $conf['memcache_key_prefix'] = $databases['default']['default']['database'];
+
+  // Make memcache the default cache class.
+  $conf['cache_backends'][] = 'sites/all/modules/contrib/memcache/memcache.inc';
+  $conf['cache_default_class'] = 'MemCacheDrupal';
+
+  // Use non-volatile storage for form cache.
+  $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+
+  // Do not bootstrap the DB when serving cached pages to anonymous visitors.
+  $conf['page_cache_without_database'] = TRUE;
+  $conf['page_cache_invoke_hooks'] = FALSE;
+
+  // Use memcache for the locking mechanism (the semaphore table).
+  $conf['lock_inc'] = 'sites/all/modules/contrib/memcache/memcache-lock.inc';
+
+  // Memcache servers and bins info.
+  $conf['memcache_servers'] = array(
+    '127.0.0.1:11211' => 'default',
+    //'unix:///path/to/socket' => 'default'
+  );
+  $conf['memcache_bins'] = array(
+    'cache' => 'default',
+  );
+}
+
+/**
  * "Stage File Proxy" is recommended for development environments to easily
  * retrieve files from the origin environment of the DB.
  */

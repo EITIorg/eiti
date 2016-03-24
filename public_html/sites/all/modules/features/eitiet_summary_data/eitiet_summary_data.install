@@ -21,3 +21,43 @@ function eitiet_summary_data_update_7001(&$sandbox) {
   $query->condition('name', $indicators_to_text, 'IN');
   $query->execute();
 }
+
+/**
+ * Add missing indicators.
+ */
+function eitiet_summary_data_update_7002(&$sandbox) {
+  // Create the indicator group.
+  $external_indicator_group = "External indicators";
+  $values = array(
+    'status' => NODE_PUBLISHED,
+    'created' => REQUEST_TIME,
+    'type' => 'group',
+    'name' => $external_indicator_group,
+  );
+  /** @var IndicatorEntity $indicator */
+  $indicator = entity_create('indicator', $values);
+  $indicator->save();
+  $group_id = $indicator->id;
+
+  // Create all other indicators.
+  $external_indicators = array(
+    "Extractives",
+    "GDP",
+    "Aid",
+    "FDI",
+    "Remittances",
+    "Total Gov Revenue"
+  );
+  foreach ($external_indicators as $external_indicator) {
+    $values = array(
+      'status' => NODE_PUBLISHED,
+      'created' => REQUEST_TIME,
+      'type' => 'numeric',
+      'name' => $external_indicator,
+      'parent' => $group_id,
+    );
+    /** @var IndicatorEntity $indicator */
+    $indicator = entity_create('indicator', $values);
+    $indicator->save();
+  }
+}
