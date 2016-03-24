@@ -13,18 +13,33 @@
  */
 
 /**
+ * Deny access to unwanted visitors.
+ */
+$deny_access = FALSE;
+if ($deny_access && php_sapi_name() != 'cli') {
+  if (empty($_COOKIE['KnockKnock']) || $_COOKIE['KnockKnock'] != 'Nobel') {
+    // - Knock, Knock. - Who’s there? - Nobel. - Nobel who? - No bell, that’s why I knocked!
+    print 'You are not welcome here!';
+    exit();
+  }
+}
+
+/**
  * The current project environment.
  * NOTE: The variable can be used inside update scripts, use only the following
  *       values: local, staging, preprod, production, other.
  */
 define('PROJECT_ENVIRONMENT', 'local');
 
-// Allow developers to debug production environments.
+// Allow developers to debug environments.
 $hide_errors = TRUE;
-if ($hide_errors && PROJECT_ENVIRONMENT == 'production') {
-  ini_set('error_reporting', E_ALL & ~E_DEPRECATED);
-  ini_set('display_errors', FALSE);
-  ini_set('display_startup_errors', FALSE);
+if ($hide_errors) {
+  ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_STRICT);
+  ini_set('display_errors', 'Off');
+}
+else {
+  ini_set('error_reporting', E_ALL);
+  ini_set('display_errors', 'On');
 }
 
 // Reset the database configuration.
@@ -39,15 +54,6 @@ $databases['default']['default'] = array(
   'host'     => '127.0.0.1',
   'prefix'   => '',
 );
-
-/**
- * Salt for one-time login links and cancel links, form tokens, etc. It should
- * be unique to each environment because of security concerns.
- *
- * NOTE: If this variable is empty, a hash of the serialized database
- * credentials will be used as a fallback salt.
- */
-$drupal_hash_salt = '';
 
 /**
  * Environments should have different settings, override the Search API settings.
@@ -99,15 +105,3 @@ if ($use_memcache) {
  */
 //$conf['stage_file_proxy_origin'] = "http://example.org"; // no trailing slash!
 //$conf['stage_file_proxy_origin_dir'] = 'sites/default/files';
-
-/**
- * Deny access to unwanted visitors.
- */
-$deny_access = FALSE;
-if ($deny_access && php_sapi_name() != 'cli') {
-  if (empty($_COOKIE['KnockKnock']) || $_COOKIE['KnockKnock'] != 'Nobel') {
-    // - Knock, Knock. - Who’s there? - Nobel. - Nobel who? - No bell, that’s why I knocked!
-    print 'You are not welcome here!';
-    exit();
-  }
-}
