@@ -37,6 +37,10 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
     return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
   }
 
+  $block = array(
+    '#type' => 'container',
+  );
+
   // Prepare the ID.
   $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
   $block['widget'] = array(
@@ -45,7 +49,8 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
     '#attributes' => array(
       'id' => $viz_id,
       'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
-    )
+    ),
+    '#weight' => 10,
   );
 
   // Load the library.
@@ -116,7 +121,8 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
       '#default_value' => $default_year,
       '#attributes' => array(
         'class' => array('widget-selector', drupal_html_class($viz_id . '-year-selector')),
-      )
+      ),
+      '#weight' => 0,
     );
 
     // And we want to alter some settings in this case.
@@ -401,7 +407,7 @@ function contentwidget_viz_groupedbarchart_external_per_country_settings(&$form,
 function contentwidget_viz_groupedbarchart_production_get_years_range() {
   // Better to make just 1 query and then a PHP loop, vs having 2 or 4 queries;
   $query = db_select('eiti_summary_data', 'sd');
-  $query->fields('sd', array('year_start', 'year_end'));
+  $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
   $query->condition('status', TRUE);
   $result = $query->execute();
   $results = $result->fetchAll();
@@ -409,18 +415,9 @@ function contentwidget_viz_groupedbarchart_production_get_years_range() {
   // Flat the values.
   $values = array();
   foreach ($results as $result) {
-    $values[] = $result->year_start;
-    $values[] = $result->year_end;
+    $values[] = $result->year;
   }
   // Sort'em.
   sort($values);
-
-  $min = array_shift($values);
-  $max = array_pop($values);
-
-  $year_min = format_date($min, 'custom', 'Y');
-  $year_max = format_date($max, 'custom', 'Y');
-  $years = range($year_min, $year_max);
-
-  return drupal_map_assoc($years);
+  return drupal_map_assoc($values);
 }
