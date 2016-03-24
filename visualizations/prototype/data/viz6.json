@@ -2,20 +2,40 @@
   "name": "disbursement",
   "children": [
         {
-          "name": "The Petroleum Tax Office",
-          "size": 1031251468630
-        },
-        { 
-          "name": "The Norwegian Petroleum Directorate",
-          "size": 21178254000
-        },
-        {
-          "name": "Directorate of Customs and Excise",
-          "size": 262139000
+          "name": "child1",
+          "children": [
+            {
+              "name": "The Petroleum Tax Office",
+              "size": 1031251468630
+            }
+          ]
         },
         {
-          "name": "Norges Bank",
-          "size": 710866858000
+          "name": "child2",
+          "children": [
+            { 
+              "name": "The Norwegian Petroleum Directorate",
+              "size": 21178254000
+            }
+          ]
+        },
+        {
+          "name": "child3",
+          "children": [
+            {
+              "name": "Directorate of Customs and Excise",
+              "size": 262139000
+            }
+          ]
+        },
+        {
+          "name": "child4",
+          "children": [
+            {
+              "name": "Norges Bank",
+              "size": 710866858000
+            }
+          ]
         }
-  ]
+    ]
 }

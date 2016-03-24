@@ -56,7 +56,6 @@ let ExtendedBar = React.createClass ({
 	doExport: function(xlabel) {
 	    let output = [];
 	    let data = this.state.chartData;
-	    console.log(data);
 	    
 	    data[0].values.forEach(function(item) {
 	    	var outputObj = {};
