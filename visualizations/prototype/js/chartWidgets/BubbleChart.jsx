@@ -1,5 +1,6 @@
 let React = require('react');
 let d3 = require('d3');
+let Papa = require('papaparse');
 
 import { findDOMNode } from 'react-dom';
 
@@ -13,16 +14,20 @@ let TooltipMixin = require('./TooltipMixin');
 
 let DataSet = React.createClass({
 	componentDidUpdate: function(nextProps, nextState) {
-		console.log("updating component");
 		let {data, diameter, width, height} = this.props;
 
-		let el = findDOMNode(this);
+		let el = findDOMNode(this),
+        	parentEl = el.parentNode.parentNode.parentNode;
+
+        if(parentEl.clientWidth <= diameter) {
+      		diameter = 0.9 * parentEl.clientWidth;
+    	}
 
 		d3.select(el).select("svg").remove(); // clear nodes with state change
 
 	    let svg = d3.select(el).append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", diameter)
+            .attr("height", diameter)
             .attr("class", "bubble");        
 
 		let format = d3.format(",d"),
@@ -132,6 +137,32 @@ let BubbleChart = React.createClass({
 		this.updateData(nextProps);
 	},
 
+	doExport: function(anything) {
+	    let output = [];
+	    let data = this.state.chartData;
+
+	   	var outputObj = {};
+	    data.children.forEach(function(child) {
+	    	outputObj[child.children[0].name] = child.children[0].size;
+	    });
+	    output.push(outputObj);
+	    console.log(output);
+
+	    var csv = Papa.unparse(output);
+
+	    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+	    var csvURL =  null;
+	    if (navigator.msSaveBlob) {
+	        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+	    } else {
+	        csvURL = window.URL.createObjectURL(csvData);
+	    }
+	    var tempLink = document.createElement('a');
+	    tempLink.href = csvURL;
+	    tempLink.setAttribute('download', 'download.csv');
+	    tempLink.click();
+	},
+
 	render() {
 		let {width,
 			 height,
@@ -147,8 +178,8 @@ let BubbleChart = React.createClass({
             		width={width}
             		height={height}
             		margin={margin}  
-            		diameter={diameter}		           		
-            		/>
+            		diameter={diameter}	/>
+            		<button className="export" onClick={this.doExport.bind(this, "input")}> Export Data </button>
 			</div>
 		);
 	}
