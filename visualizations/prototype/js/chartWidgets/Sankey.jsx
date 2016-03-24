@@ -3,6 +3,7 @@ let d3 = require('d3');
 let Papa = require('papaparse');
 let _ = require('lodash');
 
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { findDOMNode } from 'react-dom';
 
 let Chart = require('./Chart');
@@ -17,7 +18,7 @@ let TooltipMixin = require('./TooltipMixin');
 let DataSet = React.createClass({
   getInitialState: function () {
       return {
-        table: ""
+        table: null
       };
   },
 
@@ -29,7 +30,7 @@ let DataSet = React.createClass({
     if(parentEl.clientWidth >= width + margin.left + margin.right) {
       this.drawSankey(el);
     } else {
-      this.drawSankey(el);
+      this.drawTable(el);
     }    
   },
 
@@ -127,27 +128,53 @@ let DataSet = React.createClass({
 
   drawTable: function(el) {
     let data = this.props.data;
-    console.log(data);
-    let table = <table>
-                  <thead>
-                    <tr>
-                      <th> Company </th>
-                      <th> Revenue Stream </th>
-                      <th> Receiving Entity </th>
-                      <th> Amount </th>                                    
-                    </tr>
-                  </thead>
-                </table>;
-    if(this.state.table == "") {
-      this.setState({table: table});
+    let output = [];
+    let id = 1;
+    let formatNumber = d3.format(",.0f"),
+        format = function(d) { return "$" + formatNumber(d); };
+
+    let sankey = d3.sankey();
+    data.nodes && sankey
+          .nodes(data.nodes)
+          .links(data.links)
+          .layout(32);
+
+    data.links && data.links.forEach(function(link) {
+        if(link.source.sourceLinks.length > 0 && link.source.targetLinks.length == 0) {  // Company names
+            var company = link.source.name;
+            link.source.sourceLinks.forEach(function (item) {
+                var outputObj = { 
+                                  "name" : company,
+                                  "stream" : item.target.name,
+                                  "entity" : item.target.sourceLinks[0].target.name,
+                                  "amount" : format(item.value)
+                                };
+                output.push(outputObj);
+            });
+        }
+    });
+    output = _.uniqWith(output, _.isEqual);
+    output.forEach(function(item) {
+      item.id = id;
+      id += 1;
+    })
+
+    if(data.links && !this.state.table) {
+      this.setState({table: true, tableData: output});
     }
   },
 
-	render() {
-
+	render() { 
 		return (
                 <div>
-                    {this.state.table}
+                    { this.state.table &&
+                      <BootstrapTable data={this.state.tableData} striped={true}>
+                          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}> </TableHeaderColumn>
+                          <TableHeaderColumn dataField="name"  dataSort={true}>Company Name</TableHeaderColumn>
+                          <TableHeaderColumn dataField="stream" dataSort={true}>Revenue Stream</TableHeaderColumn>
+                          <TableHeaderColumn dataField="entity" dataSort={true}>Receiving Entity</TableHeaderColumn>
+                          <TableHeaderColumn dataField="amount" dataSort={true}>Amount</TableHeaderColumn>
+                      </BootstrapTable> }
                 </div>
         );
     }
