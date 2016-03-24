@@ -268,7 +268,7 @@ function contentwidget_viz_stackedbar_government_revenues_country_settings(&$for
     }
   }
 
-  $gfs_parents = array_reverse($gfs_parents);
+  $gfs_parents = array_reverse($gfs_parents, TRUE);
   $form['gfs'] = array(
     '#type' => 'fieldset',
     '#title' => t('Please select revenues you want to display.'),
