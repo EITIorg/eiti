@@ -53,8 +53,8 @@ function eitiet_summary_data_field_group_info() {
     'label' => 'Disaggregation of Data',
     'weight' => '10',
     'children' => array(
-      0 => 'field_sd_disagg_project',
-      1 => 'field_sd_disagg_revenue_stream',
+      0 => 'field_sd_disagg_revenue_stream',
+      1 => 'field_sd_disagg_project',
       2 => 'field_sd_disagg_company',
     ),
     'format_type' => 'fieldset',
