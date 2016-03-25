@@ -22,9 +22,6 @@ function helpertheme_menu_navigation_links($menu_name, $levels = MENU_MAX_DEPTH)
   foreach ($tree as $item) {
     if ($link_tree = _helpertheme_prepare_tree($item)) {
       $key = 'menu-' . $item['link']['mlid'];
-      if (!empty($link_tree['below'])) {
-        $key .= ' has-sublevel';
-      }
       // Keyed with the unique mlid to generate classes in theme_links().
       $links[$key] = $link_tree;
     }

@@ -374,12 +374,37 @@
 
   padding: 1em;
 
+  ul     	     {
+    list-style: none;
+  }
+
+  li.has-icon {
+    margin-bottom: 1em;
+  }
+
+  li.no-icon:before {
+    content: "\2022";
+    margin-right: 0.5em;
+    font-family: monospace, sans-serif;
+  }
+  li.has-sublevel:before {
+    content: "\2023";
+    margin-right: 0.5em;
+    font-family: monospace, sans-serif;
+  }
+  li.has-sublevel.expanded:before {
+    content: "\25B4";
+    margin-right: 0.5em;
+    font-family: monospace, sans-serif;
+  }
+
   .navigation-links {
     font-weight: bold;
-    padding-left: 1.5em;
+    padding-left: 0;
   }
   .submenu {
-    padding-left: 1.5em;
+    margin-left: 2em;
+    padding-left: 0;
   }
 
   .link-toplevel ~ .submenu {
@@ -395,6 +420,9 @@
     &:hover .icon {
       fill: @claltnormal;
     }
+    .title {
+      margin-left: 0.5em;
+    }
   }
 
   .item {
@@ -405,11 +433,6 @@
     font-size: 0.8em;
     font-weight: normal;
     margin-top: 0;
-  }
-
-  .icon {
-    height: 1.5em;
-    width: 1.5em;
   }
 
   .footer-site-search {
