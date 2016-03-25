@@ -5,10 +5,10 @@ $modules = array(
   //'admin',
   'admin_menu',
     //'admin_devel',
-    'admin_menu_toolbar',
+    //'admin_menu_toolbar',
     //'admin_views',
   //'adminimal_theme',
-  //'adminimal_admin_menu',
+  'adminimal_admin_menu',
 
   'ctools',
     //'bulk_export',

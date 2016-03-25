@@ -138,6 +138,7 @@ function eiti_css_alter(&$css) {
   );
   $exceptions_list = array(
     'sites/all/modules/contrib/admin_menu',
+    'sites/all/modules/contrib/adminimal_admin_menu',
     'sites/all/modules/contrib/colorbox',
     'sites/all/modules/contrib/ctools',
     'sites/all/modules/contrib/date',
