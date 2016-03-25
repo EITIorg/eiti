@@ -524,7 +524,6 @@ function helpertheme_preprocess_main_footer(&$variables) {
       '#links_prefix' => 'social-link',
       '#attributes' => array(
         'class' => array(
-          'footer-links',
           'footer-social-links',
         ),
       ),
@@ -616,6 +615,7 @@ function _theme_main_footer__site_navigation() {
   $elements['search']['textfield'] = array(
     '#type' => 'textfield',
     '#title' => t('Search Content'),
+    '#title_tag' => 'h3',
     '#title_display' => 'invisible',
     '#name' => 'query',
     '#required' => TRUE,
@@ -629,6 +629,7 @@ function _theme_main_footer__site_navigation() {
     '#type' => 'html_container',
     '#tag' => 'nav',
     '#title' => t('Site Navigation'),
+    '#title_tag' => 'h3',
     '#title_attributes' => array(
       'class' => array('section-title', 'element-invisible'),
     ),
@@ -666,7 +667,10 @@ function _theme_main_footer__site_navigation() {
     '#type' => 'html_container',
     '#tag' => 'nav',
     '#title' => t('Stay connected'),
-    '#title_attributes' => array('class' => array('section-title')),
+    '#title_tag' => 'h3',
+    '#title_attributes' => array(
+      'class' => array('section-title', 'element-invisible'),
+    ),
     '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
     '#attributes' => array(
       //'role' => 'navigation',
@@ -685,7 +689,6 @@ function _theme_main_footer__site_navigation() {
       '#links_prefix' => 'social-link',
       '#attributes' => array(
         'class' => array(
-          'footer-links',
           'footer-social-links',
         ),
       ),
