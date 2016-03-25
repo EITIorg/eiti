@@ -112,7 +112,7 @@
 	body.admin-menu.adminimal-menu:before {
 		display: none;
 	}
-	#admin-menu-menu, a#edit-shortcuts, li.admin-menu-account, #admin-menu-search, #admin-menu-users, {
+	#admin-menu-menu, a#edit-shortcuts, li.admin-menu-account, #admin-menu-search, #admin-menu-users {
 		display:none;
 	}
 
@@ -162,7 +162,7 @@
     background: none repeat scroll 0 0 #222222;
     padding: 0;
     font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif;
-    color: color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .slicknav_menu a, .slicknav_menu a:link, .slicknav_menu a:active {
