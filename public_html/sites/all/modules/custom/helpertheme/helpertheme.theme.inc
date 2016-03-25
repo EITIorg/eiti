@@ -213,7 +213,7 @@ function _theme_header_items__secondary_navigation_toggle() {
     ),
     '#title_icon' => array(
       'symbol' => 'hamburger_button',
-      'options' => array('width' => '2em', 'height' => '2em'),
+      'options' => array('width' => '3em', 'height' => '3em'),
     ),
     // '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
     '#attributes' => array(
