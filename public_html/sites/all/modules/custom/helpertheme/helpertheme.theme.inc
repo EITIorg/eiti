@@ -53,7 +53,7 @@ function theme_html_container($variables) {
       $element['#title_icon']['options'] = isset($element['#title_icon']['options']) ? $element['#title_icon']['options'] : array();
       // Get the SVG icon markup.
       $svgicon = helpertheme_get_svg_icon($element['#title_icon']['symbol'], $element['#title_icon']['options']);
-      $element['#title'] = $svgicon . ' <span class="text">' . $element['#title'] . '<span>';
+      $element['#title'] = $svgicon . ' <span class="text">' . $element['#title'] . '</span>';
     }
 
     $prefix['title'] = array(
@@ -181,9 +181,58 @@ function theme_svg_inline(array $elements) {
 }
 
 /**
- * Returns HTML for the header logo.
+ * Returns HTML for the header items.
  */
-function theme_header_identity() {
+function theme_header_items() {
+  $elements['secondary_navigation_toggle'] = _theme_header_items__secondary_navigation_toggle();
+  $elements['identity'] = _theme_header_items__identity();
+  $elements['items'] = _theme_header_items__navigation();
+
+  // Render the HTML.
+  $output = drupal_render($elements);
+
+  // Remove whitespace between items. Helps with styling in-line elements.
+  return preg_replace('/\>\s+\</', '><', $output);
+}
+
+/**
+ * Returns HTML for the header menu.
+ */
+function _theme_header_items__secondary_navigation_toggle() {
+  $elements = array();
+
+  $menu_name = 'menu-site-navigation';
+  $elements['site_navigation'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#title' => t('Site Navigation'),
+    '#title_tag' => 'a',
+    '#title_attributes' => array(
+      'href' => '#site-navigation',
+      'class' => array('link'),
+    ),
+    '#title_icon' => array(
+      'symbol' => 'hamburger_button',
+      'options' => array('width' => '2em', 'height' => '2em'),
+    ),
+    // '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      'class' => array(
+        'site-navigation-toggle-wrapper',
+      ),
+    ),
+  );
+
+  // Render the HTML.
+  return $elements;
+}
+
+/**
+ * xxx
+ *
+ * @return array
+ */
+function _theme_header_items__identity() {
   // Always reference the EITI theme, and not the current active theme.
   $theme = 'eiti';
   $theme_path = drupal_get_path('theme', $theme);
@@ -195,28 +244,36 @@ function theme_header_identity() {
   $site_link_title = t(variable_get('site_link_title', 'Visit the main page'));
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
 
-  $items['#prefix'] = '<div class="site-identity-wrapper contextual-links-region">';
-  $items['#suffix'] = '</div>';
-
-  // Initialize the template variable as a renderable array.
-  $items['contextual_links'] = array(
-    '#type' => 'contextual_links',
-    '#contextual_links' => array(
-      'menu' => array('admin/settings/generic', array('edit')),
+  $elements = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#contextual_info' => array('admin/settings/generic', array('edit')),
+    '#attributes' => array(
+      'class' => array(
+        'site-identity-wrapper',
+      ),
     ),
   );
 
-  $items['header']['#prefix'] = '<h1 class="site-name">';
-  $items['header']['#suffix'] = '</h1>';
-
-  $items['header']['logo_markup'] = array(
-    '#prefix' => '<a href="' . url('<front>') . '" title="' . $site_link_title . '" class="link" rel="home">',
-    '#suffix' => "</a>",
+  $elements['logo_markup'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'a',
+    '#attributes' => array(
+      'href' => url('<front>'),
+      'title' => $site_link_title,
+      'rel' => 'home',
+      'class' => array(
+        'link',
+      ),
+    ),
+    '#prefix' => '<h1 class="site-name">',
+    '#suffix' => '</h1>',
   );
+
 
   $file_path = drupal_realpath($logo_path);
   if (file_exists($file_path)) {
-    $items['header']['logo_markup']['png'] = array(
+    $elements['logo_markup']['png'] = array(
       '#theme' => 'image',
       '#path' => file_create_url($logo_path),
       '#alt' => '',
@@ -228,7 +285,7 @@ function theme_header_identity() {
   }
   else {
     $logo_alt = $site_name;
-    $items['header']['logo_markup']['svg'] = array(
+    $elements['logo_markup']['svg'] = array(
       '#theme' => 'image',
       '#path' => file_create_url($theme_path . '/logo.svg'),
       '#alt' => $logo_alt,
@@ -239,7 +296,7 @@ function theme_header_identity() {
       '#prefix' => "<!--[if (gte IE 9)|!(IE)]><!-->",
       '#suffix' => "<!--<![endif]-->",
     );
-    $items['header']['logo_markup']['png'] = array(
+    $elements['logo_markup']['png'] = array(
       '#theme' => 'image',
       '#path' => file_create_url($theme_path . '/logo.png'),
       '#alt' => $logo_alt,
@@ -252,20 +309,10 @@ function theme_header_identity() {
     );
   }
 
-  //$items['header']['logo_markup']['site_name'] = array(
-  //  '#markup' => $site_name,
-  //  '#prefix' => '<span class="text">',
-  //  '#suffix' => "</span>",
-  //);
-
-  // Render the HTML.
-  return drupal_render($items);
+  return $elements;
 }
 
-/**
- * Returns HTML for the header items.
- */
-function theme_header_items() {
+function _theme_header_items__navigation() {
   $elements = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -274,38 +321,6 @@ function theme_header_items() {
       ),
     ),
   );
-
-  // Get the menu links.
-  $menu_name = 'user-menu';
-  if (user_is_logged_in() && $links = helpertheme_menu_navigation_links($menu_name, 1)) {
-    $elements['user_navigation'] = array(
-      '#type' => 'html_container',
-      '#tag' => 'nav',
-      '#title' => t('User Menu'),
-      '#title_attributes' => array('class' => array('element-invisible')),
-      '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
-      '#attributes' => array(
-        'role' => 'navigation',
-        'class' => array(
-          'user-navigation',
-        ),
-      ),
-    );
-
-    $elements['user_navigation']['links'] = array(
-      '#theme' => 'links__enhanced',
-      '#links' => $links,
-      '#links_prefix' => 'action-link',
-      '#attributes' => array(
-        'class' => array(
-          'header-user-links',
-          'links',
-          'clearfix',
-        )
-      ),
-    );
-  }
-
 
   // Add the language switcher links.
   if (drupal_multilingual()) {
@@ -393,74 +408,7 @@ function theme_header_items() {
     );
   }
 
-  // Prepare the search-form.
-  // @TODO: Use a search form.
-  //$menu_elements['search']['#prefix'] = '<div class="search-form-wrapper">';
-  //$menu_elements['search']['#suffix'] = '</div>';
-  //$search_form = drupal_get_form('search_form');
-  //unset($search_form['basic']['keys']['#title']);
-
-  // Render the HTML.
-  $output = drupal_render($elements);
-
-  // Remove whitespace between items. Helps with styling in-line elements.
-  return preg_replace('/\>\s+\</', '><', $output);
-}
-
-/**
- * Returns HTML for main navigation menu.
- */
-function theme_main_navigation() {
-  $menu_elements = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'navigation-toplevel',
-      ),
-    ),
-  );
-
-  // Initialize the template variable as a renderable array.
-  $menu_elements['contextual_links'] = array(
-    '#type' => 'contextual_links',
-    '#contextual_links' => array(
-      'menu' => array('admin/structure/menu/manage', array('main-menu')),
-    ),
-  );
-  // Mark this element as potentially having contextual links attached to it.
-  $menu_elements['#attributes']['class'][] = 'contextual-links-region';
-
-  $menu_elements['header'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'h2',
-    '#value' => 'Main Menu',
-    '#attributes' => array('class' => array('element-invisible')),
-  );
-
-  $menu_tree_callback = (function_exists('i18n_menu_translated_tree')) ? 'i18n_menu_translated_tree' : 'menu_tree';
-  $menu_elements['navigation'] = $menu_tree_callback('main-menu');
-
-  // Change the wrapper class.
-  $menu_elements['navigation']['#theme_wrappers'] = array('menu_tree__main_menu__toplevel');
-
-  // Render the menu.
-  $output = drupal_render($menu_elements);
-
-  // Remove whitespace between items. Helps with styling in-line elements.
-  return preg_replace('/\>[\n\ ]+\</', '><', $output);
-}
-
-/**
- * Returns HTML for the footer items.
- */
-function theme_footer_items() {
-  $items = array();
-
-  // Render the HTML.
-  $output = drupal_render($items);
-
-  // Remove whitespace between items. Helps with styling in-line elements.
-  return preg_replace('/\>\s+\</', '><', $output);
+  return $elements;
 }
 
 /**
@@ -590,7 +538,7 @@ function helpertheme_preprocess_main_footer(&$variables) {
 
   // Get the menu links.
   $menu_name = 'menu-footer-navigation';
-  $variables['navigation'] = array(
+  $variables['legal_navigation'] = array(
     '#type' => 'html_container',
     '#tag' => 'nav',
     '#title' => t('Footer Navigation Menu'),
@@ -605,7 +553,7 @@ function helpertheme_preprocess_main_footer(&$variables) {
   );
 
   if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
-    $variables['navigation']['links'] = array(
+    $variables['legal_navigation']['links'] = array(
       '#theme' => 'links__enhanced',
       '#links' => $links,
       '#links_prefix' => 'action-link',
@@ -618,7 +566,7 @@ function helpertheme_preprocess_main_footer(&$variables) {
     );
   }
   else {
-    $variables['navigation']['empty'] = array(
+    $variables['legal_navigation']['empty'] = array(
       '#markup' => t('Menu not configured!'),
     );
   }
@@ -642,4 +590,111 @@ function helpertheme_preprocess_main_footer(&$variables) {
     '#prefix' => '<div class="footer-legal-info">',
     '#suffix' => '</div>'
   );
+
+  $variables['site_navigation'] = _theme_main_footer__site_navigation();
+}
+
+/**
+ * Returns HTML for main navigation menu.
+ */
+function _theme_main_footer__site_navigation() {
+  $menu_name = 'menu-site-navigation';
+
+  $elements['search'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'form',
+    '#attributes' => array(
+      'action' => url('search'),
+      'method' => 'get',
+      'accept-charset' => 'UTF-8',
+      'class' => array(
+        'footer-site-search',
+      ),
+    ),
+  );
+
+  $elements['search']['textfield'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search Content'),
+    '#title_display' => 'invisible',
+    '#name' => 'query',
+    '#required' => TRUE,
+    '#size' => 20,
+    '#attributes' => array(
+      'placeholder' => t('Enter search terms'),
+    ),
+  );
+
+  $elements['site_navigation'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'nav',
+    '#title' => t('Site Navigation'),
+    '#title_attributes' => array(
+      'class' => array('section-title', 'element-invisible'),
+    ),
+    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      'role' => 'navigation',
+      'class' => array(
+        'site-navigation-wrapper',
+      ),
+    ),
+  );
+
+
+  if ($links = helpertheme_menu_navigation_links($menu_name, 3)) {
+    $elements['site_navigation']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'action-link',
+      '#attributes' => array(
+        'class' => array(
+          'navigation-links',
+        ),
+      ),
+    );
+  }
+  else {
+    $elements['site_navigation']['empty'] = array(
+      '#markup' => t('!menu_name not configured!', array('!menu_name' => t('Site Navigation'))),
+    );
+  }
+
+  $menu_name = 'menu-footer-social';
+  $elements['social'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'nav',
+    '#title' => t('Stay connected'),
+    '#title_attributes' => array('class' => array('section-title')),
+    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      //'role' => 'navigation',
+      'class' => array(
+        'footer-social',
+      ),
+    ),
+    '#prefix' => '<div class="footer-social-wrapper">',
+    '#suffix' => '</div>',
+  );
+
+  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
+    $elements['social']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'social-link',
+      '#attributes' => array(
+        'class' => array(
+          'footer-links',
+          'footer-social-links',
+        ),
+      ),
+    );
+  }
+  else {
+    $elements['social']['empty'] = array(
+      '#markup' => t('Menu not configured!'),
+    );
+  }
+
+  return $elements;
 }

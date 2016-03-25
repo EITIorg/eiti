@@ -21,6 +21,7 @@ features[menu_custom][] = main-menu
 features[menu_custom][] = menu-footer-information
 features[menu_custom][] = menu-footer-navigation
 features[menu_custom][] = menu-footer-social
+features[menu_custom][] = menu-site-navigation
 features[menu_custom][] = user-menu
 features[variable][] = ds_extras_field_permissions
 features[variable][] = ds_extras_field_template

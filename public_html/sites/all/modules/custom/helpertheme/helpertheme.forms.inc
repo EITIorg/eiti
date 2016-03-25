@@ -46,6 +46,7 @@ function helpertheme_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
   $menus = array(
     'main-menu',
     'menu-footer-social',
+    'menu-site-navigation',
   );
   if (!in_array($form['original_item']['#value']['menu_name'], $menus)) {
     return;
