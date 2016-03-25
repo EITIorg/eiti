@@ -378,7 +378,7 @@
 Drupal.admin.behaviors.responsivemenu = function (context, settings, $adminMenu) {
 
     $('#admin-menu-menu-responsive').slicknav({
-		label: 'Menu',
+		label: 'Admin Menu',
 		prependTo:'body',
 		closedSymbol: "<i class=\"closed\"></i>",
 		openedSymbol: "<i class=\"open\"></i>",
