@@ -259,7 +259,42 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
    */
   public function prepare($entity, $row) {
     // Extra data processing?
-    // dsm.
+    if ($this->isADuplicate($entity)) {
+      throw new MigrateException(t('The imported summary data is a duplicate. <br/>File: !file', array(
+        '!file' => $row->file,
+      )), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
+      return FALSE;
+    }
+  }
+
+  /**
+   * Small function that checks if current summary data exists in the system.
+   * This is done by judging the Country + Year (year_end).
+   *
+   * @param $entity
+   *  The fully polished summary data un-saved entity.
+   *
+   * @return bool
+   *  Returns TRUE if this entity is a duplicate and FALSE if not.
+   */
+  private function isADuplicate($entity) {
+    // Let's pull the year out and the country.
+    $year_end_timestamp = $entity->year_end;
+    $year = format_date($year_end_timestamp , 'custom', 'Y');
+    $country_id = $entity->country_id;
+
+    // Now let's make the query.
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
+    $query->condition('status', TRUE);
+    $query->condition('country_id', $country_id);
+    $query->where('DATE_PART(\'year\', TO_TIMESTAMP(sd.year_end)) = :year', array(':year' => $year));
+    $count = $query->countQuery()->execute()->fetchField();
+
+    if ($count > 0) {
+      return TRUE;
+    }
+    return FALSE;
   }
 
 }
