@@ -42,6 +42,7 @@ class views_handler_title_field extends views_handler_field_field {
         $uri = entity_uri($entity_type, $entity);
         $this->options['alter']['make_link'] = TRUE;
         $this->options['alter']['path'] = $uri['path'];
+        $this->options['alter']['options'] = !empty($uri['options']) ? $uri['options'] : array();
       }
     }
     return parent::render_item($count, $item);
