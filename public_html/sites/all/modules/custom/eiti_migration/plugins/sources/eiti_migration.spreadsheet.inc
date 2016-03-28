@@ -575,9 +575,11 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             $dateFields = array('start_date', 'end_date', 'publish_date');
             foreach ($dateFields as $dateField) {
               // Screw it, it's just 1 value anyway for them.
-              $excelDate = $migrationRow[$dateField][0];
-              $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
-              $migrationRow[$dateField] = $phpDate;
+              if (!empty($migrationRow[$dateField][0])) {
+                $excelDate = $migrationRow[$dateField][0];
+                $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
+                $migrationRow[$dateField] = $phpDate;
+              }
             }
 
             // Create unique id.
@@ -807,6 +809,12 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $revenue_column = $position['column'] + 4;
             }
           }
+          else {
+            Migration::displayMessage(t('Could not locate find GFS Classification column / cell for the Governmental Revenues.<br/>File: !file', array(
+              '!file' => $this->currentFile,
+            )));
+            return FALSE;
+          }
 
           // Now let's walk through the right cells.
           for ($row = $start_row; $row < $highestRow; $row++) {
@@ -924,6 +932,12 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
               $revenue_column = $position['column'] + 4;
             }
           }
+          else {
+            Migration::displayMessage(t('Could not locate find GFS Classification column / cell for the Company Revenues.<br/>File: !file', array(
+              '!file' => $this->currentFile,
+            )));
+            return FALSE;
+          }
 
           // Now let's walk through the right cells.
           for ($column = $companies_column; $column < $highestColumnIndex; $column++) {
@@ -1021,7 +1035,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
 
   /**
    * Small helper function that looks up a cell in a sheet, that matches at least
-   * one of the given values in $values.\
+   * one of the given values in $values.
    *
    * @param PHPExcel_Worksheet $sheet
    *  PHPExcel Worksheet object.
