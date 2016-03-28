@@ -18,7 +18,10 @@
     "dependencies": {
         "d3": "^3.5.3",
         "immutable": "^3.7.5",
+        "lodash": "^4.6.1",
+        "papaparse": "^4.1.2",
         "react": "^0.14.3",
+        "react-bootstrap-table": "^2.0.2",
         "react-dom": "^0.14.3",
         "react-d3": "^0.4.0",
         "react-d3-components": "^0.6.0",

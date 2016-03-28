@@ -5,108 +5,62 @@
 	<head>
 		<title>EITI Visualizations</title>
 		<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
-
-		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/main.css">
 	</head>
 
 	<body>
 		<div id="main">
-			<div id="plotly"></div>
-			<div id="treemap"></div>
-			<div>
-				<select id="selection">
-					<option value="data/viz6.json">2006</option>
-  					<option value="data/viz6test.json">2007</option>
-				</select>
-			</div>
+			<div id="grouped"></div>
+			<div id="grouped_export"></div>
+			<div id="stacked"></div>
+			<div id="stacked_export"></div>
 			<div id="bubble"></div>
 			<div id="sankey"></div>
-	    	<div id="viz2"></div>
-	    	<div id="viz3"></div>
-	    	<div id="viz4"></div>
-	    	<div id="viz5"></div>
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
-		<script src="dist/chartWidgets.js"></script>
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="dist/chartWidgets.js"></script>
 		<script>
-			var trace1 = {
-			  x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-			  y: [20, 14, 25, 16, 18, 22, 19, 15, 12, 16, 14, 17],
-			  type: 'bar',
-			  name: 'Primary Product',
-			  marker: {
-			    color: 'rgb(49,130,189)',
-			    opacity: 0.7,
-			  }
+			/**** GROUPED ****/
+			var oil = {
+			  x: ['2009', '2010', '2011', '2012', '2013'],
+			  y: [122661511, 104366635, 97494031, 89183936, 84943990],
+			  name: 'Oil',
+			  type: 'bar'
 			};
 
-			var trace2 = {
-			  x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-			  y: [19, 14, 22, 14, 16, 19, 15, 14, 10, 12, 12, 16],
-			  type: 'bar',
-			  name: 'Secondary Product',
-			  marker: {
-			    color: 'rgb(204,204,204)',
-			    opacity: 0.5
-			  }
+			var gas = {
+			  x: ['2009', '2010', '2011', '2012', '2013'],
+			  y: [100110308, 107250281, 101266314, 114722664, 108745838],
+			  name: 'Gas',
+			  type: 'bar'
 			};
 
-			var data = [trace1, trace2];
+			var ngl = {
+			  x: ['2009', '2010', '2011', '2012', '2013'],
+			  y: [16941870, 15505360, 16314039, 17798865, 17718292],
+			  name: 'NGL',
+			  type: 'bar'
+			}
 
-			var layout = {
-			  title: '2013 Sales Report',
-			  xaxis: {
-			    tickangle: -45
-			  },
-			  barmode: 'group'
-			};
-			Plotly.newPlot('plotly', data, layout);
+			var condensate = {
+			  x: ['2009', '2010', '2011', '2012', '2013'],
+			  y: [3923854, 4163009, 4583334, 4574854, 3991160],
+			  name: 'Condensate',
+			  type: 'bar'
+			}
+
+			var data1 = [oil, gas, ngl, condensate];
+
+			var layout1 = {
+				title: 'Production Volume Ratio',
+				barmode: 'group'};
+
+			Plotly.newPlot('grouped', data1, layout1, {displaylogo: false});
 
 			chartWidget.create({
-				type: "TreeMap",		
-				name: "Sample Treemap",
-				width: 600,
-				height: 300,
-				margin: {top: 20, right: 0, bottom: 0, left: 0},
-	            container: "treemap"
-			},
-			'data/viz7.json');
-			chartWidget.create({
-				type: "BubbleChart",		
-				name: "Sample BubbleChart",
-				width: 600,
-				height: 600,
-				diameter: 600,
-				margin: {top: 20, right: 0, bottom: 0, left: 0},
-	            container: "bubble"
-			},
-			'data/viz6.json');
-			chartWidget.create({
-				type: "Sankey",		
-				name: "Sample Sankey",
-				width: 600,
-				height: 300,
-				margin: {top: 1, right: 1, bottom: 6, left: 1},
-	            container: "sankey",
-	            processor: function(input) {
-					return input;
-	            }
-			},
-			'data/viz10a.json');
-			chartWidget.create({
-				type: "GroupedBar",		
-				name: "Production Values",
-				width: 1300,
-				height: 400,
-				margin: {top: 10, bottom: 50, left: 100, right: 10},
+				type: "GroupedBarExport",	
 	            xlabel: "Year",
-	            ylabel: "Volume (liters)",
-	            container: "viz2",
-	            description: "Resources volumes included in 'Production volume and value (3.5.a)'"
+	            container: "grouped_export"
 			}, 
 			[{
 			    "label": "Oil",
@@ -151,18 +105,58 @@
 			    }
 			]);
 
+
+			/**** STACKED ****/
+			var stacked1 = {
+			  x: ['2008', '2010', '2011', '2012', '2013'],
+			  y: [239528270000, 155612137000, 205936428000, 228670845630, 201503788000],
+			  name: 'Ordinary taxes on income, profits and capital gains',
+			  type: 'bar'
+			};
+
+			var stacked2 = {
+			  x: ['2008', '2010', '2011', '2012', '2013'],
+			  y: [1841532000, 1374367000, 1517294000, 1780413000, 1700043000],
+			  name: 'Licence fees',
+			  type: 'bar'
+			};
+
+			var stacked3 = {
+			  x: ['2008', '2010', '2011', '2012', '2013'],
+			  y: [3664473000, 2204785000, 2220255000, 2255251000, 3180095000],
+			  name: 'Emission and pollution taxes',
+			  type: 'bar'
+			}
+
+			var stacked4 = {
+			  x: ['2008', '2010', '2011', '2012', '2013'],
+			  y: [16940000000, 12818000000, 13352000000, 13887000000, 14421000000],
+			  name: 'From government participation (equity)',
+			  type: 'bar'
+			}
+
+			var stacked5 = {
+			  x: ['2008', '2010', '2011', '2012', '2013'],
+			  y: [155420129000, 103571650000, 128083414000, 146929996000, 124825251000],
+			  name: 'Withdrawals from income of quasi-corporations',
+			  type: 'bar'
+			}
+
+			var data2 = [stacked1, stacked2, stacked3, stacked4, stacked5];
+
+			var layout2 = {
+				title: 'Government Income by Type of Revenue',
+				barmode: 'stack'};
+
+			Plotly.newPlot('stacked', data2, layout2, {displaylogo: false});
+
 			chartWidget.create({
-				type: "StackedBar",		
-				name: "Comparative Gov Revenues",
-				width: 1300,
-				height: 400,
-				margin: {top: 10, bottom: 50, left: 100, right: 10},
+				type: "StackedBarExport",		
 	            xlabel: "Year",
-	            ylabel: "Revenue (USD)",
-	            container: "viz3"
+	            container: "stacked_export"
 			},
 			[{
-			    "label": "Total",
+			    "label": "Ordinary taxes on income, profits and capital gains",
 			          "values": [
 			              {"x": "2008", "y": 239528270000},
 			              {"x": "2010", "y": 155612137000},
@@ -172,7 +166,7 @@
 			          ]
 			    },
 			    {
-			    "label": "GDP",
+			    "label": "Licence fees",
 			          "values": [
 			              {"x": "2008", "y": 1841532000},
 			              {"x": "2010", "y": 1374367000},
@@ -182,7 +176,7 @@
 			          ]
 			    },
 			    {
-			    "label": "Aid",
+			    "label": "Emission and pollution taxes",
 			          "values": [
 			              {"x": "2008", "y": 3664473000},
 			              {"x": "2010", "y": 2204785000},
@@ -193,7 +187,7 @@
 			          ]
 			    },
 			    {
-				"label": "Remittance Inflows",
+				"label": "From government participation (equity)",
 			          "values": [        
 			              {"x": "2008", "y": 16940000000 },
 			              {"x": "2010", "y": 12818000000 },
@@ -203,7 +197,7 @@
 			          ]
 			    },
 			    {
-			      "label": "FDI",
+			      "label": "Withdrawals from income of quasi-corporations",
 			          "values": [        
 			              {"x": "2008", "y": 155420129000 },
 			              {"x": "2010", "y": 103571650000 },
@@ -214,33 +208,31 @@
 			    }
 			]);
 
+			/***** BUBBLE *****/
 			chartWidget.create({
-				type: "Bar",		
-				name: "Sample Bar Chart",
-				width: 800,
+				type: "BubbleChart",		
+				name: "Disbursed Revenue",
+				width: 600,
 				height: 600,
-				margin: {top: 10, bottom: 50, left: 50, right: 10},
-	            xlabel: "Year",
-	            ylabel: "Countries",
-	            container: "viz4"
+				diameter: 600,
+				margin: {top: 20, right: 0, bottom: 0, left: 0},
+	            container: "bubble"
 			},
-			[{
-			    label: 'Clients',
-			    values: [{x: '2013', y: 10}, {x: '2014', y: 4}, {x: '2015', y: 3}]
-			}]);
+			'data/viz6.json');
 
+			/***** SANKEY *****/
 			chartWidget.create({
-				type: "Pie",		
-				name: "Sample Pie Chart",
-				width: 800,
-				height: 600,
-				margin: {top: 10, bottom: 10, left: 100, right: 100},
-	            container: "viz5"
+				type: "Sankey",		
+				name: "Flow of Government Revenue",
+				width: 600,
+				height: 300,
+				margin: {top: 1, right: 1, bottom: 6, left: 1},
+	            container: "sankey",
+	            processor: function(input) {
+					return input;
+	            }
 			},
-			{
-			    label: 'Resources',
-			    values: [{x: 'Oil', y: 10}, {x: 'Gas', y: 4}, {x: 'Cobalt', y: 3}]
-			});
+			'data/viz10a.json');
 		</script>
 	</body>
 </html>

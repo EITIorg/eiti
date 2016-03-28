@@ -1,6 +1,9 @@
 let React = require('react');
 let d3 = require('d3');
+let Papa = require('papaparse');
+let _ = require('lodash');
 
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { findDOMNode } from 'react-dom';
 
 let Chart = require('./Chart');
@@ -13,15 +16,22 @@ let AccessorMixin = require('./AccessorMixin');
 let TooltipMixin = require('./TooltipMixin');
 
 let DataSet = React.createClass({
-	componentDidUpdate: function(nextProps, nextState) {
-		let el = findDOMNode(this);
-    console.log(el);
-    var otherEl = el.parentNode.parentNode.parentNode;
-    console.log(otherEl);
-    console.log(otherEl.clientHeight);
-    console.log(otherEl.clientWidth);
+  getInitialState: function () {
+      return {
+        table: null
+      };
+  },
 
-    this.drawSankey(el);
+	componentDidUpdate: function(nextProps, nextState) {
+    let {width, height, margin} = this.props;
+		let el = findDOMNode(this),
+        parentEl = el.parentNode.parentNode.parentNode;
+
+    if(parentEl.clientWidth >= width + margin.left + margin.right) {
+      this.drawSankey(el);
+    } else {
+      this.drawTable(el);
+    }    
   },
 
   drawSankey: function(el) {
@@ -99,26 +109,73 @@ let DataSet = React.createClass({
 	},	
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
-    classes: function(root) {
-      var classes = [];      
+  classes: function(root) {
+    var classes = [];      
 
-      function recurse(name, node) {
-        if (node.children) {
-        	node.children.forEach(function(child) { 
-        		recurse(node.name, child); 
-        	});
-        } else {
-        	classes.push({packageName: name, className: node.name, value: node.size});
-        }
+    function recurse(name, node) {
+      if (node.children) {
+      	node.children.forEach(function(child) { 
+      		recurse(node.name, child); 
+      	});
+      } else {
+      	classes.push({packageName: name, className: node.name, value: node.size});
       }
+    }
 
-      recurse(null, root);
-      return {children: classes};
-    },
+    recurse(null, root);
+    return {children: classes};
+  },
 
-	render() {
+  drawTable: function(el) {
+    let data = this.props.data;
+    let output = [];
+    let id = 1;
+    let formatNumber = d3.format(",.0f"),
+        format = function(d) { return "$" + formatNumber(d); };
+
+    let sankey = d3.sankey();
+    data.nodes && sankey
+          .nodes(data.nodes)
+          .links(data.links)
+          .layout(32);
+
+    data.links && data.links.forEach(function(link) {
+        if(link.source.sourceLinks.length > 0 && link.source.targetLinks.length == 0) {  // Company names
+            var company = link.source.name;
+            link.source.sourceLinks.forEach(function (item) {
+                var outputObj = { 
+                                  "name" : company,
+                                  "stream" : item.target.name,
+                                  "entity" : item.target.sourceLinks[0].target.name,
+                                  "amount" : format(item.value)
+                                };
+                output.push(outputObj);
+            });
+        }
+    });
+    output = _.uniqWith(output, _.isEqual);
+    output.forEach(function(item) {
+      item.id = id;
+      id += 1;
+    })
+
+    if(data.links && !this.state.table) {
+      this.setState({table: true, tableData: output});
+    }
+  },
+
+	render() { 
 		return (
-                <div></div>
+                <div>
+                    { this.state.table &&
+                      <BootstrapTable data={this.state.tableData} striped={true}>
+                          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}> </TableHeaderColumn>
+                          <TableHeaderColumn dataField="name"  dataSort={true}>Company Name</TableHeaderColumn>
+                          <TableHeaderColumn dataField="stream" dataSort={true}>Revenue Stream</TableHeaderColumn>
+                          <TableHeaderColumn dataField="entity" dataSort={true}>Receiving Entity</TableHeaderColumn>
+                          <TableHeaderColumn dataField="amount" dataSort={true}>Amount</TableHeaderColumn>
+                      </BootstrapTable> }
+                </div>
         );
     }
 });
@@ -153,11 +210,11 @@ let Sankey = React.createClass({
                     data = props.processor(data);
                 } 
             }
-            var nodes = data.nodes || {};
+            var nodes = (data) ?  data.nodes : {};
             for (var node in nodes) {
               nodedata.push(nodes[node]);
             }
-            var links = data.links || {};
+            var links = (data) ? data.links : {};
             for (var link in links) {
               linkdata.push({ "source": nodedata.indexOf(nodes[links[link].source]),
                               "target": nodedata.indexOf(nodes[links[link].target]),
@@ -182,6 +239,38 @@ let Sankey = React.createClass({
     this.updateData(nextProps);
   },
 
+  doExport: function(anything) {
+    let output = [];
+    this.state.chartData.links.forEach(function(link) {
+        if(link.source.sourceLinks.length > 0 && link.source.targetLinks.length == 0) {  // Company names
+            var company = link.source.name;
+            link.source.sourceLinks.forEach(function (item) {
+                var outputObj = { "Company Name" : company,
+                                  "Revenue Stream" : item.target.name,
+                                  "Receiving Entity" : item.target.sourceLinks[0].target.name,
+                                  "Amount" : item.value
+                                };
+                output.push(outputObj);
+            });
+        }
+    });
+
+    output = _.uniqWith(output, _.isEqual);
+    var csv = Papa.unparse(output);
+
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob) {
+        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+    } else {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'download.csv');
+    tempLink.click();
+  },
+
 	render() {
 		let {width,
 			 height,
@@ -190,13 +279,13 @@ let Sankey = React.createClass({
 
 		return (
 			<div>	
-					<h3 className={"chartTitle"}>{chartTitle}</h3>			
+					<h3 className={"chartTitle"}>{chartTitle}</h3>		
 					<DataSet
             		data={this.state.chartData}
             		width={width - margin.left - margin.right}
             		height={height - margin.top - margin.bottom}
-            		margin={margin}             		
-            		/>
+            		margin={margin} />
+          <button className="export" onClick={this.doExport.bind(this, "input")}> Export Data </button>
 			</div>
 		);
 	}
