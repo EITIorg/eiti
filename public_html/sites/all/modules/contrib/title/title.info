@@ -9,7 +9,9 @@ files[] = title.module
 files[] = views/views_handler_title_field.inc
 files[] = tests/title.test
 
-; Information added by drush on 2015-03-22
-version = "7.x-1.0-alpha7+14-dev"
+; Information added by Drupal.org packaging script on 2016-03-28
+version = "7.x-1.0-alpha7+15-dev"
+core = "7.x"
 project = "title"
-datestamp = "1427069718"
+datestamp = "1459162140"
+
