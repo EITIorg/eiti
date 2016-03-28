@@ -43,6 +43,13 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
   $entity = $form_state['entity'];
   $entity_language = entity_language('fieldable_panels_pane', $entity);
 
+  // Do not make all FPPs reusable by default.
+  // @see: fieldable_panels_panes_entities_add_page().
+  if (!empty($entity->is_new) && isset($form['reusable']['reusable'])) {
+    $entity->reusable = FALSE;
+    $form['reusable']['reusable']['#default_value'] = FALSE;
+  }
+
   // Hide the FPP view mode selector.
   if (isset($form['view_mode']['#default_value'])) {
     $form['view_mode'] = array(
