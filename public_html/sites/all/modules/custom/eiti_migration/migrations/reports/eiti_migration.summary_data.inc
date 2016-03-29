@@ -8,6 +8,7 @@
  */
 
 class EITISummaryDataMigration extends EITISpreadsheetMigration {
+  public $single_import = FALSE;
 
   /**
    * Overrides the default constructor.
@@ -22,6 +23,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       $real_path = drupal_realpath($file->uri);
       $real_paths = array($real_path);
       $this->importingFiles[$file->fid] = $real_path;
+      $this->single_import = TRUE;
     }
     else {
       $real_paths = $this->getSpreadsheetFiles();
@@ -260,10 +262,19 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
   public function prepare($entity, $row) {
     // Extra data processing?
     if ($this->isADuplicate($entity)) {
-      throw new MigrateException(t('The imported summary data is a duplicate. <br/>File: !file', array(
-        '!file' => $row->file,
-      )), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
-      return FALSE;
+      // If this is a single import file.
+      if ($this->single_import) {
+        $fids = array($row->file_fid);
+        file_delete_multiple($fids);
+        throw new MigrateException(t('The imported summary data is a duplicate. Uploaded file will be removed to prevent further imports.<br/>File: !file', array(
+          '!file' => $row->file,
+        )), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
+      }
+      else {
+        throw new MigrateException(t('The imported summary data is a duplicate. <br/>File: !file', array(
+          '!file' => $row->file,
+        )), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
+      }
     }
   }
 
