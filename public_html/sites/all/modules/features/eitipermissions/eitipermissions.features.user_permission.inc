@@ -215,13 +215,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'media',
   );
 
-  // Exported permission: 'administer media wysiwyg view mode'.
-  $permissions['administer media wysiwyg view mode'] = array(
-    'name' => 'administer media wysiwyg view mode',
-    'roles' => array(),
-    'module' => 'media_wysiwyg_view_mode',
-  );
-
   // Exported permission: 'administer menu'.
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
