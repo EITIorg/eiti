@@ -1,7 +1,7 @@
 name = Update Scripts
 description = Update Scripts for continuous integration/micro-releases.
 core = 7.x
-version = "7.x-2014-08-17"
+version = "7.x-2016-03-30"
 
 package = Development
 
