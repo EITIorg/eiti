@@ -55,4 +55,21 @@ Drupal.behaviors.toggleSiteNavigation = {
   }
 };
 
+Drupal.behaviors.toggleSiteNavigationSubLevel = {
+  /**
+   * Enable the hamburger menu sub-levels functionality.
+   * @param context
+   */
+  attach: function(context) {
+    $('.site-navigation-wrapper .navigation-links', context).once('expandable', function() {
+      $(this).find('.item.has-sublevel').each(function(index, item) {
+        var toggle = $('<span class="toggle"></span>').click(function (e) {
+          $(e.target).closest('.has-sublevel').toggleClass('expanded');
+        });
+        $(item).prepend(toggle);
+      });
+    });
+  }
+};
+
 })(jQuery);
