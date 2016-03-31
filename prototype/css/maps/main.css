@@ -323,3 +323,34 @@
      width: 100%;
   }
 }
+
+@media (max-width: 667px) {
+  .eiti-map-wrapper .map-option-widget li {
+    border-right: none;
+    border-left: none;
+    padding: 17px 0 19px 65px;
+    width: 15%;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul{
+    margin-top: -12px;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul li {
+    padding: 10px 0 10px 0;
+  }
+}
+
+@media (max-width: 384px) {
+  .eiti-map-wrapper .map-option-widget li {
+    background: none;
+    border-right: none;
+    border-left: none;
+    padding: 10px 0 10px 10px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul{
+    margin-top: -30px;
+    padding-bottom: 10px;
+    width: 60%;
+  }
+}
