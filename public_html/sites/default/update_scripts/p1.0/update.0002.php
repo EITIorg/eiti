@@ -5,10 +5,10 @@ $modules = array(
   //'admin',
   'admin_menu',
     //'admin_devel',
-    'admin_menu_toolbar',
+    //'admin_menu_toolbar',
     //'admin_views',
   //'adminimal_theme',
-  //'adminimal_admin_menu',
+  'adminimal_admin_menu',
 
   'ctools',
     //'bulk_export',
@@ -37,7 +37,7 @@ $modules = array(
 _us_module__install($modules);
 
 // Set administration theme.
-variable_set('admin_theme', 'seven');
+variable_set('admin_theme', 'adminimal');
 
 // Use administration theme for node edit pages.
 variable_set('node_admin_theme', 1);

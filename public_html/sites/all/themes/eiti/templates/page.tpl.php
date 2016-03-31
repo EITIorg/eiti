@@ -17,6 +17,7 @@
  * @var array $title_suffix
  * @var array $action_links
  * @var array $page
+ * @var array $page_title_visible
  */
 ?>
 
@@ -24,7 +25,6 @@
 <div class="main-header-wrapper">
   <header role="banner" class="main-header clearfix">
     <div class="main-header-inner clearfix">
-      <?php print theme('header_identity'); ?>
       <?php print theme('header_items'); ?>
     </div>
   </header>

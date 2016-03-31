@@ -86,9 +86,6 @@ function __eiti_menu_link__level(array &$variables, $level = NULL) {
         // Change the override the rendering of the subitems wrapper.
         $element['#below']['#theme_wrappers'] = array('menu_tree__main_menu__sublevel');
 
-        // Add list item class.
-        $element['#attributes']['class'][] = 'has-sublevel';
-
         // Add link class.
         $element['#localized_options']['attributes']['class'][] = 'with-sublevel';
       }

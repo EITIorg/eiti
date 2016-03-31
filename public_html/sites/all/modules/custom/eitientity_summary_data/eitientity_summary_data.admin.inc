@@ -80,7 +80,7 @@ function summary_data_spreadsheet_upload_form($form, &$form_state, $entity) {
 function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
   $fid = $form_state['values']['report_upload'];
   $file = file_load($fid);
-  $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_REPLACE);
+  $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_RENAME);
   $file->status = FILE_STATUS_PERMANENT;
   $file = file_save($file);
 

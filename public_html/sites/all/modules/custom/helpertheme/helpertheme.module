@@ -252,6 +252,18 @@ function helpertheme_preprocess_page(&$variables) {
   // Get path to the current module.
   $module_path = drupal_get_path('module', 'helpertheme');
 
+  // Set the default js options.
+  $js_options = array(
+    'group' => JS_DEFAULT,
+    'every_page' => TRUE,
+    'scope' => 'footer',
+    'requires_jquery' => TRUE,
+    'defer' => TRUE,
+  );
+
+  // Add the helpertheme script.
+  drupal_add_js($module_path . '/scripts/helpertheme.js', $js_options);
+
   // Set the default css options.
   $css_options = array(
     'group' => CSS_SYSTEM,
@@ -332,16 +344,7 @@ function helpertheme_theme() {
     'svg_sprite' => array(
       'file' => 'helpertheme.theme.inc',
     ),
-    'header_identity' => array(
-      'file' => 'helpertheme.theme.inc',
-    ),
     'header_items' => array(
-      'file' => 'helpertheme.theme.inc',
-    ),
-    'main_navigation' => array(
-      'file' => 'helpertheme.theme.inc',
-    ),
-    'footer_items' => array(
       'file' => 'helpertheme.theme.inc',
     ),
     'main_footer' => array(

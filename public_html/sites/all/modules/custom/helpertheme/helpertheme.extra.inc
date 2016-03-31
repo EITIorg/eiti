@@ -13,12 +13,7 @@
  * @param int $levels
  * @return array
  */
-function helpertheme_menu_navigation_links($menu_name, $levels = 0) {
-  // For now only return one level.
-  if ($levels > 1) {
-    $levels = 1;
-  }
-
+function helpertheme_menu_navigation_links($menu_name, $levels = MENU_MAX_DEPTH) {
   // Get the menu hierarchy for the current page.
   $tree = menu_tree_page_data($menu_name, $levels);
 
@@ -27,9 +22,6 @@ function helpertheme_menu_navigation_links($menu_name, $levels = 0) {
   foreach ($tree as $item) {
     if ($link_tree = _helpertheme_prepare_tree($item)) {
       $key = 'menu-' . $item['link']['mlid'];
-      if (!empty($link_tree['below'])) {
-        $key .= ' has-sublevel';
-      }
       // Keyed with the unique mlid to generate classes in theme_links().
       $links[$key] = $link_tree;
     }

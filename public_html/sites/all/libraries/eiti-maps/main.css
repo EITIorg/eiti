@@ -4,6 +4,9 @@
  */
 
 .eiti-map-wrapper .leaflet-container {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     background: #fff;
     border: 1px solid #dddddd;
     font-family: 'Open Sans', serif;

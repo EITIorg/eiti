@@ -19,7 +19,9 @@ $plugin = array(
       'data_type' => '',
     ),
     'extra_settings' => array(
-      'gfs' => array(),
+      'gfs' => array(
+        'gfs_codes' => array(),
+      ),
     ),
   ),
 );
@@ -80,11 +82,7 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['stackedbar_settings']['data_type'] == 'government_revenues') {
     // We want to pass the commodities to the filter and the country from the context.
-    $gfs_values = array();
-    foreach ($widget_settings['extra_settings']['gfs'] as $gfs_group) {
-      $gfs_values += array_flip($gfs_group);
-    }
-    $settings['endpoint'] = $endpoint . '?filter[gfs_code]=' . implode(',', $gfs_values);
+    $settings['endpoint'] = $endpoint . '?filter[gfs_code]=' . implode(',', array_flip($widget_settings['extra_settings']['gfs']['gfs_codes']));
     // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
     $country = menu_get_object('implementing_country');
     if (!empty($country)) {
@@ -260,15 +258,6 @@ function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
  */
 function contentwidget_viz_stackedbar_government_revenues_country_settings(&$form, &$form_state, &$widget_settings, $ctools_contexts = array()) {
   // Load all GFS codes so we can identify all the parents.
-  $gfs_codes_all = eitientity_gfs_code_get_by_bundle('gfs_code');
-  $gfs_parents = array();
-  foreach ($gfs_codes_all as $gfs) {
-    if (empty($gfs->parent) && !in_array($gfs->code, $gfs_parents)) {
-      $gfs_parents[$gfs->id] = $gfs;
-    }
-  }
-
-  $gfs_parents = array_reverse($gfs_parents, TRUE);
   $form['gfs'] = array(
     '#type' => 'fieldset',
     '#title' => t('Please select revenues you want to display.'),
@@ -276,44 +265,22 @@ function contentwidget_viz_stackedbar_government_revenues_country_settings(&$for
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-
-  foreach ($gfs_parents as $id => $gfs_parent) {
-    // Now that we've located it, load the tree.
-    $gfs_tree = eitientity_gfs_code_get_tree($id);
-    $gfs_options = array();
-    foreach ($gfs_tree as $gfs) {
-      $gfs_options[$gfs->id] = t('@name (@code)', array(
-        '@name' => $gfs->name,
-        '@code' => $gfs->code,
-      ));
-    }
-    // And now we want to eliminate all the groups (if anyone has this GFS as a parent, it's OUT).
-    // Why? Because they have no values.
-    $gfs_ids = array_keys($gfs_options);
-    foreach ($gfs_codes_all as $gfs) {
-      if (in_array($gfs->parent, $gfs_ids)) {
-        unset($gfs_options[$gfs->parent]);
-      }
-    }
-    if (!empty($gfs_ids)) {
-      $form['gfs']['gfs_parent_' . $id] = array(
-        '#type' => 'checkboxes',
-        '#title' => t('GFS Group: @name (@code)', array(
-          '@name' => $gfs_parent->name,
-          '@code' => $gfs_parent->code,
-        )),
-        '#options' => $gfs_options,
-        '#default_value' => isset($widget_settings['extra_settings']['gfs']['gfs_parent_' . $id]) ? $widget_settings['extra_settings']['gfs']['gfs_parent_' . $id] : TRUE,
-      );
+  $gfs_codes = eitientity_gfs_code_get_tree();
+  $options = array();
+  foreach ($gfs_codes as $gfs_code) {
+    $label = ' (' . check_plain($gfs_code->code) . ') ' . filter_xss($gfs_code->name);
+    if ($gfs_code->depth == 0) {
+      $options[$gfs_code->id] = '<strong>' . strtoupper($label) . '</strong>';
     }
     else {
-      $form['gfs']['gfs_parent_' . $id] = array(
-        '#markup' => t('<strong>GFS Group: @name (@code)</strong> <em>- No GFS Codes -</em>', array(
-          '@name' => $gfs_parent->name,
-          '@code' => $gfs_parent->code,
-        ))
-      );
+      $options[$gfs_code->id] = str_repeat('-', $gfs_code->depth) . $label;
     }
   }
 
+  $form['gfs']['gfs_codes'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Flat list of all GFS Codes'),
+    '#options' => $options,
+    '#default_value' => isset($widget_settings['extra_settings']['gfs']['gfs_codes']) ? $widget_settings['extra_settings']['gfs']['gfs_codes'] : TRUE,
+  );
 }

@@ -312,35 +312,37 @@ function _helpertheme_links__enhanced($variables) {
 
     foreach (element_children($links) as $key) {
       $link = &$links[$key];
-      $class = array('item', $key);
+      $list_item_content = '';
+      $list_item_class = array('item', $key);
 
       // Add first, last and active classes to the list of links to help out themers.
       if ($i == 1) {
-        $class[] = 'first';
+        $list_item_class[] = 'first';
       }
       if ($i == $num_links) {
-        $class[] = 'last';
+        $list_item_class[] = 'last';
       }
       if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
         && (empty($link['language']) || $link['language']->language == $language_url->language)) {
-        $class[] = 'active';
+        $list_item_class[] = 'active';
       }
-      $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
 
       $selected_icon = variable_get(HELPERTHEME_SVG_ICON_NAME_PREFIX . $link['mlid'], '');
       if (!empty($selected_icon)) {
         // Add icon.
         $link['title'] = _helpertheme_menu_link_title($link['title'], $selected_icon, $svgicon_size);
         $link['html'] = TRUE;
+        $list_item_class[] = 'has-icon';
         $link['attributes']['class'][] = 'has-icon';
       }
       else {
+        $list_item_class[] = 'no-icon';
         $link['attributes']['class'][] = 'no-icon';
       }
 
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
-        $output .= l($link['title'], $link['href'], $link);
+        $list_item_content .= l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {
         // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
@@ -351,7 +353,7 @@ function _helpertheme_links__enhanced($variables) {
         if (isset($link['attributes'])) {
           $span_attributes = drupal_attributes($link['attributes']);
         }
-        $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
+        $list_item_content .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
       }
 
       // Render the children.
@@ -364,12 +366,17 @@ function _helpertheme_links__enhanced($variables) {
           'heading' => '',
         );
 
+        $list_item_class[] = 'has-sublevel';
+
         if (!empty($variables['links']['#extras'])) {
           $bellow['links']['#extras'] = $variables['links']['#extras'];
         }
-        $output .= _helpertheme_links__enhanced($bellow);
+        $list_item_content .= _helpertheme_links__enhanced($bellow);
       }
       $i++;
+
+      $output .= '<li' . drupal_attributes(array('class' => $list_item_class)) . '>';
+      $output .= $list_item_content;
       $output .= "</li>";
     }
 

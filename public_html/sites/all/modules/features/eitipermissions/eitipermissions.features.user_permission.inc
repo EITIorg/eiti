@@ -215,13 +215,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'media',
   );
 
-  // Exported permission: 'administer media wysiwyg view mode'.
-  $permissions['administer media wysiwyg view mode'] = array(
-    'name' => 'administer media wysiwyg view mode',
-    'roles' => array(),
-    'module' => 'media_wysiwyg_view_mode',
-  );
-
   // Exported permission: 'administer menu'.
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
@@ -319,6 +312,13 @@ function eitipermissions_user_default_permissions() {
     'name' => 'administer restful',
     'roles' => array(),
     'module' => 'restful',
+  );
+
+  // Exported permission: 'administer shortcuts'.
+  $permissions['administer shortcuts'] = array(
+    'name' => 'administer shortcuts',
+    'roles' => array(),
+    'module' => 'shortcut',
   );
 
   // Exported permission: 'administer site configuration'.
@@ -481,6 +481,15 @@ function eitipermissions_user_default_permissions() {
     'module' => 'currency',
   );
 
+  // Exported permission: 'customize shortcut links'.
+  $permissions['customize shortcut links'] = array(
+    'name' => 'customize shortcut links',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'shortcut',
+  );
+
   // Exported permission: 'delete revisions'.
   $permissions['delete revisions'] = array(
     'name' => 'delete revisions',
@@ -635,6 +644,13 @@ function eitipermissions_user_default_permissions() {
     'name' => 'select account cancellation method',
     'roles' => array(),
     'module' => 'user',
+  );
+
+  // Exported permission: 'switch shortcut sets'.
+  $permissions['switch shortcut sets'] = array(
+    'name' => 'switch shortcut sets',
+    'roles' => array(),
+    'module' => 'shortcut',
   );
 
   // Exported permission: 'toggle field translatability'.

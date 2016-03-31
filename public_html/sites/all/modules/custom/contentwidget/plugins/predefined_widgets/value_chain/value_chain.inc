@@ -15,7 +15,7 @@ $plugin = array(
   'render callback' => 'contentwidget_value_chain_render',
   'settings form' => 'contentwidget_value_chain_settings',
   'defaults' => array(
-    'chains_count' => 1,
+    'chains_count' => 4,
   ),
 );
 
@@ -135,8 +135,8 @@ function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $w
   $settings_form = array();
   $blocks_count = isset($widget_settings['chains_count']) ? $widget_settings['chains_count'] : '';
 
-  $available_sizes = array('' => t('- Select -'));
-  $sizes = drupal_map_assoc(range(1, 9));
+  $available_sizes = array();
+  $sizes = drupal_map_assoc(range(4, 9));
   foreach ($sizes as $size) {
     $available_sizes[$size] = format_plural($size, '1 Block', '@count Blocks');
   }
@@ -147,6 +147,7 @@ function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $w
     '#title' => t('Number of Chain Blocks'),
     '#options' => $available_sizes,
     '#default_value' => $blocks_count,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'contentwidget_value_chain_settings_ajax',
       'wrapper' => $wrapper_id,
@@ -198,7 +199,7 @@ function _contentwidget_get_chain_elements(&$form_state, $block_settings, $delta
 
   $elements = array(
     '#type' => 'fieldset',
-    '#title' => t('Chain #@number:', array('@number' => ($delta + 1))),
+    '#title' => t('Block #@number:', array('@number' => ($delta + 1))),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );

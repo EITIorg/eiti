@@ -29,8 +29,8 @@ function eitientities_image_default_styles() {
       1 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 478,
-          'height' => 478,
+          'width' => 470,
+          'height' => 470,
         ),
         'weight' => 1,
       ),
@@ -44,8 +44,8 @@ function eitientities_image_default_styles() {
       2 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 478,
-          'height' => 238,
+          'width' => 470,
+          'height' => 234,
         ),
         'weight' => 1,
       ),
@@ -59,8 +59,8 @@ function eitientities_image_default_styles() {
       3 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 238,
-          'height' => 238,
+          'width' => 234,
+          'height' => 234,
         ),
         'weight' => 1,
       ),

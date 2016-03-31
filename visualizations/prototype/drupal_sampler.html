@@ -66,20 +66,6 @@
 			};
 			Plotly.newPlot('plotly', data, layout);
 
-			$( "#selection" ).change(function() {
-				var data = $("#selection").val();
-				console.log(data);
-			  	chartWidget.create({
-					type: "BubbleChart",		
-					name: "Sample BubbleChart 2",
-					width: 600,
-					height: 600,
-					diameter: 600,
-					margin: {top: 20, right: 0, bottom: 0, left: 0},
-		            container: "bubble"
-				},
-				data);
-			});
 			chartWidget.create({
 				type: "TreeMap",		
 				name: "Sample Treemap",

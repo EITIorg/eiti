@@ -36,7 +36,9 @@ function helpergeneric_cleanup_ui() {
 function helpergeneric_init() {
   // Disable the admin menu.
   if (function_exists('admin_menu_suppress') && helpergeneric_cleanup_ui()) {
-    admin_menu_suppress();
+    if (!module_exists('adminimal_admin_menu')) {
+      admin_menu_suppress();
+    }
   }
 }
 
@@ -114,6 +116,15 @@ function helpergeneric_menu() {
     'description' => 'Edit the main menu links.',
     'page callback' => 'drupal_goto',
     'page arguments' => array('admin/structure/menu/manage/main-menu'),
+    'access arguments' => array('administer menu'),
+    'weight' => -19,
+  );
+
+  $items['admin/settings/menu-site-navigation'] = array(
+    'title' => 'Edit Site Navigation',
+    'description' => 'Edit the Site Navigation (hamburger menu) links.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/structure/menu/manage/menu-site-navigation'),
     'access arguments' => array('administer menu'),
     'weight' => -19,
   );

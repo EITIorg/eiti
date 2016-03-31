@@ -1,0 +1,14 @@
+diff --git a/public_html/sites/all/modules/contrib/features/features.admin.inc b/public_html/sites/all/modules/contrib/features/features.admin.inc
+index e22bee9..53f5fd5 100644
+--- a/public_html/sites/all/modules/contrib/features/features.admin.inc
++++ b/public_html/sites/all/modules/contrib/features/features.admin.inc
+@@ -727,6 +727,9 @@ function _features_export_build($feature, &$form_state) {
+         }
+       }
+     }
++
++    // Allow modules to filter the available components.
++    drupal_alter('features_component_export', $component_export, $component);
+     $export['components'][$component] = $component_export;
+   }
+   $export['features_exclude'] = $excluded;

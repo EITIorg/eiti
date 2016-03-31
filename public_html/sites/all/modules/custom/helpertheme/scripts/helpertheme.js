@@ -19,4 +19,57 @@ Drupal.behaviors.browserWarnings = {
   }
 };
 
+Drupal.behaviors.toggleSiteNavigation = {
+  /**
+   * Enable the hamburger menu functionality.
+   * @param context
+   */
+  attach: function(context) {
+    $('.site-navigation-toggle-wrapper .link', context).click(function (e) {
+      var footer_navigation = $('.footer-site-navigation-wrapper', context);
+      if (!footer_navigation.size) {
+        return true;
+      }
+
+      e.preventDefault();
+
+      // Remove the current warning.
+      var button_wrapper = $(this).closest('.site-navigation-toggle-wrapper');
+      var button_offset = button_wrapper.offset();
+      var button_height = button_wrapper.outerHeight();
+
+      if ($('body', context).hasClass('site-navigation-visible')) {
+        footer_navigation.slideUp('fast');
+        $('body', context).removeClass('site-navigation-visible');
+      }
+      else {
+        footer_navigation.css({
+          'position': 'absolute',
+          'top': button_offset.top + button_height,
+          'left': button_offset.left
+        });
+        footer_navigation.slideDown('fast');
+        $('body', context).addClass('site-navigation-visible');
+      }
+    });
+  }
+};
+
+Drupal.behaviors.toggleSiteNavigationSubLevel = {
+  /**
+   * Enable the hamburger menu sub-levels functionality.
+   * @param context
+   */
+  attach: function(context) {
+    $('.site-navigation-wrapper .navigation-links', context).once('expandable', function() {
+      $(this).find('.item.has-sublevel').each(function(index, item) {
+        var toggle = $('<span class="toggle"></span>').click(function (e) {
+          $(e.target).closest('.has-sublevel').toggleClass('expanded');
+        });
+        $(item).prepend(toggle);
+      });
+    });
+  }
+};
+
 })(jQuery);

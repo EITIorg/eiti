@@ -24,8 +24,7 @@
             // Now this case is much more FUN!
             if (widgetSetting.expose_year) {
               var yearSelectorStr = '.' + widgetSetting.year_selector_class;
-
-              var $selector = $(yearSelectorStr).on('change', function(evObj) {
+              var $selector = $(yearSelectorStr).change(function(evObj) {
                 var value = $(this).val();
                 widgetSetting.name = Drupal.t('@title for @year', {
                   '@title': widgetSetting.name_original,

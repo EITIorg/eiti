@@ -12,7 +12,7 @@
 .eiti-map-wrapper .legend {
       text-align: left;
       line-height: 18px;
-      color: #555;
+      color: #555555;
       width: 320px;
     }
 
@@ -27,16 +27,13 @@
 
 .eiti-map-wrapper .country_info th {
       padding:10px 10px 10px 10px;
-
     }
 
 .eiti-map-wrapper .country_info td {
       padding:5px 5px 5px 5px;
-
     }
 .eiti-map-wrapper .country_info td {
       margin:2px 5px 2px 5px;
-
     }
 
 .eiti-map-wrapper .leaflet-popup-content {
@@ -286,9 +283,74 @@
 .report:hover {
   opacity: 0.4;
 }
-
-@media only screen and (max-width: 768px) {
+@media (max-width: 1024px) {
+  .map-container {
+    width: 100%;
+  }
+  .map-option-wrapper {
+    width: 100%;
+  }
+  .map-option-widget {
+    width: 100%;
+  }
+  .map-option-widget li{
+    padding: 0;
+    width: 10%;
+  }
+  .eiti-map-wrapper .map-option-widget {
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-widget li {
+    font-size: 9px;
+    padding: 22px 12px 26px 60px;
+    width: 12%;
+  }
+  .eiti-map-wrapper .map-container ul ul li{
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
    .country-col {
      width: 100%;
    }
+   .eiti-map-wrapper .map-option-widget li {
+     border-right: none;
+     border-left: none;
+     width: 23%;
+   }
+  .eiti-map-wrapper .map-container ul ul li{
+     padding-bottom: 10px;
+     width: 100%;
+  }
+}
+
+@media (max-width: 667px) {
+  .eiti-map-wrapper .map-option-widget li {
+    border-right: none;
+    border-left: none;
+    padding: 17px 0 19px 65px;
+    width: 15%;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul{
+    margin-top: -12px;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul li {
+    padding: 10px 0 10px 0;
+  }
+}
+
+@media (max-width: 384px) {
+  .eiti-map-wrapper .map-option-widget li {
+    background: none;
+    border-right: none;
+    border-left: none;
+    padding: 10px 0 10px 10px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul{
+    margin-top: -30px;
+    padding-bottom: 10px;
+    width: 60%;
+  }
 }

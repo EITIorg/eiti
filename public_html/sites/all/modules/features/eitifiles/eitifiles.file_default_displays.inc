@@ -173,16 +173,6 @@ function eitifiles_file_default_displays() {
 
   $file_display = new stdClass();
   $file_display->api_version = 1;
-  $file_display->name = 'audio__preview__file_field_media_large_icon';
-  $file_display->weight = 0;
-  $file_display->status = TRUE;
-  $file_display->settings = array(
-    'image_style' => 'media_thumbnail',
-  );
-  $export['audio__preview__file_field_media_large_icon'] = $file_display;
-
-  $file_display = new stdClass();
-  $file_display->api_version = 1;
   $file_display->name = 'audio__wysiwyg__file_field_file_audio';
   $file_display->weight = 0;
   $file_display->status = FALSE;
@@ -358,16 +348,6 @@ function eitifiles_file_default_displays() {
   $file_display->status = FALSE;
   $file_display->settings = '';
   $export['document__preview__file_field_file_url_plain'] = $file_display;
-
-  $file_display = new stdClass();
-  $file_display->api_version = 1;
-  $file_display->name = 'document__preview__file_field_media_large_icon';
-  $file_display->weight = 0;
-  $file_display->status = TRUE;
-  $file_display->settings = array(
-    'image_style' => 'media_thumbnail',
-  );
-  $export['document__preview__file_field_media_large_icon'] = $file_display;
 
   $file_display = new stdClass();
   $file_display->api_version = 1;
@@ -948,16 +928,6 @@ function eitifiles_file_default_displays() {
     'image_link' => '',
   );
   $export['image__preview__file_field_image'] = $file_display;
-
-  $file_display = new stdClass();
-  $file_display->api_version = 1;
-  $file_display->name = 'image__preview__file_field_media_large_icon';
-  $file_display->weight = -47;
-  $file_display->status = TRUE;
-  $file_display->settings = array(
-    'image_style' => 'media_thumbnail',
-  );
-  $export['image__preview__file_field_media_large_icon'] = $file_display;
 
   $file_display = new stdClass();
   $file_display->api_version = 1;
@@ -1617,16 +1587,6 @@ function eitifiles_file_default_displays() {
     'multiple_file_behavior' => 'tags',
   );
   $export['video__preview__file_field_file_video'] = $file_display;
-
-  $file_display = new stdClass();
-  $file_display->api_version = 1;
-  $file_display->name = 'video__preview__file_field_media_large_icon';
-  $file_display->weight = -41;
-  $file_display->status = TRUE;
-  $file_display->settings = array(
-    'image_style' => 'media_thumbnail_video',
-  );
-  $export['video__preview__file_field_media_large_icon'] = $file_display;
 
   $file_display = new stdClass();
   $file_display->api_version = 1;
