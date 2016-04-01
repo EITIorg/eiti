@@ -137,7 +137,7 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
           'label' => $item->commodity_name
         );
       }
-      $output[$item->indicator_id]['values'][] = array(
+      $output[$item->indicator_id]['values'][$item->name] = array(
         'x' => $item->name,
         'y' => round(floatval($item->value_numeric)),
       );
@@ -152,12 +152,18 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
     foreach ($x_group as $indicator_id => $x_values) {
       $x_diff = array_diff($x_all, $x_values);
       foreach ($x_diff as $x) {
-        $output[$indicator_id]['values'][] = array(
+        $output[$indicator_id]['values'][$x] = array(
           'x' => $x,
           'y' => 0,
         );
       }
     }
+
+    // Get only the values, get rid of the keys.
+    foreach ($output as $indicator_id => $values) {
+      $output[$indicator_id]['values'] = array_values($output[$indicator_id]['values']);
+    }
+
     $output = array_values($output);
     return $output;
   }
@@ -177,7 +183,7 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
           'label' => $item->commodity_name
         );
       }
-      $output[$item->indicator_id]['values'][] = array(
+      $output[$item->indicator_id]['values'][$year] = array(
         'x' => $year,
         'y' => round(floatval($item->value_numeric)),
       );
@@ -186,7 +192,7 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
       if (!in_array($year, $x_all)) {
         $x_all[] = $year;
       }
-      $x_group[$item->indicator_id][] = $year;
+      $x_group[$item->indicator_id][$year] = $year;
     }
     // Make a small normalization.
     foreach ($x_group as $indicator_id => $x_values) {
@@ -198,6 +204,13 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
         );
       }
     }
+
+    // Get only the values, get rid of the keys.
+    foreach ($output as $indicator_id => $values) {
+      sort($output[$indicator_id]['values']);
+      $output[$indicator_id]['values'] = array_values($output[$indicator_id]['values']);
+    }
+
     $output = array_values($output);
     return $output;
   }
