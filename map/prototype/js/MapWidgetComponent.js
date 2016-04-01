@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer, GeoJson } from 'react-leaflet';
 
-import { countriesData } from './data/countries.js';
+import { countryGeoJson } from './data/countries.js';
+import { countryInfo } from './data/implementing_country.js';
 
 import { helpers } from './helpers.js' ;
 import _ from 'underscore';
-
 // TODO: Move all metadata to definition/configuration
 // Overview
 import { status } from './data/status.js';
@@ -25,13 +25,13 @@ import { value_per_capita } from './data/value_per_capita.js';
 import { revenue } from './data/revenue.js';
 import { revenue_compared } from './data/revenue_compared.js';
 
-//Info box Information
-import { countryInfo } from './data/country.js';
+
 
 
 export default class MapWidgetComponent extends Component {
   constructor() {
     super();
+    //Default values
     var indicator_id = "status";
     var valuetypes = "fixed";
 
@@ -49,18 +49,105 @@ export default class MapWidgetComponent extends Component {
   }
 
   decorate(data, indicator_id, valuetypes) {
-    var countryDataProcessed = {"type":"FeatureCollection","features":[]};
+    var countryGeoJsonProcessed = {
+        "type" : "FeatureCollection",
+        "metadata" : [],
+        "features" : []
+      };
+    // Get Legend information
+    var metadata = ::this.getValues(indicator_id);
 
-    countriesData.features.forEach(function(country) {
-      var datapoint = _.find(data, function(v){ return v.ISO3 === country.id;});
+    countryGeoJson.features.forEach(function(country) {
+      var datapoint = _.find(data, function(v){ return v.iso3 === country.id;});
       if(datapoint) {
-        country['indicator_value'] = datapoint[indicator_id];
+        var indicator_value = 0;
+        switch(indicator_id) {
+          case "status": 
+            indicator_value = datapoint.status ? datapoint.status.tid || 0: 0;
+          break;
+          case "resources_oil":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
+              indicator_value = indicator ? indicator.value : 0;
+            }
+          break;
+          case "online_portal":
+            if(datapoint.licenses) {
+              var years = Object.keys(datapoint.licenses);
+              var last = _.last(years);
+              var yearData = datapoint.licenses[last];
+              var indicator = yearData.length > 0;
+              indicator_value = indicator;
+            }
+          break;
+          case "online_registry":
+            if(datapoint.contracts) {
+              var years = Object.keys(datapoint.contracts);
+              var last = _.last(years);
+              var yearData = datapoint.contracts[last];
+              var indicator = yearData.length > 0;
+              indicator_value = indicator;
+            }
+          break;
+          case "value":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, value")});
+              indicator_value = indicator;
+            }
+          break;
+          case "value_per_capita":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, value")});
+              var population = yearData.find(function(v){ return (v.commodity === "Population")});
+              if(population && indicator) {
+                indicator_value = indicator/population;
+              }
+              else
+              {
+                indicator_value = 0;
+              }
+            }
+          break;
+          case "revenue":
+            if(datapoint.revenues) {
+              var years = Object.keys(datapoint.revenues);
+              var last = _.last(years);
+              var yearData = datapoint.revenues[last];
+              var indicator = yearData.government;
+              indicator_value = indicator;
+            }
+          break;
+          case "revenue_compared":
+            if(datapoint.revenues) {
+              var years = Object.keys(datapoint.revenues);
+              var last = _.last(years);
+              var yearData = datapoint.revenues[last];
+              var indicator_government = yearData.government;
+              var indicator_company = yearData.company;
+              indicator_value = indicator_government - indicator_company;
+            }
+          break;
+        }
+
+        var indicator_type = valuetypes;
         country['indicator_type'] = valuetypes;
-        country['metadata'] = ::this.getValues(indicator_id);
+
+        var indicator_color;
+        indicator_color = ::this.getColor(indicator_type, indicator_value, metadata);
+        country['indicator_color'] = indicator_color;
       }
-      countryDataProcessed.features.push(country);
+      countryGeoJsonProcessed.features.push(country);
     }.bind(this));
-    return countryDataProcessed;
+    return countryGeoJsonProcessed;
   }
 
   addLayer(e) {
@@ -70,7 +157,7 @@ export default class MapWidgetComponent extends Component {
     var valuetypes =  e.target.dataset ? e.target.dataset.valuetypes : e.target.getAttribute("data-valuetypes");
     ::this.addLegend(map, indicator_id);
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
-    const hoverDecider = this.props.options.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
+    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
 
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
   }
@@ -131,7 +218,7 @@ export default class MapWidgetComponent extends Component {
           var indicatorMetadata;
           indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
 
-          var mergedHTML = "";
+          var mergedHTML = "<h2>" + ::this.getIndicatorName(indicator_id || this.state.indicator_id) + "<br/></h2>";
           indicatorMetadata.forEach(function(v) {
             mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+ v.title + '</strong> <br/>'+ (v.subtitle || '') + '<br/>' ) ;
           });
@@ -141,6 +228,36 @@ export default class MapWidgetComponent extends Component {
       info.addTo(map);
   }
 
+  getIndicatorName(indicator_id){
+    var values;
+    switch(indicator_id) {
+      case "status": 
+        values = "Implementation Status";
+      break;
+      case "resources_oil":
+        values = "Oil, prices (in USD)";
+      break;
+      case "online_portal":
+        values = "Online License Portal";
+      break;
+      case "online_registry":
+        values = "Online Registry of Contracts";
+      break;
+      case "value":
+        values = "Production value";
+      break;
+      case "value_per_capita":
+        values = "Production value per capita";
+      break;
+      case "revenue":
+        values = "Revenue";
+      break;
+      case "revenue_compared":
+        values = "Government Revenues vs Companies Revenues";
+      break;
+    }
+    return values;
+  }
 
 
   onEachFeaturePage(feature, layer) {
@@ -151,13 +268,42 @@ export default class MapWidgetComponent extends Component {
     //debugger;
   }
 
+  getColor(indicator_type, indicator_value, metadata) {
+    if(indicator_type == 'fixed') {
+        var completeType = _.find(metadata, function(v){ return (v.id == indicator_value)});
+        return completeType.color;
+    }
+    else
+    {
+        //debugger;
+        if (metadata === undefined) return;
+
+        if(this.isNumeric(indicator_value)) {
+            var value = Number(indicator_value);
+            var completeType = _.find(metadata, function(v){ return value > v.range.start && value <= v.range.end;});
+
+            return completeType !== undefined ? completeType.color : '#dddddd';
+        }
+        else
+        {
+            return '#dddddd';
+        }
+        
+    }
+  }
+
+  isNumeric( obj ) {
+        return !jQuery.isArray( obj ) && (obj - parseFloat( obj ) + 1) >= 0;
+  }
+
+
 
   render() {
 
-    const hoverDecider = this.props.options.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
+    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
     const geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     var buttons;
-    if(this.props.options.buttons) {
+    if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">
           <ul className="map-option-widget">
             <li>
@@ -197,6 +343,44 @@ export default class MapWidgetComponent extends Component {
         </div>);
     }
 
+    var selector;
+    if(this.props.selector) {
+      var items = [];
+      var cols = [];
+      var sortedCountries = _.sortBy(countryInfo, 'label');
+      for(var i = 0; i < sortedCountries.length;i++) {
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other"; 
+        var countryPageURL = "/implementing_country/" + countryInfo[i].id
+        items.push(
+            <li>
+              <span className={itemStyle}></span>
+              <a href={countryPageURL}>{sortedCountries[i].label}</a>
+              <span className="report">
+                <a href="#"><img src="images/map-icons/report-link-icon.svg" /></a>
+              </span>
+            </li>
+          );
+        if((i+1)%4 === 0) {
+          cols.push(
+              <div className="country-col">
+                <ul className="country-list">
+                {items}
+                </ul>
+              </div>
+            );
+          items = [];
+        }
+      }
+
+      //Divide in columns by 4
+
+      selector = (
+        <div className="country-list-wrapper">
+          {cols}
+        </div>
+      );
+    }
+
     return (
 
       <div className="map-container">
@@ -217,7 +401,7 @@ export default class MapWidgetComponent extends Component {
             {geoJsonLayer}
           </Map>
         </div>
-
+        {selector}
       </div>
     );
   }
