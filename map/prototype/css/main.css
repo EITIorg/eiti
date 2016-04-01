@@ -95,7 +95,7 @@
     width: 1300px;
 }
 .eiti-map-wrapper .map-option-widget li {
-    background: url('../../images/map-icons/map-sprite.png') no-repeat;
+    background: url('map-sprite.png') no-repeat;
     border-left: 1px solid #0a6997;
     border-right: 1px solid #0a6997;
     border-top: none;
@@ -161,6 +161,13 @@
 .eiti-map-wrapper .map-option-widget li:hover {
     background-color: #023554;
     color: #ffffff;
+}
+.eiti-map-wrapper .st0 {
+    fill:none;
+    stroke:#00A5E9;
+    stroke-width:5;
+    stroke-linecap:round;
+    stroke-miterlimit:10;
 }
 .eiti-map-wrapper .map-container ul ul {
     background: #023554;

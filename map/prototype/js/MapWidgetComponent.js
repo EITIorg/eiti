@@ -351,6 +351,18 @@ export default class MapWidgetComponent extends Component {
           </ul>
         </div>);
     }
+    var reportLink = (<svg id="country-report-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+          <path className="st0" d="M156.4,132l-10.5,18.3L135.5,132V9.2c0-2.9,2.3-5.2,5.2-5.2h10.5c2.9,0,5.2,2.3,5.2,5.2V132z"/>
+          <rect x="135.5" y="22.3" className="st0" width="20.9" height="10.5"/>
+          <line className="st0" x1="135.5" y1="132" x2="156.4" y2="132"/>
+          <line className="st0" x1="145.9" y1="150.3" x2="145.9" y2="155.6"/>
+          <rect x="4.8" y="4" className="st0" width="115" height="151.6"/>
+          <rect x="4.8" y="4" className="st0" width="20.9" height="151.6"/>
+          <rect x="44" y="30.1" className="st0" width="57.5" height="31.4"/>
+          <line className="st0" x1="54.5" y1="40.6" x2="91.1" y2="40.6"/>
+          <line className="st0" x1="54.5" y1="51" x2="91.1" y2="51"/>
+          </svg>);
+
 
     var selector;
     if(this.props.selector) {
@@ -365,7 +377,9 @@ export default class MapWidgetComponent extends Component {
               <span className={itemStyle}></span>
               <a href={countryPageURL}>{sortedCountries[i].label}</a>
               <span className="report">
-                <a href="#"><img src="images/map-icons/report-link-icon.svg" /></a>
+                <a href="#">
+                  {reportLink}
+                </a>
               </span>
             </li>
           );
@@ -384,7 +398,7 @@ export default class MapWidgetComponent extends Component {
       //Divide in columns by 4
 
       selector = (
-        <div className="country-list-wrapper">
+        <div className="country-list-wrapper clearfix">
           {cols}
         </div>
       );
