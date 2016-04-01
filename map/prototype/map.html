@@ -9,13 +9,15 @@
 </head>
 
 <body>
+
 <div class="layout-map-content-wrapper eiti-map-wrapper">
     <div class="container-fluid">
         <div id="map_all" class="main-map"></div>
     </div>
 </div>
-    <script src="dist/mapWidgets.js"></script>
-    <script>
+
+<script src="dist/mapWidgets.js"></script>
+<script>
     mapWidget.createHomePage({
         name: "Homepage Map",
         container: "map_all",
@@ -24,29 +26,29 @@
         maxZoom: 5,
         minZoom: 2
     });
-    </script>
+</script>
 
-    <script>
-  function mapDropdown() {
-      document.getElementById("map-dropdown").classList.toggle("show");
-  }
-
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-      var dropdowns = document.getElementsByClassName("map-option-wrapper");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
+<script>
+    function mapDropdown() {
+        document.getElementById("map-dropdown").classList.toggle("show");
     }
-  }
-  </script>
-  <script src="http://code.jquery.com/jquery.js"></script>
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("map-option-wrapper");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+<script src="http://code.jquery.com/jquery.js"></script>
 
 </body>
 </html>
