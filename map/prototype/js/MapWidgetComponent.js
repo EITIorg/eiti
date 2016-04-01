@@ -244,16 +244,16 @@ export default class MapWidgetComponent extends Component {
         values = "Online Registry of Contracts";
       break;
       case "value":
-        values = "Production value";
+        values = "Production value (in USD)";
       break;
       case "value_per_capita":
-        values = "Production value per capita";
+        values = "Production value per capita (in USD)";
       break;
       case "revenue":
-        values = "Revenue";
+        values = "Government Revenue (in USD)";
       break;
       case "revenue_compared":
-        values = "Government Revenues vs Companies Revenues";
+        values = "Government Revenues vs Companies Revenues (in USD)";
       break;
     }
     return values;
@@ -267,6 +267,15 @@ export default class MapWidgetComponent extends Component {
     });
     //debugger;
   }
+
+  onEachFeatureStatus(feature, layer) {
+      layer.on({
+          mouseover: function(e){ helpers.showTooltipStatus(e, countryInfo) } ,
+          mouseout: helpers.resetTooltip,
+          click: helpers.zoomToFeature
+      });
+  }
+
 
   getColor(indicator_type, indicator_value, metadata) {
     if(indicator_type == 'fixed') {
@@ -300,7 +309,7 @@ export default class MapWidgetComponent extends Component {
 
   render() {
 
-    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
+    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : this.onEachFeatureStatus;
     const geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     var buttons;
     if(this.props.buttons) {

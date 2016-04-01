@@ -7,12 +7,23 @@ import { render } from 'react-dom';
 import MapWidgetComponent from './MapWidgetComponent';
 
 window.mapWidget.createHomePage = function(options) {
-	options['buttons'] = false;
-  createMapPage(options);
+  options['buttons'] = false;
+  options['infobox'] = false;
+  options['selector'] = false;
+  window.mapWidget.createMapPage(options);
 }
 
 window.mapWidget.createMapPage = function(options) {
-	render(<MapWidgetComponent {...options} buttons="true" infobox="true" selector="true"/>, document.getElementById(options.container));
+  if(options.buttons === undefined) {
+    options.buttons = true;
+  }
+  if(options.infobox === undefined) {
+    options.infobox = true;
+  }
+  if(options.selector === undefined) {
+    options.selector = true;
+  }
+	render(<MapWidgetComponent {...options} buttons={options.buttons} infobox={options.infobox} selector={options.selector}/>, document.getElementById(options.container));
 }
 
 

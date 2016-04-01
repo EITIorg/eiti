@@ -44,17 +44,20 @@ export var helpers = {
         return !jQuery.isArray( obj ) && (obj - parseFloat( obj ) + 1) >= 0;
     },
 
-    showTooltipStatus: function (e) {
+    showTooltipStatus: function (e, countryInfo) {
         var country_link = '';
         var layer = e.target;
-        var country_status = layer.feature.indicator_value;
-        var country_url = (country_status < 4 && linkMap[layer.feature.id]) ? '/implementing_country/' + linkMap[layer.feature.id] + '':'';
-        if(country_url === '') {
-            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
+
+        var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
+        var country_link = '';
+    
+
+        if(country) {
+            country_link = '<a href="/implementing_country/' +  country.id + '"><strong>' + layer.feature.properties.name + '</strong></a>';
         }
         else
         {
-            country_link = '<a href="' + country_url + '"><strong>' + layer.feature.properties.name + '</strong></a>';
+            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
         }
         var popup = L.popup({autoPan:false, closeButton:false})
             .setLatLng(e.latlng)
@@ -68,14 +71,6 @@ export var helpers = {
 
     zoomToFeature: function(e){
         window.location = 'country_' + layer.feature.id + '.html';
-    },
-
-    onEachFeatureStatus: function (feature, layer) {
-        layer.on({
-            mouseover: helpers.showTooltipStatus,
-            mouseout: helpers.resetTooltip,
-            click: helpers.zoomToFeature
-        });
     },
 
     showInfobox: function(e, countryInfo) {

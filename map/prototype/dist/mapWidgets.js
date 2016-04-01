@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f0e3ad51367d43e20c93"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e485e4c870a0787616be"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -592,11 +592,22 @@
 	
 	window.mapWidget.createHomePage = function (options) {
 	  options['buttons'] = false;
-	  createMapPage(options);
+	  options['infobox'] = false;
+	  options['selector'] = false;
+	  window.mapWidget.createMapPage(options);
 	};
 	
 	window.mapWidget.createMapPage = function (options) {
-	  (0, _reactDom.render)(_react2.default.createElement(_MapWidgetComponent2.default, _extends({}, options, { buttons: 'true', infobox: 'true', selector: 'true' })), document.getElementById(options.container));
+	  if (options.buttons === undefined) {
+	    options.buttons = true;
+	  }
+	  if (options.infobox === undefined) {
+	    options.infobox = true;
+	  }
+	  if (options.selector === undefined) {
+	    options.selector = true;
+	  }
+	  (0, _reactDom.render)(_react2.default.createElement(_MapWidgetComponent2.default, _extends({}, options, { buttons: options.buttons, infobox: options.infobox, selector: options.selector })), document.getElementById(options.container));
 	};
 	
 	// Polyfill not being loaded by Babel
@@ -20399,16 +20410,16 @@
 	          values = "Online Registry of Contracts";
 	          break;
 	        case "value":
-	          values = "Production value";
+	          values = "Production value (in USD)";
 	          break;
 	        case "value_per_capita":
-	          values = "Production value per capita";
+	          values = "Production value per capita (in USD)";
 	          break;
 	        case "revenue":
-	          values = "Revenue";
+	          values = "Government Revenue (in USD)";
 	          break;
 	        case "revenue_compared":
-	          values = "Government Revenues vs Companies Revenues";
+	          values = "Government Revenues vs Companies Revenues (in USD)";
 	          break;
 	      }
 	      return values;
@@ -20423,6 +20434,17 @@
 	        }
 	      });
 	      //debugger;
+	    }
+	  }, {
+	    key: 'onEachFeatureStatus',
+	    value: function onEachFeatureStatus(feature, layer) {
+	      layer.on({
+	        mouseover: function mouseover(e) {
+	          _helpers.helpers.showTooltipStatus(e, _implementing_country.countryInfo);
+	        },
+	        mouseout: _helpers.helpers.resetTooltip,
+	        click: _helpers.helpers.zoomToFeature
+	      });
 	    }
 	  }, {
 	    key: 'getColor',
@@ -20457,7 +20479,7 @@
 	    key: 'render',
 	    value: function render() {
 	
-	      var hoverDecider = this.props.infobox ? this.onEachFeaturePage : _helpers.helpers.onEachFeatureStatus;
+	      var hoverDecider = this.props.infobox ? this.onEachFeaturePage : this.onEachFeatureStatus;
 	      var geoJsonLayer = _react3.default.createElement(_reactLeaflet.GeoJson, { data: this.state.baseMap, ref: 'geoJsonLayer', onEachFeature: hoverDecider, style: _helpers.helpers.style });
 	      var buttons;
 	      if (this.props.buttons) {
@@ -41891,15 +41913,19 @@
 	        return !jQuery.isArray(obj) && obj - parseFloat(obj) + 1 >= 0;
 	    },
 	
-	    showTooltipStatus: function showTooltipStatus(e) {
+	    showTooltipStatus: function showTooltipStatus(e, countryInfo) {
 	        var country_link = '';
 	        var layer = e.target;
-	        var country_status = layer.feature.indicator_value;
-	        var country_url = country_status < 4 && linkMap[layer.feature.id] ? '/implementing_country/' + linkMap[layer.feature.id] + '' : '';
-	        if (country_url === '') {
-	            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
+	
+	        var country = _underscore2.default.find(countryInfo, function (v) {
+	            return v.iso3 === layer.feature.id;
+	        });
+	        var country_link = '';
+	
+	        if (country) {
+	            country_link = '<a href="/implementing_country/' + country.id + '"><strong>' + layer.feature.properties.name + '</strong></a>';
 	        } else {
-	            country_link = '<a href="' + country_url + '"><strong>' + layer.feature.properties.name + '</strong></a>';
+	            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
 	        }
 	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent(country_link).openOn(layer._map);
 	    },
@@ -41910,14 +41936,6 @@
 	
 	    zoomToFeature: function zoomToFeature(e) {
 	        window.location = 'country_' + layer.feature.id + '.html';
-	    },
-	
-	    onEachFeatureStatus: function onEachFeatureStatus(feature, layer) {
-	        layer.on({
-	            mouseover: helpers.showTooltipStatus,
-	            mouseout: helpers.resetTooltip,
-	            click: helpers.zoomToFeature
-	        });
 	    },
 	
 	    showInfobox: function showInfobox(e, countryInfo) {
