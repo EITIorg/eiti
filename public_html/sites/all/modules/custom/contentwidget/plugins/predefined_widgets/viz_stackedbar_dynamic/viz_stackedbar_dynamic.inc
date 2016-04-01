@@ -281,6 +281,7 @@ function contentwidget_viz_stackedbar_government_revenues_country_settings(&$for
     '#type' => 'checkboxes',
     '#title' => t('Flat list of all GFS Codes'),
     '#options' => $options,
+    '#required' => TRUE,
     '#default_value' => isset($widget_settings['extra_settings']['gfs']['gfs_codes']) ? $widget_settings['extra_settings']['gfs']['gfs_codes'] : TRUE,
   );
 }
