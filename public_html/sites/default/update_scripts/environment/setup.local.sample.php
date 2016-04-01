@@ -97,7 +97,7 @@ $modules = array(
   // 'og_ui',
   // 'page_manager',
   // 'panels_ipe',
-  'rules_admin',
+  // 'rules_admin',
   // 'schema',
   // 'stage_file_proxy',
   'update',
