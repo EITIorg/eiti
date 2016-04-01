@@ -248,3 +248,14 @@ function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function eitiwidgets_entity_info_alter(&$info) {
+  if (!empty($info['fieldable_panels_pane']['bundles'])) {
+    foreach ($info['fieldable_panels_pane']['bundles'] as $name => &$bundle) {
+      $bundle['pane category'] = t('Widget Library');
+    }
+  }
+}
