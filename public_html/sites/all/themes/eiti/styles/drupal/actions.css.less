@@ -9,7 +9,7 @@
 .tabs-wrapper {
   font-family: @fstack_alt;
   margin: 1em 0;
-  text-align: right;
+
   a {
     display: inline-block;
     padding: 0.2em 0.6em;
@@ -17,26 +17,26 @@
   }
 
   .primary {
-    // .clearfix-mixin();
+    background-color: @clmain__separator;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
-    white-space: nowrap;
+
     li {
       display: inline-block;
-      margin: 0;
       margin-left: 0.5em;
     }
+
     a {
-      background-color: @clmain__header;
-      border-radius: 0.5em;
-      border: @border_width solid @clmain__separator;
-      line-height: 1.5;
-      text-shadow: 0 @border_width 0 white;
-      box-shadow: 1px 1px 3px @clmain__separator;
+      border-style: solid;
+      border-color: transparent;
+      border-width: 3px 0 0;
+      margin-top: -3px;
     }
-    a:hover,
+
     li.active a {
-      background-color: white;
+      background-color: @clmain;
+      border-top-color: @clanchor;
     }
   }
 

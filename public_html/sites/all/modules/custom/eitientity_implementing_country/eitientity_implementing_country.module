@@ -351,29 +351,6 @@ function eitientity_implementing_country_field_extra_fields() {
 }
 
 /**
- * Implements hook_entity_view_alter().
- *
- * @param array $build
- * @param string $entity_type
- */
-function eitientity_implementing_country_entity_view_alter(&$build, $entity_type) {
-  if ($entity_type != 'implementing_country') {
-    return;
-  }
-
-  /** @var ImplementingCountryEntity $entity */
-  $entity = $build['#entity'];
-
-  // Add contextual links for this node, except when the node is already being
-  // displayed on its own page. Modules may alter this behavior (for example,
-  // to restrict contextual links to certain view modes) by implementing
-  // hook_node_view_alter().
-  if ($entity->identifier()) {
-    $build['#contextual_links'][$entity_type] = array($entity_type, array($entity->identifier()));
-  }
-}
-
-/**
  * Implements hook_ctools_plugin_directory().
  *
  * @param string $owner

@@ -19,9 +19,6 @@ function eiti_preprocess_page(&$variables) {
   else if (drupal_is_front_page()) {
     $variables['display_tabs'] = FALSE;
   }
-  else if (helpergeneric_cleanup_ui()) {
-    $variables['display_tabs'] = FALSE;
-  }
 
   // Always display tabs on admin pages.
   if (arg(0) == 'admin') {
