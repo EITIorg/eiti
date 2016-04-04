@@ -25,7 +25,7 @@
       }
 
       mapWidget.createHomePage({
-        name: Drupal.t('Homepage Map'),
+        name: Drupal.t('Map'),
         container: settings.semiInteractiveMap.container,
         position: settings.semiInteractiveMap.position,
         zoom: default_zoom,

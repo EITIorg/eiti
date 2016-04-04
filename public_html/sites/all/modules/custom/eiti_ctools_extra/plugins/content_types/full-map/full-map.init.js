@@ -4,7 +4,9 @@
 (function($) {
   Drupal.behaviors.fullMap = {
     attach: function (context, settings) {
-      context = $(context);
+      if (!settings.fullMap.container || !settings.fullMap.position) {
+        return;
+      }
 
       var map_container = $('#' + settings.fullMap.container, context);
       if (!map_container.length) {
@@ -23,7 +25,7 @@
       }
 
       mapWidget.createMapPage({
-        name: "Homepage Map",
+        name: Drupal.t('Map'),
         container: settings.fullMap.container,
         position: settings.fullMap.position,
         zoom: default_zoom,
