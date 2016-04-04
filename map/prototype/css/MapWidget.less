@@ -1,0 +1,105 @@
+
+/**
+ * @file
+ * This file contains styles for the widget that should be included in the distribution.
+ */
+
+
+/**
+ * Layout declarations.
+ */
+.eiti-map-wrapper {
+  .map-option-widget,
+  .leaflet-container {
+    margin: 0 auto;
+    width: 1300px;
+  }
+
+  .leaflet-container {
+    height: 500px;
+  }
+}
+
+/**
+ * Other style declarations.
+ */
+.eiti-map-wrapper .leaflet-container {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  background: #fff;
+  border: 1px solid #dddddd;
+}
+
+.eiti-map-wrapper .map-option-wrapper {
+  text-align: center;
+  background: #005382;
+
+  .map-option-widget {
+    .clearfix-mixin();  // TODO: Use the clearfix class!
+    list-style: none;
+    padding: 0.25em 0 0;
+  }
+}
+
+.eiti-map-wrapper {
+  // TODO: Improve legend markup.
+  .legend {
+    text-align: left;
+    line-height: 1.25em;
+    color: #555;
+    width: 20em;
+    i {
+      width: 0.75em;
+      height: 0.75em;
+      float: left;
+      margin-right: 0.5em;
+      margin-bottom: 1em;
+      margin-top: 0.25em;
+    }
+  }
+}
+
+
+
+/******************************************************************************
+ * Helper mixins.
+ */
+
+/*
+ * Box sizing.
+ *
+ * @see: http://caniuse.com/#feat=css3-boxsizing
+ * @see: http://www.w3.org/TR/css3-ui/#box-sizing
+ */
+.box-sizing(@type: border-box) {
+  -moz-box-sizing: @type;
+  -webkit-box-sizing: @type;
+  box-sizing: @type;
+}
+
+/*
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of 'table' rather than 'block' is only necessary if using
+ *    ':before' to contain the top-margins of child elements.
+ *
+ * @see: http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
+ * @see: http://nicolasgallagher.com/micro-clearfix-hack
+ * @see: http://www.satzansatz.de/cssd/onhavinglayout.html
+ * @see: http://quirksmode.org/css/css2/display.html
+ */
+.clearfix-mixin() {
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}
