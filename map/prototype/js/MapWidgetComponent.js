@@ -62,7 +62,7 @@ export default class MapWidgetComponent extends Component {
       if(datapoint) {
         var indicator_value = 0;
         switch(indicator_id) {
-          case "status": 
+          case "status":
             indicator_value = datapoint.status ? datapoint.status.tid || 0: 0;
           break;
           case "resources_oil":
@@ -168,7 +168,7 @@ export default class MapWidgetComponent extends Component {
     //debugger;
     var values;
     switch(indicator_id) {
-      case "status": 
+      case "status":
         values = status;
       break;
       case "resources_oil":
@@ -231,7 +231,7 @@ export default class MapWidgetComponent extends Component {
   getIndicatorName(indicator_id){
     var values;
     switch(indicator_id) {
-      case "status": 
+      case "status":
         values = "Implementation Status";
       break;
       case "resources_oil":
@@ -263,7 +263,7 @@ export default class MapWidgetComponent extends Component {
   onEachFeaturePage(feature, layer) {
     layer.on({
         mouseout: helpers.resetTooltip,
-        click: function(e){ helpers.showInfobox(e, countryInfo) } 
+        click: function(e){ helpers.showInfobox(e, countryInfo) }
     });
     //debugger;
   }
@@ -297,7 +297,7 @@ export default class MapWidgetComponent extends Component {
         {
             return '#dddddd';
         }
-        
+
     }
   }
 
@@ -370,7 +370,7 @@ export default class MapWidgetComponent extends Component {
       var cols = [];
       var sortedCountries = _.sortBy(countryInfo, 'label');
       for(var i = 0; i < sortedCountries.length;i++) {
-        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other"; 
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
         var countryPageURL = "/implementing_country/" + countryInfo[i].id
         items.push(
             <li>

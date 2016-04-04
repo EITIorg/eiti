@@ -11,7 +11,7 @@ window.mapWidget.createHomePage = function(options) {
   options['infobox'] = false;
   options['selector'] = false;
   window.mapWidget.createMapPage(options);
-}
+};
 
 window.mapWidget.createMapPage = function(options) {
   if(options.buttons === undefined) {
@@ -23,8 +23,8 @@ window.mapWidget.createMapPage = function(options) {
   if(options.selector === undefined) {
     options.selector = true;
   }
-	render(<MapWidgetComponent {...options} buttons={options.buttons} infobox={options.infobox} selector={options.selector}/>, document.getElementById(options.container));
-}
+  render(<MapWidgetComponent {...options} buttons={options.buttons} infobox={options.infobox} selector={options.selector}/>, document.getElementById(options.container));
+};
 
 
 // Polyfill not being loaded by Babel

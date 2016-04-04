@@ -50,7 +50,7 @@ export var helpers = {
 
         var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
         var country_link = '';
-    
+
 
         if(country) {
             country_link = '<a href="/implementing_country/' +  country.id + '"><strong>' + layer.feature.properties.name + '</strong></a>';
@@ -80,9 +80,9 @@ export var helpers = {
         var layer = e.target;
         var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
         var country_link = '';
-    
+
         var country_url = '/implementing_country/' +  country.id;
-        
+
         if(country_url === '') {
             country_link = '<strong> Country Page not available </strong>';
         }
@@ -99,7 +99,7 @@ export var helpers = {
         var yearData = country.reports[last];
 
         var indicator_GDP = yearData.find(
-            function(v){ 
+            function(v){
                 return (v.commodity === "Gross Domestic Product - all sectors" && v.unit === "USD")});
         var indicator_oil = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
         var indicator_population = yearData.find(function(v){ return (v.commodity === "Population")});
@@ -134,29 +134,29 @@ export var helpers = {
         var indicator_gov_vs_com = indicator_government - indicator_company;
 
         var html = '<div>' +
-            '<table class="country_info">' + 
-            '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="http://demo.eiti.org/images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="height:20px;margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' + 
-            '  <tbody>' + '    <tr><td>GDP: ' + this.formatNumber(indicator_GDP ? indicator_GDP.value : 0 ) + ' USD </td><td>Population: ' + this.formatNumber(indicator_population ? indicator_population.value : 0) + '</td></tr>' + 
-            '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' + 
-            '    <tr>' + 
-            '       <td><strong>' + this.formatNumber(indicator_oil.value) + ' (' + indicator_oil.unit +')</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> <strong>Oil</strong> </td>' + 
-            '       <td><strong>N/A</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Gas </td>' + 
-            '    </tr>' + 
-            '    <tr>' + 
-            '       <td><strong>Online Licenses: ' + (indicator_licenses ? '<a href="' +indicator_licenses[0]+ '" target="_blank"> Yes </a>' : 'No') + '</strong></td>' + 
-            '       <td><strong>Online Contracts: ' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank"> Yes </a>' : 'No') + '</strong></td>' + 
-            '    </tr>' + 
-            '    <tr>' + 
-            '       <td><strong>' + this.formatNumber(indicator_oil_value ? indicator_oil_value.value : 0) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil, Value </td>' + 
-            '       <td><strong>' + this.formatNumber(indicator_oil_value_pc) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '')  +'</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil, Value (Per Capita)</td>' + 
-            '    </tr>' + 
-            '    <tr>' + 
-            '       <td><strong>' + this.formatNumber(indicator_government ? indicator_government : 0) + ' (USD) </strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Revenue by Government </td>' + 
-            '       <td><strong>' + this.formatNumber(indicator_company ? indicator_company : 0) +' (USD) </strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Revenue by Companies</td>' + 
-            '    </tr>' + 
-            '    <tr><td colspan="2"><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/>' + country_link + '</td></tr>' + 
-            '  </tbody>' + 
-            '</table>' + 
+            '<table class="country_info">' +
+            '  <thead><tr style="background-color:#f4f4f4"><th colspan="2"><img src="http://demo.eiti.org/images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style="height:20px;margin:0px 10px 0px 5px"/>' + layer.feature.properties.name + '</th></tr></thead>' +
+            '  <tbody>' + '    <tr><td>GDP: ' + this.formatNumber(indicator_GDP ? indicator_GDP.value : 0 ) + ' USD </td><td>Population: ' + this.formatNumber(indicator_population ? indicator_population.value : 0) + '</td></tr>' +
+            '    <tr><td colspan="2">&nbsp;<strong>Country Commodity Total</strong></td></tr>' +
+            '    <tr>' +
+            '       <td><strong>' + this.formatNumber(indicator_oil.value) + ' (' + indicator_oil.unit +')</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> <strong>Oil</strong> </td>' +
+            '       <td><strong>N/A</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Gas </td>' +
+            '    </tr>' +
+            '    <tr>' +
+            '       <td><strong>Online Licenses: ' + (indicator_licenses ? '<a href="' +indicator_licenses[0]+ '" target="_blank"> Yes </a>' : 'No') + '</strong></td>' +
+            '       <td><strong>Online Contracts: ' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank"> Yes </a>' : 'No') + '</strong></td>' +
+            '    </tr>' +
+            '    <tr>' +
+            '       <td><strong>' + this.formatNumber(indicator_oil_value ? indicator_oil_value.value : 0) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil, Value </td>' +
+            '       <td><strong>' + this.formatNumber(indicator_oil_value_pc) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '')  +'</strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Oil, Value (Per Capita)</td>' +
+            '    </tr>' +
+            '    <tr>' +
+            '       <td><strong>' + this.formatNumber(indicator_government ? indicator_government : 0) + ' (USD) </strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Revenue by Government </td>' +
+            '       <td><strong>' + this.formatNumber(indicator_company ? indicator_company : 0) +' (USD) </strong><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_oilunrefined.svg" style="margin:0px 2px 0px 2px;width:18px;"/> Revenue by Companies</td>' +
+            '    </tr>' +
+            '    <tr><td colspan="2"><img src="http://demo.eiti.org/images/icon-dump/eiti_popup_opencountry.svg" style="margin:0px 2px 0px 2px;width:18px"/>' + country_link + '</td></tr>' +
+            '  </tbody>' +
+            '</table>' +
             '</div>';
 
         var popup = L.popup({autoPan:true, closeButton:false, maxWidth:400})
