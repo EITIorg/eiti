@@ -49,7 +49,7 @@
     height: 2px;
     margin-top: 4px;
     margin-bottom: 4px;
-    width 100%;
+    width: 100%;
 }
 .eiti-map-wrapper .leaflet-popup-content a:hover {
     text-decoration: none;
@@ -64,8 +64,8 @@
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
 }
 .eiti-map-wrapper .leaflet-popup-content {
-    padding: 10;
-    margin: 10;
+    padding: 10px;
+    margin: 10px;
 }
 .eiti-map-wrapper .leaflet-popup-content-wrapper {
     padding: 1px;
