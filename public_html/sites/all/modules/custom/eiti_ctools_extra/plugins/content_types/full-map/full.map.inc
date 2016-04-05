@@ -63,7 +63,6 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
       'class' => array(
         'eiti-map-wrapper',
         'full-map-wrapper',
-        'media-resizable-wrapper',
       ),
     )
   );
@@ -77,7 +76,6 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
       'id' => $map_html_id,
       'class' => array(
         'main-map',
-        'media-resizable-element'
       )
     )
   );
