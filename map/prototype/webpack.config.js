@@ -5,7 +5,7 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   entry: {
-    app: __dirname + '/js/index.js'
+    app: __dirname + '/source/scripts/index.js'
   },
   module: {
     loaders: [
