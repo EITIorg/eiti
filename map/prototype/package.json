@@ -45,6 +45,7 @@
     "eslint-plugin-react": "^4.0.0",
     "jest-cli": "^0.8.2",
     "leaflet": "^0.7.7",
+    "less": "^2.6.1",
     "onchange": "^2.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
@@ -55,6 +56,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build:js": "webpack && webpack --config webpack.config.js",
-    "build": "npm run clean && npm run build:js"
+    "build:less": "./node_modules/.bin/lessc source/styles/mapWidgets.less dist/css/mapWidgets.css",
+    "build": "npm run clean && npm run build:js && npm run build:less"
   }
 }
