@@ -2,13 +2,15 @@
 import _ from 'underscore';
 
 export var helpers = {
-    basePath: window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.eitiMapWidgetsLibPath : 'dist',
+    getBasePath: function() {
+        return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
+    },
 
     getPaletteDivergent: function(index) {
         var colors = ['#42abd8', '#65c32d', '#ff6600', '#dddddd'];
         return colors[index];
-
     },
+
     getPaletteBreaks: function(index) {
         var colors = ['#f1eef6','#bdc9e1','#74a9cf','#2b8cbe','#045a8d'];
         return colors[index];
@@ -248,6 +250,6 @@ export var helpers = {
     },
 
     getResourceUrl: function(relative_path) {
-        return this.basePath + '/' + relative_path;
+        return this.getBasePath() + '/' + relative_path;
     }
 };
