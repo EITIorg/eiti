@@ -24,11 +24,11 @@ module.exports = {
             }]
           ]
         }
-      },
+      }
     ]
   },
   output: {
-    path: __dirname + '/dist/',
+    path: __dirname + '/dist/js',
     filename: 'mapWidgets.js',
     publicPath: 'http://localhost:8000/dist'
   },

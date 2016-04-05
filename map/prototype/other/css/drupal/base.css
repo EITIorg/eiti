@@ -4,8 +4,10 @@
  */
 
 html {
-    // Always show page scroll-bar to prevent side-movement when hovering over
-    // items that are extending their height.
+    /*
+    Always show page scroll-bar to prevent side-movement when hovering over
+    items that are extending their height.
+    */
     overflow-y: scroll;
 }
 
@@ -28,10 +30,9 @@ body {
  * @see http://www.satzansatz.de/cssd/onhavinglayout.html
  * @see http://quirksmode.org/css/css2/display.html
  */
-
 .clearfix:before,
 .clearfix:after {
   clear: both;
-  content: " "; // 1.
-  display: table; // 2.
+  content: " "; /* 1. */
+  display: table; /* 2. */
 }

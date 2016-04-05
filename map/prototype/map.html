@@ -5,18 +5,18 @@
     <title>EITI - Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Include JS for the prototype. -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
     <!-- Include CSS for the prototype. -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
     <link rel="stylesheet" href="./other/css/drupal/base.css" />
     <link rel="stylesheet" href="./other/css/drupal/reset.css" />
     <link rel="stylesheet" href="./other/css/prototype-only.css" />
 
-    <!-- TODO: REMOVE as soon as the styles have been restructured and cleaned. -->
-    <link rel="stylesheet" href="./other/css/main.css" />
-
     <!-- Include resources required for the widget. -->
-    <!--<link rel="stylesheet" href="./css/MapWidget.less" />-->
-    <link rel="stylesheet/less" type="text/css" href="./css/MapWidget.less" />
+    <script src="./dist/mapWidgets.js"></script>
+    <link rel="stylesheet" href="./dist/mapWidgets.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 </head>
 <body>
@@ -27,7 +27,6 @@
     </div>
 </div>
 
-<script src="dist/mapWidgets.js"></script>
 <script>
     mapWidget.createHomePage({
         name: "Homepage Map",
@@ -59,10 +58,6 @@
         }
     }
 </script>
-
-<!-- Include JS for the prototype. -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
 
 </body>
 </html>
