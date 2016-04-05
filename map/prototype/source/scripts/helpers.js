@@ -2,6 +2,7 @@
 import _ from 'underscore';
 
 export var helpers = {
+    basePath: window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.eitiMapWidgetsLibPath : 'dist',
 
     getPaletteDivergent: function(index) {
         var colors = ['#42abd8', '#65c32d', '#ff6600', '#dddddd'];
@@ -142,7 +143,7 @@ export var helpers = {
 
         // Add country info.
         info_header = info_header +
-            '<img src="../images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif" style=""/>' +
+            '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' +
             '<span>' + layer.feature.properties.name + '</span>';
 
         // Add GDP indicator info.
@@ -162,7 +163,7 @@ export var helpers = {
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_oil.value) + '</span>' +
             '  <span class="unit">(' + indicator_oil.unit + ')</span>' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilrefined.svg" alt="Oil Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Oil') + '</span>' +
             '</div>';
 
@@ -172,7 +173,7 @@ export var helpers = {
             '<div class="info-block">' +
             '  <span class="value">' + 'N/A' + '</span>' +
             // '  <span class="unit">(' + 'N/A' + ')</span>' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilunrefined.svg" alt="Gas Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilunrefined.svg') + '" alt="Gas Icon" />' +
             '  <span class="label">' + this.t('Gas') + '</span>' +
             '</div>';
 
@@ -194,7 +195,7 @@ export var helpers = {
         info_content = info_content +
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_oil_value ? indicator_oil_value.value : 0) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</span>' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilrefined.svg" alt="Oil Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Oil, Value') + '</span>' +
             '</div>';
 
@@ -202,7 +203,7 @@ export var helpers = {
         info_content = info_content +
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_oil_value_pc) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</span>' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilrefined.svg" alt="Oil Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Oil, Value (Per Capita)') + '</span>' +
             '</div>';
 
@@ -210,7 +211,7 @@ export var helpers = {
         info_content = info_content +
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_government ? indicator_government : 0) + '</span>( ' + currency_code + ')' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilrefined.svg" alt="Oil Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Revenue by Government') + '</span>' +
             '</div>';
 
@@ -218,7 +219,7 @@ export var helpers = {
         info_content = info_content +
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_company ? indicator_company : 0) + '</span>( ' + currency_code + ')' +
-            '  <img class="icon" src="../images/icon-dump/eiti_popup_oilrefined.svg" alt="Oil Icon" />' +
+            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Revenue by Companies') + '</span>' +
             '</div>';
 
@@ -228,7 +229,7 @@ export var helpers = {
             '<div class="country-info-top-indicators">' + info_top_indicators + '</div>' +
             '<h3 class="title">' + this.t('Country Commodity Total') + '</h3>' +
             '<div class="country-info-content">' + info_content + '</div>' +
-            '<div class="country-link">' + '<img class="country-icon" src="../images/icon-dump/eiti_popup_opencountry.svg" />' + country_link + '</div>' +
+            '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
         var popup = L.popup({autoPan:true, closeButton:false, maxWidth:400})
@@ -244,5 +245,9 @@ export var helpers = {
         let x = 3;
         var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
         return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+    },
+
+    getResourceUrl: function(relative_path) {
+        return this.basePath + '/' + relative_path;
     }
 };
