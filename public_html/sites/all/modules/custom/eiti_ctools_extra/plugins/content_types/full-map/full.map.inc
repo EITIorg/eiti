@@ -50,6 +50,7 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
     );
     return $block;
   }
+  drupal_add_js(array('eitiMapWidgetsLibPath' => $library_maps['library path']), array('type' => 'setting'));
 
   // Add our init js.
   drupal_add_js($plugin_info['path'] . '/full-map.init.js');

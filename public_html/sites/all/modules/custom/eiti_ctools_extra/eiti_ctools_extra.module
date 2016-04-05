@@ -25,10 +25,14 @@ function eiti_ctools_extra_libraries_info() {
     'version' => '1.0',
     'files' => array(
       'js' => array(
-        'mapWidgets.js',
+        'js/mapWidgets.js' => array(
+          'defer' => TRUE,
+          'preprocess' => FALSE,
+          'scope' => 'footer',
+        ),
       ),
       'css' => array(
-        'main.css',
+        'css/mapWidgets.css' => array('preprocess' => FALSE),
       ),
     ),
   );
