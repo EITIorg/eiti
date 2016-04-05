@@ -1,23 +1,15 @@
 # This file can be used to install, update, backup or destroy an environment.
-# TODO: Use webpack
 
 # To execute a target ('command'), just type `make` followed by the
 # name of the command.
 
 # The default target, if no target argument is provided to `make`.
-# Build LESS files
-build-css: clean-css
+# Build the project
+build:
 	@echo 'Building CSS files...'
-	@lessc source/styles/mapWidgets.less dist/css/mapWidgets.css
-	@echo 'Copying source/images to dist...'
-	@cp -r source/images dist
-	@echo "Don't forget to run webpack and update the Drupal content widget by running 'make update-library'"
+	@npm run build
+	@echo "Don't forget to update the Drupal content widget by running 'make update-library'"
 	@echo 'Done!'
-
-# Remove built files.
-clean-css:
-	@echo 'Cleaning dist/css and dist/images.'
-	@rm -rf dist/css dist/images
 
 # Update the library installed in Drupal.
 update-library:
