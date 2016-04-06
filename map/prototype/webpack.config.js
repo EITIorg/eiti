@@ -5,7 +5,7 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   entry: {
-    app: __dirname + '/js/index.js'
+    app: __dirname + '/source/scripts/index.js'
   },
   module: {
     loaders: [
@@ -24,11 +24,11 @@ module.exports = {
             }]
           ]
         }
-      },
+      }
     ]
   },
   output: {
-    path: __dirname + '/dist/',
+    path: __dirname + '/dist/js',
     filename: 'mapWidgets.js',
     publicPath: 'http://localhost:8000/dist'
   },

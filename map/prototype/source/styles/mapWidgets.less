@@ -1,0 +1,406 @@
+
+/**
+ * @file
+ * This file contains styles for the widget that should be included in the distribution.
+ */
+
+
+/**
+ * Layout declarations.
+
+ * @TODO: Add responsive design!
+ */
+.eiti-map-wrapper {
+  .map-option-widget,
+  .leaflet-container,
+  .country-list-wrapper {
+    margin: 0 auto;
+    width: 1300px;
+  }
+  .country-list-wrapper {
+    max-width: 60em;
+  }
+
+  .leaflet-container {
+    height: 500px;
+  }
+
+  // TODO: Cleanup flexbox settings!
+  .country-info-top-indicators {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    .info {
+      flex: 1;
+      margin-right: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .country-info-content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    .info-block {
+      flex: 1;
+      min-width: 10em;
+      margin-right: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .country-list-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    .country-col {
+      flex: 1;
+      min-width: 10em;
+      margin-right: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .map-option-widget {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    & > li {
+      flex: 1;
+      min-width: 10em;
+      &:nth-child(3) {
+        flex: 1.2;
+      }
+    }
+  }
+}
+
+// TODO: Improve legend markup and redo the styling.
+.eiti-map-wrapper .legend {
+  text-align: left;
+  line-height: 1.25em;
+  color: #555;
+  width: 20em;
+  i {
+    width: 0.75em;
+    height: 0.75em;
+    float: left;
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    margin-top: 0.25em;
+  }
+}
+
+// Override default leaflet styling.
+.eiti-map-wrapper {
+  .leaflet-container {
+    .box-sizing();
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+  }
+  .leaflet-popup-content-wrapper {
+    padding: 0;
+    border-radius: 0;
+  }
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+    //box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .leaflet-popup-content {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+}
+
+.eiti-map-wrapper .map-option-wrapper {
+  background-color: #005382;
+  color: #0192c7;
+
+  .map-option-widget {
+    .clearfix-mixin();  // TODO: Use the clearfix class!
+    list-style: none;
+    padding: 0.25em 0 0;
+  }
+}
+
+.eiti-map-wrapper .map-option-widget {
+  .box-sizing();
+  border-left: 1px solid #0a6997;
+  border-right: 1px solid #0a6997;
+
+  & > li {
+    .transition(color 400ms ease-in-out);
+
+    .box-sizing();
+    background: url('../images/map-icons/map-sprite.png') no-repeat;
+    line-height: 3.75em;
+    padding-left: 3.75em;
+
+    & > span {
+      display: block;
+      border-right: 1px solid #0a6997;
+    }
+    &:last-child > span {
+      border-right: none;
+    }
+
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+
+    &.active,
+    &:hover {
+      background-color: #023554;
+      color: #ffffff;
+    }
+
+    // TODO: Use svg icons.
+    &:nth-child(1) {
+      background-position: 14px 13px;
+    }
+    &:nth-child(1):hover,
+    &:nth-child(1).active {
+      background-position: 14px -37px;
+    }
+    &:nth-child(2) {
+      background-position: 14px -406px;
+    }
+    &:nth-child(2):hover,
+    &:nth-child(2).active {
+      background-position: 14px -458px;
+    }
+    &:nth-child(3) {
+      background-position: 14px -203px;
+    }
+    &:nth-child(3):hover,
+    &:nth-child(3).active {
+      background-position: 14px -254px;
+    }
+    &:nth-child(4) {
+      background-position: 14px -96px;
+    }
+    &:nth-child(4):hover,
+    &:nth-child(4).active {
+      background-position: 14px -150px;
+    }
+    &:nth-child(5) {
+      background-position: 14px -304px;
+    }
+    &:nth-child(5):hover,
+    &:nth-child(5).active {
+      background-position: 14px -353px;
+    }
+
+
+    &:hover .map-option-items {
+      display: block;
+      left: 0;
+      right: 0;
+      top: 3.75em;
+    }
+  }
+
+  .map-option-items {
+    background-color: #023554;
+    display: none;
+    list-style: none;
+    position: absolute;
+    z-index: 1001;
+
+    line-height: normal;  // Reset the line-height.
+
+    li {
+      color: #999999;
+      cursor: pointer;
+      margin: 1em;
+      padding: 0;
+      text-transform: capitalize;
+
+      &:hover,
+      &.active {
+        color: #ffffff;
+      }
+      &:before {
+        content: '\25B8';
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.eiti-map-wrapper {
+  .country-info-wrapper {
+    padding: 0 1em 1em;
+    a:hover {
+      text-decoration: none;
+    }
+
+    .title {
+      font-weight: normal;
+    }
+
+    .country-icon {
+      height: 1.5em;
+      width: 1.5em;
+    }
+  }
+
+  .country-info-header {
+    background-color: #f4f4f4;
+    padding: 1em;
+
+    // Expand to fill the .country-info-wrapper.
+    margin-left: -1em;
+    margin-right: -1em;
+
+    img {
+      margin-right: 1em;
+    }
+  }
+
+  .country-info-top-indicators {
+    margin: 1em 0;
+  }
+
+  .country-info-content {
+    .info-block {
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+    }
+    .value {
+      font-weight: bold;
+    }
+    .icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+
+.eiti-map-wrapper {
+  .country-list-wrapper {
+    padding: 2em 0;
+  }
+
+  .country-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-bottom: 1px solid #eeeeee;
+      margin-bottom: 0.75em;
+      padding-bottom: 0.75em;
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+
+    a {
+      color: #00a5e9;
+      text-decoration: none;
+
+      &:hover {
+        color: #f5822a;
+      }
+    }
+
+    .member-status {
+      display: inline-block;
+      height: 1em;
+      margin-right: 0.5em;
+      width: 1em;
+
+      &.compliant {
+        background-color: #65c32d;
+      }
+      &.candidate {
+        background-color: #42abd8;
+      }
+      &.suspended {
+        background-color: #ff6600;
+      }
+      &.other {
+        background-color: #dddddd;
+      }
+    }
+
+    .report {
+      float: right;
+      width: 1.25em;
+      &:hover {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  // Style the inline SVG icon
+  .st0 {
+    fill: none;
+    stroke: #00A5E9;
+    stroke-width: 5;
+  }
+}
+
+/******************************************************************************
+ * Helper mixins.
+ */
+
+/*
+ * Box sizing.
+ *
+ * @see: http://caniuse.com/#feat=css3-boxsizing
+ * @see: http://www.w3.org/TR/css3-ui/#box-sizing
+ */
+.box-sizing(@type: border-box) {
+  -moz-box-sizing: @type;
+  -webkit-box-sizing: @type;
+  box-sizing: @type;
+}
+
+/*
+ * CSS Transitions.
+ *
+ * @see: http://caniuse.com/#feat=css-transitions
+ * @see: https://drafts.csswg.org/css-transitions-1
+ * @see: https://drafts.csswg.org/css-transitions-1/#animatable-css
+ */
+.transition(@transition...) {
+  -webkit-transition: @transition;
+  -o-transition: @transition;
+}
+
+/*
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of 'table' rather than 'block' is only necessary if using
+ *    ':before' to contain the top-margins of child elements.
+ *
+ * @see: http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
+ * @see: http://nicolasgallagher.com/micro-clearfix-hack
+ * @see: http://www.satzansatz.de/cssd/onhavinglayout.html
+ * @see: http://quirksmode.org/css/css2/display.html
+ */
+.clearfix-mixin() {
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}

@@ -1,0 +1,47 @@
+
+img {
+  /* Make sure images fit inside the container. */
+  max-width: 100%;
+  height: auto;
+}
+
+img,
+svg {
+  // Reset the line-height.
+  line-height: 1;
+}
+
+img,
+svg,
+iframe {
+  /* Make sure elements are vertically aligned. Solves some vertical alignment and spacing issues. */
+  vertical-align: middle;
+}
+
+/**
+ * Make the element resizable but keep the aspect ratio using a box-model feature.
+ *
+ * @see http://www.w3.org/TR/CSS2/box.html#padding-properties
+ */
+.media-resizable-wrapper {
+  display: block; // We need a block element for this to work.
+  height: 0;
+  /*@aspect_ratio: (9 / 16) * 100%;*/
+  /*padding-top: @aspect_ratio;*/
+  padding-top: 56.25%;
+  position: relative;
+}
+.media-resizable-wrapper.aspect-3-4 {
+  /*@aspect_ratio: (3 / 4) * 100%;*/
+  /*padding-top: @aspect_ratio;*/
+  padding-top: 75%;
+}
+
+.media-resizable-wrapper.media-resizable-element {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
