@@ -232,28 +232,28 @@ export default class MapWidgetComponent extends Component {
     var values;
     switch(indicator_id) {
       case "status":
-        values = "Implementation Status";
+        values = helpers.t("Implementation Status");
       break;
       case "resources_oil":
-        values = "Oil, prices (in USD)";
+        values = helpers.t("Oil, prices (in USD)");
       break;
       case "online_portal":
-        values = "Online License Portal";
+        values = helpers.t("Online License Portal");
       break;
       case "online_registry":
-        values = "Online Registry of Contracts";
+        values = helpers.t("Online Registry of Contracts");
       break;
       case "value":
-        values = "Production value (in USD)";
+        values = helpers.t("Production value (in USD)");
       break;
       case "value_per_capita":
-        values = "Production value per capita (in USD)";
+        values = helpers.t("Production value per capita (in USD)");
       break;
       case "revenue":
-        values = "Government Revenue (in USD)";
+        values = helpers.t("Government Revenue (in USD)");
       break;
       case "revenue_compared":
-        values = "Government Revenues vs Companies Revenues (in USD)";
+        values = helpers.t("Government Revenues vs Companies Revenues (in USD)");
       break;
     }
     return values;
@@ -369,7 +369,8 @@ export default class MapWidgetComponent extends Component {
       var items = [];
       var cols = [];
       var sortedCountries = _.sortBy(countryInfo, 'label');
-      for(var i = 0; i < sortedCountries.length;i++) {
+
+      for (var i = 0; i < sortedCountries.length;i++) {
         var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
         var countryPageURL = "/implementing_country/" + countryInfo[i].id
         items.push(

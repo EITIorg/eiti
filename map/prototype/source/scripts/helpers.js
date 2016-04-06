@@ -94,10 +94,10 @@ export var helpers = {
         var country_url = '/implementing_country/' +  country.id;
 
         if(country_url === '') {
-            country_link = '<strong> Country Page not available </strong>';
+            country_link = '<strong>' + this.t('Country Page not available') + '</strong>';
         }
         else {
-            country_link = '<a href="' + country_url + '"><strong>Open Country Page</strong></a>';
+            country_link = '<a href="' + country_url + '"><strong>' + this.t('Open Country Page') + '</strong></a>';
         }
 
         // General info
