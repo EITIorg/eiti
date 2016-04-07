@@ -59,6 +59,7 @@
     "build:js": "webpack && webpack --config webpack.config.js",
     "build:less": "./node_modules/.bin/lessc source/styles/mapWidgets.less dist/css/mapWidgets.css",
     "copy:images": "cp -r source/images dist",
-    "build": "npm run clean && npm run build:js && npm run build:less && npm run copy:images"
+    "release": "date +%Y%m%d-%H%M > dist/RELEASE.txt",
+    "build": "npm run clean && npm run build:js && npm run build:less && npm run copy:images && npm run release"
   }
 }
