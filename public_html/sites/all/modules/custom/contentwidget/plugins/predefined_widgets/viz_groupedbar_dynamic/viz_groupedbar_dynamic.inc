@@ -112,7 +112,13 @@ function contentwidget_viz_groupedbarchart_dynamic_render($plugin, $widget_setti
   if ($widget_settings['extra_settings']['expose_year']) {
     $available_years_options = contentwidget_viz_groupedbarchart_production_get_years_range();
     $last_year = array_slice($available_years_options, -1);
-    $default_year = reset($last_year);
+    $current_year = date('Y');
+    if (in_array($current_year, $available_years_options)) {
+      $default_year = $current_year;
+    }
+    else {
+      $default_year = reset($last_year);
+    }
 
     $block['widget_year_selector'] = array(
       '#type' => 'select',
@@ -393,9 +399,9 @@ function contentwidget_viz_groupedbarchart_external_per_country_settings(&$form,
   $form['external_indicators'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Please select the external indicators you want to use.'),
-    '#description' => t('If you check this box, users will be able to filter data by the <strong>external indicators</strong>.
-        <br/>Note: <em>If you want to use these values, make sure you have them in the Summary Data files.
-        If you don\'t, then edit the Summary Data and create the indicator values manually.</em>'),
+    '#description' => t('If you check this box, users will be able to filter data by the <strong>external indicators</strong>.' .
+        '<br/>Note: <em>If you want to use these values, make sure you have them in the Summary Data files.' .
+        'If you don\'t, then edit the Summary Data and create the indicator values manually.</em>'),
     '#options' => $external_options,
     '#default_value' => isset($widget_settings['extra_settings']['external_indicators']) ? $widget_settings['extra_settings']['external_indicators'] : TRUE,
   );
