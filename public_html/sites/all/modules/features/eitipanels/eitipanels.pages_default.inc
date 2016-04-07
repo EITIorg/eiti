@@ -124,8 +124,8 @@ function eitipanels_default_page_manager_pages() {
     $pane = new stdClass();
     $pane->pid = 'new-34dc8bb3-7161-4f4f-9afa-4cddca1d14cf';
     $pane->panel = 'middle';
-    $pane->type = 'full.map';
-    $pane->subtype = 'full.map';
+    $pane->type = 'map_full';
+    $pane->subtype = 'map_full';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

@@ -50,7 +50,7 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
   );
 
   // Load the library.
-  $library = libraries_load('eiti-charts');
+  $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
     return array('#markup' => t('Charts library could not be loaded.'));
   }

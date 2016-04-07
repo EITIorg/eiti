@@ -5,7 +5,8 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   entry: {
-    app: __dirname + '/source/scripts/index.js'
+    'mapWidgets': __dirname + '/source/scripts/index.js',
+    'mapWidgets.min': __dirname + '/source/scripts/index.js'
   },
   module: {
     loaders: [
@@ -29,7 +30,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist/js',
-    filename: 'mapWidgets.js',
+    filename: '[name].js',
     publicPath: 'http://localhost:8000/dist'
   },
   plugins: [
@@ -39,6 +40,10 @@ module.exports = {
       }
     }),
     new webpack.NoErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    }),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {

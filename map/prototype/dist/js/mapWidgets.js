@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e0d24846cdbea9d17e5c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8b495ddab556990f7445"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -42440,7 +42440,6 @@
 	        if (window.Drupal && typeof window.Drupal.t === 'function') {
 	            return window.Drupal.t(string);
 	        }
-	        console.log(string, 'string');
 	        return string;
 	    },
 	
