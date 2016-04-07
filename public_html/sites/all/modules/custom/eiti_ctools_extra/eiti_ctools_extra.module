@@ -88,10 +88,40 @@ function eiti_ctools_extra_libraries_info() {
               'scope' => 'footer',
             ),
           ),
+          'css' => array(
+            'css/mapWidgets.css' => array(
+              'preprocess' => FALSE,
+            ),
+          ),
         ),
       ),
     ),
   );
 
   return $libraries;
+}
+
+
+/**
+ * Helper function for libraries_load(). Helps deal with URLs used inside the library.
+ *
+ * @TODO: Update the libraries to work without this extra info.
+ *
+ * @param $name
+ * @return boolean
+ */
+function eiti_ctools_extra_load_eiti_libraries($name, $variant = NULL) {
+  static $loaded_libraries = array();
+
+  if (!isset($loaded_libraries[$name])) {
+    $loaded_libraries[$name] = libraries_load($name, $variant);
+    if (!empty($loaded_libraries[$name]['library path'])) {
+      $js_data = array(
+        'eitiMapWidgetsLibPath' => $loaded_libraries[$name]['library path'],
+      );
+      drupal_add_js($js_data, array('type' => 'setting'));
+    }
+  }
+
+  return $loaded_libraries[$name];
 }

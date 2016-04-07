@@ -22,9 +22,9 @@ function eitipanels_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'panels_page_allowed_types';
   $strongarm->value = array(
-    'semi-interactive.map-semi-interactive.map' => 'semi-interactive.map-semi-interactive.map',
+    'map_simple-map_simple' => 'map_simple-map_simple',
     'country-header-country-header' => 'country-header-country-header',
-    'full.map-full.map' => 'full.map-full.map',
+    'map_full-map_full' => 'map_full-map_full',
     'fieldable_panels_pane-fact_blocks' => 'fieldable_panels_pane-fact_blocks',
     'fieldable_panels_pane-featured_bookmarks' => 'fieldable_panels_pane-featured_bookmarks',
     'fieldable_panels_pane-header' => 'fieldable_panels_pane-header',

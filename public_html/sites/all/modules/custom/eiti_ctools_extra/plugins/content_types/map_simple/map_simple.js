@@ -1,14 +1,14 @@
 /**
- * Fully interactive map (or Full Map) init behavior.
+ * Semi-interactive map init behavior.
  */
 (function($) {
-  Drupal.behaviors.fullMap = {
+  Drupal.behaviors.eitiMapSimple = {
     attach: function (context, settings) {
-      if (!settings.fullMap.container || !settings.fullMap.position) {
+      if (!settings.eitiMapSimple.container || !settings.eitiMapSimple.position) {
         return;
       }
 
-      var map_container = $('#' + settings.fullMap.container, context);
+      var map_container = $('#' + settings.eitiMapSimple.container, context);
       if (!map_container.length) {
         return;
       }
@@ -24,10 +24,10 @@
         default_zoom = 1;
       }
 
-      mapWidget.createMapPage({
+      mapWidget.createHomePage({
         name: Drupal.t('Map'),
-        container: settings.fullMap.container,
-        position: settings.fullMap.position,
+        container: settings.eitiMapSimple.container,
+        position: settings.eitiMapSimple.position,
         zoom: default_zoom,
         maxZoom: 5,
         minZoom: 0
