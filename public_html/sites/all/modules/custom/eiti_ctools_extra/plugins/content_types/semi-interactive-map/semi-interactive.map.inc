@@ -43,10 +43,10 @@ function eiti_ctools_extra_map_semi_interactive_render($subtype, $conf, $panel_a
   }
 
   // Now our custom EITI Maps.
-  $library_maps = libraries_load('eiti-maps');
+  $library_maps = libraries_load('eitiMapWidgets');
   if (empty($library_maps)) {
     $block->content = array(
-      '#markup' => t('Please make sure the <strong>eiti-maps</strong> library exists and has proper permission settings.'),
+      '#markup' => t('Please make sure the <strong>eitiMapWidgets</strong> library exists and has proper permission settings.'),
     );
     return $block;
   }
