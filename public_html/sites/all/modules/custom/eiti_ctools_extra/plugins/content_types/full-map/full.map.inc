@@ -43,7 +43,7 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
   }
 
   // Now our custom EITI Maps.
-  $library_maps = libraries_load('eitiMapWidgets');
+  $library_maps = libraries_load('eitiMapWidgets', 'minified');
   if (empty($library_maps)) {
     $block->content = array(
       '#markup' => t('Please make sure the <strong>eitiMapWidgets</strong> library exists and has proper permission settings.'),

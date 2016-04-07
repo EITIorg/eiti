@@ -77,6 +77,20 @@ function eiti_ctools_extra_libraries_info() {
         ),
       ),
     ),
+
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'js/mapWidgets.min.js' => array(
+              'defer' => TRUE,
+              'preprocess' => FALSE,
+              'scope' => 'footer',
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $libraries;
