@@ -1,5 +1,6 @@
 
 # Ignore development specific files and folders.
+.DS_Store
 .idea
 *.sublime*
 *--ignore.*
@@ -7,7 +8,6 @@
 /.project
 /.settings
 /.vagrant
-/public_html/sites/all/modules/dev
 
 # Ignore archives and database dumps.
 /*.7z
@@ -32,17 +32,13 @@
 # Ignore local .htaccess and robots.txt files.
 /public_html/robots.txt
 
-# Ignore development specific files.
+# Ignore PHP development specific files.
+/public_html/sites/all/modules/dev
 /public_html/sites/default/update_scripts/environment/setup.local.php
 /xdebug/
 /old_html/
 
-# Ignore development things for visualizations
-/visualizations/prototype/node_modules
+
+# Ignore JS development specific files and folders.
+node_modules/
 /visualizations/prototype/js/rd3
-
-# Ignore development things for Map
-/map/prototype/node_modules
-
-
-prototype/images/icon-dump/.DS_Store
