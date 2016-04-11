@@ -11,17 +11,17 @@
   <!-- Include CSS for the prototype. -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="css/prototype-only.css">
-  <link rel="stylesheet" href="css/justified-nav.css">
+  <link rel="stylesheet" href="./other/css/prototype-only.css">
+  <link rel="stylesheet" href="./other/css/justified-nav.css">
 
 
   <!-- Include resources required for the widget. -->
   <!--<link rel="stylesheet" href="css/main.css">-->
-  <link rel="stylesheet" href="css/prototype.css">
+  <link rel="stylesheet" href="./other/css/prototype.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-  <script src="js/plugins.js"></script>
+  <script src="./other/js/plugins.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.js"></script>
-  <script src="js/vendor/sankey.js"></script>
+  <script src="./source/scripts/vendor/sankey.js"></script>
 </head>
 <body>
 
@@ -130,7 +130,7 @@
         .append("g")
         .attr("transform", "translate(" + margin8.left + "," + margin8.top + ")");
 
-      d3.csv("data/viz2.csv", function(error, data) {
+      d3.csv("other/data/viz2.csv", function(error, data) {
         if (error) throw error;
 
         var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "Year"; });
@@ -226,7 +226,7 @@
     .append("g")
     .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
 
-  d3.csv("data/viz3.csv", function(error, data) {
+  d3.csv("other/data/viz3.csv", function(error, data) {
     if (error) throw error;
 
     color3.domain(d3.keys(data[0]).filter(function(key) { return key !== "Year"; }));
@@ -317,7 +317,7 @@
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  d3.csv("data/viz4.csv", type, function(error, data) {
+  d3.csv("other/data/viz4.csv", type, function(error, data) {
     if (error) throw error;
 
     var g1 = svg4.selectAll(".arc")
@@ -381,7 +381,7 @@
     .append("g")
     .attr("transform", "translate(" + margin5.left + "," + margin5.top + ")");
 
-  d3.csv("data/viz5.csv", function(error, data) {
+  d3.csv("other/data/viz5.csv", function(error, data) {
     if (error) throw error;
 
     color5.domain(d3.keys(data[0]).filter(function(key) { return key !== "Year"; }));
@@ -464,7 +464,7 @@
     .attr("height", diameter)
     .attr("class", "bubble");
 
-  d3.json("data/viz6.json", function(error, root) {
+  d3.json("other/data/viz6.json", function(error, root) {
     if (error) throw error;
 
     var node = svg6.selectAll(".node")
@@ -547,7 +547,7 @@
     .attr("y", 6 - margin.top)
     .attr("dy", ".75em");
 
-  d3.json("data/viz7.json", function(error, root) {
+  d3.json("other/data/viz7.json", function(error, root) {
     if(error) return console.warn(error);
     initialize(root);
     accumulate(root);
@@ -717,7 +717,7 @@
     .append("g")
     .attr("transform", "translate(" + margin8.left + "," + margin8.top + ")");
 
-  d3.csv("data/viz8.csv", function(error, data) {
+  d3.csv("other/data/viz8.csv", function(error, data) {
     if (error) throw error;
 
     var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "Year"; });
@@ -814,7 +814,7 @@
     .append("g")
     .attr("transform", "translate(" + margin9a.left + "," + margin9a.top + ")");
 
-  d3.csv("data/viz9a.csv", function(error, data) {
+  d3.csv("other/data/viz9a.csv", function(error, data) {
     if (error) throw error;
 
     //var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "date"; });
@@ -920,7 +920,7 @@
     .append("g")
     .attr("transform", "translate(" + margin9b.left + "," + margin9b.top + ")");
 
-  d3.csv("data/viz9.csv", function(error, data) {
+  d3.csv("other/data/viz9.csv", function(error, data) {
     if (error) throw error;
 
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
@@ -992,7 +992,7 @@
 
   var path = sankey.link();
 
-  d3.json("data/viz10.json", function(energy) {
+  d3.json("other/data/viz10.json", function(energy) {
 
     sankey
       .nodes(energy.nodes)

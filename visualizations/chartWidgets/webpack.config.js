@@ -3,8 +3,8 @@ var	path = require("path");
 
 module.exports = {
   entry: {
-    "chartWidgets": path.resolve(__dirname, "js/index.jsx"),
-    "chartWidgets.min": path.resolve(__dirname, "js/index.jsx")
+    "chartWidgets": path.resolve(__dirname, "source/scripts/index.jsx"),
+    "chartWidgets.min": path.resolve(__dirname, "source/scripts/index.jsx")
   },
   output: {
     path: path.join(__dirname, 'dist', 'js'),
