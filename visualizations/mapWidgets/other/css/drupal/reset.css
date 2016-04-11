@@ -7,7 +7,7 @@ img {
 
 img,
 svg {
-  // Reset the line-height.
+  /* Reset the line-height. */
   line-height: 1;
 }
 
@@ -24,7 +24,7 @@ iframe {
  * @see http://www.w3.org/TR/CSS2/box.html#padding-properties
  */
 .media-resizable-wrapper {
-  display: block; // We need a block element for this to work.
+  display: block; /* We need a block element for this to work. */
   height: 0;
   /*@aspect_ratio: (9 / 16) * 100%;*/
   /*padding-top: @aspect_ratio;*/
