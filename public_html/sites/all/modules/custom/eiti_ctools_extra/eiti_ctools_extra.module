@@ -39,6 +39,11 @@ function eiti_ctools_extra_libraries_info() {
           'scope' => 'footer',
         ),
       ),
+      'css' => array(
+        'css/chartWidgets.css' => array(
+          'preprocess' => FALSE,
+        ),
+      ),
     ),
 
     'variants' => array(
@@ -49,6 +54,11 @@ function eiti_ctools_extra_libraries_info() {
               'defer' => TRUE,
               'preprocess' => FALSE,
               'scope' => 'footer',
+            ),
+          ),
+          'css' => array(
+            'css/chartWidgets.css' => array(
+              'preprocess' => FALSE,
             ),
           ),
         ),
