@@ -5,6 +5,7 @@
   <title>EITI Visualizations</title>
   <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
 </head>
 <body>
 
@@ -16,6 +17,7 @@
   <div id="bubble"></div>
   <div id="sankey"></div>
 </div>
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="dist/chartWidgets.js"></script>
 <script>
@@ -39,14 +41,14 @@
     y: [16941870, 15505360, 16314039, 17798865, 17718292],
     name: 'NGL',
     type: 'bar'
-  };
+  }
 
   var condensate = {
     x: ['2009', '2010', '2011', '2012', '2013'],
     y: [3923854, 4163009, 4583334, 4574854, 3991160],
     name: 'Condensate',
     type: 'bar'
-  };
+  }
 
   var data1 = [oil, gas, ngl, condensate];
 
@@ -124,21 +126,21 @@
     y: [3664473000, 2204785000, 2220255000, 2255251000, 3180095000],
     name: 'Emission and pollution taxes',
     type: 'bar'
-  };
+  }
 
   var stacked4 = {
     x: ['2008', '2010', '2011', '2012', '2013'],
     y: [16940000000, 12818000000, 13352000000, 13887000000, 14421000000],
     name: 'From government participation (equity)',
     type: 'bar'
-  };
+  }
 
   var stacked5 = {
     x: ['2008', '2010', '2011', '2012', '2013'],
     y: [155420129000, 103571650000, 128083414000, 146929996000, 124825251000],
     name: 'Withdrawals from income of quasi-corporations',
     type: 'bar'
-  };
+  }
 
   var data2 = [stacked1, stacked2, stacked3, stacked4, stacked5];
 
