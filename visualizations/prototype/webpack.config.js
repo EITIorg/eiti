@@ -7,11 +7,10 @@ module.exports = {
     "chartWidgets.min": path.resolve(__dirname, "js/index.jsx")
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist', 'js'),
     filename: "[name].js"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,

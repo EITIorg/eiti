@@ -42,6 +42,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "build:js": "webpack && webpack --config webpack.config.js",
-    "build": "npm run clean && npm run build:js"
+    "copy:css": "mkdir -p dist/css/ && cp -r css/chartWidgets.css dist/css/",
+    "release": "date +%Y%m%d-%H%M > dist/RELEASE.txt",
+    "build": "npm run clean && npm run build:js && npm run copy:css && npm run release"
   }
 }

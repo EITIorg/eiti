@@ -4,235 +4,261 @@
   <meta charset="utf-8">
   <title>EITI Visualizations</title>
   <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
-  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Include CSS for the prototype. -->
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="css/prototype-only.css">
+
+  <!-- Include resources required for the widget. -->
+  <link rel="stylesheet" href="css/chartWidgets.css">
+  <script src="dist/js/chartWidgets.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
 
-<div id="main">
-  <div id="grouped"></div>
-  <div id="grouped_export"></div>
-  <div id="stacked"></div>
-  <div id="stacked_export"></div>
-  <div id="bubble"></div>
-  <div id="sankey"></div>
+<div class="page-wrapper">
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="grouped" class="eiti-chart-widget"></div>
+    <script>
+      var oil = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [122661511, 104366635, 97494031, 89183936, 84943990],
+        name: 'Oil',
+        type: 'bar'
+      };
+
+      var gas = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [100110308, 107250281, 101266314, 114722664, 108745838],
+        name: 'Gas',
+        type: 'bar'
+      };
+
+      var ngl = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [16941870, 15505360, 16314039, 17798865, 17718292],
+        name: 'NGL',
+        type: 'bar'
+      };
+
+      var condensate = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [3923854, 4163009, 4583334, 4574854, 3991160],
+        name: 'Condensate',
+        type: 'bar'
+      };
+
+      var data1 = [oil, gas, ngl, condensate];
+
+      var layout1 = {
+        title: 'Production Volume Ratio',
+        barmode: 'group'};
+
+      Plotly.newPlot('grouped', data1, layout1, {displaylogo: false});
+    </script>
+  </div>
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="grouped_export" class="eiti-chart-widget"></div>
+    <script>
+      chartWidget.create({
+          type: "GroupedBarExport",
+          xlabel: "Year",
+          container: "grouped_export"
+        },
+        [
+          {
+            "label": "Oil",
+            "values": [
+              {"x": "2009", "y": 122661511},
+              {"x": "2010", "y": 104366635},
+              {"x": "2011", "y": 97494031},
+              {"x": "2012", "y": 89183936},
+              {"x": "2013", "y": 84943990}
+            ]
+          },
+          {
+            "label": "Gas",
+            "values": [
+              {"x": "2009", "y": 100110308},
+              {"x": "2010", "y": 107250281},
+              {"x": "2011", "y": 101266314},
+              {"x": "2012", "y": 114722664},
+              {"x": "2013", "y": 108745838}
+            ]
+          },
+          {
+            "label": "NGL",
+            "values": [
+              {"x": "2009", "y": 16941870},
+              {"x": "2010", "y": 15505360},
+              {"x": "2011", "y": 16314039},
+              {"x": "2012", "y": 17798865},
+              {"x": "2013", "y": 17718292}
+
+            ]
+          },
+          {
+            "label": "Condensate",
+            "values": [
+              {"x": "2009", "y": 3923854 },
+              {"x": "2010", "y": 4163009 },
+              {"x": "2011", "y": 4583334 },
+              {"x": "2012", "y": 4574854 },
+              {"x": "2013", "y": 3991160 }
+            ]
+          }
+        ]);
+    </script>
+  </div>
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="stacked" class="eiti-chart-widget"></div>
+    <script>
+      var stacked1 = {
+        x: ['2008', '2010', '2011', '2012', '2013'],
+        y: [239528270000, 155612137000, 205936428000, 228670845630, 201503788000],
+        name: 'Ordinary taxes on income, profits and capital gains',
+        type: 'bar'
+      };
+
+      var stacked2 = {
+        x: ['2008', '2010', '2011', '2012', '2013'],
+        y: [1841532000, 1374367000, 1517294000, 1780413000, 1700043000],
+        name: 'Licence fees',
+        type: 'bar'
+      };
+
+      var stacked3 = {
+        x: ['2008', '2010', '2011', '2012', '2013'],
+        y: [3664473000, 2204785000, 2220255000, 2255251000, 3180095000],
+        name: 'Emission and pollution taxes',
+        type: 'bar'
+      };
+
+      var stacked4 = {
+        x: ['2008', '2010', '2011', '2012', '2013'],
+        y: [16940000000, 12818000000, 13352000000, 13887000000, 14421000000],
+        name: 'From government participation (equity)',
+        type: 'bar'
+      };
+
+      var stacked5 = {
+        x: ['2008', '2010', '2011', '2012', '2013'],
+        y: [155420129000, 103571650000, 128083414000, 146929996000, 124825251000],
+        name: 'Withdrawals from income of quasi-corporations',
+        type: 'bar'
+      };
+
+      var data2 = [stacked1, stacked2, stacked3, stacked4, stacked5];
+
+      var layout2 = {
+        title: 'Government Income by Type of Revenue',
+        barmode: 'stack'};
+
+      Plotly.newPlot('stacked', data2, layout2, {displaylogo: false});
+    </script>
+  </div>
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="stacked_export" class="eiti-chart-widget"></div>
+    <script>
+      chartWidget.create({
+          type: "StackedBarExport",
+          xlabel: "Year",
+          container: "stacked_export"
+        },
+        [
+          {
+            "label": "Ordinary taxes on income, profits and capital gains",
+            "values": [
+              {"x": "2008", "y": 239528270000},
+              {"x": "2010", "y": 155612137000},
+              {"x": "2011", "y": 205936428000},
+              {"x": "2012", "y": 228670845630},
+              {"x": "2013", "y": 201503788000}
+            ]
+          },
+          {
+            "label": "Licence fees",
+            "values": [
+              {"x": "2008", "y": 1841532000},
+              {"x": "2010", "y": 1374367000},
+              {"x": "2011", "y": 1517294000},
+              {"x": "2012", "y": 1780413000},
+              {"x": "2013", "y": 1700043000}
+            ]
+          },
+          {
+            "label": "Emission and pollution taxes",
+            "values": [
+              {"x": "2008", "y": 3664473000},
+              {"x": "2010", "y": 2204785000},
+              {"x": "2011", "y": 2220255000},
+              {"x": "2012", "y": 2255251000},
+              {"x": "2013", "y": 3180095000}
+
+            ]
+          },
+          {
+            "label": "From government participation (equity)",
+            "values": [
+              {"x": "2008", "y": 16940000000 },
+              {"x": "2010", "y": 12818000000 },
+              {"x": "2011", "y": 13352000000 },
+              {"x": "2012", "y": 13887000000 },
+              {"x": "2013", "y": 14421000000 }
+            ]
+          },
+          {
+            "label": "Withdrawals from income of quasi-corporations",
+            "values": [
+              {"x": "2008", "y": 155420129000 },
+              {"x": "2010", "y": 103571650000 },
+              {"x": "2011", "y": 128083414000 },
+              {"x": "2012", "y": 146929996000 },
+              {"x": "2013", "y": 124825251000 }
+            ]
+          }
+        ]);
+    </script>
+  </div>
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="bubble" class="eiti-chart-widget"></div>
+    <script>
+      chartWidget.create({
+          type: "BubbleChart",
+          name: "Disbursed Revenue",
+          width: 600,
+          height: 600,
+          diameter: 600,
+          margin: {top: 20, right: 0, bottom: 0, left: 0},
+          container: "bubble"
+        },
+        'data/viz6.json');
+    </script>
+  </div>
+
+  <div class="eiti-chart-widget-wrapper">
+    <div id="sankey" class="eiti-chart-widget"></div>
+    <script>
+      chartWidget.create({
+          type: "Sankey",
+          name: "Flow of Government Revenue",
+          width: 600,
+          height: 300,
+          margin: {top: 1, right: 1, bottom: 6, left: 1},
+          container: "sankey",
+          processor: function(input) {
+            return input;
+          }
+        },
+        'data/viz10a.json');
+    </script>
+  </div>
 </div>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="dist/chartWidgets.js"></script>
-<script>
-  /**** GROUPED ****/
-  var oil = {
-    x: ['2009', '2010', '2011', '2012', '2013'],
-    y: [122661511, 104366635, 97494031, 89183936, 84943990],
-    name: 'Oil',
-    type: 'bar'
-  };
-
-  var gas = {
-    x: ['2009', '2010', '2011', '2012', '2013'],
-    y: [100110308, 107250281, 101266314, 114722664, 108745838],
-    name: 'Gas',
-    type: 'bar'
-  };
-
-  var ngl = {
-    x: ['2009', '2010', '2011', '2012', '2013'],
-    y: [16941870, 15505360, 16314039, 17798865, 17718292],
-    name: 'NGL',
-    type: 'bar'
-  }
-
-  var condensate = {
-    x: ['2009', '2010', '2011', '2012', '2013'],
-    y: [3923854, 4163009, 4583334, 4574854, 3991160],
-    name: 'Condensate',
-    type: 'bar'
-  }
-
-  var data1 = [oil, gas, ngl, condensate];
-
-  var layout1 = {
-    title: 'Production Volume Ratio',
-    barmode: 'group'};
-
-  Plotly.newPlot('grouped', data1, layout1, {displaylogo: false});
-
-  chartWidget.create({
-      type: "GroupedBarExport",
-      xlabel: "Year",
-      container: "grouped_export"
-    },
-    [{
-      "label": "Oil",
-      "values": [
-        {"x": "2009", "y": 122661511},
-        {"x": "2010", "y": 104366635},
-        {"x": "2011", "y": 97494031},
-        {"x": "2012", "y": 89183936},
-        {"x": "2013", "y": 84943990}
-      ]
-    },
-      {
-        "label": "Gas",
-        "values": [
-          {"x": "2009", "y": 100110308},
-          {"x": "2010", "y": 107250281},
-          {"x": "2011", "y": 101266314},
-          {"x": "2012", "y": 114722664},
-          {"x": "2013", "y": 108745838}
-        ]
-      },
-      {
-        "label": "NGL",
-        "values": [
-          {"x": "2009", "y": 16941870},
-          {"x": "2010", "y": 15505360},
-          {"x": "2011", "y": 16314039},
-          {"x": "2012", "y": 17798865},
-          {"x": "2013", "y": 17718292}
-
-        ]
-      },
-      {
-        "label": "Condensate",
-        "values": [
-          {"x": "2009", "y": 3923854 },
-          {"x": "2010", "y": 4163009 },
-          {"x": "2011", "y": 4583334 },
-          {"x": "2012", "y": 4574854 },
-          {"x": "2013", "y": 3991160 }
-        ]
-      }
-    ]);
-
-  /**** STACKED ****/
-  var stacked1 = {
-    x: ['2008', '2010', '2011', '2012', '2013'],
-    y: [239528270000, 155612137000, 205936428000, 228670845630, 201503788000],
-    name: 'Ordinary taxes on income, profits and capital gains',
-    type: 'bar'
-  };
-
-  var stacked2 = {
-    x: ['2008', '2010', '2011', '2012', '2013'],
-    y: [1841532000, 1374367000, 1517294000, 1780413000, 1700043000],
-    name: 'Licence fees',
-    type: 'bar'
-  };
-
-  var stacked3 = {
-    x: ['2008', '2010', '2011', '2012', '2013'],
-    y: [3664473000, 2204785000, 2220255000, 2255251000, 3180095000],
-    name: 'Emission and pollution taxes',
-    type: 'bar'
-  }
-
-  var stacked4 = {
-    x: ['2008', '2010', '2011', '2012', '2013'],
-    y: [16940000000, 12818000000, 13352000000, 13887000000, 14421000000],
-    name: 'From government participation (equity)',
-    type: 'bar'
-  }
-
-  var stacked5 = {
-    x: ['2008', '2010', '2011', '2012', '2013'],
-    y: [155420129000, 103571650000, 128083414000, 146929996000, 124825251000],
-    name: 'Withdrawals from income of quasi-corporations',
-    type: 'bar'
-  }
-
-  var data2 = [stacked1, stacked2, stacked3, stacked4, stacked5];
-
-  var layout2 = {
-    title: 'Government Income by Type of Revenue',
-    barmode: 'stack'};
-
-  Plotly.newPlot('stacked', data2, layout2, {displaylogo: false});
-
-  chartWidget.create({
-      type: "StackedBarExport",
-      xlabel: "Year",
-      container: "stacked_export"
-    },
-    [{
-      "label": "Ordinary taxes on income, profits and capital gains",
-      "values": [
-        {"x": "2008", "y": 239528270000},
-        {"x": "2010", "y": 155612137000},
-        {"x": "2011", "y": 205936428000},
-        {"x": "2012", "y": 228670845630},
-        {"x": "2013", "y": 201503788000}
-      ]
-    },
-      {
-        "label": "Licence fees",
-        "values": [
-          {"x": "2008", "y": 1841532000},
-          {"x": "2010", "y": 1374367000},
-          {"x": "2011", "y": 1517294000},
-          {"x": "2012", "y": 1780413000},
-          {"x": "2013", "y": 1700043000}
-        ]
-      },
-      {
-        "label": "Emission and pollution taxes",
-        "values": [
-          {"x": "2008", "y": 3664473000},
-          {"x": "2010", "y": 2204785000},
-          {"x": "2011", "y": 2220255000},
-          {"x": "2012", "y": 2255251000},
-          {"x": "2013", "y": 3180095000}
-
-        ]
-      },
-      {
-        "label": "From government participation (equity)",
-        "values": [
-          {"x": "2008", "y": 16940000000 },
-          {"x": "2010", "y": 12818000000 },
-          {"x": "2011", "y": 13352000000 },
-          {"x": "2012", "y": 13887000000 },
-          {"x": "2013", "y": 14421000000 }
-        ]
-      },
-      {
-        "label": "Withdrawals from income of quasi-corporations",
-        "values": [
-          {"x": "2008", "y": 155420129000 },
-          {"x": "2010", "y": 103571650000 },
-          {"x": "2011", "y": 128083414000 },
-          {"x": "2012", "y": 146929996000 },
-          {"x": "2013", "y": 124825251000 }
-        ]
-      }
-    ]);
-
-  /***** BUBBLE *****/
-  chartWidget.create({
-      type: "BubbleChart",
-      name: "Disbursed Revenue",
-      width: 600,
-      height: 600,
-      diameter: 600,
-      margin: {top: 20, right: 0, bottom: 0, left: 0},
-      container: "bubble"
-    },
-    'data/viz6.json');
-
-  /***** SANKEY *****/
-  chartWidget.create({
-      type: "Sankey",
-      name: "Flow of Government Revenue",
-      width: 600,
-      height: 300,
-      margin: {top: 1, right: 1, bottom: 6, left: 1},
-      container: "sankey",
-      processor: function(input) {
-        return input;
-      }
-    },
-    'data/viz10a.json');
-</script>
 </body>
 </html>
