@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EITI - Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Include JS for the prototype. -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
+    <!-- Include CSS for the prototype. -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="./other/css/drupal/base.css" />
+    <link rel="stylesheet" href="./other/css/drupal/reset.css" />
+    <link rel="stylesheet" href="./other/css/prototype-only.css" />
+
+    <!-- Include resources required for the widget. -->
+    <script src="./dist/js/mapWidgets.js"></script>
+    <link rel="stylesheet" href="./dist/css/mapWidgets.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+</head>
+<body>
+
+<div class="main-content-wrapper">
+    <div class="eiti-map-wrapper">
+        <div id="map_all" class="main-map"></div>
+    </div>
+</div>
+
+<script>
+    mapWidget.createMapPage({
+        name: "Homepage Map",
+        container: "map_all",
+        position: [12.897489183755892, -12.76171875],
+        zoom: 2,
+        maxZoom: 5,
+        minZoom: 2
+    });
+</script>
+
+<script>
+    function mapDropdown() {
+        document.getElementById("map-dropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("map-option-wrapper");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
