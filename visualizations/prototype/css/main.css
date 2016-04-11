@@ -1,13 +1,9 @@
 
-#viz2, #viz3, #treemap {
-    margin-bottom: 100px;
-}
-
-svg {
+.eiti-chart-widget svg {
   font: 10px sans-serif;
 }
 
-.chartTitle {
+.eiti-chart-widget .chartTitle {
     display: inline-block;
     margin-left: 150px;
     font-size: 1.3em;
@@ -15,18 +11,17 @@ svg {
     color: #4bb4a1;
 }
 
-.chartDescription {
+.eiti-chart-widget .chartDescription {
     margin-left: 110px;
-    margin-top: -20px;
     color: #c83739;
     font-size: 1.1em;
 }
 
-.legend {
+.eiti-chart-widget .legend {
     float: right;
     margin-right: 100px;
 }
-.legend-item-active {
+.eiti-chart-widget .legend-item-active {
     float: left;
     border: 2px solid #4bb4a1;
     border-radius: 3px;
@@ -36,7 +31,7 @@ svg {
     margin: 1px;
     cursor: pointer;
 }
-.legend-item {
+.eiti-chart-widget .legend-item {
     float: left;
     border: 2px solid #ddd;
     border-radius: 3px;
@@ -46,91 +41,88 @@ svg {
     margin: 1px;
     cursor: pointer;
 }
-.legend-item li:hover {
+.eiti-chart-widget .legend-item li:hover {
     border: 2px solid #4bb4a1;
 }
 
 
-#waveformchart svg {
+.eiti-chart-widget #waveformchart svg {
   position: absolute;
   width: 100%;
   height: 100%;
 }
-#waveformchart {
+.eiti-chart-widget #waveformchart {
     width: 100%;
     height: 140px;
     background-color: #333;
     position: relative;
     margin-bottom: 20px;
 }
-.axis {
+.eiti-chart-widget .axis {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
 
-.axis text {
+.eiti-chart-widget .axis text {
     font: 11px sans-serif;
     fill: #000;
     stroke: none;
     font-weight: bold;
 }
 
-.axis line {
+.eiti-chart-widget .axis line {
     stroke: #ccc;
 }
 
-.axis path {
+.eiti-chart-widget .axis path {
     stroke: #ccc;
 }
-#waveformchart .bar{
-    -ms-transform: scale(1,1); /* IE 9 */
+.eiti-chart-widget #waveformchart .bar{
     -webkit-transform: scale(1,1); /* Safari */
     transform: scale(1,1);
 }
 
-#waveformchart .bar:hover {
+.eiti-chart-widget #waveformchart .bar:hover {
     height: 100%;
-    -ms-transform: scale(2,100); /* IE 9 */
     -webkit-transform: scale(2,100); /* Safari */
     transform: scale(2,100);
-    -ms-transform-origin: 50% 50%; /* IE 9 */
     -webkit-transform-origin: 50% 50%; /* Chrome, Safari, Opera */
     transform-origin: 50% 50%;
 }
 
-.bar:hover {
+.eiti-chart-widget .bar:hover {
     stroke: #333;
 }
 
-.dot:hover {
+.eiti-chart-widget .dot:hover {
     fill: #E55;
 }
 
-.area:hover {
+.eiti-chart-widget .area:hover {
     fill: #E55;
 }
 
-.line {
+.eiti-chart-widget .line {
     padding: 10px;
 }
 
-.line:hover {
+.eiti-chart-widget .line:hover {
     stroke: #E55;
 }
 
-.arc path:hover {
+.eiti-chart-widget .arc path:hover {
     fill: #E55;
 }
 
-.arc text {
+.eiti-chart-widget .arc text {
     font: 11px sans-serif;
     fill: #000;
     stroke: none;
     font-weight: bold;
 }
 
-.tooltip {
+.eiti-chart-widget .tooltip {
     padding: 3px;
     border: 1px solid #ccc;
     border-radius: 2px;
@@ -140,87 +132,80 @@ svg {
     align-items: center;
 }
 
-.brush .extent {
+.eiti-chart-widget .brush .extent {
   stroke: #000;
   fill-opacity: .125;
   shape-rendering: crispEdges;
 }
 
-.brush .background {
+.eiti-chart-widget .brush .background {
   fill: #ddd;
 }
 
-#treemap svg{
+.eiti-chart-widget #treemap svg{
   background: #ddd;
 }
 
-.grandparent text {
+.eiti-chart-widget .grandparent text {
   font-weight: bold;
 }
 
-.rect {
+.eiti-chart-widget .rect {
   fill: none;
   stroke: #fff;
 }
 
-rect.parent,
-.grandparent rect {
+.eiti-chart-widget rect.parent,
+.eiti-chart-widget .grandparent rect {
   stroke-width: 2px;
 }
 
-.grandparent rect {
+.eiti-chart-widget .grandparent rect {
   fill: orange;
 }
 
-.grandparent:hover rect {
+.eiti-chart-widget .grandparent:hover rect {
   fill: #ee9700;
 }
 
-.children rect.parent,
-.grandparent rect {
+.eiti-chart-widget .children rect.parent,
+.eiti-chart-widget .grandparent rect {
   cursor: pointer;
 }
 
-.children rect.parent {
+.eiti-chart-widget .children rect.parent {
   fill: #bbb;
   fill-opacity: .5;
 }
 
-.children:hover rect.child {
+.eiti-chart-widget .children:hover rect.child {
   fill: #bbb;
 }
 
-.node rect {
+.eiti-chart-widget .node rect {
   cursor: move;
   fill-opacity: .9;
   shape-rendering: crispEdges;
 }
 
-.node text {
+.eiti-chart-widget .node text {
   pointer-events: none;
   text-shadow: 0 1px 0 #fff;
 }
 
-.link {
+.eiti-chart-widget .link {
   fill: none;
   stroke: #000;
   stroke-opacity: .2;
 }
 
-.link:hover {
+.eiti-chart-widget .link:hover {
   stroke-opacity: .5;
 }
 
-.browser text {
+.eiti-chart-widget .browser text {
   text-anchor: end;
 }
-
-
-
-
-
-
-
 
 
 /* ==========================================================================

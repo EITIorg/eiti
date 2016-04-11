@@ -7,17 +7,7 @@
 .eiti-chart-widget-wrapper {
   border-bottom: 2px solid #cccccc;
   margin: 2em 0;
-  padding-botom: 2em;
-}
-
-/*
- * Browser Upgrade Prompt
- */
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+  padding-bottom: 2em;
 }
 
 /*
