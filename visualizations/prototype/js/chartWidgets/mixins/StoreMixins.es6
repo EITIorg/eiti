@@ -1,5 +1,4 @@
 import {createStore} from 'reflux';
-import {List,Map,Record} from 'immutable';
 
 const FALSE_DATA = {};
 
