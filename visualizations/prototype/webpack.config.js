@@ -11,7 +11,6 @@ module.exports = {
 		filename: "[name].js"
 	},
 	plugins: [
-    	new webpack.HotModuleReplacementPlugin(),
     	new webpack.NoErrorsPlugin(),
     	new webpack.optimize.UglifyJsPlugin({
 	      include: /\.min\.js$/,
