@@ -1,7 +1,13 @@
 
-#main {
-  /*width: 1366px;*/
-  margin-top: 20px;
+.page-wrapper {
+  margin: 2em auto;
+  width: 60em;
+}
+
+.eiti-chart-widget-wrapper {
+  border-bottom: 2px solid #cccccc;
+  margin: 2em 0;
+  padding-botom: 2em;
 }
 
 /*
