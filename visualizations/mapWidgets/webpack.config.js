@@ -9,24 +9,14 @@ module.exports = {
     'mapWidgets.min': __dirname + '/source/scripts/index.js'
   },
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          plugins: [
-            ['react-transform', {
-              transforms: [{
-                transform: 'react-transform-hmr',
-                imports: ['react'],
-                locals: ['module']
-              }]
-            }]
-          ]
-        }
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        plugins: []
       }
-    ]
+    }]
   },
   output: {
     path: __dirname + '/dist/js',
@@ -39,12 +29,12 @@ module.exports = {
         'NODE_ENV': '"production"'
       }
     }),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ],
   devServer: {
     colors: true,
