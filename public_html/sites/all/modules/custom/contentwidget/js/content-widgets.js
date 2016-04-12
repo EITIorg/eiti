@@ -82,6 +82,7 @@ Drupal.behaviors.eitiContentWidgetPlotlyInit = {
    * @param {Object} chartSettings.layout
    * @param {string} chartSettings.xlabel
    * @param {string} chartSettings.ylabel
+   * @param {string} chartSettings.legend_position
    * @param {string} chartSettings.year_selector_class
    * @param {string} chartSettings.endpoint
    * @param {Object} chartSettings.endpoint_data
@@ -110,6 +111,13 @@ Drupal.behaviors.eitiContentWidgetPlotlyInit = {
         title: chartSettings.ylabel
       }
     });
+
+    if (chartSettings.legend_position && chartSettings.legend_position === 'above') {
+      chartSettings.layout.legend = {
+        x: 0,
+        y: 100
+      };
+    }
 
     // Enable the year selector.
     if (chartSettings.year_selector_class && chartSettings.year_selector_class !== '') {

@@ -37,7 +37,8 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
     $query->fields('sd', array('id', 'year_end', 'status'));
     $query->fields('ic', array('iso', 'name'));
     $query->fields('grs', array('gfs_code_id', 'revenue'));
-    $query->fields('gfs', array('name'));
+    $query->addField('gfs', 'name', 'gfs_name');
+    $query->addField('gfs', 'code', 'gfs_code');
     $query->condition('sd.status', TRUE);
     $query->condition('grs.type', 'agency');
     $query->condition('grs.revenue', 0, '>');
@@ -78,51 +79,30 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
    */
   public function processCountryGovernmentalRevenue($data) {
     $output = array();
-    // Needed for normalization.
-    $x_all = array();
-    $x_group = array();
+
     foreach ($data as $item) {
       $year = format_date($item->year_end, 'custom', 'Y');
       if (!key_exists($item->gfs_code_id, $output)) {
         $output[$item->gfs_code_id] = array(
-          'label' => $item->gfs_name,
-          'values' => array(),
+          'name' => t('@gfs_name [@gfs_code]', array(
+            '@gfs_name' => $item->gfs_name,
+            '@gfs_code' => $item->gfs_code,
+          )),
         );
       }
 
       // 2 cases: either it's unique and we append the value, or it's not,
       // then we sum the values together.
-      if (!key_exists($year, $output[$item->gfs_code_id]['values'])) {
-        $output[$item->gfs_code_id]['values'][$year] = array(
-          'x' => $year,
-          'y' => round(floatval($item->revenue)),
-        );
+      if ($key = array_search($year, $output[$item->gfs_code_id]['x'])) {
+        $output[$item->gfs_code_id]['y'][$key] += round(floatval($item->revenue));
       }
       else {
-        $output[$item->gfs_code_id]['values'][$year]['y'] += round(floatval($item->revenue));
+        $output[$item->gfs_code_id]['x'][] = $year;
+        $output[$item->gfs_code_id]['y'][] = round(floatval($item->revenue));
       }
+    }
 
-      // Used for normalization.
-      if (!in_array($year, $x_all)) {
-        $x_all[] = $year;
-      }
-      $x_group[$item->gfs_code_id][] = $year;
-    }
-    // Make a small normalization.
-    foreach ($output as $out_key => $group) {
-      $output[$out_key]['values'] = array_values($group['values']);
-    }
-    foreach ($x_group as $indicator_id => $x_values) {
-      $x_diff = array_diff($x_all, $x_values);
-      foreach ($x_diff as $x) {
-        $output[$indicator_id]['values'][] = array(
-          'x' => $x,
-          'y' => 0,
-        );
-      }
-    }
     $output = array_values($output);
     return $output;
   }
 }
-
