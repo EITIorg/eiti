@@ -50,7 +50,7 @@
     font: {
       family: '"Open Sans", sans-serif'
     },
-    barmode:'group'
+    barmode: 'group'
   };
 
   Drupal.behaviors.eitiContentWidgetPlotlyInit = {
@@ -88,6 +88,7 @@
      * @param {string} chartSettings.ylabel
      * @param {string} chartSettings.legend_position
      * @param {string} chartSettings.year_selector_class
+     * @param {string} chartSettings.type
      * @param {string} chartSettings.endpoint
      * @param {Object} chartSettings.endpoint_data
      *
@@ -117,11 +118,27 @@
       });
 
       // Show the legend above the chart when there are many options or the options have long names.
-      if (chartSettings.legend_position && chartSettings.legend_position === 'above') {
-        chartSettings.layout.legend = {
-          x: 0,
-          y: 100
-        };
+      if (chartSettings.legend_position) {
+        if (chartSettings.legend_position === 'above') {
+          chartSettings.layout.legend = {
+            x: 0,
+            y: 1,
+            yanchor: 'bottom',
+            xanchor: 'left'
+          };
+        }
+        else if (chartSettings.legend_position === 'right') {
+          chartSettings.layout.legend = {
+            x: 1,
+            y: 1,
+            yanchor: 'top',
+            xanchor: 'left'
+          };
+        }
+      }
+
+      if (chartSettings.type && chartSettings.type === 'StackedBar') {
+        chartSettings.layout.barmode = 'stacked';
       }
 
       // Enable the year selector.

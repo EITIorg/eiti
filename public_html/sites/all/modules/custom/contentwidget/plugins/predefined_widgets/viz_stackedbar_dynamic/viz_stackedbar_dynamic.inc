@@ -17,6 +17,7 @@ $plugin = array(
   'defaults' => array(
     'stackedbar_settings' => array(
       'data_type' => '',
+      'legend_position' => 'right',
     ),
     'extra_settings' => array(
       'gfs' => array(
@@ -92,11 +93,11 @@ function contentwidget__viz_stackedbar_dynamic__render($plugin, $widget_settings
   $js_settings = $js_settings[$widget_settings['stackedbar_settings']['data_type']];
   $settings = array(
     'type' => 'StackedBar',
-    'name' => $js_settings['title'],
+    'title' => $js_settings['title'],
     'description' => $js_settings['description'],
     'xlabel' => $js_settings['x-axis'],
     'ylabel' => $js_settings['y-axis'],
-    'legend_position' => 'above',
+    'legend_position' => $widget_settings['stackedbar_settings']['legend_position'],
     'container' => $identifier,
     'endpoint' => $endpoint,
     'endpoint_data' => array(),
@@ -162,8 +163,9 @@ function contentwidget__viz_stackedbar_dynamic__settings_form(&$element, &$form_
     '#type' => 'select',
     '#title' => t('Data Type'),
     '#description' => t('Please select which data would you like to pull from the Summary Data.'),
-    '#default_value' => isset($widget_settings['stackedbar_settings']['data_type']) ? $widget_settings['stackedbar_settings']['data_type'] : '',
+    '#default_value' => $widget_settings['stackedbar_settings']['data_type'],
     '#options' => $type_options,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => '_contentwidget__viz_stackedbar_dynamic__ajax_settings',
       'event' => 'change',
@@ -171,6 +173,17 @@ function contentwidget__viz_stackedbar_dynamic__settings_form(&$element, &$form_
       'method' => 'replace',
       'effect' => 'fade',
     ),
+  );
+
+  $settings_form['stackedbar_settings']['legend_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Legend Position'),
+    '#options' => array(
+      'above' => t('Above'),
+      'right' => t('Right'),
+    ),
+    '#default_value' => $widget_settings['stackedbar_settings']['legend_position'],
+    '#required' => TRUE,
   );
 
   // Check if there are any extra settings.
