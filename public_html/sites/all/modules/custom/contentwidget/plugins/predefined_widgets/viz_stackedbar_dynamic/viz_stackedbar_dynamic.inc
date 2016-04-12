@@ -12,11 +12,12 @@
 $plugin = array(
   'title' => 'Visualization: Stacked Bar chart dynamic',
   'description' => 'A stacked bar chart with data pulled from the Summary Data.',
-  'render callback' => 'contentwidget_viz_stackedbar_dynamic_render',
-  'settings form' => 'contentwidget_viz_stackedbar_dynamic_settings',
+  'render callback' => 'contentwidget__viz_stackedbar_dynamic__render',
+  'settings form' => 'contentwidget__viz_stackedbar_dynamic__settings_form',
   'defaults' => array(
     'stackedbar_settings' => array(
       'data_type' => '',
+      'legend_position' => 'right',
     ),
     'extra_settings' => array(
       'gfs' => array(
@@ -29,75 +30,94 @@ $plugin = array(
 /**
  * Render callback for the 'StackedBar Chart' predefined widget.
  */
-function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
-  $block = array();
-
+function contentwidget__viz_stackedbar_dynamic__render($plugin, $widget_settings, $entity, $langcode) {
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
-    return array('#markup' => t('Configured Stacked Bar Widget - with dynamic data (from Summary Data).'));
+    return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
+  }
+
+  // Load the Plotly.js library.
+  $plotly_library = libraries_load('plotly', 'minified');
+  if (empty($plotly_library)) {
+    return array('#markup' => t('Plotly.js library could not be loaded.'));
   }
 
   // Prepare the ID.
-  $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
+  $identifier_parts = array(
+    'eiti-chart-widget',
+    $entity->fpid,
+    $entity->vid
+  );
+  $identifier = drupal_clean_css_identifier(implode('-', $identifier_parts));
+
+  $block = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'eiti-chart-widget-wrapper',
+        $identifier . '-wrapper',
+      ),
+    ),
+  );
+
   $block['widget'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#attributes' => array(
-      'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
-    )
+      'id' => $identifier,
+      'class' => array(
+        'eiti-chart-widget',
+        drupal_html_class('eiti-chart-widget--' . $plugin['name']),
+      ),
+    ),
+    '#weight' => 10,
   );
 
-  // Load the library.
-  $library = libraries_load('eitiChartWidgets', 'minified');
-  if (empty($library)) {
-    return array('#markup' => t('Charts library could not be loaded.'));
-  }
+  $block['widget']['initializing'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('Initializing chart.'),
+    '#attributes' => array(
+      'class' => array(
+        'message-initializing',
+      ),
+    ),
+  );
 
-  $endpoints = contentwidget_viz_stackedbar_dynamic_get_data_types('endpoint');
+  $endpoints = _contentwidget__viz_stackedbar_dynamic__get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['stackedbar_settings']['data_type']];
 
   // Send the settings, so that later we can load them in our behaviour.
-  $js_settings = contentwidget_viz_stackedbar_dynamic_get_data_types('js settings');
+  $js_settings = _contentwidget__viz_stackedbar_dynamic__get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['stackedbar_settings']['data_type']];
   $settings = array(
     'type' => 'StackedBar',
-    'name' => $js_settings['title'],
-    'width' => 800,
-    'height' => 400,
-    'margin' => array(
-      'top' => 10,
-      'bottom' => 50,
-      'left' => 100,
-      'right' => 10
-    ),
+    'title' => $js_settings['title'],
+    'description' => $js_settings['description'],
     'xlabel' => $js_settings['x-axis'],
     'ylabel' => $js_settings['y-axis'],
-    'description' => $js_settings['description'],
-    'container' => $viz_id,
+    'legend_position' => $widget_settings['stackedbar_settings']['legend_position'],
+    'container' => $identifier,
     'endpoint' => $endpoint,
+    'endpoint_data' => array(),
   );
 
-  // As dynamic as we tried to be, this is a little exception.
-  if ($widget_settings['stackedbar_settings']['data_type'] == 'government_revenues') {
-    // We want to pass the commodities to the filter and the country from the context.
-    $settings['endpoint'] = $endpoint . '?filter[gfs_code]=' . implode(',', array_flip($widget_settings['extra_settings']['gfs']['gfs_codes']));
-    // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
-    $country = menu_get_object('implementing_country');
-    if (!empty($country)) {
-      $settings['endpoint'] .= '&filter[country_iso]=' . $country->iso;
-    }
-    else {
-      return array('#markup' => t('This widget requires country context.'));
-    }
+  switch ($widget_settings['stackedbar_settings']['data_type']) {
+    case 'government_revenues':
+      // We want to pass the commodities to the filter and the country from the context.
+      $settings['endpoint_data']['filter']['gfs_code'] = implode(',', array_flip($widget_settings['extra_settings']['gfs']['gfs_codes']));
+      $country = menu_get_object('implementing_country');
+      if (!empty($country)) {
+        $settings['endpoint_data']['filter']['country_iso'] = $country->iso;
+      }
+      else {
+        return array('#markup' => t('This widget requires country context.'));
+      }
+      break;
   }
 
-  // Wrap things up.
-  $settings = array(
-    $viz_id => $settings,
-  );
-  drupal_add_js(array('contentwidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(array('eitiContentWidgetPlotly' => array($identifier => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }
@@ -105,7 +125,7 @@ function contentwidget_viz_stackedbar_dynamic_render($plugin, $widget_settings, 
 /**
  * Settings form for the 'StackedBar Chart' predefined widget.
  */
-function contentwidget_viz_stackedbar_dynamic_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget__viz_stackedbar_dynamic__settings_form(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   // Extract these for possible re-use.
@@ -123,8 +143,8 @@ function contentwidget_viz_stackedbar_dynamic_settings(&$element, &$form_state, 
   );
 
   // We want to cut out those who's context is required.
-  $type_options = contentwidget_viz_stackedbar_dynamic_get_data_types('options');
-  $items = contentwidget_viz_stackedbar_dynamic_get_data_types();
+  $type_options = _contentwidget__viz_stackedbar_dynamic__get_data_types('options');
+  $items = _contentwidget__viz_stackedbar_dynamic__get_data_types();
   foreach ($type_options as $option_key => $label) {
     if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
@@ -143,10 +163,11 @@ function contentwidget_viz_stackedbar_dynamic_settings(&$element, &$form_state, 
     '#type' => 'select',
     '#title' => t('Data Type'),
     '#description' => t('Please select which data would you like to pull from the Summary Data.'),
-    '#default_value' => isset($widget_settings['stackedbar_settings']['data_type']) ? $widget_settings['stackedbar_settings']['data_type'] : '',
+    '#default_value' => $widget_settings['stackedbar_settings']['data_type'],
     '#options' => $type_options,
+    '#required' => TRUE,
     '#ajax' => array(
-      'callback' => 'contentwidget_viz_stackedbar_dynamic_ajax_settings',
+      'callback' => '_contentwidget__viz_stackedbar_dynamic__ajax_settings',
       'event' => 'change',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
@@ -154,8 +175,19 @@ function contentwidget_viz_stackedbar_dynamic_settings(&$element, &$form_state, 
     ),
   );
 
+  $settings_form['stackedbar_settings']['legend_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Legend Position'),
+    '#options' => array(
+      'above' => t('Above'),
+      'right' => t('Right'),
+    ),
+    '#default_value' => $widget_settings['stackedbar_settings']['legend_position'],
+    '#required' => TRUE,
+  );
+
   // Check if there are any extra settings.
-  $extra_settings = contentwidget_viz_stackedbar_dynamic_get_data_types('extra settings');
+  $extra_settings = _contentwidget__viz_stackedbar_dynamic__get_data_types('extra settings');
   $settings_form['extra_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Extra Settings'),
@@ -177,7 +209,7 @@ function contentwidget_viz_stackedbar_dynamic_settings(&$element, &$form_state, 
 /**
  * Small custom ajax callback.
  */
-function contentwidget_viz_stackedbar_dynamic_ajax_settings($form, $form_state) {
+function _contentwidget__viz_stackedbar_dynamic__ajax_settings($form, $form_state) {
   $parents = $form_state['triggering_element']['#parents'];
 
   // Polish the #parents.
@@ -210,14 +242,14 @@ function contentwidget_viz_stackedbar_dynamic_ajax_settings($form, $form_state) 
  *   The Return array depends on the $return parameter you specify, either it's
  *   an array of labels for the options, or it's an array of api endpoints.
  */
-function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
+function _contentwidget__viz_stackedbar_dynamic__get_data_types($return = NULL) {
   $items = array();
 
   // ####### DEFINE ITEMS ######
   $items['government_revenues'] = array(
     'label' => t('Country: Government Revenue'),
     'endpoint' => '/api/v1.0/stacked_bar/government_revenues',
-    'extra settings' => 'contentwidget_viz_stackedbar_government_revenues_country_settings',
+    'extra settings' => '_contentwidget__viz_groupedbar_dynamic__government_revenues_country_settings',
     'x-axis' => t('Years'),
     'y-axis' => t('Government Revenue (normalized to USD)'),
     'title' => t('Government Revenues'),
@@ -256,26 +288,29 @@ function contentwidget_viz_stackedbar_dynamic_get_data_types($return = NULL) {
 /**
  * Extra settings for the Governmental Revenues per Country.
  */
-function contentwidget_viz_stackedbar_government_revenues_country_settings(&$form, &$form_state, &$widget_settings, $ctools_contexts = array()) {
+function _contentwidget__viz_groupedbar_dynamic__government_revenues_country_settings(&$form, &$form_state, &$widget_settings, $ctools_contexts = array()) {
   // Load all GFS codes so we can identify all the parents.
   $form['gfs'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Please select revenues you want to display.'),
+    '#title' => t('Revenue Stream as Disclosed by Government'),
     '#description' => t('You may specify the revenues (GFS Codes) you want to be displayed in the widget.'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#attributes' => array('class' => array('gfs-codes-container')),
   );
+
   $gfs_codes = eitientity_gfs_code_get_tree();
   $options = array();
   foreach ($gfs_codes as $gfs_code) {
-    $label = ' (' . check_plain($gfs_code->code) . ') ' . filter_xss($gfs_code->name);
-    if ($gfs_code->depth == 0) {
-      $options[$gfs_code->id] = '<strong>' . strtoupper($label) . '</strong>';
-    }
-    else {
-      $options[$gfs_code->id] = str_repeat('-', $gfs_code->depth) . $label;
-    }
+    $options[$gfs_code->id] = '<span>' . str_repeat('-', $gfs_code->depth) . '[' . check_plain($gfs_code->code) . ']</span> ' . filter_xss($gfs_code->name);
   }
+
+  $inline_style = '.gfs-codes-container label.option {font-family: monospace; font-size: 1em; vertical-align: top;}';
+  $form['gfs']['style'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'style',
+    '#value' => $inline_style,
+  );
 
   $form['gfs']['gfs_codes'] = array(
     '#type' => 'checkboxes',

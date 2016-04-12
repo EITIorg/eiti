@@ -1,5 +1,8 @@
 <?php
 
+// HACK: Fix missing array_column() in PHP <5.5.
+include_once 'eiti_api.array_column.inc';
+
 /**
  * Implements hook_ctools_plugin_directory().
  */

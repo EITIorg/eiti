@@ -43,7 +43,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
+      'class' => array(drupal_html_class($plugin['name']), 'eiti-chart-widget'),
     )
   );
 
@@ -97,7 +97,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
   $settings = array(
     $viz_id => $settings,
   );
-  drupal_add_js(array('contentwidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }

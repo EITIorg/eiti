@@ -108,6 +108,27 @@ function eiti_ctools_extra_libraries_info() {
     ),
   );
 
+  $libraries['plotly'] = array(
+    'title' => 'Plotly',
+    'version arguments' => array(
+      'file' => 'plotly.js',
+      'pattern' => '/plotly.js\s+v?([\d\.]+)/',
+      'lines' => 3,
+    ),
+    'files' => array(
+      'js' => array(
+        'plotly.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'js' => array(
+          'plotly.min.js',
+        ),
+      ),
+    ),
+  );
+
   return $libraries;
 }
 
