@@ -97,7 +97,7 @@ function contentwidget_viz_sankey_dynamic_render($plugin, $widget_settings, $ent
   $settings = array(
     $viz_id => $settings,
   );
-  drupal_add_js(array('contentwidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }
