@@ -43,7 +43,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
     '#tag' => 'div',
     '#attributes' => array(
       'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
+      'class' => array(drupal_html_class($plugin['name']), 'eiti-chart-widget'),
     )
   );
 
