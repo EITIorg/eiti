@@ -11,6 +11,11 @@ module.exports = {
     filename: "[name].js"
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"'
+      }
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
