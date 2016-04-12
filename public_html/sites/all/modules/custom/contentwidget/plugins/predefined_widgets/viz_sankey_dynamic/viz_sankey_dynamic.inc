@@ -26,30 +26,48 @@ $plugin = array(
  * Render callback for the 'Sankey Chart' predefined widget.
  */
 function contentwidget_viz_sankey_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
-  $block = array();
-
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
     return array('#markup' => t('Configured Sankey Widget - with dynamic data (from Summary Data).'));
   }
 
-  // Prepare the ID.
-  $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
-  $block['widget'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#attributes' => array(
-      'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-chart-widget'),
-    )
-  );
-
   // Load the library.
   $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
     return array('#markup' => t('Charts library could not be loaded.'));
   }
+
+  // Prepare the ID.
+  $identifier_parts = array(
+    'eiti-chart-widget',
+    $entity->fpid,
+    $entity->vid
+  );
+  $identifier = drupal_clean_css_identifier(implode('-', $identifier_parts));
+
+  $block = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'eiti-chart-widget-wrapper',
+        $identifier . '-wrapper',
+      ),
+    ),
+  );
+
+  $block['widget'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'id' => $identifier,
+      'class' => array(
+        'eiti-chart-widget',
+        drupal_html_class('eiti-chart-widget--' . $plugin['name']),
+      ),
+    ),
+    '#weight' => 10,
+  );
 
   $endpoints = contentwidget_viz_sankey_dynamic_get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['sankey_settings']['data_type']];
@@ -68,7 +86,7 @@ function contentwidget_viz_sankey_dynamic_render($plugin, $widget_settings, $ent
       'left' => 6,
       'right' => 1
     ),
-    'container' => $viz_id,
+    'container' => $identifier,
     'endpoint' => $endpoint,
   );
 
@@ -90,12 +108,11 @@ function contentwidget_viz_sankey_dynamic_render($plugin, $widget_settings, $ent
     else {
       return array('#markup' => t('This widget requires country context.'));
     }
-
   }
 
   // Wrap things up.
   $settings = array(
-    $viz_id => $settings,
+    $identifier => $settings,
   );
   drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));

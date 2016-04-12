@@ -28,30 +28,48 @@ $plugin = array(
  * Render callback for the 'Bubble Chart' predefined widget.
  */
 function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $entity, $langcode) {
-  $block = array();
-
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
-    return array('#markup' => t('Configured Bubble Widget - with dynamic data (from Summary Data).'));
+    return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
   }
-
-  // Prepare the ID.
-  $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
-  $block['widget'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#attributes' => array(
-      'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-chart-widget'),
-    )
-  );
 
   // Load the library.
   $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
     return array('#markup' => t('Charts library could not be loaded.'));
   }
+
+  // Prepare the ID.
+  $identifier_parts = array(
+    'eiti-chart-widget',
+    $entity->fpid,
+    $entity->vid
+  );
+  $identifier = drupal_clean_css_identifier(implode('-', $identifier_parts));
+
+  $block = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'eiti-chart-widget-wrapper',
+        $identifier . '-wrapper',
+      ),
+    ),
+  );
+
+  $block['widget'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'id' => $identifier,
+      'class' => array(
+        'eiti-chart-widget',
+        drupal_html_class('eiti-chart-widget--' . $plugin['name']),
+      ),
+    ),
+    '#weight' => 10,
+  );
 
   $endpoints = contentwidget_viz_bubble_dynamic_get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['bubble_settings']['data_type']];
@@ -71,7 +89,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
       'left' => 0,
       'right' => 0
     ),
-    'container' => $viz_id,
+    'container' => $identifier,
     'endpoint' => $endpoint,
   );
 
@@ -95,7 +113,7 @@ function contentwidget_viz_bubble_dynamic_render($plugin, $widget_settings, $ent
 
   // Wrap things up.
   $settings = array(
-    $viz_id => $settings,
+    $identifier => $settings,
   );
   drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
@@ -137,6 +155,7 @@ function contentwidget_viz_bubble_dynamic_settings(&$element, &$form_state, $plu
       }
     }
   }
+
   array_unshift($type_options, t('- Select -'));
   $wrapper_id = 'extra-settings-bubble-dynamic';
   $settings_form['bubble_settings']['data_type'] = array(
@@ -145,6 +164,7 @@ function contentwidget_viz_bubble_dynamic_settings(&$element, &$form_state, $plu
     '#description' => t('Please select which data would you like to pull from the Summary Data.'),
     '#default_value' => isset($widget_settings['bubble_settings']['data_type']) ? $widget_settings['bubble_settings']['data_type'] : '',
     '#options' => $type_options,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'contentwidget_viz_bubble_dynamic_ajax_settings',
       'event' => 'change',

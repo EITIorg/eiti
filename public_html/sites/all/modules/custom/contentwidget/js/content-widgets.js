@@ -16,31 +16,50 @@
    * @param {Object} chartSettings
    */
   Drupal.eitiContentWidget.updatePlotlyChart = function (chartSettings) {
-    $.get(chartSettings.endpoint, chartSettings.endpoint_data, function (response) {
-      var $chartContainer = $('#' + chartSettings.container);
+    // Load data from an API endpoint.
+    if (chartSettings.hasOwnProperty('endpoint')) {
+      $.get(chartSettings.endpoint, chartSettings.endpoint_data, function (response) {
+        var $chartContainer = $('#' + chartSettings.container);
 
-      if (!response.data || !response.data.length) {
-        var message = Drupal.t('There is no data.');
-        if (chartSettings.endpoint_data.filter.year) {
-          message = Drupal.t('There is no data for !year.', {'!year': chartSettings.endpoint_data.filter.year});
+        if (!response.data || !response.data.length) {
+          var message = Drupal.t('There is no data.');
+          if (chartSettings.endpoint_data.filter.year) {
+            message = Drupal.t('There is no data for !year.', {'!year': chartSettings.endpoint_data.filter.year});
+          }
+
+          $chartContainer.html('<p class="no-chart">' + message + '</p>');
+          return;
         }
 
-        $chartContainer.html('<p class="no-chart">' + message + '</p>');
-        return;
-      }
+        for (var delta in response.data) {
+          if (!response.data.hasOwnProperty(delta)) {
+            continue;
+          }
 
-      for (var delta in response.data) {
-        if (!response.data.hasOwnProperty(delta)) {
+          // @TODO: Remove!
+          response.data[delta].type = 'bar';
+        }
+
+        $chartContainer.html('');  // HACK: Remove any markup, this avoids a layout bug in plotly.
+        Plotly.newPlot(chartSettings.container, response.data, chartSettings.layout, {displaylogo: false});
+      });
+    }
+    // Use provided data.
+    else if (chartSettings.hasOwnProperty('widgetData')) {
+      var $chartContainer = $('#' + chartSettings.container);
+
+      for (var delta in chartSettings.widgetData) {
+        if (!chartSettings.widgetData.hasOwnProperty(delta)) {
           continue;
         }
 
         // @TODO: Remove!
-        response.data[delta].type = 'bar';
+        chartSettings.widgetData[delta].type = 'bar';
       }
 
       $chartContainer.html('');  // HACK: Remove any markup, this avoids a layout bug in plotly.
-      Plotly.newPlot(chartSettings.container, response.data, chartSettings.layout, {displaylogo: false});
-    });
+      Plotly.newPlot(chartSettings.container, chartSettings.widgetData, chartSettings.layout, {displaylogo: false});
+    }
   };
 
   /**
@@ -95,7 +114,7 @@
      * @private
      */
     _initializePlotlyChart: function (context, chartSettings) {
-      if (!chartSettings.container || !chartSettings.endpoint) {
+      if (!chartSettings.container) {
         return;
       }
 
