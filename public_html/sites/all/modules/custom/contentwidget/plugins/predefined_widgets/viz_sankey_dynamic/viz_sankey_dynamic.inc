@@ -147,6 +147,7 @@ function contentwidget_viz_sankey_dynamic_settings(&$element, &$form_state, $plu
     '#description' => t('Please select which data would you like to pull from the Summary Data.'),
     '#default_value' => isset($widget_settings['sankey_settings']['data_type']) ? $widget_settings['sankey_settings']['data_type'] : '',
     '#options' => $type_options,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => 'contentwidget_viz_sankey_dynamic_ajax_settings',
       'event' => 'change',
