@@ -289,7 +289,7 @@ function eiti_migration_migrate_api() {
     'skip_pictures' => TRUE,
     'source_dir' => $legacy_public,
     'destination_dir' => 'public://document_preview',
-    'bundle' => 'document',
+    'bundle' => 'image',
     'description' => t('Migrates the Image Previews field files.'),
     'dependencies' => array('EITIUsersMigration'),
   );

@@ -49,6 +49,17 @@ class EITIUsersMigration extends DrupalUser7Migration {
  * where we do our best to handle the poorly migrated data into the legacy system.
  */
 abstract class EITINodeMigration extends DrupalNode7Migration {
+
+  public function __construct(array $arguments) {
+    parent::__construct($arguments);
+    $this->formatMappings = array(
+      '1' => 'filtered_html',
+      '2' => 'plain_text',
+      '3' => 'filtered_html',
+      '4' => 'plain_text',
+    );
+  }
+
   /**
    * That's where row preparation magic is done.
    */
@@ -233,6 +244,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       $source_nid = $row->tnid;
       $source_node = node_load($source_nid);
 
+
       // Special case when we have a Stub.
       if ($source_node->title == 'Stub') {
         $source_node->language = 'en';
@@ -244,31 +256,13 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
       // We need to get all of the possible translations to create. So we look
       // for any translatable fields.
-      $translatable_fields = array();
-      foreach (field_info_instances('node', $this->destinationType) as $instance) {
-        $field_name = $instance['field_name'];
-        $field = field_info_field($field_name);
-
-        if ($field['translatable']) {
-          $translatable_fields[] = $field_name;
-        }
-      }
-
-      // Set the values.
-      foreach ($translatable_fields as $translatable_field) {
-        if (!empty($source_node->{$translatable_field}) && !empty($entity->{$translatable_field})) {
-          $source_node->{$translatable_field} = array_merge($source_node->{$translatable_field}, $entity->{$translatable_field});
-        }
-        elseif(empty($source_node->{$translatable_field}) && !empty($entity->{$translatable_field})) {
-          $source_node->{$translatable_field} = $entity->{$translatable_field};
-        }
-      }
+      $this->mergeTranslatableNodeFields($source_node, $entity);
 
       if (!isset($source_node->translations->data[$entity->language])) {
         // Add the new translation and store it.
         $handler->setTranslation(array(
           'translate' => 0,
-          'status' => 1,
+          'status' => $entity->status,
           'language' => $entity->language,
           'source' => $original_language,
           'uid' => (empty($entity->uid)) ? 0 : $entity->uid,
@@ -276,7 +270,11 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
           'created' => (empty($entity->created)) ? REQUEST_TIME : $entity->created,
         ));
       }
+      // All statuses are published by default.
+      $source_node->status = TRUE;
+
       // Save the source node.
+      field_attach_presave('node', $source_node);
       node_save($source_node);
 
       // Now cancel the creation of the node.
@@ -293,6 +291,41 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       // In this case, it's an updated stub (source of translation).
       $old_stub = node_load($entity->nid);
       $entity->translations = $old_stub->translations;
+    }
+
+    // Now we look-up the existing node, and if there IS ONE we merge the fields.
+    $existing_node = node_load($entity->nid, NULL, TRUE);
+    $this->mergeTranslatableNodeFields($entity, $existing_node);
+  }
+
+  /**
+   * Merged translatable fields together.
+   *
+   * @param $a
+   *   First Entity, entity who's values will store both values.
+   *
+   * @param $b
+   *   Second Entity, entities who's values will be copied to $a.
+   */
+  public function mergeTranslatableNodeFields($a, $b) {
+    $translatable_fields = array();
+    foreach (field_info_instances('node', $this->destinationType) as $instance) {
+      $field_name = $instance['field_name'];
+      $field = field_info_field($field_name);
+
+      if ($field['translatable']) {
+        $translatable_fields[] = $field_name;
+      }
+    }
+
+    // Set the values.
+    foreach ($translatable_fields as $translatable_field) {
+      if (!empty($a->{$translatable_field}) && !empty($b->{$translatable_field})) {
+        $a->{$translatable_field} = array_merge($a->{$translatable_field}, $b->{$translatable_field});
+      }
+      elseif(empty($a->{$translatable_field}) && !empty($b->{$translatable_field})) {
+        $a->{$translatable_field} = $b->{$translatable_field};
+      }
     }
   }
 

@@ -37,11 +37,8 @@ class EITIPersonMigration extends EITINodeMigration {
 
     // Now the mappings.
     $this->addFieldMapping('field_person_picture', 'field_contact_img')
-      ->sourceMigration('EITIPersonPicturesMigration');
+      ->sourceMigration(array('EITIPersonPicturesMigration'));
     $this->addFieldMapping('field_person_picture:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_person_picture:language', 'language');
-    $this->addFieldMapping('field_person_picture:alt', 'field_contact_img:alt');
-    $this->addFieldMapping('field_person_picture:title', 'field_contact_img:title');
 
     $this->addFieldMapping('field_board_member_type', 'field_board_member_type');
     $this->addFieldMapping('field_position', 'field_contact_role');
