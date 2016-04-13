@@ -42,16 +42,12 @@ class EITIDocumentMigration extends EITINodeMigration {
 
     // Now the mappings.
     $this->addFieldMapping('field_doc_image_preview', 'field_document_img')
-      ->sourceMigration('EITIDocumentFilesPreviewMigration');
+      ->sourceMigration(array('EITIDocumentFilesPreviewMigration'));
     $this->addFieldMapping('field_doc_image_preview:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_doc_image_preview:language', 'language');
-    $this->addFieldMapping('field_doc_image_preview:alt', 'field_document_img:alt');
-    $this->addFieldMapping('field_doc_image_preview:title', 'field_document_img:title');
 
     $this->addFieldMapping('field_attachments', 'files_merged')
      ->sourceMigration(array('EITIDocumentUploadFilesMigration', 'EITIDocumentAttachmentsMigration'));
     $this->addFieldMapping('field_attachments:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_attachments:language', 'language');
 
     $this->addFieldMapping('field_document_category', 'field_taxonomy_resource_category')
       ->sourceMigration('EITITaxonomyResouceCategoryMigration');
