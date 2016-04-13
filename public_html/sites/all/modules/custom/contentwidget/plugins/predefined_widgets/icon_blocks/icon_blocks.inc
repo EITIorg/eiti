@@ -71,11 +71,10 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
     );
 
     // Add the block title.
-    $title = $widget_settings['blocks'][$delta]['title'];
     $icon_block['icon_blocks']['text_wrapper']['title'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h4',
-      '#value' => $title,
+      '#value' => t($widget_settings['blocks'][$delta]['title']),
       '#attributes' => array(
         'class' => array(
           'title',
