@@ -33,15 +33,6 @@ function eiti_ctools_extra_map_simple_render($subtype, $conf, $panel_args, $cont
   // We need this because we store the JS init file in the plugin folder.
   $plugin_info = ctools_get_plugins('ctools', 'content_types', $subtype);
 
-  // Load the libraries, leaflet first.
-  $library_leaflet = libraries_load('leaflet');
-  if (empty($library_leaflet)) {
-    $block->content = array(
-      '#markup' => t('Please make sure the <strong>leaflet</strong> library exists and has proper permission settings.'),
-    );
-    return $block;
-  }
-
   // Now our custom EITI Maps.
   $library_maps = eiti_ctools_extra_load_eiti_libraries('eitiMapWidgets', 'minified');
   if (empty($library_maps)) {

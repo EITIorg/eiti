@@ -132,6 +132,11 @@ div.description,
   }
 }
 
+.eiti-map-wrapper {
+  .leaflet-top, .leaflet-bottom {
+    z-index: 100;  // Reduce the z-index.
+  }
+}
 
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';

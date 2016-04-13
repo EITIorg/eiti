@@ -85,6 +85,9 @@ function eiti_ctools_extra_libraries_info() {
         'css/mapWidgets.css' => array(
           'preprocess' => FALSE,
         ),
+        'css/leaflet.css' => array(
+          'preprocess' => FALSE,
+        ),
       ),
     ),
 
@@ -100,6 +103,9 @@ function eiti_ctools_extra_libraries_info() {
           ),
           'css' => array(
             'css/mapWidgets.css' => array(
+              'preprocess' => FALSE,
+            ),
+            'css/leaflet.css' => array(
               'preprocess' => FALSE,
             ),
           ),

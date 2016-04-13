@@ -58,8 +58,9 @@
     "clean": "rimraf dist",
     "build:js": "webpack && webpack --config webpack.config.js",
     "build:less": "./node_modules/.bin/lessc source/styles/mapWidgets.less dist/css/mapWidgets.css",
-    "copy:images": "cp -r source/images dist",
+    "copy:images": "cp -r ./source/images dist",
+    "copy:leaflet-resources": "cp -r ./node_modules/leaflet/dist/leaflet.css ./node_modules/leaflet/dist/images dist/css",
     "release": "date +%Y%m%d-%H%M > dist/RELEASE.txt",
-    "build": "npm run clean && npm run build:js && npm run build:less && npm run copy:images && npm run release"
+    "build": "npm run clean && npm run build:js && npm run build:less && npm run copy:images && npm run copy:leaflet-resources && npm run release"
   }
 }
