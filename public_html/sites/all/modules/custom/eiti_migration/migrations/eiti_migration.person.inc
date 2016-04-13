@@ -106,6 +106,13 @@ class EITIPersonMigration extends EITINodeMigration {
     if (!empty($row->field_ref_country_name_2)) {
       $row->field_ref_country_name_2 = $this->fetchSourceReferencedNodesCountry($row->field_ref_country_name_2);
     }
+
+    // And let's polish the email values.
+    if (!empty($row->field_contact_email)) {
+      $row->field_contact_email = (is_array($row->field_contact_email)) ? array_pop($row->field_contact_email) : $row->field_contact_email;
+      $row->field_contact_email = $this->parseEmail($row->field_contact_email);
+    }
+
     return TRUE;
   }
 
@@ -156,6 +163,20 @@ class EITIPersonMigration extends EITINodeMigration {
     }
     $countries = array_unique($countries);
     return $countries;
+  }
+
+  /**
+   * Small helper function that parses EMAIL from an HTML text.
+   */
+  private function parseEmail($html_value) {
+    $email_pattern = "/[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/i";
+    $matches = array();
+    preg_match_all($email_pattern, $html_value, $matches);
+    if (!empty($matches[0])) {
+      $email = array_pop($matches[0]);
+      return $email;
+    }
+    return '';
   }
 }
 

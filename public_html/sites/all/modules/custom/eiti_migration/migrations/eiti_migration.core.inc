@@ -294,8 +294,10 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
     }
 
     // Now we look-up the existing node, and if there IS ONE we merge the fields.
-    $existing_node = node_load($entity->nid, NULL, TRUE);
-    $this->mergeTranslatableNodeFields($entity, $existing_node);
+    if (!empty($entity->nid)) {
+      $existing_node = node_load($entity->nid, NULL, TRUE);
+      $this->mergeTranslatableNodeFields($entity, $existing_node);
+    }
   }
 
   /**
