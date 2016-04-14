@@ -58,6 +58,17 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
     );
   }
 
+  // Add our checkbox (it will be serialized and stored as a Ctools Content-Type instance setting).
+  $form['show_title'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Title'),
+    '#description' => t("If you won't like to display the title on the page, but use it only for <strong>adminsitrative side</strong>, uncheck this box."),
+    '#default_value' => (!isset($form_state['conf']['show_title'])) ? TRUE : $form_state['conf']['show_title'],
+    '#weight' => 2,
+  );
+  // We need additional submit handler to save our custom properties into $conf.
+  $form['#submit'][] = 'eitiwidgets_fpp_form_show_title_submit';
+
   // Hide unused FPP specific form elements.
   // @see: fieldable_panels_panes_entity_edit_form_submit()
   $form['link'] = array(
@@ -88,6 +99,33 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
       );
       break;
   }
+}
+
+/**
+ * Submit handler that saves addition proprieties for FPP.
+ */
+function eitiwidgets_fpp_form_show_title_submit($form, &$form_state) {
+  // Specify which fields you will like to save to conf.
+  $fields_to_save = array('show_title');
+  foreach ($fields_to_save as $key) {
+    $form_state['conf'][$key] = $form_state['values'][$key];
+  }
+}
+
+/**
+ * A ctools content-type callback, which overrides the default FPP callback,
+ * creating a wrapper callback that later makes additional checks and alters
+ * the returned $content ($block).
+ *
+ * @see fieldable_panels_panes_fieldable_panels_pane_content_type_render
+ */
+function eitiwidgets_fpp_render($subtype, $conf, $panel_args = array(), $context = array()) {
+  $block = fieldable_panels_panes_fieldable_panels_pane_content_type_render($subtype, $conf, $panel_args = array(), $context = array());
+  if (isset($conf['show_title']) && $conf['show_title'] == FALSE) {
+    $block->title = '';
+    unset($block->content['title_field']);
+  }
+  return $block;
 }
 
 /**
@@ -257,5 +295,17 @@ function eitiwidgets_entity_info_alter(&$info) {
     foreach ($info['fieldable_panels_pane']['bundles'] as $name => &$bundle) {
       $bundle['pane category'] = t('Widget Library');
     }
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_pre_alter().
+ */
+function eitiwidgets_ctools_plugin_pre_alter(&$plugin, &$info) {
+  // Alter the fieldable panels pane plugin so that it supports one more configuration,
+  // and change its render callback (which will act as a wrapper callback).
+  if ($plugin['plugin type'] == 'content_types' && $plugin['name'] == 'fieldable_panels_pane') {
+    $plugin['defaults']['show_title'] = TRUE;
+    $plugin['render callback'] = 'eitiwidgets_fpp_render';
   }
 }
