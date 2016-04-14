@@ -28,7 +28,7 @@ let DataSet = React.createClass({
 	    let svg = d3.select(el).append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
-            .attr("class", "bubble");        
+            .attr("class", "bubble");
 
 		let format = d3.format(",d"),
             color = d3.scale.category20c();
@@ -58,16 +58,16 @@ let DataSet = React.createClass({
               .text(function(d) { return d.className.substring(0, d.r / 3); });
 
         //d3.select(self.frameElement).style("height", height + "px");
-	},	
+	},
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
     classes: function(root) {
-      var classes = [];      
+      var classes = [];
 
       function recurse(name, node) {
         if (node.children) {
-        	node.children.forEach(function(child) { 
-        		recurse(node.name, child); 
+        	node.children.forEach(function(child) {
+        		recurse(node.name, child);
         	});
         } else {
         	classes.push({packageName: name, className: node.name, value: node.size});
@@ -124,7 +124,7 @@ let BubbleChart = React.createClass({
 			req.open("GET", props.dataURL, true);
 			req.send();
 		}
-		else if(props.chartData) {			
+		else if(props.chartData) {
 			this.setState({chartData: props.chartData});
 		}
 	},
@@ -172,13 +172,13 @@ let BubbleChart = React.createClass({
 			 chartTitle} = this.props;
 
 		return (
-			<div>	
-					<h3 className={"chartTitle"}>{chartTitle}</h3>			
+			<div>
+					<h3 className={"chartTitle"}>{chartTitle}</h3>
 					<DataSet
             		data={this.state.chartData}
             		width={width}
             		height={height}
-            		margin={margin}  
+            		margin={margin}
             		diameter={diameter}	/>
             		<button className="export" onClick={this.doExport.bind(this, "input")}> Export Data </button>
 			</div>

@@ -13,7 +13,7 @@ let GroupedBarExport = React.createClass ({
 		    rawData: [{
 			    label: '',
 			    values: [{x: '', y: 0}]
-		    }]		  
+		    }]
 	    }
     },
 
@@ -27,7 +27,7 @@ let GroupedBarExport = React.createClass ({
 			    	var data = JSON.parse(req.responseText);
 			    	if(props.processor) {
 		               data = props.processor(data);
-		            } 
+		            }
 			    	var classData = data.map(function(item) {
 			    		var newItem = item;
 			    		newItem['active'] = true;
@@ -60,7 +60,7 @@ let GroupedBarExport = React.createClass ({
 	doExport: function(xlabel) {
 	    let output = [];
 	    let data = this.state.chartData;
-	    
+
 	    data[0].values.forEach(function(item) {
 	    	var outputObj = {};
 	    	outputObj[xlabel] = item.x;
@@ -68,7 +68,7 @@ let GroupedBarExport = React.createClass ({
 	    	output.push(outputObj);
 	    });
 
-	    let dataLength = data.length; 
+	    let dataLength = data.length;
 	    for(var i=1; i<dataLength; i++) {
 	    	var j = 0;
 	    	data[i].values.forEach(function(item) {
@@ -95,7 +95,7 @@ let GroupedBarExport = React.createClass ({
 
 	render: function() {
 	    return (
-	    <div>	    	
+	    <div>
                 <button className="export" onClick={this.doExport.bind(this, this.props.xlabel)}> Export Data </button>
         </div>
 	    )

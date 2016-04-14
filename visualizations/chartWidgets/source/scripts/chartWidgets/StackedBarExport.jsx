@@ -26,7 +26,7 @@ let StackedBarExport = React.createClass ({
 			    	var data = JSON.parse(req.responseText);
 			    	if(props.processor) {
 		               data = props.processor(data);
-		            } 
+		            }
 			    	var classData = data.map(function(item) {
 			    		var newItem = item;
 			    		newItem['active'] = true;
@@ -59,7 +59,7 @@ let StackedBarExport = React.createClass ({
 	doExport: function(xlabel) {
 	    let output = [];
 	    let data = this.state.chartData;
-	    
+
 	    data[0].values.forEach(function(item) {
 	    	var outputObj = {};
 	    	outputObj[xlabel] = item.x;
@@ -67,7 +67,7 @@ let StackedBarExport = React.createClass ({
 	    	output.push(outputObj);
 	    });
 
-	    let dataLength = data.length; 
+	    let dataLength = data.length;
 	    for(var i=1; i<dataLength; i++) {
 	    	var j = 0;
 	    	data[i].values.forEach(function(item) {

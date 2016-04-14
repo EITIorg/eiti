@@ -17,7 +17,7 @@ window.chartWidget.create = function(options, data) {
 	var chartData, dataURL;
 	if(typeof(data) == "string") { //assumption: URL for JSON
 		dataURL = data;
-	} 
+	}
 	else { //assumption: data is tabular JSON data
 		chartData = data;
 	}

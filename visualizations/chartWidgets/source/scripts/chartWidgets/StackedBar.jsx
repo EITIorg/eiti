@@ -40,7 +40,7 @@ let StackedBar = React.createClass ({
 		classData.forEach(function(item){
 			item.active = (newChartLabels.indexOf(item.label) < 0 ) ? false : true;
 		});
-		
+
 		this.setState({ chartData: newData, rawData: classData });
 	},
 
@@ -79,7 +79,7 @@ let StackedBar = React.createClass ({
 			    	var data = JSON.parse(req.responseText);
 			    	if(props.processor) {
 		               data = props.processor(data);
-		            } 
+		            }
 			    	var classData = data.map(function(item) {
 			    		var newItem = item;
 			    		newItem['active'] = true;
@@ -112,7 +112,7 @@ let StackedBar = React.createClass ({
 	doExport: function(xlabel) {
 	    let output = [];
 	    let data = this.state.chartData;
-	    
+
 	    data[0].values.forEach(function(item) {
 	    	var outputObj = {};
 	    	outputObj[xlabel] = item.x;
@@ -120,7 +120,7 @@ let StackedBar = React.createClass ({
 	    	output.push(outputObj);
 	    });
 
-	    let dataLength = data.length; 
+	    let dataLength = data.length;
 	    for(var i=1; i<dataLength; i++) {
 	    	var j = 0;
 	    	data[i].values.forEach(function(item) {
@@ -157,9 +157,9 @@ let StackedBar = React.createClass ({
 		            height={this.props.height}
 		            margin={this.props.margin}
 		        	xAxis={{label: this.props.xlabel}}
-	                yAxis={{label: this.props.ylabel}} 
+	                yAxis={{label: this.props.ylabel}}
 	                tooltipHtml={this.props.tooltip}
-	                tooltipMode={'mouse'} 
+	                tooltipMode={'mouse'}
 	                legend={this.props.legend && this.state.showLegend} />
 		        <button className="export" onClick={this.doExport.bind(this, this.props.xlabel)}> Export Data </button>
 	        </div>

@@ -229,7 +229,7 @@ let TreeMap = React.createClass({
 			req.open("GET", props.dataURL, true);
 			req.send();
 		}
-		else if(props.chartData) {			
+		else if(props.chartData) {
 			this.setState({chartData: props.chartData});
 		}
 	},
@@ -268,7 +268,7 @@ let TreeMap = React.createClass({
 	        .round(false);
 
 		return (
-			<div>				
+			<div>
 					<h3 className={"chartTitle"}>{chartTitle}</h3>
 					<DataSet
             		data={this.state.chartData}
@@ -277,8 +277,8 @@ let TreeMap = React.createClass({
             		margin={margin}
             		formatNumber={formatNumber}
             		x={x}
-            		y={y}          
-            		treemap={treemap}  		           		
+            		y={y}
+            		treemap={treemap}
             		/>
 			</div>
 		);

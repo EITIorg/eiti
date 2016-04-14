@@ -7,7 +7,7 @@ let ExtendedPie = React.createClass ({
 	    	chartData: [{
 			    label: '',
 			    values: [{x: '', y: 0}]
-		    }]		  
+		    }]
 	    }
     },
 

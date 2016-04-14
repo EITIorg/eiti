@@ -31,7 +31,7 @@ let DataSet = React.createClass({
       this.drawSankey(el);
     } else {
       this.drawTable(el);
-    }    
+    }
   },
 
   drawSankey: function(el) {
@@ -106,16 +106,16 @@ let DataSet = React.createClass({
             sankey.relayout();
             link.attr("d", path);
           }
-	},	
+	},
 
 	// Returns a flattened hierarchy containing all leaf nodes under the root.
   classes: function(root) {
-    var classes = [];      
+    var classes = [];
 
     function recurse(name, node) {
       if (node.children) {
-      	node.children.forEach(function(child) { 
-      		recurse(node.name, child); 
+      	node.children.forEach(function(child) {
+      		recurse(node.name, child);
       	});
       } else {
       	classes.push({packageName: name, className: node.name, value: node.size});
@@ -143,7 +143,7 @@ let DataSet = React.createClass({
         if(link.source.sourceLinks.length > 0 && link.source.targetLinks.length == 0) {  // Company names
             var company = link.source.name;
             link.source.sourceLinks.forEach(function (item) {
-                var outputObj = { 
+                var outputObj = {
                                   "name" : company,
                                   "stream" : item.target.name,
                                   "entity" : item.target.sourceLinks[0].target.name,
@@ -164,7 +164,7 @@ let DataSet = React.createClass({
     }
   },
 
-	render() { 
+	render() {
 		return (
                 <div>
                     { this.state.table &&
@@ -202,13 +202,13 @@ let Sankey = React.createClass({
       var req = new XMLHttpRequest();
       req.onreadystatechange = function() {
           if (req.readyState == 4 && req.status == 200) {
-            var data = JSON.parse(req.responseText), 
-                nodedata = [], 
+            var data = JSON.parse(req.responseText),
+                nodedata = [],
                 linkdata = [],
                 processedData;
             if(props.processor) {
                     data = props.processor(data);
-                } 
+                }
             }
             var nodes = (data) ?  data.nodes : {};
             for (var node in nodes) {
@@ -226,7 +226,7 @@ let Sankey = React.createClass({
       req.open("GET", props.dataURL, true);
       req.send();
     }
-    else if(props.chartData) {      
+    else if(props.chartData) {
       this.setState({chartData: props.chartData});
     }
   },
@@ -279,8 +279,8 @@ let Sankey = React.createClass({
 			 chartTitle} = this.props;
 
 		return (
-			<div>	
-					<h3 className={"chartTitle"}>{chartTitle}</h3>		
+			<div>
+					<h3 className={"chartTitle"}>{chartTitle}</h3>
 					<DataSet
             		data={this.state.chartData}
             		width={width - margin.left - margin.right}

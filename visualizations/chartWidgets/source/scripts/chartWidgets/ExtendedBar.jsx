@@ -8,7 +8,7 @@ let ExtendedBar = React.createClass ({
 	    	chartData: [{
 			    label: '',
 			    values: [{x: '', y: 0}]
-		    }]		  
+		    }]
 	    }
     },
 
@@ -56,7 +56,7 @@ let ExtendedBar = React.createClass ({
 	doExport: function(xlabel) {
 	    let output = [];
 	    let data = this.state.chartData;
-	    
+
 	    data[0].values.forEach(function(item) {
 	    	var outputObj = {};
 	    	outputObj[xlabel] = item.x;
@@ -78,7 +78,7 @@ let ExtendedBar = React.createClass ({
 	    tempLink.href = csvURL;
 	    tempLink.setAttribute('download', 'download.csv');
 	    tempLink.click();
-	    
+
 	},
 
 	render: function() {
@@ -90,9 +90,9 @@ let ExtendedBar = React.createClass ({
 		            height={this.props.height}
 		            margin={this.props.margin}
 		        	xAxis={{label: this.props.xlabel}}
-	                yAxis={{label: this.props.ylabel}} 
+	                yAxis={{label: this.props.ylabel}}
 	                tooltipHtml={this.props.tooltip}
-	                tooltipMode={'mouse'} 
+	                tooltipMode={'mouse'}
 	                legend={false} />
 	            <button className="export" onClick={this.doExport.bind(this, this.props.xlabel)}> Export Data </button>
             </div>

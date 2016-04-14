@@ -137,12 +137,12 @@ let BarChart = React.createClass({
 
     _renderLegend() {
         var props = this.props;
-            
-        if (props.legend) {    
+
+        if (props.legend) {
           var colorDomain = props.legendData.map(function(item) {
             return item.label;
           });
-          var colorScale = props.colorScale.domain(colorDomain);  
+          var colorScale = props.colorScale.domain(colorDomain);
           return (
             <Legend
               colors={colorScale}
@@ -185,7 +185,7 @@ let BarChart = React.createClass({
           var colorDomain = this.props.legendData.map(function(item) {
             return item.label;
           });
-          colorScale = colorScale.domain(colorDomain);          
+          colorScale = colorScale.domain(colorDomain);
         }
 
         return (
@@ -232,7 +232,7 @@ let BarChart = React.createClass({
                 </Chart>
 
                 <Tooltip {...this.state.tooltip}/>
-                
+
                 </div>
         );
     }
