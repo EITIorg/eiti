@@ -42,6 +42,13 @@
 
         $chartContainer.html('');  // HACK: Remove any markup, this avoids a layout bug in plotly.
         Plotly.newPlot(chartSettings.container, response.data, chartSettings.layout, {displaylogo: false});
+
+        // @HACK: Reuse the export functionality form the eitiChartWidgets library.
+        // @TODO: Remove dependency on the eitiChartWidgets library.
+        var exportWidgetSettings = $.extend({}, chartSettings);
+        exportWidgetSettings.type += 'Export';
+        exportWidgetSettings.container += '--export';
+        chartWidget.create(exportWidgetSettings, response.data);
       });
     }
     // Use provided data.

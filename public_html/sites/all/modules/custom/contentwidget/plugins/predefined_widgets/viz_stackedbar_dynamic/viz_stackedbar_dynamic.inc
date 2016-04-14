@@ -43,6 +43,13 @@ function contentwidget__viz_stackedbar_dynamic__render($plugin, $widget_settings
     return array('#markup' => t('Plotly.js library could not be loaded.'));
   }
 
+  // Load the library.
+  // @TODO: Use restful.module for CSV export.
+  $library = libraries_load('eitiChartWidgets', 'minified');
+  if (empty($library)) {
+    return array('#markup' => t('Charts library could not be loaded.'));
+  }
+
   // Prepare the ID.
   $identifier_parts = array(
     'eiti-chart-widget',
@@ -62,8 +69,7 @@ function contentwidget__viz_stackedbar_dynamic__render($plugin, $widget_settings
   );
 
   $block['widget'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
+    '#type' => 'container',
     '#attributes' => array(
       'id' => $identifier,
       'class' => array(
@@ -83,6 +89,17 @@ function contentwidget__viz_stackedbar_dynamic__render($plugin, $widget_settings
         'message-initializing',
       ),
     ),
+  );
+
+  $block['export'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => $identifier . '--export',
+      'class' => array(
+        'eiti-chart-widget--export',
+      ),
+    ),
+    '#weight' => 11,
   );
 
   $endpoints = _contentwidget__viz_stackedbar_dynamic__get_data_types('endpoint');

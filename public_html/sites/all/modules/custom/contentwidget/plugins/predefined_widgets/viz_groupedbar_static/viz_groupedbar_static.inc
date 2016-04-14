@@ -38,7 +38,14 @@ function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settin
     return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
   }
 
+  // Load the Plotly.js library.
+  $plotly_library = libraries_load('plotly', 'minified');
+  if (empty($plotly_library)) {
+    return array('#markup' => t('Plotly.js library could not be loaded.'));
+  }
+
   // Load the library.
+  // @TODO: Use restful.module for CSV export.
   $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
     return array('#markup' => t('Charts library could not be loaded.'));
@@ -63,8 +70,7 @@ function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settin
   );
 
   $block['widget'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
+    '#type' => 'container',
     '#attributes' => array(
       'id' => $identifier,
       'class' => array(
@@ -84,6 +90,17 @@ function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settin
         'message-initializing',
       ),
     ),
+  );
+
+  $block['export'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => $identifier . '--export',
+      'class' => array(
+        'eiti-chart-widget--export',
+      ),
+    ),
+    '#weight' => 11,
   );
 
   // Prepare the data.
