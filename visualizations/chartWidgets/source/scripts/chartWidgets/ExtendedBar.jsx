@@ -74,6 +74,7 @@ let ExtendedBar = React.createClass ({
 	        csvURL = window.URL.createObjectURL(csvData);
 	    }
 	    var tempLink = document.createElement('a');
+	    document.body.appendChild(tempLink);
 	    tempLink.href = csvURL;
 	    tempLink.setAttribute('download', 'download.csv');
 	    tempLink.click();
