@@ -21,9 +21,7 @@
  * @see http://www.w3.org/TR/2011/WD-html5-20110525/tokenization.html#before-doctype-name-state
  */
 ?><!DOCTYPE html>
-<?php /* @see http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither */ ?>
-<!--[if IE 8 ]> <html class="no-js ie8 lt-ie9" <?php print $html_attributes; ?>> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" <?php print $html_attributes; ?>> <!--<![endif]-->
+<html class="no-js" <?php print $html_attributes; ?>>
 <head>
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>

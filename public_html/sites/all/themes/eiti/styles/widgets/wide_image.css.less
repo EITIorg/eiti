@@ -81,10 +81,13 @@
 .xMediumAndDown() {
   .predefined-widget--wide-image {
     .links-wrapper {
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       justify-content: space-around;
       li {
+        -ms-flex: 50%;
         flex: 50%;
       }
     }
@@ -99,7 +102,9 @@
       font-size: 2.5em;
     }
     .links-wrapper {
+      display: -ms-flexbox;
       display: flex;
+      -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
       justify-content: space-around;
     }

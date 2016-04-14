@@ -63,18 +63,19 @@
       line-height: 1.3em;
       min-height: 2.6em;
     }
-
-
   }
 }
 
 .xMediumAndDown() {
   .predefined-widget--value-chain {
     .value-chain-list {
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       justify-content: space-between;
       & > li {
+        -ms-flex: 1;
         flex: 1;
       }
     }
@@ -84,9 +85,15 @@
   .predefined-widget--value-chain {
     .value-chain-list {
       align-items: center;
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
       justify-content: space-between;
+      & > li {
+        -ms-flex: 1;
+        flex: 1;
+      }
     }
   }
 }

@@ -35,10 +35,13 @@
 .xMediumAndDown() {
   .predefined-widget--fact-blocks {
     .fact-blocks-wrapper {
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       justify-content: space-around;
       li {
+        -ms-flex: 50%;
         flex: 50%;
       }
     }
@@ -50,10 +53,13 @@
 .xNormalAndUp() {
   .predefined-widget--fact-blocks {
     .fact-blocks-wrapper {
+      display: -ms-flexbox;
       display: flex;
+      -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
       justify-content: space-around;
       li {
+        -ms-flex: 25%;
         flex: 25%;
       }
     }
