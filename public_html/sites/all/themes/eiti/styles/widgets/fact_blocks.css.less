@@ -5,6 +5,7 @@
     margin: 0;
 
     li {
+      .box-sizing();
       display: inline-block;
       padding: 0 0.5em;
     }
@@ -43,6 +44,9 @@
       li {
         -ms-flex: 50%;
         flex: 50%;
+        min-width: 12em;
+        margin-bottom: 1em;
+        margin-top: 1em;
       }
     }
     .with-background-image {

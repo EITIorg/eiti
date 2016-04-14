@@ -26,11 +26,20 @@
   }
 
   .site-navigation-toggle-wrapper {
-    .expand-column();
+    .first-child-column();
   }
 
   .footer-column {
     .row-separator();
+  }
+}
+
+.xMediumAndDown() {
+  .site-navigation-toggle-wrapper {
+    .column(0.8);
+  }
+  .site-identity-wrapper {
+    .column(2.2);
   }
 }
 
@@ -41,11 +50,8 @@
     .row-wrapper(8);
   }
 
-  .site-identity-wrapper {
-    .column(2);
-  }
   .header-items {
-    .column(6);
+    .column(5);
   }
 
   .main-content-inner,

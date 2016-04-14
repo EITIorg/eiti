@@ -82,6 +82,7 @@ function contentwidget_fact_blocks_render($plugin, $widget_settings, $entity, $l
         'class' => array(
           'widget-icon-value-suffix-wrapper',
           'mobject',
+          'mobject--small',
           'clearfix',
         ),
       ),
