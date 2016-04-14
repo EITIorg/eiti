@@ -32,11 +32,26 @@
 
     // Allow the .overlay-wrapper to be positioned relatively.
     position: relative;
+  }
 
-    // HACK: Force minimum size when something went wrong and the image didn't load.
-    @item_size: 14.625em;
-    min-height: @item_size;
-    min-width: @item_size;
+  // HACK: Force bookmark size when there is no image or something went wrong and the image didn't load.
+  .view-mode-bm_small_tile {
+    .linked-wrapper {
+      min-height: (234/16) * 1em;
+      min-width: (234/16) * 1em;
+    }
+  }
+  .view-mode-bm_medium_tile {
+    .linked-wrapper {
+      min-height: (234/16) * 1em;
+      min-width: (470/16) * 1em;
+    }
+  }
+  .view-mode-bm_large_tile {
+    .linked-wrapper {
+      min-height: (470/16) * 1em;
+      min-width: (470/16) * 1em;
+    }
   }
 
   .overlay-wrapper {
