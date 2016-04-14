@@ -80,8 +80,16 @@ function contentwidget_value_chain_render($plugin, $widget_settings, $entity, $l
     );
 
     $add_arrow = TRUE;
-    // Do not add arrow after the last item.
-    if ($delta == $chains_count - 1) {
+    if ($delta == 0) {
+      // Do not add arrow after the first item.
+      $add_arrow = FALSE;
+    }
+    else if ($delta == $chains_count - 1) {
+      // Do not add arrow after the last item.
+      $add_arrow = FALSE;
+    }
+    else if ($delta == $chains_count - 2) {
+      // Do not add arrow before the last item.
       $add_arrow = FALSE;
     }
 
