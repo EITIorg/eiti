@@ -174,15 +174,13 @@ function helpertheme_html_head_alter(&$head_elements) {
   }
 
   // Force IE to always use most recent engine.
-  $head_elements['mobile_viewport'] = array(
+  $head_elements['ie_compatible'] = array(
     '#tag' => 'meta',
     '#type' => 'html_tag',
     '#attributes' => array(
       'http-equiv' => 'X-UA-Compatible',
       'content' => 'IE=Edge',
     ),
-    '#prefix' => "<!--[if gte IE 8]>\n",
-    '#suffix' => "<![endif]-->\n",
   );
 
   /*
