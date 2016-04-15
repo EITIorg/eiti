@@ -73,6 +73,10 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'flush caches',
         'display drupal links',
 
+        // Hide coffee.module permissions.
+        'access coffee',
+        'administer coffee',
+
         // Hide devel.module permissions.
         'access devel information',
         'execute php code',
@@ -86,9 +90,31 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         // Hide less.module permissions.
         'administer less',
 
+        // Hide module_filter.module permissions.
+        'administer module filter',
+
         // Hide stage_file_proxy.module permissions.
         'administer stage_file_proxy settings',
       );
+      break;
+
+    case 'variable_realm':
+      $entries_list = array(
+        'global:default',
+        'language',
+      );
+
+      $variable_realm_name_prefixes = array(
+        'language:',
+      );
+      foreach (array_keys($component_export['options']['sources']) as $name) {
+        foreach ($variable_realm_name_prefixes as $prefix) {
+          if (strpos($name, $prefix) === 0) {
+            // Only remove the variable and do not display any message.
+            unset($component_export['options']['sources'][$name]);
+          }
+        }
+      }
       break;
 
     case 'variable':
@@ -98,6 +124,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'helpergeneric_cleanup_ui_force',
 
         // Hide CORE variables.
+        'admin_theme',
         'cache',
         'cache_lifetime',
         'clean_url',
@@ -111,6 +138,8 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'date_format_medium',
         'date_format_short',
         'dblog_row_limit',
+        'default_field_group',
+        'default_nodes_main',
         'drupal_private_key',
         'drupal_css_cache_files',
         'drupal_http_request_fails',
@@ -126,6 +155,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'menu_expanded',
         'menu_masks',
         'menu_rebuild_needed',
+        'node_admin_theme',
         'page_cache_maximum_age',
         'page_compression',
         'path_alias_whitelist',
@@ -142,22 +172,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'theme_default',
 
         // Cache specific variables.
-        'cache_flush_cache',
-        'cache_flush_cache_field',
-        'cache_flush_cache_filter',
-        'cache_flush_cache_form',
-        'cache_flush_cache_htmlpurifier',
-        'cache_flush_cache_image',
-        'cache_flush_cache_libraries',
-        'cache_flush_cache_menu',
-        'cache_flush_cache_page',
-        'cache_flush_cache_panels',
-        'cache_flush_cache_path',
-        'cache_flush_cache_restclient',
-        'cache_flush_cache_token',
-        'cache_flush_cache_variable',
-        'cache_flush_cache_views',
-        'cache_flush_cache_views_data',
+        'cache_content_flush_cache_page',
 
         // Hide admin_menu.module variables.
         'admin_menu_devel_modules_enabled',
@@ -174,9 +189,19 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'date_views_day_format_without_year',
         'date_views_week_format_with_year',
         'date_views_week_format_without_year',
+        'date_format_html5_tools_iso8601',
+        'date_format_search_api_facetapi_SECOND',
+        'date_format_search_api_facetapi_DAY',
+        'date_format_search_api_facetapi_HOUR',
+        'date_format_search_api_facetapi_MINUTE',
+        'date_format_search_api_facetapi_YEAR',
+        'date_format_search_api_facetapi_MONTH',
 
         // Hide entity.module variables.
         'entity_cache_tables_created',
+
+        // Hide entitycache.module variables.
+        'entitycache_enabled',
 
         // Hide entityreference.module variables.
         'entityreference:base-tables',
@@ -253,6 +278,12 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes',
         'media_wysiwyg_view_mode_video_wysiwyg_restricted_view_modes_status',
 
+        // Hide memcache.module variables.
+        'memcache_wildcard_flushes',
+
+        // Hide module_filter.module variables.
+        'module_filter_recent_modules',
+
         // Hide node.module variables.
         'node_cron_last',
 
@@ -277,6 +308,15 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         // Hide recaptcha.module variables.
         'recaptcha_private_key',
         'recaptcha_public_key',
+
+        // Hide rel.module variables.
+        'rel_build_form_registration',
+        'rel_build_registration_ignore',
+
+        // Hide search_api.module variables.
+        'search_api_facets_search_ids',
+        'search_api_solr_site_hash',
+        'search_api_solr_last_optimize',
 
         // Hide update.module variables.
         'update_last_check',
@@ -313,7 +353,12 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
       );
 
       $variable_name_prefixes = array(
-        'additional_settings__active_tab_',
+        'helpertheme_svg_icon_',  // helpertheme.module
+        'eiti_migration_',  // eiti_migration.module
+
+        'additional_settings__active_tab_',  // node.module
+        'cache_flush_',  // memcache.module
+        'cache_temporary_flush_',  // memcache.module
       );
       foreach ($component_export['options']['sources'] as $name) {
         foreach ($variable_name_prefixes as $prefix) {

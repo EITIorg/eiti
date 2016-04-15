@@ -1,0 +1,14 @@
+/**
+ * @file
+ * Override adminimal theme styles.
+ */
+
+/* HACK: Always show scroll-bar on admin pages. */
+html {
+  overflow-y: scroll;
+}
+
+.media-item .label-wrapper label {
+  font-size: 8px;
+  line-height: 1.5;
+}
