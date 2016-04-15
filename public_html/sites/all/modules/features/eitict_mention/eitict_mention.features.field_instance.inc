@@ -134,9 +134,10 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_source_link',
-    'label' => 'Source Link',
+    'label' => 'Source',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -227,7 +228,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
   t('Please specify the short description of this mention - what is the article about?
 Note: it\'s better to keep this description short (2-3 sentences). ');
   t('Published Date');
-  t('Source Link');
+  t('Source');
   t('Title');
 
   return $field_instances;
