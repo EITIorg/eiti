@@ -157,13 +157,13 @@ function eitict_document_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '6',
+          'weight' => '7',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
