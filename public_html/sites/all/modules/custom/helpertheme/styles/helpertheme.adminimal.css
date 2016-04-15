@@ -12,3 +12,9 @@ html {
   font-size: 8px;
   line-height: 1.5;
 }
+
+.media-list-thumbnails li a {
+  display: block;
+  height: 100px;
+  width: 100px;
+}
