@@ -18,11 +18,6 @@
   src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNShsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
 }
 
-/* HACK: Always show scroll-bar on admin pages. */
-html {
-  overflow-y: scroll;
-}
-
 body.adminimal-theme *::-moz-focus-inner {
   border: 0;
 }
