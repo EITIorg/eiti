@@ -350,10 +350,11 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'views_ui_show_sql_query_where',
 
         // Remove Form API weirdness!?!!
-        'default_field_group',
-        'default_nodes_main',
         'default_ds_field_settings',
         'default_ds_layout_settings',
+        'default_field_group',
+        'default_nodes_main',
+        'default_page_manager_handlers',
       );
 
       $variable_name_prefixes = array(
