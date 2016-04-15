@@ -163,4 +163,3 @@ features[user_role][] = investor
 features[user_role][] = restricted user
 features[user_role][] = translation editor
 features[variable][] = field_bundle_settings_user__user
-features_exclude[dependencies][search] = search

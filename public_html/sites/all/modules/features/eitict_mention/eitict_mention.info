@@ -52,6 +52,3 @@ features[variable][] = menu_parent_mention
 features[variable][] = node_options_mention
 features[variable][] = node_preview_mention
 features[variable][] = node_submitted_mention
-features_exclude[dependencies][eitict_article] = eitict_article
-features_exclude[field_base][body] = body
-features_exclude[field_base][title_field] = title_field
