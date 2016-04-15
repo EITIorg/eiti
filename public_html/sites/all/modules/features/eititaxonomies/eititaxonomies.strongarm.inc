@@ -75,5 +75,21 @@ function eititaxonomies_strongarm() {
   );
   $export['entity_translation_settings_taxonomy_term__tags'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'title_taxonomy_term';
+  $strongarm->value = array(
+    'auto_attach' => array(
+      'name' => 'name',
+      'description' => 'description',
+    ),
+    'hide_label' => array(
+      'entity' => 'entity',
+      'page' => 0,
+    ),
+  );
+  $export['title_taxonomy_term'] = $strongarm;
+
   return $export;
 }
