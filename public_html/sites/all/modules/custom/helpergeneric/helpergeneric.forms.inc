@@ -138,8 +138,6 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'date_format_medium',
         'date_format_short',
         'dblog_row_limit',
-        'default_field_group',
-        'default_nodes_main',
         'drupal_private_key',
         'drupal_css_cache_files',
         'drupal_http_request_fails',
@@ -350,6 +348,12 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'views_ui_show_preview_information',
         'views_ui_show_sql_query',
         'views_ui_show_sql_query_where',
+
+        // Remove Form API weirdness!?!!
+        'default_field_group',
+        'default_nodes_main',
+        'default_ds_field_settings',
+        'default_ds_layout_settings',
       );
 
       $variable_name_prefixes = array(
