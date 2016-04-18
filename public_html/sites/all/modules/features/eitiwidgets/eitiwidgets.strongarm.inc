@@ -15,9 +15,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__fact_blocks';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -28,9 +28,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__featured_bookmarks';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -41,9 +41,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__header';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -54,9 +54,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__icon_blocks';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -67,9 +67,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__quote';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -80,9 +80,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__table';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -93,9 +93,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__tabs_with_widgets';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -106,9 +106,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__text';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -119,9 +119,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__value_chain';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -132,9 +132,9 @@ function eitiwidgets_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_fieldable_panels_pane__visualization';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
