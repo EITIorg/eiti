@@ -147,7 +147,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -263,7 +263,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -414,7 +414,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -563,7 +563,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -808,7 +808,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -1044,7 +1044,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -1332,7 +1332,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -1482,7 +1482,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -1600,7 +1600,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
