@@ -23,7 +23,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -123,8 +123,10 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
       'default' => array(
         'label' => 'inline',
         'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
+        'settings' => array(
+          'strip_www' => FALSE,
+        ),
+        'type' => 'link_domain',
         'weight' => 3,
       ),
       'teaser' => array(
@@ -180,10 +182,15 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',

@@ -17,14 +17,8 @@ function eitict_mention_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'mention';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'title' => array(
-      'weight' => '0',
-      'label' => 'hidden',
-      'format' => 'default',
+    'title_field' => array(
       'formatter_settings' => array(
-        'link' => '0',
-        'wrapper' => 'h2',
-        'class' => 'title',
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
@@ -52,7 +46,7 @@ function eitict_mention_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
-        0 => 'title',
+        0 => 'title_field',
         1 => 'group_details',
         2 => 'field_published_date',
         3 => 'field_source_link',
@@ -60,7 +54,7 @@ function eitict_mention_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'title' => 'main',
+      'title_field' => 'main',
       'group_details' => 'main',
       'field_published_date' => 'main',
       'field_source_link' => 'main',
