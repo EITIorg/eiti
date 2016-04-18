@@ -22,9 +22,10 @@ function eitipanels_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'panels_page_allowed_types';
   $strongarm->value = array(
-    'map_simple-map_simple' => 'map_simple-map_simple',
     'country-header-country-header' => 'country-header-country-header',
+    'map_simple-map_simple' => 'map_simple-map_simple',
     'map_full-map_full' => 'map_full-map_full',
+    'views_panes-mentions-listing' => 'views_panes-mentions-listing',
     'fieldable_panels_pane-fact_blocks' => 'fieldable_panels_pane-fact_blocks',
     'fieldable_panels_pane-featured_bookmarks' => 'fieldable_panels_pane-featured_bookmarks',
     'fieldable_panels_pane-header' => 'fieldable_panels_pane-header',
@@ -33,6 +34,7 @@ function eitipanels_strongarm() {
     'fieldable_panels_pane-table' => 'fieldable_panels_pane-table',
     'fieldable_panels_pane-tabs_with_widgets' => 'fieldable_panels_pane-tabs_with_widgets',
     'fieldable_panels_pane-text' => 'fieldable_panels_pane-text',
+    'fieldable_panels_pane-value_chain' => 'fieldable_panels_pane-value_chain',
     'fieldable_panels_pane-visualization' => 'fieldable_panels_pane-visualization',
   );
   $export['panels_page_allowed_types'] = $strongarm;

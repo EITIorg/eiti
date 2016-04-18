@@ -23,6 +23,7 @@ function eitict_mention_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Mentions';
+  $handler->display->display_options['css_class'] = 'single-fluid-row-wrapper';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -72,14 +73,20 @@ function eitict_mention_views_default_views() {
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'mentions';
-
   /* Display: Listing */
   $handler = $view->new_display('panel_pane', 'Listing', 'listing');
-  $handler->display->display_options['pane_category']['name'] = 'Listings';
+  $handler->display->display_options['pane_title'] = 'Listing: Mentions';
+  $handler->display->display_options['pane_category']['name'] = 'Widget Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 0;
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 0;
+  $handler->display->display_options['allow']['exposed_form'] = 0;
+  $handler->display->display_options['allow']['fields_override'] = 0;
   $translatables['mentions'] = array(
     t('Master'),
     t('Mentions'),
@@ -96,9 +103,9 @@ function eitict_mention_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('Page'),
     t('Listing'),
-    t('Listings'),
+    t('Listing: Mentions'),
+    t('Widget Library'),
   );
   $export['mentions'] = $view;
 
