@@ -10,8 +10,8 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Visualization: Stacked Bar chart dynamic',
-  'description' => 'A stacked bar chart with data pulled from the Summary Data.',
+  'title' => t('Visualization: Stacked Bar chart dynamic'),
+  'description' => t('A stacked bar chart with data pulled from the Summary Data.'),
   'render callback' => 'contentwidget__viz_stackedbar_dynamic__render',
   'settings form' => 'contentwidget__viz_stackedbar_dynamic__settings_form',
   'defaults' => array(

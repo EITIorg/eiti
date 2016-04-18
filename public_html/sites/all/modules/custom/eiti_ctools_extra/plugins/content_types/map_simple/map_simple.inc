@@ -16,12 +16,13 @@
  */
 $plugin = array(
   'title' => t('Map: Simple'),
-  'single' => TRUE,
+  'category' => t('Widget Library'),
   'description' => t('Add a simplified interactive map. Initially intended to be used on the homepage.'),
-  'category' => t('EITI Maps'),
-  'render callback' => 'eiti_ctools_extra_map_simple_render',
   'edit form' => 'eiti_ctools_extra_map_simple_edit_form',
+  'icon' => drupal_get_path('module', 'contentwidget') . '/icon-eiti-base.png',
+  'render callback' => 'eiti_ctools_extra_map_simple_render',
   'render last' => TRUE,
+  'single' => TRUE,
 );
 
 /**

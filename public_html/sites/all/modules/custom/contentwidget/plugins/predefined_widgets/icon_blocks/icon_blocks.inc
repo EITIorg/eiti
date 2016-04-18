@@ -10,10 +10,10 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Icon Blocks',
-  'description' => 'Use this widget to add multiple icon blocks.',
-  'render callback' => 'contentwidget_icon_blocks_render',
-  'settings form' => 'contentwidget_icon_blocks_settings',
+  'title' => t('Icon Blocks'),
+  'description' => t('Use this widget to add multiple icon blocks.'),
+  'render callback' => 'contentwidget__icon_blocks__render',
+  'settings form' => 'contentwidget__icon_blocks__settings',
   'defaults' => array(
     'blocks_count' => 1,
   ),
@@ -22,7 +22,7 @@ $plugin = array(
 /**
  * Render callback for the 'Icon Link' predefined widget.
  */
-function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget__icon_blocks__render($plugin, $widget_settings, $entity, $langcode) {
   $blocks_count = $widget_settings['blocks_count'];
 
   // Iterate through the link icons (formatting already inspired from the prototype).
@@ -118,7 +118,7 @@ function contentwidget_icon_blocks_render($plugin, $widget_settings, $entity, $l
 /**
  * Settings form for the 'Icon Link' predefined widget.
  */
-function contentwidget_icon_blocks_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget__icon_blocks__settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $blocks_count = isset($widget_settings['blocks_count']) ? $widget_settings['blocks_count'] : '';
 
@@ -135,7 +135,7 @@ function contentwidget_icon_blocks_settings(&$element, &$form_state, $plugin, $w
     '#options' => $available_sizes,
     '#default_value' => $blocks_count,
     '#ajax' => array(
-      'callback' => 'contentwidget_icon_blocks_settings_ajax',
+      'callback' => '_contentwidget__icon_blocks__settings_ajax',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
       'effect' => 'fade'
@@ -162,7 +162,7 @@ function contentwidget_icon_blocks_settings(&$element, &$form_state, $plugin, $w
   // Create the forms for the icon links.
   for ($delta = 0; $delta < $blocks_count; $delta++) {
     $block_settings = empty($widget_settings['blocks'][$delta]) ? array() : $widget_settings['blocks'][$delta];
-    $settings_form['blocks'][$delta] = _contentwidget_get_icon_block_elements($form_state, $block_settings, $delta);
+    $settings_form['blocks'][$delta] = _contentwidget__icon_blocks__get_icon_block_elements($form_state, $block_settings, $delta);
   }
 
   $settings_form['#attached']['css'] = array(
@@ -175,9 +175,9 @@ function contentwidget_icon_blocks_settings(&$element, &$form_state, $plugin, $w
 /**
  * Helper function creating the form elements for an icon block.
  *
- * @see: contentwidget_icon_blocks_settings()
+ * @see: contentwidget__icon_blocks__settings()
  */
-function _contentwidget_get_icon_block_elements(&$form_state, $block_settings, $delta) {
+function _contentwidget__icon_blocks__get_icon_block_elements(&$form_state, $block_settings, $delta) {
   $triggering_element = empty($form_state['triggering_element']) ? array() : $form_state['triggering_element'];
   $triggering_element_name = NULL;
   if (!empty($triggering_element['#parents'])) {
@@ -238,7 +238,7 @@ function _contentwidget_get_icon_block_elements(&$form_state, $block_settings, $
     '#default_value' => $links_count,
     '#required' => TRUE,
     '#ajax' => array(
-      'callback' => 'contentwidget_icon_blocks_links_settings_ajax',
+      'callback' => 'contentwidget__icon_blocks__links_settings_ajax',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
       'effect' => 'fade'
@@ -290,7 +290,7 @@ function _contentwidget_get_icon_block_elements(&$form_state, $block_settings, $
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_icon_blocks_settings_ajax($form, $form_state) {
+function _contentwidget__icon_blocks__settings_ajax($form, $form_state) {
   $triggering_element = $form_state['triggering_element'];
 
   // Go one level up in the form, to the container.
@@ -302,7 +302,7 @@ function contentwidget_icon_blocks_settings_ajax($form, $form_state) {
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_icon_blocks_links_settings_ajax($form, $form_state) {
+function contentwidget__icon_blocks__links_settings_ajax($form, $form_state) {
   $triggering_element = $form_state['triggering_element'];
 
   // Go one level up in the form, to the container.

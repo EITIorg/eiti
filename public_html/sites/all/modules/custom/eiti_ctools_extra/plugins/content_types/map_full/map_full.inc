@@ -16,18 +16,19 @@
  */
 $plugin = array(
   'title' => t('Map: Full'),
-  'single' => TRUE,
   'description' => t('Add a fully interactive map. Initially intended to be used on a separate map page'),
-  'category' => t('EITI Maps'),
-  'render callback' => 'eiti_ctools_extra_map_full_render',
-  'edit form' => 'eiti_ctools_extra_map_full_edit_form',
+  'category' => t('Widget Library'),
+  'edit form' => 'eiti_ctools_extra__map_full__edit_form',
+  'icon' => drupal_get_path('module', 'contentwidget') . '/icon-eiti-base.png',
+  'render callback' => 'eiti_ctools_extra__map_full__render',
   'render last' => TRUE,
+  'single' => TRUE,
 );
 
 /**
  * Output function for the 'Full Map' content type.
  */
-function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $context) {
+function eiti_ctools_extra__map_full__render($subtype, $conf, $panel_args, $context) {
   $block = new stdClass();
 
   // We need this because we store the JS init file in the plugin folder.
@@ -86,7 +87,7 @@ function eiti_ctools_extra_map_full_render($subtype, $conf, $panel_args, $contex
  *
  * @TODO: make configurable stats.
  */
-function eiti_ctools_extra_map_full_edit_form($form, &$form_state) {
+function eiti_ctools_extra__map_full__edit_form($form, &$form_state) {
   // Empty so that we can have title override.
   return $form;
 }

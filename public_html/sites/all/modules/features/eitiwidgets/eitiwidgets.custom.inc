@@ -294,6 +294,7 @@ function eitiwidgets_entity_info_alter(&$info) {
   if (!empty($info['fieldable_panels_pane']['bundles'])) {
     foreach ($info['fieldable_panels_pane']['bundles'] as $name => &$bundle) {
       $bundle['pane category'] = t('Widget Library');
+      $bundle['pane icon'] = drupal_get_path('module', 'contentwidget') . '/icon-eiti-widget.png';
     }
   }
 }
@@ -307,5 +308,43 @@ function eitiwidgets_ctools_plugin_pre_alter(&$plugin, &$info) {
   if ($plugin['plugin type'] == 'content_types' && $plugin['name'] == 'fieldable_panels_pane') {
     $plugin['defaults']['show_title'] = TRUE;
     $plugin['render callback'] = 'eitiwidgets_fpp_render';
+  }
+}
+
+/**
+ * Implements hook_preprocess_panels_add_content_modal().
+ */
+function eitiwidgets_preprocess_panels_add_content_modal(&$vars) {
+  // Change the categories order.
+  // @see: panels_renderer_editor::get_category()
+  $category = 'Widget library';
+  $library_key = preg_replace('/[^a-z0-9]/', '-', strtolower($category));
+  $vars['categories'][$library_key]['weight'] = -99;
+  uasort($vars['categories'], 'drupal_sort_weight');
+
+  // Recreate the list of categories using the new order and add prefix reusable prefix to categories.
+  $without_prefix = array(
+    $library_key
+  );
+  $vars['categories_array'] = array();
+  foreach ($vars['categories'] as $key => $category_info) {
+    // 'root' category is actually displayed under the categories, so
+    // skip it.
+    if ($key == 'root') {
+      continue;
+    }
+
+    $class = 'panels-modal-add-category';
+    if ($key == $vars['category']) {
+      $class .= ' active';
+    }
+
+    $url = $vars['renderer']->get_url('select-content', $vars['region'], $key);
+
+    $title = $category_info['title'];
+    if (!in_array($key, $without_prefix)) {
+      $title = t('[reusable] !category', array('!category' => $category_info['title']));
+    }
+    $vars['categories_array'][] = ctools_ajax_text_button($title, $url, '', $class);
   }
 }

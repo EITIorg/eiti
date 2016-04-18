@@ -10,8 +10,8 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Visualization: Grouped Bar chart dynamic',
-  'description' => 'A bar chart with data pulled from the Summary Data.',
+  'title' => t('Visualization: Grouped Bar chart dynamic'),
+  'description' => t('A bar chart with data pulled from the Summary Data.'),
   'render callback' => 'contentwidget__viz_groupedbar_dynamic__render',
   'settings form' => 'contentwidget__viz_groupedbar_dynamic__settings_form',
   'defaults' => array(

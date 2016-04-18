@@ -10,8 +10,8 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Visualization: Grouped Bar chart static',
-  'description' => 'A grouped bar chart with a manual input data.',
+  'title' => t('Visualization: Grouped Bar chart static'),
+  'description' => t('A grouped bar chart with a manual input data.'),
   'render callback' => 'contentwidget_viz_groupedbarchart_static_render',
   'settings form' => 'contentwidget_viz_groupedbarchart_static_settings',
   'defaults' => array(
