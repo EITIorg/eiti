@@ -64,7 +64,7 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
     '#title' => t('Show Title'),
     '#description' => t("If you won't like to display the title on the page, but use it only for <strong>adminsitrative side</strong>, uncheck this box."),
     '#default_value' => (!isset($form_state['conf']['show_title'])) ? TRUE : $form_state['conf']['show_title'],
-    '#weight' => 2,
+    '#weight' => 1,
   );
   // We need additional submit handler to save our custom properties into $conf.
   $form['#submit'][] = 'eitiwidgets_fpp_form_show_title_submit';

@@ -284,6 +284,129 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-featured_persons-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-featured_persons-field_fpp_body'] = array(
+    'bundle' => 'featured_persons',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_persons-field_fpp_person_list'.
+  $field_instances['fieldable_panels_pane-featured_persons-field_fpp_person_list'] = array(
+    'bundle' => 'featured_persons',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_person_list',
+    'label' => 'Person List',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_persons-title_field'.
+  $field_instances['fieldable_panels_pane-featured_persons-title_field'] = array(
+    'bundle' => 'featured_persons',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-header-field_fpp_background_image'.
   $field_instances['fieldable_panels_pane-header-field_fpp_background_image'] = array(
     'bundle' => 'header',
@@ -1630,6 +1753,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Content Widgets');
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
+  t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
