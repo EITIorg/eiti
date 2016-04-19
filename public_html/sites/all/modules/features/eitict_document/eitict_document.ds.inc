@@ -80,7 +80,7 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'document';
   $ds_layout->view_mode = 'default';
-  $ds_layout->layout = 'mobjectstacked';
+  $ds_layout->layout = 'mobject';
   $ds_layout->settings = array(
     'regions' => array(
       'side' => array(
@@ -108,10 +108,8 @@ function eitict_document_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
-      'above' => 'div',
       'side' => 'div',
       'main' => 'div',
-      'below' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'div',
