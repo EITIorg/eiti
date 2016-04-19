@@ -344,7 +344,7 @@ function eitiwidgets_field_default_field_instances() {
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_person_list',
     'label' => 'Person List',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -391,6 +391,130 @@ function eitiwidgets_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
         'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_publications-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-featured_publications-field_fpp_body'] = array(
+    'bundle' => 'featured_publications',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_publications-field_fpp_publication_list'.
+  $field_instances['fieldable_panels_pane-featured_publications-field_fpp_publication_list'] = array(
+    'bundle' => 'featured_publications',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_publication_list',
+    'label' => 'Publication List',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-featured_publications-title_field'.
+  $field_instances['fieldable_panels_pane-featured_publications-title_field'] = array(
+    'bundle' => 'featured_publications',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A field replacing fieldable panel pane title.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 'entity',
         'page' => 0,
       ),
       'text_processing' => 0,
@@ -1761,6 +1885,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
   t('Please specify the source of this data (a link to a page or a file).');
   t('Please specify the wide background image used for the header.');
+  t('Publication List');
   t('Quote');
   t('Source');
   t('Source URL');
