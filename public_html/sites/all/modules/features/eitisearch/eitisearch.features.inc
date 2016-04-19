@@ -41,7 +41,7 @@ function eitisearch_default_search_api_index() {
       "fields" : {
         "body:value" : { "type" : "text" },
         "field_article_type" : { "type" : "string" },
-        "field_related_country" : { "type" : "list\\u003Cstring\\u003E", "entity_type" : "country" },
+        "field_related_country:name" : { "type" : "list\\u003Cstring\\u003E" },
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "search_api_language" : { "type" : "string" },
         "title_field" : { "type" : "text" },

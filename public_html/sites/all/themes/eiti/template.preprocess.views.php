@@ -83,12 +83,12 @@ function __eiti_preprocess_views_view__search(&$variables) {
         }
 
         // Add "Filter by Related Country" facets block.
-        $facet_name = 'field_related_country';
+        $facet_name = 'field_related_country:name';
         if (isset($realm[$facet_name])) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
+            '#title' => t('Filter by @title:', array('@title' => 'Related Country')),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
