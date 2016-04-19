@@ -67,5 +67,21 @@ function eitientities_image_default_styles() {
     ),
   );
 
+  // Exported image style: dc-cover.
+  $styles['dc-cover'] = array(
+    'label' => 'Document Cover (200px wide)',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 200,
+          'height' => '',
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }

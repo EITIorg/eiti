@@ -45,6 +45,11 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_doc_image_preview' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|document|default'] = $ds_fieldsetting;
 

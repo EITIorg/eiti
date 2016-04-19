@@ -153,7 +153,7 @@ function eitict_document_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'img-narrow',
+          'image_style' => 'dc-cover',
         ),
         'type' => 'image',
         'weight' => 0,
