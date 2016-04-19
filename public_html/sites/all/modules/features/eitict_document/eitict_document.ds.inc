@@ -31,14 +31,14 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_doc_published_date' => array(
+    'field_attachments' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
         ),
       ),
     ),
-    'field_attachments' => array(
+    'field_doc_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -80,31 +80,38 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'document';
   $ds_layout->view_mode = 'default';
-  $ds_layout->layout = 'simplelayout';
+  $ds_layout->layout = 'mobjectstacked';
   $ds_layout->settings = array(
     'regions' => array(
+      'side' => array(
+        0 => 'field_doc_image_preview',
+        1 => 'field_doc_published_date',
+        2 => 'field_document_category',
+      ),
       'main' => array(
-        0 => 'group_doc_details',
-        1 => 'title_field',
-        2 => 'field_doc_image_preview',
-        3 => 'body',
-        4 => 'field_doc_published_date',
+        3 => 'title_field',
+        4 => 'body',
         5 => 'field_attachments',
-        6 => 'field_document_category',
       ),
     ),
     'fields' => array(
-      'group_doc_details' => 'main',
+      'field_doc_image_preview' => 'side',
+      'field_doc_published_date' => 'side',
+      'field_document_category' => 'side',
       'title_field' => 'main',
-      'field_doc_image_preview' => 'main',
       'body' => 'main',
-      'field_doc_published_date' => 'main',
       'field_attachments' => 'main',
-      'field_document_category' => 'main',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
     'wrappers' => array(
+      'above' => 'div',
+      'side' => 'div',
       'main' => 'div',
+      'below' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'div',
