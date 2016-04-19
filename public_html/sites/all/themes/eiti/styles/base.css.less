@@ -139,25 +139,38 @@ hr {
  */
 .mobject {
   display: flex;
+  display: -ms-flexbox;  // IE10
   align-items: flex-start;
+  flex-align: start;  // IE10
 
   .group-side {
     margin-right: 1em;
     flex: 0 0 content;
+    -ms-flex: 0 0 content;
+    img {
+      max-width: none;
+    }
   }
   .group-main {
     flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
   }
 }
 .xSmallOnly() {
   .mobject:not(.mobject--small) {
     display: block;
+
     .group-side {
       margin-right: 0;
       flex: none;
+      -ms-flex: none;
+      img {
+        max-width: 100%;
+      }
     }
     .group-main {
       flex: none;
+      -ms-flex: none;
     }
   }
 }
