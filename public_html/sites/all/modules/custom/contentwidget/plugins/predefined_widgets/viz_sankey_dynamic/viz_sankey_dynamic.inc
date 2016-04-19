@@ -144,18 +144,21 @@ function contentwidget__viz_sankey_dynamic__settings(&$element, &$form_state, $p
   // We want to cut out those who's context is required.
   $type_options = _contentwidget__viz_sankey_dynamic__get_data_types('options');
   $items = _contentwidget__viz_sankey_dynamic__get_data_types();
+  $form_state['required_ctools_contexts_available'] = FALSE;
   foreach ($type_options as $option_key => $label) {
     if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
 
       if (!isset($form_state['pane'])) {
         $settings_form['sankey_settings']['no-pane'] = array(
-          '#markup' => '<strong>'. t('Please configure this pane inside of the panelizer, because it requires panelizer context.') . '</strong>',
+          '#markup' => '<strong>'. t('Please configure this pane inside of the "Customize display > Content" page.') . '</strong>',
         );
         return $settings_form;
       }
     }
   }
+  $form_state['required_ctools_contexts_available'] = TRUE;
+
   array_unshift($type_options, t('- Select -'));
   $wrapper_id = 'extra-settings-sankey-dynamic';
   $settings_form['sankey_settings']['data_type'] = array(

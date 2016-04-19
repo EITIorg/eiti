@@ -99,6 +99,12 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
       );
       break;
   }
+
+  // Do not allow editing of FPP entities outside of the required context.
+  if (isset($form_state['required_ctools_contexts_available']) && !$form_state['required_ctools_contexts_available']) {
+    $form['actions']['submit']['#disabled'] = TRUE;
+    form_set_error('field_fpp_widget', '<strong>' . t('Please configure this pane inside of the "Customize display > Content" page.') . '</strong>');
+  }
 }
 
 /**
