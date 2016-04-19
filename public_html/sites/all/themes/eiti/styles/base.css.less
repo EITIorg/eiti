@@ -138,27 +138,26 @@ hr {
  * Set the style for a 2 column CSS Media Object, first column is optional.
  */
 .mobject {
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+
   .group-side {
-    display: block;
-    float: left;
     margin-right: 1em;
+    flex: 0 0 content;
   }
   .group-main {
-    display: table-cell;
-    width: 500em;
+    flex: 1 1 auto;
   }
 }
 .xSmallOnly() {
   .mobject:not(.mobject--small) {
+    display: block;
     .group-side {
-      float: none;
       margin-right: 0;
-      text-align: center;
+      flex: none;
     }
     .group-main {
-      display: block;
-      width: auto;
+      flex: none;
     }
   }
 }
