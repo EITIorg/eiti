@@ -4,11 +4,10 @@
 }
 
 .eiti-chart-widget .chartTitle {
+    color: #0093cf;
     display: inline-block;
-    margin-left: 150px;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #4bb4a1;
+    font-size: 1em;
+    font-weight: 300;
 }
 
 .eiti-chart-widget .chartDescription {
@@ -225,4 +224,19 @@
  */
 .invisible {
     visibility: hidden;
+}
+
+/* export button */
+.export {
+  background: #f0f0f0;
+  border: #f0f0f0;
+  color: #0093cf;
+  font-size: 0.8em;
+  margin: 15px 0;
+  padding: 4px 10px;
+}
+.export:hover {
+  background: #0093cf;
+  border: #0093cf;
+  color: #f0f0f0;
 }
