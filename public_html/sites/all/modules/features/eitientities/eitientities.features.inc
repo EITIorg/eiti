@@ -69,12 +69,12 @@ function eitientities_image_default_styles() {
 
   // Exported image style: dc-cover.
   $styles['dc-cover'] = array(
-    'label' => 'Document Cover (200px wide)',
+    'label' => 'Document Cover (100px wide)',
     'effects' => array(
-      1 => array(
+      3 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 200,
+          'width' => 100,
           'height' => '',
           'upscale' => 1,
         ),

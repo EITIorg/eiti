@@ -19,6 +19,15 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'trim_length' => 256,
+        ),
+        'type' => 'helpergeneric_clean_summary',
+        'weight' => 3,
+      ),
+      'full' => array(
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -62,6 +71,12 @@ function eitict_document_field_default_field_instances() {
     'description' => 'If you have any file attachments, or if you want to specify any existing file from the library, use this field.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'full' => array(
         'label' => 'above',
         'module' => 'file',
         'settings' => array(),
@@ -149,6 +164,16 @@ function eitict_document_field_default_field_instances() {
     'description' => 'Image preview relevant to the document you\'re creating.',
     'display' => array(
       'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'dc-cover',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'full' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
@@ -254,6 +279,12 @@ function eitict_document_field_default_field_instances() {
         'type' => 'date_default',
         'weight' => 1,
       ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -300,6 +331,12 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'i18n_taxonomy',
         'settings' => array(),
         'type' => 'i18n_taxonomy_term_reference_plain',
@@ -337,6 +374,17 @@ function eitict_document_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title element-no-margin',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 2,
+      ),
+      'full' => array(
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
