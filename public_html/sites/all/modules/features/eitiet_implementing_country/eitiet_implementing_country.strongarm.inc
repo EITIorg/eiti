@@ -134,5 +134,20 @@ function eitiet_implementing_country_strongarm() {
   $strongarm->value = 'implementing_country:normal:default:default';
   $export['panelizer_implementing_country:normal:default_selection'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'title_implementing_country';
+  $strongarm->value = array(
+    'auto_attach' => array(
+      'name' => 0,
+    ),
+    'hide_label' => array(
+      'page' => 0,
+      'entity' => 0,
+    ),
+  );
+  $export['title_implementing_country'] = $strongarm;
+
   return $export;
 }
