@@ -120,10 +120,10 @@ function eitict_article_strongarm() {
   $strongarm->name = 'field_bundle_settings_node__article';
   $strongarm->value = array(
     'view_modes' => array(
-      'teaser' => array(
+      'full' => array(
         'custom_settings' => TRUE,
       ),
-      'full' => array(
+      'teaser' => array(
         'custom_settings' => FALSE,
       ),
       'rss' => array(

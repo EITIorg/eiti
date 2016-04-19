@@ -19,19 +19,19 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
         'module' => 'helpergeneric',
         'settings' => array(
           'trim_length' => 256,
         ),
         'type' => 'helpergeneric_clean_summary',
         'weight' => 1,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -71,13 +71,13 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 5,
       ),
-      'teaser' => array(
+      'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -105,16 +105,16 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -190,6 +190,12 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -201,12 +207,6 @@ function eitict_article_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -247,16 +247,16 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -287,6 +287,12 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -294,12 +300,6 @@ function eitict_article_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -379,6 +379,12 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -386,12 +392,6 @@ function eitict_article_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -472,16 +472,16 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'countries',
         'settings' => array(),
         'type' => 'country_default',
         'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -510,16 +510,16 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'full' => array(
+        'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -554,19 +554,19 @@ function eitict_article_field_default_field_instances() {
         'module' => 'title',
         'settings' => array(
           'title_class' => '',
-          'title_link' => '',
-          'title_style' => '',
+          'title_link' => 'content',
+          'title_style' => 'h3',
         ),
         'type' => 'title_linked',
         'weight' => 0,
       ),
-      'teaser' => array(
+      'full' => array(
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
-          'title_link' => 'content',
-          'title_style' => 'h3',
+          'title_class' => 'page-title',
+          'title_link' => '',
+          'title_style' => 'h1',
         ),
         'type' => 'title_linked',
         'weight' => 0,
