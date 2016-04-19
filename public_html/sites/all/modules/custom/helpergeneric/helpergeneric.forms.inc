@@ -355,6 +355,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'default_field_group',
         'default_nodes_main',
         'default_page_manager_handlers',
+        'tabs__active_tab',
       );
 
       $variable_name_prefixes = array(

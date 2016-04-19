@@ -14,14 +14,16 @@ function eitientities_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ds_classes_fields';
-  $strongarm->value = 'clearfix|Clearfix';
+  $strongarm->value = 'clearfix|Clearfix
+layout-separator|Layout Separator';
   $export['ds_classes_fields'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ds_classes_regions';
-  $strongarm->value = 'clearfix|Clearfix';
+  $strongarm->value = 'clearfix|Clearfix
+layout-separator|Layout Separator';
   $export['ds_classes_regions'] = $strongarm;
 
   $strongarm = new stdClass();

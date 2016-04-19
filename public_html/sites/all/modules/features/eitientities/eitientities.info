@@ -32,6 +32,7 @@ features[image][] = bm-large
 features[image][] = bm-medium
 features[image][] = bm-small
 features[image][] = dc-cover
+features[image][] = pr-photo
 features[user_permission][] = gfs_code entity administer
 features[user_permission][] = gfs_code entity view
 features[user_permission][] = indicator entity administer

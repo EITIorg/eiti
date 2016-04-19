@@ -53,8 +53,8 @@ function eitict_person_field_group_info() {
     'label' => 'Details',
     'weight' => '2',
     'children' => array(
-      0 => 'field_position',
-      1 => 'field_email',
+      0 => 'field_email',
+      1 => 'field_position',
     ),
     'format_type' => 'div',
     'format_settings' => array(

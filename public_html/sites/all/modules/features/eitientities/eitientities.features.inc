@@ -83,5 +83,20 @@ function eitientities_image_default_styles() {
     ),
   );
 
+  // Exported image style: pr-photo.
+  $styles['pr-photo'] = array(
+    'label' => 'Person Photo (100px by 100px)',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 100,
+          'height' => 100,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }

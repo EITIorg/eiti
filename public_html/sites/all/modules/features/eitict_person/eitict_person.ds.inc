@@ -24,6 +24,11 @@ function eitict_person_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_person_picture' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|person|default'] = $ds_fieldsetting;
 
@@ -38,6 +43,20 @@ function eitict_person_ds_field_settings_info() {
       'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
+    ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_person_picture' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
     ),
   );
   $export['node|person|teaser'] = $ds_fieldsetting;
@@ -118,8 +137,8 @@ function eitict_person_ds_layout_settings_info() {
         1 => 'title_field',
         2 => 'group_details',
         3 => 'body',
-        4 => 'field_position',
-        5 => 'node_link',
+        4 => 'node_link',
+        5 => 'field_position',
         6 => 'field_email',
       ),
     ),
@@ -128,13 +147,14 @@ function eitict_person_ds_layout_settings_info() {
       'title_field' => 'main',
       'group_details' => 'main',
       'body' => 'main',
-      'field_position' => 'main',
       'node_link' => 'main',
+      'field_position' => 'main',
       'field_email' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(
         'clearfix' => 'clearfix',
+        'layout-separator' => 'layout-separator',
       ),
     ),
     'wrappers' => array(
@@ -142,7 +162,7 @@ function eitict_person_ds_layout_settings_info() {
       'main' => 'div',
       'ds_hidden' => 'div',
     ),
-    'layout_wrapper' => 'div',
+    'layout_wrapper' => 'article',
     'layout_attributes' => '',
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',

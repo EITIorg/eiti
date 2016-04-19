@@ -227,7 +227,7 @@ function eitict_person_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'bm-small',
+          'image_style' => 'pr-photo',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -237,7 +237,7 @@ function eitict_person_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'bm-small',
+          'image_style' => 'pr-photo',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -512,7 +512,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => 'title',
+          'title_class' => 'title element-no-margin',
           'title_link' => '',
           'title_style' => 'h3',
         ),
