@@ -60,6 +60,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'document' => 'document',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'node';
@@ -67,12 +68,77 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['language']['value'] = array(
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
   );
+  $handler->display->display_options['filters']['language']['group'] = 1;
+  /* Filter criterion: Field: Title (title_field) */
+  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title_field_value']['group'] = 1;
+  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Document Category (field_document_category) */
+  $handler->display->display_options['filters']['field_document_category_tid']['id'] = 'field_document_category_tid';
+  $handler->display->display_options['filters']['field_document_category_tid']['table'] = 'field_data_field_document_category';
+  $handler->display->display_options['filters']['field_document_category_tid']['field'] = 'field_document_category_tid';
+  $handler->display->display_options['filters']['field_document_category_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_document_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_document_category_tid']['expose']['operator_id'] = 'field_document_category_tid_op';
+  $handler->display->display_options['filters']['field_document_category_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_document_category_tid']['expose']['operator'] = 'field_document_category_tid_op';
+  $handler->display->display_options['filters']['field_document_category_tid']['expose']['identifier'] = 'category';
+  $handler->display->display_options['filters']['field_document_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['field_document_category_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_document_category_tid']['vocabulary'] = 'document_category';
+  $handler->display->display_options['filters']['field_document_category_tid']['hierarchy'] = 1;
+  /* Filter criterion: Content: Published Date (field_doc_published_date) */
+  $handler->display->display_options['filters']['field_doc_published_date_value']['id'] = 'field_doc_published_date_value';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['table'] = 'field_data_field_doc_published_date';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['field'] = 'field_doc_published_date_value';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_doc_published_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_doc_published_date_value']['expose']['operator_id'] = 'field_doc_published_date_value_op';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['expose']['label'] = 'Published Date';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['expose']['operator'] = 'field_doc_published_date_value_op';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['expose']['identifier'] = 'date';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_doc_published_date_value']['granularity'] = 'month';
+  $handler->display->display_options['filters']['field_doc_published_date_value']['year_range'] = '-30:+1';
 
   /* Display: Listing */
   $handler = $view->new_display('panel_pane', 'Listing', 'listing');
   $handler->display->display_options['pane_title'] = 'Listing: Publications';
   $handler->display->display_options['pane_category']['name'] = 'Widget Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['inherit_panels_path'] = '1';
   $translatables['publications'] = array(
     t('Master'),
     t('Publications'),
@@ -89,6 +155,9 @@ function eitict_document_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Search'),
+    t('Category'),
+    t('Published Date'),
     t('Listing'),
     t('Listing: Publications'),
     t('Widget Library'),
