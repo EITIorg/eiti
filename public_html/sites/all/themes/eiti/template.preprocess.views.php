@@ -88,7 +88,7 @@ function __eiti_preprocess_views_view__search(&$variables) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => 'Related Country')),
+            '#title' => t('Filter by @title:', array('@title' => t('Related Country'))),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
