@@ -15,7 +15,8 @@ function eitientities_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'ds_classes_fields';
   $strongarm->value = 'clearfix|Clearfix
-layout-separator|Layout Separator';
+layout-separator|Layout Separator
+single-fluid-row-wrapper|Single Fluid Row Wrapper';
   $export['ds_classes_fields'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -23,7 +24,8 @@ layout-separator|Layout Separator';
   $strongarm->api_version = 1;
   $strongarm->name = 'ds_classes_regions';
   $strongarm->value = 'clearfix|Clearfix
-layout-separator|Layout Separator';
+layout-separator|Layout Separator
+single-fluid-row-wrapper|Single Fluid Row Wrapper';
   $export['ds_classes_regions'] = $strongarm;
 
   $strongarm = new stdClass();

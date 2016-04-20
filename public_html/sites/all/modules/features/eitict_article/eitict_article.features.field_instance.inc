@@ -77,7 +77,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -93,7 +93,7 @@ function eitict_article_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -114,7 +114,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -178,7 +178,7 @@ function eitict_article_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -292,11 +292,11 @@ function eitict_article_field_default_field_instances() {
         'weight' => 8,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'img-wide',
+          'image_style' => 'bg-wide',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -367,7 +367,7 @@ function eitict_article_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 6,
+      'weight' => 2,
     ),
   );
 
@@ -388,10 +388,10 @@ function eitict_article_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'img-narrow',
         ),
         'type' => 'image',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -461,7 +461,7 @@ function eitict_article_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -499,7 +499,7 @@ function eitict_article_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -540,7 +540,7 @@ function eitict_article_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -571,7 +571,7 @@ function eitict_article_field_default_field_instances() {
           'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',

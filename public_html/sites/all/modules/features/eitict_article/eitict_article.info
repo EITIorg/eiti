@@ -42,6 +42,7 @@ features[field_base][] = field_featured_image
 features[field_base][] = field_image_gallery
 features[field_base][] = field_tags
 features[field_group][] = group_event_details|node|article|form
+features[field_group][] = group_featured_image_header|node|article|full
 features[field_instance][] = node-article-body
 features[field_instance][] = node-article-field_article_type
 features[field_instance][] = node-article-field_attachments

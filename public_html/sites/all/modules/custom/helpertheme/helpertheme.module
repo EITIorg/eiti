@@ -158,6 +158,14 @@ function helpertheme_ds_layout_info() {
     ),
   );
 
+  $layouts['widelayout'] = array(
+    'label' => t('HelperTheme: Wide Layout'),
+    'path' => $path . '/dslayouts/widelayout',
+    'regions' => array(
+      'main' => t('Main'),
+    ),
+  );
+
   return $layouts;
 }
 
@@ -527,9 +535,108 @@ function helpertheme_get_icons_list($group, $sprite_icons_only = TRUE) {
 }
 
 /**
+ * Returns whether the current page is the full page view of the passed-in entity.
+ *
+ * @param string $type
+ * @param stdClass $entity
+ * @return bool
+ */
+function helpertheme_entity_is_page($type, $entity) {
+  // Ugly but necessary: there is no standardized way to tell if the current
+  // page is an entity view page. This information should be injected here in
+  // some form by entity-defining modules.
+  $entity_types = array(
+    'taxonomy_term' => 2,
+    'fieldable_panels_pane' => 4,
+  );
+
+  $position = 1;
+  if (isset($entity_types[$type])) {
+    $position = $entity_types[$type];
+  }
+
+  $page_object = menu_get_object($type, $position);
+  if (empty($page_object)) {
+    return FALSE;
+  }
+
+  $entity_identifier = entity_id($type, $entity);
+  $page_object_identifier = entity_id($type, $page_object);
+  return $entity_identifier == $page_object_identifier;
+}
+
+/**
  * Implements hook_panels_pre_render().
+ *
+ * @inheritdoc
  */
 function helpertheme_panels_pre_render($panels_display, $renderer) {
   $class = drupal_html_class('page-layout--' . $panels_display->layout);
   helpertheme_set_html_classes($class);
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ * @inheritdoc
+ */
+function helpertheme_entity_view_alter(&$build, $type) {
+  if (!isset($build['#bundle']) || !isset($build['#view_mode']) || $build['#view_mode'] != 'full') {
+    return;
+  }
+
+  if (!isset($build['#' . $type])) {
+    return;
+  }
+
+  $entity = $build['#' . $type];
+  if (!helpertheme_entity_is_page($type, $entity)) {
+    return;
+  }
+
+  $ds_layout = ds_get_layout($type, $build['#bundle'], $build['#view_mode']);
+  if (isset($ds_layout['layout'])) {
+    $class = drupal_html_class('page-layout--' . $ds_layout['layout']);
+    helpertheme_set_html_classes($class);
+  }
+}
+
+/**
+ * Implements hook_ds_field_theme_functions_info().
+ */
+function helpertheme_ds_field_theme_functions_info() {
+  return array(
+    'theme_helpertheme_ds_field_simple' => t('HelperTheme: Simple'),
+  );
+}
+
+/**
+ * Provide simple HTML for the field.
+ *
+ * @TODO: Improve styling for multi-value fields.
+ */
+function theme_helpertheme_ds_field_simple($variables) {
+  $output = '';
+  $config = $variables['ds-config'];
+  $classes = isset($config['classes']) ? ' ' . $config['classes'] : '';
+
+  // Add a simple wrapper.
+  $output .= '<div class="field field-name-' . strtr($variables['element']['#field_name'], '_', '-') . $classes . '">';
+
+  // Render the label.
+  if (!$variables['label_hidden']) {
+    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . $variables['label'];
+    if (!isset($config['lb-col'])) {
+      $output .= ':&nbsp;';
+    }
+    $output .= '</div>';
+  }
+
+  // Render the items.
+  foreach ($variables['items'] as $delta => $item) {
+    $output .= drupal_render($item);
+  }
+  $output .="</div>";
+
+  return $output;
 }

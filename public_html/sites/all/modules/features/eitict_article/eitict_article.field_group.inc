@@ -21,10 +21,10 @@ function eitict_article_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Event Details',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
-      0 => 'field_event_location',
-      1 => 'field_event_date',
+      0 => 'field_event_date',
+      1 => 'field_event_location',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -38,9 +38,43 @@ function eitict_article_field_group_info() {
   );
   $field_groups['group_event_details|node|article|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_featured_image_header|node|article|full';
+  $field_group->group_name = 'group_featured_image_header';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'full';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Featured Image Header',
+    'weight' => '0',
+    'children' => array(
+      0 => 'field_featured_image',
+      1 => 'title_field',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Featured Image Header',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'featured-image-header-wrapper force-full-width  clearfix',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_featured_image_header|node|article|full'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Event Details');
+  t('Featured Image Header');
 
   return $field_groups;
 }

@@ -39,7 +39,7 @@ function eitifiles_image_default_styles() {
   $styles['bg-wide'] = array(
     'label' => 'Background: Wide (1920px by 640px)',
     'effects' => array(
-      3 => array(
+      1 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1920,
@@ -52,14 +52,14 @@ function eitifiles_image_default_styles() {
         'name' => 'canvasactions_definecanvas',
         'data' => array(
           'RGB' => array(
-            'HEX' => '#d3d3d3',
+            'HEX' => '#676767',
           ),
           'under' => 1,
           'exact' => array(
             'width' => 1920,
-            'height' => '',
-            'xpos' => 'right',
-            'ypos' => 'top',
+            'height' => 640,
+            'xpos' => 'center',
+            'ypos' => 'center',
           ),
           'relative' => array(
             'leftdiff' => '',
