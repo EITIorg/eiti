@@ -60,11 +60,9 @@
     margin: 0 auto;  // Recenter the field.
     position: relative;
     z-index: 2;
-
-    & > * {
-      line-height: 1;
-      font-weight: normal;
-    }
+  }
+  .title {
+    font-weight: normal;
   }
 }
 
@@ -85,7 +83,7 @@
         color: @clmain;
       }
 
-      & > * {
+      .title {
         text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
       }
     }
@@ -96,7 +94,7 @@
   .featured-image-header-wrapper {
     .field-name-field-featured-image + .field-name-title-field {
       height: 35em;
-      & > * {
+      .title {
         position: absolute;
         bottom: 0;
       }
@@ -119,10 +117,38 @@
 
   .field {
     flex: 1;
-    min-width: 10em;
+    margin-right: 1em;
+    &:last-child {
+      margin-right: 0;
+    }
   }
   .field-name-field-tags {
     flex: 2;
+  }
+}
+
+.view-mode-teaser_alternative {
+  .title {
+    font-weight: normal;
+  }
+  .field-name-field-featured-image {
+    a {
+      .border-radius(6px);
+      border: 1px solid @clmain__separator;
+      display: block;
+      padding: 5px;
+    }
+    img {
+      .border-radius(3px);
+    }
+  }
+  .article-info {
+    border-bottom: 1px solid @clmain__separator;
+    border-top: 1px solid @clmain__separator;
+    .field {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
   }
 }
 

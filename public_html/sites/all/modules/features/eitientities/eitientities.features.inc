@@ -22,6 +22,21 @@ function eitientities_ctools_plugin_api($module = NULL, $api = NULL) {
 function eitientities_image_default_styles() {
   $styles = array();
 
+  // Exported image style: ar-thumb.
+  $styles['ar-thumb'] = array(
+    'label' => 'Article Thumbnail (144px by 144px)',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 144,
+          'height' => 144,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: bm-large.
   $styles['bm-large'] = array(
     'label' => 'Bookmark: Large',

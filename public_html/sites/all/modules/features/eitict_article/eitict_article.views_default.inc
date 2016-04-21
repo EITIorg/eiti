@@ -260,6 +260,12 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['sorts']['sticky']['table'] = 'node';
   $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
   $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
+  /* Contextual filter: Content: Tags (field_tags) */
+  $handler->display->display_options['arguments']['field_tags_tid']['id'] = 'field_tags_tid';
+  $handler->display->display_options['arguments']['field_tags_tid']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['arguments']['field_tags_tid']['field'] = 'field_tags_tid';
+  $handler->display->display_options['arguments']['field_tags_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_tags_tid']['summary']['format'] = 'default_summary';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -299,9 +305,9 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['group'] = 1;
   $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Filter by Title';
   $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
   );
@@ -316,6 +322,7 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'tags';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
     2 => '2',
   );
@@ -341,7 +348,8 @@ function eitict_article_views_default_views() {
     t('next ›'),
     t('last »'),
     t('There are no items to display.'),
-    t('Search'),
+    t('All'),
+    t('Filter by Title'),
     t('Tags'),
     t('Page'),
   );

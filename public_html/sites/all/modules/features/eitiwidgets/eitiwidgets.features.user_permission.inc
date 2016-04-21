@@ -103,6 +103,15 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'create fieldable featured_articles'.
+  $permissions['create fieldable featured_articles'] = array(
+    'name' => 'create fieldable featured_articles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable featured_bookmarks'.
   $permissions['create fieldable featured_bookmarks'] = array(
     'name' => 'create fieldable featured_bookmarks',
@@ -209,6 +218,15 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable featured_articles'.
+  $permissions['delete fieldable featured_articles'] = array(
+    'name' => 'delete fieldable featured_articles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable featured_bookmarks'.
   $permissions['delete fieldable featured_bookmarks'] = array(
     'name' => 'delete fieldable featured_bookmarks',
@@ -309,6 +327,15 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable fact_blocks'.
   $permissions['edit fieldable fact_blocks'] = array(
     'name' => 'edit fieldable fact_blocks',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable featured_articles'.
+  $permissions['edit fieldable featured_articles'] = array(
+    'name' => 'edit fieldable featured_articles',
     'roles' => array(
       'administrator' => 'administrator',
     ),

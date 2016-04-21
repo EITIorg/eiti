@@ -16,6 +16,7 @@ function eitientities_strongarm() {
   $strongarm->name = 'ds_classes_fields';
   $strongarm->value = 'clearfix|Clearfix
 layout-separator|Layout Separator
+pane-title-wrapper|Pane Title Wrapper
 single-fluid-row-wrapper|Single Fluid Row Wrapper';
   $export['ds_classes_fields'] = $strongarm;
 

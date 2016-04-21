@@ -37,5 +37,14 @@ function eitientities_ds_view_modes_info() {
   );
   $export['bm_small_tile'] = $ds_view_mode;
 
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'teaser_alternative';
+  $ds_view_mode->label = 'Teaser Alternative';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['teaser_alternative'] = $ds_view_mode;
+
   return $export;
 }
