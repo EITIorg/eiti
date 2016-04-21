@@ -64,6 +64,15 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'article' => 'article',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
+  $handler->display->display_options['filters']['language']['group'] = 1;
   /* Filter criterion: Content: Article Type (field_article_type) */
   $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
   $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
@@ -71,6 +80,7 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
     'blog' => 'blog',
   );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -149,6 +159,15 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'article' => 'article',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
+  $handler->display->display_options['filters']['language']['group'] = 1;
   /* Filter criterion: Content: Article Type (field_article_type) */
   $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
   $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
@@ -156,6 +175,7 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
     'event' => 'event',
   );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -234,6 +254,15 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'article' => 'article',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
+  $handler->display->display_options['filters']['language']['group'] = 1;
   /* Filter criterion: Content: Article Type (field_article_type) */
   $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
   $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
@@ -241,6 +270,7 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
     'news' => 'news',
   );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

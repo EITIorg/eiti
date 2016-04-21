@@ -101,3 +101,51 @@ function __eiti_preprocess_views_view__search(&$variables) {
       }
   }
 }
+
+/**
+ * Implements template_preprocess_views_view() for the blog view.
+ */
+function __eiti_preprocess_views_view__blog(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view() for the events view.
+ */
+function __eiti_preprocess_views_view__events(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view() for the news view.
+ */
+function __eiti_preprocess_views_view__news(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
+  }
+}

@@ -17,10 +17,54 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'node_link' => array(
+      'weight' => '9',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'author' => array(
+      'weight' => '18',
+      'label' => 'hidden',
+      'format' => 'author',
+    ),
+    'post_date' => array(
+      'weight' => '19',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_shortest',
+    ),
+    'field_featured_image' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
+        ),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'func' => 'theme_ds_field_reset',
+          'func' => 'theme_helpertheme_ds_field_simple',
+          'classes' => 'single-fluid-row-wrapper',
+        ),
+      ),
+    ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_event_location' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_tags' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -44,21 +88,7 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
-    'field_event_location' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_related_country' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_tags' => array(
+    'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -87,7 +117,14 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_image_gallery' => array(
+    'field_related_country' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_event_location' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -95,6 +132,13 @@ function eitict_article_ds_field_settings_info() {
       ),
     ),
     'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_tags' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -119,24 +163,56 @@ function eitict_article_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'article';
   $ds_layout->view_mode = 'default';
-  $ds_layout->layout = 'simplelayout';
+  $ds_layout->layout = 'widelayout';
   $ds_layout->settings = array(
     'regions' => array(
+      'above' => array(
+        0 => 'group_featured_image_header',
+        1 => 'field_featured_image',
+        2 => 'group_article_info_wrapper',
+        3 => 'title_field',
+        4 => 'group_article_info',
+        9 => 'author',
+        10 => 'post_date',
+        11 => 'field_tags',
+      ),
       'main' => array(
-        0 => 'title_field',
-        1 => 'body',
+        5 => 'field_event_date',
+        6 => 'field_event_location',
+        7 => 'body',
+        8 => 'node_link',
       ),
     ),
     'fields' => array(
-      'title_field' => 'main',
+      'group_featured_image_header' => 'above',
+      'field_featured_image' => 'above',
+      'group_article_info_wrapper' => 'above',
+      'title_field' => 'above',
+      'group_article_info' => 'above',
+      'field_event_date' => 'main',
+      'field_event_location' => 'main',
       'body' => 'main',
+      'node_link' => 'main',
+      'author' => 'above',
+      'post_date' => 'above',
+      'field_tags' => 'above',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+      'main' => array(
+        'clearfix' => 'clearfix',
+        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+      ),
+    ),
     'wrappers' => array(
+      'above' => 'header',
       'main' => 'div',
+      'below' => 'div',
       'ds_hidden' => 'div',
     ),
-    'layout_wrapper' => 'div',
+    'layout_wrapper' => 'article',
     'layout_attributes' => '',
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
@@ -156,16 +232,16 @@ function eitict_article_ds_layout_settings_info() {
     'regions' => array(
       'above' => array(
         0 => 'group_featured_image_header',
-        1 => 'field_featured_image',
-        2 => 'group_article_info_wrapper',
+        1 => 'group_article_info_wrapper',
+        2 => 'field_featured_image',
+        3 => 'title_field',
         4 => 'group_article_info',
-        5 => 'title_field',
         11 => 'author',
         12 => 'post_date',
         13 => 'field_tags',
       ),
       'main' => array(
-        3 => 'field_related_country',
+        5 => 'field_related_country',
         6 => 'field_event_date',
         7 => 'field_event_location',
         8 => 'body',
@@ -175,11 +251,11 @@ function eitict_article_ds_layout_settings_info() {
     ),
     'fields' => array(
       'group_featured_image_header' => 'above',
-      'field_featured_image' => 'above',
       'group_article_info_wrapper' => 'above',
-      'field_related_country' => 'main',
-      'group_article_info' => 'above',
+      'field_featured_image' => 'above',
       'title_field' => 'above',
+      'group_article_info' => 'above',
+      'field_related_country' => 'main',
       'field_event_date' => 'main',
       'field_event_location' => 'main',
       'body' => 'main',
@@ -199,7 +275,7 @@ function eitict_article_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
-      'above' => 'div',
+      'above' => 'header',
       'main' => 'div',
       'below' => 'div',
       'ds_hidden' => 'div',

@@ -21,10 +21,10 @@ function eitict_article_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'helpergeneric',
         'settings' => array(
-          'trim_length' => 256,
+          'trim_length' => 512,
         ),
         'type' => 'helpergeneric_clean_summary',
-        'weight' => 1,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -71,7 +71,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -107,7 +107,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -190,9 +190,17 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
@@ -247,9 +255,10 @@ function eitict_article_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
+        'type' => 'text_default',
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -286,10 +295,14 @@ function eitict_article_field_default_field_instances() {
     'description' => 'If there\'s a featured image, specify it.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'bg-wide',
+        ),
+        'type' => 'image',
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -381,7 +394,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -474,7 +487,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'above',
@@ -509,10 +522,14 @@ function eitict_article_field_default_field_instances() {
     'description' => 'Use tags to wire this content to other related content.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
+        'label' => 'hidden',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 0,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator_localized',
+        'weight' => 20,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -556,12 +573,12 @@ function eitict_article_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'title',
           'title_link' => 'content',
-          'title_style' => 'h3',
+          'title_style' => 'h2',
         ),
         'type' => 'title_linked',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'hidden',
