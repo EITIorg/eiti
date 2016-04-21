@@ -25,8 +25,6 @@ function eitipanels_strongarm() {
     'country-header-country-header' => 'country-header-country-header',
     'map_simple-map_simple' => 'map_simple-map_simple',
     'map_full-map_full' => 'map_full-map_full',
-    'views_panes-mentions-listing' => 'views_panes-mentions-listing',
-    'views_panes-publications-listing' => 'views_panes-publications-listing',
     'fieldable_panels_pane-fact_blocks' => 'fieldable_panels_pane-fact_blocks',
     'fieldable_panels_pane-featured_bookmarks' => 'fieldable_panels_pane-featured_bookmarks',
     'fieldable_panels_pane-header' => 'fieldable_panels_pane-header',

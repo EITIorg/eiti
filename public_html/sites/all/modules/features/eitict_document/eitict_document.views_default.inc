@@ -145,6 +145,10 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['pane_category']['name'] = 'Widget Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['inherit_panels_path'] = '1';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'publications';
   $translatables['publications'] = array(
     t('Master'),
     t('Publications'),
@@ -168,6 +172,7 @@ function eitict_document_views_default_views() {
     t('Listing'),
     t('Listing: Publications'),
     t('Widget Library'),
+    t('Page'),
   );
   $export['publications'] = $view;
 

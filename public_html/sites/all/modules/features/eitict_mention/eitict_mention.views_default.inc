@@ -93,6 +93,10 @@ function eitict_mention_views_default_views() {
   $handler->display->display_options['allow']['title_override'] = 0;
   $handler->display->display_options['allow']['exposed_form'] = 0;
   $handler->display->display_options['allow']['fields_override'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'mentions';
   $translatables['mentions'] = array(
     t('Master'),
     t('Mentions'),
@@ -113,6 +117,7 @@ function eitict_mention_views_default_views() {
     t('Listing'),
     t('Listing: Mentions'),
     t('Widget Library'),
+    t('Page'),
   );
   $export['mentions'] = $view;
 

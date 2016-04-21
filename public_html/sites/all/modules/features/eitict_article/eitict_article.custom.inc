@@ -20,3 +20,17 @@ function eitict_article_field_group_build_pre_render_alter(&$element) {
     }
   }
 }
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function eitict_article_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  $view = $form_state['view'];
+
+  if ($view->name == 'news') {
+    // Improve the form layout.
+    $form['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $form['search']['#size'] = 30;
+    $form['tags']['#size'] = 30;
+  }
+}

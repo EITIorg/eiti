@@ -291,6 +291,35 @@ function eitict_article_views_default_views() {
     'news' => 'news',
   );
   $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
+  /* Filter criterion: Field: Title (title_field) */
+  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title_field_value']['group'] = 1;
+  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  /* Filter criterion: Content: Tags (field_tags) */
+  $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_tags_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Tags';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'tags';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -312,6 +341,8 @@ function eitict_article_views_default_views() {
     t('next ›'),
     t('last »'),
     t('There are no items to display.'),
+    t('Search'),
+    t('Tags'),
     t('Page'),
   );
   $export['news'] = $view;
