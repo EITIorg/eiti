@@ -44,6 +44,13 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
+    'field_event_location' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'field_related_country' => array(
       'formatter_settings' => array(
         'ft' => array(
