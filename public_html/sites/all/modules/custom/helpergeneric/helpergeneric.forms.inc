@@ -122,6 +122,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
       $entries_list = array(
         // Custom variables.
         'helpergeneric_cleanup_ui_force',
+        'date_format_shortest',
 
         // Hide CORE variables.
         'admin_theme',

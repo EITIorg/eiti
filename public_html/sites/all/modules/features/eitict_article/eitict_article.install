@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Add new date format.
+ */
+function eitict_article_update_7001() {
+  module_load_include('inc', 'update_scripts', 'helpers/core');
+
+  // Add a custom date format "Feb 28, 2012".
+  $date_format = 'M j, Y';
+  _us_system__add_date_format($date_format);
+
+  $machine_name = 'shortest';
+  $title = 'Shortest';
+  _us_system__add_date_format_type($machine_name, $title, $date_format);
+}

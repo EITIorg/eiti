@@ -92,9 +92,31 @@
   .featured-image-header-wrapper {
     .field-name-field-featured-image + .field-name-title-field {
       .page-title {
-        margin-top: 16em;
+        margin-top: 15em;
       }
     }
+  }
+}
+
+.article-info-wrapper {
+  background-color: @clmain__header;
+}
+
+.article-info {
+  padding: 0.5em;
+
+  display: flex;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  justify-content: space-between;
+
+  .field {
+    flex: 1;
+    min-width: 10em;
+  }
+  .field-name-field-tags {
+    flex: 2;
   }
 }
 
