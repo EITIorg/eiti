@@ -80,6 +80,13 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
