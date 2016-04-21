@@ -575,7 +575,7 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(
           'title_class' => 'title',
           'title_link' => 'content',
-          'title_style' => 'h2',
+          'title_style' => 'h1',
         ),
         'type' => 'title_linked',
         'weight' => 2,

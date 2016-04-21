@@ -22,6 +22,13 @@ function eitict_document_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
     'field_doc_image_preview' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -33,13 +40,6 @@ function eitict_document_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
@@ -60,6 +60,13 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_doc_published_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -72,18 +79,6 @@ function eitict_document_ds_field_settings_info() {
         'ft' => array(
           'func' => 'theme_field',
         ),
-      ),
-    ),
-    'field_doc_published_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_doc_image_preview' => array(
-      'formatter_settings' => array(
-        'ft' => array(),
       ),
     ),
   );
@@ -152,7 +147,7 @@ function eitict_document_ds_layout_settings_info() {
       'main' => 'div',
       'ds_hidden' => 'div',
     ),
-    'layout_wrapper' => 'div',
+    'layout_wrapper' => 'article',
     'layout_attributes' => '',
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
@@ -199,12 +194,14 @@ function eitict_document_ds_layout_settings_info() {
       'main' => 'div',
       'ds_hidden' => 'div',
     ),
-    'layout_wrapper' => 'div',
+    'layout_wrapper' => 'article',
     'layout_attributes' => '',
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
     'layout_disable_css' => FALSE,
+    'hide_page_title' => '0',
+    'page_option_title' => '',
   );
   $export['node|document|full'] = $ds_layout;
 
