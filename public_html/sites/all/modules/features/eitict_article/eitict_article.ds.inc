@@ -34,10 +34,15 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
-    'submitted_by' => array(
-      'weight' => '1',
+    'author' => array(
+      'weight' => '18',
       'label' => 'hidden',
-      'format' => 'ds_time_ago',
+      'format' => 'author',
+    ),
+    'post_date' => array(
+      'weight' => '19',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_shortest',
     ),
     'field_related_country' => array(
       'formatter_settings' => array(
@@ -135,13 +140,18 @@ function eitict_article_ds_layout_settings_info() {
   $ds_layout->layout = 'widelayout';
   $ds_layout->settings = array(
     'regions' => array(
-      'main' => array(
+      'above' => array(
         0 => 'group_featured_image_header',
         1 => 'field_featured_image',
-        2 => 'submitted_by',
-        3 => 'field_tags',
-        4 => 'title_field',
-        5 => 'field_related_country',
+        2 => 'group_article_info_wrapper',
+        4 => 'group_article_info',
+        5 => 'title_field',
+        11 => 'author',
+        12 => 'post_date',
+        13 => 'field_tags',
+      ),
+      'main' => array(
+        3 => 'field_related_country',
         6 => 'field_event_date',
         7 => 'field_event_location',
         8 => 'body',
@@ -150,25 +160,34 @@ function eitict_article_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'group_featured_image_header' => 'main',
-      'field_featured_image' => 'main',
-      'submitted_by' => 'main',
-      'field_tags' => 'main',
-      'title_field' => 'main',
+      'group_featured_image_header' => 'above',
+      'field_featured_image' => 'above',
+      'group_article_info_wrapper' => 'above',
       'field_related_country' => 'main',
+      'group_article_info' => 'above',
+      'title_field' => 'above',
       'field_event_date' => 'main',
       'field_event_location' => 'main',
       'body' => 'main',
       'field_attachments' => 'main',
       'field_image_gallery' => 'main',
+      'author' => 'above',
+      'post_date' => 'above',
+      'field_tags' => 'above',
     ),
     'classes' => array(
       'layout_class' => array(
         '' => '',
       ),
+      'main' => array(
+        'clearfix' => 'clearfix',
+        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+      ),
     ),
     'wrappers' => array(
+      'above' => 'div',
       'main' => 'div',
+      'below' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'article',

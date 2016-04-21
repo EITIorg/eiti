@@ -13,6 +13,72 @@ function eitict_article_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_article_info_wrapper|node|article|full';
+  $field_group->group_name = 'group_article_info_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'full';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Article Info Wrapper',
+    'weight' => '1',
+    'children' => array(
+      0 => 'group_article_info',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Article Info Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'article-info-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_article_info_wrapper|node|article|full'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_article_info|node|article|full';
+  $field_group->group_name = 'group_article_info';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'article';
+  $field_group->mode = 'full';
+  $field_group->parent_name = 'group_article_info_wrapper';
+  $field_group->data = array(
+    'label' => 'Article Info',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_tags',
+      1 => 'author',
+      2 => 'post_date',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Article Info',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'article-info single-fluid-row-wrapper clearfix',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_article_info|node|article|full'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_event_details|node|article|form';
   $field_group->group_name = 'group_event_details';
   $field_group->entity_type = 'node';
@@ -59,7 +125,7 @@ function eitict_article_field_group_info() {
       'label' => 'Featured Image Header',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'featured-image-header-wrapper force-full-width  clearfix',
+        'classes' => 'featured-image-header-wrapper  clearfix',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
@@ -73,6 +139,8 @@ function eitict_article_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Article Info');
+  t('Article Info Wrapper');
   t('Event Details');
   t('Featured Image Header');
 

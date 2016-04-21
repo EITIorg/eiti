@@ -162,7 +162,9 @@ function helpertheme_ds_layout_info() {
     'label' => t('HelperTheme: Wide Layout'),
     'path' => $path . '/dslayouts/widelayout',
     'regions' => array(
+      'above' => t('Above'),
       'main' => t('Main'),
+      'below' => t('Below'),
     ),
   );
 
