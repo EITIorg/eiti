@@ -1,0 +1,24 @@
+Index: public_html/sites/all/modules/contrib/content_access/content_access.admin.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/sites/all/modules/contrib/content_access/content_access.admin.inc	(revision 95f2a5bb97e2209dc38e490f6591f10eae6f562b)
++++ public_html/sites/all/modules/contrib/content_access/content_access.admin.inc	(revision )
+@@ -94,6 +94,9 @@
+   // Apply new settings.
+   node_access_acquire_grants($node);
+ 
++  // Clear the static loading cache.
++  entity_get_controller('node')->resetCache(array($node->nid));
++
+   module_invoke_all('per_node', $settings);
+ 
+   drupal_set_message(t('Your changes have been saved.'));
+@@ -344,4 +347,4 @@
+       array('@types' => implode(', ', $types))
+     ));
+   }
+-}
+\ No newline at end of file
++}

@@ -94,6 +94,9 @@ function content_access_page_submit($form, &$form_state) {
   // Apply new settings.
   node_access_acquire_grants($node);
 
+  // Clear the static loading cache.
+  entity_get_controller('node')->resetCache(array($node->nid));
+
   module_invoke_all('per_node', $settings);
 
   drupal_set_message(t('Your changes have been saved.'));
