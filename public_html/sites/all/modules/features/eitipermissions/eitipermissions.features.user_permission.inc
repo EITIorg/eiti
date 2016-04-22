@@ -748,6 +748,22 @@ function eitipermissions_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'grant content access'.
+  $permissions['grant content access'] = array(
+    'name' => 'grant content access',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'content_access',
+  );
+
+  // Exported permission: 'grant own content access'.
+  $permissions['grant own content access'] = array(
+    'name' => 'grant own content access',
+    'roles' => array(),
+    'module' => 'content_access',
+  );
+
   // Exported permission: 'helpergeneric access taxonomy'.
   $permissions['helpergeneric access taxonomy'] = array(
     'name' => 'helpergeneric access taxonomy',

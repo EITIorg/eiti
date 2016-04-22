@@ -30,6 +30,7 @@ features[user_permission][] = delete any page content
 features[user_permission][] = delete own page content
 features[user_permission][] = edit any page content
 features[user_permission][] = edit own page content
+features[variable][] = content_access_page
 features[variable][] = diff_enable_revisions_page_node_page
 features[variable][] = diff_show_preview_changes_node_page
 features[variable][] = diff_view_mode_preview_node_page
