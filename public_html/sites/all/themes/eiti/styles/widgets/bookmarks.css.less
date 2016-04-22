@@ -34,26 +34,6 @@
     position: relative;
   }
 
-  // HACK: Force bookmark size when there is no image or something went wrong and the image didn't load.
-  .view-mode-bm_small_tile {
-    .linked-wrapper {
-      min-height: (234/16) * 1em;
-      min-width: (234/16) * 1em;
-    }
-  }
-  .view-mode-bm_medium_tile {
-    .linked-wrapper {
-      min-height: (234/16) * 1em;
-      min-width: (470/16) * 1em;
-    }
-  }
-  .view-mode-bm_large_tile {
-    .linked-wrapper {
-      min-height: (470/16) * 1em;
-      min-width: (470/16) * 1em;
-    }
-  }
-
   .overlay-wrapper {
     padding: 1.5em;
     position: absolute;
@@ -76,6 +56,17 @@
     }
   }
 }
+.xSmallOnly() {
+  .predefined-widget--bookmarks {
+    // @TODO: Remove!!
+    .overlay-wrapper {
+      position: static;
+    }
+    .field-name-field-bm-image + .overlay-wrapper {
+      position: absolute;
+    }
+  }
+}
 
 .xMediumAndDown() {
   .predefined-widget--bookmarks {
@@ -85,6 +76,30 @@
         float: none;
         margin: 0 auto;
         max-width: 100%
+      }
+    }
+  }
+}
+
+.xMediumAndUp() {
+  .predefined-widget--bookmarks {
+    // HACK: Force bookmark size when there is no image or something went wrong and the image didn't load.
+    .view-mode-bm_small_tile {
+      .linked-wrapper {
+        min-height: (234/16) * 1em;
+        min-width: (234/16) * 1em;
+      }
+    }
+    .view-mode-bm_medium_tile {
+      .linked-wrapper {
+        min-height: (234/16) * 1em;
+        min-width: (470/16) * 1em;
+      }
+    }
+    .view-mode-bm_large_tile {
+      .linked-wrapper {
+        min-height: (470/16) * 1em;
+        min-width: (470/16) * 1em;
       }
     }
   }
