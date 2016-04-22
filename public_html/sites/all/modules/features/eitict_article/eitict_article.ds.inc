@@ -17,18 +17,28 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'article_info' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'article_header' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'node_link' => array(
-      'weight' => '9',
+      'weight' => '3',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'author' => array(
-      'weight' => '18',
+      'weight' => '7',
       'label' => 'hidden',
       'format' => 'author',
     ),
     'post_date' => array(
-      'weight' => '19',
+      'weight' => '6',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
@@ -36,7 +46,13 @@ function eitict_article_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_helpertheme_ds_field_simple',
-          'classes' => 'single-fluid-row-wrapper',
+        ),
+      ),
+    ),
+    'field_tags' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -48,20 +64,6 @@ function eitict_article_ds_field_settings_info() {
       ),
     ),
     'field_event_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_tags' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_event_location' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -78,23 +80,25 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'article_info' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'article_header' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'author' => array(
-      'weight' => '18',
+      'weight' => '8',
       'label' => 'hidden',
       'format' => 'author',
     ),
     'post_date' => array(
-      'weight' => '19',
+      'weight' => '7',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
-    ),
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_helpertheme_ds_field_simple',
-          'classes' => 'single-fluid-row-wrapper',
-        ),
-      ),
     ),
     'field_tags' => array(
       'formatter_settings' => array(
@@ -103,21 +107,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_related_country' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_image_gallery' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_featured_image' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_helpertheme_ds_field_simple',
@@ -131,6 +121,13 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_featured_image' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
+        ),
+      ),
+    ),
     'field_attachments' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -138,7 +135,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_event_location' => array(
+    'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -155,18 +152,23 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'teaser_alternative';
   $ds_fieldsetting->settings = array(
+    'article_info' => array(
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'node_link' => array(
-      'weight' => '6',
+      'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'author' => array(
-      'weight' => '7',
+      'weight' => '6',
       'label' => 'hidden',
       'format' => 'author',
     ),
     'post_date' => array(
-      'weight' => '8',
+      'weight' => '5',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
@@ -177,13 +179,48 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'body' => array(
+    'field_event_date' => array(
       'formatter_settings' => array(
-        'ft' => array(),
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
       ),
     ),
   );
   $export['node|article|teaser_alternative'] = $ds_fieldsetting;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_custom_fields_info().
+ */
+function eitict_article_ds_custom_fields_info() {
+  $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'article_header';
+  $ds_field->label = 'Article Header';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'article|*';
+  $ds_field->properties = array();
+  $export['article_header'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'article_info';
+  $ds_field->label = 'Article Info';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'article|*';
+  $ds_field->properties = array();
+  $export['article_info'] = $ds_field;
 
   return $export;
 }
@@ -204,35 +241,35 @@ function eitict_article_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'above' => array(
-        0 => 'group_featured_image_header',
-        1 => 'field_featured_image',
-        2 => 'group_article_info_wrapper',
-        3 => 'title_field',
-        4 => 'group_article_info',
-        9 => 'author',
-        10 => 'post_date',
-        11 => 'field_tags',
+        0 => 'article_header',
+        1 => 'article_info',
       ),
       'main' => array(
-        5 => 'field_event_date',
-        6 => 'field_event_location',
-        7 => 'body',
-        8 => 'node_link',
+        2 => 'body',
+        3 => 'node_link',
+      ),
+      'ds_hidden' => array(
+        4 => 'field_featured_image',
+        5 => 'title_field',
+        6 => 'post_date',
+        7 => 'author',
+        8 => 'field_event_date',
+        9 => 'field_event_location',
+        10 => 'field_tags',
       ),
     ),
     'fields' => array(
-      'group_featured_image_header' => 'above',
-      'field_featured_image' => 'above',
-      'group_article_info_wrapper' => 'above',
-      'title_field' => 'above',
-      'group_article_info' => 'above',
-      'field_event_date' => 'main',
-      'field_event_location' => 'main',
+      'article_header' => 'above',
+      'article_info' => 'above',
       'body' => 'main',
       'node_link' => 'main',
-      'author' => 'above',
-      'post_date' => 'above',
-      'field_tags' => 'above',
+      'field_featured_image' => 'ds_hidden',
+      'title_field' => 'ds_hidden',
+      'post_date' => 'ds_hidden',
+      'author' => 'ds_hidden',
+      'field_event_date' => 'ds_hidden',
+      'field_event_location' => 'ds_hidden',
+      'field_tags' => 'ds_hidden',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -268,39 +305,37 @@ function eitict_article_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'above' => array(
-        0 => 'group_featured_image_header',
-        1 => 'group_article_info_wrapper',
-        2 => 'field_featured_image',
-        3 => 'group_article_info',
-        5 => 'title_field',
-        11 => 'author',
-        12 => 'post_date',
-        13 => 'field_tags',
+        0 => 'article_header',
+        1 => 'article_info',
       ),
       'main' => array(
-        4 => 'field_related_country',
-        6 => 'field_event_date',
-        7 => 'field_event_location',
-        8 => 'body',
-        9 => 'field_attachments',
-        10 => 'field_image_gallery',
+        2 => 'body',
+        3 => 'field_attachments',
+        4 => 'field_image_gallery',
+      ),
+      'ds_hidden' => array(
+        5 => 'field_featured_image',
+        6 => 'title_field',
+        7 => 'post_date',
+        8 => 'author',
+        9 => 'field_event_date',
+        10 => 'field_event_location',
+        11 => 'field_tags',
       ),
     ),
     'fields' => array(
-      'group_featured_image_header' => 'above',
-      'group_article_info_wrapper' => 'above',
-      'field_featured_image' => 'above',
-      'group_article_info' => 'above',
-      'field_related_country' => 'main',
-      'title_field' => 'above',
-      'field_event_date' => 'main',
-      'field_event_location' => 'main',
+      'article_header' => 'above',
+      'article_info' => 'above',
       'body' => 'main',
       'field_attachments' => 'main',
       'field_image_gallery' => 'main',
-      'author' => 'above',
-      'post_date' => 'above',
-      'field_tags' => 'above',
+      'field_featured_image' => 'ds_hidden',
+      'title_field' => 'ds_hidden',
+      'post_date' => 'ds_hidden',
+      'author' => 'ds_hidden',
+      'field_event_date' => 'ds_hidden',
+      'field_event_location' => 'ds_hidden',
+      'field_tags' => 'ds_hidden',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -342,27 +377,29 @@ function eitict_article_ds_layout_settings_info() {
       ),
       'main' => array(
         1 => 'title_field',
-        2 => 'group_article_info',
-        3 => 'field_event_date',
-        4 => 'field_event_location',
-        5 => 'body',
-        6 => 'node_link',
-        7 => 'author',
-        8 => 'post_date',
+        2 => 'article_info',
+        3 => 'body',
+        4 => 'node_link',
+      ),
+      'ds_hidden' => array(
+        5 => 'post_date',
+        6 => 'author',
+        7 => 'field_event_date',
+        8 => 'field_event_location',
         9 => 'field_tags',
       ),
     ),
     'fields' => array(
       'field_featured_image' => 'side',
       'title_field' => 'main',
-      'group_article_info' => 'main',
-      'field_event_date' => 'main',
-      'field_event_location' => 'main',
+      'article_info' => 'main',
       'body' => 'main',
       'node_link' => 'main',
-      'author' => 'main',
-      'post_date' => 'main',
-      'field_tags' => 'main',
+      'post_date' => 'ds_hidden',
+      'author' => 'ds_hidden',
+      'field_event_date' => 'ds_hidden',
+      'field_event_location' => 'ds_hidden',
+      'field_tags' => 'ds_hidden',
     ),
     'classes' => array(
       'layout_class' => array(

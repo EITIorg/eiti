@@ -157,3 +157,38 @@ function helperfield_field_is_empty($item, $field) {
 function helperfield_field_widget_element_validate($element, &$form_state) {
   // @TODO: Add some validation magic.
 }
+
+
+/**
+ * Helper function to get the default value for a field on an entity.
+ *
+ * @param string $entity_type
+ *   The type of $entity; e.g., 'node' or 'user'.
+ * @param stdClass $entity
+ *   The entity for the operation.
+ * @param string $field_name
+ *   The field name.
+ * @param string $column
+ *   The field name.
+ * @param int $delta
+ *   The delta value, defaults to 0.
+ * @param string|null $langcode
+ *   The field language to fill-in with the default value.
+ *
+ * @return array
+ */
+function helperfield_field_get_value($entity_type, $entity, $field_name, $delta = 0, $column = NULL, $langcode = NULL) {
+  // Determine the langcode that will be used by language fallback.
+  $langcode = field_language($entity_type, $entity, $field_name, $langcode);
+
+  if (isset($entity->{$field_name}[$langcode][$delta])) {
+    if (is_null($column)) {
+      return $entity->{$field_name}[$langcode][$delta];
+    }
+    else if (isset($entity->{$field_name}[$langcode][$delta][$column])) {
+      return $entity->{$field_name}[$langcode][$delta][$column];
+    }
+  }
+
+  return NULL;
+}

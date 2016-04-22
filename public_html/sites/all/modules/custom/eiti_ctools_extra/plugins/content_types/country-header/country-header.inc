@@ -48,7 +48,7 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     $cover_file_uri = $cover_file_info['uri'];
 
     // Get the image URI.
-    $style_name = 'bg-wide';
+    $style_name = 'bg-large';
     $cover_url = image_style_url($style_name, $cover_file_uri);
 
     $block['banner']['#attributes']['class'][] = 'with-background-image';
