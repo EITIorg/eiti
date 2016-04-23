@@ -63,4 +63,5 @@ features[variable][] = panelizer_implementing_country:normal:default_selection
 features[variable][] = panelizer_implementing_country:normal_allowed_layouts_default
 features[variable][] = panelizer_implementing_country:normal_allowed_types_default
 features[variable][] = panelizer_implementing_country:normal_default
+features[variable][] = pathauto_taxonomy_term_country_status_pattern
 features[variable][] = title_implementing_country

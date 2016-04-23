@@ -187,25 +187,24 @@ function eitict_stakeholder_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stk_type',
     'indexes' => array(
-      'value' => array(
-        0 => 'value',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'taxonomy',
     'settings' => array(
       'allowed_values' => array(
-        'civil' => 'Civil-Society',
-        'companies' => 'Companies',
-        'countries' => 'Countries',
-        'industry' => 'Organisations',
-        'institutional' => 'Investors',
+        0 => array(
+          'vocabulary' => 'stakeholder_types',
+          'parent' => 0,
+        ),
       ),
-      'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
     ),
     'translatable' => 0,
-    'type' => 'list_text',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_stk_website'.

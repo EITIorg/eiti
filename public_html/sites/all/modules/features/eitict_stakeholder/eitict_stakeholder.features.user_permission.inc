@@ -43,6 +43,17 @@ function eitict_stakeholder_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete terms in stakeholder_types'.
+  $permissions['delete terms in stakeholder_types'] = array(
+    'name' => 'delete terms in stakeholder_types',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit any stakeholder content'.
   $permissions['edit any stakeholder content'] = array(
     'name' => 'edit any stakeholder content',
@@ -63,6 +74,17 @@ function eitict_stakeholder_user_default_permissions() {
       'translation editor' => 'translation editor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit terms in stakeholder_types'.
+  $permissions['edit terms in stakeholder_types'] = array(
+    'name' => 'edit terms in stakeholder_types',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
   );
 
   return $permissions;

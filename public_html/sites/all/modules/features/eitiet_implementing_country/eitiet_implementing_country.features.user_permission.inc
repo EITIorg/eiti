@@ -59,14 +59,22 @@ function eitiet_implementing_country_user_default_permissions() {
   // Exported permission: 'delete terms in country_status'.
   $permissions['delete terms in country_status'] = array(
     'name' => 'delete terms in country_status',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in country_status'.
   $permissions['edit terms in country_status'] = array(
     'name' => 'edit terms in country_status',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
     'module' => 'taxonomy',
   );
 

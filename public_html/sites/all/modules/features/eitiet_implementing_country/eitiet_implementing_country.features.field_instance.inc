@@ -123,6 +123,8 @@ function eitiet_implementing_country_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 'media_internet',
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -205,6 +207,8 @@ function eitiet_implementing_country_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 'media_internet',
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,

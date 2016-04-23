@@ -17,20 +17,6 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
-    'field_stk_website' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_stk_logo' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -38,10 +24,10 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_stk_countries' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'func' => 'theme_field',
+          'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
@@ -62,16 +48,11 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_stk_logo' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
     'field_stk_countries' => array(
       'formatter_settings' => array(
-        'ft' => array(),
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
       ),
     ),
   );
@@ -100,15 +81,11 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
       'main' => array(
         1 => 'title_field',
-        2 => 'field_stk_website',
-        3 => 'field_stk_countries',
       ),
     ),
     'fields' => array(
       'field_stk_logo' => 'side',
       'title_field' => 'main',
-      'field_stk_website' => 'main',
-      'field_stk_countries' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -165,7 +142,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
     ),
     'classes' => array(
       'layout_class' => array(
-        '' => '',
+        'layout-narrow-left-column' => 'layout-narrow-left-column',
       ),
     ),
     'wrappers' => array(
