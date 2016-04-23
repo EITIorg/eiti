@@ -162,27 +162,27 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'document';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'mobject';
+  $ds_layout->layout = 'doublelayout';
   $ds_layout->settings = array(
     'regions' => array(
-      'side' => array(
+      'left' => array(
         0 => 'field_doc_image_preview',
         1 => 'field_doc_published_date',
         2 => 'field_document_category',
       ),
-      'main' => array(
+      'right' => array(
         3 => 'title_field',
         4 => 'body',
         5 => 'field_attachments',
       ),
     ),
     'fields' => array(
-      'field_doc_image_preview' => 'side',
-      'field_doc_published_date' => 'side',
-      'field_document_category' => 'side',
-      'title_field' => 'main',
-      'body' => 'main',
-      'field_attachments' => 'main',
+      'field_doc_image_preview' => 'left',
+      'field_doc_published_date' => 'left',
+      'field_document_category' => 'left',
+      'title_field' => 'right',
+      'body' => 'right',
+      'field_attachments' => 'right',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -190,8 +190,8 @@ function eitict_document_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
-      'side' => 'div',
-      'main' => 'div',
+      'left' => 'div',
+      'right' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'article',

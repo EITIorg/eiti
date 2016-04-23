@@ -135,16 +135,16 @@ function eitict_stakeholder_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'stakeholder';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'mobject';
+  $ds_layout->layout = 'doublelayout';
   $ds_layout->settings = array(
     'regions' => array(
-      'side' => array(
+      'left' => array(
         0 => 'field_stk_logo',
         1 => 'field_stk_category',
         2 => 'field_stk_website',
         3 => 'field_stk_countries',
       ),
-      'main' => array(
+      'right' => array(
         4 => 'title_field',
         5 => 'body',
         6 => 'field_stk_form',
@@ -153,15 +153,15 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'field_stk_logo' => 'side',
-      'field_stk_category' => 'side',
-      'field_stk_website' => 'side',
-      'field_stk_countries' => 'side',
-      'title_field' => 'main',
-      'body' => 'main',
-      'field_stk_form' => 'main',
-      'field_stk_statement' => 'main',
-      'field_stk_support' => 'main',
+      'field_stk_logo' => 'left',
+      'field_stk_category' => 'left',
+      'field_stk_website' => 'left',
+      'field_stk_countries' => 'left',
+      'title_field' => 'right',
+      'body' => 'right',
+      'field_stk_form' => 'right',
+      'field_stk_statement' => 'right',
+      'field_stk_support' => 'right',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -169,8 +169,8 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
-      'side' => 'div',
-      'main' => 'div',
+      'left' => 'div',
+      'right' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'article',
