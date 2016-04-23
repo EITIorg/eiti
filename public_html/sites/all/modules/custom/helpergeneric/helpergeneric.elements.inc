@@ -86,6 +86,15 @@ function form_process_ereference($element, &$form_state) {
       $eid = $entity->identifier();
       $element['#value'] = $entity->label() . " [id:$eid]";
     }
+    else {
+      unset($element['#value']);
+      $args = array(
+        '%type' => $entity_info['label'],
+        '%id' => (int) $element['#default_value'],
+      );
+      $message = t('The referenced %type entity with ID %id does not exist.', $args);
+      form_set_error(implode('][', $element['#parents']), $message);
+    }
   }
 
   return $element;
