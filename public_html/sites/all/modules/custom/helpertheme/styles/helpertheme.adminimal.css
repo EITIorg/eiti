@@ -18,3 +18,8 @@ html {
   height: 100px;
   width: 100px;
 }
+
+.fix-ctools-dropbutton .ctools-dropbutton-processed {
+  position: absolute;
+  margin-top: -15px;
+}
