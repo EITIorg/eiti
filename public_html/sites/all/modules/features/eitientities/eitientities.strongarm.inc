@@ -26,7 +26,8 @@ single-fluid-row-wrapper|Single Fluid Row Wrapper';
   $strongarm->name = 'ds_classes_regions';
   $strongarm->value = 'clearfix|Clearfix
 layout-separator|Layout Separator
-single-fluid-row-wrapper|Single Fluid Row Wrapper';
+single-fluid-row-wrapper|Single Fluid Row Wrapper
+layout-narrow-left-column|Layout: Narrow Left Column';
   $export['ds_classes_regions'] = $strongarm;
 
   $strongarm = new stdClass();

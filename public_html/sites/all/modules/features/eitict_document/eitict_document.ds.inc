@@ -60,13 +60,6 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_doc_published_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -75,6 +68,13 @@ function eitict_document_ds_field_settings_info() {
       ),
     ),
     'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_doc_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -166,8 +166,8 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'field_doc_image_preview',
-        1 => 'field_doc_published_date',
+        0 => 'field_doc_published_date',
+        1 => 'field_doc_image_preview',
         2 => 'field_document_category',
       ),
       'right' => array(
@@ -177,8 +177,8 @@ function eitict_document_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'field_doc_image_preview' => 'left',
       'field_doc_published_date' => 'left',
+      'field_doc_image_preview' => 'left',
       'field_document_category' => 'left',
       'title_field' => 'right',
       'body' => 'right',
@@ -186,7 +186,7 @@ function eitict_document_ds_layout_settings_info() {
     ),
     'classes' => array(
       'layout_class' => array(
-        '' => '',
+        'layout-narrow-left-column' => 'layout-narrow-left-column',
       ),
     ),
     'wrappers' => array(
