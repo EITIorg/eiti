@@ -137,14 +137,27 @@ function eitict_stakeholder_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_taxonomy_term__stakeholder_types';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
+        ),
+        'language' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -221,6 +234,20 @@ function eitict_stakeholder_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_stakeholder_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_stakeholder_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_stakeholder_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_stakeholder_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_stakeholder_fr_pattern';
   $strongarm->value = '';
   $export['pathauto_node_stakeholder_fr_pattern'] = $strongarm;
@@ -231,6 +258,20 @@ function eitict_stakeholder_strongarm() {
   $strongarm->name = 'pathauto_node_stakeholder_pattern';
   $strongarm->value = '';
   $export['pathauto_node_stakeholder_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_stakeholder_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_stakeholder_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_stakeholder_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_stakeholder_und_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
