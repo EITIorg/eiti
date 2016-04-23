@@ -31,17 +31,17 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_stk_countries' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_stk_logo' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_stk_countries' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -60,6 +60,18 @@ function eitict_stakeholder_ds_field_settings_info() {
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
+      ),
+    ),
+    'field_stk_logo' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_stk_countries' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
       ),
     ),
   );
@@ -123,33 +135,33 @@ function eitict_stakeholder_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'stakeholder';
   $ds_layout->view_mode = 'full';
-  $ds_layout->layout = 'simplelayout';
+  $ds_layout->layout = 'mobject';
   $ds_layout->settings = array(
     'regions' => array(
-      'main' => array(
-        0 => 'title_field',
-        1 => 'field_stk_logo',
+      'side' => array(
+        0 => 'field_stk_logo',
+        1 => 'field_stk_category',
         2 => 'field_stk_website',
         3 => 'field_stk_countries',
-        4 => 'field_stk_type',
-        5 => 'field_stk_category',
+      ),
+      'main' => array(
+        4 => 'title_field',
+        5 => 'body',
         6 => 'field_stk_form',
         7 => 'field_stk_statement',
         8 => 'field_stk_support',
-        9 => 'body',
       ),
     ),
     'fields' => array(
+      'field_stk_logo' => 'side',
+      'field_stk_category' => 'side',
+      'field_stk_website' => 'side',
+      'field_stk_countries' => 'side',
       'title_field' => 'main',
-      'field_stk_logo' => 'main',
-      'field_stk_website' => 'main',
-      'field_stk_countries' => 'main',
-      'field_stk_type' => 'main',
-      'field_stk_category' => 'main',
+      'body' => 'main',
       'field_stk_form' => 'main',
       'field_stk_statement' => 'main',
       'field_stk_support' => 'main',
-      'body' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -157,6 +169,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
+      'side' => 'div',
       'main' => 'div',
       'ds_hidden' => 'div',
     ),

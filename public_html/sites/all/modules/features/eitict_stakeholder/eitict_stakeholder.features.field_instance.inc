@@ -28,7 +28,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -57,7 +57,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 10,
+      'weight' => 7,
     ),
   );
 
@@ -75,11 +75,11 @@ function eitict_stakeholder_field_default_field_instances() {
         'weight' => 4,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -120,7 +120,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
         'weight' => 3,
@@ -210,7 +210,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -225,7 +225,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'logo-scaled',
+          'image_style' => 'logo-scaled-width',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -235,10 +235,10 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'logo-scaled',
+          'image_style' => 'logo-scaled-width',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -350,7 +350,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -409,7 +409,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -432,10 +432,9 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 4,
+        'type' => 'hidden',
+        'weight' => 16,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -471,7 +470,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'weight' => 2,
       ),
       'full' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
@@ -543,7 +542,7 @@ function eitict_stakeholder_field_default_field_instances() {
           'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',

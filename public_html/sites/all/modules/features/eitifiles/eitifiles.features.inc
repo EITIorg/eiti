@@ -277,16 +277,32 @@ function eitifiles_image_default_styles() {
     ),
   );
 
-  // Exported image style: logo-scaled.
-  $styles['logo-scaled'] = array(
-    'label' => 'Logo: Scaled (96px tall)',
+  // Exported image style: logo-scaled-height.
+  $styles['logo-scaled-height'] = array(
+    'label' => 'Logo: Scaled Height (96px tall)',
     'effects' => array(
       5 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => '',
           'height' => 96,
-          'upscale' => 0,
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: logo-scaled-width.
+  $styles['logo-scaled-width'] = array(
+    'label' => 'Logo: Scaled Width (160px wide)',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 160,
+          'height' => '',
+          'upscale' => 1,
         ),
         'weight' => 1,
       ),

@@ -77,7 +77,7 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     $logo_file_alt_text = $logo_file_info['field_file_image_alt_text'];
 
     // Create the logo URL.
-    $style_name = 'logo-scaled';
+    $style_name = 'logo-scaled-height';
     $logo_url = image_style_url($style_name, $logo_file_uri);
 
     $block['banner']['name_and_logo']['logo'] = array(
