@@ -169,7 +169,7 @@ function eitict_article_strongarm() {
           'weight' => '11',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

@@ -126,7 +126,7 @@ function eitict_page_strongarm() {
           'weight' => '3',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

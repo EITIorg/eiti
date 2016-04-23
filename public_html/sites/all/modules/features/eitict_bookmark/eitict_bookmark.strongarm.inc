@@ -114,7 +114,7 @@ function eitict_bookmark_strongarm() {
           'weight' => '6',
         ),
         'language' => array(
-          'weight' => '2',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

@@ -163,7 +163,7 @@ function eitict_mention_strongarm() {
           'weight' => '5',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),

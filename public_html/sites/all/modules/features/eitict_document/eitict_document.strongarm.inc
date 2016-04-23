@@ -163,7 +163,7 @@ function eitict_document_strongarm() {
           'weight' => '7',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
