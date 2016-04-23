@@ -372,7 +372,7 @@ function eitientity_implementing_country_ctools_plugin_directory($owner, $plugin
  * @param string $name
  *   Name of the country.
  *
- * @return bool|stdCass
+ * @return bool|stdClass
  *   Loaded entity if was found or FALSE.
  */
 function eitientity_implementing_country_lookup_by_name($name) {

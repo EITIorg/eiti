@@ -10,6 +10,7 @@
  */
 class OrganisationEntityUIController extends EntityBundleableUIController {
   protected $entity_path;
+  protected $bundle_path;
   protected $entity_id_count;
 
   public function __construct($entity_type, $entity_info) {
@@ -192,7 +193,7 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
    * @param $conditions
    *   An array of conditions as needed by entity_load().
    *
-   * @return Array
+   * @return array
    *   A renderable array.
    */
   public function overviewTable($conditions = array()) {
@@ -220,7 +221,6 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'name',
         'class' => array($css_class_prefix . '-ui-name'),
-        'sort' => 'desc',
       ),
       array(
         'data' => t('Type'),
@@ -233,6 +233,7 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'changed',
         'class' => array($css_class_prefix . '-ui-changed'),
+        'sort' => 'asc',
       ),
       array(
         'data' => t('Status'),
@@ -287,9 +288,18 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
   protected function overviewTableRow($conditions, $id, $entity, $additional_cols = array()) {
     $entity_uri = entity_uri($this->entityType, $entity);
 
+    $label = entity_label($this->entityType, $entity);
+    if (!empty($entity->country_id)) {
+      /** @var ImplementingCountryEntity $country */
+      if ($country = entity_load_single('implementing_country', $entity->country_id)) {
+        $country_name = $country->label();
+        $label = $country_name . ' > ' . $label;
+      }
+    }
+
     $row[] = array('data' => array(
       '#theme' => 'entity_ui_overview_item',
-      '#label' => entity_label($this->entityType, $entity),
+      '#label' => $label,
       '#name' => !empty($this->entityInfo['exportable']) ? $entity->identifier() : FALSE,
       '#url' => $entity_uri ? $entity_uri : FALSE,
       '#entity_type' => $this->entityType),
