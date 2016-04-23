@@ -221,6 +221,16 @@ function helpertheme_html_head_alter(&$head_elements) {
 function helpertheme_preprocess_html(&$variables) {
   global $theme;
 
+  // Get path to the current module.
+  $module_path = drupal_get_path('module', 'helpertheme');
+
+  if (!empty($GLOBALS['user']->uid)) {
+    if (defined('PROJECT_ENVIRONMENT') && PROJECT_ENVIRONMENT != 'production') {
+      $variables['classes_array'][] = drupal_html_class('project-environment--' . PROJECT_ENVIRONMENT);
+    }
+    drupal_add_css($module_path . '/styles/helpertheme.authenticated.css', array('weight' => 999, 'preprocess' => FALSE));
+  }
+
   $variables['html_attributes']['lang'] = $variables['language']->language;
   $variables['html_attributes']['dir'] = $variables['language']->dir;
   $variables['html_attributes']['xmlns:svg'] = 'http://www.w3.org/2000/svg';
@@ -229,12 +239,9 @@ function helpertheme_preprocess_html(&$variables) {
   // Allow modules to add classes.
   $variables['classes_array'] = array_merge($variables['classes_array'], helpertheme_get_html_classes());
 
-  // Get path to the current module.
-  $module_path = drupal_get_path('module', 'helpertheme');
-
   // Override adminimal theme styles.
   if ($theme == 'adminimal') {
-    drupal_add_css($module_path . '/styles/helpertheme.adminimal.css', array('weight' => 999));
+    drupal_add_css($module_path . '/styles/helpertheme.adminimal.css', array('weight' => 999, 'preprocess' => FALSE));
   }
 }
 

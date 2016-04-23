@@ -23,7 +23,7 @@
  * @see http://www.w3.org/TR/2011/WD-html5-20110525/tokenization.html#before-doctype-name-state
  */
 ?><!DOCTYPE html>
-<html class="no-js" <?php print $html_attributes; ?>>
+<html <?php print $html_attributes; ?>>
 <head>
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
@@ -31,12 +31,12 @@
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
-  <div id="skip-link">
-    <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
-  </div>
+<div id="skip-link">
+  <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
+</div>
 
-  <?php print $page_top; ?>
-  <?php print $page; ?>
-  <?php print $page_bottom; ?>
+<?php print $page_top; ?>
+<?php print $page; ?>
+<?php print $page_bottom; ?>
 </body>
 </html>
