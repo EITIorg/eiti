@@ -89,7 +89,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
     ),
     'classes' => array(
       'layout_class' => array(
-        '' => '',
+        'clearfix' => 'clearfix',
       ),
     ),
     'wrappers' => array(
