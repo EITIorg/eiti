@@ -39,22 +39,37 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
     // Hide the "Create new revision" checkbox.
     $form['revision_information']['#access'] = FALSE;
 
+    // Determine the entity_type. :(
+    if (isset($form_state['entity']) && method_exists($form_state['entity'], 'entityType')) {
+      $entity_type = call_user_func(array($form_state['entity'], 'entityType'));
+    }
+    else if (isset($form_state['entity']->panelizer['default']->entity_type)) {
+      $entity_type = $form_state['entity']->panelizer['default']->entity_type;
+    }
+
     // Replace the cancel submit button with a link to the entity page.
-    if (isset($form_state['entity']->panelizer['default']->entity_type)) {
-      $entity = $form_state['entity'];
-      $entity_type = $entity->panelizer['default']->entity_type;
-      $entity_uri = entity_uri($entity_type, $entity);
+    if (isset($entity_type)) {
+      $entity_uri = entity_uri($entity_type, $form_state['entity']);
+
+      $options = array();
+      $path = $entity_uri['path'];
+
+      // A destination in $_GET always overrides the function arguments.
+      // We do not allow absolute URLs to be passed via $_GET, as this can be an attack vector.
+      if (isset($_GET['destination']) && !url_is_external($_GET['destination'])) {
+        $destination = drupal_parse_url($_GET['destination']);
+        $path = $destination['path'];
+        $options['query'] = $destination['query'];
+        $options['fragment'] = $destination['fragment'];
+      }
 
       $form['buttons']['cancel'] = array(
         '#type' => 'link',
         '#title' => t('Cancel'),
-        '#href' => $entity_uri['path'],
+        '#href' => $path,
+        '#options' => $options,
         '#weight' => 20,
       );
-
-      if (isset($_GET['destination'])) {
-        $form['buttons']['cancel']['#options']['query'] = drupal_get_destination();
-      }
     }
   }
 }
