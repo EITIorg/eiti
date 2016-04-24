@@ -58,6 +58,7 @@ features[user_permission][] = translate implementing_country entities
 features[variable][] = entity_translation_settings_implementing_country__normal
 features[variable][] = entity_translation_settings_taxonomy_term__country_status
 features[variable][] = field_bundle_settings_implementing_country__normal
+features[variable][] = field_bundle_settings_taxonomy_term__country_status
 features[variable][] = panelizer_defaults_implementing_country_normal
 features[variable][] = panelizer_implementing_country:normal:default_selection
 features[variable][] = panelizer_implementing_country:normal_allowed_layouts_default
