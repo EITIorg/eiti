@@ -578,7 +578,7 @@ function eitiet_summary_data_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_report_file',
-    'label' => 'Report File',
+    'label' => 'Summary Data Report File',
     'required' => 1,
     'settings' => array(
       'description_field' => 0,
@@ -627,6 +627,8 @@ function eitiet_summary_data_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
