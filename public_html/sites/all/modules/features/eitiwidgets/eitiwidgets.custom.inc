@@ -188,7 +188,7 @@ function __eitiwidgets_fpp_form_validation__featured_bookmarks(&$form, &$form_st
   if ($bookmark_list_values) {
     $count = 0;
     foreach ($bookmark_list_values as $key => $value) {
-      if ($key == 'add_mode') {
+      if ($key === 'add_more') {
         continue;
       }
       if (!empty($value['target_id'])) {
