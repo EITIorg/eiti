@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @file: Create Stakeholder Types.
- * @desc: This script can be used to create the Stakeholder Types vocabulary terms.
- */
-
+// Create the Stakeholder Types vocabulary terms.
 // Prepare a list of ordered taxonomy terms.
 $types = array(
   'Civil-Society',
