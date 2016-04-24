@@ -30,11 +30,32 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
     // Hide the "From pane" title type (visibility) option.
     unset($form['display_title']['hide_title']['#options'][PANELS_TITLE_PANE]);
 
-    // Hide the " Substitutions" fieldset.
+    // Hide the "Substitutions" fieldset.
     $form['display_title']['contexts']['#access'] = FALSE;
 
     // Hide preview button.
     $form['preview']['#access'] = FALSE;
+
+    // Hide the "Create new revision" checkbox.
+    $form['revision_information']['#access'] = FALSE;
+
+    // Replace the cancel submit button with a link to the entity page.
+    if (isset($form_state['entity']->panelizer['default']->entity_type)) {
+      $entity = $form_state['entity'];
+      $entity_type = $entity->panelizer['default']->entity_type;
+      $entity_uri = entity_uri($entity_type, $entity);
+
+      $form['buttons']['cancel'] = array(
+        '#type' => 'link',
+        '#title' => t('Cancel'),
+        '#href' => $entity_uri['path'],
+        '#weight' => 20,
+      );
+
+      if (isset($_GET['destination'])) {
+        $form['buttons']['cancel']['#options']['query'] = drupal_get_destination();
+      }
+    }
   }
 }
 

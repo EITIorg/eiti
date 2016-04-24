@@ -468,6 +468,19 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
+  // Add Cancel link.
+  $entity = $form_state['node'];
+  $entity_uri = entity_uri('node', $entity);
+  $form['actions']['cancel'] = array(
+    '#type' => 'link',
+    '#title' => t('Cancel'),
+    '#href' => $entity_uri['path'],
+    '#weight' => 20,
+  );
+  if (isset($_GET['destination'])) {
+    $form['actions']['cancel']['#options']['query'] = drupal_get_destination();
+  }
+
   // Restrict summary length.
   $form['#validate'][] = 'helpergeneric_node_form_summary_validate';
 }
