@@ -238,11 +238,6 @@ function helpertheme_preprocess_html(&$variables) {
 
   // Allow modules to add classes.
   $variables['classes_array'] = array_merge($variables['classes_array'], helpertheme_get_html_classes());
-
-  // Override adminimal theme styles.
-  if ($theme == 'adminimal') {
-    drupal_add_css($module_path . '/styles/helpertheme.adminimal.css', array('weight' => 999, 'preprocess' => FALSE));
-  }
 }
 
 /**
