@@ -4,6 +4,8 @@ define('EITIWIDGETS_PANELS_TITLE_ENTITY', 99);
 
 /**
  * Implements hook_form_alter().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
   $fpp_forms = array(
@@ -38,6 +40,9 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * A place where we alter our FPP forms.
+ *
+ * @param array $form
+ * @param array $form_state
  */
 function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
   $entity = $form_state['entity'];
@@ -109,6 +114,9 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
 
 /**
  * Submit handler that saves addition proprieties for FPP.
+ *
+ * @param array $form
+ * @param array $form_state
  */
 function eitiwidgets_fpp_form_show_title_submit($form, &$form_state) {
   // Specify which fields you will like to save to conf.
@@ -124,6 +132,12 @@ function eitiwidgets_fpp_form_show_title_submit($form, &$form_state) {
  * the returned $content ($block).
  *
  * @see fieldable_panels_panes_fieldable_panels_pane_content_type_render
+ *
+ * @param string $subtype
+ * @param array $conf
+ * @param array $panel_args
+ * @param array $context
+ * @return \stdClass
  */
 function eitiwidgets_fpp_render($subtype, $conf, $panel_args = array(), $context = array()) {
   $block = fieldable_panels_panes_fieldable_panels_pane_content_type_render($subtype, $conf, $panel_args = array(), $context = array());
@@ -166,6 +180,8 @@ function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
 
 /**
  * Implements hook_panels_pane_content_alter().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts) {
   if (!isset($content->content['#fieldable_panels_pane'])) {
@@ -197,6 +213,8 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
 
 /**
  * Implements hook_entity_view().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
   if ($type != 'fieldable_panels_pane') {
@@ -212,6 +230,8 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
 
 /**
  * Implements hook_preprocess_fieldable_panels_pane().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   $entity = $variables['elements']['#fieldable_panels_pane'];
@@ -253,6 +273,8 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
 
 /**
  * Implements hook_panelizer_overview_links_alter().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_panelizer_overview_links_alter(&$links_array, $entity_type, $entity, $view_mode) {
   // Do not show 'reset' link on panelizer overview pages for panelized entities..
@@ -264,6 +286,8 @@ function eitiwidgets_panelizer_overview_links_alter(&$links_array, $entity_type,
 
 /**
  * Implements hook_preprocess_panelizer_view_mode().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
   $element = $variables['element'];
@@ -295,6 +319,8 @@ function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
 
 /**
  * Implements hook_entity_info_alter().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_entity_info_alter(&$info) {
   if (!empty($info['fieldable_panels_pane']['bundles'])) {
@@ -307,6 +333,8 @@ function eitiwidgets_entity_info_alter(&$info) {
 
 /**
  * Implements hook_ctools_plugin_pre_alter().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_ctools_plugin_pre_alter(&$plugin, &$info) {
   // Alter the fieldable panels pane plugin so that it supports one more configuration,
@@ -319,6 +347,8 @@ function eitiwidgets_ctools_plugin_pre_alter(&$plugin, &$info) {
 
 /**
  * Implements hook_preprocess_panels_add_content_modal().
+ *
+ * @inheritdoc
  */
 function eitiwidgets_preprocess_panels_add_content_modal(&$vars) {
   // Change the categories order.
