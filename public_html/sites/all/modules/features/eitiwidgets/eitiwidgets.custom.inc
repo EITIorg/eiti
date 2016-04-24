@@ -149,32 +149,59 @@ function eitiwidgets_fpp_render($subtype, $conf, $panel_args = array(), $context
 }
 
 /**
- * Our custom form validations.
+ * Validation handler for the FPP widget form.
+ *
+ * @see: eitiwidgets_form_alter()
+ *
+ * @param array $form
+ * @param array $form_state
  */
 function eitiwidgets_fpp_form_validation(&$form, &$form_state) {
-  $entity = $form_state['entity'];
-  $entity_language = entity_language('fieldable_panels_pane', $entity);
+  $function = '__' . __FUNCTION__ . '__' . $form_state['entity']->bundle;
+  if (function_exists($function)) {
+    $function($form, $form_state);
+  }
+}
 
-  switch ($entity->bundle) {
-    // General entity form validation for the "Featured Bookmarks".
-    case 'featured_bookmarks':
-      $field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
-      $list_size = isset($form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size']) ? $form_state['values']['field_fpp_widget'][$field_language][0]['settings']['bookmarks']['widget_size'] : 0;
+/**
+ * Validation handler for the featured_bookmarks widget form.
+ *
+ * @see: eitiwidgets_fpp_form_validation()
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function __eitiwidgets_fpp_form_validation__featured_bookmarks(&$form, &$form_state) {
+  // Get the number of featured bookmarks required for the entity.
+  $field_language = $form['field_fpp_widget']['#language'];
+  $widget_settings = $form_state['values']['field_fpp_widget'][$field_language][0]['settings'];
+  $required_size = isset($widget_settings['bookmarks']['widget_size']) ? $widget_settings['bookmarks']['widget_size'] : 0;
+  if (empty($required_size)) {
+    return;
+  }
 
-      if (!empty($list_size)) {
-        $ief = reset($form_state['inline_entity_form']);
-        if (count($ief['entities']) < $list_size) {
-          $msg = t('Please make sure you have specified at least @num bookmarks - because of the widget size you have specified.', array(
-            '@num' => $list_size,
-          ));
-          form_set_error('field_fpp_bookmark_list', $msg);
-        }
+  $path = array(
+    'field_fpp_bookmark_list',
+    $form['field_fpp_bookmark_list']['#language'],
+  );
+  $bookmark_list_values = drupal_array_get_nested_value($form_state['values'], $path);
+  if ($bookmark_list_values) {
+    $count = 0;
+    foreach ($bookmark_list_values as $key => $value) {
+      if ($key == 'add_mode') {
+        continue;
       }
-      else {
-        $msg = t('Please specify the widget size.');
-        form_set_error('field_fpp_widget][' . $field_language . '][0][settings][bookmarks][widget_size', $msg);
+      if (!empty($value['target_id'])) {
+        $count++;
       }
-      break;
+    }
+
+    if ($count < $required_size) {
+      $msg = t('Please make sure you have specified at least @num bookmarks - because of the widget size you have specified.', array(
+        '@num' => $required_size,
+      ));
+      form_set_error('field_fpp_bookmark_list', $msg);
+    }
   }
 }
 

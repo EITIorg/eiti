@@ -154,6 +154,7 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'menu_expanded',
         'menu_masks',
         'menu_rebuild_needed',
+        'node_access_needs_rebuild',
         'node_admin_theme',
         'page_cache_maximum_age',
         'page_compression',
