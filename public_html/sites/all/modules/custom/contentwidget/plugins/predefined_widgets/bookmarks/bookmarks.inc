@@ -27,7 +27,7 @@ function contentwidget__featured_bookmarks__render($plugin, $widget_settings, $e
   $referenced_ids = array();
 
   $entity_type = 'fieldable_panels_pane';
-  $bookmark_list_field_language = field_language($entity_type, $entity, 'field_fpp_widget', $langcode);
+  $bookmark_list_field_language = field_language($entity_type, $entity, 'field_fpp_bookmark_list', $langcode);
   foreach ($entity->field_fpp_bookmark_list[$bookmark_list_field_language] as $reference) {
     $referenced_ids[] = $reference['target_id'];
   }
@@ -157,6 +157,7 @@ function contentwidget__featured_bookmarks__settings(&$element, &$form_state, $p
     '#title' => t('Widget Size'),
     '#options' => $available_sizes,
     '#default_value' => $default_size,
+    '#required' => TRUE,
     '#ajax' => array(
       'callback' => '_contentwidget__featured_bookmarks__settings_ajax',
       'wrapper' => 'widget-preview',
@@ -184,7 +185,7 @@ function contentwidget__featured_bookmarks__settings(&$element, &$form_state, $p
   else {
     $settings_form['widget_preview'] = array(
       '#type' => 'markup',
-      '#markup' => t('Please select the size of the widget for prev12iew.'),
+      '#markup' => t('Select the size of the widget, and a preview of the layout will be displayed.'),
       '#prefix' => '<div id="widget-preview">',
       '#suffix' => '</div>',
     );
