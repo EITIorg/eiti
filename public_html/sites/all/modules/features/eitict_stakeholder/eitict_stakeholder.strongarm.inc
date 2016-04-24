@@ -256,7 +256,7 @@ function eitict_stakeholder_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_stakeholder_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'stakeholder/[node:title_field]';
   $export['pathauto_node_stakeholder_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
