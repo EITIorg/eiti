@@ -61,7 +61,7 @@ function eitiet_implementing_country_strongarm() {
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '5',
+          'weight' => '6',
         ),
         'language' => array(
           'weight' => '1',
