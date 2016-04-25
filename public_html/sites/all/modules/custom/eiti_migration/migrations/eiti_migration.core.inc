@@ -489,17 +489,13 @@ class EITIDrupalFileMigration extends DrupalFile7Migration {
     $legacy_path = self::getOldPath($row->uri);
 
     // Now we need to add the current path as a redirect.
-    $new_redirect_default = array(
-      'uid' => $entity->uid,
+    $path_alias = array(
       'language' => isset($entity->language) ? $entity->language : LANGUAGE_NONE,
     );
-    $new_redirect = new stdClass();
-    redirect_object_prepare($new_redirect, $new_redirect_default);
-    $new_redirect->redirect = 'file/' . $entity->fid;
-    $new_redirect->source = $legacy_path;
-    if (EITIMigrateRedirectEntityHandler::redirectValidate($new_redirect)) {
-      redirect_save($new_redirect);
-    }
+    $path_alias['alias']= variable_get('file_public_path', 'sites/default/files') . '/' . file_uri_target($entity->uri);
+    $path_alias['source'] = $legacy_path;
+    path_save($path_alias);
+
   }
 
   /**

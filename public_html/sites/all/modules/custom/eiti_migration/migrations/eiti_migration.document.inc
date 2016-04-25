@@ -139,6 +139,7 @@ class EITIDocumentAttachmentsMigration extends EITIDrupalFileMigration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
