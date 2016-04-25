@@ -469,25 +469,29 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Add Cancel link.
-  $entity_uri = entity_uri('node', $form_state['node']);
-  $options = array();
-  $path = $entity_uri['path'];
-
   // A destination in $_GET always overrides the function arguments.
   // We do not allow absolute URLs to be passed via $_GET, as this can be an attack vector.
+  $cancel_link_options = array();
   if (isset($_GET['destination']) && !url_is_external($_GET['destination'])) {
     $destination = drupal_parse_url($_GET['destination']);
-    $path = $destination['path'];
-    $options['query'] = $destination['query'];
-    $options['fragment'] = $destination['fragment'];
+    $cancel_link_path = $destination['path'];
+    $cancel_link_options['query'] = $destination['query'];
+    $cancel_link_options['fragment'] = $destination['fragment'];
   }
-  $form['actions']['cancel'] = array(
-    '#type' => 'link',
-    '#title' => t('Cancel'),
-    '#href' => $path,
-    '#options' => $options,
-    '#weight' => 20,
-  );
+  else if (!empty($form_state['node']->nid)) {
+    $entity_uri = entity_uri('node', $form_state['node']);
+    $cancel_link_path = $entity_uri['path'];
+  }
+
+  if (isset($cancel_link_path)) {
+    $form['actions']['cancel'] = array(
+      '#type' => 'link',
+      '#title' => t('Cancel'),
+      '#href' => $cancel_link_path,
+      '#options' => $cancel_link_options,
+      '#weight' => 20,
+    );
+  }
 
   // Restrict summary length.
   $form['#validate'][] = 'helpergeneric_node_form_summary_validate';
