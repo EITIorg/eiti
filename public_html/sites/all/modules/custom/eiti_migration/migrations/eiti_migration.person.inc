@@ -81,6 +81,9 @@ class EITIPersonMigration extends EITINodeMigration {
     // Make sure both values are used if one's missing: body vs field_contact_desc.
     if (empty($row->field_contact_desc)) {
       $row->field_contact_desc = $row->body;
+      $format_to = 'field_contact_desc:format';
+      $format_from = 'body:format';
+      $row->{$format_to} = $row->{$format_from};
     }
 
     // Do the same with the name vs title.
