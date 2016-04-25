@@ -295,6 +295,7 @@ function eitiwidgets_field_default_field_instances() {
   // 'fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'.
   $field_instances['fieldable_panels_pane-featured_bookmarks-field_fpp_bookmark_list'] = array(
     'bundle' => 'featured_bookmarks',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.',
     'display' => array(
@@ -316,20 +317,13 @@ function eitiwidgets_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'inline_entity_form',
+      'module' => 'entityreference',
       'settings' => array(
-        'fields' => array(),
-        'type_settings' => array(
-          'allow_existing' => 1,
-          'allow_new' => 1,
-          'delete_references' => 0,
-          'label_plural' => 'bookmarks',
-          'label_singular' => 'bookmark',
-          'match_operator' => 'CONTAINS',
-          'override_labels' => 1,
-        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
       ),
-      'type' => 'inline_entity_form',
+      'type' => 'entityreference_autocomplete',
       'weight' => 3,
     ),
   );

@@ -79,7 +79,7 @@
     .column(1.5);
   }
   .header-items {
-    .column(8.5);
+    .column(9);
   }
 
   .main-content-inner,
@@ -132,6 +132,18 @@
     .main-column-wrapper {
       .column(9);
       .last-child-column();
+    }
+  }
+}
+
+.xNormalAndUp() {
+  .custom-doublelayout.layout-narrow-left-column {
+    .expand-column();
+    .group-left {
+      .column(3);
+    }
+    .group-right {
+      .column(9);
     }
   }
 }

@@ -57,7 +57,9 @@ function eitientity_organisation_schema() {
       ),
     ),
     'indexes' => array(
-      'entity_status' => array('id', 'status'),
+      'entity_status_type' => array('status', 'type', 'id'),
+      'entity_created' => array('created'),
+      'entity_changed' => array('changed'),
     ),
     'foreign keys' => array(
       'entity_eiti_implementing_country' => array(
@@ -69,4 +71,15 @@ function eitientity_organisation_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Add Organisation to Revenue Stream entities.
+ */
+function eitientity_organisation_update_7001(&$sandbox) {
+  db_drop_index('eiti_organisation', 'entity_status');
+
+  db_add_index('eiti_organisation', 'entity_status_type', array('status', 'type', 'id'));
+  db_add_index('eiti_organisation', 'entity_created', array('created'));
+  db_add_index('eiti_organisation', 'entity_changed', array('changed'));
 }

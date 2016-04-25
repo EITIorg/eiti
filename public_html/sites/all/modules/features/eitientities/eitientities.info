@@ -48,4 +48,5 @@ features[user_permission][] = revenue_stream entity edit
 features[user_permission][] = revenue_stream entity view
 features[variable][] = ds_classes_fields
 features[variable][] = ds_classes_regions
+features[variable][] = pathauto_node_pattern
 features[variable][] = title_node

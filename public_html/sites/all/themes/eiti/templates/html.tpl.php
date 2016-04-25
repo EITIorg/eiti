@@ -4,10 +4,12 @@
  * @file
  * Theme implementation to display the basic html structure of a single page.
  *
+ * @var string $html_attributes
  * @var string $head
  * @var string $head_title
  * @var string $styles
  * @var string $scripts
+ * @var string $classes
  * @var string $attributes
  * @var string $page_top
  * @var string $page

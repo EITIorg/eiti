@@ -1,0 +1,8 @@
+name = HelperTheme: Adminimal
+description = Requires HelperTheme module to be enabled.
+core = 7.x
+engine = phptemplate
+
+base theme = adminimal
+
+stylesheets[all][] = styles/adminimal_helpertheme_fix.css

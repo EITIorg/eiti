@@ -163,7 +163,7 @@ function eitict_document_strongarm() {
           'weight' => '7',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
@@ -228,6 +228,48 @@ function eitict_document_strongarm() {
   $strongarm->name = 'node_submitted_document';
   $strongarm->value = 1;
   $export['node_submitted_document'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_document_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_document_und_pattern'] = $strongarm;
 
   return $export;
 }

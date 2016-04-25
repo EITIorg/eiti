@@ -101,14 +101,16 @@ function eitientity_organisation_admin_paths() {
 function eitientity_organisation_get_types() {
   $items = array();
 
+  $t_args = array('%name' => t('Revenue Stream as Disclosed by Government'));
   $items['agency'] = array(
     'label' => t('Government Agency'),
-    'description' => t('A simple entity for storing government agency.'),
+    'description' => t('Used on summary data %name field.', $t_args),
   );
 
+  $t_args = array('%name' => t('Reconciled Revenue Streams per Company'));
   $items['company'] = array(
     'label' => t('Company'),
-    'description' => t('A simple entity for storing companies.'),
+    'description' => t('Used on summary data %name field.', $t_args),
   );
 
   return $items;

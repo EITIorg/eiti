@@ -23,9 +23,9 @@ function eitiet_implementing_country_field_group_info() {
     'label' => 'Metadata',
     'weight' => '4',
     'children' => array(
-      0 => 'field_ic_change_status_date',
-      1 => 'field_ic_status',
-      2 => 'field_ic_website',
+      0 => 'field_ic_status',
+      1 => 'field_ic_website',
+      2 => 'field_ic_change_status_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

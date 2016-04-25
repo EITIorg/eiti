@@ -33,7 +33,7 @@ define('PROJECT_ENVIRONMENT', 'local');
 
 // Allow developers to debug environments.
 $hide_errors = TRUE;
-if ($hide_errors) {
+if ($hide_errors && PROJECT_ENVIRONMENT == 'production') {
   ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_STRICT);
   ini_set('display_errors', 'Off');
 }

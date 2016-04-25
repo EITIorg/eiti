@@ -14,7 +14,7 @@ function eitifiles_file_default_types() {
   $file_type->disabled = FALSE; /* Edit this to true to make a default file_type disabled initially */
   $file_type->api_version = 1;
   $file_type->type = 'report';
-  $file_type->label = 'Report';
+  $file_type->label = 'Summary Data Report';
   $file_type->description = 'Use this file type to upload reports / summary data spreadsheet files. Note: all reports will be imported into the system, sooner or later.';
   $file_type->mimetypes = array(
     0 => 'application/vnd.ms-excel',

@@ -163,7 +163,7 @@ function eitict_mention_strongarm() {
           'weight' => '5',
         ),
         'language' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -214,6 +214,48 @@ function eitict_mention_strongarm() {
   $strongarm->name = 'node_submitted_mention';
   $strongarm->value = 1;
   $export['node_submitted_mention'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mention_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mention_und_pattern'] = $strongarm;
 
   return $export;
 }

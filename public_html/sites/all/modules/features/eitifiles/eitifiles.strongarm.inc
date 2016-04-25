@@ -658,27 +658,7 @@ function eitifiles_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'media_wysiwyg_view_mode_report_wysiwyg_restricted_view_modes';
-  $strongarm->value = array(
-    'default' => 0,
-    'teaser' => 0,
-    'full' => 0,
-    'preview' => 0,
-    'rss' => 0,
-    'search_index' => 0,
-    'search_result' => 0,
-    'wysiwyg' => 0,
-    'token' => 0,
-    'narrow' => 0,
-    'narrow_linked' => 0,
-    'normal' => 0,
-    'normal_linked' => 0,
-    'large' => 0,
-    'large_linked' => 0,
-    'original' => 0,
-    'thumbnail' => 0,
-    'wide' => 0,
-    'wide_linked' => 0,
-  );
+  $strongarm->value = array();
   $export['media_wysiwyg_view_mode_report_wysiwyg_restricted_view_modes'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -752,6 +732,48 @@ function eitifiles_strongarm() {
   $strongarm->name = 'media_wysiwyg_wysiwyg_upload_directory';
   $strongarm->value = 'inline';
   $export['media_wysiwyg_wysiwyg_upload_directory'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_audio_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_audio_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_document_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_document_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_image_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_image_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_report_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_report_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_file_video_pattern';
+  $strongarm->value = '';
+  $export['pathauto_file_video_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

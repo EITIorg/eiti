@@ -10,6 +10,7 @@
  */
 class OrganisationEntityUIController extends EntityBundleableUIController {
   protected $entity_path;
+  protected $bundle_path;
   protected $entity_id_count;
 
   public function __construct($entity_type, $entity_info) {
@@ -177,12 +178,11 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
   }
 
   /**
-   * Returns the operation count for calculating colspans.
+   * Returns the operation count for calculating column spanning.
    */
   protected function operationCount() {
-    $count = 3;
-    $count += !empty($this->entityInfo['i18n controller class']) ? 1 : 0;
-    return $count;
+    // We use ctools_dropbutton.
+    return 1;
   }
 
   /**
@@ -192,7 +192,7 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
    * @param $conditions
    *   An array of conditions as needed by entity_load().
    *
-   * @return Array
+   * @return array
    *   A renderable array.
    */
   public function overviewTable($conditions = array()) {
@@ -220,7 +220,6 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'name',
         'class' => array($css_class_prefix . '-ui-name'),
-        'sort' => 'desc',
       ),
       array(
         'data' => t('Type'),
@@ -233,6 +232,7 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'changed',
         'class' => array($css_class_prefix . '-ui-changed'),
+        'sort' => 'asc',
       ),
       array(
         'data' => t('Status'),
@@ -269,6 +269,7 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('None.'),
+      '#attributes' => array('class' => array('fix-ctools-dropbutton')),
     );
     return $render;
   }
@@ -287,9 +288,18 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
   protected function overviewTableRow($conditions, $id, $entity, $additional_cols = array()) {
     $entity_uri = entity_uri($this->entityType, $entity);
 
+    $label = entity_label($this->entityType, $entity);
+    if (!empty($entity->country_id)) {
+      /** @var ImplementingCountryEntity $country */
+      if ($country = entity_load_single('implementing_country', $entity->country_id)) {
+        $country_name = $country->label();
+        $label = $country_name . ' > ' . $label;
+      }
+    }
+
     $row[] = array('data' => array(
       '#theme' => 'entity_ui_overview_item',
-      '#label' => entity_label($this->entityType, $entity),
+      '#label' => $label,
       '#name' => !empty($this->entityInfo['exportable']) ? $entity->identifier() : FALSE,
       '#url' => $entity_uri ? $entity_uri : FALSE,
       '#entity_type' => $this->entityType),
@@ -308,17 +318,30 @@ class OrganisationEntityUIController extends EntityBundleableUIController {
       ));
     }
 
-    // If i18n integration is enabled, add a link to the translate tab.
-    $i18n = !empty($this->entityInfo['i18n controller class']);
-
     $row[] = $entity->status ? t('published') : t('not published');
 
     // Add operations.
-    $row[] = l(t('edit'), $this->entity_path . "/$id/edit", array('query' => drupal_get_destination()));
-    if ($i18n) {
-      $row[] = l(t('translate'), $this->entity_path . "/$id/translate");
-    }
-    $row[] = l(t('delete'), $this->entity_path . "/$id/delete", array('query' => drupal_get_destination()));
+    $operations = array();
+
+    $operations[] = array(
+      'title' => t('edit'),
+      'href' => $this->entity_path . "/$id/edit",
+      'query' => drupal_get_destination(),
+    );
+
+    // $operations[] = array(
+    //   'title' => t('translate'),
+    //   'href' => $this->entity_path . "/$id/translate",
+    // );
+
+    $operations[] = array(
+      'title' => t('delete'),
+      'href' => $this->entity_path . "/$id/delete",
+      'query' => drupal_get_destination(),
+    );
+
+    $row[] = theme('links__ctools_dropbutton', array('links' => $operations, 'attributes' => array('class' => array())));
+
     return $row;
   }
 }

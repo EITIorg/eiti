@@ -114,7 +114,7 @@ function eitict_bookmark_strongarm() {
           'weight' => '6',
         ),
         'language' => array(
-          'weight' => '2',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -165,6 +165,48 @@ function eitict_bookmark_strongarm() {
   $strongarm->name = 'node_submitted_bookmark';
   $strongarm->value = 0;
   $export['node_submitted_bookmark'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_bookmark_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_bookmark_und_pattern'] = $strongarm;
 
   return $export;
 }

@@ -23,8 +23,8 @@ function eitict_article_field_group_info() {
     'label' => 'Event Details',
     'weight' => '6',
     'children' => array(
-      0 => 'field_event_date',
-      1 => 'field_event_location',
+      0 => 'field_event_location',
+      1 => 'field_event_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

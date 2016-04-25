@@ -100,7 +100,7 @@ function eitiwidgets_field_default_field_bases() {
   // Exported field_base: 'field_fpp_bookmark_list'.
   $field_bases['field_fpp_bookmark_list'] = array(
     'active' => 1,
-    'cardinality' => 7,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_fpp_bookmark_list',
