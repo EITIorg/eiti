@@ -185,7 +185,7 @@ class EITIPersonMigration extends EITINodeMigration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIPersonPicturesMigration extends DrupalFile7Migration {
+class EITIPersonPicturesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }

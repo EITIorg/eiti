@@ -80,7 +80,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
   public function prepare($entity, $row) {
     // Replace the old <img> tags with the new Media JSON.
     if (!empty($entity->body)) {
-      MigrateDestinationMedia::rewriteImgTags($entity);
+      self::rewriteImgTags($entity);
     }
 
     // Take care of the paths.
@@ -88,6 +88,100 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
     // Check if it is a translation.
     $this->entityTranslate($entity, $row);
+  }
+
+  /**
+   * Overridden and rewritten method that rewrites the Img Tags.
+   */
+  static public function rewriteImgTags($entity, $field = 'body') {
+    if (is_array($entity->$field)) {
+      migrate_instrument_start('MigrateDestinationMedia rewriteImgTags');
+      foreach ($entity->$field as $language => $values) {
+        $body = isset($values[0]['value']) ? $values[0]['value'] : '';
+        break;
+      }
+      // Quickly skip any non-candidates.
+      if (!stristr($body, '<img')) {
+        migrate_instrument_stop('EITINodeMigration rewriteImgTags');
+        return;
+      }
+      // Pass full img tags into the callback.
+      $new_body = preg_replace_callback('|<img [^>]*>|i', array(self, 'replaceOverriddenCallback'),
+        $body);
+      $entity->{$field}[$language][0]['value'] = $new_body;
+      migrate_instrument_stop('EITINodeMigration rewriteImgTags');
+    }
+  }
+
+  /**
+   * Overridden static version of replaceCallback.
+   */
+  static protected function replaceOverriddenCallback(array $matches) {
+    $legacy_domain = variable_get('eiti_migration_legacy_domain', 'eiti.org');
+    $src_matches = array();
+    // Default to the original <img> tag
+    $result = $matches[0];
+    // Extract the src parameter
+    if (preg_match('|src=[\'"]([^\'"]+)[\'"]|i', $matches[0], $src_matches)) {
+      // Replace the scheme and host portions of the referenced URI with the
+      // Drupal scheme as it's saved in the file_unmanaged table
+      $src = $src_matches[1];
+      $fid = db_select('file_managed', 'f')
+        ->fields('f', array('fid'))
+        ->condition('filename', basename($src))
+        ->execute()
+        ->fetchField();
+
+      // If there's no FID in our database, well, we'll fetch the image from the web and save it.
+      if (!$fid && !empty($src)) {
+        $path_info = parse_url($src);
+        $full_path = FALSE;
+        if (isset($path_info['host']) && ($path_info['host'] == 'eiti.org' || $path_info['host'] == 'www.eiti.org' )) {
+          $full_path = 'https://' . $legacy_domain . $path_info['path'];
+        }
+        elseif (empty($path_info['host'])) {
+          $full_path = (substr($path_info['path'], 0, 1) == '/') ? 'https://' . $legacy_domain . $path_info['path'] : 'https://' . $legacy_domain . '/' . $path_info['path'];
+        }
+
+        // Now that we know what's the path.
+        if ($full_path) {
+          $file = system_retrieve_file($full_path, 'public://migrated_images/' . basename($src), TRUE);
+          if ($file) {
+            $fid = $file->fid;
+          }
+        }
+      }
+
+      // Now replace the files with their media JSON equivalent.
+      if ($fid) {
+        $image_info = array(
+          'type' => 'media',
+          'view_mode' => 'wide',
+          'fid' => $fid,
+          'attributes' => array(
+            'alt' => '',
+            'title' => '',
+            'class' => 'media-image',
+            'typeof' => 'foaf:Image',
+            'wysiwyg' => 1,
+          ),
+        );
+        // Get the height and width parameters if present
+        preg_match('|width=[\'"]([^\'"]+)[\'"]|i', $matches[0], $width);
+        preg_match('|height=[\'"]([^\'"]+)[\'"]|i', $matches[0], $height);
+        // image width
+        if ($width) {
+          $image_info['attributes']['width'] = $width[1];
+        }
+        // image height
+        if ($height) {
+          $image_info['attributes']['height'] = $height[1];
+        }
+
+        $result = '[[' . drupal_json_encode($image_info) . ']]';
+      }
+    }
+    return $result;
   }
 
   /**
@@ -205,9 +299,12 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
     }
   }
 
+  /**
+   * Small helper function that changes the 'changed' timestamp.
+   */
   public function fixChangePropertyValue($node, $changed) {
     // Unfortunately, http://drupal.org/node/722688 was not accepted, so fix
-    // the changed timestamp
+    // the changed timestamp.
     db_update('node')
       ->fields(array('changed' => $changed))
       ->condition('nid', $node->nid)
@@ -370,4 +467,51 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
   }
 }
+
+/**
+ * Class EITIDrupalFileMigration
+ *
+ * Custom File Migration wrapper class.
+ */
+class EITIDrupalFileMigration extends DrupalFile7Migration {
+  /**
+   * Prepare function.
+   */
+  public function complete($entity, $row) {
+    // Take care of the paths.
+    $this->migrateRedirects($entity, $row);
+  }
+
+  /**
+   * Migrate the redirects.
+   */
+  public function migrateRedirects($entity, $row) {
+    $legacy_path = self::getOldPath($row->uri);
+
+    // Now we need to add the current path as a redirect.
+    $new_redirect_default = array(
+      'uid' => $entity->uid,
+      'language' => isset($entity->language) ? $entity->language : LANGUAGE_NONE,
+    );
+    $new_redirect = new stdClass();
+    redirect_object_prepare($new_redirect, $new_redirect_default);
+    $new_redirect->redirect = 'file/' . $entity->fid;
+    $new_redirect->source = $legacy_path;
+    if (EITIMigrateRedirectEntityHandler::redirectValidate($new_redirect)) {
+      redirect_save($new_redirect);
+    }
+  }
+
+  /**
+   * Small function that gets a Legacy Path using an URI.
+   */
+  static public function getOldPath($uri) {
+    list($scheme, $target) = explode('://', $uri, 2);
+
+    $target = trim($target, '\/');
+    $path = str_replace('\\', '/', $target);
+    return 'files/' . $path;
+  }
+}
+
 

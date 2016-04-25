@@ -263,7 +263,7 @@ class EITIEventsToArticleMigration extends EITIGenericToArticleMigration {
  *
  * This class helps us migrate correctly the featured images (and adding the caption as title to them).
  */
-class EITINewsFeaturedImageMigration extends DrupalFile7Migration {
+class EITINewsFeaturedImageMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
@@ -315,7 +315,7 @@ class EITINewsFeaturedImageMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate correctly the featured images (and adding the caption as title to them).
  */
-class EITIBlogFeaturedImageMigration extends DrupalFile7Migration {
+class EITIBlogFeaturedImageMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
 
@@ -366,7 +366,7 @@ class EITIBlogFeaturedImageMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate correctly the featured images (and adding the caption as title to them).
  */
-class EITIEventFeaturedImageMigration extends DrupalFile7Migration {
+class EITIEventFeaturedImageMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -396,7 +396,7 @@ class EITIEventFeaturedImageMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate image galleries from the legacy to the new system.
  */
-class EITINewsImageGalleryMigration extends DrupalFile7Migration {
+class EITINewsImageGalleryMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -422,7 +422,7 @@ class EITINewsImageGalleryMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate image galleries from the legacy to the new system.
  */
-class EITIBlogImageGalleryMigration extends DrupalFile7Migration {
+class EITIBlogImageGalleryMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -449,7 +449,7 @@ class EITIBlogImageGalleryMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITINewsAttachedFilesMigration extends DrupalFile7Migration {
+class EITINewsAttachedFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -481,7 +481,7 @@ class EITINewsAttachedFilesMigration extends DrupalFile7Migration {
  *
  * This class helps us IMCE files from the legacy to the new system.
  */
-class EITIIMCEFilesMigration extends DrupalFile7Migration {
+class EITIIMCEFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -515,7 +515,7 @@ class EITIIMCEFilesMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITINewsUploadFilesMigration extends DrupalFile7Migration {
+class EITINewsUploadFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -547,7 +547,7 @@ class EITINewsUploadFilesMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIBlogUploadFilesMigration extends DrupalFile7Migration {
+class EITIBlogUploadFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -579,7 +579,7 @@ class EITIBlogUploadFilesMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIEventUploadFilesMigration extends DrupalFile7Migration {
+class EITIEventUploadFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
