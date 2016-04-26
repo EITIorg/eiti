@@ -160,9 +160,12 @@
   color: @normalcolor;
 
   // Style links that have been visited.
-  &:visited {
-    color: @viscolor;
-  }
+  // @HACK: Remove visited style!
+  //&:visited {
+  //  @viscolor: @normalcolor;
+  //  color: @viscolor;
+  //}
+
   // Style links that are active.
   &.active,
   &:active {
