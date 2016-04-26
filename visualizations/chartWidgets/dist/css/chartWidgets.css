@@ -4,10 +4,11 @@
 }
 
 .eiti-chart-widget .chartTitle {
-    color: #0093cf;
     display: inline-block;
-    font-size: 1em;
-    font-weight: 300;
+    margin-left: 150px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #4bb4a1;
 }
 
 .eiti-chart-widget .chartDescription {
@@ -206,28 +207,7 @@
   text-anchor: end;
 }
 
-
-/* ==========================================================================
-   Helper classes
-   TODO: Verify if these can be removed!
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers:
- */
-.hidden {
-    display: none !important;
-}
-
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-.invisible {
-    visibility: hidden;
-}
-
-/* export button */
-.export {
+.eiti-chart-widget .export {
   background: #f0f0f0;
   border: #f0f0f0;
   color: #0093cf;
@@ -235,7 +215,8 @@
   margin: 15px 0;
   padding: 4px 10px;
 }
-.export:hover {
+
+.eiti-chart-widget .export:hover {
   background: #0093cf;
   border: #0093cf;
   color: #f0f0f0;

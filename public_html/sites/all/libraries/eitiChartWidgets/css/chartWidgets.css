@@ -207,22 +207,17 @@
   text-anchor: end;
 }
 
-
-/* ==========================================================================
-   Helper classes
-   TODO: Verify if these can be removed!
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers:
- */
-.hidden {
-    display: none !important;
+.eiti-chart-widget .export {
+  background: #f0f0f0;
+  border: #f0f0f0;
+  color: #0093cf;
+  font-size: 0.8em;
+  margin: 15px 0;
+  padding: 4px 10px;
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-.invisible {
-    visibility: hidden;
+.eiti-chart-widget .export:hover {
+  background: #0093cf;
+  border: #0093cf;
+  color: #f0f0f0;
 }
