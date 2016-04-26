@@ -108,7 +108,7 @@ function eitientities_field_default_field_bases() {
       'entity_translation_sync' => FALSE,
       'size' => 5,
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'country',
   );
 

@@ -69,18 +69,18 @@ class EITINewsToArticleMigration extends EITIGenericToArticleMigration {
     $this->addFieldMapping('field_tags:source_type')
       ->defaultValue('tid');
 
+    $this->addFieldMapping('field_related_country', 'field_taxonomy_countries');
+
     // Simple mappings
     // $this->addSimpleMappings(array('language, revision, log, body:language, body:format'));
 
     // Unmigrated sources.
     $this->addUnmigratedSources(array(
       'field_support_company',
-      'field_taxonomy_countries',
       'field_taxonomy_related_subsite',
     ));
 
     $this->addUnmigratedDestinations(array(
-      'field_related_country',
       'field_event_date',
       'field_event_location',
     ));
@@ -97,6 +97,27 @@ class EITINewsToArticleMigration extends EITIGenericToArticleMigration {
     // implementation, so parent classes can ignore rows.
     if (parent::prepareRow($row) === FALSE) {
       return FALSE;
+    }
+
+    // Now let's play with the country field.
+    $exceptions = array(
+      'Democratic Republic of Congo' => 'CD',
+      "Côte d'Ivoire" => 'CI'
+    );
+    if (!empty($row->field_taxonomy_countries)) {
+      $country_vocabulary_vid = 9;
+      $terms = $this->fetchSourceTerm($country_vocabulary_vid, $row->field_taxonomy_countries);
+      // Reset and repopulate.
+      $row->field_taxonomy_countries = array();
+      foreach ($terms as $term) {
+        $country = countries_country_lookup($term->name, 'name');
+        if (!empty($country)) {
+          $row->field_taxonomy_countries[] = $country->iso2;
+        }
+        elseif (in_array($term->name, array_keys($exceptions))) {
+          $row->field_taxonomy_countries[] = $exceptions[$term->name];
+        }
+      }
     }
 
     // Merge files together.
