@@ -81,6 +81,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
     // Replace the old <img> tags with the new Media JSON.
     if (!empty($entity->body)) {
       self::rewriteImgTags($entity);
+      self::rewriteHrefs($entity);
     }
 
     // Take care of the paths.
@@ -110,6 +111,29 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
         $body);
       $entity->{$field}[$language][0]['value'] = $new_body;
       migrate_instrument_stop('EITINodeMigration rewriteImgTags');
+    }
+  }
+
+  /**
+   * Overridden and rewritten method that rewrites the Hrefs.
+   */
+  static public function rewriteHrefs($entity, $field = 'body') {
+    if (is_array($entity->$field)) {
+      migrate_instrument_start('MigrateDestinationMedia rewriteHrefs');
+      foreach ($entity->$field as $language => $values) {
+        $body = isset($values[0]['value']) ? $values[0]['value'] : '';
+        break;
+      }
+      // Quickly skip any non-candidates.
+      if (!stristr($body, '<a')) {
+        migrate_instrument_stop('EITINodeMigration rewriteHrefs');
+        return;
+      }
+      // Pass full img tags into the callback.
+      $new_body = preg_replace_callback('|<a [^>]*>|i', array(self, 'replaceHrefCallback'),
+        $body);
+      $entity->{$field}[$language][0]['value'] = $new_body;
+      migrate_instrument_stop('EITINodeMigration rewriteHrefs');
     }
   }
 
@@ -179,6 +203,33 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
         }
 
         $result = '[[' . drupal_json_encode($image_info) . ']]';
+      }
+    }
+    return $result;
+  }
+
+  /**
+   * A callback function from preg_replace_callback.
+   */
+  public function replaceHrefCallback(array $matches) {
+    $legacy_domain = variable_get('eiti_migration_legacy_domain', 'eiti.org');
+    $href_matches = array();
+
+    // Default to the original <a> tag
+    $result = $matches[0];
+    // Extract the src parameter
+    if (preg_match('|href=[\'"]([^\'"]+)[\'"]|i', $matches[0], $href_matches)) {
+      // Replace the scheme and host portions of the referenced URI with the
+      // Drupal scheme as it's saved in the file_unmanaged table
+      $href = $href_matches[1];
+
+      // If there's no FID in our database, well, we'll fetch the image from the web and save it.
+      if (!empty($href)) {
+        $path_info = parse_url($href);
+        if (isset($path_info['host']) && ($path_info['host'] == $legacy_domain || $path_info['host'] == 'www.' . $legacy_domain )) {
+          $relative_path = $path_info['path'];
+          $result = str_replace($href, $relative_path, $result);
+        }
       }
     }
     return $result;
