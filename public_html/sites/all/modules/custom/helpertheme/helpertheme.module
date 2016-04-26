@@ -586,16 +586,26 @@ function helpertheme_panels_pre_render($panels_display, $renderer) {
  * @inheritdoc
  */
 function helpertheme_entity_view_alter(&$build, $type) {
-  if (!isset($build['#bundle']) || !isset($build['#view_mode']) || $build['#view_mode'] != 'full') {
+  $entity = NULL;
+  if (isset($build['#' . $type])) {
+    $entity = $build['#' . $type];
+  }
+  else if ($type == 'taxonomy_term' && isset($build['#term'])) {
+    $entity = $build['#term'];
+
+    // @HACK: Hide the title; we have DS.
+    helpertheme_page_title_set_status(FALSE);
+  }
+
+  if (empty($entity)) {
     return;
   }
 
-  if (!isset($build['#' . $type])) {
-    return;
-  }
-
-  $entity = $build['#' . $type];
   if (!helpertheme_entity_is_page($type, $entity)) {
+    return;
+  }
+
+  if (!isset($build['#bundle']) || !isset($build['#view_mode'])) {
     return;
   }
 
@@ -603,6 +613,7 @@ function helpertheme_entity_view_alter(&$build, $type) {
   if (isset($ds_layout['layout'])) {
     $class = drupal_html_class('page-layout--' . $ds_layout['layout']);
     helpertheme_set_html_classes($class);
+    helpertheme_page_title_set_status(FALSE);
   }
 }
 
