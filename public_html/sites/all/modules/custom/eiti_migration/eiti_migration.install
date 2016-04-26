@@ -21,5 +21,11 @@ function eiti_migration_install() {
   if (!file_exists($spreadsheets_temporary_path)) {
     drupal_mkdir($spreadsheets_temporary_path);
   }
-  file_prepare_directory($spreadsheets_path);
+  file_prepare_directory($spreadsheets_temporary_path);
+
+  $migrated_img = 'public://migrated_images';
+  if (!file_exists($migrated_img)) {
+    drupal_mkdir($migrated_img);
+  }
+  file_prepare_directory($migrated_img);
 }

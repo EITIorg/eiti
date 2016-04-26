@@ -49,6 +49,12 @@ function eiti_migration_settings($form, $form_state) {
     '#collapsible' => TRUE,
     '#collpased' => FALSE,
   );
+  $form['eiti_migration_files_fieldset']['eiti_migration_legacy_domain'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Legacy Domain'),
+    '#description' => t('Please specify the legacy domain (i.e. <strong>eiti.org</strong>).'),
+    '#default_value' => variable_get('eiti_migration_legacy_domain', 'eiti.org'),
+  );
   $form['eiti_migration_files_fieldset']['eiti_migration_files_public'] = array(
     '#type' => 'textfield',
     '#title' => t('Legacy Public Directory'),

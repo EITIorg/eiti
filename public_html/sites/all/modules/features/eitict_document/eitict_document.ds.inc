@@ -38,9 +38,7 @@ function eitict_document_ds_field_settings_info() {
     ),
     'field_doc_published_date' => array(
       'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
+        'ft' => array(),
       ),
     ),
   );
@@ -121,18 +119,18 @@ function eitict_document_ds_layout_settings_info() {
     'regions' => array(
       'side' => array(
         0 => 'field_doc_image_preview',
-        1 => 'field_doc_published_date',
       ),
       'main' => array(
-        2 => 'title_field',
+        1 => 'title_field',
+        2 => 'field_doc_published_date',
         3 => 'body',
         4 => 'node_link',
       ),
     ),
     'fields' => array(
       'field_doc_image_preview' => 'side',
-      'field_doc_published_date' => 'side',
       'title_field' => 'main',
+      'field_doc_published_date' => 'main',
       'body' => 'main',
       'node_link' => 'main',
     ),

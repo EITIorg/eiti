@@ -94,7 +94,7 @@ class EITIDocumentMigration extends EITINodeMigration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentFilesPreviewMigration extends DrupalFile7Migration {
+class EITIDocumentFilesPreviewMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -119,7 +119,7 @@ class EITIDocumentFilesPreviewMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
+class EITIDocumentAttachmentsMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -139,6 +139,7 @@ class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -151,7 +152,7 @@ class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentUploadFilesMigration extends DrupalFile7Migration {
+class EITIDocumentUploadFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }

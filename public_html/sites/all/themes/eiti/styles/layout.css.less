@@ -105,6 +105,29 @@
     width: auto;
   }
 }
+.xSmallOnly() {
+  .page-layout--widelayout {
+    .page-title-wrapper {
+      .single-fluid-column();
+    }
+  }
+}
+.xMediumOnly() {
+  .page-layout--widelayout {
+    .page-title-wrapper {
+      .row-wrapper(8);
+      .single-fluid-column(padding);
+    }
+  }
+}
+.xNormalAndUp() {
+  .page-layout--widelayout {
+    .page-title-wrapper {
+      .row-wrapper();
+      .single-fluid-column(padding);
+    }
+  }
+}
 
 // Use `single-fluid-row-wrapper` class on pages that should expand the full width of the page.
 .xSmallOnly() {

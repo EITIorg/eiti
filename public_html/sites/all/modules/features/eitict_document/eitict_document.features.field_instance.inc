@@ -97,7 +97,7 @@ function eitict_document_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => 'documents',
       'file_extensions' => 'xls xlsx doc docx ppt pptx pdf jpeg jpg gif png ai psd tif rtf txt',
       'filefield_paths' => array(
@@ -266,7 +266,7 @@ function eitict_document_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -277,7 +277,7 @@ function eitict_document_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'above',
@@ -390,7 +390,7 @@ function eitict_document_field_default_field_instances() {
           'title_style' => 'h3',
         ),
         'type' => 'title_linked',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'hidden',
