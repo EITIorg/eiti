@@ -84,6 +84,9 @@
   margin-right: @gen_gutter_width / 2;
 }
 .single-fluid-column(@type:margin) when (@type = padding) {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   padding-left: @gen_gutter_width / 2;
   padding-right: @gen_gutter_width / 2;
 }

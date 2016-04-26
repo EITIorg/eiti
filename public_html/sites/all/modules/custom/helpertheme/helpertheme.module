@@ -577,6 +577,7 @@ function helpertheme_entity_is_page($type, $entity) {
 function helpertheme_panels_pre_render($panels_display, $renderer) {
   $class = drupal_html_class('page-layout--' . $panels_display->layout);
   helpertheme_set_html_classes($class);
+  helpertheme_page_title_set_status(FALSE);
 }
 
 /**
