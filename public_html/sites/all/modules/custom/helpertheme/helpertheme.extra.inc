@@ -93,7 +93,7 @@ function helpertheme_page_title_set_status($value = NULL) {
     return $status;
   }
 
-  return TRUE;
+  return FALSE;
 }
 
 /**
