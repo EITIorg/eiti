@@ -545,8 +545,14 @@ class EITIDrupalFileMigration extends DrupalFile7Migration {
     );
     $path_alias['alias']= variable_get('file_public_path', 'sites/default/files') . '/' . file_uri_target($entity->uri);
     $path_alias['source'] = $legacy_path;
-    path_save($path_alias);
 
+    $conditions = array(
+      'alias' => $path_alias['alias'],
+    );
+    $alias_lookup = path_load($conditions);
+    if (empty($alias_lookup)) {
+      path_save($path_alias);
+    }
   }
 
   /**
