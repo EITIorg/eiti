@@ -11,8 +11,8 @@
  */
 class ImplementingCountryPanelizerEntity extends PanelizerEntityDefault {
   public $supports_revisions = FALSE;
-  public $entity_admin_root = 'admin/structure/implementing_country/%';
-  public $entity_admin_bundle = 3;
+  // public $entity_admin_root = 'admin/structure/implementing_country/manage/%';
+  // public $entity_admin_bundle = 4;
   public $views_table = 'eiti_implementing_country';
   //public $uses_page_manager = TRUE;
 
