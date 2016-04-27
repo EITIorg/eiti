@@ -123,7 +123,7 @@ destroy:
 	@echo 'Erasing the database content...'
 	@drush sql-drop --yes
 	@echo 'Erasing the user uploaded files...'
-	@rm -rf sites/default/files/*
+	@rm -rf sites/default/files
 
 
 # Backup the environment.
