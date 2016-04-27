@@ -42,3 +42,8 @@ div.ctools-modal-content .form-item .media-thumbnail label {
 .page-admin-structure-fieldable-panels-panes td.ctools-export-ui-operations .ctools-dropbutton-processed {
   margin-bottom: 10px;
 }
+
+/* Fix table field form element style. */
+.form-tablefield .tablefield-rebuild.form-submit {
+  background-color: #e3e3e3 !important;
+}
