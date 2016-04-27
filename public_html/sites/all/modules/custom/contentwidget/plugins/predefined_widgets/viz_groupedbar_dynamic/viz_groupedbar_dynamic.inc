@@ -94,6 +94,7 @@ function contentwidget__viz_groupedbar_dynamic__render($plugin, $widget_settings
     '#attributes' => array(
       'id' => $identifier . '--export',
       'class' => array(
+        'eiti-chart-widget',
         'eiti-chart-widget--export',
       ),
     ),

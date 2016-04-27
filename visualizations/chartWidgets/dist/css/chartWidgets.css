@@ -4,17 +4,11 @@
 }
 
 .eiti-chart-widget .chartTitle {
-    display: inline-block;
-    margin-left: 150px;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #4bb4a1;
+    font-weight: normal;
+    text-align: center;
 }
 
 .eiti-chart-widget .chartDescription {
-    margin-left: 110px;
-    color: #c83739;
-    font-size: 1.1em;
 }
 
 .eiti-chart-widget .legend {
