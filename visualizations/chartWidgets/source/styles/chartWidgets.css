@@ -189,8 +189,8 @@
 }
 
 .eiti-chart-widget .node text {
+  font-size: 1.2em;
   pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
 }
 
 .eiti-chart-widget .link {
