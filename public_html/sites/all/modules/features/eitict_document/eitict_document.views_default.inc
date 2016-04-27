@@ -23,7 +23,7 @@ function eitict_document_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Publications';
-  $handler->display->display_options['css_class'] = 'single-fluid-row-wrapper';
+  $handler->display->display_options['css_class'] = '';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -110,15 +110,6 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['field_document_category_tid']['expose']['identifier'] = 'category';
   $handler->display->display_options['filters']['field_document_category_tid']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    3 => 0,
-    9 => 0,
-    7 => 0,
-    8 => 0,
-    6 => 0,
-    5 => 0,
-    10 => 0,
-    4 => 0,
   );
   $handler->display->display_options['filters']['field_document_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_document_category_tid']['vocabulary'] = 'document_category';
