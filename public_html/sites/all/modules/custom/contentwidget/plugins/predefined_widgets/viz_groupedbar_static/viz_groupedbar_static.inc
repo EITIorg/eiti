@@ -10,8 +10,8 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Visualization: Grouped Bar chart static',
-  'description' => 'A grouped bar chart with a manual input data.',
+  'title' => t('Visualization: Grouped Bar chart static'),
+  'description' => t('A grouped bar chart with a manual input data.'),
   'render callback' => 'contentwidget_viz_groupedbarchart_static_render',
   'settings form' => 'contentwidget_viz_groupedbarchart_static_settings',
   'defaults' => array(
@@ -32,69 +32,104 @@ $plugin = array(
  * Render callback for the 'Bar Chart' predefined widget.
  */
 function contentwidget_viz_groupedbarchart_static_render($plugin, $widget_settings, $entity, $langcode) {
-  $block = array();
-
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
-    return array('#markup' => t('Configured Stacked Bar Widget - with static data (manually entered).'));
+    return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
   }
 
-
-  // Prepare the ID.
-  $viz_id = implode('_', array($plugin['name'], $entity->fpid, $entity->vid));
-  $block['widget'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#attributes' => array(
-      'id' => $viz_id,
-      'class' => array(drupal_html_class($plugin['name']), 'eiti-visualization-wrapper'),
-    )
-  );
+  // Load the Plotly.js library.
+  $plotly_library = libraries_load('plotly', 'minified');
+  if (empty($plotly_library)) {
+    return array('#markup' => t('Plotly.js library could not be loaded.'));
+  }
 
   // Load the library.
-  $library = libraries_load('eiti-charts');
+  // @TODO: Use restful.module for CSV export.
+  $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
     return array('#markup' => t('Charts library could not be loaded.'));
   }
 
-  // Prepare the data.
-  $data = array();
-  for ($delta = 0; $delta < $widget_settings['groups_number']; $delta++) {
-    $data_group = array(
-      'label' => $widget_settings['barchart_value']['group_' . $delta]['group_name_' . $delta],
-    );
-    for ($v_delta = 0; $v_delta < $widget_settings['values_number']; $v_delta++) {
-      $data_group['values'][] = array(
-        'x' => $widget_settings['barchart_value']['group_' . $delta]['x_' . $v_delta],
-        'y' => (integer) $widget_settings['barchart_value']['group_' . $delta]['y_' . $v_delta],
-      );
+  // Prepare the ID.
+  $identifier_parts = array(
+    'eiti-chart-widget',
+    $entity->fpid,
+    $entity->vid
+  );
+  $identifier = drupal_clean_css_identifier(implode('-', $identifier_parts));
 
+  $block = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'eiti-chart-widget-wrapper',
+        $identifier . '-wrapper',
+      ),
+    ),
+  );
+
+  $block['widget'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => $identifier,
+      'class' => array(
+        'eiti-chart-widget',
+        drupal_html_class('eiti-chart-widget--' . $plugin['name']),
+      ),
+    ),
+    '#weight' => 10,
+  );
+
+  $block['widget']['initializing'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('Initializing chart.'),
+    '#attributes' => array(
+      'class' => array(
+        'message-initializing',
+      ),
+    ),
+  );
+
+  $block['export'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'id' => $identifier . '--export',
+      'class' => array(
+        'eiti-chart-widget--export',
+      ),
+    ),
+    '#weight' => 11,
+  );
+
+  // Prepare the data.
+  $widget_data = array();
+  // @TODO: Simplify data structure!
+  for ($group_delta = 0; $group_delta < $widget_settings['groups_number']; $group_delta++) {
+    $data_group = array(
+      'name' => $widget_settings['barchart_value']['group_' . $group_delta]['group_name_' . $group_delta],
+    );
+    for ($value_delta = 0; $value_delta < $widget_settings['values_number']; $value_delta++) {
+      $data_group['x'][$value_delta] = $widget_settings['barchart_value']['group_' . $group_delta]['x_' . $value_delta];
+      $data_group['y'][$value_delta] = round(floatval($widget_settings['barchart_value']['group_' . $group_delta]['y_' . $value_delta]));
     }
-    $data[] = $data_group;
+
+    $widget_data[$group_delta] = $data_group;
   }
 
   // Send the settings, so that later we can load them in our behaviour.
   $settings = array(
-    $viz_id => array(
-      'type' => 'GroupedBar',
-      'name' => $widget_settings['barchart_settings']['name'],
-      'width' => 800,
-      'height' => 400,
-      'margin' => array(
-        'top' => 10,
-        'bottom' => 50,
-        'left' => 100,
-        'right' => 10
-      ),
-      'xlabel' => $widget_settings['barchart_settings']['x-axis'],
-      'ylabel' => $widget_settings['barchart_settings']['y-axis'],
-      'description' => $widget_settings['barchart_settings']['description'],
-      'container' => $viz_id,
-      'widgetData' => $data,
-    ),
+    'container' => $identifier,
+    'type' => 'GroupedBar',
+    'title' => $widget_settings['barchart_settings']['name'],
+    'description' => $widget_settings['barchart_settings']['description'],
+    'xlabel' => $widget_settings['barchart_settings']['x-axis'],
+    'ylabel' => $widget_settings['barchart_settings']['y-axis'],
+    'widgetData' => $widget_data,
   );
-  drupal_add_js(array('contentwidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+
+  drupal_add_js(array('eitiContentWidgetPlotly' => array($identifier => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }

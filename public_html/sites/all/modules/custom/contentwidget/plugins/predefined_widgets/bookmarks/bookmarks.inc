@@ -10,27 +10,24 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Featured Bookmarks',
-  'description' => 'Displays a list of featured bookmarks in a square-stylized fashion.',
-  'render callback' => 'contentwidget_featured_bookmarks_render',
-  'settings form' => 'contentwidget_featured_bookmarks_settings',
-  'entity form alter' => 'contentwidget_featured_bookmarks_form_alter',
-  'entity group alter' => 'contentwidget_featured_bookmarks_group_alter',
-  'hook_entity_view' => 'contentwidget_featured_bookmarks_hook_entity_view',
-  'hook_fieldable_panels_pane_view' => 'contentwidget_featured_bookmarks_hook_fieldable_panels_pane_view',
+  'title' => t('Featured Bookmarks'),
+  'description' => t('Displays a list of featured bookmarks in a square-stylized fashion.'),
+  'hook_entity_view' => 'contentwidget__featured_bookmarks__hook_entity_view',
+  'render callback' => 'contentwidget__featured_bookmarks__render',
+  'settings form' => 'contentwidget__featured_bookmarks__settings',
   'defaults' => array(),
 );
 
 /**
  * Render callback for the 'Featured Bookmarks' predefined widget.
  */
-function contentwidget_featured_bookmarks_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget__featured_bookmarks__render($plugin, $widget_settings, $entity, $langcode) {
   $size = $widget_settings['widget_size'];
 
   $referenced_ids = array();
 
   $entity_type = 'fieldable_panels_pane';
-  $bookmark_list_field_language = field_language($entity_type, $entity, 'field_fpp_widget', $langcode);
+  $bookmark_list_field_language = field_language($entity_type, $entity, 'field_fpp_bookmark_list', $langcode);
   foreach ($entity->field_fpp_bookmark_list[$bookmark_list_field_language] as $reference) {
     $referenced_ids[] = $reference['target_id'];
   }
@@ -44,7 +41,7 @@ function contentwidget_featured_bookmarks_render($plugin, $widget_settings, $ent
   }
 
   // Get the dimensions of each bookmark.
-  list($large_tiles_ids, $medium_tiles_ids, $small_tiles_ids) = _contentwidget_featured_bookmarks_get_dimensions($size);
+  list($large_tiles_ids, $medium_tiles_ids, $small_tiles_ids) = _contentwidget__featured_bookmarks__get_dimensions($size);
 
   // Load entities with their different modes.
   $entities_renderable_arr = array();
@@ -109,7 +106,7 @@ function contentwidget_featured_bookmarks_render($plugin, $widget_settings, $ent
  * @param $size
  * @return array
  */
-function _contentwidget_featured_bookmarks_get_dimensions($size) {
+function _contentwidget__featured_bookmarks__get_dimensions($size) {
   $small_tiles_ids = $medium_tiles_ids = $large_tiles_ids = array();
 
   switch ($size) {
@@ -143,7 +140,7 @@ function _contentwidget_featured_bookmarks_get_dimensions($size) {
 /**
  * Settings form for the 'Top Projects' predefined widget.
  */
-function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget__featured_bookmarks__settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $default_size = isset($widget_settings['widget_size']) ? $widget_settings['widget_size'] : '';
 
@@ -160,8 +157,9 @@ function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plu
     '#title' => t('Widget Size'),
     '#options' => $available_sizes,
     '#default_value' => $default_size,
+    '#required' => TRUE,
     '#ajax' => array(
-      'callback' => 'contentwidget_featured_bookmarks_settings_ajax',
+      'callback' => '_contentwidget__featured_bookmarks__settings_ajax',
       'wrapper' => 'widget-preview',
       'method' => 'replace',
       'effect' => 'fade'
@@ -187,7 +185,7 @@ function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plu
   else {
     $settings_form['widget_preview'] = array(
       '#type' => 'markup',
-      '#markup' => t('Please select the size of the widget for prev12iew.'),
+      '#markup' => t('Select the size of the widget, and a preview of the layout will be displayed.'),
       '#prefix' => '<div id="widget-preview">',
       '#suffix' => '</div>',
     );
@@ -199,7 +197,7 @@ function contentwidget_featured_bookmarks_settings(&$element, &$form_state, $plu
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_featured_bookmarks_settings_ajax($form, $form_state) {
+function _contentwidget__featured_bookmarks__settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
   $entity_language = entity_language('fieldable_panels_pane', $entity);
   $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
@@ -211,7 +209,7 @@ function contentwidget_featured_bookmarks_settings_ajax($form, $form_state) {
  *
  * Please note that this helper is called multiple times if references exist.
  */
-function contentwidget_featured_bookmarks_hook_entity_view($context) {
+function contentwidget__featured_bookmarks__hook_entity_view($context) {
   // We need to prepare the referenced bookmarks.
   if (isset($context['referenced_entity'])) {
     $bookmark_entity = $context['referenced_entity'];

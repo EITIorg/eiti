@@ -49,6 +49,17 @@ class EITIUsersMigration extends DrupalUser7Migration {
  * where we do our best to handle the poorly migrated data into the legacy system.
  */
 abstract class EITINodeMigration extends DrupalNode7Migration {
+
+  public function __construct(array $arguments) {
+    parent::__construct($arguments);
+    $this->formatMappings = array(
+      '1' => 'filtered_html',
+      '2' => 'plain_text',
+      '3' => 'filtered_html',
+      '4' => 'plain_text',
+    );
+  }
+
   /**
    * That's where row preparation magic is done.
    */
@@ -69,7 +80,8 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
   public function prepare($entity, $row) {
     // Replace the old <img> tags with the new Media JSON.
     if (!empty($entity->body)) {
-      MigrateDestinationMedia::rewriteImgTags($entity);
+      self::rewriteImgTags($entity);
+      self::rewriteHrefs($entity);
     }
 
     // Take care of the paths.
@@ -77,6 +89,150 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
     // Check if it is a translation.
     $this->entityTranslate($entity, $row);
+  }
+
+  /**
+   * Overridden and rewritten method that rewrites the Img Tags.
+   */
+  static public function rewriteImgTags($entity, $field = 'body') {
+    if (is_array($entity->$field)) {
+      migrate_instrument_start('MigrateDestinationMedia rewriteImgTags');
+      foreach ($entity->$field as $language => $values) {
+        $body = isset($values[0]['value']) ? $values[0]['value'] : '';
+        break;
+      }
+      // Quickly skip any non-candidates.
+      if (!stristr($body, '<img')) {
+        migrate_instrument_stop('EITINodeMigration rewriteImgTags');
+        return;
+      }
+      // Pass full img tags into the callback.
+      $new_body = preg_replace_callback('|<img [^>]*>|i', array(self, 'replaceOverriddenCallback'),
+        $body);
+      $entity->{$field}[$language][0]['value'] = $new_body;
+      migrate_instrument_stop('EITINodeMigration rewriteImgTags');
+    }
+  }
+
+  /**
+   * Overridden and rewritten method that rewrites the Hrefs.
+   */
+  static public function rewriteHrefs($entity, $field = 'body') {
+    if (is_array($entity->$field)) {
+      migrate_instrument_start('MigrateDestinationMedia rewriteHrefs');
+      foreach ($entity->$field as $language => $values) {
+        $body = isset($values[0]['value']) ? $values[0]['value'] : '';
+        break;
+      }
+      // Quickly skip any non-candidates.
+      if (!stristr($body, '<a')) {
+        migrate_instrument_stop('EITINodeMigration rewriteHrefs');
+        return;
+      }
+      // Pass full img tags into the callback.
+      $new_body = preg_replace_callback('|<a [^>]*>|i', array(self, 'replaceHrefCallback'),
+        $body);
+      $entity->{$field}[$language][0]['value'] = $new_body;
+      migrate_instrument_stop('EITINodeMigration rewriteHrefs');
+    }
+  }
+
+  /**
+   * Overridden static version of replaceCallback.
+   */
+  static protected function replaceOverriddenCallback(array $matches) {
+    $legacy_domain = variable_get('eiti_migration_legacy_domain', 'eiti.org');
+    $src_matches = array();
+    // Default to the original <img> tag
+    $result = $matches[0];
+    // Extract the src parameter
+    if (preg_match('|src=[\'"]([^\'"]+)[\'"]|i', $matches[0], $src_matches)) {
+      // Replace the scheme and host portions of the referenced URI with the
+      // Drupal scheme as it's saved in the file_unmanaged table
+      $src = $src_matches[1];
+      $fid = db_select('file_managed', 'f')
+        ->fields('f', array('fid'))
+        ->condition('filename', basename($src))
+        ->execute()
+        ->fetchField();
+
+      // If there's no FID in our database, well, we'll fetch the image from the web and save it.
+      if (!$fid && !empty($src)) {
+        $path_info = parse_url($src);
+        $full_path = FALSE;
+        if (isset($path_info['host']) && ($path_info['host'] == 'eiti.org' || $path_info['host'] == 'www.eiti.org' )) {
+          $full_path = 'https://' . $legacy_domain . $path_info['path'];
+        }
+        elseif (empty($path_info['host'])) {
+          $full_path = (substr($path_info['path'], 0, 1) == '/') ? 'https://' . $legacy_domain . $path_info['path'] : 'https://' . $legacy_domain . '/' . $path_info['path'];
+        }
+
+        // Now that we know what's the path.
+        if ($full_path) {
+          $file = system_retrieve_file($full_path, 'public://migrated_images/' . basename($src), TRUE);
+          if ($file) {
+            $fid = $file->fid;
+          }
+        }
+      }
+
+      // Now replace the files with their media JSON equivalent.
+      if ($fid) {
+        $image_info = array(
+          'type' => 'media',
+          'view_mode' => 'wide',
+          'fid' => $fid,
+          'attributes' => array(
+            'alt' => '',
+            'title' => '',
+            'class' => 'media-image',
+            'typeof' => 'foaf:Image',
+            'wysiwyg' => 1,
+          ),
+        );
+        // Get the height and width parameters if present
+        preg_match('|width=[\'"]([^\'"]+)[\'"]|i', $matches[0], $width);
+        preg_match('|height=[\'"]([^\'"]+)[\'"]|i', $matches[0], $height);
+        // image width
+        if ($width) {
+          $image_info['attributes']['width'] = $width[1];
+        }
+        // image height
+        if ($height) {
+          $image_info['attributes']['height'] = $height[1];
+        }
+
+        $result = '[[' . drupal_json_encode($image_info) . ']]';
+      }
+    }
+    return $result;
+  }
+
+  /**
+   * A callback function from preg_replace_callback.
+   */
+  public function replaceHrefCallback(array $matches) {
+    $legacy_domain = variable_get('eiti_migration_legacy_domain', 'eiti.org');
+    $href_matches = array();
+
+    // Default to the original <a> tag
+    $result = $matches[0];
+    // Extract the src parameter
+    if (preg_match('|href=[\'"]([^\'"]+)[\'"]|i', $matches[0], $href_matches)) {
+      // Replace the scheme and host portions of the referenced URI with the
+      // Drupal scheme as it's saved in the file_unmanaged table
+      $href = $href_matches[1];
+
+      // If there's no FID in our database, well, we'll fetch the image from the web and save it.
+      if (!empty($href)) {
+        $path_info = parse_url($href);
+        if (isset($path_info['host']) && ($path_info['host'] == $legacy_domain || $path_info['host'] == 'www.' . $legacy_domain )) {
+          $relative_path = $path_info['path'];
+          $result = str_replace($href, $relative_path, $result);
+        }
+      }
+    }
+    return $result;
   }
 
   /**
@@ -194,9 +350,12 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
     }
   }
 
+  /**
+   * Small helper function that changes the 'changed' timestamp.
+   */
   public function fixChangePropertyValue($node, $changed) {
     // Unfortunately, http://drupal.org/node/722688 was not accepted, so fix
-    // the changed timestamp
+    // the changed timestamp.
     db_update('node')
       ->fields(array('changed' => $changed))
       ->condition('nid', $node->nid)
@@ -233,6 +392,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       $source_nid = $row->tnid;
       $source_node = node_load($source_nid);
 
+
       // Special case when we have a Stub.
       if ($source_node->title == 'Stub') {
         $source_node->language = 'en';
@@ -244,31 +404,13 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
       // We need to get all of the possible translations to create. So we look
       // for any translatable fields.
-      $translatable_fields = array();
-      foreach (field_info_instances('node', $this->destinationType) as $instance) {
-        $field_name = $instance['field_name'];
-        $field = field_info_field($field_name);
-
-        if ($field['translatable']) {
-          $translatable_fields[] = $field_name;
-        }
-      }
-
-      // Set the values.
-      foreach ($translatable_fields as $translatable_field) {
-        if (!empty($source_node->{$translatable_field}) && !empty($entity->{$translatable_field})) {
-          $source_node->{$translatable_field} = array_merge($source_node->{$translatable_field}, $entity->{$translatable_field});
-        }
-        elseif(empty($source_node->{$translatable_field}) && !empty($entity->{$translatable_field})) {
-          $source_node->{$translatable_field} = $entity->{$translatable_field};
-        }
-      }
+      $this->mergeTranslatableNodeFields($source_node, $entity);
 
       if (!isset($source_node->translations->data[$entity->language])) {
         // Add the new translation and store it.
         $handler->setTranslation(array(
           'translate' => 0,
-          'status' => 1,
+          'status' => $entity->status,
           'language' => $entity->language,
           'source' => $original_language,
           'uid' => (empty($entity->uid)) ? 0 : $entity->uid,
@@ -276,7 +418,11 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
           'created' => (empty($entity->created)) ? REQUEST_TIME : $entity->created,
         ));
       }
+      // All statuses are published by default.
+      $source_node->status = TRUE;
+
       // Save the source node.
+      field_attach_presave('node', $source_node);
       node_save($source_node);
 
       // Now cancel the creation of the node.
@@ -293,6 +439,43 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       // In this case, it's an updated stub (source of translation).
       $old_stub = node_load($entity->nid);
       $entity->translations = $old_stub->translations;
+    }
+
+    // Now we look-up the existing node, and if there IS ONE we merge the fields.
+    if (!empty($entity->nid)) {
+      $existing_node = node_load($entity->nid, NULL, TRUE);
+      $this->mergeTranslatableNodeFields($entity, $existing_node);
+    }
+  }
+
+  /**
+   * Merged translatable fields together.
+   *
+   * @param $a
+   *   First Entity, entity who's values will store both values.
+   *
+   * @param $b
+   *   Second Entity, entities who's values will be copied to $a.
+   */
+  public function mergeTranslatableNodeFields($a, $b) {
+    $translatable_fields = array();
+    foreach (field_info_instances('node', $this->destinationType) as $instance) {
+      $field_name = $instance['field_name'];
+      $field = field_info_field($field_name);
+
+      if ($field['translatable']) {
+        $translatable_fields[] = $field_name;
+      }
+    }
+
+    // Set the values.
+    foreach ($translatable_fields as $translatable_field) {
+      if (!empty($a->{$translatable_field}) && !empty($b->{$translatable_field})) {
+        $a->{$translatable_field} = array_merge($a->{$translatable_field}, $b->{$translatable_field});
+      }
+      elseif(empty($a->{$translatable_field}) && !empty($b->{$translatable_field})) {
+        $a->{$translatable_field} = $b->{$translatable_field};
+      }
     }
   }
 
@@ -335,4 +518,53 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
 
   }
 }
+
+/**
+ * Class EITIDrupalFileMigration
+ *
+ * Custom File Migration wrapper class.
+ */
+class EITIDrupalFileMigration extends DrupalFile7Migration {
+  /**
+   * Prepare function.
+   */
+  public function complete($entity, $row) {
+    // Take care of the paths.
+    $this->migrateRedirects($entity, $row);
+  }
+
+  /**
+   * Migrate the redirects.
+   */
+  public function migrateRedirects($entity, $row) {
+    $legacy_path = self::getOldPath($row->uri);
+
+    // Now we need to add the current path as a redirect.
+    $path_alias = array(
+      'language' => isset($entity->language) ? $entity->language : LANGUAGE_NONE,
+    );
+    $path_alias['alias']= variable_get('file_public_path', 'sites/default/files') . '/' . file_uri_target($entity->uri);
+    $path_alias['source'] = $legacy_path;
+
+    $conditions = array(
+      'alias' => $path_alias['alias'],
+    );
+    $alias_lookup = path_load($conditions);
+    if (empty($alias_lookup)) {
+      path_save($path_alias);
+    }
+  }
+
+  /**
+   * Small function that gets a Legacy Path using an URI.
+   */
+  static public function getOldPath($uri) {
+    list($scheme, $target) = explode('://', $uri, 2);
+
+    $target = trim($target, '\/');
+    $path = str_replace('\\', '/', $target);
+    return 'files/' . $path;
+  }
+}
+
 

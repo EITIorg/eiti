@@ -9,15 +9,21 @@
 
 .site-identity-wrapper {
   .site-name {
-    font-size: inherit;
+    font-size: 1em;
     margin: 0;
+  }
+}
+.xMediumAndDown() {
+  .site-identity-wrapper {
+    .link {
+      line-height: 3em;
+    }
   }
 }
 .xMediumOnly() {
   .header-items,
   .site-identity-wrapper {
     line-height: 2em;
-    margin: 0.5em;
   }
 }
 .xMediumAndUp() {
@@ -28,7 +34,7 @@
 .xNormalAndUp() {
   .header-items,
   .site-identity-wrapper {
-    line-height: 5em;
+    line-height: 4.8em;
   }
 }
 
@@ -39,6 +45,7 @@
 .site-navigation-toggle-wrapper {
   background-color: @clnormal;
   color: @clmain;
+
   .link {
     .link-color(@clmain, @claltnormal);
 
@@ -52,35 +59,26 @@
 
   .link {
     display: block;
-    margin: 0.5em;
+  }
+  .text {
+    .visually-hidden();
   }
 }
 
 .xMediumAndDown() {
   .site-navigation-toggle-wrapper {
-    margin-bottom: 0.5em;
     .link {
-      padding: 0.5em;
-    }
-    .text {
-      margin-left: 0.5em;
+      text-align: center;
+      line-height: 3em;
     }
   }
-
 }
+
 .xNormalAndUp() {
   .site-navigation-toggle-wrapper {
     .link {
       text-align: center;
-      line-height: 5em;
-      margin: 0;
-
-      .text {
-        line-height: normal;
-        display: inline-block;
-
-        .visually-hidden();
-      }
+      line-height: 4.8em;
     }
   }
 }
@@ -122,8 +120,9 @@
 }
 .xSmallOnly() {
   .main-navigation {
+    margin: 0.5em 0;
     .header-links {
-      margin: 0 -0.5em;  // HACK: Subtract link padding!
+      margin: 0;
       line-height: 1.75em;
     }
     .link-toplevel {
@@ -159,6 +158,9 @@
   }
   .language-switcher {
     float: right;
+    .locale-links {
+      display: block;
+    }
   }
 }
 
@@ -195,7 +197,7 @@
 
 .xSmallOnly() {
   .language-switcher {
-    margin: 0.5em 0;
+    margin: 0.5em;
     .first {
       .language-link {
         padding-left: 0;

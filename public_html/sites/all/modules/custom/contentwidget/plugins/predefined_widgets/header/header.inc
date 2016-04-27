@@ -10,19 +10,17 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Header',
-  'description' => 'Display a header with sub-header and some links, with an optional background.',
-  'render callback' => 'contentwidget_header_render',
-  'settings form' => 'contentwidget_header_settings',
-  'entity form alter' => 'contentwidget_header_form_alter',
-  'entity group alter' => 'contentwidget_header_group_alter',
+  'title' => t('Header'),
+  'description' => t('Display a header with sub-header and some links, with an optional background.'),
+  'render callback' => 'contentwidget__header__render',
+  'settings form' => 'contentwidget__header__settings',
   'defaults' => array(),
 );
 
 /**
  * Render callback for the 'Header' predefined widget.
  */
-function contentwidget_header_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget__header__render($plugin, $widget_settings, $entity, $langcode) {
   $image_url = '';
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -149,7 +147,7 @@ function contentwidget_header_render($plugin, $widget_settings, $entity, $langco
 /**
  * Settings form for the 'Top Projects' predefined widget.
  */
-function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget__header__settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
 
   $header_small = isset($widget_settings['header_small']) ? $widget_settings['header_small'] : '';
@@ -188,7 +186,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
     '#default_value' => $links_max,
     '#required' => TRUE,
     '#ajax' => array(
-      'callback' => 'contentwidget_header_settings_ajax',
+      'callback' => '_contentwidget__header__settings_ajax',
       'event' => 'change',
       'wrapper' => 'links-wrapper',
       'method' => 'replace',
@@ -242,7 +240,7 @@ function contentwidget_header_settings(&$element, &$form_state, $plugin, $widget
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_header_settings_ajax($form, $form_state) {
+function _contentwidget__header__settings_ajax($form, $form_state) {
   $entity = $form['#entity'];
   $entity_language = entity_language('fieldable_panels_pane', $entity);
   $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);

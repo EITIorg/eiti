@@ -29,16 +29,6 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'language' => 'und',
       'i18n_mode' => 0,
     ),
-    'country_status' => array(
-      'name' => 'Country Status',
-      'machine_name' => 'country_status',
-      'description' => '',
-      'hierarchy' => 0,
-      'module' => 'taxonomy',
-      'weight' => 0,
-      'language' => 'und',
-      'i18n_mode' => 1,
-    ),
     'document_category' => array(
       'name' => 'Document Category',
       'machine_name' => 'document_category',

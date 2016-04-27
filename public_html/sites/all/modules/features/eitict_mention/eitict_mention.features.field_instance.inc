@@ -23,7 +23,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -64,7 +64,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
     'description' => 'Please specify the publishing date of this article.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'long',
@@ -72,10 +72,10 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -121,11 +121,13 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
     'description' => 'Please specify the Source for this mention: both title and the full link (<em>i.e. Title - All Africa, URL - http://allafrica.com/stories/201512041040.html</em>).',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 2,
+        'settings' => array(
+          'strip_www' => FALSE,
+        ),
+        'type' => 'link_domain',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -134,9 +136,10 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_source_link',
-    'label' => 'Source Link',
+    'label' => 'Source',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -179,10 +182,15 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -215,7 +223,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -227,7 +235,7 @@ Note: it\'s better to keep this description short (2-3 sentences). ',
   t('Please specify the short description of this mention - what is the article about?
 Note: it\'s better to keep this description short (2-3 sentences). ');
   t('Published Date');
-  t('Source Link');
+  t('Source');
   t('Title');
 
   return $field_instances;

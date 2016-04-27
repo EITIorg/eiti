@@ -186,9 +186,8 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
    * Returns the operation count for calculating column spanning.
    */
   protected function operationCount() {
-    $count = 3;
-    $count += !empty($this->entityInfo['i18n controller class']) ? 1 : 0;
-    return $count;
+    // We use ctools_dropbutton.
+    return 1;
   }
 
   /**
@@ -214,14 +213,14 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
         'specifier' => 'title',
         'class' => array('country-ui-title'),
       ),
+      // array(
+      //   'data' => t('Type'),
+      //   'type' => 'property',
+      //   'specifier' => 'type',
+      //   'class' => array('country-ui-type'),
+      // ),
       array(
-        'data' => t('Type'),
-        'type' => 'property',
-        'specifier' => 'type',
-        'class' => array('country-ui-type'),
-      ),
-      array(
-        'data' => t('Last Updated'),
+        'data' => t('Changed'),
         'type' => 'property',
         'specifier' => 'changed',
         'class' => array('country-ui-changed'),
@@ -251,7 +250,7 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
     /** @var ImplementingCountryEntity $entity */
     foreach ($entities as $entity) {
       $cols = array(
-        check_plain($this->entityInfo['bundles'][$entity->bundle()]['label']),
+        // check_plain($this->entityInfo['bundles'][$entity->bundle()]['label']),
         format_date(!empty($entity->changed) ? $entity->changed : $entity->created, 'short'),
       );
       $rows[] = $this->overviewTableRow($conditions, $entity->identifier(), $entity, $cols);
@@ -262,6 +261,7 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('None.'),
+      '#attributes' => array('class' => array('fix-ctools-dropbutton')),
     );
     return $render;
   }
@@ -304,15 +304,34 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
     $row[] = $entity->status ? t('published') : t('not published');
 
     // Add operations.
-    $row[] = l(t('edit'), $this->entity_path . "/$id/edit", array('query' => drupal_get_destination()));
+    $operations = array();
 
-    // If i18n integration is enabled, add a link to the translate tab.
-    $i18n = !empty($this->entityInfo['i18n controller class']);
-    if ($i18n) {
-      $row[] = l(t('translate'), $this->entity_path . "/$id/translate");
+    if ($handler = panelizer_entity_plugin_get_handler($this->entityType)) {
+      $operations[] = array(
+        'title' => t('configure widgets'),
+        'href' => $this->entity_path . "/$id/panelizer/default/content",
+        'query' => drupal_get_destination(),
+      );
     }
 
-    $row[] = l(t('delete'), $this->entity_path . "/$id/delete", array('query' => drupal_get_destination()));
+    $operations[] = array(
+      'title' => t('edit'),
+      'href' => $this->entity_path . "/$id/edit",
+      'query' => drupal_get_destination(),
+    );
+
+    $operations[] = array(
+      'title' => t('translate'),
+      'href' => $this->entity_path . "/$id/translate",
+    );
+
+    $operations[] = array(
+      'title' => t('delete'),
+      'href' => $this->entity_path . "/$id/delete",
+      'query' => drupal_get_destination(),
+    );
+
+    $row[] = theme('links__ctools_dropbutton', array('links' => $operations, 'attributes' => array('class' => array())));
 
     return $row;
   }

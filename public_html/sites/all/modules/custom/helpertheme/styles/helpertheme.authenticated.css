@@ -1,0 +1,30 @@
+
+/**
+ * This file should contain CSS that is loaded logged in users.
+ */
+
+/* Highlight the user name if it is UID1 */
+body.adminimal-menu #admin-menu .dropdown li.admin-menu-action.admin-menu-account a[href="/user/1"] {
+  background-color: firebrick !important;
+}
+
+/* On the production environment we don't add the ".project-environment--*" class */
+body.adminimal-menu:not(.project-environment--local) #admin-menu {
+  background-color: darkred !important;  /* alert, we are on production*/
+}
+
+body.project-environment--preprod.adminimal-menu #admin-menu {
+  background-color: #563412 !important;  /* some sort of brown */
+}
+
+body.project-environment--staging.adminimal-menu #admin-menu {
+  background-color: #123456 !important;  /* some sort of pale blue */
+}
+
+body.project-environment--other.adminimal-menu #admin-menu {
+  background-color: #125634 !important;  /* some sort of pale green */
+}
+
+body.project-environment--local.adminimal-menu #admin-menu {
+  /* keep unchanged. */
+}

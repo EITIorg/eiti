@@ -11,6 +11,14 @@
     & > li {
       display: inline-block;
       padding: 1em 0;
+
+      &.first,
+      &.last {
+        font-size: 0.75em;
+        .icon {
+          fill: @clmain__separator;
+        }
+      }
     }
   }
 
@@ -20,7 +28,7 @@
     position: relative;
     .arrow {
       position: absolute;
-      right: -1em;
+      right: -1.25em; // We are left with 0.125em spacing on each side of the arrow.
       top: 50%;
       .icon {
         fill: @clmain__separator;
@@ -35,7 +43,6 @@
 
       .link-color(@clnormal, @clanchor__hover);
       .icon {
-        padding-right: 2em;
         fill: @clanchor;
       }
       &:hover {
@@ -51,21 +58,65 @@
       margin: 0.5em 0;
       padding: 0.5em 0.25em;
 
-      font-size: 0.875em;
+      font-size: 0.8em;
       line-height: 1.3em;
       min-height: 2.6em;
     }
-
-
   }
 }
 
-.xMediumAndDown() {
+.xSmallOnly() {
   .predefined-widget--value-chain {
     .value-chain-list {
+      align-items: center;
+      text-align: center;
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      & > li {
+        width: 10em;
+      }
+    }
+
+    .value-chain-wrapper {
+      .title {
+        border: none;
+        min-height: 0;
+      }
+      .arrow {
+        position: absolute;
+        right: 50%;
+        top: auto;
+        bottom: 0;
+        height: 0;
+        margin-left: -5.5em;
+
+        .icon {
+          fill: @clmain__separator;
+          margin-top: 0;
+          transform: translateY(-50%) rotate(90deg);
+        }
+      }
+    }
+  }
+}
+.xMediumOnly() {
+  .predefined-widget--value-chain {
+    .value-chain-list {
+      align-items: center;
+      align-content: center;
+      text-align: center;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      & > li {
+        width: 10em;
+      }
+    }
+
+    .value-chain-wrapper {
     }
   }
 }
@@ -73,9 +124,18 @@
   .predefined-widget--value-chain {
     .value-chain-list {
       align-items: center;
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
       justify-content: space-between;
+      & > li {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+      }
+    }
+    .chain-icon .icon {
+      padding-right: 2em;
     }
   }
 }

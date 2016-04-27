@@ -22,6 +22,24 @@ function organisation_form($form, &$form_state, $entity) {
     drupal_set_title(eitientity_organisation_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
 
+  // $form['additional_settings'] = array(
+  //   '#type' => 'vertical_tabs',
+  //   '#weight' => 99,
+  // );
+
+  // Entity options for administrators
+  $form['options'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Publishing options'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#group' => 'additional_settings',
+    '#attributes' => array(
+      'class' => array("{$entity_type}-form-options"),
+    ),
+    '#weight' => 95,
+  );
+
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => t('Name'),
@@ -38,7 +56,7 @@ function organisation_form($form, &$form_state, $entity) {
     '#autocomplete_path' => 'helpergeneric/ereference/implementing_country',
   );
 
-  $form['status'] = array(
+  $form['options']['status'] = array(
     '#type' => 'checkbox',
     '#title' => t('Published'),
     '#default_value' => $entity->status,

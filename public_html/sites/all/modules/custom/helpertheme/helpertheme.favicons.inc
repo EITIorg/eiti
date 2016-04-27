@@ -135,8 +135,8 @@ function _helpertheme_favicons($theme_path) {
     '#attributes' => array(
       'rel' => 'icon',
       'type' => 'image/png',
-      'href' => url($theme_path . '/favicons/favicon-192x192.png'),
-      'sizes' => '192x192',
+      'href' => url($theme_path . '/favicons/favicon-194x194.png'),
+      'sizes' => '194x194',
     ),
   );
   $favicon_tags[] = array(

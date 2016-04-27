@@ -56,6 +56,28 @@ function eitiet_implementing_country_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'delete terms in country_status'.
+  $permissions['delete terms in country_status'] = array(
+    'name' => 'delete terms in country_status',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in country_status'.
+  $permissions['edit terms in country_status'] = array(
+    'name' => 'edit terms in country_status',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'implementing_country entity access overview'.
   $permissions['implementing_country entity access overview'] = array(
     'name' => 'implementing_country entity access overview',

@@ -129,35 +129,17 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
   public function processGlobalProductionFields($data) {
     $output = array();
     // Needed for normalization.
-    $x_all = array();
-    $x_group = array();
     foreach ($data as $item) {
       if (!key_exists($item->indicator_id, $output)) {
         $output[$item->indicator_id] = array(
-          'label' => $item->commodity_name
+          'name' => $item->commodity_name,
         );
       }
-      $output[$item->indicator_id]['values'][] = array(
-        'x' => $item->name,
-        'y' => round(floatval($item->value_numeric)),
-      );
 
-      // Used for normalization.
-      if (!in_array($item->name, $x_all)) {
-        $x_all[] = $item->name;
-      }
-      $x_group[$item->indicator_id][] = $item->name;
+      $output[$item->indicator_id]['x'][] = $item->name;
+      $output[$item->indicator_id]['y'][] = round(floatval($item->value_numeric));
     }
-    // Make a small normalization.
-    foreach ($x_group as $indicator_id => $x_values) {
-      $x_diff = array_diff($x_all, $x_values);
-      foreach ($x_diff as $x) {
-        $output[$indicator_id]['values'][] = array(
-          'x' => $x,
-          'y' => 0,
-        );
-      }
-    }
+
     $output = array_values($output);
     return $output;
   }
@@ -168,36 +150,18 @@ class EITIApiGroupedBar extends RestfulDataProviderEITICharts {
   function processCountryProductionFields($data) {
     $output = array();
     // Needed for normalization.
-    $x_all = array();
-    $x_group = array();
     foreach ($data as $item) {
       $year = format_date($item->year_end, 'custom', 'Y');
       if (!key_exists($item->indicator_id, $output)) {
         $output[$item->indicator_id] = array(
-          'label' => $item->commodity_name
+          'name' => $item->commodity_name
         );
       }
-      $output[$item->indicator_id]['values'][] = array(
-        'x' => $year,
-        'y' => round(floatval($item->value_numeric)),
-      );
 
-      // Used for normalization.
-      if (!in_array($year, $x_all)) {
-        $x_all[] = $year;
-      }
-      $x_group[$item->indicator_id][] = $year;
+      $output[$item->indicator_id]['x'][] = $year;
+      $output[$item->indicator_id]['y'][] = round(floatval($item->value_numeric));
     }
-    // Make a small normalization.
-    foreach ($x_group as $indicator_id => $x_values) {
-      $x_diff = array_diff($x_all, $x_values);
-      foreach ($x_diff as $x) {
-        $output[$indicator_id]['values'][] = array(
-          'x' => $x,
-          'y' => 0,
-        );
-      }
-    }
+
     $output = array_values($output);
     return $output;
   }

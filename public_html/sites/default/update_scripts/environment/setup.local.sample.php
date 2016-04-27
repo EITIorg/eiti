@@ -24,6 +24,9 @@ if (!variable_get('update_scripts_user_one_updated', FALSE)) {
   variable_set('update_scripts_user_one_updated', TRUE);
 }
 
+// Disable page cache for anonymous users.
+variable_set('cache', 0);
+
 if ($DEVEL_MODE) {
   // Disable CSS and JavaScript aggregation.
   variable_set('preprocess_css', 0);
@@ -97,7 +100,7 @@ $modules = array(
   // 'og_ui',
   // 'page_manager',
   // 'panels_ipe',
-  'rules_admin',
+  // 'rules_admin',
   // 'schema',
   // 'stage_file_proxy',
   'update',

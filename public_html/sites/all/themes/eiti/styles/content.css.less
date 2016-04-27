@@ -1,0 +1,162 @@
+
+.field {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  .fieldable-panels-pane > & {
+    margin: 0;
+  }
+}
+
+.field {
+  &.field-label-inline .field-label,
+  .label-inline {
+    display: inline;
+    font-weight: bold;
+  }
+
+  .label-above {
+    font-weight: bold;
+  }
+}
+
+.field-name-field-attachments,
+.field-name-field-image-gallery {
+  background-color: @clmain__header;
+  border: 1px solid @clmain__separator;
+  padding: 1em !important;  // Fix for article page where layout is set on field wrappers.
+
+}
+
+// @TODO: Update markup for document and person entities teaser and apply proper styling.
+.group-side {
+  & > img {
+    border: 1px solid @clmain__separator;
+  }
+}
+
+.article-header {
+  &.with-featured-image {
+    background-size: cover;
+    background-position: center center;
+
+    color: @clmain;
+    a {
+      color: @clmain;
+    }
+
+    .title {
+      text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
+    }
+  }
+
+  .title {
+    font-weight: normal;
+  }
+}
+
+.xMediumAndUp() {
+  .article-header.with-featured-image {
+    @aspect_ratio: (5 / 16) * 100%;
+    display: block; // We need a block element for this to work.
+    height: 0;
+    padding-top: @aspect_ratio;
+
+    .title-field-wrapper {
+      position: relative;
+    }
+
+    .field-name-title-field {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+    }
+  }
+}
+
+.article-info-wrapper {
+  background-color: @clmain__header;
+}
+
+.article-info {
+  padding: 0.5em;
+
+  display: flex;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+
+  .field {
+    margin-right: 2em;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .field-name-field-tags {
+    flex: 2;
+  }
+
+  &.alternative {
+    border-bottom: 1px solid @clmain__separator;
+    border-top: 1px solid @clmain__separator;
+    .field {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.node-article.view-mode-teaser_alternative {
+  .title {
+    font-weight: normal;
+  }
+  .field-name-field-featured-image {
+    a {
+      .border-radius(6px);
+      border: 1px solid @clmain__separator;
+      display: block;
+      padding: 5px;
+    }
+    img {
+      .border-radius(3px);
+    }
+  }
+}
+
+.custom-doublelayout.layout-narrow-left-column {
+  .group-left {
+    .field-items {
+      margin-left: 0;
+    }
+    .field-item {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.stakeholder-links {
+  padding-left: 0;
+  border-bottom: 1px solid @clmain__separator;
+  li {
+    display: inline;
+    &:first-child {
+      margin-left: 0.5em;
+    }
+  }
+  a {
+    background-color: @clmain__header;
+    border: 1px solid @clmain__separator;
+    display: inline-block;
+    margin-bottom: -1px;
+    padding: 0.5em;
+    &.active {
+      background-color: @clmain;
+      border-bottom-color: @clmain;
+    }
+  }
+}
+
+@import './lib/custom-responsive.less';
+@import './lib/helpers.less';

@@ -2,36 +2,163 @@
 
 /**
  * @file
- * Main .module file, includes all the vital hooks and functions for the module.
+ * Expose custom libraries and plugins.
  */
 
 /**
- * Implements hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_directory().
+ *
+ * @inheritdoc
  */
-function eiti_ctools_extra_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'ctools' && !empty($plugin)) {
-    return "plugins/$plugin";
+function eiti_ctools_extra_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'contentwidget' && $plugin_type == 'predefined_widgets') {
+    return 'plugins/' . $plugin_type;
   }
+
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+
+  return NULL;
 }
 
 /**
  * Implements hook_libraries_info().
+ *
+ * @inheritdoc
  */
 function eiti_ctools_extra_libraries_info() {
-  $libraries = array();
-
-  $libraries['eiti-maps'] = array(
-    'title' => 'EITI-Maps',
+  $libraries['eitiChartWidgets'] = array(
+    'title' => 'EITI Chart Widgets Library',
     'version' => '1.0',
     'files' => array(
       'js' => array(
-        'mapWidgets.js',
+        'js/chartWidgets.js' => array(
+          'defer' => TRUE,
+          'preprocess' => FALSE,
+          'scope' => 'footer',
+        ),
       ),
       'css' => array(
-        'main.css',
+        'css/chartWidgets.css' => array(
+          'preprocess' => FALSE,
+        ),
+      ),
+    ),
+
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'js/chartWidgets.min.js' => array(
+              'defer' => TRUE,
+              'preprocess' => FALSE,
+              'scope' => 'footer',
+            ),
+          ),
+          'css' => array(
+            'css/chartWidgets.css' => array(
+              'preprocess' => FALSE,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  $libraries['eitiMapWidgets'] = array(
+    'title' => 'EITI Map Widgets Library',
+    'version arguments' => array(
+      'file' => 'RELEASE.txt',
+      'pattern' => '/([\d\-]+)/',
+      'lines' => 1,
+    ),
+    'files' => array(
+      'js' => array(
+        'js/mapWidgets.js' => array(
+          'defer' => TRUE,
+          'preprocess' => FALSE,
+          'scope' => 'footer',
+        ),
+      ),
+      'css' => array(
+        'css/mapWidgets.css' => array(
+          'preprocess' => FALSE,
+        ),
+        'css/leaflet.css' => array(
+          'preprocess' => FALSE,
+        ),
+      ),
+    ),
+
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'js/mapWidgets.min.js' => array(
+              'defer' => TRUE,
+              'preprocess' => FALSE,
+              'scope' => 'footer',
+            ),
+          ),
+          'css' => array(
+            'css/mapWidgets.css' => array(
+              'preprocess' => FALSE,
+            ),
+            'css/leaflet.css' => array(
+              'preprocess' => FALSE,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  $libraries['plotly'] = array(
+    'title' => 'Plotly',
+    'version arguments' => array(
+      'file' => 'plotly.js',
+      'pattern' => '/plotly.js\s+v?([\d\.]+)/',
+      'lines' => 3,
+    ),
+    'files' => array(
+      'js' => array(
+        'plotly.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'js' => array(
+          'plotly.min.js',
+        ),
       ),
     ),
   );
 
   return $libraries;
+}
+
+
+/**
+ * Helper function for libraries_load(). Helps deal with URLs used inside the library.
+ *
+ * @TODO: Update the libraries to work without this extra info.
+ *
+ * @param $name
+ * @return boolean
+ */
+function eiti_ctools_extra_load_eiti_libraries($name, $variant = NULL) {
+  static $loaded_libraries = array();
+
+  if (!isset($loaded_libraries[$name])) {
+    $loaded_libraries[$name] = libraries_load($name, $variant);
+    if (!empty($loaded_libraries[$name]['library path'])) {
+      $js_data = array(
+        'eitiMapWidgetsLibPath' => $loaded_libraries[$name]['library path'],
+      );
+      drupal_add_js($js_data, array('type' => 'setting'));
+    }
+  }
+
+  return $loaded_libraries[$name];
 }

@@ -1,0 +1,44 @@
+/**
+ * @file
+ * Override adminimal theme styles.
+ */
+
+/* HACK: Always show scroll-bar on admin pages. */
+html {
+  overflow-y: scroll;
+}
+
+/* Fix file thumbnails overview page. */
+.media-item .label-wrapper label {
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.media-list-thumbnails li a {
+  display: block;
+  height: 100px;
+  width: 100px;
+}
+
+/* Fix media widget layout on ctools modal. */
+div.ctools-modal-content .form-item .media-thumbnail label {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Fix overview pages for custom entities. */
+.fix-ctools-dropbutton .ctools-dropbutton-processed {
+  position: absolute;
+  margin-top: -15px;
+}
+
+/* Fix FPP bundles overview form. */
+.page-admin-structure-fieldable-panels-panes td.ctools-export-ui-operations {
+  height: 2.5em;
+  position: relative;
+}
+
+.page-admin-structure-fieldable-panels-panes td.ctools-export-ui-operations .ctools-dropbutton-processed {
+  margin-bottom: 10px;
+}

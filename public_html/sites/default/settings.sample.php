@@ -33,7 +33,7 @@ define('PROJECT_ENVIRONMENT', 'local');
 
 // Allow developers to debug environments.
 $hide_errors = TRUE;
-if ($hide_errors) {
+if ($hide_errors && PROJECT_ENVIRONMENT == 'production') {
   ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_STRICT);
   ini_set('display_errors', 'Off');
 }
@@ -58,7 +58,7 @@ $databases['default']['default'] = array(
 /**
  * Environments should have different settings, override the Search API settings.
  */
-//$conf['search_api_override_mode'] = 'load';
+//$conf['search_api_override_mode'] = 'default';
 //$conf['search_api_override_servers']['solr_server'] = array(
 //  'name' => '(overridden) Solr Server for production',
 //  'description' => '(overridden) The Solr search server configured for the production environment.',

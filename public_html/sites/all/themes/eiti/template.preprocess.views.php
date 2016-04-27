@@ -83,12 +83,12 @@ function __eiti_preprocess_views_view__search(&$variables) {
         }
 
         // Add "Filter by Related Country" facets block.
-        $facet_name = 'field_related_country';
+        $facet_name = 'field_related_country:name';
         if (isset($realm[$facet_name])) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
+            '#title' => t('Filter by @title:', array('@title' => t('Related Country'))),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
@@ -99,5 +99,53 @@ function __eiti_preprocess_views_view__search(&$variables) {
 
         $variables['attachment_before'] .= render($elements);
       }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view() for the blog view.
+ */
+function __eiti_preprocess_views_view__blog(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view() for the events view.
+ */
+function __eiti_preprocess_views_view__events(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view() for the news view.
+ */
+function __eiti_preprocess_views_view__news(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'page':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      // Force wide layout.
+      $layout = 'widelayout';
+      $class = drupal_html_class('page-layout--' . $layout);
+      helpertheme_set_html_classes($class);
   }
 }

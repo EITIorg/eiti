@@ -10,10 +10,10 @@
  * by the system that includes this file.
  */
 $plugin = array(
-  'title' => 'Value Chain',
-  'description' => 'Use this widget to create the value chain.',
-  'render callback' => 'contentwidget_value_chain_render',
-  'settings form' => 'contentwidget_value_chain_settings',
+  'title' => t('Value Chain'),
+  'description' => t('Use this widget to create the value chain.'),
+  'render callback' => 'contentwidget__value_chain__render',
+  'settings form' => 'contentwidget__value_chain__settings',
   'defaults' => array(
     'chains_count' => 4,
   ),
@@ -22,7 +22,7 @@ $plugin = array(
 /**
  * Render callback for the 'Value Chain' predefined widget.
  */
-function contentwidget_value_chain_render($plugin, $widget_settings, $entity, $langcode) {
+function contentwidget__value_chain__render($plugin, $widget_settings, $entity, $langcode) {
   $chains_count = $widget_settings['chains_count'];
 
   // Iterate through the link icons (formatting already inspired from the prototype).
@@ -131,7 +131,7 @@ function contentwidget_value_chain_render($plugin, $widget_settings, $entity, $l
 /**
  * Settings form for the 'Value Chain' predefined widget.
  */
-function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $widget_settings) {
+function contentwidget__value_chain__settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
   $blocks_count = isset($widget_settings['chains_count']) ? $widget_settings['chains_count'] : '';
 
@@ -149,7 +149,7 @@ function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $w
     '#default_value' => $blocks_count,
     '#required' => TRUE,
     '#ajax' => array(
-      'callback' => 'contentwidget_value_chain_settings_ajax',
+      'callback' => '_contentwidget__value_chain__settings_ajax',
       'wrapper' => $wrapper_id,
       'method' => 'replace',
       'effect' => 'fade'
@@ -176,7 +176,7 @@ function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $w
   // Create the forms for the icon links.
   for ($delta = 0; $delta < $blocks_count; $delta++) {
     $block_settings = empty($widget_settings['chains'][$delta]) ? array() : $widget_settings['chains'][$delta];
-    $settings_form['chains'][$delta] = _contentwidget_get_chain_elements($form_state, $block_settings, $delta);
+    $settings_form['chains'][$delta] = _contentwidget__value_chain__get_chain_elements($form_state, $block_settings, $delta);
   }
 
   $settings_form['#attached']['css'] = array(
@@ -189,9 +189,9 @@ function contentwidget_value_chain_settings(&$element, &$form_state, $plugin, $w
 /**
  * Helper function creating the form elements for a value chain.
  *
- * @see: contentwidget_value_chain_settings()
+ * @see: contentwidget__value_chain__settings()
  */
-function _contentwidget_get_chain_elements(&$form_state, $block_settings, $delta) {
+function _contentwidget__value_chain__get_chain_elements(&$form_state, $block_settings, $delta) {
   // Fetch the re-usable icon options.
   $icons = helpertheme_get_svg_icons();
   $icon_options = array('' => t('No Icon'));
@@ -234,7 +234,7 @@ function _contentwidget_get_chain_elements(&$form_state, $block_settings, $delta
 /**
  * Ajax callback for the settings form.
  */
-function contentwidget_value_chain_settings_ajax($form, $form_state) {
+function _contentwidget__value_chain__settings_ajax($form, $form_state) {
   $triggering_element = $form_state['triggering_element'];
 
   // Go one level up in the form, to the container.

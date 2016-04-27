@@ -4,12 +4,6 @@
  * Implements hook_install().
  */
 function eiti_migration_install() {
-  $msg = 'Please <a href="!url">configure the Legacy System settings</a> on this machine before you run or register your migrations.';
-  $args = array(
-    '!url' => url('admin/content/migrate/configure-legacy'),
-  );
-  drupal_set_message(t($msg, $args));
-
   // Prepare our folders.
   $spreadsheets_path = 'public://spreadsheets';
   if (!file_exists($spreadsheets_path)) {
@@ -21,5 +15,35 @@ function eiti_migration_install() {
   if (!file_exists($spreadsheets_temporary_path)) {
     drupal_mkdir($spreadsheets_temporary_path);
   }
+  file_prepare_directory($spreadsheets_temporary_path);
+
+  $migrated_img = 'public://migrated_images';
+  if (!file_exists($migrated_img)) {
+    drupal_mkdir($migrated_img);
+  }
+  file_prepare_directory($migrated_img);
+}
+
+/**
+ * Make sure all directories required for the migration exist.
+ */
+function eiti_migration_update_7001(&$sandbox) {
+  // Prepare our folders.
+  $spreadsheets_path = 'public://spreadsheets';
+  if (!file_exists($spreadsheets_path)) {
+    drupal_mkdir($spreadsheets_path);
+  }
   file_prepare_directory($spreadsheets_path);
+
+  $spreadsheets_temporary_path = 'public://spreadsheets_temporary';
+  if (!file_exists($spreadsheets_temporary_path)) {
+    drupal_mkdir($spreadsheets_temporary_path);
+  }
+  file_prepare_directory($spreadsheets_temporary_path);
+
+  $migrated_img = 'public://migrated_images';
+  if (!file_exists($migrated_img)) {
+    drupal_mkdir($migrated_img);
+  }
+  file_prepare_directory($migrated_img);
 }

@@ -1,0 +1,66 @@
+{
+  "name": "eiti-map",
+  "version": "0.0.1",
+  "description": "Map for EITI",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "leaflet",
+    "react",
+    "map",
+    "indicators",
+    "layers"
+  ],
+  "author": "Fernando Ferreyra <fferreyra@developmentgateway.org>",
+  "license": "",
+  "dependencies": {
+    "geostats": "^1.5.0",
+    "leaflet": "^0.7.7",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-leaflet": "^0.10.0",
+    "underscore": "^1.8.3",
+    "zepto": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.2",
+    "babel-eslint": "^6.0.0",
+    "babel-jest": "^6.0.1",
+    "babel-loader": "^6.2.3",
+    "babel-plugin-react-transform": "^2.0.0",
+    "babel-plugin-syntax-class-properties": "^6.5.0",
+    "babel-plugin-syntax-export-extensions": "^6.5.0",
+    "babel-plugin-syntax-function-bind": "^6.5.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.5.0",
+    "babel-plugin-transform-class-properties": "^6.5.2",
+    "babel-plugin-transform-export-extensions": "^6.5.0",
+    "babel-plugin-transform-function-bind": "^6.5.2",
+    "babel-plugin-transform-object-rest-spread": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "eslint": "^2.2.0",
+    "eslint-plugin-react": "^4.0.0",
+    "jest-cli": "^0.8.2",
+    "leaflet": "^0.7.7",
+    "less": "^2.6.1",
+    "onchange": "^2.0.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-transform-hmr": "^1.0.2",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:js": "webpack && webpack --config webpack.config.js",
+    "build:less": "./node_modules/.bin/lessc source/styles/mapWidgets.less dist/css/mapWidgets.css",
+    "copy:images": "cp -r ./source/images dist",
+    "copy:leaflet-resources": "cp -r ./node_modules/leaflet/dist/leaflet.css ./node_modules/leaflet/dist/images dist/css",
+    "release": "date +%Y%m%d-%H%M > dist/RELEASE.txt",
+    "build": "npm run clean && npm run build:js && npm run build:less && npm run copy:images && npm run copy:leaflet-resources && npm run release"
+  }
+}

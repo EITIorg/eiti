@@ -16,10 +16,7 @@ function eiti_preprocess_page(&$variables) {
   if (user_is_anonymous()) {
     $variables['display_tabs'] = FALSE;
   }
-  else if (drupal_is_front_page()) {
-    $variables['display_tabs'] = FALSE;
-  }
-  else if (helpergeneric_cleanup_ui()) {
+  else if (drupal_is_front_page() && !user_access('create page content')) {
     $variables['display_tabs'] = FALSE;
   }
 

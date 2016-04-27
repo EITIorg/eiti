@@ -123,8 +123,8 @@ function eitict_bookmark_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_bm_link',
-      1 => 'field_bm_reference_type',
-      2 => 'field_bm_reference',
+      1 => 'field_bm_reference',
+      2 => 'field_bm_reference_type',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

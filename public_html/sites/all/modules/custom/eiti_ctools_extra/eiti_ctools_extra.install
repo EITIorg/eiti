@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Update usage of renamed map widgets.
+ */
+function eiti_ctools_extra_update_7001(&$sandbox) {
+  // Fix things.
+  db_update('panels_pane')
+    ->fields(array(
+      'type' => 'map_full',
+      'subtype' => 'map_full',
+    ))
+    ->condition('type', 'full.map')
+    ->execute();
+
+  db_update('panels_pane')
+    ->fields(array(
+      'type' => 'map_simple',
+      'subtype' => 'map_simple',
+    ))
+    ->condition('type', 'semi-interactive.map')
+    ->execute();
+}

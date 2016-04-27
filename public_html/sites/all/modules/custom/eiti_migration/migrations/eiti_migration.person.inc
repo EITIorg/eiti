@@ -37,11 +37,8 @@ class EITIPersonMigration extends EITINodeMigration {
 
     // Now the mappings.
     $this->addFieldMapping('field_person_picture', 'field_contact_img')
-      ->sourceMigration('EITIPersonPicturesMigration');
+      ->sourceMigration(array('EITIPersonPicturesMigration'));
     $this->addFieldMapping('field_person_picture:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_person_picture:language', 'language');
-    $this->addFieldMapping('field_person_picture:alt', 'field_contact_img:alt');
-    $this->addFieldMapping('field_person_picture:title', 'field_contact_img:title');
 
     $this->addFieldMapping('field_board_member_type', 'field_board_member_type');
     $this->addFieldMapping('field_position', 'field_contact_role');
@@ -84,6 +81,9 @@ class EITIPersonMigration extends EITINodeMigration {
     // Make sure both values are used if one's missing: body vs field_contact_desc.
     if (empty($row->field_contact_desc)) {
       $row->field_contact_desc = $row->body;
+      $format_to = 'field_contact_desc:format';
+      $format_from = 'body:format';
+      $row->{$format_to} = $row->{$format_from};
     }
 
     // Do the same with the name vs title.
@@ -109,6 +109,13 @@ class EITIPersonMigration extends EITINodeMigration {
     if (!empty($row->field_ref_country_name_2)) {
       $row->field_ref_country_name_2 = $this->fetchSourceReferencedNodesCountry($row->field_ref_country_name_2);
     }
+
+    // And let's polish the email values.
+    if (!empty($row->field_contact_email)) {
+      $row->field_contact_email = (is_array($row->field_contact_email)) ? array_pop($row->field_contact_email) : $row->field_contact_email;
+      $row->field_contact_email = $this->parseEmail($row->field_contact_email);
+    }
+
     return TRUE;
   }
 
@@ -160,6 +167,20 @@ class EITIPersonMigration extends EITINodeMigration {
     $countries = array_unique($countries);
     return $countries;
   }
+
+  /**
+   * Small helper function that parses EMAIL from an HTML text.
+   */
+  private function parseEmail($html_value) {
+    $email_pattern = "/[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/i";
+    $matches = array();
+    preg_match_all($email_pattern, $html_value, $matches);
+    if (!empty($matches[0])) {
+      $email = array_pop($matches[0]);
+      return $email;
+    }
+    return '';
+  }
 }
 
 /**
@@ -167,7 +188,7 @@ class EITIPersonMigration extends EITINodeMigration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIPersonPicturesMigration extends DrupalFile7Migration {
+class EITIPersonPicturesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }

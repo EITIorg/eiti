@@ -37,10 +37,13 @@
 .xMediumAndDown() {
   .predefined-widget--icon-blocks {
     .icon-blocks-wrapper {
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       justify-content: space-around;
       & > li {
+        -ms-flex: 50%;
         flex: 50%;
       }
     }
@@ -52,10 +55,13 @@
 .xNormalAndUp() {
   .predefined-widget--icon-blocks {
     .icon-blocks-wrapper {
+      display: -ms-flexbox;
       display: flex;
-      flex-flow: row wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       justify-content: space-around;
       & > li {
+        -ms-flex: 50%;
         flex: 50%;
       }
     }

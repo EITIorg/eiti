@@ -23,3 +23,4 @@ _us_module__install($modules);
 
 // Use adminimal as the administration theme.
 variable_set('admin_theme', 'adminimal');
+_us_theme__enable('adminimal');

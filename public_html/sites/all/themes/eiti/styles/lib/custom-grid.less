@@ -14,7 +14,8 @@
 
 .single-fluid-row-wrapper(@count: @gen_total_columns) {
   .box-sizing();
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: @gen_gutter_width / 2;
   padding-right: @gen_gutter_width / 2;
   width: (@gen_column_width + @gen_gutter_width) * @count;
@@ -74,7 +75,7 @@
 }
 
 .row-separator() {
-  margin-bottom: @gen_gutter_width;
+  margin-bottom: @gen_gutter_width * 2;
 }
 
 // Can be used instead of .column(1) for a fluid layout.
@@ -83,6 +84,9 @@
   margin-right: @gen_gutter_width / 2;
 }
 .single-fluid-column(@type:margin) when (@type = padding) {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   padding-left: @gen_gutter_width / 2;
   padding-right: @gen_gutter_width / 2;
 }

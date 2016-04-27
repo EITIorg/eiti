@@ -1,0 +1,351 @@
+
+/**
+ * @TODO: CLEANUP!!!
+ */
+
+.eiti-map-wrapper .leaflet-container {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #dddddd;
+    font-family: 'Open Sans', serif;
+}
+.eiti-map-wrapper .mainMap {
+    width: 400px;
+    height: 500px;
+}
+.eiti-map-wrapper .legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+    width: 320px;
+}
+.eiti-map-wrapper .legend i {
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 15px;
+    margin-top: 4px;
+}
+.eiti-map-wrapper .country_info th {
+    padding: 10px 10px 10px 10px;
+}
+.eiti-map-wrapper .country_info td {
+    padding: 5px 5px 5px 5px;
+}
+.eiti-map-wrapper .country_info tr {
+    margin: 2px 5px 2px 5px;
+}
+.eiti-map-wrapper .leaflet-popup-content {
+    padding: 5px;
+    margin: 0;
+}
+.eiti-map-wrapper .leaflet-popup-content hr {
+    background: #eeeeee;
+    border: none;
+    display: block;
+    height: 2px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width 100%;
+}
+.eiti-map-wrapper .leaflet-popup-content a:hover {
+    text-decoration: none;
+}
+.eiti-map-wrapper .leaflet-popup-content-wrapper {
+    padding: 1px;
+    text-align: left;
+    border-radius: 0px;
+}
+.eiti-map-wrapper .leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+}
+.eiti-map-wrapper .leaflet-popup-content {
+    padding: 10;
+    margin: 10;
+}
+.eiti-map-wrapper .leaflet-popup-content-wrapper {
+    padding: 1px;
+    text-align: left;
+    border-radius: 0px;
+}
+.eiti-map-wrapper .leaflet-container {
+    height: 500px;
+    width: 1300px;
+    display: block;
+    margin: auto;
+}
+.map-container {
+    font-family: 'Open Sans', serif;
+}
+.eiti-map-wrapper .map-option-wrapper {
+    text-align: center;
+    background: #005382;
+    margin-bottom: 0;
+}
+.eiti-map-wrapper .map-option-widget {
+    display: inline-block;
+    list-style: none;
+    margin: 4px auto 0 auto;
+    overflow: visible;
+    padding: 0;
+    width: 1300px;
+}
+.eiti-map-wrapper .map-option-widget li {
+    background: url('../../images/map-icons/map-sprite.png') no-repeat;
+    border-left: 1px solid #0a6997;
+    border-right: 1px solid #0a6997;
+    border-top: none;
+    border-bottom: none;
+    color: #0192c7;
+    float: left;
+    font-size: 14px;
+    padding: 20px 12px 20px 65px;
+    position: relative;
+    width: 14%;
+    margin-left: -1px;
+    text-align: left;
+    text-transform: uppercase;
+    -webkit-transition: color 400ms ease-in-out;
+    -moz-transition: color 400ms ease-in-out;
+    -o-transition: color 400ms ease-in-out;
+    transition: color 400ms ease-in-out;
+}
+.eiti-map-wrapper .map-option-widget li.active {
+    background-color: #023554;
+    color: #ffffff;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(1) {
+    background-position: 14px 13px;
+    border-left: none;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(1):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(1).active {
+    background-position: 14px -37px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(2) {
+    background-position: 14px -406px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(2):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(2).active {
+    background-position: 14px -458px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(3) {
+    background-position: 14px -203px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(3):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(3).active {
+    background-position: 14px -254px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(4) {
+    background-position: 14px -96px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(4):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(4).active {
+    background-position: 14px -150px;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(5) {
+    background-position: 14px -304px;
+    border-right: none;
+}
+.eiti-map-wrapper .map-option-widget li:nth-child(5):hover,
+.eiti-map-wrapper .map-option-widget li:nth-child(5).active {
+    background-position: 14px -353px;
+}
+.eiti-map-wrapper .map-option-widget li:first-child {
+    margin-left: 0;
+}
+.eiti-map-wrapper .map-option-widget li:hover {
+    background-color: #023554;
+    color: #ffffff;
+}
+.eiti-map-wrapper .map-container ul ul {
+    background: #023554;
+    border-top: none;
+    display: none;
+    list-style: square;
+    margin-top: -1px;
+    position: absolute;
+    z-index: 1001;
+}
+.eiti-map-wrapper .map-container ul ul li {
+    background: none;
+    display: block;
+    float: left;
+    padding: 0;
+}
+.eiti-map-wrapper .map-container ul li:hover ul {
+    display: block;
+    left: 0;
+    padding: 14px;
+    top: 60px;
+    width: 89%;
+}
+.eiti-map-wrapper .map-container ul li:last-child:hover ul {
+    display: block;
+    left: auto;
+    position: absolute;
+    right: 0;
+}
+/*sub nav*/
+
+.eiti-map-wrapper .map-option-items li {
+    border-left: 1px solid #023554;
+    border-right: 1px solid #023554;
+    color: #999999;
+    display: block;
+    float: none;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    position: relative;
+    text-transform: capitalize;
+    width: 100%;
+}
+.eiti-map-wrapper .map-option-items li:hover,
+.eiti-map-wrapper .map-option-items li.active {
+    color: #ffffff;
+}
+.eiti-map-wrapper .map-option-items li {
+    background: none;
+    cursor: pointer;
+}
+.eiti-map-wrapper .map-option-items li:before {
+    content: '\25B8';
+    margin-right: 4px;
+}
+
+
+
+/* list of countries */
+
+.eiti-map-wrapper .country-list-wrapper {
+    margin: 2em auto;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 70em;
+}
+.eiti-map-wrapper .country-col {
+    float: left;
+    margin-left: 3.5em;
+    margin-right: 3.5em;
+    width: 28%;
+}
+.eiti-map-wrapper .country-col {
+    margin-right: 0;
+}
+.eiti-map-wrapper .country-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    display: block;
+}
+.eiti-map-wrapper .country-list li {
+    border-bottom: 1px solid #eeeeee;
+    display: block;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+}
+.eiti-map-wrapper .country-list a {
+    color: #00a5e9;
+    text-decoration: none;
+}
+.eiti-map-wrapper .country-list a:hover {
+    color: #f5822a;
+}
+.eiti-map-wrapper .member-status {
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 15px;
+}
+.eiti-map-wrapper .member-status.compliant {
+    background: #65c32d;
+}
+.eiti-map-wrapper .member-status.candidate {
+    background: #42abd8;
+}
+.eiti-map-wrapper .member-status.suspended {
+    background: #ff6600;
+}
+.eiti-map-wrapper .member-status.other {
+    background: #dddddd;
+}
+.eiti-map-wrapper .report {
+    float: right;
+    width: 20px;
+}
+.eiti-map-wrapper .report:hover {
+    opacity: 0.4;
+}
+@media (max-width: 1024px) {
+    .eiti-map-wrapper .map-container {
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-wrapper {
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-widget {
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-widget li {
+        padding: 0;
+        width: 10%;
+    }
+    .eiti-map-wrapper .map-option-widget {
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-widget li {
+        font-size: 9px;
+        padding: 22px 12px 26px 60px;
+        width: 12%;
+    }
+    .eiti-map-wrapper .map-container ul ul li {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .eiti-map-wrapper .country-col {
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-widget li {
+        border-right: none;
+        border-left: none;
+        width: 23%;
+    }
+    .eiti-map-wrapper .map-container ul ul li {
+        padding-bottom: 10px;
+        width: 100%;
+    }
+}
+@media (max-width: 667px) {
+    .eiti-map-wrapper .map-option-widget li {
+        border-right: none;
+        border-left: none;
+        padding: 17px 0 19px 65px;
+        width: 15%;
+    }
+    .eiti-map-wrapper .map-option-wrapper ul ul {
+        margin-top: -12px;
+    }
+    .eiti-map-wrapper .map-option-wrapper ul ul li {
+        padding: 10px 0 10px 0;
+    }
+}
+@media (max-width: 384px) {
+    .eiti-map-wrapper .map-option-widget li {
+        background: none;
+        border-right: none;
+        border-left: none;
+        padding: 10px 0 10px 10px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+    .eiti-map-wrapper .map-option-wrapper ul ul {
+        margin-top: -30px;
+        padding-bottom: 10px;
+        width: 60%;
+    }
+}

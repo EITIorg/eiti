@@ -21,10 +21,34 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
   $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'featured_articles';
+  $fieldable_panels_pane_type->title = 'Featured Articles';
+  $fieldable_panels_pane_type->description = 'Use this widget to create a list of selected articles of various types (blog, event, news).';
+  $export['featured_articles'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
   $fieldable_panels_pane_type->name = 'featured_bookmarks';
   $fieldable_panels_pane_type->title = 'Featured Bookmarks';
   $fieldable_panels_pane_type->description = 'Featured bookmarks go here (also known as Media Section).';
   $export['featured_bookmarks'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'featured_persons';
+  $fieldable_panels_pane_type->title = 'Featured Persons';
+  $fieldable_panels_pane_type->description = 'Featured persons go here (useful for the about pages).';
+  $export['featured_persons'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'featured_publications';
+  $fieldable_panels_pane_type->title = 'Featured Publications';
+  $fieldable_panels_pane_type->description = '';
+  $export['featured_publications'] = $fieldable_panels_pane_type;
 
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */

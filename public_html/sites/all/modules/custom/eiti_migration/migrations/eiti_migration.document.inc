@@ -42,16 +42,12 @@ class EITIDocumentMigration extends EITINodeMigration {
 
     // Now the mappings.
     $this->addFieldMapping('field_doc_image_preview', 'field_document_img')
-      ->sourceMigration('EITIDocumentFilesPreviewMigration');
+      ->sourceMigration(array('EITIDocumentFilesPreviewMigration'));
     $this->addFieldMapping('field_doc_image_preview:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_doc_image_preview:language', 'language');
-    $this->addFieldMapping('field_doc_image_preview:alt', 'field_document_img:alt');
-    $this->addFieldMapping('field_doc_image_preview:title', 'field_document_img:title');
 
     $this->addFieldMapping('field_attachments', 'files_merged')
      ->sourceMigration(array('EITIDocumentUploadFilesMigration', 'EITIDocumentAttachmentsMigration'));
     $this->addFieldMapping('field_attachments:file_class')->defaultValue('MigrateFileFid');
-    $this->addFieldMapping('field_attachments:language', 'language');
 
     $this->addFieldMapping('field_document_category', 'field_taxonomy_resource_category')
       ->sourceMigration('EITITaxonomyResouceCategoryMigration');
@@ -98,7 +94,7 @@ class EITIDocumentMigration extends EITINodeMigration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentFilesPreviewMigration extends DrupalFile7Migration {
+class EITIDocumentFilesPreviewMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -123,7 +119,7 @@ class EITIDocumentFilesPreviewMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
+class EITIDocumentAttachmentsMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }
@@ -143,6 +139,7 @@ class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -155,7 +152,7 @@ class EITIDocumentAttachmentsMigration extends DrupalFile7Migration {
  *
  * This class helps us migrate attached files from the legacy to the new system.
  */
-class EITIDocumentUploadFilesMigration extends DrupalFile7Migration {
+class EITIDocumentUploadFilesMigration extends EITIDrupalFileMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
   }

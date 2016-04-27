@@ -1,0 +1,38 @@
+/**
+ * @file
+ * This file includes CSS that is copied from Drupal. Please DO NOT touch!
+ */
+
+html {
+    /*
+    Always show page scroll-bar to prevent side-movement when hovering over
+    items that are extending their height.
+    */
+    overflow-y: scroll;
+}
+
+body {
+    color: #676767;
+    font-family: "Open Sans","sans-serif";
+}
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of 'table' rather than 'block' is only necessary if using
+ *    ':before' to contain the top-margins of child elements.
+ *
+ * @see http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
+ * @see http://nicolasgallagher.com/micro-clearfix-hack
+ * @see http://www.satzansatz.de/cssd/onhavinglayout.html
+ * @see http://quirksmode.org/css/css2/display.html
+ */
+.clearfix:before,
+.clearfix:after {
+  clear: both;
+  content: " "; /* 1. */
+  display: table; /* 2. */
+}

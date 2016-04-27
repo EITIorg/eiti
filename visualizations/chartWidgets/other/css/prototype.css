@@ -1,0 +1,84 @@
+
+.eiti-chart-widget svg {
+  font: 10px sans-serif;
+}
+
+.eiti-chart-widget .arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.eiti-chart-widget .arc path {
+  stroke: #fff;
+}
+
+.eiti-chart-widget text {
+  pointer-events: none;
+}
+
+.eiti-chart-widget .grandparent text {
+  font-weight: bold;
+}
+
+.eiti-chart-widget rect {
+  fill: none;
+  stroke: #fff;
+}
+
+.eiti-chart-widget rect.parent,
+.eiti-chart-widget .grandparent rect {
+  stroke-width: 2px;
+}
+
+.eiti-chart-widget .grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.eiti-chart-widget .children rect.parent,
+.eiti-chart-widget .grandparent rect {
+  cursor: pointer;
+}
+
+.eiti-chart-widget .children rect.parent {
+  fill: #bbb;
+  fill-opacity: .5;
+}
+
+.eiti-chart-widget .children:hover rect.child {
+  fill: #bbb;
+}
+
+.eiti-chart-widget .axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.eiti-chart-widget .node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.eiti-chart-widget .node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.eiti-chart-widget .link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.eiti-chart-widget .link:hover {
+  stroke-opacity: .5;
+}
+
+.eiti-chart-widget .browser text {
+  text-anchor: end;
+}

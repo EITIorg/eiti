@@ -1,0 +1,223 @@
+
+.eiti-chart-widget svg {
+  font: 10px sans-serif;
+}
+
+.eiti-chart-widget .chartTitle {
+    display: inline-block;
+    margin-left: 150px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #4bb4a1;
+}
+
+.eiti-chart-widget .chartDescription {
+    margin-left: 110px;
+    color: #c83739;
+    font-size: 1.1em;
+}
+
+.eiti-chart-widget .legend {
+    float: right;
+    margin-right: 100px;
+}
+.eiti-chart-widget .legend-item-active {
+    float: left;
+    border: 2px solid #4bb4a1;
+    border-radius: 3px;
+    font-size: 2em;
+    padding: 5px;
+    line-height: 70%;
+    margin: 1px;
+    cursor: pointer;
+}
+.eiti-chart-widget .legend-item {
+    float: left;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    font-size: 2em;
+    padding: 5px;
+    line-height: 70%;
+    margin: 1px;
+    cursor: pointer;
+}
+.eiti-chart-widget .legend-item li:hover {
+    border: 2px solid #4bb4a1;
+}
+
+
+.eiti-chart-widget #waveformchart svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.eiti-chart-widget #waveformchart {
+    width: 100%;
+    height: 140px;
+    background-color: #333;
+    position: relative;
+    margin-bottom: 20px;
+}
+.eiti-chart-widget .axis {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.eiti-chart-widget .axis text {
+    font: 11px sans-serif;
+    fill: #000;
+    stroke: none;
+    font-weight: bold;
+}
+
+.eiti-chart-widget .axis line {
+    stroke: #ccc;
+}
+
+.eiti-chart-widget .axis path {
+    stroke: #ccc;
+}
+.eiti-chart-widget #waveformchart .bar{
+    -webkit-transform: scale(1,1); /* Safari */
+    transform: scale(1,1);
+}
+
+.eiti-chart-widget #waveformchart .bar:hover {
+    height: 100%;
+    -webkit-transform: scale(2,100); /* Safari */
+    transform: scale(2,100);
+    -webkit-transform-origin: 50% 50%; /* Chrome, Safari, Opera */
+    transform-origin: 50% 50%;
+}
+
+.eiti-chart-widget .bar:hover {
+    stroke: #333;
+}
+
+.eiti-chart-widget .dot:hover {
+    fill: #E55;
+}
+
+.eiti-chart-widget .area:hover {
+    fill: #E55;
+}
+
+.eiti-chart-widget .line {
+    padding: 10px;
+}
+
+.eiti-chart-widget .line:hover {
+    stroke: #E55;
+}
+
+.eiti-chart-widget .arc path:hover {
+    fill: #E55;
+}
+
+.eiti-chart-widget .arc text {
+    font: 11px sans-serif;
+    fill: #000;
+    stroke: none;
+    font-weight: bold;
+}
+
+.eiti-chart-widget .tooltip {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #eee;
+    opacity: 0.8;
+    justify-content: center;
+    align-items: center;
+}
+
+.eiti-chart-widget .brush .extent {
+  stroke: #000;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.eiti-chart-widget .brush .background {
+  fill: #ddd;
+}
+
+.eiti-chart-widget #treemap svg{
+  background: #ddd;
+}
+
+.eiti-chart-widget .grandparent text {
+  font-weight: bold;
+}
+
+.eiti-chart-widget .rect {
+  fill: none;
+  stroke: #fff;
+}
+
+.eiti-chart-widget rect.parent,
+.eiti-chart-widget .grandparent rect {
+  stroke-width: 2px;
+}
+
+.eiti-chart-widget .grandparent rect {
+  fill: orange;
+}
+
+.eiti-chart-widget .grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.eiti-chart-widget .children rect.parent,
+.eiti-chart-widget .grandparent rect {
+  cursor: pointer;
+}
+
+.eiti-chart-widget .children rect.parent {
+  fill: #bbb;
+  fill-opacity: .5;
+}
+
+.eiti-chart-widget .children:hover rect.child {
+  fill: #bbb;
+}
+
+.eiti-chart-widget .node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.eiti-chart-widget .node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.eiti-chart-widget .link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.eiti-chart-widget .link:hover {
+  stroke-opacity: .5;
+}
+
+.eiti-chart-widget .browser text {
+  text-anchor: end;
+}
+
+.eiti-chart-widget .export {
+  background: #f0f0f0;
+  border: #f0f0f0;
+  color: #0093cf;
+  font-size: 0.8em;
+  margin: 15px 0;
+  padding: 4px 10px;
+}
+
+.eiti-chart-widget .export:hover {
+  background: #0093cf;
+  border: #0093cf;
+  color: #f0f0f0;
+}

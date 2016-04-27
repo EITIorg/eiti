@@ -28,6 +28,7 @@ stylesheets[all][] = styles/header-footer.css.less
 stylesheets[all][] = styles/other.css.less
 stylesheets[all][] = styles/listings.css.less
 stylesheets[all][] = styles/layout.css.less
+stylesheets[all][] = styles/content.css.less
 
 stylesheets[all][] = styles/other/country_header.css.less
 

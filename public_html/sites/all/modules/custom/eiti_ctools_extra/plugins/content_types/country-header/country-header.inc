@@ -8,17 +8,17 @@
 $plugin = array(
   'title' => t('Country Header'),
   'description' => t('Country header containing the banner, logo and various other information.'),
+  'category' => t('Widgets Library'),
+  'render callback'  => 'eiti_ctools_extra__country_header__render',
   'required context' => array(
     new ctools_context_required(t('Implementing Country'), 'implementing_country'),
   ),
-  'render callback'  => 'eiti_ctools_extra_country_header_content_type_render',
-  'category' => t('EITI Country'),
 );
 
 /**
  * Output function for the 'Country Header' content type.
  */
-function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $panel_args, $context) {
+function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args, $context) {
   if ($context[0]->plugin == 'entity:implementing_country' && !empty($context[0]->data)) {
     /** @var ImplementingCountryEntity $entity */
     $entity = $context[0]->data;
@@ -48,7 +48,7 @@ function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $
     $cover_file_uri = $cover_file_info['uri'];
 
     // Get the image URI.
-    $style_name = 'bg-wide';
+    $style_name = 'bg-large';
     $cover_url = image_style_url($style_name, $cover_file_uri);
 
     $block['banner']['#attributes']['class'][] = 'with-background-image';
@@ -77,7 +77,7 @@ function eiti_ctools_extra_country_header_content_type_render($subtype, $conf, $
     $logo_file_alt_text = $logo_file_info['field_file_image_alt_text'];
 
     // Create the logo URL.
-    $style_name = 'logo-scaled';
+    $style_name = 'logo-scaled-height';
     $logo_url = image_style_url($style_name, $logo_file_uri);
 
     $block['banner']['name_and_logo']['logo'] = array(

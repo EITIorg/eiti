@@ -322,43 +322,6 @@ function helpergeneric_permission() {
 }
 
 /**
- * Implements hook_entity_view_alter().
- */
-function helpergeneric_entity_view_alter(&$build, $entity_type) {
-  if ($entity_type != 'node' || empty($build['#node'])) {
-    return;
-  }
-
-  /** @var stdClass $entity */
-  $entity = $build['#node'];
-
-  // Add contextual links for this node, except when the node is already being
-  // displayed on its own page. Modules may alter this behavior (for example,
-  // to restrict contextual links to certain view modes) by implementing
-  // hook_node_view_alter().
-  if ($entity->nid) {
-    $build['#contextual_links'][$entity_type] = array($entity_type, array($entity->nid));
-  }
-}
-
-/**
- * Implements hook_user_view_alter().
- */
-function helpergeneric_user_view_alter(&$build) {
-  if (empty($build['#account']->uid)) {
-    return;
-  }
-
-  /** @var stdClass $account */
-  $account = $build['#account'];
-
-  // Display user contextual links.
-  if (user_edit_access($account) && $build['#view_mode'] == 'full') {
-    $build['#contextual_links']['user'] = array('user', array($account->uid));
-  }
-}
-
-/**
  * Returns a sting formatted to be used by Form API #states or form_set_error().
  *
  * @param array $parents

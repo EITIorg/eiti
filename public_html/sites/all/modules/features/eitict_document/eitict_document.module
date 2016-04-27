@@ -4,4 +4,5 @@
  * Code for the eitict_document feature.
  */
 
+include_once 'eitict_document.custom.inc';
 include_once 'eitict_document.features.inc';

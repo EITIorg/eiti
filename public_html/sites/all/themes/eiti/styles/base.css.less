@@ -101,8 +101,7 @@ hr {
     padding: 1em;
     text-decoration: none;
 
-    &:link,
-    &:visited {
+    &:link {
       color: @cldetail__alt;
     }
   }
@@ -147,10 +146,13 @@ hr {
   .group-main {
     display: table-cell;
     width: 500em;
+    img {
+      width: auto;
+    }
   }
 }
 .xSmallOnly() {
-  .mobject {
+  .mobject:not(.mobject--small) {
     .group-side {
       float: none;
       margin-right: 0;

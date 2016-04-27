@@ -318,6 +318,7 @@ function _theme_header_items__navigation() {
     '#attributes' => array(
       'class' => array(
         'header-items',
+        'clearfix',
       ),
     ),
   );
@@ -330,7 +331,7 @@ function _theme_header_items__navigation() {
       $elements['language_switcher'] = array(
         '#type' => 'html_container',
         '#tag' => 'nav',
-        '#title' => t('Languages'),
+        '#title' => t('Languages') . ': ',
         '#title_attributes' => array('class' => array('language-switcher-title')),
         '#title_icon' => array(
           'symbol' => 'message',
@@ -340,6 +341,7 @@ function _theme_header_items__navigation() {
           'role' => 'navigation',
           'class' => array(
             'language-switcher',
+            'container-inline',
           ),
         ),
       );

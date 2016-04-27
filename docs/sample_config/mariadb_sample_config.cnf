@@ -1,0 +1,5 @@
+# MariaDB sample configuration.
+# Copy this file to: /etc/my.cnf.d/custom.cnf
+
+[mysqld]
+max_allowed_packet=256M

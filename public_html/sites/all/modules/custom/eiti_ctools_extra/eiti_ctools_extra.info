@@ -1,7 +1,6 @@
 name = EITI Ctools Extra
-description = This module offers extra ctools functionality such as: selection rules, contexts and ctools content-types.
+description = Offers extra ctools functionality such as: selection rules, contexts and ctools content-types.
 core = 7.x
 package = EITI Custom
 
 dependencies[] = ctools
-dependencies[] = leaflet
