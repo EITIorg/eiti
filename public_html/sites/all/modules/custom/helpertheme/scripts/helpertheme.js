@@ -62,12 +62,23 @@ Drupal.behaviors.toggleSiteNavigationSubLevel = {
    */
   attach: function(context) {
     $('.site-navigation-wrapper .navigation-links', context).once('expandable', function() {
-      $(this).find('.item.has-sublevel').each(function(index, item) {
-        var toggle = $('<span class="toggle"></span>').click(function (e) {
-          $(e.target).closest('.has-sublevel').toggleClass('expanded');
-        });
-        $(item).prepend(toggle);
+      $(this).find('.item.has-sublevel').click(function (e) {
+        var list_item = $(e.target).closest('.has-sublevel');
+
+        if (list_item.is('expanded')) {
+          list_item.removeClass('expanded');
+          list_item.parent().removeClass('has-expanded-child');
+        }
+        else {
+          list_item.addClass('expanded');
+          list_item.parent().addClass('has-expanded-child');
+          list_item.parent().children().not(list_item).removeClass('expanded');
+        }
       });
+
+      $(this).find('.item.has-sublevel > a.link').click(function (e) {
+        e.preventDefault();
+      })
     });
   }
 };

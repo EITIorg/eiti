@@ -645,7 +645,7 @@ function _theme_main_footer__site_navigation() {
   );
 
 
-  if ($links = helpertheme_menu_navigation_links($menu_name, 3)) {
+  if ($links = helpertheme_menu_navigation_links($menu_name, 2)) {
     $links['#extras']['svgicon_size'] = '1.25em';
     $elements['site_navigation']['links'] = array(
       '#theme' => 'links__enhanced',

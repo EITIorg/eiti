@@ -340,7 +340,10 @@ function _helpertheme_links__enhanced($variables) {
         $link['attributes']['class'][] = 'no-icon';
       }
 
-      if (isset($link['href'])) {
+      if (isset($link['href']) && $link['href'] == '<nolink>') {
+        $list_item_content .= '<span ' . drupal_attributes($link['attributes']) . '>' . $link['title'] . '</span>';
+      }
+      else if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
         $list_item_content .= l($link['title'], $link['href'], $link);
       }
