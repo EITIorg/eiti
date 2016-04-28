@@ -40,6 +40,9 @@ Drupal.behaviors.toggleSiteNavigation = {
 
       if ($('body', context).hasClass('site-navigation-visible')) {
         footer_navigation.slideUp('fast');
+        var navigation_links = footer_navigation.find('.navigation-links');
+        navigation_links.removeClass('has-expanded-child');
+        navigation_links.find('.item').removeClass('expanded');
         $('body', context).removeClass('site-navigation-visible');
       }
       else {
@@ -62,10 +65,10 @@ Drupal.behaviors.toggleSiteNavigationSubLevel = {
    */
   attach: function(context) {
     $('.site-navigation-wrapper .navigation-links', context).once('expandable', function() {
-      $(this).find('.item.has-sublevel').click(function (e) {
+      $(this).find('.item.has-sublevel > .link').click(function (e) {
         var list_item = $(e.target).closest('.has-sublevel');
 
-        if (list_item.is('expanded')) {
+        if (list_item.is('.expanded')) {
           list_item.removeClass('expanded');
           list_item.parent().removeClass('has-expanded-child');
         }
