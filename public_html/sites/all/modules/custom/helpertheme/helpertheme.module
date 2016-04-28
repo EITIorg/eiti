@@ -99,6 +99,13 @@ function helpertheme_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['site-map'] = array(
+    'title' => 'Site Map',
+    'page callback' => 'helpertheme_site_map',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -661,4 +668,44 @@ function theme_helpertheme_ds_field_simple($variables) {
   $output .="</div>";
 
   return $output;
+}
+
+function helpertheme_site_map() {
+  $menu_name = 'menu-site-navigation';
+  $links = helpertheme_menu_navigation_links($menu_name, 2);
+
+  if (empty($links)) {
+    return drupal_not_found();
+  }
+
+  $elements['site_navigation'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'nav',
+    '#title' => t('Site Navigation'),
+    '#title_tag' => 'h3',
+    '#title_attributes' => array(
+      'class' => array('section-title', 'element-invisible'),
+    ),
+    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      'role' => 'navigation',
+      'class' => array(
+        'site-navigation-wrapper',
+      ),
+    ),
+  );
+
+  $links['#extras']['svgicon_size'] = '1.25em';
+  $elements['site_navigation']['links'] = array(
+    '#theme' => 'links__enhanced',
+    '#links' => $links,
+    '#links_prefix' => 'action-link',
+    '#attributes' => array(
+      'class' => array(
+        'navigation-links',
+      ),
+    ),
+  );
+
+  return $elements;
 }

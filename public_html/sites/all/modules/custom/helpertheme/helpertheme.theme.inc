@@ -657,6 +657,20 @@ function _theme_main_footer__site_navigation() {
         ),
       ),
     );
+
+    $elements['site_navigation']['see_all'] = array(
+      '#theme' => 'link',
+      '#path' => 'site-map',
+      '#text' => t('see all'),
+      '#options' => array(
+        'attributes' => array(
+          'class' => array(
+            'see-all-link-wrapper'
+          ),
+        ),
+        'html' => FALSE,
+      ),
+    );
   }
   else {
     $elements['site_navigation']['empty'] = array(

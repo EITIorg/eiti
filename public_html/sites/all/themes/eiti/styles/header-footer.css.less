@@ -448,6 +448,10 @@
       }
     }
   }
+  .navigation-links > .item:last-child {
+    border-bottom: 1px solid lighten(@clnormal, 10%);
+  }
+
   .section-title {
     color: @claltnormal__light;
     font-size: 0.8em;
@@ -513,7 +517,9 @@
     }
   }
 
-
+  .see-all-link-wrapper {
+    .link-color(@clmain, @claltnormal);
+  }
 }
 
 .site-navigation-wrapper {
