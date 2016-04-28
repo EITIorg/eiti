@@ -716,5 +716,56 @@ function _theme_main_footer__site_navigation() {
     );
   }
 
+
+  // Add the language switcher links.
+  if (drupal_multilingual()) {
+    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+    $lang_links = language_negotiation_get_switch_links('language', $path);
+    if (isset($lang_links->links)) {
+      $elements['language_switcher'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'nav',
+        '#title' => t('Change language'),
+        '#title_attributes' => array('class' => array('language-switcher-title')),
+        '#title_tag' => 'h4',
+        '#attributes' => array(
+          'role' => 'navigation',
+          'class' => array(
+            'navigation-language-switcher',
+          ),
+        ),
+      );
+
+      $elements['site_navigation']['language_switcher']['wrapper'] = array(
+        '#type' => 'html_container',
+        '#attributes' => array(
+          'class' => array(
+            'locale-links-wrapper',
+          ),
+        ),
+      );
+
+      // Add language info to all links.
+      $languages = language_list();
+      foreach ($lang_links->links as &$link) {
+        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
+          $link['language'] = $languages[$link['attributes']['lang']];
+        }
+      }
+
+      $elements['language_switcher']['wrapper']['links'] = array(
+        '#theme' => 'links__language_switcher',
+        '#links' => $lang_links->links,
+        '#attributes' => array(
+          'class' => array(
+            'language-switcher-' . $lang_links->provider,
+            'locale-links',
+          ),
+        ),
+      );
+    }
+  }
+
+
   return $elements;
 }
