@@ -250,5 +250,4 @@ class EITIIndicatorValuesMigration extends EITISpreadsheetMigration {
     $summary_data_emw->field_sd_indicator_values[] = $entity->id;
     $summary_data_emw->save();
   }
-
 }
