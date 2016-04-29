@@ -23,7 +23,6 @@ function eitict_document_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Publications';
-  $handler->display->display_options['css_class'] = '';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -83,20 +82,11 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['group'] = 1;
   $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Filter by title';
   $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    3 => 0,
-    9 => 0,
-    7 => 0,
-    8 => 0,
-    6 => 0,
-    5 => 0,
-    10 => 0,
-    4 => 0,
   );
   /* Filter criterion: Content: Document Category (field_document_category) */
   $handler->display->display_options['filters']['field_document_category_tid']['id'] = 'field_document_category_tid';
@@ -157,7 +147,7 @@ function eitict_document_views_default_views() {
     t('next ›'),
     t('last »'),
     t('No content matches the search criteria.'),
-    t('Search'),
+    t('Filter by title'),
     t('Category'),
     t('Published Date'),
     t('Listing'),

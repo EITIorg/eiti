@@ -1,4 +1,43 @@
 
+.xNormalAndUp() {
+  .view .view-filters {
+    margin-bottom: 2em;
+    margin-top: 2em;
+
+  }
+}
+.views-exposed-form {
+  // The button has smaller font and the buttons are not properly aligned with the filters.
+  label {
+    line-height: 1.5em;
+  }
+  .views-submit-button {
+    margin-top: 1.5em;
+    .form-submit {
+      margin-top: 0;
+    }
+  }
+}
+
+.content-search-page {
+  .views-exposed-widgets {
+    margin: 1em 0;
+    & * {
+      display: inline;
+    }
+  }
+
+  .views-exposed-widget {
+    float: none;
+    padding: 0;
+
+    .form-submit {
+      border: 0;
+      margin-top: 0;
+    }
+  }
+}
+
 // @TODO: Cleanup!
 table {
   @header_color: #ffffff;
@@ -42,26 +81,6 @@ table {
     th,
     td {
       padding: 0.5em 1em;
-    }
-  }
-}
-
-.content-search-page {
-
-  .views-exposed-widgets {
-    margin: 1em 0;
-    & * {
-      display: inline;
-    }
-  }
-
-  .views-exposed-widget {
-    float: none;
-    padding: 0;
-
-    .form-submit {
-      border: 0;
-      margin-top: 0;
     }
   }
 }
