@@ -61,3 +61,85 @@ function eitiet_summary_data_update_7002(&$sandbox) {
     $indicator->save();
   }
 }
+
+/**
+ * Add missing indicators.
+ */
+function eitiet_summary_data_update_7004(&$sandbox) {
+  $new_indicators = array();
+
+  $query = new EntityFieldQuery();
+  $matched = $query
+    ->entityCondition('entity_type', 'indicator')
+    ->propertyCondition('type', 'group')
+    ->propertyCondition('name', 'Production volume and value (3.5.a)')
+    ->execute();
+  if (!empty($matched['indicator'])) {
+    $group_entity = reset($matched['indicator']);
+
+    $new_indicators[] = array(
+      'name' => "Copper, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+    $new_indicators[] = array(
+      'name' => "Gold, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+    $new_indicators[] = array(
+      'name' => "Coal, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+  }
+
+  $query = new EntityFieldQuery();
+  $matched = $query
+    ->entityCondition('entity_type', 'indicator')
+    ->propertyCondition('type', 'group')
+    ->propertyCondition('name', 'Export volume and value (3.5.b)')
+    ->execute();
+  if (!empty($matched['indicator'])) {
+    $group_entity = reset($matched['indicator']);
+
+    $new_indicators[] = array(
+      'name' => "Copper, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+    $new_indicators[] = array(
+      'name' => "Gold, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+    $new_indicators[] = array(
+      'name' => "Coal, volume",
+      'parent' => $group_entity->id,
+      'type' => "numeric",
+    );
+  }
+
+  /* Loop and create the values */
+  foreach ($new_indicators as $new_indicator) {
+    $query = new EntityFieldQuery();
+    $matched = $query
+      ->entityCondition('entity_type', 'indicator')
+      ->propertyCondition('type', $new_indicator['type'])
+      ->propertyCondition('name', $new_indicator['name'])
+      ->propertyCondition('parent', $new_indicator['parent'])
+      ->execute();
+    if (!empty($matched['indicator'])) {
+      continue;
+    }
+
+    $new_indicator_values = array(
+        'status' => NODE_PUBLISHED,
+        'created' => REQUEST_TIME,
+      ) + $new_indicator;
+
+    /** @var IndicatorEntity $new_entity */
+    $new_entity = entity_create('indicator', $new_indicator_values);
+    $new_entity->save();
+  }
+}
