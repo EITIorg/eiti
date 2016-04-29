@@ -44,20 +44,20 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
   }
 
   // Add the article header (title and featured image)
-  if ($view_mode != 'teaser_alternative') {
+  if (in_array($view_mode, array('full', 'teaser_alternative'))) {
     $article_header = _eitict_article_entity_view_get_article_header($entity, $type, $view_mode, $langcode);
     $entity->article_header = render($article_header);
   }
 
   // Add the article info.
   $article_info = _eitict_article_entity_view_get_article_info($entity, $type, $view_mode, $langcode);
-  if ($view_mode != 'teaser_alternative') {
+  if (in_array($view_mode, array('full', 'teaser_alternative'))) {
     $article_info['#attributes']['class'][] = 'single-fluid-row-wrapper';
     $article_info['#prefix'] = '<div class="article-info-wrapper">';
     $article_info['#suffix'] = '</div>';
   }
   else {
-    $article_info['#attributes']['class'][] = 'alternative';
+    $article_info['#attributes']['class'][] = 'simple';
   }
   $entity->article_info = render($article_info);
 }
@@ -160,16 +160,43 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
     case 'event':
       if (isset($entity->content['field_event_date'])) {
         $elements['field_event_date'] = $entity->content['field_event_date'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('date', $options);
+        $elements['field_event_date'][0]['#prefix'] = $svgicon;
+
         $entity->content['field_event_date']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_event_location'])) {
         $elements['field_event_location'] = $entity->content['field_event_location'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('country', $options);
+        $elements['field_event_location'][0]['#prefix'] = $svgicon;
+
         $entity->content['field_event_location']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_tags'])) {
         $elements['field_tags'] = $entity->content['field_tags'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('tag', $options);
+        $elements['field_tags'][0]['#prefix'] = $svgicon;
+
         $entity->content['field_tags']['#printed'] = TRUE;
       }
       break;
@@ -177,16 +204,43 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
     default:
       if (isset($entity->content['author'])) {
         $elements['author'] = $entity->content['author'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('author', $options);
+        $elements['author'][0]['#prefix'] = $svgicon;
+
         $entity->content['author']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['post_date'])) {
         $elements['post_date'] = $entity->content['post_date'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('date', $options);
+        $elements['post_date'][0]['#prefix'] = $svgicon;
+
         $entity->content['post_date']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_tags'])) {
         $elements['field_tags'] = $entity->content['field_tags'];
+
+        $size = '1em';
+        $options = array(
+          'width' => $size,
+          'height' => $size,
+        );
+        $svgicon = helpertheme_get_svg_icon('tag', $options);
+        $elements['field_tags'][0]['#prefix'] = $svgicon;
+
         $entity->content['field_tags']['#printed'] = TRUE;
       }
       break;

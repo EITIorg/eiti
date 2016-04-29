@@ -29,8 +29,8 @@
 }
 
 // @TODO: Update markup for document and person entities teaser and apply proper styling.
-.group-side {
-  & > img {
+.mobject .group-side {
+  img {
     border: 1px solid @clmain__separator;
   }
 }
@@ -97,8 +97,12 @@
   .field-name-field-tags {
     flex: 2;
   }
+  .icon {
+    fill: @clanchor;
+    vertical-align: baseline;
+  }
 
-  &.alternative {
+  &.simple {
     border-bottom: 1px solid @clmain__separator;
     border-top: 1px solid @clmain__separator;
     .field {
