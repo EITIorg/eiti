@@ -82,13 +82,43 @@ function __eiti_preprocess_views_view__search(&$variables) {
           $elements[$facet_name]['filters'] = $realm[$facet_name];
         }
 
-        // Add "Filter by Related Country" facets block.
+        // Add "Filter by Tags" facets block.
+        $facet_name = 'field_article_type';
+        if (isset($realm[$facet_name])) {
+          $elements[$facet_name] = array(
+            '#type' => 'html_container',
+            '#tag' => 'div',
+            '#title' => t('Filter by @title:', array('@title' => t('Article Type'))),
+            '#title_tag' => 'h3',
+            '#title_attributes' => array('class' => array('facet-title')),
+            '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
+            '#attributes' => array(),
+          );
+          $elements[$facet_name]['filters'] = $realm[$facet_name];
+        }
+
+        // Add "Filter by Related Country » Label" facets block.
         $facet_name = 'field_related_country:name';
         if (isset($realm[$facet_name])) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
             '#title' => t('Filter by @title:', array('@title' => t('Related Country'))),
+            '#title_tag' => 'h3',
+            '#title_attributes' => array('class' => array('facet-title')),
+            '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
+            '#attributes' => array(),
+          );
+          $elements[$facet_name]['filters'] = $realm[$facet_name];
+        }
+
+        // Add "Filter by Tags" facets block.
+        $facet_name = 'field_tags';
+        if (isset($realm[$facet_name])) {
+          $elements[$facet_name] = array(
+            '#type' => 'html_container',
+            '#tag' => 'div',
+            '#title' => t('Filter by @title:', array('@title' => t('Tags'))),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
