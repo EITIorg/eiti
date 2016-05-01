@@ -30,8 +30,8 @@ function helpertheme_libraries_info() {
     'version arguments' => array(
       'file' => 'modernizr-custom.js',
       'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
-      'lines' => 100,
-      'cols' => 100,
+      'lines' => 64,
+      'cols' => 64,
     ),
     'files' => array('js' => array('modernizr-custom.js')),
     'variants' => array(
@@ -49,18 +49,12 @@ function helpertheme_libraries_info() {
       'file' => 'VERSION.txt',
       'pattern' => '/([0-9a-zA-Z\.-]+)/',
       'lines' => 1,
-      'cols' => 100,
+      'cols' => 64,
     ),
     'files' => array('js' => array('svg4everybody.js')),
     'variants' => array(
       'minified' => array(
         'files' => array('js' => array('svg4everybody.min.js')),
-      ),
-      'ie8' => array(
-        'files' => array('js' => array('svg4everybody.ie8.js')),
-      ),
-      'ie8-minified' => array(
-        'files' => array('js' => array('svg4everybody.ie8.min.js')),
       ),
     ),
   );

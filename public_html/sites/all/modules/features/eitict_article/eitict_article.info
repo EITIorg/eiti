@@ -20,6 +20,7 @@ dependencies[] = list
 dependencies[] = media
 dependencies[] = node
 dependencies[] = options
+dependencies[] = owlcarousel_fields
 dependencies[] = panelizer
 dependencies[] = strongarm
 dependencies[] = taxonomy

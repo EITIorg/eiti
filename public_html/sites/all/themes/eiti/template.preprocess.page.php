@@ -143,6 +143,7 @@ function eiti_css_alter(&$css) {
     'sites/all/modules/contrib/hierarchical_select',
     'sites/all/modules/contrib/l10n_client',
     'sites/all/modules/contrib/media',
+    'sites/all/modules/contrib/owlcarousel',
     'sites/all/modules/contrib/views',
   );
 

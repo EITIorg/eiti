@@ -450,12 +450,13 @@ function eitict_article_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'image',
+        'module' => 'owlcarousel_fields',
         'settings' => array(
-          'image_link' => 'file',
-          'image_style' => 'img-narrow',
+          'image_style' => 'large',
+          'settings_group' => 'owlcarousel_settings_default',
+          'trim_length' => '',
         ),
-        'type' => 'image',
+        'type' => 'owlcarousel_formatter',
         'weight' => 4,
       ),
       'teaser_alternative' => array(

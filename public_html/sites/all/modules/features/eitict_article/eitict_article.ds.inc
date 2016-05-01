@@ -66,13 +66,13 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
-    'article_info' => array(
-      'weight' => '1',
+    'article_header' => array(
+      'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'article_header' => array(
-      'weight' => '0',
+    'article_info' => array(
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -86,10 +86,26 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
-    'field_tags' => array(
+    'field_attachments' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
+          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
+    'field_image_gallery' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
+    'field_featured_image' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
         ),
       ),
     ),
@@ -107,21 +123,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_featured_image' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_helpertheme_ds_field_simple',
-        ),
-      ),
-    ),
-    'field_attachments' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_image_gallery' => array(
+    'field_tags' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
