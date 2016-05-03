@@ -8,6 +8,8 @@ $modules = array(
     // 'owlcarousel_colorbox',
     // 'owlcarousel_views',
 
+  'imagecache_coloractions',
+
   'jquery_update',
 );
 _us_module__install($modules);

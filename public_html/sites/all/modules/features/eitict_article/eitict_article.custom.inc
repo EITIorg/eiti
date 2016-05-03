@@ -72,7 +72,6 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
     '#attributes' => array(
       'class' => array(
         'article-header',
-        'clearfix',
       ),
     ),
   );
@@ -85,7 +84,6 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
         'class' => array(
           'title-field-wrapper',
           'single-fluid-row-wrapper',
-          'clearfix',
         ),
       ),
     );
