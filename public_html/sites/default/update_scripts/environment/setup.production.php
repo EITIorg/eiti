@@ -50,6 +50,7 @@ $modules = array(
   'memcache_admin',
   'module_filter',
   // 'og_ui',
+  'owlcarousel_ui',
   // 'page_manager',
   // 'panels_ipe',
   // 'rules_admin',

@@ -20,12 +20,10 @@
   }
 }
 
-.field-name-field-attachments,
-.field-name-field-image-gallery {
+.field-highlighted {
   background-color: @clmain__header;
   border: 1px solid @clmain__separator;
   padding: 1em !important;  // Fix for article page where layout is set on field wrappers.
-
 }
 
 // @TODO: Update markup for document and person entities teaser and apply proper styling.
@@ -39,6 +37,7 @@
   &.with-featured-image {
     background-size: cover;
     background-position: center center;
+    position: relative;
 
     color: @clmain;
     a {
@@ -46,7 +45,18 @@
     }
 
     .title {
-      text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
+      text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 2px;
+    }
+
+    // @TODO: Make the image darker in image styles.
+    &::before {
+      content: ' ';
+      background-color: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
 

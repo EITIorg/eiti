@@ -2,8 +2,9 @@
 
 // Provide a list of modules to be installed.
 $modules = array(
+  'jquery_update',
+
   'wysiwyg',
-    //'jquery_update',
     // Enable WYSIWYG related media sub-modules:
     'media_wysiwyg',
     'media_wysiwyg_view_mode',
@@ -26,14 +27,13 @@ _us_views__disable('media_default');
 // variable_set('jquery_update_jquery_version', '1.8');
 
 // Make sure that jQuery version 1.8.x is used on the admin interface.
-// Required by the new version of media.module
 // variable_set('jquery_update_jquery_admin_version', '1.8');
 
 // Set the fallback format to plain text.
 variable_set('filter_fallback_format', 'plain_text');
 
 // Limit the teaser length.
-variable_set('teaser_length', 256);
+variable_set('teaser_length', 512);
 
 // Set the "Add media" wysiwyg button title.
 variable_set('media_wysiwyg_wysiwyg_icon_title', 'Add/Update media');

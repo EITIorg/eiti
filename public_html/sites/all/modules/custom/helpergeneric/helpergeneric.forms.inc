@@ -220,15 +220,16 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
 
         // Hide htmlpurifier.module variables.
         'htmlpurifier_version_current',
+        'htmlpurifier_version_check_failed',
 
         // Hide job_scheduler.module variables.
         'job_scheduler_rebuild_all',
 
         // Hide jquery_update.module variables.
-        'jquery_update_compression_type',
-        'jquery_update_jquery_version',
-        'jquery_update_jquery_admin_version',
-        'jquery_update_jquery_cdn',
+        // 'jquery_update_compression_type',
+        // 'jquery_update_jquery_version',
+        // 'jquery_update_jquery_admin_version',
+        // 'jquery_update_jquery_cdn',
 
         // Hide less.module variables.
         'less_devel',

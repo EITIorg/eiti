@@ -155,10 +155,12 @@ cf:
 		sites/default/files/styles
 
 
-# Copy media module icons to the site files directory.
+# Fix site media.
 fm:
 	@echo 'Copying media module icons to the site files directory.'
 	@drush php-eval "module_load_include('install', 'media'); _media_install_copy_icons();"
+	@echo 'Flush all generated images.'
+	@drush image-flush --all
 
 
 # Bring the site offline.
