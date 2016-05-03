@@ -381,6 +381,36 @@ function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
 }
 
 /**
+ * Implements hook_menu_alter().
+ *
+ * @inheritdoc
+ */
+function eitiwidgets_menu_alter(&$items) {
+  if (isset($items['admin/structure/fieldable-panels-panes/view/%fieldable_panels_panes/access'])) {
+    $items['admin/structure/fieldable-panels-panes/view/%fieldable_panels_panes/access']['access callback'] = 'eitiwidgets_fieldable_panels_panes_access';
+  }
+  if (isset($items['admin/structure/fieldable-panels-panes/view/%fieldable_panels_panes/revision'])) {
+    $items['admin/structure/fieldable-panels-panes/view/%fieldable_panels_panes/revision']['access callback'] = 'eitiwidgets_fieldable_panels_panes_access';
+  }
+}
+
+/**
+ * Alternative access callback for the FPP "Access Control" and "Revision" tabs.
+ *
+ * @param string $op
+ * @param stdClass|null $entity
+ * @param stdClass|null $account
+ * @return bool
+ */
+function eitiwidgets_fieldable_panels_panes_access($op, $entity = NULL, $account = NULL) {
+  if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
+    return FALSE;
+  }
+
+  return entity_get_controller('fieldable_panels_pane')->access($op, $entity, $account);
+}
+
+/**
  * Implements hook_entity_info_alter().
  *
  * @inheritdoc
