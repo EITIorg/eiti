@@ -93,7 +93,8 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
 
       // 2 cases: either it's unique and we append the value, or it's not,
       // then we sum the values together.
-      if ($key = array_search($year, $output[$item->gfs_code_id]['x'])) {
+      $key = isset($output[$item->gfs_code_id]['x']) ? array_search($year, $output[$item->gfs_code_id]['x']) : FALSE;
+      if ($key !== FALSE) {
         $output[$item->gfs_code_id]['y'][$key] += round(floatval($item->revenue));
       }
       else {
