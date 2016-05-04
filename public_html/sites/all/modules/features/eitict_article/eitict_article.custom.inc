@@ -52,7 +52,7 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
   // Add the article info.
   $article_info = _eitict_article_entity_view_get_article_info($entity, $type, $view_mode, $langcode);
   if (in_array($view_mode, array('full', 'teaser_alternative'))) {
-    $article_info['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $article_info['#attributes']['class'][] = 'single-narrow-row-wrapper';
     $article_info['#prefix'] = '<div class="article-info-wrapper">';
     $article_info['#suffix'] = '</div>';
   }
@@ -83,7 +83,7 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
       '#attributes' => array(
         'class' => array(
           'title-field-wrapper',
-          'single-fluid-row-wrapper',
+          'single-narrow-row-wrapper',
         ),
       ),
     );

@@ -343,7 +343,7 @@ function eitict_article_ds_layout_settings_info() {
       ),
       'main' => array(
         'clearfix' => 'clearfix',
-        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+        'single-narrow-row-wrapper' => 'single-narrow-row-wrapper',
       ),
     ),
     'wrappers' => array(
@@ -409,7 +409,7 @@ function eitict_article_ds_layout_settings_info() {
       ),
       'main' => array(
         'clearfix' => 'clearfix',
-        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+        'single-narrow-row-wrapper' => 'single-narrow-row-wrapper',
       ),
     ),
     'wrappers' => array(
