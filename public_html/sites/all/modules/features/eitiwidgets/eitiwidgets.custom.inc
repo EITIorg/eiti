@@ -289,6 +289,62 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
   if (isset($entity->content['title']['#value']) && $entity->content['title']['#value'] == '') {
     unset($entity->content['title']);
   }
+
+  if ($entity->bundle == 'quote') {
+    $entity->content['quote_widget'] = eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langcode);
+
+    // Move fields inside the new quote_widget element.
+    if (isset($entity->content['field_fpp_quote'])) {
+      $entity->content['quote_widget']['overlay']['blockquote']['field_fpp_quote'] = $entity->content['field_fpp_quote'];
+      unset($entity->content['field_fpp_quote']);
+    }
+    if (isset($entity->content['field_fpp_source'])) {
+      $entity->content['quote_widget']['overlay']['blockquote']['field_fpp_source'] = $entity->content['field_fpp_source'];
+      unset($entity->content['field_fpp_source']);
+    }
+  }
+}
+
+/**
+ * Prepares the content for the quote widget DS preprocessed field.
+ */
+function eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langcode) {
+  $elements = array(
+    '#type' => 'html_container',
+  );
+
+  $elements['overlay']['blockquote'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'blockquote',
+    '#attributes' => array(
+      'class' => array(
+        'single-fluid-row-wrapper',
+      ),
+    ),
+  );
+
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
+
+    // Use the featured image as background image.
+    $entity_id = entity_id('fieldable_panels_pane', $entity);
+    $selector_prefix = implode('-', array('fieldable_panels_pane', $entity_id));
+    helpertheme_get_background_image_with_overlay($elements, $featured_image_data, $selector_prefix);
+  }
+
+  $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $langcode);
+  if (!empty($entity->field_fpp_source_url[$source_url_field_language][0])) {
+    if (!empty($entity->field_fpp_source_url[$source_url_field_language][0]['url'])) {
+      $url = $entity->field_fpp_source_url[$source_url_field_language][0]['url'];
+
+      $elements['#tag'] = 'a';
+      $elements['#attributes']['href'] = url($url);
+      $elements['#attributes']['class'][] = 'linked-wrapper';
+    }
+  }
+
+  return $elements;
 }
 
 /**
@@ -302,35 +358,12 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
 
   // Constrain the pane content.
   $variables['classes_array'][] = 'clearfix';
-  $variables['main_classes'] = 'single-fluid-row-wrapper';
 
-  // @TODO: Use on all bundles.
-  if (!empty($entity->field_fpp_background_image) && $entity->bundle == 'quote') {
-    $image_url = NULL;
-
-    // Get the background image URL.
-    $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $entity_language);
-    if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
-      $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
-      // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
-      $image_url = file_create_url($image_file->uri);
-    }
-
-    if ($image_url) {
-      $variables['attributes_array']['style'] = 'background-image: url("' . $image_url . '");';
-    }
+  if (!isset($variables['main_classes'])) {
+    $variables['main_classes'] = '';
   }
-
-  if ($entity->bundle == 'quote' && !empty($entity->field_fpp_source_url)) {
-    $source_url_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_source_url', $entity_language);
-    if (!empty($entity->field_fpp_source_url[$source_url_field_language][0]['url'])) {
-      $url = $entity->field_fpp_source_url[$source_url_field_language][0]['url'];
-      $variables['main_wrapper'] = 'a';
-      $variables['main_attributes'] = array(
-        'href' => url($url),
-      );
-      $variables['main_classes'] .= ' linked-wrapper';
-    }
+  if (empty($entity->field_fpp_background_image) && $entity->bundle != 'quote') {
+    $variables['main_classes'] .= ' single-fluid-row-wrapper';
   }
 }
 

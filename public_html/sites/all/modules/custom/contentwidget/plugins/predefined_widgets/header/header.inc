@@ -21,14 +21,6 @@ $plugin = array(
  * Render callback for the 'Header' predefined widget.
  */
 function contentwidget__header__render($plugin, $widget_settings, $entity, $langcode) {
-  $image_url = '';
-  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
-  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
-    $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
-    // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
-    $image_url = file_create_url($image_file->uri);
-  }
-
   $header_small = (!empty($widget_settings['header_small'])) ? $widget_settings['header_small'] : FALSE;
   $header_big = (!empty($widget_settings['header_big'])) ? $widget_settings['header_big'] : FALSE;
 
@@ -60,18 +52,16 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
 
   $block = array(
     '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'clearfix',
-      ),
-    )
+    '#attributes' => array()
   );
 
-  if (!empty($image_url)) {
-    $block['#attributes']['class'][] = 'with-background-image';
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
 
-    $block_style = "background-image: url(${image_url});";
-    $block['#attributes']['style'] = $block_style;
+    // Use the featured image as background image.
+    $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
+    helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
   }
   else {
     $block['#attributes']['class'][] = 'no-background-image';
@@ -132,13 +122,6 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   }
 
   if (empty($image_url)) {
-    if (!empty($block['overlay']['headers'])) {
-      $block['overlay']['headers']['#attributes']['class'][] = 'single-narrow-row-wrapper';
-    }
-
-    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-narrow-row-wrapper';
-  }
-  else {
     $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
 
@@ -174,7 +157,8 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $settings_form['links'] = array(
     '#type' => 'fieldset',
     '#title' => t('Links'),
-    '#collapsible' => FALSE,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
     '#prefix' => '<div id="links-wrapper">',
     '#suffix' => '</div>',
   );

@@ -113,6 +113,11 @@ function eitiwidgets_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'quote';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'quote_widget' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'field_fpp_source' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -250,6 +255,27 @@ function eitiwidgets_ds_field_settings_info() {
 }
 
 /**
+ * Implements hook_ds_custom_fields_info().
+ */
+function eitiwidgets_ds_custom_fields_info() {
+  $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'quote_widget';
+  $ds_field->label = 'Quote Widget';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'fieldable_panels_pane' => 'fieldable_panels_pane',
+  );
+  $ds_field->ui_limit = 'quote|*';
+  $ds_field->properties = array();
+  $export['quote_widget'] = $ds_field;
+
+  return $export;
+}
+
+/**
  * Implements hook_ds_layout_settings_info().
  */
 function eitiwidgets_ds_layout_settings_info() {
@@ -371,6 +397,44 @@ function eitiwidgets_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'fieldable_panels_pane|header|default';
+  $ds_layout->entity_type = 'fieldable_panels_pane';
+  $ds_layout->bundle = 'header';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 'simplelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'main' => array(
+        0 => 'field_fpp_widget',
+      ),
+      'ds_hidden' => array(
+        1 => 'field_fpp_background_image',
+      ),
+    ),
+    'fields' => array(
+      'field_fpp_widget' => 'main',
+      'field_fpp_background_image' => 'ds_hidden',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
+    'wrappers' => array(
+      'main' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['fieldable_panels_pane|header|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'fieldable_panels_pane|icon_blocks|default';
   $ds_layout->entity_type = 'fieldable_panels_pane';
   $ds_layout->bundle = 'icon_blocks';
@@ -417,23 +481,27 @@ function eitiwidgets_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
-        0 => 'group_blockquote',
-        3 => 'field_fpp_quote',
-        4 => 'field_fpp_source',
+        0 => 'quote_widget',
       ),
       'ds_hidden' => array(
-        1 => 'field_fpp_background_image',
-        2 => 'field_fpp_source_url',
+        1 => 'field_fpp_quote',
+        2 => 'field_fpp_source',
+        3 => 'field_fpp_background_image',
+        4 => 'field_fpp_source_url',
       ),
     ),
     'fields' => array(
-      'group_blockquote' => 'main',
+      'quote_widget' => 'main',
+      'field_fpp_quote' => 'ds_hidden',
+      'field_fpp_source' => 'ds_hidden',
       'field_fpp_background_image' => 'ds_hidden',
       'field_fpp_source_url' => 'ds_hidden',
-      'field_fpp_quote' => 'main',
-      'field_fpp_source' => 'main',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
     'wrappers' => array(
       'main' => 'div',
       'ds_hidden' => 'div',
@@ -443,6 +511,7 @@ function eitiwidgets_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
   );
   $export['fieldable_panels_pane|quote|default'] = $ds_layout;
 

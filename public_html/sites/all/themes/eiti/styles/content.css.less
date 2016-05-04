@@ -34,55 +34,50 @@
 }
 
 .article-header {
-  &.with-featured-image {
-    background-size: cover;
-    background-position: center center;
-    position: relative;
-
-    color: @clmain;
-    a {
-      .link-color(@clmain, @clactive__alt);
-    }
-
-    .title {
-      text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 2px;
-    }
-
-    // @TODO: Make the image darker in image styles.
-    &::before {
-      content: ' ';
-      background-color: rgba(0, 0, 0, 0.4);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-  }
-
   .title {
     font-weight: normal;
   }
-}
 
-.xMediumAndUp() {
-  .article-header.with-featured-image {
+  &.with-background-image {
     @aspect_ratio: (5 / 16) * 100%;
     display: block; // We need a block element for this to work.
     height: 0;
     padding-top: @aspect_ratio;
+  }
+  &.with-background-image > .overlay-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+}
 
-    .title-field-wrapper {
-      position: relative;
-    }
+.with-background-image {
+  background-size: cover;
+  background-position: center center;
+  position: relative;
 
-    .field-name-title-field {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: 0;
-    }
+  background-color: @claltmain;
+  color: @clmain;
+  text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 2px;
+  a {
+    .link-color(@clmain, @clactive__alt);
+  }
+
+  // @TODO: Make the image darker in image styles.
+  &::before {
+    content: ' ';
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  & > .overlay-wrapper {
+    position: relative;
   }
 }
 

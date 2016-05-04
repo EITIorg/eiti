@@ -44,11 +44,7 @@
   }
 
   .with-background-image {
-    background-color: #000000;
     color: @claltnormal__light;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
 
     .overlay-wrapper {
       padding-bottom: 1em;
@@ -68,7 +64,7 @@
     }
 
     .links-wrapper {
-      border-top: 1px solid #DFDFDF;
+      border-top: 1px solid fade(@clmain__separator, 60%);
       margin: 1em 0;
     }
 
@@ -100,9 +96,6 @@
         min-width: 19em;
         line-height: 3em;
       }
-    }
-    .with-background-image {
-      background-size: 160% auto;  // Make images larger on small screens.
     }
   }
 }
