@@ -89,13 +89,12 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     '#type' => 'container',
   );
 
-
   // Only if it's set, we want to show the tag.
-  if ($header_small) {
-    $block['overlay']['headers']['header_small'] = array(
+  if ($header_big) {
+    $block['overlay']['headers']['header_big'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h2',
-      '#value' => $header_small,
+      '#value' => $header_big,
       '#attributes' => array(
         'class' => array('title'),
       ),
@@ -103,39 +102,41 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   }
 
   // Only if it's set, we want to show the tag.
-  if ($header_big) {
-    $block['overlay']['headers']['header_big'] = array(
+  if ($header_small) {
+    $block['overlay']['headers']['header_small'] = array(
       '#type' => 'html_tag',
       '#tag' => 'p',
-      '#value' => $header_big,
+      '#value' => $header_small,
       '#attributes' => array(
         'class' => array('subtitle'),
       ),
     );
   }
 
-  $block['overlay']['links_wrapper'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array('links-wrapper'),
-    ),
-  );
-  $block['overlay']['links_wrapper']['links'] = array(
-    '#theme' => 'item_list',
-    '#items' => $link_items,
-    '#type' => 'ul',
-    '#title' => '',
-    '#attributes' => array(
-      'class' => array('links'),
-    ),
-  );
+  if (!empty($link_items)) {
+    $block['overlay']['links_wrapper'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array('links-wrapper'),
+      ),
+    );
+    $block['overlay']['links_wrapper']['links'] = array(
+      '#theme' => 'item_list',
+      '#items' => $link_items,
+      '#type' => 'ul',
+      '#title' => '',
+      '#attributes' => array(
+        'class' => array('links'),
+      ),
+    );
+  }
 
   if (empty($image_url)) {
     if (!empty($block['overlay']['headers'])) {
-      $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+      $block['overlay']['headers']['#attributes']['class'][] = 'single-narrow-row-wrapper';
     }
 
-    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-narrow-row-wrapper';
   }
   else {
     $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
@@ -155,18 +156,18 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
 
   // @TODO: Rename!
-  $settings_form['header_small'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Small Header'),
-    '#description' => t('Please specify the small header text.'),
-    '#default_value' => $header_small,
-    '#size' => 100,
-  );
   $settings_form['header_big'] = array(
     '#type' => 'textfield',
     '#title' => t('Big Header'),
     '#description' => t('Please specify the big header text.'),
     '#default_value' => $header_big,
+    '#size' => 100,
+  );
+  $settings_form['header_small'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Small Header'),
+    '#description' => t('Please specify the small header text.'),
+    '#default_value' => $header_small,
     '#size' => 100,
   );
 
@@ -181,7 +182,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $settings_form['links']['links_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Links'),
-    '#options' => drupal_map_assoc(range(1, 4)),
+    '#options' => drupal_map_assoc(range(0, 4)),
     '#description' => t('Please specify the number of links you want to use.'),
     '#default_value' => $links_max,
     '#required' => TRUE,

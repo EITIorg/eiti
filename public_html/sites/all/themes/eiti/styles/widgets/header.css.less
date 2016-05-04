@@ -23,9 +23,6 @@
 
   .no-background-image {
     color: @clanchor;
-    .title {
-      font-weight: normal;
-    }
 
     .links-wrapper {
       border-top: 1px solid @clmain__separator;
@@ -59,14 +56,15 @@
     }
 
     .title {
-      color: @claltnormal;
-      font-weight: 300;
-      text-transform: uppercase;
-    }
-    .subtitle {
       font-size: 2em;
       font-weight: 300;
       margin: 0;
+    }
+    .subtitle {
+      color: @claltnormal;
+      font-size: 1.5em;
+      font-weight: 300;
+      text-transform: uppercase;
     }
 
     .links-wrapper {
@@ -110,7 +108,7 @@
 }
 .xNormalAndUp() {
   .predefined-widget--header {
-    .subtitle {
+    .title {
       font-size: 2.5em;
     }
     .links {
