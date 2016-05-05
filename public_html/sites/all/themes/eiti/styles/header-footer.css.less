@@ -223,6 +223,7 @@
       // We do this in order to align the dropdown with the options.
       position: absolute;
       top: 50%;  // HACK: align .locale-links properly inside .locale-links-wrapper.
+      left: 0;
       right: 0;
       height: 0;
 
@@ -231,7 +232,8 @@
 
     .locale-links {
       background-color: @clmain__header;
-      border: 1px solid @clnormal;
+      border: 2px solid @clmain__separator;
+      border-top-width: 0;
       text-align: right;
 
       margin-top: 1em;  // HACK: align .locale-links properly inside .locale-links-wrapper.
