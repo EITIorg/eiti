@@ -35,92 +35,57 @@ function eitifiles_views_api($module = NULL, $api = NULL) {
 function eitifiles_image_default_styles() {
   $styles = array();
 
-  // Exported image style: bg-large.
-  $styles['bg-large'] = array(
-    'label' => 'Background: Large (1920px by 560px)',
+  // Exported image style: bg-enlarged.
+  $styles['bg-enlarged'] = array(
+    'label' => 'Background: Enlarged (1920px wide)',
     'effects' => array(
-      1 => array(
+      7 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1920,
           'height' => '',
           'upscale' => 1,
         ),
-        'weight' => -10,
+        'weight' => 1,
       ),
-      3 => array(
+      8 => array(
         'name' => 'canvasactions_blur',
         'data' => array(
           'intensity' => 2,
         ),
-        'weight' => -9,
-      ),
-      2 => array(
-        'name' => 'canvasactions_definecanvas',
-        'data' => array(
-          'RGB' => array(
-            'HEX' => '#ffffff',
-          ),
-          'under' => 1,
-          'exact' => array(
-            'width' => 1920,
-            'height' => 560,
-            'xpos' => 'center',
-            'ypos' => 'center',
-          ),
-          'relative' => array(
-            'leftdiff' => '',
-            'rightdiff' => '',
-            'topdiff' => '',
-            'bottomdiff' => '',
-          ),
-        ),
-        'weight' => -8,
+        'weight' => 2,
       ),
     ),
   );
 
-  // Exported image style: bg-small.
-  $styles['bg-small'] = array(
-    'label' => 'Background: Small (1280px by 400px)',
+  // Exported image style: bg-large.
+  $styles['bg-large'] = array(
+    'label' => 'Background: Large (1920px by 560px)',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1920,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => -10,
+      ),
+    ),
+  );
+
+  // Exported image style: bg-normal.
+  $styles['bg-normal'] = array(
+    'label' => 'Background: Normal (980px wide)',
     'effects' => array(
       1 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 1280,
+          'width' => 980,
           'height' => '',
-          'upscale' => 1,
+          'upscale' => 0,
         ),
         'weight' => 1,
-      ),
-      2 => array(
-        'name' => 'canvasactions_blur',
-        'data' => array(
-          'intensity' => 1,
-        ),
-        'weight' => 2,
-      ),
-      3 => array(
-        'name' => 'canvasactions_definecanvas',
-        'data' => array(
-          'RGB' => array(
-            'HEX' => '#ffffff',
-          ),
-          'under' => 1,
-          'exact' => array(
-            'width' => 1280,
-            'height' => 400,
-            'xpos' => 'center',
-            'ypos' => 'center',
-          ),
-          'relative' => array(
-            'leftdiff' => '',
-            'rightdiff' => '',
-            'topdiff' => '',
-            'bottomdiff' => '',
-          ),
-        ),
-        'weight' => 3,
       ),
     ),
   );
