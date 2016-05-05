@@ -155,7 +155,7 @@ function eitict_bookmark_field_default_field_instances() {
   $field_instances['node-bookmark-field_bm_image'] = array(
     'bundle' => 'bookmark',
     'deleted' => 0,
-    'description' => 'Image is used to represent your bookmark (as a background image). If you don\'t specify one, we\'ll just use a blue background.',
+    'description' => 'Upload a relevant image, it should either be a square image that is 480 pixels wide, or one that is in landscape orientation with the image height half the size of the width.',
     'display' => array(
       'bm_large_tile' => array(
         'label' => 'hidden',
@@ -224,14 +224,14 @@ function eitict_bookmark_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -247,9 +247,9 @@ function eitict_bookmark_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '4 MB',
+      'max_resolution' => '2400x2400',
+      'min_resolution' => '480x480',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -270,6 +270,8 @@ function eitict_bookmark_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -611,7 +613,6 @@ function eitict_bookmark_field_default_field_instances() {
   t('Bookmark Type');
   t('Hide Title');
   t('Image');
-  t('Image is used to represent your bookmark (as a background image). If you don\'t specify one, we\'ll just use a blue background.');
   t('In certain cases, you might want to hide the title.');
   t('Link');
   t('Please specify the bookmark type. Make sure you re-use existing terms (suggestions appear while you\'re typing).');
@@ -619,6 +620,7 @@ function eitict_bookmark_field_default_field_instances() {
   t('Reference');
   t('Reference Type');
   t('Title');
+  t('Upload a relevant image, it should either be a square image that is 480 pixels wide, or one that is in landscape orientation with the image height half the size of the width.');
   t('You can reference any of the following content: Articles, Blog Posts, Mentions, Documents and People.');
 
   return $field_instances;

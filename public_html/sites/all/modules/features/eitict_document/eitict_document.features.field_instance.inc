@@ -146,7 +146,7 @@ function eitict_document_field_default_field_instances() {
   $field_instances['node-document-field_doc_image_preview'] = array(
     'bundle' => 'document',
     'deleted' => 0,
-    'description' => 'Image preview relevant to the document you\'re creating.',
+    'description' => 'Upload a relevant image preview, it should have a portrait orientation and at least 360px wide and 480px tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -179,14 +179,14 @@ function eitict_document_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => 0,
       'file_directory' => 'document_preview',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -202,9 +202,9 @@ function eitict_document_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '4 MB',
+      'max_resolution' => '1800x2400',
+      'min_resolution' => '360x480',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -225,6 +225,8 @@ function eitict_document_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -401,10 +403,10 @@ function eitict_document_field_default_field_instances() {
   t('Document Category');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('Image Preview');
-  t('Image preview relevant to the document you\'re creating.');
   t('Please specify the resource categories that apply to this document.');
   t('Published Date');
   t('Title');
+  t('Upload a relevant image preview, it should have a portrait orientation and at least 360px wide and 480px tall.');
 
   return $field_instances;
 }

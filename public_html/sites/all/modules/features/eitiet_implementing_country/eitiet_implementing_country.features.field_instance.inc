@@ -119,7 +119,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   $field_instances['implementing_country-normal-field_ic_cover'] = array(
     'bundle' => 'normal',
     'deleted' => 0,
-    'description' => 'Please upload the background image (cover) for this country: usually it\'s an abstract map with a highlighted map, or any image that represents the country. <em>Make sure to upload a high quality image</em>.',
+    'description' => 'Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -143,9 +143,9 @@ function eitiet_implementing_country_field_default_field_instances() {
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -155,15 +155,15 @@ function eitiet_implementing_country_field_default_field_instances() {
             'slashes' => 0,
             'transliterate' => 0,
           ),
-          'value' => '',
+          'value' => 'background_image',
         ),
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -203,7 +203,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   $field_instances['implementing_country-normal-field_ic_logo'] = array(
     'bundle' => 'normal',
     'deleted' => 0,
-    'description' => 'Please specify the local country-specific EITI logo.',
+    'description' => 'Upload the local country-specific EITI logo, preferably a landscape orientation and it should be at least 240 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -227,9 +227,9 @@ function eitiet_implementing_country_field_default_field_instances() {
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -239,15 +239,15 @@ function eitiet_implementing_country_field_default_field_instances() {
             'slashes' => 0,
             'transliterate' => 0,
           ),
-          'value' => '',
+          'value' => 'logo_image',
         ),
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '4 MB',
+      'max_resolution' => '2400x2400',
+      'min_resolution' => '240x240',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -494,9 +494,9 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('Name');
   t('Please specify the country\'s EITI membership status.');
   t('Please specify the local EITI country-specific website.');
-  t('Please specify the local country-specific EITI logo.');
   t('Please specify when did this country change its EITI Status.');
-  t('Please upload the background image (cover) for this country: usually it\'s an abstract map with a highlighted map, or any image that represents the country. <em>Make sure to upload a high quality image</em>.');
+  t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
+  t('Upload the local country-specific EITI logo, preferably a landscape orientation and it should be at least 240 pixels tall.');
 
   return $field_instances;
 }

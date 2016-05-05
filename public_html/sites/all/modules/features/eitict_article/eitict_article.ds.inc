@@ -172,13 +172,6 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_event_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_tags' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -190,6 +183,13 @@ function eitict_article_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_helpertheme_ds_field_simple',
+        ),
+      ),
+    ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
