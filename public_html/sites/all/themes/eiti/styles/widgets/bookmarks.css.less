@@ -28,10 +28,14 @@
 
     display: block;
     background-color: @claltmain;
-    text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
+    text-shadow: 0 0 2px fade(@claltmain, 10%);
 
     // Allow the .overlay-wrapper to be positioned relatively.
     position: relative;
+
+    &:hover .field-name-field-bm-image::before {
+      background-color: fade(@claltmain, 90%);
+    }
   }
 
   .overlay-wrapper {
@@ -56,6 +60,8 @@
     }
 
     &::before {
+      .transition(background-color, 400ms, ease-in);
+
       content: " ";
       display: block;
       position: absolute;
