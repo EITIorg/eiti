@@ -86,4 +86,19 @@ Drupal.behaviors.toggleSiteNavigationSubLevel = {
   }
 };
 
+Drupal.behaviors.toggleBackgroundImageHoverState = {
+  /**
+   * Help with text visibility on linked blocks of content.
+   *
+   * @param context
+   */
+  attach: function(context) {
+    $('.with-background-image .title a', context).hover(function () {
+      $(this).closest('.with-background-image').addClass('hover');
+    }, function () {
+      $(this).closest('.with-background-image').removeClass('hover');
+    });
+  }
+};
+
 })(jQuery);

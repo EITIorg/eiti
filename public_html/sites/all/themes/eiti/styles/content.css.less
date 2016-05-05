@@ -53,13 +53,14 @@
 
   background-color: @claltmain;
   color: @clmain;
-  text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 2px;
+  text-shadow: 0 0 0.25em fade(@claltmain, 90%);
   a {
     .link-color(@clmain, @clactive__alt);
   }
 
   // @TODO: Make the image darker in image styles.
   &::before {
+    .transition(background-color, 400ms, ease-in);
     content: ' ';
     background-color: fade(@claltmain, 40%);
     position: absolute;
@@ -67,6 +68,9 @@
     bottom: 0;
     left: 0;
     right: 0;
+  }
+  &.hover::before {
+    background-color: fade(@claltmain, 90%);
   }
 
   .overlay-wrapper {
