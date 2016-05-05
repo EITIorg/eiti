@@ -146,15 +146,13 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   // @TODO: Rename!
   $settings_form['header_big'] = array(
     '#type' => 'textfield',
-    '#title' => t('Big Header'),
-    '#description' => t('Please specify the big header text.'),
+    '#title' => t('Title'),
     '#default_value' => $header_big,
     '#size' => 100,
   );
   $settings_form['header_small'] = array(
     '#type' => 'textfield',
-    '#title' => t('Small Header'),
-    '#description' => t('Please specify the small header text.'),
+    '#title' => t('Subtitle (simple paragraph)'),
     '#default_value' => $header_small,
     '#size' => 100,
   );
