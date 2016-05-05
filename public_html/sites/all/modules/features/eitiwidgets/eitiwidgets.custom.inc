@@ -354,7 +354,6 @@ function eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langco
  */
 function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   $entity = $variables['elements']['#fieldable_panels_pane'];
-  $entity_language = entity_language('fieldable_panels_pane', $entity);
 
   // Constrain the pane content.
   $variables['classes_array'][] = 'clearfix';
@@ -362,7 +361,8 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
   if (!isset($variables['main_classes'])) {
     $variables['main_classes'] = '';
   }
-  if (empty($entity->field_fpp_background_image) && $entity->bundle != 'quote') {
+
+  if (empty($entity->field_fpp_background_image) && !in_array($entity->bundle, array('quote', 'header'))) {
     $variables['main_classes'] .= ' single-fluid-row-wrapper';
   }
 }

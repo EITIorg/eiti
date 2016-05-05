@@ -55,6 +55,19 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     '#attributes' => array()
   );
 
+  $block['overlay'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'overlay-wrapper',
+        'overlay-wrapper222',
+      ),
+    ),
+  );
+  $block['overlay']['headers'] = array(
+    '#type' => 'container',
+  );
+
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
     $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
@@ -66,18 +79,6 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   else {
     $block['#attributes']['class'][] = 'no-background-image';
   }
-
-  $block['overlay'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'overlay-wrapper',
-      ),
-    ),
-  );
-  $block['overlay']['headers'] = array(
-    '#type' => 'container',
-  );
 
   // Only if it's set, we want to show the tag.
   if ($header_big) {
@@ -121,8 +122,9 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     );
   }
 
-  if (empty($image_url)) {
-    $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  if (empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
 
   return $block;
