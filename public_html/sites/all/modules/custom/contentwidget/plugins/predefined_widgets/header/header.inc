@@ -55,15 +55,6 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     '#attributes' => array()
   );
 
-  $block['overlay'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'overlay-wrapper',
-        'overlay-wrapper222',
-      ),
-    ),
-  );
   $block['overlay']['headers'] = array(
     '#type' => 'container',
   );
@@ -75,6 +66,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     // Use the featured image as background image.
     $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
     helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
+    $block['overlay']['#attributes']['class'][] = 'clearfix';
   }
   else {
     $block['#attributes']['class'][] = 'no-background-image';

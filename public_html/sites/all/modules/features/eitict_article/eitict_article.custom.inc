@@ -104,6 +104,7 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
     // Use the featured image as background image.
     $selector_prefix = implode('-', array($type, $entity->nid, $view_mode));
     helpertheme_get_background_image_with_overlay($elements, $featured_image_data, $selector_prefix);
+    $elements['overlay']['#attributes']['class'][] = 'clearfix';
   }
   else {
     $elements['#attributes']['class'][] = 'without-featured-image';
