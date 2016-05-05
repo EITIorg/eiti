@@ -126,6 +126,9 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
     $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
+  else {
+    $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+  }
 
   return $block;
 }
