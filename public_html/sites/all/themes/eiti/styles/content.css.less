@@ -37,19 +37,12 @@
   .title {
     font-weight: normal;
   }
-
-  &.with-background-image {
-    @aspect_ratio: (5 / 16) * 100%;
-    display: block; // We need a block element for this to work.
-    height: 0;
-    padding-top: @aspect_ratio;
-  }
-  &.with-background-image > .overlay-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
+}
+.xMediumAndUp() {
+  .article-header {
+    &.with-background-image {
+      padding-top: 20%;
+    }
   }
 }
 
@@ -68,7 +61,7 @@
   // @TODO: Make the image darker in image styles.
   &::before {
     content: ' ';
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: fade(@claltmain, 40%);
     position: absolute;
     top: 0;
     bottom: 0;
