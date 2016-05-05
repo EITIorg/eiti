@@ -708,7 +708,6 @@ function helpertheme_site_map() {
  * @param array $elements
  * @param array $image_data
  * @param string $selector_prefix
- * @param bool $narrow
  */
 function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix) {
   global $theme, $theme_info;

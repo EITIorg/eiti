@@ -313,6 +313,7 @@ function _theme_header_items__identity() {
 }
 
 function _theme_header_items__navigation() {
+  global $language;
   $elements = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -327,16 +328,19 @@ function _theme_header_items__navigation() {
   if (drupal_multilingual()) {
     $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
     $lang_links = language_negotiation_get_switch_links('language', $path);
+
     if (isset($lang_links->links)) {
+      $active_language = check_plain($language->native);
+      $title_attributes = array(
+        'class' => array('language-switcher-title'),
+        'xml:lang' => $language->language,
+      );
+
       $elements['language_switcher'] = array(
         '#type' => 'html_container',
         '#tag' => 'nav',
-        '#title' => t('Languages') . ': ',
-        '#title_attributes' => array('class' => array('language-switcher-title')),
-        '#title_icon' => array(
-          'symbol' => 'message',
-          'options' => array('width' => '1.5em', 'height' => '1.5em'),
-        ),
+        '#title' => $active_language,
+        '#title_attributes' => $title_attributes,
         '#attributes' => array(
           'role' => 'navigation',
           'class' => array(

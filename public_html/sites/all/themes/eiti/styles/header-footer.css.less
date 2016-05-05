@@ -147,9 +147,6 @@
     margin-left: 0.5em;
     margin-right: 0.5em;
   }
-  .language-switcher .icon {
-    margin-left: 0.5em;
-  }
 }
 
 .xMediumAndUp() {
@@ -172,13 +169,7 @@
     margin: 0;
   }
 
-  .icon {
-    display: none;
-    padding: 0.5em;
-  }
-
   .locale-links {
-
     padding: 0.5em 0;
     margin: 0;
 
@@ -198,6 +189,11 @@
 .xSmallOnly() {
   .language-switcher {
     margin: 0.5em;
+
+    .language-switcher-title {
+      display: none;  // The title is now the name of the active language.
+    }
+
     .first {
       .language-link {
         padding-left: 0;
@@ -212,13 +208,15 @@
 
     .language-switcher-title {
       cursor: pointer;
+      border: 2px solid @clmain__separator;
+      padding: 0.5em;
 
-      .icon {
-        display: inherit;
+      &::after {
+        content: " \25BC";
       }
-      .text {
-        .visually-hidden();
-      }
+    }
+    .language-link.active {
+      display: none;
     }
 
     .locale-links-wrapper {
