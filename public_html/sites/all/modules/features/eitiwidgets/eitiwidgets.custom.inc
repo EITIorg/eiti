@@ -272,6 +272,37 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
   if (!empty($entity->field_fpp_background_image)) {
     $pane->css['css_class'] .= ' has-background-image';
   }
+
+  if (isset($content->content['title_field'][0]['#markup'])) {
+    $title_markup = $content->content['title_field'][0]['#markup'];
+
+    // Add ID attribute, used for anchor links.
+    if (!empty($content->title)) {
+      $content->css_id = drupal_html_id($content->title);
+    }
+
+    $anchor_link = '';
+    if (isset($content->css_id)) {
+      $size = '1.5em';
+      $svg_options = array(
+        'width' => $size,
+        'height' => $size,
+      );
+      $svg_icon = helpertheme_get_svg_icon('website', $svg_options);
+
+      $options = array(
+        'external' => TRUE,
+        'fragment' => $content->css_id,
+        'html' => TRUE,
+        'attributes' => array(
+          'class' => array('anchor-link')
+        ),
+      );
+      $anchor_link = l($svg_icon, '', $options);
+    }
+
+    $content->content['title_field'][0]['#markup'] = $anchor_link . $title_markup;
+  }
 }
 
 /**
