@@ -1,14 +1,14 @@
-export var online_portal = [
+export var online_contracts = [
   {
     "id": 1,
     "color": "#42abd8",
-    "title": "License Registry Available",
+    "title": "Yes",
     "subtitle": ""
   },
   {
     "id": 0,
     "color": "#dddddd",
-    "title": "No License Registry",
+    "title": "No",
     "subtitle": ""
   }
 ];

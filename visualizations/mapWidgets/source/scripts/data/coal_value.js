@@ -1,4 +1,4 @@
-export var value_per_capita = [
+export var coal_value = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

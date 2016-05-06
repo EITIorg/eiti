@@ -1,4 +1,4 @@
-export var resources_oil = [
+export var revenue_per_capita = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

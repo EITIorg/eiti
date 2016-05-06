@@ -1,4 +1,4 @@
-export var value = [
+export var share_revenues = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

@@ -1,4 +1,4 @@
-export var revenue_compared = [
+export var gold_value = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

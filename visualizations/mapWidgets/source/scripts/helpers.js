@@ -28,7 +28,6 @@ export var helpers = {
 
     getColor: function(feature) {
         if(feature !== undefined) {
-            //console.log(feature.indicator_value);
             if(feature.indicator_color) {
                 return feature.indicator_color;
             }
@@ -84,6 +83,12 @@ export var helpers = {
         return string;
     },
 
+    findFormatValue: function(data, condition) {
+        var object = data.find(condition);
+        var value = object ? this.formatNumber(object.value) : this.t('n/a');
+        return value;
+    },
+
     showInfobox: function(e, countryInfo) {
         helpers.resetTooltip();
 
@@ -105,132 +110,115 @@ export var helpers = {
         var last = _.last(years);
         var yearData = country.reports[last];
 
-        var indicator_GDP = yearData.find(function(v) {
-                return (v.commodity === "Gross Domestic Product - all sectors" && v.unit === "USD")
-            });
-        var indicator_oil = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
-        var indicator_population = yearData.find(function(v){ return (v.commodity === "Population")});
+        // Prepare data for info box
 
-        // Licenses
+        // Status
+        var country_status = country.status ? country.status.name : this.t('n/a');
+
+        // Member Since
+        var memberDate = (country.status_date || country.status_date !== null) ? new Date(country.status_date*1000) : undefined;
+        var country_member_since = memberDate ? memberDate.getFullYear() : t.this('n/a');
+
+        // Latest Report Year
+        var country_last_report_year = last;
+        
+        // Latest Report Link
+        var country_last_report_file = country.annual_report_file;
+
+        // Extractives Revenue latest year
+        
+        var indicator_government_revenue = yearData.find(function(v){ return (v.commodity === "Extractives")}) || yearData.find(function(v){ return (v.commodity === "Government revenue - extractive industries")}) || undefined;
+        if(indicator_government_revenue) {
+            var years_revenue = Object.keys(country.revenues);
+            var last_revenue = _.last(years_revenue);
+            var yearData_revenue = country.revenues[last_revenue];
+            indicator_government_revenue = yearData_revenue.government;
+        }
+        indicator_government_revenue = indicator_government_revenue || 'n/a';
+
+        // Sectors Covered
+
+        // Number of companies reporting
+
+        // Online Licenses (link)[Oil], (link)[Mining]
         var years_licenses = country.licenses ? Object.keys(country.licenses):[];
         var last_licenses = _.last(years_licenses);
         var indicator_licenses = country.licenses ? country.licenses[last_licenses] : undefined;
 
-        // Contracts
+
+        // Online Contract (link)
         var years_contracts = country.contracts ? Object.keys(country.contracts):[];
         var last_contracts = _.last(years_contracts);
         var indicator_contracts = country.contracts ? country.contracts[last_contracts]: undefined;
 
-        // Value & Value per capita
-        var indicator_oil_value = yearData.find(function(v){ return (v.commodity === "Oil, value")});
-        var indicator_oil_value_pc = 0;
-        if (indicator_oil_value && indicator_population) {
-            indicator_oil_value_pc = indicator_oil_value.value/indicator_population;
-        }
-        else {
-            indicator_oil_value_pc = 0;
-        }
-
-        // Revenue by Government vs Extractives
-        var years_revenue = Object.keys(country.revenues);
-        var last_revenue = _.last(years_revenue);
-        var yearData_revenue = country.revenues[last_revenue];
-        var indicator_government = yearData_revenue.government;
-        var indicator_company = yearData_revenue.company;
+        // Country Website
+        var country_website = country.local_website ? country.local_website : this.t('n/a');
 
         var currency_code = 'USD';
         var info_header = '';
-        var info_content = '';
-        var info_top_indicators = '';
+        var info_content_first = '';
+        var info_top_indicators_first = '';
+        var info_content_second = '';
+        var info_top_indicators_second = '';
 
         // Add country info.
         info_header = info_header +
             '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' +
             '<span>' + layer.feature.properties.name + '</span>';
 
-        // Add GDP indicator info.
-        info_top_indicators = info_top_indicators +
+        // Add Status indicator info.
+        info_top_indicators_first = info_top_indicators_first +
             '<span class="info">' +
-            '  <span class="label">' + this.t('GDP') + ':</span> <span class="value">' + this.formatNumber(indicator_GDP ? indicator_GDP.value : 0 ) +  ' ' + currency_code + '</span>' +
+            '  <span class="label">' + this.t('Status') + ':</span> <span class="value">' + country_status + '</span>' +
             '</span>';
 
-        // Add Population indicator info.
-        info_top_indicators = info_top_indicators +
+        // Add Last Year indicator info.
+        info_top_indicators_first = info_top_indicators_first +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Population') + ':</span> <span class="value">' + this.formatNumber(indicator_population ? indicator_population.value : 0) + '</span>' +
+            '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value">' + country_member_since + '</span>' +
             '</span>';
 
-        // Add info about Oil.
-        info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + this.formatNumber(indicator_oil.value) + '</span>' +
-            '  <span class="unit">(' + indicator_oil.unit + ')</span>' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-            '  <span class="label">' + this.t('Oil') + '</span>' +
-            '</div>';
+        // Add Last Report Link
+        info_top_indicators_second = info_top_indicators_second +
+            '<span class="info">' +
+            '  <span class="label">' + this.t('Last Report') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#": country_last_report_file) + '">' + country_last_report_year + '</a></span>' +
+            '</span>';
 
-        // Add info about GAS.
-        // TODO: use values from the indicator.
-        info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + 'N/A' + '</span>' +
-            // '  <span class="unit">(' + 'N/A' + ')</span>' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilunrefined.svg') + '" alt="Gas Icon" />' +
-            '  <span class="label">' + this.t('Gas') + '</span>' +
-            '</div>';
+        // Add Revenue
+        info_content_first = info_content_first +
+            '<span class="info">' +
+            '  <span class="label">' + this.t('Extractives revenues for ') + last +':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' +
+            '</span>';
 
         // Add info about Online Licenses.
-        info_content = info_content +
+        info_content_second = info_content_second +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Licenses') + ':</span>' +
             '  <span class="value">' + (indicator_licenses ? '<a href="' +indicator_licenses[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
         // Add info about Online Contracts.
-        info_content = info_content +
+        info_content_second = info_content_second +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Contracts') + ':</span>' +
             '  <span class="value">' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
-        // Add info about Oil.
-        info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + this.formatNumber(indicator_oil_value ? indicator_oil_value.value : 0) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</span>' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-            '  <span class="label">' + this.t('Oil, Value') + '</span>' +
-            '</div>';
-
-        // Add info about Oil per capita.
-        info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + this.formatNumber(indicator_oil_value_pc) + (indicator_oil_value ? ' (' + indicator_oil_value.unit +')' : '') + '</span>' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-            '  <span class="label">' + this.t('Oil, Value (Per Capita)') + '</span>' +
-            '</div>';
-
-        // Add info about Revenue by Government.
-        info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + this.formatNumber(indicator_government ? indicator_government : 0) + '</span>( ' + currency_code + ')' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-            '  <span class="label">' + this.t('Revenue by Government') + '</span>' +
-            '</div>';
-
         // Add info about Revenue by Companies.
-        info_content = info_content +
+        /*info_content = info_content +
             '<div class="info-block">' +
             '  <span class="value">' + this.formatNumber(indicator_company ? indicator_company : 0) + '</span>( ' + currency_code + ')' +
             '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
             '  <span class="label">' + this.t('Revenue by Companies') + '</span>' +
-            '</div>';
+            '</div>';*/
 
         // Add online contracts.
         var html = '<aside class="country-info-wrapper">' +
             '<div class="country-info-header">' + info_header + '</div>' +
-            '<div class="country-info-top-indicators">' + info_top_indicators + '</div>' +
-            '<h3 class="title">' + this.t('Country Commodity Total') + '</h3>' +
-            '<div class="country-info-content">' + info_content + '</div>' +
+            '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' +
+            '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' +
+            '<div class="country-info-content">' + info_content_first + '</div>' +
+            '<div class="country-info-content">' + info_content_second + '</div>' +
             '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
