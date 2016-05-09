@@ -41,7 +41,7 @@ export default class MapWidgetComponent extends Component {
   }
 
   componentWillMount() {
-    this.serverRequest = $.get(helpers.getEndPoint(), function (result) {
+    this.serverRequest = jQuery.get(helpers.getEndPoint(), function (result) {
 
       var baseMap = ::this.decorate(result.data, this.state.indicator_id, this.state.valuetypes);
       this.setState ( {
