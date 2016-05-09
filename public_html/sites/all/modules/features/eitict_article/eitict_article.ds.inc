@@ -86,26 +86,11 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
-    'field_attachments' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-          'classes' => 'field-highlighted',
-        ),
-      ),
-    ),
     'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
           'classes' => 'field-highlighted',
-        ),
-      ),
-    ),
-    'field_featured_image' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_helpertheme_ds_field_simple',
         ),
       ),
     ),
@@ -123,10 +108,25 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_featured_image' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
         ),
       ),
     ),

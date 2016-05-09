@@ -451,11 +451,11 @@ function eitict_article_field_default_field_instances() {
         'weight' => 16,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'owlcarousel_fields',
         'settings' => array(
-          'image_style' => 'large',
-          'settings_group' => 'owlcarousel_settings_default',
+          'image_style' => 'img-article-slider',
+          'settings_group' => 'owlcarousel_settings_article',
           'trim_length' => '',
         ),
         'type' => 'owlcarousel_formatter',

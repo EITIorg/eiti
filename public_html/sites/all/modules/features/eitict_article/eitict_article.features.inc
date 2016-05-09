@@ -27,6 +27,53 @@ function eitict_article_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function eitict_article_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: img-article-slider.
+  $styles['img-article-slider'] = array(
+    'label' => 'Image: Article Slider (590px wide)',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 590,
+          'height' => 443,
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+      2 => array(
+        'name' => 'canvasactions_definecanvas',
+        'data' => array(
+          'RGB' => array(
+            'HEX' => '#f0f0f0',
+          ),
+          'under' => 1,
+          'exact' => array(
+            'width' => 590,
+            'height' => 443,
+            'xpos' => 'center',
+            'ypos' => 'center',
+          ),
+          'relative' => array(
+            'leftdiff' => '',
+            'rightdiff' => '',
+            'topdiff' => '',
+            'bottomdiff' => '',
+          ),
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function eitict_article_node_info() {
