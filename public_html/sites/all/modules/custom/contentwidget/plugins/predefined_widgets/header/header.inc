@@ -30,7 +30,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     $item_title = $widget_settings['links']['link_' . $link_count]['title_' . $link_count];
     $item_link = $widget_settings['links']['link_' . $link_count]['link_' . $link_count];
     $item_icon = $widget_settings['links']['link_' . $link_count]['icon_' . $link_count];
-    if (empty($item_title) || empty($item_link) || empty($item_icon)) {
+    if (empty($item_title) || empty($item_link)) {
       continue;
     }
 
@@ -153,7 +153,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
     '#type' => 'fieldset',
     '#title' => t('Links'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => FALSE,
     '#prefix' => '<div id="links-wrapper">',
     '#suffix' => '</div>',
   );
@@ -176,15 +176,21 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
 
   // Create links.
   for ($link_count = 0; $link_count < $links_max; $link_count++) {
-    $settings_form['links']['link_' . $link_count] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Link #!number:', array('!number' => ($link_count + 1))),
-      '#collapsible' => FALSE,
-    );
-
     $link_url = isset($widget_settings['links']['link_' . $link_count]['link_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['link_' . $link_count] : '';
     $link_title = isset($widget_settings['links']['link_' . $link_count]['title_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['title_' . $link_count] : '';
     $link_icon = isset($widget_settings['links']['link_' . $link_count]['icon_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['icon_' . $link_count] : '';
+
+    $fieldset_name = t('Link #!number:', array('!number' => ($link_count + 1)));
+    if (isset($link_title)) {
+      $fieldset_name .= ' ' . check_plain($link_title);
+    }
+
+    $settings_form['links']['link_' . $link_count] = array(
+      '#type' => 'fieldset',
+      '#title' => $fieldset_name,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
 
     $icons = helpertheme_get_svg_icons();
     $options = array('' => t('No Icon'));
@@ -195,7 +201,6 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
       '#options' => $options,
       '#icons' => $icons,
       '#default_value' => $link_icon,
-      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['title_' . $link_count] = array(
       '#type' => 'textfield',
