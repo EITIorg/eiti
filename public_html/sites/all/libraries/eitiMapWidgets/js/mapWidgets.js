@@ -23754,7 +23754,7 @@
 	  _createClass(MapWidgetComponent, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.serverRequest = $.get(_helpers.helpers.getEndPoint(), function (result) {
+	      this.serverRequest = jQuery.get(_helpers.helpers.getEndPoint(), function (result) {
 	
 	        var baseMap = this.decorate.call(this, result.data, this.state.indicator_id, this.state.valuetypes);
 	        this.setState({
