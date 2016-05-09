@@ -70,10 +70,11 @@
   flex: 1.2;
 }
 .eiti-map-wrapper .legend {
+  font-family: 'Open Sans';
   text-align: left;
   line-height: 1.25em;
   color: #555;
-  width: 20em;
+  width: 25em;
 }
 .eiti-map-wrapper .legend i {
   width: 0.75em;
@@ -91,6 +92,7 @@
   border: 1px solid #dddddd;
 }
 .eiti-map-wrapper .leaflet-popup-content-wrapper {
+  font-family: 'Open Sans';
   padding: 0;
   border-radius: 0;
 }
@@ -108,6 +110,7 @@
   color: #0192c7;
 }
 .eiti-map-wrapper .map-option-wrapper .map-option-widget {
+  cursor: pointer;
   list-style: none;
   padding: 0.25em 0 0;
 }
