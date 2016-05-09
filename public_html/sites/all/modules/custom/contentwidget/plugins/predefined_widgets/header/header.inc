@@ -21,14 +21,6 @@ $plugin = array(
  * Render callback for the 'Header' predefined widget.
  */
 function contentwidget__header__render($plugin, $widget_settings, $entity, $langcode) {
-  $image_url = '';
-  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
-  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
-    $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
-    // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
-    $image_url = file_create_url($image_file->uri);
-  }
-
   $header_small = (!empty($widget_settings['header_small'])) ? $widget_settings['header_small'] : FALSE;
   $header_big = (!empty($widget_settings['header_big'])) ? $widget_settings['header_big'] : FALSE;
 
@@ -38,7 +30,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     $item_title = $widget_settings['links']['link_' . $link_count]['title_' . $link_count];
     $item_link = $widget_settings['links']['link_' . $link_count]['link_' . $link_count];
     $item_icon = $widget_settings['links']['link_' . $link_count]['icon_' . $link_count];
-    if (empty($item_title) || empty($item_link) || empty($item_icon)) {
+    if (empty($item_title) || empty($item_link)) {
       continue;
     }
 
@@ -60,42 +52,32 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
 
   $block = array(
     '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'clearfix',
-      ),
-    )
+    '#attributes' => array()
   );
 
-  if (!empty($image_url)) {
-    $block['#attributes']['class'][] = 'with-background-image';
+  $block['overlay']['headers'] = array(
+    '#type' => 'container',
+  );
 
-    $block_style = "background-image: url(${image_url});";
-    $block['#attributes']['style'] = $block_style;
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
+
+    // Use the featured image as background image.
+    $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
+    helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
+    $block['overlay']['#attributes']['class'][] = 'clearfix';
   }
   else {
     $block['#attributes']['class'][] = 'no-background-image';
   }
 
-  $block['overlay'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'overlay-wrapper',
-      ),
-    ),
-  );
-  $block['overlay']['headers'] = array(
-    '#type' => 'container',
-  );
-
-
   // Only if it's set, we want to show the tag.
-  if ($header_small) {
-    $block['overlay']['headers']['header_small'] = array(
+  if ($header_big) {
+    $block['overlay']['headers']['header_big'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h2',
-      '#value' => $header_small,
+      '#value' => $header_big,
       '#attributes' => array(
         'class' => array('title'),
       ),
@@ -103,38 +85,37 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   }
 
   // Only if it's set, we want to show the tag.
-  if ($header_big) {
-    $block['overlay']['headers']['header_big'] = array(
+  if ($header_small) {
+    $block['overlay']['headers']['header_small'] = array(
       '#type' => 'html_tag',
       '#tag' => 'p',
-      '#value' => $header_big,
+      '#value' => $header_small,
       '#attributes' => array(
         'class' => array('subtitle'),
       ),
     );
   }
 
-  $block['overlay']['links_wrapper'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array('links-wrapper'),
-    ),
-  );
-  $block['overlay']['links_wrapper']['links'] = array(
-    '#theme' => 'item_list',
-    '#items' => $link_items,
-    '#type' => 'ul',
-    '#title' => '',
-    '#attributes' => array(
-      'class' => array('links'),
-    ),
-  );
+  if (!empty($link_items)) {
+    $block['overlay']['links_wrapper'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array('links-wrapper'),
+      ),
+    );
+    $block['overlay']['links_wrapper']['links'] = array(
+      '#theme' => 'item_list',
+      '#items' => $link_items,
+      '#type' => 'ul',
+      '#title' => '',
+      '#attributes' => array(
+        'class' => array('links'),
+      ),
+    );
+  }
 
-  if (empty($image_url)) {
-    if (!empty($block['overlay']['headers'])) {
-      $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
-    }
-
+  if (empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
     $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
   else {
@@ -155,25 +136,24 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
 
   // @TODO: Rename!
-  $settings_form['header_small'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Small Header'),
-    '#description' => t('Please specify the small header text.'),
-    '#default_value' => $header_small,
-    '#size' => 100,
-  );
   $settings_form['header_big'] = array(
     '#type' => 'textfield',
-    '#title' => t('Big Header'),
-    '#description' => t('Please specify the big header text.'),
+    '#title' => t('Title'),
     '#default_value' => $header_big,
+    '#size' => 100,
+  );
+  $settings_form['header_small'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subtitle (simple paragraph)'),
+    '#default_value' => $header_small,
     '#size' => 100,
   );
 
   $settings_form['links'] = array(
     '#type' => 'fieldset',
     '#title' => t('Links'),
-    '#collapsible' => FALSE,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
     '#prefix' => '<div id="links-wrapper">',
     '#suffix' => '</div>',
   );
@@ -181,7 +161,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $settings_form['links']['links_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Links'),
-    '#options' => drupal_map_assoc(range(1, 4)),
+    '#options' => drupal_map_assoc(range(0, 4)),
     '#description' => t('Please specify the number of links you want to use.'),
     '#default_value' => $links_max,
     '#required' => TRUE,
@@ -196,15 +176,21 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
 
   // Create links.
   for ($link_count = 0; $link_count < $links_max; $link_count++) {
-    $settings_form['links']['link_' . $link_count] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Link #!number:', array('!number' => ($link_count + 1))),
-      '#collapsible' => FALSE,
-    );
-
     $link_url = isset($widget_settings['links']['link_' . $link_count]['link_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['link_' . $link_count] : '';
     $link_title = isset($widget_settings['links']['link_' . $link_count]['title_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['title_' . $link_count] : '';
     $link_icon = isset($widget_settings['links']['link_' . $link_count]['icon_' . $link_count]) ? $widget_settings['links']['link_' . $link_count]['icon_' . $link_count] : '';
+
+    $fieldset_name = t('Link #!number:', array('!number' => ($link_count + 1)));
+    if (isset($link_title)) {
+      $fieldset_name .= ' ' . check_plain($link_title);
+    }
+
+    $settings_form['links']['link_' . $link_count] = array(
+      '#type' => 'fieldset',
+      '#title' => $fieldset_name,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
 
     $icons = helpertheme_get_svg_icons();
     $options = array('' => t('No Icon'));
@@ -215,7 +201,6 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
       '#options' => $options,
       '#icons' => $icons,
       '#default_value' => $link_icon,
-      '#required' => TRUE,
     );
     $settings_form['links']['link_' . $link_count]['title_' . $link_count] = array(
       '#type' => 'textfield',

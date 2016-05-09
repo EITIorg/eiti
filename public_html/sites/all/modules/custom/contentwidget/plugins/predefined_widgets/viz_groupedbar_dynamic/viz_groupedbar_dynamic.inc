@@ -94,6 +94,7 @@ function contentwidget__viz_groupedbar_dynamic__render($plugin, $widget_settings
     '#attributes' => array(
       'id' => $identifier . '--export',
       'class' => array(
+        'eiti-chart-widget',
         'eiti-chart-widget--export',
       ),
     ),
@@ -106,6 +107,7 @@ function contentwidget__viz_groupedbar_dynamic__render($plugin, $widget_settings
   // Send the settings, so that later we can load them in our behaviour.
   $js_settings = _contentwidget__viz_groupedbar_dynamic__get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['barchart_settings']['data_type']];
+
   $settings = array(
     'container' => $identifier,
     'type' => 'GroupedBar',
@@ -122,6 +124,9 @@ function contentwidget__viz_groupedbar_dynamic__render($plugin, $widget_settings
     case 'production_countries':
       // We want to pass the commodities to the filter.
       $settings['endpoint_data']['filter']['indicator'] = implode(',', $widget_settings['extra_settings']['commodities']);
+      $indicators = array_filter($widget_settings['extra_settings']['commodities']);
+      $std_unit = _contentwidget__viz_groupedbar_dynamic__get_standard_unit($indicators);
+      $settings['ylabel'] .= format_string(' (!unit)', array('!unit' => $std_unit));
       break;
     case 'production_per_country':
       // We want to pass the commodities to the filter and the country from the context.
@@ -301,7 +306,7 @@ function _contentwidget__viz_groupedbar_dynamic__get_data_types($return = FALSE)
     'endpoint' => '/api/v1.0/grouped_bar/production',
     'extra settings' => '_contentwidget__viz_groupedbar_dynamic__production_countries_settings',
     'x-axis' => t('Countries'),
-    'y-axis' => t('Production Volumes (Sm3)'),
+    'y-axis' => t('Production Volumes'),
     'title' => t('Global Production Chart'),
     'description' => t('Production volumes for all the countries'),
   );
@@ -376,7 +381,14 @@ function _contentwidget__viz_groupedbar_dynamic__production_countries_settings(&
   }
 
   $commodities_options = array();
-  $commodities = array('Oil, volume', 'Gas, volume', 'NGL, volume');
+  $commodities = array(
+    'Oil, volume',
+    'Gas, volume',
+    'NGL, volume',
+    'Coal, volume',
+    'Gold, volume',
+    'Copper, volume',
+  );
   $numeric_indicators = eitientity_indicator_get_by_bundle('numeric');
   foreach ($numeric_indicators as $id => $indicator) {
     if (in_array($indicator->name, $commodities) && $indicator->parent == $production_group_id) {
@@ -461,4 +473,40 @@ function _contentwidget__viz_groupedbar_dynamic__production_get_years_range() {
   // Sort'em.
   sort($values);
   return drupal_map_assoc($values);
+}
+
+/**
+ * Get the standard measurement unit for these commodities.
+ *
+ * @param $indicator_ids
+ *  EITI Indicator IDs (Commodities).
+ */
+function _contentwidget__viz_groupedbar_dynamic__get_standard_unit($indicator_ids) {
+  $unit_mappings = array(
+    'Oil, volume' => t('Sm3'),
+    'Gas, volume' => t('Sm3'),
+    'NGL, volume' => t('Sm3'),
+    'Coal, volume' => t('Tonnes'),
+    'Gold, volume' => t('Tonnes'),
+    'Copper, volume' => t('Tonnes'),
+  );
+
+  $picked_units = array();
+  $indicators = entity_load('indicator', $indicator_ids);
+
+  foreach ($indicators as $indicator) {
+    if (in_array($indicator->name, array_keys($unit_mappings))) {
+      $picked_units[$unit_mappings[$indicator->name]] = $indicator->name;
+    }
+  }
+
+  if (count($picked_units) > 1) {
+    $picked_units = array(t('Mixed') => 'Mixed');
+  }
+
+  // We return empty if empty.
+  if (empty($picked_units)) {
+    return '';
+  }
+  return key($picked_units);
 }

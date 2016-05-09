@@ -29,37 +29,33 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
   }
 
   /** @var EntityMetadataWrapper $entity_wrapper */
-  $entity_wrapper = entity_metadata_wrapper($entity->entityType(), $entity);
+  $entity_type = $entity->entityType();
+  $entity_wrapper = entity_metadata_wrapper($entity_type, $entity);
 
   $block['banner'] = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
         'country-banner-wrapper',
-        'clearfix',
       ),
     )
   );
 
-  // Add the country "cover" image.
-  if (!empty($entity->field_ic_cover)) {
-    // Get the file URI.
-    $cover_file_info = $entity_wrapper->field_ic_cover->value();
-    $cover_file_uri = $cover_file_info['uri'];
+  $entity_language = entity_language($entity_type, $entity);
+  $image_field_language = field_language($entity_type, $entity, 'field_ic_cover', $entity_language);
+  if (!empty($entity->field_ic_cover[$image_field_language][0])) {
+    $cover_image_data = $entity->field_ic_cover[$image_field_language][0];
 
-    // Get the image URI.
-    $style_name = 'bg-large';
-    $cover_url = image_style_url($style_name, $cover_file_uri);
-
-    $block['banner']['#attributes']['class'][] = 'with-background-image';
-    $block_style = "background-image: url(${cover_url});";
-    $block['banner']['#attributes']['style'] = $block_style;
+    // Use the featured image as background image.
+    $entity_id = entity_id($entity_type, $entity);
+    $selector_prefix = implode('-', array($entity_type, $entity_id));
+    helpertheme_get_background_image_with_overlay($block['banner'], $cover_image_data, $selector_prefix);
   }
   else {
     $block['banner']['#attributes']['class'][] = 'no-background-image';
   }
 
-  $block['banner']['name_and_logo'] = array(
+  $block['banner']['overlay']['name_and_logo'] = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
@@ -80,14 +76,14 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     $style_name = 'logo-scaled-height';
     $logo_url = image_style_url($style_name, $logo_file_uri);
 
-    $block['banner']['name_and_logo']['logo'] = array(
+    $block['banner']['overlay']['name_and_logo']['logo'] = array(
       '#theme' => 'image',
       '#path' => $logo_url,
       '#alt' => $logo_file_alt_text,
     );
   }
 
-  $block['banner']['name_and_logo']['name'] = array(
+  $block['banner']['overlay']['name_and_logo']['name'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'h1',
     '#value' => $entity_wrapper->label(),

@@ -1,25 +1,25 @@
 
 .country-banner-wrapper {
-  &.with-background-image {
-    background-color: @clmain__separator;
-    color: @clnormal__dark;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top right;
-  }
   &.no-background-image {
-    margin: 2em 0;
+    margin: 1.5em 0;
   }
 
   img {
     margin-right: 2em;
   }
   .page-title {
-    color: @clnormal__dark;
     display: inline;
     margin: 0;
 
     line-height: 100%;  // HACK: Make sure the page title doesn't change the wrapper height.
+  }
+}
+.xMediumAndUp() {
+  .country-banner-wrapper {
+    &.with-background-image {
+      padding-bottom: 6%;
+      padding-top: 6%;
+    }
   }
 }
 
@@ -36,20 +36,7 @@
   }
 }
 
-.xSmallOnly() {
-  .country-banner-wrapper {
-    &.with-background-image {
-      padding: 2em 0;
-    }
-  }
-}
 .xMediumOnly() {
-  .country-banner-wrapper {
-    &.with-background-image {
-      // NOTE: We only have a single line in this widget.
-      line-height: 10em;
-    }
-  }
   .country-information-wrapper {
     display: -ms-flexbox;
     display: flex;
@@ -62,12 +49,6 @@
   }
 }
 .xNormalAndUp() {
-  .country-banner-wrapper {
-    &.with-background-image {
-      // NOTE: We only have a single line in this widget.
-      line-height: 20em;
-    }
-  }
   .country-information-wrapper {
     display: -ms-flexbox;
     display: flex;

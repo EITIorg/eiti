@@ -313,6 +313,7 @@ function _theme_header_items__identity() {
 }
 
 function _theme_header_items__navigation() {
+  global $language;
   $elements = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -327,16 +328,19 @@ function _theme_header_items__navigation() {
   if (drupal_multilingual()) {
     $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
     $lang_links = language_negotiation_get_switch_links('language', $path);
+
     if (isset($lang_links->links)) {
+      $active_language = check_plain($language->native);
+      $title_attributes = array(
+        'class' => array('language-switcher-title'),
+        'xml:lang' => $language->language,
+      );
+
       $elements['language_switcher'] = array(
         '#type' => 'html_container',
         '#tag' => 'nav',
-        '#title' => t('Languages') . ': ',
-        '#title_attributes' => array('class' => array('language-switcher-title')),
-        '#title_icon' => array(
-          'symbol' => 'message',
-          'options' => array('width' => '1.5em', 'height' => '1.5em'),
-        ),
+        '#title' => $active_language,
+        '#title_attributes' => $title_attributes,
         '#attributes' => array(
           'role' => 'navigation',
           'class' => array(
@@ -645,7 +649,7 @@ function _theme_main_footer__site_navigation() {
   );
 
 
-  if ($links = helpertheme_menu_navigation_links($menu_name, 3)) {
+  if ($links = helpertheme_menu_navigation_links($menu_name, 2)) {
     $links['#extras']['svgicon_size'] = '1.25em';
     $elements['site_navigation']['links'] = array(
       '#theme' => 'links__enhanced',
@@ -655,6 +659,20 @@ function _theme_main_footer__site_navigation() {
         'class' => array(
           'navigation-links',
         ),
+      ),
+    );
+
+    $elements['site_navigation']['see_all'] = array(
+      '#theme' => 'link',
+      '#path' => 'site-map',
+      '#text' => t('see all'),
+      '#options' => array(
+        'attributes' => array(
+          'class' => array(
+            'see-all-link-wrapper'
+          ),
+        ),
+        'html' => FALSE,
       ),
     );
   }
@@ -701,6 +719,57 @@ function _theme_main_footer__site_navigation() {
       '#markup' => t('Menu not configured!'),
     );
   }
+
+
+  // Add the language switcher links.
+  if (drupal_multilingual()) {
+    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
+    $lang_links = language_negotiation_get_switch_links('language', $path);
+    if (isset($lang_links->links)) {
+      $elements['language_switcher'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'nav',
+        '#title' => t('Change language'),
+        '#title_attributes' => array('class' => array('language-switcher-title')),
+        '#title_tag' => 'h4',
+        '#attributes' => array(
+          'role' => 'navigation',
+          'class' => array(
+            'navigation-language-switcher',
+          ),
+        ),
+      );
+
+      $elements['site_navigation']['language_switcher']['wrapper'] = array(
+        '#type' => 'html_container',
+        '#attributes' => array(
+          'class' => array(
+            'locale-links-wrapper',
+          ),
+        ),
+      );
+
+      // Add language info to all links.
+      $languages = language_list();
+      foreach ($lang_links->links as &$link) {
+        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
+          $link['language'] = $languages[$link['attributes']['lang']];
+        }
+      }
+
+      $elements['language_switcher']['wrapper']['links'] = array(
+        '#theme' => 'links__language_switcher',
+        '#links' => $lang_links->links,
+        '#attributes' => array(
+          'class' => array(
+            'language-switcher-' . $lang_links->provider,
+            'locale-links',
+          ),
+        ),
+      );
+    }
+  }
+
 
   return $elements;
 }

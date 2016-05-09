@@ -15,7 +15,7 @@ export var status = [
     "id": 76,
     "color": "#ff6600",
     "title": "Suspended",
-    "subtitle": "implementing EITI, not yet compliant"
+    "subtitle": "Compliant/Candidate status is temporarily suspended"
   },
   {
     "id": 0,

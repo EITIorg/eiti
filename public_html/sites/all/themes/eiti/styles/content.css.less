@@ -20,59 +20,68 @@
   }
 }
 
-.field-name-field-attachments,
-.field-name-field-image-gallery {
+.field-highlighted {
   background-color: @clmain__header;
   border: 1px solid @clmain__separator;
   padding: 1em !important;  // Fix for article page where layout is set on field wrappers.
-
 }
 
 // @TODO: Update markup for document and person entities teaser and apply proper styling.
-.group-side {
-  & > img {
+.mobject .group-side {
+  img {
     border: 1px solid @clmain__separator;
   }
 }
 
 .article-header {
-  &.with-featured-image {
-    background-size: cover;
-    background-position: center center;
-
-    color: @clmain;
-    a {
-      color: @clmain;
-    }
-
-    .title {
-      text-shadow: rgba(0, 0, 0, 0.9) 1px 1px 2px;
-    }
-  }
-
   .title {
     font-weight: normal;
   }
-}
 
-.xMediumAndUp() {
-  .article-header.with-featured-image {
+  &.with-background-image {
     @aspect_ratio: (5 / 16) * 100%;
     display: block; // We need a block element for this to work.
     height: 0;
     padding-top: @aspect_ratio;
+  }
+  &.with-background-image > .overlay-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+}
 
-    .title-field-wrapper {
-      position: relative;
-    }
+.with-background-image {
+  background-size: cover;
+  background-position: center center;
+  position: relative;
 
-    .field-name-title-field {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: 0;
-    }
+  background-color: @claltmain;
+  color: @clmain;
+  text-shadow: 0 0 0.25em fade(@claltmain, 90%);
+  a {
+    .link-color(@clmain, @clactive__alt);
+  }
+
+  // @TODO: Make the image darker in image styles.
+  &::before {
+    .transition(background-color, 400ms, ease-in);
+    content: ' ';
+    background-color: fade(@claltmain, 40%);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  &.hover::before {
+    background-color: fade(@claltmain, 90%);
+  }
+
+  .overlay-wrapper {
+    position: relative;
   }
 }
 
@@ -97,8 +106,17 @@
   .field-name-field-tags {
     flex: 2;
   }
+  .field-name-field-event-date {
+    div {
+      display: inline;
+    }
+  }
+  .icon {
+    fill: @clanchor;
+    vertical-align: baseline;
+  }
 
-  &.alternative {
+  &.simple {
     border-bottom: 1px solid @clmain__separator;
     border-top: 1px solid @clmain__separator;
     .field {

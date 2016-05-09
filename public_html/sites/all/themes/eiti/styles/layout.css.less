@@ -131,12 +131,18 @@
 
 // Use `single-fluid-row-wrapper` class on pages that should expand the full width of the page.
 .xSmallOnly() {
+  .single-narrow-row-wrapper,
   .single-fluid-row-wrapper {
     .single-fluid-column(margin);
   }
 }
 .xMediumOnly() {
   .single-fluid-row-wrapper {
+    .single-fluid-row-wrapper(8);
+  }
+}
+.xMediumAndUp() {
+  .single-narrow-row-wrapper {
     .single-fluid-row-wrapper(8);
   }
 }

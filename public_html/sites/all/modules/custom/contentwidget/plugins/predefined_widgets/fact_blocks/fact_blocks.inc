@@ -23,43 +23,26 @@ $plugin = array(
  * Render callback for the 'Fact Blocks' predefined widget.
  */
 function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, $langcode) {
-  $image_url = '';
-  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
-  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
-    $image_file = (object) $entity->field_fpp_background_image[$image_field_language][0];
-    // @TODO: Make sure the image is decently sized, we don't want 10MB background images.
-    $image_url = file_create_url($image_file->uri);
-  }
-
   // Prepare the wrapper.
   $block = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array(
-        'clearfix',
-      ),
     )
   );
 
-  if (!empty($image_url)) {
-    $block['#attributes']['class'][] = 'with-background-image';
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
 
-    $block_style = "background-image: url(${image_url});";
-    $block['#attributes']['style'] = $block_style;
+    // Use the featured image as background image.
+    $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
+    helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
   }
   else {
     $block['#attributes']['class'][] = 'no-background-image';
   }
 
-  $block['overlay'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'single-fluid-row-wrapper',
-        'overlay-wrapper',
-      ),
-    )
-  );
+  $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
 
   // And now prepare the list of facts that we'll render in theme_item_list.
   $fact_items = array();
@@ -231,7 +214,8 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
     $settings_form[$delta] = array(
       '#type' => 'fieldset',
       '#title' => t('Key Fact #!number:', array('!number' => ($delta + 1))),
-      '#collapsible' => FALSE,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
     );
 
     $settings_form[$delta]['icon'] = array(

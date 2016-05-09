@@ -27,22 +27,28 @@ function eitisettings_filter_default_formats() {
           'filter_html_nofollow' => 0,
         ),
       ),
-      'filter_autop' => array(
-        'weight' => -48,
-        'status' => 1,
-        'settings' => array(),
-      ),
-      'filter_url' => array(
-        'weight' => -46,
+      'htmlpurifier' => array(
+        'weight' => 0,
         'status' => 1,
         'settings' => array(
-          'filter_url_length' => 72,
+          'htmlpurifier_config_name' => 'htmlpurifier_basic',
+          'htmlpurifier_help' => 1,
+          'htmlpurifier_filter_tips' => 'HTML tags will be transformed to conform to HTML standards.',
+          'htmlpurifier_config' => array(
+            'Attr.EnableID' => 0,
+            'AutoFormat.AutoParagraph' => 1,
+            'AutoFormat.Linkify' => 1,
+            'AutoFormat.RemoveEmpty' => 0,
+            'Null_HTML.Allowed' => 1,
+            'HTML.ForbiddenAttributes' => '',
+            'HTML.ForbiddenElements' => '',
+            'HTML.SafeObject' => 0,
+            'Output.FlashCompat' => 0,
+            'URI.DisableExternalResources' => 0,
+            'URI.DisableResources' => 0,
+            'Null_URI.Munge' => 1,
+          ),
         ),
-      ),
-      'filter_htmlcorrector' => array(
-        'weight' => -43,
-        'status' => 1,
-        'settings' => array(),
       ),
     ),
   );

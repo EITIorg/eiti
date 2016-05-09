@@ -98,7 +98,7 @@ class EITISpreadsheetMigration extends Migration {
     asort($matchRating);
     end($matchRating);
     $bestMatchingID = key($matchRating);
-    if ($matchRating[$bestMatchingID] > 90) {
+    if ($matchRating[$bestMatchingID] > 95) {
       return $bestMatchingID;
     }
     return FALSE;

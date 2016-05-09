@@ -24,7 +24,7 @@ function eitict_article_field_default_field_instances() {
           'trim_length' => 512,
         ),
         'type' => 'helpergeneric_clean_summary',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -37,10 +37,10 @@ function eitict_article_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'helpergeneric',
         'settings' => array(
-          'trim_length' => 256,
+          'trim_length' => 512,
         ),
         'type' => 'helpergeneric_clean_summary',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -221,7 +221,7 @@ function eitict_article_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -249,7 +249,7 @@ function eitict_article_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -293,7 +293,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -307,7 +307,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -334,17 +334,17 @@ function eitict_article_field_default_field_instances() {
   $field_instances['node-article-field_featured_image'] = array(
     'bundle' => 'article',
     'deleted' => 0,
-    'description' => 'If there\'s a featured image, specify it.',
+    'description' => 'Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'image_link' => 'content',
+          'image_style' => 'ar-thumb',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 0,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -360,11 +360,11 @@ function eitict_article_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'ar-thumb',
+          'image_link' => '',
+          'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -375,16 +375,16 @@ function eitict_article_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => 'image_featured',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -400,9 +400,9 @@ function eitict_article_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -423,6 +423,8 @@ function eitict_article_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 'media_internet',
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -449,13 +451,14 @@ function eitict_article_field_default_field_instances() {
         'weight' => 16,
       ),
       'full' => array(
-        'label' => 'above',
-        'module' => 'image',
+        'label' => 'hidden',
+        'module' => 'owlcarousel_fields',
         'settings' => array(
-          'image_link' => 'file',
-          'image_style' => 'img-narrow',
+          'image_style' => 'img-article-slider',
+          'settings_group' => 'owlcarousel_settings_article',
+          'trim_length' => '',
         ),
-        'type' => 'image',
+        'type' => 'owlcarousel_formatter',
         'weight' => 4,
       ),
       'teaser_alternative' => array(
@@ -592,7 +595,7 @@ function eitict_article_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator_localized',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -612,7 +615,7 @@ function eitict_article_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator_localized',
-        'weight' => 9,
+        'weight' => 10,
       ),
     ),
     'entity_type' => 'node',
@@ -648,10 +651,10 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(
           'title_class' => 'title',
           'title_link' => 'content',
-          'title_style' => 'h1',
+          'title_style' => 'h3',
         ),
         'type' => 'title_linked',
-        'weight' => 5,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -670,10 +673,10 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(
           'title_class' => 'title',
           'title_link' => 'content',
-          'title_style' => 'h3',
+          'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 1,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -708,7 +711,6 @@ function eitict_article_field_default_field_instances() {
   t('Event Date');
   t('Event Location');
   t('Featured Image');
-  t('If there\'s a featured image, specify it.');
   t('If this article is somehow related to a certain country, please specify the country. It can be related to multiple countries. This changes the article visibility as it will show up on the country\'s page.');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('If you want to upload multiple images and display them in a gallery fashion, use this field.');
@@ -718,6 +720,7 @@ function eitict_article_field_default_field_instances() {
   t('Specify the event location.');
   t('Tags');
   t('Title');
+  t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
   t('Use tags to wire this content to other related content.');
 
   return $field_instances;

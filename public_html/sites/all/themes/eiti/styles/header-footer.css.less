@@ -147,9 +147,6 @@
     margin-left: 0.5em;
     margin-right: 0.5em;
   }
-  .language-switcher .icon {
-    margin-left: 0.5em;
-  }
 }
 
 .xMediumAndUp() {
@@ -172,13 +169,7 @@
     margin: 0;
   }
 
-  .icon {
-    display: none;
-    padding: 0.5em;
-  }
-
   .locale-links {
-
     padding: 0.5em 0;
     margin: 0;
 
@@ -198,6 +189,11 @@
 .xSmallOnly() {
   .language-switcher {
     margin: 0.5em;
+
+    .language-switcher-title {
+      display: none;  // The title is now the name of the active language.
+    }
+
     .first {
       .language-link {
         padding-left: 0;
@@ -212,19 +208,22 @@
 
     .language-switcher-title {
       cursor: pointer;
+      border: 2px solid @clmain__separator;
+      padding: 0.5em;
 
-      .icon {
-        display: inherit;
+      &::after {
+        content: " \25BC";
       }
-      .text {
-        .visually-hidden();
-      }
+    }
+    .language-link.active {
+      display: none;
     }
 
     .locale-links-wrapper {
       // We do this in order to align the dropdown with the options.
       position: absolute;
       top: 50%;  // HACK: align .locale-links properly inside .locale-links-wrapper.
+      left: 0;
       right: 0;
       height: 0;
 
@@ -233,8 +232,9 @@
 
     .locale-links {
       background-color: @clmain__header;
-      border: 1px solid @clnormal;
-      text-align: right;
+      border: 2px solid @clmain__separator;
+      border-top-width: 0;
+      text-align: left;
 
       margin-top: 1em;  // HACK: align .locale-links properly inside .locale-links-wrapper.
 
@@ -256,6 +256,9 @@
 
 .main-footer {
   color: @claltnormal;
+  a {
+    .link-color(@claltnormal__light, @clanchor__hover);
+  }
 
   .section-title {
     color: @claltnormal__light;
@@ -318,7 +321,6 @@
   line-height: 1.5em;
 
   .link-toplevel {
-    .link-color(@claltnormal__light, @clanchor__hover);
     text-transform: uppercase;
   }
 }
@@ -375,25 +377,31 @@
   color: @clmain;
   padding: 1em;
 
-  .item.has-icon {
-    margin-bottom: 1em;
-  }
-
   .navigation-links {
     font-weight: bold;
     padding-left: 1em;
+    margin-top: 0;
+
+    .link {
+      display: block;
+    }
   }
   .submenu {
-    margin-left: 2em;
     padding-left: 0;
   }
 
-  .link-toplevel ~ .submenu {
-    font-size: 0.875em;
+  span.link {
+    cursor: pointer;
   }
-
   .link {
-    .link-color(@clmain, @claltnormal);
+    color: @clmain;
+    padding: 0.5em 0;
+
+    // Style link hover and focus states.
+    &:focus,
+    &:hover {
+      color: @claltnormal;
+    }
 
     .icon {
       fill: @clmain;
@@ -404,11 +412,48 @@
     .title {
       margin-left: 0.5em;
     }
+
+    &.with-sublevel:active {
+      outline: none;
+    }
+  }
+  .navigation-links.has-expanded-child {
+    > li:not(.expanded) > .link {
+      color: lighten(@clnormal, 10%);
+
+      // Style link hover and focus states.
+      &:focus,
+      &:hover {
+        color: lighten(@claltnormal, 10%);
+      }
+
+      .icon {
+        fill: lighten(@clnormal, 10%);
+      }
+      &:hover .icon {
+        fill: lighten(@claltnormal, 10%);
+      }
+    }
   }
 
-  .item {
-    margin: 0.5em 0;
+  .navigation-links {
+    .item {
+      padding: 0;
+      margin: 0;
+      &:not(:last-child) {
+        border-bottom: 1px solid lighten(@clnormal, 10%);
+      }
+      &.expanded {
+        & > .link {
+          border-bottom: 1px solid lighten(@clnormal, 10%);
+        }
+      }
+    }
   }
+  .navigation-links > .item:last-child {
+    border-bottom: 1px solid lighten(@clnormal, 10%);
+  }
+
   .section-title {
     color: @claltnormal__light;
     font-size: 0.8em;
@@ -425,7 +470,7 @@
     border-width: 1px;
     border-style: solid none;
     padding: 2em 0;
-    margin-top: 0;
+    margin: 0;
   }
   .form-text {
     .box-sizing();
@@ -445,9 +490,8 @@
     }
 
     .item.no-icon:not(.has-sublevel):before {
-      content: "\2022";
-      margin-right: 0.5em;
-      font-family: monospace, sans-serif;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
     }
 
     .has-sublevel > .toggle:before {
@@ -475,7 +519,22 @@
     }
   }
 
-
+  .see-all-link-wrapper {
+    .link-color(@clmain, @claltnormal);
+  }
+  .navigation-language-switcher {
+    .language-switcher-title {
+      margin: 1em 0 0;
+    }
+    .locale-links {
+      margin: 0;
+      list-style: none;
+      padding-left: 0;
+    }
+    a {
+      .link-color(@clmain, @claltnormal);
+    }
+  }
 }
 
 .site-navigation-wrapper {

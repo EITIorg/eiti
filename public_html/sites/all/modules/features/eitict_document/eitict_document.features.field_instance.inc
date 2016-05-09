@@ -19,11 +19,11 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'helpergeneric',
+        'module' => 'text',
         'settings' => array(
-          'trim_length' => 256,
+          'trim_length' => 600,
         ),
-        'type' => 'helpergeneric_clean_summary',
+        'type' => 'text_summary_or_trimmed',
         'weight' => 3,
       ),
       'full' => array(
@@ -32,15 +32,6 @@ function eitict_document_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -82,12 +73,6 @@ function eitict_document_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -161,13 +146,13 @@ function eitict_document_field_default_field_instances() {
   $field_instances['node-document-field_doc_image_preview'] = array(
     'bundle' => 'document',
     'deleted' => 0,
-    'description' => 'Image preview relevant to the document you\'re creating.',
+    'description' => 'Upload a relevant image preview, it should have a portrait orientation and at least 360px wide and 480px tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'content',
           'image_style' => 'dc-cover',
         ),
         'type' => 'image',
@@ -183,12 +168,6 @@ function eitict_document_field_default_field_instances() {
         'type' => 'image',
         'weight' => 0,
       ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -200,14 +179,14 @@ function eitict_document_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => 0,
       'file_directory' => 'document_preview',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -223,9 +202,9 @@ function eitict_document_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '4 MB',
+      'max_resolution' => '1800x2400',
+      'min_resolution' => '360x480',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -246,6 +225,8 @@ function eitict_document_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -291,13 +272,7 @@ function eitict_document_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -350,12 +325,6 @@ function eitict_document_field_default_field_instances() {
         'type' => 'i18n_taxonomy_term_reference_plain',
         'weight' => 2,
       ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_document_category',
@@ -386,7 +355,7 @@ function eitict_document_field_default_field_instances() {
         'module' => 'title',
         'settings' => array(
           'title_class' => 'title element-no-margin',
-          'title_link' => '',
+          'title_link' => 'content',
           'title_style' => 'h3',
         ),
         'type' => 'title_linked',
@@ -402,17 +371,6 @@ function eitict_document_field_default_field_instances() {
         ),
         'type' => 'title_linked',
         'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'title',
-        'settings' => array(
-          'title_class' => '',
-          'title_link' => 'content',
-          'title_style' => 'h3',
-        ),
-        'type' => 'title_linked',
-        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -445,10 +403,10 @@ function eitict_document_field_default_field_instances() {
   t('Document Category');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('Image Preview');
-  t('Image preview relevant to the document you\'re creating.');
   t('Please specify the resource categories that apply to this document.');
   t('Published Date');
   t('Title');
+  t('Upload a relevant image preview, it should have a portrait orientation and at least 360px wide and 480px tall.');
 
   return $field_instances;
 }

@@ -15,7 +15,7 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_background_image'] = array(
     'bundle' => 'fact_blocks',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -34,14 +34,14 @@ function eitiwidgets_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -51,15 +51,15 @@ function eitiwidgets_field_default_field_instances() {
             'slashes' => 0,
             'transliterate' => 0,
           ),
-          'value' => '',
+          'value' => 'background_image',
         ),
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -654,15 +654,20 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances['fieldable_panels_pane-header-field_fpp_background_image'] = array(
     'bundle' => 'header',
     'deleted' => 0,
-    'description' => 'Please specify the wide background image used for the header.',
+    'description' => 'Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
         'weight' => 2,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_background_image',
     'label' => 'Background Image',
@@ -672,32 +677,32 @@ function eitiwidgets_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
         'file_path' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
-          'value' => '',
+          'value' => 'background_image',
         ),
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -707,6 +712,8 @@ function eitiwidgets_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
@@ -716,6 +723,8 @@ function eitiwidgets_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -954,19 +963,20 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances['fieldable_panels_pane-quote-field_fpp_background_image'] = array(
     'bundle' => 'quote',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'large',
+          'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 4,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_background_image',
     'label' => 'Background Image',
@@ -981,9 +991,9 @@ function eitiwidgets_field_default_field_instances() {
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -993,15 +1003,15 @@ function eitiwidgets_field_default_field_instances() {
             'slashes' => 0,
             'transliterate' => 0,
           ),
-          'value' => '',
+          'value' => 'background_image',
         ),
         'redirect' => 0,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '32 MB',
-      'max_resolution' => '',
-      'min_resolution' => '',
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1011,6 +1021,8 @@ function eitiwidgets_field_default_field_instances() {
       'settings' => array(
         'allowed_schemes' => array(
           'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
         ),
         'allowed_types' => array(
           'audio' => 0,
@@ -1020,6 +1032,8 @@ function eitiwidgets_field_default_field_instances() {
           'video' => 0,
         ),
         'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
           'media_internet' => 0,
           'media_library--audio_library' => 0,
           'media_library--document_library' => 0,
@@ -1045,7 +1059,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -1080,7 +1094,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -1117,7 +1131,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 2,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -1168,7 +1182,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -2003,7 +2017,6 @@ function eitiwidgets_field_default_field_instances() {
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
   t('Please specify the source of this data (a link to a page or a file).');
-  t('Please specify the wide background image used for the header.');
   t('Publication List');
   t('Quote');
   t('Source');
@@ -2013,6 +2026,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Tab widget settings.');
   t('Table');
   t('Title');
+  t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
   t('Useful Links');
   t('Widget');
 

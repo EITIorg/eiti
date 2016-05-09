@@ -22,13 +22,6 @@ function eitict_document_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
     'field_doc_image_preview' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -36,9 +29,11 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_doc_published_date' => array(
+    'title_field' => array(
       'formatter_settings' => array(
-        'ft' => array(),
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
       ),
     ),
   );
@@ -51,6 +46,13 @@ function eitict_document_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'document';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'field_document_category' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -65,13 +67,6 @@ function eitict_document_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_attachments' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_doc_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -81,23 +76,6 @@ function eitict_document_ds_field_settings_info() {
     ),
   );
   $export['node|document|full'] = $ds_fieldsetting;
-
-  $ds_fieldsetting = new stdClass();
-  $ds_fieldsetting->api_version = 1;
-  $ds_fieldsetting->id = 'node|document|teaser';
-  $ds_fieldsetting->entity_type = 'node';
-  $ds_fieldsetting->bundle = 'document';
-  $ds_fieldsetting->view_mode = 'teaser';
-  $ds_fieldsetting->settings = array(
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
-  );
-  $export['node|document|teaser'] = $ds_fieldsetting;
 
   return $export;
 }
@@ -164,8 +142,8 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'field_doc_published_date',
-        1 => 'field_doc_image_preview',
+        0 => 'field_doc_image_preview',
+        1 => 'field_doc_published_date',
         2 => 'field_document_category',
       ),
       'right' => array(
@@ -175,8 +153,8 @@ function eitict_document_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'field_doc_published_date' => 'left',
       'field_doc_image_preview' => 'left',
+      'field_doc_published_date' => 'left',
       'field_document_category' => 'left',
       'title_field' => 'right',
       'body' => 'right',
@@ -202,38 +180,6 @@ function eitict_document_ds_layout_settings_info() {
     'page_option_title' => '',
   );
   $export['node|document|full'] = $ds_layout;
-
-  $ds_layout = new stdClass();
-  $ds_layout->api_version = 1;
-  $ds_layout->id = 'node|document|teaser';
-  $ds_layout->entity_type = 'node';
-  $ds_layout->bundle = 'document';
-  $ds_layout->view_mode = 'teaser';
-  $ds_layout->layout = 'simplelayout';
-  $ds_layout->settings = array(
-    'regions' => array(
-      'main' => array(
-        0 => 'title_field',
-        1 => 'body',
-      ),
-    ),
-    'fields' => array(
-      'title_field' => 'main',
-      'body' => 'main',
-    ),
-    'classes' => array(),
-    'wrappers' => array(
-      'main' => 'div',
-      'ds_hidden' => 'div',
-    ),
-    'layout_wrapper' => 'div',
-    'layout_attributes' => '',
-    'layout_attributes_merge' => 1,
-    'layout_link_attribute' => '',
-    'layout_link_custom' => '',
-    'layout_disable_css' => FALSE,
-  );
-  $export['node|document|teaser'] = $ds_layout;
 
   return $export;
 }

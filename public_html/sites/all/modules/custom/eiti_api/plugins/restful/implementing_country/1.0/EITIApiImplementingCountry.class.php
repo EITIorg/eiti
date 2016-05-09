@@ -37,6 +37,10 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'property' => 'field_ic_website',
       'sub_property' => 'url',
     );
+    $public_fields['annual_report_file'] = array(
+      'property' => 'field_ic_annual_reports',
+      'process_callbacks' => array(array($this, 'prepareAnnualReport')),
+    );
     $public_fields['reports'] = array(
       'callback' => array($this, 'getReports'),
     );
@@ -136,6 +140,18 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'language' => $entity->language,
       'name' => $entity->name,
     );
+  }
+
+  /**
+   * A standard processing callback that returns just latest (highest delta) report.
+   *
+   * @param $entity
+   *   Implementing Country entity.
+   * @return array
+   */
+  function prepareAnnualReport($values) {
+    $last_annual_report = end($values);
+    return file_create_url($last_annual_report['uri']);
   }
 
   /**

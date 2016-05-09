@@ -2,50 +2,53 @@ import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer, GeoJson } from 'react-leaflet';
 
 import { countryGeoJson } from './data/countries.js';
-import { countryInfo } from './data/implementing_country.js';
+//import { countryInfo } from './data/implementing_country.js';
 
 import { helpers } from './helpers.js' ;
 import _ from 'underscore';
-// TODO: Move all metadata to definition/configuration
-// Overview
+// Legend information
 import { status } from './data/status.js';
-
-// Resources
-import { resources_oil } from './data/resources_oil.js';
-
-// Tax & Legal Framework
-import { online_portal } from './data/online_portal.js';
-import { online_registry } from './data/online_registry.js';
-
-// Production
-import { value } from './data/value.js';
-import { value_per_capita } from './data/value_per_capita.js';
-
-// Revenues
+import { online_oil_registry } from './data/online_oil_registry.js';
+import { online_mining_registry } from './data/online_mining_registry.js';
+import { online_contracts } from './data/online_contracts.js';
+import { oil_value } from './data/oil_value.js';
+import { gas_value } from './data/gas_value.js';
+import { coal_value } from './data/coal_value.js';
+import { gold_value } from './data/gold_value.js';
+import { copper_value } from './data/copper_value.js';
 import { revenue } from './data/revenue.js';
-import { revenue_compared } from './data/revenue_compared.js';
+import { revenue_per_capita } from './data/revenue_per_capita.js';
+import { share_revenues } from './data/share_revenues.js';
 
+import geostats from 'geostats';
 
 
 
 export default class MapWidgetComponent extends Component {
   constructor() {
     super();
-    //Default values
-    var indicator_id = "status";
-    var valuetypes = "fixed";
-
     this.state = {
-      hasLocation: false,
+      indicator_id: 'status',
+      valuetypes: 'fixed',
+      baseMap: undefined,
+      data: {},
       latlng: {
-        lat: 12.897489183755892,
-        lng: -12.76171875
+          lat: 12.897489183755892,
+          lng: -12.76171875
       },
-      baseMap: ::this.decorate(countryInfo, indicator_id, valuetypes),
-      data: countryInfo,
-      indicator_id: indicator_id,
-      valuetypes: valuetypes
+      hasLocation: false,
     };
+  }
+
+  componentWillMount() {
+    this.serverRequest = $.get(this.props.endpoint, function (result) {
+
+      var baseMap = ::this.decorate(result.data, this.state.indicator_id, this.state.valuetypes);
+      this.setState ( {
+        baseMap: baseMap,
+        data: result.data
+      });
+    }.bind(this));
   }
 
   decorate(data, indicator_id, valuetypes) {
@@ -61,20 +64,12 @@ export default class MapWidgetComponent extends Component {
       var datapoint = _.find(data, function(v){ return v.iso3 === country.id;});
       if(datapoint) {
         var indicator_value = 0;
+        var indicator_unit = '';
         switch(indicator_id) {
           case "status":
             indicator_value = datapoint.status ? datapoint.status.tid || 0: 0;
           break;
-          case "resources_oil":
-            if(datapoint.reports) {
-              var years = Object.keys(datapoint.reports);
-              var last = _.last(years);
-              var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
-              indicator_value = indicator ? indicator.value : 0;
-            }
-          break;
-          case "online_portal":
+          case "online_oil_registry":
             if(datapoint.licenses) {
               var years = Object.keys(datapoint.licenses);
               var last = _.last(years);
@@ -83,7 +78,16 @@ export default class MapWidgetComponent extends Component {
               indicator_value = indicator;
             }
           break;
-          case "online_registry":
+          case "online_mining_registry":
+            if(datapoint.licenses) {
+              var years = Object.keys(datapoint.licenses);
+              var last = _.last(years);
+              var yearData = datapoint.licenses[last];
+              var indicator = yearData.length > 0;
+              indicator_value = indicator;
+            }
+          break;
+          case "online_contracts":
             if(datapoint.contracts) {
               var years = Object.keys(datapoint.contracts);
               var last = _.last(years);
@@ -92,31 +96,46 @@ export default class MapWidgetComponent extends Component {
               indicator_value = indicator;
             }
           break;
-          case "value":
+          case "oil_value":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
               var indicator = yearData.find(function(v){ return (v.commodity === "Oil, value")});
-              indicator_value = indicator;
+              indicator_value = indicator ? indicator.value : 0;
+              indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
-          case "value_per_capita":
+          case "gas_value":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, value")});
-              var population = yearData.find(function(v){ return (v.commodity === "Population")});
-              if(population && indicator) {
-                indicator_value = indicator/population;
-              }
-              else
-              {
-                indicator_value = 0;
-              }
+              var indicator = yearData.find(function(v){ return (v.commodity === "Gas, value")});
+              indicator_value = indicator ? indicator.value : 0;
+              indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
+          case "coal_value":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Coal, value")});
+              indicator_value = indicator ? indicator.value : 0;
+              indicator_unit = indicator ? indicator.unit : 0;
+            }
+          break;
+          case "copper_value":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Copper, value")});
+              indicator_value = indicator ? indicator.value : 0;
+              indicator_unit = indicator ? indicator.unit : 0;
+            }
+          break;          
           case "revenue":
             if(datapoint.revenues) {
               var years = Object.keys(datapoint.revenues);
@@ -124,30 +143,88 @@ export default class MapWidgetComponent extends Component {
               var yearData = datapoint.revenues[last];
               var indicator = yearData.government;
               indicator_value = indicator;
+              indicator_unit = indicator.unit;
             }
           break;
-          case "revenue_compared":
+          case "revenue_per_capita":
             if(datapoint.revenues) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
+              var generalYearData = datapoint.reports[last];
+              var indicator = yearData.government;
+              var population = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Population")}) : undefined;
+              if(population && indicator) {
+                indicator_value = indicator.value/population.value;
+              }
+              else
+              {
+                indicator_value = 0;
+              }
+              indicator_unit = 'USD/population';
+            }
+          break;
+          case "share_revenues":
+            if(datapoint.revenues) {
+              var years = Object.keys(datapoint.revenues);
+              var last = _.last(years);
+              var yearData = datapoint.revenues[last];
+              var generalYearData = datapoint.reports[last];
               var indicator_government = yearData.government;
-              var indicator_company = yearData.company;
-              indicator_value = indicator_government - indicator_company;
+              var indicator_allsectors = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - all sectors")}) : undefined;
+              if(indicator_government && indicator_allsectors && indicator_allsectors !== 0) {
+                indicator_value = indicator_government*100/indicator_allsectors.value;
+              }
+              else
+              {
+                indicator_value = 0;
+              }
+              indicator_unit = '';
             }
           break;
         }
 
         var indicator_type = valuetypes;
         country['indicator_type'] = valuetypes;
+        country['indicator_value'] = indicator_value;
+        country['indicator_unit'] = indicator_unit;
 
-        var indicator_color;
-        indicator_color = ::this.getColor(indicator_type, indicator_value, metadata);
-        country['indicator_color'] = indicator_color;
       }
       countryGeoJsonProcessed.features.push(country);
+
     }.bind(this));
+  
+    if(valuetypes === 'range') {
+      // Update metadata with ranges
+      metadata = this.updateMetadata(countryGeoJsonProcessed, metadata);
+    }
+
+    // Assign color with the new metadata
+    countryGeoJsonProcessed.features.forEach(function(feature) {
+        var indicator_color;
+        indicator_color = ::this.getColor(feature.indicator_type, feature.indicator_value, metadata);
+        feature['indicator_color'] = indicator_color;
+      }.bind(this));
+
     return countryGeoJsonProcessed;
+  }
+
+  updateMetadata(data, metadata) {
+    var values = _.map(_.pluck(data.features, 'indicator_value'),function(v){ return v?v*1:0;});
+    var part = _.pluck(data.features, 'indicator_unit');
+    console.log(part);
+    var unit = _.find(part, function(v) { return v !== undefined;});
+
+    var classifier = new geostats(values);
+    var ranges = classifier.getEqInterval(metadata.length);
+
+    for(var i=0; i< metadata.length;i++) {
+      metadata[i].unit = unit;
+      metadata[i].range.start = ranges[i];
+      metadata[i].range.end = ranges[i+1];
+      metadata[i].title = helpers.formatNumber(ranges[i]) + ' - ' + helpers.formatNumber(ranges[i+1]);
+    }
+    return metadata;
   }
 
   addLayer(e) {
@@ -155,42 +232,52 @@ export default class MapWidgetComponent extends Component {
     const map = this.refs['map'].leafletElement;
     var indicator_id = e.target.dataset ? e.target.dataset.indicatorid : e.target.getAttribute("data-indicatorid");
     var valuetypes =  e.target.dataset ? e.target.dataset.valuetypes : e.target.getAttribute("data-valuetypes");
-    ::this.addLegend(map, indicator_id);
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
-    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : helpers.onEachFeatureStatus;
+    const hoverDecider = this.props.infobox ? function(feature, layer){this.onEachFeaturePage(feature, layer)}.bind(this) : function(feature, layer){this.onEachFeatureStatus(feature, layer)}.bind(this);
+
+    ::this.addLegend(map, indicator_id, countryDataProcessed);
 
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
   }
 
-  // TODO: Replace with retrieval from endpoint data
-
   getValues(indicator_id) {
-    //debugger;
     var values;
     switch(indicator_id) {
       case "status":
         values = status;
       break;
-      case "resources_oil":
-        values = resources_oil;
+      case "online_oil_registry":
+        values = online_oil_registry;
       break;
-      case "online_portal":
-        values = online_portal;
+      case "online_mining_registry":
+        values = online_mining_registry;
       break;
-      case "online_registry":
-        values = online_registry;
+      case "online_contracts":
+        values = online_contracts;
       break;
-      case "value":
-        values = value;
+      case "oil_value":
+        values = oil_value;
       break;
-      case "value_per_capita":
-        values = value_per_capita;
+      case "gas_value":
+        values = gas_value;
+      break;
+      case "coal_value":
+        values = coal_value;
+      break;
+      case "gold_value":
+        values = gold_value;
+      break;
+      case "copper_value":
+        values = copper_value;
       break;
       case "revenue":
         values = revenue;
       break;
-      case "revenue_compared":
-        values = revenue_compared;
+      case "revenue_per_capita":
+        values = revenue_per_capita;
+      break;
+      case "share_revenues":
+        values = share_revenues;
       break;
     }
     return values;
@@ -202,7 +289,7 @@ export default class MapWidgetComponent extends Component {
     map.removeLayer(geoJsonLayer);
   }
 
-  addLegend(map, indicator_id) {
+  addLegend(map, indicator_id, countryDataProcessed) {
       var info = L.control({position: 'bottomleft'});
       //var map = e.target._map;
 
@@ -217,12 +304,16 @@ export default class MapWidgetComponent extends Component {
       info.update = function (props) {
           var indicatorMetadata;
           indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
-
-          var mergedHTML = "<h2>" + ::this.getIndicatorName(indicator_id || this.state.indicator_id) + "<br/></h2>";
+          var indicatorName = ::this.getIndicatorName(indicator_id || this.state.indicator_id);
+          var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
+          var mergedHTML = "<h2>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<br/></h2>";
           indicatorMetadata.forEach(function(v) {
-            mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+ v.title + '</strong> <br/>'+ (v.subtitle || '') + '<br/>' ) ;
+            mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+helpers.t(v.title)+ '</strong> <br/>'+ (helpers.t(v.subtitle) || '') + '<br/>' ) ;
           });
-          map.options.legend.innerHTML = mergedHTML;
+
+          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI Summary Data') + "</a>"; 
+
+          map.options.legend.innerHTML = mergedHTML + sourceText;
       }.bind(this);
 
       info.addTo(map);
@@ -234,26 +325,38 @@ export default class MapWidgetComponent extends Component {
       case "status":
         values = helpers.t("Implementation Status");
       break;
-      case "resources_oil":
-        values = helpers.t("Oil, prices (in USD)");
+      case "online_oil_registry":
+        values = helpers.t("Online oil registry");
       break;
-      case "online_portal":
-        values = helpers.t("Online License Portal");
+      case "online_mining_registry":
+        values = helpers.t("Online mining registry");
       break;
-      case "online_registry":
+      case "online_contracts":
         values = helpers.t("Online Registry of Contracts");
       break;
-      case "value":
-        values = helpers.t("Production value (in USD)");
+      case "oil_value":
+        values = helpers.t("Oil");
       break;
-      case "value_per_capita":
-        values = helpers.t("Production value per capita (in USD)");
+      case "gas_value":
+        values = helpers.t("Gas");
+      break;
+      case "coal_value":
+        values = helpers.t("Coal");
+      break;
+      case "gold_value":
+        values = helpers.t("Gold");
+      break;
+      case "copper_value":
+        values = helpers.t("Copper");
       break;
       case "revenue":
-        values = helpers.t("Government Revenue (in USD)");
+        values = helpers.t("Government revenue - extractive industries");
       break;
-      case "revenue_compared":
-        values = helpers.t("Government Revenues vs Companies Revenues (in USD)");
+      case "revenue_per_capita":
+        values = helpers.t("Government revenue - extractive industries per capita");
+      break;
+      case "share_revenues":
+        values = helpers.t("% Extractives revenue as a share of total government revenue");
       break;
     }
     return values;
@@ -263,14 +366,14 @@ export default class MapWidgetComponent extends Component {
   onEachFeaturePage(feature, layer) {
     layer.on({
         mouseout: helpers.resetTooltip,
-        click: function(e){ helpers.showInfobox(e, countryInfo) }
+        click: function(e){ helpers.showInfobox(e, this.state.data) }.bind(this)
     });
-    //debugger;
   }
 
   onEachFeatureStatus(feature, layer) {
+      var data = this.state.data;
       layer.on({
-          mouseover: function(e){ helpers.showTooltipStatus(e, countryInfo) } ,
+          mouseover: function(e){ helpers.showTooltipStatus(e, data) },
           mouseout: helpers.resetTooltip,
           click: helpers.zoomToFeature
       });
@@ -284,7 +387,6 @@ export default class MapWidgetComponent extends Component {
     }
     else
     {
-        //debugger;
         if (metadata === undefined) return;
 
         if(this.isNumeric(indicator_value)) {
@@ -308,54 +410,52 @@ export default class MapWidgetComponent extends Component {
 
 
   render() {
-
-    const hoverDecider = this.props.infobox ? this.onEachFeaturePage : this.onEachFeatureStatus;
-    const geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
+    //if(!this.state || !this.state.baseMap) return;
+    const hoverDecider = this.props.infobox ? function(feature, layer){this.onEachFeaturePage(feature, layer)}.bind(this) : function(feature, layer){this.onEachFeatureStatus(feature, layer)}.bind(this);
+    var geoJsonLayer;
+    if(this.state.baseMap === undefined) {
+      geoJsonLayer == null;
+    }
+    else {
+      geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
+    } 
     var buttons;
     if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">
-          <ul className="map-option-widget">
-            <li>
+          <ul className="map-option-widget pointer">
+            <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>
               Overview
-              <ul className="map-option-items">
-                <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>Status</li>
-              </ul>
-            </li>
-            <li>
-              Resources
-              <ul className="map-option-items">
-                <li data-indicatorid="resources_oil" data-valuetypes="range" onClick={::this.addLayer}>Oil</li>
-              </ul>
             </li>
             <li>
               Tax & Legal Framework
               <ul className="map-option-items">
-                <li data-indicatorid="online_portal" data-valuetypes="fixed" onClick={::this.addLayer}>License Registry</li>
-                <li data-indicatorid="online_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Contracts</li>
+                <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Online Oil Registry</li>
+                <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Online Mining Registry</li>
+                <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>Online Registry of contracts</li>
               </ul>
             </li>
             <li>
               Production
               <ul className="map-option-items">
-                <li data-indicatorid="value" data-valuetypes="range" onClick={::this.addLayer}>Value</li>
-                <li data-indicatorid="value_per_capita" data-valuetypes="range" onClick={::this.addLayer}>Value per capita</li>
+                <li data-indicatorid="oil_value" data-valuetypes="range" onClick={::this.addLayer}>Oil, volume</li>
+                <li data-indicatorid="gas_value" data-valuetypes="range" onClick={::this.addLayer}>Gas, volume</li>
+                <li data-indicatorid="coal_value" data-valuetypes="range" onClick={::this.addLayer}>Coal, volume</li>
+                <li data-indicatorid="gold_value" data-valuetypes="range" onClick={::this.addLayer}>Gold, volume</li>
+                <li data-indicatorid="copper_value" data-valuetypes="range" onClick={::this.addLayer}>Copper, volume</li>
               </ul>
             </li>
             <li>
               Revenues
               <ul className="map-option-items">
-                <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>Revenue</li>
-                <li data-indicatorid="revenue_compared" data-valuetypes="range" onClick={::this.addLayer}>Revenue Per Capita</li>
+                <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>Government extractives revenue</li>
+                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>Revenues Per Capita</li>
+                <li data-indicatorid="share_revenues" data-valuetypes="range" onClick={::this.addLayer}>Share of revenues</li>
               </ul>
             </li>
           </ul>
         </div>);
     }
     var reportLink = (<svg id="country-report-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-          <path className="st0" d="M156.4,132l-10.5,18.3L135.5,132V9.2c0-2.9,2.3-5.2,5.2-5.2h10.5c2.9,0,5.2,2.3,5.2,5.2V132z"/>
-          <rect x="135.5" y="22.3" className="st0" width="20.9" height="10.5"/>
-          <line className="st0" x1="135.5" y1="132" x2="156.4" y2="132"/>
-          <line className="st0" x1="145.9" y1="150.3" x2="145.9" y2="155.6"/>
           <rect x="4.8" y="4" className="st0" width="115" height="151.6"/>
           <rect x="4.8" y="4" className="st0" width="20.9" height="151.6"/>
           <rect x="44" y="30.1" className="st0" width="57.5" height="31.4"/>
@@ -368,11 +468,11 @@ export default class MapWidgetComponent extends Component {
     if(this.props.selector) {
       var items = [];
       var cols = [];
-      var sortedCountries = _.sortBy(countryInfo, 'label');
+      var sortedCountries = _.sortBy(this.state.data, 'label');
 
       for (var i = 0; i < sortedCountries.length;i++) {
         var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
-        var countryPageURL = "/implementing_country/" + countryInfo[i].id
+        var countryPageURL = "/implementing_country/" + this.state.data[i].id
         items.push(
             <li>
               <span className={itemStyle}></span>

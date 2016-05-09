@@ -98,6 +98,7 @@ $modules = array(
   // 'menu',
   'module_filter',
   // 'og_ui',
+  'owlcarousel_ui',
   // 'page_manager',
   // 'panels_ipe',
   // 'rules_admin',

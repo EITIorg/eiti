@@ -215,7 +215,7 @@ function eitict_stakeholder_field_default_field_instances() {
   $field_instances['node-stakeholder-field_stk_logo'] = array(
     'bundle' => 'stakeholder',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Upload the stakeholder logo, it should be at least 240 pixels on all sides.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -248,14 +248,14 @@ function eitict_stakeholder_field_default_field_instances() {
       'default_image' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png jpg jpeg',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
           'options' => array(
-            'pathauto' => 0,
-            'slashes' => 0,
-            'transliterate' => 0,
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -271,9 +271,9 @@ function eitict_stakeholder_field_default_field_instances() {
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
-      'max_filesize' => '2 M',
-      'max_resolution' => '2048x2048',
-      'min_resolution' => '100x100',
+      'max_filesize' => '4 MB',
+      'max_resolution' => '2400x2400',
+      'min_resolution' => '240x240',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -669,6 +669,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Statement of Support');
   t('The full URL (including http://) of the stakeholder website.');
   t('Type');
+  t('Upload the stakeholder logo, it should be at least 240 pixels on all sides.');
   t('Website');
 
   return $field_instances;

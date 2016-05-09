@@ -26,7 +26,7 @@ $modules = array(
     //'image_styles_admin',
     //'imagecache_autorotate',
     'imagecache_canvasactions',
-    //'imagecache_coloractions',
+    'imagecache_coloractions',
     //'imagecache_customactions',
 
   'media',
