@@ -41,7 +41,7 @@ export default class MapWidgetComponent extends Component {
   }
 
   componentWillMount() {
-    this.serverRequest = $.get(this.props.endpoint, function (result) {
+    this.serverRequest = $.get(helpers.getEndPoint(), function (result) {
 
       var baseMap = ::this.decorate(result.data, this.state.indicator_id, this.state.valuetypes);
       this.setState ( {
@@ -310,9 +310,7 @@ export default class MapWidgetComponent extends Component {
           indicatorMetadata.forEach(function(v) {
             mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+helpers.t(v.title)+ '</strong> <br/>'+ (helpers.t(v.subtitle) || '') + '<br/>' ) ;
           });
-
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI Summary Data') + "</a>"; 
-
           map.options.legend.innerHTML = mergedHTML + sourceText;
       }.bind(this);
 
@@ -375,7 +373,7 @@ export default class MapWidgetComponent extends Component {
       layer.on({
           mouseover: function(e){ helpers.showTooltipStatus(e, data) },
           mouseout: helpers.resetTooltip,
-          click: helpers.zoomToFeature
+          click: function(e){ helpers.zoomToFeature(e, data) }
       });
   }
 
@@ -420,36 +418,37 @@ export default class MapWidgetComponent extends Component {
       geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     } 
     var buttons;
+
     if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">
-          <ul className="map-option-widget pointer">
+          <ul className="map-option-widget">
             <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>
-              Overview
+              {helpers.t('Overview')}
             </li>
             <li>
               Tax & Legal Framework
               <ul className="map-option-items">
-                <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Online Oil Registry</li>
-                <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>Online Mining Registry</li>
-                <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>Online Registry of contracts</li>
+                <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Oil Registry')}</li>
+                <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Mining Registry')}</li>
+                <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Registry of contracts')}</li>
               </ul>
             </li>
             <li>
               Production
               <ul className="map-option-items">
-                <li data-indicatorid="oil_value" data-valuetypes="range" onClick={::this.addLayer}>Oil, volume</li>
-                <li data-indicatorid="gas_value" data-valuetypes="range" onClick={::this.addLayer}>Gas, volume</li>
-                <li data-indicatorid="coal_value" data-valuetypes="range" onClick={::this.addLayer}>Coal, volume</li>
-                <li data-indicatorid="gold_value" data-valuetypes="range" onClick={::this.addLayer}>Gold, volume</li>
-                <li data-indicatorid="copper_value" data-valuetypes="range" onClick={::this.addLayer}>Copper, volume</li>
+                <li data-indicatorid="oil_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
+                <li data-indicatorid="gas_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
+                <li data-indicatorid="coal_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Coal, volume')}</li>
+                <li data-indicatorid="gold_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gold, volume')}</li>
+                <li data-indicatorid="copper_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, volume')}</li>
               </ul>
             </li>
             <li>
               Revenues
               <ul className="map-option-items">
-                <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>Government extractives revenue</li>
-                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>Revenues Per Capita</li>
-                <li data-indicatorid="share_revenues" data-valuetypes="range" onClick={::this.addLayer}>Share of revenues</li>
+                <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
+                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues Per Capita')}</li>
+                <li data-indicatorid="share_revenues" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Share of revenues')}</li>
               </ul>
             </li>
           </ul>

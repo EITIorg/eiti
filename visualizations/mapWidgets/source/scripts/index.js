@@ -23,7 +23,8 @@ window.mapWidget.createMapPage = function(options) {
   if(options.selector === undefined) {
     options.selector = true;
   }
-  render(<MapWidgetComponent {...options} buttons={options.buttons} infobox={options.infobox} selector={options.selector} endpoint="source/scripts/data/implementing_country.json"/>, document.getElementById(options.container));
+
+  render(<MapWidgetComponent {...options} buttons={options.buttons} infobox={options.infobox} selector={options.selector} />, document.getElementById(options.container));
 };
 
 

@@ -6,6 +6,10 @@ export var helpers = {
         return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
     },
 
+    getEndPoint: function() {
+        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';   
+    }, 
+
     getPaletteDivergent: function(index) {
         var colors = ['#42abd8', '#65c32d', '#ff6600', '#dddddd'];
         return colors[index];
@@ -60,6 +64,7 @@ export var helpers = {
         {
             country_link = '<strong>' + layer.feature.properties.name + '</strong>';
         }
+        e.latlng.lat = e.latlng.lat+2.5;
         var popup = L.popup({autoPan:false, closeButton:false})
             .setLatLng(e.latlng)
             .setContent(country_link)
@@ -70,8 +75,10 @@ export var helpers = {
     // Left for future reference
     },
 
-    zoomToFeature: function(e){
-        window.location = 'country_' + layer.feature.id + '.html';
+    zoomToFeature: function(e, countryInfo){
+        var layer = e.target;
+        var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
+        window.location = '/implementing_country/' +  country.id;
     },
 
     // Helper function that can translate strings.
@@ -160,6 +167,7 @@ export var helpers = {
         var info_top_indicators_first = '';
         var info_content_second = '';
         var info_top_indicators_second = '';
+        var info_content_third = '';
 
         // Add country info.
         info_header = info_header +
@@ -181,24 +189,41 @@ export var helpers = {
         // Add Last Report Link
         info_top_indicators_second = info_top_indicators_second +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Last Report') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#": country_last_report_file) + '">' + country_last_report_year + '</a></span>' +
+            '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#": country_last_report_file) + '">' + country_last_report_year + '</a></span>' +
             '</span>';
 
         // Add Revenue
         info_content_first = info_content_first +
+            '<div class="info-block">' +
             '<span class="info">' +
             '  <span class="label">' + this.t('Extractives revenues for ') + last +':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' +
-            '</span>';
+            '</span>' +
+            '</div>';
 
-        // Add info about Online Licenses.
+        // Add Sectors Covered
         info_content_second = info_content_second +
             '<div class="info-block">' +
+            '<span class="info">' +
+            '   <span class="label">' + this.t('Sectors covered') + ':</span>' +
+            '   <span class="value">Oil <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" /></span>' +
+            '   <span class="value">Gas <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilunrefined.svg') + '" alt="Oil Icon" /></span>' +
+            '   <span class="value">Mining <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_mineral.svg') + '" alt="Oil Icon" /></span>' +
+            '</span>' +
+            '</div>' +
+            '<div class="info-block">' +
+            '<span class="info">' +
+            '  <span class="label">' + this.t('Number of companies reporting') + ':</span> <span class="value">' + 32 + '</span>' +
+            '</span>' +
+            '</div>';
+
+        // Add info about Online Licenses.
+        info_content_third = '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Licenses') + ':</span>' +
             '  <span class="value">' + (indicator_licenses ? '<a href="' +indicator_licenses[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
         // Add info about Online Contracts.
-        info_content_second = info_content_second +
+        info_content_third = info_content_third +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Contracts') + ':</span>' +
             '  <span class="value">' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
@@ -219,6 +244,7 @@ export var helpers = {
             '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' +
             '<div class="country-info-content">' + info_content_first + '</div>' +
             '<div class="country-info-content">' + info_content_second + '</div>' +
+            '<div class="country-info-content">' + info_content_third + '</div>' +
             '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
