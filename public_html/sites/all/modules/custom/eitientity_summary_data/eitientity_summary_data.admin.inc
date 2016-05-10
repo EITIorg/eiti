@@ -85,7 +85,7 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
   $file = file_save($file);
 
   // Check if we have the module ready and enabled.
-  if (!module_enable(array('eiti_migration'))) {
+  if (!module_exists('eiti_migration')) {
     drupal_set_message(t('Please enable the EITI Migrate module for this import to take place.'), ERROR_MESSAGE);
   }
   else {
