@@ -78,7 +78,9 @@ export var helpers = {
     zoomToFeature: function(e, countryInfo){
         var layer = e.target;
         var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
-        window.location = '/implementing_country/' +  country.id;
+        if(country && country.id) {
+            window.location = '/implementing_country/' +  country.id;
+        }
     },
 
     // Helper function that can translate strings.
@@ -113,6 +115,9 @@ export var helpers = {
         }
 
         // General info
+        if(!country.reports) {
+            country.reports = [];
+        }
         var years = Object.keys(country.reports);
         var last = _.last(years);
         var yearData = country.reports[last];
@@ -124,7 +129,7 @@ export var helpers = {
 
         // Member Since
         var memberDate = (country.status_date || country.status_date !== null) ? new Date(country.status_date*1000) : undefined;
-        var country_member_since = memberDate ? memberDate.getFullYear() : t.this('n/a');
+        var country_member_since = memberDate ? memberDate.getUTCFullYear() : t.this('n/a');
 
         // Latest Report Year
         var country_last_report_year = last;
@@ -188,9 +193,19 @@ export var helpers = {
             '</span>';
 
         // Add Last Report Link
+        var country_report_link = '';
+        if(country_last_report_file || country_last_report_file === null) {
+            country_report_link += country_last_report_year;
+        }
+        else
+        {
+            country_report_link += '<a href="' + country_last_report_file + '">' 
+            country_report_link += country_last_report_year;
+            country_report_link += '</a>';
+        }
         info_top_indicators_second = info_top_indicators_second +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#": country_last_report_file) + '">' + country_last_report_year + '</a></span>' +
+            '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value">' + country_report_link + '</span>' +
             '</span>';
 
         // Add Revenue
@@ -241,7 +256,7 @@ export var helpers = {
             '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
-        var popup = L.popup({autoPan:true, closeButton:false, maxWidth:400})
+        var popup = L.popup({autoPan:true, closeButton:true, maxWidth:400})
             .setLatLng(e.latlng)
             .setContent(html)
             .openOn(layer._map);

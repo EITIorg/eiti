@@ -24938,7 +24938,7 @@
 	
 	        // Member Since
 	        var memberDate = country.status_date || country.status_date !== null ? new Date(country.status_date * 1000) : undefined;
-	        var country_member_since = memberDate ? memberDate.getFullYear() : t.this('n/a');
+	        var country_member_since = memberDate ? memberDate.getUTCFullYear() : t.this('n/a');
 	
 	        // Latest Report Year
 	        var country_last_report_year = last;
@@ -24997,7 +24997,15 @@
 	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value"><strong>' + country_member_since + '</strong></span>' + '</span>';
 	
 	        // Add Last Report Link
-	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#" : country_last_report_file) + '">' + country_last_report_year + '</a></span>' + '</span>';
+	        var country_report_link = '';
+	        if (country_last_report_file || country_last_report_file === null) {
+	            country_report_link += country_last_report_year;
+	        } else {
+	            country_report_link += '<a href="' + country_last_report_file + '">';
+	            country_report_link += country_last_report_year;
+	            country_report_link += '</a>';
+	        }
+	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value">' + country_report_link + '</span>' + '</span>';
 	
 	        // Add Revenue
 	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' + '</span>' + '</div>';
@@ -25014,7 +25022,7 @@
 	
 	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
-	        var popup = L.popup({ autoPan: true, closeButton: false, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
+	        var popup = L.popup({ autoPan: true, closeButton: true, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    },
 	
 	    formatNumber: function formatNumber(number) {

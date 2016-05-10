@@ -54,9 +54,6 @@
   min-width: 10em;
   margin-right: 1em;
 }
-.eiti-map-wrapper .country-list-wrapper .country-col:last-child {
-  margin-right: 0;
-}
 .eiti-map-wrapper .map-option-widget {
   display: flex;
   flex-flow: row wrap;

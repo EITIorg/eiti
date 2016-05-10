@@ -472,7 +472,7 @@ export default class MapWidgetComponent extends Component {
 
       for (var i = 0; i < sortedCountries.length;i++) {
         var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
-        var countryPageURL = "/implementing_country/" + this.state.data[i].id
+        var countryPageURL = "/implementing_country/" + sortedCountries[i].id
         items.push(
             <li>
               <span className={itemStyle}></span>
