@@ -1,4 +1,4 @@
-export var gas_value = [
+export var gold_volume = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

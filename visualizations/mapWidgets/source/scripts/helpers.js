@@ -168,6 +168,7 @@ export var helpers = {
         var info_content_second = '';
         var info_top_indicators_second = '';
         var info_content_third = '';
+        var info_content_second_a = '';
 
         // Add country info.
         info_header = info_header +
@@ -177,13 +178,13 @@ export var helpers = {
         // Add Status indicator info.
         info_top_indicators_first = info_top_indicators_first +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Status') + ':</span> <span class="value">' + country_status + '</span>' +
+            '  <span class="label">' + this.t('Status') + ':</span> <span class="value"><strong>' + country_status + '</strong></span>' +
             '</span>';
 
         // Add Last Year indicator info.
         info_top_indicators_first = info_top_indicators_first +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value">' + country_member_since + '</span>' +
+            '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value"><strong>' + country_member_since + '</strong></span>' +
             '</span>';
 
         // Add Last Report Link
@@ -209,13 +210,13 @@ export var helpers = {
             '   <span class="value">Gas <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilunrefined.svg') + '" alt="Oil Icon" /></span>' +
             '   <span class="value">Mining <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_mineral.svg') + '" alt="Oil Icon" /></span>' +
             '</span>' +
-            '</div>' +
-            '<div class="info-block">' +
+            '</div>';
+        // Add Companies reporting
+        info_content_second_a = info_content_second_a + '<div class="info-block">' +
             '<span class="info">' +
             '  <span class="label">' + this.t('Number of companies reporting') + ':</span> <span class="value">' + 32 + '</span>' +
             '</span>' +
             '</div>';
-
         // Add info about Online Licenses.
         info_content_third = '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Licenses') + ':</span>' +
@@ -229,21 +230,13 @@ export var helpers = {
             '  <span class="value">' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
-        // Add info about Revenue by Companies.
-        /*info_content = info_content +
-            '<div class="info-block">' +
-            '  <span class="value">' + this.formatNumber(indicator_company ? indicator_company : 0) + '</span>( ' + currency_code + ')' +
-            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-            '  <span class="label">' + this.t('Revenue by Companies') + '</span>' +
-            '</div>';*/
-
-        // Add online contracts.
         var html = '<aside class="country-info-wrapper">' +
             '<div class="country-info-header">' + info_header + '</div>' +
             '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' +
             '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' +
             '<div class="country-info-content">' + info_content_first + '</div>' +
             '<div class="country-info-content">' + info_content_second + '</div>' +
+            '<div class="country-info-content">' + info_content_second_a + '</div>' +
             '<div class="country-info-content">' + info_content_third + '</div>' +
             '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';

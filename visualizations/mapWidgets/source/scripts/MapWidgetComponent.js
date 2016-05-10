@@ -6,16 +6,17 @@ import { countryGeoJson } from './data/countries.js';
 
 import { helpers } from './helpers.js' ;
 import _ from 'underscore';
+
 // Legend information
 import { status } from './data/status.js';
 import { online_oil_registry } from './data/online_oil_registry.js';
 import { online_mining_registry } from './data/online_mining_registry.js';
 import { online_contracts } from './data/online_contracts.js';
-import { oil_value } from './data/oil_value.js';
-import { gas_value } from './data/gas_value.js';
-import { coal_value } from './data/coal_value.js';
-import { gold_value } from './data/gold_value.js';
-import { copper_value } from './data/copper_value.js';
+import { oil_volume } from './data/oil_volume.js';
+import { gas_volume } from './data/gas_volume.js';
+import { coal_volume } from './data/coal_volume.js';
+import { gold_volume} from './data/gold_volume.js';
+import { copper_volume } from './data/copper_volume.js';
 import { revenue } from './data/revenue.js';
 import { revenue_per_capita } from './data/revenue_per_capita.js';
 import { share_revenues } from './data/share_revenues.js';
@@ -96,42 +97,42 @@ export default class MapWidgetComponent extends Component {
               indicator_value = indicator;
             }
           break;
-          case "oil_value":
+          case "oil_volume":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, value")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
-          case "gas_value":
+          case "gas_volume":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Gas, value")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Gas, volume")});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
-          case "coal_value":
+          case "coal_volume":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Coal, value")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Coal, volume")});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
-          case "copper_value":
+          case "copper_volume":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Copper, value")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Copper, volume")});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -143,7 +144,7 @@ export default class MapWidgetComponent extends Component {
               var yearData = datapoint.revenues[last];
               var indicator = yearData.government;
               indicator_value = indicator;
-              indicator_unit = indicator.unit;
+              indicator_unit = 'USD';
             }
           break;
           case "revenue_per_capita":
@@ -255,20 +256,20 @@ export default class MapWidgetComponent extends Component {
       case "online_contracts":
         values = online_contracts;
       break;
-      case "oil_value":
-        values = oil_value;
+      case "oil_volume":
+        values = oil_volume;
       break;
-      case "gas_value":
-        values = gas_value;
+      case "gas_volume":
+        values = gas_volume;
       break;
-      case "coal_value":
-        values = coal_value;
+      case "coal_volume":
+        values = coal_volume;
       break;
-      case "gold_value":
-        values = gold_value;
+      case "gold_volume":
+        values = gold_volume;
       break;
-      case "copper_value":
-        values = copper_value;
+      case "copper_volume":
+        values = copper_volume;
       break;
       case "revenue":
         values = revenue;
@@ -332,19 +333,19 @@ export default class MapWidgetComponent extends Component {
       case "online_contracts":
         values = helpers.t("Online Registry of Contracts");
       break;
-      case "oil_value":
+      case "oil_volume":
         values = helpers.t("Oil");
       break;
-      case "gas_value":
+      case "gas_volume":
         values = helpers.t("Gas");
       break;
-      case "coal_value":
+      case "coal_volume":
         values = helpers.t("Coal");
       break;
-      case "gold_value":
+      case "gold_volume":
         values = helpers.t("Gold");
       break;
-      case "copper_value":
+      case "copper_volume":
         values = helpers.t("Copper");
       break;
       case "revenue":
@@ -436,11 +437,11 @@ export default class MapWidgetComponent extends Component {
             <li>
               Production
               <ul className="map-option-items">
-                <li data-indicatorid="oil_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
-                <li data-indicatorid="gas_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
-                <li data-indicatorid="coal_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Coal, volume')}</li>
-                <li data-indicatorid="gold_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gold, volume')}</li>
-                <li data-indicatorid="copper_value" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, volume')}</li>
+                <li data-indicatorid="oil_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
+                <li data-indicatorid="gas_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
+                <li data-indicatorid="coal_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Coal, volume')}</li>
+                <li data-indicatorid="gold_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gold, volume')}</li>
+                <li data-indicatorid="copper_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, volume')}</li>
               </ul>
             </li>
             <li>

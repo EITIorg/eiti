@@ -1,4 +1,4 @@
-export var copper_value = [
+export var copper_volume = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

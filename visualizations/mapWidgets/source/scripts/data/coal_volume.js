@@ -1,4 +1,4 @@
-export var coal_value = [
+export var coal_volume = [
   {
     "id": 1,
     "range": {start: 0, end: 1},

@@ -53,7 +53,7 @@
                 "unit": "USD",
                 "source": "2.6.5 Export from the extractive sector"
             }, {
-                "commodity": "Oil, value",
+                "commodity": "Oil, volume",
                 "id": "1",
                 "value": "1029300",
                 "value_text": null,

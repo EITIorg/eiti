@@ -1,4 +1,4 @@
-export var oil_value = [
+export var oil_volume = [
   {
     "id": 1,
     "range": {start: 0, end: 1},
