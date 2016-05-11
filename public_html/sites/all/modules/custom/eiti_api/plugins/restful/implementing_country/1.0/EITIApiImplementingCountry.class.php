@@ -12,6 +12,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   public $reports;
   public $licenses;
   public $revenues;
+  public $metadata;
 
   /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
@@ -44,6 +45,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $public_fields['reports'] = array(
       'callback' => array($this, 'getReports'),
     );
+    $public_fields['metadata'] = array(
+      'callback' => array($this, 'getMetadata'),
+    );
     $public_fields['licenses'] = array(
       'callback' => array($this, 'getLicenses'),
     );
@@ -65,6 +69,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $this->reports = $data['reports'];
     $this->licenses = $data['licenses'];
     $this->revenues = $this->queryRevenues();
+    $this->metadata = $this->querySummaryDataInfo();
 
     $return = parent::getList();
     return $return;
@@ -125,6 +130,50 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   function getRevenues($emw) {
     $iso2 = $emw->iso->value();
     return isset($this->revenues[$iso2]) ? $this->revenues[$iso2] : NULL;
+  }
+
+  /**
+   * Gets metadata related to this implementing country.
+   *
+   * @param $emw
+   *  EntityMetadataWrapper object (Implementing Country).
+   *
+   * @return array
+   */
+  function getMetadata($emw) {
+    $iso2 = $emw->iso->value();
+    $countrySummaryDataInfo = array();
+
+    foreach ($this->metadata as $summaryData) {
+      $summaryDataEmw = entity_metadata_wrapper('summary_data', $summaryData);
+      $implementingCountry = $summaryDataEmw->country_id->value();
+      if ($implementingCountry->iso == $iso2) {
+        $year = format_date($summaryData->year_end, 'custom', 'Y');
+        $countrySummaryDataInfo[$year]['contact']['name']  = $summaryDataEmw->field_sd_contact_name->value();
+        $countrySummaryDataInfo[$year]['contact']['email']  = $summaryDataEmw->field_sd_contact_email_address->value();
+        $countrySummaryDataInfo[$year]['contact']['organisation']  = $summaryDataEmw->field_sd_contact_organisation->value();
+
+        $sectors = array(
+          'field_sd_gas_sector' => 'Gas',
+          'field_sd_mining_sector' => 'Mining',
+          'field_sd_oil_sector' => 'Oil',
+          'field_sd_other_sector' => 'Other Sectors',
+        );
+        $countrySummaryDataInfo[$year]['sectors_covered'] = array();
+        foreach ($sectors as $field_id => $sector) {
+          if ($summaryDataEmw->{$field_id}->value()) {
+            $countrySummaryDataInfo[$year]['sectors_covered'][] = $sector;
+          }
+        }
+
+        $countrySummaryDataInfo[$year]['reporting_organisations'] = array();
+        $countrySummaryDataInfo[$year]['reporting_organisations']['companies'] = $summaryDataEmw->field_sd_no_reporting_com->value();
+        $countrySummaryDataInfo[$year]['reporting_organisations']['governmental_agencies'] = $summaryDataEmw->field_sd_no_reporting_gov->value();
+        $countrySummaryDataInfo[$year]['web_report_links'] = $summaryDataEmw->field_sd_file_links->value();
+      }
+    }
+
+    return $countrySummaryDataInfo;
   }
 
   /**
@@ -292,5 +341,27 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     }
 
     return $revenues;
+  }
+
+  /**
+   * Helper function that basically builds and executes the query to retrieve all
+   * of Info MetaData from the SummaryData.
+   */
+  public function querySummaryDataInfo() {
+    $output = array();
+
+    $query = new EntityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'summary_data')
+      ->propertyCondition('status', '1')
+      ->execute();
+
+    if (!empty($result['summary_data'])) {
+      $entity_ids = array_keys($result['summary_data']);
+      $entities = entity_load('summary_data', $entity_ids);
+      $output = array_values($entities);
+    }
+
+    return $output;
   }
 }
