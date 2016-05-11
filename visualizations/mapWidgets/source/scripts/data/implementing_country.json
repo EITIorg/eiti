@@ -1,745 +1,608 @@
 {
-    "data": [{
-        "id": 1,
-        "label": "Albania",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/1",
-        "iso2": "AL",
-        "iso3": "ALB",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": {
-            "2012": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "1",
-                "value": "623696682464",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "1",
-                "value": "12654028436019",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.1. Contribution to Albanian Economy"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "1",
-                "value": "79146919431",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "1",
-                "value": "3196208530806",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "1",
-                "value": "710900473934",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.5 Export from the extractive sector"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "1",
-                "value": "2090883746864",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.5 Export from the extractive sector"
-            }, {
-                "commodity": "Oil, volume",
-                "id": "1",
-                "value": "1029300",
-                "value_text": null,
-                "unit": "ton",
-                "source": "2.2.3 Oil and gas production"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "1",
-                "value": "13.1",
-                "value_text": null,
-                "unit": "million Sm3 o.e.",
-                "source": "2.2.3 Oil and gas production"
-            }, {
-                "commodity": "Oil, value",
-                "id": "1",
-                "value": "1024000",
-                "value_text": null,
-                "unit": "ton",
-                "source": "<URL, or reference to section in EITI Report>"
-            }, {
-                "commodity": "Total revenue received?",
-                "id": "1",
-                "value": "328909952607",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
-            }]
-        },
-        "licenses": null,
-        "revenues": {
-            "2012": {
-                "government": "64766958",
-                "company": "64767138"
-            }
-        }
-    }, {
-        "id": 2,
-        "label": "Republic Philippines",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/2",
-        "iso2": "PH",
-        "iso3": "PHL",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 4,
-        "label": "Ghana",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/4",
-        "iso2": "GH",
-        "iso3": "GHA",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 5,
-        "label": "Democratic Republic of Congo",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/5",
-        "iso2": "CD",
-        "iso3": "COD",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 6,
-        "label": "Peru",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/6",
-        "iso2": "PE",
-        "iso3": "PER",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 7,
-        "label": "Mongolia",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/7",
-        "iso2": "MN",
-        "iso3": "MNG",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 11,
-        "label": "Sierra Leone",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/11",
-        "iso2": "SL",
-        "iso3": "SLE",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 12,
-        "label": "Guinea",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/12",
-        "iso2": "GN",
-        "iso3": "GIN",
-        "status": null,
-        "status_date": "1167609600",
-        "local_website": "http://www.itie-guinee.org/",
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 13,
-        "label": "Guatemala ",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/13",
-        "iso2": "GT",
-        "iso3": "GTM",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 14,
-        "label": "Bulgaria",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/14",
-        "iso2": "BG",
-        "iso3": "BGR",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": null,
-        "licenses": null,
-        "revenues": null
-    }, {
-        "id": 15,
-        "label": "Norway",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/15",
-        "iso2": "NO",
-        "iso3": "NOR",
-        "status": null,
-        "status_date": null,
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": {
-            "2008": [{
-                "commodity": "Oil, value",
-                "id": "15",
-                "value": "122661511",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "15",
-                "value": "100110308",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "NGL, volume",
-                "id": "15",
-                "value": "16941870",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "Condensate, volume",
-                "id": "15",
-                "value": "3923854",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }],
-            "2011": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "15",
-                "value": "115428571429",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "15",
-                "value": "491214285714",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "15",
-                "value": "75178571429",
-                "value_text": null,
-                "unit": "USD",
-                "source": "http://www.statsbudsjettet.no/Statsbudsjettet-2014/Dokumenter1/Budsjettdokumenter/Nasjonalbudsjettet-2010/Meld-St-1/Vedlegg-og-registre/Vedlegg-2-Historiske-tabeller-og-detaljerte-anslagstall/"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "15",
-                "value": "230535714286",
-                "value_text": null,
-                "unit": "USD",
-                "source": "http://www.statsbudsjettet.no/Statsbudsjettet-2014/Dokumenter1/Budsjettdokumenter/Nasjonalbudsjettet-2010/Meld-St-1/Vedlegg-og-registre/Vedlegg-2-Historiske-tabeller-og-detaljerte-anslagstall/"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "15",
-                "value": "109107142857",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "15",
-                "value": "212500000000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }],
-            "2012": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "15",
-                "value": "120000000000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "15",
-                "value": "501551724138",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "15",
-                "value": "72586206897",
-                "value_text": null,
-                "unit": "USD",
-                "source": "http://www.statsbudsjettet.no/Statsbudsjettet-2014/Dokumenter1/Budsjettdokumenter/Nasjonalbudsjettet-2010/Meld-St-1/Vedlegg-og-registre/Vedlegg-2-Historiske-tabeller-og-detaljerte-anslagstall/"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "15",
-                "value": "222586206897",
-                "value_text": null,
-                "unit": "USD",
-                "source": "http://www.statsbudsjettet.no/Statsbudsjettet-2014/Dokumenter1/Budsjettdokumenter/Nasjonalbudsjettet-2010/Meld-St-1/Vedlegg-og-registre/Vedlegg-2-Historiske-tabeller-og-detaljerte-anslagstall/"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "15",
-                "value": "105344827586",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "15",
-                "value": "205172413793",
-                "value_text": null,
-                "unit": "USD",
-                "source": "https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }],
-            "2013": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "15",
-                "value": "114237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "15",
-                "value": "510338983051",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "15",
-                "value": "64237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "15",
-                "value": "218983050847",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "15",
-                "value": "96610169492",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "15",
-                "value": "198474576271",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }],
-            "2014": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "15",
-                "value": "114237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "15",
-                "value": "510338983051",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "15",
-                "value": "64237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "15",
-                "value": "218983050847",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "15",
-                "value": "96610169492",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "15",
-                "value": "198474576271",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }],
-            "2015": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "15",
-                "value": "114237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Gross Domestic Product - all sectors",
-                "id": "15",
-                "value": "510338983051",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "15",
-                "value": "64237288136",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Government revenue - all sectors",
-                "id": "15",
-                "value": "218983050847",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "15",
-                "value": "96610169492",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "15",
-                "value": "198474576271",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Section 2.2 and https://www.regjeringen.no/no/dokumenter/Meld-St-1-20142015/id2005410/"
-            }, {
-                "commodity": "Oil, value",
-                "id": "15",
-                "value": "84943990",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Section 2.2 and http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "15",
-                "value": "108745838",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Section 2.2 and http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "NGL, volume",
-                "id": "15",
-                "value": "17718292",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Section 2.2 and http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }, {
-                "commodity": "Condensate, volume",
-                "id": "15",
-                "value": "3991160",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Section 2.2 and http://www.norskpetroleum.no/en/production/production-of-oil-and-gas/"
-            }]
-        },
-        "licenses": {
-            "2008": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2010": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2011": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2012": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2013": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2014": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ],
-            "2015": [
-                "http://factpages.npd.no/factpages/Default.aspx?culture=en"
-            ]
-        },
-        "revenues": {
-            "2008": {
-                "government": "76170398175",
-                "company": "77097425366"
-            },
-            "2010": {
-                "company": "47062886942"
-            },
-            "2011": {
-                "company": "64530088033"
-            },
-            "2012": {
-                "company": "69604277468"
-            },
-            "2013": {
-                "government": "58600441016",
-                "company": "60762436267"
-            },
-            "2014": {
-                "government": "58600441016",
-                "company": "60762436267"
-            },
-            "2015": {
-                "government": "58600441016",
-                "company": "60762436267"
-            }
-        }
-    }, {
-        "id": 16,
-        "label": "Mexico",
-        "self": "https://staging.eiti.org/api/v1.0/implementing_country/16",
-        "iso2": "MX",
-        "iso3": "MEX",
-        "status": {
-            "tid": "74",
-            "language": "en",
-            "name": "Compliant"
-        },
-        "status_date": "1451606400",
-        "local_website": null,
-        "annual_report_file": null,
-        "reports": {
-            "2008": [{
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "4153000000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }],
-            "2009": [{
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "3402000000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Contextual Information"
-            }],
-            "2010": [{
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "5154000000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }],
-            "2011": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "16",
-                "value": "33038158968",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "5884323617",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }, {
-                "commodity": "Oil, value",
-                "id": "16",
-                "value": "3948689.9382717",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "DATOS DE PRODUCCIÓN"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "16",
-                "value": "10916966.299928",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "DATOS DE PRODUCCIÓN"
-            }],
-            "2012": [{
-                "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
-                "id": "16",
-                "value": "31816268311",
-                "value_text": null,
-                "unit": "USD",
-                "source": "2. Representatividad de las Compañías adheridas al Tercer Estudio de Conciliación de la EITI en el Perú"
-            }, {
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "5480907241",
-                "value_text": null,
-                "unit": "USD",
-                "source": "<URL, or reference to section in EITI Report>"
-            }, {
-                "commodity": "Oil, value",
-                "id": "16",
-                "value": "3774483.0292303",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "DATOS DE PRODUCCIÓN"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "16",
-                "value": "11381518.057371",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "DATOS DE PRODUCCIÓN"
-            }, {
-                "commodity": "NGL, volume",
-                "id": "16",
-                "value": "5226207.271242",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "DATOS DE PRODUCCIÓN"
-            }, {
-                "commodity": "Oil, value",
-                "id": "16",
-                "value": "905640.894991",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "<URL, or reference to section in EITI Report>"
-            }],
-            "2013": [{
-                "commodity": "Government revenue - extractive industries",
-                "id": "16",
-                "value": "5511486804.6679",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "Exports - extractive industries",
-                "id": "16",
-                "value": "28124923000",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "Exports - all sectors",
-                "id": "16",
-                "value": "37754098360.656",
-                "value_text": null,
-                "unit": "USD",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "Oil, value",
-                "id": "16",
-                "value": "3649718.65692",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "NGL, volume",
-                "id": "16",
-                "value": "6071258.33559",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "Gas, volume",
-                "id": "16",
-                "value": "430559",
-                "value_text": null,
-                "unit": "million cubic feet",
-                "source": "Contextual Information"
-            }, {
-                "commodity": "Oil, value",
-                "id": "16",
-                "value": "851616.918705",
-                "value_text": null,
-                "unit": "Sm3",
-                "source": "Contextual Information"
-            }]
-        },
-        "licenses": {
-            "2011": [
-                "http://www.ingemmet.gob.pe/form/plantilla01.aspx?opcion=401"
-            ],
-            "2012": [
-                "http://www.ingemmet.gob.pe/form/plantilla01.aspx?opcion=401"
-            ]
-        },
-        "revenues": {
-            "2008": {
-                "government": "3573697357",
-                "company": "3573697356"
-            },
-            "2009": {
-                "government": "2965369766",
-                "company": "2965369767"
-            },
-            "2010": {
-                "government": "4358147653",
-                "company": "4358147652"
-            },
-            "2011": {
-                "government": "5884357012",
-                "company": "5884357014"
-            },
-            "2012": {
-                "government": "5480853241",
-                "company": "5480853243"
-            },
-            "2013": {
-                "government": "5511486804",
-                "company": "5511486804"
-            }
-        }
-    }],
-    "count": 12,
-    "self": {
-        "title": "Self",
-        "href": "https://staging.eiti.org/api/v1.0/implementing_country"
-    }
+"data": [
+{
+"id": 1,
+"label": "Albania",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/1",
+"iso2": "AL",
+"iso3": "ALB",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": {
+"2012": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"id": "1",
+"value": "623696682464",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "<URL, or reference to section in EITI Report>"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "1",
+"value": "12654028436019",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.1. Contribution to Albanian Economy"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"id": "1",
+"value": "79146919431",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "1",
+"value": "3196208530806",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+},
+{
+"commodity": "Exports - extractive industries",
+"id": "1",
+"value": "710900473934",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.5 Export from the extractive sector"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "1",
+"value": "2090883746864",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.5 Export from the extractive sector"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1029300",
+"value_bool": null,
+"value_text": null,
+"unit": "ton",
+"source": "2.2.3 Oil and gas production"
+},
+{
+"commodity": "Gas, volume",
+"id": "1",
+"value": "13.1",
+"value_bool": null,
+"value_text": null,
+"unit": "million Sm3 o.e.",
+"source": "2.2.3 Oil and gas production"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1024000",
+"value_bool": null,
+"value_text": null,
+"unit": "ton",
+"source": "<URL, or reference to section in EITI Report>"
+},
+{
+"commodity": "Total revenue received?",
+"id": "1",
+"value": "328909952607",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+},
+{
+"commodity": "Population",
+"id": "1",
+"value": "2",
+"value_bool": "0",
+"value_text": "",
+"unit": "people",
+"source": null
+}
+],
+"2013": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"id": "1",
+"value": "5",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "1",
+"value": "7",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"id": "1",
+"value": "164881741",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "1",
+"value": "171277200",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - extractive industries",
+"id": "1",
+"value": "96705",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "1",
+"value": "100828",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 and 77 of Report EITI 2013-2014"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1203637",
+"value_bool": null,
+"value_text": null,
+"unit": "Ton",
+"source": "Page 38 of Report EITI 2013-2014"
+},
+{
+"commodity": "Gas, volume",
+"id": "1",
+"value": "22.5",
+"value_bool": null,
+"value_text": null,
+"unit": "million Nm3",
+"source": "Page 38 of Report EITI 2013-2014"
+},
+{
+"commodity": "Total revenue received?",
+"id": "1",
+"value": "33.418773142531",
+"value_bool": null,
+"value_text": null,
+"unit": "",
+"source": "Page 29, 30 and 111 of EITI Report 2013-2014"
+}
+]
+},
+"metadata": {
+"2012": {
+"contact": {
+"name": "Andrii Zherebko",
+"email": "Azherebko@eiti.org",
+"organisation": "EITI"
+},
+"year_start": "1325376000",
+"year_end": "1356912000",
+"currency_rate": "0.1055",
+"currency_code": "ALL",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "75",
+"governmental_agencies": "2"
+},
+"web_report_links": [
+{
+"url": "https://eiti.org/files/albania_eiti_report-2013-2014_final.pdf",
+"title": "",
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2013": {
+"contact": {
+"name": "Eni Bajraktari",
+"email": "eni.bajraktari@eiti.gov.al",
+"organisation": "EITI Albania"
+},
+"year_start": "1356998400",
+"year_end": "1388448000",
+"currency_rate": "0.1057",
+"currency_code": "ALL",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil",
+"Other Sectors"
+],
+"reporting_organisations": {
+"companies": "103",
+"governmental_agencies": "11"
+},
+"web_report_links": [
+{
+"url": "http://www.albeiti.org/wp-content/uploads/2016/01/EITI-Report-2013-2014.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+}
+},
+"licenses": {
+"2013": {
+"Public registry of licences, oil": "www.google.com.ar",
+"Public registry of licences, mining": "www.google.com.ar"
+}
+},
+"contracts": {
+"2013": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "2",
+"Publicly available registry of contracts": "www.google.com"
+}
+},
+"revenues": {
+"2012": {
+"government": "64766958",
+"company": "64767138"
+},
+"2013": {
+"government": "312251154",
+"company": "311789716"
+}
+}
+},
+{
+"id": 2,
+"label": "Republic Philippines",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/2",
+"iso2": "PH",
+"iso3": "PHL",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 5,
+"label": "Republic of the Congo",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/5",
+"iso2": "CD",
+"iso3": "COD",
+"status": null,
+"status_date": "1230768000",
+"local_website": "http://www.itie-congo.org/",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 6,
+"label": "Peru",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/6",
+"iso2": "PE",
+"iso3": "PER",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 7,
+"label": "Mongolia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/7",
+"iso2": "MN",
+"iso3": "MNG",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 11,
+"label": "Sierra Leone",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/11",
+"iso2": "SL",
+"iso3": "SLE",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 12,
+"label": "Guinea",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/12",
+"iso2": "GN",
+"iso3": "GIN",
+"status": null,
+"status_date": "1167609600",
+"local_website": "http://www.itie-guinee.org/",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 13,
+"label": "Guatemala ",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/13",
+"iso2": "GT",
+"iso3": "GTM",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 14,
+"label": "Bulgaria",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/14",
+"iso2": "BG",
+"iso3": "BGR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 15,
+"label": "Norway",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/15",
+"iso2": "NO",
+"iso3": "NOR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 16,
+"label": "Mexico",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/16",
+"iso2": "MX",
+"iso3": "MEX",
+"status": {
+"tid": "74",
+"language": "en",
+"name": "Compliant"
+},
+"status_date": "1420070400",
+"local_website": "www.mexico.org",
+"annual_report_file": "https://staging.eiti.org/sites/default/files/annualreports/rapportconciliationitiemauritanie2013.pdf",
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 17,
+"label": "Brazil",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/17",
+"iso2": "BR",
+"iso3": "BRA",
+"status": {
+"tid": "75",
+"language": "en",
+"name": "Candidate"
+},
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 18,
+"label": "Costa Rica",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/18",
+"iso2": "CR",
+"iso3": "CRI",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 19,
+"label": "Liberia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/19",
+"iso2": "LR",
+"iso3": "LBR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 20,
+"label": "Niger",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/20",
+"iso2": "NE",
+"iso3": "NER",
+"status": {
+"tid": "76",
+"language": "en",
+"name": "Suspended"
+},
+"status_date": "1199145600",
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 22,
+"label": "Mali",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/22",
+"iso2": "ML",
+"iso3": "MLI",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 23,
+"label": "Argentina",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/23",
+"iso2": "AR",
+"iso3": "ARG",
+"status": {
+"tid": "74",
+"language": "en",
+"name": "Compliant"
+},
+"status_date": "1262304000",
+"local_website": "www.argentina.org",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 24,
+"label": "Maldives",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/24",
+"iso2": "MV",
+"iso3": "MDV",
+"status": {
+"tid": "75",
+"language": "en",
+"name": "Candidate"
+},
+"status_date": "1104537600",
+"local_website": "www.argentina.org",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 25,
+"label": "São Tomé and Príncipe",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/25",
+"iso2": "ST",
+"iso3": "STP",
+"status": {
+"tid": "74",
+"language": "en",
+"name": "Compliant"
+},
+"status_date": "1325376000",
+"local_website": "http://www.min-financas.st/index.php/pt/eiti",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+}
+],
+"count": 19,
+"self": {
+"title": "Self",
+"href": "https://staging.eiti.org/api/v1.0/implementing_country"
+}
 }

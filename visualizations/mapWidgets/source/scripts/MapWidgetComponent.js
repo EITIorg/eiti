@@ -75,8 +75,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.licenses);
               var last = _.last(years);
               var yearData = datapoint.licenses[last];
-              var indicator = yearData.length > 0;
-              indicator_value = indicator;
+              indicator_value = yearData['Public registry of licences, oil'] !== undefined;
             }
           break;
           case "online_mining_registry":
@@ -84,8 +83,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.licenses);
               var last = _.last(years);
               var yearData = datapoint.licenses[last];
-              var indicator = yearData.length > 0;
-              indicator_value = indicator;
+              indicator_value = yearData['Public registry of licences, mining'] !== undefined;
             }
           break;
           case "online_contracts":
@@ -93,8 +91,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.contracts);
               var last = _.last(years);
               var yearData = datapoint.contracts[last];
-              var indicator = yearData.length > 0;
-              indicator_value = indicator;
+              indicator_value = yearData['Publicly available registry of contracts'] !== undefined;
             }
           break;
           case "oil_volume":
@@ -167,18 +164,17 @@ export default class MapWidgetComponent extends Component {
           break;
           case "share_revenues":
             if(datapoint.revenues) {
-              var years = Object.keys(datapoint.revenues);
+              var years = Object.keys(datapoint.reports);
               var last = _.last(years);
-              var yearData = datapoint.revenues[last];
               var generalYearData = datapoint.reports[last];
-              var indicator_government = yearData.government;
+              var indicator_government = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - extractive industries")}) : undefined;
               var indicator_allsectors = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - all sectors")}) : undefined;
-              if(indicator_government && indicator_allsectors && indicator_allsectors !== 0) {
-                indicator_value = indicator_government*100/indicator_allsectors.value;
+              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government.value !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+                indicator_value = indicator_government.value*100/indicator_allsectors.value;
               }
               else
               {
-                indicator_value = 0;
+                indicator_value = 'n/a';
               }
               indicator_unit = '';
             }
@@ -213,7 +209,7 @@ export default class MapWidgetComponent extends Component {
   updateMetadata(data, metadata) {
     var values = _.map(_.pluck(data.features, 'indicator_value'),function(v){ return v?v*1:0;});
     var part = _.pluck(data.features, 'indicator_unit');
-    console.log(part);
+
     var unit = _.find(part, function(v) { return v !== undefined;});
 
     var classifier = new geostats(values);
@@ -308,9 +304,12 @@ export default class MapWidgetComponent extends Component {
           var indicatorName = ::this.getIndicatorName(indicator_id || this.state.indicator_id);
           var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
           var mergedHTML = "<h2>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<br/></h2>";
+          var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
+            noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
             mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+helpers.t(v.title)+ '</strong> <br/>'+ (helpers.t(v.subtitle) || '') + '<br/>' ) ;
           });
+          if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No Data')+ '</strong><br/><br/>' ) ;
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI Summary Data') + "</a>"; 
           map.options.legend.innerHTML = mergedHTML + sourceText;
       }.bind(this);
@@ -384,7 +383,7 @@ export default class MapWidgetComponent extends Component {
         var completeType = _.find(metadata, function(v){ return (v.id == indicator_value)});
         return completeType.color;
     }
-    else
+    else 
     {
         if (metadata === undefined) return;
 
@@ -449,7 +448,7 @@ export default class MapWidgetComponent extends Component {
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
                 <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues Per Capita')}</li>
-                <li data-indicatorid="share_revenues" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Share of revenues')}</li>
+                <li data-indicatorid="share_revenues" data-valuetypes="percentage" onClick={::this.addLayer}>{helpers.t('Share of revenues')}</li>
               </ul>
             </li>
           </ul>

@@ -104,7 +104,7 @@ export var helpers = {
         var layer = e.target;
         var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
         var country_link = '';
-
+        if(!country['id']) return;
         var country_url = '/implementing_country/' +  country.id;
 
         if(country_url === '') {
@@ -118,9 +118,13 @@ export var helpers = {
         if(!country.reports) {
             country.reports = [];
         }
+
         var years = Object.keys(country.reports);
         var last = _.last(years);
-        var yearData = country.reports[last];
+        var yearData = country.reports[last] || [];
+
+        var lastMetadata = _.last(Object.keys(country.metadata));
+        var yearMetaData = country.metadata[lastMetadata] || [];
 
         // Prepare data for info box
 
@@ -129,7 +133,7 @@ export var helpers = {
 
         // Member Since
         var memberDate = (country.status_date || country.status_date !== null) ? new Date(country.status_date*1000) : undefined;
-        var country_member_since = memberDate ? memberDate.getUTCFullYear() : t.this('n/a');
+        var country_member_since = memberDate ? memberDate.getUTCFullYear() : this.t('n/a');
 
         // Latest Report Year
         var country_last_report_year = last;
@@ -149,14 +153,15 @@ export var helpers = {
         indicator_government_revenue = indicator_government_revenue || 'n/a';
 
         // Sectors Covered
+        var sectors_covered = yearMetaData.sectors_covered;
 
         // Number of companies reporting
+        var companies_reporting = yearMetaData.reporting_organisations ? yearMetaData.reporting_organisations.companies: 'n/a';
 
         // Online Licenses (link)[Oil], (link)[Mining]
         var years_licenses = country.licenses ? Object.keys(country.licenses):[];
         var last_licenses = _.last(years_licenses);
         var indicator_licenses = country.licenses ? country.licenses[last_licenses] : undefined;
-
 
         // Online Contract (link)
         var years_contracts = country.contracts ? Object.keys(country.contracts):[];
@@ -195,7 +200,7 @@ export var helpers = {
         // Add Last Report Link
         var country_report_link = '';
         if(country_last_report_file || country_last_report_file === null) {
-            country_report_link += country_last_report_year;
+            country_report_link += country_last_report_year || 'n/a';
         }
         else
         {
@@ -205,7 +210,7 @@ export var helpers = {
         }
         info_top_indicators_second = info_top_indicators_second +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value">' + country_report_link + '</span>' +
+            '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' +
             '</span>';
 
         // Add Revenue
@@ -220,29 +225,50 @@ export var helpers = {
         info_content_second = info_content_second +
             '<div class="info-block">' +
             '<span class="info">' +
-            '   <span class="label">' + this.t('Sectors covered') + ':</span>' +
-            '   <span class="value">Oil <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" /></span>' +
-            '   <span class="value">Gas <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilunrefined.svg') + '" alt="Oil Icon" /></span>' +
-            '   <span class="value">Mining <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_mineral.svg') + '" alt="Oil Icon" /></span>' +
-            '</span>' +
-            '</div>';
+            '   <span class="label">' + this.t('Sectors covered') + ':</span>';
+            if(sectors_covered && sectors_covered.length > 0) {
+                for(var i = 0; i < sectors_covered.length;i++) {
+                    info_content_second = info_content_second + 
+                        '   <span class="value">' + this.t(sectors_covered[i]) + ' <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_' + sectors_covered[i].toLowerCase().replace(' ', '') + '.svg') + '"  /></span>';
+
+                }
+            }
+            else
+            {
+                info_content_second = info_content_second + '<strong>' + this.t('n/a') + '</strong>';
+            }
+            info_content_second = info_content_second +'</span>' +
+                '</div>';
+
         // Add Companies reporting
         info_content_second_a = info_content_second_a + '<div class="info-block">' +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Number of companies reporting') + ':</span> <span class="value">' + 32 + '</span>' +
+            '  <span class="label">' + this.t('Number of companies reporting') + ':</span> <span class="value">' + companies_reporting + '</span>' +
             '</span>' +
             '</div>';
+
         // Add info about Online Licenses.
-        info_content_third = '<div class="info-block">' +
-            '  <span class="label">' + this.t('Online Licenses') + ':</span>' +
-            '  <span class="value">' + (indicator_licenses ? '<a href="' +indicator_licenses[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
-            '</div>';
+        info_content_third = '<div class="info-block"><span class="label">' + this.t('Online Licenses') + ':</span>';
+        if(indicator_licenses) {
+            if(indicator_licenses["Public registry of licences, mining"]) {
+                info_content_third += '  <span class="value"><a href="' + indicator_licenses["Public registry of licences, mining"] + '" target="_blank">' + this.t('Mining') + '</a></span>';
+            }
+            if(indicator_licenses["Public registry of licences, oil"]) {
+                info_content_third += '  <span class="value"><a href="' + indicator_licenses["Public registry of licences, oil"] + '" target="_blank">' + this.t('Oil') + '</a></span>';
+            }
+        }
+        else
+        {
+            info_content_third += '  <span class="value">' + this.t('No') + '</span>';
+        }
+
+        info_content_third += '</div>';
 
         // Add info about Online Contracts.
         info_content_third = info_content_third +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Contracts') + ':</span>' +
-            '  <span class="value">' + (indicator_contracts ? '<a href="' +indicator_contracts[0]+ '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
+            '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
         var html = '<aside class="country-info-wrapper">' +
