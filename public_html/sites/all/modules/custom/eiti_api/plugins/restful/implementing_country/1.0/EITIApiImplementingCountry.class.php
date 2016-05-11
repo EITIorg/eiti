@@ -195,7 +195,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
         $countrySummaryDataInfo[$year]['reporting_organisations']['companies'] = $summaryDataEmw->field_sd_no_reporting_com->value();
         $countrySummaryDataInfo[$year]['reporting_organisations']['governmental_agencies'] = $summaryDataEmw->field_sd_no_reporting_gov->value();
         $countrySummaryDataInfo[$year]['web_report_links'] = $summaryDataEmw->field_sd_file_links->value();
-        $countrySummaryDataInfo[$year]['disaggregated']['project'] = $summaryDataEmw->field_sd_file_links->value();
+        $countrySummaryDataInfo[$year]['disaggregated']['project'] = $summaryDataEmw->field_sd_disagg_project->value();
         $countrySummaryDataInfo[$year]['disaggregated']['revenue_stream'] = $summaryDataEmw->field_sd_disagg_revenue_stream->value();
         $countrySummaryDataInfo[$year]['disaggregated']['company'] = $summaryDataEmw->field_sd_disagg_company->value();
       }
@@ -294,10 +294,10 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       // Now let's check for licenses, if they have a valid URL.
       if (in_array($record['commodity'], $licenses_indicators)) {
         if (valid_url($record['value_text'])) {
-          $licenses[$iso2][$year][] = $record['value_text'];
+          $licenses[$iso2][$year][$record['commodity']] = $record['value_text'];
         }
         if (valid_url($record['source'])) {
-          $licenses[$iso2][$year][] = $record['source'];
+          $licenses[$iso2][$year][$record['commodity']] = $record['source'];
         }
       }
 
