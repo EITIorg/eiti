@@ -11,6 +11,7 @@
 class EITIApiImplementingCountry extends RestfulEntityBase {
   public $reports;
   public $licenses;
+  public $contracts;
   public $revenues;
   public $metadata;
 
@@ -51,6 +52,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $public_fields['licenses'] = array(
       'callback' => array($this, 'getLicenses'),
     );
+    $public_fields['contracts'] = array(
+      'callback' => array($this, 'getContracts'),
+    );
     $public_fields['revenues'] = array(
       'callback' => array($this, 'getRevenues'),
     );
@@ -68,6 +72,8 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
 
     $this->reports = $data['reports'];
     $this->licenses = $data['licenses'];
+    $this->contracts = $data['contracts'];
+
     $this->revenues = $this->queryRevenues();
     $this->metadata = $this->querySummaryDataInfo();
 
@@ -119,6 +125,20 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   }
 
   /**
+   * Gets contracts related to this implementing country.
+   *
+   * @param $emw
+   *   EntityMetadataWrapper object (Implementing Country).
+   *
+   * @return mixed
+   *   Either NULL or an array of licenses.
+   */
+  function getContracts($emw) {
+    $iso2 = $emw->iso->value();
+    return isset($this->contracts[$iso2]) ? $this->contracts[$iso2] : NULL;
+  }
+
+  /**
    * Gets revenues related to this implementing country.
    *
    * @param $emw
@@ -153,6 +173,11 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
         $countrySummaryDataInfo[$year]['contact']['email']  = $summaryDataEmw->field_sd_contact_email_address->value();
         $countrySummaryDataInfo[$year]['contact']['organisation']  = $summaryDataEmw->field_sd_contact_organisation->value();
 
+        $countrySummaryDataInfo[$year]['year_start']  = $summaryDataEmw->year_start->value();
+        $countrySummaryDataInfo[$year]['year_end']  = $summaryDataEmw->year_end->value();
+        $countrySummaryDataInfo[$year]['currency_rate']  = $summaryDataEmw->currency_rate->value();
+        $countrySummaryDataInfo[$year]['currency_code']  = $summaryDataEmw->currency_code->value();
+
         $sectors = array(
           'field_sd_gas_sector' => 'Gas',
           'field_sd_mining_sector' => 'Mining',
@@ -170,6 +195,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
         $countrySummaryDataInfo[$year]['reporting_organisations']['companies'] = $summaryDataEmw->field_sd_no_reporting_com->value();
         $countrySummaryDataInfo[$year]['reporting_organisations']['governmental_agencies'] = $summaryDataEmw->field_sd_no_reporting_gov->value();
         $countrySummaryDataInfo[$year]['web_report_links'] = $summaryDataEmw->field_sd_file_links->value();
+        $countrySummaryDataInfo[$year]['disaggregated']['project'] = $summaryDataEmw->field_sd_file_links->value();
+        $countrySummaryDataInfo[$year]['disaggregated']['revenue_stream'] = $summaryDataEmw->field_sd_disagg_revenue_stream->value();
+        $countrySummaryDataInfo[$year]['disaggregated']['company'] = $summaryDataEmw->field_sd_disagg_company->value();
       }
     }
 
@@ -221,6 +249,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $query->addField('ic', 'iso', 'iso2');
     $query->addField('ic', 'id', 'id');
     $query->addField('iv', 'value_numeric', 'value');
+    $query->addField('iv', 'value_boolean', 'value_bool');
     $query->addField('iv', 'value_text', 'value_text');
     $query->addField('iv', 'value_unit', 'unit');
     $query->addField('iv', 'source', 'source');
@@ -238,10 +267,17 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     // Now let's polish it.
     $reports = array();
     $licenses = array();
+    $contracts = array();
     $licenses_indicators = array(
       'Public registry of licences, oil',
       'Public registry of licences, mining',
       'If incomplete or not available, provide an explanation',
+    );
+    $contract_indicators = array(
+      'Does the report address the government\'s policy on contract disclosure?',
+      'Are contracts disclosed?',
+      'Publicly available registry of contracts',
+      'Registry 2',
     );
 
     foreach ($records as $record) {
@@ -264,11 +300,22 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
           $licenses[$iso2][$year][] = $record['source'];
         }
       }
+
+      // And continuing with the contracts.
+      if (in_array($record['commodity'], $contract_indicators)) {
+        if (isset($record['value_text'])) {
+          $contracts[$iso2][$year][$record['commodity']] = $record['value_text'];
+        }
+        elseif (isset($record['value_bool'])) {
+          $contracts[$iso2][$year][$record['commodity']] = $record['value_bool'];
+        }
+      }
     }
 
     return array(
       'reports' => $reports,
       'licenses' => $licenses,
+      'contracts' => $contracts,
     );
   }
 
