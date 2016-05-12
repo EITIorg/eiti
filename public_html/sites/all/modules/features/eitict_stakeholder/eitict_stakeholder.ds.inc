@@ -17,14 +17,14 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'field_stk_logo' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
-    'title_field' => array(
+    'field_stk_logo' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -90,6 +90,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
     'classes' => array(
       'layout_class' => array(
         'clearfix' => 'clearfix',
+        'layout-separator' => 'layout-separator',
       ),
     ),
     'wrappers' => array(

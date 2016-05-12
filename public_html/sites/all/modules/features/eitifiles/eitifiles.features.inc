@@ -258,18 +258,40 @@ function eitifiles_image_default_styles() {
     ),
   );
 
-  // Exported image style: logo-scaled-width.
-  $styles['logo-scaled-width'] = array(
-    'label' => 'Logo: Scaled Width (160px wide)',
+  // Exported image style: logo-small.
+  $styles['logo-small'] = array(
+    'label' => 'Logo: Small (112px by 56px)',
     'effects' => array(
-      6 => array(
+      4 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 160,
-          'height' => '',
+          'width' => 112,
+          'height' => 56,
           'upscale' => 1,
         ),
         'weight' => 1,
+      ),
+      5 => array(
+        'name' => 'canvasactions_definecanvas',
+        'data' => array(
+          'RGB' => array(
+            'HEX' => '#ffffff',
+          ),
+          'under' => 1,
+          'exact' => array(
+            'width' => 112,
+            'height' => 56,
+            'xpos' => 'center',
+            'ypos' => 'center',
+          ),
+          'relative' => array(
+            'leftdiff' => '',
+            'rightdiff' => '',
+            'topdiff' => '',
+            'bottomdiff' => '',
+          ),
+        ),
+        'weight' => 2,
       ),
     ),
   );
