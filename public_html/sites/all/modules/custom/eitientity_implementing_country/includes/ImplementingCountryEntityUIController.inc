@@ -210,8 +210,8 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
       array(
         'data' => t('Name'),
         'type' => 'property',
-        'specifier' => 'title',
-        'class' => array('country-ui-title'),
+        'specifier' => 'name',
+        'class' => array('country-ui-name'),
       ),
       // array(
       //   'data' => t('Type'),
