@@ -24879,6 +24879,7 @@
 	        } else {
 	            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
 	        }
+	
 	        e.latlng.lat = e.latlng.lat + 2.5;
 	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent(country_link).openOn(layer._map);
 	    },
@@ -24927,6 +24928,13 @@
 	            country_link = '<strong>' + this.t('Country Page not available') + '</strong>';
 	        } else {
 	            country_link = '<a href="' + country_url + '"><strong>' + this.t('Open Country Page') + '</strong></a>';
+	        }
+	
+	        var country_websitelink = '';
+	        if (!country.local_website || country.local_website === '') {
+	            country_websitelink = '<strong>' + this.t('EITI Website not available') + '</strong>';
+	        } else {
+	            country_websitelink = '<a href="' + country.local_website + '" target="_blank"><strong>' + this.t('Open Local EITI Website') + '</strong></a>';
 	        }
 	
 	        // General info
@@ -24985,7 +24993,7 @@
 	        // Online Contract (link)
 	        var years_contracts = country.contracts ? Object.keys(country.contracts) : [];
 	        var last_contracts = _underscore2.default.last(years_contracts);
-	        var indicator_contracts = country.contracts ? country.contracts[last_contracts] : undefined;
+	        var indicator_contracts = country.contracts ? country.contracts[last_contracts] : {};
 	
 	        // Country Website
 	        var country_website = country.local_website ? country.local_website : this.t('n/a');
@@ -25054,7 +25062,7 @@
 	        // Add info about Online Contracts.
 	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
 	
-	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
+	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
 	        var popup = L.popup({ autoPan: true, closeButton: true, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    },

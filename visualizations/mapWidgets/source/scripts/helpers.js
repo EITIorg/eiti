@@ -64,6 +64,7 @@ export var helpers = {
         {
             country_link = '<strong>' + layer.feature.properties.name + '</strong>';
         }
+
         e.latlng.lat = e.latlng.lat+2.5;
         var popup = L.popup({autoPan:false, closeButton:false})
             .setLatLng(e.latlng)
@@ -112,6 +113,14 @@ export var helpers = {
         }
         else {
             country_link = '<a href="' + country_url + '"><strong>' + this.t('Open Country Page') + '</strong></a>';
+        }
+
+        var country_websitelink = '';
+        if(!country.local_website || country.local_website === '') {
+            country_websitelink = '<strong>' + this.t('EITI Website not available') + '</strong>';
+        }
+        else {
+            country_websitelink = '<a href="' + country.local_website + '" target="_blank"><strong>' + this.t('Open Local EITI Website') + '</strong></a>';
         }
 
         // General info
@@ -166,7 +175,7 @@ export var helpers = {
         // Online Contract (link)
         var years_contracts = country.contracts ? Object.keys(country.contracts):[];
         var last_contracts = _.last(years_contracts);
-        var indicator_contracts = country.contracts ? country.contracts[last_contracts]: undefined;
+        var indicator_contracts = country.contracts ? country.contracts[last_contracts]: {};
 
         // Country Website
         var country_website = country.local_website ? country.local_website : this.t('n/a');
@@ -279,6 +288,7 @@ export var helpers = {
             '<div class="country-info-content">' + info_content_second + '</div>' +
             '<div class="country-info-content">' + info_content_second_a + '</div>' +
             '<div class="country-info-content">' + info_content_third + '</div>' +
+            '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' +
             '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
