@@ -273,7 +273,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'filefield_paths_enabled' => 1,
       'max_filesize' => '4 MB',
       'max_resolution' => '2400x2400',
-      'min_resolution' => '240x240',
+      'min_resolution' => '120x120',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
