@@ -227,7 +227,7 @@ class ImplementingCountryEntityUIController extends EntityBundleableUIController
         'sort' => 'desc',
       ),
       array(
-        'data' => t('Status'),
+        'data' => t('Publishing Status'),
         'type' => 'property',
         'specifier' => 'changed',
         'class' => array('country-ui-changed'),
