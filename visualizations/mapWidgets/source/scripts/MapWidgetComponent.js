@@ -439,7 +439,7 @@ export default class MapWidgetComponent extends Component {
     if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">
           <ul className="map-option-widget">
-            <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer}>
+            <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer} className="active">
               {helpers.t('Overview')}
             </li>
             <li>

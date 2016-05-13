@@ -24210,7 +24210,7 @@
 	            { className: 'map-option-widget' },
 	            _react2.default.createElement(
 	              'li',
-	              { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
+	              { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this), className: 'active' },
 	              _helpers.helpers.t('Overview')
 	            ),
 	            _react2.default.createElement(
