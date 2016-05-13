@@ -19,10 +19,9 @@ function eitiet_implementing_country_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'file',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 6,
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -82,7 +81,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -125,7 +124,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -209,7 +208,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -294,7 +293,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -326,13 +325,13 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'implementing_country',
     'field_name' => 'field_ic_website',
-    'label' => 'Country Website',
+    'label' => 'Website',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -378,7 +377,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -485,7 +484,6 @@ function eitiet_implementing_country_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Annual Reports');
-  t('Country Website');
   t('Cover');
   t('Description');
   t('EITI Member Since');
@@ -497,6 +495,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('Please specify when did this country change its EITI Status.');
   t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
   t('Upload the local country-specific EITI logo, preferably a landscape orientation and it should be at least 240 pixels tall.');
+  t('Website');
 
   return $field_instances;
 }

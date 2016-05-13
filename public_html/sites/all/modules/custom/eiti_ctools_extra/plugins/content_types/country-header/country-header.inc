@@ -8,7 +8,7 @@
 $plugin = array(
   'title' => t('Country Header'),
   'description' => t('Country header containing the banner, logo and various other information.'),
-  'category' => t('Widgets Library'),
+  'category' => t('Widget Library'),
   'render callback'  => 'eiti_ctools_extra__country_header__render',
   'required context' => array(
     new ctools_context_required(t('Implementing Country'), 'implementing_country'),
@@ -204,7 +204,7 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     $block['info']['website'] = array(
       '#type' => 'html_container',
       '#tag' => 'div',
-      '#title' => t('Country Website'),
+      '#title' => t('Website'),
       '#title_tag' => 'span',
       '#title_icon' => array(
         'symbol' => 'website',
