@@ -140,8 +140,10 @@ function helpertheme_ds_layout_info() {
     'label' => t('HelperTheme: Double Layout'),
     'path' => $path . '/dslayouts/doublelayout',
     'regions' => array(
+      'above' => t('Above'),
       'left' => t('Left'),
       'right' => t('Right'),
+      'below' => t('Below'),
     ),
   );
 

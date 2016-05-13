@@ -4,5 +4,4 @@
  * Code for the EITI Content Type Stakeholder feature.
  */
 
-include_once 'eitict_stakeholder.custom.inc';
 include_once 'eitict_stakeholder.features.inc';

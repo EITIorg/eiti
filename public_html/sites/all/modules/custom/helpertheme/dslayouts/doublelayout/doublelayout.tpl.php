@@ -13,6 +13,12 @@
   <?php print render($title_suffix['contextual_links']); ?>
   <?php endif; ?>
 
+  <?php if (isset($above)): ?>
+    <<?php print $above_wrapper ?> class="group-above <?php print $above_classes; ?>">
+    <?php print $above; ?>
+    </<?php print $above_wrapper ?>>
+  <?php endif; ?>
+
   <<?php print $left_wrapper ?> class="group-left <?php print $left_classes; ?>">
     <?php print $left; ?>
   </<?php print $left_wrapper ?>>
@@ -21,9 +27,16 @@
     <?php print $right; ?>
   </<?php print $right_wrapper ?>>
 
+  <?php if (isset($below)): ?>
+    <<?php print $below_wrapper ?> class="group-below <?php print $below_classes; ?>">
+    <?php print $below; ?>
+    </<?php print $below_wrapper ?>>
+  <?php endif; ?>
+
   <?php if (isset($drupal_render_children)): ?>
     <div class="extra">
       <?php print $drupal_render_children ?>
     </div>
   <?php endif; ?>
+
 </<?php print $layout_wrapper ?>>

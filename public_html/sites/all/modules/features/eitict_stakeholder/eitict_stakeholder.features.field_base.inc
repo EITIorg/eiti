@@ -10,6 +10,27 @@
 function eitict_stakeholder_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_stakeholder_type_sidebar'.
+  $field_bases['field_stakeholder_type_sidebar'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_stakeholder_type_sidebar',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 1,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_stk_category'.
   $field_bases['field_stk_category'] = array(
     'active' => 1,

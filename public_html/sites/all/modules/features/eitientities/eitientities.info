@@ -13,6 +13,7 @@ dependencies[] = eitientity_revenue_stream
 dependencies[] = eititaxonomies
 dependencies[] = features
 dependencies[] = file
+dependencies[] = i18n_taxonomy
 dependencies[] = image
 dependencies[] = strongarm
 dependencies[] = taxonomy

@@ -58,6 +58,42 @@ function eitict_stakeholder_ds_field_settings_info() {
   );
   $export['node|stakeholder|full'] = $ds_fieldsetting;
 
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'taxonomy_term|stakeholder_types|default';
+  $ds_fieldsetting->entity_type = 'taxonomy_term';
+  $ds_fieldsetting->bundle = 'stakeholder_types';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'stakehoder_listing' => array(
+      'weight' => '3',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['taxonomy_term|stakeholder_types|default'] = $ds_fieldsetting;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_custom_fields_info().
+ */
+function eitict_stakeholder_ds_custom_fields_info() {
+  $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'stakehoder_listing';
+  $ds_field->label = 'Stakehoder Listing';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'taxonomy_term' => 'taxonomy_term',
+  );
+  $ds_field->ui_limit = 'stakeholder_types|*';
+  $ds_field->properties = array();
+  $export['stakehoder_listing'] = $ds_field;
+
   return $export;
 }
 
@@ -161,6 +197,57 @@ function eitict_stakeholder_ds_layout_settings_info() {
     'page_option_title' => '',
   );
   $export['node|stakeholder|full'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'taxonomy_term|stakeholder_types|default';
+  $ds_layout->entity_type = 'taxonomy_term';
+  $ds_layout->bundle = 'stakeholder_types';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 'doublelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'above' => array(
+        0 => 'name_field',
+      ),
+      'left' => array(
+        1 => 'description_field',
+        2 => 'stakehoder_listing',
+      ),
+      'right' => array(
+        3 => 'field_stakeholder_type_sidebar',
+      ),
+    ),
+    'fields' => array(
+      'name_field' => 'above',
+      'description_field' => 'left',
+      'stakehoder_listing' => 'left',
+      'field_stakeholder_type_sidebar' => 'right',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        'clearfix' => 'clearfix',
+        'layout-narrow-right-column' => 'layout-narrow-right-column',
+      ),
+      'above' => array(
+        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+      ),
+    ),
+    'wrappers' => array(
+      'above' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'below' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['taxonomy_term|stakeholder_types|default'] = $ds_layout;
 
   return $export;
 }

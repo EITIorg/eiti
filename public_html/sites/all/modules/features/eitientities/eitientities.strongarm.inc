@@ -29,7 +29,8 @@ single-fluid-row-wrapper|Single Fluid Row Wrapper';
 layout-separator|Layout Separator
 single-fluid-row-wrapper|Single Fluid Row Wrapper
 single-narrow-row-wrapper|Single Narrow Row Wrapper
-layout-narrow-left-column|Layout: Narrow Left Column';
+layout-narrow-left-column|Layout: Narrow Left Column
+layout-narrow-right-column|Layout: Narrow Right Column';
   $export['ds_classes_regions'] = $strongarm;
 
   $strongarm = new stdClass();

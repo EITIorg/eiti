@@ -154,13 +154,12 @@
 
 .xNormalAndUp() {
   .content-search-page {
+    .expand-column();
     .attachment-column-wrapper {
       .column(3);
-      .first-child-column();
     }
     .main-column-wrapper {
       .column(9);
-      .last-child-column();
     }
   }
 }
@@ -173,6 +172,16 @@
     }
     .group-right {
       .column(9);
+    }
+  }
+
+  .custom-doublelayout.layout-narrow-right-column {
+    .expand-column();
+    .group-left {
+      .column(9);
+    }
+    .group-right {
+      .column(3);
     }
   }
 }
