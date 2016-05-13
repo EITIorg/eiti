@@ -222,7 +222,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'logo-scaled-width',
+          'image_style' => 'logo-small',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -232,7 +232,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'logo-scaled-width',
+          'image_style' => 'logo-small',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -273,7 +273,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'filefield_paths_enabled' => 1,
       'max_filesize' => '4 MB',
       'max_resolution' => '2400x2400',
-      'min_resolution' => '240x240',
+      'min_resolution' => '120x120',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
@@ -609,6 +609,43 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-stakeholder_types-field_stakeholder_type_sidebar'.
+  $field_instances['taxonomy_term-stakeholder_types-field_stakeholder_type_sidebar'] = array(
+    'bundle' => 'stakeholder_types',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_stakeholder_type_sidebar',
+    'label' => 'Stakeholder Type Sidebar',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-stakeholder_types-name_field'.
   $field_instances['taxonomy_term-stakeholder_types-name_field'] = array(
     'bundle' => 'stakeholder_types',
@@ -666,6 +703,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Please enter the Statement of support URL.');
   t('Stakeholder Form');
   t('Stakeholder Statement');
+  t('Stakeholder Type Sidebar');
   t('Statement of Support');
   t('The full URL (including http://) of the stakeholder website.');
   t('Type');

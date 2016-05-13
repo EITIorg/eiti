@@ -1,0 +1,22 @@
+Index: public_html/includes/database/query.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public_html/includes/database/query.inc	(revision b8aa287c084b41b9c8f5be450f3ab7b983bbf968)
++++ public_html/includes/database/query.inc	(revision )
+@@ -1856,7 +1856,13 @@
+                 $placeholders[] = $placeholder;
+               }
+             }
+-            $condition_fragments[] = ' (' . $connection->escapeField($condition['field']) . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
++            // HACK: Fix currency.module on PostgreSQL.
++            // @see: https://www.drupal.org/node/2007388
++            $escaped_field = $connection->escapeField($condition['field']);
++            if (in_array($escaped_field, array('ISO4217Code', 'ISO4217Number'))) {
++              $escaped_field = '"'. $escaped_field . '"';
++            }
++            $condition_fragments[] = ' (' . $escaped_field . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
+           }
+         }
+       }

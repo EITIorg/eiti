@@ -138,6 +138,7 @@ function eiti_migration_spreadsheets_import_finished($success, $results, $operat
  */
 function _eiti_migration_spreadsheet_dynamic_upload_import($migration, $arguments, &$context) {
   Migration::registerMigration($migration, $migration, $arguments);
+  drupal_static_reset('getInstance');
   $migrationInstance = Migration::getInstance($migration);
   $result = $migrationInstance->processImport();
 

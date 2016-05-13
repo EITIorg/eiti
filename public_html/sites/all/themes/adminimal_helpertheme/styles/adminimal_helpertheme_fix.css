@@ -47,3 +47,11 @@ div.ctools-modal-content .form-item .media-thumbnail label {
 .form-tablefield .tablefield-rebuild.form-submit {
   background-color: #e3e3e3 !important;
 }
+
+/* EITI-493: Lower z-index for panels popups. */
+.adminimal-backend #modalBackdrop {
+  z-index: 10 !important;
+}
+.adminimal-backend #modalContent {
+  z-index: 10 !important;
+}

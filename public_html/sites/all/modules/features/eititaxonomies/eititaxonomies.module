@@ -4,4 +4,5 @@
  * Code for the eititaxonomies feature.
  */
 
+include_once 'eititaxonomies.custom.inc';
 include_once 'eititaxonomies.features.inc';

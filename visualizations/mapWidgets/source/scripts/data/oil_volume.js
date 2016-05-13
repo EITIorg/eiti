@@ -1,9 +1,9 @@
-export var gas_value = [
+export var oil_volume = [
   {
     "id": 1,
     "range": {start: 0, end: 1},
     "color": "#fef0d9",
-    "title": "No Data",
+    "title": "No data",
     "subtitle": ""
   },
   {

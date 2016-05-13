@@ -79,7 +79,8 @@
 	  if (options.selector === undefined) {
 	    options.selector = true;
 	  }
-	  (0, _reactDom.render)(_react2.default.createElement(_MapWidgetComponent2.default, _extends({}, options, { buttons: options.buttons, infobox: options.infobox, selector: options.selector, endpoint: 'source/scripts/data/implementing_country.json' })), document.getElementById(options.container));
+	
+	  (0, _reactDom.render)(_react2.default.createElement(_MapWidgetComponent2.default, _extends({}, options, { buttons: options.buttons, infobox: options.infobox, selector: options.selector })), document.getElementById(options.container));
 	};
 	
 	// Polyfill not being loaded by Babel
@@ -23711,15 +23712,15 @@
 	
 	var _online_contracts = __webpack_require__(161);
 	
-	var _oil_value = __webpack_require__(160);
+	var _oil_volume = __webpack_require__(160);
 	
-	var _gas_value = __webpack_require__(158);
+	var _gas_volume = __webpack_require__(158);
 	
-	var _coal_value = __webpack_require__(155);
+	var _coal_volume = __webpack_require__(155);
 	
-	var _gold_value = __webpack_require__(159);
+	var _gold_volume = __webpack_require__(159);
 	
-	var _copper_value = __webpack_require__(156);
+	var _copper_volume = __webpack_require__(156);
 	
 	var _revenue = __webpack_require__(164);
 	
@@ -23768,7 +23769,7 @@
 	  _createClass(MapWidgetComponent, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.serverRequest = $.get(this.props.endpoint, function (result) {
+	      this.serverRequest = jQuery.get(_helpers.helpers.getEndPoint(), function (result) {
 	
 	        var baseMap = this.decorate.call(this, result.data, this.state.indicator_id, this.state.valuetypes);
 	        this.setState({
@@ -23804,8 +23805,7 @@
 	                var years = Object.keys(datapoint.licenses);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.licenses[last];
-	                var indicator = yearData.length > 0;
-	                indicator_value = indicator;
+	                indicator_value = yearData['Public registry of licences, oil'] !== undefined;
 	              }
 	              break;
 	            case "online_mining_registry":
@@ -23813,8 +23813,7 @@
 	                var years = Object.keys(datapoint.licenses);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.licenses[last];
-	                var indicator = yearData.length > 0;
-	                indicator_value = indicator;
+	                indicator_value = yearData['Public registry of licences, mining'] !== undefined;
 	              }
 	              break;
 	            case "online_contracts":
@@ -23822,53 +23821,64 @@
 	                var years = Object.keys(datapoint.contracts);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.contracts[last];
-	                var indicator = yearData.length > 0;
-	                indicator_value = indicator;
+	                indicator_value = yearData['Publicly available registry of contracts'] !== undefined;
 	              }
 	              break;
-	            case "oil_value":
+	            case "oil_volume":
 	              if (datapoint.reports) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Oil, value";
+	                  return v.commodity === "Oil, volume";
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
 	              }
 	              break;
-	            case "gas_value":
+	            case "gas_volume":
 	              if (datapoint.reports) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Gas, value";
+	                  return v.commodity === "Gas, volume";
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
 	              }
 	              break;
-	            case "coal_value":
+	            case "coal_volume":
 	              if (datapoint.reports) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Coal, value";
+	                  return v.commodity === "Coal, volume";
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
 	              }
 	              break;
-	            case "copper_value":
+	            case "gold_volume":
 	              if (datapoint.reports) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Copper, value";
+	                  return v.commodity === "Gold, volume";
+	                });
+	                indicator_value = indicator ? indicator.value : 0;
+	                indicator_unit = indicator ? indicator.unit : 0;
+	              }
+	              break;
+	            case "copper_volume":
+	              if (datapoint.reports) {
+	                var years = Object.keys(datapoint.reports);
+	                var last = _underscore2.default.last(years);
+	                var yearData = datapoint.reports[last];
+	                var indicator = yearData.find(function (v) {
+	                  return v.commodity === "Copper, volume";
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23881,7 +23891,7 @@
 	                var yearData = datapoint.revenues[last];
 	                var indicator = yearData.government;
 	                indicator_value = indicator;
-	                indicator_unit = indicator.unit;
+	                indicator_unit = 'USD';
 	              }
 	              break;
 	            case "revenue_per_capita":
@@ -23904,18 +23914,19 @@
 	              break;
 	            case "share_revenues":
 	              if (datapoint.revenues) {
-	                var years = Object.keys(datapoint.revenues);
+	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
-	                var yearData = datapoint.revenues[last];
 	                var generalYearData = datapoint.reports[last];
-	                var indicator_government = yearData.government;
+	                var indicator_government = generalYearData ? generalYearData.find(function (v) {
+	                  return v.commodity === "Government revenue - extractive industries";
+	                }) : undefined;
 	                var indicator_allsectors = generalYearData ? generalYearData.find(function (v) {
 	                  return v.commodity === "Government revenue - all sectors";
 	                }) : undefined;
-	                if (indicator_government && indicator_allsectors && indicator_allsectors !== 0) {
-	                  indicator_value = indicator_government * 100 / indicator_allsectors.value;
+	                if (indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government.value !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+	                  indicator_value = indicator_government.value * 100 / indicator_allsectors.value;
 	                } else {
-	                  indicator_value = 0;
+	                  indicator_value = 'n/a';
 	                }
 	                indicator_unit = '';
 	              }
@@ -23951,9 +23962,9 @@
 	        return v ? v * 1 : 0;
 	      });
 	      var part = _underscore2.default.pluck(data.features, 'indicator_unit');
-	      console.log(part);
+	
 	      var unit = _underscore2.default.find(part, function (v) {
-	        return v !== undefined;
+	        return v !== undefined && v !== "" && v !== 0;
 	      });
 	
 	      var classifier = new _geostats2.default(values);
@@ -23970,6 +23981,13 @@
 	  }, {
 	    key: 'addLayer',
 	    value: function addLayer(e) {
+	      //Deactivate anything selected
+	      jQuery('.map-option-wrapper').find("LI").removeClass('active');
+	      //Activate current selected
+	      jQuery(e.target).parents("LI").addClass('active');
+	      //Activate itself
+	      jQuery(e.target).addClass('active');
+	
 	      if (this.removeLayer) this.removeLayer();
 	      var map = this.refs['map'].leafletElement;
 	      var indicator_id = e.target.dataset ? e.target.dataset.indicatorid : e.target.getAttribute("data-indicatorid");
@@ -24002,20 +24020,20 @@
 	        case "online_contracts":
 	          values = _online_contracts.online_contracts;
 	          break;
-	        case "oil_value":
-	          values = _oil_value.oil_value;
+	        case "oil_volume":
+	          values = _oil_volume.oil_volume;
 	          break;
-	        case "gas_value":
-	          values = _gas_value.gas_value;
+	        case "gas_volume":
+	          values = _gas_volume.gas_volume;
 	          break;
-	        case "coal_value":
-	          values = _coal_value.coal_value;
+	        case "coal_volume":
+	          values = _coal_volume.coal_volume;
 	          break;
-	        case "gold_value":
-	          values = _gold_value.gold_value;
+	        case "gold_volume":
+	          values = _gold_volume.gold_volume;
 	          break;
-	        case "copper_value":
-	          values = _copper_value.copper_value;
+	        case "copper_volume":
+	          values = _copper_volume.copper_volume;
 	          break;
 	        case "revenue":
 	          values = _revenue.revenue;
@@ -24058,12 +24076,13 @@
 	          return v !== undefined;
 	        });
 	        var mergedHTML = "<h2>" + _helpers.helpers.t(indicatorName) + " " + (unit ? "(" + unit + ")" : "") + "<br/></h2>";
+	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
+	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
 	          mergedHTML += '<i style="background:' + v.color + '"></i> <strong>' + _helpers.helpers.t(v.title) + '</strong> <br/>' + (_helpers.helpers.t(v.subtitle) || '') + '<br/>';
 	        });
-	
-	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI Summary Data') + "</a>";
-	
+	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No data') + '</strong><br/><br/>';
+	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
 	        map.options.legend.innerHTML = mergedHTML + sourceText;
 	      }.bind(this);
 	
@@ -24075,7 +24094,7 @@
 	      var values;
 	      switch (indicator_id) {
 	        case "status":
-	          values = _helpers.helpers.t("Implementation Status");
+	          values = _helpers.helpers.t("Implementation status");
 	          break;
 	        case "online_oil_registry":
 	          values = _helpers.helpers.t("Online oil registry");
@@ -24084,22 +24103,22 @@
 	          values = _helpers.helpers.t("Online mining registry");
 	          break;
 	        case "online_contracts":
-	          values = _helpers.helpers.t("Online Registry of Contracts");
+	          values = _helpers.helpers.t("Online registry of contracts");
 	          break;
-	        case "oil_value":
-	          values = _helpers.helpers.t("Oil");
+	        case "oil_volume":
+	          values = _helpers.helpers.t("Oil, volume");
 	          break;
-	        case "gas_value":
-	          values = _helpers.helpers.t("Gas");
+	        case "gas_volume":
+	          values = _helpers.helpers.t("Gas, volume");
 	          break;
-	        case "coal_value":
-	          values = _helpers.helpers.t("Coal");
+	        case "coal_volume":
+	          values = _helpers.helpers.t("Coal, tons");
 	          break;
-	        case "gold_value":
-	          values = _helpers.helpers.t("Gold");
+	        case "gold_volume":
+	          values = _helpers.helpers.t("Gold, tons");
 	          break;
-	        case "copper_value":
-	          values = _helpers.helpers.t("Copper");
+	        case "copper_volume":
+	          values = _helpers.helpers.t("Copper, tons");
 	          break;
 	        case "revenue":
 	          values = _helpers.helpers.t("Government revenue - extractive industries");
@@ -24132,7 +24151,9 @@
 	          _helpers.helpers.showTooltipStatus(e, data);
 	        },
 	        mouseout: _helpers.helpers.resetTooltip,
-	        click: _helpers.helpers.zoomToFeature
+	        click: function click(e) {
+	          _helpers.helpers.zoomToFeature(e, data);
+	        }
 	      });
 	    }
 	  }, {
@@ -24179,17 +24200,18 @@
 	        geoJsonLayer = _react2.default.createElement(_reactLeaflet.GeoJson, { data: this.state.baseMap, ref: 'geoJsonLayer', onEachFeature: hoverDecider, style: _helpers.helpers.style });
 	      }
 	      var buttons;
+	
 	      if (this.props.buttons) {
 	        buttons = _react2.default.createElement(
 	          'div',
 	          { className: 'map-option-wrapper' },
 	          _react2.default.createElement(
 	            'ul',
-	            { className: 'map-option-widget pointer' },
+	            { className: 'map-option-widget' },
 	            _react2.default.createElement(
 	              'li',
 	              { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	              'Overview'
+	              _helpers.helpers.t('Overview')
 	            ),
 	            _react2.default.createElement(
 	              'li',
@@ -24201,17 +24223,17 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_oil_registry', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  'Online Oil Registry'
+	                  _helpers.helpers.t('Online oil registry')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_mining_registry', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  'Online Mining Registry'
+	                  _helpers.helpers.t('Online mining registry')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_contracts', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  'Online Registry of contracts'
+	                  _helpers.helpers.t('Online registry of contracts')
 	                )
 	              )
 	            ),
@@ -24224,28 +24246,28 @@
 	                { className: 'map-option-items' },
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'oil_value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Oil, volume'
+	                  { 'data-indicatorid': 'oil_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Oil, volume')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'gas_value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Gas, volume'
+	                  { 'data-indicatorid': 'gas_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Gas, volume')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'coal_value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Coal, volume'
+	                  { 'data-indicatorid': 'coal_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Coal, tons')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'gold_value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Gold, volume'
+	                  { 'data-indicatorid': 'gold_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Gold, tons')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'copper_value', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Copper, volume'
+	                  { 'data-indicatorid': 'copper_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Copper, tons')
 	                )
 	              )
 	            ),
@@ -24259,17 +24281,17 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'revenue', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Government extractives revenue'
+	                  _helpers.helpers.t('Government extractives revenue')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'revenue_per_capita', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Revenues Per Capita'
+	                  _helpers.helpers.t('Revenues per capita')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
-	                  { 'data-indicatorid': 'share_revenues', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  'Share of revenues'
+	                  { 'data-indicatorid': 'share_revenues', 'data-valuetypes': 'percentage', onClick: this.addLayer.bind(this) },
+	                  _helpers.helpers.t('Share of revenues')
 	                )
 	              )
 	            )
@@ -24294,7 +24316,7 @@
 	
 	        for (var i = 0; i < sortedCountries.length; i++) {
 	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
-	          var countryPageURL = "/implementing_country/" + this.state.data[i].id;
+	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 	          items.push(_react2.default.createElement(
 	            'li',
 	            null,
@@ -24382,11 +24404,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var coal_value = exports.coal_value = [{
+	var coal_volume = exports.coal_volume = [{
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24423,11 +24445,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var copper_value = exports.copper_value = [{
+	var copper_volume = exports.copper_volume = [{
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24470,11 +24492,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var gas_value = exports.gas_value = [{
+	var gas_volume = exports.gas_volume = [{
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24511,11 +24533,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var gold_value = exports.gold_value = [{
+	var gold_volume = exports.gold_volume = [{
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24552,11 +24574,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var oil_value = exports.oil_value = [{
+	var oil_volume = exports.oil_volume = [{
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24596,12 +24618,12 @@
 	var online_contracts = exports.online_contracts = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24617,12 +24639,12 @@
 	var online_mining_registry = exports.online_mining_registry = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24638,12 +24660,12 @@
 	var online_oil_registry = exports.online_oil_registry = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24660,7 +24682,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24701,7 +24723,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24740,33 +24762,33 @@
 	});
 	var share_revenues = exports.share_revenues = [{
 	  "id": 1,
-	  "range": { start: 0, end: 1 },
+	  "range": { start: 0, end: 20 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "0% - 20%",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
-	  "range": { start: 1, end: 8000000 },
+	  "range": { start: 20, end: 40 },
 	  "color": "#fdcc8a",
-	  "title": "0 - 8000000",
+	  "title": "20% - 40%",
 	  "subtitle": ""
 	}, {
 	  "id": 3,
-	  "range": { start: 8000000, end: 25000000 },
+	  "range": { start: 40, end: 60 },
 	  "color": "#fc8d59",
-	  "title": "8000001 - 25000000",
+	  "title": "40% - 60%",
 	  "subtitle": ""
 	}, {
 	  "id": 4,
-	  "range": { start: 25000000, end: 163000000 },
+	  "range": { start: 60, end: 80 },
 	  "color": "#e34a33",
-	  "title": "250000001 - 163000000",
+	  "title": "60% - 80%",
 	  "subtitle": ""
 	}, {
 	  "id": 5,
-	  "range": { start: 163000000, end: 1090000000 },
+	  "range": { start: 80, end: 100 },
 	  "color": "#b30000",
-	  "title": "163000001 - 1090000000",
+	  "title": "80% - 100%",
 	  "subtitle": ""
 	}];
 
@@ -24782,18 +24804,18 @@
 	var status = exports.status = [{
 	  "id": 74,
 	  "color": "#65c32d",
-	  "title": "EITI Compliant Country",
+	  "title": "EITI compliant country",
 	  "subtitle": "confirmed to have met all EITI requirements "
 	}, {
 	  "id": 75,
 	  "color": "#42abd8",
-	  "title": "EITI Candidate Country",
+	  "title": "EITI candidate country",
 	  "subtitle": "implementing EITI, not yet compliant"
 	}, {
 	  "id": 76,
 	  "color": "#ff6600",
 	  "title": "Suspended",
-	  "subtitle": "Compliant/Candidate status is temporarily suspended"
+	  "subtitle": "compliant/candidate status is temporarily suspended"
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
@@ -24821,6 +24843,10 @@
 	var helpers = exports.helpers = {
 	    getBasePath: function getBasePath() {
 	        return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
+	    },
+	
+	    getEndPoint: function getEndPoint() {
+	        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';
 	    },
 	
 	    getPaletteDivergent: function getPaletteDivergent(index) {
@@ -24872,6 +24898,8 @@
 	        } else {
 	            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
 	        }
+	
+	        e.latlng.lat = e.latlng.lat + 2.5;
 	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent(country_link).openOn(layer._map);
 	    },
 	
@@ -24879,8 +24907,14 @@
 	        // Left for future reference
 	    },
 	
-	    zoomToFeature: function zoomToFeature(e) {
-	        window.location = 'country_' + layer.feature.id + '.html';
+	    zoomToFeature: function zoomToFeature(e, countryInfo) {
+	        var layer = e.target;
+	        var country = _underscore2.default.find(countryInfo, function (v) {
+	            return v.iso3 === layer.feature.id;
+	        });
+	        if (country && country.id) {
+	            window.location = '/implementing_country/' + country.id;
+	        }
 	    },
 	
 	    // Helper function that can translate strings.
@@ -24906,7 +24940,7 @@
 	            return v.iso3 === layer.feature.id;
 	        });
 	        var country_link = '';
-	
+	        if (!country['id']) return;
 	        var country_url = '/implementing_country/' + country.id;
 	
 	        if (country_url === '') {
@@ -24915,10 +24949,24 @@
 	            country_link = '<a href="' + country_url + '"><strong>' + this.t('Open Country Page') + '</strong></a>';
 	        }
 	
+	        var country_websitelink = '';
+	        if (!country.local_website || country.local_website === '') {
+	            country_websitelink = '<strong>' + this.t('EITI Website not available') + '</strong>';
+	        } else {
+	            country_websitelink = '<a href="' + country.local_website + '" target="_blank"><strong>' + this.t('Open Local EITI Website') + '</strong></a>';
+	        }
+	
 	        // General info
+	        if (!country.reports) {
+	            country.reports = [];
+	        }
+	
 	        var years = Object.keys(country.reports);
 	        var last = _underscore2.default.last(years);
-	        var yearData = country.reports[last];
+	        var yearData = country.reports[last] || [];
+	
+	        var lastMetadata = _underscore2.default.last(Object.keys(country.metadata));
+	        var yearMetaData = country.metadata[lastMetadata] || [];
 	
 	        // Prepare data for info box
 	
@@ -24927,7 +24975,7 @@
 	
 	        // Member Since
 	        var memberDate = country.status_date || country.status_date !== null ? new Date(country.status_date * 1000) : undefined;
-	        var country_member_since = memberDate ? memberDate.getFullYear() : t.this('n/a');
+	        var country_member_since = memberDate ? memberDate.getUTCFullYear() : this.t('n/a');
 	
 	        // Latest Report Year
 	        var country_last_report_year = last;
@@ -24951,8 +24999,10 @@
 	        indicator_government_revenue = indicator_government_revenue || 'n/a';
 	
 	        // Sectors Covered
+	        var sectors_covered = yearMetaData.sectors_covered;
 	
 	        // Number of companies reporting
+	        var companies_reporting = yearMetaData.reporting_organisations ? yearMetaData.reporting_organisations.companies : 'n/a';
 	
 	        // Online Licenses (link)[Oil], (link)[Mining]
 	        var years_licenses = country.licenses ? Object.keys(country.licenses) : [];
@@ -24962,7 +25012,7 @@
 	        // Online Contract (link)
 	        var years_contracts = country.contracts ? Object.keys(country.contracts) : [];
 	        var last_contracts = _underscore2.default.last(years_contracts);
-	        var indicator_contracts = country.contracts ? country.contracts[last_contracts] : undefined;
+	        var indicator_contracts = country.contracts ? country.contracts[last_contracts] : {};
 	
 	        // Country Website
 	        var country_website = country.local_website ? country.local_website : this.t('n/a');
@@ -24973,49 +25023,81 @@
 	        var info_top_indicators_first = '';
 	        var info_content_second = '';
 	        var info_top_indicators_second = '';
+	        var info_content_third = '';
+	        var info_content_second_a = '';
 	
 	        // Add country info.
 	        info_header = info_header + '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' + '<span>' + layer.feature.properties.name + '</span>';
 	
 	        // Add Status indicator info.
-	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Status') + ':</span> <span class="value">' + country_status + '</span>' + '</span>';
+	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Status') + ':</span> <span class="value"><strong>' + country_status + '</strong></span>' + '</span>';
 	
 	        // Add Last Year indicator info.
-	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value">' + country_member_since + '</span>' + '</span>';
+	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Joined in') + ':</span> <span class="value"><strong>' + country_member_since + '</strong></span>' + '</span>';
 	
 	        // Add Last Report Link
-	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Last Report') + ':</span> <span class="value"><a href="' + (country_last_report_file ? "#" : country_last_report_file) + '">' + country_last_report_year + '</a></span>' + '</span>';
+	        var country_report_link = '';
+	        if (country_last_report_file || country_last_report_file === null) {
+	            country_report_link += country_last_report_year || 'n/a';
+	        } else {
+	            country_report_link += '<a href="' + country_last_report_file + '">';
+	            country_report_link += country_last_report_year;
+	            country_report_link += '</a>';
+	        }
+	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' + '</span>';
 	
 	        // Add Revenue
-	        info_content_first = info_content_first + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' + '</span>';
+	        var extractives_revenue_value = indicator_government_revenue > 0 ? this.formatNumber(indicator_government_revenue, { inMillions: true, includeDecimals: true }) + ' million ' + currency_code : this.t('n/a');
+	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
+	
+	        // Add Sectors Covered
+	        info_content_second = info_content_second + '<div class="info-block">' + '<span class="info">' + '   <span class="label">' + this.t('Sectors covered') + ':</span>';
+	        if (sectors_covered && sectors_covered.length > 0) {
+	            for (var i = 0; i < sectors_covered.length; i++) {
+	                info_content_second = info_content_second + '   <span class="value">' + this.t(sectors_covered[i]) + ' <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_' + sectors_covered[i].toLowerCase().replace(' ', '') + '.svg') + '"  /></span>';
+	            }
+	        } else {
+	            info_content_second = info_content_second + '<strong>' + this.t('n/a') + '</strong>';
+	        }
+	        info_content_second = info_content_second + '</span>' + '</div>';
+	
+	        // Add Companies reporting
+	        info_content_second_a = info_content_second_a + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Number of companies reporting') + ':</span> <span class="value">' + companies_reporting + '</span>' + '</span>' + '</div>';
 	
 	        // Add info about Online Licenses.
-	        info_content_second = info_content_second + '<div class="info-block">' + '  <span class="label">' + this.t('Online Licenses') + ':</span>' + '  <span class="value">' + (indicator_licenses ? '<a href="' + indicator_licenses[0] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
+	        info_content_third = '<div class="info-block"><span class="label">' + this.t('Online Licenses') + ':</span>';
+	        if (indicator_licenses) {
+	            if (indicator_licenses["Public registry of licences, mining"]) {
+	                info_content_third += '  <span class="value"><a href="' + indicator_licenses["Public registry of licences, mining"] + '" target="_blank">' + this.t('Mining') + '</a></span>';
+	            }
+	            if (indicator_licenses["Public registry of licences, oil"]) {
+	                info_content_third += '  <span class="value"><a href="' + indicator_licenses["Public registry of licences, oil"] + '" target="_blank">' + this.t('Oil') + '</a></span>';
+	            }
+	        } else {
+	            info_content_third += '  <span class="value">' + this.t('No') + '</span>';
+	        }
+	
+	        info_content_third += '</div>';
 	
 	        // Add info about Online Contracts.
-	        info_content_second = info_content_second + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts ? '<a href="' + indicator_contracts[0] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
+	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
 	
-	        // Add info about Revenue by Companies.
-	        /*info_content = info_content +
-	            '<div class="info-block">' +
-	            '  <span class="value">' + this.formatNumber(indicator_company ? indicator_company : 0) + '</span>( ' + currency_code + ')' +
-	            '  <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_oilrefined.svg') + '" alt="Oil Icon" />' +
-	            '  <span class="label">' + this.t('Revenue by Companies') + '</span>' +
-	            '</div>';*/
+	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
-	        // Add online contracts.
-	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
-	
-	        var popup = L.popup({ autoPan: true, closeButton: false, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
+	        var popup = L.popup({ autoPan: true, closeButton: true, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    },
 	
-	    formatNumber: function formatNumber(number) {
+	    formatNumber: function formatNumber(number, options) {
 	        number = Number(number);
 	        if (isNaN(number)) return 0;
-	        var n = 0;
-	        var x = 3;
-	        var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+	        if (options && options.inMillions) {
+	            number /= Math.pow(10, 6);
+	        }
+	        var n = options && options.includeDecimals ? 2 : 0;
+	        var re = '\\d(?=(\\d{3})+' + (n > 0 ? '\\.' : '$') + ')';
 	        return number.toFixed(Math.max(0, ~ ~n)).replace(new RegExp(re, 'g'), '$&,');
+	
+	        //return number.toFixed((options && options.includeDecimals) ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 	    },
 	
 	    getResourceUrl: function getResourceUrl(relative_path) {

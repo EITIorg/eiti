@@ -448,10 +448,6 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['menu']['#access'] = FALSE;
     }
 
-    if (isset($form['path'])) {
-      $form['path']['#access'] = FALSE;
-    }
-
     if (isset($form['redirect'])) {
       $form['redirect']['#access'] = FALSE;
     }

@@ -54,9 +54,6 @@
   min-width: 10em;
   margin-right: 1em;
 }
-.eiti-map-wrapper .country-list-wrapper .country-col:last-child {
-  margin-right: 0;
-}
 .eiti-map-wrapper .map-option-widget {
   display: flex;
   flex-flow: row wrap;
@@ -70,10 +67,11 @@
   flex: 1.2;
 }
 .eiti-map-wrapper .legend {
+  font-family: 'Open Sans';
   text-align: left;
   line-height: 1.25em;
   color: #555;
-  width: 20em;
+  width: 25em;
 }
 .eiti-map-wrapper .legend i {
   width: 0.75em;
@@ -83,6 +81,9 @@
   margin-bottom: 1em;
   margin-top: 0.25em;
 }
+.eiti-map-wrapper .legend h2 {
+  line-height: 1.25em;
+}
 .eiti-map-wrapper .leaflet-container {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -91,6 +92,7 @@
   border: 1px solid #dddddd;
 }
 .eiti-map-wrapper .leaflet-popup-content-wrapper {
+  font-family: 'Open Sans';
   padding: 0;
   border-radius: 0;
 }
@@ -108,6 +110,7 @@
   color: #0192c7;
 }
 .eiti-map-wrapper .map-option-wrapper .map-option-widget {
+  cursor: pointer;
   list-style: none;
   padding: 0.25em 0 0;
 }
@@ -207,7 +210,7 @@
   cursor: pointer;
   margin: 1em;
   padding: 0;
-  text-transform: capitalize;
+  text-transform: none;
 }
 .eiti-map-wrapper .map-option-widget .map-option-items li:hover,
 .eiti-map-wrapper .map-option-widget .map-option-items li.active {
@@ -306,6 +309,88 @@
   fill: none;
   stroke: #00A5E9;
   stroke-width: 5;
+}
+@media (max-width: 1024px) {
+  .eiti-map-wrapper .map-container {
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-wrapper {
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-widget {
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-widget li {
+    padding: 0;
+    width: 10%;
+  }
+  .eiti-map-wrapper .map-option-widget {
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-widget li {
+    font-size: 9px;
+    padding: 22px 12px 26px 60px;
+    width: 12%;
+    line-height: 0.75em;
+  }
+  .eiti-map-wrapper .map-container ul ul li {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .eiti-map-wrapper .country-col {
+    width: 290px;
+  }
+  .eiti-map-wrapper .country-list-wrapper {
+    max-width: 19em;
+  }
+  .eiti-map-wrapper .country-list {
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 0.75em;
+  }
+  .eiti-map-wrapper .map-option-widget li {
+    border-right: none;
+    border-left: none;
+    line-height: 0.75em;
+    width: 23%;
+  }
+  .eiti-map-wrapper .map-container ul ul li {
+    padding-bottom: 10px;
+    width: 100%;
+  }
+}
+@media (max-width: 667px) {
+  .eiti-map-wrapper .map-option-widget li {
+    border-right: none;
+    border-left: none;
+    padding: 17px 0 19px 20px;
+    width: 15%;
+    line-height: 1.75em;
+    background: none;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul {
+    margin-top: 12px;
+    width: 120px;
+    padding-left: 0px;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul li {
+    padding: 10px 0 10px 0;
+  }
+}
+@media (max-width: 384px) {
+  .eiti-map-wrapper .map-option-widget li {
+    background: none;
+    border-right: none;
+    border-left: none;
+    padding: 10px 0 10px 10px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .eiti-map-wrapper .map-option-wrapper ul ul {
+    margin-top: -30px;
+    padding-bottom: 10px;
+    width: 60%;
+  }
 }
 /******************************************************************************
  * Helper mixins.
