@@ -124,6 +124,16 @@ export default class MapWidgetComponent extends Component {
               indicator_unit = indicator ? indicator.unit : 0;
             }
           break;
+          case "gold_volume":
+            if(datapoint.reports) {
+              var years = Object.keys(datapoint.reports);
+              var last = _.last(years);
+              var yearData = datapoint.reports[last];
+              var indicator = yearData.find(function(v){ return (v.commodity === "Gold, volume")});
+              indicator_value = indicator ? indicator.value : 0;
+              indicator_unit = indicator ? indicator.unit : 0;
+            }
+          break;
           case "copper_volume":
             if(datapoint.reports) {
               var years = Object.keys(datapoint.reports);
@@ -210,7 +220,7 @@ export default class MapWidgetComponent extends Component {
     var values = _.map(_.pluck(data.features, 'indicator_value'),function(v){ return v?v*1:0;});
     var part = _.pluck(data.features, 'indicator_unit');
 
-    var unit = _.find(part, function(v) { return v !== undefined;});
+    var unit = _.find(part, function(v) { return v !== undefined && v !== "" && v !== 0;});
 
     var classifier = new geostats(values);
     var ranges = classifier.getEqInterval(metadata.length);

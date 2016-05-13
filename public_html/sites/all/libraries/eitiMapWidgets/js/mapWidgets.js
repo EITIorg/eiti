@@ -23860,6 +23860,18 @@
 	                indicator_unit = indicator ? indicator.unit : 0;
 	              }
 	              break;
+	            case "gold_volume":
+	              if (datapoint.reports) {
+	                var years = Object.keys(datapoint.reports);
+	                var last = _underscore2.default.last(years);
+	                var yearData = datapoint.reports[last];
+	                var indicator = yearData.find(function (v) {
+	                  return v.commodity === "Gold, volume";
+	                });
+	                indicator_value = indicator ? indicator.value : 0;
+	                indicator_unit = indicator ? indicator.unit : 0;
+	              }
+	              break;
 	            case "copper_volume":
 	              if (datapoint.reports) {
 	                var years = Object.keys(datapoint.reports);
@@ -23952,7 +23964,7 @@
 	      var part = _underscore2.default.pluck(data.features, 'indicator_unit');
 	
 	      var unit = _underscore2.default.find(part, function (v) {
-	        return v !== undefined;
+	        return v !== undefined && v !== "" && v !== 0;
 	      });
 	
 	      var classifier = new _geostats2.default(values);
