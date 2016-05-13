@@ -51,8 +51,6 @@ function eititaxonomies_taxonomy_term_page($term) {
   drupal_set_breadcrumb($breadcrumb);
   // drupal_add_feed('taxonomy/term/' . $term->tid . '/feed', 'RSS - ' . $term->name);
 
-  $build = array();
-
   // Get an ordered list of terms.
   $terms_list = i18n_taxonomy_get_tree($term->vid, $langcode, 0, 1, TRUE);
   $links = array();
@@ -64,6 +62,7 @@ function eititaxonomies_taxonomy_term_page($term) {
     );
   }
 
+  $term->stakehoder_listing = '';
   $term->stakehoder_listing .= theme('links', array(
     'links' => $links,
     'attributes' => array(
@@ -76,6 +75,8 @@ function eititaxonomies_taxonomy_term_page($term) {
   // Add the taxonomy nodes listing.
   // We need this inside the taxonomy display settings page.
   $term->stakehoder_listing .= views_embed_view('taxonomy_nodes', 'default', $term->tid);
+
+  $build = array();
 
   $build['term_display'] = array(
     '#prefix' => '<div class="term-display">',
