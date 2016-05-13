@@ -144,14 +144,6 @@ function helpertheme_color_palette() {
     '#value' => '#6bc93f',
     '#desc' => 'success message base color',
     '#variants' => array(
-      'clstatus__dark' => array(
-        '#value' => 'darken(@clstatus, 40%)',
-        '#desc' => 'text',
-      ),
-      'clstatus__alt' => array(
-        '#value' => 'desaturate(@clstatus, 18)', // #73b355
-        '#desc' => 'icons and box shadow',
-      ),
       'clstatus__faded' => array(
         '#value' => 'lighten(@clstatus__alt, 18%)',
         '#desc' => 'box border',
@@ -160,6 +152,14 @@ function helpertheme_color_palette() {
         '#value' => 'lighten(@clstatus, 40%)',
         '#desc' => 'box background',
       ),
+      'clstatus__dark' => array(
+        '#value' => 'darken(@clstatus, 40%)',
+        '#desc' => 'text',
+      ),
+      'clstatus__alt' => array(
+        '#value' => 'desaturate(@clstatus, 18)', // #73b355
+        '#desc' => 'icons and box shadow',
+      ),
     ),
   );
 
@@ -167,14 +167,6 @@ function helpertheme_color_palette() {
     '#value' => '#d8a80e',
     '#desc' => 'warning message base color',
     '#variants' => array(
-      'clwarning__dark' => array(
-        '#value' => 'darken(@clwarning, 24%)',
-        '#desc' => 'text color',
-      ),
-      'clwarning__alt' => array(
-        '#value' => 'saturate(@clwarning, 18)', // #e29700
-        '#desc' => 'icons and box shadow',
-      ),
       'clwarning__faded' => array(
         '#value' => 'lighten(@clwarning__alt, 36%)',
         '#desc' => 'box border',
@@ -183,6 +175,14 @@ function helpertheme_color_palette() {
         '#value' => 'lighten(@clwarning, 52%)',
         '#desc' => 'box background',
       ),
+      'clwarning__dark' => array(
+        '#value' => 'darken(@clwarning, 24%)',
+        '#desc' => 'text color',
+      ),
+      'clwarning__alt' => array(
+        '#value' => 'saturate(@clwarning, 18)', // #e29700
+        '#desc' => 'icons and box shadow',
+      ),
     ),
   );
 
@@ -190,14 +190,6 @@ function helpertheme_color_palette() {
     '#value' => '#d53615',
     '#desc' => 'error message base color',
     '#variants' => array(
-      'clerror__dark' => array(
-        '#value' => 'darken(@clerror, 24%)',
-        '#desc' => 'text color',
-      ),
-      'clerror__alt' => array(
-        '#value' => 'saturate(@clerror, 18)', // #ea2800
-        '#desc' => 'icons and box shadow',
-      ),
       'clerror__faded' => array(
         '#value' => 'lighten(@clerror__alt, 36%)',
         '#desc' => 'box border',
@@ -205,6 +197,14 @@ function helpertheme_color_palette() {
       'clerror__light' => array(
         '#value' => 'lighten(@clerror, 50%)',
         '#desc' => 'box background',
+      ),
+      'clerror__dark' => array(
+        '#value' => 'darken(@clerror, 24%)',
+        '#desc' => 'text color',
+      ),
+      'clerror__alt' => array(
+        '#value' => 'saturate(@clerror, 18)', // #ea2800
+        '#desc' => 'icons and box shadow',
       ),
     ),
   );
