@@ -16,7 +16,7 @@ $modules = array(
     'i18n_panels',
     //'i18n_path',
     //'i18n_redirect',
-    'i18n_select',
+    //'i18n_select',
     'i18n_string',
     //'i18n_sync',
     'i18n_taxonomy',
