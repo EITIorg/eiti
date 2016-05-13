@@ -88,7 +88,7 @@ function eitict_bookmark_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'In certain cases, you might want to hide the title.',
+    'description' => 'In certain cases, you might want to hide the title. If you choose to hide the title, the bookmark image SHOULD have an "Alt Text" for screen readers.',
     'display' => array(
       'bm_large_tile' => array(
         'label' => 'hidden',
@@ -132,6 +132,7 @@ function eitict_bookmark_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_bm_hide_title',
     'label' => 'Hide Title',
@@ -613,7 +614,7 @@ function eitict_bookmark_field_default_field_instances() {
   t('Bookmark Type');
   t('Hide Title');
   t('Image');
-  t('In certain cases, you might want to hide the title.');
+  t('In certain cases, you might want to hide the title. If you choose to hide the title, the bookmark image SHOULD have an "Alt Text" for screen readers.');
   t('Link');
   t('Please specify the bookmark type. Make sure you re-use existing terms (suggestions appear while you\'re typing).');
   t('Please specify whether this bookmark leads to an <strong>internal page</strong> (<em>eiti.org page</em>) or to some <strong>external website\'s page</strong>.');
