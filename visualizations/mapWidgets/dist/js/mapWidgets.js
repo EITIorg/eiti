@@ -23981,6 +23981,13 @@
 	  }, {
 	    key: 'addLayer',
 	    value: function addLayer(e) {
+	      //Deactivate anything selected
+	      jQuery('.map-option-wrapper').find("LI").removeClass('active');
+	      //Activate current selected
+	      jQuery(e.target).parents("LI").addClass('active');
+	      //Activate itself
+	      jQuery(e.target).addClass('active');
+	
 	      if (this.removeLayer) this.removeLayer();
 	      var map = this.refs['map'].leafletElement;
 	      var indicator_id = e.target.dataset ? e.target.dataset.indicatorid : e.target.getAttribute("data-indicatorid");
@@ -24074,8 +24081,8 @@
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
 	          mergedHTML += '<i style="background:' + v.color + '"></i> <strong>' + _helpers.helpers.t(v.title) + '</strong> <br/>' + (_helpers.helpers.t(v.subtitle) || '') + '<br/>';
 	        });
-	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No Data') + '</strong><br/><br/>';
-	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI Summary Data') + "</a>";
+	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No data') + '</strong><br/><br/>';
+	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
 	        map.options.legend.innerHTML = mergedHTML + sourceText;
 	      }.bind(this);
 	
@@ -24087,7 +24094,7 @@
 	      var values;
 	      switch (indicator_id) {
 	        case "status":
-	          values = _helpers.helpers.t("Implementation Status");
+	          values = _helpers.helpers.t("Implementation status");
 	          break;
 	        case "online_oil_registry":
 	          values = _helpers.helpers.t("Online oil registry");
@@ -24096,22 +24103,22 @@
 	          values = _helpers.helpers.t("Online mining registry");
 	          break;
 	        case "online_contracts":
-	          values = _helpers.helpers.t("Online Registry of Contracts");
+	          values = _helpers.helpers.t("Online registry of contracts");
 	          break;
 	        case "oil_volume":
-	          values = _helpers.helpers.t("Oil");
+	          values = _helpers.helpers.t("Oil, volume");
 	          break;
 	        case "gas_volume":
-	          values = _helpers.helpers.t("Gas");
+	          values = _helpers.helpers.t("Gas, volume");
 	          break;
 	        case "coal_volume":
-	          values = _helpers.helpers.t("Coal");
+	          values = _helpers.helpers.t("Coal, tons");
 	          break;
 	        case "gold_volume":
-	          values = _helpers.helpers.t("Gold");
+	          values = _helpers.helpers.t("Gold, tons");
 	          break;
 	        case "copper_volume":
-	          values = _helpers.helpers.t("Copper");
+	          values = _helpers.helpers.t("Copper, tons");
 	          break;
 	        case "revenue":
 	          values = _helpers.helpers.t("Government revenue - extractive industries");
@@ -24216,17 +24223,17 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_oil_registry', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Online Oil Registry')
+	                  _helpers.helpers.t('Online oil registry')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_mining_registry', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Online Mining Registry')
+	                  _helpers.helpers.t('Online mining registry')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'online_contracts', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Online Registry of contracts')
+	                  _helpers.helpers.t('Online registry of contracts')
 	                )
 	              )
 	            ),
@@ -24250,17 +24257,17 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'coal_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Coal, volume')
+	                  _helpers.helpers.t('Coal, tons')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'gold_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Gold, volume')
+	                  _helpers.helpers.t('Gold, tons')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'copper_volume', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Copper, volume')
+	                  _helpers.helpers.t('Copper, tons')
 	                )
 	              )
 	            ),
@@ -24279,7 +24286,7 @@
 	                _react2.default.createElement(
 	                  'li',
 	                  { 'data-indicatorid': 'revenue_per_capita', 'data-valuetypes': 'range', onClick: this.addLayer.bind(this) },
-	                  _helpers.helpers.t('Revenues Per Capita')
+	                  _helpers.helpers.t('Revenues per capita')
 	                ),
 	                _react2.default.createElement(
 	                  'li',
@@ -24401,7 +24408,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24442,7 +24449,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24489,7 +24496,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24530,7 +24537,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24571,7 +24578,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24611,12 +24618,12 @@
 	var online_contracts = exports.online_contracts = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24632,12 +24639,12 @@
 	var online_mining_registry = exports.online_mining_registry = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24653,12 +24660,12 @@
 	var online_oil_registry = exports.online_oil_registry = [{
 	  "id": 1,
 	  "color": "#42abd8",
-	  "title": "Yes",
+	  "title": "Available",
 	  "subtitle": ""
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
-	  "title": "No",
+	  "title": "Unavailable",
 	  "subtitle": ""
 	}];
 
@@ -24675,7 +24682,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24716,7 +24723,7 @@
 	  "id": 1,
 	  "range": { start: 0, end: 1 },
 	  "color": "#fef0d9",
-	  "title": "No Data",
+	  "title": "No data",
 	  "subtitle": ""
 	}, {
 	  "id": 2,
@@ -24797,18 +24804,18 @@
 	var status = exports.status = [{
 	  "id": 74,
 	  "color": "#65c32d",
-	  "title": "EITI Compliant Country",
+	  "title": "EITI compliant country",
 	  "subtitle": "confirmed to have met all EITI requirements "
 	}, {
 	  "id": 75,
 	  "color": "#42abd8",
-	  "title": "EITI Candidate Country",
+	  "title": "EITI candidate country",
 	  "subtitle": "implementing EITI, not yet compliant"
 	}, {
 	  "id": 76,
 	  "color": "#ff6600",
 	  "title": "Suspended",
-	  "subtitle": "Compliant/Candidate status is temporarily suspended"
+	  "subtitle": "compliant/candidate status is temporarily suspended"
 	}, {
 	  "id": 0,
 	  "color": "#dddddd",
@@ -25040,7 +25047,8 @@
 	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' + '</span>';
 	
 	        // Add Revenue
-	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' + '</span>' + '</div>';
+	        var extractives_revenue_value = indicator_government_revenue > 0 ? this.formatNumber(indicator_government_revenue, { inMillions: true, includeDecimals: true }) + ' million ' + currency_code : this.t('n/a');
+	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
 	
 	        // Add Sectors Covered
 	        info_content_second = info_content_second + '<div class="info-block">' + '<span class="info">' + '   <span class="label">' + this.t('Sectors covered') + ':</span>';
@@ -25074,18 +25082,22 @@
 	        // Add info about Online Contracts.
 	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
 	
-	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
+	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
 	        var popup = L.popup({ autoPan: true, closeButton: true, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    },
 	
-	    formatNumber: function formatNumber(number) {
+	    formatNumber: function formatNumber(number, options) {
 	        number = Number(number);
 	        if (isNaN(number)) return 0;
-	        var n = 0;
-	        var x = 3;
-	        var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+	        if (options && options.inMillions) {
+	            number /= Math.pow(10, 6);
+	        }
+	        var n = options && options.includeDecimals ? 2 : 0;
+	        var re = '\\d(?=(\\d{3})+' + (n > 0 ? '\\.' : '$') + ')';
 	        return number.toFixed(Math.max(0, ~ ~n)).replace(new RegExp(re, 'g'), '$&,');
+	
+	        //return number.toFixed((options && options.includeDecimals) ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 	    },
 	
 	    getResourceUrl: function getResourceUrl(relative_path) {

@@ -235,6 +235,13 @@ export default class MapWidgetComponent extends Component {
   }
 
   addLayer(e) {
+    //Deactivate anything selected
+    jQuery('.map-option-wrapper').find("LI").removeClass('active')
+    //Activate current selected
+    jQuery(e.target).parents("LI").addClass('active');
+    //Activate itself
+    jQuery(e.target).addClass('active')
+
     if(this.removeLayer) this.removeLayer();
     const map = this.refs['map'].leafletElement;
     var indicator_id = e.target.dataset ? e.target.dataset.indicatorid : e.target.getAttribute("data-indicatorid");
@@ -319,8 +326,8 @@ export default class MapWidgetComponent extends Component {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
             mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+helpers.t(v.title)+ '</strong> <br/>'+ (helpers.t(v.subtitle) || '') + '<br/>' ) ;
           });
-          if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No Data')+ '</strong><br/><br/>' ) ;
-          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI Summary Data') + "</a>"; 
+          if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
+          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
           map.options.legend.innerHTML = mergedHTML + sourceText;
       }.bind(this);
 
@@ -331,7 +338,7 @@ export default class MapWidgetComponent extends Component {
     var values;
     switch(indicator_id) {
       case "status":
-        values = helpers.t("Implementation Status");
+        values = helpers.t("Implementation status");
       break;
       case "online_oil_registry":
         values = helpers.t("Online oil registry");
@@ -340,22 +347,22 @@ export default class MapWidgetComponent extends Component {
         values = helpers.t("Online mining registry");
       break;
       case "online_contracts":
-        values = helpers.t("Online Registry of Contracts");
+        values = helpers.t("Online registry of contracts");
       break;
       case "oil_volume":
-        values = helpers.t("Oil");
+        values = helpers.t("Oil, volume");
       break;
       case "gas_volume":
-        values = helpers.t("Gas");
+        values = helpers.t("Gas, volume");
       break;
       case "coal_volume":
-        values = helpers.t("Coal");
+        values = helpers.t("Coal, tons");
       break;
       case "gold_volume":
-        values = helpers.t("Gold");
+        values = helpers.t("Gold, tons");
       break;
       case "copper_volume":
-        values = helpers.t("Copper");
+        values = helpers.t("Copper, tons");
       break;
       case "revenue":
         values = helpers.t("Government revenue - extractive industries");
@@ -438,9 +445,9 @@ export default class MapWidgetComponent extends Component {
             <li>
               Tax & Legal Framework
               <ul className="map-option-items">
-                <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Oil Registry')}</li>
-                <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Mining Registry')}</li>
-                <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online Registry of contracts')}</li>
+                <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online oil registry')}</li>
+                <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online mining registry')}</li>
+                <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online registry of contracts')}</li>
               </ul>
             </li>
             <li>
@@ -448,16 +455,16 @@ export default class MapWidgetComponent extends Component {
               <ul className="map-option-items">
                 <li data-indicatorid="oil_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
                 <li data-indicatorid="gas_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
-                <li data-indicatorid="coal_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Coal, volume')}</li>
-                <li data-indicatorid="gold_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gold, volume')}</li>
-                <li data-indicatorid="copper_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, volume')}</li>
+                <li data-indicatorid="coal_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Coal, tons')}</li>
+                <li data-indicatorid="gold_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gold, tons')}</li>
+                <li data-indicatorid="copper_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, tons')}</li>
               </ul>
             </li>
             <li>
               Revenues
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
-                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues Per Capita')}</li>
+                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues per capita')}</li>
                 <li data-indicatorid="share_revenues" data-valuetypes="percentage" onClick={::this.addLayer}>{helpers.t('Share of revenues')}</li>
               </ul>
             </li>

@@ -81,6 +81,9 @@
   margin-bottom: 1em;
   margin-top: 0.25em;
 }
+.eiti-map-wrapper .legend h2 {
+  line-height: 1.25em;
+}
 .eiti-map-wrapper .leaflet-container {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -207,7 +210,7 @@
   cursor: pointer;
   margin: 1em;
   padding: 0;
-  text-transform: capitalize;
+  text-transform: none;
 }
 .eiti-map-wrapper .map-option-widget .map-option-items li:hover,
 .eiti-map-wrapper .map-option-widget .map-option-items li.active {

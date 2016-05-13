@@ -223,10 +223,11 @@ export var helpers = {
             '</span>';
 
         // Add Revenue
+        var extractives_revenue_value =   indicator_government_revenue > 0 ? (this.formatNumber(indicator_government_revenue, {inMillions: true, includeDecimals:true}) + ' million ' + currency_code) : this.t('n/a');
         info_content_first = info_content_first +
             '<div class="info-block">' +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Extractives revenues for ') + last +':</span> <span class="value">' + this.formatNumber(indicator_government_revenue) + ' ' + currency_code + '</span>' +
+            '  <span class="label">' + this.t('Extractives revenues for ') + last +':</span> <span class="value">' + extractives_revenue_value + '</span>' +
             '</span>' +
             '</div>';
 
@@ -288,8 +289,8 @@ export var helpers = {
             '<div class="country-info-content">' + info_content_second + '</div>' +
             '<div class="country-info-content">' + info_content_second_a + '</div>' +
             '<div class="country-info-content">' + info_content_third + '</div>' +
-            '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' +
-            '<div class="country-link">' + '<img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
+            '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' +
+            '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' +
             '</aside>';
 
         var popup = L.popup({autoPan:true, closeButton:true, maxWidth:400})
@@ -298,13 +299,17 @@ export var helpers = {
             .openOn(layer._map);
     },
 
-    formatNumber: function(number) {
+    formatNumber: function(number, options) {
         number = Number(number);
         if(isNaN(number)) return 0;
-        let n = 0;
-        let x = 3;
-        var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+        if(options && options.inMillions) {
+            number /= Math.pow(10,6);
+        }
+        var n = (options && options.includeDecimals) ? 2 : 0;
+        var re = '\\d(?=(\\d{3})+' + (n > 0 ? '\\.' : '$') + ')';
         return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+
+        //return number.toFixed((options && options.includeDecimals) ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     },
 
     getResourceUrl: function(relative_path) {
