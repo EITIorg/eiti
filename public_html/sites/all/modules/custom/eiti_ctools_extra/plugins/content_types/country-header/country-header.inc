@@ -10,8 +10,13 @@ $plugin = array(
   'description' => t('Country header containing the banner, logo and various other information.'),
   'category' => t('Widget Library'),
   'render callback'  => 'eiti_ctools_extra__country_header__render',
+  'edit form' => 'eiti_ctools_extra__country_header__settings_form',
   'required context' => array(
     new ctools_context_required(t('Implementing Country'), 'implementing_country'),
+  ),
+  'defaults' => array(
+    'title_display' => '',
+    'background_style' => '',
   ),
 );
 
@@ -49,17 +54,24 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     // Use the featured image as background image.
     $entity_id = entity_id($entity_type, $entity);
     $selector_prefix = implode('-', array($entity_type, $entity_id));
-    helpertheme_get_background_image_with_overlay($block['banner'], $cover_image_data, $selector_prefix);
+
+    $with_overlay = TRUE;
+    if (isset($conf['background_style']) && $conf['background_style'] == 'no-overlay') {
+      $with_overlay = FALSE;
+    }
+
+    helpertheme_get_background_image_with_overlay($block['banner'], $cover_image_data, $selector_prefix, $with_overlay);
   }
   else {
     $block['banner']['#attributes']['class'][] = 'no-background-image';
   }
 
   $block['banner']['overlay']['name_and_logo'] = array(
-    '#type' => 'container',
+    '#type' => 'html_container',
+    '#tag' => 'h1',
     '#attributes' => array(
       'class' => array(
-        'country-logo-wrapper',
+        'page-title',
       ),
     ),
     '#prefix' => '<div class="single-fluid-row-wrapper">',
@@ -80,15 +92,20 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
       '#theme' => 'image',
       '#path' => $logo_url,
       '#alt' => $logo_file_alt_text,
+      '#attributes' => array('role' => 'presentation'),
+      '#weight' => -1,
     );
   }
 
   $block['banner']['overlay']['name_and_logo']['name'] = array(
-    '#theme' => 'html_tag',
-    '#tag' => 'h1',
+    '#type' => 'html_tag',
+    '#tag' => 'span',
     '#value' => $entity_wrapper->label(),
-    '#attributes' => array('class' => array('page-title')),
+    '#attributes' => array('class' => array('name')),
   );
+  if (!empty($conf['title_display'])) {
+    $block['banner']['overlay']['name_and_logo']['name']['#attributes']['class'][] = drupal_clean_css_identifier($conf['title_display']);
+  }
 
   $block['info'] = array(
     '#type' => 'container',
@@ -229,4 +246,59 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
   return (object) array(
     'content' => $block,
   );
+}
+
+/**
+ * Settings form for the country header.
+ */
+function eiti_ctools_extra__country_header__settings_form($form, &$form_state) {
+  $conf = $form_state['conf'];
+
+  $cleanup_list = array(
+    'context',
+    'override_title',
+    'override_title_text',
+    'override_title_heading',
+    'override_title_markup',
+  );
+  foreach ($cleanup_list as $key) {
+    if (isset($form[$key])) {
+      $form[$key]['#access'] = FALSE;
+    }
+  }
+
+  $form['title_display'] = array(
+    '#title' => t('Title Display'),
+    '#type' => 'select',
+    '#options' => array(
+      '' => t('Default'),
+      'element-invisible' => t('No Title'),
+    ),
+
+    '#default_value' => $conf['title_display'],
+  );
+
+  $form['background_style'] = array(
+    '#title' => t('Background Style'),
+    '#type' => 'select',
+    '#options' => array(
+      '' => t('Default'),
+      'no-overlay' => t('No overlay'),
+    ),
+
+    '#default_value' => $conf['background_style'],
+  );
+
+  return $form;
+}
+
+function eiti_ctools_extra__country_header__settings_form_submit($form, &$form_state) {
+  // Remove unneeded values.
+  form_state_values_clean($form_state);
+
+  foreach (element_children($form) as $key) {
+    if (!empty($form_state['values'][$key])) {
+      $form_state['conf'][$key] = $form_state['values'][$key];
+    }
+  }
 }

@@ -710,8 +710,9 @@ function helpertheme_site_map() {
  * @param array $elements
  * @param array $image_data
  * @param string $selector_prefix
+ * @param bool $with_overlay
  */
-function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix) {
+function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix, $with_overlay = TRUE) {
   global $theme, $theme_info;
   if ($theme != 'eiti') {
     return;
@@ -738,6 +739,10 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
   $selector = drupal_html_id($selector_prefix . '-background-image-' . $featured_image_fid);
   $elements['#attributes']['class'][] = $selector;
   $elements['#attributes']['class'][] = 'with-background-image';
+
+  if ($with_overlay) {
+    $elements['#attributes']['class'][] = 'with-overlay';
+  }
 
   // Prepare inline style for: 'Smartphone' and 'Tablet'
   // @see: .xMediumAndDown() in custom-responsive.less
