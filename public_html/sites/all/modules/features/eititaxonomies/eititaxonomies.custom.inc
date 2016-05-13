@@ -52,7 +52,7 @@ function eititaxonomies_taxonomy_term_page($term) {
   // drupal_add_feed('taxonomy/term/' . $term->tid . '/feed', 'RSS - ' . $term->name);
 
   // Get an ordered list of terms.
-  $terms_list = i18n_taxonomy_get_tree($term->vid, $langcode, 0, 1, TRUE);
+  $terms_list = taxonomy_get_tree($term->vid, 0, 1, TRUE);
   $links = array();
   foreach ($terms_list as $weight => $term_object) {
     $entity_uri = entity_uri('taxonomy_term', $term_object);
