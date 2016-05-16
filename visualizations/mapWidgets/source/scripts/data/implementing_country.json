@@ -15,24 +15,370 @@
 "local_website": "http://www.albeiti.org",
 "annual_report_file": null,
 "reports": {
-"2012": [],
-"2013": [],
-"2014": []
+"2012": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"id": "1",
+"value": "623696682464",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "<URL, or reference to section in EITI Report>"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "1",
+"value": "12654028436019",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.1. Contribution to Albanian Economy"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"id": "1",
+"value": "79146919431",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "1",
+"value": "3196208530806",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+},
+{
+"commodity": "Exports - extractive industries",
+"id": "1",
+"value": "710900473934",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.5 Export from the extractive sector"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "1",
+"value": "2090883746864",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.5 Export from the extractive sector"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1199650.35",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "2.2.3 Oil and gas production"
+},
+{
+"commodity": "Gas, volume",
+"id": "1",
+"value": "13100001",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "2.2.3 Oil and gas production"
+},
+{
+"commodity": "Coal, volume",
+"id": "1",
+"value": "1000",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "2.3 Mining sector overview"
+},
+{
+"commodity": "Total revenue received?",
+"id": "1",
+"value": "328909952607",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2.6.2. Government’s revenue from the upstream oil, gas and mining sector"
+}
+],
+"2013": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"id": "1",
+"value": "5",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "1",
+"value": "7",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"id": "1",
+"value": "164881741",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "1",
+"value": "171277200",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - extractive industries",
+"id": "1",
+"value": "96705",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "1",
+"value": "100828",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 and 77 of Report EITI 2013-2014"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1402840326",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Page 38 of Report EITI 2013-2014"
+},
+{
+"commodity": "Total revenue received?",
+"id": "1",
+"value": "33.418773142531",
+"value_bool": null,
+"value_text": null,
+"unit": "",
+"source": "Page 29, 30 and 111 of EITI Report 2013-2014"
+}
+],
+"2014": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"id": "1",
+"value": "5",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "1",
+"value": "7",
+"value_bool": null,
+"value_text": null,
+"unit": "% of GDP",
+"source": "Page 13 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"id": "1",
+"value": "165687204",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of EITI Report 2013-2014"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "1",
+"value": "170568720",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page 14 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - extractive industries",
+"id": "1",
+"value": "82207.091665",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 of Report EITI 2013-2014"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "1",
+"value": "82802.091665",
+"value_bool": null,
+"value_text": null,
+"unit": "ALL million",
+"source": "Page 16 and 77 of Report EITI 2013-2014"
+},
+{
+"commodity": "Oil, volume",
+"id": "1",
+"value": "1615529138",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Page 38 of Report EITI 2013-2014"
+},
+{
+"commodity": "Total revenue received?",
+"id": "1",
+"value": "37.37913033942",
+"value_bool": null,
+"value_text": null,
+"unit": "USD million",
+"source": "Page 29, 30 and 111 of EITI Report 2013-2014"
+}
+]
 },
 "metadata": {
-"2012": {},
-"2013": {},
-"2014": {}
+"2012": {
+"contact": {
+"name": "Andrii Zherebko",
+"email": "Azherebko@eiti.org",
+"organisation": "EITI"
+},
+"year_start": "1325376000",
+"year_end": "1356912000",
+"currency_rate": "0.1055",
+"currency_code": "ALL",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "75",
+"governmental_agencies": "2"
+},
+"web_report_links": [
+{
+"url": "https://eiti.org/files/albania_eiti_report-2013-2014_final.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2013": {
+"contact": {
+"name": "Eni Bajraktari",
+"email": "eni.bajraktari@eiti.gov.al",
+"organisation": "EITI Albania"
+},
+"year_start": "1356998400",
+"year_end": "1388448000",
+"currency_rate": "0.1057",
+"currency_code": "ALL",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil",
+"Other Sectors"
+],
+"reporting_organisations": {
+"companies": "103",
+"governmental_agencies": "11"
+},
+"web_report_links": [
+{
+"url": "http://www.albeiti.org/wp-content/uploads/2016/01/EITI-Report-2013-2014.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2014": {
+"contact": {
+"name": "Eni Bajraktari",
+"email": "eni.bajraktari@eiti.gov.al",
+"organisation": "EITI Albania"
+},
+"year_start": "1388534400",
+"year_end": "1419984000",
+"currency_rate": "0.1055",
+"currency_code": "ALL",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "118",
+"governmental_agencies": "11"
+},
+"web_report_links": [
+{
+"url": "http://www.albeiti.org/wp-content/uploads/2016/01/EITI-Report-2013-2014.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+}
 },
 "licenses": null,
 "contracts": {
-"2013": {},
-"2014": {}
+"2013": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "2"
+},
+"2014": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "2"
+}
 },
 "revenues": {
-"2012": {},
-"2013": {},
-"2014": {}
+"2012": {
+"government": "64766958",
+"company": "64767138"
+},
+"2013": {
+"government": "312251154",
+"company": "311789716"
+},
+"2014": {
+"government": "164910608",
+"company": "164682273"
+}
 }
 },
 {
@@ -50,16 +396,114 @@
 "local_website": "http://ph-eiti.org",
 "annual_report_file": null,
 "reports": {
-"2012": []
+"2012": [
+{
+"commodity": "Gross Domestic Product - all sectors",
+"id": "2",
+"value": "272000000000",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Vol. 1 (Contextual Information), Chapter 1"
+},
+{
+"commodity": "Government revenue - all sectors",
+"id": "2",
+"value": "39325124319",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Vol. 2 Reconciliation Report, Table 4"
+},
+{
+"commodity": "Exports - all sectors",
+"id": "2",
+"value": "52100000000",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Vol. 1 (Contextual Information), Chapter 1"
+},
+{
+"commodity": "Gold, volume",
+"id": "2",
+"value": "14596",
+"value_bool": null,
+"value_text": null,
+"unit": "kg",
+"source": "Production Data (2012 and 2013): http://ph-eiti.org/#/EITI-Report/First-Country-Report"
+},
+{
+"commodity": "Gas, volume",
+"id": "2",
+"value": "148330",
+"value_bool": "0",
+"value_text": "",
+"unit": "tonne",
+"source": "Vol. 1 (Contextual Information), Chapter 1"
+},
+{
+"commodity": "Oil, volume",
+"id": "2",
+"value": "260349",
+"value_bool": "0",
+"value_text": "",
+"unit": "Sm3",
+"source": "Vol. 1 (Contextual Information), Chapter 1"
+}
+]
 },
 "metadata": {
-"2012": {}
+"2012": {
+"contact": {
+"name": null,
+"email": null,
+"organisation": "Isla Lipana /Pricewaterhouse Coopers"
+},
+"year_start": "1325376000",
+"year_end": "1356912000",
+"currency_rate": "42.23",
+"currency_code": "PHP",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil",
+"Other Sectors"
+],
+"reporting_organisations": {
+"companies": "36",
+"governmental_agencies": "7"
+},
+"web_report_links": [
+{
+"url": "http://ph-eiti.org/#/EITI-Report/First-Country-Report",
+"title": "",
+"attributes": []
+},
+{
+"url": "http://ph-eiti.org/#/EITI-Report/First-Country-Report",
+"title": "",
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
+}
 },
 "licenses": {
-"2012": {}
+"2012": {
+"Public registry of licences, mining": "http://www.mgb.gov.ph/lptt.aspx"
+}
 },
 "contracts": {
-"2012": {}
+"2012": {
+"Does the report address the government's policy on contract disclosure?": "2",
+"Are contracts disclosed?": "2",
+"Publicly available registry of contracts": "Mining Tenements Division of MGB"
+}
 },
 "revenues": {
 "2012": {
@@ -92,6 +536,17 @@
 "value_text": null,
 "unit": "USD",
 "source": "p. 11"
+}
+],
+"2011": [
+{
+"commodity": "Government revenue - extractive industries",
+"id": "26",
+"value": "1421167721",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2. Key highlights of this report, p. 7"
 }
 ],
 "2012": [
@@ -134,10 +589,10 @@
 {
 "commodity": "Oil, volume",
 "id": "26",
-"value": "8545000",
+"value": "1358548761",
 "value_bool": null,
 "value_text": null,
-"unit": "bbls",
+"unit": "Sm3",
 "source": "1.3 La production du secteur extractif en 2012"
 },
 {
@@ -146,7 +601,7 @@
 "value": "619301",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2012"
 },
 {
@@ -155,17 +610,8 @@
 "value": "2546",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2012"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "8337983",
-"value_bool": null,
-"value_text": null,
-"unit": "bbls",
-"source": "5.3.1 Données sur la production et l'exportation du secteur extractif"
 }
 ],
 "2013": [
@@ -202,43 +648,16 @@
 "value": "919588",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2013"
 },
 {
 "commodity": "Gold, volume",
 "id": "26",
-"value": "2860",
+"value": "3.15",
 "value_bool": null,
 "value_text": null,
-"unit": "kg",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "797147",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "6801880",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "137074",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2013"
 }
 ],
@@ -267,34 +686,16 @@
 "value": "1065744",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.2. La production et les exportations du secteur extractif"
 },
 {
 "commodity": "Gold, volume",
 "id": "26",
-"value": "26.38602585",
+"value": "0.0286601",
 "value_bool": null,
 "value_text": null,
-"unit": "kg",
-"source": "1.2. La production et les exportations du secteur extractif"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "1030129",
-"value_bool": null,
-"value_text": null,
-"unit": "tons",
-"source": "1.2. La production et les exportations du secteur extractif"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "23564",
-"value_bool": null,
-"value_text": null,
-"unit": "kg",
+"unit": "tonne",
 "source": "1.2. La production et les exportations du secteur extractif"
 }
 ]
@@ -994,9 +1395,73 @@
 "local_website": "http://www.eitimongolia.mn/en",
 "annual_report_file": null,
 "reports": {
-"2009": [],
-"2010": [],
-"2011": [],
+"2009": [
+{
+"commodity": "Coal, volume",
+"id": "7",
+"value": "13164000",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Section 3.A Minerals"
+},
+{
+"commodity": "Gold, volume",
+"id": "7",
+"value": "1",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Section 3.A Minerals"
+}
+],
+"2011": [
+{
+"commodity": "Exports - all sectors",
+"id": "7",
+"value": "4800000000",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 3, Page 9"
+},
+{
+"commodity": "Oil, volume",
+"id": "7",
+"value": "405243.417173",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 3. The Mongolian Extractive Sector"
+},
+{
+"commodity": "Coal, volume",
+"id": "7",
+"value": "32029700",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Section 3. The Mongolian Extractive Sector"
+},
+{
+"commodity": "Copper, volume",
+"id": "7",
+"value": "347400",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Section 3. The Mongolian Extractive Sector"
+},
+{
+"commodity": "Gold, volume",
+"id": "7",
+"value": "6.3",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Section 3. The Mongolian Extractive Sector"
+}
+],
 "2012": [
 {
 "commodity": "Exports - extractive industries",
@@ -1026,27 +1491,9 @@
 "source": "Section 1.3.2.b"
 },
 {
-"commodity": "Oil, volume",
+"commodity": "Copper, volume",
 "id": "7",
-"value": "567267.64976",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": "Section 1.3.2.b"
-},
-{
-"commodity": "Coal, volume",
-"id": "7",
-"value": "20916000",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "Section 1.3.2.b"
-},
-{
-"commodity": "Gold, volume",
-"id": "7",
-"value": "2800",
+"value": "348000",
 "value_bool": null,
 "value_text": null,
 "unit": "tonne",
@@ -1056,8 +1503,8 @@
 "commodity": "Gold, volume",
 "id": "7",
 "value": "6608",
-"value_bool": "0",
-"value_text": "",
+"value_bool": null,
+"value_text": null,
 "unit": "tonne",
 "source": "Section 1.3.2.b"
 }
@@ -1224,22 +1671,22 @@
 "web_report_links": [
 {
 "url": "http://www.eitimongolia.mn/en/reconciliation-report",
-"title": "",
+"title": null,
 "attributes": []
 },
 {
 "url": "http://www.eitimongolia.mn/sites/default/files/uploads/Companies_report_2012.xlsx",
-"title": "",
+"title": null,
 "attributes": []
 },
 {
 "url": "http://www.eitimongolia.mn/sites/default/files/uploads/Government_reports_2012.xlsx",
-"title": "",
+"title": null,
 "attributes": []
 },
 {
 "url": "http://www.eitimongolia.mn/sites/default/files/uploads/Summary_report_2012.pdf",
-"title": "",
+"title": null,
 "attributes": []
 }
 ],
@@ -1487,6 +1934,17 @@
 "source": "p. 11"
 }
 ],
+"2011": [
+{
+"commodity": "Government revenue - extractive industries",
+"id": "26",
+"value": "1421167721",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "2. Key highlights of this report, p. 7"
+}
+],
 "2012": [
 {
 "commodity": "Gross Domestic Product - all sectors",
@@ -1527,10 +1985,10 @@
 {
 "commodity": "Oil, volume",
 "id": "26",
-"value": "8545000",
+"value": "1358548761",
 "value_bool": null,
 "value_text": null,
-"unit": "bbls",
+"unit": "Sm3",
 "source": "1.3 La production du secteur extractif en 2012"
 },
 {
@@ -1539,7 +1997,7 @@
 "value": "619301",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2012"
 },
 {
@@ -1548,17 +2006,8 @@
 "value": "2546",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2012"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "8337983",
-"value_bool": null,
-"value_text": null,
-"unit": "bbls",
-"source": "5.3.1 Données sur la production et l'exportation du secteur extractif"
 }
 ],
 "2013": [
@@ -1595,43 +2044,16 @@
 "value": "919588",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2013"
 },
 {
 "commodity": "Gold, volume",
 "id": "26",
-"value": "2860",
+"value": "3.15",
 "value_bool": null,
 "value_text": null,
-"unit": "kg",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "797147",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "6801880",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "137074",
-"value_bool": null,
-"value_text": null,
-"unit": "million CDF",
+"unit": "tonne",
 "source": "1.3 La production du secteur extractif en 2013"
 }
 ],
@@ -1660,34 +2082,16 @@
 "value": "1065744",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "1.2. La production et les exportations du secteur extractif"
 },
 {
 "commodity": "Gold, volume",
 "id": "26",
-"value": "26.38602585",
+"value": "0.0286601",
 "value_bool": null,
 "value_text": null,
-"unit": "kg",
-"source": "1.2. La production et les exportations du secteur extractif"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "1030129",
-"value_bool": null,
-"value_text": null,
-"unit": "tons",
-"source": "1.2. La production et les exportations du secteur extractif"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "23564",
-"value_bool": null,
-"value_text": null,
-"unit": "kg",
+"unit": "tonne",
 "source": "1.2. La production et les exportations du secteur extractif"
 }
 ]
@@ -1946,10 +2350,10 @@
 {
 "commodity": "Gold, volume",
 "id": "27",
-"value": "2524113",
+"value": "78",
 "value_bool": null,
 "value_text": null,
-"unit": "oz",
+"unit": "tonne",
 "source": "Appendix 4"
 }
 ],
@@ -1957,16 +2361,16 @@
 {
 "commodity": "Gold, volume",
 "id": "27",
-"value": "2556556",
+"value": "79",
 "value_bool": null,
 "value_text": null,
-"unit": "Oz",
+"unit": "tonne",
 "source": "Table 5.1: Mineral Production in 2010-2011"
 },
 {
 "commodity": "Oil, volume",
 "id": "27",
-"value": "187778.31107616",
+"value": "187778308",
 "value_bool": null,
 "value_text": null,
 "unit": "Sm3",
@@ -1977,16 +2381,16 @@
 {
 "commodity": "Gold, volume",
 "id": "27",
-"value": "2662943",
+"value": "82",
 "value_bool": null,
 "value_text": null,
-"unit": "Oz",
+"unit": "tonne",
 "source": "Table 5.1: Mineral Production in 2010-2011"
 },
 {
 "commodity": "Oil, volume",
 "id": "27",
-"value": "3846846.5500251",
+"value": "3846846482",
 "value_bool": null,
 "value_text": null,
 "unit": "Sm3",
@@ -2002,11 +2406,11 @@
 "source": "Page vi"
 }
 ],
-"2013": [
+"2012": [
 {
 "commodity": "Oil, volume",
 "id": "27",
-"value": "5731225158",
+"value": "4202194664",
 "value_bool": null,
 "value_text": null,
 "unit": "Sm3",
@@ -2015,10 +2419,10 @@
 {
 "commodity": "Gold, volume",
 "id": "27",
-"value": "136",
+"value": "134",
 "value_bool": null,
 "value_text": null,
-"unit": "tons",
+"unit": "tonne",
 "source": "2012/2013 Mining Sector Report; section 4.0; Table 4.2"
 }
 ]
@@ -2162,38 +2566,6 @@
 "revenue_stream": "1",
 "company": "1"
 }
-},
-"2013": {
-"contact": {
-"name": "Kwaku Boa-Amponsem",
-"email": "assoboas@yahoo.com",
-"organisation": "BOAS & ASSOCIATES"
-},
-"year_start": "1356998400",
-"year_end": "1388448000",
-"currency_rate": "2.35",
-"currency_code": "USD",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "22",
-"governmental_agencies": "11"
-},
-"web_report_links": [
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&download=173:2012-2013-mining-sector-report&id=21:national-reports&Itemid=54",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "1",
-"revenue_stream": "1",
-"company": "1"
-}
 }
 },
 "licenses": null,
@@ -2208,10 +2580,6 @@
 "Are contracts disclosed?": "0"
 },
 "2012": {
-"Does the report address the government's policy on contract disclosure?": "1",
-"Are contracts disclosed?": "0"
-},
-"2013": {
 "Does the report address the government's policy on contract disclosure?": "1",
 "Are contracts disclosed?": "0"
 }
@@ -2232,10 +2600,6 @@
 "2012": {
 "government": "729853058",
 "company": "729853057"
-},
-"2013": {
-"government": "845870485",
-"company": "846102137"
 }
 }
 }

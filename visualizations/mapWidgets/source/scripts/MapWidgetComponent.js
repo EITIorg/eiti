@@ -99,7 +99,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, volume")});
+              var indicator = yearData.find(function(v){ debugger;return (v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -109,7 +109,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Gas, volume")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Gas, volume" && v.unit && v.unit.toLowerCase() === 'sm3')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -119,7 +119,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Coal, volume")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Coal, volume" && v.unit && v.unit.toLowerCase() === 'tonne')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -129,7 +129,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Gold, volume")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Gold, volume" && v.unit && v.unit.toLowerCase() === 'tonne')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -139,7 +139,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ return (v.commodity === "Copper, volume")});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Copper, volume" && v.unit && v.unit.toLowerCase() === 'tonne')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -356,13 +356,13 @@ export default class MapWidgetComponent extends Component {
         values = helpers.t("Gas, volume");
       break;
       case "coal_volume":
-        values = helpers.t("Coal, tons");
+        values = helpers.t("Coal");
       break;
       case "gold_volume":
-        values = helpers.t("Gold, tons");
+        values = helpers.t("Gold");
       break;
       case "copper_volume":
-        values = helpers.t("Copper, tons");
+        values = helpers.t("Copper");
       break;
       case "revenue":
         values = helpers.t("Government revenue - extractive industries");
@@ -523,7 +523,7 @@ export default class MapWidgetComponent extends Component {
 
     return (
 
-      <div className="map-container">
+      <div className="map-container media-resizable-element">
         {buttons}
         <div>
           <Map
