@@ -174,13 +174,14 @@ export default class MapWidgetComponent extends Component {
           break;
           case "share_revenues":
             if(datapoint.revenues) {
-              var years = Object.keys(datapoint.reports);
+              var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
+              var yearData = datapoint.revenues[last];
               var generalYearData = datapoint.reports[last];
-              var indicator_government = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - extractive industries")}) : undefined;
+              var indicator_government = yearData.government;
               var indicator_allsectors = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - all sectors")}) : undefined;
-              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government.value !== 0 && indicator_allsectors.unit === indicator_government.unit) {
-                indicator_value = indicator_government.value*100/indicator_allsectors.value;
+              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+                indicator_value = indicator_government*100/indicator_allsectors.value;
               }
               else
               {
@@ -321,6 +322,9 @@ export default class MapWidgetComponent extends Component {
           var indicatorName = ::this.getIndicatorName(indicator_id || this.state.indicator_id);
           var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
           var mergedHTML = "<h2>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<br/></h2>";
+          //mergedHTML += "<h2 class='close_legend'>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<div>Close</div><br/></h2>";
+          mergedHTML += "<div class='legend_body'>";
+
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
@@ -328,6 +332,9 @@ export default class MapWidgetComponent extends Component {
           });
           if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
+
+          mergedHTML += "</div>";
+
           map.options.legend.innerHTML = mergedHTML + sourceText;
       }.bind(this);
 
@@ -520,17 +527,22 @@ export default class MapWidgetComponent extends Component {
         </div>
       );
     }
+    var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    var zoom = 2;
 
+    if(screenWidth < 384) {
+      zoom = 1;
+    }
     return (
 
-      <div className="map-container media-resizable-element">
+      <div className="map-container">
         {buttons}
-        <div>
-          <Map
+        <div className="media-resizable-wrapper">
+          <Map className="media-resizable-element"
             center={this.state.latlng}
             length={4}
             ref='map'
-            zoom={2}
+            zoom={zoom}
             height={500}
             scrollWheelZoom={false}
             >
