@@ -38,6 +38,9 @@ function eiti_migration_migrate_api() {
       'mentions' => array(
         'title' => t('Migration to the Mention CT'),
       ),
+      'internal' => array(
+        'title' => t('Migration to the Internal CT'),
+      ),
       'spreadsheets' => array(
         'title' => t('Migration of spreadsheets (Reports) to custom entities.'),
       ),
@@ -351,6 +354,47 @@ function eiti_migration_migrate_api() {
     ),
   );
 
+  // ###########################################
+  // ######## INTERNAL PAGES MIGRATIONS ########
+  // ###########################################
+  $migrations['migrations']['EITIPagesUploadedFilesMigration'] = array(
+    'class_name' => 'EITIPagesUploadedFilesMigration',
+    'group_name' => 'internal',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://',
+    'bundle' => 'document',
+    'description' => t('Migrates the files from the Page legacy-ct to Internal CT.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIPagesAttachedFilesMigration'] = array(
+    'class_name' => 'EITIPagesAttachedFilesMigration',
+    'group_name' => 'internal',
+    'user_migration' => 'EITIUsersMigration',
+    'skip_pictures' => TRUE,
+    'source_dir' => $legacy_public,
+    'destination_dir' => 'public://',
+    'bundle' => 'document',
+    'description' => t('Migrates the attached files from the Page legacy-ct to Internal CT.'),
+    'dependencies' => array('EITIUsersMigration'),
+  );
+  $migrations['migrations']['EITIInternalPageMigration'] = array(
+    'class_name' => 'EITIInternalPageMigration',
+    'group_name' => 'internal',
+    'user_migration' => 'EITIUsersMigration',
+    'file_migration' => 'EITIIMCEFilesMigration',
+    'source_type' => 'page',
+    'destination_type' => 'internal',
+    'description' => t('Migration responsible for migrating internal pages nodes to the Internal CT.'),
+    'soft_dependencies' => array(
+      'EITIUsersMigration',
+      'EITIIMCEFilesMigration',
+      'EITIPagesAttachedFilesMigration',
+      'EITIPagesUploadedFilesMigration',
+    ),
+  );
+
   // #####################################
   // ######## MENTIONS MIGRATIONS ########
   // #####################################
@@ -413,7 +457,7 @@ function eiti_migration_migrate_api() {
   // Add legacy database key.
   foreach($migrations['migrations'] as $key => $migration) {
     // Add the connection only to the groups we want to opt in.
-    $opt_in_groups = array('core', 'articles', 'documents', 'persons', 'mentions');
+    $opt_in_groups = array('core', 'articles', 'documents', 'persons', 'mentions', 'internal');
     if (in_array($migration['group_name'], $opt_in_groups)) {
       $migrations['migrations'][$key]['source_database'] = array(
         'driver'   => 'mysql',

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Content Type Internal Page feature.
+ */
+
+include_once 'eitict_internal.features.inc';

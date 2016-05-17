@@ -211,9 +211,12 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
   /**
    * A callback function from preg_replace_callback.
    */
-  public function replaceHrefCallback(array $matches) {
+  static public function replaceHrefCallback(array $matches) {
+    module_load_include('inc', 'pathauto', 'pathauto');
+
     $legacy_domain = variable_get('eiti_migration_legacy_domain', 'eiti.org');
     $href_matches = array();
+    $file = FALSE;
 
     // Default to the original <a> tag
     $result = $matches[0];
@@ -223,12 +226,72 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
       // Drupal scheme as it's saved in the file_unmanaged table
       $href = $href_matches[1];
 
+      $fid = db_select('file_managed', 'f')
+        ->fields('f', array('fid'))
+        ->condition('filename', basename($href))
+        ->execute()
+        ->fetchField();
+
       // If there's no FID in our database, well, we'll fetch the image from the web and save it.
       if (!empty($href)) {
+        if (empty($fid)) {
+          $path_info = parse_url($href);
+          $full_path = FALSE;
+          if (isset($path_info['host']) && ($path_info['host'] == 'eiti.org' || $path_info['host'] == 'www.eiti.org' )) {
+            $full_path = 'https://' . $legacy_domain . $path_info['path'];
+          }
+          elseif (empty($path_info['host'])) {
+            $full_path = (substr($path_info['path'], 0, 1) == '/') ? 'https://' . $legacy_domain . $path_info['path'] : 'https://' . $legacy_domain . '/' . $path_info['path'];
+          }
+
+          // Now that we know what's the path.
+          if ($full_path) {
+            $basename = basename($href);
+            $info = pathinfo($basename);
+            $basename_clean = pathauto_clean_alias($info['filename']);
+            $file = system_retrieve_file($full_path, 'public://migrated_files/' . $basename_clean . '.' . $info['extension'], TRUE);
+          }
+        }
+
+        // Now replace to an absolute path (relative to domain).
         $path_info = parse_url($href);
+        $relative_path = $path_info['path'];
         if (isset($path_info['host']) && ($path_info['host'] == $legacy_domain || $path_info['host'] == 'www.' . $legacy_domain )) {
-          $relative_path = $path_info['path'];
           $result = str_replace($href, $relative_path, $result);
+        }
+
+        // Also preserve the old aliases (because in images case, we rewrite to Media FID anyway, here we just need to preserve the alises).
+        if ($file) {
+          $path_alias['alias'] = variable_get('file_public_path', 'sites/default/files') . '/' . file_uri_target($file->uri);
+          $path_alias['source'] = urldecode(ltrim($relative_path, '/'));
+
+          $conditions = array(
+            'alias' => $path_alias['alias'],
+          );
+          $alias_lookup = path_load($conditions);
+          if (empty($alias_lookup)) {
+            if (strlen($path_alias['alias']) >= 255) {
+              $msg = t("File alias cannot be created, alias is too long: !file",
+                array(
+                  '!file' => $path_alias['alias'],
+                )
+              );
+              $mg = Migration::currentMigration();
+              $mg->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+            }
+            elseif (strlen($path_alias['source']) >= 255) {
+              $msg = t("File alias cannot be created, source is too long: !file",
+                array(
+                  '!file' => $path_alias['source'],
+                )
+              );
+              $mg = Migration::currentMigration();
+              $mg->queueMessage($msg, MigrationBase::MESSAGE_NOTICE);
+            }
+            else {
+              path_save($path_alias);
+            }
+          }
         }
       }
     }
