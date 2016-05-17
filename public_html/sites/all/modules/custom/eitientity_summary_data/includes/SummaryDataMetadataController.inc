@@ -2,15 +2,12 @@
 
 /**
  */
-class SummaryDataMetadataController extends EntityDefaultMetadataController {
+class SummaryDataMetadataController extends HelperEntityMetadataController {
   public function entityPropertyInfo() {
     $info = parent::entityPropertyInfo();
 
     // A bit more adjustments.
     foreach ($info[$this->type] as $bundle => &$bundle_info) {
-      if (isset($bundle_info['status'])) {
-        $bundle_info['status']['type'] = 'boolean';
-      }
       if (isset($bundle_info['country_id'])) {
         $bundle_info['country_id'] = array(
           'label' => t('Implementing Country'),

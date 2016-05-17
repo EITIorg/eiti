@@ -8,3 +8,4 @@ dependencies[] = entity
 
 files[] = includes/HelperEntity.inc
 files[] = includes/HelperEntityBundleableUIController.inc
+files[] = includes/HelperEntityMetadataController.inc

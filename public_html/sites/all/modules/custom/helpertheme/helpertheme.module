@@ -638,6 +638,9 @@ function helpertheme_ds_field_theme_functions_info() {
 /**
  * Provide simple HTML for the field.
  *
+ * @see: theme_ds_field_minimal().
+ * @see: theme_ds_field_minimal().
+ *
  * @TODO: Improve styling for multi-value fields.
  */
 function theme_helpertheme_ds_field_simple($variables) {
@@ -658,9 +661,12 @@ function theme_helpertheme_ds_field_simple($variables) {
   }
 
   // Render the items.
+  $output .= '<div class="field-items">';
   foreach ($variables['items'] as $delta => $item) {
-    $output .= drupal_render($item);
+    $output .= '<div class="field-item">' . drupal_render($item) . '</div>';
   }
+  $output .= "</div>";
+
   $output .="</div>";
 
   return $output;

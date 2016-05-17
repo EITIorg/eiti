@@ -130,3 +130,17 @@ function helperentity_entity_ui_get_page_title($op, $entity_type, $entity = NULL
   }
   return entity_ui_get_action_title($op, $entity_type, $bundle);
 }
+
+/**
+ * Gets the property using the getter method (named just like the property).
+ *
+ * @see: entity_property_getter_method
+ * @TODO: Cleanup!
+ */
+function helperentity_property_getter_method($object, array $options, $name) {
+  if (in_array($name, array('created', 'changed', 'year_start', 'year_end'))) {
+    return format_date($object->$name, 'shortest');
+  }
+
+  return entity_property_getter_method($object, $options, $name);
+}

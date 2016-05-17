@@ -59,56 +59,56 @@ function eitiet_summary_data_strongarm() {
       'display' => array(
         'country_id' => array(
           'default' => array(
-            'weight' => '5',
+            'weight' => '0',
             'visible' => TRUE,
           ),
         ),
         'year_start' => array(
           'default' => array(
-            'weight' => '6',
-            'visible' => TRUE,
+            'weight' => '15',
+            'visible' => FALSE,
           ),
         ),
         'year_end' => array(
           'default' => array(
-            'weight' => '7',
+            'weight' => '1',
             'visible' => TRUE,
           ),
         ),
         'published' => array(
           'default' => array(
-            'weight' => '4',
-            'visible' => TRUE,
+            'weight' => '14',
+            'visible' => FALSE,
           ),
         ),
         'currency_code' => array(
           'default' => array(
-            'weight' => '3',
-            'visible' => TRUE,
+            'weight' => '13',
+            'visible' => FALSE,
           ),
         ),
         'currency_rate' => array(
           'default' => array(
-            'weight' => '2',
-            'visible' => TRUE,
+            'weight' => '12',
+            'visible' => FALSE,
           ),
         ),
         'status' => array(
           'default' => array(
-            'weight' => '9',
-            'visible' => TRUE,
+            'weight' => '16',
+            'visible' => FALSE,
           ),
         ),
         'created' => array(
           'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+            'weight' => '10',
+            'visible' => FALSE,
           ),
         ),
         'changed' => array(
           'default' => array(
-            'weight' => '1',
-            'visible' => TRUE,
+            'weight' => '11',
+            'visible' => FALSE,
           ),
         ),
         'url' => array(

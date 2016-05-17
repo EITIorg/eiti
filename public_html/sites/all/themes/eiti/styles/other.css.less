@@ -81,6 +81,34 @@ div.description,
   }
 }
 
+.xNormalAndUp() {
+  .entity-summary-data.view-mode-full {
+    .field {
+      .clearfix-mixin();
+    }
+    .label-above {
+      width: 40%;
+      float: left;
+      text-align: right;
+    }
+    .field-items {
+      width: 50%;
+      float: left;
+    }
+    .field-item {
+      margin-bottom: 0.5em;
+    }
+    .field-group-div {
+      border: 1px solid @clmain__separator;
+      margin: 1em 0;
+      padding: 1em;
+      h3 {
+        margin-top: 0;
+      }
+    }
+  }
+
+}
 
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';
