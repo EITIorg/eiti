@@ -29,17 +29,7 @@ function eiti_ctools_extra__quick_summary_tool__render($subtype, $conf, $panel_a
   );
 
   // Retrieve the QST form.
-  // $block['form'] = eiti_ctools_extra__quick_summary_tool__form();
-
-  // Retrieve the QST Data.
-  $block['info'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'id' => 'quick-summary-tool--info',  // We don't care about multiple widgets on the same page.
-    ),
-  );
-
-  $block['info'] += eiti_ctools_extra__quick_summary_tool__info();
+  $block['form'] = drupal_get_form('eiti_ctools_extra__quick_summary_tool__form');
 
   return (object) array(
     'content' => $block,
@@ -64,17 +54,4 @@ function eiti_ctools_extra__quick_summary_tool__settings_form_submit($form, &$fo
  */
 function _eiti_ctools_extra__quick_summary_tool__form() {
   return $form;
-}
-
-/**
- * @return array
- */
-function eiti_ctools_extra__quick_summary_tool__info() {
-  $elements = array();
-
-  // $entity_id = 51;
-  // $entity = entity_load_single('summary_data', $entity_id);
-  // $elements = entity_view('summary_data', array($entity_id => $entity), 'full');
-
-  return $elements;
 }

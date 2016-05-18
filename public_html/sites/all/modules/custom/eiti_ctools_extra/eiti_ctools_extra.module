@@ -192,24 +192,9 @@ function eiti_ctools_extra_load_eiti_libraries($name, $variant = NULL) {
 }
 
 /**
- * Implements hook_menu().
- */
-function eiti_ctools_extra_menu() {
-  $items = array();
-
-  $items['quick-summary-tool'] = array(
-    'title' => 'Quick Summary Tool',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('eiti_ctools_extra__quick_summary_tool__form'),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  return $items;
-}
-
-/**
  * Form constructor for the Quick Summary Tool form.
+ *
+ * @TODO: Currently the form only works via API; for fix: views_exposed_form_cache()
  *
  * @param $form
  * @param $form_state
@@ -217,8 +202,6 @@ function eiti_ctools_extra_menu() {
  * @return array
  */
 function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
-  // if $cached return views_exposed_form_cache($view->name, $view->current_display);
-
   $form = array(
     '#type' => 'container',
     '#attributes' => array(
@@ -241,16 +224,30 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
     $selected_countries = $form_state['input']['countries'];
   }
 
+  // Get a list of Implementing Countries that have summary data files.
   $query = db_select('eiti_implementing_country', 'ic');
   $query->innerJoin('eiti_summary_data', 'sd', 'ic.id = sd.country_id');
   $query
     ->fields('ic', array('id', 'name'))
+    ->orderBy('ic.name')
     ->groupBy('ic.id')
     ->condition('ic.status', 1);
 
-  // @TODO: Translate labels using entity_load() && entity_label()?!
   $country_options = $query->execute()
     ->fetchAllKeyed();
+
+  // Translate Country Names.
+  $countries = entity_load('implementing_country', array_keys($country_options));
+  foreach ($country_options as $country_id => &$country_name) {
+    if (empty($countries[$country_id])) {
+      continue;
+    }
+
+    $country_name = entity_label('implementing_country', $countries[$country_id]);
+  }
+
+  // Sort the countries by the translated names.
+  sort($country_options);
 
   $form['countries'] = array(
     '#type' => 'select',
@@ -264,7 +261,7 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
     ),
     '#multiple' => TRUE,
     '#attributes' => array(
-      'style' => 'width: 26em;',  // Used by Select2.
+      'style' => 'width: 19em;',  // Used by Select2.
       'data-placeholder' => t('Countries'),
       'class' => array(
         'jquery-select2-enabled',
@@ -298,7 +295,7 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
     '#attributes' => array(
       'id' => 'quick-summary-tool--form-years',
       'data-placeholder' => t('Years'),
-      'style' => 'width: 15em;',  // Used by Select2.
+      'style' => 'width: 19em;',  // Used by Select2.
       'class' => array(
         'jquery-select2-enabled',
       ),
@@ -342,9 +339,6 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
 
 
   $form['#suffix'] = '<div id="quick-summary-tool--information-placeholder"></div>';
-
-  // Save the form
-  // views_exposed_form_cache($view->name, $view->current_display, $form);
 
   return $form;
 }
