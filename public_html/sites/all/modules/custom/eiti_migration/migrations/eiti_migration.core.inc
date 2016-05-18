@@ -107,7 +107,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
         return;
       }
       // Pass full img tags into the callback.
-      $new_body = preg_replace_callback('|<img [^>]*>|i', array(self, 'replaceOverriddenCallback'),
+      $new_body = preg_replace_callback('|<img [^>]*>|i', array('EITINodeMigration', 'replaceOverriddenCallback'),
         $body);
       $entity->{$field}[$language][0]['value'] = $new_body;
       migrate_instrument_stop('EITINodeMigration rewriteImgTags');
@@ -130,7 +130,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
         return;
       }
       // Pass full img tags into the callback.
-      $new_body = preg_replace_callback('|<a [^>]*>|i', array(self, 'replaceHrefCallback'),
+      $new_body = preg_replace_callback('|<a [^>]*>|i', array('EITINodeMigration', 'replaceHrefCallback'),
         $body);
       $entity->{$field}[$language][0]['value'] = $new_body;
       migrate_instrument_stop('EITINodeMigration rewriteHrefs');
@@ -240,7 +240,7 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
           if (isset($path_info['host']) && ($path_info['host'] == 'eiti.org' || $path_info['host'] == 'www.eiti.org' )) {
             $full_path = 'https://' . $legacy_domain . $path_info['path'];
           }
-          elseif (empty($path_info['host'])) {
+          elseif (empty($path_info['host']) && !empty($path_info['path'])) {
             $full_path = (substr($path_info['path'], 0, 1) == '/') ? 'https://' . $legacy_domain . $path_info['path'] : 'https://' . $legacy_domain . '/' . $path_info['path'];
           }
 
@@ -249,7 +249,17 @@ abstract class EITINodeMigration extends DrupalNode7Migration {
             $basename = basename($href);
             $info = pathinfo($basename);
             $basename_clean = pathauto_clean_alias($info['filename']);
-            $file = system_retrieve_file($full_path, 'public://migrated_files/' . $basename_clean . '.' . $info['extension'], TRUE);
+
+            // We want specifically paths with extensions (files, duh).
+            if (!empty($info['extension'])) {
+              $file = system_retrieve_file($full_path, 'public://migrated_files/' . $basename_clean . '.' . $info['extension'], TRUE);
+
+              // Fix it, so all the files are by default documents and NOT reports.
+              if ($file->type == 'report') {
+                $file->type = 'document';
+                $file = file_save($file);
+              }
+            }
           }
         }
 
