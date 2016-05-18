@@ -84,6 +84,9 @@
 .eiti-map-wrapper .legend h2 {
   line-height: 1.25em;
 }
+.eiti-map-wrapper .resizable-map {
+  width: 100% !important;
+}
 .eiti-map-wrapper .leaflet-container {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -112,7 +115,7 @@
 .eiti-map-wrapper .map-option-wrapper .map-option-widget {
   cursor: pointer;
   list-style: none;
-  padding: 0.25em 0 0;
+  padding: 0 0 0;
 }
 .eiti-map-wrapper .map-option-wrapper .map-option-widget:before,
 .eiti-map-wrapper .map-option-wrapper .map-option-widget:after {
@@ -256,9 +259,6 @@
   width: 1.5em;
   height: 1.5em;
 }
-.eiti-map-wrapper .open_legend {
-  display: none;
-}
 .eiti-map-wrapper .country-list-wrapper {
   padding: 2em 0;
 }
@@ -363,13 +363,6 @@
   }
 }
 @media (max-width: 667px) {
-  .open_legend {
-    display: block;
-  }
-  .close_legend,
-  .legend_body {
-    display: none;
-  }
   .eiti-map-wrapper .map-option-widget li {
     border-right: none;
     border-left: none;

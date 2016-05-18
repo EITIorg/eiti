@@ -530,15 +530,24 @@ export default class MapWidgetComponent extends Component {
     var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var zoom = 2;
 
-    if(screenWidth < 384) {
+    if(screenWidth <= 400) {
       zoom = 1;
     }
+
+    // If there's a selector, add the responsive classes.
+    var containerClass = 'map-container';
+    var elementClass;
+    if(selector) {
+      containerClass = 'map-container media-resizable-element';
+      elementClass = 'resizable-map';
+    }
+
     return (
 
-      <div className="map-container">
+      <div className={containerClass}>
         {buttons}
-        <div className="media-resizable-wrapper">
-          <Map className="media-resizable-element"
+        <div>
+          <Map className={elementClass}
             center={this.state.latlng}
             length={4}
             ref='map'

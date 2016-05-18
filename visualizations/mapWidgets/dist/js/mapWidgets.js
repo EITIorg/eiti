@@ -24366,19 +24366,28 @@
 	      var screenWidth = window.innerWidth > 0 ? window.innerWidth : screen.width;
 	      var zoom = 2;
 	
-	      if (screenWidth < 384) {
+	      if (screenWidth <= 400) {
 	        zoom = 1;
 	      }
+	
+	      // If there's a selector, add the responsive classes.
+	      var containerClass = 'map-container';
+	      var elementClass;
+	      if (selector) {
+	        containerClass = 'map-container media-resizable-element';
+	        elementClass = 'resizable-map';
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'map-container' },
+	        { className: containerClass },
 	        buttons,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'media-resizable-wrapper' },
+	          null,
 	          _react2.default.createElement(
 	            _reactLeaflet.Map,
-	            { className: 'media-resizable-element',
+	            { className: elementClass,
 	              center: this.state.latlng,
 	              length: 4,
 	              ref: 'map',
