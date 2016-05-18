@@ -6,13 +6,9 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/1",
 "iso2": "AL",
 "iso3": "ALB",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1230768000",
-"local_website": "http://www.albeiti.org",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": {
 "2012": [
@@ -246,6 +242,15 @@
 "source": "Page 38 of Report EITI 2013-2014"
 },
 {
+"commodity": "Gas, volume",
+"id": "1",
+"value": "16778841.59636",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Page 38 of Report EITI 2013-2014"
+},
+{
 "commodity": "Total revenue received?",
 "id": "1",
 "value": "37.37913033942",
@@ -263,8 +268,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1325376000",
-"year_end": "1356912000",
+"year_start": "Jan 1, 2012",
+"year_end": "Dec 31, 2012",
 "currency_rate": "0.1055",
 "currency_code": "ALL",
 "sectors_covered": [
@@ -295,8 +300,8 @@
 "email": "eni.bajraktari@eiti.gov.al",
 "organisation": "EITI Albania"
 },
-"year_start": "1356998400",
-"year_end": "1388448000",
+"year_start": "Jan 1, 2013",
+"year_end": "Dec 31, 2013",
 "currency_rate": "0.1057",
 "currency_code": "ALL",
 "sectors_covered": [
@@ -328,8 +333,8 @@
 "email": "eni.bajraktari@eiti.gov.al",
 "organisation": "EITI Albania"
 },
-"year_start": "1388534400",
-"year_end": "1419984000",
+"year_start": "Jan 1, 2014",
+"year_end": "Dec 31, 2014",
 "currency_rate": "0.1055",
 "currency_code": "ALL",
 "sectors_covered": [
@@ -383,106 +388,295 @@
 },
 {
 "id": 2,
-"label": "Republic Philippines",
+"label": "Philippines",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/2",
 "iso2": "PH",
 "iso3": "PHL",
-"status": {
-"tid": "75",
-"language": "en",
-"name": "Candidate"
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"status_date": "1356998400",
-"local_website": "http://ph-eiti.org",
+{
+"id": 4,
+"label": "Ghana",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/4",
+"iso2": "GH",
+"iso3": "GHA",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": {
-"2012": [
-{
-"commodity": "Gross Domestic Product - all sectors",
-"id": "2",
-"value": "272000000000",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Vol. 1 (Contextual Information), Chapter 1"
-},
-{
-"commodity": "Government revenue - all sectors",
-"id": "2",
-"value": "39325124319",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Vol. 2 Reconciliation Report, Table 4"
-},
-{
-"commodity": "Exports - all sectors",
-"id": "2",
-"value": "52100000000",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Vol. 1 (Contextual Information), Chapter 1"
-},
+"2009": [
 {
 "commodity": "Gold, volume",
-"id": "2",
-"value": "14596",
+"id": "4",
+"value": "78",
 "value_bool": null,
 "value_text": null,
-"unit": "kg",
-"source": "Production Data (2012 and 2013): http://ph-eiti.org/#/EITI-Report/First-Country-Report"
-},
-{
-"commodity": "Gas, volume",
-"id": "2",
-"value": "148330",
-"value_bool": "0",
-"value_text": "",
 "unit": "tonne",
-"source": "Vol. 1 (Contextual Information), Chapter 1"
+"source": "Appendix 4"
+}
+],
+"2010": [
+{
+"commodity": "Gold, volume",
+"id": "4",
+"value": "79",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Table 5.1: Mineral Production in 2010-2011"
 },
 {
 "commodity": "Oil, volume",
-"id": "2",
-"value": "260349",
-"value_bool": "0",
-"value_text": "",
+"id": "4",
+"value": "187778308",
+"value_bool": null,
+"value_text": null,
 "unit": "Sm3",
-"source": "Vol. 1 (Contextual Information), Chapter 1"
+"source": ""
+}
+],
+"2011": [
+{
+"commodity": "Gold, volume",
+"id": "4",
+"value": "82",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "Table 5.1: Mineral Production in 2010-2011"
+},
+{
+"commodity": "Oil, volume",
+"id": "4",
+"value": "3846846482",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Table 6.2, p. 21 & 6.0, p. 22"
+},
+{
+"commodity": "Total revenue received?",
+"id": "4",
+"value": "444124723.69",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Page vi"
+}
+],
+"2012": [
+{
+"commodity": "Oil, volume",
+"id": "4",
+"value": "4202194664",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "2012/2013 Oil & Gas EITI Report; section 4.4;Table 4.8.1/4.8.2"
+},
+{
+"commodity": "Gold, volume",
+"id": "4",
+"value": "134",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "2012/2013 Mining Sector Report; section 4.0; Table 4.2"
+}
+],
+"2013": [
+{
+"commodity": "Oil, volume",
+"id": "4",
+"value": "5731225158",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "2012/2013 Oil & Gas EITI Report; section 4.4;Table 4.8.1/4.8.2"
+},
+{
+"commodity": "Gold, volume",
+"id": "4",
+"value": "136",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
+"source": "2012/2013 Mining Sector Report; section 4.0; Table 4.2"
 }
 ]
 },
 "metadata": {
-"2012": {
+"2009": {
 "contact": {
-"name": null,
-"email": null,
-"organisation": "Isla Lipana /Pricewaterhouse Coopers"
+"name": "Christoffer B. Claussen",
+"email": "cclaussen@eiti.org",
+"organisation": "International Secretariat"
 },
-"year_start": "1325376000",
-"year_end": "1356912000",
-"currency_rate": "42.23",
-"currency_code": "PHP",
+"year_start": "Jan 1, 2009",
+"year_end": "Dec 31, 2009",
+"currency_rate": "1.05",
+"currency_code": "GHS",
 "sectors_covered": [
-"Gas",
-"Mining",
-"Oil",
-"Other Sectors"
+"Mining"
 ],
 "reporting_organisations": {
-"companies": "36",
-"governmental_agencies": "7"
+"companies": "10",
+"governmental_agencies": "17"
 },
 "web_report_links": [
 {
-"url": "http://ph-eiti.org/#/EITI-Report/First-Country-Report",
-"title": "",
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=4:2009&Itemid=54",
+"title": null,
 "attributes": []
 },
 {
-"url": "http://ph-eiti.org/#/EITI-Report/First-Country-Report",
-"title": "",
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2010": {
+"contact": {
+"name": "Christoffer B. Claussen",
+"email": "cclaussen@eiti.org",
+"organisation": "International Secretariat"
+},
+"year_start": "Jan 1, 2010",
+"year_end": "Dec 31, 2010",
+"currency_rate": "1.4253",
+"currency_code": "GHS",
+"sectors_covered": [
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "10",
+"governmental_agencies": "19"
+},
+"web_report_links": [
+{
+"url": "http://www.gheiti.gov.gh/site/",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2011": {
+"contact": {
+"name": "Christoffer B. Claussen",
+"email": "cclaussen@eiti.org",
+"organisation": "International Secretariat"
+},
+"year_start": "Jan 1, 2011",
+"year_end": "Dec 31, 2011",
+"currency_rate": "1.53",
+"currency_code": "GHS",
+"sectors_covered": [
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "11",
+"governmental_agencies": "19"
+},
+"web_report_links": [
+{
+"url": "http://www.gheiti.gov.gh/site/",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2012": {
+"contact": {
+"name": "Kwaku Boa-Amponsem",
+"email": "assoboas@yahoo.com",
+"organisation": "BOAS & ASSOCIATES"
+},
+"year_start": "Jan 1, 2012",
+"year_end": "Dec 31, 2012",
+"currency_rate": "1.9",
+"currency_code": "USD",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "22",
+"governmental_agencies": "11"
+},
+"web_report_links": [
+{
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&download=173:2012-2013-mining-sector-report&id=21:national-reports&Itemid=54",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2013": {
+"contact": {
+"name": "Kwaku Boa-Amponsem",
+"email": "assoboas@yahoo.com",
+"organisation": "BOAS & ASSOCIATES"
+},
+"year_start": "Jan 1, 2013",
+"year_end": "Dec 31, 2013",
+"currency_rate": "2.35",
+"currency_code": "USD",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "22",
+"governmental_agencies": "11"
+},
+"web_report_links": [
+{
+"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&download=173:2012-2013-mining-sector-report&id=21:national-reports&Itemid=54",
+"title": null,
 "attributes": []
 }
 ],
@@ -493,44 +687,64 @@
 }
 }
 },
-"licenses": {
-"2012": {
-"Public registry of licences, mining": "http://www.mgb.gov.ph/lptt.aspx"
-}
-},
+"licenses": null,
 "contracts": {
+"2009": {
+"Does the report address the government's policy on contract disclosure?": "0"
+},
+"2010": {
+"Are contracts disclosed?": "0"
+},
+"2011": {
+"Are contracts disclosed?": "0"
+},
 "2012": {
-"Does the report address the government's policy on contract disclosure?": "2",
-"Are contracts disclosed?": "2",
-"Publicly available registry of contracts": "Mining Tenements Division of MGB"
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "0"
+},
+"2013": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "0"
 }
 },
 "revenues": {
+"2009": {
+"government": "111915170",
+"company": "111915173"
+},
+"2010": {
+"government": "210184339",
+"company": "210184338"
+},
+"2011": {
+"government": "855102805",
+"company": "855102804"
+},
 "2012": {
-"government": "1542831450",
-"company": "1249431627"
+"government": "729853058",
+"company": "729853057"
+},
+"2013": {
+"government": "845870485",
+"company": "846102137"
 }
 }
 },
 {
 "id": 5,
-"label": "Republic of the Congo",
+"label": "Democratic Republic of Congo",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/5",
 "iso2": "CD",
 "iso3": "COD",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1167609600",
-"local_website": "http://www.itie-congo.org/",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": {
 "2010": [
 {
 "commodity": "Government revenue - extractive industries",
-"id": "26",
+"id": "5",
 "value": "875938727",
 "value_bool": null,
 "value_text": null,
@@ -541,7 +755,7 @@
 "2011": [
 {
 "commodity": "Government revenue - extractive industries",
-"id": "26",
+"id": "5",
 "value": "1421167721",
 "value_bool": null,
 "value_text": null,
@@ -552,7 +766,7 @@
 "2012": [
 {
 "commodity": "Gross Domestic Product - all sectors",
-"id": "26",
+"id": "5",
 "value": "18803894472",
 "value_bool": null,
 "value_text": null,
@@ -561,7 +775,7 @@
 },
 {
 "commodity": "Government revenue - extractive industries",
-"id": "26",
+"id": "5",
 "value": "2437884877",
 "value_bool": null,
 "value_text": null,
@@ -570,7 +784,7 @@
 },
 {
 "commodity": "Government revenue - all sectors",
-"id": "26",
+"id": "5",
 "value": "2437884877",
 "value_bool": null,
 "value_text": null,
@@ -579,7 +793,7 @@
 },
 {
 "commodity": "Exports - extractive industries",
-"id": "26",
+"id": "5",
 "value": "8532905390",
 "value_bool": null,
 "value_text": null,
@@ -588,7 +802,7 @@
 },
 {
 "commodity": "Oil, volume",
-"id": "26",
+"id": "5",
 "value": "1358548761",
 "value_bool": null,
 "value_text": null,
@@ -597,7 +811,7 @@
 },
 {
 "commodity": "Copper, volume",
-"id": "26",
+"id": "5",
 "value": "619301",
 "value_bool": null,
 "value_text": null,
@@ -606,7 +820,7 @@
 },
 {
 "commodity": "Gold, volume",
-"id": "26",
+"id": "5",
 "value": "2546",
 "value_bool": null,
 "value_text": null,
@@ -617,7 +831,7 @@
 "2013": [
 {
 "commodity": "Government revenue - extractive industries",
-"id": "26",
+"id": "5",
 "value": "1469553000",
 "value_bool": null,
 "value_text": null,
@@ -626,7 +840,7 @@
 },
 {
 "commodity": "Government revenue - all sectors",
-"id": "26",
+"id": "5",
 "value": "2296176562.5",
 "value_bool": null,
 "value_text": null,
@@ -635,7 +849,7 @@
 },
 {
 "commodity": "Oil, volume",
-"id": "26",
+"id": "5",
 "value": "1327705.19707",
 "value_bool": null,
 "value_text": null,
@@ -644,7 +858,7 @@
 },
 {
 "commodity": "Copper, volume",
-"id": "26",
+"id": "5",
 "value": "919588",
 "value_bool": null,
 "value_text": null,
@@ -653,7 +867,7 @@
 },
 {
 "commodity": "Gold, volume",
-"id": "26",
+"id": "5",
 "value": "3.15",
 "value_bool": null,
 "value_text": null,
@@ -664,7 +878,7 @@
 "2014": [
 {
 "commodity": "Government revenue - extractive industries",
-"id": "26",
+"id": "5",
 "value": "2048925576",
 "value_bool": null,
 "value_text": null,
@@ -673,7 +887,7 @@
 },
 {
 "commodity": "Government revenue - all sectors",
-"id": "26",
+"id": "5",
 "value": "7317591342.8571",
 "value_bool": null,
 "value_text": null,
@@ -682,7 +896,7 @@
 },
 {
 "commodity": "Copper, volume",
-"id": "26",
+"id": "5",
 "value": "1065744",
 "value_bool": null,
 "value_text": null,
@@ -691,7 +905,7 @@
 },
 {
 "commodity": "Gold, volume",
-"id": "26",
+"id": "5",
 "value": "0.0286601",
 "value_bool": null,
 "value_text": null,
@@ -707,8 +921,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1262304000",
-"year_end": "1293753600",
+"year_start": "Jan 1, 2010",
+"year_end": "Dec 31, 2010",
 "currency_rate": "906.9575",
 "currency_code": "USD",
 "sectors_covered": [
@@ -744,8 +958,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1293840000",
-"year_end": "1325289600",
+"year_start": "Jan 1, 2011",
+"year_end": "Dec 31, 2011",
 "currency_rate": "910",
 "currency_code": "CDF",
 "sectors_covered": [
@@ -796,8 +1010,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1325376000",
-"year_end": "1356912000",
+"year_start": "Jan 1, 2012",
+"year_end": "Dec 31, 2012",
 "currency_rate": "919.4983",
 "currency_code": "USD",
 "sectors_covered": [
@@ -828,8 +1042,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1356998400",
-"year_end": "1388448000",
+"year_start": "Jan 1, 2013",
+"year_end": "Dec 31, 2013",
 "currency_rate": "919.4983",
 "currency_code": "CDF",
 "sectors_covered": [
@@ -860,8 +1074,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1388534400",
-"year_end": "1419984000",
+"year_start": "Jan 1, 2014",
+"year_end": "Dec 31, 2014",
 "currency_rate": "925.5802",
 "currency_code": "CDF",
 "sectors_covered": [
@@ -941,13 +1155,9 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/6",
 "iso2": "PE",
 "iso3": "PER",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1325376000",
-"local_website": "http://eitiperu.minem.gob.pe/",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": {
 "2008": [
@@ -1115,12 +1325,21 @@
 "source": "Contextual Information"
 },
 {
-"commodity": "Oil, volume",
+"commodity": "Copper, volume",
 "id": "6",
-"value": "851616.918705",
+"value": "1376000",
 "value_bool": null,
 "value_text": null,
-"unit": "Sm3",
+"unit": "ton",
+"source": "Contextual Information"
+},
+{
+"commodity": "Gold, volume",
+"id": "6",
+"value": "2768",
+"value_bool": null,
+"value_text": null,
+"unit": "tonne",
 "source": "Contextual Information"
 }
 ]
@@ -1132,8 +1351,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1199145600",
-"year_end": "1228089600",
+"year_start": "Jan 1, 2008",
+"year_end": "Dec 1, 2008",
 "currency_rate": "2.926",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1164,8 +1383,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1230768000",
-"year_end": "1259625600",
+"year_start": "Jan 1, 2009",
+"year_end": "Dec 1, 2009",
 "currency_rate": "3.012",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1196,8 +1415,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1262304000",
-"year_end": "1291161600",
+"year_start": "Jan 1, 2010",
+"year_end": "Dec 1, 2010",
 "currency_rate": "2.826",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1228,8 +1447,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1293840000",
-"year_end": "1322697600",
+"year_start": "Jan 1, 2011",
+"year_end": "Dec 1, 2011",
 "currency_rate": "2.695",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1260,8 +1479,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1325376000",
-"year_end": "1354320000",
+"year_start": "Jan 1, 2012",
+"year_end": "Dec 1, 2012",
 "currency_rate": "2.549",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1292,8 +1511,8 @@
 "email": "Azherebko@eiti.org",
 "organisation": "EITI"
 },
-"year_start": "1356998400",
-"year_end": "1385856000",
+"year_start": "Jan 1, 2013",
+"year_end": "Dec 1, 2013",
 "currency_rate": "2.785",
 "currency_code": "PEN",
 "sectors_covered": [
@@ -1386,13 +1605,9 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/7",
 "iso2": "MN",
 "iso3": "MNG",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1167609600",
-"local_website": "http://www.eitimongolia.mn/en",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": {
 "2009": [
@@ -1508,6 +1723,62 @@
 "unit": "tonne",
 "source": "Section 1.3.2.b"
 }
+],
+"2013": [
+{
+"commodity": "Oil, volume",
+"id": "7",
+"value": "934528.92",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "MEITI Report 2013, page 38, chart 11"
+},
+{
+"commodity": "Coal, volume",
+"id": "7",
+"value": "30123.3",
+"value_bool": null,
+"value_text": null,
+"unit": "tonns",
+"source": "MEITI Report 2013, page 37, table 20"
+},
+{
+"commodity": "Gold, volume",
+"id": "7",
+"value": "9",
+"value_bool": null,
+"value_text": null,
+"unit": "tonns",
+"source": "MEITI Report 2013, page 37, table 20"
+},
+{
+"commodity": "Oil, volume",
+"id": "7",
+"value": "5244",
+"value_bool": null,
+"value_text": null,
+"unit": "million barrell",
+"source": "MEITI Report 2013, page 40, table 24"
+},
+{
+"commodity": "Coal, volume",
+"id": "7",
+"value": "18188",
+"value_bool": null,
+"value_text": null,
+"unit": "thous.t",
+"source": "MEITI Report 2013, page 39, table 21"
+},
+{
+"commodity": "Gold, volume",
+"id": "7",
+"value": "7558",
+"value_bool": null,
+"value_text": null,
+"unit": "kg",
+"source": "http://www.mram.gov.mn/images/stories/mram/statistek/monthly_report_2013-12.pdf"
+}
 ]
 },
 "metadata": {
@@ -1517,8 +1788,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1230768000",
-"year_end": "1262217600",
+"year_start": "Jan 1, 2009",
+"year_end": "Dec 31, 2009",
 "currency_rate": "1432",
 "currency_code": "MNT",
 "sectors_covered": [
@@ -1563,8 +1834,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1262304000",
-"year_end": "1293753600",
+"year_start": "Jan 1, 2010",
+"year_end": "Dec 31, 2010",
 "currency_rate": "1351.87",
 "currency_code": "MNT",
 "sectors_covered": [
@@ -1609,8 +1880,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1293840000",
-"year_end": "1325289600",
+"year_start": "Jan 1, 2011",
+"year_end": "Dec 31, 2011",
 "currency_rate": "1252.76",
 "currency_code": "MNT",
 "sectors_covered": [
@@ -1655,8 +1926,8 @@
 "email": "cclaussen@eiti.org",
 "organisation": "EITI International Secretariat"
 },
-"year_start": "1325376000",
-"year_end": "1356912000",
+"year_start": "Jan 1, 2012",
+"year_end": "Dec 31, 2012",
 "currency_rate": "1349.93",
 "currency_code": "MNT",
 "sectors_covered": [
@@ -1695,9 +1966,91 @@
 "revenue_stream": "1",
 "company": "1"
 }
+},
+"2013": {
+"contact": {
+"name": "Delgermaa Boldbaatar",
+"email": "eiti.communication@gmail.com",
+"organisation": "Mongolia EITI Secretariat"
+},
+"year_start": "Jan 1, 2013",
+"year_end": "Dec 31, 2013",
+"currency_rate": "1.659",
+"currency_code": "MNT",
+"sectors_covered": [
+"Mining",
+"Oil",
+"Other Sectors"
+],
+"reporting_organisations": {
+"companies": "1198",
+"governmental_agencies": "43"
+},
+"web_report_links": [
+{
+"url": "http://www.eitimongolia.mn/mn/reconciliation-report",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/government-reports",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/companies-reports",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/licenses",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/production-and-sales",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/tax-and-fees",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/donations",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/work-force",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/beneficial-ownership",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://www.eitimongolia.mn/mn/transparent-companies",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "1",
+"revenue_stream": "1",
+"company": "1"
+}
 }
 },
-"licenses": null,
+"licenses": {
+"2013": {
+"Public registry of licences, oil": "www.pam.gov.mn",
+"Public registry of licences, mining": "http://cmcs.mram.gov.mn/"
+}
+},
 "contracts": {
 "2009": {
 "Does the report address the government's policy on contract disclosure?": "0",
@@ -1714,6 +2067,12 @@
 "2012": {
 "Does the report address the government's policy on contract disclosure?": "1",
 "Are contracts disclosed?": "2"
+},
+"2013": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "2",
+"Publicly available registry of contracts": "Oyu tolgoi LLC disclosed their investment agreement",
+"Registry 2": "Mongolia EITI Secretariat register agreements made with local authorities"
 }
 },
 "revenues": {
@@ -1729,6 +2088,10 @@
 },
 "2012": {
 "government": "1188764494"
+},
+"2013": {
+"government": "1014838200958",
+"company": "949978427386"
 }
 }
 },
@@ -1754,11 +2117,7 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/12",
 "iso2": "GN",
 "iso3": "GIN",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
+"status": null,
 "status_date": "1167609600",
 "local_website": "http://www.itie-guinee.org/",
 "annual_report_file": null,
@@ -1774,13 +2133,29 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/13",
 "iso2": "GT",
 "iso3": "GTM",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
+"status": null,
 "status_date": null,
 "local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 14,
+"label": "Germany ",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/14",
+"iso2": "DE",
+"iso3": "DEU",
+"status": {
+"tid": "75",
+"language": "en",
+"name": "Candidate"
+},
+"status_date": "1451606400",
+"local_website": "http://www.d-eiti.de/en/",
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1800,7 +2175,59 @@
 "name": "Compliant"
 },
 "status_date": "1167609600",
-"local_website": "http://www.eiti.no",
+"local_website": "http://www.eiti.no/",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 16,
+"label": "United States of America",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/16",
+"iso2": "US",
+"iso3": "USA",
+"status": {
+"tid": "75",
+"language": "en",
+"name": "Candidate"
+},
+"status_date": "1388534400",
+"local_website": "https://useiti.doi.gov/",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 17,
+"label": "Colombia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/17",
+"iso2": "CO",
+"iso3": "COL",
+"status": null,
+"status_date": "1388534400",
+"local_website": "https://eiti.org/colombia",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 18,
+"label": "Indonesia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/18",
+"iso2": "ID",
+"iso3": "IDN",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1810,17 +2237,13 @@
 },
 {
 "id": 19,
-"label": "Liberia",
+"label": "Zambia",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/19",
-"iso2": "LR",
-"iso3": "LBR",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1199145600",
-"local_website": "http://www.leiti.org.lr",
+"iso2": "ZM",
+"iso3": "ZMB",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1830,17 +2253,29 @@
 },
 {
 "id": 20,
-"label": "Niger",
+"label": "Cameroon",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/20",
-"iso2": "NE",
-"iso3": "NER",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
+"iso2": "CM",
+"iso3": "CMR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"status_date": "1167609600",
-"local_website": "http://www.itieniger.ne/index.php/en/",
+{
+"id": 21,
+"label": "Trinidad and Tobago ",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/21",
+"iso2": "TT",
+"iso3": "TTO",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1854,13 +2289,25 @@
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/22",
 "iso2": "ML",
 "iso3": "MLI",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"status_date": "1167609600",
-"local_website": "http://itie.mines.gouv.ml/",
+{
+"id": 23,
+"label": "Tanzania",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/23",
+"iso2": "TZ",
+"iso3": "TZA",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1870,17 +2317,13 @@
 },
 {
 "id": 24,
-"label": "Maldives",
+"label": "Kazakhstan",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/24",
-"iso2": "MV",
-"iso3": "MDV",
-"status": {
-"tid": "75",
-"language": "en",
-"name": "Candidate"
-},
-"status_date": "1104537600",
-"local_website": "www.argentina.org",
+"iso2": "KZ",
+"iso3": "KAZ",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1890,17 +2333,13 @@
 },
 {
 "id": 25,
-"label": "São Tomé and Príncipe",
+"label": "Liberia",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/25",
-"iso2": "ST",
-"iso3": "STP",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1325376000",
-"local_website": "http://www.min-financas.st/index.php/pt/eiti",
+"iso2": "LR",
+"iso3": "LBR",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
 "reports": null,
 "metadata": [],
@@ -1910,701 +2349,374 @@
 },
 {
 "id": 26,
-"label": "Democratic Republic of Congo",
+"label": "Ukraine",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/26",
-"iso2": "CD",
-"iso3": "COD",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1199145600",
-"local_website": "http://www.itierdc.net/",
+"iso2": "UA",
+"iso3": "UKR",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
-"reports": {
-"2010": [
-{
-"commodity": "Government revenue - extractive industries",
-"id": "26",
-"value": "875938727",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "p. 11"
-}
-],
-"2011": [
-{
-"commodity": "Government revenue - extractive industries",
-"id": "26",
-"value": "1421167721",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "2. Key highlights of this report, p. 7"
-}
-],
-"2012": [
-{
-"commodity": "Gross Domestic Product - all sectors",
-"id": "26",
-"value": "18803894472",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "3.8.2 Contribution dans le PIB"
-},
-{
-"commodity": "Government revenue - extractive industries",
-"id": "26",
-"value": "2437884877",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "6.1.3 Analyse des revenus par Régie financière"
-},
-{
-"commodity": "Government revenue - all sectors",
-"id": "26",
-"value": "2437884877",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "3.8.1 Contribution dans les recettes de l’Etat"
-},
-{
-"commodity": "Exports - extractive industries",
-"id": "26",
-"value": "8532905390",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "1.4. L’Exportation du secteur extractif en 2012"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "1358548761",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": "1.3 La production du secteur extractif en 2012"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "619301",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.3 La production du secteur extractif en 2012"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "2546",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.3 La production du secteur extractif en 2012"
-}
-],
-"2013": [
-{
-"commodity": "Government revenue - extractive industries",
-"id": "26",
-"value": "1469553000",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "1.2. Revenus du secteur extractif"
-},
-{
-"commodity": "Government revenue - all sectors",
-"id": "26",
-"value": "2296176562.5",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "<URL, or reference to section in EITI Report>"
-},
-{
-"commodity": "Oil, volume",
-"id": "26",
-"value": "1327705.19707",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "919588",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.3 La production du secteur extractif en 2013"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "3.15",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.3 La production du secteur extractif en 2013"
-}
-],
-"2014": [
-{
-"commodity": "Government revenue - extractive industries",
-"id": "26",
-"value": "2048925576",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "1.1. Revenus du secteur extractif"
-},
-{
-"commodity": "Government revenue - all sectors",
-"id": "26",
-"value": "7317591342.8571",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "<URL, or reference to section in EITI Report>"
-},
-{
-"commodity": "Copper, volume",
-"id": "26",
-"value": "1065744",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.2. La production et les exportations du secteur extractif"
-},
-{
-"commodity": "Gold, volume",
-"id": "26",
-"value": "0.0286601",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "1.2. La production et les exportations du secteur extractif"
-}
-]
-},
-"metadata": {
-"2010": {
-"contact": {
-"name": "Christoffer Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "EITI International Secretariat"
-},
-"year_start": "1262304000",
-"year_end": "1293753600",
-"currency_rate": "906.9575",
-"currency_code": "USD",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "58",
-"governmental_agencies": "9"
-},
-"web_report_links": [
-{
-"url": "http://www.itierdc.com/Publication_et_rapport/RAPPORT%20ITIE%202010%20%2026_01_013.pdf",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.itierdc.com/Publication_et_rapport/Rapport_ITIE-RDC_2010_UK.pdf",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "0",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2011": {
-"contact": {
-"name": "Christoffer Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "EITI International Secretariat"
-},
-"year_start": "1293840000",
-"year_end": "1325289600",
-"currency_rate": "910",
-"currency_code": "CDF",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "83",
-"governmental_agencies": "5"
-},
-"web_report_links": [
-{
-"url": "http://www.itierdc.com/pdf/Rapport%20Mines%20ITIE-RDC%202011_VERSION_ANGLAISE.pdf",
-"title": null,
-"attributes": []
-},
-{
-"url": "English EITI Report Oil & Gas 2011",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.itierdc.com/pdf/Rapport%20ITIE-RDC%202011%20Mines_EN.pdf",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.itierdc.com/pdf/Rapport%20Complementaire%20ITIE_RDC%202011.pdf",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.itierdc.com/pdf/Rapport%20Complementaire%20ITIE-RDC%202011%20-%20version%20anglaise%20(english).pdf",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "0",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2012": {
-"contact": {
-"name": "Christoffer Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "EITI International Secretariat"
-},
-"year_start": "1325376000",
-"year_end": "1356912000",
-"currency_rate": "919.4983",
-"currency_code": "USD",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "118",
-"governmental_agencies": "7"
-},
-"web_report_links": [
-{
-"url": "http://www.itierdc.com/pv+pub+rap.php?valeur=%20%C2%BB%C2%BB%20informations%20sur%20l%27%C3%A9laboration%20du%20Rapport%20ITIE-RDC%202012&valeurr=Dernier%20Rapport",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "0",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2013": {
-"contact": {
-"name": "Andrii Zherebko",
-"email": "Azherebko@eiti.org",
-"organisation": "EITI"
-},
-"year_start": "1356998400",
-"year_end": "1388448000",
-"currency_rate": "919.4983",
-"currency_code": "CDF",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "117",
-"governmental_agencies": "8"
-},
-"web_report_links": [
-{
-"url": "https://eiti.org/files/Rapport%20de%20Conciliation%20ITIE%20RDC%202013%20-%20Final%20-%20PG.pdf",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "0",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2014": {
-"contact": {
-"name": "Andrii Zherebko",
-"email": "Azherebko@eiti.org",
-"organisation": "EITI"
-},
-"year_start": "1388534400",
-"year_end": "1419984000",
-"currency_rate": "925.5802",
-"currency_code": "CDF",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "118",
-"governmental_agencies": "8"
-},
-"web_report_links": [
-{
-"url": "https://eiti.org/files/Rapport%20de%20Conciliation%20ITIE%20RDC%202013%20-%20Final%20-%20PG.pdf",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "0",
-"revenue_stream": "1",
-"company": "1"
-}
-}
-},
-"licenses": {
-"2011": {
-"Public registry of licences, mining": "Partially"
-},
-"2013": {
-"Public registry of licences, mining": "http://portals.flexicadastre.com/drc/fr/"
-},
-"2014": {
-"Public registry of licences, mining": "http://portals.flexicadastre.com/drc/fr/"
-}
-},
-"contracts": {
-"2010": {
-"Does the report address the government's policy on contract disclosure?": "2",
-"Are contracts disclosed?": "2"
-},
-"2011": {
-"Does the report address the government's policy on contract disclosure?": "0",
-"Are contracts disclosed?": "2",
-"Publicly available registry of contracts": "Partially"
-},
-"2012": {
-"Does the report address the government's policy on contract disclosure?": "1",
-"Are contracts disclosed?": "2"
-}
-},
-"revenues": {
-"2010": {
-"government": "811962999"
-},
-"2011": {
-"government": "1296440307.02",
-"company": "1260540322"
-},
-"2012": {
-"government": "1396183756",
-"company": "1390895806"
-},
-"2013": {
-"government": "1277319434",
-"company": "1277319434.24"
-},
-"2014": {
-"government": "1667890285",
-"company": "1667890285"
-}
-}
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
 {
 "id": 27,
-"label": "Ghana",
+"label": "Central African Republic",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/27",
-"iso2": "GH",
-"iso3": "GHA",
-"status": {
-"tid": "74",
-"language": "en",
-"name": "Compliant"
-},
-"status_date": "1167609600",
-"local_website": "http://www.gheiti.gov.gh/site/",
+"iso2": "CF",
+"iso3": "CAF",
+"status": null,
+"status_date": null,
+"local_website": null,
 "annual_report_file": null,
-"reports": {
-"2009": [
-{
-"commodity": "Gold, volume",
-"id": "27",
-"value": "78",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "Appendix 4"
-}
-],
-"2010": [
-{
-"commodity": "Gold, volume",
-"id": "27",
-"value": "79",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "Table 5.1: Mineral Production in 2010-2011"
-},
-{
-"commodity": "Oil, volume",
-"id": "27",
-"value": "187778308",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": ""
-}
-],
-"2011": [
-{
-"commodity": "Gold, volume",
-"id": "27",
-"value": "82",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "Table 5.1: Mineral Production in 2010-2011"
-},
-{
-"commodity": "Oil, volume",
-"id": "27",
-"value": "3846846482",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": "Table 6.2, p. 21 & 6.0, p. 22"
-},
-{
-"commodity": "Total revenue received?",
-"id": "27",
-"value": "444124723.69",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Page vi"
-}
-],
-"2012": [
-{
-"commodity": "Oil, volume",
-"id": "27",
-"value": "4202194664",
-"value_bool": null,
-"value_text": null,
-"unit": "Sm3",
-"source": "2012/2013 Oil & Gas EITI Report; section 4.4;Table 4.8.1/4.8.2"
-},
-{
-"commodity": "Gold, volume",
-"id": "27",
-"value": "134",
-"value_bool": null,
-"value_text": null,
-"unit": "tonne",
-"source": "2012/2013 Mining Sector Report; section 4.0; Table 4.2"
-}
-]
-},
-"metadata": {
-"2009": {
-"contact": {
-"name": "Christoffer B. Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "International Secretariat"
-},
-"year_start": "1230768000",
-"year_end": "1262217600",
-"currency_rate": "1.05",
-"currency_code": "GHS",
-"sectors_covered": [
-"Mining"
-],
-"reporting_organisations": {
-"companies": "10",
-"governmental_agencies": "17"
-},
-"web_report_links": [
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=4:2009&Itemid=54",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "1",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2010": {
-"contact": {
-"name": "Christoffer B. Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "International Secretariat"
-},
-"year_start": "1262304000",
-"year_end": "1293753600",
-"currency_rate": "1.4253",
-"currency_code": "GHS",
-"sectors_covered": [
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "10",
-"governmental_agencies": "19"
-},
-"web_report_links": [
-{
-"url": "http://www.gheiti.gov.gh/site/",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "1",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2011": {
-"contact": {
-"name": "Christoffer B. Claussen",
-"email": "cclaussen@eiti.org",
-"organisation": "International Secretariat"
-},
-"year_start": "1293840000",
-"year_end": "1325289600",
-"currency_rate": "1.53",
-"currency_code": "GHS",
-"sectors_covered": [
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "11",
-"governmental_agencies": "19"
-},
-"web_report_links": [
-{
-"url": "http://www.gheiti.gov.gh/site/",
-"title": null,
-"attributes": []
-},
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&id=15:implementation-reports&Itemid=54",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "1",
-"revenue_stream": "1",
-"company": "1"
-}
-},
-"2012": {
-"contact": {
-"name": "Kwaku Boa-Amponsem",
-"email": "assoboas@yahoo.com",
-"organisation": "BOAS & ASSOCIATES"
-},
-"year_start": "1325376000",
-"year_end": "1356912000",
-"currency_rate": "1.9",
-"currency_code": "USD",
-"sectors_covered": [
-"Gas",
-"Mining",
-"Oil"
-],
-"reporting_organisations": {
-"companies": "22",
-"governmental_agencies": "11"
-},
-"web_report_links": [
-{
-"url": "http://www.gheiti.gov.gh/site/index.php?option=com_phocadownload&view=category&download=173:2012-2013-mining-sector-report&id=21:national-reports&Itemid=54",
-"title": null,
-"attributes": []
-}
-],
-"disaggregated": {
-"project": "1",
-"revenue_stream": "1",
-"company": "1"
-}
-}
-},
+"reports": null,
+"metadata": [],
 "licenses": null,
-"contracts": {
-"2009": {
-"Does the report address the government's policy on contract disclosure?": "0"
+"contracts": null,
+"revenues": null
 },
-"2010": {
-"Are contracts disclosed?": "0"
+{
+"id": 28,
+"label": "Côte d'Ivoire ",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/28",
+"iso2": "CI",
+"iso3": "CIV",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"2011": {
-"Are contracts disclosed?": "0"
+{
+"id": 29,
+"label": "Gabon",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/29",
+"iso2": "GA",
+"iso3": "GAB",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"2012": {
-"Does the report address the government's policy on contract disclosure?": "1",
-"Are contracts disclosed?": "0"
-}
+{
+"id": 30,
+"label": "Niger",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/30",
+"iso2": "NE",
+"iso3": "NER",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"revenues": {
-"2009": {
-"government": "111915170",
-"company": "111915173"
+{
+"id": 31,
+"label": "Burkina Faso",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/31",
+"iso2": "BF",
+"iso3": "BFA",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"2010": {
-"government": "210184339",
-"company": "210184338"
+{
+"id": 32,
+"label": "Nigeria",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/32",
+"iso2": "NG",
+"iso3": "NGA",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"2011": {
-"government": "855102805",
-"company": "855102804"
+{
+"id": 33,
+"label": "Madagascar",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/33",
+"iso2": "MG",
+"iso3": "MDG",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
-"2012": {
-"government": "729853058",
-"company": "729853057"
-}
-}
+{
+"id": 34,
+"label": "United Kingdom",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/34",
+"iso2": "GB",
+"iso3": "GBR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 35,
+"label": "Azerbaijan",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/35",
+"iso2": "AZ",
+"iso3": "AZE",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 36,
+"label": "Mauritania",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/36",
+"iso2": "MR",
+"iso3": "MRT",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 37,
+"label": "Senegal",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/37",
+"iso2": "SN",
+"iso3": "SEN",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 38,
+"label": "Chad",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/38",
+"iso2": "TD",
+"iso3": "TCD",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 39,
+"label": "Kyrgyz Republic",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/39",
+"iso2": "KG",
+"iso3": "KGZ",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 40,
+"label": "Timor-Leste",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/40",
+"iso2": "TL",
+"iso3": "TLS",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 41,
+"label": "Iraq",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/41",
+"iso2": "IQ",
+"iso3": "IRQ",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 42,
+"label": "Mozambique",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/42",
+"iso2": "MZ",
+"iso3": "MOZ",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 43,
+"label": "Yemen",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/43",
+"iso2": "YE",
+"iso3": "YEM",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 44,
+"label": "Republic of the Congo",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/44",
+"iso2": "CG",
+"iso3": "COG",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 45,
+"label": "Togo",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/45",
+"iso2": "TG",
+"iso3": "TGO",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 46,
+"label": "Papua New Guinea",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/46",
+"iso2": "PG",
+"iso3": "PNG",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 47,
+"label": "Myanmar",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/47",
+"iso2": "MM",
+"iso3": "MMR",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+{
+"id": 48,
+"label": "Ethiopia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/48",
+"iso2": "ET",
+"iso3": "ETH",
+"status": null,
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 }
 ],
-"count": 16,
+"count": 44,
 "self": {
 "title": "Self",
 "href": "https://staging.eiti.org/api/v1.0/implementing_country"

@@ -492,7 +492,7 @@ export default class MapWidgetComponent extends Component {
       var items = [];
       var cols = [];
       var sortedCountries = _.sortBy(this.state.data, 'label');
-
+      var cutout = Math.ceil(sortedCountries.length/4);
       for (var i = 0; i < sortedCountries.length;i++) {
         var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
         var countryPageURL = "/implementing_country/" + sortedCountries[i].id
@@ -507,7 +507,7 @@ export default class MapWidgetComponent extends Component {
               </span>
             </li>
           );
-        if((i+1)%4 === 0) {
+        if((i+1)%cutout === 0) {
           cols.push(
               <div className="country-col">
                 <ul className="country-list">

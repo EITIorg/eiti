@@ -24318,7 +24318,7 @@
 	        var items = [];
 	        var cols = [];
 	        var sortedCountries = _underscore2.default.sortBy(this.state.data, 'label');
-	
+	        var cutout = Math.ceil(sortedCountries.length / 4);
 	        for (var i = 0; i < sortedCountries.length; i++) {
 	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
 	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
@@ -24341,7 +24341,7 @@
 	              )
 	            )
 	          ));
-	          if ((i + 1) % 4 === 0) {
+	          if ((i + 1) % cutout === 0) {
 	            cols.push(_react2.default.createElement(
 	              'div',
 	              { className: 'country-col' },
