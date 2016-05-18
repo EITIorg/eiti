@@ -299,7 +299,7 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
     $query->condition('status', TRUE);
     $query->condition('country_id', $country_id);
-    $query->where('DATE_PART(\'year\', TO_TIMESTAMP(sd.year_end)) = :year', array(':year' => $year));
+    $query->where("DATE_PART('year', TO_TIMESTAMP(sd.year_end)) = :year", array(':year' => $year));
     $count = $query->countQuery()->execute()->fetchField();
 
     if ($count > 0) {
