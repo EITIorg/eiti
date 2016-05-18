@@ -247,7 +247,7 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
   }
 
   // Sort the countries by the translated names.
-  sort($country_options);
+  asort($country_options);
 
   $form['countries'] = array(
     '#type' => 'select',
@@ -350,6 +350,7 @@ function eiti_ctools_extra__quick_summary_tool__country_callback($form, $form_st
   $commands = array();
 
   $commands[] = ajax_command_replace('#quick-summary-tool--form .form-item-years', drupal_render($form['years']));
+  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
 
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -359,6 +360,7 @@ function eiti_ctools_extra__quick_summary_tool__country_callback($form, $form_st
  */
 function eiti_ctools_extra__quick_summary_tool__submit_callback($form, $form_state) {
   $commands = array();
+  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
 
   $countries = $form_state['values']['countries'];
   if (empty($countries)) {
@@ -403,10 +405,8 @@ function eiti_ctools_extra__quick_summary_tool__submit_callback($form, $form_sta
     );
   }
 
-  if (empty($info)) {
-    $commands[] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
-  }
-  else {
+  if (!empty($info)) {
+    unset($commands['clear']);
     $commands[] = ajax_command_html('#quick-summary-tool--information-placeholder', drupal_render($info));
   }
 
