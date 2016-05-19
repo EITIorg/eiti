@@ -18,7 +18,8 @@ function eitientities_strongarm() {
 field-highlighted|Field Highlighted
 layout-separator|Layout Separator
 pane-title-wrapper|Pane Title Wrapper
-single-fluid-row-wrapper|Single Fluid Row Wrapper';
+single-fluid-row-wrapper|Single Fluid Row Wrapper
+image-wrapped|Image: Wrapped';
   $export['ds_classes_fields'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -30,7 +31,8 @@ layout-separator|Layout Separator
 single-fluid-row-wrapper|Single Fluid Row Wrapper
 single-narrow-row-wrapper|Single Narrow Row Wrapper
 layout-narrow-left-column|Layout: Narrow Left Column
-layout-narrow-right-column|Layout: Narrow Right Column';
+layout-narrow-right-column|Layout: Narrow Right Column
+image-wrapped|Image: Wrapped';
   $export['ds_classes_regions'] = $strongarm;
 
   $strongarm = new stdClass();

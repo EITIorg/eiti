@@ -64,6 +64,12 @@ function eititaxonomies_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $translatables['taxonomy_nodes'] = array(
     t('Master'),
     t('more'),
@@ -81,6 +87,7 @@ function eititaxonomies_views_default_views() {
     t('last »'),
     t('There is currently no content classified with this term.'),
     t('All'),
+    t('Block'),
   );
   $export['taxonomy_nodes'] = $view;
 

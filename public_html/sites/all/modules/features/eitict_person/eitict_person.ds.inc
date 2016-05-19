@@ -24,11 +24,6 @@ function eitict_person_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_person_picture' => array(
-      'formatter_settings' => array(
-        'ft' => array(),
-      ),
-    ),
   );
   $export['node|person|default'] = $ds_fieldsetting;
 
@@ -44,14 +39,14 @@ function eitict_person_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'title_field' => array(
+    'field_person_picture' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
-    'field_person_picture' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -106,7 +101,14 @@ function eitict_person_ds_layout_settings_info() {
       'field_email' => 'main',
       'field_website' => 'main',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+      'side' => array(
+        'image-wrapped' => 'image-wrapped',
+      ),
+    ),
     'wrappers' => array(
       'side' => 'div',
       'main' => 'div',
@@ -155,6 +157,9 @@ function eitict_person_ds_layout_settings_info() {
       'layout_class' => array(
         'clearfix' => 'clearfix',
         'layout-separator' => 'layout-separator',
+      ),
+      'side' => array(
+        'image-wrapped' => 'image-wrapped',
       ),
     ),
     'wrappers' => array(
