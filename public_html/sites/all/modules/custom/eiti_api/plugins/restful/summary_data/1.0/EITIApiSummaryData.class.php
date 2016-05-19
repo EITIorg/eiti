@@ -65,15 +65,9 @@ class EITIApiSummaryData extends RestfulEntityBase {
     );
     $public_fields['revenue_government'] = array(
       'property' => 'field_sd_revenue_government',
-      'resource' => array(
-        'revenue' => 'revenue',
-      ),
     );
     $public_fields['revenue_company'] = array(
       'property' => 'field_sd_revenue_company',
-      'resource' => array(
-        'revenue' => 'revenue',
-      ),
     );
     return $public_fields;
   }

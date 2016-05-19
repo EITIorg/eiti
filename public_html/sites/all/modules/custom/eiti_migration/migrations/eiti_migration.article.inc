@@ -490,6 +490,8 @@ class EITINewsAttachedFilesMigration extends EITIDrupalFileMigration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -523,6 +525,8 @@ class EITIIMCEFilesMigration extends EITIDrupalFileMigration {
    * Complete function.
    */
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -556,6 +560,8 @@ class EITINewsUploadFilesMigration extends EITIDrupalFileMigration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -588,6 +594,8 @@ class EITIBlogUploadFilesMigration extends EITIDrupalFileMigration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);
@@ -620,6 +628,8 @@ class EITIEventUploadFilesMigration extends EITIDrupalFileMigration {
   }
 
   public function complete($entity, $row) {
+    parent::complete($entity, $row);
+
     if ($entity->type == 'report') {
       $entity->type = 'document';
       file_save($entity);

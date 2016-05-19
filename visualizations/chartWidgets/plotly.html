@@ -60,60 +60,47 @@
   </div>
 
   <div class="eiti-chart-widget-wrapper">
-    <div id="grouped_export" class="eiti-chart-widget"></div>
+    <div id="grouped_export_new" class="eiti-chart-widget"></div>
     <script>
+          var oil = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [122661511, 104366635, 97494031, 89183936, 84943990],
+        name: 'Oil',
+        type: 'bar'
+      };
+
+      var gas = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [100110308, 107250281, 101266314, 114722664, 108745838],
+        name: 'Gas',
+        type: 'bar'
+      };
+
+      var ngl = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [16941870, 15505360, 16314039, 17798865, 17718292],
+        name: 'NGL',
+        type: 'bar'
+      };
+
+      var condensate = {
+        x: ['2009', '2010', '2011', '2012', '2013'],
+        y: [3923854, 4163009, 4583334, 4574854, 3991160],
+        name: 'Condensate',
+        type: 'bar'
+      };
+
+      var data1 = [oil, gas, ngl, condensate];
       chartWidget.create({
           type: "GroupedBarExport",
           xlabel: "Year",
-          container: "grouped_export"
+          container: "grouped_export_new"
         },
-        [
-          {
-            "label": "Oil",
-            "values": [
-              {"x": "2009", "y": 122661511},
-              {"x": "2010", "y": 104366635},
-              {"x": "2011", "y": 97494031},
-              {"x": "2012", "y": 89183936},
-              {"x": "2013", "y": 84943990}
-            ]
-          },
-          {
-            "label": "Gas",
-            "values": [
-              {"x": "2009", "y": 100110308},
-              {"x": "2010", "y": 107250281},
-              {"x": "2011", "y": 101266314},
-              {"x": "2012", "y": 114722664},
-              {"x": "2013", "y": 108745838}
-            ]
-          },
-          {
-            "label": "NGL",
-            "values": [
-              {"x": "2009", "y": 16941870},
-              {"x": "2010", "y": 15505360},
-              {"x": "2011", "y": 16314039},
-              {"x": "2012", "y": 17798865},
-              {"x": "2013", "y": 17718292}
-
-            ]
-          },
-          {
-            "label": "Condensate",
-            "values": [
-              {"x": "2009", "y": 3923854 },
-              {"x": "2010", "y": 4163009 },
-              {"x": "2011", "y": 4583334 },
-              {"x": "2012", "y": 4574854 },
-              {"x": "2013", "y": 3991160 }
-            ]
-          }
-        ]);
+        data1);
     </script>
   </div>
 
-  <div class="eiti-chart-widget-wrapper">
+    <div class="eiti-chart-widget-wrapper">
     <div id="stacked" class="eiti-chart-widget"></div>
     <script>
       var stacked1 = {

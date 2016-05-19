@@ -59,61 +59,67 @@ function eitiet_summary_data_strongarm() {
       'display' => array(
         'country_id' => array(
           'default' => array(
-            'weight' => '5',
+            'weight' => '0',
             'visible' => TRUE,
           ),
         ),
         'year_start' => array(
           'default' => array(
-            'weight' => '6',
-            'visible' => TRUE,
+            'weight' => '25',
+            'visible' => FALSE,
           ),
         ),
         'year_end' => array(
-          'default' => array(
-            'weight' => '7',
-            'visible' => TRUE,
-          ),
-        ),
-        'published' => array(
-          'default' => array(
-            'weight' => '4',
-            'visible' => TRUE,
-          ),
-        ),
-        'currency_code' => array(
-          'default' => array(
-            'weight' => '3',
-            'visible' => TRUE,
-          ),
-        ),
-        'currency_rate' => array(
-          'default' => array(
-            'weight' => '2',
-            'visible' => TRUE,
-          ),
-        ),
-        'status' => array(
-          'default' => array(
-            'weight' => '9',
-            'visible' => TRUE,
-          ),
-        ),
-        'created' => array(
-          'default' => array(
-            'weight' => '0',
-            'visible' => TRUE,
-          ),
-        ),
-        'changed' => array(
           'default' => array(
             'weight' => '1',
             'visible' => TRUE,
           ),
         ),
+        'published' => array(
+          'default' => array(
+            'weight' => '24',
+            'visible' => FALSE,
+          ),
+        ),
+        'currency_code' => array(
+          'default' => array(
+            'weight' => '23',
+            'visible' => FALSE,
+          ),
+        ),
+        'currency_rate' => array(
+          'default' => array(
+            'weight' => '22',
+            'visible' => FALSE,
+          ),
+        ),
+        'status' => array(
+          'default' => array(
+            'weight' => '26',
+            'visible' => FALSE,
+          ),
+        ),
+        'created' => array(
+          'default' => array(
+            'weight' => '20',
+            'visible' => FALSE,
+          ),
+        ),
+        'changed' => array(
+          'default' => array(
+            'weight' => '21',
+            'visible' => FALSE,
+          ),
+        ),
         'url' => array(
           'default' => array(
-            'weight' => '0',
+            'weight' => '16',
+            'visible' => FALSE,
+          ),
+        ),
+        'sectors_covered' => array(
+          'default' => array(
+            'weight' => '3',
             'visible' => TRUE,
           ),
         ),

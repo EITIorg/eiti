@@ -341,3 +341,54 @@ function eitientity_summary_data_admin_paths() {
 
   return $paths;
 }
+
+/**
+ * Value callback for "Sectors Covered".
+ *
+ * @param $data
+ * @param array $options
+ * @param $name
+ * @param $type
+ * @param $info
+ *
+ * @return null|string
+ */
+function eitientity_summary_data_entity_property_get_sectors_covered($data, array $options, $name, $type, $info) {
+  $fields = array(
+    'field_sd_oil_sector',
+    'field_sd_gas_sector',
+    'field_sd_mining_sector',
+    'field_sd_other_sector',
+  );
+
+  $emw = entity_metadata_wrapper($type, $data);
+
+  $sectors_covered = array();
+  foreach ($fields as $field_name) {
+    if (empty($data->{$field_name})) {
+      continue;
+    }
+
+    // Special case for the Other sectors field which is actually a text field.
+    if ($field_name == 'field_sd_other_sector' && $emw->{$field_name}->value()) {
+      // Some just provide the string "Yes" fro the other sectors covered.
+      if ($emw->{$field_name}->value() == 'Yes' || $emw->{$field_name}->value() == 'yes') {
+        $info = $emw->{$field_name}->info();
+        $sectors_covered[] = check_plain($info['label']);
+      }
+      else {
+        $sectors_covered[] = check_plain($emw->{$field_name}->value());
+      }
+    }
+    else if ($emw->{$field_name}->value()) {
+      $info = $emw->{$field_name}->info();
+      $sectors_covered[] = check_plain($info['label']);
+    }
+  }
+
+  if (!empty($sectors_covered)) {
+    return implode(', ', $sectors_covered);
+  }
+
+  return t('None');
+}

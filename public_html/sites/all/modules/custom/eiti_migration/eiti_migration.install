@@ -22,6 +22,12 @@ function eiti_migration_install() {
     drupal_mkdir($migrated_img);
   }
   file_prepare_directory($migrated_img);
+
+  $migrated_files = 'public://migrated_files';
+  if (!file_exists($migrated_files)) {
+    drupal_mkdir($migrated_files);
+  }
+  file_prepare_directory($migrated_files);
 }
 
 /**
@@ -46,4 +52,15 @@ function eiti_migration_update_7001(&$sandbox) {
     drupal_mkdir($migrated_img);
   }
   file_prepare_directory($migrated_img);
+}
+
+/**
+ * Make sure all directories required for the migration exist.
+ */
+function eiti_migration_update_7002(&$sandbox) {
+  $migrated_files = 'public://migrated_files';
+  if (!file_exists($migrated_files)) {
+    drupal_mkdir($migrated_files);
+  }
+  file_prepare_directory($migrated_files);
 }

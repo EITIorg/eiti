@@ -3,3 +3,25 @@
  * @file
  * Includes styles used to make the prototype look pretty and are not meant to be used else where.
  */
+
+/**
+ * Make the element resizable but keep the aspect ratio using a box-model feature.
+ *
+ * @see http://www.w3.org/TR/CSS2/box.html#padding-properties
+ */
+.media-resizable-wrapper {
+  display: block;
+  height: 0;
+  padding-top: 56.25%;
+  position: relative;
+}
+.media-resizable-wrapper .media-resizable-element {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.media-resizable-wrapper.aspect-3-4 {
+  padding-top: 75%;
+}

@@ -61,20 +61,17 @@ let GroupedBarExport = React.createClass ({
 	    let output = [];
 	    let data = this.state.chartData;
 
-	    data[0].values.forEach(function(item) {
+	    // Get the X values first (years, usually)
+	    data[0].x.forEach(function(item) {
 	    	var outputObj = {};
-	    	outputObj[xlabel] = item.x;
-	    	outputObj[data[0].label] = item.y;
+	    	outputObj[xlabel] = item;
 	    	output.push(outputObj);
 	    });
 
-	    let dataLength = data.length;
-	    for(var i=1; i<dataLength; i++) {
-	    	var j = 0;
-	    	data[i].values.forEach(function(item) {
-	    		output[j][data[i].label] = item.y;
-	    		j++;
-	    	});
+	    for(var index = 0; index < output.length; index++) {
+	    	data.forEach(function(dataPoint){
+	    		output[index][dataPoint.name] = dataPoint.y[index];
+	    	})
 	    }
 
 	    var csv = Papa.unparse(output);

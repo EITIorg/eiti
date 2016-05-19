@@ -135,6 +135,34 @@ function eiti_ctools_extra_libraries_info() {
     ),
   );
 
+  $libraries['select2'] = array(
+    'title' => 'Select2',
+    'description' => 'The jQuery replacement for select boxes',
+    'version arguments' => array(
+      'file' => 'dist/js/select2.js',
+      'pattern' => '/Select2\s+v?([\d\.]+)/',
+      'lines' => 3,
+    ),
+    'files' => array(
+      'js' => array(
+        'dist/js/select2.js',
+      ),
+      'css' => array(
+        'dist/css/select2.css',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'js' => array(
+          'dist/js/select2.min.js',
+        ),
+        'css' => array(
+          'dist/css/select2.min.css',
+        ),
+      ),
+    ),
+  );
+
   return $libraries;
 }
 
@@ -161,4 +189,226 @@ function eiti_ctools_extra_load_eiti_libraries($name, $variant = NULL) {
   }
 
   return $loaded_libraries[$name];
+}
+
+/**
+ * Form constructor for the Quick Summary Tool form.
+ *
+ * @TODO: Currently the form only works via API; for fix: views_exposed_form_cache()
+ *
+ * @param $form
+ * @param $form_state
+ *
+ * @return array
+ */
+function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
+  $form = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'autocomplete' => 'off',
+      'id' => 'quick-summary-tool--form',
+      'class' => array(
+        'quick-summary-tool--form',
+        'container-inline-block',
+      ),
+    ),
+  );
+
+  // Load the library.
+  libraries_load('select2', 'minified');
+  $module_path = drupal_get_path('module', 'eiti_ctools_extra');
+  drupal_add_js($module_path . '/scripts/eiti_ctools_extra.select.js');
+
+  $selected_countries = NULL;
+  if (isset($form_state['input']['countries'])) {
+    $selected_countries = $form_state['input']['countries'];
+  }
+
+  // Get a list of Implementing Countries that have summary data files.
+  $query = db_select('eiti_implementing_country', 'ic');
+  $query->innerJoin('eiti_summary_data', 'sd', 'ic.id = sd.country_id');
+  $query
+    ->fields('ic', array('id', 'name'))
+    ->orderBy('ic.name')
+    ->groupBy('ic.id')
+    ->condition('ic.status', 1);
+
+  $country_options = $query->execute()
+    ->fetchAllKeyed();
+
+  // Translate Country Names.
+  $countries = entity_load('implementing_country', array_keys($country_options));
+  foreach ($country_options as $country_id => &$country_name) {
+    if (empty($countries[$country_id])) {
+      continue;
+    }
+
+    $country_name = entity_label('implementing_country', $countries[$country_id]);
+  }
+
+  // Sort the countries by the translated names.
+  asort($country_options);
+
+  $form['countries'] = array(
+    '#type' => 'select',
+    '#title' => t('Countries'),
+    '#title_display' => 'invisible',
+    '#required' => TRUE,
+    '#value' => $selected_countries,
+    '#options' => $country_options,
+    '#ajax' => array(
+      'callback' => 'eiti_ctools_extra__quick_summary_tool__country_callback',
+    ),
+    '#multiple' => TRUE,
+    '#attributes' => array(
+      'style' => 'width: 19em;',  // Used by Select2.
+      'data-placeholder' => t('Countries'),
+      'class' => array(
+        'jquery-select2-enabled',
+      ),
+    ),
+  );
+
+  $year_options = array();
+  if (!empty($selected_countries)) {
+    // Now let's make the query.
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->addExpression("DATE_PART('year', TO_TIMESTAMP(sd.year_end))", 'year');
+    $query->condition('status', 1)
+      ->condition('country_id', $selected_countries, 'IN')
+      ->groupBy('year');
+
+    // @TODO: Translate labels using entity_load() && entity_label()?!
+    $year_options = $query->execute()
+      ->fetchAllKeyed(0, 0);
+
+    ksort($year_options);
+  }
+
+  $form['years'] = array(
+    '#type' => 'select',
+    '#title' => t('Years'),
+    '#title_display' => 'invisible',
+    '#options' => $year_options,
+    '#disabled' => empty($year_options),
+    '#multiple' => TRUE,
+    '#attributes' => array(
+      'id' => 'quick-summary-tool--form-years',
+      'data-placeholder' => t('Years'),
+      'style' => 'width: 19em;',  // Used by Select2.
+      'class' => array(
+        'jquery-select2-enabled',
+      ),
+    ),
+  );
+
+  if (empty($year_options)) {
+    $form['years']['#disabled'] = TRUE;
+  }
+  else {
+    $form['years']['#required'] = TRUE;
+  }
+
+  $form['actions'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'form-item',
+      ),
+    ),
+  );
+
+  $form['actions']['next'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#attributes' => array(
+      'class' => array(
+        'form-item',
+      ),
+    ),
+    '#ajax' => array(
+      'callback' => 'eiti_ctools_extra__quick_summary_tool__submit_callback',
+    ),
+  );
+
+  $form['actions']['cancel'] = array(
+    '#type' => 'link',
+    '#title' => t('Reset'),
+    '#href' => url($_GET['q']),
+  );
+
+
+  $form['#suffix'] = '<div id="quick-summary-tool--information-placeholder"></div>';
+
+  return $form;
+}
+
+/**
+ * Ajax callback triggered by select.
+ */
+function eiti_ctools_extra__quick_summary_tool__country_callback($form, $form_state) {
+  $commands = array();
+
+  $commands[] = ajax_command_replace('#quick-summary-tool--form .form-item-years', drupal_render($form['years']));
+  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * Ajax callback triggered by select.
+ */
+function eiti_ctools_extra__quick_summary_tool__submit_callback($form, $form_state) {
+  $commands = array();
+  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
+
+  $countries = $form_state['values']['countries'];
+  if (empty($countries)) {
+    return $commands;
+  }
+  $countries = drupal_map_assoc($countries);
+
+  $years = $form_state['values']['years'];
+  if (empty($years)) {
+    return $commands;
+  }
+  $years = drupal_map_assoc($years);
+
+  // Now let's make the query.
+  $query = db_select('eiti_summary_data', 'sd');
+  $query->fields('sd', array('id'));
+  $query->condition('status', 1);
+  $query->condition('country_id', $countries);
+  $query->where("DATE_PART('year', TO_TIMESTAMP(sd.year_end)) IN (:years)", array(':years' => $years));
+
+  // @TODO: Translate labels using entity_load() && entity_label()?!
+  $summary_data_entities = $query->execute()
+    ->fetchAllAssoc(0, 0);
+
+  if (empty($summary_data_entities)) {
+    return $commands;
+  }
+
+  if (count($countries) == 1 && count($years) == 1) {
+    $entity_id = key($summary_data_entities);
+    $entity = entity_load_single('summary_data', $entity_id);
+    if (empty($entity)) {
+      return $commands;
+    }
+
+    $info[$entity_id] = entity_view('summary_data', array($entity_id => $entity), 'full');
+  }
+  else if (count($summary_data_entities) > 1) {
+    $view_args = implode(',', array_keys($summary_data_entities));
+    $info[] = array(
+      '#markup' => views_embed_view('quick_summary_table', 'default', $view_args),
+    );
+  }
+
+  if (!empty($info)) {
+    unset($commands['clear']);
+    $commands[] = ajax_command_html('#quick-summary-tool--information-placeholder', drupal_render($info));
+  }
+
+  return array('#type' => 'ajax', '#commands' => $commands);
 }

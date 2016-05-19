@@ -1,0 +1,31 @@
+
+.quick-summary-tool--wrapper {
+}
+
+.quick-summary-tool--form {
+  // HACK: Style the ajax throbber.
+  .form-type-select {
+    position: relative;
+    .ajax-progress {
+      position: absolute;
+      z-index: 1;
+      line-height: 2.3em;
+      right: 0.5em;
+    }
+  }
+  .ajax-progress {
+    .message {
+      display: none;
+    }
+  }
+}
+.xNormalAndUp() {
+  .quick-summary-tool--form {
+    .form-item {
+      margin-right: 1em;
+    }
+  }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

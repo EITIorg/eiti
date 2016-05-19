@@ -23830,7 +23830,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Oil, volume";
+	                  debugger;return v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23842,7 +23842,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Gas, volume";
+	                  return v.commodity === "Gas, volume" && v.unit && v.unit.toLowerCase() === 'sm3';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23854,7 +23854,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Coal, volume";
+	                  return v.commodity === "Coal, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23866,7 +23866,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Gold, volume";
+	                  return v.commodity === "Gold, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23878,7 +23878,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Copper, volume";
+	                  return v.commodity === "Copper, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23914,17 +23914,16 @@
 	              break;
 	            case "share_revenues":
 	              if (datapoint.revenues) {
-	                var years = Object.keys(datapoint.reports);
+	                var years = Object.keys(datapoint.revenues);
 	                var last = _underscore2.default.last(years);
+	                var yearData = datapoint.revenues[last];
 	                var generalYearData = datapoint.reports[last];
-	                var indicator_government = generalYearData ? generalYearData.find(function (v) {
-	                  return v.commodity === "Government revenue - extractive industries";
-	                }) : undefined;
+	                var indicator_government = yearData.government;
 	                var indicator_allsectors = generalYearData ? generalYearData.find(function (v) {
 	                  return v.commodity === "Government revenue - all sectors";
 	                }) : undefined;
-	                if (indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government.value !== 0 && indicator_allsectors.unit === indicator_government.unit) {
-	                  indicator_value = indicator_government.value * 100 / indicator_allsectors.value;
+	                if (indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+	                  indicator_value = indicator_government * 100 / indicator_allsectors.value;
 	                } else {
 	                  indicator_value = 'n/a';
 	                }
@@ -24076,6 +24075,9 @@
 	          return v !== undefined;
 	        });
 	        var mergedHTML = "<h2>" + _helpers.helpers.t(indicatorName) + " " + (unit ? "(" + unit + ")" : "") + "<br/></h2>";
+	        //mergedHTML += "<h2 class='close_legend'>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<div>Close</div><br/></h2>";
+	        mergedHTML += "<div class='legend_body'>";
+	
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
@@ -24083,6 +24085,9 @@
 	        });
 	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No data') + '</strong><br/><br/>';
 	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
+	
+	        mergedHTML += "</div>";
+	
 	        map.options.legend.innerHTML = mergedHTML + sourceText;
 	      }.bind(this);
 	
@@ -24112,13 +24117,13 @@
 	          values = _helpers.helpers.t("Gas, volume");
 	          break;
 	        case "coal_volume":
-	          values = _helpers.helpers.t("Coal, tons");
+	          values = _helpers.helpers.t("Coal");
 	          break;
 	        case "gold_volume":
-	          values = _helpers.helpers.t("Gold, tons");
+	          values = _helpers.helpers.t("Gold");
 	          break;
 	        case "copper_volume":
-	          values = _helpers.helpers.t("Copper, tons");
+	          values = _helpers.helpers.t("Copper");
 	          break;
 	        case "revenue":
 	          values = _helpers.helpers.t("Government revenue - extractive industries");
@@ -24210,7 +24215,7 @@
 	            { className: 'map-option-widget' },
 	            _react2.default.createElement(
 	              'li',
-	              { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this) },
+	              { 'data-indicatorid': 'status', 'data-valuetypes': 'fixed', onClick: this.addLayer.bind(this), className: 'active' },
 	              _helpers.helpers.t('Overview')
 	            ),
 	            _react2.default.createElement(
@@ -24313,7 +24318,7 @@
 	        var items = [];
 	        var cols = [];
 	        var sortedCountries = _underscore2.default.sortBy(this.state.data, 'label');
-	
+	        var cutout = Math.ceil(sortedCountries.length / 4);
 	        for (var i = 0; i < sortedCountries.length; i++) {
 	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
 	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
@@ -24336,7 +24341,7 @@
 	              )
 	            )
 	          ));
-	          if ((i + 1) % 4 === 0) {
+	          if ((i + 1) % cutout === 0) {
 	            cols.push(_react2.default.createElement(
 	              'div',
 	              { className: 'country-col' },
@@ -24358,21 +24363,35 @@
 	          cols
 	        );
 	      }
+	      var screenWidth = window.innerWidth > 0 ? window.innerWidth : screen.width;
+	      var zoom = 2;
+	
+	      if (screenWidth <= 400) {
+	        zoom = 1;
+	      }
+	
+	      // If there's a selector, add the responsive classes.
+	      var containerClass = 'map-container';
+	      var elementClass;
+	      if (selector) {
+	        containerClass = 'map-container media-resizable-element';
+	        elementClass = 'resizable-map';
+	      }
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'map-container' },
+	        { className: containerClass },
 	        buttons,
 	        _react2.default.createElement(
 	          'div',
 	          null,
 	          _react2.default.createElement(
 	            _reactLeaflet.Map,
-	            {
+	            { className: elementClass,
 	              center: this.state.latlng,
 	              length: 4,
 	              ref: 'map',
-	              zoom: 2,
+	              zoom: zoom,
 	              height: 500,
 	              scrollWheelZoom: false
 	            },
@@ -24985,12 +25004,8 @@
 	
 	        // Extractives Revenue latest year
 	
-	        var indicator_government_revenue = yearData.find(function (v) {
-	            return v.commodity === "Extractives";
-	        }) || yearData.find(function (v) {
-	            return v.commodity === "Government revenue - extractive industries";
-	        }) || undefined;
-	        if (indicator_government_revenue) {
+	        var indicator_government_revenue = undefined;
+	        if (country.revenues && country.revenues.length) {
 	            var years_revenue = Object.keys(country.revenues);
 	            var last_revenue = _underscore2.default.last(years_revenue);
 	            var yearData_revenue = country.revenues[last_revenue];

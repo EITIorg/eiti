@@ -20,10 +20,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'email',
         'settings' => array(),
-        'type' => 'email_default',
-        'weight' => 20,
+        'type' => 'hidden',
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -54,10 +53,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 18,
+        'type' => 'hidden',
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -90,10 +88,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 19,
+        'type' => 'hidden',
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -129,12 +126,13 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 23,
+        'weight' => 8,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_company',
-    'label' => 'By Company',
+    'label' => 'Disaggregation of data by company',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -162,12 +160,13 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 24,
+        'weight' => 9,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_project',
-    'label' => 'By Project',
+    'label' => 'Disaggregation of data by project',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -195,18 +194,20 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 22,
+        'weight' => 7,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_revenue_stream',
-    'label' => 'By Revenue Stream',
-    'required' => FALSE,
+    'label' => 'Disaggregation of data by revenue stream',
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
@@ -226,12 +227,13 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 15,
+        'weight' => 11,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_file_links',
-    'label' => 'File Links',
+    'label' => 'Other data files',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -278,7 +280,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 13,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -311,7 +313,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -343,10 +345,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
         'settings' => array(),
-        'type' => 'entityreference_entity_id',
-        'weight' => 21,
+        'type' => 'hidden',
+        'weight' => 27,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -390,7 +391,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 11,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -428,7 +429,7 @@ function eitiet_summary_data_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 17,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -470,7 +471,7 @@ function eitiet_summary_data_field_default_field_instances() {
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 16,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -506,7 +507,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 9,
+        'weight' => 12,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -535,10 +536,14 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 12,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => '',
+        ),
+        'type' => 'title_linked',
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -572,7 +577,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 27,
+        'weight' => 10,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -652,12 +657,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 26,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -698,12 +700,9 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 25,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
       ),
     ),
     'entity_type' => 'summary_data',
@@ -736,11 +735,10 @@ function eitiet_summary_data_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('By Company');
-  t('By Project');
-  t('By Revenue Stream');
+  t('Disaggregation of data by company');
+  t('Disaggregation of data by project');
+  t('Disaggregation of data by revenue stream');
   t('Email address');
-  t('File Links');
   t('Gas');
   t('Independent Administrator');
   t('Indicator Values');
@@ -751,9 +749,10 @@ function eitiet_summary_data_field_default_field_instances() {
   t('Oil');
   t('Organisation');
   t('Other');
+  t('Other data files');
   t('Reconciled Revenue Streams per Company');
-  t('Report File');
   t('Revenue Stream as Disclosed by Government');
+  t('Summary Data Report File');
 
   return $field_instances;
 }

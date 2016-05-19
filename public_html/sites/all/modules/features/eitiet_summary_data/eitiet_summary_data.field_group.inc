@@ -128,30 +128,6 @@ function eitiet_summary_data_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_sectors_covered|summary_data|summary_data|default';
-  $field_group->group_name = 'group_sd_sectors_covered';
-  $field_group->entity_type = 'summary_data';
-  $field_group->bundle = 'summary_data';
-  $field_group->mode = 'default';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Sectors Covered',
-    'weight' => '11',
-    'children' => array(),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-sd-sectors-covered field-group-fieldset',
-      ),
-    ),
-  );
-  $field_groups['group_sd_sectors_covered|summary_data|summary_data|default'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_sd_sectors_covered|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_sectors_covered';
   $field_group->entity_type = 'summary_data';

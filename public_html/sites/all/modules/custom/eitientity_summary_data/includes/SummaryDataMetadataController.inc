@@ -2,19 +2,16 @@
 
 /**
  */
-class SummaryDataMetadataController extends EntityDefaultMetadataController {
+class SummaryDataMetadataController extends HelperEntityMetadataController {
   public function entityPropertyInfo() {
     $info = parent::entityPropertyInfo();
 
     // A bit more adjustments.
     foreach ($info[$this->type] as $bundle => &$bundle_info) {
-      if (isset($bundle_info['status'])) {
-        $bundle_info['status']['type'] = 'boolean';
-      }
       if (isset($bundle_info['country_id'])) {
         $bundle_info['country_id'] = array(
-          'label' => t('Implementing Country'),
           'type' => 'implementing_country',
+          'label' => t('Implementing Country'),
           'description' => t('Implementing Country specified.'),
           'getter callback' => 'entity_property_getter_method',
           'setter callback' => 'entity_property_setter_method',
@@ -22,6 +19,15 @@ class SummaryDataMetadataController extends EntityDefaultMetadataController {
           'schema field' => 'country_id',
         );
       }
+
+      $bundle_info['sectors_covered'] = array(
+        'type' => 'text',
+        'label' => t('Sectors Covered'),
+        'description' => t('The list of sectors covered in this summary data.'),
+        'getter callback' => 'eitientity_summary_data_entity_property_get_sectors_covered',
+        'computed' => TRUE,
+        'schema field' => 'country_id',
+      );
     }
 
     return $info;

@@ -143,3 +143,43 @@ function eitiet_summary_data_update_7004(&$sandbox) {
     $new_entity->save();
   }
 }
+
+/**
+ * Fix parent for existing indicators.
+ */
+function eitiet_summary_data_update_7005(&$sandbox) {
+  $parent_name = 'Distribution of revenues from extractive industries (3.7.a)';
+  $query = new EntityFieldQuery();
+  $matched = $query
+    ->entityCondition('entity_type', 'indicator')
+    ->propertyCondition('type', 'group')
+    ->propertyCondition('name', $parent_name)
+    ->execute();
+  if (empty($matched['indicator'])) {
+    return;
+  }
+  $parent_indicator_id = key($matched['indicator']);
+
+  // Wrong indicator: Export volume and value (3.5.b) > Oil, volume
+  $wrong_parent_id = 10;
+
+  // Here is where we just want to update the existing indicators.
+  $indicators_to_update = array(
+    'Are EI revenues recorded in the government accounts/budget?',
+    'If no, provide a brief explanation.',
+    'If yes, link to government\'s accounts, where revenues are recorded',
+    'Link to other financial reports, where revenues are recorded',
+  );
+
+  /* Loop and create the values */
+  foreach ($indicators_to_update as $indicator) {
+
+    $query = db_update('eiti_indicator');
+    $query->fields(array(
+      'parent' => $parent_indicator_id,
+    ));
+    $query->condition('name', $indicator);
+    $query->condition('parent', $wrong_parent_id);
+    $query->execute();
+  }
+}

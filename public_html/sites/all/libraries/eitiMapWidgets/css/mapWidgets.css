@@ -14,7 +14,7 @@
   width: 1300px;
 }
 .eiti-map-wrapper .country-list-wrapper {
-  max-width: 60em;
+  max-width: 80em;
 }
 .eiti-map-wrapper .leaflet-container {
   height: 500px;
@@ -84,6 +84,9 @@
 .eiti-map-wrapper .legend h2 {
   line-height: 1.25em;
 }
+.eiti-map-wrapper .resizable-map {
+  width: 100% !important;
+}
 .eiti-map-wrapper .leaflet-container {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -112,7 +115,7 @@
 .eiti-map-wrapper .map-option-wrapper .map-option-widget {
   cursor: pointer;
   list-style: none;
-  padding: 0.25em 0 0;
+  padding: 0 0 0;
 }
 .eiti-map-wrapper .map-option-wrapper .map-option-widget:before,
 .eiti-map-wrapper .map-option-wrapper .map-option-widget:after {

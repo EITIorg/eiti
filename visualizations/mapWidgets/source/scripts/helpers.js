@@ -152,8 +152,8 @@ export var helpers = {
 
         // Extractives Revenue latest year
         
-        var indicator_government_revenue = yearData.find(function(v){ return (v.commodity === "Extractives")}) || yearData.find(function(v){ return (v.commodity === "Government revenue - extractive industries")}) || undefined;
-        if(indicator_government_revenue) {
+        var indicator_government_revenue = undefined;
+        if(country.revenues && country.revenues.length) {
             var years_revenue = Object.keys(country.revenues);
             var last_revenue = _.last(years_revenue);
             var yearData_revenue = country.revenues[last_revenue];

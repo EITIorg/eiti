@@ -388,3 +388,14 @@ function _helpertheme_links__enhanced($variables) {
 
   return $output;
 }
+
+/**
+ * Theme preprocess function for theme_entity_property().
+ *
+ * @see theme_entity_property()
+ */
+function helpertheme_preprocess_entity_property(&$variables) {
+  // We want properties to look more like fields.
+  $variables['attributes_array']['class'][] = 'field';
+  $variables['title_attributes_array']['class'][] = 'label-above';
+}
