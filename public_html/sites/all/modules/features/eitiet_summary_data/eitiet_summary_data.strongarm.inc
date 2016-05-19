@@ -65,7 +65,7 @@ function eitiet_summary_data_strongarm() {
         ),
         'year_start' => array(
           'default' => array(
-            'weight' => '15',
+            'weight' => '25',
             'visible' => FALSE,
           ),
         ),
@@ -77,43 +77,49 @@ function eitiet_summary_data_strongarm() {
         ),
         'published' => array(
           'default' => array(
-            'weight' => '14',
+            'weight' => '24',
             'visible' => FALSE,
           ),
         ),
         'currency_code' => array(
           'default' => array(
-            'weight' => '13',
+            'weight' => '23',
             'visible' => FALSE,
           ),
         ),
         'currency_rate' => array(
           'default' => array(
-            'weight' => '12',
+            'weight' => '22',
             'visible' => FALSE,
           ),
         ),
         'status' => array(
           'default' => array(
-            'weight' => '16',
+            'weight' => '26',
             'visible' => FALSE,
           ),
         ),
         'created' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '20',
             'visible' => FALSE,
           ),
         ),
         'changed' => array(
           'default' => array(
-            'weight' => '11',
+            'weight' => '21',
             'visible' => FALSE,
           ),
         ),
         'url' => array(
           'default' => array(
-            'weight' => '0',
+            'weight' => '16',
+            'visible' => FALSE,
+          ),
+        ),
+        'sectors_covered' => array(
+          'default' => array(
+            'weight' => '3',
             'visible' => TRUE,
           ),
         ),

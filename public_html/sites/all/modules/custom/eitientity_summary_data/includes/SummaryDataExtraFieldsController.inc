@@ -9,6 +9,10 @@
  * Controller for generating extra fields based on property metadata.
  */
 class SummaryDataExtraFieldsController extends EntityDefaultExtraFieldsController {
+  /**
+   * @var array
+   */
+  protected $propertyInfo;
 
   public function fieldExtraFields() {
     $extra = array();
@@ -18,12 +22,10 @@ class SummaryDataExtraFieldsController extends EntityDefaultExtraFieldsControlle
         continue;
       }
 
-      if (!empty($property_info['computed'])) {
-        continue;
-      }
-
-      if (!in_array($name, array('created', 'changed', 'status'))) {
-        $extra[$this->entityType][$this->entityType]['form'][$name] = $this->generateExtraFieldInfo($name, $property_info);
+      if (empty($property_info['computed'])) {
+        if (!in_array($name, array('created', 'changed', 'status'))) {
+          $extra[$this->entityType][$this->entityType]['form'][$name] = $this->generateExtraFieldInfo($name, $property_info);
+        }
       }
       $extra[$this->entityType][$this->entityType]['display'][$name] = $this->generateExtraFieldInfo($name, $property_info);
     }
