@@ -13,40 +13,6 @@ function eitiet_summary_data_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_contact_details|summary_data|summary_data|default';
-  $field_group->group_name = 'group_sd_contact_details';
-  $field_group->entity_type = 'summary_data';
-  $field_group->bundle = 'summary_data';
-  $field_group->mode = 'default';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Contact details',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_sd_contact_name',
-      1 => 'field_sd_contact_email_address',
-      2 => 'field_sd_contact_organisation',
-    ),
-    'format_type' => 'div',
-    'format_settings' => array(
-      'label' => 'Contact details',
-      'instance_settings' => array(
-        'id' => '',
-        'classes' => 'group-sd-contact-details field-group-div',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
-      ),
-      'formatter' => 'open',
-    ),
-  );
-  $field_groups['group_sd_contact_details|summary_data|summary_data|default'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_sd_contact_details|summary_data|summary_data|form';
   $field_group->group_name = 'group_sd_contact_details';
   $field_group->entity_type = 'summary_data';
@@ -73,40 +39,6 @@ function eitiet_summary_data_field_group_info() {
     ),
   );
   $field_groups['group_sd_contact_details|summary_data|summary_data|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
-  $field_group->identifier = 'group_sd_data_disaggregation|summary_data|summary_data|default';
-  $field_group->group_name = 'group_sd_data_disaggregation';
-  $field_group->entity_type = 'summary_data';
-  $field_group->bundle = 'summary_data';
-  $field_group->mode = 'default';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Disaggregation of Data',
-    'weight' => '6',
-    'children' => array(
-      0 => 'field_sd_disagg_project',
-      1 => 'field_sd_disagg_revenue_stream',
-      2 => 'field_sd_disagg_company',
-    ),
-    'format_type' => 'div',
-    'format_settings' => array(
-      'label' => 'Disaggregation of Data',
-      'instance_settings' => array(
-        'id' => '',
-        'classes' => 'group-sd-data-disaggregation field-group-div',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
-      ),
-      'formatter' => 'open',
-    ),
-  );
-  $field_groups['group_sd_data_disaggregation|summary_data|summary_data|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
