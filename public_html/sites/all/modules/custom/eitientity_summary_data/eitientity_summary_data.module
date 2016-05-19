@@ -419,7 +419,7 @@ function eitientity_summary_data_entity_property_get_indicator_gov_revenue_extra
     ->fetchAllAssoc('id');
 
   if (empty($queried_indicators)) {
-    return NULL;
+    return t('N/A');
   }
   $queried_indicator = reset($queried_indicators);
 
