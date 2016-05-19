@@ -13,6 +13,65 @@ function eitict_internal_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'content_access_internal';
+  $strongarm->value = array(
+    'view_own' => array(
+      0 => 2,
+      1 => 3,
+    ),
+    'view' => array(
+      0 => 2,
+      1 => 3,
+    ),
+    'priority' => '-10',
+  );
+  $export['content_access_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_internal';
+  $strongarm->value = 0;
+  $export['diff_enable_revisions_page_node_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_internal';
+  $strongarm->value = 0;
+  $export['diff_show_preview_changes_node_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_internal';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'ds_extras_view_modes_internal';
+  $strongarm->value = array();
+  $export['ds_extras_view_modes_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_internal';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_node_metadata_internal';
+  $strongarm->value = '0';
+  $export['entity_translation_node_metadata_internal'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__internal';
   $strongarm->value = array(
     'view_modes' => array(),
@@ -67,14 +126,14 @@ function eitict_internal_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_internal';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_internal'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_internal';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_internal'] = $strongarm;
 
   return $export;
