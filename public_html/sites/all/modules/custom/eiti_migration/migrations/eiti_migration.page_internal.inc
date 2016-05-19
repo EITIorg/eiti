@@ -25,6 +25,7 @@ class EITIInternalPageMigration extends EITINodeMigration {
 
     $this->addFieldMapping('body', 'body', FALSE);
     $this->addFieldMapping('body:summary', 'body:summary', FALSE);
+    $this->addFieldMapping('body:language', 'language', FALSE);
 
     $this->addFieldMapping('field_attachments', 'files_merged')
      ->sourceMigration(array('EITIIMCEFilesMigration', 'EITIPagesAttachedFilesMigration', 'EITIPagesUploadedFilesMigration'));
