@@ -274,7 +274,7 @@ function contentwidget__viz_bubble_dynamic__get_data_types($return = FALSE) {
  * Extra settings for our disbursed revenues bubble widget.
  */
 function _contentwidget__viz_bubble_dynamic__disbursed_revenues_settings(&$form, &$form_state, $widget_settings) {
-  $bubble_numbers = drupal_map_assoc(array(5, 10, 15));
+  $bubble_numbers = drupal_map_assoc(drupal_map_assoc(range(2, 15)));
   $form['bubbles_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Bubbles'),
