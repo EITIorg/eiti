@@ -392,3 +392,42 @@ function eitientity_summary_data_entity_property_get_sectors_covered($data, arra
 
   return t('None');
 }
+
+/**
+ * Value callback for "Government revenue - extractive industries".
+ *
+ * @param $data
+ * @param array $options
+ * @param $name
+ * @param $type
+ * @param $info
+ */
+function eitientity_summary_data_entity_property_get_indicator_gov_revenue_extractive($data, array $options, $name, $type, $info) {
+  // Load Parent Indicator:
+  // Contribution of extractive industries to economy (3.4) > Government revenue - extractive industries
+  // @HACK: Have dynamic indicators and hardcoded reports.
+  $hardcoded_indicator_id = 4;
+
+  // SELECT fiv.field_sd_indicator_values_target_id AS iv_id, iv.* FROM field_data_field_sd_indicator_values fiv RIGHT JOIN eiti_indicator_value iv ON iv.id = fiv.field_sd_indicator_values_target_id AND iv.indicator_id = 4 WHERE fiv.entity_id = 50;
+  $select = db_select('field_data_field_sd_indicator_values', 'fiv');
+  $select->innerJoin('eiti_indicator_value', 'iv', 'iv.id = fiv.field_sd_indicator_values_target_id');
+  $select->condition('fiv.entity_type', 'summary_data')
+    ->condition('fiv.entity_id', $data->id)
+    ->condition('iv.indicator_id', $hardcoded_indicator_id)
+    ->fields('iv');
+  $queried_indicators = $select->execute()
+    ->fetchAllAssoc('id');
+
+  if (empty($queried_indicators)) {
+    return NULL;
+  }
+  $queried_indicator = reset($queried_indicators);
+
+  // @TODO: Configure indicator_value entity display settings.
+  $value = t('@currency @value', array(
+    '@currency' => $queried_indicator->value_unit,
+    '@value' => number_format($queried_indicator->value_numeric, 2),
+  ));
+
+  return $value;
+}
