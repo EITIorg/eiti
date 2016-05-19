@@ -75,15 +75,7 @@ function contentwidget__featured_bookmarks__render($plugin, $widget_settings, $e
     $items[$key] = preg_replace('@>[\s\W]+<@', '><', $markup);
   }
 
-  $block = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'single-fluid-row-wrapper',
-        'clearfix',
-      )
-    )
-  );
+  $block = array();
 
   $block['bookmarks'] = array(
     '#theme' => 'item_list',

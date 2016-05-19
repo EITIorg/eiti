@@ -222,3 +222,4 @@ features[variable][] = panelizer_defaults_fieldable_panels_pane_text
 features[variable][] = panelizer_defaults_fieldable_panels_pane_value_chain
 features[variable][] = panelizer_defaults_fieldable_panels_pane_visualization
 features[variable][] = title_fieldable_panels_pane
+features_exclude[field_group][group_title_wrapper|fieldable_panels_pane|featured_bookmarks|default] = group_title_wrapper|fieldable_panels_pane|featured_bookmarks|default
