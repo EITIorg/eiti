@@ -29,6 +29,7 @@ export default class MapWidgetComponent extends Component {
   constructor() {
     super();
     this.state = {
+      initialized: false,
       indicator_id: 'status',
       valuetypes: 'fixed',
       baseMap: undefined,
@@ -99,7 +100,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ debugger;return (v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3')});
+              var indicator = yearData.find(function(v){ return (v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3')});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -306,7 +307,6 @@ export default class MapWidgetComponent extends Component {
 
   addLegend(map, indicator_id, countryDataProcessed) {
       var info = L.control({position: 'bottomleft'});
-      //var map = e.target._map;
 
       info.onAdd = function (map) {
           if(map.options.legend === undefined) {
@@ -319,12 +319,29 @@ export default class MapWidgetComponent extends Component {
       info.update = function (props) {
           var indicatorMetadata;
           indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
+
           var indicatorName = ::this.getIndicatorName(indicator_id || this.state.indicator_id);
           var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
-          var mergedHTML = "<h2>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<br/></h2>";
-          //mergedHTML += "<h2 class='close_legend'>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<div>Close</div><br/></h2>";
-          mergedHTML += "<div class='legend_body'>";
 
+          var h2El = document.createElement("H2");
+          h2El.innerText = helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "");
+          h2El.className = "responsive-header";
+
+          var spanEl = document.createElement("SPAN");
+          spanEl.innerText = helpers.t("show");
+          h2El.appendChild(spanEl);
+
+          var h2El_2 = document.createElement("H2");
+          h2El_2.innerText = helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "");
+
+          var spanEl_2 = document.createElement("SPAN");
+          spanEl_2.innerText = helpers.t("hide");
+          h2El_2.appendChild(spanEl_2);
+
+          var divLegend = document.createElement("DIV");
+          divLegend.className = "responsive-legend";
+
+          var mergedHTML = "";
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
@@ -333,9 +350,27 @@ export default class MapWidgetComponent extends Component {
           if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
 
-          mergedHTML += "</div>";
+          var divLegendBody = document.createElement("DIV");
+          divLegendBody.innerHTML = mergedHTML + sourceText;
+          divLegend.appendChild(h2El_2);
+          divLegend.appendChild(divLegendBody);
 
-          map.options.legend.innerHTML = mergedHTML + sourceText;
+          while (map.options.legend.firstChild) {
+              map.options.legend.removeChild(map.options.legend.firstChild);
+          }
+
+          map.options.legend.appendChild(h2El);
+          map.options.legend.appendChild(divLegend);
+
+          spanEl.onclick = function() {
+            divLegend.style.display = 'block';
+            h2El.style.display = 'none';
+          };
+
+          spanEl_2.onclick = function() {
+            divLegend.style.display = 'none';
+            h2El.style.display = 'block';
+          };
       }.bind(this);
 
       info.addTo(map);
@@ -495,13 +530,19 @@ export default class MapWidgetComponent extends Component {
       var cutout = Math.ceil(sortedCountries.length/4);
       for (var i = 0; i < sortedCountries.length;i++) {
         var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
-        var countryPageURL = "/implementing_country/" + sortedCountries[i].id
+        var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
+
+        var years = Object.keys(sortedCountries[i].metadata);
+        var last = _.last(years);
+        var yearData = sortedCountries[i].metadata[last];
+        var reportURL = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _.first(yearData.web_report_links) : '#';
+
         items.push(
             <li>
               <span className={itemStyle}></span>
               <a href={countryPageURL}>{sortedCountries[i].label}</a>
               <span className="report">
-                <a href="#">
+                <a target="_blank" href={reportURL.url ? reportURL.url : "#"} title={last}>
                   {reportLink}
                 </a>
               </span>
@@ -557,7 +598,12 @@ export default class MapWidgetComponent extends Component {
             >
             <TileLayer
               url=''
-              onLeafletLoad={function(e) {this.addLegend(e.target._map)}.bind(this)}
+              onLeafletLoad={function(e) {
+                if(!this.state.initialized) {
+                  this.addLegend(e.target._map, this.state.indicator_id);
+                  this.setState({initialized:true});
+                }
+              }.bind(this)}
             />
             {geoJsonLayer}
           </Map>
