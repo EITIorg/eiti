@@ -30,6 +30,7 @@ features[variable][] = diff_view_mode_preview_node_internal
 features[variable][] = ds_extras_view_modes_internal
 features[variable][] = entity_translation_hide_translation_links_internal
 features[variable][] = entity_translation_node_metadata_internal
+features[variable][] = entity_translation_settings_node__internal
 features[variable][] = field_bundle_settings_node__internal
 features[variable][] = language_content_type_internal
 features[variable][] = menu_options_internal
