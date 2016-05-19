@@ -46,13 +46,6 @@ function eitict_document_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'document';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
-    'field_attachments' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_document_category' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -64,6 +57,14 @@ function eitict_document_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+          'classes' => 'field-highlighted',
         ),
       ),
     ),
@@ -166,8 +167,10 @@ function eitict_document_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
+      'above' => 'div',
       'left' => 'div',
       'right' => 'div',
+      'below' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'article',
