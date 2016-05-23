@@ -23906,7 +23906,7 @@
 	                  return v.commodity === "Population";
 	                }) : undefined;
 	                if (population && indicator) {
-	                  indicator_value = indicator.value / population.value;
+	                  indicator_value = indicator / population;
 	                } else {
 	                  indicator_value = 0;
 	                }
@@ -25041,7 +25041,7 @@
 	        var country_member_since = memberDate ? memberDate.getUTCFullYear() : this.t('n/a');
 	
 	        // Latest Report Year
-	        var country_last_report_year = last;
+	        var country_last_report_year = lastMetadata;
 	
 	        // Latest Report Link
 	        var country_last_report_file = country.annual_report_file;
@@ -25107,7 +25107,7 @@
 	
 	        // Add Revenue
 	        var extractives_revenue_value = indicator_government_revenue > 0 ? this.formatNumber(indicator_government_revenue, { inMillions: true, includeDecimals: true }) + ' million ' + currency_code : this.t('n/a');
-	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
+	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractive industry revenues') + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
 	
 	        // Add Sectors Covered
 	        info_content_second = info_content_second + '<div class="info-block">' + '<span class="info">' + '   <span class="label">' + this.t('Sectors covered') + ':</span>';

@@ -156,7 +156,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "revenue_per_capita":
-            if(datapoint.revenues) {
+            if(datapoint.revenues) {  
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
@@ -164,7 +164,7 @@ export default class MapWidgetComponent extends Component {
               var indicator = yearData.government;
               var population = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Population")}) : undefined;
               if(population && indicator) {
-                indicator_value = indicator.value/population.value;
+                indicator_value = indicator/population;
               }
               else
               {
