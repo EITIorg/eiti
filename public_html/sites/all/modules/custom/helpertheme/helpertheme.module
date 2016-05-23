@@ -122,7 +122,7 @@ function helpertheme_menu() {
  * @return string
  */
 function helpertheme_page_access_denied() {
-  $elements['message'] = t('You are not authorized to access this page.');
+  $elements['message']['#markup'] = t('You are not authorized to access this page.');
 
   // Only display the login form for authenticated users.
   if (empty($GLOBALS['user']->uid)) {
@@ -138,7 +138,7 @@ function helpertheme_page_access_denied() {
  * @return string
  */
 function helpertheme_page_not_found() {
-  $elements['message'] = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+  $elements['message']['#markup'] = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
 
   return drupal_render($elements);
 }
