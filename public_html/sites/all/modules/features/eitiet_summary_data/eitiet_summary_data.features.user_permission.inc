@@ -24,10 +24,7 @@ function eitiet_summary_data_user_default_permissions() {
   // Exported permission: 'summary_data entity administer'.
   $permissions['summary_data entity administer'] = array(
     'name' => 'summary_data entity administer',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'eitientity_summary_data',
   );
 

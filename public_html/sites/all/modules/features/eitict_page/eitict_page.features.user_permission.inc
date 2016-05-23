@@ -15,6 +15,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'administer panelizer node page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'panelizer',
   );
@@ -45,6 +47,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'administer panelizer node page overview',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'panelizer',
   );
@@ -61,6 +65,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'create page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -70,6 +76,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'delete any page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -79,6 +87,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'delete own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -88,6 +98,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -97,6 +109,8 @@ function eitict_page_user_default_permissions() {
     'name' => 'edit own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );

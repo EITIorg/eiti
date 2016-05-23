@@ -15,6 +15,8 @@ function eitiet_organisation_user_default_permissions() {
     'name' => 'organisation entity access overview',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_organisation',
   );
@@ -22,10 +24,7 @@ function eitiet_organisation_user_default_permissions() {
   // Exported permission: 'organisation entity administer'.
   $permissions['organisation entity administer'] = array(
     'name' => 'organisation entity administer',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'eitientity_organisation',
   );
 
@@ -34,6 +33,8 @@ function eitiet_organisation_user_default_permissions() {
     'name' => 'organisation entity create',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_organisation',
   );
@@ -43,6 +44,8 @@ function eitiet_organisation_user_default_permissions() {
     'name' => 'organisation entity delete',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_organisation',
   );
@@ -52,6 +55,8 @@ function eitiet_organisation_user_default_permissions() {
     'name' => 'organisation entity edit',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_organisation',
   );

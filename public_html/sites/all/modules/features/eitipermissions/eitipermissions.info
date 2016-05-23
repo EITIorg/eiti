@@ -5,6 +5,7 @@ package = EITI General
 version = 7.x-1.0
 dependencies[] = actions_permissions
 dependencies[] = admin_menu
+dependencies[] = content_access
 dependencies[] = contextual
 dependencies[] = ctools
 dependencies[] = currency

@@ -76,10 +76,7 @@ function eitientities_user_default_permissions() {
   // Exported permission: 'revenue_stream entity administer'.
   $permissions['revenue_stream entity administer'] = array(
     'name' => 'revenue_stream entity administer',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'eitientity_revenue_stream',
   );
 
@@ -88,6 +85,8 @@ function eitientities_user_default_permissions() {
     'name' => 'revenue_stream entity create',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_revenue_stream',
   );
@@ -97,6 +96,8 @@ function eitientities_user_default_permissions() {
     'name' => 'revenue_stream entity delete',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_revenue_stream',
   );
@@ -106,6 +107,8 @@ function eitientities_user_default_permissions() {
     'name' => 'revenue_stream entity edit',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_revenue_stream',
   );
@@ -115,6 +118,8 @@ function eitientities_user_default_permissions() {
     'name' => 'revenue_stream entity view',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_revenue_stream',
   );

@@ -15,6 +15,8 @@ function eitiet_implementing_country_user_default_permissions() {
     'name' => 'administer panelizer implementing_country normal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'panelizer',
   );
@@ -45,6 +47,8 @@ function eitiet_implementing_country_user_default_permissions() {
     'name' => 'administer panelizer implementing_country normal overview',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'panelizer',
   );
@@ -92,10 +96,7 @@ function eitiet_implementing_country_user_default_permissions() {
   // Exported permission: 'implementing_country entity administer'.
   $permissions['implementing_country entity administer'] = array(
     'name' => 'implementing_country entity administer',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'eitientity_implementing_country',
   );
 

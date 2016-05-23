@@ -15,6 +15,8 @@ function eitict_internal_user_default_permissions() {
     'name' => 'create internal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -24,6 +26,8 @@ function eitict_internal_user_default_permissions() {
     'name' => 'delete any internal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -33,6 +37,8 @@ function eitict_internal_user_default_permissions() {
     'name' => 'delete own internal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -42,6 +48,8 @@ function eitict_internal_user_default_permissions() {
     'name' => 'edit any internal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );
@@ -51,6 +59,8 @@ function eitict_internal_user_default_permissions() {
     'name' => 'edit own internal content',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'node',
   );

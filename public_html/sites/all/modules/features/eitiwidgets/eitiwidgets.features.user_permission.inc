@@ -99,6 +99,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable fact_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -108,6 +110,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable featured_articles',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -117,6 +121,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable featured_bookmarks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -126,6 +132,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable featured_persons',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -135,6 +143,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable featured_publications',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -144,6 +154,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable header',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -153,6 +165,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable icon_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -162,6 +176,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable quote',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -171,6 +187,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable table',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -187,6 +205,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable text',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -196,6 +216,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable value_chain',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -205,6 +227,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'create fieldable visualization',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -214,6 +238,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable fact_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -223,6 +249,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable featured_articles',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -232,6 +260,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable featured_bookmarks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -241,6 +271,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable featured_persons',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -250,6 +282,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable featured_publications',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -259,6 +293,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable header',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -268,6 +304,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable icon_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -277,6 +315,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable quote',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -286,6 +326,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable table',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -302,6 +344,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable text',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -311,6 +355,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable value_chain',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -320,6 +366,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'delete fieldable visualization',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -329,6 +377,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable fact_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -338,6 +388,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable featured_articles',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -347,6 +399,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable featured_bookmarks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -356,6 +410,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable featured_persons',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -365,6 +421,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable featured_publications',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -374,6 +432,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable header',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -383,6 +443,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable icon_blocks',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -392,6 +454,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable quote',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -401,6 +465,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable table',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -417,6 +483,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable text',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -426,6 +494,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable value_chain',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
@@ -435,6 +505,8 @@ function eitiwidgets_user_default_permissions() {
     'name' => 'edit fieldable visualization',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'fieldable_panels_panes',
   );
