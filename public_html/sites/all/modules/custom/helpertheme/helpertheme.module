@@ -93,6 +93,20 @@ function helpertheme_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['page-403'] = array(
+    'title' => 'Access denied',
+    'page callback' => 'helpertheme_page_access_denied',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['page-404'] = array(
+    'title' => 'Page not found',
+    'page callback' => 'helpertheme_page_not_found',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   $items['site-map'] = array(
     'title' => 'Site Map',
     'page callback' => 'helpertheme_site_map',
@@ -101,6 +115,32 @@ function helpertheme_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Replaces the standard 403 handler.
+ * @return string
+ */
+function helpertheme_page_access_denied() {
+  $elements['message'] = t('You are not authorized to access this page.');
+
+  // Only display the login form for authenticated users.
+  if (empty($GLOBALS['user']->uid)) {
+    $elements['login_form'] = drupal_get_form('user_login');
+  }
+
+  return drupal_render($elements);
+
+}
+
+/**
+ * Replaces the standard 404 handler.
+ * @return string
+ */
+function helpertheme_page_not_found() {
+  $elements['message'] = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+
+  return drupal_render($elements);
 }
 
 /**

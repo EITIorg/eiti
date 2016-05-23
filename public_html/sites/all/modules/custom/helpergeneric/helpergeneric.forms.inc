@@ -161,8 +161,6 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'path_alias_whitelist',
         'preprocess_css',
         'preprocess_js',
-        'site_403',
-        'site_404',
         'site_default_country',
         'site_frontpage',
         'site_mail',
