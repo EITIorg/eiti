@@ -540,7 +540,11 @@ function helpergeneric_form_user_profile_form_alter(&$form, &$form_state, $form_
  */
 function helpergeneric_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login') {
-    drupal_set_title('Log in');
+    if (arg(0) == 'user') {
+      // Only update on the login page. And not the 403 pages.
+      drupal_set_title('Log in');
+    }
+
     $form['actions']['cancel'] = array(
       '#type' => 'link',
       '#title' => t('Request new password'),
