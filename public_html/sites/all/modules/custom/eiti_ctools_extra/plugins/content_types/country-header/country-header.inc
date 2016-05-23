@@ -25,13 +25,13 @@ $plugin = array(
  * Output function for the 'Country Header' content type.
  */
 function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args, $context) {
-  if ($context[0]->plugin == 'entity:implementing_country' && !empty($context[0]->data)) {
+  if (!empty($context[0]->data) && $context[0]->plugin == 'entity:implementing_country') {
     /** @var ImplementingCountryEntity $entity */
     $entity = $context[0]->data;
   }
   else if (arg(0) == 'implementing_country') {
     /** @var ImplementingCountryEntity $entity */
-    $entity = menu_get_object('implementing_country', 1);
+    $entity = menu_get_object('implementing_country');
   }
 
   if (empty($entity)) {
