@@ -151,8 +151,11 @@ function eitict_bookmark_field_default_field_bases() {
         'target_bundles' => array(
           'article' => 'article',
           'document' => 'document',
+          'internal' => 'internal',
           'mention' => 'mention',
+          'page' => 'page',
           'person' => 'person',
+          'stakeholder' => 'stakeholder',
         ),
       ),
       'target_type' => 'node',
@@ -177,8 +180,8 @@ function eitict_bookmark_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'internal' => 'Internal',
-        'external' => 'External',
+        'internal' => 'Internal Content',
+        'external' => 'Internal (relative) or External URL',
       ),
       'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,
