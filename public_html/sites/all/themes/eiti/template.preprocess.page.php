@@ -12,7 +12,7 @@ function eiti_preprocess_html(&$variables) {
   if (variable_get('eiti_beta_warning', 1)) {
     $message = 'Welcome to our new website, highlighting the impact of the EITI’s work in our 51 member countries.';
     $message .= '<br>';
-    $message .= 'Some features are still under construction. If needed, you can access our old site <a href="https://eiti.org/home">here</a>';
+    $message .= 'Some features are still under construction. If needed, you can access our old site <a href="https://eiti.org/home">here</a>.';
     $variables['eiti_beta_warning'] = t($message);
   }
 }
