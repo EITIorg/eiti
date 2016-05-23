@@ -101,7 +101,7 @@ function helpertheme_menu() {
   );
 
   $items['page-404'] = array(
-    'title' => 'Page not found',
+    'title' => 'Sorry, the page you requested was not found.',
     'page callback' => 'helpertheme_page_not_found',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -138,7 +138,10 @@ function helpertheme_page_access_denied() {
  * @return string
  */
 function helpertheme_page_not_found() {
-  $elements['message']['#markup'] = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+  $message = 'This is our new website, and some pages are still being updated.';
+  $message .= '<br>';
+  $message .= 'You can also try searching on our old website: !url';
+  $elements['message']['#markup'] = t($message, array('!url' => l('https://eiti.org/search', 'https://eiti.org/search')));
 
   return drupal_render($elements);
 }
