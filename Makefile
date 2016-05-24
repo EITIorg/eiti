@@ -35,7 +35,7 @@ backup: backup-db backup-files
 backup-db:
 	@# Make sure the environment is prepared.
 	@test -e 'public_html/sites/default/settings.custom.php' || (echo 'Missing settings.custom.php, exiting...'; exit 8)
-	@echo "Backing-up the project database."
+	@echo 'Backing-up the project database.'
 	@time drush --root=$(ROOT_DIRECTORY)/public_html sql-dump --gzip --result-file=$(BACKUPS_DIRECTORY)/$(NAME_PREFIX).sql
 	@echo 'Site database backup created.'
 
@@ -44,7 +44,7 @@ backup-db:
 backup-files:
 	@# Make sure the environment is prepared.
 	@test -d 'public_html/sites/default/files' || (echo 'Files directory not found.'; exit 16)
-	@echo Backing-up `du --si -sm public_html/sites/default/files | cut -f1 -` Mb of user uploaded files.
+	@echo 'Backing-up ''`du --si -sm public_html/sites/default/files | cut -f1 -`' Mb of user uploaded files.'
 	@time tar -C public_html/sites/default \
 		--exclude=css \
 		--exclude=ctools \
@@ -65,7 +65,7 @@ fix: fix-permissions
 fix-permissions:
 	@# Make sure the environment is prepared.
 	@test -e $(ROOT_DIRECTORY)'/public_html/sites/default/settings.custom.php' || (echo 'Missing settings.custom.php, exiting...'; exit 8)
-	@echo "Fixing permissions for: "$(ROOT_DIRECTORY)
+	@echo 'Fixing permissions for: '$(ROOT_DIRECTORY)
 	@test -e '/usr/local/sbin/setup_environment' || (echo -e 'Missing setup_environment script, exiting...\nSee docs section: Setup linux server permissions for a Drupal environment'; exit 9)
 	@sudo /usr/local/sbin/setup_environment $(ROOT_DIRECTORY)
 	@echo 'Finished resetting file permissions.'
