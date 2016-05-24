@@ -291,7 +291,8 @@ function eitict_bookmark_field_default_field_instances() {
     'bundle' => 'bookmark',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'All bookmarks lead somewhere, if this is not an internal bookmark, please specify the link where it should lead.',
+    'description' => 'For Internal (relative) URLs don\'t include the domain or a preceding slash, e.g.: <b>search</b> and not <b>/search</b>.<br>
+For External URLs include the full domain name and protocoal, e.g.: <b>https://www.example.org/page</b> and not <b>www.example.org/page</b>',
     'display' => array(
       'bm_large_tile' => array(
         'label' => 'hidden',
@@ -334,6 +335,7 @@ function eitict_bookmark_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_bm_link',
     'label' => 'Link',
@@ -376,7 +378,7 @@ function eitict_bookmark_field_default_field_instances() {
     'bundle' => 'bookmark',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'You can reference any of the following content: Articles, Blog Posts, Mentions, Documents and People.',
+    'description' => 'You can reference any of the following content: Article, Document, Internal Page, Mention, Page, Person, Stakeholder.',
     'display' => array(
       'bm_large_tile' => array(
         'label' => 'hidden',
@@ -430,6 +432,7 @@ function eitict_bookmark_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_bm_reference',
     'label' => 'Reference',
@@ -504,6 +507,7 @@ function eitict_bookmark_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_bm_reference_type',
     'label' => 'Reference Type',
@@ -610,8 +614,9 @@ function eitict_bookmark_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('All bookmarks lead somewhere, if this is not an internal bookmark, please specify the link where it should lead.');
   t('Bookmark Type');
+  t('For Internal (relative) URLs don\'t include the domain or a preceding slash, e.g.: <b>search</b> and not <b>/search</b>.<br>
+For External URLs include the full domain name and protocoal, e.g.: <b>https://www.example.org/page</b> and not <b>www.example.org/page</b>');
   t('Hide Title');
   t('Image');
   t('In certain cases, you might want to hide the title. If you choose to hide the title, the bookmark image SHOULD have an "Alt Text" for screen readers.');
@@ -622,7 +627,7 @@ function eitict_bookmark_field_default_field_instances() {
   t('Reference Type');
   t('Title');
   t('Upload a relevant image, it should either be a square image that is 480 pixels wide, or one that is in landscape orientation with the image height half the size of the width.');
-  t('You can reference any of the following content: Articles, Blog Posts, Mentions, Documents and People.');
+  t('You can reference any of the following content: Article, Document, Internal Page, Mention, Page, Person, Stakeholder.');
 
   return $field_instances;
 }

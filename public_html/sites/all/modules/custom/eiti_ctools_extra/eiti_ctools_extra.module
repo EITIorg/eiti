@@ -210,6 +210,7 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
       'class' => array(
         'quick-summary-tool--form',
         'container-inline-block',
+        'single-fluid-row-wrapper',
       ),
     ),
   );
@@ -337,9 +338,6 @@ function eiti_ctools_extra__quick_summary_tool__form($form, &$form_state) {
     '#href' => url($_GET['q']),
   );
 
-
-  $form['#suffix'] = '<div id="quick-summary-tool--information-placeholder"></div>';
-
   return $form;
 }
 
@@ -350,7 +348,6 @@ function eiti_ctools_extra__quick_summary_tool__country_callback($form, $form_st
   $commands = array();
 
   $commands[] = ajax_command_replace('#quick-summary-tool--form .form-item-years', drupal_render($form['years']));
-  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
 
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -360,7 +357,7 @@ function eiti_ctools_extra__quick_summary_tool__country_callback($form, $form_st
  */
 function eiti_ctools_extra__quick_summary_tool__submit_callback($form, $form_state) {
   $commands = array();
-  $commands['clear'] = ajax_command_html('#quick-summary-tool--information-placeholder', '');
+  $commands['clear'] = ajax_command_html('.quick-summary-tool--information-placeholder', '');
 
   $countries = $form_state['values']['countries'];
   if (empty($countries)) {
@@ -399,16 +396,77 @@ function eiti_ctools_extra__quick_summary_tool__submit_callback($form, $form_sta
     $info[$entity_id] = entity_view('summary_data', array($entity_id => $entity), 'full');
   }
   else if (count($summary_data_entities) > 1) {
-    $view_args = implode(',', array_keys($summary_data_entities));
-    $info[] = array(
-      '#markup' => views_embed_view('quick_summary_table', 'default', $view_args),
-    );
+    $info[] = eiti_ctools_extra__quick_summary_tool__quick_summary_table(array_keys($summary_data_entities));
   }
 
   if (!empty($info)) {
     unset($commands['clear']);
-    $commands[] = ajax_command_html('#quick-summary-tool--information-placeholder', drupal_render($info));
+    $commands[] = ajax_command_html('.quick-summary-tool--information-placeholder', drupal_render($info));
   }
 
   return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+function eiti_ctools_extra__quick_summary_tool__quick_summary_table($ids) {
+  $entity_type = 'summary_data';
+
+  // GEt information about properties and fields.
+  $property_info = entity_get_property_info($entity_type);
+  $properties = $property_info['properties'];
+  $properties += $property_info['bundles']['summary_data']['properties'];
+
+  // Prepare the table header.
+  $header = array();
+  $header[] = check_plain($properties['year_end']['label']);
+  $header[] = check_plain($properties['sectors_covered']['label']);
+  $header[] = check_plain($properties['field_sd_no_reporting_com']['label']);
+  $header[] = check_plain($properties['gov_revenue_extractive']['label']);
+  $header[] = check_plain($properties['field_sd_report_file']['label']);
+  $header[] = check_plain($properties['field_sd_file_links']['label']);
+
+  // Prepare the table rows.
+  $rows = array();
+  foreach (entity_load($entity_type, $ids) as $entity) {
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+
+    $row_data = array();
+    $row_data[] = $wrapper->year_end->value();
+    $row_data[] = $wrapper->sectors_covered->value();
+    $row_data[] = $wrapper->field_sd_no_reporting_com->value();
+    $row_data[] = $wrapper->gov_revenue_extractive->value();
+
+    if ($wrapper->field_sd_report_file->value()) {
+      $field_view_field = field_view_field($entity_type, $entity, 'field_sd_report_file');
+      $field_view_field['#label_display'] = 'hidden';
+      $row_data[] = drupal_render($field_view_field);
+    }
+    else {
+      $row_data[] = '';
+    }
+
+    if ($wrapper->field_sd_file_links->value()) {
+      $field_view_field = field_view_field($entity_type, $entity, 'field_sd_file_links');
+      $field_view_field['#label_display'] = 'hidden';
+      $row_data[] = drupal_render($field_view_field);
+    }
+    else {
+      $row_data[] = '';
+    }
+
+    $rows[] = $row_data;
+  }
+
+  $table = array(
+    '#type' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No content available.'),
+    '#attributes' => array(
+      'class' => array(
+        'quick-summary-tool--table',
+      ),
+    ),
+  );
+
+  return $table;
 }

@@ -337,6 +337,20 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_entity_view_alter().
+ */
+function eitiwidgets_entity_view_alter(&$build, $type) {
+  if ($type != 'fieldable_panels_pane') {
+    return;
+  }
+
+  // Force editors to use the panelizer UI.
+  if (isset($build['#contextual_links'])) {
+    unset($build['#contextual_links']);
+  }
+}
+
+/**
  * Prepares the content for the quote widget DS preprocessed field.
  */
 function eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langcode) {

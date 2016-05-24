@@ -17,11 +17,15 @@ function eitict_internal_strongarm() {
   $strongarm->value = array(
     'view_own' => array(
       0 => 2,
-      1 => 3,
+      1 => 7,
+      2 => 10,
+      3 => 3,
     ),
     'view' => array(
       0 => 2,
-      1 => 3,
+      1 => 7,
+      2 => 10,
+      3 => 3,
     ),
     'priority' => '-10',
   );

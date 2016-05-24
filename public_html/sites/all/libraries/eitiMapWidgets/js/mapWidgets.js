@@ -23753,6 +23753,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MapWidgetComponent).call(this));
 	
 	    _this.state = {
+	      initialized: false,
 	      indicator_id: 'status',
 	      valuetypes: 'fixed',
 	      baseMap: undefined,
@@ -23830,7 +23831,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  debugger;return v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3';
+	                  return v.commodity === "Oil, volume" && v.unit && v.unit.toLowerCase() === 'sm3';
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23905,7 +23906,7 @@
 	                  return v.commodity === "Population";
 	                }) : undefined;
 	                if (population && indicator) {
-	                  indicator_value = indicator.value / population.value;
+	                  indicator_value = indicator / population;
 	                } else {
 	                  indicator_value = 0;
 	                }
@@ -24057,7 +24058,6 @@
 	    key: 'addLegend',
 	    value: function addLegend(map, indicator_id, countryDataProcessed) {
 	      var info = L.control({ position: 'bottomleft' });
-	      //var map = e.target._map;
 	
 	      info.onAdd = function (map) {
 	        if (map.options.legend === undefined) {
@@ -24070,14 +24070,31 @@
 	      info.update = function (props) {
 	        var indicatorMetadata;
 	        indicatorMetadata = this.getValues.call(this, indicator_id || this.state.indicator_id);
+	
 	        var indicatorName = this.getIndicatorName.call(this, indicator_id || this.state.indicator_id);
 	        var unit = _underscore2.default.find(_underscore2.default.pluck(indicatorMetadata, 'unit'), function (v) {
 	          return v !== undefined;
 	        });
-	        var mergedHTML = "<h2>" + _helpers.helpers.t(indicatorName) + " " + (unit ? "(" + unit + ")" : "") + "<br/></h2>";
-	        //mergedHTML += "<h2 class='close_legend'>" + helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "") + "<div>Close</div><br/></h2>";
-	        mergedHTML += "<div class='legend_body'>";
 	
+	        var h2El = document.createElement("H2");
+	        h2El.innerText = _helpers.helpers.t(indicatorName) + " " + (unit ? "(" + unit + ")" : "");
+	        h2El.className = "responsive-header";
+	
+	        var spanEl = document.createElement("SPAN");
+	        spanEl.innerText = _helpers.helpers.t("show");
+	        h2El.appendChild(spanEl);
+	
+	        var h2El_2 = document.createElement("H2");
+	        h2El_2.innerText = _helpers.helpers.t(indicatorName) + " " + (unit ? "(" + unit + ")" : "");
+	
+	        var spanEl_2 = document.createElement("SPAN");
+	        spanEl_2.innerText = _helpers.helpers.t("hide");
+	        h2El_2.appendChild(spanEl_2);
+	
+	        var divLegend = document.createElement("DIV");
+	        divLegend.className = "responsive-legend";
+	
+	        var mergedHTML = "";
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
@@ -24086,9 +24103,27 @@
 	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No data') + '</strong><br/><br/>';
 	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
 	
-	        mergedHTML += "</div>";
+	        var divLegendBody = document.createElement("DIV");
+	        divLegendBody.innerHTML = mergedHTML + sourceText;
+	        divLegend.appendChild(h2El_2);
+	        divLegend.appendChild(divLegendBody);
 	
-	        map.options.legend.innerHTML = mergedHTML + sourceText;
+	        while (map.options.legend.firstChild) {
+	          map.options.legend.removeChild(map.options.legend.firstChild);
+	        }
+	
+	        map.options.legend.appendChild(h2El);
+	        map.options.legend.appendChild(divLegend);
+	
+	        spanEl.onclick = function () {
+	          divLegend.style.display = 'block';
+	          h2El.style.display = 'none';
+	        };
+	
+	        spanEl_2.onclick = function () {
+	          divLegend.style.display = 'none';
+	          h2El.style.display = 'block';
+	        };
 	      }.bind(this);
 	
 	      info.addTo(map);
@@ -24322,6 +24357,12 @@
 	        for (var i = 0; i < sortedCountries.length; i++) {
 	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
 	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
+	
+	          var years = Object.keys(sortedCountries[i].metadata);
+	          var last = _underscore2.default.last(years);
+	          var yearData = sortedCountries[i].metadata[last];
+	          var reportURL = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _underscore2.default.first(yearData.web_report_links) : '#';
+	
 	          items.push(_react2.default.createElement(
 	            'li',
 	            null,
@@ -24336,7 +24377,7 @@
 	              { className: 'report' },
 	              _react2.default.createElement(
 	                'a',
-	                { href: '#' },
+	                { target: '_blank', href: reportURL.url ? reportURL.url : "#", title: last },
 	                reportLink
 	              )
 	            )
@@ -24398,7 +24439,10 @@
 	            _react2.default.createElement(_reactLeaflet.TileLayer, {
 	              url: '',
 	              onLeafletLoad: function (e) {
-	                this.addLegend(e.target._map);
+	                if (!this.state.initialized) {
+	                  this.addLegend(e.target._map, this.state.indicator_id);
+	                  this.setState({ initialized: true });
+	                }
 	              }.bind(this)
 	            }),
 	            geoJsonLayer
@@ -24997,7 +25041,7 @@
 	        var country_member_since = memberDate ? memberDate.getUTCFullYear() : this.t('n/a');
 	
 	        // Latest Report Year
-	        var country_last_report_year = last;
+	        var country_last_report_year = lastMetadata;
 	
 	        // Latest Report Link
 	        var country_last_report_file = country.annual_report_file;
@@ -25063,7 +25107,7 @@
 	
 	        // Add Revenue
 	        var extractives_revenue_value = indicator_government_revenue > 0 ? this.formatNumber(indicator_government_revenue, { inMillions: true, includeDecimals: true }) + ' million ' + currency_code : this.t('n/a');
-	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractives revenues for ') + last + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
+	        info_content_first = info_content_first + '<div class="info-block">' + '<span class="info">' + '  <span class="label">' + this.t('Extractive industry revenues') + ':</span> <span class="value">' + extractives_revenue_value + '</span>' + '</span>' + '</div>';
 	
 	        // Add Sectors Covered
 	        info_content_second = info_content_second + '<div class="info-block">' + '<span class="info">' + '   <span class="label">' + this.t('Sectors covered') + ':</span>';

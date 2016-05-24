@@ -5,6 +5,19 @@
  */
 
 /**
+ * Preprocess variables for html.tpl.php
+ */
+function eiti_preprocess_html(&$variables) {
+  // TODO: Cleanup!
+  if (variable_get('eiti_beta_warning', 1)) {
+    $message = 'Welcome to our new website, highlighting the impact of the EITI’s work in our 51 member countries.';
+    $message .= '<br>';
+    $message .= 'Some features are still under construction. If needed, you can access our old site <a href="https://eiti.org/home">here</a>.';
+    $variables['eiti_beta_warning'] = t($message);
+  }
+}
+
+/**
  * Preprocess variables for page.tpl.php
  */
 function eiti_preprocess_page(&$variables) {

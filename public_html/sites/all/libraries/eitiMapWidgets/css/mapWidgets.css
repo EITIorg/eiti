@@ -73,6 +73,12 @@
   color: #555;
   width: 25em;
 }
+.eiti-map-wrapper .legend .responsive-header {
+  display: none;
+}
+.eiti-map-wrapper .legend .responsive-legend {
+  display: block;
+}
 .eiti-map-wrapper .legend i {
   width: 0.75em;
   height: 0.75em;
@@ -83,6 +89,11 @@
 }
 .eiti-map-wrapper .legend h2 {
   line-height: 1.25em;
+}
+.eiti-map-wrapper .legend h2 span {
+  font-size: 12px;
+  cursor: pointer;
+  color: #0078A8;
 }
 .eiti-map-wrapper .resizable-map {
   width: 100% !important;
@@ -314,6 +325,12 @@
   stroke-width: 5;
 }
 @media (max-width: 1024px) {
+  .eiti-map-wrapper .country-list-wrapper .country-col {
+    min-width: 15em;
+  }
+  .eiti-map-wrapper .country-list-wrapper {
+    max-width: 40em;
+  }
   .eiti-map-wrapper .map-container {
     width: 100%;
   }
@@ -381,6 +398,12 @@
   }
 }
 @media (max-width: 384px) {
+  .eiti-map-wrapper .responsive-header H2 {
+    display: block;
+  }
+  .eiti-map-wrapper .responsive-legend DIV {
+    display: none;
+  }
   .eiti-map-wrapper .map-option-widget li {
     background: none;
     border-right: none;

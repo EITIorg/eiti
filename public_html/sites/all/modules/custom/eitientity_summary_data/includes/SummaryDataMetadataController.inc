@@ -26,7 +26,14 @@ class SummaryDataMetadataController extends HelperEntityMetadataController {
         'description' => t('The list of sectors covered in this summary data.'),
         'getter callback' => 'eitientity_summary_data_entity_property_get_sectors_covered',
         'computed' => TRUE,
-        'schema field' => 'country_id',
+      );
+
+      $bundle_info['gov_revenue_extractive'] = array(
+        'type' => 'text',
+        'label' => t('Government revenue - extractive industries'),
+        'description' => t('Contribution of extractive industries to economy (3.4) > Government revenue - extractive industries'),
+        'getter callback' => 'eitientity_summary_data_entity_property_get_indicator_gov_revenue_extractive',
+        'computed' => TRUE,
       );
     }
 

@@ -9,9 +9,10 @@
 # VM specific information:
 #  - vm_hostonlyip should be unique among your virtual machines.
 #  - the VM hostname is created using vm_shortname and vm_environment.
-vm_hostonlyip: 10.10.10.49
 vm_shortname: eiti
 vm_environment: local
+vm_hostonlyip: 10.10.10.49
+vm_hosts_entry: 0
 
 # Vhosts and shared folders:
 #  - template is the name of the template used to create the vhost.

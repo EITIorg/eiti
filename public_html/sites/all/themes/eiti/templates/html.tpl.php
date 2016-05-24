@@ -35,6 +35,12 @@
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   </div>
 
+  <?php // TODO: Cleanup! ?>
+  <?php if (isset($eiti_beta_warning)): ?>
+    <div style="background-color: #676767; border-bottom: 1px solid white; color: white; margin: 0; border-radius: 0; padding: 1em; text-align: center;">
+      <?php print $eiti_beta_warning; ?>
+    </div>
+  <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>

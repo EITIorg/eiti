@@ -31,13 +31,13 @@ function contentwidget__viz_bubble_dynamic__render($plugin, $widget_settings, $e
   // If we're in Panelizer, we don't want to create the whole chart there, bail.
   $menu_item = menu_get_item();
   if (in_array('panelizer', $menu_item['map']) || in_array('editor', $menu_item['map'])) {
-    return array('#markup' => t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).'));
+    return array('#markup' => '<p>' . t('Configured Grouped Bar Widget - with dynamic data (from Summary Data).') . '</p>');
   }
 
   // Load the library.
   $library = libraries_load('eitiChartWidgets', 'minified');
   if (empty($library)) {
-    return array('#markup' => t('Charts library could not be loaded.'));
+    return array('#markup' => '<p>' . t('Charts library could not be loaded.') . '</p>');
   }
 
   // Prepare the ID.
@@ -105,6 +105,9 @@ function contentwidget__viz_bubble_dynamic__render($plugin, $widget_settings, $e
       return array('#markup' => t('This widget requires country context.'));
     }
     $years = _contentwidget__viz_bubble_dynamic__get_years_min_max($country->id);
+    if (empty($years)) {
+      return array('#markup' => '<p>' . t('There is no data.') . '</p>');
+    }
     $settings['name'] .= t(" (@min - @max)", array(
       '@min' => format_date($years['min'], 'custom', 'Y'),
       '@max' => format_date($years['max'], 'custom', 'Y'),
@@ -274,7 +277,7 @@ function contentwidget__viz_bubble_dynamic__get_data_types($return = FALSE) {
  * Extra settings for our disbursed revenues bubble widget.
  */
 function _contentwidget__viz_bubble_dynamic__disbursed_revenues_settings(&$form, &$form_state, $widget_settings) {
-  $bubble_numbers = drupal_map_assoc(array(5, 10, 15));
+  $bubble_numbers = drupal_map_assoc(drupal_map_assoc(range(2, 15)));
   $form['bubbles_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Bubbles'),
@@ -295,6 +298,9 @@ function _contentwidget__viz_bubble_dynamic__get_years_min_max($country_id) {
   $query->condition('country_id', $country_id);
   $result = $query->execute();
   $results = $result->fetchAll();
+  if (empty($results)) {
+    return array();
+  }
 
   // Flat the values.
   $values = array();

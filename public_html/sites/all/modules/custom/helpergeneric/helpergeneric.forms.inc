@@ -161,8 +161,6 @@ function helpergeneric_features_component_export_alter(&$component_export, $comp
         'path_alias_whitelist',
         'preprocess_css',
         'preprocess_js',
-        'site_403',
-        'site_404',
         'site_default_country',
         'site_frontpage',
         'site_mail',
@@ -448,10 +446,6 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['menu']['#access'] = FALSE;
     }
 
-    if (isset($form['redirect'])) {
-      $form['redirect']['#access'] = FALSE;
-    }
-
     if (isset($form['revision_information'])) {
       $form['revision_information']['#access'] = FALSE;
     }
@@ -546,7 +540,11 @@ function helpergeneric_form_user_profile_form_alter(&$form, &$form_state, $form_
  */
 function helpergeneric_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login') {
-    drupal_set_title('Log in');
+    if (arg(0) == 'user') {
+      // Only update on the login page. And not the 403 pages.
+      drupal_set_title('Log in');
+    }
+
     $form['actions']['cancel'] = array(
       '#type' => 'link',
       '#title' => t('Request new password'),

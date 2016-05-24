@@ -15,6 +15,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'admin_menu',
   );
@@ -24,6 +26,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'system',
   );
@@ -71,6 +75,7 @@ function eitipermissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'media',
   );
@@ -104,6 +109,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'add media from remote sources',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'media_internet',
   );
@@ -368,6 +375,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'administer url aliases',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'path',
   );
@@ -394,6 +403,7 @@ function eitipermissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'migrate',
   );
@@ -429,10 +439,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'change layouts in place editing'.
   $permissions['change layouts in place editing'] = array(
     'name' => 'change layouts in place editing',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -753,6 +760,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'grant content access',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'content_access',
   );
@@ -769,6 +778,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'helpergeneric access taxonomy',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'helpergeneric',
   );
@@ -813,20 +824,14 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'manipulate all entityqueues'.
   $permissions['manipulate all entityqueues'] = array(
     'name' => 'manipulate all entityqueues',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'entityqueue',
   );
 
   // Exported permission: 'manipulate entityqueues'.
   $permissions['manipulate entityqueues'] = array(
     'name' => 'manipulate entityqueues',
-    'roles' => array(
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
-    ),
+    'roles' => array(),
     'module' => 'entityqueue',
   );
 
@@ -836,6 +841,7 @@ function eitipermissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'migrate',
   );
@@ -992,6 +998,7 @@ function eitipermissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'media_wysiwyg',
   );
@@ -1031,9 +1038,7 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'use panels locks'.
   $permissions['use panels locks'] = array(
     'name' => 'use panels locks',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'panels',
   );
 
@@ -1049,7 +1054,9 @@ function eitipermissions_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
       'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'filter',
   );
@@ -1102,6 +1109,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'view pane admin links',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'panels',
   );
@@ -1133,6 +1142,8 @@ function eitipermissions_user_default_permissions() {
     'name' => 'view the administration theme',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
     ),
     'module' => 'system',
   );

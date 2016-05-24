@@ -24,34 +24,21 @@ function eiti_ctools_extra__quick_summary_tool__render($subtype, $conf, $panel_a
         'quick-summary-tool--wrapper',
       ),
     ),
-    '#prefix' => '<div class="single-fluid-row-wrapper">',
-    '#suffix' => '</div>',
   );
 
   // Retrieve the QST form.
   $block['form'] = drupal_get_form('eiti_ctools_extra__quick_summary_tool__form');
 
+  $block['information_placeholder'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'quick-summary-tool--information-placeholder',
+      ),
+    ),
+  );
+
   return (object) array(
     'content' => $block,
   );
-}
-
-function eiti_ctools_extra__quick_summary_tool__settings_form_submit($form, &$form_state) {
-  // Remove unneeded values.
-  form_state_values_clean($form_state);
-
-  foreach (element_children($form) as $key) {
-    if (!empty($form_state['values'][$key])) {
-      $form_state['conf'][$key] = $form_state['values'][$key];
-    }
-  }
-}
-
-/**
- * Build the form for the quick_summary_tool plugin.
- * @param $form
- * @param $form_state
- */
-function _eiti_ctools_extra__quick_summary_tool__form() {
-  return $form;
 }

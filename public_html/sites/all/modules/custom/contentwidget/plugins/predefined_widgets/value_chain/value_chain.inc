@@ -197,9 +197,14 @@ function _contentwidget__value_chain__get_chain_elements(&$form_state, $block_se
   $icon_options = array('' => t('No Icon'));
   $icon_options += drupal_map_assoc(array_keys($icons));
 
+  $block_title = '';
+  if (isset($block_settings['title'])) {
+    $block_title = $block_settings['title'];
+  }
+
   $elements = array(
     '#type' => 'fieldset',
-    '#title' => t('Block #@number:', array('@number' => ($delta + 1))),
+    '#title' => t('Block #@number: @title', array('@number' => $delta + 1, '@title' => $block_title)),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
@@ -208,7 +213,7 @@ function _contentwidget__value_chain__get_chain_elements(&$form_state, $block_se
     '#type' => 'textfield',
     '#title' => t('Title'),
     '#required' => TRUE,
-    '#default_value' => isset($block_settings['title']) ? $block_settings['title'] : '',
+    '#default_value' => $block_title,
   );
 
   $elements['url'] = array(

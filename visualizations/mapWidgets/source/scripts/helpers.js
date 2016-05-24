@@ -145,7 +145,7 @@ export var helpers = {
         var country_member_since = memberDate ? memberDate.getUTCFullYear() : this.t('n/a');
 
         // Latest Report Year
-        var country_last_report_year = last;
+        var country_last_report_year = lastMetadata;
         
         // Latest Report Link
         var country_last_report_file = country.annual_report_file;
@@ -227,7 +227,7 @@ export var helpers = {
         info_content_first = info_content_first +
             '<div class="info-block">' +
             '<span class="info">' +
-            '  <span class="label">' + this.t('Extractives revenues for ') + last +':</span> <span class="value">' + extractives_revenue_value + '</span>' +
+            '  <span class="label">' + this.t('Extractive industry revenues') +':</span> <span class="value">' + extractives_revenue_value + '</span>' +
             '</span>' +
             '</div>';
 

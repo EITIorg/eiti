@@ -11,9 +11,10 @@ $plugin = array(
   'category' => t('Widget Library'),
   'render callback'  => 'eiti_ctools_extra__country_header__render',
   'edit form' => 'eiti_ctools_extra__country_header__settings_form',
-  'required context' => array(
-    new ctools_context_required(t('Implementing Country'), 'implementing_country'),
-  ),
+  // HACK: Avoid missing context issue.
+  // 'required context' => array(
+  //   new ctools_context_required(t('Implementing Country'), 'implementing_country'),
+  // ),
   'defaults' => array(
     'title_display' => '',
     'background_style' => '',
@@ -24,9 +25,13 @@ $plugin = array(
  * Output function for the 'Country Header' content type.
  */
 function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args, $context) {
-  if ($context[0]->plugin == 'entity:implementing_country' && !empty($context[0]->data)) {
+  if (!empty($context[0]->data) && $context[0]->plugin == 'entity:implementing_country') {
     /** @var ImplementingCountryEntity $entity */
     $entity = $context[0]->data;
+  }
+  else if (arg(0) == 'implementing_country') {
+    /** @var ImplementingCountryEntity $entity */
+    $entity = menu_get_object('implementing_country');
   }
 
   if (empty($entity)) {

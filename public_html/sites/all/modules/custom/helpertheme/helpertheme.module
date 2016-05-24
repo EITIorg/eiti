@@ -93,6 +93,20 @@ function helpertheme_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['page-403'] = array(
+    'title' => 'Access denied',
+    'page callback' => 'helpertheme_page_access_denied',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['page-404'] = array(
+    'title' => 'Sorry, the page you requested was not found.',
+    'page callback' => 'helpertheme_page_not_found',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   $items['site-map'] = array(
     'title' => 'Site Map',
     'page callback' => 'helpertheme_site_map',
@@ -101,6 +115,41 @@ function helpertheme_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Replaces the standard 403 handler.
+ * @return string
+ */
+function helpertheme_page_access_denied() {
+  $elements['message']['#markup'] = t('You are not authorized to access this page.');
+
+  // Only display the login form for authenticated users.
+  if (empty($GLOBALS['user']->uid)) {
+    $elements['login_form'] = drupal_get_form('user_login');
+  }
+
+  return drupal_render($elements);
+
+}
+
+/**
+ * Replaces the standard 404 handler.
+ * @return string
+ */
+function helpertheme_page_not_found() {
+  $message = 'This is our new website, and some pages are still being updated.';
+  $message .= '<br>';
+  $message .= 'If you wish to report an error, please !emailus.';
+  $message .= '<br>';
+  $message .= 'You can also try searching on our old website: !url';
+
+  $elements['message']['#markup'] = t($message, array(
+    '!emailus' => l('email us', 'mailto:cberger@eiti.org'),
+    '!url' => l('https://eiti.org/search', 'https://eiti.org/search')
+  ));
+
+  return drupal_render($elements);
 }
 
 /**

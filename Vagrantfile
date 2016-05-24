@@ -36,7 +36,9 @@ Vagrant.configure(2) do |config|
   config.vm.box_download_checksum_type = project_settings['box']['download_checksum_type']
 
   # Setup the VM hostname.
-  config.vm.hostname = project_settings['vm_shortname']
+  if defined? project_settings['vm_hosts_entry'] and project_settings['vm_hosts_entry'] == 1
+    config.vm.hostname = project_settings['vm_shortname']
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -71,7 +73,9 @@ Vagrant.configure(2) do |config|
   config.hostsupdater.aliases = []
   for vhost in project_settings['vhosts']
     config.hostsupdater.aliases = config.hostsupdater.aliases + [vhost['domain']]
-    config.hostsupdater.aliases = config.hostsupdater.aliases + vhost['aliases']
+    if vhost.has_key? 'aliases'
+      config.hostsupdater.aliases = config.hostsupdater.aliases + vhost['aliases']
+    end
   end
   # Cleanup /etc/hosts when shutting down the VM.
   config.hostsupdater.remove_on_suspend = true
