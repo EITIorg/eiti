@@ -23826,7 +23826,7 @@
 	              }
 	              break;
 	            case "oil_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23838,7 +23838,7 @@
 	              }
 	              break;
 	            case "gas_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23850,7 +23850,7 @@
 	              }
 	              break;
 	            case "coal_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23862,7 +23862,7 @@
 	              }
 	              break;
 	            case "gold_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23874,7 +23874,7 @@
 	              }
 	              break;
 	            case "copper_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -24382,7 +24382,7 @@
 	              )
 	            )
 	          ));
-	          if ((i + 1) % cutout === 0) {
+	          if ((i + 1) % cutout === 0 || i + 1 === sortedCountries.length) {
 	            cols.push(_react2.default.createElement(
 	              'div',
 	              { className: 'country-col' },
@@ -25049,11 +25049,16 @@
 	        // Extractives Revenue latest year
 	
 	        var indicator_government_revenue = undefined;
-	        if (country.revenues && country.revenues.length) {
+	        if (country.revenues && Object.keys(country.revenues).length > 0) {
 	            var years_revenue = Object.keys(country.revenues);
 	            var last_revenue = _underscore2.default.last(years_revenue);
 	            var yearData_revenue = country.revenues[last_revenue];
 	            indicator_government_revenue = yearData_revenue.government;
+	        } else {
+	            var extractiveYearData = yearData.find(function (v) {
+	                return v.commodity === "Government revenue - extractive industries";
+	            });
+	            indicator_government_revenue = extractiveYearData ? extractiveYearData.value : undefined;
 	        }
 	        indicator_government_revenue = indicator_government_revenue || 'n/a';
 	

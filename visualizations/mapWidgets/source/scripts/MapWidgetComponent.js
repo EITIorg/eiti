@@ -96,7 +96,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "oil_volume":
-            if(datapoint.reports) {
+            if(datapoint.reports && Object.keys(datapoint.reports).length > 0) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
@@ -106,7 +106,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "gas_volume":
-            if(datapoint.reports) {
+            if(datapoint.reports && Object.keys(datapoint.reports).length > 0) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
@@ -116,7 +116,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "coal_volume":
-            if(datapoint.reports) {
+            if(datapoint.reports && Object.keys(datapoint.reports).length > 0) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
@@ -126,7 +126,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "gold_volume":
-            if(datapoint.reports) {
+            if(datapoint.reports && Object.keys(datapoint.reports).length > 0) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
@@ -136,7 +136,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "copper_volume":
-            if(datapoint.reports) {
+            if(datapoint.reports && Object.keys(datapoint.reports).length > 0) {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
@@ -548,7 +548,7 @@ export default class MapWidgetComponent extends Component {
               </span>
             </li>
           );
-        if((i+1)%cutout === 0) {
+        if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {
           cols.push(
               <div className="country-col">
                 <ul className="country-list">
