@@ -37,7 +37,10 @@
 
   <?php // TODO: Cleanup! ?>
   <?php if (isset($eiti_beta_warning)): ?>
-    <div style="background-color: #676767; border-bottom: 1px solid white; color: white; margin: 0; border-radius: 0; padding: 1em; text-align: center;">
+    <div class="eiti-beta-warning" style="background-color: #676767; border-bottom: 1px solid white; color: white; margin: 0; border-radius: 0; padding: 1em; text-align: center;">
+      <style>
+        .eiti-beta-warning a { color: #9ce0fc; }
+      </style>
       <?php print $eiti_beta_warning; ?>
     </div>
   <?php endif; ?>
