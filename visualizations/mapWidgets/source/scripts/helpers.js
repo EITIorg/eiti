@@ -197,7 +197,7 @@ export var helpers = {
         // Add country info.
         info_header = info_header +
             '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' +
-            '<span>' + layer.feature.properties.name + '</span>';
+            '<span>' + country.label + '</span>';
 
         // Add Status indicator info.
         info_top_indicators_first = info_top_indicators_first +

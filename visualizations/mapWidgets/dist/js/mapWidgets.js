@@ -25091,7 +25091,7 @@
 	        var info_content_second_a = '';
 	
 	        // Add country info.
-	        info_header = info_header + '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' + '<span>' + layer.feature.properties.name + '</span>';
+	        info_header = info_header + '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' + '<span>' + country.label + '</span>';
 	
 	        // Add Status indicator info.
 	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Status') + ':</span> <span class="value"><strong>' + country_status + '</strong></span>' + '</span>';

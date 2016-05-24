@@ -2236,22 +2236,6 @@
 "revenues": null
 },
 {
-"id": 19,
-"label": "Zambia",
-"self": "https://staging.eiti.org/api/v1.0/implementing_country/19",
-"iso2": "ZM",
-"iso3": "ZMB",
-"status": null,
-"status_date": null,
-"local_website": null,
-"annual_report_file": null,
-"reports": null,
-"metadata": [],
-"licenses": null,
-"contracts": null,
-"revenues": null
-},
-{
 "id": 20,
 "label": "Cameroon",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/20",
@@ -2573,7 +2557,7 @@
 },
 {
 "id": 40,
-"label": "Timor-Leste",
+"label": "Timor-Lestessss",
 "self": "https://staging.eiti.org/api/v1.0/implementing_country/40",
 "iso2": "TL",
 "iso3": "TLS",
