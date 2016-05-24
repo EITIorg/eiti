@@ -438,10 +438,6 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
     // Do not display as vertical tabs.
     unset($form['additional_settings']['#type']);
 
-    if (isset($form['author'])) {
-      $form['author']['#access'] = FALSE;
-    }
-
     if (isset($form['menu'])) {
       $form['menu']['#access'] = FALSE;
     }
