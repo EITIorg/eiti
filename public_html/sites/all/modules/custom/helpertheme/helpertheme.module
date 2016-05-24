@@ -140,8 +140,14 @@ function helpertheme_page_access_denied() {
 function helpertheme_page_not_found() {
   $message = 'This is our new website, and some pages are still being updated.';
   $message .= '<br>';
+  $message .= 'If you wish to report an error, please !emailus.';
+  $message .= '<br>';
   $message .= 'You can also try searching on our old website: !url';
-  $elements['message']['#markup'] = t($message, array('!url' => l('https://eiti.org/search', 'https://eiti.org/search')));
+
+  $elements['message']['#markup'] = t($message, array(
+    '!emailus' => l('email us', 'mailto:cberger@eiti.org'),
+    '!url' => l('https://eiti.org/search', 'https://eiti.org/search')
+  ));
 
   return drupal_render($elements);
 }
