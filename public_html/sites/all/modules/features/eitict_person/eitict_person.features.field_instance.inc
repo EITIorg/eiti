@@ -227,7 +227,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'content',
           'image_style' => 'pr-photo',
         ),
         'type' => 'image',
@@ -365,9 +365,9 @@ function eitict_person_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'i18n_taxonomy_term_reference_plain',
         'weight' => 2,
       ),
       'teaser' => array(
@@ -505,7 +505,7 @@ function eitict_person_field_default_field_instances() {
         'module' => 'title',
         'settings' => array(
           'title_class' => 'title',
-          'title_link' => '',
+          'title_link' => 'content',
           'title_style' => 'h3',
         ),
         'type' => 'title_linked',
