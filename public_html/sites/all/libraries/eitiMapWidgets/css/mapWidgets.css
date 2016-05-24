@@ -315,6 +315,7 @@
 .eiti-map-wrapper .country-list .report {
   float: right;
   width: 1.25em;
+  height: 20px;
 }
 .eiti-map-wrapper .country-list .report:hover {
   opacity: 0.4;
