@@ -24361,7 +24361,12 @@
 	          var years = Object.keys(sortedCountries[i].metadata);
 	          var last = _underscore2.default.last(years);
 	          var yearData = sortedCountries[i].metadata[last];
-	          var reportURL = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _underscore2.default.first(yearData.web_report_links) : '#';
+	          // If there's an attached report to the implementing country, use that one. If not, look for it in the metadata
+	          var reportURL = sortedCountries[i].annual_report_file;
+	          if (reportURL === undefined || reportURL === null) {
+	            var reportObj = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _underscore2.default.first(yearData.web_report_links) : undefined;
+	            reportURL = reportObj ? reportObj.url : "#";
+	          }
 	
 	          items.push(_react2.default.createElement(
 	            'li',
@@ -24377,7 +24382,7 @@
 	              { className: 'report' },
 	              _react2.default.createElement(
 	                'a',
-	                { target: '_blank', href: reportURL.url ? reportURL.url : "#", title: last },
+	                { target: '_blank', href: reportURL, title: last },
 	                reportLink
 	              )
 	            )
