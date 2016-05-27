@@ -74,7 +74,7 @@ function eititaxonomies_taxonomy_term_page($term) {
 
   // Add the taxonomy nodes listing.
   // We need this inside the taxonomy display settings page.
-  $term->stakehoder_listing .= views_embed_view('taxonomy_nodes', 'block', $term->tid);
+  $term->stakehoder_listing .= views_embed_view('taxonomy_nodes', 'stakehoder_listing', $term->tid);
 
   $build = array();
 

@@ -14,6 +14,7 @@ dependencies[] = field_group
 dependencies[] = filefield_paths
 dependencies[] = helpergeneric
 dependencies[] = html5_tools
+dependencies[] = i18n_taxonomy
 dependencies[] = image
 dependencies[] = link
 dependencies[] = list

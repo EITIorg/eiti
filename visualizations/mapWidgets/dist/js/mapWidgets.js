@@ -23826,7 +23826,7 @@
 	              }
 	              break;
 	            case "oil_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23838,7 +23838,7 @@
 	              }
 	              break;
 	            case "gas_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23850,7 +23850,7 @@
 	              }
 	              break;
 	            case "coal_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23862,7 +23862,7 @@
 	              }
 	              break;
 	            case "gold_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -23874,7 +23874,7 @@
 	              }
 	              break;
 	            case "copper_volume":
-	              if (datapoint.reports) {
+	              if (datapoint.reports && Object.keys(datapoint.reports).length > 0) {
 	                var years = Object.keys(datapoint.reports);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
@@ -24361,7 +24361,12 @@
 	          var years = Object.keys(sortedCountries[i].metadata);
 	          var last = _underscore2.default.last(years);
 	          var yearData = sortedCountries[i].metadata[last];
-	          var reportURL = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _underscore2.default.first(yearData.web_report_links) : '#';
+	          // If there's an attached report to the implementing country, use that one. If not, look for it in the metadata
+	          var reportURL = sortedCountries[i].annual_report_file;
+	          if (reportURL === undefined || reportURL === null) {
+	            var reportObj = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _underscore2.default.first(yearData.web_report_links) : undefined;
+	            reportURL = reportObj ? reportObj.url : "#";
+	          }
 	
 	          items.push(_react2.default.createElement(
 	            'li',
@@ -24377,12 +24382,12 @@
 	              { className: 'report' },
 	              _react2.default.createElement(
 	                'a',
-	                { target: '_blank', href: reportURL.url ? reportURL.url : "#", title: last },
+	                { target: '_blank', href: reportURL, title: last },
 	                reportLink
 	              )
 	            )
 	          ));
-	          if ((i + 1) % cutout === 0) {
+	          if ((i + 1) % cutout === 0 || i + 1 === sortedCountries.length) {
 	            cols.push(_react2.default.createElement(
 	              'div',
 	              { className: 'country-col' },
@@ -25049,11 +25054,16 @@
 	        // Extractives Revenue latest year
 	
 	        var indicator_government_revenue = undefined;
-	        if (country.revenues && country.revenues.length) {
+	        if (country.revenues && Object.keys(country.revenues).length > 0) {
 	            var years_revenue = Object.keys(country.revenues);
 	            var last_revenue = _underscore2.default.last(years_revenue);
 	            var yearData_revenue = country.revenues[last_revenue];
 	            indicator_government_revenue = yearData_revenue.government;
+	        } else {
+	            var extractiveYearData = yearData.find(function (v) {
+	                return v.commodity === "Government revenue - extractive industries";
+	            });
+	            indicator_government_revenue = extractiveYearData ? extractiveYearData.value : undefined;
 	        }
 	        indicator_government_revenue = indicator_government_revenue || 'n/a';
 	
@@ -25086,7 +25096,7 @@
 	        var info_content_second_a = '';
 	
 	        // Add country info.
-	        info_header = info_header + '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' + '<span>' + layer.feature.properties.name + '</span>';
+	        info_header = info_header + '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' + '<span>' + country.label + '</span>';
 	
 	        // Add Status indicator info.
 	        info_top_indicators_first = info_top_indicators_first + '<span class="info">' + '  <span class="label">' + this.t('Status') + ':</span> <span class="value"><strong>' + country_status + '</strong></span>' + '</span>';

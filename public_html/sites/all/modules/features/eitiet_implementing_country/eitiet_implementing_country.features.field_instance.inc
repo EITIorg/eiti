@@ -27,7 +27,7 @@ function eitiet_implementing_country_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'implementing_country',
     'field_name' => 'field_ic_annual_reports',
-    'label' => 'Annual Reports',
+    'label' => 'EITI Reports',
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
@@ -35,7 +35,7 @@ function eitiet_implementing_country_field_default_field_instances() {
       'file_directory' => '',
       'file_extensions' => 'pdf doc docx odt fodt zip',
       'filefield_paths' => array(
-        'active_updating' => 0,
+        'active_updating' => 1,
         'file_name' => array(
           'options' => array(
             'pathauto' => 1,
@@ -52,7 +52,7 @@ function eitiet_implementing_country_field_default_field_instances() {
           ),
           'value' => 'annual-reports',
         ),
-        'redirect' => 0,
+        'redirect' => 1,
         'retroactive_update' => 0,
       ),
       'filefield_paths_enabled' => 1,
@@ -483,10 +483,10 @@ function eitiet_implementing_country_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Annual Reports');
   t('Cover');
   t('Description');
   t('EITI Member Since');
+  t('EITI Reports');
   t('EITI Status');
   t('Logo');
   t('Name');

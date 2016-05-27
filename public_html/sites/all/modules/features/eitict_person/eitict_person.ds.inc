@@ -24,6 +24,11 @@ function eitict_person_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_person_picture' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|person|default'] = $ds_fieldsetting;
 

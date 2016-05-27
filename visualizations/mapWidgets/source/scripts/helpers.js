@@ -153,11 +153,16 @@ export var helpers = {
         // Extractives Revenue latest year
         
         var indicator_government_revenue = undefined;
-        if(country.revenues && country.revenues.length) {
+        if(country.revenues && Object.keys(country.revenues).length > 0 ) {
             var years_revenue = Object.keys(country.revenues);
             var last_revenue = _.last(years_revenue);
             var yearData_revenue = country.revenues[last_revenue];
             indicator_government_revenue = yearData_revenue.government;
+        }
+        else
+        {
+            var extractiveYearData = yearData.find(function(v){ return (v.commodity === "Government revenue - extractive industries")});
+            indicator_government_revenue = extractiveYearData ? extractiveYearData.value : undefined;
         }
         indicator_government_revenue = indicator_government_revenue || 'n/a';
 
@@ -192,7 +197,7 @@ export var helpers = {
         // Add country info.
         info_header = info_header +
             '<img src="' + this.getResourceUrl('images/flags/gif/' + layer.feature.id.toLowerCase() + '.gif') + '" style=""/>' +
-            '<span>' + layer.feature.properties.name + '</span>';
+            '<span>' + country.label + '</span>';
 
         // Add Status indicator info.
         info_top_indicators_first = info_top_indicators_first +
