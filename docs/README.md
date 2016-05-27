@@ -1,7 +1,7 @@
 
 # EITI User Documentation:
 
-## Updating a EITI production to the latest codebase.
+## Updating EITI production to the latest codebase.
 
 ```
 cd /var/www/eiti-production/public_html/
