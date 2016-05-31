@@ -518,6 +518,12 @@ function helpergeneric_form_user_profile_form_alter(&$form, &$form_state, $form_
     return;
   }
 
+  // Allow user administrators should also be able to change assigned roles.
+  if (isset($form['account']['roles']['#access'])) {
+    $roles = array_map('check_plain', user_roles(TRUE));
+    $form['account']['roles']['#access'] = $roles && user_access('administer users');
+  }
+
   if (isset($form['redirect'])) {
     $form['redirect']['#access'] = FALSE;
   }

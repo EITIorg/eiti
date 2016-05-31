@@ -15,8 +15,7 @@ function eitipermissions_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'admin_menu',
   );
