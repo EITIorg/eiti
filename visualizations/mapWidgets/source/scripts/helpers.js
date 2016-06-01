@@ -2,12 +2,20 @@
 import _ from 'underscore';
 
 export var helpers = {
+    getPageSize: function() {
+        return 50;
+    },
+
     getBasePath: function() {
         return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
     },
 
     getEndPoint: function() {
         return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';   
+    }, 
+    
+    getEndPointPage: function(page) {
+        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';   
     }, 
 
     getPaletteDivergent: function(index) {
