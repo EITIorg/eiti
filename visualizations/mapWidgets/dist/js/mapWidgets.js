@@ -23921,7 +23921,7 @@
 	                  return v.commodity === "Population";
 	                }) : undefined;
 	                if (population && indicator) {
-	                  indicator_value = indicator / population;
+	                  indicator_value = indicator / population.value;
 	                } else {
 	                  indicator_value = 0;
 	                }
@@ -23938,7 +23938,7 @@
 	                var indicator_allsectors = generalYearData ? generalYearData.find(function (v) {
 	                  return v.commodity === "Government revenue - all sectors";
 	                }) : undefined;
-	                if (indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+	                if (indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === 'USD') {
 	                  indicator_value = indicator_government * 100 / indicator_allsectors.value;
 	                } else {
 	                  indicator_value = 'n/a';
@@ -24191,6 +24191,9 @@
 	    key: 'onEachFeaturePage',
 	    value: function onEachFeaturePage(feature, layer) {
 	      layer.on({
+	        mouseover: function mouseover(e) {
+	          _helpers.helpers.showHint(e);
+	        },
 	        mouseout: _helpers.helpers.resetTooltip,
 	        click: function (e) {
 	          _helpers.helpers.showInfobox(e, this.state.data);
@@ -24991,6 +24994,14 @@
 	        } else {
 	            country_link = '<strong>' + layer.feature.properties.name + '</strong>';
 	        }
+	
+	        e.latlng.lat = e.latlng.lat + 2.5;
+	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent(country_link).openOn(layer._map);
+	    },
+	
+	    showHint: function showHint(e) {
+	        var layer = e.target;
+	        var country_link = '<strong>' + this.t('Click on a country to find out more') + '</strong>';
 	
 	        e.latlng.lat = e.latlng.lat + 2.5;
 	        var popup = L.popup({ autoPan: false, closeButton: false }).setLatLng(e.latlng).setContent(country_link).openOn(layer._map);

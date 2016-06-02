@@ -184,7 +184,7 @@ export default class MapWidgetComponent extends Component {
               var indicator = yearData.government;
               var population = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Population")}) : undefined;
               if(population && indicator) {
-                indicator_value = indicator/population;
+                indicator_value = indicator/population.value;
               }
               else
               {
@@ -201,7 +201,7 @@ export default class MapWidgetComponent extends Component {
               var generalYearData = datapoint.reports[last];
               var indicator_government = yearData.government;
               var indicator_allsectors = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - all sectors")}) : undefined;
-              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === 'USD') {
                 indicator_value = indicator_government*100/indicator_allsectors.value;
               }
               else
@@ -442,6 +442,7 @@ export default class MapWidgetComponent extends Component {
 
   onEachFeaturePage(feature, layer) {
     layer.on({
+        mouseover: function(e){ helpers.showHint(e) },
         mouseout: helpers.resetTooltip,
         click: function(e){ helpers.showInfobox(e, this.state.data) }.bind(this)
     });

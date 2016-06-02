@@ -80,8 +80,19 @@ export var helpers = {
             .openOn(layer._map);
     },
 
+    showHint: function (e) {
+        var layer = e.target;
+        var country_link = '<strong>' + this.t('Click on a country to find out more') + '</strong>';
+
+        e.latlng.lat = e.latlng.lat+2.5;
+        var popup = L.popup({autoPan:false, closeButton:false})
+            .setLatLng(e.latlng)
+            .setContent(country_link)
+            .openOn(layer._map);
+    },
+
     resetTooltip: function(e) {
-    // Left for future reference
+        // Left for future reference
     },
 
     zoomToFeature: function(e, countryInfo){
