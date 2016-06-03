@@ -9,6 +9,8 @@
  * Class EITIApiIndicatorValue
  */
 class EITIApiIndicatorValue extends RestfulEntityBase {
+  protected $range = 200;
+
   /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
    */
