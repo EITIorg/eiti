@@ -66,6 +66,11 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'article';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'article_summary' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'article_header' => array(
       'weight' => '0',
       'label' => 'hidden',
@@ -86,6 +91,20 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_tags' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -101,25 +120,11 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_event_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_attachments' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
           'classes' => 'field-highlighted',
-        ),
-      ),
-    ),
-    'field_tags' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
         ),
       ),
     ),
@@ -229,6 +234,18 @@ function eitict_article_ds_custom_fields_info() {
   $ds_field->properties = array();
   $export['article_info'] = $ds_field;
 
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'article_summary';
+  $ds_field->label = 'Article Summary';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'article|full';
+  $ds_field->properties = array();
+  $export['article_summary'] = $ds_field;
+
   return $export;
 }
 
@@ -306,25 +323,27 @@ function eitict_article_ds_layout_settings_info() {
     'regions' => array(
       'above' => array(
         0 => 'article_header',
-        1 => 'article_info',
+        2 => 'article_info',
       ),
       'main' => array(
-        2 => 'body',
-        3 => 'field_attachments',
-        4 => 'field_image_gallery',
+        1 => 'article_summary',
+        3 => 'body',
+        4 => 'field_attachments',
+        5 => 'field_image_gallery',
       ),
       'ds_hidden' => array(
-        5 => 'field_featured_image',
-        6 => 'title_field',
-        7 => 'post_date',
-        8 => 'author',
-        9 => 'field_event_date',
-        10 => 'field_event_location',
-        11 => 'field_tags',
+        6 => 'field_featured_image',
+        7 => 'title_field',
+        8 => 'post_date',
+        9 => 'author',
+        10 => 'field_event_date',
+        11 => 'field_event_location',
+        12 => 'field_tags',
       ),
     ),
     'fields' => array(
       'article_header' => 'above',
+      'article_summary' => 'main',
       'article_info' => 'above',
       'body' => 'main',
       'field_attachments' => 'main',
