@@ -55,3 +55,8 @@ div.ctools-modal-content .form-item .media-thumbnail label {
 .adminimal-backend #modalContent {
   z-index: 10 !important;
 }
+
+/* Fix media browser tabs. */
+#media-browser-page #media-browser-tabset #branding h1 {
+  height: auto;
+}
