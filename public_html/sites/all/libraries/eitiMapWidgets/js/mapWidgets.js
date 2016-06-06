@@ -24930,7 +24930,7 @@
 	
 	var helpers = exports.helpers = {
 	    getPageSize: function getPageSize() {
-	        return 50;
+	        return 200;
 	    },
 	
 	    getBasePath: function getBasePath() {

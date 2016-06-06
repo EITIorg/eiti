@@ -3,7 +3,7 @@ import _ from 'underscore';
 
 export var helpers = {
     getPageSize: function() {
-        return 50;
+        return 200;
     },
 
     getBasePath: function() {
