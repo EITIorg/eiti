@@ -68,6 +68,13 @@ $databases['default']['default'] = array(
 //);
 
 /**
+ * Set the Google Analytics Account (Web Property ID) on production.
+ */
+if (PROJECT_ENVIRONMENT == 'production') {
+  $conf['googleanalytics_account'] = 'UA-';
+}
+
+/**
  * Memcache daemon configuration.
  */
 $use_memcache = FALSE;

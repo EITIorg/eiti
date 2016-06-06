@@ -31,5 +31,13 @@ variable_set('less_watch', 0);
 //   ERROR_REPORTING_DISPLAY_ALL => All messages
 variable_set('error_level', ERROR_REPORTING_DISPLAY_ALL);
 
+// Provide a list of modules to be disabled and uninstalled.
+$modules = array(
+  'googleanalytics',
+);
+// Uninstall modules
+_us_module__uninstall($modules);
+
+
 // Include the production setup script.
 include $script_directory . '/setup.production.php';
