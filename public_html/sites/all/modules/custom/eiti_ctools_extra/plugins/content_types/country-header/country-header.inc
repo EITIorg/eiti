@@ -302,7 +302,7 @@ function eiti_ctools_extra__country_header__settings_form_submit($form, &$form_s
   form_state_values_clean($form_state);
 
   foreach (element_children($form) as $key) {
-    if (!empty($form_state['values'][$key])) {
+    if (isset($form_state['values'][$key])) {
       $form_state['conf'][$key] = $form_state['values'][$key];
     }
   }
