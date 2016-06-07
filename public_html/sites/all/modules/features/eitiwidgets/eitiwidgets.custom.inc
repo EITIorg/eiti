@@ -91,6 +91,11 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
     $form['reusable']['reusable']['#default_value'] = FALSE;
   }
 
+  // Hide the FPP "Revision" fieldset.
+  if (isset($form['revision'])) {
+    $form['revision']['#access'] = FALSE;
+  }
+
   // Hide the FPP view mode selector.
   if (isset($form['view_mode']['#default_value'])) {
     $form['view_mode'] = array(

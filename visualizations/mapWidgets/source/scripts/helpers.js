@@ -2,12 +2,20 @@
 import _ from 'underscore';
 
 export var helpers = {
+    getPageSize: function() {
+        return 200;
+    },
+
     getBasePath: function() {
         return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
     },
 
     getEndPoint: function() {
         return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';   
+    }, 
+    
+    getEndPointPage: function(page) {
+        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';   
     }, 
 
     getPaletteDivergent: function(index) {
@@ -72,8 +80,19 @@ export var helpers = {
             .openOn(layer._map);
     },
 
+    showHint: function (e) {
+        var layer = e.target;
+        var country_link = '<strong>' + this.t('Click on a country to find out more') + '</strong>';
+
+        e.latlng.lat = e.latlng.lat+2.5;
+        var popup = L.popup({autoPan:false, closeButton:false})
+            .setLatLng(e.latlng)
+            .setContent(country_link)
+            .openOn(layer._map);
+    },
+
     resetTooltip: function(e) {
-    // Left for future reference
+        // Left for future reference
     },
 
     zoomToFeature: function(e, countryInfo){

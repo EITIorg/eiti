@@ -36,6 +36,7 @@ features[ds_field_settings][] = node|article|full
 features[ds_field_settings][] = node|article|teaser_alternative
 features[ds_fields][] = article_header
 features[ds_fields][] = article_info
+features[ds_fields][] = article_summary
 features[ds_layout_settings][] = node|article|default
 features[ds_layout_settings][] = node|article|full
 features[ds_layout_settings][] = node|article|teaser_alternative

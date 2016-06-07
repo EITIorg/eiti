@@ -1,0 +1,33 @@
+{
+"data": [
+{
+"id": 61,
+"label": "Solomon Islands",
+"self": "https://beta.eiti.org/api/v1.0/implementing_country/61",
+"iso2": "SB",
+"iso3": "SLB",
+"status": {
+"tid": "75",
+"language": "en",
+"name": "Candidate"
+},
+"status_date": "1325376000",
+"local_website": "http://www.sieiti.gov.sb/",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+}
+],
+"count": 51,
+"self": {
+"title": "Self",
+"href": "https://beta.eiti.org/api/v1.0/implementing_country"
+},
+"previous": {
+"title": "Previous",
+"href": "https://beta.eiti.org/api/v1.0/implementing_country?page=1"
+}
+}

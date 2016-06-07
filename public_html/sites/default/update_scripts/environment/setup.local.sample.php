@@ -93,6 +93,7 @@ $modules = array(
   'field_ui',
   // 'feeds_ui',
   // 'feeds_tamper_ui',
+  'googleanalytics',
   // 'l10n_client',
   // 'l10n_update',
   // 'menu',

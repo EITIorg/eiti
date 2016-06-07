@@ -64,6 +64,21 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
     $article_info['#attributes']['class'][] = 'simple';
   }
   $entity->article_info = render($article_info);
+
+
+  // If a custom summary was provided, display it on the article page.
+  if (in_array($view_mode, array('full'))) {
+    if (!empty($entity->content['body']['#items'][0]['summary'])) {
+      $article_summary = $entity->content['body']['#items'][0]['summary'];
+
+      $article_summary_format = NULL;
+      if (isset($entity->content['body']['#items'][0]['format'])) {
+        $article_summary_format = $entity->content['body']['#items'][0]['format'];
+      }
+
+      $entity->article_summary = check_markup($article_summary, $article_summary_format);
+    }
+  }
 }
 
 /**

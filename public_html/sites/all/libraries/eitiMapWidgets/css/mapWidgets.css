@@ -287,6 +287,10 @@
   border-bottom: none;
   padding-bottom: 0;
 }
+.eiti-map-wrapper .country-list .empty {
+  opacity: 0.4;
+  cursor: default;
+}
 .eiti-map-wrapper .country-list a {
   color: #00a5e9;
   text-decoration: none;

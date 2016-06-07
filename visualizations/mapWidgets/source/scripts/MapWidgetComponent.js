@@ -42,14 +42,34 @@ export default class MapWidgetComponent extends Component {
     };
   }
 
-  componentWillMount() {
-    this.serverRequest = jQuery.get(helpers.getEndPoint(), function (result) {
 
-      var baseMap = ::this.decorate(result.data, this.state.indicator_id, this.state.valuetypes);
-      this.setState ( {
-        baseMap: baseMap,
-        data: result.data
-      });
+  componentWillMount() {
+    jQuery.get(helpers.getEndPoint() + '?fields=id', function(result) {
+        var calls = [];
+        var results = [];
+
+        for (var i = 0; i < result.count / helpers.getPageSize(); i++) {
+            calls.push(
+                jQuery.get(helpers.getEndPointPage(i + 1), function(result) {
+                    results.push(result.data);
+                })
+            );
+        }
+
+        jQuery.when.apply(null, calls).done(function() {
+            var consolidated = [];
+            results.forEach(function(r) {
+                consolidated = consolidated.concat(r);
+            });
+
+            var baseMap = ::this.decorate(consolidated, this.state.indicator_id, this.state.valuetypes);
+            this.setState({
+                baseMap: baseMap,
+                data: consolidated
+            });
+
+        }.bind(this));
+
     }.bind(this));
   }
 
@@ -164,7 +184,7 @@ export default class MapWidgetComponent extends Component {
               var indicator = yearData.government;
               var population = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Population")}) : undefined;
               if(population && indicator) {
-                indicator_value = indicator/population;
+                indicator_value = indicator/population.value;
               }
               else
               {
@@ -181,7 +201,7 @@ export default class MapWidgetComponent extends Component {
               var generalYearData = datapoint.reports[last];
               var indicator_government = yearData.government;
               var indicator_allsectors = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Government revenue - all sectors")}) : undefined;
-              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === indicator_government.unit) {
+              if(indicator_government && indicator_allsectors && indicator_allsectors.value !== 0 && indicator_government !== 0 && indicator_allsectors.unit === 'USD') {
                 indicator_value = indicator_government*100/indicator_allsectors.value;
               }
               else
@@ -422,6 +442,7 @@ export default class MapWidgetComponent extends Component {
 
   onEachFeaturePage(feature, layer) {
     layer.on({
+        mouseover: function(e){ helpers.showHint(e) },
         mouseout: helpers.resetTooltip,
         click: function(e){ helpers.showInfobox(e, this.state.data) }.bind(this)
     });
@@ -537,9 +558,11 @@ export default class MapWidgetComponent extends Component {
         var yearData = sortedCountries[i].metadata[last];
         // If there's an attached report to the implementing country, use that one. If not, look for it in the metadata
         var reportURL = sortedCountries[i].annual_report_file;
+        var reportClass = "";
         if(reportURL === undefined || reportURL === null) {
           var reportObj = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _.first(yearData.web_report_links) : undefined;
-          reportURL = reportObj ? reportObj.url : "#";
+          reportURL = reportObj ? reportObj.url : "";
+          reportClass = reportObj ? "" : "empty";
         }
 
         items.push(
@@ -547,7 +570,7 @@ export default class MapWidgetComponent extends Component {
               <span className={itemStyle}></span>
               <a href={countryPageURL}>{sortedCountries[i].label}</a>
               <span className="report">
-                <a target="_blank" href={reportURL} title={last}>
+                <a target="_blank" href={reportURL} title={last} className={reportClass}>
                   {reportLink}
                 </a>
               </span>

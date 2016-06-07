@@ -1,0 +1,14 @@
+diff --git a/public_html/sites/all/modules/contrib/file_entity/file_entity.module b/public_html/sites/all/modules/contrib/file_entity/file_entity.module
+index 36f8283..46d3f2a 100644
+--- a/public_html/sites/all/modules/contrib/file_entity/file_entity.module
++++ b/public_html/sites/all/modules/contrib/file_entity/file_entity.module
+@@ -1600,9 +1600,6 @@ function file_entity_ctools_plugin_api($module, $api) {
+   if (($module == 'file_entity' && $api == 'file_type') || ($module == 'page_manager' && $api == 'pages_default') || $module == 'panelizer') {
+     return array('version' => 1);
+   }
+-  if ($module == 'file_entity' && $api == 'file_default_displays') {
+-    return array('version' => 1);
+-  }
+ }
+ 
+ /**
