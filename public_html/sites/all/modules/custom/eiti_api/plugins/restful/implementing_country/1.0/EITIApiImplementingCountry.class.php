@@ -243,9 +243,11 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
     $query->leftJoin('eiti_indicator_value', 'iv', 'fiv.field_sd_indicator_values_target_id = iv.id');
     $query->leftJoin('eiti_indicator', 'i', 'i.id = iv.indicator_id');
+    $query->leftJoin('eiti_indicator', 'ip', 'i.parent = ip.id');
 
     $query->addField('sd', 'year_end', 'year');
     $query->addField('i', 'name', 'commodity');
+    $query->addField('ip', 'name', 'parent');
     $query->addField('ic', 'iso', 'iso2');
     $query->addField('ic', 'id', 'id');
     $query->addField('iv', 'value_numeric', 'value');
