@@ -39,6 +39,15 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No content matches the search criteria.';
+  /* Relationship: Content: Entity translation: translations */
+  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
+  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
+  /* Relationship: Content: Document Category (field_document_category) */
+  $handler->display->display_options['relationships']['field_document_category_tid']['id'] = 'field_document_category_tid';
+  $handler->display->display_options['relationships']['field_document_category_tid']['table'] = 'field_data_field_document_category';
+  $handler->display->display_options['relationships']['field_document_category_tid']['field'] = 'field_document_category_tid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -51,6 +60,15 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Entity translation: Language */
+  $handler->display->display_options['filters']['language_1']['id'] = 'language_1';
+  $handler->display->display_options['filters']['language_1']['table'] = 'entity_translation';
+  $handler->display->display_options['filters']['language_1']['field'] = 'language';
+  $handler->display->display_options['filters']['language_1']['relationship'] = 'entity_translations';
+  $handler->display->display_options['filters']['language_1']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
+  $handler->display->display_options['filters']['language_1']['group'] = 1;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -66,14 +84,6 @@ function eitict_document_views_default_views() {
     'document' => 'document',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'node';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-  );
-  $handler->display->display_options['filters']['language']['group'] = 1;
   /* Filter criterion: Field: Title (title_field) */
   $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
@@ -100,6 +110,15 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['field_document_category_tid']['expose']['identifier'] = 'category';
   $handler->display->display_options['filters']['field_document_category_tid']['expose']['remember_roles'] = array(
     2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
   );
   $handler->display->display_options['filters']['field_document_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_document_category_tid']['vocabulary'] = 'document_category';
@@ -119,6 +138,13 @@ function eitict_document_views_default_views() {
   );
   $handler->display->display_options['filters']['field_doc_published_date_value']['granularity'] = 'month';
   $handler->display->display_options['filters']['field_doc_published_date_value']['year_range'] = '-30:+1';
+  /* Filter criterion: Content: Document Category (field_document_category:language) */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'field_data_field_document_category';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
 
   /* Display: Listing */
   $handler = $view->new_display('panel_pane', 'Listing', 'listing');
@@ -147,6 +173,8 @@ function eitict_document_views_default_views() {
     t('next ›'),
     t('last »'),
     t('No content matches the search criteria.'),
+    t('Translations'),
+    t('term from field_document_category'),
     t('Filter by title'),
     t('Category'),
     t('Published Date'),
