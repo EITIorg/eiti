@@ -44,7 +44,7 @@ backup-db:
 backup-files:
 	@# Make sure the environment is prepared.
 	@test -d 'public_html/sites/default/files' || (echo 'Files directory not found.'; exit 16)
-	@echo 'Backing-up ''`du --si -sm public_html/sites/default/files | cut -f1 -`' Mb of user uploaded files.'
+	@echo 'Backing-up '`du --si -sm public_html/sites/default/files | cut -f1 -`' Mb of user uploaded files.'
 	@time tar -C public_html/sites/default \
 		--exclude=css \
 		--exclude=ctools \

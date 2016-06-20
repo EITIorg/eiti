@@ -16,6 +16,12 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   public $metadata;
 
   /**
+   * Overriding the defaults.
+   * @var int
+   */
+  protected $range = 200;
+
+  /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
    */
   public function publicFieldsInfo() {

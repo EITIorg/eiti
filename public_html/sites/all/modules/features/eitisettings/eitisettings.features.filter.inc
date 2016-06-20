@@ -69,7 +69,7 @@ function eitisettings_filter_default_formats() {
           'htmlpurifier_help' => 1,
           'htmlpurifier_filter_tips' => 'HTML tags will be transformed to conform to HTML standards.',
           'htmlpurifier_config' => array(
-            'Attr.EnableID' => 0,
+            'Attr.EnableID' => 1,
             'AutoFormat.AutoParagraph' => 1,
             'AutoFormat.Linkify' => 1,
             'Cache.DefinitionImpl' => 'Drupal',

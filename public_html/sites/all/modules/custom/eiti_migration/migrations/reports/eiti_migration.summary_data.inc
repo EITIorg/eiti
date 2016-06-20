@@ -9,6 +9,7 @@
 
 class EITISummaryDataMigration extends EITISpreadsheetMigration {
   public $single_import = FALSE;
+  public $postImportRollback = FALSE;
 
   /**
    * Overrides the default constructor.
@@ -123,6 +124,10 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
         '!filename' => $row->file,
       ));
       $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      MigrationBase::displayMessage($msg);
+
+      // Add item to the post import rollback.
+      $this->postImportRollback[$row->summary_id] = $row;
       return FALSE;
     }
     $countries = eitientity_implementing_country_lookup_by_name($country_name);
@@ -148,6 +153,10 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
           '!filename' => $row->file,
         ));
         $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+        MigrationBase::displayMessage($msg);
+
+        // Add item to the post import rollback.
+        $this->postImportRollback[$row->summary_id] = $row;
         return FALSE;
       }
 
@@ -167,6 +176,10 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
         '!filename' => $row->file,
       ));
       $this->queueMessage($msg, MigrationBase::MESSAGE_ERROR);
+      MigrationBase::displayMessage($msg);
+
+      // Add item to the post import rollback.
+      $this->postImportRollback[$row->summary_id] = $row;
       return FALSE;
     }
 
@@ -275,6 +288,30 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
           '!file' => $row->file,
         )), Migration::MESSAGE_ERROR, MigrateMap::STATUS_FAILED);
       }
+    }
+  }
+
+  /**
+   * We use this hook to get rid of any unwanted imports.
+   */
+  public function postImport() {
+    parent::postImport();
+    $rollbackItems = $this->postImportRollback;
+    if (is_array($rollbackItems)) {
+      $keysRollback = array_keys($rollbackItems);
+
+      // Remove entries from the map table, but leave the messages.
+      $mapCon = $this->map->getConnection();
+      $mapCon->delete($this->map->getMapTable())
+        ->condition('sourceid1', $keysRollback, 'IN')
+        ->execute();
+
+      // Remove the files themselves.
+      $file_fids = array();
+      foreach ($rollbackItems as $rollbackItem) {
+        $file_fids[] = $rollbackItem->file_fid;
+      }
+      file_delete_multiple($file_fids);
     }
   }
 
