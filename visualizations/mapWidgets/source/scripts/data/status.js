@@ -22,5 +22,11 @@ export var status = [
     "color": "#dddddd",
     "title": "Other",
     "subtitle": ""
+  },
+  {
+    "id": 77,
+    "color": "#dddddd",
+    "title": "Other",
+    "subtitle": ""
   }
 ];
