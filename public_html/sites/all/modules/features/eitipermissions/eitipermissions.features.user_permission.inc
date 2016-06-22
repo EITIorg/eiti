@@ -189,6 +189,7 @@ function eitipermissions_user_default_permissions() {
     'name' => 'administer files',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
     ),
     'module' => 'file_entity',
   );

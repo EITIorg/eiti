@@ -164,7 +164,7 @@
       }
 
       if (chartSettings.type && chartSettings.type === 'StackedBar') {
-        chartSettings.layout.barmode = 'stacked';
+        chartSettings.layout.barmode = 'stack';
       }
 
       // Enable the year selector.
