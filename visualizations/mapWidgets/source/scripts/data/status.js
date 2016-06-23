@@ -18,12 +18,6 @@ export var status = [
     "subtitle": "compliant/candidate status is temporarily suspended"
   },
   {
-    "id": 0,
-    "color": "#dddddd",
-    "title": "Other",
-    "subtitle": ""
-  },
-  {
     "id": 77,
     "color": "#dddddd",
     "title": "Other",
