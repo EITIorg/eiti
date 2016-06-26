@@ -121,7 +121,66 @@ function helpergeneric_settings_form($form) {
     '#description' => t('This legal information is shown in the page footer.'),
   );
 
-  return system_settings_form($form);
+  $form['other'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Other'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  // We want to allow people add exceptions for link validations via UI.
+  if (module_exists('link')) {
+    $default_arr = explode('|', LINK_DOMAINS);
+    $default_arr = variable_get('eiti_url_domains', $default_arr);
+    $default_str = list_allowed_values_string($default_arr);
+    $form['other']['eiti_url_domains'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Allowed domains (URL validations)'),
+      '#description' => t("Please specify <strong>one domain per line</strong> (numbers don't matter). Don't bother of sorting and duplicates, those will be cleared when you save the form.<br/><br/>Defaults to: <em>!default</em>", array('!default' => LINK_DOMAINS)),
+      '#default_value' => $default_str,
+      '#element_validate' => array('helpergeneric_settings_url_domains_validate'),
+    );
+  }
+
+  $system_form = system_settings_form($form);
+  $system_form['#submit'][] = 'helpergeneric_settings_form_extra_submit';
+
+  // Now, we can return the form.
+  return $system_form;
+}
+
+/**
+ * A small textarea validation / massages the value as well.
+ * @param $element
+ *
+ *   Text-area FAPI element.
+ *
+ * @param $form_state
+ *   Form-state of the form during validation.
+ */
+function helpergeneric_settings_url_domains_validate($element, &$form_state) {
+  // Check our links.
+  if (!empty($form_state['values']['eiti_url_domains'])) {
+    $allowed_domain_value = $form_state['values']['eiti_url_domains'];
+    $allowed_domain_value = strtolower($allowed_domain_value);
+    $form_state['values']['eiti_url_domains'] = list_extract_allowed_values($allowed_domain_value, 'list_text', TRUE);
+    sort($form_state['values']['eiti_url_domains']);
+  }
+  else {
+    $default_arr = explode('|', LINK_DOMAINS);
+    $form_state['values']['eiti_url_domains'] = $default_arr;
+  }
+}
+
+/**
+ * Post submit handler - a place where we do some extra magic.
+ */
+function helpergeneric_settings_form_extra_submit($form, &$form_state) {
+  // We check if we have insert any values for the URL Domains, if we did, we use other variable (of the link.module).
+  if (module_exists('link') && !empty($form_state['values']['eiti_url_domains'])) {
+    variable_set('link_extra_domains', $form_state['values']['eiti_url_domains']);
+    drupal_set_message(t('Global LINK domains are changed.'));
+  }
 }
 
 /**
