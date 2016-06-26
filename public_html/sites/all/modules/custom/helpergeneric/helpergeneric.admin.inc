@@ -131,7 +131,7 @@ function helpergeneric_settings_form($form) {
   // We want to allow people add exceptions for link validations via UI.
   if (module_exists('link')) {
     $default_arr = explode('|', LINK_DOMAINS);
-    $default_arr = variable_get('eiti_url_domains', $default_arr);
+    $default_arr = variable_get('link_extra_domains', $default_arr);
     $default_str = list_allowed_values_string($default_arr);
     $form['other']['eiti_url_domains'] = array(
       '#type' => 'textarea',
@@ -151,8 +151,8 @@ function helpergeneric_settings_form($form) {
 
 /**
  * A small textarea validation / massages the value as well.
- * @param $element
  *
+ * @param $element
  *   Text-area FAPI element.
  *
  * @param $form_state
@@ -164,6 +164,7 @@ function helpergeneric_settings_url_domains_validate($element, &$form_state) {
     $allowed_domain_value = $form_state['values']['eiti_url_domains'];
     $allowed_domain_value = strtolower($allowed_domain_value);
     $form_state['values']['eiti_url_domains'] = list_extract_allowed_values($allowed_domain_value, 'list_text', TRUE);
+    $form_state['values']['eiti_url_domains'] = array_unique($form_state['values']['eiti_url_domains']);
     sort($form_state['values']['eiti_url_domains']);
   }
   else {
