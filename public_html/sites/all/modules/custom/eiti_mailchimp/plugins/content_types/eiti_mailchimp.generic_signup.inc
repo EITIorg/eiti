@@ -73,7 +73,9 @@ function eiti_mailchimp__signup__render($subtype, $conf, $panel_args, $context) 
     if ($signup) {
       $block = new stdClass();
       $block->title = check_plain($signup->title);
-      $block->content = drupal_get_form('mailchimp_signup_subscribe_block_' . $signup->name . '_form', $signup, 'mailchimp_signup_block');
+      $signup_form = drupal_get_form('mailchimp_signup_subscribe_block_' . $signup->name . '_form', $signup, 'mailchimp_signup_block');
+      $signup_form['#attributes']['class'][] = 'single-fluid-row-wrapper';
+      $block->content = $signup_form;
       return $block;
     }
   }

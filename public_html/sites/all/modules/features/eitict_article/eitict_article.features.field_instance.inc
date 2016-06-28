@@ -31,7 +31,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -86,7 +86,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 20,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -129,7 +129,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -235,7 +235,7 @@ function eitict_article_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 9,
+        'weight' => 11,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -300,7 +300,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -354,7 +354,7 @@ function eitict_article_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -459,7 +459,7 @@ function eitict_article_field_default_field_instances() {
           'trim_length' => '',
         ),
         'type' => 'owlcarousel_formatter',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -554,10 +554,11 @@ function eitict_article_field_default_field_instances() {
         'weight' => 19,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'eiti_mailchimp',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'eiti_mailchimp_signup_form',
+        'weight' => 6,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -601,7 +602,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 19,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -652,7 +653,7 @@ function eitict_article_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator_localized',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -712,7 +713,7 @@ function eitict_article_field_default_field_instances() {
           'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 6,
+        'weight' => 8,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
