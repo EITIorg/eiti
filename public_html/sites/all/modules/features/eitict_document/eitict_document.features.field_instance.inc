@@ -343,6 +343,47 @@ function eitict_document_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-document-field_mailchimp_signup_form'.
+  $field_instances['node-document-field_mailchimp_signup_form'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you want to display a signup form, specify which form you\'d like to use.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 13,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_mailchimp_signup_form',
+    'label' => 'Mailchimp Signup Form',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-document-title_field'.
   $field_instances['node-document-title_field'] = array(
     'bundle' => 'document',
@@ -402,7 +443,9 @@ function eitict_document_field_default_field_instances() {
   t('Body');
   t('Document Category');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
+  t('If you want to display a signup form, specify which form you\'d like to use.');
   t('Image Preview');
+  t('Mailchimp Signup Form');
   t('Please specify the resource categories that apply to this document.');
   t('Published Date');
   t('Title');
