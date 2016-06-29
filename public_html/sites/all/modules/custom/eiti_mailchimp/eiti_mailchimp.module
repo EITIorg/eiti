@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Main .module file.
+ */
+
+define('MAILCHIMP_SIGNUP_EITI_WIDGET', 1);
+define('MAILCHIMP_SIGNUP_EITI_BOTH', 3);
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function eiti_mailchimp_form_mailchimp_signup_form_alter(&$form, &$form_state) {
+  $signup = $form_state['signup'];
+
+  $mode_defaults = array(
+    MAILCHIMP_SIGNUP_BLOCK => array(MAILCHIMP_SIGNUP_BLOCK),
+    MAILCHIMP_SIGNUP_PAGE => array(MAILCHIMP_SIGNUP_PAGE),
+    MAILCHIMP_SIGNUP_EITI_WIDGET => array(MAILCHIMP_SIGNUP_EITI_WIDGET),
+    MAILCHIMP_SIGNUP_EITI_BOTH => array(MAILCHIMP_SIGNUP_EITI_WIDGET, MAILCHIMP_SIGNUP_PAGE),
+  );
+
+  unset($form['mode']['#options'][MAILCHIMP_SIGNUP_BLOCK]);
+  $form['mode']['#options'][MAILCHIMP_SIGNUP_EITI_WIDGET] = t('EITI Widget');
+  $form['mode']['#default_value'] = !empty($signup->mode) ? $mode_defaults[$signup->mode] : array();
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function eiti_mailchimp_entity_info_alter(&$entity_info) {
+  $entity_info['mailchimp_signup']['admin ui']['controller class'] = 'EITIMailChimpSignupUIController';
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ *
+ * @inheritdoc
+ */
+function eiti_mailchimp_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function eiti_mailchimp_field_formatter_info() {
+  return array(
+    'eiti_mailchimp_signup_form' => array(
+      'label' => t('Mailchimp Sign-up Form'),
+      'description' => t('Load the entity and fetch its form and render it.'),
+      'field types' => array('entityreference'),
+      'settings' => array(),
+    )
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function eiti_mailchimp_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $summary = t('Use a rendered form of the signup.');
+  return $summary;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function eiti_mailchimp_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  foreach ($items as $delta => $item) {
+    $signup_id = $item['target_id'];
+    $signup = mailchimp_signup_load($signup_id);
+
+    if ($signup) {
+      $signup_form = drupal_get_form('mailchimp_signup_subscribe_block_' . $signup->name . '_form', $signup, 'mailchimp_signup_block');
+      $element[$delta] = $signup_form;
+    }
+  }
+  return $element;
+}

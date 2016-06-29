@@ -68,6 +68,17 @@ function eitipermissions_user_default_permissions() {
     'module' => 'contextual',
   );
 
+  // Exported permission: 'access mailchimp signup pages'.
+  $permissions['access mailchimp signup pages'] = array(
+    'name' => 'access mailchimp signup pages',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'mailchimp_signup',
+  );
+
   // Exported permission: 'access media browser'.
   $permissions['access media browser'] = array(
     'name' => 'access media browser',
@@ -222,6 +233,24 @@ function eitipermissions_user_default_permissions() {
     'module' => 'less',
   );
 
+  // Exported permission: 'administer mailchimp'.
+  $permissions['administer mailchimp'] = array(
+    'name' => 'administer mailchimp',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'mailchimp',
+  );
+
+  // Exported permission: 'administer mailchimp signup entities'.
+  $permissions['administer mailchimp signup entities'] = array(
+    'name' => 'administer mailchimp signup entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'mailchimp_signup',
+  );
+
   // Exported permission: 'administer media browser'.
   $permissions['administer media browser'] = array(
     'name' => 'administer media browser',
@@ -250,6 +279,7 @@ function eitipermissions_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
     ),
     'module' => 'node',
   );
@@ -1059,6 +1089,72 @@ function eitipermissions_user_default_permissions() {
       'translation editor' => 'translation editor',
     ),
     'module' => 'filter',
+  );
+
+  // Exported permission: 'view any unpublished article content'.
+  $permissions['view any unpublished article content'] = array(
+    'name' => 'view any unpublished article content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished bookmark content'.
+  $permissions['view any unpublished bookmark content'] = array(
+    'name' => 'view any unpublished bookmark content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished content'.
+  $permissions['view any unpublished content'] = array(
+    'name' => 'view any unpublished content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+    ),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished document content'.
+  $permissions['view any unpublished document content'] = array(
+    'name' => 'view any unpublished document content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished internal content'.
+  $permissions['view any unpublished internal content'] = array(
+    'name' => 'view any unpublished internal content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished mention content'.
+  $permissions['view any unpublished mention content'] = array(
+    'name' => 'view any unpublished mention content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished page content'.
+  $permissions['view any unpublished page content'] = array(
+    'name' => 'view any unpublished page content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished person content'.
+  $permissions['view any unpublished person content'] = array(
+    'name' => 'view any unpublished person content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
+  );
+
+  // Exported permission: 'view any unpublished stakeholder content'.
+  $permissions['view any unpublished stakeholder content'] = array(
+    'name' => 'view any unpublished stakeholder content',
+    'roles' => array(),
+    'module' => 'view_unpublished',
   );
 
   // Exported permission: 'view files'.

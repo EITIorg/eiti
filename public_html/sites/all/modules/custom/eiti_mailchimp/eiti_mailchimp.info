@@ -1,0 +1,10 @@
+name = EITI Mailchimp Integration
+description = Customizes mailchimp to EITI needs.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = mailchimp
+dependencies[] = mailchimp_signup
+
+files[] = includes/eiti_mailchimp_signup.ui_controller.inc
+files[] = includes/eiti_mailchimp_signup.admin.inc

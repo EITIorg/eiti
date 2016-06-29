@@ -24221,7 +24221,8 @@
 	        var completeType = _underscore2.default.find(metadata, function (v) {
 	          return v.id == indicator_value;
 	        });
-	        return completeType.color;
+	
+	        return completeType ? completeType.color : '#dddddd';
 	      } else {
 	        if (metadata === undefined) return;
 	
@@ -24904,11 +24905,6 @@
 	  "color": "#ff6600",
 	  "title": "Suspended",
 	  "subtitle": "compliant/candidate status is temporarily suspended"
-	}, {
-	  "id": 0,
-	  "color": "#dddddd",
-	  "title": "Other",
-	  "subtitle": ""
 	}, {
 	  "id": 77,
 	  "color": "#dddddd",

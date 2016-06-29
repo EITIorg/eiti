@@ -461,7 +461,8 @@ export default class MapWidgetComponent extends Component {
   getColor(indicator_type, indicator_value, metadata) {
     if(indicator_type == 'fixed') {
         var completeType = _.find(metadata, function(v){ return (v.id == indicator_value)});
-        return completeType.color;
+
+        return completeType ? completeType.color: '#dddddd';
     }
     else 
     {
