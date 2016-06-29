@@ -12,7 +12,7 @@ function eiti_views_extra_views_data_alter(&$data) {
   // We correct the handler, because for some reason, it's messed up.
   if (!empty($data['field_data_field_document_category']['language']['filter'])) {
     $data['field_data_field_document_category']['language']['filter'] = array(
-      'handler' => 'views_handler_filter_locale_language',
+      'handler' => 'eiti_views_handler_filter_field_language',
     );
   }
 }
