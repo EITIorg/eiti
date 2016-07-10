@@ -1,118 +1,37 @@
+---
 # Default vagrant settings file.
 #
-# You can copy this file to "Vagrantsettings.local.yaml" and configure it.
+# You can copy this file to "Vagrantsettings.local.yml" and configure it.
 #
 
-########################################
-# Project specific settings.
+# Used to name the VM and set hostname for the GUEST (only if vagrant.hosts_entry is 1).
+# TODO: Use `project_environment` to botstrap instances?!?
+project_shortname: eiti
+project_environment: local
 
-# VM specific information:
-#  - vm_hostonlyip should be unique among your virtual machines.
-#  - the VM hostname is created using vm_shortname and vm_environment.
-vm_shortname: eiti
-vm_environment: local
-vm_hostonlyip: 10.10.10.49
-vm_hosts_entry: 0
+# Vagrant VM only settings.
+#  - hostonlyip: should be unique IP among your virtual machines.
+#  - hosts_entry: determines if the GUEST hostname is add added to the HOST /etc/hosts file.
+vagrant:
+  hostonlyip: 10.10.10.49
+  hosts_entry: 0
 
-# Vhosts and shared folders:
-#  - template is the name of the template used to create the vhost.
-#  - source points to a folder on the host OS, it can be a relative path.
-#  - docroot points to a folder in the gues where source is mounted.
-vhosts:
-  - domain: eiti-local.dev
-    aliases:
-      - www.eiti-local.dev
-    template: default
-    source: ./public_html
-    docroot: /var/www/eiti-local
-  - domain: eiti-old-local.dev
-    aliases:
-      - www.eiti-old-local.dev
-    template: default
-    source: ./old_html
-    docroot: /var/www/eiti-old-local
-  - domain: eiti-visualizations-local.dev
-    aliases:
-      - www.eiti-visualizations-local.dev
-    template: default
-    source: ./visualizations
-    docroot: /var/www/eiti-visualizations-local
+# Define mount points for the VM.
+vagrant_volumes:
+  - source: ./
+    target: /var/www/eiti-local
 
-
-####################
-# Database specific settings.
-
-pgsql_allow_remote_access: false
-pgsql_root_password: demo3
-pgsql_databases:
-  - name: eiti_local
-    user: eiti_user
-    pass: demo1
-  - name: eiti_old_local
-    user: eiti_old_user
-    pass: demo1
-
-
-########################################
-# Vagrant settings.
-
-# Default VM box.
-box:
-  name: sl6201502
-  url: http://user.developmentgateway.org/~wschneider/scientific-6-201502.box
-  download_checksum: a73dfd9f73161c32acc0c57f91071e77
+# Information about the box.
+vagrant_box:
+  name: sl7201607
+  url: http://user.developmentgateway.org/~wschneider/scientific-7-201607.box
+  download_checksum: 7bfe7ba403eeeb20d57fdd1c8b400e10
   download_checksum_type: md5
 
-
-########################################
-# Puppet settings.
-# NOTE: "--parser future" option is required!
-
-# Enable puppet development "mode".
-puppet_development: 0
-
-# Default options for the "puppet apply"
-puppet_options:
-  --parser future
-  --verbose
-
-# Development options for the "puppet apply"
-puppet_options_dev:
-  --parser future
-  --verbose
-  --debug
-
-
-####################
-# Puppet settings for non-development mode:
-puppet_module_name: SchnWalter/happydev
-puppet_module_version: 0.2.11
-
-# HACK-ishly remove existing modules and then reinstall.
-puppet_force_reinstall: 0
-
-puppet_manifest_file_contents: |
-  node default {
-    # Dump facts to /tmp/facts.yaml
-    # include ::happydev::fairy_dust::debug_helper
-
-    include ::happydev::rhel
-    include ::happydev::fairy_dust::orange_blossom
-
-    # include ::happydev::mysql
-    include ::happydev::pgsql
-
-    include ::happydev::apache
-    include ::happydev::php
-  }
-
-####################
-# Puppet settings for development mode:
-
-# Relative or absolute path pointing to the local development happy-deployer files.
-# NOTE: Do NOT add a trailing slash (/).
-happy_deployer_path: ../happy-deployer
-
-# Alternative (development) manifest file, located in the puppet/manifests folder inside happy-deployer:
-# Replaces puppet_manifest_file_contents only when in puppet development "mode".
-puppet_alternative_manifest_file: dev-eiti.pp
+# Ansible variables to override.
+common__backups_user: vagrant
+common__backups_group: vagrant
+httpd__User: vagrant
+httpd__Group: vagrant
+httpd__User_vhosts: vagrant
+httpd__Group_vhosts: vagrant
