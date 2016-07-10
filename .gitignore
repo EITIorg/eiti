@@ -23,7 +23,7 @@
 /public_html/.htaccess
 /public_html/sites/*/drushrc.custom.php
 /public_html/sites/*/settings.custom.php
-/Vagrantsettings.local.yaml
+/Vagrantsettings.local.yml
 
 # Ignore paths that contain user-generated content.
 /public_html/sites/*/files
