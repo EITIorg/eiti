@@ -14,5 +14,6 @@
   roles:
     - common
     - httpd_php56
+    - postgresql
     - solr
     - memcached

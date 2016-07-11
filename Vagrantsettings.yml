@@ -21,7 +21,8 @@ vagrant_volumes:
   - source: ./
     target: /var/www/eiti-local
 
-# Information about the box.
+# Information about the Vagrant box. Any simple SL7 box should work.
+# @see: https://github.com/devgateway/happy-deployer
 vagrant_box:
   name: sl7201607
   url: http://user.developmentgateway.org/~wschneider/scientific-7-201607.box

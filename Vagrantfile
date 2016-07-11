@@ -38,6 +38,9 @@ project_settings.each_key {|key| ansible_extra_vars[key] = project_settings[key]
 # TODO: Use custom inventory for Vagrant.
 ansible_extra_vars['hosts'] = 'all'
 
+# Vagrant v1.8.4 is required for ansible_local provisioning to work properly.
+Vagrant.require_version ">= 1.8.4"
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version.
 Vagrant.configure(2) do |config|
