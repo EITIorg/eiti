@@ -15,4 +15,4 @@
  *
  * NOTE: It also helps with generating one time login links using `drush uli`.
  */
-$options['uri'] = "http://eiti-local.dev";  // Without a trailing slash.
+$options['uri'] = "http://eiti.local";  // Without a trailing slash.
