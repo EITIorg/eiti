@@ -82,6 +82,51 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function eitict_article_form_article_node_form_alter(&$form, &$form_state) {
+  $form['add_bookmark'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Automatically create a bookmark'),
+    '#description' => t('Check this box if you want a bookmark to be automatically created for this article.'),
+    '#default_value' => FALSE,
+    '#weight' => 10,
+  );
+  $form['add_bookmark_img'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Re-use article\'s image.'),
+    '#description' => t('Check this box if you want your bookmark to re-use the image uploaded higher.'),
+    '#default_value' => FALSE,
+    '#weight' => 11,
+    '#states' => array(
+      'visible' => array(
+        'input[name="add_bookmark"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['actions']['submit']['#submit'][] = 'eitict_article_form_node_form_add_bookmark_submit';
+}
+
+/**
+ * Submit handler that checks if the add_bookmark checkbox was checked or not,
+ * and then creates a bookmark node with reference towards the article.
+ */
+function eitict_article_form_node_form_add_bookmark_submit($form, $form_state) {
+  $add_bookmark = $form_state['values']['add_bookmark'];
+  $add_bookmark_img = $form_state['values']['add_bookmark_img'];
+  if ($add_bookmark) {
+    $target_node = $form_state['node'];
+    $details = array(
+      'node' => $target_node,
+    );
+    if ($add_bookmark_img) {
+      $details['image_field'] = 'field_featured_image';
+    }
+    eitict_bookmark_autocreate($details);
+  }
+}
+
+/**
  * Helper function for article entity header.
  *
  * @inheritdoc
@@ -127,6 +172,7 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
 
   return $elements;
 }
+
 
 /**
  * Helper function for article entity info.

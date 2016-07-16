@@ -123,3 +123,56 @@ function eitict_bookmark_preprocess_node(&$variables) {
     $variables['main_classes'] .= ' linked-wrapper';
   }
 }
+
+/**
+ * Custom function that creates a bookmark with specified details.
+ *
+ * @param $details
+ *  An array of details, such as target content, etc.
+ *  Keys:
+ *   - node - target node.
+ *   - uid - that creates the bookmark, defaults to targets uid.
+ */
+function eitict_bookmark_autocreate($details) {
+  $target = $details['node'];
+
+  $values = array(
+    'type' => 'bookmark',
+    'uid' => isset($details['uid']) ? $details['uid'] : $target->uid,
+    'status' => 1,
+    'comment' => 0,
+    'promote' => 0,
+  );
+
+  // Set the basics.
+  $node = entity_create('node', $values);
+  $emw = entity_metadata_wrapper('node', $node);
+  $temw = entity_metadata_wrapper('node', $target);
+  $emw->title->set($target->title);
+
+  // Set the type.
+  if ($target->type == 'article') {
+    $term_name = ucfirst($temw->field_article_type->value());
+    $bookmark_terms = taxonomy_get_term_by_name($term_name, 'bookmark_type');
+    $bookmark_term = reset($bookmark_terms);
+    $emw->field_bm_bookmark_type->set($bookmark_term->tid);
+  }
+
+  $emw->field_bm_reference_type->set('internal');
+  $emw->field_bm_reference->set(intval($target->nid));
+
+  // And now let's check whether we want to re-use an image of the target node.
+  if (isset($details['image_field'])) {
+    $field_name = $details['image_field'];
+
+    $image = $temw->{$field_name}->value();
+    if (!empty($image)) {
+      $emw->field_bm_image->set($image);
+    }
+  }
+  $emw->save();
+
+  drupal_set_message(t('A bookmark was created automatically.<br />!action', array(
+    '!action' => l(t('Click here to adjust.'), 'node/' . $emw->raw()->nid . '/edit')
+  )));
+}
