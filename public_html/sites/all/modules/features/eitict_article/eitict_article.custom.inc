@@ -90,20 +90,21 @@ function eitict_article_form_article_node_form_alter(&$form, &$form_state) {
     '#title' => t('Automatically create a bookmark'),
     '#description' => t('Check this box if you want a bookmark to be automatically created for this article.'),
     '#default_value' => FALSE,
-    '#weight' => 15,
+    '#weight' => 10.5,
   );
   $form['add_bookmark_img'] = array(
     '#type' => 'checkbox',
     '#title' => t('Re-use article\'s image.'),
     '#description' => t('Check this box if you want your bookmark to re-use the image uploaded higher.'),
     '#default_value' => FALSE,
-    '#weight' => 15.1,
+    '#weight' => 10.6,
     '#states' => array(
       'visible' => array(
         'input[name="add_bookmark"]' => array('checked' => TRUE),
       ),
     ),
   );
+  dsm($form);
   $form['actions']['submit']['#submit'][] = 'eitict_article_form_node_form_add_bookmark_submit';
 }
 
