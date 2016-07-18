@@ -104,7 +104,6 @@ function eitict_article_form_article_node_form_alter(&$form, &$form_state) {
       ),
     ),
   );
-  dsm($form);
   $form['actions']['submit']['#submit'][] = 'eitict_article_form_node_form_add_bookmark_submit';
 }
 
