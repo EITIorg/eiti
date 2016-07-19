@@ -65,6 +65,7 @@ function eitisearch_views_default_views() {
     'article' => 'article',
     'document' => 'document',
     'mention' => 'mention',
+    'page' => 'page',
     'person' => 'person',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
