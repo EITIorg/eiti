@@ -87,7 +87,7 @@ function eitict_page_strongarm() {
         'custom_settings' => FALSE,
       ),
       'teaser' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
@@ -114,6 +114,9 @@ function eitict_page_strongarm() {
         'custom_settings' => FALSE,
       ),
       'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'teaser_alternative' => array(
         'custom_settings' => FALSE,
       ),
     ),

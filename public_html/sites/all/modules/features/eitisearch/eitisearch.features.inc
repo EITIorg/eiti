@@ -36,7 +36,7 @@ function eitisearch_default_search_api_index() {
     "item_type" : "node",
     "options" : {
       "datasource" : { "bundles" : [ "article", "document", "page" ] },
-      "index_directly" : 0,
+      "index_directly" : 1,
       "cron_limit" : "50",
       "fields" : {
         "author" : { "type" : "integer", "entity_type" : "user" },
@@ -46,6 +46,8 @@ function eitisearch_default_search_api_index() {
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },
+        "search_api_panelizer_content" : { "type" : "text" },
+        "search_api_panelizer_title" : { "type" : "text" },
         "status" : { "type" : "boolean" },
         "title_field" : { "type" : "text" },
         "type" : { "type" : "string" }
@@ -58,7 +60,7 @@ function eitisearch_default_search_api_index() {
         },
         "search_api_alter_node_access" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
-        "panelizer" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "panelizer" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_language_control" : {
           "status" : 0,
           "weight" : "0",
@@ -70,29 +72,39 @@ function eitisearch_default_search_api_index() {
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
       },
       "processors" : {
-        "search_api_case_ignore" : {
-          "status" : 0,
-          "weight" : "0",
-          "settings" : { "fields" : { "title_field" : true, "body:value" : true } }
-        },
         "search_api_html_filter" : {
-          "status" : 0,
-          "weight" : "10",
+          "status" : 1,
+          "weight" : "-50",
           "settings" : {
-            "fields" : { "title_field" : true, "body:value" : true },
+            "fields" : {
+              "title_field" : true,
+              "search_api_panelizer_content" : true,
+              "body:value" : true
+            },
             "title" : 0,
             "alt" : 1,
             "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
           }
         },
+        "search_api_case_ignore" : {
+          "status" : 1,
+          "weight" : "-49",
+          "settings" : { "fields" : {
+              "title_field" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "body:value" : true
+            }
+          }
+        },
         "search_api_transliteration" : {
           "status" : 0,
-          "weight" : "15",
+          "weight" : "-48",
           "settings" : { "fields" : { "title_field" : true, "body:value" : true } }
         },
         "search_api_tokenizer" : {
           "status" : 0,
-          "weight" : "20",
+          "weight" : "-47",
           "settings" : {
             "fields" : { "title_field" : true, "body:value" : true },
             "spaces" : "[^[:alnum:]]",
@@ -101,7 +113,7 @@ function eitisearch_default_search_api_index() {
         },
         "search_api_stopwords" : {
           "status" : 0,
-          "weight" : "30",
+          "weight" : "-46",
           "settings" : {
             "fields" : { "title_field" : true, "body:value" : true },
             "file" : "",
@@ -110,7 +122,7 @@ function eitisearch_default_search_api_index() {
         },
         "search_api_highlighting" : {
           "status" : 0,
-          "weight" : "35",
+          "weight" : "-45",
           "settings" : {
             "prefix" : "\\u003Cstrong\\u003E",
             "suffix" : "\\u003C\\/strong\\u003E",
@@ -152,7 +164,9 @@ function eitisearch_default_search_api_server() {
       "highlight_data" : 0,
       "skip_schema_check" : 0,
       "solr_version" : "",
-      "http_method" : "AUTO"
+      "http_method" : "AUTO",
+      "log_query" : 0,
+      "log_response" : 0
     },
     "enabled" : "1"
   }');
