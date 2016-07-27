@@ -15,3 +15,25 @@ function eitict_person_form_person_node_form_alter(&$form, &$form_state) {
     )
   );
 }
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function eitict_person_node_view_alter(&$build) {
+  switch ($build['#bundle']) {
+    case 'person':
+      if ($build['#view_mode'] == 'teaser') {
+        if (!empty($build['field_board_membership'])) {
+          $alternate_value = 2;
+          $value = $build['field_board_membership']['#items'][0]['value'];
+          if ($value == $alternate_value) {
+            $build['field_board_membership'][0]['#markup'] = t('Alternate');
+          }
+          else {
+            unset($build['field_board_membership']);
+          }
+        }
+      }
+      break;
+  }
+}

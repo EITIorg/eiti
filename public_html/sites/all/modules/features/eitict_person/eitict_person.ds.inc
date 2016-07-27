@@ -40,18 +40,18 @@ function eitict_person_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'node_link' => array(
-      'weight' => '4',
+      'weight' => '6',
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'field_person_picture' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
-    'title_field' => array(
+    'field_person_picture' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -142,21 +142,23 @@ function eitict_person_ds_layout_settings_info() {
       ),
       'main' => array(
         1 => 'title_field',
-        2 => 'group_details',
-        3 => 'body',
-        4 => 'node_link',
-        5 => 'field_position',
-        6 => 'field_email',
+        2 => 'field_board_membership',
+        3 => 'field_position',
+        4 => 'field_email',
+        5 => 'group_details',
+        6 => 'body',
+        7 => 'node_link',
       ),
     ),
     'fields' => array(
       'field_person_picture' => 'side',
       'title_field' => 'main',
+      'field_board_membership' => 'main',
+      'field_position' => 'main',
+      'field_email' => 'main',
       'group_details' => 'main',
       'body' => 'main',
       'node_link' => 'main',
-      'field_position' => 'main',
-      'field_email' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(

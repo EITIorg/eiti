@@ -51,10 +51,11 @@ function eitict_person_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Details',
-    'weight' => '2',
+    'weight' => '4',
     'children' => array(
       0 => 'field_position',
       1 => 'field_email',
+      2 => 'field_board_membership',
     ),
     'format_type' => 'div',
     'format_settings' => array(

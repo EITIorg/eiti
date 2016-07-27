@@ -4,3 +4,5 @@ core = 7.x
 package = EITI Custom
 
 dependencies[] = views
+
+files[] = includes/filters/eiti_views_handler_filter_field_language.inc

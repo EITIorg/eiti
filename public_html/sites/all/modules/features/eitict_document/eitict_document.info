@@ -58,6 +58,7 @@ features[variable][] = comment_document
 features[variable][] = comment_form_location_document
 features[variable][] = comment_preview_document
 features[variable][] = comment_subject_field_document
+features[variable][] = content_access_document
 features[variable][] = diff_enable_revisions_page_node_document
 features[variable][] = diff_show_preview_changes_node_document
 features[variable][] = diff_view_mode_preview_node_document

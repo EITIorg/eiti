@@ -64,9 +64,8 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
 
 1.  Once inside the VM, run to go into the project folder:
     ```
-    cdp
+    cd /var/www/eiti-local/
     ```
-    For a full list of aliases, just run the `alias` command.
 
 2.  Prepare drupal for installation, run these inside the VM in the project folder:
     *   Prepare the environment by running one of the following commands for your environment:
@@ -102,7 +101,6 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
         ```
         make install
         ```
-        When you are asked for a DB user password (twice), just press enter, it is already present in `~/.pgpass`.
 
     *   Alternatively, **IF** you have a database dump, you can import it using:
         ```
@@ -111,7 +109,7 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
         make
         ```
 
-4.  Check if the project has been installed properly, for local development go to: [eiti-local.dev](http://eiti-local.dev/)
+4.  Check if the project has been installed properly, for local development go to: [eiti.local](http://eiti.local/)
 
 
 ## More Info:

@@ -44,10 +44,6 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
   $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
   $handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
-  /* Relationship: Content: Document Category (field_document_category) */
-  $handler->display->display_options['relationships']['field_document_category_tid']['id'] = 'field_document_category_tid';
-  $handler->display->display_options['relationships']['field_document_category_tid']['table'] = 'field_data_field_document_category';
-  $handler->display->display_options['relationships']['field_document_category_tid']['field'] = 'field_document_category_tid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -174,7 +170,6 @@ function eitict_document_views_default_views() {
     t('last »'),
     t('No content matches the search criteria.'),
     t('Translations'),
-    t('term from field_document_category'),
     t('Filter by title'),
     t('Category'),
     t('Published Date'),

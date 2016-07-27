@@ -65,6 +65,7 @@ function eitisearch_views_default_views() {
     'article' => 'article',
     'document' => 'document',
     'mention' => 'mention',
+    'page' => 'page',
     'person' => 'person',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -80,10 +81,21 @@ function eitisearch_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'query';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
     2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
   );
   $handler->display->display_options['filters']['search_api_views_fulltext']['min_length'] = '2';
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'body:value' => 'body:value',
+    'search_api_panelizer_content' => 'search_api_panelizer_content',
+    'search_api_panelizer_title' => 'search_api_panelizer_title',
     'title_field' => 'title_field',
   );
 

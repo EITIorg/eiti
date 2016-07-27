@@ -1,0 +1,16 @@
+Index: sites/all/modules/contrib/panelizer/plugins/search_api/PanelizerSearchApiAlterCallback.class.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- sites/all/modules/contrib/panelizer/plugins/search_api/PanelizerSearchApiAlterCallback.class.php	(revision 4992644c26a9c73cf2ee24d0d8599fd2639a74ca)
++++ sites/all/modules/contrib/panelizer/plugins/search_api/PanelizerSearchApiAlterCallback.class.php	(revision )
+@@ -37,7 +37,7 @@
+       $item->search_api_panelizer_content = NULL;
+       $item->search_api_panelizer_title = NULL;
+       try {
+-        if ($render_info = $entity_handler->render_entity($item, 'page_manager')) {
++        if ($render_info = $entity_handler->render_entity($item, 'default')) {
+           $item->search_api_panelizer_content = $render_info['content'];
+           $item->search_api_panelizer_title = !empty($render_info['title']) ? $render_info['title'] : NULL;
+         }
