@@ -189,14 +189,7 @@ function eitict_document_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Publications';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    5 => '5',
-    6 => '6',
-    7 => '7',
-    8 => '8',
-    10 => '10',
-  );
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -544,6 +537,15 @@ function eitict_document_views_default_views() {
 
   /* Display: Private Page */
   $handler = $view->new_display('page', 'Private Page', 'page_1');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    6 => '6',
+    7 => '7',
+    8 => '8',
+    10 => '10',
+  );
   $handler->display->display_options['path'] = 'publications-restricted';
   $translatables['publications_search'] = array(
     t('Master'),
