@@ -1,7 +1,7 @@
 ---
 # Default vagrant settings file.
 #
-# You can copy this file to "Vagrantsettings.local.yml" and configure it.
+# You can copy this file to "VagrantSettings.local.yml" and configure it.
 #
 
 # Used to name the VM and set hostname for the GUEST (only if vagrant.hosts_entry is 1).

@@ -25,12 +25,12 @@ vhosts:
     noindex: true
     docroot: /var/www/eiti-local/visualizations
     weight: 20
-  - domain: eiti-old.local
+  - domain: eiti-legacy.local
     template: default
     noindex: true
     php_devel: true
     php_xdebug: true
-    docroot: /var/www/eiti-local/old_html
+    docroot: /var/www/eiti-local/legacy_html
     weight: 30
 
 # Apache Solr cores for Drupal.
@@ -43,6 +43,6 @@ postgresql__databases:
   - name: eiti_local
     user: eiti_user
     pass: 'demo1'
-  - name: eiti_old_local
-    user: eiti_old_user
+  - name: eiti_legacy_local
+    user: eiti_legacy_user
     pass: 'demo1'

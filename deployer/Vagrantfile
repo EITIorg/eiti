@@ -8,12 +8,12 @@
 # Load some project specific settings form YAML files.
 require 'fileutils'
 require 'yaml'
-if File.exists? __dir__ + '/Vagrantsettings.local.yml'
-  project_settings_file = __dir__ + '/Vagrantsettings.local.yml'
-elsif File.exists? __dir__ + '/Vagrantsettings.yml'
-  project_settings_file = __dir__ + '/Vagrantsettings.yml'
+if File.exists? __dir__ + '/VagrantSettings.local.yml'
+  project_settings_file = __dir__ + '/VagrantSettings.local.yml'
+elsif File.exists? __dir__ + '/VagrantSettings.yml'
+  project_settings_file = __dir__ + '/VagrantSettings.yml'
 else
-  raise 'Can not find the Vagrantsettings.yml file.'
+  raise 'Can not find the VagrantSettings.yml file.'
 end
 project_settings = YAML.load_file(project_settings_file)
 
@@ -24,15 +24,25 @@ end
 # abort(project_settings.inspect) # print variables and exit
 
 # Prepare a list of variables for Ansible.
-if File.exists? __dir__ + '/ansible/vars.local.yml'
-  ansible_extra_vars_file = __dir__ + '/ansible/vars.local.yml'
-elsif File.exists? __dir__ + '/ansible/vars.default.yml'
-  ansible_extra_vars_file = __dir__ + '/ansible/vars.default.yml'
+if File.exists? __dir__ + '/DeployerSettings.local.yml'
+  ansible_extra_vars_file = __dir__ + '/DeployerSettings.local.yml'
+elsif File.exists? __dir__ + '/DeployerSettings.yml'
+  ansible_extra_vars_file = __dir__ + '/DeployerSettings.yml'
 else
-  raise 'Can not find the ansible/vars.local.yml file.'
+  raise 'Can not find the DeployerSettings.yml file.'
 end
 ansible_extra_vars = YAML.load_file(ansible_extra_vars_file)
 project_settings.each_key {|key| ansible_extra_vars[key] = project_settings[key] }
+
+# The Ansible Playbook for the 'main' VM.
+# A relative path on the /vagrant guest directory.
+if File.exists? __dir__ + '/AnsibleMain.local.yml'
+  ansible_playbook = 'AnsibleMain.local.yml'
+elsif File.exists? __dir__ + '/AnsibleMain.yml'
+  ansible_playbook = 'AnsibleMain.yml'
+else
+  raise 'Can not find the AnsibleMain.yml file.'
+end
 
 # Force Ansible to run on the current host.
 # TODO: Use custom inventory for Vagrant.
@@ -170,7 +180,7 @@ Vagrant.configure(2) do |config|
 
       # Update Ansible configuration.
       sudo /usr/bin/mkdir -p /etc/ansible
-      sudo /usr/bin/cp /vagrant/ansible/inventory.vagrant.conf /etc/ansible/hosts
+      sudo /usr/bin/cp /vagrant/inventory.vagrant.conf /etc/ansible/hosts
     SHELL
 
     # Run Ansible from the Vagrant VM
@@ -178,7 +188,7 @@ Vagrant.configure(2) do |config|
     #   $ cd /vagrant/ansible && make run
     main_config.vm.provision 'ansible_local' do |ansible|
       ansible.extra_vars = ansible_extra_vars
-      ansible.playbook = './ansible/main.yml'  # A relative path on the /vagrant guest directory.
+      ansible.playbook = ansible_playbook
       ansible.sudo = true
       # ansible.verbose = 'vv'
     end

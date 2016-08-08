@@ -10,6 +10,9 @@ ENVIRONMENT?=local
 ## Provision the current host if one has not been provided.
 HOSTS?=localhost
 
+## By default provision Using the AnsibleMain.yml playbook.
+PLAYBOOK?=AnsibleMain.yml
+
 
 ## The default target, if no target argument is provided to `make`.
 ## Update an environment with the latest changes from code.
@@ -36,22 +39,22 @@ provision:
 	@echo 'Provisioning the localhost using Ansible Playbooks:'
 	@test -e 'inventory.conf' && ( \
 			echo 'Using local inventory.conf' && \
-			ansible-playbook -vvv --inventory="inventory.conf" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" main.yml \
+			ansible-playbook -vvv --inventory="inventory.conf" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" ${PLAYBOOK} \
 		) || true
 	@test ! -e 'inventory.conf' && ( \
 			echo 'Using default inventory' && \
-			ansible-playbook -vvv  --extra-vars="{project_environment: ${ENVIRONMENT}}" main.yml \
+			ansible-playbook -vvv  --extra-vars="{project_environment: ${ENVIRONMENT}}" ${PLAYBOOK} \
 		) || true
 
 
 ## Provision the localhost using Ansible Playbooks.
 provision-vagrant:
 	@echo 'Provisioning the localhost using Ansible Playbooks:'
-	@test -e '../Vagrantsettings.local.yml' && ( \
-			echo 'Using ../Vagrantsettings.local.yml' && \
-			ansible-playbook --extra-vars "@../Vagrantsettings.local.yml" -b main.yml \
+	@test -e 'VagrantSettings.local.yml' && ( \
+			echo 'Using VagrantSettings.local.yml' && \
+			ansible-playbook --extra-vars "@VagrantSettings.local.yml" -b ${PLAYBOOK} \
 		) || true
-	@test ! -e '../Vagrantsettings.local.yml' && ( \
-			echo 'Using ../Vagrantsettings.yml' && \
-			ansible-playbook --extra-vars "@../Vagrantsettings.yml" -b main.yml \
+	@test ! -e 'VagrantSettings.local.yml' && ( \
+			echo 'Using ../VagrantSettings.yml' && \
+			ansible-playbook --extra-vars "@VagrantSettings.yml" -b ${PLAYBOOK} \
 		) || true
