@@ -59,7 +59,6 @@ backup-files:
 
 ## Alias of fix-permissions
 fix: fix-permissions
-	@echo ''
 
 ## Fix file permissions for an environment.
 fix-permissions:
