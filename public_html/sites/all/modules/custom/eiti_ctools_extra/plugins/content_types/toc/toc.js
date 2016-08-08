@@ -21,7 +21,7 @@
       var offsetBuffer = 50;
       var maxString = 60;
       var maxRows = 5;
-      var menu_title = "On this page"; // Change to a translatable string
+      var menu_title = Drupal.t("On this page");
 
       var floatingNav = jQuery('<ul style="list-style-type:none; padding: 0;"></ul>');
       jQuery('.panelizer-view-mode .pane-title-wrapper .title').each(function (key, value) {
