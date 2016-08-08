@@ -7,14 +7,14 @@ make bootstrap-el7
 
 ### Provision a Vagrant VM using the extra vagrant files
 ```
-ansible-playbook --extra-vars="@VagrantSettings.yml" main.yml
+ansible-playbook --extra-vars="@VagrantSettings.yml" AnsibleMain.yml
 # OR:
-ansible-playbook --extra-vars="@VagrantSettings.local.yml" main.yml
+ansible-playbook --extra-vars="@VagrantSettings.local.yml" AnsibleMain.yml
 ```
 
 ### Provision remote preprod hosts
 ```
-ansible-playbook --inventory="inventory.conf" --extra-vars="hosts=preprod" main.yml
+ansible-playbook --inventory="inventory.conf" --extra-vars="hosts=preprod" AnsibleMain.yml
 ```
 
 ### Discover information from systems

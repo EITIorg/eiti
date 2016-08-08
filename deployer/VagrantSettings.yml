@@ -18,7 +18,7 @@ vagrant:
 
 # Define mount points for the VM.
 vagrant_volumes:
-  - source: ./
+  - source: ../
     target: /var/www/eiti-local
 
 # Information about the Vagrant box. Any simple SL7 box should work.
