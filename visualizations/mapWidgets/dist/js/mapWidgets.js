@@ -23870,7 +23870,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Coal, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
+	                  console.log(v.unit);return v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23882,7 +23882,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Gold, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
+	                  return v.commodity === "Gold, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -23894,7 +23894,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  return v.commodity === "Copper, volume" && v.unit && v.unit.toLowerCase() === 'tonne';
+	                  return v.commodity === "Copper, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
