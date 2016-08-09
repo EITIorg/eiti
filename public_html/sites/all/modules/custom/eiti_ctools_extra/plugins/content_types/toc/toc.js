@@ -36,7 +36,7 @@
         var offset = Math.floor(offsetObj.top - offsetBuffer);
         titles.push({text: text, offset: offset, id: '#t' + offset});
 
-        var liElement = jQuery('<li id="t' + offset + '" style="margin: 0.5em 1em;"><a href="' + href + '" class="link-title-with-icon">' + svg_icon + '&nbsp;&nbsp;' + text + '</a></li>');
+        var liElement = jQuery('<li id="t' + offset + '" style="margin: 0.5em 1em;"><a href="' + (href ? href : '#') + '" class="link-title-with-icon">' + svg_icon + '&nbsp;&nbsp;' + text + '</a></li>');
         if(!href) {
           liElement.on("click", function(){
             value.scrollIntoView();
