@@ -37,8 +37,8 @@ vagrant_box:
 
 # Ansible variables to override.
 common__backups_user: vagrant
-common__backups_group: vagrant
+common__backups_group: users
 httpd__User: vagrant
-httpd__Group: vagrant
+httpd__Group: users
 httpd__User_vhosts: vagrant
-httpd__Group_vhosts: vagrant
+httpd__Group_vhosts: users

@@ -9,11 +9,10 @@
 *--ignore
 *--ignore.*
 /deployer/.vagrant
+/deployer/*.retry
 /deployer/AnsibleMain.local.yml
 /deployer/DeployerSettings.local.yml
 /deployer/VagrantSettings.local.yml
-/deployer/*.gz
-/deployer/*.tgz
 
 # Ignore archives and database dumps.
 /*.7z
@@ -22,6 +21,8 @@
 /*.tar
 /*.tgz
 /*.zip
+/deployer/*.gz
+/deployer/*.tgz
 
 # Drupal specific files and folders.
 # Ignore configuration files that may contain sensitive information.
