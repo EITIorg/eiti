@@ -31,15 +31,19 @@
   yum: name={{ item }} state=installed
   with_items:
     - bash-completion
+    - bash-completion-extras
     - deltarpm
     - git
     - htop
     - iftop
     - iotop
     - lsof
+    - net-tools
     - nmap-ncat
     - patch
     - screen
+    - vim
+    - wget
 
 - name: Install yum-cron.
   yum: name=yum-cron state=present
