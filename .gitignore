@@ -12,6 +12,8 @@
 /deployer/AnsibleMain.local.yml
 /deployer/DeployerSettings.local.yml
 /deployer/VagrantSettings.local.yml
+/deployer/*.gz
+/deployer/*.tgz
 
 # Ignore archives and database dumps.
 /*.7z
