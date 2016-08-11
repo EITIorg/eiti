@@ -52,6 +52,7 @@ function eitisearch_default_search_api_index() {
         "field_doc_type_public" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_document_category" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_published_date" : { "type" : "date" },
+        "field_relevance" : { "type" : "integer" },
         "nid" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },

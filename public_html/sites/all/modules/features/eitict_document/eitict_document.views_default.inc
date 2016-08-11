@@ -205,15 +205,21 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'No results';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No content matches the search criteria.';
-  /* Field: Indexed Node: Title */
+  /* Field: Indexed Node: Full Name */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_document_search';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = 'Title';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_document_search';
   $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  /* Sort criterion: Indexed Node: Published Date */
+  $handler->display->display_options['sorts']['field_doc_published_date']['id'] = 'field_doc_published_date';
+  $handler->display->display_options['sorts']['field_doc_published_date']['table'] = 'search_api_index_document_search';
+  $handler->display->display_options['sorts']['field_doc_published_date']['field'] = 'field_doc_published_date';
+  $handler->display->display_options['sorts']['field_doc_published_date']['order'] = 'DESC';
   /* Filter criterion: Search: Fulltext search */
   $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_document_search';
@@ -277,6 +283,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['field_doc_country']['expose']['label'] = 'Country';
   $handler->display->display_options['filters']['field_doc_country']['expose']['operator'] = 'field_doc_country_op';
   $handler->display->display_options['filters']['field_doc_country']['expose']['identifier'] = 'field_doc_country';
+  $handler->display->display_options['filters']['field_doc_country']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_doc_country']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -371,6 +378,14 @@ function eitict_document_views_default_views() {
   );
   $handler->display->display_options['filters']['field_doc_published_date_1']['widget_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_doc_published_date_1']['year_range'] = '-4:+1';
+  /* Filter criterion: Indexed Node: Relevance */
+  $handler->display->display_options['filters']['field_relevance']['id'] = 'field_relevance';
+  $handler->display->display_options['filters']['field_relevance']['table'] = 'search_api_index_document_search';
+  $handler->display->display_options['filters']['field_relevance']['field'] = 'field_relevance';
+  $handler->display->display_options['filters']['field_relevance']['operator'] = '<>';
+  $handler->display->display_options['filters']['field_relevance']['value'] = array(
+    0 => '0',
+  );
 
   /* Display: Public Page */
   $handler = $view->new_display('page', 'Public Page', 'page');
@@ -439,6 +454,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['filters']['field_doc_country']['expose']['label'] = 'Country';
   $handler->display->display_options['filters']['field_doc_country']['expose']['operator'] = 'field_doc_country_op';
   $handler->display->display_options['filters']['field_doc_country']['expose']['identifier'] = 'field_doc_country';
+  $handler->display->display_options['filters']['field_doc_country']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_doc_country']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -533,6 +549,14 @@ function eitict_document_views_default_views() {
   );
   $handler->display->display_options['filters']['field_doc_published_date_1']['widget_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_doc_published_date_1']['year_range'] = '-4:+1';
+  /* Filter criterion: Indexed Node: Relevance */
+  $handler->display->display_options['filters']['field_relevance']['id'] = 'field_relevance';
+  $handler->display->display_options['filters']['field_relevance']['table'] = 'search_api_index_document_search';
+  $handler->display->display_options['filters']['field_relevance']['field'] = 'field_relevance';
+  $handler->display->display_options['filters']['field_relevance']['operator'] = '<>';
+  $handler->display->display_options['filters']['field_relevance']['value'] = array(
+    0 => '0',
+  );
   $handler->display->display_options['path'] = 'publications';
 
   /* Display: Private Page */

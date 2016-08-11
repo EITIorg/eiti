@@ -138,3 +138,52 @@ function __eiti_menu_link__level(array &$variables, $level = NULL) {
 function eiti_links__enhanced($variables) {
   return _helpertheme_links__enhanced($variables);
 }
+
+/**
+ * Override the default select.
+ */
+function eiti_select($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'size'));
+  _form_set_class($element, array('form-select'));
+
+  if (isset($element['#use_unsafe_labels']) && $element['#use_unsafe_labels'] == TRUE) {
+    return '<select' . drupal_attributes($element['#attributes']) . '>' . _eiti_form_select_options($element) . '</select>';
+  }
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
+}
+
+/**
+ * Custom implementation of form_select_options.
+ */
+function _eiti_form_select_options($element) {
+  if (!isset($choices)) {
+    $choices = $element['#options'];
+  }
+  // array_key_exists() accommodates the rare event where $element['#value'] is NULL.
+  // isset() fails in this situation.
+  $value_valid = isset($element['#value']) || array_key_exists('#value', $element);
+  $value_is_array = $value_valid && is_array($element['#value']);
+  $options = '';
+  foreach ($choices as $key => $choice) {
+    if (is_array($choice)) {
+      $options .= '<optgroup label="' . check_plain($key) . '">';
+      $options .= form_select_options($element, $choice);
+      $options .= '</optgroup>';
+    }
+    elseif (is_object($choice)) {
+      $options .= form_select_options($element, $choice->option);
+    }
+    else {
+      $key = (string) $key;
+      if ($value_valid && (!$value_is_array && (string) $element['#value'] === $key || ($value_is_array && in_array($key, $element['#value'])))) {
+        $selected = ' selected="selected"';
+      }
+      else {
+        $selected = '';
+      }
+      $options .= '<option value="' . check_plain($key) . '"' . $selected . '>' . $choice . '</option>';
+    }
+  }
+  return $options;
+}

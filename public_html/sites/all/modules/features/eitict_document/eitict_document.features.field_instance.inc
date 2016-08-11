@@ -24,7 +24,7 @@ function eitict_document_field_default_field_instances() {
           'trim_length' => 600,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -65,7 +65,7 @@ function eitict_document_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -151,9 +151,8 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'countries',
         'settings' => array(),
-        'type' => 'country_default',
+        'type' => 'hidden',
         'weight' => 15,
       ),
       'full' => array(
@@ -352,11 +351,11 @@ function eitict_document_field_default_field_instances() {
     'description' => 'Please specify who has published this document. It can either be a person, legal entity, organisation, etc.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
+        'label' => 'inline',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 14,
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
@@ -395,9 +394,8 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 18,
       ),
       'full' => array(
@@ -434,9 +432,8 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 17,
       ),
       'full' => array(
@@ -475,7 +472,7 @@ function eitict_document_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -512,12 +509,9 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 13,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -558,9 +552,8 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 16,
       ),
       'full' => array(
