@@ -1,6 +1,6 @@
 ---
 - name: Configure LAMP
-  hosts: "{{ hosts|default('localhost') }}"
+  hosts: "{{ hosts|default('devel') }}"
   become: true
   become_user: root
 

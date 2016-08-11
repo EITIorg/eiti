@@ -44,10 +44,6 @@ else
   raise 'Can not find the AnsibleMain.yml file.'
 end
 
-# Force Ansible to run on the current host.
-# TODO: Use custom inventory for Vagrant.
-ansible_extra_vars['hosts'] = 'all'
-
 # Vagrant v1.8.4 is required for ansible_local provisioning to work properly.
 Vagrant.require_version ">= 1.8.4"
 
@@ -181,10 +177,6 @@ Vagrant.configure(2) do |config|
 
       echo "Installing Ansible from EPEL..."
       yum --quiet --quiet install ansible
-
-      # Update Ansible configuration.
-      sudo /usr/bin/mkdir -p /etc/ansible
-      sudo /usr/bin/cp /vagrant/inventory.vagrant.conf /etc/ansible/hosts
     SHELL
 
     # Run Ansible from the Vagrant VM
@@ -194,7 +186,9 @@ Vagrant.configure(2) do |config|
       ansible.extra_vars = ansible_extra_vars
       ansible.playbook = ansible_playbook
       ansible.sudo = true
-      # ansible.verbose = 'vv'
+      ansible.limit = "devel"
+      ansible.inventory_path = '/vagrant/inventory.vagrant.conf'
+      ansible.verbose = 'vv'
     end
   end
 end
