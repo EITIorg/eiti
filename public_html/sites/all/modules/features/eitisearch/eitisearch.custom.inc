@@ -44,7 +44,7 @@ function eitisearch_form_views_exposed_form_alter(&$form, &$form_state) {
   foreach ($fields_to_adjust as $field_key) {
     $field = field_info_field($field_key);
     $options = eitisearch_adjusted_voc_options($field);
-    $form[$field_key]['#options'] = $options;
+    $form[$field_key]['#options'] = array(t('- Any -')) + $options;
     $form[$field_key]['#use_unsafe_labels'] = TRUE;
   }
 }

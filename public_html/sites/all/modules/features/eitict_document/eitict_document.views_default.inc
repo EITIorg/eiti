@@ -564,11 +564,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    5 => '5',
-    6 => '6',
-    7 => '7',
-    8 => '8',
-    10 => '10',
+    2 => '2',
   );
   $handler->display->display_options['path'] = 'publications-restricted';
   $translatables['publications_search'] = array(
