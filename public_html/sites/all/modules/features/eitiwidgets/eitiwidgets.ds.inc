@@ -75,7 +75,7 @@ function eitiwidgets_ds_field_settings_info() {
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'classes' => 'pane-title-wrapper',
+          'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
@@ -99,7 +99,7 @@ function eitiwidgets_ds_field_settings_info() {
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'classes' => 'pane-title-wrapper',
+          'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
@@ -203,7 +203,7 @@ function eitiwidgets_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'text';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'field_fpp_icon' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -217,7 +217,7 @@ function eitiwidgets_ds_field_settings_info() {
         ),
       ),
     ),
-    'title_field' => array(
+    'field_fpp_icon' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -634,18 +634,18 @@ function eitiwidgets_ds_layout_settings_info() {
     'regions' => array(
       'main' => array(
         0 => 'group_title_wrapper',
-        1 => 'field_fpp_body',
-        2 => 'field_fpp_icon',
-        3 => 'title_field',
-        4 => 'field_fpp_useful_links',
+        1 => 'field_fpp_icon',
+        2 => 'field_fpp_body',
+        3 => 'field_fpp_useful_links',
+        4 => 'title_field',
       ),
     ),
     'fields' => array(
       'group_title_wrapper' => 'main',
-      'field_fpp_body' => 'main',
       'field_fpp_icon' => 'main',
-      'title_field' => 'main',
+      'field_fpp_body' => 'main',
       'field_fpp_useful_links' => 'main',
+      'title_field' => 'main',
     ),
     'classes' => array(),
     'wrappers' => array(
@@ -657,6 +657,7 @@ function eitiwidgets_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
   );
   $export['fieldable_panels_pane|text|default'] = $ds_layout;
 
