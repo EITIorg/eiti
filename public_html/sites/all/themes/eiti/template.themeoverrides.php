@@ -182,7 +182,7 @@ function _eiti_form_select_options($element) {
       else {
         $selected = '';
       }
-      $options .= '<option value="' . check_plain($key) . '"' . $selected . '>' . $choice . '</option>';
+      $options .= '<option value="' . check_plain($key) . '"' . $selected . '>' . filter_xss_admin($choice) . '</option>';
     }
   }
   return $options;
