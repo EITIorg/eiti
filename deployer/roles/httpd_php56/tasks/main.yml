@@ -18,6 +18,7 @@
     - php56u-mysql
     - php56u-opcache
     - php56u-pdo
+    - php56u-pecl-memcache
     - php56u-pecl-uploadprogress
     - php56u-pecl-xdebug
     - php56u-pgsql
