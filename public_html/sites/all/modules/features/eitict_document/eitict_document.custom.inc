@@ -51,12 +51,17 @@ function eitict_document_form_document_node_form_set_access_submit($form, $form_
   $settings = content_access_get_per_node_settings($node);
   if ($doc_type == 'private') {
     // Set the proper permissions.
-    if (!in_array(DRUPAL_AUTHENTICATED_RID, $settings['view'])) {
-      $settings['view'][] = DRUPAL_AUTHENTICATED_RID;
+    if (!empty($settings)) {
+      if (!in_array(DRUPAL_AUTHENTICATED_RID, $settings['view'])) {
+        $settings['view'][] = DRUPAL_AUTHENTICATED_RID;
+      }
+      $id = array_search(DRUPAL_ANONYMOUS_RID, $settings['view']);
+      if ($id !== FALSE) {
+        unset($settings['view'][$id]);
+      }
     }
-    $id = array_search(DRUPAL_ANONYMOUS_RID, $settings['view']);
-    if ($id !== FALSE) {
-      unset($settings['view'][$id]);
+    else {
+      $settings['view'][] = DRUPAL_AUTHENTICATED_RID;
     }
     content_access_save_per_node_settings($node, $settings);
 
@@ -66,7 +71,7 @@ function eitict_document_form_document_node_form_set_access_submit($form, $form_
   }
   else {
     // Set the proper permissions.
-    if (!in_array(DRUPAL_ANONYMOUS_RID, $settings['view'])) {
+    if (empty($settings) || !in_array(DRUPAL_ANONYMOUS_RID, $settings['view'])) {
       $settings['view'][] = DRUPAL_ANONYMOUS_RID;
     }
     content_access_save_per_node_settings($node, $settings);
