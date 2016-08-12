@@ -170,13 +170,13 @@ Vagrant.configure(2) do |config|
       # @see: https://fedoraproject.org/wiki/EPEL
       test -f /etc/yum.repos.d/epel.repo || \
         (
-          echo "Adding the EPEL repository..."\
-          rpm --quiet --force -Uh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &> /dev/null && \
-          gpg --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 &> /dev/null \
+          echo "Adding the EPEL repository..." && \
+          rpm --import https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7 && \
+          rpm --quiet --force -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
         )
 
       echo "Installing Ansible from EPEL..."
-      yum --quiet --quiet install ansible
+      yum --assumeyes --quiet install ansible
     SHELL
 
     # Run Ansible from the Vagrant VM
@@ -188,7 +188,7 @@ Vagrant.configure(2) do |config|
       ansible.sudo = true
       ansible.limit = "devel"
       ansible.inventory_path = '/vagrant/inventory.vagrant.conf'
-      ansible.verbose = 'vv'
+      # ansible.verbose = 'vv'
     end
   end
 end
