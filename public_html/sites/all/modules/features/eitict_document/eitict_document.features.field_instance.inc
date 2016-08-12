@@ -19,11 +19,11 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
+        'module' => 'helpergeneric',
         'settings' => array(
           'trim_length' => 600,
         ),
-        'type' => 'text_summary_or_trimmed',
+        'type' => 'helpergeneric_clean_summary',
         'weight' => 4,
       ),
       'full' => array(

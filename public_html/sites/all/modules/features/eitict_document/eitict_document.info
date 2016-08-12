@@ -3,6 +3,7 @@ description = Holds the Document content-type and everything related.
 core = 7.x
 package = EITI Entities
 version = 7.x-1.0
+dependencies[] = countries
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
