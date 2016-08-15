@@ -178,9 +178,15 @@ fm:
 offline:
 	@echo 'Bringing the site offline.'
 	@drush variable-set -y --always-set maintenance_mode 1
+	@echo 'Clearing the website cache...'
+	@drush cache-clear all
+	@echo 'Done, the site is now offline!'
 
 
 # Bring the site online.
 online:
 	@echo 'Bringing the site online.'
 	@drush variable-set -y --always-set maintenance_mode 0
+	@echo 'Clearing the website cache...'
+	@drush cache-clear all
+	@echo 'Done, the site is now online!'
