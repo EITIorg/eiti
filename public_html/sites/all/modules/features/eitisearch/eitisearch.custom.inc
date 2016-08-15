@@ -46,7 +46,6 @@ function eitisearch_form_views_exposed_form_alter(&$form, &$form_state) {
     $options = eitisearch_adjusted_voc_options($field);
 
     $form[$field_key]['#options'] = array('All' => t('- Any -')) + $options;
-    $form[$field_key]['#use_unsafe_labels'] = TRUE;
   }
 }
 
@@ -63,12 +62,19 @@ function eitisearch_adjusted_voc_options($field) {
   foreach ($field['settings']['allowed_values'] as $tree) {
     if ($vocabulary = taxonomy_vocabulary_machine_name_load($tree['vocabulary'])) {
       if ($terms = taxonomy_get_tree($vocabulary->vid, $tree['parent'])) {
+        $parents = array();
         foreach ($terms as $term) {
           if ($term->depth == 0) {
-            $options[$term->tid] = i18n_taxonomy_term_name($term);
+            $parents[$term->tid] = $term->name;
           }
           else {
-            $options[$term->tid] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $term->depth) . i18n_taxonomy_term_name($term);
+            $parent_tid = reset($term->parents);
+            if (in_array($parent_tid, array_keys($parents))) {
+              $options[$parents[$parent_tid]][$term->tid] = i18n_taxonomy_term_name($term);
+            }
+            else {
+              $options[$term->tid] = i18n_taxonomy_term_name($term);
+            }
           }
         }
       }
