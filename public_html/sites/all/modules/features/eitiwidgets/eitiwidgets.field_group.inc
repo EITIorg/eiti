@@ -57,13 +57,14 @@ function eitiwidgets_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Title Display',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-title-display field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-title-display field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_title_display|fieldable_panels_pane|featured_bookmarks|form'] = $field_group;
@@ -239,7 +240,7 @@ function eitiwidgets_field_group_info() {
         'show_label' => '0',
         'label_element' => 'h3',
         'effect' => 'none',
-        'speed' => 'fast',
+        'speed' => 'none',
       ),
       'formatter' => 'open',
     ),
@@ -325,8 +326,8 @@ function eitiwidgets_field_group_info() {
     'label' => 'Title Wrapper',
     'weight' => '0',
     'children' => array(
-      0 => 'field_fpp_icon',
-      1 => 'title_field',
+      0 => 'title_field',
+      1 => 'field_fpp_icon',
     ),
     'format_type' => 'div',
     'format_settings' => array(

@@ -80,3 +80,50 @@ function eitict_page_content_access_hide_checkboxes($element) {
   }
   return $element;
 }
+
+/**
+ * Implements hook_entity_view().
+ *
+ * @inheritdoc
+ */
+function eitict_page_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type != 'node' || $entity->type != 'page') {
+    return;
+  }
+
+  // Add the article header (title and featured image)
+//  if (in_array($view_mode, array('teaser'))) {
+//    $article_header = _eitict_article_entity_view_get_article_header($entity, $type, $view_mode, $langcode);
+//    $entity->article_header = render($article_header);
+//  }
+
+  // Add the article info.
+  $article_info = _eitict_page_entity_view_get_article_info($entity, $type, $view_mode, $langcode);
+  if (in_array($view_mode, array('teaser'))) {
+    $article_info['#attributes']['class'][] = 'single-narrow-row-wrapper';
+    $article_info['#prefix'] = '<div class="article-info-wrapper">';
+    $article_info['#suffix'] = '</div>';
+  }
+  else {
+    $article_info['#attributes']['class'][] = 'simple';
+  }
+  $entity->article_info = render($article_info);
+}
+
+
+/**
+ * Helper function for article entity info.
+ *
+ * @inheritdoc
+ */
+function _eitict_page_entity_view_get_article_info($entity, $type, $view_mode, $langcode) {
+  $elements = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'article-info',
+        'clearfix',
+      ),
+    ),
+  );
+}

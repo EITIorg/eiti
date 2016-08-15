@@ -5,7 +5,14 @@
 
 # Avoid conflicts with files of the same name
 # @see: http://www.gnu.org/savannah-checkouts/gnu/make/manual/html_node/Phony-Targets.html
-.PHONY : update install prepare-local prepare-staging prepare-preprod prepare-production prepare clean destroy backup cc cf fm offline online
+.PHONY : dummy update install prepare-local prepare-staging prepare-preprod prepare-production prepare clean destroy backup cc cf fm offline online
+
+## Display a list of targets.
+dummy:
+	@echo 'Here is a list of available commands:'
+	@grep -iE "^[a-z_-]+:" $(lastword $(MAKEFILE_LIST)) | cut -d: -f1 | grep -v dummy | xargs -i{} echo "  $$ make {}"
+	@echo ''
+
 
 # The default target, if no target argument is provided to `make`.
 # Update an environment with the latest changes from code.
@@ -55,7 +62,9 @@ install:
 	@echo 'Or use eitiUser/eitiUser for credentials!'
 
 # Prepare environment for local development.
-prepare-local: prepare
+prepare-local:
+	@echo 'Creating file: '.htaccess''
+	@test -f .htaccess || cp .htaccess{.sample,}
 	@echo 'Creating file: "sites/default/update_scripts/environment/setup.local.php"'
 	@test -f sites/default/update_scripts/environment/setup.local.php || \
 		cp sites/default/update_scripts/environment/setup.local{.sample,}.php
@@ -68,7 +77,9 @@ prepare-local: prepare
 		cp sites/default/drushrc.{sample,custom}.php
 
 # Prepare environment for staging.
-prepare-staging: prepare
+prepare-staging:
+	@echo 'Creating file: '.htaccess''
+	@test -f .htaccess || cp .htaccess{.sample,}
 	@echo 'Creating and updating file: "sites/default/settings.custom.php"'
 	@test -f sites/default/settings.custom.php || \
 		chmod ug+w sites/default && \
@@ -77,7 +88,9 @@ prepare-staging: prepare
 		sed -i -e "s/define('PROJECT_ENVIRONMENT', 'local')/define('PROJECT_ENVIRONMENT', 'staging')/" sites/default/settings.custom.php
 
 # Prepare environment for preprod.
-prepare-preprod: prepare
+prepare-preprod:
+	@echo 'Creating file: '.htaccess''
+	@test -f .htaccess || cp .htaccess{.sample,}
 	@echo 'Creating and updating file: "sites/default/settings.custom.php"'
 	@test -f sites/default/settings.custom.php || \
 		chmod ug+w sites/default && \
@@ -86,18 +99,15 @@ prepare-preprod: prepare
 		sed -i -e "s/define('PROJECT_ENVIRONMENT', 'local')/define('PROJECT_ENVIRONMENT', 'preprod')/" sites/default/settings.custom.php
 
 # Prepare environment for production.
-prepare-production: prepare
+prepare-production:
+	@echo 'Creating file: '.htaccess''
+	@test -f .htaccess || cp .htaccess{.sample,}
 	@echo 'Creating and updating file: "sites/default/settings.custom.php"'
 	@test -f sites/default/settings.custom.php || \
 		chmod ug+w sites/default && \
 		cp sites/default/settings.{sample,custom}.php && \
 		chmod ug+w sites/default/settings*.php && \
 		sed -i -e "s/define('PROJECT_ENVIRONMENT', 'local')/define('PROJECT_ENVIRONMENT', 'production')/" sites/default/settings.custom.php
-
-# Helper prepare.
-prepare:
-	@echo 'Creating file: '.htaccess''
-	@test -f .htaccess || cp .htaccess{.sample,}
 
 
 # Remove environment specific files.
@@ -123,7 +133,8 @@ destroy:
 	@echo 'Erasing the database content...'
 	@drush sql-drop --yes
 	@echo 'Erasing the user uploaded files...'
-	@rm -rf sites/default/files
+	@chmod ug+w sites/default && \
+		rm -rf sites/default/files
 
 
 # Backup the environment.

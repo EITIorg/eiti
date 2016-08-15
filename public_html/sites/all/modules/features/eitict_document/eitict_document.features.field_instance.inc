@@ -19,12 +19,12 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
+        'module' => 'helpergeneric',
         'settings' => array(
           'trim_length' => 600,
         ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 3,
+        'type' => 'helpergeneric_clean_summary',
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -65,7 +65,7 @@ function eitict_document_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -138,7 +138,45 @@ function eitict_document_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 6,
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_doc_country'.
+  $field_instances['node-document-field_doc_country'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify which countries are related to this document.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_doc_country',
+    'label' => 'Country',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 13,
     ),
   );
 
@@ -301,6 +339,124 @@ function eitict_document_field_default_field_instances() {
         'year_range' => '-30:+1',
       ),
       'type' => 'date_select',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_doc_publisher'.
+  $field_instances['node-document-field_doc_publisher'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify who has published this document. It can either be a person, legal entity, organisation, etc.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 3,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_doc_publisher',
+    'label' => 'Publisher',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_doc_type_internal'.
+  $field_instances['node-document-field_doc_type_internal'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify the Publication Type (Private / Internal).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_doc_type_internal',
+    'label' => 'Internal Sub-Type',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_doc_type_public'.
+  $field_instances['node-document-field_doc_type_public'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify the Publication Type (Public).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_doc_type_public',
+    'label' => 'Public Sub-Type',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 2,
     ),
   );
@@ -316,7 +472,7 @@ function eitict_document_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -326,6 +482,7 @@ function eitict_document_field_default_field_instances() {
         'weight' => 2,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_document_category',
     'label' => 'Document Category',
@@ -338,8 +495,8 @@ function eitict_document_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 3,
+      'type' => 'options_select',
+      'weight' => 10,
     ),
   );
 
@@ -352,12 +509,9 @@ function eitict_document_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 13,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -381,7 +535,49 @@ function eitict_document_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_relevance'.
+  $field_instances['node-document-field_relevance'] = array(
+    'bundle' => 'document',
+    'default_value' => array(
+      0 => array(
+        'value' => 5,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Please specify the relevance (importance) of this document. 10 being the <em>highest</em> and 0 being the <em>lowest</em>.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_relevance',
+    'label' => 'Relevance',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 12,
     ),
   );
 
@@ -442,13 +638,23 @@ function eitict_document_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Attachments');
   t('Body');
+  t('Country');
   t('Document Category');
   t('If you have any file attachments, or if you want to specify any existing file from the library, use this field.');
   t('If you want to display a signup form, specify which form you\'d like to use.');
   t('Image Preview');
+  t('Internal Sub-Type');
   t('Mailchimp Signup Form');
+  t('Please specify the Publication Type (Private / Internal).');
+  t('Please specify the Publication Type (Public).');
+  t('Please specify the relevance (importance) of this document. 10 being the <em>highest</em> and 0 being the <em>lowest</em>.');
   t('Please specify the resource categories that apply to this document.');
+  t('Please specify which countries are related to this document.');
+  t('Please specify who has published this document. It can either be a person, legal entity, organisation, etc.');
+  t('Public Sub-Type');
   t('Published Date');
+  t('Publisher');
+  t('Relevance');
   t('Title');
   t('Upload a relevant image preview, it should have a portrait orientation and at least 360px wide and 480px tall.');
 

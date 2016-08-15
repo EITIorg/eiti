@@ -28,6 +28,140 @@ function eitisearch_views_api($module = NULL, $api = NULL) {
  */
 function eitisearch_default_search_api_index() {
   $items = array();
+  $items['document_search'] = entity_import('search_api_index', '{
+    "name" : "Document Search",
+    "machine_name" : "document_search",
+    "description" : "We use this index for Publications only.",
+    "server" : "solr_server",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [ "document" ] },
+      "index_directly" : 1,
+      "cron_limit" : "50",
+      "fields" : {
+        "author" : { "type" : "integer", "entity_type" : "user" },
+        "body:summary" : { "type" : "text" },
+        "body:value" : { "type" : "text" },
+        "changed" : { "type" : "date" },
+        "created" : { "type" : "date" },
+        "field_attachments:file" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "file" },
+        "field_doc_country" : { "type" : "list\\u003Cstring\\u003E", "entity_type" : "country" },
+        "field_doc_published_date" : { "type" : "date" },
+        "field_doc_publisher" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_doc_type_internal" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_doc_type_public" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_document_category" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_published_date" : { "type" : "date" },
+        "field_relevance" : { "type" : "integer" },
+        "nid" : { "type" : "integer" },
+        "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
+        "search_api_language" : { "type" : "string" },
+        "status" : { "type" : "boolean" },
+        "title" : { "type" : "text" },
+        "title_field" : { "type" : "text" }
+      },
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_access" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "panelizer" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "-50",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "title_field" : true,
+              "body:value" : true,
+              "body:summary" : true,
+              "field_attachments:description" : true
+            },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
+          }
+        },
+        "search_api_case_ignore" : {
+          "status" : 1,
+          "weight" : "-49",
+          "settings" : { "fields" : {
+              "title" : true,
+              "author" : true,
+              "title_field" : true,
+              "field_document_category" : true,
+              "search_api_language" : true,
+              "field_attachments:description" : true
+            }
+          }
+        },
+        "search_api_transliteration" : {
+          "status" : 0,
+          "weight" : "-48",
+          "settings" : { "fields" : {
+              "title" : true,
+              "title_field" : true,
+              "field_attachments:description" : true
+            }
+          }
+        },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "-47",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "title_field" : true,
+              "field_attachments:description" : true
+            },
+            "spaces" : "[^[:alnum:]]",
+            "ignorable" : "[\\u0027]"
+          }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "-46",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "title_field" : true,
+              "field_attachments:description" : true
+            },
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "-45",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0"
+  }');
   $items['node_search'] = entity_import('search_api_index', '{
     "name" : "Content Search",
     "machine_name" : "node_search",

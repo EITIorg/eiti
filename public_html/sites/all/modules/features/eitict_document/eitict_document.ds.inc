@@ -18,18 +18,18 @@ function eitict_document_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
     'node_link' => array(
-      'weight' => '4',
+      'weight' => '5',
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'title_field' => array(
+    'field_doc_image_preview' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
-    'field_doc_image_preview' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -109,14 +109,16 @@ function eitict_document_ds_layout_settings_info() {
       'main' => array(
         1 => 'title_field',
         2 => 'field_doc_published_date',
-        3 => 'body',
-        4 => 'node_link',
+        3 => 'field_doc_publisher',
+        4 => 'body',
+        5 => 'node_link',
       ),
     ),
     'fields' => array(
       'field_doc_image_preview' => 'side',
       'title_field' => 'main',
       'field_doc_published_date' => 'main',
+      'field_doc_publisher' => 'main',
       'body' => 'main',
       'node_link' => 'main',
     ),

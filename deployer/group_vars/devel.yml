@@ -1,0 +1,9 @@
+---
+
+project_environment: local
+
+httpd_php56__error_reporting: E_ALL
+httpd_php56__display_errors: On
+httpd_php56__display_startup_errors: On
+httpd_php56__html_errors: On
+httpd_php56__opcache_enable: 0

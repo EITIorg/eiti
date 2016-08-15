@@ -20,6 +20,7 @@ features[facetapi][] = search_api@node_search:block:field_related_country:name
 features[facetapi][] = search_api@node_search:block:field_tags
 features[facetapi][] = search_api@node_search:block:type
 features[features_api][] = api:2
+features[search_api_index][] = document_search
 features[search_api_index][] = node_search
 features[search_api_server][] = solr_server
 features[views_view][] = search

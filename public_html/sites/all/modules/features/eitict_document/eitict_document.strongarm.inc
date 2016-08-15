@@ -180,10 +180,10 @@ function eitict_document_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '9',
+          'weight' => '17',
         ),
         'redirect' => array(
-          'weight' => '8',
+          'weight' => '16',
         ),
         'language' => array(
           'weight' => '1',

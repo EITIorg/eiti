@@ -1,13 +1,18 @@
 
 # Ignore development specific files and folders.
 .DS_Store
+.buildpath
 .idea
+.project
+.settings
 *.sublime*
+*--ignore
 *--ignore.*
-/.buildpath
-/.project
-/.settings
-/.vagrant
+/deployer/.vagrant
+/deployer/*.retry
+/deployer/AnsibleMain.local.yml
+/deployer/DeployerSettings.local.yml
+/deployer/VagrantSettings.local.yml
 
 # Ignore archives and database dumps.
 /*.7z
@@ -16,14 +21,14 @@
 /*.tar
 /*.tgz
 /*.zip
-
+/deployer/*.gz
+/deployer/*.tgz
 
 # Drupal specific files and folders.
 # Ignore configuration files that may contain sensitive information.
 /public_html/.htaccess
 /public_html/sites/*/drushrc.custom.php
 /public_html/sites/*/settings.custom.php
-/Vagrantsettings.local.yml
 
 # Ignore paths that contain user-generated content.
 /public_html/sites/*/files
@@ -36,8 +41,7 @@
 /public_html/sites/all/modules/dev
 /public_html/sites/default/update_scripts/environment/setup.local.php
 /xdebug/
-/old_html/
-
+/legacy_html/
 
 # Ignore JS development specific files and folders.
 node_modules/

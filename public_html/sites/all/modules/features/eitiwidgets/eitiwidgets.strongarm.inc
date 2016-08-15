@@ -273,14 +273,7 @@ function eitiwidgets_strongarm() {
           'weight' => '0',
         ),
       ),
-      'display' => array(
-        'title' => array(
-          'default' => array(
-            'weight' => '1',
-            'visible' => FALSE,
-          ),
-        ),
-      ),
+      'display' => array(),
     ),
   );
   $export['field_bundle_settings_fieldable_panels_pane__featured_bookmarks'] = $strongarm;
@@ -382,14 +375,7 @@ function eitiwidgets_strongarm() {
           'weight' => '0',
         ),
       ),
-      'display' => array(
-        'title' => array(
-          'default' => array(
-            'weight' => '1',
-            'visible' => FALSE,
-          ),
-        ),
-      ),
+      'display' => array(),
     ),
   );
   $export['field_bundle_settings_fieldable_panels_pane__header'] = $strongarm;
@@ -461,14 +447,7 @@ function eitiwidgets_strongarm() {
           'weight' => '0',
         ),
       ),
-      'display' => array(
-        'title' => array(
-          'default' => array(
-            'weight' => '2',
-            'visible' => TRUE,
-          ),
-        ),
-      ),
+      'display' => array(),
     ),
   );
   $export['field_bundle_settings_fieldable_panels_pane__quote'] = $strongarm;
@@ -606,14 +585,7 @@ function eitiwidgets_strongarm() {
           'weight' => '0',
         ),
       ),
-      'display' => array(
-        'title' => array(
-          'default' => array(
-            'weight' => '3',
-            'visible' => TRUE,
-          ),
-        ),
-      ),
+      'display' => array(),
     ),
   );
   $export['field_bundle_settings_fieldable_panels_pane__value_chain'] = $strongarm;
