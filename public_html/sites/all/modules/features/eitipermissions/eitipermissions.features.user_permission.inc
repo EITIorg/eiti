@@ -552,11 +552,77 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete terms in publication_types_internal'.
+  $permissions['delete terms in publication_types_internal'] = array(
+    'name' => 'delete terms in publication_types_internal',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in publication_types_public'.
+  $permissions['delete terms in publication_types_public'] = array(
+    'name' => 'delete terms in publication_types_public',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in publishers'.
+  $permissions['delete terms in publishers'] = array(
+    'name' => 'delete terms in publishers',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'display drupal links'.
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
     'roles' => array(),
     'module' => 'admin_menu',
+  );
+
+  // Exported permission: 'edit terms in publication_types_internal'.
+  $permissions['edit terms in publication_types_internal'] = array(
+    'name' => 'edit terms in publication_types_internal',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in publication_types_public'.
+  $permissions['edit terms in publication_types_public'] = array(
+    'name' => 'edit terms in publication_types_public',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in publishers'.
+  $permissions['edit terms in publishers'] = array(
+    'name' => 'edit terms in publishers',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
   );
 
   // Exported permission: 'execute country_disable_action'.
