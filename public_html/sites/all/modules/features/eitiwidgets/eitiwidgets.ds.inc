@@ -437,12 +437,14 @@ function eitiwidgets_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
-        0 => 'title_field',
-        1 => 'field_fpp_body',
-        2 => 'field_fpp_publication_list',
+        0 => 'group_title_wrapper',
+        1 => 'title_field',
+        2 => 'field_fpp_body',
+        3 => 'field_fpp_publication_list',
       ),
     ),
     'fields' => array(
+      'group_title_wrapper' => 'main',
       'title_field' => 'main',
       'field_fpp_body' => 'main',
       'field_fpp_publication_list' => 'main',
