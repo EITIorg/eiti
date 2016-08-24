@@ -12,3 +12,4 @@ index 011b82c..5fa4404 100644
          $items[$this->plugin['entity path'] . '/revisions/%panelizer_node_revision/panelizer'] = array(
            'title' => 'Customize display',
            // Make sure this is accessible to panelize entities with no defaults.
+
