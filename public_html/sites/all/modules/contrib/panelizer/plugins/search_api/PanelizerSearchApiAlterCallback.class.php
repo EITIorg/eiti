@@ -53,7 +53,7 @@ class PanelizerSearchApiAlterCallback extends SearchApiAbstractAlterCallback {
       }
 
       try {
-        if ($render_info = $entity_handler->render_entity($item, 'page_manager')) {
+        if ($render_info = $entity_handler->render_entity($item, 'default')) {
           $item->search_api_panelizer_content = $render_info['content'];
           $item->search_api_panelizer_title = !empty($render_info['title']) ? $render_info['title'] : NULL;
         }
