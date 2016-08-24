@@ -703,18 +703,15 @@ function ds_entity_variables(&$vars) {
 
       // Add extras classes to the region.
       if (empty($layout['flexible'])) {
-        if (!isset($vars[$region_name . '_classes'])) {
-          $vars[$region_name . '_classes'] = '';
-        }
-        $vars[$region_name . '_classes'] .= !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
+        $vars[$region_name . '_classes'] = !empty($layout['settings']['classes'][$region_name]) ? ' ' . implode(' ', $layout['settings']['classes'][$region_name]) : '';
 
         // Token support for region classes.
         if (module_exists('token') && isset($vars[$entity_type])) {
-          $vars[$region_name . '_classes'] .= token_replace($vars[$region_name . '_classes'], array($entity_type => $vars[$entity_type]), array('clear' => TRUE, 'sanitize' => TRUE));
+          $vars[$region_name . '_classes'] = token_replace($vars[$region_name . '_classes'], array($entity_type => $vars[$entity_type]), array('clear' => TRUE, 'sanitize' => TRUE));
         }
       }
       // Add a wrapper to the region.
-      if (empty($layout['flexible']) && !isset($vars[$region_name . '_wrapper'])) {
+      if (empty($layout['flexible'])) {
         $vars[$region_name . '_wrapper'] = isset($layout['settings']['wrappers'][$region_name]) ? $layout['settings']['wrappers'][$region_name] : 'div';
       }
     }
@@ -723,14 +720,10 @@ function ds_entity_variables(&$vars) {
     $vars['rendered_by_ds'] = TRUE;
 
     // Add a layout wrapper.
-    if (!isset($vars['layout_wrapper'])) {
-      $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
-    }
+    $vars['layout_wrapper'] = isset($layout['settings']['layout_wrapper']) ? $layout['settings']['layout_wrapper'] : 'div';
 
     // Add layout attributes if any.
-    if (!isset($vars['layout_attributes'])) {
-      $vars['layout_attributes'] = '';
-    }
+    $vars['layout_attributes'] = '';
     if (!empty($layout['settings']['layout_attributes'])) {
       if (isset($vars[$entity_type])) {
         $vars['layout_attributes'] .= ' ' . token_replace($layout['settings']['layout_attributes'], array($entity_type => $vars[$entity_type]), array('clear' => TRUE, 'sanitize' => TRUE));
