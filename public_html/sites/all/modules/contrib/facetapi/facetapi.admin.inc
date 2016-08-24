@@ -522,6 +522,15 @@ function facetapi_facet_display_form($form, &$form_state, FacetapiAdapter $adapt
     '#description' => t('The action to take when a facet has no items.'),
   );
 
+  $form['widget']['display_count'] = array(
+    '#type' => 'checkbox',
+    '#prefix' => '<div class="facetapi-display-count-setting">',
+    '#suffix' => '</div>',
+    '#title' => t('Display the number of matching items'),
+    '#description' => t('If checked, the number of matching items will be output in brackets.'),
+    '#default_value' => $facet_settings->settings['display_count'],
+  );
+
   $form['widget']['facet_more_text'] = array(
     '#type' => 'textfield',
     '#prefix' => '<div class="facetapi-more-text-setting">',

@@ -105,7 +105,7 @@ class FacetapiWidgetLinks extends FacetapiWidget {
       $variables = array(
         'text' => $item['#markup'],
         'path' => $item['#path'],
-        'count' => $item['#count'],
+        'count' => $settings['display_count'] ? $item['#count'] : NULL,
         'options' => array(
           'attributes' => $attributes,
           'html' => $item['#html'],

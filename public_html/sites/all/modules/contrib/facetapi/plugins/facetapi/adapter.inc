@@ -309,8 +309,8 @@ abstract class FacetapiAdapter {
       // Perform basic parsing of the filter.
       $parts = explode(':', $filter, 2);
       $field_alias = rawurldecode($parts[0]);
-      $filter = $field_alias . ':' . $parts[1]; // @see https://www.drupal.org/node/1884152
       if (isset($parts[1]) && isset($enabled_aliases[$field_alias])) {
+        $filter = $field_alias . ':' . $parts[1]; // @see https://www.drupal.org/node/1884152
 
         // Store basic information about the active item. For details on how
         // this array is structured, refer to the FacetapiAdapter::activeItems
@@ -779,6 +779,7 @@ abstract class FacetapiAdapter {
         'sort_weight' => array(),
         'sort_order' => array(),
         'empty_behavior' => 'none',
+        'display_count' => TRUE,
         'facet_more_text' => 'Show more',
         'facet_fewer_text' => 'Show fewer',
       );
