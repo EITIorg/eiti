@@ -5,7 +5,7 @@
   become_user: root
 
   vars_files:
-    - ["DeployerSettings.{{ project_environment|default('local') }}.yml", "DeployerSettings.yml"]
+    - ["environments/{{ project_environment|default('local') }}.yml", "environments/sample.yml"]
 
   tasks:
     - hostname: name={{ hostname }}

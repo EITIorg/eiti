@@ -14,7 +14,10 @@ HOSTS?=devel
 PLAYBOOK?=AnsibleMain.yml
 
 ## By default use the vagrant specific inventory.
-INVENTORY?="/vagrant/inventory.vagrant.conf"
+INVENTORY?=AnsibleInventory.conf
+
+## By default use the default vagrant settings.
+VAGRANT_SETTINGS?=VagrantSettings.yml
 
 
 ## The default target, if no target argument is provided to `make`.
@@ -28,8 +31,9 @@ dummy:
 bootstrap-el7:
 	@echo 'Bootstrapping Ansible:'
 	@echo 'Installing the EPEL repository.'
-	@rpm --quiet --force -Uh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-	@gpg --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+	@rpm --import https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+	@rpm --quiet --force -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	@yum --quiet clean all
 	@echo 'Install Ansible from EPEL.'
 	@yum -y install ansible
 	@echo 'Update Ansible configuration.'
@@ -40,17 +44,12 @@ bootstrap-el7:
 ## Provision environment using Ansible Playbooks.
 provision:
 	@echo 'Provisioning the localhost using Ansible Playbooks:'
-	@ansible-playbook -v --inventory="${INVENTORY}" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" ${PLAYBOOK}
+	@test -e '/vagrant' && (echo -e '/vagrant directory detected, exiting...'; exit 15)
+	@ansible-playbook -v --inventory="${INVENTORY}" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" -- ${PLAYBOOK}
 
 
 ## Provision the localhost using Ansible Playbooks.
 provision-vagrant:
 	@echo 'Provisioning the local Vagrant VM using Ansible Playbooks:'
-	@test -e 'VagrantSettings.local.yml' && ( \
-			echo 'Using VagrantSettings.local.yml' && \
-			ansible-playbook -v --inventory="${INVENTORY}" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" --extra-vars="@VagrantSettings.local.yml" ${PLAYBOOK} \
-		) || true
-	@test ! -e 'VagrantSettings.local.yml' && ( \
-			echo 'Using VagrantSettings.yml' && \
-			ansible-playbook -v --inventory="${INVENTORY}" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" --extra-vars="@VagrantSettings.yml"  ${PLAYBOOK} \
-		) || true
+	@test -e '/vagrant' || (echo -e '/vagrant directory not detected, exiting...'; exit 15)
+	@ansible-playbook -v --inventory="${INVENTORY}" --extra-vars="@${VAGRANT_SETTINGS}" --extra-vars="project_environment=${ENVIRONMENT} hosts=${HOSTS}" -- ${PLAYBOOK}
