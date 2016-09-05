@@ -9,8 +9,8 @@ common__ius_repo_url: https://centos7.iuscommunity.org/ius-release.rpm
 common__ius_repo_gpg_key_url: /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY
 
 # Extra open TCP ports.
-common__extra_open_tcp_ports:
-  - 22
+#common__extra_open_tcp_ports:
+#  - 2222
 
 # @see: http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
 # common__developers:
