@@ -178,11 +178,11 @@ function eitiwidgets_fpp_form_show_title_submit($form, &$form_state) {
  * @param array $conf
  * @param array $panel_args
  * @param array $context
- * @return \stdClass
+ * @return stdClass|NULL
  */
 function eitiwidgets_fpp_render($subtype, $conf, $panel_args = array(), $context = array()) {
-  $block = fieldable_panels_panes_fieldable_panels_pane_content_type_render($subtype, $conf, $panel_args = array(), $context = array());
-  if (isset($conf['show_title']) && $conf['show_title'] == FALSE) {
+  $block = fieldable_panels_panes_fieldable_panels_pane_content_type_render($subtype, $conf, $panel_args, $context);
+  if (!empty($block) && isset($conf['show_title']) && $conf['show_title'] == FALSE) {
     $block->title = '';
     unset($block->content['title_field']);
   }
