@@ -8,7 +8,7 @@ httpd_php56__date_timezone: 'America/New_York'
 
 # Maximum execution time of each script.
 # @see: https://secure.php.net/manual/en/info.configuration.php#ini.max-execution-time
-httpd_php56__max_execution_time: 120
+httpd_php56__max_execution_time: 30
 
 # Maximum amount of memory a script may consume.
 # @see: https://secure.php.net/memory-limit
@@ -16,11 +16,11 @@ httpd_php56__memory_limit: 192M
 
 # Maximum size of POST data that PHP will accept.
 # @see: https://secure.php.net/post-max-size
-httpd_php56__post_max_size: 64M
+httpd_php56__post_max_size: 8M
 
 # Maximum allowed size for uploaded files.
 # @see: https://secure.php.net/upload-max-filesize
-httpd_php56__upload_max_filesize: 64M
+httpd_php56__upload_max_filesize: 8M
 
 # Do not expose the fact that PHP is installed on the server.
 # @see: https://secure.php.net/expose-php
