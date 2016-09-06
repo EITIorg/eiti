@@ -1,5 +1,8 @@
 ---
 # Global project specific overrides go here.
 
+# On EITI we have a different directory for storing backups.
+common__backups_directory: /var/backup
+
 # The jenkins role requires the full OpenJDK Runtime Environment.
 java__package: java-1.8.0-openjdk

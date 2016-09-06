@@ -6,6 +6,7 @@ httpd__port: 80
 httpd__tsl_port: 443
 
 # Set the server name.
+# TODO: Changes after changing the hostname, see: AnsibleMain.yml
 httpd__ServerName: "{{ ansible_fqdn }}"
 
 # Limit on the number of simultaneous requests that will be served.
