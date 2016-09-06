@@ -1,0 +1,7 @@
+---
+
+# Install the "OpenJDK Runtime Environment".
+java__package: java-1.8.0-openjdk-headless
+
+# Install the "OpenJDK runtime environment without audio and video support".
+#java__package: java-1.8.0-openjdk-headless

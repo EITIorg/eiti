@@ -1,2 +1,5 @@
 ---
 # Global project specific overrides go here.
+
+# The jenkins role requires the full OpenJDK Runtime Environment.
+java__package: java-1.8.0-openjdk

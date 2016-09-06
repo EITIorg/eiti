@@ -7,9 +7,6 @@
 
 # - debug: var=solr__port
 
-- name: Install JAVA OpenJDK Runtime Environment
-  yum: name=java-1.8.0-openjdk-headless state=installed
-
 - name: Check solr presence
   stat: path=/opt/{{ _solr__package }}/bin/solr
   register: solr_executable
