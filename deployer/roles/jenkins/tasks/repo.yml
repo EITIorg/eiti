@@ -1,0 +1,16 @@
+---
+
+- name: 'Copy the repository file.'
+  copy:
+    src: 'jenkins.repo'
+    dest: '/etc/yum.repos.d/jenkins.repo'
+
+- name: 'Copy the repository GPG key file.'
+  copy:
+    src: 'jenkins.io.key'
+    dest: '{{ jenkins__repo_gpg_key_url }}'
+
+- name: 'Import repository GPG key'
+  rpm_key:
+    key: "{{ jenkins__repo_gpg_key_url }}"
+    state: present

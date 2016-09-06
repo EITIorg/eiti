@@ -1,0 +1,15 @@
+---
+
+
+# Set the backups directory owner and group.
+#jenkins__backups_user: deployer
+#jenkins__backups_group: developers
+jenkins__extra_group: developers
+
+
+# Bind Jenkins to a specific port.
+# NOTE: The default is: 8080
+jenkins__port: 8080
+
+# Information about: Jenkins-stable repository
+jenkins__repo_gpg_key_url: /etc/pki/rpm-gpg/JENKINS-STABLE-GPG-KEY

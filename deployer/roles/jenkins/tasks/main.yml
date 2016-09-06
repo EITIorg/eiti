@@ -1,0 +1,30 @@
+---
+
+- name: Ensure the repository is installed.
+  include: repo.yml
+
+- name: Install Packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - jenkins
+
+- name: Insert Firewall Rule - allow port {{ jenkins__port }}
+  firewalld: port={{ jenkins__port }}/tcp permanent=true state=enabled immediate=yes
+
+- name: Allow jenkins user to create backups
+  user:
+    name: jenkins
+    groups: "{{ common__backups_group }}"
+    append: yes
+
+- name: Allow jenkins user to deploy files
+  user:
+    name: jenkins
+    groups: developers
+    append: yes
+
+- name: Allow jenkins user to execute Drush commands without problems
+  user:
+    name: jenkins
+    groups: "{{ httpd__Group_vhosts }}"
+    append: yes
