@@ -82,6 +82,14 @@ class EITIApiBubble extends RestfulDataProviderEITICharts {
     $child_count = 0;
     foreach ($data as $item) {
       $child_count++;
+
+      // There are some weird cases where there is no Gov. organization specified,
+      // for a specific revenue stream.
+      if (empty($item->org_id)) {
+        $item->org_id = 'none';
+        $item->org_name = t('- Not Specified -');
+      }
+
       if (!in_array($item->org_id, array_keys($output))) {
         $output[$item->org_id] = array(
           'name' => 'child' . $child_count,
