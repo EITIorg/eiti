@@ -359,8 +359,9 @@ function eitict_document_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'taxonomy_term_reference_link',
         'weight' => 0,
       ),
     ),
@@ -400,8 +401,9 @@ function eitict_document_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'taxonomy_term_reference_link',
         'weight' => 0,
       ),
     ),
@@ -438,8 +440,9 @@ function eitict_document_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'taxonomy_term_reference_link',
         'weight' => 0,
       ),
     ),
@@ -476,9 +479,8 @@ function eitict_document_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_plain',
+        'type' => 'hidden',
         'weight' => 2,
       ),
     ),

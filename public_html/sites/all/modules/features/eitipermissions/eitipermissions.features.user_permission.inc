@@ -880,6 +880,88 @@ function eitipermissions_user_default_permissions() {
     'module' => 'helpergeneric',
   );
 
+  // Exported permission: 'helpergeneric add taxonomy terms in 1'.
+  $permissions['helpergeneric add taxonomy terms in 1'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 1',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 10'.
+  $permissions['helpergeneric add taxonomy terms in 10'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 10',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 2'.
+  $permissions['helpergeneric add taxonomy terms in 2'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 2',
+    'roles' => array(),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 3'.
+  $permissions['helpergeneric add taxonomy terms in 3'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 3',
+    'roles' => array(),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 4'.
+  $permissions['helpergeneric add taxonomy terms in 4'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 4',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 5'.
+  $permissions['helpergeneric add taxonomy terms in 5'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 5',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 6'.
+  $permissions['helpergeneric add taxonomy terms in 6'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 6',
+    'roles' => array(),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 7'.
+  $permissions['helpergeneric add taxonomy terms in 7'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 7',
+    'roles' => array(),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 8'.
+  $permissions['helpergeneric add taxonomy terms in 8'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 8',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
+  // Exported permission: 'helpergeneric add taxonomy terms in 9'.
+  $permissions['helpergeneric add taxonomy terms in 9'] = array(
+    'name' => 'helpergeneric add taxonomy terms in 9',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'helpergeneric',
+  );
+
   // Exported permission: 'helpergeneric administer menus'.
   $permissions['helpergeneric administer menus'] = array(
     'name' => 'helpergeneric administer menus',

@@ -289,13 +289,17 @@ function helpergeneric_menu_alter(&$items) {
 
   // Display the "Edit" link in user pages contextual links.
   $items['user/%user/edit']['context'] = MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE;
+
+  // Replace adding new terms to a custom access permission, per vocabulary.
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/add']['access callback'] = 'helpergeneric_term_add_access';
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/add']['access arguments'] = array(3);
 }
 
 /**
  * Implements hook_permission().
  */
 function helpergeneric_permission() {
-  return array(
+  $items = array(
     'helpergeneric access taxonomy' => array(
       'title' => t('Access vocabularies only.'),
       'description' => t('Allow users to access the vocabularies.'),
@@ -319,6 +323,24 @@ function helpergeneric_permission() {
       'description' => t('Allow users to access the user configuration pages.'),
     ),
   );
+  foreach (taxonomy_get_vocabularies() as $vocabulary) {
+    $items += array(
+      'helpergeneric add taxonomy terms in ' . $vocabulary->vid => array(
+        'title' => t('Add terms in %vocabulary', array('%vocabulary' => $vocabulary->name)),
+        'description' => t('Allow users to add taxonomy terms.'),
+      ),
+    );
+  }
+
+  return $items;
+}
+
+
+/**
+ * Return edit access for a given term.
+ */
+function helpergeneric_term_add_access($voc) {
+  return user_access("helpergeneric add taxonomy terms in $voc->vid") || user_access('administer taxonomy');
 }
 
 /**

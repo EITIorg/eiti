@@ -595,3 +595,25 @@ function helpergeneric_form_file_entity_edit_alter(&$form, &$form_state, $form_i
     $form['user']['#access'] = FALSE;
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_overview_vocabularies().
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function helpergeneric_form_taxonomy_overview_vocabularies_alter(&$form, $form_state) {
+  // Well, we want to hide "Add term" for cases where user doesn't have access for those.
+  $elements = element_children($form);
+  foreach ($elements as $element) {
+    if (!empty($form[$element]['add'])) {
+      $vid = $element;
+      if (!user_access("helpergeneric add taxonomy terms in $vid") && !user_access('administer taxonomy')) {
+        unset($form[$element]['add']);
+      }
+    }
+    if (!empty($form[$element]['edit']) && !user_access('administer taxonomy')) {
+      unset($form[$element]['edit']);
+    }
+  }
+}
