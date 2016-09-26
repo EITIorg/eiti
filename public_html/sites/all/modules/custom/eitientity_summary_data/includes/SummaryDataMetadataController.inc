@@ -35,6 +35,14 @@ class SummaryDataMetadataController extends HelperEntityMetadataController {
         'getter callback' => 'eitientity_summary_data_entity_property_get_indicator_gov_revenue_extractive',
         'computed' => TRUE,
       );
+
+      $bundle_info['gov_revenue_calculated'] = array(
+        'type' => 'text',
+        'label' => t('Government revenue - calculated sum'),
+        'description' => t('Sum all the revenues reported by the Governmental Organisations into one number'),
+        'getter callback' => 'eitientity_summary_data_entity_property_calculate_gov_revenue',
+        'computed' => TRUE,
+      );
     }
 
     return $info;
