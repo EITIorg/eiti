@@ -332,8 +332,8 @@ function __helpergeneric_field_formatter_view__helpergeneric_link($entity_type, 
           break;
         case 'twitter_icon':
           $options = array(
-            'width' => '16px',
-            'height' => '16px',
+            'width' => '24px',
+            'height' => '24px',
             'sprite_name' => 'icons',  // @TODO: FIX!
           );
           $icon = helpertheme_get_svg_icon('twitter', $options);
@@ -572,6 +572,7 @@ function theme_helpergeneric_skype_button($vars) {
         "name": "' . $skype_name . '",
         "element": "SkypeButton_' . $unique_id . '",
         "participants": ["' . $skype_id . '"],
+        "imageSize": 24
       });
     </script>
     <div class="skype-id">' . $skype_id  . '</div>
