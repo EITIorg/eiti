@@ -1,5 +1,6 @@
-
 @print_text_color: #333333;
+@print_text_color_faded: #8B8B8B;
+@print_dark_background: #cccccc;
 @link_text_color: #333366;
 
 html,
@@ -38,11 +39,14 @@ body {
  */
 p, blockquote, ul, ol, dl, pre {
   page-break-inside: avoid;
+  color: @print_text_color !important;
 }
 
 // Avoid page breaks straight after a heading.
 h1, h2, h3, h4, h5, h6 {
   page-break-after: avoid;
+  color: @print_text_color !important;
+  text-shadow: none;
 }
 
 // Put tables on their own page.
@@ -67,6 +71,7 @@ td {
 a {
   text-decoration: none;
   color: @link_text_color !important;
+  word-break: break-all;
 }
 
 a[href^="http://"]:after,
@@ -75,6 +80,7 @@ a[href^="ftp://"]:after {
   content: " (" attr(href) ")";
   font-family: monospace, sans-serif;
   font-size: 0.9em;
+  color: @print_text_color_faded !important;
 }
 
 abbr[title]:after,
@@ -83,3 +89,118 @@ acronym[title]:after {
   font-family: monospace, sans-serif;
   font-size: 0.9em;
 }
+
+/**
+ * Custom things, get rid of un-needed elements.
+ */
+.site-navigation-toggle-wrapper,
+.footer-identity .footer-logo,
+.footer-social {
+  display: none;
+}
+
+
+/**
+ * Reset background colors / images.
+ */
+.main-header-wrapper,
+.predefined-widget--bookmarks .linked-wrapper,
+.predefined-widget--bookmarks .field-name-field-bm-image:before,
+.with-background-image,
+.with-background-image:before {
+  background: transparent none !important;
+  color: @print_text_color !important;
+  text-shadow: none !important;
+}
+.predefined-widget--fact-blocks {
+  .widget-icon-value-suffix-wrapper,
+  .widget-description {
+    color: @print_text_color !important;
+    text-shadow: none !important;
+  }
+  .widget-description {
+    padding: 0.5em 0;
+  }
+}
+.predefined-widget--quote {
+  background-color: @print_dark_background;
+}
+.footer-contact-info {
+  color: @print_text_color !important;
+  text-shadow: none !important;
+}
+.footer-links {
+  a {
+    &:after {
+      font-size: 0.8em;
+    }
+  }
+}
+svg {
+  fill: @print_text_color !important;
+}
+
+/**
+ * Reset positions and layouts.
+ */
+.predefined-widget--bookmarks {
+  .overlay-wrapper {
+    position: static !important;
+    left: auto;
+    top: auto;
+    padding: 0;
+
+    .field-name-field-bm-bookmark-type {
+      padding: 0.5em 0 0.25em;
+    }
+  }
+  li {
+    margin-bottom: 1em !important;
+  }
+}
+.predefined-widget--value-chain {
+  .value-chain-list {
+    > li {
+      width: 100%;
+      display: block;
+      text-align: left;
+      .value-chain-wrapper {
+        a {
+          &:after {
+            display: block;
+            font-size: 0.7em;
+          }
+          display: inline-block;
+          .chain-icon {
+            display: inline-block;
+            margin-right: 2em;
+          }
+          .title {
+            display: inline-block;
+            border: 0 none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.5em;
+          }
+        }
+        .arrow {
+          display: none;
+        }
+      }
+      &.first {
+        border-bottom: 1px solid @print_text_color;
+      }
+      &.last{
+        border-top: 1px solid @print_text_color;
+      }
+    }
+  }
+}
+.footer-identity .footer-slogan {
+  margin-left: 0;
+}
+.group-side {
+  float: left !important;
+  margin-right: 1em !important;
+}
+
