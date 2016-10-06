@@ -450,9 +450,10 @@ function helpergeneric_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['options']['promote']['#access'] = FALSE;
     }
 
-    if (isset($form['options']['sticky'])) {
-      $form['options']['sticky']['#access'] = FALSE;
-    }
+    // We don't need to hide these anymore.
+    // if (isset($form['options']['sticky'])) {
+    //   $form['options']['sticky']['#access'] = FALSE;
+    // }
   }
 
   // Add Cancel link.
