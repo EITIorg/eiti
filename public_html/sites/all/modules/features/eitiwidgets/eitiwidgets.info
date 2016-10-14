@@ -39,6 +39,7 @@ features[ds_field_settings][] = fieldable_panels_pane|text|default
 features[ds_field_settings][] = fieldable_panels_pane|value_chain|default
 features[ds_field_settings][] = fieldable_panels_pane|visualization|default
 features[ds_fields][] = quote_widget
+features[ds_layout_settings][] = fieldable_panels_pane|fact_blocks|default
 features[ds_layout_settings][] = fieldable_panels_pane|featured_articles|default
 features[ds_layout_settings][] = fieldable_panels_pane|featured_bookmarks|default
 features[ds_layout_settings][] = fieldable_panels_pane|featured_persons|default

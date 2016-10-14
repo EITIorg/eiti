@@ -307,6 +307,52 @@ function eitiwidgets_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'fieldable_panels_pane|fact_blocks|default';
+  $ds_layout->entity_type = 'fieldable_panels_pane';
+  $ds_layout->bundle = 'fact_blocks';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 'doublelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'above' => array(
+        0 => 'group_title_wrapper',
+        2 => 'title_field',
+      ),
+      'below' => array(
+        1 => 'field_fpp_widget',
+      ),
+    ),
+    'fields' => array(
+      'group_title_wrapper' => 'above',
+      'field_fpp_widget' => 'below',
+      'title_field' => 'above',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+      'above' => array(
+        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+      ),
+    ),
+    'wrappers' => array(
+      'above' => 'div',
+      'left' => 'div',
+      'right' => 'div',
+      'below' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['fieldable_panels_pane|fact_blocks|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'fieldable_panels_pane|featured_articles|default';
   $ds_layout->entity_type = 'fieldable_panels_pane';
   $ds_layout->bundle = 'featured_articles';
