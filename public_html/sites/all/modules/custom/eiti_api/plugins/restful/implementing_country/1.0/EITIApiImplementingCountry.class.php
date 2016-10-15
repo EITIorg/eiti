@@ -218,10 +218,12 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    * @return array
    */
   function prepareStatus($entity) {
+    $term_emw = entity_metadata_wrapper('taxonomy_term', $entity);
     return array(
       'tid' => $entity->tid,
       'language' => $entity->language,
       'name' => $entity->name,
+      'color' => $term_emw->field_tx_country_color->value(),
     );
   }
 
