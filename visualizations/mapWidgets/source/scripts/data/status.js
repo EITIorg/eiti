@@ -1,25 +1,43 @@
 export var status = [
   {
-    "id": 74,
-    "color": "#65c32d",
-    "title": "EITI compliant country",
-    "subtitle": "confirmed to have met all EITI requirements "
+    "id": 75,
+    "color": "#2D8B2A",
+    "title": "Meaningful progress",
+    "subtitle": ""
   },
   {
-    "id": 75,
-    "color": "#42abd8",
-    "title": "EITI candidate country",
-    "subtitle": "implementing EITI, not yet compliant"
+    "id": 74,
+    "color": "#84AD42",
+    "title": "Satisfactory progress",
+    "subtitle": ""
+  },
+  {
+    "id": 78,
+    "color": "#FAC433",
+    "title": "Inadequate progress",
+    "subtitle": ""
+  },
+  {
+    "id": 79,
+    "color": "#C00000",
+    "title": "No progress",
+    "subtitle": ""
+  },
+  {
+    "id": 80,
+    "color": "#00919B",
+    "title": "Yet to be assessed to the 2016 Standard",
+    "subtitle": ""
   },
   {
     "id": 76,
-    "color": "#ff6600",
+    "color": "#FF6600",
     "title": "Suspended",
-    "subtitle": "compliant/candidate status is temporarily suspended"
+    "subtitle": ""
   },
   {
     "id": 77,
-    "color": "#dddddd",
+    "color": "#808080",
     "title": "Other",
     "subtitle": ""
   }
