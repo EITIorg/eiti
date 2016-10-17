@@ -20,6 +20,7 @@ features[field_instance][] = taxonomy_term-bookmark_type-description_field
 features[field_instance][] = taxonomy_term-bookmark_type-name_field
 features[field_instance][] = taxonomy_term-company_commodities-description_field
 features[field_instance][] = taxonomy_term-company_commodities-name_field
+features[field_instance][] = taxonomy_term-country_status-field_tx_country_color
 features[field_instance][] = taxonomy_term-document_category-description_field
 features[field_instance][] = taxonomy_term-document_category-name_field
 features[field_instance][] = taxonomy_term-person_positions-description_field
