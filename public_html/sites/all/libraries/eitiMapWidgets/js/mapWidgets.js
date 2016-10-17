@@ -23998,7 +23998,7 @@
 	        divLegend.className = "responsive-legend";
 	
 	        var mergedHTML = "";
-	        var headerText = '<div class="legend_description" >' + _helpers.helpers.t(indicatorHeader) + "</div>";
+	        var headerText = '<div class="legend_header" >' + _helpers.helpers.t(indicatorHeader) + "</div>";
 	        mergedHTML += headerText;
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
@@ -24010,7 +24010,7 @@
 	        });
 	        if (noDataIncluded === false) mergedHTML += '<i style="background:#dddddd"></i> <strong>' + _helpers.helpers.t('No data') + '</strong><br/><br/>';
 	
-	        var footerText = '<div class="legend_description" >' + _helpers.helpers.t(indicatorFooter) + "</div>";
+	        var footerText = '<div class="legend_footer" >' + _helpers.helpers.t(indicatorFooter) + "</div>";
 	        mergedHTML += footerText;
 	
 	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
@@ -24235,7 +24235,7 @@
 	        var sortedCountries = _underscore2.default.sortBy(this.state.data, 'label');
 	        var cutout = Math.ceil(sortedCountries.length / 4);
 	        for (var i = 0; i < sortedCountries.length; i++) {
-	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
+	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/ /g, "_") : "member-status other";
 	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 	
 	          var years = Object.keys(sortedCountries[i].metadata);
@@ -24529,7 +24529,7 @@
 	  "name": "status",
 	  "description": "Implementation status",
 	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard",
-	  "footer": "For a map of countries click <a href=\"/data\">here</a>"
+	  "footer": "For a map of the former status of countries under the EITI rules, click <a href=\"/countries_legacy\">here</a>"
 	}, {
 	  "id": 2,
 	  "name": "online_oil_registry",
@@ -24845,17 +24845,17 @@
 	  "title": "Satisfactory progress",
 	  "subtitle": ""
 	}, {
-	  "id": 78,
+	  "id": 4551,
 	  "color": "#FAC433",
 	  "title": "Inadequate progress",
 	  "subtitle": ""
 	}, {
-	  "id": 79,
+	  "id": 4552,
 	  "color": "#C00000",
 	  "title": "No progress",
 	  "subtitle": ""
 	}, {
-	  "id": 80,
+	  "id": 4553,
 	  "color": "#00919B",
 	  "title": "Yet to be assessed to the 2016 Standard",
 	  "subtitle": ""

@@ -4,7 +4,7 @@ export var indicator_list = [
     "name": "status",
     "description": "Implementation status",
     "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard",
-    "footer": "For a map of countries click <a href=\"/data\">here</a>"
+    "footer": "For a map of the former status of countries under the EITI rules, click <a href=\"/countries_legacy\">here</a>"
   },
   {
     "id": 2,

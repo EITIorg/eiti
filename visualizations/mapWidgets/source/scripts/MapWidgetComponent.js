@@ -369,7 +369,7 @@ export default class MapWidgetComponent extends Component {
 
 
           var mergedHTML = "";
-          var headerText = '<div class="legend_description" >' + helpers.t(indicatorHeader) + "</div>"; 
+          var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>"; 
           mergedHTML += headerText;
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
@@ -381,7 +381,7 @@ export default class MapWidgetComponent extends Component {
           });
           if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
 
-          var footerText = '<div class="legend_description" >' + helpers.t(indicatorFooter) + "</div>"; 
+          var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>"; 
           mergedHTML += footerText;
 
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
@@ -528,7 +528,7 @@ export default class MapWidgetComponent extends Component {
       var sortedCountries = _.sortBy(this.state.data, 'label');
       var cutout = Math.ceil(sortedCountries.length/4);
       for (var i = 0; i < sortedCountries.length;i++) {
-        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/ /g,"_") : "member-status other";
         var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 
         var years = Object.keys(sortedCountries[i].metadata);
