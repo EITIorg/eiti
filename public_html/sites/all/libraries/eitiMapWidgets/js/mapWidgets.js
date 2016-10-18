@@ -24529,7 +24529,7 @@
 	  "name": "status",
 	  "description": "Implementation status",
 	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard",
-	  "footer": "For a map of the former status of countries under the EITI rules, click <a href=\"/countries_legacy\">here</a>"
+	  "footer": "For a map of the former status of countries under the EITI rules, click <a href=\"/countries-archive\">here</a>"
 	}, {
 	  "id": 2,
 	  "name": "online_oil_registry",
@@ -24837,12 +24837,12 @@
 	var status = exports.status = [{
 	  "id": 75,
 	  "color": "#2D8B2A",
-	  "title": "Meaningful progress",
+	  "title": "Satisfactory progress",
 	  "subtitle": ""
 	}, {
 	  "id": 74,
 	  "color": "#84AD42",
-	  "title": "Satisfactory progress",
+	  "title": "Meaningful progress",
 	  "subtitle": ""
 	}, {
 	  "id": 4551,
@@ -24852,12 +24852,12 @@
 	}, {
 	  "id": 4552,
 	  "color": "#C00000",
-	  "title": "No progress",
+	  "title": "No progress<br/>",
 	  "subtitle": ""
 	}, {
 	  "id": 4553,
 	  "color": "#00919B",
-	  "title": "Yet to be assessed to the 2016 Standard",
+	  "title": "Yet to be assessed to the 2016 Standard<br/>",
 	  "subtitle": ""
 	}, {
 	  "id": 76,
