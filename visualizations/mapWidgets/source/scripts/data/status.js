@@ -12,19 +12,19 @@ export var status = [
     "subtitle": ""
   },
   {
-    "id": 4551,
+    "id": 5314,
     "color": "#FAC433",
     "title": "Inadequate progress",
     "subtitle": ""
   },
   {
-    "id": 4552,
+    "id": 5315,
     "color": "#C00000",
     "title": "No progress<br/>",
     "subtitle": ""
   },
   {
-    "id": 4553,
+    "id": 5316,
     "color": "#00919B",
     "title": "Yet to be assessed to the 2016 Standard<br/>",
     "subtitle": ""
