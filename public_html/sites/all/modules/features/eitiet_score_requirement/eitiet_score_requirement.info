@@ -1,0 +1,17 @@
+name = EITI Entity Type Score Requirement
+description = Score Requirement entity type settings and information.
+core = 7.x
+package = EITI Entities
+version = 7.x-1.0
+dependencies[] = ctools
+dependencies[] = eititaxonomies
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = taxonomy
+dependencies[] = text
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[field_base][] = field_score_req_category
+features[field_instance][] = taxonomy_term-score_requirement_category-description_field
+features[field_instance][] = taxonomy_term-score_requirement_category-name_field
+features[taxonomy][] = score_requirement_category

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Entity Type Score Requirement feature.
+ */
+
+include_once 'eitiet_score_requirement.features.inc';

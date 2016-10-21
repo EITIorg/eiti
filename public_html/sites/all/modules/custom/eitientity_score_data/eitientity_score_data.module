@@ -37,10 +37,7 @@ function eitientity_score_data_entity_info() {
     'controller class' => 'EntityAPIController',
     'extra fields controller class' => 'ScoreDataExtraFieldsController',
     'metadata controller class' => 'ScoreDataMetadataController',
-    //'i18n controller class' => 'EntityDefaultI18nStringController',
 
-    //'entity cache' => FALSE,
-    //'field cache' => FALSE,
     'static cache' => FALSE,
     'fieldable' => TRUE,
 
@@ -50,10 +47,7 @@ function eitientity_score_data_entity_info() {
 
     'entity keys' => array(
       'id' => 'id',
-      //'revision' => 'vid',
       'bundle' => 'type',
-      //'label' => 'name',
-      //'language' => 'language',
     ),
 
     'bundles' => array(),
@@ -70,13 +64,6 @@ function eitientity_score_data_entity_info() {
       'menu wildcard' => $menu_wildcard,
       'file' => 'eitientity_score_data.admin.inc',
     ),
-
-    //'view modes' => array(
-    //  'full' => array(
-    //    'label' => t('Full'),
-    //    'custom settings' => FALSE,
-    //  ),
-    //),
   );
 
   foreach ($entity_info['score_data']['bundles callback']() as $type => $bundle_info) {
@@ -335,7 +322,6 @@ function eitientity_score_data_admin_paths() {
     //EITIENTITY_SCOREDATA_UI_PATH . '/*' => TRUE,
     EITIENTITY_SCOREDATA_UI_PATH . '/*/edit' => TRUE,
     EITIENTITY_SCOREDATA_UI_PATH . '/*/usage' => TRUE,
-    EITIENTITY_SCOREDATA_UI_PATH . '/*/upload' => TRUE,
     EITIENTITY_SCOREDATA_UI_PATH . '/*/delete' => TRUE,
   );
 

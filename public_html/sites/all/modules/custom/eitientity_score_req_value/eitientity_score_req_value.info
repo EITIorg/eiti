@@ -7,6 +7,6 @@ dependencies[] = entity
 dependencies[] = eitientity_score_req
 
 ; Entity handlers.
-;files[] = includes/IndicatorValueEntity.inc
-;files[] = includes/IndicatorValueInlineEntityFormController.inc
-;files[] = includes/IndicatorValueMetadataController.inc
+files[] = includes/ScoreReqValueEntity.inc
+files[] = includes/ScoreReqValueInlineEntityFormController.inc
+files[] = includes/ScoreReqValueMetadataController.inc

@@ -23,8 +23,32 @@ function eitientity_score_req_value_schema() {
         'not null' => FALSE,
       ),
       'value' => array(
-        'description' => 'The value for this entity.',
+        'description' => 'The value for this entity (from a discreet list).',
         'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'progress_value' => array(
+        'description' => 'The value of the progress for this entity (from a discreet list).',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'is_applicable' => array(
+        'description' => 'Boolean value that indicates whether the value is applicable or not.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'is_required' => array(
+        'description' => 'Boolean value that indicates whether the value is required or encouraged.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'description' => array(
+        'description' => 'Description for the entity.',
+        'type' => 'text',
         'not null' => FALSE,
         'default' => NULL,
       ),
