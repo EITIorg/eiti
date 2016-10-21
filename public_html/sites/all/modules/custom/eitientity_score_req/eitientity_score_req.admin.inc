@@ -29,26 +29,12 @@ function score_req_form($form, &$form_state, $entity) {
     '#required' => TRUE,
   );
 
-  // Get a list of group score_reqs sorted by name.
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'score_req');
-  $query->entityCondition('bundle', 'group');
-  $query->propertyOrderBy('name');
-  $results = $query->execute();
-
-  $score_req_options = array('' => t('- None -'));
-  foreach ($results['score_req'] as $result) {
-    $score_req = entity_load_single($entity_type, $result->id);
-
-    $score_req_options[$score_req->identifier()] = filter_xss($score_req->label());
-  }
-
-  $form['parent'] = array(
-    '#type' => 'select',
-    '#title' => t('Parent'),
-    '#default_value' => $entity->parent,
-    '#options' => $score_req_options,
-    '#description' => t('The score_req parent group.'),
+  $form['code'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Code'),
+    '#description' => t('The code of the Requirement (i.e. 1.1).'),
+    '#default_value' => $entity->code,
+    '#required' => TRUE,
   );
 
   $form['status'] = array(
@@ -181,4 +167,48 @@ function _score_req_entity_form_delete_submit($form, &$form_state) {
 
   $entity_uri = entity_uri($entity_type, $entity);
   $form_state['redirect'] = array($entity_uri['path'] . '/delete', array('query' => $destination));
+}
+
+
+/**
+ * Menu callback: Creates overview page for custom identifier entities at admin/structure/%.
+ *
+ * @param $entity_type
+ * @return array
+ */
+function eitientity_score_req_entity_overview_types($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+
+  $build = array();
+  if (empty($entity_info)) {
+    return $build;
+  }
+
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => '2'));
+  $rows = array();
+
+  if (module_exists('field_ui') && !empty($entity_info['fieldable'])) {
+    foreach ($entity_info['bundles'] as $bundle) {
+      $url_path = $bundle['admin']['path'];
+      if (isset($bundle['admin']['real path'])) {
+        $url_path = $bundle['admin']['real path'];
+      }
+
+      $row = array();
+      $row[] = $bundle['label'];
+      $row[] = array('data' => l(t('manage fields'), $url_path . '/fields'));
+      $row[] = array('data' => l(t('manage display'), $url_path . '/display'));
+
+      $rows[] = $row;
+    }
+  }
+
+  $build['table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No entity types available.'),
+  );
+
+  return $build;
 }

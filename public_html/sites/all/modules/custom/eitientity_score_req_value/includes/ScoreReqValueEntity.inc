@@ -11,20 +11,15 @@ class ScoreReqValueEntity extends Entity {
   // Define some default values.
   public $id = NULL;
 
-  public $indicator_id = NULL;
-  /** @var IndicatorEntity $indicator */
-  public $indicator = NULL;
+  public $score_req_id = NULL;
+  /** @var ScoreReqEntity $score_req */
+  public $score_req = NULL;
 
-  public $value_boolean = NULL;
-  public $value_enum = NULL;
-  public $value_numeric = NULL;
-  public $value_unit = NULL;
-  public $original_value_numeric = NULL;
-  public $original_value_unit = NULL;
-  public $value_text = NULL;
-
-  public $source = NULL;
-  public $comments = NULL;
+  public $value = NULL;
+  public $progress_value = NULL;
+  public $is_applicable = NULL;
+  public $is_required = NULL;
+  public $description = NULL;
 
   /**
    * Set up the object instance on construction or unserializiation.
@@ -32,9 +27,9 @@ class ScoreReqValueEntity extends Entity {
   protected function setUp() {
     parent::setUp();
 
-    if (!empty($this->indicator_id)) {
-      $this->indicator = entity_load_single('score_req', $this->indicator_id);
-      if (empty($this->indicator)) {
+    if (!empty($this->score_req_id)) {
+      $this->score_req = entity_load_single('score_req', $this->score_req_id);
+      if (empty($this->score_req)) {
         throw new Exception('Cannot create an Score Requirement Value without a valid Score Requirement.');
       }
     }
@@ -49,70 +44,23 @@ class ScoreReqValueEntity extends Entity {
   }
 
   /**
-   * Returns the indicator value.
-   */
-  public function getValue() {
-    if (empty($this->indicator) && !empty($this->indicator_id)) {
-      $this->setUp();
-    }
-
-    if (empty($this->indicator)) {
-      return NULL;
-    }
-
-    switch ($this->indicator->type) {
-      case 'boolean':
-        return $this->value_boolean;
-      case 'enum':
-        return $this->value_enum;
-      case 'numeric':
-        return $this->value_numeric;
-      case 'text':
-      default:
-        return $this->value_text;
-    }
-  }
-
-  /**
-   * Returns the indicator unit.
-   */
-  public function getUnit() {
-    if (empty($this->indicator) && !empty($this->indicator_id)) {
-      $this->setUp();
-    }
-
-    if (empty($this->indicator)) {
-      return NULL;
-    }
-
-    switch ($this->indicator->type) {
-      case 'numeric':
-        return $this->value_unit;
-        break;
-      case 'text':
-      default:
-        return 'N/A';
-    }
-  }
-
-  /**
-   * Getter callback for indicator_id.
+   * Getter callback for score_req_id.
    *
    * @return entity
-   *   Indicator entity.
+   *   ScoreReq entity.
    */
-  public function indicatorid() {
-    return entity_load_single('indicator', $this->indicator_id);
+  public function score_reqid() {
+    return entity_load_single('score_req', $this->score_req_id);
   }
 
   /**
-   * Setter for indicator_id.
+   * Setter for score_req_id.
    *
-   * @param entity $indicator
+   * @param entity $score_req
    *
-   *  Indicator entity instance.
+   *  ScoreReq entity instance.
    */
-  public function setIndicatorid($indicator) {
-    $this->indicator_id = is_object($indicator->id) ? $indicator->id : $indicator;
+  public function setScoreReqid($score_req) {
+    $this->score_req_id = is_object($score_req->id) ? $score_req->id : $score_req;
   }
 }

@@ -43,6 +43,13 @@ function eitientity_score_req_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'code' => array(
+        'description' => 'The score_req code.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
     ),
     'indexes' => array(
       'entity_score_req_info' => array('id', 'status'),

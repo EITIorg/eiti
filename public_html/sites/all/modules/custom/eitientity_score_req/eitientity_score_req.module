@@ -8,7 +8,9 @@
  * Define administrative URLs.
  */
 define('EITIENTITY_SCORE_REQ_UI_PATH', 'score_req');
-define('EITIENTITY_SCORE_REQ_ADMIN_UI_PATH', 'admin/structure/score_req');
+define('EITIENTITY_SCORE_REQ_ADMIN_UI_PATH', 'admin/structure/score_req/list');
+define('EITIENTITY_SCORE_REQ_BUNDLE_ADMIN_UI_PATH', 'admin/structure/score_req');
+
 
 /**
  * Implements hook_entity_info().
@@ -27,20 +29,17 @@ function eitientity_score_req_entity_info() {
 
     'entity class' => 'ScoreReqEntity',
     'controller class' => 'EntityAPIController',
-    //'i18n controller class' => 'EntityDefaultI18nStringController',
 
     'static cache' => TRUE,
-    'fieldable' => FALSE,
+    'fieldable' => TRUE,
 
     'access callback' => 'eitientity_score_req_access',
     'uri callback' => 'entity_class_uri',
 
     'entity keys' => array(
       'id' => 'id',
-      //'revision' => 'vid',
       'bundle' => 'type',
       'label' => 'name',
-      //'language' => 'language',
     ),
 
     'bundles' => array(),
@@ -52,22 +51,19 @@ function eitientity_score_req_entity_info() {
     'admin ui' => array(
       'path' => EITIENTITY_SCORE_REQ_ADMIN_UI_PATH,
       'entity path' => EITIENTITY_SCORE_REQ_UI_PATH,
+      'bundle path' => EITIENTITY_SCORE_REQ_BUNDLE_ADMIN_UI_PATH,
       'controller class' => 'ScoreReqEntityUIController',
       'menu wildcard' => $menu_wildcard,
       'file' => 'eitientity_score_req.admin.inc',
-    ),
-
-    'view modes' => array(
-      //'full' => array(
-      //  'label' => t('Full'),
-      //  'custom settings' => FALSE,
-      //),
     ),
   );
 
   foreach ($entity_info['score_req']['bundles callback']() as $type => $bundle_info) {
     $entity_info['score_req']['bundles'][$type] = array(
       'label' => $bundle_info['label'],
+      'admin' => array(
+        'path' => EITIENTITY_SCORE_REQ_BUNDLE_ADMIN_UI_PATH . '/manage/' . $type,
+      ),
     );
   }
 
@@ -81,7 +77,7 @@ function eitientity_score_req_admin_paths() {
   $paths = array(
     EITIENTITY_SCORE_REQ_UI_PATH . '/add' => TRUE,
     EITIENTITY_SCORE_REQ_UI_PATH . '/add/*' => TRUE,
-    EITIENTITY_SCORE_REQ_UI_PATH . '/*' => TRUE,
+//    EITIENTITY_SCORE_REQ_UI_PATH . '/*' => TRUE,
     EITIENTITY_SCORE_REQ_UI_PATH . '/*/edit' => TRUE,
     EITIENTITY_SCORE_REQ_UI_PATH . '/*/usage' => TRUE,
     EITIENTITY_SCORE_REQ_UI_PATH . '/*/delete' => TRUE,
@@ -96,29 +92,9 @@ function eitientity_score_req_admin_paths() {
 function eitientity_score_req_get_types() {
   $items = array();
 
-  $items['group'] = array(
-    'label' => t('Group'),
-    'description' => t('Group score_reqs are used for grouping other score_reqs.'),
-  );
-
-  $items['boolean'] = array(
-    'label' => t('Boolean'),
-    'description' => t('Boolean score_reqs are used for yes/no score_reqs.'),
-  );
-
-  $items['enum'] = array(
-    'label' => t('Enum'),
-    'description' => t('Enum score_reqs are used for yes/no/partially score_reqs.'),
-  );
-
-  $items['numeric'] = array(
-    'label' => t('Numeric'),
-    'description' => t('Numeric score_reqs are used for quantities of something.'),
-  );
-
-  $items['text'] = array(
-    'label' => t('Text'),
-    'description' => t('Text score_reqs are used for storing text.'),
+  $items['standard'] = array(
+    'label' => t('Standard'),
+    'description' => t('Standard Score Requirement.'),
   );
 
   return $items;

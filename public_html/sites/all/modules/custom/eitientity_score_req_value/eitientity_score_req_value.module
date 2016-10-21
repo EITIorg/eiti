@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Exposes a custom entity to store indicators.
+ * Exposes a custom entity to store score_reqs.
  */
 
 /**
@@ -108,20 +108,20 @@ function eitientity_score_req_value_permission() {
  *
  * @return string
  */
-function eitientity_score_req_value_get_indicator_label($entity_type, $entity) {
-  if (!empty($entity->indicator_id)) {
-    /** @var IndicatorEntity $indicator_entity */
-    $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
+function eitientity_score_req_value_get_score_req_label($entity_type, $entity) {
+  if (!empty($entity->score_req_id)) {
+    /** @var IndicatorEntity $score_req_entity */
+    $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
 
-    // Add indicator group name as prefix on IEF.
+    // Add score_req group name as prefix on IEF.
     $parent_name = '';
-    if (!empty($indicator_entity->parent)) {
-      $parent_indicator_entity = entity_load_single('indicator', $indicator_entity->parent);
-      $parent_name = '<b>' . filter_xss($parent_indicator_entity->label()) . ' > </b>';
+    if (!empty($score_req_entity->parent)) {
+      $parent_score_req_entity = entity_load_single('score_req', $score_req_entity->parent);
+      $parent_name = '<b>' . filter_xss($parent_score_req_entity->label()) . ' > </b>';
     }
 
-    if (!empty($indicator_entity)) {
-      return $parent_name . filter_xss($indicator_entity->label());
+    if (!empty($score_req_entity)) {
+      return $parent_name . filter_xss($score_req_entity->label());
     }
   }
 
@@ -135,13 +135,13 @@ function eitientity_score_req_value_get_indicator_label($entity_type, $entity) {
  * @return string
  */
 function eitientity_score_req_value_get_score_req_value_value($entity_type, $entity) {
-  if (empty($entity->indicator_id)) {
+  if (empty($entity->score_req_id)) {
     return '';
   }
 
-  /** @var IndicatorEntity $indicator_entity */
-  $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
-  if (empty($indicator_entity)) {
+  /** @var IndicatorEntity $score_req_entity */
+  $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
+  if (empty($score_req_entity)) {
     return '';
   }
 
@@ -155,13 +155,13 @@ function eitientity_score_req_value_get_score_req_value_value($entity_type, $ent
  * @return string
  */
 function eitientity_score_req_value_get_score_req_value_unit($entity_type, $entity) {
-  if (empty($entity->indicator_id)) {
+  if (empty($entity->score_req_id)) {
     return '';
   }
 
-  /** @var IndicatorEntity $indicator_entity */
-  $indicator_entity = entity_load_single('indicator', $entity->indicator_id);
-  if (empty($indicator_entity)) {
+  /** @var IndicatorEntity $score_req_entity */
+  $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
+  if (empty($score_req_entity)) {
     return '';
   }
 
@@ -171,62 +171,54 @@ function eitientity_score_req_value_get_score_req_value_unit($entity_type, $enti
 /**
  * @return array
  */
-function eitientity_score_req_value_get_indicator_information() {
+function eitientity_score_req_value_get_score_req_information() {
   $information = &drupal_static(__FUNCTION__);
 
   if (!empty($information)) {
     return $information;
   }
 
-  $indicator_groups_mapping = array();
-  $indicator_options = array();
-  $indicator_attributes = array();
+  $score_req_groups_mapping = array();
+  $score_req_options = array();
+  $score_req_attributes = array();
 
   // Get a list of domains sorted by weight and name.
   $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'indicator');
+  $query->entityCondition('entity_type', 'score_req');
   $query->propertyOrderBy('name');
   $results = $query->execute();
 
   // @TODO: Optimize!
-  // Prepare indicator groups.
-  foreach ($results['indicator'] as $result) {
-    /** @var IndicatorEntity $indicator */
-    $indicator = entity_load_single('indicator', $result->id);
+  // Prepare score_req groups.
+  foreach ($results['score_req'] as $result) {
+    /** @var IndicatorEntity $score_req */
+    $score_req = entity_load_single('score_req', $result->id);
 
-    if ($indicator->type != 'group') {
+    if ($score_req->type != 'group') {
       continue;
     }
 
-    $indicator_options[filter_xss($indicator->label())] = array();
-    $indicator_groups_mapping[$indicator->identifier()] = filter_xss($indicator->label());
+    $score_req_options[filter_xss($score_req->label())] = array();
+    $score_req_groups_mapping[$score_req->identifier()] = filter_xss($score_req->label());
   }
 
-  foreach ($results['indicator'] as $result) {
-    /** @var IndicatorEntity $indicator */
-    $indicator = entity_load_single('indicator', $result->id);
-
-    if ($indicator->type == 'group') {
-      continue;
-    }
-
-    $indicator_attributes[$indicator->identifier()] = array(
-      'data-indicator-type' => check_plain($indicator->type),
+  foreach ($results['score_req'] as $result) {
+    /** @var IndicatorEntity $score_req */
+    $score_req = entity_load_single('score_req', $result->id);
+    $score_req_attributes[$score_req->identifier()] = array(
+      'data-score_req-type' => check_plain($score_req->type),
     );
 
-    $indicator_label = filter_xss($indicator->label()) . ' [' . check_plain($indicator->type) . ']';
-    if (isset($indicator_groups_mapping[$indicator->parent])) {
-      $parent_group = $indicator_groups_mapping[$indicator->parent];
-      $indicator_options[$parent_group][$indicator->identifier()] = $indicator_label;
-    }
-    else {
-      $indicator_options[$indicator->identifier()] = $indicator_label;
+    $score_req_label = filter_xss($score_req->label()) . ' [' . check_plain($score_req->type) . ']';
+    if (isset($score_req_groups_mapping[$score_req->parent])) {
+      $parent_group = $score_req_groups_mapping[$score_req->parent];
+      $score_req_options[$score_req->identifier()] = $score_req_label;
     }
   }
 
   $information = array(
-    'options' => $indicator_options,
-    'attributes' => $indicator_attributes
+    'options' => $score_req_options,
+    'attributes' => $score_req_attributes
   );
   return $information;
 }
@@ -238,7 +230,7 @@ function eitientity_score_req_value_get_indicator_information() {
 function eitientity_score_req_value_theme() {
   return array(
     // From form.inc.
-    'select_indicators' => array(
+    'select_score_reqs' => array(
       'render element' => 'element',
     ),
   );
@@ -257,7 +249,7 @@ function eitientity_score_req_value_theme() {
  *
  * @return string
  */
-function theme_select_indicators($variables) {
+function theme_select_score_reqs($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
   _form_set_class($element, array('form-select'));
