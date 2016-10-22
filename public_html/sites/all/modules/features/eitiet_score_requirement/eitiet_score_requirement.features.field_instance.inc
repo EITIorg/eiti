@@ -10,6 +10,39 @@
 function eitiet_score_requirement_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'score_req-standard-field_score_req_category'.
+  $field_instances['score_req-standard-field_score_req_category'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_req',
+    'field_name' => 'field_score_req_category',
+    'label' => 'Category',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-score_requirement_category-description_field'.
   $field_instances['taxonomy_term-score_requirement_category-description_field'] = array(
@@ -90,6 +123,7 @@ function eitiet_score_requirement_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Category');
   t('Description');
   t('Name');
 

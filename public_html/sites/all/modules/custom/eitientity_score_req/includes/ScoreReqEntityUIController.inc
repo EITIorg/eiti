@@ -9,19 +9,6 @@
  * Override HelperEntityBundleableUIController to customize our menu items.
  */
 class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
-//  protected $entity_path;
-//  protected $entity_id_count;
-//
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public function __construct($entity_type, $entity_info) {
-//    parent::__construct($entity_type, $entity_info);
-//    $this->id_count = count(explode('/', $this->path));
-//    $this->entity_path = $this->entityInfo['admin ui']['entity path'];
-//    $this->entity_id_count = count(explode('/', $this->entity_path));
-//  }
-//
   /**
    * {@inheritdoc}
    */

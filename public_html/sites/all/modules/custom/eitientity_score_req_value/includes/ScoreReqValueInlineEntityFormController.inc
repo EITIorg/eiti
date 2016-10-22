@@ -34,6 +34,13 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
   public function tableFields($bundles) {
     $fields = array();
 
+    $fields['field_score_req_category'] = array(
+      'type' => 'callback',
+      'render_callback' => 'eitientity_score_req_value_get_score_req_category',
+      'label' => t('Requirement Category'),
+      'weight' => 10,
+    );
+
     $fields['score_req'] = array(
       'type' => 'callback',
       'render_callback' => 'eitientity_score_req_value_get_score_req_label',
@@ -44,7 +51,7 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
     $fields['score_req_value'] = array(
       'type' => 'callback',
       'render_callback' => 'eitientity_score_req_value_get_score_req_value_value',
-      'label' => t('Value'),
+      'label' => t('Progress Value'),
       'weight' => 30,
     );
 
@@ -74,55 +81,41 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       '#theme' => 'select_score_reqs',
     );
 
-    $entity_form['value_boolean'] = array(
+    $entity_form['value'] = array(
       '#type' => 'select',
-      '#title' => t('Value'),
-      '#options' => array(
-        EITIENTITY_INDICATOR_VALUE_VALUE_NO => t('No'),
-        EITIENTITY_INDICATOR_VALUE_VALUE_YES => t('Yes'),
-      ),
-      '#default_value' => $entity->value_boolean,
+      '#title' => t('Level of Progress (Value)'),
+      '#required' => TRUE,
+      '#options' => array('' => t('- Select -')) + _eitientity_score_req_value_get_value_options(),
+      '#default_value' => $entity->value,
     );
-    $this->entityFormSetElementStates($entity_form['value_boolean'], 'boolean', $entity_form['#parents'], 'score_req_id');
 
+    $entity_form['description'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Description'),
+      '#default_value' => $entity->description,
+    );
+
+    $entity_form['dir_of_progress'] = array(
+      '#type' => 'select',
+      '#title' => t('Direction of Progress'),
+      '#options' => _eitientity_score_req_value_get_dir_of_progress_options(),
+      '#default_value' => $entity->progress_value,
+    );
+    $entity_form['is_applicable'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Is Applicable'),
+      '#default_value' => $entity->is_applicable,
+    );
+    $entity_form['is_required'] = array(
+      '#type' => 'radios',
+      '#title' => t('Required or Encouraged?'),
+      '#options' => array(
+        EITIENTITY_SCORE_REQ_REQUIRED => t('Is Required'),
+        EITIENTITY_SCORE_REQ_ENCOURAGED => t('Is Encouraged')
+      ),
+      '#default_value' => $entity->is_applicable,
+    );
     return $entity_form;
-  }
-
-  /**
-   * Sets the form element #states array in order to control the bundle specific
-   * elements.
-   *
-   * @param array $form_element
-   * @param string $bundle
-   * @param array $form_parents_list
-   * @param string $controller
-   */
-  protected function entityFormSetElementStates(&$form_element, $bundle, $form_parents_list, $controller) {
-    $states_group = 0;
-
-    $target_parents = $form_parents_list;
-    $field_name = array_shift($target_parents);
-    $target_parents[] = $controller;
-    $controller_form_element_name = $field_name . '[' . implode('][', $target_parents) . ']';
-    $jquery_selector = ':input[name="' . $controller_form_element_name . '"]';
-
-    // Get a list of score_reqs that use this form element.
-    $score_reqs = eitientity_score_req_get_by_bundle($bundle);
-
-    // Hide form element if no score_reqs use it.
-    if (empty($score_reqs)) {
-      $form_element['#access'] = FALSE;
-    }
-
-    /** @var ScoreReqEntity $score_req */
-    foreach ($score_reqs as $score_req) {
-      if (!empty($form_element['#states']['visible'][$states_group])) {
-        $form_element['#states']['required'][$states_group][] = 'or';
-        $form_element['#states']['visible'][$states_group][] = 'or';
-      }
-      $form_element['#states']['required'][$states_group][][$jquery_selector] = array('value' => $score_req->identifier());
-      $form_element['#states']['visible'][$states_group][][$jquery_selector] = array('value' => $score_req->identifier());
-    }
   }
 
   /**

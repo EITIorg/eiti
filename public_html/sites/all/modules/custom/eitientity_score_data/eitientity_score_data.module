@@ -113,21 +113,12 @@ function eitientity_score_data_label($entity, $entity_type) {
     return '';
   }
 
-//  $t_args['!year_start'] = '';
-//  if (!is_null($entity->year_start)) {
-//    $t_args['!year_start'] = format_date($entity->year_start, 'custom', 'Y');
-//  }
-//
-//  $t_args['!year_end'] = '';
-//  if (!is_null($entity->year_end)) {
-//    $t_args['!year_end'] = format_date($entity->year_end, 'custom', 'Y');
-//  }
-
-  if ($t_args['!year_start'] == $t_args['!year_end']) {
-    return t('!country: !year_start', $t_args);
+  $t_args['!year'] = '';
+  if (!is_null($entity->year)) {
+    $t_args['!year'] = $entity->year;
   }
 
-  return t('!country: !year_end', $t_args);
+  return t('!country: !year', $t_args);
 }
 
 /**
@@ -302,7 +293,7 @@ function eitientity_score_data_entity_ui_get_page_title($op, $entity_type, $enti
  * @param $context
  */
 function eitientity_score_data_date_popup_process_alter(&$element, &$form_state, $context) {
-  if ($context['form']['#form_id'] != 'score_data_form') {
+  if ($context['form']['#form_id'] != 'score_data_edit_standard_form') {
     return;
   }
 
