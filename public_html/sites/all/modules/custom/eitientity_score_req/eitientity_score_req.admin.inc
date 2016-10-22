@@ -12,7 +12,7 @@
  *
  * @param array $form
  * @param array $form_state
- * @param IndicatorEntity $entity
+ * @param ScoreReqEntity $entity
  * @return array
  */
 function score_req_form($form, &$form_state, $entity) {
@@ -111,17 +111,12 @@ function _score_req_entity_form_submit($form, &$form_state) {
 
   // Remove unneeded values.
   form_state_values_clean($form_state);
-  /** @var IndicatorEntity $entity */
+  /** @var ScoreReqEntity $entity */
   $entity = entity_ui_form_submit_build_entity($form, $form_state);
 
   // Set the timestamp fields.
   if (empty($entity->created)) {
     $entity->created = REQUEST_TIME;
-  }
-
-  // Use NULL for parent; Form API doesn't like NULL.
-  if (empty($entity->parent)) {
-    $entity->parent = NULL;
   }
 
   // Save the entity.

@@ -8,15 +8,15 @@ class ScoreReqValueMetadataController extends EntityDefaultMetadataController {
 
     // A bit more adjustments.
     foreach ($info[$this->type] as $bundle => &$bundle_info) {
-      if (isset($bundle_info['indicator_id'])) {
-        $bundle_info['indicator_id'] = array(
-          'label' => t('Indicator'),
-          'type' => 'indicator',
-          'description' => t('Indicator specified.'),
+      if (isset($bundle_info['score_req_id'])) {
+        $bundle_info['score_req_id'] = array(
+          'label' => t('Score Requirement'),
+          'type' => 'score_req',
+          'description' => t('Score Requirement specified.'),
           'getter callback' => 'entity_property_getter_method',
           'setter callback' => 'entity_property_setter_method',
           'required' => TRUE,
-          'schema field' => 'indicator_id',
+          'schema field' => 'score_req_id',
         );
       }
     }

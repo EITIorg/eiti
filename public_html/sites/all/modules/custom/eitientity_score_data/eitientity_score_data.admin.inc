@@ -36,6 +36,18 @@ function score_data_form($form, &$form_state, $entity, $op) {
 function score_data_default_form($form, &$form_state, $entity) {
   $entity_type = $entity->entityType();
 
+  // If the it's a new entity, we want a custom approach.
+//  if (isset($entity->is_new) && $entity->is_new == TRUE) {
+//    //    $entity->field_scd_score_req_values[LANGUAGE_NONE]['entities'][0]
+//    $ief_key = key($form_state['inline_entity_form']);
+//    $form_state['inline_entity_form'][$ief_key]['entities'][] = array(
+//      'entity' => entity_create('score_req', array('type' => 'standard')),
+//      'weight' => 0,
+//      'form' => 0,
+//      'needs_save' => FALSE,
+//    );
+//  }
+
   $query = new EntityFieldQuery();
   $countries_count = $query
     ->entityCondition('entity_type', 'implementing_country')
@@ -46,27 +58,22 @@ function score_data_default_form($form, &$form_state, $entity) {
   }
 
   $query = new EntityFieldQuery();
-  $indicators_count = $query
-    ->entityCondition('entity_type', 'indicator')
+  $score_reqs_count = $query
+    ->entityCondition('entity_type', 'score_req')
     ->count()
     ->execute();
-  if (empty($indicators_count)) {
-    drupal_set_message(t('No indicators exist.'), 'warning');
+  if (empty($score_reqs_count)) {
+    drupal_set_message(t('No score requirements exist. Import default via task-script?'), 'warning');
   }
 
-  // Denny access to the form if no implementing countries or indicators exist.
-  if (empty($countries_count) || empty($indicators_count)) {
+  // Denny access to the form if no implementing countries or score_reqs exist.
+  if (empty($countries_count) || empty($score_reqs_count)) {
     return drupal_access_denied();
   }
 
   if (isset($form_state['op']) && arg(0) != 'admin') {
     drupal_set_title(eitientity_score_data_entity_ui_get_page_title($form_state['op'], $entity_type, $entity), PASS_THROUGH);
   }
-
-  // $form['additional_settings'] = array(
-  //   '#type' => 'vertical_tabs',
-  //   '#weight' => 99,
-  // );
 
   // Entity options for administrators
   $form['options'] = array(
@@ -90,22 +97,23 @@ function score_data_default_form($form, &$form_state, $entity) {
     '#autocomplete_path' => 'helpergeneric/ereference/implementing_country',
   );
 
-  $year_start_value = date('Y');
-  if (!empty($entity->year_start)) {
-    $year_start_date = new DateObject($entity->year, NULL);
-    $year_start_value = $year_start_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
-  }
+//  $year_start_value = date('Y');
+//  if (!empty($entity->year_start)) {
+//    $year_start_date = new DateObject($entity->year, NULL);
+//    $year_start_value = $year_start_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
+//  }
   $form['year'] = array(
     '#type' => 'date_select',
     '#title' => t('Year'),
     '#required' => TRUE,
-    '#default_value' => $year_start_value,
+    '#default_value' => $entity->year,
     '#date_format' => 'Y',
     '#date_label_position' => 'none',
     '#date_year_range' => '-20:+2',
   );
 
   $published_value = 0;
+
   if (!empty($entity->published)) {
     $published_date = new DateObject($entity->published, NULL);
     $published_value = $published_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
@@ -166,6 +174,25 @@ function score_data_default_form($form, &$form_state, $entity) {
   // Attach fields, if any, and allow DS to order form items.
   field_attach_form($entity_type, $entity, $form, $form_state, entity_language($entity_type, $entity));
 
+  // Create our prepopulate button.
+  $ief_id = $form['field_scd_score_req_values']['und']['#ief_id'];
+  if ($form_state['submitted'] == FALSE || !in_array('score_data_form_prepopulate_ief', $form_state['submit_handlers'])) {
+    $form['field_scd_score_req_values']['und']['actions']['ief_add']['#weight'] = 5;
+    $form['field_scd_score_req_values']['und']['actions']['prepopulate'] = array(
+      '#type' => 'submit',
+      '#weight' => 0,
+      '#value' => t('Prepopulate with Standard Requirements'),
+      '#name' => 'ief-' . $ief_id . '-prepopulate',
+      '#ief_form' => 'prepopulate',
+      '#submit' => array('score_data_form_prepopulate_ief'),
+      '#ajax' => array(
+        'callback' => 'inline_entity_form_get_element',
+        'wrapper' => 'inline-entity-form-' . $ief_id,
+      ),
+      '#limit_validation_errors' => $form['field_scd_score_req_values']['und']['actions']['ief_add']['#limit_validation_errors']
+    );
+  }
+
   if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
     if (isset($form['redirect'])) {
       $form['redirect']['#access'] = FALSE;
@@ -173,6 +200,37 @@ function score_data_default_form($form, &$form_state, $entity) {
   }
 
   return $form;
+}
+
+/**
+ * Function that prepopulates the IEF for Score Data.
+ */
+function score_data_form_prepopulate_ief(&$form, &$form_state) {
+  $element = inline_entity_form_get_element($form, $form_state);
+  $ief_id = $element['#ief_id'];
+
+  $form_state['rebuild'] = TRUE;
+  $form_state['inline_entity_form'][$ief_id]['entities'] = array();
+  $requirements_info = eitientity_score_req_value_get_score_req_information();
+  $weight = 0;
+  $default_score_req_values = array(
+    'description' => '',
+    'value' => '',
+    'is_applicable' => TRUE,
+    'type' => 'standard',
+    'progress_value' => EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME,
+  );
+  foreach ($requirements_info['options'] as $score_req_id => $label) {
+    $form_state['inline_entity_form'][$ief_id]['entities'][] = array(
+      'entity' => entity_create('score_req_value', array(
+        'score_req_id' => $score_req_id,
+      ) + $default_score_req_values),
+      'weight' => $weight,
+      'form' => NULL,
+      'needs_save' => TRUE,
+    );
+    $weight++;
+  }
 }
 
 /**
@@ -209,6 +267,18 @@ function _score_data_form_date_popup_date_validate($element, &$form_state, $form
 function _score_data_form_validate($form, &$form_state) {
   $entity_type = $form_state['entity_type'];
   $entity = $form_state[$entity_type];
+
+  // Let's manually clean-up the IEF without values.
+  $ief_key = key($form_state['inline_entity_form']);
+  $ief_entities = $form_state['inline_entity_form'][$ief_key]['entities'];
+  foreach ($ief_entities as $ief_entity_key => $ief_entity) {
+    if (!isset($ief_entity['entity']->value) || $ief_entity['entity']->value == NULL) {
+      unset($form_state['inline_entity_form'][$ief_key]['entities'][$ief_entity_key]);
+      unset($form_state['values']['field_scd_score_req_values']['und']['entities'][$ief_entity_key]);
+    }
+  }
+  $form_state['inline_entity_form'][$ief_key]['entities'] = array_values($form_state['inline_entity_form'][$ief_key]['entities']);
+  $form_state['values']['field_scd_score_req_values']['und']['entities'] = array_values($form_state['values']['field_scd_score_req_values']['und']['entities']);
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
 }
 

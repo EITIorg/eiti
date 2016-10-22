@@ -5,6 +5,29 @@
  */
 
 /**
+ * Define the values.
+ */
+// Values (Progress Values).
+define('EITIENTITY_SCORE_REQ_VALUE_NO', 0);
+define('EITIENTITY_SCORE_REQ_VALUE_INADEQUATE', 1);
+define('EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL', 2);
+define('EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY', 3);
+define('EITIENTITY_SCORE_REQ_VALUE_BEYOND', 4);
+
+// Direction of Progress.
+define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME', 0);
+define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_BETTER', 1);
+define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_WORSE', 2);
+
+// Is applicable.
+define('EITIENTITY_SCORE_REQ_IS_APPLICABLE', 0);
+define('EITIENTITY_SCORE_REQ_IS_NOT_APPLICABLE', 1);
+
+// Is required.
+define('EITIENTITY_SCORE_REQ_REQUIRED', 0);
+define('EITIENTITY_SCORE_REQ_ENCOURAGED', 1);
+
+/**
  * Implements hook_entity_info().
  */
 function eitientity_score_req_value_entity_info() {
@@ -101,7 +124,6 @@ function eitientity_score_req_value_permission() {
   return $perms;
 }
 
-
 /**
  * @param string $entity_type
  * @param ScoreReqValueEntity $entity
@@ -110,18 +132,17 @@ function eitientity_score_req_value_permission() {
  */
 function eitientity_score_req_value_get_score_req_label($entity_type, $entity) {
   if (!empty($entity->score_req_id)) {
-    /** @var IndicatorEntity $score_req_entity */
+    /** @var ScoreReqEntity $score_req_entity */
     $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
 
     // Add score_req group name as prefix on IEF.
-    $parent_name = '';
-    if (!empty($score_req_entity->parent)) {
-      $parent_score_req_entity = entity_load_single('score_req', $score_req_entity->parent);
-      $parent_name = '<b>' . filter_xss($parent_score_req_entity->label()) . ' > </b>';
+    $code = '';
+    if (!empty($score_req_entity->code)) {
+      $code = ' <b>[#' . filter_xss($score_req_entity->code) . ']</b>';
     }
 
     if (!empty($score_req_entity)) {
-      return $parent_name . filter_xss($score_req_entity->label());
+      return filter_xss($score_req_entity->label()) . $code;
     }
   }
 
@@ -139,13 +160,18 @@ function eitientity_score_req_value_get_score_req_value_value($entity_type, $ent
     return '';
   }
 
-  /** @var IndicatorEntity $score_req_entity */
+  /** @var ScoreReqEntity $score_req_entity */
   $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
   if (empty($score_req_entity)) {
     return '';
   }
 
-  return $entity->getValue();
+  if ($entity->value !== '') {
+    return _eitientity_score_req_value_get_value_options($entity->value);
+  }
+  else {
+    return '<em>' . t('No Specified') . '</em>';
+  }
 }
 
 /**
@@ -154,18 +180,23 @@ function eitientity_score_req_value_get_score_req_value_value($entity_type, $ent
  *
  * @return string
  */
-function eitientity_score_req_value_get_score_req_value_unit($entity_type, $entity) {
+function eitientity_score_req_value_get_score_req_category($entity_type, $entity) {
   if (empty($entity->score_req_id)) {
     return '';
   }
 
-  /** @var IndicatorEntity $score_req_entity */
+  /** @var ScoreReqEntity $score_req_entity */
   $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
   if (empty($score_req_entity)) {
     return '';
   }
-
-  return $entity->getUnit();
+  $score_req_emw = entity_metadata_wrapper('score_req', $score_req_entity);
+  if ($category = $score_req_emw->field_score_req_category->value()) {
+    return $category->name;
+  }
+  else {
+    return '<em>' . t('N/A') . '</em>';
+  }
 }
 
 /**
@@ -185,35 +216,22 @@ function eitientity_score_req_value_get_score_req_information() {
   // Get a list of domains sorted by weight and name.
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'score_req');
-  $query->propertyOrderBy('name');
+  $query->propertyOrderBy('code');
   $results = $query->execute();
 
-  // @TODO: Optimize!
-  // Prepare score_req groups.
   foreach ($results['score_req'] as $result) {
-    /** @var IndicatorEntity $score_req */
-    $score_req = entity_load_single('score_req', $result->id);
-
-    if ($score_req->type != 'group') {
-      continue;
-    }
-
-    $score_req_options[filter_xss($score_req->label())] = array();
-    $score_req_groups_mapping[$score_req->identifier()] = filter_xss($score_req->label());
-  }
-
-  foreach ($results['score_req'] as $result) {
-    /** @var IndicatorEntity $score_req */
+    /** @var ScoreReqEntity $score_req */
     $score_req = entity_load_single('score_req', $result->id);
     $score_req_attributes[$score_req->identifier()] = array(
-      'data-score_req-type' => check_plain($score_req->type),
+      'data-score_req-code' => check_plain($score_req->code),
     );
-
-    $score_req_label = filter_xss($score_req->label()) . ' [' . check_plain($score_req->type) . ']';
-    if (isset($score_req_groups_mapping[$score_req->parent])) {
-      $parent_group = $score_req_groups_mapping[$score_req->parent];
-      $score_req_options[$score_req->identifier()] = $score_req_label;
+    $score_req_emw = entity_metadata_wrapper('score_req', $score_req);
+    $score_req_label = filter_xss($score_req->label()) . ' [#' . check_plain($score_req->code) . ']';
+    $category = $score_req_emw->field_score_req_category->value();
+    if (!empty($category)) {
+      $score_req_label .= ' - ' . $category->name;
     }
+    $score_req_options[$score_req->identifier()] = $score_req_label;
   }
 
   $information = array(
@@ -223,6 +241,54 @@ function eitientity_score_req_value_get_score_req_information() {
   return $information;
 }
 
+/**
+ * Returns an array of all possible options (aka: levels of progress).
+ *
+ * @param $id
+ *  ID of the value, specify it to see the label of it.
+ *
+ * @return array|string
+ *  Returns either array of options or a label as a string.
+ */
+function _eitientity_score_req_value_get_value_options($id = NULL) {
+  $options = array(
+    EITIENTITY_SCORE_REQ_VALUE_NO => t('No'),
+    EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
+    EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
+    EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
+    EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+  );
+
+  if ($id == NULL) {
+    return $options;
+  }
+  else {
+    return $options[$id];
+  }
+}
+/**
+ * Returns an array of all possible direction of progress options.
+ *
+ * @param $id
+ *  ID of the value, specify it to see the label of it.
+ *
+ * @return array|string
+ *  Returns either array of options or a label as a string.
+ */
+function _eitientity_score_req_value_get_dir_of_progress_options($id = NULL) {
+  $options = array(
+    EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME => t('Same'),
+    EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_BETTER => t('Better'),
+    EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_WORSE => t('Worse'),
+  );
+
+  if ($id == NULL) {
+    return $options;
+  }
+  else {
+    return $options[$id];
+  }
+}
 
 /**
  * Provides theme registration for themes across .inc files.
@@ -299,5 +365,4 @@ function eitientity_score_req_value_form_select_options($element, $choices = NUL
     }
   }
   return $options;
-
 }

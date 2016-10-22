@@ -8,7 +8,7 @@ dependencies[] = elements
 dependencies[] = entity
 dependencies[] = helpergeneric
 dependencies[] = eitientity_implementing_country
-;dependencies[] = eitientity_score_req_value
+dependencies[] = eitientity_score_req_value
 
 
 ; Entity handlers.
