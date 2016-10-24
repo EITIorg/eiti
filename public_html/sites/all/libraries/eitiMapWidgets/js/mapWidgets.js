@@ -24528,7 +24528,7 @@
 	  "id": 1,
 	  "name": "status",
 	  "description": "Implementation status",
-	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br/><a href=\"/about/how-we-work\">Country statuses explained</a>",
+	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br/><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
 	  "footer": "For an overview of the former status of countries under the EITI rules, click <a href=\"/countries-archive\">here</a>"
 	}, {
 	  "id": 2,
@@ -24845,17 +24845,17 @@
 	  "title": "Meaningful progress",
 	  "subtitle": ""
 	}, {
-	  "id": 5314,
+	  "id": 5327,
 	  "color": "#FAC433",
 	  "title": "Inadequate progress",
 	  "subtitle": ""
 	}, {
-	  "id": 5315,
+	  "id": 5328,
 	  "color": "#C00000",
 	  "title": "No progress<br/>",
 	  "subtitle": ""
 	}, {
-	  "id": 5316,
+	  "id": 5329,
 	  "color": "#00919B",
 	  "title": "Yet to be assessed against the 2016 Standard<br/>",
 	  "subtitle": ""
