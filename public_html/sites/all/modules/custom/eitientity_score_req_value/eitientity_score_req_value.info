@@ -1,0 +1,12 @@
+name = EITI Entity: Score Requirement Value
+description = Exposes a custom entity to score requirement values.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+dependencies[] = eitientity_score_req
+
+; Entity handlers.
+files[] = includes/ScoreReqValueEntity.inc
+files[] = includes/ScoreReqValueInlineEntityFormController.inc
+files[] = includes/ScoreReqValueMetadataController.inc

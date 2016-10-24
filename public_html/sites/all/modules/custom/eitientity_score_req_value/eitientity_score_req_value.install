@@ -1,0 +1,69 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function eitientity_score_req_value_schema() {
+  $schema['eiti_score_req_value'] = array(
+    'description' => 'The base table for storing indicator value entities.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The identifier for this entity.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'score_req_id' => array(
+        'description' => 'The score requirement id for this entity.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'value' => array(
+        'description' => 'The value for this entity (from a discreet list).',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'progress_value' => array(
+        'description' => 'The value of the progress for this entity (from a discreet list).',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'is_applicable' => array(
+        'description' => 'Boolean value that indicates whether the value is applicable or not.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'is_required' => array(
+        'description' => 'Boolean value that indicates whether the value is required or encouraged.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'description' => array(
+        'description' => 'Description for the entity.',
+        'type' => 'text',
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+    ),
+    'indexes' => array(
+      'entity_score_req_value_info' => array('id', 'score_req_id'),
+    ),
+    'foreign keys' => array(
+      'eiti_score_req' => array(
+        'table' => 'eiti_score_req',
+        'columns' => array('score_req_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
