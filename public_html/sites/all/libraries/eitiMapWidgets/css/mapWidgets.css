@@ -69,12 +69,18 @@
 .eiti-map-wrapper .legend {
   font-family: 'Open Sans';
   text-align: left;
-  line-height: 1.25em;
+  line-height: 1.5em;
   color: #555;
   width: 25em;
 }
 .eiti-map-wrapper .legend .responsive-header {
   display: none;
+}
+.eiti-map-wrapper .legend .legend_header {
+  margin-bottom: 5px;
+}
+.eiti-map-wrapper .legend .legend_footer {
+  color: #555;
 }
 .eiti-map-wrapper .legend .responsive-legend {
   display: block;
@@ -84,8 +90,7 @@
   height: 0.75em;
   float: left;
   margin-right: 0.5em;
-  margin-bottom: 1em;
-  margin-top: 0.25em;
+  margin-top: 0.4em;
 }
 .eiti-map-wrapper .legend h2 {
   line-height: 1.25em;
@@ -304,17 +309,26 @@
   margin-right: 0.5em;
   width: 1em;
 }
-.eiti-map-wrapper .country-list .member-status.compliant {
-  background-color: #65c32d;
+.eiti-map-wrapper .country-list .member-status.satisfactory_progress {
+  background-color: #84AD42;
 }
-.eiti-map-wrapper .country-list .member-status.candidate {
-  background-color: #42abd8;
+.eiti-map-wrapper .country-list .member-status.meaningful_progress {
+  background-color: #2D8B2A;
+}
+.eiti-map-wrapper .country-list .member-status.inadequate_progress {
+  background-color: #FAC433;
+}
+.eiti-map-wrapper .country-list .member-status.no_progress {
+  background-color: #C00000;
+}
+.eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_to_the_2016_standard {
+  background-color: #00919B;
 }
 .eiti-map-wrapper .country-list .member-status.suspended {
-  background-color: #ff6600;
+  background-color: #FF6600;
 }
 .eiti-map-wrapper .country-list .member-status.other {
-  background-color: #dddddd;
+  background-color: #808080;
 }
 .eiti-map-wrapper .country-list .report {
   float: right;

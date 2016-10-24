@@ -164,6 +164,42 @@ function eititaxonomies_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-country_status-field_tx_country_color'.
+  $field_instances['taxonomy_term-country_status-field_tx_country_color'] = array(
+    'bundle' => 'country_status',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify the color in HEX.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_tx_country_color',
+    'label' => 'Color',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 6,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-document_category-description_field'.
   $field_instances['taxonomy_term-document_category-description_field'] = array(
     'bundle' => 'document_category',
@@ -627,8 +663,10 @@ function eititaxonomies_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Color');
   t('Description');
   t('Name');
+  t('Please specify the color in HEX.');
 
   return $field_instances;
 }

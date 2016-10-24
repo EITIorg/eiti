@@ -83,13 +83,20 @@
 .eiti-map-wrapper .legend {
   font-family: 'Open Sans';
   text-align: left;
-  line-height: 1.25em;
+  line-height: 1.5em;
   color: #555;
   width: 25em;
   .responsive-header {
     display:none;
   }
 
+  .legend_header {
+    margin-bottom:5px;
+  }
+
+  .legend_footer {
+    color:#555;
+  }
   .responsive-legend {
     display:block;
   }
@@ -98,8 +105,8 @@
     height: 0.75em;
     float: left;
     margin-right: 0.5em;
-    margin-bottom: 1em;
-    margin-top: 0.25em;
+    margin-top: 0.4em;
+
   }
   h2 {
     line-height:1.25em;
@@ -345,17 +352,26 @@
       margin-right: 0.5em;
       width: 1em;
 
-      &.compliant {
-        background-color: #65c32d;
+      &.satisfactory_progress {
+        background-color: #84AD42;
       }
-      &.candidate {
-        background-color: #42abd8;
+      &.meaningful_progress {
+        background-color: #2D8B2A;
+      }
+      &.inadequate_progress {
+        background-color: #FAC433;
+      }
+      &.no_progress {
+        background-color: #C00000;
+      }
+      &.yet_to_be_assessed_to_the_2016_standard {
+        background-color: #00919B;
       }
       &.suspended {
-        background-color: #ff6600;
+        background-color: #FF6600;
       }
       &.other {
-        background-color: #dddddd;
+        background-color: #808080;
       }
     }
 
