@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# For more information:
+# @see https://github.com/devgateway/happy-deployer
+
 # REQUIREMENTS:
 # @see https://github.com/cogitatio/vagrant-hostsupdater
 # @see https://github.com/dotless-de/vagrant-vbguest
@@ -13,7 +16,7 @@ if File.exists? __dir__ + '/VagrantSettings.local.yml'
 elsif File.exists? __dir__ + '/VagrantSettings.yml'
   project_settings_file = __dir__ + '/VagrantSettings.yml'
 else
-  raise 'Can not find the VagrantSettings.yml file.'
+  raise 'Can not find VagrantSettings.local.yml or VagrantSettings.yml.'
 end
 project_settings = YAML.load_file(project_settings_file)
 
@@ -24,24 +27,23 @@ end
 # abort(project_settings.inspect) # print variables and exit
 
 # Prepare a list of variables for Ansible.
-if File.exists? __dir__ + '/DeployerSettings.local.yml'
-  ansible_extra_vars_file = __dir__ + '/DeployerSettings.local.yml'
-elsif File.exists? __dir__ + '/DeployerSettings.yml'
-  ansible_extra_vars_file = __dir__ + '/DeployerSettings.yml'
+if File.exists? __dir__ + '/environments/local.yml'
+  ansible_extra_vars_file = __dir__ + '/environments/local.yml'
+elsif File.exists? __dir__ + '/environments/sample.yml'
+  ansible_extra_vars_file = __dir__ + '/environments/sample.yml'
 else
-  raise 'Can not find the DeployerSettings.yml file.'
+  raise 'Can not find environments/local.yml or environments/sample.yml.'
 end
 ansible_extra_vars = YAML.load_file(ansible_extra_vars_file)
 project_settings.each_key {|key| ansible_extra_vars[key] = project_settings[key] }
 
 # The Ansible Playbook for the 'main' VM.
-# A relative path on the /vagrant guest directory.
 if File.exists? __dir__ + '/AnsibleMain.local.yml'
   ansible_playbook = 'AnsibleMain.local.yml'
 elsif File.exists? __dir__ + '/AnsibleMain.yml'
   ansible_playbook = 'AnsibleMain.yml'
 else
-  raise 'Can not find the AnsibleMain.yml file.'
+  raise 'Can not find the AnsibleMain.local.yml or AnsibleMain.yml.'
 end
 
 # Vagrant v1.8.4 is required for ansible_local provisioning to work properly.
@@ -82,16 +84,27 @@ Vagrant.configure(2) do |config|
     # 1. Add port forwarding
     # main_config.vm.network :forwarded_port, guest: 80, host: 8080
 
+    # Forward ports.
+    if project_settings.has_key? 'vagrant_mapped_ports'
+      for entry in project_settings['vagrant_mapped_ports']
+        if !(entry.has_key? 'skip' && entry['skip'])
+          main_config.vm.network :forwarded_port, guest: entry['source'], host: entry['target']
+        end
+      end
+    end
+
     # 2. Add a new virtual network interface card with a fixed IP.
     main_config.vm.network :private_network, ip: project_settings['vagrant']['hostonlyip']
 
     # Settings for the vagrant-hostsupdater plugin.
     # @see https://github.com/cogitatio/vagrant-hostsupdater
     main_config.hostsupdater.aliases = []
-    for vhost in ansible_extra_vars['vhosts']
-      main_config.hostsupdater.aliases = main_config.hostsupdater.aliases + [vhost['domain']]
-      if vhost.has_key? 'aliases'
-        main_config.hostsupdater.aliases = main_config.hostsupdater.aliases + vhost['aliases']
+    if ansible_extra_vars.has_key? 'vhosts'
+      for vhost in ansible_extra_vars['vhosts']
+        main_config.hostsupdater.aliases = main_config.hostsupdater.aliases + [vhost['domain']]
+        if vhost.has_key? 'aliases'
+          main_config.hostsupdater.aliases = main_config.hostsupdater.aliases + vhost['aliases']
+        end
       end
     end
     # Cleanup /etc/hosts when shutting down the VM.
@@ -122,10 +135,13 @@ Vagrant.configure(2) do |config|
     # Mount project directories into the guest OS.
     for volume in project_settings['vagrant_volumes']
       if !(volume.has_key? 'skip' && volume['skip'])
-        if defined? project_settings['vagrant_volumes_type']
-          main_config.vm.synced_folder volume['source'], volume['target'], type: project_settings['vagrant_volumes_type']
-        else
-          main_config.vm.synced_folder volume['source'], volume['target']
+        case project_settings['vagrant_volumes_type']
+          when "nfs"
+            main_config.vm.synced_folder volume['source'], volume['target'], type: "nfs", nfs_udp: false
+          when "smb"
+            main_config.vm.synced_folder volume['source'], volume['target'], type: "smb"
+          else
+            main_config.vm.synced_folder volume['source'], volume['target']
         end
       end
     end
@@ -154,6 +170,9 @@ Vagrant.configure(2) do |config|
 
       # Set the number of virtual CPUs allocated to the virtual machine.
       vb.customize ['modifyvm', :id, '--cpus', 2]
+
+      # Set the name of the VM.
+      vb.name = project_settings['hostname'] + "_main_#{(Time.now.to_f * 1000.0).to_i}"
     end
 
     # Enable provisioning with a shell script. Additional provisioners such as
@@ -172,7 +191,9 @@ Vagrant.configure(2) do |config|
         (
           echo "Adding the EPEL repository..." && \
           rpm --import https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7 && \
-          rpm --quiet --force -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+          rpm --quiet --force -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+          echo "Cleaning the yum cache..." && \
+          yum --quiet clean all \
         )
 
       echo "Installing Ansible from EPEL..."
@@ -187,8 +208,9 @@ Vagrant.configure(2) do |config|
       ansible.playbook = ansible_playbook
       ansible.sudo = true
       ansible.limit = "devel"
-      ansible.inventory_path = '/vagrant/inventory.vagrant.conf'
-      # ansible.verbose = 'vv'
+      # The inventory_path is an absolute path inside the VM.
+      ansible.inventory_path = '/vagrant/AnsibleInventory.conf'
+      # ansible.verbose = 'v'
     end
   end
 end

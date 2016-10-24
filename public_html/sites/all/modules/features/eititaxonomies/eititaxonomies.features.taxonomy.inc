@@ -63,7 +63,7 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'name' => 'Publication Types Public',
       'machine_name' => 'publication_types_public',
       'description' => '',
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',

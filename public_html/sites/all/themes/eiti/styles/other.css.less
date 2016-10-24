@@ -69,6 +69,42 @@ div.description,
   text-align: right;
 }
 
+.person-quick-links-wrapper {
+  @twitter_brand_color: #1da1f2;
+  @skype_brand_color: #00AFF0;
+
+  .field-name-field-twitter-handle {
+    margin: 0 0.5em 0 0;
+    .icon.symbol--twitter {
+      fill: @twitter_brand_color;
+    }
+  }
+  .field-name-field-skype-id {
+    p {
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+      a {
+        width: 24px;
+        overflow: hidden;
+        display: inline-block;
+        img {
+          width: 65px;
+          max-width: 65px;
+          margin: 0 !important;
+          padding: 0  !important;;
+          vertical-align: middle  !important;;
+        }
+      }
+    }
+    .skype-id {
+      color: @skype_brand_color;
+      font-size: 12px;
+    }
+  }
+}
+
 .xMediumAndDown() {
   // Fix wysiwyg image table align hack on mobile browsers.
   table[align="left"],

@@ -41,6 +41,16 @@ function helpergeneric_field_formatter_info() {
     );
   }
 
+  $formatters['helpergeneric_link'] = array(
+    'label' => t('HelperGeneric: Link'),
+    'field types' => array(
+      'text',
+    ),
+    'settings' => array(
+      'link_type' => '',
+    ),
+  );
+
   return $formatters;
 }
 
@@ -117,6 +127,18 @@ function helpergeneric_field_formatter_settings_form($field, $instance, $view_mo
     );
   }
 
+  if ($display['type'] == 'helpergeneric_link') {
+    $link_type_options = array('' => t('- Select Link Type - '));
+    $link_type_options += _helpergeneric_formatter_get_link_types();
+    $element['link_type'] = array(
+      '#type' => 'select',
+      '#title' => t('Link Type'),
+      '#options' => $link_type_options,
+      '#description' => t('Please select how exactly you would like to render the link.'),
+      '#default_value' => $settings['link_type']
+    );
+  }
+
   return $element;
 }
 
@@ -150,6 +172,16 @@ function helpergeneric_field_formatter_settings_summary($field, $instance, $view
   if ($display['type'] == 'link_icon') {
     $summary[] = t('Icon') . ': ' . check_plain($settings['icon']);
     $summary[] = t('Size') . ': ' . check_plain($settings['size']);
+  }
+
+  if ($display['type'] == 'helpergeneric_link') {
+    $link_type_options = _helpergeneric_formatter_get_link_types();
+    if (!empty($settings['link_type'])) {
+      $summary[] = t('Link Render') . ': ' . check_plain($link_type_options[$settings['link_type']]);
+    }
+    else {
+      $summary[] = t('Link Render') . ': ' . t('None - Please select one.');
+    }
   }
 
   return implode('<br />', $summary);
@@ -257,6 +289,70 @@ function __helpergeneric_field_formatter_view__helpergeneric_list($entity_type, 
       '#title' => NULL,
       '#type' => $settings['list_type'],
     );
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_field_formatter_view() for 'helpergeneric_link'.
+ *
+ * @param $entity_type
+ * @param $entity
+ * @param $field
+ * @param $instance
+ * @param $langcode
+ * @param $items
+ * @param $display
+ * @return array
+ */
+function __helpergeneric_field_formatter_view__helpergeneric_link($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $result = array();
+  $link_type = $display['settings']['link_type'];
+
+  foreach ($items as $delta => $item) {
+    if (empty($link_type)) {
+      $output = _text_sanitize($instance, $langcode, $item, 'safe_value');
+    }
+    else {
+      switch ($link_type) {
+        case 'skype_icon':
+          $output = array(
+            '#theme' => 'helpergeneric_skype_button',
+            '#value' => $item['value'],
+            '#attached' => array(
+              'js' => array(
+                array(
+                  'data' => 'http://www.skypeassets.com/i/scom/js/skype-uri.js',
+                  'type' => 'external',
+                )
+              ),
+            ),
+          );
+          break;
+        case 'twitter_icon':
+          $options = array(
+            'width' => '24px',
+            'height' => '24px',
+            'sprite_name' => 'icons',  // @TODO: FIX!
+          );
+          $icon = helpertheme_get_svg_icon('twitter', $options);
+          $output = l($icon, 'http://twitter.com/' . $item['value'], array(
+            'external' => TRUE,
+            'absolute' => TRUE,
+            'html' => TRUE,
+          ));
+          break;
+      }
+    }
+
+    // Now glue things.
+    if (!is_array($output)) {
+      $result[$delta] = array('#markup' => $output);
+    }
+    else {
+      $result[$delta] = $output;
+    }
   }
 
   return $result;
@@ -413,6 +509,9 @@ function helpergeneric_theme() {
     'helpergeneric_formatter_link_icon' => array(
       'variables' => array('element' => NULL, 'field' => NULL, 'display' => NULL),
     ),
+    'helpergeneric_skype_button' => array(
+      'variables' => array('value' => NULL),
+    ),
   );
 }
 
@@ -457,4 +556,38 @@ function theme_helpergeneric_formatter_link_icon($variables) {
   elseif (!empty($variables['element']['url'])) {
     return l($svgicon . $variables['element']['title'], $variables['element']['url'], $link_options);
   }
+}
+
+/**
+ * Returns a skype button.
+ */
+function theme_helpergeneric_skype_button($vars) {
+  $skype_id = $vars['value'];
+  $skype_name = 'chat';
+  $unique_id = uniqid();
+
+  $output = '<div id="SkypeButton_' . $unique_id . '">
+    <script type="text/javascript">
+      Skype.ui({
+        "name": "' . $skype_name . '",
+        "element": "SkypeButton_' . $unique_id . '",
+        "participants": ["' . $skype_id . '"],
+        "imageSize": 24
+      });
+    </script>
+    <div class="skype-id">' . $skype_id  . '</div>
+  </div>';
+
+  return $output;
+}
+
+/**
+ * Small helper function that returns the link-types.
+ */
+function _helpergeneric_formatter_get_link_types() {
+  $link_type_options = array(
+    'skype_icon' => t('Skype Handle as Icon'),
+    'twitter_icon' => t('Twitter Handle as Icon'),
+  );
+  return $link_type_options;
 }

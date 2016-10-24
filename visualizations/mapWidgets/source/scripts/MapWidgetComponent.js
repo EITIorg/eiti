@@ -8,6 +8,7 @@ import { helpers } from './helpers.js' ;
 import _ from 'underscore';
 
 // Legend information
+import { indicator_list } from './data/indicator_list.js';
 import { status } from './data/status.js';
 import { online_oil_registry } from './data/online_oil_registry.js';
 import { online_mining_registry } from './data/online_mining_registry.js';
@@ -340,11 +341,16 @@ export default class MapWidgetComponent extends Component {
           var indicatorMetadata;
           indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
 
-          var indicatorName = ::this.getIndicatorName(indicator_id || this.state.indicator_id);
+          var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
+          var indicatorName = indicatorData["name"];
+          var indicatorDescription = indicatorData["description"];
+          var indicatorHeader = indicatorData["header"];
+          var indicatorFooter = indicatorData["footer"];
+
           var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
 
           var h2El = document.createElement("H2");
-          h2El.innerText = helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "");
+          h2El.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
           h2El.className = "responsive-header";
 
           var spanEl = document.createElement("SPAN");
@@ -352,7 +358,7 @@ export default class MapWidgetComponent extends Component {
           h2El.appendChild(spanEl);
 
           var h2El_2 = document.createElement("H2");
-          h2El_2.innerText = helpers.t(indicatorName) + " " + (unit ? "("+unit+ ")" : "");
+          h2El_2.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
 
           var spanEl_2 = document.createElement("SPAN");
           spanEl_2.innerText = helpers.t("hide");
@@ -361,13 +367,23 @@ export default class MapWidgetComponent extends Component {
           var divLegend = document.createElement("DIV");
           divLegend.className = "responsive-legend";
 
+
           var mergedHTML = "";
+          var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>"; 
+          mergedHTML += headerText;
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-            mergedHTML += ('<i style="background:' + v.color + '"></i> <strong>'+helpers.t(v.title)+ '</strong> <br/>'+ (helpers.t(v.subtitle) || '') + '<br/>' ) ;
+            mergedHTML += '<i style="background:' + v.color + '"></i> '+helpers.t(v.title)+ '<br/>';
+            if(v.subtitle != "") {
+              mergedHTML += (helpers.t(v.subtitle) || '') + '<br/>';
+            }
           });
-          if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
+          //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
+
+          var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>"; 
+          mergedHTML += footerText;
+
           var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
 
           var divLegendBody = document.createElement("DIV");
@@ -396,49 +412,10 @@ export default class MapWidgetComponent extends Component {
       info.addTo(map);
   }
 
-  getIndicatorName(indicator_id){
-    var values;
-    switch(indicator_id) {
-      case "status":
-        values = helpers.t("Implementation status");
-      break;
-      case "online_oil_registry":
-        values = helpers.t("Online oil registry");
-      break;
-      case "online_mining_registry":
-        values = helpers.t("Online mining registry");
-      break;
-      case "online_contracts":
-        values = helpers.t("Online registry of contracts");
-      break;
-      case "oil_volume":
-        values = helpers.t("Oil, volume");
-      break;
-      case "gas_volume":
-        values = helpers.t("Gas, volume");
-      break;
-      case "coal_volume":
-        values = helpers.t("Coal");
-      break;
-      case "gold_volume":
-        values = helpers.t("Gold");
-      break;
-      case "copper_volume":
-        values = helpers.t("Copper");
-      break;
-      case "revenue":
-        values = helpers.t("Government revenue - extractive industries");
-      break;
-      case "revenue_per_capita":
-        values = helpers.t("Government revenue - extractive industries per capita");
-      break;
-      case "share_revenues":
-        values = helpers.t("% Extractives revenue as a share of total government revenue");
-      break;
-    }
-    return values;
+  getIndicatorData(indicator_id){
+    var current_indicator = _.find(indicator_list, function(v){ return (v.name == indicator_id)});
+    return current_indicator;
   }
-
 
   onEachFeaturePage(feature, layer) {
     layer.on({
@@ -551,7 +528,7 @@ export default class MapWidgetComponent extends Component {
       var sortedCountries = _.sortBy(this.state.data, 'label');
       var cutout = Math.ceil(sortedCountries.length/4);
       for (var i = 0; i < sortedCountries.length;i++) {
-        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase() : "member-status other";
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/ /g,"_") : "member-status other";
         var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 
         var years = Object.keys(sortedCountries[i].metadata);

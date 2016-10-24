@@ -246,6 +246,10 @@ function eitict_article_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'There are no items to display.';
+  /* Relationship: Content: Entity translation: translations */
+  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
+  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -284,14 +288,6 @@ function eitict_article_views_default_views() {
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'node';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-  );
-  $handler->display->display_options['filters']['language']['group'] = 1;
   /* Filter criterion: Content: Article Type (field_article_type) */
   $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
   $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
@@ -330,6 +326,14 @@ function eitict_article_views_default_views() {
     2 => '2',
   );
   $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
+  /* Filter criterion: Entity translation: Language */
+  $handler->display->display_options['filters']['language_1']['id'] = 'language_1';
+  $handler->display->display_options['filters']['language_1']['table'] = 'entity_translation';
+  $handler->display->display_options['filters']['language_1']['field'] = 'language';
+  $handler->display->display_options['filters']['language_1']['relationship'] = 'entity_translations';
+  $handler->display->display_options['filters']['language_1']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -351,6 +355,7 @@ function eitict_article_views_default_views() {
     t('next ›'),
     t('last »'),
     t('There are no items to display.'),
+    t('Translations'),
     t('All'),
     t('Filter by Title'),
     t('Tags'),

@@ -89,8 +89,9 @@ httpd_php56__drush_download_checksum: 5a81d4cefe59f083f7aa6dbcd511c0446557d022a7
 httpd_php56__drupal_console_install: 1
 httpd_php56__drupal_console_download_url: https://drupalconsole.com/installer
 
-# Disable xdebug for composer.
-httpd_php56__composer_disable_xdebug: 0
+# Composer recommends that Xdebug should be disabled on CLI.
+httpd_php56__sapi_cli_xdebug: 0
+httpd_php56__sapi_httpd_xdebug: 1
 
 # A list of extra PHP.ini directives.
 #httpd_php56__ini_extra_directives:

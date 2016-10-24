@@ -1,9 +1,7 @@
 ---
-# Fallback environment settings file.
-# You can copy this file to "vars.{$project_environment}.yml" and configure it.
+# Sample environment settings file.
 #
-# NOTE: The project Vagrantfile first tries to load "vars.local.yml".
-# TODO: Improve!!!
+# Vagrant will load this file if a "local.yml" environment variables file does not exist.
 #
 
 # Web server vhosts information:
@@ -17,15 +15,14 @@ vhosts:
     template: default
     noindex: true
     php_devel: true
-    php_xdebug: true
     docroot: /var/www/eiti-local/public_html
     weight: 10
-  - domain: eiti-visualizations.local
+  - domain: visualizations.eiti.local
     template: default
     noindex: true
     docroot: /var/www/eiti-local/visualizations
     weight: 20
-  - domain: eiti-legacy.local
+  - domain: legacy.eiti.local
     template: default
     noindex: true
     php_devel: true

@@ -431,3 +431,37 @@ function eitientity_summary_data_entity_property_get_indicator_gov_revenue_extra
 
   return $value;
 }
+
+/**
+ * Value callback for "'Government revenue - calculated sum".
+ *
+ * @param $data
+ * @param array $options
+ * @param $name
+ * @param $type
+ * @param $info
+ */
+function eitientity_summary_data_entity_property_calculate_gov_revenue($data, array $options, $name, $type, $info) {
+  // Following the example above for consistency.
+  $select = db_select('field_data_field_sd_revenue_government', 'fgr');
+  $select->innerJoin('eiti_revenue_stream', 'rs', 'rs.id = fgr.field_sd_revenue_government_target_id');
+  $select->condition('fgr.entity_type', 'summary_data')
+    ->condition('fgr.entity_id', $data->id)
+    ->condition('rs.type', 'agency');
+
+  // We choose to do it in the Database for performance reasons.
+  // Also we *consider* that the currency is always USD as the import does all the necessary conversion.
+  $select->addExpression('SUM(rs.revenue)', 'revenue');
+  $revenue = $select->execute()->fetchField();
+
+  if (empty($revenue)) {
+    return t('N/A');
+  }
+
+  $value = t('@currency @value', array(
+    '@currency' => t('USD'),
+    '@value' => number_format($revenue, 2),
+  ));
+
+  return $value;
+}

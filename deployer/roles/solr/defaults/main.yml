@@ -7,10 +7,11 @@ solr__port: 8983
 # The Solr version to download and install.
 solr__version: 5.5.2
 
-# The sha256 checksum of the downloaded file.
+# The checksum of the downloaded file.
 solr__download_checksum: "md5:ad798c4ddeccd740cf78c25c7962ba71"
 
 # Set the Download mirror, WITH a trailing slash.
+# NOTE: The Apache.org Archive is very slow.
 solr__download_mirror: https://archive.apache.org/dist/lucene/solr/
 
 # Official mirros only offer the latest version.

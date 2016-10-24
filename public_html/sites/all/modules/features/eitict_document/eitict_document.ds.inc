@@ -46,10 +46,32 @@ function eitict_document_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'document';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
-    'field_document_category' => array(
+    'field_attachments' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
+          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
+    'field_doc_type_public' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Publication Type',
+        ),
+      ),
+    ),
+    'field_doc_published_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_doc_type_internal' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Publication Type',
         ),
       ),
     ),
@@ -64,21 +86,6 @@ function eitict_document_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
-    'field_attachments' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-          'classes' => 'field-highlighted',
-        ),
-      ),
-    ),
-    'field_doc_published_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
         ),
       ),
     ),
@@ -155,21 +162,25 @@ function eitict_document_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'field_doc_image_preview',
-        1 => 'field_doc_published_date',
-        2 => 'field_document_category',
+        0 => 'field_doc_publisher',
+        1 => 'field_doc_image_preview',
+        2 => 'field_doc_type_internal',
+        3 => 'field_doc_type_public',
+        4 => 'field_doc_published_date',
       ),
       'right' => array(
-        3 => 'title_field',
-        4 => 'body',
-        5 => 'field_attachments',
-        6 => 'field_mailchimp_signup_form',
+        5 => 'title_field',
+        6 => 'body',
+        7 => 'field_attachments',
+        8 => 'field_mailchimp_signup_form',
       ),
     ),
     'fields' => array(
+      'field_doc_publisher' => 'left',
       'field_doc_image_preview' => 'left',
+      'field_doc_type_internal' => 'left',
+      'field_doc_type_public' => 'left',
       'field_doc_published_date' => 'left',
-      'field_document_category' => 'left',
       'title_field' => 'right',
       'body' => 'right',
       'field_attachments' => 'right',

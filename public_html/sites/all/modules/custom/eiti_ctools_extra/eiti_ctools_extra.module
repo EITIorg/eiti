@@ -433,7 +433,13 @@ function eiti_ctools_extra__quick_summary_tool__quick_summary_table($ids) {
     $row_data[] = $wrapper->year_end->value();
     $row_data[] = $wrapper->sectors_covered->value();
     $row_data[] = $wrapper->field_sd_no_reporting_com->value();
-    $row_data[] = $wrapper->gov_revenue_extractive->value();
+
+    // Government revenue is a separate case, we want to have a soft-calculated fallback.
+    $gov_revenue = $wrapper->gov_revenue_extractive->value();
+    if ($gov_revenue == 'N/A') {
+      $gov_revenue = $wrapper->gov_revenue_calculated->value();
+    }
+    $row_data[] = $gov_revenue;
 
     if ($wrapper->field_sd_report_file->value()) {
       $field_view_field = field_view_field($entity_type, $entity, 'field_sd_report_file');

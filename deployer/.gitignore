@@ -1,0 +1,15 @@
+
+# Ignore development specific files and directories.
+/.vagrant
+/*.retry
+/AnsibleInventory.*.conf
+/AnsibleMain.local.yml
+/VagrantSettings.local.yml
+/environments/local.yml
+
+# Ignore archives and database dumps.
+/*.7z
+/*.gz
+/*.sql
+/*.tar
+/*.tgz

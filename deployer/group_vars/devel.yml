@@ -1,9 +1,23 @@
 ---
+# Settings for environment in the devel group.
 
-project_environment: local
 
+# Configure PHP for local development.
 httpd_php56__error_reporting: E_ALL
 httpd_php56__display_errors: On
 httpd_php56__display_startup_errors: On
 httpd_php56__html_errors: On
 httpd_php56__opcache_enable: 0
+
+# A list of extra PHP.ini directives.
+httpd_php56__ini_extra_directives:
+  - ; @see http://www.xdebug.org/docs/all_settings
+  - xdebug.idekey = "vagrant-xdebug"
+  - xdebug.max_nesting_level = 300
+  - xdebug.remote_enable = 1
+  - xdebug.remote_port = 9000
+  - xdebug.remote_connect_back = 1
+
+# Open 9000 TCP port for xdebug.
+common__extra_open_tcp_ports:
+  - 9000

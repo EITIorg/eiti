@@ -26,12 +26,37 @@
   notify:
     - restart httpd
 
-- name: Update PHP configuration
+- name: Update configuration
   template:
     src: custom.ini.j2
     dest: /etc/php.d/99-custom.ini
   notify:
     - restart httpd
+
+- name: Create configuration file for Apache 2 HTTPD SAPI (apache2handler)
+  command: cp --force /etc/php.ini /etc/php-apache2handler.ini
+  args:
+    creates: /etc/php-apache2handler.ini
+
+- name: Disable xdebug for CLI SAPI
+  lineinfile:
+    dest: "/etc/php.d/15-xdebug.ini"
+    backrefs: yes
+    regexp: '^zend_extension=(.+)'
+    line: ';zend_extension=\1'
+  notify:
+    - restart httpd
+  when: not httpd_php56__sapi_cli_xdebug
+
+- name: Enable Xdebug for Apache HTTPD SAPI
+  lineinfile:
+    dest: "/etc/php-apache2handler.ini"
+    regexp: '^zend_extension=xdebug.so'
+    insertafter: "^; default extension directory."
+    line: 'zend_extension=xdebug.so'
+  notify:
+    - restart httpd
+  when: httpd_php56__sapi_httpd_xdebug
 
 - name: Check composer presence
   stat: path=/usr/local/bin/composer

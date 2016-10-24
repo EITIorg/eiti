@@ -240,18 +240,18 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
       '#default_value' => _contentwidget__fact_blocks__get_property_value($widget_settings, $delta, 'type'),
     );
 
+    $entity_language = entity_language('fieldable_panels_pane', $form_state['entity']);
+    $widget_field_language = field_language('fieldable_panels_pane', $form_state['entity'], 'field_fpp_widget', $entity_language);
+
     // For cases where field parents are set.
     if (!empty($element['#field_parents'])) {
       $parents = $element['#field_parents'];
       $field_name = array_shift($parents);
       $field_parents_path = $field_name . '[' . implode('][', $parents) . ']';
-
-      $entity_language = entity_language('fieldable_panels_pane', $form_state['entity']);
-      $widget_field_language = field_language('fieldable_panels_pane', $form_state['entity'], 'field_fpp_widget', $entity_language);
       $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][' . $widget_field_language . '][0][settings][fact_blocks]';
     }
     else {
-      $field_name_prefix = $element['#field_name'] . '[und][0][settings][fact_blocks]';
+      $field_name_prefix = $element['#field_name'] . '[' . $widget_field_language . '][0][settings][fact_blocks]';
     }
 
     $settings_form[$delta]['value'] = array(
@@ -332,9 +332,25 @@ function _contentwidget__fact_blocks__get_computed_values($return) {
   // Please make sure you specify a nice label in format: "<Scope>: <Description>".
   // Also make sure that the function callback returns either value, or an array
   // which has 2 keys: value and suffix.
-  $items['eiti_countries'] = array(
-    'label' => t('Global: Countries Count'),
-    'function' => '_contentwidget__fact_blocks__get_countries_count',
+  $items['eiti_countries_compliant'] = array(
+    'label' => t('Global: Compliant Countries Count'),
+    'function' => '_contentwidget__fact_blocks__get_compliant_countries_count',
+  );
+  $items['eiti_countries_candidate'] = array(
+    'label' => t('Global: Candidate Countries Count'),
+    'function' => '_contentwidget__fact_blocks__get_candidate_countries_count',
+  );
+  $items['eiti_countries_suspended'] = array(
+    'label' => t('Global: Suspended Countries Count'),
+    'function' => '_contentwidget__fact_blocks__get_suspended_countries_count',
+  );
+  $items['eiti_summary_data_count'] = array(
+    'label' => t('Global: Summary Data Count'),
+    'function' => '_contentwidget__fact_blocks__get_summary_data_count',
+  );
+  $items['eiti_revenue_sum_governmental_agencies'] = array(
+    'label' => t('Global: Sum of All Government Revenues'),
+    'function' => '_contentwidget__fact_blocks__get_all_revenues',
   );
 
   $output = array();
@@ -357,21 +373,143 @@ function _contentwidget__fact_blocks__get_computed_values($return) {
 }
 
 /**
- * Custom function that returns the count of implementing countries.
+ * Custom function that returns the count of compliant implementing countries.
  */
-function _contentwidget__fact_blocks__get_countries_count() {
-  $query = new EntityFieldQuery();
-  $result = $query
-    ->entityCondition('entity_type', 'implementing_country')
-    ->propertyCondition('status', '1')
-    ->count()
-    ->execute();
+function _contentwidget__fact_blocks__get_compliant_countries_count() {
+  $count = _contentwidget__fact_blocks__get_countries_count('Compliant');
+  if ($count == FALSE) {
+    $count = t('N/A');
+  }
 
+  return array(
+    'value' => $count,
+    'suffix' => '',
+  );
+}
+
+/**
+ * Custom function that returns the count of candidate implementing countries.
+ */
+function _contentwidget__fact_blocks__get_candidate_countries_count() {
+  $count = _contentwidget__fact_blocks__get_countries_count('Candidate');
+  if ($count == FALSE) {
+    $count = t('N/A');
+  }
+
+  return array(
+    'value' => $count,
+    'suffix' => '',
+  );
+}
+
+/**
+ * Custom function that returns the count of compliant implementing countries.
+ */
+function _contentwidget__fact_blocks__get_suspended_countries_count() {
+  $count = _contentwidget__fact_blocks__get_countries_count('Suspended');
+  if ($count == FALSE) {
+    $count = t('N/A');
+  }
+
+  return array(
+    'value' => $count,
+    'suffix' => '',
+  );
+}
+
+/**
+ * Custom function that returns the count of implementing countries.
+ *
+ * @type string
+ *  Type of the implementing country: candidate, suspended or compliant.
+ *
+ * @return int
+ *  Returns the count of countries.
+ */
+function _contentwidget__fact_blocks__get_countries_count($type) {
+  // Static cache the whole thing.
+  $results = &drupal_static(__FUNCTION__);
+
+  $terms = taxonomy_get_term_by_name($type, 'country_status');
+  if (is_array($terms)) {
+    $term = reset($terms);
+    if (!empty($results[$term->tid])) {
+      return $results[$term->tid];
+    }
+
+    $query = new EntityFieldQuery();
+    $result = $query
+      ->entityCondition('entity_type', 'implementing_country')
+      ->propertyCondition('status', '1')
+      ->fieldCondition('field_ic_status', 'tid', $term->tid)
+      ->count()
+      ->execute();
+    $results[$term->tid] = $result;
+  }
+  else {
+    return FALSE;
+  }
+
+  return $result;
+}
+
+/**
+ * Gets the global count of all of the uploaded summary data.
+ */
+function _contentwidget__fact_blocks__get_summary_data_count() {
+  $select = db_select('eiti_summary_data', 'sd');
+  $result = $select->condition('sd.status', 1)
+    ->countQuery()
+    ->execute()
+    ->fetchField();
   return array(
     'value' => $result,
     'suffix' => '',
   );
 }
+
+/**
+ * Sums all the revenues for all of the summary data ever uploaded.
+ */
+function _contentwidget__fact_blocks__get_all_revenues() {
+  // Let's check the cache first.
+  $cache = cache_get('fact_block_global_revenue_sum');
+  if (!empty($cache->data)) {
+    $revenue = $cache->data;
+  }
+  else {
+    $select = db_select('field_data_field_sd_revenue_government', 'fgr');
+    $select->innerJoin('eiti_revenue_stream', 'rs', 'rs.id = fgr.field_sd_revenue_government_target_id');
+    $select->innerJoin('eiti_summary_data', 'sd', 'sd.id = fgr.entity_id');
+    $select->condition('fgr.entity_type', 'summary_data')
+      ->condition('sd.status', 1)
+      ->condition('rs.type', 'agency');
+
+    // We choose to do it in the Database for performance reasons.
+    // Also we *consider* that the currency is always USD as the import does all the necessary conversion.
+    $select->addExpression('SUM(rs.revenue)', 'revenue');
+    $revenue = $select->execute()->fetchField();
+
+    // Let's cache if for performance reasons.
+    cache_set('fact_block_global_revenue_sum', $revenue, 'cache', CACHE_TEMPORARY);
+  }
+
+  if (empty($revenue)) {
+    return array(
+      'value' => t('N/A'),
+      'suffix' => '',
+    );
+  }
+
+  $revenue_trillions = $revenue / 1000000000000;
+  $value = array(
+    'value' => number_format($revenue_trillions, 2),
+    'suffix' => '',
+  );
+
+  return $value;
+}
+
 
 /**
  * Ajax callback for the settings form.

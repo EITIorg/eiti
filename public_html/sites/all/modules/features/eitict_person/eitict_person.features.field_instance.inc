@@ -31,7 +31,7 @@ function eitict_person_field_default_field_instances() {
           'trim_length' => 256,
         ),
         'type' => 'helpergeneric_clean_summary',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -74,7 +74,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -195,7 +195,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'node',
@@ -334,7 +334,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -416,7 +416,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -433,6 +433,96 @@ function eitict_person_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-person-field_skype_id'.
+  $field_instances['node-person-field_skype_id'] = array(
+    'bundle' => 'person',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'link_type' => 'skype_icon',
+        ),
+        'type' => 'helpergeneric_link',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_skype_id',
+    'label' => 'Skype',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
+    ),
+  );
+
+  // Exported field_instance: 'node-person-field_twitter_handle'.
+  $field_instances['node-person-field_twitter_handle'] = array(
+    'bundle' => 'person',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'link_type' => 'twitter_icon',
+        ),
+        'type' => 'helpergeneric_link',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_twitter_handle',
+    'label' => 'Twitter',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 15,
     ),
   );
 
@@ -454,7 +544,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'node',
@@ -566,6 +656,8 @@ function eitict_person_field_default_field_instances() {
   t('Please specify the position / work title of this person.');
   t('Position');
   t('Related Country');
+  t('Skype');
+  t('Twitter');
   t('Website');
 
   return $field_instances;

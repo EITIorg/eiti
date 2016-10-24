@@ -56,6 +56,7 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
 
     $query->condition('sd.status', TRUE);
     $query->condition('crs.revenue', 0, '>');
+    $query->isNotNull('sq.agency');
     $query->orderBy('crs.revenue', 'DESC');
 
     // Check for the filters.
@@ -123,25 +124,34 @@ class EITIApiSankey extends RestfulDataProviderEITICharts {
       if (!in_array($item->company, $lookup_haystack)) {
         $nodes[] = array(
           'name' => $item->company,
+          'type' => 'company',
         );
       }
       if (!in_array($item->agency, $lookup_haystack)) {
         $nodes[] = array(
           'name' => $item->agency,
+          'type' => 'agency',
         );
       }
       if (!in_array($item->revenue_name, $lookup_haystack)) {
         $nodes[] = array(
           'name' => $item->revenue_name,
+          'type' => 'revenue',
         );
       }
     }
 
     // Now let's create the links.
     $lookup_haystack = array_column($nodes, 'name');
+
     $company_values = array();
     foreach ($data as $item) {
       $company_index = array_search($item->company, $lookup_haystack);
+
+      // If for some reason (like same name) the type isn't company, SKIP!
+      if ($nodes[$company_index]['type'] != 'company') {
+        continue;
+      }
 
       // Append the value or sum it to existing fluxes.
       if (!in_array($company_index, array_keys($company_values))) {

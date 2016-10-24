@@ -1,7 +1,10 @@
 ---
 # Default vagrant settings file.
 #
-# You can copy this file to "VagrantSettings.local.yml" and configure it.
+# You can copy this file to "Vagrantsettings.local.yml" and configure it.
+#
+# For more information:
+# @see https://github.com/devgateway/happy-deployer
 #
 
 # Used to name the VM and set hostname for the GUEST (only if vagrant.hosts_entry is 1).
@@ -17,9 +20,13 @@ vagrant:
   hosts_entry: 0
 
 # Define mount points for the VM.
+# - source: path in the host that should be mounted in the VM.
+# - target: path in the VM where the sources hould be mounted.
+# - skip: if this volume should not be mounted; you can configure your IDE to deploy the files.
 vagrant_volumes:
   - source: ../
     target: /var/www/eiti-local
+    #skip: true
 
 # The type of synced directory. By default this is "vboxsf" which is very slow.
 #   - For linux/mac see: https://www.vagrantup.com/docs/synced-folders/nfs.html
@@ -35,6 +42,13 @@ vagrant_box:
   download_checksum: 7bfe7ba403eeeb20d57fdd1c8b400e10
   download_checksum_type: md5
 
+# Define forwarded ports.
+#vagrant_mapped_ports:
+#  - source: 5432
+#    target: 5432
+#  - source: 8009
+#    target: 8009
+
 # Ansible variables to override.
 common__backups_user: vagrant
 common__backups_group: users
@@ -42,17 +56,3 @@ httpd__User: vagrant
 httpd__Group: users
 httpd__User_vhosts: vagrant
 httpd__Group_vhosts: users
-
-# A list of extra PHP.ini directives.
-httpd_php56__ini_extra_directives:
-  - ; @see http://www.xdebug.org/docs/all_settings
-  - xdebug.idekey = "vagrant-xdebug"
-  - xdebug.max_nesting_level = 300
-  - xdebug.remote_enable = 1
-  - xdebug.remote_port = 9000
-  - xdebug.remote_connect_back = 1
-
-# Extra open TCP ports.
-common__extra_open_tcp_ports:
-  - 22
-  - 9000
