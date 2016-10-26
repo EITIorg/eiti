@@ -1144,7 +1144,11 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'score_req_value entity administer'.
   $permissions['score_req_value entity administer'] = array(
     'name' => 'score_req_value entity administer',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
     'module' => 'eitientity_score_req_value',
   );
 
