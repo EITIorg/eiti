@@ -332,17 +332,9 @@ function _contentwidget__fact_blocks__get_computed_values($return) {
   // Please make sure you specify a nice label in format: "<Scope>: <Description>".
   // Also make sure that the function callback returns either value, or an array
   // which has 2 keys: value and suffix.
-  $items['eiti_countries_compliant'] = array(
-    'label' => t('Global: Compliant Countries Count'),
-    'function' => '_contentwidget__fact_blocks__get_compliant_countries_count',
-  );
-  $items['eiti_countries_candidate'] = array(
-    'label' => t('Global: Candidate Countries Count'),
-    'function' => '_contentwidget__fact_blocks__get_candidate_countries_count',
-  );
-  $items['eiti_countries_suspended'] = array(
-    'label' => t('Global: Suspended Countries Count'),
-    'function' => '_contentwidget__fact_blocks__get_suspended_countries_count',
+  $items['eiti_countries_implementing_countries'] = array(
+    'label' => t('Global: Implementing Countries Count'),
+    'function' => '_contentwidget__fact_blocks__get_impl_countries_count',
   );
   $items['eiti_summary_data_count'] = array(
     'label' => t('Global: Summary Data Count'),
@@ -373,40 +365,18 @@ function _contentwidget__fact_blocks__get_computed_values($return) {
 }
 
 /**
- * Custom function that returns the count of compliant implementing countries.
+ * Custom function that returns the count of meaningful progress implementing countries.
  */
-function _contentwidget__fact_blocks__get_compliant_countries_count() {
-  $count = _contentwidget__fact_blocks__get_countries_count('Compliant');
-  if ($count == FALSE) {
-    $count = t('N/A');
-  }
-
-  return array(
-    'value' => $count,
-    'suffix' => '',
+function _contentwidget__fact_blocks__get_impl_countries_count() {
+  $opt_in = array(
+    'Meaningful progress',
+    'Satisfactory progress',
+    'Inadequate progress',
+    'No progress',
+    'Yet to be assessed to the 2016 Standard',
+    'Suspended',
   );
-}
-
-/**
- * Custom function that returns the count of candidate implementing countries.
- */
-function _contentwidget__fact_blocks__get_candidate_countries_count() {
-  $count = _contentwidget__fact_blocks__get_countries_count('Candidate');
-  if ($count == FALSE) {
-    $count = t('N/A');
-  }
-
-  return array(
-    'value' => $count,
-    'suffix' => '',
-  );
-}
-
-/**
- * Custom function that returns the count of compliant implementing countries.
- */
-function _contentwidget__fact_blocks__get_suspended_countries_count() {
-  $count = _contentwidget__fact_blocks__get_countries_count('Suspended');
+  $count = _contentwidget__fact_blocks__get_countries_count($opt_in);
   if ($count == FALSE) {
     $count = t('N/A');
   }
@@ -429,26 +399,31 @@ function _contentwidget__fact_blocks__get_suspended_countries_count() {
 function _contentwidget__fact_blocks__get_countries_count($type) {
   // Static cache the whole thing.
   $results = &drupal_static(__FUNCTION__);
+  $tids = array();
 
-  $terms = taxonomy_get_term_by_name($type, 'country_status');
-  if (is_array($terms)) {
-    $term = reset($terms);
-    if (!empty($results[$term->tid])) {
-      return $results[$term->tid];
+  if (is_array($type)) {
+    foreach ($type as $term_name) {
+      $terms = taxonomy_get_term_by_name($term_name, 'country_status');
+      $term = reset($terms);
+      $tids[] = $term->tid;
     }
-
-    $query = new EntityFieldQuery();
-    $result = $query
-      ->entityCondition('entity_type', 'implementing_country')
-      ->propertyCondition('status', '1')
-      ->fieldCondition('field_ic_status', 'tid', $term->tid)
-      ->count()
-      ->execute();
-    $results[$term->tid] = $result;
   }
   else {
-    return FALSE;
+    $terms = taxonomy_get_term_by_name($type, 'country_status');
+    $term = reset($terms);
+    $tids = array($term->tid);
   }
+  if (!empty($results[implode(':', $tids)])) {
+    return $results[implode(':', $tids)];
+  }
+
+  $query = new EntityFieldQuery();
+  $query
+    ->entityCondition('entity_type', 'implementing_country')
+    ->propertyCondition('status', '1');
+  $query->fieldCondition('field_ic_status', 'tid', $tids, 'IN');
+  $result = $query->count()->execute();
+  $results[implode(':', $tids)] = $result;
 
   return $result;
 }
