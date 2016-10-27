@@ -43,34 +43,31 @@ export default class MapWidgetComponent extends Component {
     };
   }
 
+  getFields(indicator_id) {
+    var params = "";
+    // TODO: As we limit the fields we retrive, add additional cases
+    switch(indicator_id) {
+      case "status":
+        params = "id,label,iso3,status"
+      break;
+    }
+    return params ? "?fields=" + params : "";
+  }
 
   componentWillMount() {
-    jQuery.get(helpers.getEndPoint() + '?fields=id', function(result) {
-        var calls = [];
-        var results = [];
+    console.log("Needs buttons?" + this.props.buttons);
+    var params = "";
+    if(this.props.buttons) {
+      params = ::this.getFields(this.state.indicator_id);
+    }
 
-        for (var i = 0; i < result.count / helpers.getPageSize(); i++) {
-            calls.push(
-                jQuery.get(helpers.getEndPointPage(i + 1), function(result) {
-                    results.push(result.data);
-                })
-            );
-        }
-
-        jQuery.when.apply(null, calls).done(function() {
-            var consolidated = [];
-            results.forEach(function(r) {
-                consolidated = consolidated.concat(r);
-            });
-
-            var baseMap = ::this.decorate(consolidated, this.state.indicator_id, this.state.valuetypes);
-            this.setState({
-                baseMap: baseMap,
-                data: consolidated
-            });
-
-        }.bind(this));
-
+    jQuery.get(helpers.getEndPoint(params), function(results) {
+        console.log(results);
+        var baseMap = ::this.decorate(results.data, this.state.indicator_id, this.state.valuetypes);
+        this.setState({
+            baseMap: baseMap,
+            data: results
+        });
     }.bind(this));
   }
 
@@ -84,7 +81,9 @@ export default class MapWidgetComponent extends Component {
     var metadata = ::this.getValues(indicator_id);
 
     countryGeoJson.features.forEach(function(country) {
-      var datapoint = _.find(data, function(v){ return v.iso3 === country.id;});
+      var datapoint = _.find(data, function(v){ 
+        return v.iso3 === country.id;
+      });
       if(datapoint) {
         var indicator_value = 0;
         var indicator_unit = '';
@@ -476,6 +475,8 @@ export default class MapWidgetComponent extends Component {
       geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
     } 
     var buttons;
+
+    //TODO: Move this to a configuration file
 
     if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">

@@ -10,14 +10,11 @@ export var helpers = {
         return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
     },
 
-    getEndPoint: function() {
-        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';   
+    getEndPoint: function(params) {
+        console.log(params);
+        return window.Drupal ? '/api/v1.0/implementing_country' + params : 'source/scripts/data/implementing_country.json' + params ;   
     }, 
     
-    getEndPointPage: function(page) {
-        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';   
-    }, 
-
     getPaletteDivergent: function(index) {
         var colors = ['#42abd8', '#65c32d', '#ff6600', '#dddddd'];
         return colors[index];

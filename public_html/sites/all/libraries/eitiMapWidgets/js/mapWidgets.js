@@ -23651,30 +23651,33 @@
 	  }
 	
 	  _createClass(MapWidgetComponent, [{
+	    key: 'getFields',
+	    value: function getFields(indicator_id) {
+	      var params = "";
+	      // TODO: As we limit the fields we retrive, add additional cases
+	      switch (indicator_id) {
+	        case "status":
+	          params = "id,label,iso3,status";
+	          break;
+	      }
+	      return params ? "?fields=" + params : "";
+	    }
+	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      jQuery.get(_helpers.helpers.getEndPoint() + '?fields=id', function (result) {
-	        var calls = [];
-	        var results = [];
+	      console.log("Needs buttons?" + this.props.buttons);
+	      var params = "";
+	      if (this.props.buttons) {
+	        params = this.getFields.call(this, this.state.indicator_id);
+	      }
 	
-	        for (var i = 0; i < result.count / _helpers.helpers.getPageSize(); i++) {
-	          calls.push(jQuery.get(_helpers.helpers.getEndPointPage(i + 1), function (result) {
-	            results.push(result.data);
-	          }));
-	        }
-	
-	        jQuery.when.apply(null, calls).done(function () {
-	          var consolidated = [];
-	          results.forEach(function (r) {
-	            consolidated = consolidated.concat(r);
-	          });
-	
-	          var baseMap = this.decorate.call(this, consolidated, this.state.indicator_id, this.state.valuetypes);
-	          this.setState({
-	            baseMap: baseMap,
-	            data: consolidated
-	          });
-	        }.bind(this));
+	      jQuery.get(_helpers.helpers.getEndPoint(params), function (results) {
+	        console.log(results);
+	        var baseMap = this.decorate.call(this, results.data, this.state.indicator_id, this.state.valuetypes);
+	        this.setState({
+	          baseMap: baseMap,
+	          data: results
+	        });
 	      }.bind(this));
 	    }
 	  }, {
@@ -24120,6 +24123,8 @@
 	        geoJsonLayer = _react2.default.createElement(_reactLeaflet.GeoJson, { data: this.state.baseMap, ref: 'geoJsonLayer', onEachFeature: hoverDecider, style: _helpers.helpers.style });
 	      }
 	      var buttons;
+	
+	      //TODO: Move this to a configuration file
 	
 	      if (this.props.buttons) {
 	        buttons = _react2.default.createElement(
@@ -24897,12 +24902,9 @@
 	        return window.Drupal && window.Drupal.settings && window.Drupal.settings.eitiMapWidgetsLibPath ? window.Drupal.settings.eitiMapWidgetsLibPath : 'dist';
 	    },
 	
-	    getEndPoint: function getEndPoint() {
-	        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';
-	    },
-	
-	    getEndPointPage: function getEndPointPage(page) {
-	        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';
+	    getEndPoint: function getEndPoint(params) {
+	        console.log(params);
+	        return window.Drupal ? '/api/v1.0/implementing_country' + params : 'source/scripts/data/implementing_country.json' + params;
 	    },
 	
 	    getPaletteDivergent: function getPaletteDivergent(index) {
