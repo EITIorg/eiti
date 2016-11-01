@@ -55,9 +55,10 @@ export default class MapWidgetComponent extends Component {
   }
 
   componentWillMount() {
-    console.log("Needs buttons?" + this.props.buttons);
+
     var params = "";
-    if(this.props.buttons) {
+    //If there are no buttons, retrieve only fields for one layer
+    if(!this.props.buttons) {
       params = ::this.getFields(this.state.indicator_id);
     }
 
