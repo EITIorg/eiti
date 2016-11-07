@@ -1,5 +1,6 @@
 <?php
 
+// Updated from 20161022.69.01 to update.0027.
 // Provide a list of modules to be installed.
 $modules = array(
   'eitientity_score_data',
