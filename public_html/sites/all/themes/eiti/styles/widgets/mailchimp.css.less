@@ -1,0 +1,41 @@
+.pane-mailchimp-archive {
+  .pane-title-wrapper {
+    border-bottom: 1px solid @clmain__separator;
+    color: @clanchor;
+    padding: 1em 0;
+
+    .title {
+      color: @clanchor;
+      display: inline;
+      font-size: 1.25em;
+      font-weight: 300;
+      margin: 0;
+    }
+    .icon {
+      fill: @clanchor;
+      display: inline;
+      margin-right: 1em;
+      vertical-align: bottom;
+    }
+
+    position: relative;
+    .anchor-link {
+      display: none;
+      position: absolute;
+      left: -2em;
+      line-height: 1.75em;
+    }
+    &:hover {
+      .anchor-link {
+        display: block;
+      }
+    }
+  }
+  .field-name-field-fpp-widget {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .display_archive {
+    padding: 1em 0;
+  }
+}

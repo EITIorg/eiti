@@ -4,6 +4,7 @@
  * @file: Update Country Status.
  * @desc: Update country statuses to new ones.
  */
+// Updated from 20161014.67.01 to update.0026.
 // Replacement terms.
 $terms_to_rename = array(
   'Compliant' => array(

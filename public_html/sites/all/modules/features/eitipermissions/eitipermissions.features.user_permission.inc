@@ -1063,6 +1063,105 @@ function eitipermissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'score_data entity access overview'.
+  $permissions['score_data entity access overview'] = array(
+    'name' => 'score_data entity access overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_data entity administer'.
+  $permissions['score_data entity administer'] = array(
+    'name' => 'score_data entity administer',
+    'roles' => array(),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_data entity create'.
+  $permissions['score_data entity create'] = array(
+    'name' => 'score_data entity create',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_data entity delete'.
+  $permissions['score_data entity delete'] = array(
+    'name' => 'score_data entity delete',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_data entity edit'.
+  $permissions['score_data entity edit'] = array(
+    'name' => 'score_data entity edit',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_data entity view'.
+  $permissions['score_data entity view'] = array(
+    'name' => 'score_data entity view',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
+  // Exported permission: 'score_req entity administer'.
+  $permissions['score_req entity administer'] = array(
+    'name' => 'score_req entity administer',
+    'roles' => array(),
+    'module' => 'eitientity_score_req',
+  );
+
+  // Exported permission: 'score_req entity view'.
+  $permissions['score_req entity view'] = array(
+    'name' => 'score_req entity view',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eitientity_score_req',
+  );
+
+  // Exported permission: 'score_req_value entity administer'.
+  $permissions['score_req_value entity administer'] = array(
+    'name' => 'score_req_value entity administer',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_req_value',
+  );
+
+  // Exported permission: 'score_req_value entity view'.
+  $permissions['score_req_value entity view'] = array(
+    'name' => 'score_req_value entity view',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'eitientity_score_req_value',
+  );
+
   // Exported permission: 'select account cancellation method'.
   $permissions['select account cancellation method'] = array(
     'name' => 'select account cancellation method',
