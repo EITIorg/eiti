@@ -63,11 +63,15 @@ foreach ($terms_to_rename as $old_term_name => $new_term) {
 // Create.
 $voc = taxonomy_vocabulary_machine_name_load('country_status');
 foreach ($terms_to_create as $term_details) {
-  $term = new stdClass();
-  $term->name = $term_details['name'];
-  $term->name_field[LANGUAGE_NONE][0]['value'] = $term_details['name'];
-  $term->weight = $term_details['weight'];
-  $term->field_tx_country_color[LANGUAGE_NONE][0]['value'] = $term_details['color'];
-  $term->vid = $voc->vid;
-  taxonomy_term_save($term);
+  $terms = taxonomy_get_term_by_name($term_details['name'], 'country_status');
+  // Only if those don't exist any.
+  if (empty($terms)) {
+    $term = new stdClass();
+    $term->name = $term_details['name'];
+    $term->name_field[LANGUAGE_NONE][0]['value'] = $term_details['name'];
+    $term->weight = $term_details['weight'];
+    $term->field_tx_country_color[LANGUAGE_NONE][0]['value'] = $term_details['color'];
+    $term->vid = $voc->vid;
+    taxonomy_term_save($term);
+  }
 }
