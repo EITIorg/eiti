@@ -66,13 +66,9 @@ function eiti_ctools_extra__mailchimp_archive__render($subtype, $conf, $panel_ar
     )
   );
   $content['script'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'script',
-    '#attributes' => array(
-      'src' => $script_uri,
-      'language' => 'javascript',
-      'type' => 'text/javascript'
-    )
+    '#markup' => format_string('<script src="!script_path" type="text/javascript" language="javascript"></script>', array(
+      '!script_path' => $script_uri,
+    )),
   );
   $block->content = $content;
   return $block;
