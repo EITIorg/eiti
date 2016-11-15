@@ -98,6 +98,7 @@ features[variable][] = redirect_page_cache
 features[variable][] = redirect_passthrough_querystring
 features[variable][] = redirect_purge_inactive
 features[variable][] = redirect_warning
+features[variable][] = restful_render_cache
 features[variable][] = site_403
 features[variable][] = site_404
 features[variable][] = teaser_length

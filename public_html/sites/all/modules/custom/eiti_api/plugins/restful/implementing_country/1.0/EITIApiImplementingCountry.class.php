@@ -244,8 +244,17 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    * of the reports.
    */
   function queryIndicatorValues() {
-    $query = db_select('eiti_summary_data', 'sd');
+    $version = $this->getVersion();
+    $cid_parts_arr[] = 'v' . $version['major'] . '.' . $version['minor'] . '::' . $this->getResourceName();
+    $cid_parts_arr[] = 'queryIndicatorValues';
+    $cid = implode('::', $cid_parts_arr);
 
+    $cache = $this->getCacheController()->get($cid);
+    if (!empty($cache->data)) {
+      return $cache->data;
+    }
+
+    $query = db_select('eiti_summary_data', 'sd');
     // One big query.
     $query->leftJoin('field_data_field_sd_indicator_values', 'fiv', 'fiv.entity_id = sd.id');
     $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
@@ -322,11 +331,13 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       }
     }
 
-    return array(
+    $output = array(
       'reports' => $reports,
       'licenses' => $licenses,
       'contracts' => $contracts,
     );
+    $this->getCacheController()->set($cid, $output, CACHE_TEMPORARY);
+    return $output;
   }
 
   /**
@@ -335,6 +346,15 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   function queryRevenues() {
     $revenues = array();
+    $version = $this->getVersion();
+    $cid_parts_arr[] = 'v' . $version['major'] . '.' . $version['minor'] . '::' . $this->getResourceName();
+    $cid_parts_arr[] = 'queryRevenues';
+    $cid = implode('::', $cid_parts_arr);
+
+    $cache = $this->getCacheController()->get($cid);
+    if (!empty($cache->data)) {
+      return $cache->data;
+    }
 
     // First we want to see the sum of all the governmental agencies for each country
     // for each year.
@@ -396,7 +416,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     foreach ($records as $record) {
       $revenues[$record['iso2']][$record['year']]['company'] = $record['sum'];
     }
-
+    $this->getCacheController()->set($cid, $revenues, CACHE_TEMPORARY);
     return $revenues;
   }
 
@@ -406,6 +426,15 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   public function querySummaryDataInfo() {
     $output = array();
+    $version = $this->getVersion();
+    $cid_parts_arr[] = 'v' . $version['major'] . '.' . $version['minor'] . '::' . $this->getResourceName();
+    $cid_parts_arr[] = 'querySummaryDataInfo';
+    $cid = implode('::', $cid_parts_arr);
+
+    $cache = $this->getCacheController()->get($cid);
+    if (!empty($cache->data)) {
+      return $cache->data;
+    }
 
     $query = new EntityFieldQuery();
     $result = $query
@@ -418,7 +447,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       $entities = entity_load('summary_data', $entity_ids);
       $output = array_values($entities);
     }
-
+    $this->getCacheController()->set($cid, $output, CACHE_TEMPORARY);
     return $output;
   }
 }

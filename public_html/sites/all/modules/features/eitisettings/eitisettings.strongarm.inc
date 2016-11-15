@@ -614,6 +614,13 @@ user/*/*';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'restful_render_cache';
+  $strongarm->value = 1;
+  $export['restful_render_cache'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_403';
   $strongarm->value = 'page-403';
   $export['site_403'] = $strongarm;
