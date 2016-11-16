@@ -24,6 +24,7 @@ $plugin = array(
   'single' => TRUE,
   'defaults' => array(
     'limit' => 10,
+    'campaign_id' => '691e61806662528c68908252f',
   ),
 );
 
@@ -44,7 +45,8 @@ function eiti_ctools_extra__mailchimp_archive__render($subtype, $conf, $panel_ar
       ),
     )
   );
-  $script_uri = '//eiti.us5.list-manage.com/generate-js/?u=691e61806662528c68908252f&fid=1';
+  $campaign_id = !empty($conf['campaign_id']) ? $conf['campaign_id'] : '691e61806662528c68908252f';
+  $script_uri = '//eiti.us5.list-manage.com/generate-js/?u=' . $campaign_id . '&fid=1';
   if (!empty($conf['limit'])) {
     $script_uri .= '&show=' . $conf['limit'];
   }
@@ -79,6 +81,13 @@ function eiti_ctools_extra__mailchimp_archive__render($subtype, $conf, $panel_ar
  */
 function eiti_ctools_extra__mailchimp_archive__edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
+
+  $form['campaign_id'] = array(
+    '#title' => t('Campaign ID'),
+    '#type' => 'textfield',
+    '#description' => t('Please specify the campaign id. In example here: //eiti.us5.list-manage.com/generate-js/?u=<strong>691e61806662528c68908252f</strong>&fid=1, the ID is <strong>691e61806662528c68908252f</strong>.'),
+    '#default_value' => $conf['campaign_id'],
+  );
 
   $form['limit'] = array(
     '#title' => t('How many items to show?'),
