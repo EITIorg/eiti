@@ -118,6 +118,8 @@ function eitientities_user_default_permissions() {
     'name' => 'revenue_stream entity view',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
       'internal editor' => 'internal editor',
       'translation editor' => 'translation editor',
     ),
