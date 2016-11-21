@@ -12,3 +12,56 @@ function eiti_api_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
+
+/**
+ * Implements hook_entity_update().
+ */
+function eiti_api_entity_update($entity, $type) {
+  eiti_api_entity_reset_cache($entity, $type, 'update');
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function eiti_api_entity_insert($entity, $type) {
+  eiti_api_entity_reset_cache($entity, $type, 'insert');
+}
+
+/**
+ * Small custom function that resets cache for our API when needed.
+ */
+function eiti_api_entity_reset_cache($entity, $type, $op) {
+  $all_plugins = restful_get_restful_plugins();
+  $target_resources = array();
+
+  switch ($type) {
+    case 'implementing_country':
+      // General render-cache invalidation.
+      $target_resources[] = 'implementing_country';
+      break;
+    case 'revenue_stream':
+      // General render-cache invalidation.
+      $target_resources[] = 'revenue';
+      break;
+    case 'indicator_value':
+      // General render-cache invalidation.
+      $target_resources[] = 'indicator_value';
+      break;
+    case 'summary_data':
+      // General render-cache invalidation.
+      $target_resources[] = 'summary_data';
+      break;
+  }
+
+  // Loop and clean.
+  foreach ($all_plugins as $plugin) {
+    if (in_array($plugin['resource'], $target_resources)) {
+      $resource = $plugin['resource'];
+      $major_version = $plugin['major_version'];
+      $minor_version = $plugin['minor_version'];
+      $resource_handler = restful_get_restful_handler($resource, $major_version, $minor_version);
+      $resource_handler->clearResourceRenderedCache();
+    }
+  }
+}
+
