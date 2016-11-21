@@ -374,6 +374,7 @@ function _contentwidget__fact_blocks__get_impl_countries_count() {
     'Inadequate progress',
     'No progress',
     'Yet to be assessed to the 2016 Standard',
+    'Yet to be assessed against the 2016 Standard',
     'Suspended',
   );
   $count = _contentwidget__fact_blocks__get_countries_count($opt_in);
