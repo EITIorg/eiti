@@ -46,6 +46,7 @@ features[field_base][] = field_twitter_handle
 features[field_base][] = field_website
 features[field_group][] = group_contact|node|person|form
 features[field_group][] = group_details|node|person|teaser
+features[field_group][] = group_quick_links|node|person|default
 features[field_group][] = group_quick_links|node|person|teaser
 features[field_instance][] = node-person-body
 features[field_instance][] = node-person-field_board_member_type

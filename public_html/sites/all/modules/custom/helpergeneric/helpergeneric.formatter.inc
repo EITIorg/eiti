@@ -317,13 +317,17 @@ function __helpergeneric_field_formatter_view__helpergeneric_link($entity_type, 
     else {
       switch ($link_type) {
         case 'skype_icon':
+          global $is_https;
+          $uri_secure = 'https://secure.skypeassets.com/i/scom/js/skype-uri.js';
+          $uri_default = 'http://www.skypeassets.com/i/scom/js/skype-uri.js';
+          $uri_skype = ($is_https) ? $uri_secure : $uri_default;
           $output = array(
             '#theme' => 'helpergeneric_skype_button',
             '#value' => $item['value'],
             '#attached' => array(
               'js' => array(
                 array(
-                  'data' => 'http://www.skypeassets.com/i/scom/js/skype-uri.js',
+                  'data' => $uri_skype,
                   'type' => 'external',
                 )
               ),
