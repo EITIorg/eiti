@@ -264,3 +264,141 @@ function eitientity_organisation_lookup_by_name($name) {
   }
   return FALSE;
 }
+
+
+/**
+ * Implements hook_pathauto().
+ */
+function eitientity_organisation_pathauto($op) {
+  if ($op == 'settings') {
+    $settings = array();
+    $settings['module'] = 'organisation';
+    $settings['token_type'] = 'organisation';
+    $settings['groupheader'] = t('Organisation paths');
+    $settings['patterndescr'] = t('Default path pattern (applies to all entities with blank patterns below)');
+    $settings['patterndefault'] = '[organisation:name]';
+    $settings['batch_update_callback'] = 'eitientity_organisation_pathauto_bulk_update_batch_process';
+    $settings['batch_file'] = drupal_get_path('module', 'eitientity_organisation') . '/eitientity_organisation.pathauto.inc';
+
+    $languages = array();
+    if (module_exists('locale')) {
+      $languages = array(LANGUAGE_NONE => t('language neutral')) + locale_language_list('name');
+    }
+
+    foreach (eitientity_organisation_get_types() as $bundle => $bundle_details) {
+      if (count($languages)) {
+        $settings['patternitems'][$bundle] = t('Default path pattern for Organisations (@bundle_label - applies to all @bundle_label countries with blank patterns below)', array('@bundle_label' => $bundle_details['label']));
+        foreach ($languages as $lang_code => $lang_name) {
+          $settings['patternitems'][$bundle . '_' . $lang_code] = t('Pattern for all @language - Organisations (@bundle_label) paths', array('@bundle_label' => $bundle_details['label'], '@language' => $lang_name));
+        }
+      }
+    }
+    return (object) $settings;
+  }
+}
+
+/**
+ * Implements hook_insert().
+ */
+function eitientity_organisation_entity_insert($entity, $type) {
+  if ($type == 'organisation') {
+    eitientity_organisation_pathauto_update($entity, 'insert');
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function eitientity_organisation_entity_update($entity, $type) {
+  if ($type == 'organisation') {
+    eitientity_organisation_pathauto_update($entity, 'update');
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function eitientity_organisation_entity_delete($entity, $type) {
+  if ($type == 'organisation') {
+    pathauto_entity_path_delete_all('organisation', $entity, "organisation/{$entity->nid}");
+  }
+}
+
+/**
+ * Helper function that actually creates / updates the path-auto url.
+ */
+function eitientity_organisation_pathauto_update($entity, $op, array $options = array()) {
+  $options += array('language' => pathauto_entity_language('organisation', $entity));
+
+  // Skip processing if the node has no pattern.
+  if (!pathauto_pattern_load_by_entity('organisation', $entity->type, $options['language'])) {
+    return FALSE;
+  }
+
+  module_load_include('inc', 'pathauto');
+  $uri = entity_uri('organisation', $entity);
+  return pathauto_create_alias('organisation', $op, $uri['path'], array('organisation' => $entity), $entity->type, $options['language']);
+}
+
+/**
+ * Function used to update / create URL alias for multiple implementing countries.
+ */
+function eitientity_organisation_update_alias_multiple(array $ids, $op, array $options = array()) {
+  $options += array('message' => FALSE);
+
+  $implementing_countries = entity_load('organisation', $ids);
+  foreach ($implementing_countries as $implementing_country) {
+    eitientity_organisation_pathauto_update($implementing_country, $op, $options);
+  }
+
+  if (!empty($options['message'])) {
+    drupal_set_message(format_plural(count($ids), 'Updated URL alias for 1 implementing country.', 'Updated URL aliases for @count implementing countries.'));
+  }
+}
+
+
+
+/**
+ * Implements hook_tokens_info().
+ */
+function eitientity_organisation_token_info() {
+  $token_def = array();
+
+  // Generic adopted title (User Picture, Source, etc.).
+  $token_def['tokens']['organisation']['type'] = array(
+    'name' => t('Organisation Type'),
+    'description' => t('Organisation Type (entity  bundle).'),
+  );
+
+  return $token_def;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function eitientity_organisation_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $opted_types = array('organisation');
+  $opted_tokens = array('type');
+
+  // Only handling organisation tokens.
+  if (!in_array($type, $opted_types)) {
+    return;
+  }
+
+  foreach ($tokens as $name => $original) {
+    if (!in_array($name, $opted_tokens)) {
+      continue;
+    }
+
+    switch ($name) {
+      case 'type':
+        $organisation = $data['organisation'];
+        $replacements[$original] = $organisation->type;
+        break;
+    }
+  }
+
+  return $replacements;
+}
+

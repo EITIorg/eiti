@@ -222,42 +222,42 @@ function eitict_person_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_en_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'contact/[node:title_field]';
   $export['pathauto_node_person_en_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_es_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'contacto/[node:title_field]';
   $export['pathauto_node_person_es_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_fr_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'contact/[node:title_field]';
   $export['pathauto_node_person_fr_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_pattern';
-  $strongarm->value = 'person/[node:title_field]';
+  $strongarm->value = 'contact/[node:title_field]';
   $export['pathauto_node_person_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_ru_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'contact/[node:title_field]';
   $export['pathauto_node_person_ru_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_und_pattern';
-  $strongarm->value = '';
+  $strongarm->value = 'contact/[node:title_field]';
   $export['pathauto_node_person_und_pattern'] = $strongarm;
 
   return $export;
