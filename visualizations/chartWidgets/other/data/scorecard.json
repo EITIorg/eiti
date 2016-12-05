@@ -1,0 +1,188 @@
+{
+    "data": [{
+        "id": 2,
+        "label": "United States of America: 2016",
+        "self": "https:\/\/staging.eiti.org\/api\/v1.0\/score_data\/2",
+        "year": "2016",
+        "country": {
+            "id": "16",
+            "label": "United States of America",
+            "self": "https:\/\/staging.eiti.org\/api\/v1.0\/implementing_country\/16",
+            "iso2": "US",
+            "iso3": "USA",
+            "status": {
+                "tid": "5329",
+                "language": "en",
+                "name": "Yet to be assessed against the 2016 Standard",
+                "color": "00919B"
+            },
+            "status_date": "1388534400",
+            "local_website": "https:\/\/useiti.doi.gov\/",
+            "annual_report_file": null,
+            "reports": null,
+            "metadata": [],
+            "licenses": null,
+            "contracts": null,
+            "revenues": null
+        },
+        "score_req_values": [{
+            "id": "3",
+            "score_req_id": "1",
+            "score_req": {
+                "id": "1",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Government engagement",
+                "code": "1.1",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5346"
+                    }]
+                }
+            },
+            "value": "3",
+            "progress_value": "0",
+            "is_applicable": "1",
+            "is_required": "1",
+            "description": ""
+        }, {
+            "id": "4",
+            "score_req_id": "2",
+            "score_req": {
+                "id": "2",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Industry engagement",
+                "code": "1.2",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5346"
+                    }]
+                }
+            },
+            "value": "4",
+            "progress_value": "0",
+            "is_applicable": "1",
+            "is_required": "1",
+            "description": ""
+        }, {
+            "id": "7",
+            "score_req_id": "26",
+            "score_req": {
+                "id": "26",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Distribution of revenues",
+                "code": "5.3",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5350"
+                    }]
+                }
+            },
+            "value": "0",
+            "progress_value": null,
+            "is_applicable": "0",
+            "is_required": null,
+            "description": ""
+        }, {
+            "id": "8",
+            "score_req_id": "32",
+            "score_req": {
+                "id": "32",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Data accessibility",
+                "code": "7.2",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5352"
+                    }]
+                }
+            },
+            "value": "2",
+            "progress_value": null,
+            "is_applicable": "1",
+            "is_required": "0",
+            "description": ""
+        }]
+    }, {
+        "id": 3,
+        "label": "Afghanistan: 2016",
+        "self": "https:\/\/staging.eiti.org\/api\/v1.0\/score_data\/3",
+        "year": "2016",
+        "country": {
+            "id": "51",
+            "label": "Afghanistan",
+            "self": "https:\/\/staging.eiti.org\/api\/v1.0\/implementing_country\/51",
+            "iso2": "AF",
+            "iso3": "AFG",
+            "status": {
+                "tid": "5329",
+                "language": "en",
+                "name": "Yet to be assessed against the 2016 Standard",
+                "color": "00919B"
+            },
+            "status_date": "1356998400",
+            "local_website": "www.aeiti.af\/en",
+            "annual_report_file": null,
+            "reports": null,
+            "metadata": [],
+            "licenses": null,
+            "contracts": null,
+            "revenues": null
+        },
+        "score_req_values": [{
+            "id": "5",
+            "score_req_id": "26",
+            "score_req": {
+                "id": "26",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Distribution of revenues",
+                "code": "5.3",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5350"
+                    }]
+                }
+            },
+            "value": "2",
+            "progress_value": "0",
+            "is_applicable": "1",
+            "is_required": "1",
+            "description": ""
+        }, {
+            "id": "6",
+            "score_req_id": "32",
+            "score_req": {
+                "id": "32",
+                "type": "standard",
+                "status": "1",
+                "created": "1477510736",
+                "name": "Data accessibility",
+                "code": "7.2",
+                "field_score_req_category": {
+                    "und": [{
+                        "tid": "5352"
+                    }]
+                }
+            },
+            "value": "4",
+            "progress_value": "0",
+            "is_applicable": "1",
+            "is_required": "1",
+            "description": ""
+        }]
+    }],
+    "count": 2,
+    "self": {
+        "title": "Self",
+        "href": "https:\/\/staging.eiti.org\/api\/v1.0\/score_data"
+    }
+}

@@ -1992,6 +1992,7 @@ function eitiwidgets_field_default_field_instances() {
         'viz_groupedbar_dynamic' => 'viz_groupedbar_dynamic',
         'viz_groupedbar_static' => 'viz_groupedbar_static',
         'viz_sankey_dynamic' => 'viz_sankey_dynamic',
+        'viz_scorecard_dynamic' => 'viz_scorecard_dynamic',
         'viz_stackedbar_dynamic' => 'viz_stackedbar_dynamic',
       ),
       'entity_translation_sync' => FALSE,

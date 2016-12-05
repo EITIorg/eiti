@@ -201,6 +201,7 @@
      */
     attach: function (context, settings) {
       var chartTypes = [
+        'Scorecard',
         'BubbleChart',
         'Sankey'
       ];
