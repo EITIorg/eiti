@@ -215,3 +215,60 @@
   border: #0093cf;
   color: #f0f0f0;
 }
+
+
+
+TABLE.country_scorecard {
+  border-collapse: collapse;
+}
+
+.country_scorecard, .country_scorecard TD {
+  font-family: 'Helvetica';
+  border: 1px solid #ccc;
+  padding: 5px 0px 5px 8px;
+  vertical-align: top;
+}
+
+.country_scorecard, .country_scorecard TH {
+  border: 1px solid #ccc;
+  padding: 2px 8px 2px 8px;
+}
+
+
+.country_scorecard TD.no {
+  background-color: #2D8B2A;
+}
+
+.country_scorecard TD.inadequate {
+  background-color: #FAC433;
+}
+
+.country_scorecard TD.meaningful {
+  background-color: #2D8B2A;
+}
+
+.country_scorecard TD.satisfactory {
+  background-color: #84AD42;
+}
+
+.country_scorecard TD.beyond {
+  background-color: #5182bb;
+}
+
+.country_scorecard TD.not_applicable {
+  background-color: #ccc;
+}
+
+.country_scorecard TH.scores {
+  height: 110px;
+  white-space: nowrap;
+}
+
+.country_scorecard TH.scores > div {
+  transform: 
+    translate(0px, 30px)
+    rotate(-90deg);
+  width: 30px;
+}
+
+
