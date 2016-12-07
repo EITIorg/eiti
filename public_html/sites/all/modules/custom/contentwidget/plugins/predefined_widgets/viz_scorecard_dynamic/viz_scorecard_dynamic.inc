@@ -92,15 +92,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
 
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['scorecard_settings']['data_type'] == 'score_data') {
-    // Yes, because I HAVE NO IDEA how to load ctools / panels / panelizer contexts properly.
-    $country = menu_get_object('implementing_country');
-    if (!empty($country)) {
-      $settings['endpoint'] .= '?filter[country_iso]=' . $country->iso;
-      $settings['name'] .= t(" Scorecard Name ");
-    }
-    else {
-      return array('#markup' => t('This widget requires country context.'));
-    }
+    $settings['endpoint'] .= '?filter[country]=' . $widget_settings['extra_settings']['country'];
   }
 
   // Wrap things up.
@@ -139,7 +131,7 @@ function contentwidget__viz_scorecard_dynamic__settings(&$element, &$form_state,
   $items = _contentwidget__viz_scorecard_dynamic__get_data_types();
   $form_state['required_ctools_contexts_available'] = FALSE;
   foreach ($type_options as $option_key => $label) {
-    if ($items[$option_key]['context required'] && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
+    if (!empty($items[$option_key]['context required']) && (empty($ctools_contexts) || $ctools_contexts->plugin !== $items[$option_key]['context required'])) {
       unset($type_options[$option_key]);
 
       if (!isset($form_state['pane'])) {
@@ -235,8 +227,7 @@ function _contentwidget__viz_scorecard_dynamic__get_data_types($return = FALSE) 
     'label' => t('Country: Score data'),
     'endpoint' => '/api/v1.0/score_data',
     'title' => t('Scoredata by Country'),
-    'extra settings' => '_contentwidget__viz_scoredata_dynamic_settings',
-    'context required' => 'entity:implementing_country',
+    'extra settings' => '_contentwidget__viz_scorecard_dynamic_settings',
   );
 
   $output = array();
@@ -268,16 +259,31 @@ function _contentwidget__viz_scorecard_dynamic__get_data_types($return = FALSE) 
  * Extra settings for our widget.
  */
 function _contentwidget__viz_scorecard_dynamic_settings(&$form, &$form_state, $widget_settings, $ctools_contexts) {
-//  $form['no-settings'] = array('#markup' => t('No extra settings for this chart.'));
-  $country = $ctools_contexts->data;
+  $entity = $ctools_contexts->data;
+  if ($entity instanceof ImplementingCountryEntity) {
+    $default_coutry = $entity->id;
+  }
+  else {
+    $default_coutry = '';
+  }
 
-  $company_number_options = drupal_map_assoc(array(5, 10, 15, 20));
-  $form['company_number'] = array(
+  $efq = new EntityFieldQuery();
+  $efq->entityCondition('entity_type', 'implementing_country')
+    ->propertyCondition('status', '1');
+  $results = $efq->execute();
+  $countries = entity_load('implementing_country', array_keys($results['implementing_country']));
+  $country_options = array();
+  foreach ($countries as $entity_id => $country) {
+    $country_options[$entity_id] = $country->name;
+  }
+  asort($country_options);
+  $country_options = array('' => '- Select a Country') + $country_options;
+  $form['country'] = array(
     '#type' => 'select',
-    '#title' => t('Number of Companies'),
-    '#description' => t("Please specify the number of companies you want to include. Note: <em>We can't include all companies, because the output will be unreadable</em>."),
-    '#options' => $company_number_options,
-    '#default_value' => isset($widget_settings['extra_settings']['company_number']) ? $widget_settings['extra_settings']['company_number'] : 10,
+    '#title' => t('Country'),
+    '#description' => t("Please specify for which country this Scorecard is for..."),
+    '#options' => $country_options,
+    '#default_value' => isset($widget_settings['extra_settings']['country']) ? $widget_settings['extra_settings']['country'] : $default_coutry,
   );
 }
 
