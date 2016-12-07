@@ -250,7 +250,7 @@ function eitict_person_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_person_ru_pattern';
-  $strongarm->value = 'contact/[node:title_field]';
+  $strongarm->value = 'contact/[node:title-field-english]';
   $export['pathauto_node_person_ru_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

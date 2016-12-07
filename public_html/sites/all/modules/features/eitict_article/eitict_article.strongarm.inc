@@ -550,7 +550,7 @@ function eitict_article_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_article_ru_pattern';
-  $strongarm->value = '';
+  $strongarm->value = '[node:field-article-type]/[node:title-field-english]';
   $export['pathauto_node_article_ru_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

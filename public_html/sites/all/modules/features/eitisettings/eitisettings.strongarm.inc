@@ -482,7 +482,7 @@ user/*/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_ignore_words';
-  $strongarm->value = '';
+  $strongarm->value = 'un, une, de, des, le, la, les, l, a, an, the, and, or, but';
   $export['pathauto_ignore_words'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -524,7 +524,7 @@ user/*/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_update_action';
-  $strongarm->value = 2;
+  $strongarm->value = '2';
   $export['pathauto_update_action'] = $strongarm;
 
   $strongarm = new stdClass();

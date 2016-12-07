@@ -247,7 +247,7 @@ function eitict_mention_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_mention_ru_pattern';
-  $strongarm->value = 'mention/[node:title_field]';
+  $strongarm->value = 'mention/[node:title-field-english]';
   $export['pathauto_node_mention_ru_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
