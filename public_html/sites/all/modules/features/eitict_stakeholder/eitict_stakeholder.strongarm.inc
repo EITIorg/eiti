@@ -277,7 +277,7 @@ function eitict_stakeholder_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_taxonomy_term_stakeholder_types_pattern';
-  $strongarm->value = 'stakeholders/[term:i18n-name]';
+  $strongarm->value = 'supporters/[term:i18n-name]';
   $export['pathauto_taxonomy_term_stakeholder_types_pattern'] = $strongarm;
 
   return $export;

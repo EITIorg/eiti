@@ -186,7 +186,7 @@ function eitiet_implementing_country_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_implementing_country_normal_ru_pattern';
-  $strongarm->value = '';
+  $strongarm->value = '[implementing_country:name-field-english]';
   $export['pathauto_implementing_country_normal_ru_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

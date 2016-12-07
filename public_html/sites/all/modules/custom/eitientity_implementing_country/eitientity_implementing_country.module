@@ -479,3 +479,52 @@ function eitientity_implementing_country_update_alias_multiple(array $ids, $op, 
     drupal_set_message(format_plural(count($ids), 'Updated URL alias for 1 implementing country.', 'Updated URL aliases for @count implementing countries.'));
   }
 }
+
+
+
+/**
+ * Implements hook_tokens_info().
+ */
+function eitientity_implementing_country_token_info() {
+  $token_def = array();
+
+  // Generic adopted title (User Picture, Source, etc.).
+  $token_def['tokens']['implementing_country']['name-field-english'] = array(
+    'name' => t('English Name'),
+    'description' => t('Contains the english version of the title.'),
+  );
+
+  return $token_def;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function eitientity_implementing_country_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $opted_types = array('implementing_country');
+  $opted_tokens = array('name-field-english');
+
+  // Only handling summary_data tokens.
+  if (!in_array($type, $opted_types)) {
+    return;
+  }
+
+  foreach ($tokens as $name => $original) {
+    if (!in_array($name, $opted_tokens)) {
+      continue;
+    }
+
+    switch ($name) {
+      case 'name-field-english':
+        $implementing_country = $data['implementing_country'];
+        $implementing_country_emw = entity_metadata_wrapper('implementing_country', $implementing_country);
+        $title_english = $implementing_country_emw->language('en')->name_field->value();
+        $title_english = (empty($title_english)) ? $implementing_country_emw->name_field->value() : $title_english;
+        $replacements[$original] = $title_english;
+        break;
+    }
+  }
+
+  return $replacements;
+}
