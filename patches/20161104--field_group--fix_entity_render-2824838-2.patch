@@ -1,0 +1,33 @@
+diff --git a/public_html/sites/all/modules/contrib/field_group/field_group.module b/public_html/sites/all/modules/contrib/field_group/field_group.module
+index 412825f..037de4d 100644
+--- a/public_html/sites/all/modules/contrib/field_group/field_group.module
++++ b/public_html/sites/all/modules/contrib/field_group/field_group.module
+@@ -1240,9 +1240,7 @@ function _field_group_is_empty_element($element, $entity, $childname, $groups) {
+  * @param array $groups
+  *   Array of group objects.
+  */
+-function field_group_remove_empty_display_groups(& $element, $groups) {
+-
+-  $empty_child = TRUE;
++function field_group_remove_empty_display_groups(&$element, $groups, $group_name = NULL) {
+   $empty_group = TRUE;
+ 
+   // Loop through the children for current element.
+@@ -1250,7 +1248,7 @@ function field_group_remove_empty_display_groups(& $element, $groups) {
+ 
+     // Descend if the child is a group.
+     if (in_array($name, $groups)) {
+-      $empty_child = field_group_remove_empty_display_groups($element[$name], $groups);
++      $empty_child = field_group_remove_empty_display_groups($element[$name], $groups, $name);
+       if (!$empty_child) {
+         $empty_group = FALSE;
+       }
+@@ -1263,7 +1261,7 @@ function field_group_remove_empty_display_groups(& $element, $groups) {
+   }
+ 
+   // Reset an empty group.
+-  if ($empty_group) {
++  if ($group_name && $empty_group) {
+     $element = NULL;
+   }
+ 
