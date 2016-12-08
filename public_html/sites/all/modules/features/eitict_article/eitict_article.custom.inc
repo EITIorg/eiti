@@ -286,3 +286,61 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
 
   return $elements;
 }
+
+
+/**
+ * Implements hook_tokens_info().
+ */
+function eitict_article_token_info() {
+  $token_def = array();
+
+  // Generic adopted title (User Picture, Source, etc.).
+  $token_def['tokens']['node']['title-field-english'] = array(
+    'name' => t('English Title'),
+    'description' => t('Contains the english version of the title.'),
+  );
+  $token_def['tokens']['node']['article-type-adjusted'] = array(
+    'name' => t('Adjusted Article Type'),
+    'description' => t('Contains the adjusted version of the Article Type.'),
+  );
+
+  return $token_def;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function eitict_article_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $opted_types = array('node');
+  $opted_tokens = array('title-field-english', 'article-type-adjusted');
+
+  // Only handling summary_data tokens.
+  if (!in_array($type, $opted_types)) {
+    return;
+  }
+
+  foreach ($tokens as $name => $original) {
+    if (!in_array($name, $opted_tokens)) {
+      continue;
+    }
+
+    switch ($name) {
+      case 'title-field-english':
+        $node = $data['node'];
+        $node_emw = entity_metadata_wrapper('node', $node);
+        $title_english = $node_emw->language('en')->title_field->value();
+        $title_english = (empty($title_english)) ? $node_emw->title_field->value() : $title_english;
+        $replacements[$original] = $title_english;
+        break;
+      case 'article-type-adjusted':
+        $node = $data['node'];
+        $node_emw = entity_metadata_wrapper('node', $node);
+        $field_article_type = $node_emw->field_article_type->value();
+        $replacements[$original] = $field_article_type;
+        break;
+    }
+  }
+
+  return $replacements;
+}

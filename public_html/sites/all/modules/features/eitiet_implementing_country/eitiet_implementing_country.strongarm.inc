@@ -157,6 +157,55 @@ function eitiet_implementing_country_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_implementing_country_normal_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_implementing_country_normal_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_implementing_country_normal_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_pattern';
+  $strongarm->value = '[implementing_country:name]';
+  $export['pathauto_implementing_country_normal_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_ru_pattern';
+  $strongarm->value = '[implementing_country:name-field-english]';
+  $export['pathauto_implementing_country_normal_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_normal_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_implementing_country_normal_und_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_implementing_country_pattern';
+  $strongarm->value = '[implementing_country:name]';
+  $export['pathauto_implementing_country_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_taxonomy_term_country_status_pattern';
   $strongarm->value = '';
   $export['pathauto_taxonomy_term_country_status_pattern'] = $strongarm;

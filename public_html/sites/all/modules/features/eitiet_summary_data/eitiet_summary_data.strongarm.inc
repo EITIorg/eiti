@@ -128,5 +128,54 @@ function eitiet_summary_data_strongarm() {
   );
   $export['field_bundle_settings_summary_data__summary_data'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_pattern';
+  $strongarm->value = 'summary-data/[summary_data:title]';
+  $export['pathauto_summary_data_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_summary_data_summary_data_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_summary_data_summary_data_und_pattern'] = $strongarm;
+
   return $export;
 }
