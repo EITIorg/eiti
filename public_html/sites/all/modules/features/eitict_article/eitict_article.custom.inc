@@ -299,6 +299,10 @@ function eitict_article_token_info() {
     'name' => t('English Title'),
     'description' => t('Contains the english version of the title.'),
   );
+  $token_def['tokens']['node']['article-type-adjusted'] = array(
+    'name' => t('Adjusted Article Type'),
+    'description' => t('Contains the adjusted version of the Article Type.'),
+  );
 
   return $token_def;
 }
@@ -309,7 +313,7 @@ function eitict_article_token_info() {
 function eitict_article_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   $opted_types = array('node');
-  $opted_tokens = array('title-field-english');
+  $opted_tokens = array('title-field-english', 'article-type-adjusted');
 
   // Only handling summary_data tokens.
   if (!in_array($type, $opted_types)) {
@@ -328,6 +332,12 @@ function eitict_article_tokens($type, $tokens, array $data = array(), array $opt
         $title_english = $node_emw->language('en')->title_field->value();
         $title_english = (empty($title_english)) ? $node_emw->title_field->value() : $title_english;
         $replacements[$original] = $title_english;
+        break;
+      case 'article-type-adjusted':
+        $node = $data['node'];
+        $node_emw = entity_metadata_wrapper('node', $node);
+        $field_article_type = $node_emw->field_article_type->value();
+        $replacements[$original] = $field_article_type;
         break;
     }
   }
