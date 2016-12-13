@@ -16,6 +16,7 @@ export var init = function(data, scores, categories, requirements, el) {
 };
 
 function renderScorecard(data, placeholder) {
+	window.$ = window.jQuery;
 
 	var table = $('<TABLE>').addClass('country_scorecard');
 	var tableHeader = $('<THEAD>');
@@ -44,6 +45,7 @@ function renderScorecard(data, placeholder) {
 
 	//Append requirements rows based on the results
 	appendRows(data, tableBody);
+	window.$ = undefined;
 }
 
 
@@ -53,11 +55,7 @@ function appendRows(data, tableBody) {
 	var scores = data.scores;
 	var result = data.result;
 
-	var country_id = 2; //Update this to support the parameter
-
-	var countryScore = _.find(result, function(country) {
-	    return (country.id === country_id);
-	});
+	var countryScore = _.first(data.result);
 
 	_.each(categories, function(category) {
 	    var bodyRow = $("<TR>");
@@ -77,9 +75,13 @@ function appendRows(data, tableBody) {
 	        }
 
 	        currentRow.append($("<TD>").html(requirement.Requirement));
-	        let currentScore = _.find(countryScore.score_req_values, function(value) {
-	            return (value.score_req_id == requirement.id);
-	        });
+
+	        let currentScore = undefined;
+	        if (countryScore) {
+		        currentScore = _.find(countryScore.score_req_values, function(value) {
+		            return (value.score_req_id == requirement.id);
+		        });
+	        }
 
 	        // Requirement Answers
 	        if (currentScore) {
