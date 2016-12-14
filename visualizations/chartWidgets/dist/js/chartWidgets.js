@@ -46103,7 +46103,7 @@
 		var tableHeaderUpperRow = $('<TR>');
 		tableHeaderUpperRow.append($('<TH>').attr('colspan', 2).html('EITI Requirements'));
 		tableHeaderUpperRow.append($('<TH>').attr('colspan', 5).html('Level of Progress'));
-		tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html('Direction <br/>of Progress'));
+		//tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html('Direction <br/>of Progress'));
 
 		var tableHeaderLowerRow = $('<TR>');
 		tableHeaderLowerRow.append($('<TH>').html('Categories'));
@@ -46124,7 +46124,16 @@
 
 		//Append requirements rows based on the results
 		appendRows(data, tableBody);
+		var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend());
+		$(placeholder).append(legend);
+
 		window.$ = undefined;
+	}
+
+	function getLegend() {
+		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + '    The country has made no progress in addressing the requirement.  The broader objective of the requirement is in no way fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i>' + '  <div>The country has made inadequate progress in meeting the requirement. Significant elements of the requirement are outstanding and the broader objective of the requirement is far from being fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>' + '  <div>The country has made progress in meeting the requirement. Significant elements of the requirement are being implemented and the broader objective of the requirement is being fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>The country is compliant with the EITI requirement.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div>The country has gone beyond the requirement.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#ccc">&nbsp;</i>' + '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' + '</div>';
+
+		return legendHTML;
 	}
 
 	function appendRows(data, tableBody) {
@@ -46152,17 +46161,18 @@
 					currentRow = $("<TR>");
 				}
 
-				currentRow.append($("<TD>").html(requirement.Requirement));
-
 				var currentScore = undefined;
 				if (countryScore) {
 					currentScore = _.find(countryScore.score_req_values, function (value) {
 						return value.score_req_id == requirement.id;
 					});
 				}
+				var req_cell = $("<TD>");
+				currentRow.append(req_cell.html(requirement.Requirement));
 
 				// Requirement Answers
 				if (currentScore) {
+					req_cell.attr('Title', currentScore.description);
 					var cellStyle = '';
 					if (currentScore.is_applicable == 0) {
 						cellStyle = 'not_applicable ';
@@ -46183,7 +46193,8 @@
 					});
 				}
 				//Direction of Progress
-				currentRow.append($("<TD>").html('&nbsp;'));
+
+				//currentRow.append($("<TD>").html('&nbsp;'));
 				tableBody.append(currentRow);
 			});
 		});
