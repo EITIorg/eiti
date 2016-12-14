@@ -270,3 +270,25 @@ TABLE.country_scorecard {
     rotate(-90deg);
   width: 30px;
 }
+
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item i {
+  width: 2em;
+  height: 2.5em;
+  float: left;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  vertical-align: middle;
+}
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item div {
+  display:inline-block;
+  width:90%;
+  float: left;
+  vertical-align: middle;
+}
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item {
+  clear:both;
+}
+
+.eiti-chart-widget .scorecard-legend {
+  margin-top:2em;
+}
