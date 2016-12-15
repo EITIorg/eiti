@@ -279,16 +279,38 @@ TABLE.country_scorecard {
   margin-bottom: 0.5em;
   vertical-align: middle;
 }
+
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item div {
   display:inline-block;
   width:90%;
   float: left;
   vertical-align: middle;
 }
+
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item {
   clear:both;
 }
 
 .eiti-chart-widget .scorecard-legend {
   margin-top:2em;
+}
+
+.country_scorecard TR:first-child TH {
+  background-color:#0093cf;
+  color:#fff;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+}
+
+.country_scorecard TR TH {
+  background-color:#f2f2f2;
+  color:#000;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+}
+
+.country_scorecard TD.requirement {
+  background-color:#bfbfbf;
 }
