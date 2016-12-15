@@ -46151,7 +46151,7 @@
 			var requirements_category = _.filter(requirements, function (requirement) {
 				return requirement.Category === category.id;
 			});
-			bodyRow.append($("<TD>").attr('rowspan', requirements_category.length).html(category.name));
+			bodyRow.append($("<TD>").attr('rowspan', requirements_category.length).addClass('requirement').html(category.name));
 
 			_.each(requirements_category, function (requirement, idx) {
 				var currentRow;
