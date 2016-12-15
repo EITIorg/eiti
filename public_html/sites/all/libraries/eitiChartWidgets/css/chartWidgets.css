@@ -223,7 +223,6 @@ TABLE.country_scorecard {
 }
 
 .country_scorecard, .country_scorecard TD {
-  font-family: 'Helvetica';
   border: 1px solid #ccc;
   padding: 5px 0px 5px 8px;
   vertical-align: top;
