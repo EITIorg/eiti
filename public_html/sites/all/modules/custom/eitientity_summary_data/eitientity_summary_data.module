@@ -531,12 +531,18 @@ function eitientity_summary_data_entity_delete($entity, $type) {
 function eitientity_summary_data_pathauto_update($entity, $op, array $options = array()) {
   $options += array('language' => pathauto_entity_language('summary_data', $entity));
 
+  // Make sure our class is here.
+  if (!$entity instanceof SummaryDataEntity) {
+    $entity = new SummaryDataEntity((array) $entity, 'summary_data');
+  }
+
   // Skip processing if the node has no pattern.
   if (!pathauto_pattern_load_by_entity('summary_data', $entity->type, $options['language'])) {
     return FALSE;
   }
 
   module_load_include('inc', 'pathauto');
+
   $uri = entity_uri('summary_data', $entity);
   return pathauto_create_alias('summary_data', $op, $uri['path'], array('summary_data' => $entity), $entity->type, $options['language']);
 }
