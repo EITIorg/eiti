@@ -521,7 +521,7 @@ function eitientity_summary_data_entity_update($entity, $type) {
  */
 function eitientity_summary_data_entity_delete($entity, $type) {
   if ($type == 'summary_data') {
-    pathauto_entity_path_delete_all('summary_data', $entity, "summary_data/{$entity->nid}");
+    pathauto_entity_path_delete_all('summary_data', $entity, "summary_data/{$entity->id}");
   }
 }
 

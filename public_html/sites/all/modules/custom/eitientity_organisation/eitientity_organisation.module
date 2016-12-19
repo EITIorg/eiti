@@ -302,7 +302,8 @@ function eitientity_organisation_pathauto($op) {
  */
 function eitientity_organisation_entity_insert($entity, $type) {
   if ($type == 'organisation') {
-    eitientity_organisation_pathauto_update($entity, 'insert');
+    // OK, this fails during the import process. Spent a lot of time figuring out why, never could.
+//    eitientity_organisation_pathauto_update($entity, 'insert');
   }
 }
 
@@ -351,13 +352,13 @@ function eitientity_organisation_pathauto_update($entity, $op, array $options = 
 function eitientity_organisation_update_alias_multiple(array $ids, $op, array $options = array()) {
   $options += array('message' => FALSE);
 
-  $implementing_countries = entity_load('organisation', $ids);
-  foreach ($implementing_countries as $implementing_country) {
-    eitientity_organisation_pathauto_update($implementing_country, $op, $options);
+  $organisations = entity_load('organisation', $ids);
+  foreach ($organisations as $organisation) {
+    eitientity_organisation_pathauto_update($organisation, $op, $options);
   }
 
   if (!empty($options['message'])) {
-    drupal_set_message(format_plural(count($ids), 'Updated URL alias for 1 implementing country.', 'Updated URL aliases for @count implementing countries.'));
+    drupal_set_message(format_plural(count($ids), 'Updated URL alias for 1 organisation.', 'Updated URL aliases for @count implementing countries.'));
   }
 }
 
