@@ -330,6 +330,11 @@ function eitientity_organisation_entity_delete($entity, $type) {
 function eitientity_organisation_pathauto_update($entity, $op, array $options = array()) {
   $options += array('language' => pathauto_entity_language('organisation', $entity));
 
+  // Make sure our class is here.
+  if (!$entity instanceof OrganisationEntity) {
+    $entity = new OrganisationEntity((array) $entity, 'organisation');
+  }
+
   // Skip processing if the node has no pattern.
   if (!pathauto_pattern_load_by_entity('organisation', $entity->type, $options['language'])) {
     return FALSE;
