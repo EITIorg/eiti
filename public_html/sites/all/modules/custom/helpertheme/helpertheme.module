@@ -763,8 +763,14 @@ function helpertheme_site_map() {
 
 /**
  * @param array $elements
+ *  The render array of the whole content block.
+ *
  * @param array $image_data
+ *  The image value of the field.
+ *
  * @param string $selector_prefix
+ *  Assembled selector prefix for the field.
+ *
  * @param bool $with_overlay
  */
 function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix, $with_overlay = TRUE) {
@@ -821,4 +827,90 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
     '#tag' => 'style',
     '#value' => $inline_style_xMediumAndDown . $inline_style_xNormalAndUp,
   );
+}
+
+/**
+ * @param array $elements
+ *  The render array of the whole content block.
+ *
+ * @param array $video_data
+ *  The video value of the field.
+ *
+ * @param string $selector_prefix
+ *  Assembled selector prefix for the field.
+ *
+ * @param bool $with_overlay
+ */
+function helpertheme_get_background_video_with_overlay(&$elements, $video_data, $video_settings, $with_overlay = TRUE) {
+  global $theme, $theme_info;
+  if ($theme != 'eiti') {
+    return;
+  }
+
+  // Create the overlay
+  if (!isset($elements['overlay']['#type'])) {
+    $elements['overlay']['#type'] = 'container';
+    $elements['overlay']['#weight'] = 10;
+  }
+  if (!isset($elements['overlay']['#attributes']['class']) || !in_array('overlay-wrapper', $elements['overlay']['#attributes']['class'])) {
+    $elements['overlay']['#attributes']['class'][] = 'overlay-wrapper';
+  }
+
+  // Prepare Markup.
+  $elements['#attributes']['class'][] = 'with-background-video';
+
+  if ($with_overlay) {
+    $elements['#attributes']['class'][] = 'with-overlay';
+  }
+  // Lets add our element.
+  if (!empty($video_settings['video_height'])) {
+    if (in_array($video_settings['video_height'], array('overlay_padding_2', 'overlay_padding_4', 'overlay_padding_6'))) {
+      $elements['#attributes']['class'][] = 'height-overlay';
+      $elements['#attributes']['class'][] = drupal_html_class($video_settings['video_height']);
+    }
+    else {
+      $elements['#attributes']['class'][] = drupal_html_class('height-' . $video_settings['video_height']);
+    }
+  }
+
+  $source_tags = array();
+  foreach ($video_data as $delta => $video_file) {
+    $source_tags[] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'source',
+      '#attributes' => array(
+        'src' => file_create_url($video_file['uri']),
+        'type' => $video_file['filemime'],
+      ),
+    );
+  }
+
+  // Make sure it's rendered before the overlay.
+  $elements['video_background_wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array('video-wrapper'),
+    ),
+    '#weight' => 5,
+  );
+  $elements['video_background_wrapper']['video_background'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'video',
+    '#attributes' => array(
+      'loop' => TRUE,
+      'autoplay' => TRUE,
+      'muted' => TRUE,
+      'class' => array('background-video')
+    ),
+    '#value' => drupal_render($source_tags),
+  );
+  if (isset($video_settings['video_loop']) && $video_settings['video_loop'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['loop']);
+  }
+  if (isset($video_settings['video_muted']) && $video_settings['video_muted'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['muted']);
+  }
+  if (isset($video_settings['video_autoplay']) && $video_settings['video_autoplay'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['autoplay']);
+  }
 }

@@ -60,12 +60,22 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   );
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  $video_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_video', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
     $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
 
     // Use the featured image as background image.
     $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
     helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
+    $block['overlay']['#attributes']['class'][] = 'clearfix';
+  }
+  elseif (!empty($entity->field_fpp_background_video[$video_field_language])) {
+    $featured_video_data = $entity->field_fpp_background_video[$video_field_language];
+
+    // Use the featured video as background video.
+    $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
+    $video_settings = $widget_settings['video_settings'];
+    helpertheme_get_background_video_with_overlay($block, $featured_video_data, $video_settings);
     $block['overlay']['#attributes']['class'][] = 'clearfix';
   }
   else {
@@ -114,7 +124,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     );
   }
 
-  if (empty($entity->field_fpp_background_image[$image_field_language][0])) {
+  if (empty($entity->field_fpp_background_image[$image_field_language][0]) && empty($entity->field_fpp_background_video[$video_field_language])) {
     $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
     $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
@@ -130,10 +140,17 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
  */
 function contentwidget__header__settings(&$element, &$form_state, $plugin, $widget_settings) {
   $settings_form = array();
+  $entity = $form_state['entity'];
+  $langcode = $entity->language;
+  $field_header_type_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_header_type', $langcode);
 
   $header_small = isset($widget_settings['header_small']) ? $widget_settings['header_small'] : '';
   $header_big = isset($widget_settings['header_big']) ? $widget_settings['header_big'] : '';
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
+  $video_muted = isset($widget_settings['video_settings']['video_muted']) ? $widget_settings['video_settings']['video_muted'] : TRUE;
+  $video_loop = isset($widget_settings['video_settings']['video_loop']) ? $widget_settings['video_settings']['video_loop'] : TRUE;
+  $video_autoplay = isset($widget_settings['video_settings']['video_autoplay']) ? $widget_settings['video_settings']['video_autoplay'] : TRUE;
+  $video_height = isset($widget_settings['video_settings']['video_height']) ? $widget_settings['video_settings']['video_height'] : 'video';
 
   // @TODO: Rename!
   $settings_form['header_big'] = array(
@@ -147,6 +164,53 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
     '#title' => t('Subtitle (simple paragraph)'),
     '#default_value' => $header_small,
     '#size' => 100,
+  );
+
+  // Let's add video-related settings.
+  $settings_form['video_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Video Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#id' => 'video-custom-settings',
+    '#states' => array(
+      'visible' => array(
+        array(
+          'input[name="field_fpp_header_type[' . $field_header_type_language . ']"]' => array('value' => 'video'),
+        )
+      )
+    )
+  );
+  $settings_form['video_settings']['video_muted'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Mute the video'),
+    '#description' => t('Checking this box mutes the video.'),
+    '#default_value' => $video_muted,
+  );
+  $settings_form['video_settings']['video_autoplay'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Auto-play'),
+    '#description' => t('This video will auto-play as soon as the page is loaded. Otherwise, there will be a play button.'),
+    '#default_value' => $video_autoplay,
+  );
+  $settings_form['video_settings']['video_loop'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Loop'),
+    '#description' => t('Would you like this video to loop?'),
+    '#default_value' => $video_loop,
+  );
+  $settings_form['video_settings']['video_height'] = array(
+    '#type' => 'select',
+    '#title' => t('Video height'),
+    '#description' => t('How big the video should be?'),
+    '#options' => array(
+      'video' => t('Give priority to video (full height)'),
+      'overlay' => t('Give priority to overlay content'),
+      'overlay_padding_2' => t('Give priority to overlay content (+2 padding)'),
+      'overlay_padding_4' => t('Give priority to overlay content (+4 padding)'),
+      'overlay_padding_6' => t('Give priority to overlay content (+6 padding)'),
+    ),
+    '#default_value' => $video_height,
   );
 
   $settings_form['links'] = array(
