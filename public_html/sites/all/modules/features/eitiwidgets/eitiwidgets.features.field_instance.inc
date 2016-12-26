@@ -782,6 +782,126 @@ function eitiwidgets_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-header-field_fpp_background_video'.
+  $field_instances['fieldable_panels_pane-header-field_fpp_background_video'] = array(
+    'bundle' => 'header',
+    'deleted' => 0,
+    'description' => 'For a proper video playback you should upload 3 videos of 3 different types, at least. The formats of the videos are the following: webm, mp4, ogv (ogg).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_background_video',
+    'label' => 'Background Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'avi mpeg mkv mp4 mpg ogg ogv webm',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 0,
+          'report' => 0,
+          'video' => 'video',
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 0,
+          'media_library--video_library' => 'media_library--video_library',
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-header-field_fpp_header_type'.
+  $field_instances['fieldable_panels_pane-header-field_fpp_header_type'] = array(
+    'bundle' => 'header',
+    'default_value' => array(
+      0 => array(
+        'value' => 'image',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Please specify the header type.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_header_type',
+    'label' => 'Header Type',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 2,
     ),
   );
@@ -816,7 +936,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'contentwidget',
       'settings' => array(),
       'type' => 'cwsettings',
-      'weight' => 3,
+      'weight' => 5,
     ),
   );
 
@@ -2053,15 +2173,19 @@ function eitiwidgets_field_default_field_instances() {
   t('A field replacing fieldable panel pane title.');
   t('Article List');
   t('Background Image');
+  t('Background Video');
   t('Body');
   t('Bookmark List');
   t('Bookmark widget configuration.');
   t('Content Widgets');
+  t('For a proper video playback you should upload 3 videos of 3 different types, at least. The formats of the videos are the following: webm, mp4, ogv (ogg).');
+  t('Header Type');
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');
+  t('Please specify the header type.');
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
   t('Please specify the source of this data (a link to a page or a file).');
