@@ -218,6 +218,34 @@
           this._initializeCustomChart(context, settings.contentWidgets[key]);
         }
       }
+
+      // Now that we initialized all chart-related widgets, lets move to others, WAYPOINTS.
+      if ($.fn.waypoint) {
+        // First, let's do some adjustments.
+        var $tickerWaypoint = $('.ticker-waypoint', context);
+        var values = $('.widget-value .value', $tickerWaypoint);
+        values.each(function(index) {
+          var countTo = $(this).text();
+          $(this).data('count', countTo);
+          $(this).text('0');
+        });
+        var isCounted = false;
+
+        // Define our waypoint.
+        $tickerWaypoint.waypoint(function(direction) {
+          if (!isCounted) {
+            var values = $(this.element).find('.widget-value .value');
+            values.each(function(index) {
+              var countTo = $(this).data('count');
+              var counter = new CountUp(this, 0, countTo, $tickerWaypoint.data('counter-decimals'), $tickerWaypoint.data('counter-speed'));
+              counter.start();
+              isCounted = true;
+            });
+          }
+        }, {
+          offset: '50%'
+        });
+      }
     },
 
     /**

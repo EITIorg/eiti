@@ -163,6 +163,63 @@ function eiti_ctools_extra_libraries_info() {
     ),
   );
 
+  $libraries['waypoints'] = array(
+    'name' => 'jQuery Waypoints',
+    'vendor url' => 'http://imakewebthings.com/waypoints/',
+    'download url' => 'https://github.com/imakewebthings/waypoints/zipball/latest',
+    'path' => 'lib',
+    'version' => '4.0.2',
+    'files' => array(
+      'js' => array(
+        'jquery.waypoints.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.waypoints.min.js',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.waypoints.js',
+          ),
+        ),
+      ),
+    ),
+  );
+  $libraries['countup'] = array(
+    'name' => 'Count UP JS',
+    'vendor url' => 'https://github.com/inorganik/CountUp.js',
+    'download url' => 'https://github.com/inorganik/countUp.js/archive/master.zip',
+    'path' => 'dist',
+    'version' => '1.7.1',
+    'files' => array(
+      'js' => array(
+        'countUp.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'countUp.min.js',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'countUp.js',
+          ),
+        ),
+      ),
+    ),
+  );
+
   return $libraries;
 }
 
