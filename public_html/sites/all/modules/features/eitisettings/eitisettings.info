@@ -132,6 +132,7 @@ features[variable][] = xmlsitemap_path
 features[variable][] = xmlsitemap_prefetch_aliases
 features[variable][] = xmlsitemap_rebuild_needed
 features[variable][] = xmlsitemap_regenerate_needed
+features[variable][] = xmlsitemap_settings_implementing_country_normal
 features[variable][] = xmlsitemap_settings_node_article
 features[variable][] = xmlsitemap_settings_node_document
 features[variable][] = xmlsitemap_settings_node_page

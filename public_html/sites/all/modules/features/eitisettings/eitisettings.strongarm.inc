@@ -719,6 +719,13 @@ user/*/*';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_base_url';
+  $strongarm->value = 'http://eiti.local';
+  $export['xmlsitemap_base_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_batch_limit';
   $strongarm->value = '100';
   $export['xmlsitemap_batch_limit'] = $strongarm;
@@ -754,6 +761,16 @@ user/*/*';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_engines_engines';
+  $strongarm->value = array(
+    0 => 'bing',
+    1 => 'google',
+  );
+  $export['xmlsitemap_engines_engines'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_engines_minimum_lifetime';
   $strongarm->value = '172800';
   $export['xmlsitemap_engines_minimum_lifetime'] = $strongarm;
@@ -783,7 +800,7 @@ user/*/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_generated_last';
-  $strongarm->value = 1483717383;
+  $strongarm->value = 1483722434;
   $export['xmlsitemap_generated_last'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -836,8 +853,18 @@ user/*/*';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_regenerate_needed';
-  $strongarm->value = TRUE;
+  $strongarm->value = FALSE;
   $export['xmlsitemap_regenerate_needed'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_implementing_country_normal';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_implementing_country_normal'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
