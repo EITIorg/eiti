@@ -29,6 +29,10 @@ if (PROJECT_ENVIRONMENT == 'production') {
 
   // By default cleanup the UI for all users.
   variable_del('helpergeneric_cleanup_ui_force');
+
+  // Configure the xmlsitemap.module.
+  variable_set('xmlsitemap_base_url', 'https://eiti.org');
+  variable_set('xmlsitemap_engines_engines', array('bing', 'google'));
 }
 
 // Provide a list of modules to be disabled and uninstalled.

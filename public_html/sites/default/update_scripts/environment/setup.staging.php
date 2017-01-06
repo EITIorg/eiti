@@ -11,5 +11,8 @@
 // Save a watchdog entry for this build.
 watchdog('us-environment', 'Setup STAGING Environment');
 
+// Set the xmlsitemap base URL.
+variable_set('xmlsitemap_base_url', 'https://staging.eiti.org');
+
 // Include the preprod setup script.
 include $script_directory . '/setup.preprod.php';
