@@ -1,0 +1,416 @@
+commit 8e72d6d36810cc406c5bd6118a14ec87498c4f2d
+Author: osopolar <osopolar@115856.no-reply.drupal.org>
+Date:   Mon Sep 21 18:45:40 2015 -0300
+
+    [Module] ADD Entity-Support für XML Sitemap (für Field-Collection).
+
+diff --git a/xmlsitemap.generate.inc b/xmlsitemap.generate.inc
+index b7cf4ed..72f97c4 100644
+--- a/xmlsitemap.generate.inc
++++ b/xmlsitemap.generate.inc
+@@ -488,7 +488,7 @@ function xmlsitemap_rebuild_batch_fetch($entity, &$context) {
+   $result = $query->execute();
+   $ids = array_keys($result[$entity]);
+ 
+-  $info['xmlsitemap']['process callback']($ids);
++  $info['xmlsitemap']['process callback']($ids, array('entity_type' => $entity));
+   $context['sandbox']['last_id'] = end($ids);
+   $context['sandbox']['progress'] += count($ids);
+   $context['message'] = t('Now processing %entity @last_id (@progress of @count).', array('%entity' => $entity, '@last_id' => $context['sandbox']['last_id'], '@progress' => $context['sandbox']['progress'], '@count' => $context['sandbox']['max']));
+diff --git a/xmlsitemap.module b/xmlsitemap.module
+index 09d02ea..cde8019 100644
+--- a/xmlsitemap.module
++++ b/xmlsitemap.module
+@@ -1572,7 +1572,7 @@ function xmlsitemap_link_queue_process($data) {
+   $info = xmlsitemap_get_link_info($data['type']);
+   $ids = isset($data['ids']) ? $data['ids'] : array($data['id']);
+   if (function_exists($info['xmlsitemap']['process callback'])) {
+-    $info['xmlsitemap']['process callback']($ids);
++    $info['xmlsitemap']['process callback']($ids, array('entity_type' => $data['type']));
+   }
+ }
+ 
+diff --git a/xmlsitemap_entity/xmlsitemap_entity.api.php b/xmlsitemap_entity/xmlsitemap_entity.api.php
+new file mode 100644
+index 0000000..716bd8a
+--- /dev/null
++++ b/xmlsitemap_entity/xmlsitemap_entity.api.php
+@@ -0,0 +1,27 @@
++<?php
++/**
++ * @file
++ * Describes the hooks provided by the Workflow module.
++ */
++
++/**
++ * This is a placeholder for describing further keys for hook_entity_info(),
++ * which are introduced by XML sitemap entity to provide more control concerning
++ * the XML sitemap integration.
++ *
++ * The XML sitemap entity module supports following keys:
++ * - xmlsitemap: (optional) A boolean indicating if the entity should be available
++ *   for indexing or an array of xmlsitemap settings/callbacks. The following
++ *   additional keys are used by the XML sitemap entity module:
++ *   - use entity module: for internal usage only, indicates that the XML sitemap
++ *     entity module is used for this entity type.
++ *   - changed property: (optional) Name of the property that contains the last
++ *     changed UNIX timestamp.
++ */
++function xmlsitemap_entity_hook_entity_info() {
++  return array(
++    'user' => array(
++      'xmlsitemap' => FALSE,
++    ),
++  );
++}
+diff --git a/xmlsitemap_entity/xmlsitemap_entity.info b/xmlsitemap_entity/xmlsitemap_entity.info
+new file mode 100644
+index 0000000..a73c125
+--- /dev/null
++++ b/xmlsitemap_entity/xmlsitemap_entity.info
+@@ -0,0 +1,7 @@
++name = XML sitemap entity
++description = Adds the custom entity links to the sitemap.
++package = XML sitemap
++core = 7.x
++
++dependencies[] = xmlsitemap
++dependencies[] = entity
+diff --git a/xmlsitemap_entity/xmlsitemap_entity.module b/xmlsitemap_entity/xmlsitemap_entity.module
+new file mode 100644
+index 0000000..7741d0f
+--- /dev/null
++++ b/xmlsitemap_entity/xmlsitemap_entity.module
+@@ -0,0 +1,281 @@
++<?php
++/**
++ * @file
++ * Integrate custom entities with XML sitemap
++ */
++
++/**
++ * Implements hook_menu_alter().
++ */
++function xmlsitemap_entity_menu_alter(&$items) {
++  $items['admin/config/search/xmlsitemap/settings/%xmlsitemap_link_bundle/%']['access callback'] = 'xmlsitemap_entity_link_bundle_access';
++}
++
++/**
++ * Implements hook_cron().
++ */
++function xmlsitemap_entity_cron() {
++  xmlsitemap_entity_xmlsitemap_index_links(xmlsitemap_var('batch_limit'));
++}
++
++/**
++ * Implements hook_entity_info_alter().
++ */
++function xmlsitemap_entity_entity_info_alter(array &$entity_info) {
++  foreach ($entity_info as &$info) {
++    // Skip entities that shouldn't be handled by this module.
++    if (isset($info['xmlsitemap']) && $info['xmlsitemap'] == FALSE) {
++      unset($info['xmlsitemap']);
++      continue;
++    }
++    elseif (isset($info['xmlsitemap']['process callback'])) {
++      continue;
++    }
++
++    // Check if this type of entity can be indexed.
++    $indexable = (isset($info['entity keys']['id']) && isset($info['uri callback']) && isset($info['access callback']));
++
++    if ($indexable) {
++      // The default Entity API uri callback is ignored unless it has been
++      // overridden in the child class, this is checked using reflection.
++      if ($info['uri callback'] == 'entity_class_uri') {
++        $indexable = FALSE;
++
++        if (isset($info['entity class']) && $info['entity class'] != 'Entity') {
++          $class = new ReflectionClass($info['entity class']);
++          $default_uri = $class->getMethod('defaultUri')->getDeclaringClass()->getName();
++          $uri = $class->getMethod('uri')->getDeclaringClass()->getName();
++
++          if (in_array($info['entity class'], array($default_uri, $uri))) {
++            $indexable = TRUE;
++          }
++        }
++      }
++
++      if ($indexable) {
++        if (!isset($info['xmlsitemap']) || !is_array($info['xmlsitemap'])) {
++          $info['xmlsitemap'] = array();
++        }
++
++        // Set a bundle label.
++        $info += array(
++          'bundle label' => (isset($info['entity keys']['bundle']) ? t('Bundle') : $info['label']),
++        );
++
++        // Add the XML sitemap info.
++        $info['xmlsitemap'] += array(
++          'use entity module' => TRUE,
++          'changed property' => NULL,
++          'process callback' => 'xmlsitemap_entity_xmlsitemap_process_entity_links',
++        );
++      }
++    }
++
++    if (!$indexable && isset($info['xmlsitemap'])) {
++      unset($info['xmlsitemap']);
++    }
++  }
++}
++
++/**
++ * Implements hook_xmlsitemap_link_info_alter().
++ */
++function xmlsitemap_entity_xmlsitemap_link_info_alter(&$link_info) {
++  foreach ($link_info as &$info) {
++    if (!empty($info['bundles']) && !empty($info['xmlsitemap']['use entity module'])) {
++      foreach ($info['bundles'] as &$bundle) {
++        if (isset($bundle['admin'])) {
++          $admin = $bundle['admin'];
++          if (!isset($admin['access callback']) && !isset($admin['access arguments'])) {
++            unset($bundle['admin']);
++          }
++        }
++      }
++    }
++  }
++}
++
++/**
++ * Implements hook_form_alter().
++ */
++function xmlsitemap_entity_form_alter(&$form, &$form_state, $form_id) {
++  if (isset($form_state['entity_type']) && isset($form_state[$form_state['entity_type']])) {
++    if (isset($form_state['op']) && in_array($form_state['op'], array('add', 'create', 'edit', 'update'))) {
++      $info = entity_get_info($form_state['entity_type']);
++
++      if (!empty($info['xmlsitemap']['use entity module'])) {
++        list($entity_id, , $bundle) = entity_extract_ids($form_state['entity_type'], $form_state[$form_state['entity_type']]);
++
++        form_load_include($form_state, 'inc', 'xmlsitemap', 'xmlsitemap.admin');
++        xmlsitemap_add_form_link_options($form, $form_state['entity_type'], $bundle, $entity_id);
++      }
++    }
++  }
++}
++
++/**
++ * Implements hook_entity_insert().
++ */
++function xmlsitemap_entity_entity_insert($entity, $entity_type) {
++  $info = entity_get_info($entity_type);
++
++  if (!empty($info['xmlsitemap']['use entity module'])) {
++    _xmlsitemap_entity_xmlsitemap_update_link($entity_type, $entity);
++  }
++}
++
++/**
++ * Implements hook_entity_update().
++ */
++function xmlsitemap_entity_entity_update($entity, $entity_type) {
++  $info = entity_get_info($entity_type);
++
++  if (!empty($info['xmlsitemap']['use entity module'])) {
++    _xmlsitemap_entity_xmlsitemap_update_link($entity_type, $entity);
++  }
++}
++
++/**
++ * Implements hook_entity_delete().
++ */
++function xmlsitemap_entity_entity_delete($entity, $entity_type) {
++  $info = entity_get_info($entity_type);
++
++  if (!empty($info['xmlsitemap']['use entity module'])) {
++    list($entity_id) = entity_extract_ids($entity_type, $entity);
++    xmlsitemap_link_delete($entity_type, $entity_id);
++  }
++}
++
++/**
++ * Sitemap bundle settings access callback.
++ *
++ * @param $entity_data
++ *   The entity type specific sitemap info.
++ *
++ * @return
++ *   TRUE if the current user may access the sitemap bundle settings.
++ */
++function xmlsitemap_entity_link_bundle_access($entity_data) {
++  $access = xmlsitemap_link_bundle_access($entity_data);
++
++  if (!$access) {
++    $bundle = xmlsitemap_link_bundle_load($entity_data['entity'], $entity_data['bundle']);
++
++    if (!isset($bundle['info']['admin'])) {
++      $access = user_access('administer xmlsitemap');
++    }
++  }
++
++  return $access;
++}
++
++/**
++ * Implements hook_xmlsitemap_index_links().
++ */
++function xmlsitemap_entity_xmlsitemap_index_links($limit) {
++  foreach (entity_get_info() as $entity_type => $info) {
++    if (!empty($info['xmlsitemap']['use entity module'])) {
++      $bundles = xmlsitemap_get_link_type_enabled_bundles($entity_type);
++
++      if ($bundles) {
++        $query = db_select($info['base table'], 'e')
++          ->fields('e', array($info['entity keys']['id']))
++          ->isNull('s.id')
++          ->orderBy('e.' . $info['entity keys']['id'], 'DESC')
++          ->range(0, $limit);
++        $query->leftJoin('xmlsitemap', 's', 'e.' . $info['entity keys']['id'] . ' = s.id AND s.type = :type', array(
++          ':type' => $entity_type,
++        ));
++
++        if (!empty($info['entity keys']['bundle'])) {
++          $query->condition('e.' . $info['entity keys']['bundle'], $bundles);
++        }
++
++        $ids = $query->execute()->fetchCol();
++
++        if ($ids) {
++          xmlsitemap_entity_xmlsitemap_process_entity_links($ids, array('entity_type' => $entity_type));
++        }
++      }
++    }
++  }
++}
++
++/**
++ * Create and save the sitemap link for a batch of entities.
++ *
++ * @param $entity_ids
++ *   An array of entity ids.
++ * @param $entity_type
++ *   The entity type.
++ */
++function xmlsitemap_entity_xmlsitemap_process_entity_links(array $entity_ids, $data) {
++  $entities = entity_load($data['entity_type'], $entity_ids);
++
++  foreach ($entities as $entity) {
++    _xmlsitemap_entity_xmlsitemap_update_link($data['entity_type'], $entity);
++  }
++}
++
++/**
++ * Create and save the sitemap link for an entity.
++ *
++ * @param $entity_type
++ *   The entity type.
++ * @param $entity
++ *   The entity object.
++ */
++function _xmlsitemap_entity_xmlsitemap_update_link($entity_type, $entity) {
++  list($entity_id, , $bundle) = entity_extract_ids($entity_type, $entity);
++
++  // Try to load the existing sitemap link.
++  if (!isset($entity->xmlsitemap)) {
++    $entity->xmlsitemap = array();
++
++    if ($link = xmlsitemap_link_load($entity_type, $entity_id)) {
++      $entity->xmlsitemap = $link;
++    }
++  }
++
++  // Get the entity type info and bundle settings.
++  $info = entity_get_info($entity_type);
++  $settings = xmlsitemap_link_bundle_load($entity_type, $bundle);
++
++  // Get the entity URI and changed timestamp.
++  $uri = entity_uri($entity_type, $entity);
++  $changed = REQUEST_TIME;
++
++  if (array_key_exists('changed property', $info['xmlsitemap'])) {
++    if (isset($info['xmlsitemap']['changed property'])) {
++      $changed = $entity->{$info['xmlsitemap']['changed property']};
++    }
++  }
++  elseif (isset($entity->changed)) {
++    $changed = $entity->changed;
++  }
++  elseif (isset($entity->updated)) {
++    $changed = $entity->updated;
++  }
++
++  // Add some sitemap properties.
++  $entity->xmlsitemap += array(
++    'id' => $entity_id,
++    'type' => $entity_type,
++    'subtype' => $bundle,
++    'status' => $settings['status'],
++    'status_default' => $settings['status'],
++    'status_override' => 0,
++    'priority' => $settings['priority'],
++    'priority_default' => $settings['priority'],
++    'priority_override' => 0,
++  );
++
++  // Force override some properties.
++  $entity->xmlsitemap['loc'] = $uri['path'];
++  $entity->xmlsitemap['access'] = entity_access('view', $entity_type, $entity, drupal_anonymous_user());
++  $entity->xmlsitemap['language'] = (isset($entity->language) ? $entity->language : LANGUAGE_NONE);
++  $entity->xmlsitemap['lastmod'] = $changed;
++
++  xmlsitemap_link_save($entity->xmlsitemap);
++}
+diff --git a/xmlsitemap_menu/xmlsitemap_menu.module b/xmlsitemap_menu/xmlsitemap_menu.module
+index f0ba9e2..44435c9 100644
+--- a/xmlsitemap_menu/xmlsitemap_menu.module
++++ b/xmlsitemap_menu/xmlsitemap_menu.module
+@@ -90,7 +90,7 @@ function xmlsitemap_menu_xmlsitemap_index_links($limit) {
+  * @param $mlids
+  *   An array of menu link IDs.
+  */
+-function xmlsitemap_menu_xmlsitemap_process_menu_links(array $mlids, array $xmlsitemap = array()) {
++function xmlsitemap_menu_xmlsitemap_process_menu_links(array $mlids, $data = array()) {
+   // Set the global user variable to the anonymous user.
+   xmlsitemap_switch_user(0);
+ 
+@@ -99,8 +99,8 @@ function xmlsitemap_menu_xmlsitemap_process_menu_links(array $mlids, array $xmls
+     if (empty($menu_item)) {
+       continue;
+     }
+-    if (!empty($xmlsitemap)) {
+-      $menu_item['xmlsitemap'] = $xmlsitemap;
++    if (!empty($data['xmlsitemap'])) {
++      $menu_item['xmlsitemap'] = array('xmlsitemap' => (array) $data['xmlsitemap']);
+     }
+     $link = xmlsitemap_menu_create_link($menu_item);
+     xmlsitemap_link_save($link, array($link['type'] => $menu_item));
+@@ -193,7 +193,7 @@ function xmlsitemap_menu_menu_delete(array $menu) {
+  */
+ function xmlsitemap_menu_menu_link_insert(array $link) {
+   $link += array('xmlsitemap' => array());
+-  xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), $link['xmlsitemap']);
++  xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), array('xmlsitemap' => $link['xmlsitemap']));
+ }
+ 
+ /**
+@@ -203,7 +203,7 @@ function xmlsitemap_menu_menu_link_insert(array $link) {
+  */
+ function xmlsitemap_menu_menu_link_update(array $link) {
+   //$link += array('xmlsitemap' => array());
+-  //xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), $link['xmlsitemap']);
++  //xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), array('xmlsitemap' => $link['xmlsitemap']));
+ }
+ 
+ /**
+@@ -218,7 +218,7 @@ function xmlsitemap_menu_menu_link_update(array $link) {
+ function xmlsitemap_menu_menu_link_alter(array &$link) {
+   if (!empty($link['mlid'])) {
+     $link += array('xmlsitemap' => array());
+-    xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), $link['xmlsitemap']);
++    xmlsitemap_menu_xmlsitemap_process_menu_links(array($link['mlid']), array('xmlsitemap' => $link['xmlsitemap']));
+   }
+ }
+ 
