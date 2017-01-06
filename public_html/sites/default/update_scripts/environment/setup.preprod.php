@@ -15,6 +15,9 @@
 if (PROJECT_ENVIRONMENT == 'preprod') {
   // Save a watchdog entry for this build.
   watchdog('us-environment', 'Setup PREPROD Environment');
+
+  // Set the xmlsitemap base URL.
+  variable_set('xmlsitemap_base_url', 'https://preprod.eiti.org');
 }
 
 // Enable CSS and JavaScript aggregation.
