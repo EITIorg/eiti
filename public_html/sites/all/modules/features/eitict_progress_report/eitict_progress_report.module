@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EITI Content Type Progress Report feature.
+ */
+
+include_once 'eitict_progress_report.features.inc';
