@@ -100,6 +100,11 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
       $updating = FALSE;
     }
 
+    // Make sure our class is here.
+    if (!$entity instanceof OrganisationEntity) {
+      $entity = new OrganisationEntity((array) $entity, 'organisation');
+    }
+
     // Validate field data prior to saving.
     MigrateDestinationEntity::fieldAttachValidate('organisation', $entity);
 
