@@ -92,6 +92,11 @@ class EITIMigrateDestinationIndicatorValue extends MigrateDestinationEntity {
       $updating = FALSE;
     }
 
+    // Make sure our class is here.
+    if (!$entity instanceof IndicatorValueEntity) {
+      $entity = new IndicatorValueEntity((array) $entity, 'indicator_value');
+    }
+
     // Validate field data prior to saving.
     MigrateDestinationEntity::fieldAttachValidate('indicator_value', $entity);
 

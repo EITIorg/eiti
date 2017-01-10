@@ -112,6 +112,11 @@ class EITIMigrateDestinationSummaryData extends MigrateDestinationEntity {
       $updating = FALSE;
     }
 
+    // Make sure our class is here.
+    if (!$entity instanceof SummaryDataEntity) {
+      $entity = new SummaryDataEntity((array) $entity, 'summary_data');
+    }
+
     // Validate field data prior to saving.
     MigrateDestinationEntity::fieldAttachValidate('summary_data', $entity);
 
