@@ -129,7 +129,6 @@ function __eiti_menu_link__level(array &$variables, $level = NULL) {
   return "<$tag" . drupal_attributes($element['#attributes']) . '>' . $link . $output . "</$tag>\n";
 }
 
-
 /**
  * Returns HTML for a set of links.
  *
