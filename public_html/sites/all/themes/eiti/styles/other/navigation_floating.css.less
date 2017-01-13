@@ -1,0 +1,36 @@
+
+#navigation-floating {
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  transform: translate(0, -50%);
+  background-color: @clmain;
+  
+  li{
+    &.current {
+      > a {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.xMediumAndUp() {
+  #navigation-floating {
+
+  }
+}
+
+.xMediumOnly() {
+  #navigation-floating {
+
+  }
+}
+.xNormalAndUp() {
+  #navigation-floating {
+
+  }
+}
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
