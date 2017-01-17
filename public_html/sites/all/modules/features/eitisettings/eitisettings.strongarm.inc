@@ -719,13 +719,6 @@ user/*/*';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'xmlsitemap_base_url';
-  $strongarm->value = 'http://eiti.local';
-  $export['xmlsitemap_base_url'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_batch_limit';
   $strongarm->value = '100';
   $export['xmlsitemap_batch_limit'] = $strongarm;
@@ -761,16 +754,6 @@ user/*/*';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'xmlsitemap_engines_engines';
-  $strongarm->value = array(
-    0 => 'bing',
-    1 => 'google',
-  );
-  $export['xmlsitemap_engines_engines'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_engines_minimum_lifetime';
   $strongarm->value = '172800';
   $export['xmlsitemap_engines_minimum_lifetime'] = $strongarm;
@@ -795,13 +778,6 @@ user/*/*';
   $strongarm->name = 'xmlsitemap_frontpage_priority';
   $strongarm->value = '1.0';
   $export['xmlsitemap_frontpage_priority'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'xmlsitemap_generated_last';
-  $strongarm->value = 1483722434;
-  $export['xmlsitemap_generated_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
