@@ -70,7 +70,7 @@ function getLegend() {
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#2D8B2A">&nbsp;</i>' +
-    '  <div>The country is compliant with the EITI requirement.</div>' +
+    '  <div>The country is compliant with the EITI Requirement.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#5182bb">&nbsp;</i>' +
@@ -117,12 +117,30 @@ function appendRows(data, tableBody) {
 		            return (value.score_req_id == requirement.id);
 		        });
 	        }
-	        var req_cell = $("<TD>");
-	        currentRow.append(req_cell.html(requirement.Requirement));
+	        let req_cell = $("<TD>");
+	        currentRow.append(req_cell.html(requirement.Requirement + ' (#' + requirement.Code + ') '));
 
 	        // Requirement Answers
 	        if (currentScore) {
-	        	req_cell.attr('Title', currentScore.description);
+	        	if(currentScore.description && currentScore.description !== "") {
+			        let descriptionSpan = $("<DIV>").html("<BR/>" + currentScore.description).addClass("requirement_description").hide();
+			        let button = $("<A>").addClass("requirement_button").html("(+)");
+			        button.on("click", function(){
+		        		if(button.html() === "(+)") {
+		        			descriptionSpan.show();
+		        			button.html("(-)");
+		        		}
+		        		else
+		        		{
+		        			descriptionSpan.hide();
+		        			button.html("(+)");
+		        		}
+		        	});
+		        	req_cell.append(button);
+		        	req_cell.append(descriptionSpan);
+			        //console.log(requirement.Code);
+
+	        	}
 	        	var cellStyle = '';
 			    if (currentScore.is_applicable == 0) {
 			        cellStyle = 'not_applicable ';

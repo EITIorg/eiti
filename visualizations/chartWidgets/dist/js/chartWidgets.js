@@ -46168,11 +46168,28 @@
 					});
 				}
 				var req_cell = $("<TD>");
-				currentRow.append(req_cell.html(requirement.Requirement));
+				currentRow.append(req_cell.html(requirement.Requirement + ' (#' + requirement.Code + ') '));
 
 				// Requirement Answers
 				if (currentScore) {
-					req_cell.attr('Title', currentScore.description);
+					if (currentScore.description && currentScore.description !== "") {
+						(function () {
+							var descriptionSpan = $("<DIV>").html("<BR/>" + currentScore.description).addClass("requirement_description").hide();
+							var button = $("<A>").addClass("requirement_button").html("(+)");
+							button.on("click", function () {
+								if (button.html() === "(+)") {
+									descriptionSpan.show();
+									button.html("(-)");
+								} else {
+									descriptionSpan.hide();
+									button.html("(+)");
+								}
+							});
+							req_cell.append(button);
+							req_cell.append(descriptionSpan);
+							//console.log(requirement.Code);
+						})();
+					}
 					var cellStyle = '';
 					if (currentScore.is_applicable == 0) {
 						cellStyle = 'not_applicable ';

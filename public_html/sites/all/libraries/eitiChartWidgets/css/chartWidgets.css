@@ -243,11 +243,11 @@ TABLE.country_scorecard {
 }
 
 .country_scorecard TD.meaningful {
-  background-color: #2D8B2A;
+  background-color: #84AD42;
 }
 
 .country_scorecard TD.satisfactory {
-  background-color: #84AD42;
+  background-color: #2D8B2A;
 }
 
 .country_scorecard TD.beyond {
@@ -270,6 +270,15 @@ TABLE.country_scorecard {
   width: 30px;
 }
 
+.country_scorecard .requirement_description {
+  font-size:9pt;
+  width:300px;
+}
+
+.country_scorecard .requirement_button {
+  cursor: pointer;
+  color: #0093cf;
+}
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item i {
   width: 2em;
   height: 2.5em;
@@ -313,3 +322,13 @@ TABLE.country_scorecard {
 .country_scorecard TD.requirement {
   background-color:#bfbfbf;
 }
+
+.country_scorecard .requirement_description {
+  font-size:9pt;
+  width:300px;
+}
+.country_scorecard .requirement_button {
+  cursor: pointer;
+  color: #0093cf;
+}
+

@@ -13,11 +13,13 @@ define('EITIENTITY_SCORE_REQ_VALUE_INADEQUATE', 1);
 define('EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL', 2);
 define('EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY', 3);
 define('EITIENTITY_SCORE_REQ_VALUE_BEYOND', 4);
+define('EITIENTITY_SCORE_REQ_VALUE_NA', 5);
 
 // Direction of Progress.
 define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME', 0);
 define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_BETTER', 1);
 define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_WORSE', 2);
+define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY', 4);
 
 // Is applicable.
 define('EITIENTITY_SCORE_REQ_IS_APPLICABLE', 0);
@@ -257,6 +259,7 @@ function _eitientity_score_req_value_get_value_options($id = NULL) {
     EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
     EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
     EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+    EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
   );
 
   if ($id == NULL) {
@@ -280,6 +283,7 @@ function _eitientity_score_req_value_get_dir_of_progress_options($id = NULL) {
     EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME => t('Same'),
     EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_BETTER => t('Better'),
     EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_WORSE => t('Worse'),
+    EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY => t('Empty')
   );
 
   if ($id == NULL) {
