@@ -93,6 +93,14 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
   $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'teaser';
+  $fieldable_panels_pane_type->title = 'Teaser';
+  $fieldable_panels_pane_type->description = 'Use teaser widget when you want to tease a iece of content with a title, description and a link (background images allowed).';
+  $export['teaser'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
   $fieldable_panels_pane_type->name = 'text';
   $fieldable_panels_pane_type->title = 'Text';
   $fieldable_panels_pane_type->description = 'A simple text widget.';
