@@ -1732,6 +1732,165 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-teaser-field_fpp_background_image'.
+  $field_instances['fieldable_panels_pane-teaser-field_fpp_background_image'] = array(
+    'bundle' => 'teaser',
+    'deleted' => 0,
+    'description' => 'Upload a relevant image, it should have a landscape orientation.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_background_image',
+    'label' => 'Background Image',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-teaser-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-teaser-field_fpp_body'] = array(
+    'bundle' => 'teaser',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you\'d like to use a paragraph of description for your teaser, please write it here.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Description',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-teaser-field_fpp_widget'.
+  $field_instances['fieldable_panels_pane-teaser-field_fpp_widget'] = array(
+    'bundle' => 'teaser',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'contentwidget',
+        'settings' => array(),
+        'type' => 'cwrendered',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_widget',
+    'label' => 'Widget',
+    'required' => 0,
+    'settings' => array(
+      'available_widgets' => array(
+        'teaser' => 'teaser',
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'contentwidget',
+      'settings' => array(),
+      'type' => 'cwsettings',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_body'.
   $field_instances['fieldable_panels_pane-text-field_fpp_body'] = array(
     'bundle' => 'text',
@@ -2178,10 +2337,12 @@ function eitiwidgets_field_default_field_instances() {
   t('Bookmark List');
   t('Bookmark widget configuration.');
   t('Content Widgets');
+  t('Description');
   t('For a proper video playback you should upload 3 videos of 3 different types, at least. The formats of the videos are the following: webm, mp4, ogv (ogg).');
   t('Header Type');
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
+  t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
   t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');
@@ -2199,6 +2360,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Table');
   t('Title');
   t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
+  t('Upload a relevant image, it should have a landscape orientation.');
   t('Useful Links');
   t('Widget');
 

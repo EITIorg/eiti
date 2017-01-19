@@ -200,6 +200,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'create fieldable teaser'.
+  $permissions['create fieldable teaser'] = array(
+    'name' => 'create fieldable teaser',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable text'.
   $permissions['create fieldable text'] = array(
     'name' => 'create fieldable text',
@@ -339,6 +346,13 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable teaser'.
+  $permissions['delete fieldable teaser'] = array(
+    'name' => 'delete fieldable teaser',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable text'.
   $permissions['delete fieldable text'] = array(
     'name' => 'delete fieldable text',
@@ -474,6 +488,13 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable tabs_with_widgets'.
   $permissions['edit fieldable tabs_with_widgets'] = array(
     'name' => 'edit fieldable tabs_with_widgets',
+    'roles' => array(),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable teaser'.
+  $permissions['edit fieldable teaser'] = array(
+    'name' => 'edit fieldable teaser',
     'roles' => array(),
     'module' => 'fieldable_panels_panes',
   );
