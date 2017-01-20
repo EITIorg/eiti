@@ -58,6 +58,10 @@ function contentwidget__teaser__render($plugin, $widget_settings, $entity, $lang
       'class' => array('teaser-content'),
     ),
   );
+  if (!empty($widget_settings['display_settings']['teaser_height']) && $widget_settings['display_settings']['teaser_height'] !== 'standard') {
+    $height = $widget_settings['display_settings']['teaser_height'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('overlay-' . $height);
+  }
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -159,6 +163,18 @@ function contentwidget__teaser__settings(&$element, &$form_state, $plugin, $widg
     '#options' => drupal_map_assoc(range(0, 100, 10)),
     '#field_suffix' => t('%'),
     '#default_value' => isset($widget_settings['display_settings']['opacity']) ? $widget_settings['display_settings']['opacity'] : '50',
+  );
+  $settings_form['display_settings']['teaser_height'] = array(
+    '#type' => 'select',
+    '#title' => t('Height'),
+    '#description' => t('Modify widget height.'),
+    '#default_value' => isset($widget_settings['display_settings']['teaser_height']) ? $widget_settings['display_settings']['teaser_height'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard'),
+      'padding_2' => t('With padding (2)'),
+      'padding_4' => t('With padding (4)'),
+      'padding_6' => t('With padding (6)'),
+    ),
   );
 
   $settings_form['links'] = array(
