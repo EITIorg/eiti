@@ -17,6 +17,10 @@ export var init = function(data, scores, categories, requirements, el) {
 
 function renderScorecard(data, placeholder) {
 	window.$ = window.jQuery;
+	var countryScore = _.first(data.result);
+	let hasProgress = false;
+	let progress_values = _.filter(countryScore.score_req_values, function(v){return v.progress_value != null});
+	hasProgress = (progress_values.length > 0);
 
 	var table = $('<TABLE>').addClass('country_scorecard');
 	var tableHeader = $('<THEAD>');
@@ -24,12 +28,14 @@ function renderScorecard(data, placeholder) {
 	var tableHeaderUpperRow = $('<TR>');
 	tableHeaderUpperRow.append($('<TH>').attr('colspan', 2).html('EITI Requirements'));
 	tableHeaderUpperRow.append($('<TH>').attr('colspan', 5).html('Level of Progress'));
-	//tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html('Direction <br/>of Progress'));
+	if(hasProgress) {
+		tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html('Direction <br/>of Progress'));
+	}
 
 	var tableHeaderLowerRow = $('<TR>');
 	tableHeaderLowerRow.append($('<TH>').html('Categories'));
 	tableHeaderLowerRow.append($('<TH>').html('Requirements'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>No</span></div>'));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>No Progress</span></div>'));
 	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Inadequate</span></div>'));
 	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Meaningful</span></div>'));
 	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Satisfactory</span></div>'));
@@ -43,9 +49,8 @@ function renderScorecard(data, placeholder) {
 	table.append(tableBody);
 	$(placeholder).append(table);
 
-
 	//Append requirements rows based on the results
-	appendRows(data, tableBody);
+	appendRows(data, tableBody, hasProgress);
 	var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend());
 	$(placeholder).append(legend);
 
@@ -77,15 +82,19 @@ function getLegend() {
     '  <div>The country has gone beyond the requirement.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
-    '  <i style="background:#ccc">&nbsp;</i>' +
+    '  <i class="only_encouraged">&nbsp;</i>' +
     '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' +
+    '</div>' +
+    '<div class="scorecard-legend-item">' +
+    '  <i class="not_applicable">&nbsp;</i>' +
+    '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' +
     '</div>';
 
 	return legendHTML;
 
 }
 
-function appendRows(data, tableBody) {
+function appendRows(data, tableBody, hasProgress) {
 	var categories = data.categories;
 	var requirements = data.requirements;
 	var scores = data.scores;
@@ -116,6 +125,7 @@ function appendRows(data, tableBody) {
 		        currentScore = _.find(countryScore.score_req_values, function(value) {
 		            return (value.score_req_id == requirement.id);
 		        });
+
 	        }
 	        let req_cell = $("<TD>");
 	        currentRow.append(req_cell.html(requirement.Requirement + ' (#' + requirement.Code + ') '));
@@ -144,27 +154,67 @@ function appendRows(data, tableBody) {
 	        	var cellStyle = '';
 			    if (currentScore.is_applicable == 0) {
 			        cellStyle = 'not_applicable ';
-		            _.each(scores, function(value) {
-		                currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
-		            });
+			        currentRow.append($("<TD>").attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
 			    }
 			    else
 			    {
 		            _.each(scores, function(value) {
 		                var on = value.id;
 		                var cellStatus = (Number(currentScore.value) === on);
-		                cellStyle = cellStatus ? value.name.toLowerCase() : '';
+		                cellStyle = cellStatus ? value.name.replace(/\s+/g, '_').toLowerCase() : '';
 		                currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
 		            });
 			    }
+
+			    if(hasProgress){
+			    	let symbol = {
+			    		symbol: '&nbsp', 
+			    		color: '#676767'
+			    	};
+			    	
+			    	switch(currentScore.progress_value) {
+			    		case "0": //Same
+				    		symbol = {
+					    		symbol: '&equals;', 
+					    		color: '#676767'
+					    	}
+			    		break; 
+			    		case "1": //Better
+				    		symbol = {
+					    		symbol: '&rarr;', 
+					    		color: '#84AD42'
+					    	}
+			    		break; 
+			    		case "2": //Worse
+				    		symbol = {
+					    		symbol: '&larr;', 
+					    		color: 'red'
+					    	}
+			    		break; 
+			    		case "3": //Empty
+				    		symbol = {
+					    		symbol: '&nbsp', 
+					    		color: '#676767'
+					    	}
+			    		break; 
+
+			    	}
+			        var symbolElement = $("<DIV>").css({'color': symbol.color,'text-align': 'center', 'font-weight':'bold'}).html(symbol.symbol);
+			        currentRow.append($("<TD>").append(symbolElement));
+			    }
+
 	        } else {
 	            _.each(scores, function(value) {
 	                currentRow.append($("<TD>").html('&nbsp;'));
 	            });
+			    if(hasProgress){
+		            //Empty direction of progress
+	                currentRow.append($("<TD>").html('&nbsp;'));
+	            }
 	        }
 	        //Direction of Progress
-	        
-	        //currentRow.append($("<TD>").html('&nbsp;'));
+
+
 	        tableBody.append(currentRow);
 	    });
 	})

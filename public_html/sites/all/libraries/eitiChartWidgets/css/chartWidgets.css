@@ -225,7 +225,7 @@ TABLE.country_scorecard {
 .country_scorecard, .country_scorecard TD {
   border: 1px solid #ccc;
   padding: 5px 0px 5px 8px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .country_scorecard, .country_scorecard TH {
@@ -234,29 +234,42 @@ TABLE.country_scorecard {
 }
 
 
-.country_scorecard TD.no {
+.country_scorecard .no_progress, .scorecard-legend .no_progress {
   background-color: #C00000;
 }
 
-.country_scorecard TD.inadequate {
+.country_scorecard .inadequate, .scorecard-legend .inadequate {
   background-color: #FAC433;
 }
 
-.country_scorecard TD.meaningful {
+.country_scorecard .meaningful, .scorecard-legend .meaningful {
   background-color: #84AD42;
 }
 
-.country_scorecard TD.satisfactory {
+.country_scorecard .satisfactory, .scorecard-legend .satisfactory {
   background-color: #2D8B2A;
 }
 
-.country_scorecard TD.beyond {
+.country_scorecard .beyond, .scorecard-legend .beyond {
   background-color: #5182bb;
 }
 
-.country_scorecard TD.not_applicable {
+.country_scorecard .only_encouraged, .scorecard-legend .only_encouraged {
   background-color: #ccc;
 }
+
+.country_scorecard .not_applicable, .scorecard-legend .not_applicable {
+  color: white;
+  background: repeating-linear-gradient(
+    -45deg,
+    #222,
+    #222 2px,
+    #fff 2px,
+    #fff 5px
+  );
+}
+
+
 
 .country_scorecard TH.scores {
   height: 110px;
@@ -279,6 +292,7 @@ TABLE.country_scorecard {
   cursor: pointer;
   color: #0093cf;
 }
+
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item i {
   width: 2em;
   height: 2.5em;
@@ -287,17 +301,16 @@ TABLE.country_scorecard {
   margin-bottom: 0.5em;
   vertical-align: middle;
 }
-
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item div {
   display:inline-block;
   width:90%;
   float: left;
   vertical-align: middle;
 }
-
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item {
   clear:both;
 }
+
 
 .eiti-chart-widget .scorecard-legend {
   margin-top:2em;
@@ -308,19 +321,19 @@ TABLE.country_scorecard {
   color:#fff;
   font-style: normal;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
 
 .country_scorecard TR TH {
   background-color:#f2f2f2;
-  color:#000;
+  color:#676767;
   font-style: normal;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
 
 .country_scorecard TD.requirement {
-  background-color:#bfbfbf;
+  background-color:#e2e2e2;
 }
 
 .country_scorecard .requirement_description {
