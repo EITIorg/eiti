@@ -85,7 +85,7 @@
           $liElement.appendTo($floatingNavList);
         }
         else {
-          var $lastDeepList = $floatingNavList.find('> li > ul').last();
+          var $lastDeepList = $floatingNavList.find('> li:last > ul');
           if ($lastDeepList.length == 0) {
             // No deep-list? Let's create one in the last li element (top level).
             var $lastLiElement = $floatingNavList.find('> li').last();
@@ -93,8 +93,7 @@
             $deepList.appendTo($lastLiElement);
           }
           else {
-            // TODO: continue the case.
-            console.log('BOOM!');
+            // Do nothing.
           }
         }
 
@@ -105,13 +104,21 @@
             $floatingNavList.find('li').removeClass('current');
             $('.nav-item-' + $this.data('pane_id'), context).toggleClass('current');
           }, {
-            offset: firstPane ? -10 : '25%'
+            offset: firstPane ? -10 : '10%'
           });
         }
         firstPane = false;
       }
 
       $('#navigation-floating', context).append($floatingNavList);
+      if ($.fn.waypoint) {
+        $('#navigation-floating').waypoint(function(direction) {
+          var $this = $(this.element);
+          $this.parent().fadeToggle(400);
+        }, {
+          offset: '20%'
+        });
+      }
     }
   };
 })(jQuery, Drupal);

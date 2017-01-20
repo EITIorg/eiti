@@ -63,7 +63,7 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
 
   $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
 
-  if (!empty($widget_settings['facts_display_settings']['fact_height']) && $widget_settings['facts_display_settings']['fact_height'] !== 'stnadard') {
+  if (!empty($widget_settings['facts_display_settings']['fact_height']) && $widget_settings['facts_display_settings']['fact_height'] !== 'standard') {
     $height = $widget_settings['facts_display_settings']['fact_height'];
     $block['overlay']['#attributes']['class'][] = drupal_html_class('overlay-' . $height);
   }

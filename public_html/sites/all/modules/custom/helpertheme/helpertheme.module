@@ -805,27 +805,36 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
     $elements['#attributes']['class'][] = 'with-overlay';
   }
 
-  // Prepare inline style for: 'Smartphone' and 'Tablet'
-  // @see: .xMediumAndDown() in custom-responsive.less
-  $style_name = 'bg-normal';
-  $featured_image_path = image_style_url($style_name, $image_data['uri']);
-  $background_image = 'background-image: url("' . $featured_image_path . '");';
-  $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
-
-  // Prepare inline style for: 'Normal Desktop' and 'Large Desktop'.
-  // @see: .xNormalAndUp() in custom-responsive.less
-  $style_name = 'bg-large';
-  if (isset($image_data['width']) && (int) $image_data['width'] < 1920) {
-    $style_name = 'bg-enlarged';
+  // Check if we need to generate styles at all.
+  if ($image_data['filemime'] == 'image/gif') {
+    $original_image_path = file_create_url($image_data['uri']);
+    $background_image = 'background-image: url("' . $original_image_path . '");"';
+    $all_styles = ".${selector} { ${background_image} }\n";
   }
-  $featured_image_path = image_style_url($style_name, $image_data['uri']);
-  $background_image = 'background-image: url("' . $featured_image_path . '");';
-  $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
+  else {
+    // Prepare inline style for: 'Smartphone' and 'Tablet'
+    // @see: .xMediumAndDown() in custom-responsive.less
+    $style_name = 'bg-normal';
+    $featured_image_path = image_style_url($style_name, $image_data['uri']);
+    $background_image = 'background-image: url("' . $featured_image_path . '");';
+    $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
+
+    // Prepare inline style for: 'Normal Desktop' and 'Large Desktop'.
+    // @see: .xNormalAndUp() in custom-responsive.less
+    $style_name = 'bg-large';
+    if (isset($image_data['width']) && (int) $image_data['width'] < 1920) {
+      $style_name = 'bg-enlarged';
+    }
+    $featured_image_path = image_style_url($style_name, $image_data['uri']);
+    $background_image = 'background-image: url("' . $featured_image_path . '");';
+    $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
+    $all_styles = $inline_style_xMediumAndDown . $inline_style_xNormalAndUp;
+  }
 
   $elements['style'] = array(
     '#type' => 'html_tag',
     '#tag' => 'style',
-    '#value' => $inline_style_xMediumAndDown . $inline_style_xNormalAndUp,
+    '#value' => $all_styles,
   );
 }
 
