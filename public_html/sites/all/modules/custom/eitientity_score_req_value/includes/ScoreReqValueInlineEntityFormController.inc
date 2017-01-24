@@ -99,7 +99,7 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       '#type' => 'select',
       '#title' => t('Direction of Progress'),
       '#options' => _eitientity_score_req_value_get_dir_of_progress_options(),
-      '#default_value' => $entity->progress_value,
+      '#default_value' => $entity->dir_of_progress,
     );
     $entity_form['is_applicable'] = array(
       '#type' => 'checkbox',
