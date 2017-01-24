@@ -340,7 +340,11 @@ function eitipermissions_user_default_permissions() {
   // Exported permission: 'administer panelizer node progress_report overview'.
   $permissions['administer panelizer node progress_report overview'] = array(
     'name' => 'administer panelizer node progress_report overview',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
     'module' => 'panelizer',
   );
 
