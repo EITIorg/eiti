@@ -15,3 +15,9 @@ $modules = array(
     'xmlsitemap_engines',
 );
 _us_module__install($modules);
+
+// Prepare a list of features to be installed.
+$feature_names = array(
+  'eitict_progress_report',
+);
+_us_features__install($feature_names);

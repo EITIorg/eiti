@@ -305,6 +305,52 @@ function eitipermissions_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'administer panelizer node progress_report content'.
+  $permissions['administer panelizer node progress_report content'] = array(
+    'name' => 'administer panelizer node progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node progress_report context'.
+  $permissions['administer panelizer node progress_report context'] = array(
+    'name' => 'administer panelizer node progress_report context',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node progress_report defaults'.
+  $permissions['administer panelizer node progress_report defaults'] = array(
+    'name' => 'administer panelizer node progress_report defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node progress_report layout'.
+  $permissions['administer panelizer node progress_report layout'] = array(
+    'name' => 'administer panelizer node progress_report layout',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node progress_report overview'.
+  $permissions['administer panelizer node progress_report overview'] = array(
+    'name' => 'administer panelizer node progress_report overview',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node progress_report settings'.
+  $permissions['administer panelizer node progress_report settings'] = array(
+    'name' => 'administer panelizer node progress_report settings',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'administer panels layouts'.
   $permissions['administer panels layouts'] = array(
     'name' => 'administer panels layouts',
@@ -500,6 +546,17 @@ function eitipermissions_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'create progress_report content'.
+  $permissions['create progress_report content'] = array(
+    'name' => 'create progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create url aliases'.
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
@@ -539,6 +596,28 @@ function eitipermissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'shortcut',
+  );
+
+  // Exported permission: 'delete any progress_report content'.
+  $permissions['delete any progress_report content'] = array(
+    'name' => 'delete any progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own progress_report content'.
+  $permissions['delete own progress_report content'] = array(
+    'name' => 'delete own progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete revisions'.
@@ -590,6 +669,28 @@ function eitipermissions_user_default_permissions() {
     'name' => 'display drupal links',
     'roles' => array(),
     'module' => 'admin_menu',
+  );
+
+  // Exported permission: 'edit any progress_report content'.
+  $permissions['edit any progress_report content'] = array(
+    'name' => 'edit any progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own progress_report content'.
+  $permissions['edit own progress_report content'] = array(
+    'name' => 'edit own progress_report content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit terms in publication_types_internal'.
