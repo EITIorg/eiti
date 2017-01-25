@@ -62,6 +62,9 @@ function contentwidget__teaser__render($plugin, $widget_settings, $entity, $lang
     $height = $widget_settings['display_settings']['teaser_height'];
     $block['overlay']['#attributes']['class'][] = drupal_html_class('overlay-' . $height);
   }
+  // Let's put these in.
+  $block['overlay']['#opacity'] = isset($widget_settings['display_settings']['opacity']) ? $widget_settings['display_settings']['opacity'] : '60';
+  $block['overlay']['#background-color'] = isset($widget_settings['display_settings']['overlay_color']) ? $widget_settings['display_settings']['overlay_color'] : '002c47';
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -162,7 +165,14 @@ function contentwidget__teaser__settings(&$element, &$form_state, $plugin, $widg
     '#description' => t('How much opacity would you like to use?'),
     '#options' => drupal_map_assoc(range(0, 100, 10)),
     '#field_suffix' => t('%'),
-    '#default_value' => isset($widget_settings['display_settings']['opacity']) ? $widget_settings['display_settings']['opacity'] : '50',
+    '#default_value' => isset($widget_settings['display_settings']['opacity']) ? $widget_settings['display_settings']['opacity'] : '60',
+  );
+  $settings_form['display_settings']['overlay_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Color (hex)'),
+    '#description' => t('Please specify which color overlay you would like to use. I.e.: "ffffff" (white).'),
+    '#field_prefix' => t('#'),
+    '#default_value' => isset($widget_settings['display_settings']['overlay_color']) ? $widget_settings['display_settings']['overlay_color'] : '002c47',
   );
   $settings_form['display_settings']['teaser_height'] = array(
     '#type' => 'select',
