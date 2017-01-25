@@ -120,7 +120,7 @@
             $('.pane-navigation-floating .navigation-wrapper', context).fadeIn(400);
           }
         }, {
-          offset: '20%'
+          offset: '50%'
         });
       }
     }
