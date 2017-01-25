@@ -102,9 +102,9 @@ function eiti_ctools_extra__navigation_floating__render($subtype, $conf, $panel_
       'class' => array('navigation-wrapper')
     ),
   );
-  $content['navitation'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'div',
+  $content['navigation'] = array(
+    '#type' => 'container',
+    '#weight' => 10,
     '#attributes' => array(
       'id' => $navigation_id,
       'class' => array(
