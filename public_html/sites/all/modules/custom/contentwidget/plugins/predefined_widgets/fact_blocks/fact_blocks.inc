@@ -183,7 +183,8 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     $fact_items[$delta] = render($fact_block);
   }
 
-  if ($widget_settings['facts_display_settings']['title_inside'] == TRUE) {
+  if (!empty($widget_settings['facts_display_settings']['title_inside']) &&
+    $widget_settings['facts_display_settings']['title_inside'] == TRUE) {
     $block['overlay']['title_inside'] = array(
       '#type' => 'markup',
       '#markup' => '<h2>' . $entity_emw->title_field->value() . '</h2>',
