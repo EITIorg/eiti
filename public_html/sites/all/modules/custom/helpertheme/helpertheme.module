@@ -836,7 +836,7 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
     $style_name = 'bg-normal';
     $featured_image_path = image_style_url($style_name, $image_data['uri']);
     $background_image = 'background-image: url("' . $featured_image_path . '");';
-    $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} } ${$extra_styles} }\n";
+    $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} } ${extra_styles} }\n";
 
     // Prepare inline style for: 'Normal Desktop' and 'Large Desktop'.
     // @see: .xNormalAndUp() in custom-responsive.less
@@ -846,7 +846,7 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
     }
     $featured_image_path = image_style_url($style_name, $image_data['uri']);
     $background_image = 'background-image: url("' . $featured_image_path . '");';
-    $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} } ${$extra_styles} }\n";
+    $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} } ${extra_styles} }\n";
     $all_styles = $inline_style_xMediumAndDown . $inline_style_xNormalAndUp;
   }
   $elements['style'] = array(
