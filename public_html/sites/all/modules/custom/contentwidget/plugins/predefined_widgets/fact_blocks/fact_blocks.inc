@@ -29,6 +29,7 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     '#attributes' => array(
     )
   );
+  $entity_emw = entity_metadata_wrapper('fieldable_panels_pane', $entity);
 
   // Let's first figure out if we want to include some libraries or not.
   if (!empty($widget_settings['facts_display_settings']['fact_ticker_use']) && $widget_settings['facts_display_settings']['fact_ticker_use'] == TRUE) {
@@ -182,6 +183,12 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     $fact_items[$delta] = render($fact_block);
   }
 
+  if ($widget_settings['facts_display_settings']['title_inside'] == TRUE) {
+    $block['overlay']['title_inside'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2>' . $entity_emw->title_field->value() . '</h2>',
+    );
+  }
   $block['overlay']['links'] = array(
     '#theme' => 'item_list',
     '#items' => $fact_items,
@@ -235,6 +242,12 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
     '#title' => t('Display Settings'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+  );
+  $settings_form['facts_display_settings']['title_inside'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Title Inside'),
+    '#description' => t('Do you wish to use the title INSIDE of the widget or a standard title style?'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['title_inside']) ? $widget_settings['facts_display_settings']['title_inside'] : FALSE,
   );
   $settings_form['facts_display_settings']['fact_ticker_use'] = array(
     '#type' => 'checkbox',
