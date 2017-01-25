@@ -533,3 +533,23 @@ function eiti_ctools_extra__quick_summary_tool__quick_summary_table($ids) {
 
   return $table;
 }
+
+/**
+ * A small helper function that extracts the ID of the Google Spreadsheet,
+ * from the general specified URL.
+ *
+ * @param string $url
+ *  The full Google Spreadsheet specified.
+ *
+ * @return bool
+ *  Returns FALS
+ */
+function _eiti_ctools_extra_get_google_spreadsheet_id($url = NULL) {
+  if ($url !== NULL) {
+    preg_match('/spreadsheets\/d\/(.+?)\//', $url, $matches);
+    if (!empty($matches[1])) {
+      return $matches[1];
+    }
+  }
+  return FALSE;
+}

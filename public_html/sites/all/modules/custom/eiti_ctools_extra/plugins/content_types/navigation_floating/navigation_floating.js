@@ -112,9 +112,13 @@
 
       $('#navigation-floating', context).append($floatingNavList);
       if ($.fn.waypoint) {
-        $('#navigation-floating').waypoint(function(direction) {
-          var $this = $(this.element);
-          $this.parent().fadeToggle(400);
+        $('.pane-navigation-floating', context).prev().waypoint(function(direction) {
+          if (direction == 'up') {
+            $('.pane-navigation-floating .navigation-wrapper', context).fadeOut(400);
+          }
+          else {
+            $('.pane-navigation-floating .navigation-wrapper', context).fadeIn(400);
+          }
         }, {
           offset: '20%'
         });
