@@ -104,7 +104,7 @@
             $floatingNavList.find('li').removeClass('current');
             $('.nav-item-' + $this.data('pane_id'), context).toggleClass('current');
           }, {
-            offset: firstPane ? -10 : '10%'
+            offset: firstPane ? -10 : 0
           });
         }
         firstPane = false;
