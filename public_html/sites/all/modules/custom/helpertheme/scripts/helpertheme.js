@@ -107,9 +107,11 @@
   Drupal.eitiHelpers = Drupal.eitiHelpers || {};
   Drupal.eitiHelpers.scrollToElement = function(selector, targetSelector) {
     var offset = $(selector).offset();
+    var top = $(document).scrollTop();
+    var diffOffset = (top >= offset.top) ? -1 : 0;
     var scrollTarget = $(targetSelector);
     $(scrollTarget).animate({
-      scrollTop: (offset.top - 10)
+      scrollTop: (offset.top + diffOffset)
     }, 500);
   };
 
