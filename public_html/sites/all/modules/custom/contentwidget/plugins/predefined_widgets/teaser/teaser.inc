@@ -184,6 +184,8 @@ function contentwidget__teaser__settings(&$element, &$form_state, $plugin, $widg
       'padding_2' => t('With padding (2)'),
       'padding_4' => t('With padding (4)'),
       'padding_6' => t('With padding (6)'),
+      'padding_8' => t('With padding (8)'),
+      'padding_10' => t('With padding (10)'),
     ),
   );
 
