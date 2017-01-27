@@ -209,6 +209,8 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
       'overlay_padding_2' => t('Give priority to overlay content (+2 padding)'),
       'overlay_padding_4' => t('Give priority to overlay content (+4 padding)'),
       'overlay_padding_6' => t('Give priority to overlay content (+6 padding)'),
+      'overlay_padding_8' => t('Give priority to overlay content (+8 padding)'),
+      'overlay_padding_10' => t('Give priority to overlay content (+10 padding)'),
     ),
     '#default_value' => $video_height,
   );
