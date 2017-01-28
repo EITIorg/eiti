@@ -151,6 +151,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $video_loop = isset($widget_settings['video_settings']['video_loop']) ? $widget_settings['video_settings']['video_loop'] : TRUE;
   $video_autoplay = isset($widget_settings['video_settings']['video_autoplay']) ? $widget_settings['video_settings']['video_autoplay'] : TRUE;
   $video_height = isset($widget_settings['video_settings']['video_height']) ? $widget_settings['video_settings']['video_height'] : 'video';
+  $disable_overlay = isset($widget_settings['video_settings']['disable_overlay']) ? $widget_settings['video_settings']['disable_overlay'] : FALSE;
 
   // @TODO: Rename!
   $settings_form['header_big'] = array(
@@ -198,6 +199,12 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
     '#title' => t('Loop'),
     '#description' => t('Would you like this video to loop?'),
     '#default_value' => $video_loop,
+  );
+  $settings_form['video_settings']['disable_overlay'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable the Overlay'),
+    '#description' => t('Check this box to disable the overlay.'),
+    '#default_value' => $disable_overlay,
   );
   $settings_form['video_settings']['video_height'] = array(
     '#type' => 'select',
