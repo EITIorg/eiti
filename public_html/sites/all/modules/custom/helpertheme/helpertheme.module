@@ -886,6 +886,7 @@ function helpertheme_get_background_video_with_overlay(&$elements, $video_data, 
   // Prepare Markup.
   $elements['#attributes']['class'][] = 'with-background-video';
 
+  $with_overlay = ($video_settings['disable_overlay'] == TRUE) ? FALSE : $with_overlay;
   if ($with_overlay) {
     $elements['#attributes']['class'][] = 'with-overlay';
   }
