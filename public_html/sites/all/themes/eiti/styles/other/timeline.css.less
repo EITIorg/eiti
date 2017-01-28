@@ -1,0 +1,35 @@
+.pane-timeline {
+  .pane-title-wrapper {
+    border-bottom: 1px solid @clmain__separator;
+    color: @clanchor;
+    padding: 1em 0;
+    margin-bottom: 2em;
+
+    .title {
+      color: @clanchor;
+      display: inline;
+      font-size: 1.25em;
+      font-weight: 300;
+      margin: 0;
+    }
+    .icon {
+      fill: @clanchor;
+      display: inline;
+      margin-right: 1em;
+      vertical-align: bottom;
+    }
+
+    position: relative;
+    .anchor-link {
+      display: none;
+      position: absolute;
+      left: -2em;
+      line-height: 1.75em;
+    }
+    &:hover {
+      .anchor-link {
+        display: block;
+      }
+    }
+  }
+}

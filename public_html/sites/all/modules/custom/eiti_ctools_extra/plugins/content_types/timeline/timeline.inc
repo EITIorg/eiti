@@ -90,6 +90,28 @@ function eiti_ctools_extra__timeline__render($subtype, $conf, $panel_args, $cont
       '!height' => $conf['height'],
     )),
   );
+
+  // If there's specified a title, let's
+  if (!empty($conf['title'])) {
+    $content['text_wrapper'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#weight' => -10,
+      '#attributes' => array(
+        'class' => array('pane-title-wrapper', 'single-fluid-row-wrapper'),
+      )
+    );
+    $content['text_wrapper']['title'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'h4',
+      '#value' => t($conf['title']),
+      '#attributes' => array(
+        'class' => array(
+          'title',
+        ),
+      )
+    );
+  }
   $block->content = $content;
   return $block;
 }
