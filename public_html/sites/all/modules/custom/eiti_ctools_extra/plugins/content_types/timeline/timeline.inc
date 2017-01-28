@@ -73,7 +73,7 @@ function eiti_ctools_extra__timeline__render($subtype, $conf, $panel_args, $cont
     'start_slide' => 'start_at_slide',
   );
   foreach ($rest_params_mapping as $drupal_id => $url_id) {
-    if (!empty($conf[$drupal_id])) {
+    if (isset($conf[$drupal_id])) {
       $timeline_path_params[$url_id] = $conf[$drupal_id];
     }
   }
