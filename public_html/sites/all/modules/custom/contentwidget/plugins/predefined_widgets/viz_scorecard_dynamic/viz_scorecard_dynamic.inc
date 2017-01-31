@@ -75,9 +75,10 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   // Send the settings, so that later we can load them in our behaviour.
   $js_settings = _contentwidget__viz_scorecard_dynamic__get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['scorecard_settings']['data_type']];
+  $country_entity = entity_load_single('implementing_country', $widget_settings['extra_settings']['country']);
   $settings = array(
     'type' => 'Scorecard',
-    'name' => $js_settings['title'],
+    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $widget_settings['extra_settings']['year'])),
     'width' => 800,
     'height' => 600,
     'margin' => array(
@@ -93,6 +94,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['scorecard_settings']['data_type'] == 'score_data') {
     $settings['endpoint'] .= '?filter[country]=' . $widget_settings['extra_settings']['country'];
+    $settings['endpoint'] .= '&filter[year]=' . $widget_settings['extra_settings']['year'];
   }
 
   // Wrap things up.
@@ -261,10 +263,10 @@ function _contentwidget__viz_scorecard_dynamic__get_data_types($return = FALSE) 
 function _contentwidget__viz_scorecard_dynamic_settings(&$form, &$form_state, $widget_settings, $ctools_contexts) {
   $entity = $ctools_contexts->data;
   if ($entity instanceof ImplementingCountryEntity) {
-    $default_coutry = $entity->id;
+    $default_country = $entity->id;
   }
   else {
-    $default_coutry = '';
+    $default_country = '';
   }
 
   $efq = new EntityFieldQuery();
@@ -283,7 +285,43 @@ function _contentwidget__viz_scorecard_dynamic_settings(&$form, &$form_state, $w
     '#title' => t('Country'),
     '#description' => t("Please specify for which country this Scorecard is for..."),
     '#options' => $country_options,
-    '#default_value' => isset($widget_settings['extra_settings']['country']) ? $widget_settings['extra_settings']['country'] : $default_coutry,
+    '#default_value' => isset($widget_settings['extra_settings']['country']) ? $widget_settings['extra_settings']['country'] : $default_country,
+    '#ajax' => array(
+      'callback' => '_contentwidget__viz_scorecard_dynamic__ajax_settings_year',
+      'event' => 'change',
+      'wrapper' => 'extra-settings-scorecard-dynamic-year',
+      'method' => 'replace',
+      'effect' => 'fade',
+    ),
+  );
+
+  // Now we need to find out what are all the possible years for a certain country.
+  $country_id = isset($widget_settings['extra_settings']['country']) ? $widget_settings['extra_settings']['country'] : $default_country;
+  if (empty($country_id)) {
+    $year_options = array('' => '- Select a Country First');
+  }
+  else {
+    $year_options = array('' => '- Select Year');
+    $score_data = eitientity_score_data_lookup_by_country($country_id);
+    if ($score_data !== FALSE && !empty($score_data)) {
+      foreach ($score_data as $score_data_delta => $score_data_entity) {
+        // This will keep'em unique.
+        $year_options[$score_data_entity->year] = $score_data_entity->year;
+      }
+      asort($year_options);
+    }
+    else {
+      $year_options = array('' => '- Country w/o data, Pick another country');
+    }
+  }
+  $form['year'] = array(
+    '#type' => 'select',
+    '#title' => t('Year'),
+    '#description' => t("Please specify for which year the Scorecard is for..."),
+    '#options' => $year_options,
+    '#default_value' => isset($widget_settings['extra_settings']['year']) ? $widget_settings['extra_settings']['country'] : $default_year,
+    '#prefix' => '<div id="extra-settings-scorecard-dynamic-year">',
+    '#suffix' => '</div>',
   );
 }
 
@@ -291,5 +329,31 @@ function _contentwidget__viz_scorecard_dynamic_settings(&$form, &$form_state, $w
  * Our small custom validation.
  */
 function contentwidget_viz_scoredata_form_validation($element, $form_state) {
+}
+/**
+ * Small ajax function that returns all the possible years for the selected country.
+ */
+function _contentwidget__viz_scorecard_dynamic__ajax_settings_year($form, $form_state) {
+  $parents = $form_state['triggering_element']['#parents'];
+
+  // Polish the #parents.
+  $key = array_search('data_type', $parents, TRUE);
+  unset($parents[$key]);
+  $key = array_search('scorecard_settings', $parents, TRUE);
+  unset($parents[$key]);
+  $parents[] = 'extra_settings';
+
+  $exists = FALSE;
+  $value = drupal_array_get_nested_value($form, $parents, $exists);
+
+  if ($exists) {
+    return $value;
+  }
+  else {
+    $entity = $form_state['entity'];
+    $entity_language = entity_language('fieldable_panels_pane', $entity);
+    $widget_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_widget', $entity_language);
+    return $form['field_fpp_widget'][$widget_field_language][0]['settings']['viz_scorecard_dynamic']['extra_settings']['year'];
+  }
 }
 
