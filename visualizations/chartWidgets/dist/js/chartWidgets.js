@@ -46278,6 +46278,46 @@
 			cellStyle = cellStatus ? value.name.replace(/\s+/g, '_').toLowerCase() : '';
 			currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
 		});
+		if (hasProgress) {
+			var symbol = {
+				symbol: '&nbsp',
+				color: '#676767'
+			};
+
+			switch (currentScore.progress_value) {
+				case "0":
+					//Same
+					symbol = {
+						symbol: '&equals;',
+						color: '#676767'
+					};
+					break;
+				case "1":
+					//Better
+					symbol = {
+						symbol: '&rarr;',
+						color: '#84AD42'
+					};
+					break;
+				case "2":
+					//Worse
+					symbol = {
+						symbol: '&larr;',
+						color: 'red'
+					};
+					break;
+				case "3":
+					//Empty
+					symbol = {
+						symbol: '&nbsp',
+						color: '#676767'
+					};
+					break;
+
+			}
+			var symbolElement = $("<DIV>").css({ 'color': symbol.color, 'text-align': 'center', 'font-weight': 'bold' }).html(symbol.symbol);
+			currentRow.append($("<TD>").append(symbolElement));
+		}
 
 		tableBody.append(currentRow);
 	}
