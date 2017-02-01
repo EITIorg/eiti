@@ -286,6 +286,7 @@ TABLE.country_scorecard {
 .country_scorecard .requirement_description {
   font-size:9pt;
   width:300px;
+  line-height: 1.7em;
 }
 
 .country_scorecard .requirement_button {

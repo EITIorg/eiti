@@ -61,25 +61,25 @@ function getLegend() {
 	var legendHTML = '<div class="scorecard-legend-item">' +
     '  <i style="background:#C00000">&nbsp;</i>' +
     '  <div>' +
-    '    No progress. All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' +
+    '    <strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' +
     '  </div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#FAC433">&nbsp;</i>' +
-    '  <div>Inadequate progress. Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' +
+    '  <div><strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' +
     '  </div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#84AD42">&nbsp;</i>' +
-    '  <div>Meaningful progress. Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' +
+    '  <div><strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#2D8B2A">&nbsp;</i>' +
-    '  <div>Satisfactory progress. All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' +
+    '  <div>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#5182bb">&nbsp;</i>' +
-    '  <div>Beyond. The country has gone beyond the requirements.</div>' +
+    '  <div><strong>Beyond.</strong> The country has gone beyond the requirements.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i class="only_encouraged">&nbsp;</i>' +
@@ -223,7 +223,7 @@ function appendRows(data, tableBody, hasProgress) {
 
 	let currentScore = _.find(_.first(result).score_req_values, {"score_req_id" : "35"});
 	let currentRow = $("<TR>");
-	currentRow.append($("<TD>").attr('colspan', 2).css({'color': '#C00000', 'font-weight': 'bold'}).html('Overall Assessment'));
+	currentRow.append($("<TD>").attr('colspan', 2).css({'color': '#C00000', 'font-weight': 'bold'}).html('Overall assessment'));
     _.each(scores, function(value) {
         var on = value.id;
         var cellStatus = (Number(currentScore.value) === on);
