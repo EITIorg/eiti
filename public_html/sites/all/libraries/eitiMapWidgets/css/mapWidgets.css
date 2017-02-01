@@ -310,10 +310,10 @@
   width: 1em;
 }
 .eiti-map-wrapper .country-list .member-status.satisfactory_progress {
-  background-color: #84AD42;
+  background-color: #2D8B2A;
 }
 .eiti-map-wrapper .country-list .member-status.meaningful_progress {
-  background-color: #2D8B2A;
+  background-color: #84AD42;
 }
 .eiti-map-wrapper .country-list .member-status.inadequate_progress {
   background-color: #FAC433;
