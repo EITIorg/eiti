@@ -95,11 +95,11 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       '#default_value' => $entity->description,
     );
 
-    $entity_form['dir_of_progress'] = array(
+    $entity_form['progress_value'] = array(
       '#type' => 'select',
       '#title' => t('Direction of Progress'),
       '#options' => _eitientity_score_req_value_get_dir_of_progress_options(),
-      '#default_value' => isset($entity->dir_of_progress) ? $entity->dir_of_progress : EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY,
+      '#default_value' => isset($entity->progress_value) ? $entity->progress_value : EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY,
     );
     $entity_form['is_applicable'] = array(
       '#type' => 'checkbox',
