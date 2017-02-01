@@ -45754,7 +45754,7 @@
 	});
 	var scores = [{
 		"id": 0,
-		"name": "No Progress"
+		"name": "No"
 	}, {
 		"id": 1,
 		"name": "Inadequate"
@@ -46139,7 +46139,7 @@
 	}
 
 	function getLegend() {
-		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + '    The country has made no progress in addressing the requirement.  The broader objective of the requirement is in no way fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i>' + '  <div>The country has made inadequate progress in meeting the requirement. Significant elements of the requirement are outstanding and the broader objective of the requirement is far from being fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>' + '  <div>The country has made progress in meeting the requirement. Significant elements of the requirement are being implemented and the broader objective of the requirement is being fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>The country is compliant with the EITI Requirement.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div>The country has gone beyond the requirement.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i>' + '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i>' + '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' + '</div>';
+		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + '    No progress. All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i>' + '  <div>Inadequate progress. Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>' + '  <div>Meaningful progress. Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>Satisfactory progress. All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div>Beyond. The country has gone beyond the requirements.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i>' + '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i>' + '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' + '</div>';
 
 		return legendHTML;
 	}
@@ -46261,10 +46261,25 @@
 					}
 				}
 				//Direction of Progress
-
 				tableBody.append(currentRow);
 			});
 		});
+
+		// Overall Progress
+		//let scores = [ {id:1}];
+		var cellStyle = '';
+
+		var currentScore = _.find(_.first(result).score_req_values, { "score_req_id": "35" });
+		var currentRow = $("<TR>");
+		currentRow.append($("<TD>").attr('colspan', 2).css({ 'color': '#C00000', 'font-weight': 'bold' }).html('Overall Assessment'));
+		_.each(scores, function (value) {
+			var on = value.id;
+			var cellStatus = Number(currentScore.value) === on;
+			cellStyle = cellStatus ? value.name.replace(/\s+/g, '_').toLowerCase() : '';
+			currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
+		});
+
+		tableBody.append(currentRow);
 	}
 
 /***/ },
