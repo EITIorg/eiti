@@ -913,6 +913,35 @@ function helpertheme_get_background_video_with_overlay(&$elements, $video_data, 
     );
   }
 
+  // Let's add controllers.
+  $video_hide_controllers = isset($video_settings['video_hide_controllers']) ? $video_settings['video_hide_controllers'] : TRUE;
+  if (!$video_hide_controllers) {
+    $media_buttons = array(
+      'media_play' => '4em',
+      'media_pause' => '4em',
+      'media_mute' => '2em',
+      'media_unmute' => '2em',
+    );
+    $elements['controllers'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array(
+          'media-controllers',
+        )
+      ),
+      '#weight' => 100,
+    );
+    foreach ($media_buttons as $button => $size) {
+      $svgicon = helpertheme_get_svg_icon($button, array('width' => $size, 'height' => $size));
+      $icon_classes = implode(' ', array(
+        'controller',
+        drupal_html_class('icon--' . $button),
+      ));
+      $elements['controllers'][$button] = array(
+        '#markup' => '<div class="' . $icon_classes . '">' . $svgicon . '</div>',
+      );
+    }
+  }
   // Make sure it's rendered before the overlay.
   $elements['video_background_wrapper'] = array(
     '#type' => 'container',
@@ -932,13 +961,26 @@ function helpertheme_get_background_video_with_overlay(&$elements, $video_data, 
     ),
     '#value' => drupal_render($source_tags),
   );
+
   if (isset($video_settings['video_loop']) && $video_settings['video_loop'] == FALSE) {
     unset($elements['video_background_wrapper']['video_background']['#attributes']['loop']);
   }
+
   if (isset($video_settings['video_muted']) && $video_settings['video_muted'] == FALSE) {
     unset($elements['video_background_wrapper']['video_background']['#attributes']['muted']);
   }
+  else {
+    if (!$video_hide_controllers) {
+      $elements['controllers']['#attributes']['class'][] = 'muted';
+    }
+  }
+
   if (isset($video_settings['video_autoplay']) && $video_settings['video_autoplay'] == FALSE) {
     unset($elements['video_background_wrapper']['video_background']['#attributes']['autoplay']);
+  }
+  else {
+    if (!$video_hide_controllers) {
+      $elements['controllers']['#attributes']['class'][] = 'playing';
+    }
   }
 }

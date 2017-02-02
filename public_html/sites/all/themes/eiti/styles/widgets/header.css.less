@@ -172,6 +172,46 @@
         }
       }
     }
+
+    .media-controllers {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      z-index: 100;
+      .controller {
+        margin: 0.5em;
+        text-align: center;
+        display: none;
+        svg {
+          display: inline-block;
+          cursor: pointer;
+          fill: @clmain;
+        }
+        &.icon--media-play {
+          display: block;
+        }
+        &.icon--media-unmute {
+          display: block;
+        }
+      }
+
+      &.playing {
+        .icon--media-play {
+          display: none;
+        }
+        .icon--media-pause {
+          display: block;
+        }
+      }
+      &.muted {
+        .icon--media-mute {
+          display: block;
+        }
+        .icon--media-unmute {
+          display: none;
+        }
+      }
+    }
   }
 }
 

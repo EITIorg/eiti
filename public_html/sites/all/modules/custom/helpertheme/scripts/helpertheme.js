@@ -101,6 +101,38 @@
     }
   };
 
+  Drupal.behaviors.headerVideoMedia = {
+    attach: function(context) {
+      var $media = $('.media-controllers', context);
+      if ($media.length > 0) {
+        $media.find('.controller').click(function() {
+          var $this = $(this);
+          if ($this.hasClass('icon--media-play') || $this.hasClass('icon--media-pause')) {
+            if ($media.hasClass('playing')) {
+              $media.removeClass('playing');
+              $('video.background-video', context).get(0).pause();
+            }
+            else {
+              $media.addClass('playing');
+              $('video.background-video', context).get(0).play();
+            }
+
+          }
+          if ($this.hasClass('icon--media-mute') || $this.hasClass('icon--media-unmute')) {
+            if ($media.hasClass('muted')) {
+              $('video.background-video', context).get(0).muted = false;
+              $media.removeClass('muted');
+            }
+            else {
+              $('video.background-video', context).get(0).muted = true;
+              $media.addClass('muted');
+            }
+          }
+        });
+      }
+    }
+  };
+
   /**
    * Define a small helper class with handy functions.
    */

@@ -149,6 +149,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
   $video_muted = isset($widget_settings['video_settings']['video_muted']) ? $widget_settings['video_settings']['video_muted'] : TRUE;
   $video_loop = isset($widget_settings['video_settings']['video_loop']) ? $widget_settings['video_settings']['video_loop'] : TRUE;
+  $video_hide_controllers = isset($widget_settings['video_settings']['video_hide_controllers']) ? $widget_settings['video_settings']['video_hide_controllers'] : TRUE;
   $video_autoplay = isset($widget_settings['video_settings']['video_autoplay']) ? $widget_settings['video_settings']['video_autoplay'] : TRUE;
   $video_height = isset($widget_settings['video_settings']['video_height']) ? $widget_settings['video_settings']['video_height'] : 'video';
   $disable_overlay = isset($widget_settings['video_settings']['disable_overlay']) ? $widget_settings['video_settings']['disable_overlay'] : FALSE;
@@ -199,6 +200,12 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
     '#title' => t('Loop'),
     '#description' => t('Would you like this video to loop?'),
     '#default_value' => $video_loop,
+  );
+  $settings_form['video_settings']['video_hide_controllers'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide Media Buttons'),
+    '#description' => t('Would you like to hide the Media Controllers (play / mute buttons)?'),
+    '#default_value' => $video_hide_controllers,
   );
   $settings_form['video_settings']['disable_overlay'] = array(
     '#type' => 'checkbox',
