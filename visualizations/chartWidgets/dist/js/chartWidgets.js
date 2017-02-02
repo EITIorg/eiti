@@ -46159,7 +46159,7 @@
 			var requirements_category = _.filter(requirements, function (requirement) {
 				return requirement.Category === category.id;
 			});
-			bodyRow.append($("<TD>").attr('rowspan', requirements_category.length).addClass('requirement').html(category.name));
+			bodyRow.append($("<TD>").css({ 'border-bottom': '1px solid black' }).attr('rowspan', requirements_category.length).addClass('requirement').html(category.name));
 
 			_.each(requirements_category, function (requirement, idx) {
 				var currentRow;
@@ -46169,6 +46169,11 @@
 					currentRow = $("<TR>");
 				}
 
+				var bottomBorder = false;
+				if (idx === requirements_category.length - 1) {
+					bottomBorder = true;
+				}
+
 				var currentScore = undefined;
 				if (countryScore) {
 					currentScore = _.find(countryScore.score_req_values, function (value) {
@@ -46176,6 +46181,9 @@
 					});
 				}
 				var req_cell = $("<TD>");
+				if (bottomBorder) {
+					req_cell.css({ 'border-bottom': '1px solid black' });
+				}
 				currentRow.append(req_cell.html(requirement.Requirement + ' (#' + requirement.Code + ') '));
 
 				// Requirement Answers
@@ -46201,17 +46209,30 @@
 					var cellStyle = '';
 					if (currentScore.is_applicable == 0) {
 						cellStyle = 'not_applicable ';
-						currentRow.append($("<TD>").attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
+						var cell = $("<TD>");
+						if (bottomBorder) {
+							cell.css({ 'border-bottom': '1px solid black' });
+						}
+
+						currentRow.append(cell.attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
 					} else if (currentScore.is_required === "1") //This means it's encouraged
 						{
 							cellStyle = 'only_encouraged ';
-							currentRow.append($("<TD>").attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
+							var cell = $("<TD>");
+							if (bottomBorder) {
+								cell.css({ 'border-bottom': '1px solid black' });
+							}
+							currentRow.append(cell.attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
 						} else {
 						_.each(scores, function (value) {
 							var on = value.id;
 							var cellStatus = Number(currentScore.value) === on;
 							cellStyle = cellStatus ? value.name.replace(/\s+/g, '_').toLowerCase() : '';
-							currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
+							var cell = $("<TD>");
+							if (bottomBorder) {
+								cell.css({ 'border-bottom': '1px solid black' });
+							}
+							currentRow.append(cell.addClass(cellStyle).html('&nbsp;'));
 						});
 					}
 
@@ -46253,15 +46274,28 @@
 
 						}
 						var symbolElement = $("<DIV>").css({ 'color': symbol.color, 'text-align': 'center', 'font-weight': 'bold' }).html(symbol.symbol);
-						currentRow.append($("<TD>").append(symbolElement));
+						var cell = $("<TD>");
+						if (bottomBorder) {
+							cell.css({ 'border-bottom': '1px solid black' });
+						}
+
+						currentRow.append(cell.append(symbolElement));
 					}
 				} else {
 					_.each(scores, function (value) {
-						currentRow.append($("<TD>").html('&nbsp;'));
+						var cell = $("<TD>").html('&nbsp;');
+						if (bottomBorder) {
+							cell.css({ 'border-bottom': '1px solid black' });
+						}
+						currentRow.append(cell);
 					});
 					if (hasProgress) {
 						//Empty direction of progress
-						currentRow.append($("<TD>").html('&nbsp;'));
+						var cell = $("<TD>").html('&nbsp;');
+						if (bottomBorder) {
+							cell.css({ 'border-bottom': '1px solid black' });
+						}
+						currentRow.append(cell);
 					}
 				}
 				//Direction of Progress
@@ -46275,12 +46309,12 @@
 
 		var currentScore = _.find(_.first(result).score_req_values, { "score_req_id": "35" });
 		var currentRow = $("<TR>");
-		currentRow.append($("<TD>").attr('colspan', 2).css({ 'color': '#C00000', 'font-weight': 'bold' }).html('Overall assessment'));
+		currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({ 'color': '#C00000', 'font-weight': 'bold' }).html('Overall assessment'));
 		_.each(scores, function (value) {
 			var on = value.id;
 			var cellStatus = Number(currentScore.value) === on;
 			cellStyle = cellStatus ? value.name.replace(/\s+/g, '_').toLowerCase() : '';
-			currentRow.append($("<TD>").addClass(cellStyle).html('&nbsp;'));
+			currentRow.append($("<TD>").addClass("overall_progress").addClass(cellStyle).html('&nbsp;'));
 		});
 		if (hasProgress) {
 			var symbol = {
@@ -46320,7 +46354,7 @@
 
 			}
 			var symbolElement = $("<DIV>").css({ 'color': symbol.color, 'text-align': 'center', 'font-weight': 'bold' }).html(symbol.symbol);
-			currentRow.append($("<TD>").append(symbolElement));
+			currentRow.append($("<TD>").addClass("overall_progress").append(symbolElement));
 		}
 
 		tableBody.append(currentRow);

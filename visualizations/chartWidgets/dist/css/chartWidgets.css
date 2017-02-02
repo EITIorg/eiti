@@ -219,20 +219,31 @@
 
 
 TABLE.country_scorecard {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 
-.country_scorecard, .country_scorecard TD {
+.country_scorecard TD {
   border: 1px solid #ccc;
   padding: 5px 0px 5px 8px;
   vertical-align: middle;
 }
 
+.country_scorecard TR TD:first-child {
+  border-left: 1px solid #000;
+}
+.country_scorecard TR TD:last-child {
+  border-right: 1px solid #000;
+}
+
 .country_scorecard, .country_scorecard TH {
-  border: 1px solid #ccc;
+  border: 1px solid #000;
   padding: 2px 8px 2px 8px;
 }
 
+.country_scorecard .overall_progress {
+  border-top: 4px double #000;
+  border-bottom: 1px solid #000;
+}
 
 .country_scorecard .no_progress, .scorecard-legend .no_progress {
   background-color: #C00000;
