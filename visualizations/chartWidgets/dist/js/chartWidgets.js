@@ -46202,7 +46202,11 @@
 					if (currentScore.is_applicable == 0) {
 						cellStyle = 'not_applicable ';
 						currentRow.append($("<TD>").attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
-					} else {
+					} else if (currentScore.is_required === "1") //This means it's encouraged
+						{
+							cellStyle = 'only_encouraged ';
+							currentRow.append($("<TD>").attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
+						} else {
 						_.each(scores, function (value) {
 							var on = value.id;
 							var cellStatus = Number(currentScore.value) === on;
