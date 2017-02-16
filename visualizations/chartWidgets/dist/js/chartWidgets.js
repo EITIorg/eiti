@@ -46099,7 +46099,7 @@
 		var countryScore = _.first(data.result);
 		var hasProgress = false;
 		var progress_values = _.filter(countryScore.score_req_values, function (v) {
-			return v.progress_value != null;
+			return v.progress_value != null && v.progress_value !== "3";
 		});
 		hasProgress = progress_values.length > 0;
 
@@ -46132,15 +46132,18 @@
 
 		//Append requirements rows based on the results
 		appendRows(data, tableBody, hasProgress);
-		var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend());
+		var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend(hasProgress));
 		$(placeholder).append(legend);
 
 		window.$ = undefined;
 	}
 
-	function getLegend() {
-		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + '    <strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i>' + '  <div><strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>' + '  <div><strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div><strong>Beyond.</strong> The country has gone beyond the requirements.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i>' + '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i>' + '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' + '</div>';
+	function getLegend(hasProgress) {
+		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + '    <strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i>' + '  <div><strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>' + '  <div><strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div><strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div><strong>Beyond.</strong> The country has gone beyond the requirements.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i>' + '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i>' + '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' + '</div>';
 
+		if (hasProgress) {
+			legendHTML += '<div style="clear:both;padding-top:15px;"><strong>Direction of progress</strong><br/><br/></div>' + '<div class="scorecard-legend-item"><span style="color:#676767;text-align:center;">&equals;</span><div>No change in performance since the last Validation.</div></div>' + '<div class="scorecard-legend-item"><span style="color:red;text-align:center;">&larr;</span><div>The country is performing worse that in the last Validation. </div></div>' + '<div class="scorecard-legend-item"><span style="color:#84AD42;text-align:center;">&rarr;</span><div>The country is performing better than in the last Validation. </div></div>';
+		}
 		return legendHTML;
 	}
 
@@ -46303,11 +46306,9 @@
 			});
 		});
 
-		// Overall Progress
-		//let scores = [ {id:1}];
 		var cellStyle = '';
 
-		var currentScore = _.find(_.first(result).score_req_values, { "score_req_id": "35" });
+		var currentScore = _.find(_.first(result).score_req_values, { "score_req_id": "35" }); // This is the Overall Progress score_id
 		var currentRow = $("<TR>");
 		currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({ 'color': '#C00000', 'font-weight': 'bold' }).html('Overall assessment'));
 		_.each(scores, function (value) {

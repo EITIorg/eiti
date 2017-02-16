@@ -294,7 +294,7 @@ TABLE.country_scorecard {
   color: #0093cf;
 }
 
-.eiti-chart-widget .scorecard-legend .scorecard-legend-item i {
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item i, .eiti-chart-widget .scorecard-legend .scorecard-legend-item span {
   width: 2em;
   height: 2.5em;
   float: left;
@@ -302,6 +302,7 @@ TABLE.country_scorecard {
   margin-bottom: 0.5em;
   vertical-align: middle;
 }
+
 .eiti-chart-widget .scorecard-legend .scorecard-legend-item div {
   display:inline-block;
   width:90%;

@@ -19,7 +19,7 @@ function renderScorecard(data, placeholder) {
 	window.$ = window.jQuery;
 	var countryScore = _.first(data.result);
 	let hasProgress = false;
-	let progress_values = _.filter(countryScore.score_req_values, function(v){return v.progress_value != null});
+	let progress_values = _.filter(countryScore.score_req_values, function(v){return v.progress_value != null && v.progress_value !== "3"});
 	hasProgress = (progress_values.length > 0);
 
 	var table = $('<TABLE>').addClass('country_scorecard');
@@ -51,13 +51,13 @@ function renderScorecard(data, placeholder) {
 
 	//Append requirements rows based on the results
 	appendRows(data, tableBody, hasProgress);
-	var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend());
+	var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend(hasProgress));
 	$(placeholder).append(legend);
 
 	window.$ = undefined;
 }
 
-function getLegend() {
+function getLegend(hasProgress) {
 	var legendHTML = '<div class="scorecard-legend-item">' +
     '  <i style="background:#C00000">&nbsp;</i>' +
     '  <div>' +
@@ -75,7 +75,7 @@ function getLegend() {
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#2D8B2A">&nbsp;</i>' +
-    '  <div>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' +
+    '  <div><strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#5182bb">&nbsp;</i>' +
@@ -90,6 +90,13 @@ function getLegend() {
     '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' +
     '</div>';
 
+    if(hasProgress) {
+		legendHTML += '<div style="clear:both;padding-top:15px;"><strong>Direction of progress</strong><br/><br/></div>' +
+		'<div class="scorecard-legend-item"><span style="color:#676767;text-align:center;">&equals;</span><div>No change in performance since the last Validation.</div></div>' +
+		'<div class="scorecard-legend-item"><span style="color:red;text-align:center;">&larr;</span><div>The country is performing worse that in the last Validation. </div></div>' +
+		'<div class="scorecard-legend-item"><span style="color:#84AD42;text-align:center;">&rarr;</span><div>The country is performing better than in the last Validation. </div></div>'
+
+    }
 	return legendHTML;
 
 }
@@ -255,11 +262,9 @@ function appendRows(data, tableBody, hasProgress) {
 	    });
 	});
 
-// Overall Progress
-	//let scores = [ {id:1}];
 	var cellStyle = '';
 
-	let currentScore = _.find(_.first(result).score_req_values, {"score_req_id" : "35"});
+	let currentScore = _.find(_.first(result).score_req_values, {"score_req_id" : "35"}); // This is the Overall Progress score_id
 	let currentRow = $("<TR>");
 	currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({'color': '#C00000', 'font-weight': 'bold'}).html('Overall assessment'));
     _.each(scores, function(value) {
