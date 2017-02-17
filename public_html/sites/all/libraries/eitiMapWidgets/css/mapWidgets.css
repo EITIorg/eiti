@@ -79,6 +79,9 @@
 .eiti-map-wrapper .legend .legend_header {
   margin-bottom: 5px;
 }
+.eiti-map-wrapper .legend .legend_title {
+  line-height: 1.8em;
+}
 .eiti-map-wrapper .legend .legend_footer {
   color: #555;
 }
@@ -86,8 +89,8 @@
   display: block;
 }
 .eiti-map-wrapper .legend i {
-  width: 0.75em;
-  height: 0.75em;
+  width: 16px;
+  height: 16px;
   float: left;
   margin-right: 0.5em;
   margin-top: 0.4em;
@@ -322,7 +325,7 @@
   background-color: #C00000;
 }
 .eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_against_the_2016_standard {
-  background-color: #00919B;
+  background-color: #6CBCE3;
 }
 .eiti-map-wrapper .country-list .member-status.suspended {
   background-color: #FF6600;

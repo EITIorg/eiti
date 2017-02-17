@@ -25,7 +25,7 @@ export var status = [
   },
   {
     "id": 5329,
-    "color": "#00919B",
+    "color": "#6CBCE3",
     "title": "Yet to be assessed against the 2016 Standard<br/>",
     "subtitle": ""
   },
@@ -42,3 +42,4 @@ export var status = [
     "subtitle": ""
   }
 ];
+
