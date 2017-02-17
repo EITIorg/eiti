@@ -24003,7 +24003,7 @@
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
-	          mergedHTML += '<i style="background:' + v.color + '"></i> ' + _helpers.helpers.t(v.title) + '<br/>';
+	          mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
 	          if (v.subtitle != "") {
 	            mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br/>';
 	          }
@@ -24218,15 +24218,13 @@
 	          )
 	        );
 	      }
-	      var reportLink = _react2.default.createElement(
-	        'svg',
-	        { id: 'country-report-icon', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 160 160' },
-	        _react2.default.createElement('rect', { x: '4.8', y: '4', className: 'st0', width: '115', height: '151.6' }),
-	        _react2.default.createElement('rect', { x: '4.8', y: '4', className: 'st0', width: '20.9', height: '151.6' }),
-	        _react2.default.createElement('rect', { x: '44', y: '30.1', className: 'st0', width: '57.5', height: '31.4' }),
-	        _react2.default.createElement('line', { className: 'st0', x1: '54.5', y1: '40.6', x2: '91.1', y2: '40.6' }),
-	        _react2.default.createElement('line', { className: 'st0', x1: '54.5', y1: '51', x2: '91.1', y2: '51' })
-	      );
+	      /*    var reportLink = (<svg id="country-report-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+	                <rect x="4.8" y="4" className="st0" width="115" height="151.6"/>
+	                <rect x="4.8" y="4" className="st0" width="20.9" height="151.6"/>
+	                <rect x="44" y="30.1" className="st0" width="57.5" height="31.4"/>
+	                <line className="st0" x1="54.5" y1="40.6" x2="91.1" y2="40.6"/>
+	                <line className="st0" x1="54.5" y1="51" x2="91.1" y2="51"/>
+	                </svg>);*/
 	
 	      var selector;
 	      if (this.props.selector) {
@@ -24258,15 +24256,6 @@
 	              'a',
 	              { href: countryPageURL },
 	              sortedCountries[i].label
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'report' },
-	              _react2.default.createElement(
-	                'a',
-	                { target: '_blank', href: reportURL, title: last, className: reportClass },
-	                reportLink
-	              )
 	            )
 	          ));
 	          if ((i + 1) % cutout === 0 || i + 1 === sortedCountries.length) {
@@ -24856,7 +24845,7 @@
 	  "subtitle": ""
 	}, {
 	  "id": 5329,
-	  "color": "#00919B",
+	  "color": "#6CBCE3",
 	  "title": "Yet to be assessed against the 2016 Standard<br/>",
 	  "subtitle": ""
 	}, {

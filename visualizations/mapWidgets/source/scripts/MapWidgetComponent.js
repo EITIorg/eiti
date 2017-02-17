@@ -374,7 +374,7 @@ export default class MapWidgetComponent extends Component {
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-            mergedHTML += '<i style="background:' + v.color + '"></i> '+helpers.t(v.title)+ '<br/>';
+            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
             if(v.subtitle != "") {
               mergedHTML += (helpers.t(v.subtitle) || '') + '<br/>';
             }
@@ -512,13 +512,13 @@ export default class MapWidgetComponent extends Component {
           </ul>
         </div>);
     }
-    var reportLink = (<svg id="country-report-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+/*    var reportLink = (<svg id="country-report-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
           <rect x="4.8" y="4" className="st0" width="115" height="151.6"/>
           <rect x="4.8" y="4" className="st0" width="20.9" height="151.6"/>
           <rect x="44" y="30.1" className="st0" width="57.5" height="31.4"/>
           <line className="st0" x1="54.5" y1="40.6" x2="91.1" y2="40.6"/>
           <line className="st0" x1="54.5" y1="51" x2="91.1" y2="51"/>
-          </svg>);
+          </svg>);*/
 
 
     var selector;
@@ -547,11 +547,6 @@ export default class MapWidgetComponent extends Component {
             <li>
               <span className={itemStyle}></span>
               <a href={countryPageURL}>{sortedCountries[i].label}</a>
-              <span className="report">
-                <a target="_blank" href={reportURL} title={last} className={reportClass}>
-                  {reportLink}
-                </a>
-              </span>
             </li>
           );
         if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {
