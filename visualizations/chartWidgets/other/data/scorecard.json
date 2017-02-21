@@ -1,0 +1,878 @@
+{
+"data": [
+{
+"id": 6,
+"label": "Mongolia: 2016",
+"self": "https://staging.eiti.org/api/v1.0/score_data/6",
+"year": "2016",
+"country": {
+"id": "7",
+"label": "Mongolia",
+"self": "https://staging.eiti.org/api/v1.0/implementing_country/7",
+"iso2": "MN",
+"iso3": "MNG",
+"status": {
+"tid": "5329",
+"language": "en",
+"name": "Yet to be assessed against the 2016 Standard",
+"color": "00919B"
+},
+"status_date": "1167609600",
+"local_website": "http://www.eitimongolia.mn",
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
+},
+"score_req_values": [
+{
+"id": "76",
+"score_req_id": "1",
+"score_req": {
+"id": "1",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Government engagement",
+"code": "1.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5346"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "There are regular, public statements of support from the government. A senior individual has been appointed to lead on the implementation of the EITI, and senior government officials are represented on the MSWG and National Council. Government has provided funding to implementation. However, the lack of full government participation in outreach and dissemination events and the recurrent gaps in funding for EITI implementation are a concern."
+},
+{
+"id": "77",
+"score_req_id": "2",
+"score_req": {
+"id": "2",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Industry engagement",
+"code": "1.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5346"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Companies are actively and effectively engaged in the design, implementation, monitoring and evaluation of the EITI process. Industry representatives are taking part in outreach and efforts to promote public debate especially on regional level. The Minerals Law and model Production-Sharing Contract provide an enabling environment for company participation in the EITI and there do not appear to be any legal obstacles preventing company participation."
+},
+{
+"id": "78",
+"score_req_id": "3",
+"score_req": {
+"id": "3",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Civil society engagement",
+"code": "1.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5346"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Civil society are fully, actively and effectively engaged in the design, implementation, monitoring and evaluation of the EITI process. Stakeholders are taking part in outreach and efforts to promote public debate especially on regional level. There is an enabling environment for civil society participation in the EITI."
+},
+{
+"id": "79",
+"score_req_id": "4",
+"score_req": {
+"id": "4",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "MSG governance",
+"code": "1.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5346"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has been formed and includes self-appointed representatives from each stakeholder group with no suggestion of interference or coercion. Although the mechanism for civil society nominations on the MSWG restricts selection of members outside the PWYP and MECC coalitions, there is no evidence that non-member NGOs that would have liked to participate have been constrained from doing so. The ToR for the MSWG addresses the requirements of the EITI Standard, but stakeholders have highlighted certain deviations in practice, particularly related to voting. Certain MSWG decisions appear to be passed despite objections of one of the stakeholder groups, for instance in relation to data quality assurance procedures. Attendance of MSWG members is also inconsistent, with delegation of attendance to different representatives being common. these weaknesses have affected EITI implementation and contributed to inconsistent multi-stakeholder oversight of the technical aspects of EITI reporting, in particular with respect to data quality. "
+},
+{
+"id": "80",
+"score_req_id": "5",
+"score_req": {
+"id": "5",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Workplan",
+"code": "1.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5346"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2016 EITI work plan is publicly accessible and produced in a timely manner, with work plan objectives aligned with national priorities. The work plan also includes specific activities to follow up on recommendations from EITI reporting and Validation. It appears that consultations around Mongolia’s first EITI National Forum in Ulaanbaatar in early November 2015 were taken into account in the work plan’s development, even if formulation of a longer-term plan to 2020 discussed at the National Forum remains outstanding. The lack of broader consultations within each of the three constituencies is a concern. Implementation of the work plan appears broadly on track and specific delays appear reasonable."
+},
+{
+"id": "81",
+"score_req_id": "6",
+"score_req": {
+"id": "6",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Legal framework",
+"code": "2.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report address the relevant laws, regulations and fiscal regime."
+},
+{
+"id": "82",
+"score_req_id": "7",
+"score_req": {
+"id": "7",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "License allocations",
+"code": "2.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "While the 2014 EITI Report provides some useful information on license awards and transfers, the exact numbers of licenses that were allocated or transferred remains unclear. The report also fails to disclose whether there were any deviations from the license allocation procedures."
+},
+{
+"id": "83",
+"score_req_id": "8",
+"score_req": {
+"id": "8",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "License register",
+"code": "2.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Most aspects of 2.3 are addressed in the 2014 EITI Report and/or are publicly available through the MRAM cadastre and the eReporting system. However information on dates of application is not available for mining licenses. In the oil and gas sector, there is no information on dates of application, commodities produced and license coordinates"
+},
+{
+"id": "84",
+"score_req_id": "9",
+"score_req": {
+"id": "9",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Policy on contract disclosure",
+"code": "2.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report clarifies government contract disclosure policy and provides a review of actual disclosure practice. There has been follow up by the MSWG to develop a contracts portal, amend the model oil and gas PSAs to remove confidentiality clauses and to disclose all PSAs."
+},
+{
+"id": "85",
+"score_req_id": "10",
+"score_req": {
+"id": "10",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Beneficial ownership",
+"code": "2.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": "The MSWG has considered beneficial ownership disclosure in detail at several MSWG meetings and has conducted initial work on disclosure of legal ownership information (which includes some beneficial ownership disclosures) in the 2013 and 2014 EITI Reports."
+},
+{
+"id": "86",
+"score_req_id": "11",
+"score_req": {
+"id": "11",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "State participation",
+"code": "2.6",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5347"
+}
+]
+}
+},
+"value": "1",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report lists 21 extractives companies in which the state holds majority equity, some of the rules and practices governing financial transfers between government and SOEs and some details of loans and loan guarantees. However, the rules and practices related to SOEs’ retained earnings and reinvestment are not described. The report does not clarify any changes in ownership of extractives SOEs or their subsidiaries in 2014 and it remains unclear whether disclosures of loans or loan guarantees are comprehensive."
+},
+{
+"id": "87",
+"score_req_id": "12",
+"score_req": {
+"id": "12",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Exploration data",
+"code": "3.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5348"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report includes a detailed description of the extractive industries, including informal activities, and of significant exploration activities."
+},
+{
+"id": "88",
+"score_req_id": "13",
+"score_req": {
+"id": "13",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Production data",
+"code": "3.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5348"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report includes volumes of production in mining and crude oil. While the location of mining production is provided for only some mining licenses, it is possible to reconstitute the location of production using the EITIM data portal."
+},
+{
+"id": "89",
+"score_req_id": "14",
+"score_req": {
+"id": "14",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Export data",
+"code": "3.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5348"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report provides export volumes and values for only the five largest commodity exports. MRAM publishes export volume and value figures for all minerals exported in its annual information circulars, with less than one-year time lag. While MRAM export data includes only minerals produced and sold within the same year, Requirement 3.3 does not refer to the quality of official export statistics. "
+},
+{
+"id": "90",
+"score_req_id": "15",
+"score_req": {
+"id": "15",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Comprehensiveness",
+"code": "4.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has agreed a definition of materiality and materiality thresholds. Although the IA does not provide an assessment of the comprehensiveness of the 2014 EITI Report, it is possible for readers to assess the materiality of omissions and reach conclusions about the overall comprehensiveness of the EITI Report."
+},
+{
+"id": "91",
+"score_req_id": "16",
+"score_req": {
+"id": "16",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "In-kind revenues",
+"code": "4.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "The 2014 EITI Report states that the two producing oil and gas PSA operators commercialise the state’s share of in-kind revenues (Profit Oil). There are no in-kind revenues in mining. The value of cash proceeds from the sale of the state’s Profit Oil is provided.  "
+},
+{
+"id": "92",
+"score_req_id": "17",
+"score_req": {
+"id": "17",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Barter agreements",
+"code": "4.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "The 2014 EITI Report details infrastructure provisions and notes that no barters exist."
+},
+{
+"id": "93",
+"score_req_id": "18",
+"score_req": {
+"id": "18",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Transportation revenues",
+"code": "4.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has considered whether government receives transportation revenues in the mining sector and disclosed revenues collected by Erdenes Mongol, even if a materiality threshold for such revenues is not explicit (it is only implied as 0). The MSWG does not seem to have considered the existence of transportation revenues in oil and gas however although we understand that no SOEs (under the EITI Standard’s definition) collected transportation revenues."
+},
+{
+"id": "94",
+"score_req_id": "19",
+"score_req": {
+"id": "19",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "SOE transactions",
+"code": "4.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has considered the transactions between SOEs and government and disclosed dividends from the 21 SOEs operating in the extractive industries. While the 2014 EITI Report includes SOEs’ payments to subnational government, there is confusion between “subnational direct payments” and “subnational transfers”."
+},
+{
+"id": "95",
+"score_req_id": "20",
+"score_req": {
+"id": "20",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Direct subnational payments",
+"code": "4.6",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has considered subnational direct payments, disclosed and reconciled them in the 2014 EITI Report, disaggregated by payment stream. However, there is confusion between SOEs’ “subnational direct payments” and “subnational transfers”."
+},
+{
+"id": "96",
+"score_req_id": "21",
+"score_req": {
+"id": "21",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Disaggregation",
+"code": "4.7",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "While the 2014 EITI Report does not present all data disaggregated by revenue stream and by company, the EITIM data portal provides access to this level of disaggregated information."
+},
+{
+"id": "97",
+"score_req_id": "22",
+"score_req": {
+"id": "22",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Data timeliness",
+"code": "4.8",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The eReporting system has had a significant impact on timeliness of reporting and reconciliation of payments now takes place within 12 months of the end of the fiscal year under review."
+},
+{
+"id": "98",
+"score_req_id": "23",
+"score_req": {
+"id": "23",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Data quality",
+"code": "4.9",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5349"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has never undertaken a review of auditing practices prior to agreeing quality assurance procedures. Issues of data quality assurance (for both companies and government) are significant in 2014 EITI Report. While the eReporting system used for the 2014 EITI Report has addressed concerns over the confidentiality of EITI financial information pre-reconciliation, it does not appear to have resolved data quality assurance challenges. While the 2014 EITI Report provides overview of quality assurances, the materiality of omissions by reporting companies and government entities is not assessed."
+},
+{
+"id": "99",
+"score_req_id": "24",
+"score_req": {
+"id": "24",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Revenue management and expenditures",
+"code": "5.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5350"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report discloses how revenues are allocated."
+},
+{
+"id": "100",
+"score_req_id": "25",
+"score_req": {
+"id": "25",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Subnational transfers",
+"code": "5.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5350"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The general formula for calculating subnational transfers is disclosed in the 2014 EITI Report, although the formula for calculating transfers to individual aimags and soums is not provided. Discrepancies between actual and calculated transfers are not disclosed."
+},
+{
+"id": "101",
+"score_req_id": "26",
+"score_req": {
+"id": "26",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Distribution of revenues",
+"code": "5.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5350"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": "The 2014 EITI Report discloses the management of earmarked revenues."
+},
+{
+"id": "102",
+"score_req_id": "27",
+"score_req": {
+"id": "27",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Mandatory social expenditures",
+"code": "6.1.a",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5351"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Although the MSWG has considered social expenditures in detail and disclosed these in the 2013 and 2014 EITI Reports, the distinction between mandatory and voluntary social expenditures seems to have been made by reporting entities themselves. The comprehensiveness of disclosures of mandatory social expenditures is unclear. The nature and basis for reporting in-kind expenditures is not described. No details on the identity of non-governmental recipients are provided."
+},
+{
+"id": "103",
+"score_req_id": "28",
+"score_req": {
+"id": "28",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Discretionary social expenditures",
+"code": "6.1.b",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5351"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": ""
+},
+{
+"id": "104",
+"score_req_id": "29",
+"score_req": {
+"id": "29",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "SOE quasi-fiscal expenditures",
+"code": "6.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5351"
+}
+]
+}
+},
+"value": "1",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report provides details of only one SOE’s quasi-fiscal expenditures, but the comprehensiveness of assessments of quasi-fiscal expenditures is unclear. There also appears to be confusion about the classification of a number of SOEs’ “payments to subnational governments”. The MSWG does not appear to have considered whether such expenditures exist, despite the widespread knowledge of subsidised state-owned coal sales to power plants."
+},
+{
+"id": "105",
+"score_req_id": "30",
+"score_req": {
+"id": "30",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Economic contribution",
+"code": "6.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5351"
+}
+]
+}
+},
+"value": "4",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report expands on previous EITI Reports’ description of the contribution to the economy. It includes, in absolute and relative terms, the size of the extractive industries, their contribution to government revenue, exports and employment. "
+},
+{
+"id": "106",
+"score_req_id": "31",
+"score_req": {
+"id": "31",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Public debate",
+"code": "7.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5352"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has sought to ensure the EITI Report is comprehensible, accessible and actively promoted, particularly through aimag and soum level reports. EITI information has generated public debate, particularly at the subnational level."
+},
+{
+"id": "107",
+"score_req_id": "32",
+"score_req": {
+"id": "32",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Data accessibility",
+"code": "7.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5352"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": "EITI data is accessible, references international classifications, machine-readable and actively disseminated through the eReporting website."
+},
+{
+"id": "108",
+"score_req_id": "33",
+"score_req": {
+"id": "33",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Follow up on recommendations",
+"code": "7.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5352"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Recommendations of EITI Reports are followed up on by the MSWG, even if they are not consistently implemented."
+},
+{
+"id": "109",
+"score_req_id": "34",
+"score_req": {
+"id": "34",
+"type": "standard",
+"status": "1",
+"created": "1477510736",
+"name": "Outcomes and impact of implementation",
+"code": "7.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5352"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The MSWG has produced annual progress reports documenting progress and outcomes of implementation, although not tracking its impact. It appears that only one of the three stakeholder groups provided input to the 2015 annual activity report. Further work on assessing impact is needed and stakeholder engagement in developing the annual progress report should be strengthened."
+},
+{
+"id": "110",
+"score_req_id": "35",
+"score_req": {
+"id": "35",
+"type": "standard",
+"status": "1",
+"created": "1485956971",
+"name": "Overall Progress",
+"code": "0.0",
+"field_score_req_category": {
+"und": [
+{
+"tid": "5364"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": ""
+}
+]
+}
+],
+"count": 1,
+"self": {
+"title": "Self",
+"href": "https://staging.eiti.org/api/v1.0/score_data"
+}
+}
