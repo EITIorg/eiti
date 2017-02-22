@@ -215,3 +215,136 @@
   border: #0093cf;
   color: #f0f0f0;
 }
+
+
+
+TABLE.country_scorecard {
+  border-collapse: collapse;
+}
+
+.country_scorecard, .country_scorecard TD {
+  border: 1px solid #ccc;
+  padding: 5px 0px 5px 8px;
+  vertical-align: middle;
+}
+
+.country_scorecard, .country_scorecard TH {
+  border: 1px solid #ccc;
+  padding: 2px 8px 2px 8px;
+}
+
+
+.country_scorecard .no_progress, .scorecard-legend .no_progress {
+  background-color: #C00000;
+}
+
+.country_scorecard .inadequate, .scorecard-legend .inadequate {
+  background-color: #FAC433;
+}
+
+.country_scorecard .meaningful, .scorecard-legend .meaningful {
+  background-color: #84AD42;
+}
+
+.country_scorecard .satisfactory, .scorecard-legend .satisfactory {
+  background-color: #2D8B2A;
+}
+
+.country_scorecard .beyond, .scorecard-legend .beyond {
+  background-color: #5182bb;
+}
+
+.country_scorecard .only_encouraged, .scorecard-legend .only_encouraged {
+  background-color: #ccc;
+}
+
+.country_scorecard .not_applicable, .scorecard-legend .not_applicable {
+  color: white;
+  background: repeating-linear-gradient(
+    -45deg,
+    #222,
+    #222 2px,
+    #fff 2px,
+    #fff 5px
+  );
+}
+
+
+
+.country_scorecard TH.scores {
+  height: 110px;
+  white-space: nowrap;
+}
+
+.country_scorecard TH.scores > div {
+  transform: 
+    translate(0px, 30px)
+    rotate(-90deg);
+  width: 30px;
+}
+
+.country_scorecard .requirement_description {
+  font-size:9pt;
+  width:300px;
+  line-height: 1.7em;
+}
+
+.country_scorecard .requirement_button {
+  cursor: pointer;
+  color: #0093cf;
+}
+
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item i, .eiti-chart-widget .scorecard-legend .scorecard-legend-item span {
+  width: 2em;
+  height: 2.5em;
+  float: left;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  vertical-align: middle;
+}
+
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item div {
+  display:inline-block;
+  width:90%;
+  float: left;
+  vertical-align: middle;
+}
+.eiti-chart-widget .scorecard-legend .scorecard-legend-item {
+  clear:both;
+}
+
+
+.eiti-chart-widget .scorecard-legend {
+  margin-top:2em;
+}
+
+.country_scorecard TR:first-child TH {
+  background-color:#0093cf;
+  color:#fff;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
+}
+
+.country_scorecard TR TH {
+  background-color:#f2f2f2;
+  color:#676767;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
+}
+
+.country_scorecard TD.requirement {
+  background-color:#e2e2e2;
+}
+
+.country_scorecard .requirement_description {
+  font-size:9pt;
+  width:300px;
+}
+.country_scorecard .requirement_button {
+  cursor: pointer;
+  color: #0093cf;
+}
+
+

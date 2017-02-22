@@ -373,7 +373,6 @@ function _contentwidget__fact_blocks__get_impl_countries_count() {
     'Satisfactory progress',
     'Inadequate progress',
     'No progress',
-    'Yet to be assessed to the 2016 Standard',
     'Yet to be assessed against the 2016 Standard',
     'Suspended',
   );
@@ -422,7 +421,8 @@ function _contentwidget__fact_blocks__get_countries_count($type) {
   $query
     ->entityCondition('entity_type', 'implementing_country')
     ->propertyCondition('status', '1');
-  $query->fieldCondition('field_ic_status', 'tid', $tids, 'IN');
+  $query->fieldLanguageCondition('field_ic_status', LANGUAGE_NONE, '=', NULL, 'default');
+  $query->fieldCondition('field_ic_status', 'tid', $tids, 'IN', NULL, 'default');
   $result = $query->count()->execute();
   $results[implode(':', $tids)] = $result;
 

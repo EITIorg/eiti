@@ -95,16 +95,16 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       '#default_value' => $entity->description,
     );
 
-    $entity_form['dir_of_progress'] = array(
+    $entity_form['progress_value'] = array(
       '#type' => 'select',
       '#title' => t('Direction of Progress'),
       '#options' => _eitientity_score_req_value_get_dir_of_progress_options(),
-      '#default_value' => $entity->progress_value,
+      '#default_value' => isset($entity->progress_value) ? $entity->progress_value : EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY,
     );
     $entity_form['is_applicable'] = array(
       '#type' => 'checkbox',
       '#title' => t('Is Applicable'),
-      '#default_value' => $entity->is_applicable,
+      '#default_value' => isset($entity->is_applicable) ? $entity->is_applicable : TRUE,
     );
     $entity_form['is_required'] = array(
       '#type' => 'radios',
@@ -113,7 +113,7 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
         EITIENTITY_SCORE_REQ_REQUIRED => t('Is Required'),
         EITIENTITY_SCORE_REQ_ENCOURAGED => t('Is Encouraged')
       ),
-      '#default_value' => $entity->is_applicable,
+      '#default_value' => isset($entity->is_required) ? $entity->is_required : EITIENTITY_SCORE_REQ_REQUIRED,
     );
     return $entity_form;
   }

@@ -318,3 +318,30 @@ function eitientity_score_data_admin_paths() {
 
   return $paths;
 }
+
+/**
+ * Helper function that returns existing score data by looking up
+ * its specified country.
+ *
+ * @param integer $country_id
+ *   ID of the country.
+ *
+ * @return bool|array
+ *   Array of loaded entities if was any were found or FALSE.
+ */
+function eitientity_score_data_lookup_by_country($country_id) {
+  if (!is_numeric($country_id)) {
+    return FALSE;
+  }
+
+  $efq = new EntityFieldQuery();
+  $efq_results = $efq->entityCondition('entity_type', 'score_data')
+    ->propertyCondition('type', 'standard')
+    ->propertyCondition('country_id', $country_id)
+    ->execute();
+  if (!empty($efq_results['score_data'])) {
+    $score_data_entities = entity_load('score_data', array_keys($efq_results['score_data']));
+    return $score_data_entities;
+  }
+  return FALSE;
+}

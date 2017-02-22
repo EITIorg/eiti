@@ -59,26 +59,30 @@ function eitisearch_form_views_exposed_form_alter(&$form, &$form_state) {
  */
 function eitisearch_adjusted_voc_options($field) {
   $options = array();
+
   foreach ($field['settings']['allowed_values'] as $tree) {
     if ($vocabulary = taxonomy_vocabulary_machine_name_load($tree['vocabulary'])) {
-      if ($terms = taxonomy_get_tree($vocabulary->vid, $tree['parent'])) {
+      if ($terms = taxonomy_get_tree($vocabulary->vid, $tree['parent'], NULL, TRUE)) {
         $parents = array();
+
         foreach ($terms as $term) {
+          $term_emw = entity_metadata_wrapper('taxonomy_term', $term);
           if ($term->depth == 0) {
-            $parents[$term->tid] = $term->name;
+            $parents[$term->tid] = $term_emw->name->value();
           }
           else {
             $parent_tid = reset($term->parents);
             if (in_array($parent_tid, array_keys($parents))) {
-              $options[$parents[$parent_tid]][$term->tid] = i18n_taxonomy_term_name($term);
+              $options[$parents[$parent_tid]][$term->tid] = $term_emw->name->value();
             }
             else {
-              $options[$term->tid] = i18n_taxonomy_term_name($term);
+              $options[$term->tid] = $term_emw->name->value();
             }
           }
         }
       }
     }
   }
+
   return $options;
 }
