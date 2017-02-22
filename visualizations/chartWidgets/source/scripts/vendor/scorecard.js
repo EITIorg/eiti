@@ -134,7 +134,7 @@ function appendRows(data, tableBody, hasProgress) {
 	        let currentScore = undefined;
 	        if (countryScore) {
 		        currentScore = _.find(countryScore.score_req_values, function(value) {
-		            return (value.score_req_id == requirement.id);
+		            return (value.score_req.code == requirement.Code); //Allow type casting
 		        });
 
 	        }
