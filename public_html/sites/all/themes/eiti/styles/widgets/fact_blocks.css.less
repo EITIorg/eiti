@@ -35,6 +35,22 @@
     font-size: 0.875em;
   }
 
+  .digits-bigger {
+    .widget-value .value {
+      font-size: 4em;
+    }
+  }
+  .digits-big {
+    .widget-value .value {
+      font-size: 5em;
+    }
+  }
+  .digits-huge {
+    .widget-value .value {
+      font-size: 6em;
+    }
+  }
+
   .overlay-wrapper {
     h2 {
       padding-top: 1em;
@@ -58,6 +74,22 @@
     &.overlay-padding-10 {
       padding-top: 10em;
       padding-bottom: 10em;
+    }
+  }
+
+  .align-centered {
+    .fact-block-wrapper {
+      text-align: center;
+
+      .widget-icon {
+        display: inline-block;
+        float: none;
+        vertical-align: text-bottom;
+      }
+      .widget-value {
+        width: auto;
+        display: inline-block;
+      }
     }
   }
 }
