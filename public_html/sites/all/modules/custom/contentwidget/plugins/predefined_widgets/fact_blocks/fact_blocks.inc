@@ -64,9 +64,19 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
 
   $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
 
+  // Adjust the alignment, height & padding of the widget.
+  if (!empty($widget_settings['facts_display_settings']['fact_align']) && $widget_settings['facts_display_settings']['fact_align'] !== 'standard') {
+    $alignment = $widget_settings['facts_display_settings']['fact_align'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('align-' . $alignment);
+  }
   if (!empty($widget_settings['facts_display_settings']['fact_height']) && $widget_settings['facts_display_settings']['fact_height'] !== 'standard') {
     $height = $widget_settings['facts_display_settings']['fact_height'];
     $block['overlay']['#attributes']['class'][] = drupal_html_class('overlay-' . $height);
+  }
+  // Adjust the digits size.
+  if (!empty($widget_settings['facts_display_settings']['digits_size']) && $widget_settings['facts_display_settings']['digits_size'] !== 'standard') {
+    $digits_size = $widget_settings['facts_display_settings']['digits_size'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('digits-' . $digits_size);
   }
 
   // And now prepare the list of facts that we'll render in theme_item_list.
@@ -284,11 +294,21 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
       )
     ),
   );
+  $settings_form['facts_display_settings']['fact_align'] = array(
+    '#type' => 'select',
+    '#title' => t('Align'),
+    '#description' => t('Change the fact widget alignment.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_align']) ? $widget_settings['facts_display_settings']['fact_align'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard (Left)'),
+      'centered' => t('Centered'),
+    ),
+  );
   $settings_form['facts_display_settings']['fact_height'] = array(
     '#type' => 'select',
     '#title' => t('Height'),
     '#description' => t('Modify widget height.'),
-    '#default_value' => $widget_settings['facts_display_settings']['fact_height'],
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_height']) ? $widget_settings['facts_display_settings']['fact_height'] : 'standard',
     '#options' => array(
       'standard' => t('Standard'),
       'padding_2' => t('With padding (2)'),
@@ -296,6 +316,18 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
       'padding_6' => t('With padding (6)'),
       'padding_8' => t('With padding (8)'),
       'padding_10' => t('With padding (10)'),
+    ),
+  );
+  $settings_form['facts_display_settings']['digits_size'] = array(
+    '#type' => 'select',
+    '#title' => t('Size (for digits).'),
+    '#description' => t('Modify digit\'s size.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['digits_size']) ? $widget_settings['facts_display_settings']['digits_size'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard'),
+      'bigger' => t('Bigger size'),
+      'big' => t('Big size'),
+      'huge' => t('Huge size'),
     ),
   );
 
