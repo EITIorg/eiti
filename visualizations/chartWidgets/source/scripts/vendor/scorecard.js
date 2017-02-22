@@ -264,7 +264,7 @@ function appendRows(data, tableBody, hasProgress) {
 
 	var cellStyle = '';
 
-	let currentScore = _.find(_.first(result).score_req_values, {"score_req_id" : "35"}); // This is the Overall Progress score_id
+	let currentScore = _.find(_.first(result).score_req_values, function(v){ return v.score_req.code == "0.0";}); // This is the Overall Progress score_id
 	let currentRow = $("<TR>");
 	currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({'color': '#C00000', 'font-weight': 'bold'}).html('Overall assessment'));
     _.each(scores, function(value) {
