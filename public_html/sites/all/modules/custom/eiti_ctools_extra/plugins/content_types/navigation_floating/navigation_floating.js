@@ -101,10 +101,27 @@
         if (settings.eitiNavigationFloating.use_position_tracking && $.fn.waypoint) {
           $pane.waypoint(function(direction) {
             var $this = $(this.element);
-            $floatingNavList.find('li').removeClass('current');
-            $('.nav-item-' + $this.data('pane_id'), context).toggleClass('current');
+            if (direction == 'down') {
+              $('.nav-item-' + $this.data('pane_id'), context).removeClass('current');
+            }
+            else {
+              $('.nav-item-' + $this.data('pane_id'), context).addClass('current');
+            }
           }, {
-            offset: firstPane ? -10 : 0
+            offset: -10
+          });
+        }
+        if (settings.eitiNavigationFloating.use_position_tracking && $.fn.waypoint) {
+          $pane.waypoint(function(direction) {
+            var $this = $(this.element);
+            if (direction == 'down') {
+              $('.nav-item-' + $this.data('pane_id'), context).addClass('current');
+            }
+            else {
+              $('.nav-item-' + $this.data('pane_id'), context).removeClass('current');
+            }
+          }, {
+            offset: '100%'
           });
         }
         firstPane = false;
