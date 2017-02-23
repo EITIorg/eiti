@@ -26,6 +26,7 @@ $plugin = array(
   'defaults' => array(
     'use_smooth_transition' => TRUE,
     'use_position_tracking' => TRUE,
+    'use_logo' => FALSE,
     'animation_in' => 'fadeIn',
     'animation_out' => 'fadeOut',
     'pane_properties' => array(),
@@ -40,48 +41,48 @@ function eiti_ctools_extra__navigation_floating__render($subtype, $conf, $panel_
   $theme = 'eiti';
 
   // We'll need the logo as a link, so let's craft it out.
-  $theme_path = drupal_get_path('theme', $theme);
-  $logo_path = theme_get_setting('logo_path', $theme);
-  $file_path = drupal_realpath($logo_path);
-  $site_name = filter_xss_admin(variable_get('site_name', 'EITI.org Homepage'));
-  if (file_exists($file_path)) {
-    $logo_markup['png'] = array(
-      '#theme' => 'image',
-      '#path' => file_create_url($logo_path),
-      '#alt' => '',
-      '#attributes' => array(
-        'role' => 'presentation',
-        'class' => array('site-logo'),
-      ),
-    );
+  if (isset($conf['use_logo']) && $conf['use_logo']) {
+    $theme_path = drupal_get_path('theme', $theme);
+    $logo_path = theme_get_setting('logo_path', $theme);
+    $file_path = drupal_realpath($logo_path);
+    $site_name = filter_xss_admin(variable_get('site_name', 'EITI.org Homepage'));
+    if (file_exists($file_path)) {
+      $logo_markup['png'] = array(
+        '#theme' => 'image',
+        '#path' => file_create_url($logo_path),
+        '#alt' => '',
+        '#attributes' => array(
+          'role' => 'presentation',
+          'class' => array('site-logo'),
+        ),
+      );
+    }
+    else {
+      $logo_alt = $site_name;
+      $logo_markup['svg'] = array(
+        '#theme' => 'image',
+        '#path' => file_create_url($theme_path . '/logo.svg'),
+        '#alt' => $logo_alt,
+        '#attributes' => array(
+          'role' => 'presentation',
+          'class' => array('site-logo'),
+        ),
+        '#prefix' => "<!--[if (gte IE 9)|!(IE)]><!-->",
+        '#suffix' => "<!--<![endif]-->",
+      );
+      $logo_markup['png'] = array(
+        '#theme' => 'image',
+        '#path' => file_create_url($theme_path . '/logo.png'),
+        '#alt' => $logo_alt,
+        '#attributes' => array(
+          'role' => 'presentation',
+          'class' => array('site-logo'),
+        ),
+        '#prefix' => "<!--[if lt IE 9 ]>",
+        '#suffix' => "<![endif]-->",
+      );
+    }
   }
-  else {
-    $logo_alt = $site_name;
-    $logo_markup['svg'] = array(
-      '#theme' => 'image',
-      '#path' => file_create_url($theme_path . '/logo.svg'),
-      '#alt' => $logo_alt,
-      '#attributes' => array(
-        'role' => 'presentation',
-        'class' => array('site-logo'),
-      ),
-      '#prefix' => "<!--[if (gte IE 9)|!(IE)]><!-->",
-      '#suffix' => "<!--<![endif]-->",
-    );
-    $logo_markup['png'] = array(
-      '#theme' => 'image',
-      '#path' => file_create_url($theme_path . '/logo.png'),
-      '#alt' => $logo_alt,
-      '#attributes' => array(
-        'role' => 'presentation',
-        'class' => array('site-logo'),
-      ),
-      '#prefix' => "<!--[if lt IE 9 ]>",
-      '#suffix' => "<![endif]-->",
-    );
-  }
-
-
 
   // Store the correct order of panes.
   $conf['pane_order'] = array_keys($conf['pane_properties']);
@@ -112,7 +113,10 @@ function eiti_ctools_extra__navigation_floating__render($subtype, $conf, $panel_
       )
     )
   );
-  $content['logo'] = $logo_markup;
+  // If we're actually using logo.
+  if (!empty($logo_markup)) {
+    $content['logo'] = $logo_markup;
+  }
 
   // Send settings via JS.
   $widget_js_settings = $conf;
@@ -161,6 +165,12 @@ function eiti_ctools_extra__navigation_floating__edit_form($form, &$form_state) 
     '#title' => t('Display Settings'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+  );
+  $form['display_settings']['use_logo'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Logo'),
+    '#description' => t('Would you like to include the logo of EITI in the menu?'),
+    '#default_value' => $conf['use_logo']
   );
   $form['display_settings']['animation_in'] = array(
     '#type' => 'select',
