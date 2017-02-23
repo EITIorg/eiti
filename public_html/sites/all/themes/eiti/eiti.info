@@ -31,7 +31,10 @@ stylesheets[all][] = styles/layout.css.less
 stylesheets[all][] = styles/content.css.less
 
 stylesheets[all][] = styles/other/country_header.css.less
+stylesheets[all][] = styles/other/navigation_floating.css.less
+stylesheets[all][] = styles/other/minimalistic_header.css.less
 stylesheets[all][] = styles/other/quick_summary_tool.css.less
+stylesheets[all][] = styles/other/timeline.css.less
 
 ; @TODO: Implement a proper hook and move widget specific styles to the widget page.
 stylesheets[all][] = styles/widgets/all.css.less
@@ -43,6 +46,7 @@ stylesheets[all][] = styles/widgets/mailchimp.css.less
 stylesheets[all][] = styles/widgets/quote.css.less
 stylesheets[all][] = styles/widgets/table.css.less
 stylesheets[all][] = styles/widgets/tabs_with_widgets.css.less
+stylesheets[all][] = styles/widgets/teaser.css.less
 stylesheets[all][] = styles/widgets/text.css.less
 stylesheets[all][] = styles/widgets/value_chain.css.less
 stylesheets[all][] = styles/widgets/visualization.css.less

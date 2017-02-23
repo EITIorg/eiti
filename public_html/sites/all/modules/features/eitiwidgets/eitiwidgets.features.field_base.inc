@@ -76,6 +76,32 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_fpp_background_video'.
+  $field_bases['field_fpp_background_video'] = array(
+    'active' => 1,
+    'cardinality' => 3,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_background_video',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 0,
+      'display_field' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'file',
+  );
+
   // Exported field_base: 'field_fpp_body'.
   $field_bases['field_fpp_body'] = array(
     'active' => 1,
@@ -180,6 +206,33 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_fpp_header_type'.
+  $field_bases['field_fpp_header_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_header_type',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'simple' => 'Simple',
+        'image' => 'Image',
+        'video' => 'Video',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_fpp_icon'.
   $field_bases['field_fpp_icon'] = array(
     'active' => 1,
@@ -199,6 +252,32 @@ function eitiwidgets_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'helperfield_icon',
+  );
+
+  // Exported field_base: 'field_fpp_layout'.
+  $field_bases['field_fpp_layout'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_layout',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'default' => 'Default',
+        'narrow' => 'Narrow',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_fpp_person_list'.

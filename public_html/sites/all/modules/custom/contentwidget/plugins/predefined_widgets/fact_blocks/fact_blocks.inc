@@ -29,6 +29,26 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     '#attributes' => array(
     )
   );
+  $entity_emw = entity_metadata_wrapper('fieldable_panels_pane', $entity);
+
+  // Let's first figure out if we want to include some libraries or not.
+  if (!empty($widget_settings['facts_display_settings']['fact_ticker_use']) && $widget_settings['facts_display_settings']['fact_ticker_use'] == TRUE) {
+    $lib_waypoints = libraries_load('waypoints', 'minified');
+    $lib_countup = libraries_load('countup', 'minified');
+    if ($lib_waypoints['loaded'] && $lib_countup['loaded']) {
+      $path = drupal_get_path('module', 'contentwidget');
+      drupal_add_js($path . '/js/content-widgets.js');
+      $block['#attributes']['class'][] = 'ticker-waypoint';
+
+      // Let's add other metadata (per widget).
+      if (!empty($widget_settings['facts_display_settings']['fact_ticker_speed'])) {
+        $block['#attributes']['data-counter-speed'] = $widget_settings['facts_display_settings']['fact_ticker_speed'];
+      }
+      if (!empty($widget_settings['facts_display_settings']['fact_ticker_decimals'])) {
+        $block['#attributes']['data-counter-decimals'] = $widget_settings['facts_display_settings']['fact_ticker_decimals'];
+      }
+    }
+  }
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
@@ -44,6 +64,21 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
 
   $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
 
+  // Adjust the alignment, height & padding of the widget.
+  if (!empty($widget_settings['facts_display_settings']['fact_align']) && $widget_settings['facts_display_settings']['fact_align'] !== 'standard') {
+    $alignment = $widget_settings['facts_display_settings']['fact_align'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('align-' . $alignment);
+  }
+  if (!empty($widget_settings['facts_display_settings']['fact_height']) && $widget_settings['facts_display_settings']['fact_height'] !== 'standard') {
+    $height = $widget_settings['facts_display_settings']['fact_height'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('overlay-' . $height);
+  }
+  // Adjust the digits size.
+  if (!empty($widget_settings['facts_display_settings']['digits_size']) && $widget_settings['facts_display_settings']['digits_size'] !== 'standard') {
+    $digits_size = $widget_settings['facts_display_settings']['digits_size'];
+    $block['overlay']['#attributes']['class'][] = drupal_html_class('digits-' . $digits_size);
+  }
+
   // And now prepare the list of facts that we'll render in theme_item_list.
   $fact_items = array();
   for ($delta = 0; $delta < $widget_settings['facts_number']; $delta++) {
@@ -55,6 +90,15 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
           'fact-block-wrapper--' . $delta,
         ),
       ),
+    );
+
+    $fact_block['above_label'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'div',
+      '#attributes' => array(
+        'class' => array('widget-above-label')
+      ),
+      '#value' => _contentwidget__fact_blocks__get_property_value($widget_settings, $delta, 'above_label')
     );
 
     $fact_block['media_block'] = array(
@@ -149,6 +193,13 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     $fact_items[$delta] = render($fact_block);
   }
 
+  if (!empty($widget_settings['facts_display_settings']['title_inside']) &&
+    $widget_settings['facts_display_settings']['title_inside'] == TRUE) {
+    $block['overlay']['title_inside'] = array(
+      '#type' => 'markup',
+      '#markup' => '<h2>' . $entity_emw->title_field->value() . '</h2>',
+    );
+  }
   $block['overlay']['links'] = array(
     '#theme' => 'item_list',
     '#items' => $fact_items,
@@ -166,7 +217,19 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
  * Settings form for the 'Ket Facts' predefined widget.
  */
 function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, $widget_settings) {
-  $settings_form = array();
+  $entity_language = entity_language('fieldable_panels_pane', $form_state['entity']);
+  $widget_field_language = field_language('fieldable_panels_pane', $form_state['entity'], 'field_fpp_widget', $entity_language);
+
+  // For cases where field parents are set.
+  if (!empty($element['#field_parents'])) {
+    $parents = $element['#field_parents'];
+    $field_name = array_shift($parents);
+    $field_parents_path = $field_name . '[' . implode('][', $parents) . ']';
+    $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][' . $widget_field_language . '][0][settings][fact_blocks]';
+  }
+  else {
+    $field_name_prefix = $element['#field_name'] . '[' . $widget_field_language . '][0][settings][fact_blocks]';
+  }
 
   // Special case: we're in IEF. We want to get the REAL settings.
   if (!empty($form_state['inline_entity_form']) && !empty($form_state['triggering_element']['#ajax']) && $form_state['triggering_element']['#ajax']['callback'] == '_contentwidget__fact_blocks__settings_ajax') {
@@ -184,6 +247,91 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
     '#suffix' => '</div>',
   );
 
+  // Display settings.
+  $settings_form['facts_display_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Display Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $settings_form['facts_display_settings']['title_inside'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Title Inside'),
+    '#description' => t('Do you wish to use the title INSIDE of the widget or a standard title style?'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['title_inside']) ? $widget_settings['facts_display_settings']['title_inside'] : FALSE,
+  );
+  $settings_form['facts_display_settings']['fact_ticker_use'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use Ticker'),
+    '#description' => t('Use an incremental ticker for the facts.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_ticker_use']) ? $widget_settings['facts_display_settings']['fact_ticker_use'] : FALSE,
+  );
+  $settings_form['facts_display_settings']['fact_ticker_speed'] = array(
+    '#type' => 'select',
+    '#title' => t('Ticker Speed'),
+    '#description' => t('Speed of the incremental count.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_ticker_speed']) ? $widget_settings['facts_display_settings']['fact_ticker_speed'] : 'average',
+    '#options' => array(
+      '4' => t('Slow (4s)'),
+      '2' => t('Average (2s)'),
+      '1' => t('Fast (1s)'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        array('input[name="' . $field_name_prefix . '[facts_display_settings][fact_ticker_use]"]' => array('checked' => TRUE))
+      )
+    ),
+  );
+  $settings_form['facts_display_settings']['fact_ticker_decimals'] = array(
+    '#type' => 'select',
+    '#title' => t('Ticker Decimals'),
+    '#description' => t('How many decimals should we use?'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_ticker_decimals']) ? $widget_settings['facts_display_settings']['fact_ticker_decimals'] : 0,
+    '#options' => drupal_map_assoc(range(0, 3)),
+    '#states' => array(
+      'visible' => array(
+        array('input[name="' . $field_name_prefix . '[facts_display_settings][fact_ticker_use]"]' => array('checked' => TRUE))
+      )
+    ),
+  );
+  $settings_form['facts_display_settings']['fact_align'] = array(
+    '#type' => 'select',
+    '#title' => t('Align'),
+    '#description' => t('Change the fact widget alignment.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_align']) ? $widget_settings['facts_display_settings']['fact_align'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard (Left)'),
+      'centered' => t('Centered'),
+    ),
+  );
+  $settings_form['facts_display_settings']['fact_height'] = array(
+    '#type' => 'select',
+    '#title' => t('Height'),
+    '#description' => t('Modify widget height.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['fact_height']) ? $widget_settings['facts_display_settings']['fact_height'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard'),
+      'padding_2' => t('With padding (2)'),
+      'padding_4' => t('With padding (4)'),
+      'padding_6' => t('With padding (6)'),
+      'padding_8' => t('With padding (8)'),
+      'padding_10' => t('With padding (10)'),
+    ),
+  );
+  $settings_form['facts_display_settings']['digits_size'] = array(
+    '#type' => 'select',
+    '#title' => t('Size (for digits).'),
+    '#description' => t('Modify digit\'s size.'),
+    '#default_value' => !empty($widget_settings['facts_display_settings']['digits_size']) ? $widget_settings['facts_display_settings']['digits_size'] : 'standard',
+    '#options' => array(
+      'standard' => t('Standard'),
+      'bigger' => t('Bigger size'),
+      'big' => t('Big size'),
+      'huge' => t('Huge size'),
+    ),
+  );
+
+  // Facts themselves.
   $settings_form['facts_number'] = array(
     '#type' => 'select',
     '#title' => t('Number of Fact Blocks'),
@@ -225,6 +373,13 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
       '#icons' => $icons,
       '#default_value' => _contentwidget__fact_blocks__get_property_value($widget_settings, $delta, 'icon'),
     );
+    $settings_form[$delta]['above_label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Label (above)'),
+      '#description' => t('Label used for this key fact.'),
+      '#size' => 50,
+      '#default_value' => _contentwidget__fact_blocks__get_property_value($widget_settings, $delta, 'above_label'),
+    );
     $settings_form[$delta]['description'] = array(
       '#type' => 'textfield',
       '#title' => t('Description'),
@@ -239,20 +394,6 @@ function contentwidget__fact_blocks__settings(&$element, &$form_state, $plugin, 
       '#options' => $type_options,
       '#default_value' => _contentwidget__fact_blocks__get_property_value($widget_settings, $delta, 'type'),
     );
-
-    $entity_language = entity_language('fieldable_panels_pane', $form_state['entity']);
-    $widget_field_language = field_language('fieldable_panels_pane', $form_state['entity'], 'field_fpp_widget', $entity_language);
-
-    // For cases where field parents are set.
-    if (!empty($element['#field_parents'])) {
-      $parents = $element['#field_parents'];
-      $field_name = array_shift($parents);
-      $field_parents_path = $field_name . '[' . implode('][', $parents) . ']';
-      $field_name_prefix = $field_parents_path . '[' . $element['#field_name'] . '][' . $widget_field_language . '][0][settings][fact_blocks]';
-    }
-    else {
-      $field_name_prefix = $element['#field_name'] . '[' . $widget_field_language . '][0][settings][fact_blocks]';
-    }
 
     $settings_form[$delta]['value'] = array(
       '#type' => 'textfield',

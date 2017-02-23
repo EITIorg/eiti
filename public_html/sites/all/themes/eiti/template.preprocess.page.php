@@ -98,6 +98,15 @@ function eiti_preprocess_page(&$variables) {
         break;
     }
   }
+
+  // Check if this is a node page, if it uses Panelizer and if the blocks are disabled.
+  $variables['content_only'] = FALSE;
+  if (!empty($variables['node']) && ($variables['node']->type == 'progress_report') && !empty($variables['node']->panelizer['page_manager'])) {
+    $page_manager = $variables['node']->panelizer['page_manager'];
+    if ($page_manager->no_blocks == TRUE) {
+      $variables['content_only'] = TRUE;
+    }
+  }
 }
 
 /**

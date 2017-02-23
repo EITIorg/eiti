@@ -7,6 +7,7 @@
  * can be found in the html.tpl.php template in this directory.
  *
  * @var string $breadcrumb
+ * @var bool $content_only
  * @var bool $display_breadcrumb
  * @var string $tabs
  * @var bool $display_tabs
@@ -21,14 +22,15 @@
  */
 ?>
 
-
-<div class="main-header-wrapper">
-  <header role="banner" class="main-header clearfix">
-    <div class="main-header-inner clearfix">
-      <?php print theme('header_items'); ?>
-    </div>
-  </header>
-</div>
+<?php if (!$content_only): ?>
+  <div class="main-header-wrapper">
+    <header role="banner" class="main-header clearfix">
+      <div class="main-header-inner clearfix">
+        <?php print theme('header_items'); ?>
+      </div>
+    </header>
+  </div>
+<?php endif; ?>
 
 <div class="main-content-wrapper">
   <section role="main" id="main-content" class="main-content clearfix">
@@ -67,6 +69,6 @@
   </section>
 </div>
 
-<?php if (arg(0) != 'admin'): ?>
-<div class="main-footer-wrapper"><?php print theme('main_footer'); ?></div>
+<?php if (arg(0) != 'admin' && !$content_only): ?>
+  <div class="main-footer-wrapper"><?php print theme('main_footer'); ?></div>
 <?php endif; ?>

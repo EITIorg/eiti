@@ -1,0 +1,54 @@
+.minimalistic-wrapper {
+  background-color: @clmain__header;
+  min-height: 3em;
+
+  .minimalistic-logo-link {
+    float: left;
+    margin: 0.75em 0;
+    text-align: center;
+    line-height: 1.2em;
+    img {
+      width: 50%;
+      height: auto;
+    }
+  }
+  .minimalistic-page-title {
+    padding: 0 100px 0 0;
+    margin: 9px 15px;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    display: inline-block;
+  }
+  .header-items {
+    line-height: 3em;
+    margin-right: 2em;
+    position: absolute;
+    right: 0;
+    width: auto;
+    display: inline-block;
+  }
+}
+
+.xSmallOnly() {
+  .minimalistic-wrapper {
+    text-align: center;
+
+    .header-items {
+      float: none;
+      text-align: center;
+      width: 100%;
+      position: static;
+    }
+
+    .minimalistic-logo-link {
+      //float: none;
+    }
+
+    .minimalistic-page-title {
+      padding: 0;
+    }
+  }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

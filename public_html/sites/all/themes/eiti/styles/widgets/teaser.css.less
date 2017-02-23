@@ -1,0 +1,87 @@
+.predefined-widget--teaser {
+  .teaser-layout {
+    &.layout-full-centered {
+      text-align: center;
+      .ghost-links {
+        text-align: center;
+      }
+    }
+    &.layout-2-3-left {
+      text-align: left;
+      &:before {
+        width: 66%;
+      }
+      .teaser-content {
+        width: 60%;
+        padding: 0 3%;
+      }
+      .ghost-links {
+        text-align: right;
+      }
+    }
+    &.layout-2-3-right {
+      text-align: right;
+      &:before {
+        width: 66%;
+        left: auto;
+        right: 0;
+      }
+      .teaser-content {
+        width: 60%;
+        padding: 0 3% 0 37%;
+      }
+      .ghost-links {
+        text-align: left;
+      }
+    }
+  }
+  .teaser-content {
+    .title {
+      font-size: 2em;
+      font-weight: 300;
+    }
+  }
+  .ghost-links {
+    padding: 0;
+    margin-bottom: 1em;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      margin-right: 1em;
+      margin-left: 1em;
+
+      a {
+        .border-radius(3px);
+        display: inline-block;
+        border: 1px solid @clmain;
+        color: @clmain;
+        padding: 0.5em 1em;
+        font-weight: 700;
+        .transition(background-color, 400ms, ease-in);
+
+        &:hover {
+          background-color: @cldetail__alt;
+        }
+      }
+    }
+  }
+  .overlay-padding-2 {
+    padding: 2em 0;
+  }
+  .overlay-padding-4 {
+    padding: 4em 0;
+  }
+  .overlay-padding-6 {
+    padding: 6em 0;
+  }
+  .overlay-padding-8 {
+    padding: 8em 0;
+  }
+  .overlay-padding-10 {
+    padding: 10em 0;
+  }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

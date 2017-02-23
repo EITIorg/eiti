@@ -1,0 +1,68 @@
+.navigation-wrapper {
+  .gradient-right(@cldetail, fadeout(@cldetail, 100%));
+  display: none;
+
+  color: @clmain;
+  text-transform: uppercase;
+  position: fixed;
+  z-index: 1000;
+  top: 20%;
+  padding: 2em 3em 2em 2em;
+
+  a {
+    color: @clmain;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-shadow: 0 0 0.25em fade(@claltmain, 90%);
+    .transition(color, 400ms, ease-in);
+  }
+
+  img {
+    display: block;
+  }
+
+  #navigation-floating {
+    display: inline-block;
+    .navigation-list {
+      padding: 0 0 0 1em;
+      li{
+        list-style: none;
+        color: @clmain;
+        &.current {
+          color: @claltnormal;
+          > a {
+            color: @claltnormal;
+          }
+        }
+        ul {
+          padding-left: 2em;
+          margin: 0.5em 0;
+          li {
+            list-style: disc;
+            a {
+              font-weight: 600;
+              text-transform: none;
+              font-size: 0.9em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.xMediumAndDown() {
+  .navigation-wrapper {
+    display: none;
+  }
+}
+
+.xNormalAndUp() {
+  #navigation-floating {
+
+  }
+}
+
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

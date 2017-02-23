@@ -163,6 +163,63 @@ function eiti_ctools_extra_libraries_info() {
     ),
   );
 
+  $libraries['waypoints'] = array(
+    'name' => 'jQuery Waypoints',
+    'vendor url' => 'http://imakewebthings.com/waypoints/',
+    'download url' => 'https://github.com/imakewebthings/waypoints/zipball/latest',
+    'path' => 'lib',
+    'version' => '4.0.2',
+    'files' => array(
+      'js' => array(
+        'jquery.waypoints.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.waypoints.min.js',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.waypoints.js',
+          ),
+        ),
+      ),
+    ),
+  );
+  $libraries['countup'] = array(
+    'name' => 'Count UP JS',
+    'vendor url' => 'https://github.com/inorganik/CountUp.js',
+    'download url' => 'https://github.com/inorganik/countUp.js/archive/master.zip',
+    'path' => 'dist',
+    'version' => '1.7.1',
+    'files' => array(
+      'js' => array(
+        'countUp.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'countUp.min.js',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'countUp.js',
+          ),
+        ),
+      ),
+    ),
+  );
+
   return $libraries;
 }
 
@@ -475,4 +532,24 @@ function eiti_ctools_extra__quick_summary_tool__quick_summary_table($ids) {
   );
 
   return $table;
+}
+
+/**
+ * A small helper function that extracts the ID of the Google Spreadsheet,
+ * from the general specified URL.
+ *
+ * @param string $url
+ *  The full Google Spreadsheet specified.
+ *
+ * @return bool
+ *  Returns FALS
+ */
+function _eiti_ctools_extra_get_google_spreadsheet_id($url = NULL) {
+  if ($url !== NULL) {
+    preg_match('/spreadsheets\/d\/(.+?)\//', $url, $matches);
+    if (!empty($matches[1])) {
+      return $matches[1];
+    }
+  }
+  return FALSE;
 }

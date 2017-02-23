@@ -177,3 +177,13 @@
     color: @hovcolor;
   }
 }
+
+.gradient-right (@startColor: #eee, @endColor: white) {
+  background-color: @startColor;
+  background: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+  background: -webkit-linear-gradient(right, @startColor, @endColor);
+  background: -moz-linear-gradient(right, @startColor, @endColor);
+  background: -ms-linear-gradient(right, @startColor, @endColor);
+  background: -o-linear-gradient(right, @startColor, @endColor);
+  background: linear-gradient(to right, @startColor, @endColor);
+}

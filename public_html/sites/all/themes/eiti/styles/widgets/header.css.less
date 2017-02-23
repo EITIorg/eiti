@@ -44,7 +44,8 @@
     }
   }
 
-  .with-background-image {
+  .with-background-image,
+  .with-background-video {
     color: @claltnormal__light;
 
     .title {
@@ -73,6 +74,142 @@
       }
       &:hover .icon {
         fill: @clanchor__hover;
+      }
+    }
+  }
+
+  .with-background-video {
+    background-size: cover;
+    background-position: center center;
+
+    background-color: @claltmain;
+    color: @clmain;
+    text-shadow: 0 0 0.25em fade(@claltmain, 90%);
+    a {
+      .link-color(@clmain, @clactive__alt);
+    }
+
+    &.with-overlay {
+      position: relative;
+      z-index: 0;
+
+      // @TODO: Make the image darker in image styles.
+      &::before {
+        .transition(background-color, 400ms, ease-in);
+        content: ' ';
+        background-color: fade(@claltmain, 60%);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+      }
+    }
+
+    .video-wrapper {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+      }
+    }
+
+    .overlay-wrapper {
+      position: absolute;
+      z-index: 20;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.height-overlay {
+      .overlay-wrapper {
+        position: relative;
+        transform: none;
+        top: auto;
+        left: auto;
+      }
+      .video-wrapper {
+        position: absolute;
+        video {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+      &.overlay-padding-2 {
+        .overlay-wrapper {
+          padding: 2em 0;
+        }
+      }
+      &.overlay-padding-4 {
+        .overlay-wrapper {
+          padding: 4em 0;
+        }
+      }
+      &.overlay-padding-6 {
+        .overlay-wrapper {
+          padding: 6em 0;
+        }
+      }
+      &.overlay-padding-8 {
+        .overlay-wrapper {
+          padding: 8em 0;
+        }
+      }
+      &.overlay-padding-10 {
+        .overlay-wrapper {
+          padding: 10em 0;
+        }
+      }
+    }
+
+    .media-controllers {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      z-index: 100;
+      .controller {
+        margin: 0.5em;
+        text-align: center;
+        display: none;
+        svg {
+          display: inline-block;
+          cursor: pointer;
+          fill: @clmain;
+        }
+        &.icon--media-play {
+          display: block;
+        }
+        &.icon--media-unmute {
+          display: block;
+        }
+      }
+
+      &.playing {
+        .icon--media-play {
+          display: none;
+        }
+        .icon--media-pause {
+          display: block;
+        }
+      }
+      &.muted {
+        .icon--media-mute {
+          display: block;
+        }
+        .icon--media-unmute {
+          display: none;
+        }
       }
     }
   }

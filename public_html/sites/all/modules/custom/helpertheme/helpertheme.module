@@ -763,8 +763,14 @@ function helpertheme_site_map() {
 
 /**
  * @param array $elements
+ *  The render array of the whole content block.
+ *
  * @param array $image_data
+ *  The image value of the field.
+ *
  * @param string $selector_prefix
+ *  Assembled selector prefix for the field.
+ *
  * @param bool $with_overlay
  */
 function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix, $with_overlay = TRUE) {
@@ -799,26 +805,182 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
     $elements['#attributes']['class'][] = 'with-overlay';
   }
 
-  // Prepare inline style for: 'Smartphone' and 'Tablet'
-  // @see: .xMediumAndDown() in custom-responsive.less
-  $style_name = 'bg-normal';
-  $featured_image_path = image_style_url($style_name, $image_data['uri']);
-  $background_image = 'background-image: url("' . $featured_image_path . '");';
-  $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
+  // Check if we need to generate styles at all.
+  if ($image_data['filemime'] == 'image/gif') {
+    $original_image_path = file_create_url($image_data['uri']);
+    $background_image = 'background-image: url("' . $original_image_path . '");';
+    $opacity = !empty($elements['overlay']['#opacity']) ? 'opacity:' . ($elements['overlay']['#opacity'] / 100) . " !important;\n" : '';
+    $background_color = !empty($elements['overlay']['#background-color']) ? 'background-color: #' . $elements['overlay']['#background-color'] . " !important;\n" : '';
 
-  // Prepare inline style for: 'Normal Desktop' and 'Large Desktop'.
-  // @see: .xNormalAndUp() in custom-responsive.less
-  $style_name = 'bg-large';
-  if (isset($image_data['width']) && (int) $image_data['width'] < 1920) {
-    $style_name = 'bg-enlarged';
+    $all_styles = ".${selector} { ${background_image} }\n";
+
+    // Let's override the ::before overlay if any of those is present.
+    if (!empty($opacity) || !empty($background_color)) {
+      $all_styles .= ".${selector}:before { ${opacity} ${background_color} }";
+    }
   }
-  $featured_image_path = image_style_url($style_name, $image_data['uri']);
-  $background_image = 'background-image: url("' . $featured_image_path . '");';
-  $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} }}\n";
+  else {
+    // Prepare inline style for: 'Smartphone' and 'Tablet'
+    // @see: .xMediumAndDown() in custom-responsive.less
+    $opacity = !empty($elements['overlay']['#opacity']) ? 'opacity:' . ($elements['overlay']['#opacity'] / 100) . " !important;\n" : '';
+    $background_color = !empty($elements['overlay']['#background-color']) ? 'background-color: #' . $elements['overlay']['#background-color'] . " !important;\n" : '';
 
+    // Let's override the ::before overlay if any of those is present.
+    if (!empty($opacity) || !empty($background_color)) {
+      $extra_styles = ".${selector}:before { ${opacity} ${background_color} }";
+    }
+    else {
+      $extra_styles = '';
+    }
+
+    $style_name = 'bg-normal';
+    $featured_image_path = image_style_url($style_name, $image_data['uri']);
+    $background_image = 'background-image: url("' . $featured_image_path . '");';
+    $inline_style_xMediumAndDown = "@media (max-width: $breakpoint_medium) { .${selector} { ${background_image} } ${extra_styles} }\n";
+
+    // Prepare inline style for: 'Normal Desktop' and 'Large Desktop'.
+    // @see: .xNormalAndUp() in custom-responsive.less
+    $style_name = 'bg-large';
+    if (isset($image_data['width']) && (int) $image_data['width'] < 1920) {
+      $style_name = 'bg-enlarged';
+    }
+    $featured_image_path = image_style_url($style_name, $image_data['uri']);
+    $background_image = 'background-image: url("' . $featured_image_path . '");';
+    $inline_style_xNormalAndUp = "@media (min-width: $breakpoint_medium) { .${selector} { ${background_image} } ${extra_styles} }\n";
+    $all_styles = $inline_style_xMediumAndDown . $inline_style_xNormalAndUp;
+  }
   $elements['style'] = array(
     '#type' => 'html_tag',
     '#tag' => 'style',
-    '#value' => $inline_style_xMediumAndDown . $inline_style_xNormalAndUp,
+    '#value' => $all_styles,
   );
+}
+
+/**
+ * @param array $elements
+ *  The render array of the whole content block.
+ *
+ * @param array $video_data
+ *  The video value of the field.
+ *
+ * @param string $selector_prefix
+ *  Assembled selector prefix for the field.
+ *
+ * @param bool $with_overlay
+ */
+function helpertheme_get_background_video_with_overlay(&$elements, $video_data, $video_settings, $with_overlay = TRUE) {
+  global $theme, $theme_info;
+  if ($theme != 'eiti') {
+    return;
+  }
+
+  // Create the overlay
+  if (!isset($elements['overlay']['#type'])) {
+    $elements['overlay']['#type'] = 'container';
+    $elements['overlay']['#weight'] = 10;
+  }
+  if (!isset($elements['overlay']['#attributes']['class']) || !in_array('overlay-wrapper', $elements['overlay']['#attributes']['class'])) {
+    $elements['overlay']['#attributes']['class'][] = 'overlay-wrapper';
+  }
+
+  // Prepare Markup.
+  $elements['#attributes']['class'][] = 'with-background-video';
+
+  $with_overlay = ($video_settings['disable_overlay'] == TRUE) ? FALSE : $with_overlay;
+  if ($with_overlay) {
+    $elements['#attributes']['class'][] = 'with-overlay';
+  }
+  // Lets add our element.
+  if (!empty($video_settings['video_height'])) {
+    if (in_array($video_settings['video_height'], array('overlay_padding_2', 'overlay_padding_4', 'overlay_padding_6'))) {
+      $elements['#attributes']['class'][] = 'height-overlay';
+      $elements['#attributes']['class'][] = drupal_html_class($video_settings['video_height']);
+    }
+    else {
+      $elements['#attributes']['class'][] = drupal_html_class('height-' . $video_settings['video_height']);
+    }
+  }
+
+  $source_tags = array();
+  foreach ($video_data as $delta => $video_file) {
+    $source_tags[] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'source',
+      '#attributes' => array(
+        'src' => file_create_url($video_file['uri']),
+        'type' => $video_file['filemime'],
+      ),
+    );
+  }
+
+  // Let's add controllers.
+  $video_hide_controllers = isset($video_settings['video_hide_controllers']) ? $video_settings['video_hide_controllers'] : TRUE;
+  if (!$video_hide_controllers) {
+    $media_buttons = array(
+      'media_play' => '4em',
+      'media_pause' => '4em',
+      'media_mute' => '2em',
+      'media_unmute' => '2em',
+    );
+    $elements['controllers'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array(
+          'media-controllers',
+        )
+      ),
+      '#weight' => 100,
+    );
+    foreach ($media_buttons as $button => $size) {
+      $svgicon = helpertheme_get_svg_icon($button, array('width' => $size, 'height' => $size));
+      $icon_classes = implode(' ', array(
+        'controller',
+        drupal_html_class('icon--' . $button),
+      ));
+      $elements['controllers'][$button] = array(
+        '#markup' => '<div class="' . $icon_classes . '">' . $svgicon . '</div>',
+      );
+    }
+  }
+  // Make sure it's rendered before the overlay.
+  $elements['video_background_wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array('video-wrapper'),
+    ),
+    '#weight' => 5,
+  );
+  $elements['video_background_wrapper']['video_background'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'video',
+    '#attributes' => array(
+      'loop' => TRUE,
+      'autoplay' => TRUE,
+      'muted' => TRUE,
+      'class' => array('background-video')
+    ),
+    '#value' => drupal_render($source_tags),
+  );
+
+  if (isset($video_settings['video_loop']) && $video_settings['video_loop'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['loop']);
+  }
+
+  if (isset($video_settings['video_muted']) && $video_settings['video_muted'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['muted']);
+  }
+  else {
+    if (!$video_hide_controllers) {
+      $elements['controllers']['#attributes']['class'][] = 'muted';
+    }
+  }
+
+  if (isset($video_settings['video_autoplay']) && $video_settings['video_autoplay'] == FALSE) {
+    unset($elements['video_background_wrapper']['video_background']['#attributes']['autoplay']);
+  }
+  else {
+    if (!$video_hide_controllers) {
+      $elements['controllers']['#attributes']['class'][] = 'playing';
+    }
+  }
 }

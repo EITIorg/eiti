@@ -12,9 +12,20 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
     'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form',
     'fieldable_panels_panes_entity_edit_form'
   );
+
   if (in_array($form_id, $fpp_forms)) {
-    // Alter our form.
+    // Make global-wise FPP form alteration.
     eitiwidgets_fpp_form_alter($form, $form_state);
+
+    // OK, now we have cases when we want to make custom alters PER fpp bundle.
+    // Basically we define a dynamic hook: hook_fpp__BUNDLE__form_alter().
+    if (!empty($form_state['entity']->bundle)) {
+      $hook_form_alter = 'fpp__' . $form_state['entity']->bundle . '__form_alter';
+      foreach (module_implements($hook_form_alter) as $module) {
+        $function = $module . '_' . $hook_form_alter;
+        $function($form, $form_state);
+      }
+    }
 
     // Append our custom validation.
     $form['#validate'][] = 'eitiwidgets_fpp_form_validation';
@@ -76,6 +87,7 @@ function eitiwidgets_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * A place where we alter our FPP forms.
+ * This is done to all FPP forms, if you want to alter a custom one, use __eitiwidgets_fpp__BUNDLE_form_alter
  *
  * @param array $form
  * @param array $form_state
@@ -150,6 +162,39 @@ function eitiwidgets_fpp_form_alter(&$form, &$form_state) {
   if (isset($form_state['required_ctools_contexts_available']) && !$form_state['required_ctools_contexts_available']) {
     $form['actions']['submit']['#disabled'] = TRUE;
     form_set_error('field_fpp_widget', '<strong>' . t('Please configure this pane inside of the "Customize display > Content" page.') . '</strong>');
+  }
+}
+
+/**
+ * Implements hook_fpp__BUNDLE__form_alter().
+ *
+ * Alters a custom case of FPP (by bundle).
+ */
+function eitiwidgets_fpp__header__form_alter(&$form, &$form_state) {
+  // First thing's first. LANGUAGE.
+  $entity = $form_state['entity'];
+  $langcode = $entity->language;
+  $field_fpp_header_type_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_header_type', $langcode);
+
+  // Bring in the STATES api.
+  $form['field_fpp_background_image']['#states'] = array(
+    'visible' => array(
+      array(
+        'input[name="field_fpp_header_type[' . $field_fpp_header_type_language . ']"]' => array('value' => 'image'),
+      )
+    )
+  );
+  $form['field_fpp_background_video']['#states'] = array(
+    'visible' => array(
+      array(
+        'input[name="field_fpp_header_type[' . $field_fpp_header_type_language . ']"]' => array('value' => 'video'),
+      )
+    )
+  );
+
+  // For all the pre-video headers, let's consider them Image Headers.
+  if (empty($form['field_fpp_header_type'][$field_fpp_header_type_language]['#default_value']) && !empty($entity->field_fpp_background_image)) {
+    $form['field_fpp_header_type'][$field_fpp_header_type_language]['#default_value'] = 'image';
   }
 }
 
@@ -340,6 +385,24 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
     }
   }
 }
+
+/**
+ * Implements hook_ds_pre_render_alter().
+ */
+function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars) {
+  if (!empty($context['entity']) && $context['entity_type'] == 'fieldable_panels_pane') {
+    $entity = $context['entity'];
+
+    // Only text bundles (for now) support field_fpp_layout - which allows them to override the layout.
+    if ($entity->bundle == 'text') {
+      $emw = entity_metadata_wrapper('fieldable_panels_pane', $entity);
+      if ($emw->field_fpp_layout->value() == 'narrow') {
+        $vars['main_classes'] = 'single-narrow-row-wrapper';
+      }
+    }
+  }
+}
+
 
 /**
  * Prepares the content for the quote widget DS preprocessed field.
