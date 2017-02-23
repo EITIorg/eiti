@@ -1923,7 +1923,7 @@ function eitiwidgets_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1958,6 +1958,43 @@ function eitiwidgets_field_default_field_instances() {
       'settings' => array(),
       'type' => 'helperfield_radio_selector',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_layout'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_layout'] = array(
+    'bundle' => 'text',
+    'default_value' => array(
+      0 => array(
+        'value' => 'default',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Please specify which layout would you like to use.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_layout',
+    'label' => 'Layout',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
     ),
   );
 
@@ -2344,6 +2381,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
+  t('Layout');
   t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');
@@ -2351,6 +2389,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Please specify the list of bookmarks you want to use. Each position corresponds to the positions specified in the preview.');
   t('Please specify the quote (<em>don\'t use the quotation marks, we\'ll do that for you.</em>).');
   t('Please specify the source of this data (a link to a page or a file).');
+  t('Please specify which layout would you like to use.');
   t('Publication List');
   t('Quote');
   t('Source');
