@@ -387,6 +387,24 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_ds_pre_render_alter().
+ */
+function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars) {
+  if (!empty($context['entity']) && $context['entity_type'] == 'fieldable_panels_pane') {
+    $entity = $context['entity'];
+
+    // Only text bundles (for now) support field_fpp_layout - which allows them to override the layout.
+    if ($entity->bundle == 'text') {
+      $emw = entity_metadata_wrapper('fieldable_panels_pane', $entity);
+      if ($emw->field_fpp_layout->value() == 'narrow') {
+        $vars['main_classes'] = 'single-narrow-row-wrapper';
+      }
+    }
+  }
+}
+
+
+/**
  * Prepares the content for the quote widget DS preprocessed field.
  */
 function eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langcode) {

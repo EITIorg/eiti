@@ -254,6 +254,32 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'helperfield_icon',
   );
 
+  // Exported field_base: 'field_fpp_layout'.
+  $field_bases['field_fpp_layout'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_layout',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'default' => 'Default',
+        'narrow' => 'Narrow',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_fpp_person_list'.
   $field_bases['field_fpp_person_list'] = array(
     'active' => 1,
