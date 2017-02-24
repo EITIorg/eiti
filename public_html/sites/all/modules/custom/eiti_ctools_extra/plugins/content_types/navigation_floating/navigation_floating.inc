@@ -141,7 +141,7 @@ function eiti_ctools_extra__navigation_floating__edit_form($form, &$form_state) 
       drupal_set_message(t('Please make sure you have saved the page widgets and the page itself, <strong>before</strong> adding the Floating Navigation.'), 'warning');
       continue;
     }
-    elseif ($pane->type == 'navigation_floating' || $pane->type == 'minimalistic-header') {
+    elseif ($pane->type == 'navigation_floating' || $pane->type == 'minimalistic-header' || $pane->type == 'minimalistic-footer') {
       continue;
     }
     if ($pane->type == 'fieldable_panels_pane') {

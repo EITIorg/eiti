@@ -20,8 +20,6 @@ $plugin = array(
  * Output function for the 'Minimalistic Footer' content type.
  */
 function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_args, $context) {
-  global $language;
-
   $block['wrapper'] = array(
     '#type' => 'container',
     '#attributes' => array(
