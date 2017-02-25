@@ -69,6 +69,6 @@
   </section>
 </div>
 
-<?php if (arg(0) != 'admin' && !$content_only): ?>
+<?php if (arg(0) != 'admin'): ?>
   <div class="main-footer-wrapper"><?php print theme('main_footer'); ?></div>
 <?php endif; ?>

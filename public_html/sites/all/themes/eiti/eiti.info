@@ -32,7 +32,7 @@ stylesheets[all][] = styles/content.css.less
 
 stylesheets[all][] = styles/other/country_header.css.less
 stylesheets[all][] = styles/other/navigation_floating.css.less
-stylesheets[all][] = styles/other/minimalistic_header.css.less
+stylesheets[all][] = styles/other/minimalistic_header_footer.css.less
 stylesheets[all][] = styles/other/quick_summary_tool.css.less
 stylesheets[all][] = styles/other/timeline.css.less
 
