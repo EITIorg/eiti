@@ -199,6 +199,17 @@ function eitiwidgets_fpp__header__form_alter(&$form, &$form_state) {
 }
 
 /**
+ * Implements hook_fpp__BUNDLE__form_alter().
+ *
+ * Alters a custom case of FPP (by bundle).
+ */
+function eitiwidgets_fpp__teaser__form_alter(&$form, &$form_state) {
+  if (!empty($form['title'])) {
+    $form['title']['#maxlength'] = 255;
+  }
+}
+
+/**
  * Submit handler that saves addition proprieties for FPP.
  *
  * @param array $form
