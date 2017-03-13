@@ -29,8 +29,8 @@ function eitiet_implementing_country_strongarm() {
   $strongarm->name = 'entity_translation_settings_taxonomy_term__country_status';
   $strongarm->value = array(
     'default_language' => 'xx-et-default',
-    'hide_language_selector' => 1,
-    'exclude_language_none' => 1,
+    'hide_language_selector' => 0,
+    'exclude_language_none' => 0,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
