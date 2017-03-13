@@ -24836,12 +24836,12 @@
 	}, {
 	  "id": 5327,
 	  "color": "#FAC433",
-	  "title": "Inadequate progress",
+	  "title": "Inadequate progress (suspended)",
 	  "subtitle": ""
 	}, {
 	  "id": 5328,
 	  "color": "#C00000",
-	  "title": "No progress<br/>",
+	  "title": "No progress (delisted)<br/>",
 	  "subtitle": ""
 	}, {
 	  "id": 5329,
