@@ -238,6 +238,10 @@ TABLE.country_scorecard {
   background-color: #C00000;
 }
 
+.country_scorecard .no, .scorecard-legend .no {
+  background-color: #C00000;
+}
+
 .country_scorecard .inadequate, .scorecard-legend .inadequate {
   background-color: #FAC433;
 }
