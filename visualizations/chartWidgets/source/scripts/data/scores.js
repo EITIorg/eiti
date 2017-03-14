@@ -1,6 +1,6 @@
 export var scores = [{
 		"id": 0,
-		"name": "No"
+		"name": "No Progress"
 	}, {
 		"id": 1,
 		"name": "Inadequate"
