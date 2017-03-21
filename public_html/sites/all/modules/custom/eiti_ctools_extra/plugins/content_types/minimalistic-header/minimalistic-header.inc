@@ -13,6 +13,8 @@ $plugin = array(
   'edit form' => 'eiti_ctools_extra__minimalistic_header__settings_form',
   'defaults' => array(
     'title' => '',
+    'hex_background' => 'f0f0f0',
+    'close_time' => '200',
     'include_language_switcher' => TRUE,
   ),
 );
@@ -42,6 +44,7 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
       ),
     ),
   );
+
   if (file_exists($file_path)) {
     $logo_markup['png'] = array(
       '#theme' => 'image',
@@ -86,6 +89,13 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
       ),
     )
   );
+
+  // Insert inline background color.
+  if (!empty($conf['hex_background'])) {
+    $inline_style = 'background-color: #' . $conf['hex_background'];
+    $block['wrapper']['#attributes']['style'] = $inline_style;
+  }
+
   $block['wrapper']['logo'] = $logo_markup;
 
   // Add the optional title.
@@ -104,6 +114,7 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
 
   $menu_items = array(
     '#type' => 'container',
+    '#weight' => '1',
     '#attributes' => array(
       'class' => array(
         'header-items',
@@ -164,6 +175,16 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
           ),
         ),
       );
+
+      $block['wrapper']['menu_items']['toggle_btn']['#markup'] = l('Close', '', array(
+        'fragment' => 'close',
+        'attributes' => array(
+          'class' => array('close-action'),
+          'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
+        ),
+        'external' => TRUE,
+      ));
+      $block['wrapper']['menu_items']['toggle_btn']['#weight'] = '2';
     }
   }
 
@@ -196,6 +217,24 @@ function eiti_ctools_extra__minimalistic_header__settings_form($form, &$form_sta
     '#type' => 'textfield',
     '#description' => t('Leave <strong>empty</strong> if you wish no title / description of the page.<br />Note: Make sure to place this widget on the top of the page.'),
     '#default_value' => $conf['title'],
+  );
+
+  $form['hex_background'] = array(
+    '#title' => t('Background Color'),
+    '#type' => 'textfield',
+    '#description' => t('Please specify the background color.'),
+    '#field_prefix' => '#',
+    '#size' => 6,
+    '#default_value' => $conf['hex_background'],
+  );
+
+  $form['close_time'] = array(
+    '#title' => t('Closing Milliseconds'),
+    '#type' => 'textfield',
+    '#description' => t('Please how many milliseconds should the close action take place? Note: "0" indicates that it should be instant.'),
+    '#field_suffix' => t(' Milliseconds'),
+    '#size' => 6,
+    '#default_value' => $conf['close_time'],
   );
 
   $form['include_language_switcher'] = array(

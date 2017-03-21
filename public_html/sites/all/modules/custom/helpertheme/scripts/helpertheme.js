@@ -101,6 +101,21 @@
     }
   };
 
+
+  Drupal.behaviors.toggleMinimalisticWidgets = {
+    attach: function(context) {
+      $('.close-action', context).click(function (e) {
+          var minimalistic_items = $(this).closest('.pane-minimalistic-header');
+          if (!minimalistic_items.size) {
+              return true;
+          }
+          e.preventDefault();
+          var animation_time = $(this).data('animation-time');
+          minimalistic_items.slideUp(animation_time);
+      });
+    }
+  };
+
   Drupal.behaviors.headerVideoMedia = {
     attach: function(context) {
       var $media = $('.media-controllers', context);
