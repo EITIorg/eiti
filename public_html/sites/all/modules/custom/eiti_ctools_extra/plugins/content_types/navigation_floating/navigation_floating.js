@@ -27,7 +27,7 @@
         $pane.data('pane_id', paneId);
 
         // Let's initially see if the widget should be excluded.
-        if (paneSettings.exclude)
+        if (paneSettings.exclude || $pane.length === 0)
           continue;
 
         // Yes, not all widgets have titles, but all might have overridden floating menu title.
