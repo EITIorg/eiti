@@ -24522,7 +24522,7 @@
 	  "name": "status",
 	  "description": "Implementation status",
 	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br/><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
-	  "footer": "For an overview of the former status of countries under the EITI rules, click <a href=\"/countries-archive\">here</a>"
+	  "footer": "For an overview of the former status of countries under the EITI rules, click <a href=\"/countries-archive\">here</a><br/>For a list of former members or countries who are preparing to join, click <a href=\"/countries/other\">here.</a><br/><br/>"
 	}, {
 	  "id": 2,
 	  "name": "online_oil_registry",
@@ -24830,7 +24830,7 @@
 	var status = exports.status = [{
 	  "id": 5329,
 	  "color": "#6CBCE3",
-	  "title": "Yet to be assessed against the 2016 Standard",
+	  "title": "Yet to be assessed against the 2016 Standard <br/>",
 	  "subtitle": ""
 	}, {
 	  "id": 75,
@@ -24845,7 +24845,7 @@
 	}, {
 	  "id": 5327,
 	  "color": "#FAC433",
-	  "title": "Inadequate progress / suspended",
+	  "title": "Inadequate progress / suspended <br/>",
 	  "subtitle": ""
 	}];
 
