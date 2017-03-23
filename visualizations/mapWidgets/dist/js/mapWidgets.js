@@ -24230,10 +24230,14 @@
 	      if (this.props.selector) {
 	        var items = [];
 	        var cols = [];
-	        var sortedCountries = _underscore2.default.sortBy(this.state.data, 'label');
+	        var countries = _underscore2.default.sortBy(this.state.data, 'label');
+	        var sortedCountries = countries.filter(function (k, v) {
+	          return k.status.name !== "Other";
+	        });
 	        var cutout = Math.ceil(sortedCountries.length / 4);
 	        for (var i = 0; i < sortedCountries.length; i++) {
-	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/ /g, "_") : "member-status other";
+	          var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/\/| /g, "_") : "member-status other";
+	          if (sortedCountries[i].status.name === "Other") continue;
 	          var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 	
 	          var years = Object.keys(sortedCountries[i].metadata);
@@ -24824,6 +24828,11 @@
 	  value: true
 	});
 	var status = exports.status = [{
+	  "id": 5329,
+	  "color": "#6CBCE3",
+	  "title": "Yet to be assessed against the 2016 Standard",
+	  "subtitle": ""
+	}, {
 	  "id": 75,
 	  "color": "#2D8B2A",
 	  "title": "Satisfactory progress",
@@ -24836,27 +24845,7 @@
 	}, {
 	  "id": 5327,
 	  "color": "#FAC433",
-	  "title": "Inadequate progress (suspended)",
-	  "subtitle": ""
-	}, {
-	  "id": 5328,
-	  "color": "#C00000",
-	  "title": "No progress (delisted)<br/>",
-	  "subtitle": ""
-	}, {
-	  "id": 5329,
-	  "color": "#6CBCE3",
-	  "title": "Yet to be assessed against the 2016 Standard<br/>",
-	  "subtitle": ""
-	}, {
-	  "id": 76,
-	  "color": "#FF6600",
-	  "title": "Suspended",
-	  "subtitle": ""
-	}, {
-	  "id": 77,
-	  "color": "#808080",
-	  "title": "Other",
+	  "title": "Inadequate progress / suspended",
 	  "subtitle": ""
 	}];
 
