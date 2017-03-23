@@ -14,6 +14,7 @@ $plugin = array(
   'defaults' => array(
     'title' => '',
     'hex_background' => 'f0f0f0',
+    'close' => FALSE,
     'close_time' => '200',
     'include_language_switcher' => TRUE,
   ),
@@ -176,15 +177,18 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
         ),
       );
 
-      $block['wrapper']['menu_items']['toggle_btn']['#markup'] = l('Close', '', array(
-        'fragment' => 'close',
-        'attributes' => array(
-          'class' => array('close-action'),
-          'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
-        ),
-        'external' => TRUE,
-      ));
-      $block['wrapper']['menu_items']['toggle_btn']['#weight'] = '2';
+      // Make the button optional.
+      if (!empty($conf['close']) && $conf['close'] == TRUE) {
+        $block['wrapper']['menu_items']['toggle_btn']['#markup'] = l('Close', '', array(
+          'fragment' => 'close',
+          'attributes' => array(
+            'class' => array('header-close-action'),
+            'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
+          ),
+          'external' => TRUE,
+        ));
+        $block['wrapper']['menu_items']['toggle_btn']['#weight'] = '2';
+      }
     }
   }
 
@@ -228,13 +232,25 @@ function eiti_ctools_extra__minimalistic_header__settings_form($form, &$form_sta
     '#default_value' => $conf['hex_background'],
   );
 
+  $form['close'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show the "Close" button'),
+    '#description' => t('If you want to enable the close button, please check this box.'),
+    '#default_value' => $conf['close'],
+  );
+
   $form['close_time'] = array(
     '#title' => t('Closing Milliseconds'),
     '#type' => 'textfield',
-    '#description' => t('Please how many milliseconds should the close action take place? Note: "0" indicates that it should be instant.'),
+    '#description' => t('Please specify how many milliseconds should the close action take place? Note: "0" indicates that it should be instant.'),
     '#field_suffix' => t(' Milliseconds'),
     '#size' => 6,
     '#default_value' => $conf['close_time'],
+    '#states' => array(
+      'visible' => array(
+        'input[name="close"]' => array('checked' => TRUE),
+      ),
+    ),
   );
 
   $form['include_language_switcher'] = array(
