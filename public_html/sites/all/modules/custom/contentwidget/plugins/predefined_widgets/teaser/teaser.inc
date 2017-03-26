@@ -79,7 +79,7 @@ function contentwidget__teaser__render($plugin, $widget_settings, $entity, $lang
     $block['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
 
-  $title = $entity_emw->language($langcode)->title->value();
+  $title = $entity_emw->language($langcode)->title_field->value();
   $description = $entity_emw->language($langcode)->field_fpp_body->value();
 
   // Only if it's set, we want to show the tag.
