@@ -120,6 +120,11 @@ function eiti_ctools_extra__navigation_floating__render($subtype, $conf, $panel_
 
   // Send settings via JS.
   $widget_js_settings = $conf;
+  foreach ($widget_js_settings['pane_properties'] as $pid => $pane_settings) {
+    if (!empty($pane_settings['override'])) {
+      $widget_js_settings['pane_properties'][$pid]['override'] = t($pane_settings['override']);
+    }
+  }
   drupal_add_js(array('eitiNavigationFloating' => $widget_js_settings), 'setting');
   $block->content = $content;
 
