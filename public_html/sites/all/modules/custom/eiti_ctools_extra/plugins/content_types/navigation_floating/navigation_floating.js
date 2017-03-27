@@ -93,7 +93,8 @@
             $deepList.appendTo($lastLiElement);
           }
           else {
-            // Do nothing.
+            // Append to the last deep list.
+            $liElement.appendTo($lastDeepList);
           }
         }
 
