@@ -104,7 +104,7 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
     $block['wrapper']['title'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h1',
-      '#value' => $conf['title'],
+      '#value' => t($conf['title']),
       '#attributes' => array(
         'class' => array(
           'minimalistic-page-title',

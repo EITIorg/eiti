@@ -51,7 +51,7 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
       ),
     ),
   );
-  $block['wrapper']['content']['description']['content']['#markup'] = check_markup($conf['description']['value'], $conf['description']['format']);
+  $block['wrapper']['content']['description']['content']['#markup'] = check_markup(t($conf['description']['value']), $conf['description']['format']);
 
   // References.
   $block['wrapper']['content']['references'] = array(
@@ -62,7 +62,7 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
       ),
     ),
   );
-  $block['wrapper']['content']['references']['content']['#markup'] = check_markup($conf['references']['value'], $conf['references']['format']);
+  $block['wrapper']['content']['references']['content']['#markup'] = check_markup(t($conf['references']['value']), $conf['references']['format']);
 
   // Make the button optional.
   if (!empty($conf['close']) && $conf['close'] == TRUE) {
