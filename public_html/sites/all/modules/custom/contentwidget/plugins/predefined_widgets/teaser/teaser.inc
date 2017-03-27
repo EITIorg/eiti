@@ -22,6 +22,8 @@ $plugin = array(
  */
 function contentwidget__teaser__render($plugin, $widget_settings, $entity, $langcode) {
   $display_settings = (!empty($widget_settings['display_settings'])) ? $widget_settings['display_settings'] : FALSE;
+
+  /** @var \EntityMetadataWrapper $entity_emw */
   $entity_emw = entity_metadata_wrapper('fieldable_panels_pane', $entity);
 
   // And now prepare the list of links.
@@ -77,8 +79,8 @@ function contentwidget__teaser__render($plugin, $widget_settings, $entity, $lang
     $block['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
 
-  $title = $entity_emw->title->value();
-  $description = $entity_emw->field_fpp_body->value();
+  $title = $entity_emw->language($langcode)->title_field->value();
+  $description = $entity_emw->language($langcode)->field_fpp_body->value();
 
   // Only if it's set, we want to show the tag.
   if (!empty($title)) {

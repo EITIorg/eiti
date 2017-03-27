@@ -197,7 +197,7 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     $widget_settings['facts_display_settings']['title_inside'] == TRUE) {
     $block['overlay']['title_inside'] = array(
       '#type' => 'markup',
-      '#markup' => '<h2>' . $entity_emw->title_field->value() . '</h2>',
+      '#markup' => '<h2>' . $entity_emw->language($langcode)->title_field->value() . '</h2>',
     );
   }
   $block['overlay']['links'] = array(
