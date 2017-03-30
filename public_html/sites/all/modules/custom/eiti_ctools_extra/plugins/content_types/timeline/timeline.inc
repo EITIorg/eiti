@@ -24,6 +24,7 @@ $plugin = array(
   'single' => TRUE,
   'defaults' => array(
     'source' => '',
+    'i18n' => FALSE,
     'height' => 650,
     'width' => 100,
     'start_slide' => 0,
@@ -39,7 +40,16 @@ $plugin = array(
  * Output function for the 'Mailchimp Archive' content type.
  */
 function eiti_ctools_extra__timeline__render($subtype, $conf, $panel_args, $context) {
+  global $language;
   $block = new stdClass();
+
+  // If we have i18n checkbox checked, let's figure out the 'real' source.
+  if ($conf['i18n'] == TRUE && !empty($conf['spreadsheet_' . $language->language])) {
+    $source_raw = $conf['spreadsheet_' . $language->language];
+  }
+  else {
+    $source_raw = !empty($conf['source']) ? $conf['source'] : '';
+  }
 
   // Now build the content.
   $content = array(
@@ -57,7 +67,7 @@ function eiti_ctools_extra__timeline__render($subtype, $conf, $panel_args, $cont
 
   $timeline_path_root = 'https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html';
   $timeline_path_params = array();
-  $source_raw = !empty($conf['source']) ? $conf['source'] : '';
+
   $source = _eiti_ctools_extra_get_google_spreadsheet_id($source_raw);
   if (empty($source)) {
     drupal_set_message(t('Please make sure you have a correct Source spreadsheet specified for the timeline widget.'), 'warning');
@@ -130,6 +140,30 @@ function eiti_ctools_extra__timeline__edit_form($form, &$form_state) {
     )),
     '#default_value' => $conf['source'],
   );
+
+  $form['i18n'] = array(
+    '#title' => t('Multilingual'),
+    '#type' => 'checkbox',
+    '#description' => t('If you want to specify a different URL for a different language, please check this box.<br/>Note: The initial URL is used when the language has no value specified.'),
+    '#default_value' => $conf['i18n'],
+  );
+
+  $languages = language_list();
+  foreach ($languages as $language) {
+    $form['spreadsheet_' . $language->language] = array(
+      '#title' => t('Spreadsheet (!language)', array('!language' => $language->name)),
+      '#type' => 'textfield',
+      '#description' => t('Specify the URL in !language. If it\'s blank, we will use the default value.', array(
+        '!language' => $language->name,
+      )),
+      '#default_value' => $conf['spreadsheet_' . $language->language],
+      '#states' => array(
+        'visible' => array(
+          'input[name="i18n"]' => array('checked' => TRUE),
+        ),
+      )
+    );
+  }
 
   $form['height'] = array(
     '#type' => 'textfield',
