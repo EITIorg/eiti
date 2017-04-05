@@ -1856,13 +1856,7 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
                 $placeholders[] = $placeholder;
               }
             }
-            // HACK: Fix currency.module on PostgreSQL.
-            // @see: https://www.drupal.org/node/2007388
-            $escaped_field = $connection->escapeField($condition['field']);
-            if (in_array($escaped_field, array('ISO4217Code', 'ISO4217Number'))) {
-              $escaped_field = '"'. $escaped_field . '"';
-            }
-            $condition_fragments[] = ' (' . $escaped_field . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
+            $condition_fragments[] = ' (' . $connection->escapeField($condition['field']) . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
           }
         }
       }
