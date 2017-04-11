@@ -3,7 +3,7 @@
 {
 "id": 1,
 "label": "Albania",
-"self": "https://eiti.org/api/v1.0/implementing_country/1",
+"self": "http://eiti.local/api/v1.0/implementing_country/1",
 "iso2": "AL",
 "iso3": "ALB",
 "status": {
@@ -895,7 +895,7 @@
 {
 "id": 2,
 "label": "Philippines",
-"self": "https://eiti.org/api/v1.0/implementing_country/2",
+"self": "http://eiti.local/api/v1.0/implementing_country/2",
 "iso2": "PH",
 "iso3": "PHL",
 "status": {
@@ -1235,7 +1235,7 @@
 {
 "id": 4,
 "label": "Ghana",
-"self": "https://eiti.org/api/v1.0/implementing_country/4",
+"self": "http://eiti.local/api/v1.0/implementing_country/4",
 "iso2": "GH",
 "iso3": "GHA",
 "status": {
@@ -1992,7 +1992,7 @@
 {
 "id": 5,
 "label": "Democratic Republic of Congo",
-"self": "https://eiti.org/api/v1.0/implementing_country/5",
+"self": "http://eiti.local/api/v1.0/implementing_country/5",
 "iso2": "CD",
 "iso3": "COD",
 "status": {
@@ -2674,7 +2674,7 @@
 {
 "id": 6,
 "label": "Peru",
-"self": "https://eiti.org/api/v1.0/implementing_country/6",
+"self": "http://eiti.local/api/v1.0/implementing_country/6",
 "iso2": "PE",
 "iso3": "PER",
 "status": {
@@ -2721,6 +2721,16 @@
 ],
 "2009": [
 {
+"commodity": "Government revenue - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "6",
+"value": "3402000000",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Contextual Information"
+},
+{
 "commodity": "Oil, volume",
 "parent": "Production volume and value (3.5.a)",
 "id": "6",
@@ -2739,16 +2749,6 @@
 "value_text": null,
 "unit": "Sm3",
 "source": "http://www.perupetro.com.pe/wps/wcm/connect/perupetro/site-en/ImportantInformation/Statistics/Hydrocarbon%20Production/Cont_GasProduction"
-},
-{
-"commodity": "Government revenue - extractive industries",
-"parent": "Contribution of extractive industries to economy (3.4)",
-"id": "6",
-"value": "3402000000",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Contextual Information"
 }
 ],
 "2010": [
@@ -3591,7 +3591,7 @@
 {
 "id": 7,
 "label": "Mongolia",
-"self": "https://eiti.org/api/v1.0/implementing_country/7",
+"self": "http://eiti.local/api/v1.0/implementing_country/7",
 "iso2": "MN",
 "iso3": "MNG",
 "status": {
@@ -4657,7 +4657,7 @@
 {
 "id": 11,
 "label": "Sierra Leone",
-"self": "https://eiti.org/api/v1.0/implementing_country/11",
+"self": "http://eiti.local/api/v1.0/implementing_country/11",
 "iso2": "SL",
 "iso3": "SLE",
 "status": {
@@ -4989,7 +4989,7 @@
 {
 "id": 12,
 "label": "Guinea",
-"self": "https://eiti.org/api/v1.0/implementing_country/12",
+"self": "http://eiti.local/api/v1.0/implementing_country/12",
 "iso2": "GN",
 "iso3": "GIN",
 "status": {
@@ -5370,7 +5370,7 @@
 {
 "id": 13,
 "label": "Guatemala",
-"self": "https://eiti.org/api/v1.0/implementing_country/13",
+"self": "http://eiti.local/api/v1.0/implementing_country/13",
 "iso2": "GT",
 "iso3": "GTM",
 "status": {
@@ -5778,7 +5778,7 @@
 {
 "id": 14,
 "label": "Germany ",
-"self": "https://eiti.org/api/v1.0/implementing_country/14",
+"self": "http://eiti.local/api/v1.0/implementing_country/14",
 "iso2": "DE",
 "iso3": "DEU",
 "status": {
@@ -5799,7 +5799,7 @@
 {
 "id": 15,
 "label": "Norway",
-"self": "https://eiti.org/api/v1.0/implementing_country/15",
+"self": "http://eiti.local/api/v1.0/implementing_country/15",
 "iso2": "NO",
 "iso3": "NOR",
 "status": {
@@ -6590,20 +6590,30 @@
 {
 "id": 16,
 "label": "United States of America",
-"self": "https://eiti.org/api/v1.0/implementing_country/16",
+"self": "http://eiti.local/api/v1.0/implementing_country/16",
 "iso2": "US",
 "iso3": "USA",
 "status": {
-"tid": "5329",
+"tid": "8213",
 "language": "en",
-"name": "Yet to be assessed against the 2016 Standard",
-"color": "00919B"
+"name": "Suspended for missing deadline",
+"color": null
 },
 "status_date": "1388534400",
 "local_website": "https://useiti.doi.gov/",
 "annual_report_file": null,
 "reports": {
 "2013": [
+{
+"commodity": "Gold, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "16",
+"value": "691",
+"value_bool": null,
+"value_text": null,
+"unit": "Tonnes",
+"source": "http://minerals.usgs.gov/minerals/pubs/commodity/gold/mcs-2015-gold.pdf"
+},
 {
 "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
 "parent": "Contribution of extractive industries to economy (3.4)",
@@ -6743,16 +6753,6 @@
 "value_text": null,
 "unit": "Sm3",
 "source": "http://www.eia.gov/petroleum/supply/annual/volume1/archive/2013/pdf/table31.pdf"
-},
-{
-"commodity": "Gold, volume",
-"parent": "Export volume and value (3.5.b)",
-"id": "16",
-"value": "691",
-"value_bool": null,
-"value_text": null,
-"unit": "Tonnes",
-"source": "http://minerals.usgs.gov/minerals/pubs/commodity/gold/mcs-2015-gold.pdf"
 }
 ],
 "2014": [
@@ -7204,7 +7204,7 @@
 {
 "id": 17,
 "label": "Colombia",
-"self": "https://eiti.org/api/v1.0/implementing_country/17",
+"self": "http://eiti.local/api/v1.0/implementing_country/17",
 "iso2": "CO",
 "iso3": "COL",
 "status": {
@@ -7397,7 +7397,7 @@
 {
 "id": 19,
 "label": "Zambia",
-"self": "https://eiti.org/api/v1.0/implementing_country/19",
+"self": "http://eiti.local/api/v1.0/implementing_country/19",
 "iso2": "ZM",
 "iso3": "ZMB",
 "status": {
@@ -7890,7 +7890,7 @@
 {
 "id": 20,
 "label": "Cameroon",
-"self": "https://eiti.org/api/v1.0/implementing_country/20",
+"self": "http://eiti.local/api/v1.0/implementing_country/20",
 "iso2": "CM",
 "iso3": "CMR",
 "status": {
@@ -8609,7 +8609,7 @@
 {
 "id": 21,
 "label": "Trinidad and Tobago",
-"self": "https://eiti.org/api/v1.0/implementing_country/21",
+"self": "http://eiti.local/api/v1.0/implementing_country/21",
 "iso2": "TT",
 "iso3": "TTO",
 "status": {
@@ -9064,7 +9064,7 @@
 {
 "id": 22,
 "label": "Mali",
-"self": "https://eiti.org/api/v1.0/implementing_country/22",
+"self": "http://eiti.local/api/v1.0/implementing_country/22",
 "iso2": "ML",
 "iso3": "MLI",
 "status": {
@@ -9381,7 +9381,7 @@
 {
 "id": 23,
 "label": "Tanzania",
-"self": "https://eiti.org/api/v1.0/implementing_country/23",
+"self": "http://eiti.local/api/v1.0/implementing_country/23",
 "iso2": "TZ",
 "iso3": "TZA",
 "status": {
@@ -9549,14 +9549,14 @@
 {
 "id": 24,
 "label": "Kazakhstan",
-"self": "https://eiti.org/api/v1.0/implementing_country/24",
+"self": "http://eiti.local/api/v1.0/implementing_country/24",
 "iso2": "KZ",
 "iso3": "KAZ",
 "status": {
-"tid": "5329",
+"tid": "8212",
 "language": "en",
-"name": "Yet to be assessed against the 2016 Standard",
-"color": "00919B"
+"name": "Suspended due to political instability",
+"color": null
 },
 "status_date": "1356998400",
 "local_website": "http://eiti.geology.gov.kz/en/",
@@ -10127,7 +10127,7 @@
 "commodity": "Government revenue - extractive industries",
 "parent": "Contribution of extractive industries to economy (3.4)",
 "id": "24",
-"value": "15048896726",
+"value": "14826342575",
 "value_bool": null,
 "value_text": null,
 "unit": "USD",
@@ -10177,10 +10177,10 @@
 "commodity": "Condensate, volume",
 "parent": "Production volume and value (3.5.a)",
 "id": "24",
-"value": "12935700",
+"value": "15076573.427",
 "value_bool": null,
 "value_text": null,
-"unit": "Tonnes",
+"unit": "Sm3",
 "source": "Attachment 6"
 },
 {
@@ -10227,10 +10227,10 @@
 "commodity": "Condensate, volume",
 "parent": "Export volume and value (3.5.b)",
 "id": "24",
-"value": "67100",
+"value": "78205.128",
 "value_bool": null,
 "value_text": null,
-"unit": "Tonnes",
+"unit": "Sm3",
 "source": "Attachment 6"
 },
 {
@@ -10716,7 +10716,7 @@
 {
 "id": 25,
 "label": "Liberia",
-"self": "https://eiti.org/api/v1.0/implementing_country/25",
+"self": "http://eiti.local/api/v1.0/implementing_country/25",
 "iso2": "LR",
 "iso3": "LBR",
 "status": {
@@ -11128,7 +11128,7 @@
 {
 "id": 26,
 "label": "Ukraine",
-"self": "https://eiti.org/api/v1.0/implementing_country/26",
+"self": "http://eiti.local/api/v1.0/implementing_country/26",
 "iso2": "UA",
 "iso3": "UKR",
 "status": {
@@ -11323,12 +11323,12 @@
 {
 "id": 27,
 "label": "Central African Republic",
-"self": "https://eiti.org/api/v1.0/implementing_country/27",
+"self": "http://eiti.local/api/v1.0/implementing_country/27",
 "iso2": "CF",
 "iso3": "CAF",
 "status": {
 "tid": "5327",
-"language": "en",
+"language": "und",
 "name": "Inadequate progress / suspended",
 "color": "FAC433"
 },
@@ -11481,7 +11481,7 @@
 {
 "id": 28,
 "label": "Côte d'Ivoire",
-"self": "https://eiti.org/api/v1.0/implementing_country/28",
+"self": "http://eiti.local/api/v1.0/implementing_country/28",
 "iso2": "CI",
 "iso3": "CIV",
 "status": {
@@ -11496,14 +11496,34 @@
 "reports": {
 "2013": [
 {
-"commodity": "Total revenue received?",
-"parent": "Sale of the state’s share of production or other sales collected in-kind (4.1.c)",
+"commodity": "Oil, volume",
+"parent": "Export volume and value (3.5.b)",
 "id": "28",
-"value": "559917501",
+"value": "1247236.545",
 "value_bool": null,
 "value_text": null,
-"unit": "USD",
-"source": "Section 7.1.1, 2013 EITI Report"
+"unit": "Sm3",
+"source": "Section 7.5.1, 2013 EITI Report"
+},
+{
+"commodity": "Gas, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "0",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Not applicable"
+},
+{
+"commodity": "Gold, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "15.029",
+"value_bool": null,
+"value_text": null,
+"unit": "Tonnes",
+"source": "Section 6.3.2 B, 2013 EITI Report"
 },
 {
 "commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
@@ -11596,14 +11616,116 @@
 "source": "Section 2.2, 2013 EITI Report"
 },
 {
-"commodity": "Oil, volume",
-"parent": "Export volume and value (3.5.b)",
+"commodity": "Total revenue received?",
+"parent": "Sale of the state’s share of production or other sales collected in-kind (4.1.c)",
 "id": "28",
-"value": "1247236.545",
+"value": "559917501",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 7.1.1, 2013 EITI Report"
+}
+],
+"2014": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "1693858801",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.2, 2014 EITI Report"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "34182758663",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.2, 2014 EITI Report"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "515210326",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.1, 2014 EITI Report"
+},
+{
+"commodity": "Government revenue - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "6049726999",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.1, 2014 EITI Report"
+},
+{
+"commodity": "Exports - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "1392121229",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.3, 2014 EITI Report"
+},
+{
+"commodity": "Exports - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "12602147578",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.7.3, 2014 EITI Report"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "1097258.418",
 "value_bool": null,
 "value_text": null,
 "unit": "Sm3",
-"source": "Section 7.5.1, 2013 EITI Report"
+"source": "Section 2.2, 2014 EITI Report"
+},
+{
+"commodity": "Gas, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "2133322.322946",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 2.2, 2014 EITI Report"
+},
+{
+"commodity": "Gold, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "19.08",
+"value_bool": null,
+"value_text": null,
+"unit": "Tonnes",
+"source": "Section 2.2, 2014 EITI Report"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "927642.373",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 7.6.1, 2014 EITI Report"
 },
 {
 "commodity": "Gas, volume",
@@ -11612,18 +11734,160 @@
 "value": "0",
 "value_bool": null,
 "value_text": null,
-"unit": "Sm3",
-"source": "Not applicable"
+"unit": "",
+"source": ""
 },
 {
 "commodity": "Gold, volume",
 "parent": "Export volume and value (3.5.b)",
 "id": "28",
-"value": "15.029",
+"value": "19.141",
 "value_bool": null,
 "value_text": null,
 "unit": "Tonnes",
-"source": "Section 6.3.2 B, 2013 EITI Report"
+"source": "Section 7.6.2, 2014 EITI Report"
+},
+{
+"commodity": "Total revenue received?",
+"parent": "Sale of the state’s share of production or other sales collected in-kind (4.1.c)",
+"id": "28",
+"value": "196072757",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 7.1.2, 2014 EITI Report"
+}
+],
+"2015": [
+{
+"commodity": "Gross Domestic Product - extractive industries (Gross Value Added)",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "1698413724",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.2, 2015 EITI Report"
+},
+{
+"commodity": "Gross Domestic Product - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "32963436079",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.2, 2015 EITI Report"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "316248357",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.1, 2015 EITI Report"
+},
+{
+"commodity": "Government revenue - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "6148460678",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.1, 2015 EITI Report"
+},
+{
+"commodity": "Exports - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "1326251354",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.3, 2015 EITI Report"
+},
+{
+"commodity": "Exports - all sectors",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "28",
+"value": "12274591614",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 4.4.3, 2015 EITI Report"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "1706754.269",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 2.2, 2015 EITI Report"
+},
+{
+"commodity": "Gas, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "2226559.858",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 2.2, 2015 EITI Report"
+},
+{
+"commodity": "Gold, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "28",
+"value": "23.5",
+"value_bool": null,
+"value_text": null,
+"unit": "Tonnes",
+"source": "Section 2.2, 2015 EITI Report"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "1734701.739",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "Section 7.7.1, 2015 EITI Report"
+},
+{
+"commodity": "Gas, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "0",
+"value_bool": null,
+"value_text": null,
+"unit": "",
+"source": ""
+},
+{
+"commodity": "Gold, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "28",
+"value": "18.241",
+"value_bool": null,
+"value_text": null,
+"unit": "Tonnes",
+"source": "Section 2.5, 2015 EITI Report"
+},
+{
+"commodity": "Total revenue received?",
+"parent": "Sale of the state’s share of production or other sales collected in-kind (4.1.c)",
+"id": "28",
+"value": "131867277",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 7.1.2, 2015 EITI Report"
 }
 ]
 },
@@ -11875,6 +12139,70 @@
 "revenue_stream": "1",
 "company": "1"
 }
+},
+"2014": {
+"contact": {
+"name": "Karim Lourimi",
+"email": "Karim.Lourimi@moorestephens.com",
+"organisation": "Moore Stephens LLP"
+},
+"year_start": "Jan 1, 2014",
+"year_end": "Dec 31, 2014",
+"currency_rate": "494.138",
+"currency_code": "XOF",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "26",
+"governmental_agencies": "8"
+},
+"web_report_links": [
+{
+"url": "http://san.capitalafrique.com/cnitie.ci/files/upload/Rapport_conciliation_ITIE_CI_2014.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
+},
+"2015": {
+"contact": {
+"name": "Karim Lourimi",
+"email": "Karim.Lourimi@moorestephens.com",
+"organisation": "Moore Stephens LLP"
+},
+"year_start": "Jan 1, 2015",
+"year_end": "Dec 31, 2015",
+"currency_rate": "591.13983",
+"currency_code": "XOF",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil"
+],
+"reporting_organisations": {
+"companies": "33",
+"governmental_agencies": "8"
+},
+"web_report_links": [
+{
+"url": "http://cnitiesan.bluig.com/files/rapport-conciliation-itie-ci-2015-final---30-3-17.pdf",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": "0",
+"revenue_stream": "1",
+"company": "1"
+}
 }
 },
 "licenses": {
@@ -11884,6 +12212,14 @@
 },
 "contracts": {
 "2013": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "0"
+},
+"2014": {
+"Does the report address the government's policy on contract disclosure?": "1",
+"Are contracts disclosed?": "0"
+},
+"2015": {
 "Does the report address the government's policy on contract disclosure?": "1",
 "Are contracts disclosed?": "0"
 }
@@ -11913,13 +12249,21 @@
 "2013": {
 "government": "718400445",
 "company": "498610367"
+},
+"2014": {
+"government": "487302747",
+"company": "360217682"
+},
+"2015": {
+"government": "457795075",
+"company": "399140080"
 }
 }
 },
 {
 "id": 30,
 "label": "Niger",
-"self": "https://eiti.org/api/v1.0/implementing_country/30",
+"self": "http://eiti.local/api/v1.0/implementing_country/30",
 "iso2": "NE",
 "iso3": "NER",
 "status": {
@@ -12381,7 +12725,7 @@
 {
 "id": 32,
 "label": "Nigeria",
-"self": "https://eiti.org/api/v1.0/implementing_country/32",
+"self": "http://eiti.local/api/v1.0/implementing_country/32",
 "iso2": "NG",
 "iso3": "NGA",
 "status": {
@@ -12876,7 +13220,7 @@
 {
 "id": 33,
 "label": "Madagascar",
-"self": "https://eiti.org/api/v1.0/implementing_country/33",
+"self": "http://eiti.local/api/v1.0/implementing_country/33",
 "iso2": "MG",
 "iso3": "MDG",
 "status": {
@@ -13059,7 +13403,7 @@
 {
 "id": 34,
 "label": "United Kingdom",
-"self": "https://eiti.org/api/v1.0/implementing_country/34",
+"self": "http://eiti.local/api/v1.0/implementing_country/34",
 "iso2": "GB",
 "iso3": "GBR",
 "status": {
@@ -13246,7 +13590,7 @@
 {
 "id": 35,
 "label": "Azerbaijan",
-"self": "https://eiti.org/api/v1.0/implementing_country/35",
+"self": "http://eiti.local/api/v1.0/implementing_country/35",
 "iso2": "AZ",
 "iso3": "AZE",
 "status": {
@@ -14537,7 +14881,7 @@
 {
 "id": 36,
 "label": "Mauritania",
-"self": "https://eiti.org/api/v1.0/implementing_country/36",
+"self": "http://eiti.local/api/v1.0/implementing_country/36",
 "iso2": "MR",
 "iso3": "MRT",
 "status": {
@@ -15326,7 +15670,7 @@
 {
 "id": 37,
 "label": "Senegal",
-"self": "https://eiti.org/api/v1.0/implementing_country/37",
+"self": "http://eiti.local/api/v1.0/implementing_country/37",
 "iso2": "SN",
 "iso3": "SEN",
 "status": {
@@ -15631,7 +15975,7 @@
 {
 "id": 38,
 "label": "Chad",
-"self": "https://eiti.org/api/v1.0/implementing_country/38",
+"self": "http://eiti.local/api/v1.0/implementing_country/38",
 "iso2": "TD",
 "iso3": "TCD",
 "status": {
@@ -16014,12 +16358,12 @@
 {
 "id": 39,
 "label": "Kyrgyz Republic",
-"self": "https://eiti.org/api/v1.0/implementing_country/39",
+"self": "http://eiti.local/api/v1.0/implementing_country/39",
 "iso2": "KG",
 "iso3": "KGZ",
 "status": {
 "tid": "5327",
-"language": "en",
+"language": "und",
 "name": "Inadequate progress / suspended",
 "color": "FAC433"
 },
@@ -16606,7 +16950,7 @@
 {
 "id": 40,
 "label": "Timor-Leste",
-"self": "https://eiti.org/api/v1.0/implementing_country/40",
+"self": "http://eiti.local/api/v1.0/implementing_country/40",
 "iso2": "TL",
 "iso3": "TLS",
 "status": {
@@ -16896,7 +17240,7 @@
 {
 "id": 41,
 "label": "Iraq",
-"self": "https://eiti.org/api/v1.0/implementing_country/41",
+"self": "http://eiti.local/api/v1.0/implementing_country/41",
 "iso2": "IQ",
 "iso3": "IRQ",
 "status": {
@@ -16907,7 +17251,7 @@
 },
 "status_date": "1325376000",
 "local_website": "http://ieiti.org.iq/",
-"annual_report_file": "https://eiti.org/sites/default/files/annualreports/ieiti2015report.pdf",
+"annual_report_file": "http://eiti.local/sites/default/files/annualreports/ieiti2015report.pdf",
 "reports": {
 "2013": [
 {
@@ -17041,6 +17385,58 @@
 "value_text": null,
 "unit": "Sm3",
 "source": "3.27"
+}
+],
+"2015": [
+{
+"commodity": "Exports - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "41",
+"value": "37346441000",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "As reported by SOMO, 3.3.5"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "41",
+"value": "203343754.332",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "(3.1)"
+},
+{
+"commodity": "Gas, volume",
+"parent": "Production volume and value (3.5.a)",
+"id": "41",
+"value": "23458086",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "(3.2.8)"
+},
+{
+"commodity": "Oil, volume",
+"parent": "Export volume and value (3.5.b)",
+"id": "41",
+"value": "174374202.995",
+"value_bool": null,
+"value_text": null,
+"unit": "Sm3",
+"source": "As reported in page 14 (3.9)"
+},
+{
+"commodity": "Total revenue received?",
+"parent": "Sale of the state’s share of production or other sales collected in-kind (4.1.c)",
+"id": "41",
+"value": "37346440900",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Section 3.3.5"
 }
 ]
 },
@@ -17233,6 +17629,44 @@
 "revenue_stream": "1",
 "company": "1"
 }
+},
+"2015": {
+"contact": {
+"name": "Mashhoor AlDamen",
+"email": "maldamen@kpmg.com",
+"organisation": "KPMG"
+},
+"year_start": "Jan 1, 2015",
+"year_end": "Dec 31, 2015",
+"currency_rate": "1166",
+"currency_code": "IQD",
+"sectors_covered": [
+"Gas",
+"Mining",
+"Oil",
+"Other Sectors"
+],
+"reporting_organisations": {
+"companies": "64",
+"governmental_agencies": "31"
+},
+"web_report_links": [
+{
+"url": "http://ieiti.org.iq/uploads/2015%20Report/IEITI%202015%20Report.pdf",
+"title": null,
+"attributes": []
+},
+{
+"url": "http://ieiti.org.iq/uploads/2015%20Report/IEITI%202015%20Report.pptx",
+"title": null,
+"attributes": []
+}
+],
+"disaggregated": {
+"project": null,
+"revenue_stream": "1",
+"company": "1"
+}
 }
 },
 "licenses": null,
@@ -17244,6 +17678,10 @@
 "2014": {
 "Does the report address the government's policy on contract disclosure?": "0",
 "Are contracts disclosed?": "0"
+},
+"2015": {
+"Does the report address the government's policy on contract disclosure?": "0",
+"Are contracts disclosed?": "2"
 }
 },
 "revenues": {
@@ -17266,13 +17704,17 @@
 "2014": {
 "government": "71090211267.38",
 "company": "71090211267.38"
+},
+"2015": {
+"government": "51240995267",
+"company": "51240995266.58"
 }
 }
 },
 {
 "id": 42,
 "label": "Mozambique",
-"self": "https://eiti.org/api/v1.0/implementing_country/42",
+"self": "http://eiti.local/api/v1.0/implementing_country/42",
 "iso2": "MZ",
 "iso3": "MOZ",
 "status": {
@@ -17899,12 +18341,12 @@
 {
 "id": 43,
 "label": "Yemen",
-"self": "https://eiti.org/api/v1.0/implementing_country/43",
+"self": "http://eiti.local/api/v1.0/implementing_country/43",
 "iso2": "YE",
 "iso3": "YEM",
 "status": {
 "tid": "5327",
-"language": "en",
+"language": "und",
 "name": "Inadequate progress / suspended",
 "color": "FAC433"
 },
@@ -18157,7 +18599,7 @@
 {
 "id": 45,
 "label": "Togo",
-"self": "https://eiti.org/api/v1.0/implementing_country/45",
+"self": "http://eiti.local/api/v1.0/implementing_country/45",
 "iso2": "TG",
 "iso3": "TGO",
 "status": {
@@ -18588,7 +19030,7 @@
 {
 "id": 46,
 "label": "Papua New Guinea",
-"self": "https://eiti.org/api/v1.0/implementing_country/46",
+"self": "http://eiti.local/api/v1.0/implementing_country/46",
 "iso2": "PG",
 "iso3": "PNG",
 "status": {
@@ -18609,7 +19051,7 @@
 {
 "id": 48,
 "label": "Ethiopia",
-"self": "https://eiti.org/api/v1.0/implementing_country/48",
+"self": "http://eiti.local/api/v1.0/implementing_country/48",
 "iso2": "ET",
 "iso3": "ETH",
 "status": {
@@ -18630,7 +19072,7 @@
 {
 "id": 50,
 "label": "Burkina Faso",
-"self": "https://eiti.org/api/v1.0/implementing_country/50",
+"self": "http://eiti.local/api/v1.0/implementing_country/50",
 "iso2": "BF",
 "iso3": "BFA",
 "status": {
@@ -19125,7 +19567,7 @@
 {
 "id": 51,
 "label": "Afghanistan",
-"self": "https://eiti.org/api/v1.0/implementing_country/51",
+"self": "http://eiti.local/api/v1.0/implementing_country/51",
 "iso2": "AF",
 "iso3": "AFG",
 "status": {
@@ -19619,7 +20061,7 @@
 {
 "id": 52,
 "label": "Republic of the Congo",
-"self": "https://eiti.org/api/v1.0/implementing_country/52",
+"self": "http://eiti.local/api/v1.0/implementing_country/52",
 "iso2": "CG",
 "iso3": "COG",
 "status": {
@@ -19656,16 +20098,6 @@
 ],
 "2005": [
 {
-"commodity": "Government revenue - extractive industries",
-"parent": "Contribution of extractive industries to economy (3.4)",
-"id": "52",
-"value": "1635098381",
-"value_bool": null,
-"value_text": null,
-"unit": "USD",
-"source": "Tableaux III - Origine des encaissements et mesure des écarts avec les recettes du Trésor"
-},
-{
 "commodity": "Oil, volume",
 "parent": "Production volume and value (3.5.a)",
 "id": "52",
@@ -19674,6 +20106,16 @@
 "value_text": null,
 "unit": "Sm3",
 "source": "Annexes: HISTORIQUE DE LA PRODUCTION REALISEE DE 2004 A 2006 PAR CHAMPS ET PAR PERMIS (en Bbls)"
+},
+{
+"commodity": "Government revenue - extractive industries",
+"parent": "Contribution of extractive industries to economy (3.4)",
+"id": "52",
+"value": "1635098381",
+"value_bool": null,
+"value_text": null,
+"unit": "USD",
+"source": "Tableaux III - Origine des encaissements et mesure des écarts avec les recettes du Trésor"
 }
 ],
 "2006": [
@@ -20416,7 +20858,7 @@
 {
 "id": 53,
 "label": "Indonesia",
-"self": "https://eiti.org/api/v1.0/implementing_country/53",
+"self": "http://eiti.local/api/v1.0/implementing_country/53",
 "iso2": "ID",
 "iso3": "IDN",
 "status": {
@@ -21001,7 +21443,7 @@
 {
 "id": 54,
 "label": "Myanmar",
-"self": "https://eiti.org/api/v1.0/implementing_country/54",
+"self": "http://eiti.local/api/v1.0/implementing_country/54",
 "iso2": "MM",
 "iso3": "MMR",
 "status": {
@@ -21244,7 +21686,7 @@
 {
 "id": 55,
 "label": "Malawi",
-"self": "https://eiti.org/api/v1.0/implementing_country/55",
+"self": "http://eiti.local/api/v1.0/implementing_country/55",
 "iso2": "MW",
 "iso3": "MWI",
 "status": {
@@ -21265,12 +21707,12 @@
 {
 "id": 56,
 "label": "Tajikistan",
-"self": "https://eiti.org/api/v1.0/implementing_country/56",
+"self": "http://eiti.local/api/v1.0/implementing_country/56",
 "iso2": "TJ",
 "iso3": "TJK",
 "status": {
 "tid": "5327",
-"language": "en",
+"language": "und",
 "name": "Inadequate progress / suspended",
 "color": "FAC433"
 },
@@ -21452,7 +21894,7 @@
 {
 "id": 57,
 "label": "Dominican Republic ",
-"self": "https://eiti.org/api/v1.0/implementing_country/57",
+"self": "http://eiti.local/api/v1.0/implementing_country/57",
 "iso2": "DO",
 "iso3": "DOM",
 "status": {
@@ -21473,7 +21915,7 @@
 {
 "id": 58,
 "label": "Honduras",
-"self": "https://eiti.org/api/v1.0/implementing_country/58",
+"self": "http://eiti.local/api/v1.0/implementing_country/58",
 "iso2": "HN",
 "iso3": "HND",
 "status": {
@@ -21772,7 +22214,7 @@
 {
 "id": 59,
 "label": "Sao Tome and Principe",
-"self": "https://eiti.org/api/v1.0/implementing_country/59",
+"self": "http://eiti.local/api/v1.0/implementing_country/59",
 "iso2": "ST",
 "iso3": "STP",
 "status": {
@@ -22870,7 +23312,7 @@
 {
 "id": 60,
 "label": "Seychelles",
-"self": "https://eiti.org/api/v1.0/implementing_country/60",
+"self": "http://eiti.local/api/v1.0/implementing_country/60",
 "iso2": "SC",
 "iso3": "SYC",
 "status": {
@@ -23189,12 +23631,12 @@
 {
 "id": 61,
 "label": "Solomon Islands",
-"self": "https://eiti.org/api/v1.0/implementing_country/61",
+"self": "http://eiti.local/api/v1.0/implementing_country/61",
 "iso2": "SB",
 "iso3": "SLB",
 "status": {
 "tid": "5327",
-"language": "en",
+"language": "und",
 "name": "Inadequate progress / suspended",
 "color": "FAC433"
 },
@@ -23404,7 +23846,7 @@
 {
 "id": 66,
 "label": "Australia ",
-"self": "https://eiti.org/api/v1.0/implementing_country/66",
+"self": "http://eiti.local/api/v1.0/implementing_country/66",
 "iso2": "AU",
 "iso3": "AUS",
 "status": {
@@ -23425,7 +23867,7 @@
 {
 "id": 72,
 "label": "France",
-"self": "https://eiti.org/api/v1.0/implementing_country/72",
+"self": "http://eiti.local/api/v1.0/implementing_country/72",
 "iso2": "FR",
 "iso3": "FRA",
 "status": {
@@ -23446,7 +23888,7 @@
 {
 "id": 73,
 "label": "Guyana",
-"self": "https://eiti.org/api/v1.0/implementing_country/73",
+"self": "http://eiti.local/api/v1.0/implementing_country/73",
 "iso2": "GY",
 "iso3": "GUY",
 "status": {
@@ -23467,7 +23909,7 @@
 {
 "id": 74,
 "label": "Equatorial Guinea",
-"self": "https://eiti.org/api/v1.0/implementing_country/74",
+"self": "http://eiti.local/api/v1.0/implementing_country/74",
 "iso2": "GQ",
 "iso3": "GNQ",
 "status": {
@@ -23488,7 +23930,7 @@
 {
 "id": 75,
 "label": "Gabon",
-"self": "https://eiti.org/api/v1.0/implementing_country/75",
+"self": "http://eiti.local/api/v1.0/implementing_country/75",
 "iso2": "GA",
 "iso3": "GAB",
 "status": {
@@ -23746,30 +24188,9 @@
 }
 },
 {
-"id": 76,
-"label": "Mexico",
-"self": "https://eiti.org/api/v1.0/implementing_country/76",
-"iso2": "MX",
-"iso3": "MEX",
-"status": {
-"tid": "77",
-"language": "en",
-"name": "Other",
-"color": "808080"
-},
-"status_date": null,
-"local_website": null,
-"annual_report_file": null,
-"reports": null,
-"metadata": [],
-"licenses": null,
-"contracts": null,
-"revenues": null
-},
-{
 "id": 77,
 "label": "Armenia",
-"self": "https://eiti.org/api/v1.0/implementing_country/77",
+"self": "http://eiti.local/api/v1.0/implementing_country/77",
 "iso2": "AM",
 "iso3": "ARM",
 "status": {
@@ -23786,11 +24207,36 @@
 "licenses": null,
 "contracts": null,
 "revenues": null
+},
+{
+"id": 78,
+"label": "Suriname",
+"self": "http://eiti.local/api/v1.0/implementing_country/78",
+"iso2": "SR",
+"iso3": "SUR",
+"status": {
+"tid": "77",
+"language": "en",
+"name": "Other",
+"color": "808080"
+},
+"status_date": null,
+"local_website": null,
+"annual_report_file": null,
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 }
 ],
-"count": 58,
+"count": 59,
 "self": {
 "title": "Self",
-"href": "https://eiti.org/api/v1.0/implementing_country"
+"href": "http://eiti.local/api/v1.0/implementing_country"
+},
+"next": {
+"title": "Next",
+"href": "http://eiti.local/api/v1.0/implementing_country?page=2"
 }
 }

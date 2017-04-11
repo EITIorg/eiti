@@ -95,6 +95,42 @@
   margin-right: 0.5em;
   margin-top: 0.4em;
 }
+.eiti-map-wrapper .legend i.satisfactory_progress {
+  background-color: #2D8B2A;
+}
+.eiti-map-wrapper .legend i.meaningful_progress {
+  background-color: #84AD42;
+}
+.eiti-map-wrapper .legend i.inadequate_progress___suspended {
+  background-color: #FAC433;
+}
+.eiti-map-wrapper .legend i.no_progress {
+  background-color: #C00000;
+}
+.eiti-map-wrapper .legend i.yet_to_be_assessed_against_the_2016_standard {
+  background-color: #6CBCE3;
+}
+.eiti-map-wrapper .legend i.suspended {
+  background-color: #FF6600;
+}
+.eiti-map-wrapper .legend i.other {
+  background-color: #808080;
+}
+.eiti-map-wrapper .legend i.suspended_for_missing_deadline {
+  background-color: #FAC433;
+  background-image: url(../images/icon-dump/eiti_alarm_clock.svg), none;
+  background-size: 11px;
+  background-repeat: no-repeat;
+  background-position-x: 3px;
+  background-position-y: 2px;
+}
+.eiti-map-wrapper .legend i.suspended_due_to_political_instability {
+  background-color: #FAC433;
+  background-image: url(../images/icon-dump/eiti_lightning.svg), none;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position-x: 3px;
+}
 .eiti-map-wrapper .legend h2 {
   line-height: 1.25em;
 }
@@ -332,6 +368,21 @@
 }
 .eiti-map-wrapper .country-list .member-status.other {
   background-color: #808080;
+}
+.eiti-map-wrapper .country-list .member-status.suspended_for_missing_deadline {
+  background-color: #FAC433;
+  background-image: url(../images/icon-dump/eiti_alarm_clock.svg), none;
+  background-size: 11px;
+  background-repeat: no-repeat;
+  background-position-x: 3px;
+  background-position-y: 2px;
+}
+.eiti-map-wrapper .country-list .member-status.suspended_due_to_political_instability {
+  background-color: #FAC433;
+  background-image: url(../images/icon-dump/eiti_lightning.svg), none;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position-x: 3px;
 }
 .eiti-map-wrapper .country-list .report {
   float: right;

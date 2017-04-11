@@ -24003,7 +24003,9 @@
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
-	          mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	
+	          mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	          //            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
 	          if (v.subtitle != "") {
 	            mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br/>';
 	          }
@@ -24522,7 +24524,7 @@
 	  "name": "status",
 	  "description": "Implementation status",
 	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br/><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
-	  "footer": "For an overview of the former status of countries under the EITI rules, click <a href=\"/countries-archive\">here</a><br/>For a list of former members or countries who are preparing to join, click <a href=\"/countries/other\">here.</a><br/><br/>"
+	  "footer": "<br/>For an overview of the former status of countries under the EITI Rules, click <a href=\"/countries-archive\">here</a>.<br/>For a list of former members or countries who are preparing to join, click <a href=\"/countries/other\">here</a>.<br/><br/>"
 	}, {
 	  "id": 2,
 	  "name": "online_oil_registry",
@@ -24830,7 +24832,7 @@
 	var status = exports.status = [{
 	  "id": 5329,
 	  "color": "#6CBCE3",
-	  "title": "Yet to be assessed against the 2016 Standard <br/>",
+	  "title": "Yet to be assessed against the 2016 Standard<br/>",
 	  "subtitle": ""
 	}, {
 	  "id": 75,
@@ -24845,7 +24847,17 @@
 	}, {
 	  "id": 5327,
 	  "color": "#FAC433",
-	  "title": "Inadequate progress / suspended <br/>",
+	  "title": "Inadequate progress / suspended<br/>",
+	  "subtitle": ""
+	}, {
+	  "id": 8212,
+	  "color": "#FAC433",
+	  "title": "Suspended due to political instability",
+	  "subtitle": ""
+	}, {
+	  "id": 8213,
+	  "color": "#FAC433",
+	  "title": "Suspended for missing deadline",
 	  "subtitle": ""
 	}];
 
