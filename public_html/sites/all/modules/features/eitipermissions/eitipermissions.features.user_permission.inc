@@ -877,13 +877,6 @@ function eitipermissions_user_default_permissions() {
     'module' => 'actions_permissions',
   );
 
-  // Exported permission: 'execute views_bulk_operations_archive_action'.
-  $permissions['execute views_bulk_operations_archive_action'] = array(
-    'name' => 'execute views_bulk_operations_archive_action',
-    'roles' => array(),
-    'module' => 'actions_permissions',
-  );
-
   // Exported permission: 'execute views_bulk_operations_argument_selector_action'.
   $permissions['execute views_bulk_operations_argument_selector_action'] = array(
     'name' => 'execute views_bulk_operations_argument_selector_action',

@@ -163,7 +163,6 @@ features[user_permission][] = execute system_goto_action
 features[user_permission][] = execute system_message_action
 features[user_permission][] = execute system_send_email_action
 features[user_permission][] = execute user_block_user_action
-features[user_permission][] = execute views_bulk_operations_archive_action
 features[user_permission][] = execute views_bulk_operations_argument_selector_action
 features[user_permission][] = execute views_bulk_operations_delete_item
 features[user_permission][] = execute views_bulk_operations_delete_revision
