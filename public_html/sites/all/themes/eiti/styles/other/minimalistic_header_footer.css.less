@@ -26,12 +26,27 @@
     right: 0;
     width: auto;
     display: inline-block;
+
+    > nav, > .header-close-action, > .header-show-action {
+      display: inline-block;
+      float: none;
+    }
+
+    .header-close-action, .header-show-action {
+      margin-left: 1em;
+      font-size: 0.8em;
+    }
+
   }
 
   &.minimalistic-footer {
     padding: 0em 0;
     margin-top: 0em;
+    min-height: 0;
 
+    .single-fluid-row-wrapper {
+      position: relative;
+    }
     .footer-description {
       width: 60%;
       display: inline-block;
@@ -43,6 +58,16 @@
       display: inline-block;
       font-size: 0.8em;
       vertical-align: top;
+    }
+
+    .footer-close-action, .footer-show-action {
+      font-size: 0.8em;
+      .border-radius(5px);
+      position: absolute;
+      background-color: @clmain__header;
+      padding: 5px 10px 10px;
+      right: 0;
+      top: -25px;
     }
   }
 }

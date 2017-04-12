@@ -101,6 +101,52 @@
     }
   };
 
+
+  Drupal.behaviors.toggleMinimalisticWidgets = {
+    attach: function(context) {
+      $('.header-close-action', context).click(function (e) {
+          var minimalistic_header = $(this).parents('.pane-minimalistic-header');
+          var animation_time = $(this).data('animation-time');
+
+          if (!minimalistic_header.size) {
+              return true;
+          }
+          else {
+              minimalistic_header.slideUp(animation_time);
+          }
+          e.preventDefault();
+      });
+      $('.footer-close-action', context).click(function (e) {
+          var minimalistic_footer = $(this).parents('.minimalistic-footer');
+          var animation_time = $(this).data('animation-time');
+          var animation_delay = $(this).data('animation-delay');
+          var targetID = $(this).data('target');
+
+          if (!minimalistic_footer.size) {
+              return true;
+          }
+
+          // We just hide it and that's it.
+          $.cookie('minimalistic-footer-' + targetID, 'closed', { expires: 30 });
+          minimalistic_footer.slideUp(animation_time);
+          $(this).toggleClass('close-action').toggleClass('show-action');
+          e.preventDefault();
+      });
+      $('.footer-close-action', context).each(function() {
+        var minimalistic_footer = $(this).parents('.minimalistic-footer');
+        var animation_time = $(this).data('animation-time');
+        var animation_delay = $(this).data('animation-delay');
+        var targetID = $(this).data('target');
+        var cookieValue = $.cookie('minimalistic-footer-' + targetID);
+        if (cookieValue == 'closed') {
+          minimalistic_footer.hide();
+          // It's closed, we just show the footer for a delay, and hide it afterwords.
+          minimalistic_footer.slideDown(animation_time).delay(animation_delay).slideUp(animation_time);
+        }
+      });
+    }
+  };
+
   Drupal.behaviors.headerVideoMedia = {
     attach: function(context) {
       var $media = $('.media-controllers', context);

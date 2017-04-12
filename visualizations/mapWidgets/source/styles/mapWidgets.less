@@ -111,6 +111,42 @@
     margin-right: 0.5em;
     margin-top: 0.4em;
 
+    &.satisfactory_progress {
+      background-color: #2D8B2A;
+    }
+    &.meaningful_progress {
+      background-color: #84AD42;
+    }
+    &.inadequate_progress___suspended {
+      background-color: #FAC433;
+    }
+    &.no_progress {
+      background-color: #C00000;
+    }
+    &.yet_to_be_assessed_against_the_2016_standard {
+      background-color: #6CBCE3;
+    }
+    &.suspended {
+      background-color: #FF6600;
+    }
+    &.other {
+      background-color: #808080;
+    }
+    &.suspended_for_missing_deadline {
+      background-color: #FAC433;
+      background-image: url(../images/icon-dump/eiti_alarm_clock.svg), none;
+      background-size: 11px;
+      background-repeat: no-repeat;
+      background-position-x: 3px;
+      background-position-y: 2px;
+    }
+    &.suspended_due_to_political_instability {
+      background-color: #FAC433;
+      background-image: url(../images/icon-dump/eiti_lightning.svg), none;
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position-x: 3px;
+    }
   }
   h2 {
     line-height:1.25em;
@@ -362,7 +398,7 @@
       &.meaningful_progress {
         background-color: #84AD42;
       }
-      &.inadequate_progress {
+      &.inadequate_progress___suspended {
         background-color: #FAC433;
       }
       &.no_progress {
@@ -377,6 +413,22 @@
       &.other {
         background-color: #808080;
       }
+      &.suspended_for_missing_deadline {
+        background-color: #FAC433;
+        background-image: url(../images/icon-dump/eiti_alarm_clock.svg), none;
+        background-size: 11px;
+        background-repeat: no-repeat;
+        background-position-x: 3px;
+        background-position-y: 2px;
+      }
+      &.suspended_due_to_political_instability {
+        background-color: #FAC433;
+        background-image: url(../images/icon-dump/eiti_lightning.svg), none;
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position-x: 3px;
+      }
+      
     }
 
     .report {

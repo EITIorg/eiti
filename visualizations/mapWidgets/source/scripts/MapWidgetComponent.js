@@ -374,7 +374,9 @@ export default class MapWidgetComponent extends Component {
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+
+            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+//            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
             if(v.subtitle != "") {
               mergedHTML += (helpers.t(v.subtitle) || '') + '<br/>';
             }
@@ -525,10 +527,12 @@ export default class MapWidgetComponent extends Component {
     if(this.props.selector) {
       var items = [];
       var cols = [];
-      var sortedCountries = _.sortBy(this.state.data, 'label');
+      var countries = _.sortBy(this.state.data, 'label');
+      var sortedCountries = countries.filter(function(k,v){ return (k.status.name !== "Other")})
       var cutout = Math.ceil(sortedCountries.length/4);
       for (var i = 0; i < sortedCountries.length;i++) {
-        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/ /g,"_") : "member-status other";
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/\/| /g,"_") : "member-status other";
+        if(sortedCountries[i].status.name === "Other") continue;
         var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
 
         var years = Object.keys(sortedCountries[i].metadata);
