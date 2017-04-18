@@ -240,7 +240,7 @@ function eiti_ctools_extra__minimalistic_header__settings_form($form, &$form_sta
   );
 
   $form['close_time'] = array(
-    '#title' => t('Closing Milliseconds'),
+    '#title' => t('Closing (Animation) Milliseconds'),
     '#type' => 'textfield',
     '#description' => t('Please specify how many milliseconds should the close action take place? Note: "0" indicates that it should be instant.'),
     '#field_suffix' => t(' Milliseconds'),

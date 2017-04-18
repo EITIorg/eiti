@@ -41,11 +41,12 @@
 
   &.minimalistic-footer {
     padding: 0em 0;
-    margin-top: 0em;
+    margin-top: 35px;
     min-height: 0;
 
     .single-fluid-row-wrapper {
       position: relative;
+      background: inherit;
     }
     .footer-description {
       width: 60%;
@@ -64,10 +65,19 @@
       font-size: 0.8em;
       .border-radius(5px);
       position: absolute;
-      background-color: @clmain__header;
+      background: inherit;
       padding: 5px 10px 10px;
       right: 0;
       top: -25px;
+    }
+  }
+  &.close-bottom-position {
+    margin-bottom: 35px;
+    .footer-close-action, .footer-show-action {
+      padding: 10px 10px 5px;
+      right: 0;
+      bottom: -25px;
+      top: initial;
     }
   }
 }
