@@ -37,7 +37,7 @@ $plugin = array(
 
 
 /**
- * Output function for the 'Mailchimp Archive' content type.
+ * Output function for the 'Storify' content type.
  */
 function eiti_ctools_extra__timeline__render($subtype, $conf, $panel_args, $context) {
   global $language;
