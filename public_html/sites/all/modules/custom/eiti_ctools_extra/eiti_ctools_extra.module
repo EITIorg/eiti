@@ -223,6 +223,30 @@ function eiti_ctools_extra_libraries_info() {
   return $libraries;
 }
 
+/**
+ * Implements hook_theme().
+ */
+function eiti_ctools_extra_theme($existing, $type, $theme, $path) {
+  return array(
+    'eiti_ctools_extra_storify' => array(
+      'file' => 'includes/eiti_ctools_extra.theme.inc',
+      'template' => 'templates/storify',
+      'variables' => array(
+        'url' => '',
+        'title' => '',
+      ),
+    ),
+    'eiti_ctools_extra_infogram' => array(
+      'file' => 'includes/eiti_ctools_extra.theme.inc',
+      'template' => 'templates/infogram',
+      'variables' => array(
+        'info_id' => '',
+        'info_type' => '',
+        'title' => '',
+      ),
+    ),
+  );
+}
 
 /**
  * Helper function for libraries_load(). Helps deal with URLs used inside the library.

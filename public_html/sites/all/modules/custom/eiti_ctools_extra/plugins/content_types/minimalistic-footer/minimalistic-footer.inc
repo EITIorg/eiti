@@ -14,8 +14,11 @@ $plugin = array(
   'defaults' => array(
     'title' => '',
     'close' => TRUE,
-    'close_delay' => '5000',
+    'close_dismissible' => TRUE,
+    'close_position' => 'top',
+    'close_delay' => '0',
     'close_time' => '200',
+    'hex_background' => 'f0f0f0',
   ),
 );
 
@@ -70,14 +73,23 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
       'fragment' => 'close',
       'attributes' => array(
         'class' => array('footer-close-action'),
-        'data-animation-delay' => !empty($conf['close_delay']) ? $conf['close_delay'] : '5000',
+        'data-animation-delay' => !empty($conf['close_delay']) ? $conf['close_delay'] : '0',
         'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
+        'data-dismissible' => $conf['close_dismissible'],
         'data-target' => (!empty($panel_args[0]) && !empty($conf['pane_id'])) ? $panel_args[0] . '-' . $conf['pane_id'] : '',
       ),
       'external' => TRUE,
     ));
+    if ($conf['close_position'] == 'bottom') {
+      $block['wrapper']['#attributes']['class'][] = 'close-bottom-position';
+    }
     $block['wrapper']['menu_items']['toggle_btn']['#weight'] = '2';
     drupal_add_library('system', 'jquery.cookie');
+  }
+
+  // Apply the background.
+  if (!empty($conf['hex_background'])) {
+    $block['wrapper']['#attributes']['style'] = 'background:#' . $conf['hex_background'] . ';';
   }
 
   return (object) array(
@@ -120,7 +132,6 @@ function eiti_ctools_extra__minimalistic_footer__settings_form($form, &$form_sta
     '#format' => $conf['references']['format'],
   );
 
-
   $form['close'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show the "Close" button'),
@@ -148,7 +159,7 @@ function eiti_ctools_extra__minimalistic_footer__settings_form($form, &$form_sta
     '#description' => t('Please specify how many milliseconds should the close action take place? Note: "0" indicates that it should be instant.'),
     '#field_suffix' => t(' Milliseconds'),
     '#size' => 6,
-    '#default_value' => $conf['close_time'],
+    '#default_value' => $conf['close_time'] ? $conf['close_time'] : '200',
     '#states' => array(
       'visible' => array(
         'input[name="close"]' => array('checked' => TRUE),
@@ -156,6 +167,39 @@ function eiti_ctools_extra__minimalistic_footer__settings_form($form, &$form_sta
     ),
   );
 
+  $form['close_position'] = array(
+    '#title' => t('Close Button Position'),
+    '#type' => 'select',
+    '#description' => t('Position of the close button'),
+    '#default_value' => $conf['close_position'] ? $conf['close_position'] : 'top',
+    '#options' => array('top' => t('Top'), 'bottom' => t('Bottom')),
+    '#states' => array(
+      'visible' => array(
+        'input[name="close"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['close_dismissible'] = array(
+    '#title' => t('Dismissible?'),
+    '#type' => 'checkbox',
+    '#description' => t('Please specify whether this footer should be dismissible or not.'),
+    '#default_value' => $conf['close_dismissible'],
+    '#states' => array(
+      'visible' => array(
+        'input[name="close"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
+  $form['hex_background'] = array(
+    '#title' => t('Background Color'),
+    '#type' => 'textfield',
+    '#description' => t('Please specify the background color.'),
+    '#field_prefix' => '#',
+    '#size' => 6,
+    '#default_value' => $conf['hex_background'] ? $conf['hex_background'] : 'f0f0f0',
+  );
 
   return $form;
 }
