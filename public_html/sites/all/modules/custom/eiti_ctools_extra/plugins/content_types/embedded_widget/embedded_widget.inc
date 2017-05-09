@@ -61,15 +61,15 @@ function eiti_ctools_extra__embedded_widget__render($subtype, $conf, $panel_args
   switch ($conf['type']) {
     case 'storify':
       $content['widget']['#markup'] = theme('eiti_ctools_extra_storify', array(
-        'url' => $conf['storify']['url'],
-        'title' => $conf['storify']['title'],
+        'url' => isset($conf['storify'][$language->language]['url']) ? $conf['storify'][$language->language]['url'] : $conf['storify']['default']['url'],
+        'title' => isset($conf['storify'][$language->language]['title']) ? $conf['storify'][$language->language]['title'] : $conf['storify']['default']['title'],
       ));
       break;
     case 'infogram':
       $content['widget']['#markup'] = theme('eiti_ctools_extra_infogram', array(
-        'info_id' => $conf['infogram']['id'],
-        'info_type' => $conf['infogram']['info_type'],
-        'title' => $conf['infogram']['title'],
+        'info_id' => isset($conf['infogram'][$language->language]['id']) ? $conf['infogram'][$language->language]['id'] : $conf['infogram']['default']['id'],
+        'info_type' => isset($conf['infogram'][$language->language]['info_type']) ? $conf['infogram'][$language->language]['info_type'] : $conf['infogram']['default']['info_type'],
+        'title' => isset($conf['infogram'][$language->language]['title']) ? $conf['infogram'][$language->language]['title'] : $conf['infogram']['default']['title'],
       ));
       break;
   }
@@ -83,7 +83,7 @@ function eiti_ctools_extra__embedded_widget__render($subtype, $conf, $panel_args
  */
 function eiti_ctools_extra__embedded_widget__edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
-
+  dsm($conf);
   $form['type'] = array(
     '#title' => t('Widget Type'),
     '#type' => 'select',
@@ -92,8 +92,33 @@ function eiti_ctools_extra__embedded_widget__edit_form($form, &$form_state) {
     '#required' => TRUE,
     '#options' => array_merge(array('' => t('- Select - ')), _eiti_ctools_extra__embedded_widget__get_types()),
   );
+
+  $form['i18n'] = array(
+    '#title' => t('Multilingual'),
+    '#type' => 'checkbox',
+    '#description' => t('If you want to specify a different Widget for a different language, please check this box.'),
+    '#default_value' => $conf['i18n'],
+  );
+
+  $languages = language_list();
+  foreach ($languages as $language) {
+    $form['embedded_code_' . $language->language] = array(
+      '#title' => t('Embedded Code (!language)', array('!language' => $language->name)),
+      '#type' => 'textarea',
+      '#description' => t('Specify the code for !language. If it\'s blank, we will use the default value.', array(
+        '!language' => $language->name,
+      )),
+      '#default_value' => $conf['embedded_code_' . $language->language],
+      '#states' => array(
+        'visible' => array(
+          'input[name="i18n"]' => array('checked' => TRUE),
+        ),
+      )
+    );
+  }
+
   $form['embedded_code'] = array(
-    '#title' => t('Embedded Code'),
+    '#title' => t('Embedded Code (Default)'),
     '#type' => 'textarea',
     '#description' => t('Please paste in the code.<br/><em>Note: We will do custom processing and not paste as-is because of the security.</em>'),
     '#default_value' => $conf['embedded_code'],
@@ -102,34 +127,47 @@ function eiti_ctools_extra__embedded_widget__edit_form($form, &$form_state) {
   // Make a preview of parsed data.
   switch ($conf['type']) {
     case 'storify':
-      $form['embedded_identified_url'] = array(
-        '#markup' => '<div>' . t('<strong>Verified Storify URL</strong>: @url', array(
-            '@url' => !empty($conf['storify']['url']) ? $conf['storify']['url'] : t('N/A'),
-          )) . '</div>',
-      );
-      $form['embedded_identified_title'] = array(
-        '#markup' => '<div>' . t('<strong>Verified Storify Title</strong>: @title', array(
-            '@title' => !empty($conf['storify']['title']) ? $conf['storify']['title'] : t('N/A'),
-          )) . '</div>',
-      );
+      if ($conf['i18n'] == TRUE) {
+        foreach ($conf['storify'] as $language_code => $storify_localized) {
+          $form['embedded_identified_url_' . $language_code] = array(
+            '#markup' => '<hr/><div>' . t('<strong>Verified Storify URL</strong> (@lang): @url', array(
+                '@url' => !empty($conf['storify'][$language_code]['url']) ? $conf['storify'][$language_code]['url'] : t('N/A'),
+                '@lang' => strtoupper($language_code)
+              )) . '</div>',
+          );
+          $form['embedded_identified_title_' . $language_code] = array(
+            '#markup' => '<div>' . t('<strong>Verified Storify Title</strong> (@lang): @title', array(
+                '@title' => !empty($conf['storify'][$language_code]['title']) ? $conf['storify'][$language_code]['title'] : t('N/A'),
+                '@lang' => strtoupper($language_code)
+              )) . '</div>',
+          );
+        }
+      }
       break;
 
     case 'infogram':
-      $form['embedded_identified_id'] = array(
-        '#markup' => '<div>' . t('<strong>Verified Infogr.am ID</strong>: @url', array(
-            '@url' => !empty($conf['infogram']['id']) ? $conf['infogram']['id'] : t('N/A'),
-          )) . '</div>',
-      );
-      $form['embedded_identified_title'] = array(
-        '#markup' => '<div>' . t('<strong>Verified Infogr.am Title</strong>: @title', array(
-            '@title' => !empty($conf['infogram']['title']) ? $conf['infogram']['title'] : t('N/A'),
-          )) . '</div>',
-      );
-      $form['embedded_identified_inf_type'] = array(
-        '#markup' => '<div>' . t('<strong>Verified Infogr.am Type</strong>: @title', array(
-            '@title' => !empty($conf['infogram']['info_type']) ? $conf['infogram']['info_type'] : t('N/A'),
-          )) . '</div>',
-      );
+      if ($conf['i18n'] == TRUE) {
+        foreach ($conf['infogram'] as $language_code => $storify_localized) {
+          $form['embedded_identified_id_' . $language_code] = array(
+            '#markup' => '<hr/><div>' . t('<strong>Verified Infogr.am ID</strong> (@lang): @url', array(
+                '@url' => !empty($conf['infogram'][$language_code]['id']) ? $conf['infogram'][$language_code]['id'] : t('N/A'),
+                '@lang' => strtoupper($language_code),
+              )) . '</div>',
+          );
+          $form['embedded_identified_title_' . $language_code] = array(
+            '#markup' => '<div>' . t('<strong>Verified Infogr.am Title</strong> (@lang): @title', array(
+                '@title' => !empty($conf['infogram'][$language_code]['title']) ? $conf['infogram'][$language_code]['title'] : t('N/A'),
+                '@lang' => strtoupper($language_code),
+              )) . '</div>',
+          );
+          $form['embedded_identified_inf_type_' . $language_code] = array(
+            '#markup' => '<div>' . t('<strong>Verified Infogr.am Type</strong> (@lang): @title', array(
+                '@title' => !empty($conf['infogram'][$language_code]['info_type']) ? $conf['infogram'][$language_code]['info_type'] : t('N/A'),
+                '@lang' => strtoupper($language_code),
+              )) . '</div>',
+          );
+        }
+      }
       break;
   }
 
@@ -143,9 +181,32 @@ function eiti_ctools_extra__embedded_widget__edit_form_validate($form, &$form_st
   // Check types and post-processing.
   $type = $form_state['values']['type'];
   $code = $form_state['values']['embedded_code'];
+  $i18n = $form_state['values']['i18n'];
   $types = _eiti_ctools_extra__embedded_widget__get_types();
+  $form_state['conf'][$type] = array();
+
+  // Internationalization case!
+  if ($i18n) {
+    $languages = language_list();
+    foreach ($languages as $language) {
+      if (($form_state['values']['embedded_code_' . $language->language])) {
+        // First, make sure it's off.
+        unset($form_state['conf'][$type][$language->language]);
+        if ($output = _eiti_ctools_extra__embedded_widget__process($type, $form_state['values']['embedded_code_' . $language->language])) {
+          $form_state['conf'][$type][$language->language] = $output;
+        }
+        else {
+          form_set_error('embedded_code_' . $language->language, t('Make sure you have pasted correct <strong>@type</strong> code.', array(
+            '@type' => $types[$type]
+          )));
+        }
+      }
+    }
+  }
+
+  // Defaults still work as they used to (w/ or w/o i18n).
   if ($output = _eiti_ctools_extra__embedded_widget__process($type, $code)) {
-    $form_state['conf'][$type] = $output;
+    $form_state['conf'][$type]['default'] = $output;
   }
   else {
     form_set_error('embedded_code', t('Make sure you have pasted correct <strong>@type</strong> code.', array(
@@ -240,6 +301,9 @@ function eiti_ctools_extra__embedded_widget__admin_info($subtype, $conf, $contex
     $block->title = t('Configured @type Widget', array(
       '@type' => $types[$conf['type']]
     ));
+    if ($conf['i18n']) {
+      $block->title .= t(' (with internationalization)');
+    }
     $block->content = t('Embedded Widget (Configured).');
     return $block;
   }
