@@ -60,12 +60,20 @@ function eiti_ctools_extra__embedded_widget__render($subtype, $conf, $panel_args
 
   switch ($conf['type']) {
     case 'storify':
+      // Let's check if we have the 'default' key set. If we don't, we mock it.
+      if (empty($conf['storify']['default'])) {
+        $conf['storify']['default'] = $conf['storify'];
+      }
       $content['widget']['#markup'] = theme('eiti_ctools_extra_storify', array(
         'url' => isset($conf['storify'][$language->language]['url']) ? $conf['storify'][$language->language]['url'] : $conf['storify']['default']['url'],
         'title' => isset($conf['storify'][$language->language]['title']) ? $conf['storify'][$language->language]['title'] : $conf['storify']['default']['title'],
       ));
       break;
     case 'infogram':
+      // Let's check if we have the 'default' key set. If we don't, we mock it.
+      if (empty($conf['infogram']['default'])) {
+        $conf['infogram']['default'] = $conf['infogram'];
+      }
       $content['widget']['#markup'] = theme('eiti_ctools_extra_infogram', array(
         'info_id' => isset($conf['infogram'][$language->language]['id']) ? $conf['infogram'][$language->language]['id'] : $conf['infogram']['default']['id'],
         'info_type' => isset($conf['infogram'][$language->language]['info_type']) ? $conf['infogram'][$language->language]['info_type'] : $conf['infogram']['default']['info_type'],
@@ -83,7 +91,7 @@ function eiti_ctools_extra__embedded_widget__render($subtype, $conf, $panel_args
  */
 function eiti_ctools_extra__embedded_widget__edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
-  
+
   $form['type'] = array(
     '#title' => t('Widget Type'),
     '#type' => 'select',
