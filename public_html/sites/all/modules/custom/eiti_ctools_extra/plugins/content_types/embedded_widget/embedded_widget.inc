@@ -83,7 +83,7 @@ function eiti_ctools_extra__embedded_widget__render($subtype, $conf, $panel_args
  */
 function eiti_ctools_extra__embedded_widget__edit_form($form, &$form_state) {
   $conf = $form_state['conf'];
-  dsm($conf);
+  
   $form['type'] = array(
     '#title' => t('Widget Type'),
     '#type' => 'select',
