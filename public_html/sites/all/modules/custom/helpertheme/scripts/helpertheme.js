@@ -121,6 +121,7 @@
           var animation_time = $(this).data('animation-time');
           var targetID = $(this).data('target');
           var dismissible = $(this).data('dismissible');
+          var dismissible_group = $(this).data('group');
 
           if (!minimalistic_footer.size) {
               return true;
@@ -128,10 +129,21 @@
 
           // We just hide it and that's it.
           if (dismissible == true) {
-            $.cookie('minimalistic-footer-' + targetID, 'closed', { expires: 30 });
+            if (dismissible_group !== undefined) {
+              $.cookie('minimalistic-footer-group' + dismissible_group, 'closed', { expires: 30 });
+              $('.group-' + dismissible_group, context).slideUp(animation_time);
+              $('.group-' + dismissible_group + ' .footer-close-action', context).toggleClass('footer-close-action').toggleClass('footer-show-action');
+            }
+            else {
+              $.cookie('minimalistic-footer-' + targetID, 'closed', { expires: 30 });
+              minimalistic_footer.slideUp(animation_time);
+              $(this).toggleClass('footer-close-action').toggleClass('footer-show-action');
+            }
           }
-          minimalistic_footer.slideUp(animation_time);
-          $(this).toggleClass('close-action').toggleClass('show-action');
+          else {
+            minimalistic_footer.slideUp(animation_time);
+            $(this).toggleClass('footer-close-action').toggleClass('footer-show-action');
+          }
           e.preventDefault();
       });
       $('.footer-close-action', context).each(function() {
@@ -139,16 +151,28 @@
         var animation_time = $(this).data('animation-time');
         var animation_delay = $(this).data('animation-delay');
         var dismissible = $(this).data('dismissible');
+        var dismissible_group = $(this).data('group');
         var targetID = $(this).data('target');
-        var cookieValue = $.cookie('minimalistic-footer-' + targetID);
+        var cookieValue;
+
+        // If this is group, then we check whether the group is dismissed.
+        if (dismissible_group !== undefined) {
+          cookieValue = $.cookie('minimalistic-footer-group' + dismissible_group);
+        }
+        else {
+          cookieValue = $.cookie('minimalistic-footer-' + targetID);
+        }
+
+        // By default widgets are closed.
         if (cookieValue == 'closed') {
           // It's closed, we just show the footer for a delay, and hide it afterwords.
           if (animation_delay !== 0) {
+            minimalistic_footer.show();
             minimalistic_footer.delay(animation_delay).slideUp(animation_time);
           }
-          else {
-            minimalistic_footer.hide();
-          }
+        }
+        else {
+          minimalistic_footer.show();
         }
       });
     }

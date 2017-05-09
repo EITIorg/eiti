@@ -11,10 +11,12 @@ $plugin = array(
   'category' => t('Widget Library'),
   'render callback' => 'eiti_ctools_extra__minimalistic_footer__render',
   'edit form' => 'eiti_ctools_extra__minimalistic_footer__settings_form',
+  'admin info' => 'eiti_ctools_extra__minimalistic_footer__admin_info',
   'defaults' => array(
     'title' => '',
     'close' => TRUE,
     'close_dismissible' => TRUE,
+    'close_dismissible_group' => '',
     'close_position' => 'top',
     'close_delay' => '0',
     'close_time' => '200',
@@ -76,6 +78,7 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
         'data-animation-delay' => !empty($conf['close_delay']) ? $conf['close_delay'] : '0',
         'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
         'data-dismissible' => $conf['close_dismissible'],
+        'data-group' => !empty($conf['close_dismissible_group']) ? drupal_html_class($conf['close_dismissible_group']) : '',
         'data-target' => (!empty($panel_args[0]) && !empty($conf['pane_id'])) ? $panel_args[0] . '-' . $conf['pane_id'] : '',
       ),
       'external' => TRUE,
@@ -83,7 +86,16 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
     if ($conf['close_position'] == 'bottom') {
       $block['wrapper']['#attributes']['class'][] = 'close-bottom-position';
     }
+
+    // Inject the group class for group-functionality.
+    if (!empty($conf['close_dismissible_group'])) {
+      $block['wrapper']['#attributes']['class'][] = 'group-' . drupal_html_class($conf['close_dismissible_group']);
+    }
+
+    // Adjust the weights.
     $block['wrapper']['menu_items']['toggle_btn']['#weight'] = '2';
+
+    // Add the cookie library - we have to memorize whether the user has dismissed the footers or not.
     drupal_add_library('system', 'jquery.cookie');
   }
 
@@ -192,6 +204,18 @@ function eiti_ctools_extra__minimalistic_footer__settings_form($form, &$form_sta
     ),
   );
 
+  $form['close_dismissible_group'] = array(
+    '#title' => t('Dismissible Group'),
+    '#type' => 'textfield',
+    '#description' => t('If user dismisses an element which belongs to this group - all group elements get dismissed.'),
+    '#default_value' => $conf['close_dismissible_group'],
+    '#states' => array(
+      'visible' => array(
+        'input[name="close_dismissible"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
   $form['hex_background'] = array(
     '#title' => t('Background Color'),
     '#type' => 'textfield',
@@ -213,5 +237,29 @@ function eiti_ctools_extra__minimalistic_footer__settings_form_submit($form, &$f
       $form_state['conf'][$key] = $form_state['values'][$key];
       $form_state['conf']['pane_id'] = $form_state['pane']->pid;
     }
+  }
+}
+
+/**
+ * Admin callback for the backend.
+ */
+function eiti_ctools_extra__minimalistic_footer__admin_info($subtype, $conf, $contexts) {
+  if (!empty($conf)) {
+    $block = new stdClass;
+    if (empty($conf['close_dismissible_group'])) {
+      $block->title = t('@type Minimalistic Footer Widget', array(
+        '@type' => $conf['close_dismissible'] ? t('Dismissible'): t('Standard'),
+      ));
+    }
+    else {
+      $block->title = t('@type Minimalistic Footer Widget belonging to "@group" group', array(
+        '@type' => $conf['close_dismissible'] ? t('Dismissible'): t('Standard'),
+        '@group' => $conf['close_dismissible_group']
+      ));
+    }
+    $block->content = t('Description: @desc', array(
+      '@desc' => strip_tags($conf['description']['value'])
+    ));
+    return $block;
   }
 }
