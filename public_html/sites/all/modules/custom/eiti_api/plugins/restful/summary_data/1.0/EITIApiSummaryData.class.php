@@ -35,6 +35,13 @@ class EITIApiSummaryData extends RestfulEntityBase {
     $public_fields['year_end'] = array(
       'property' => 'year_end',
     );
+    $public_fields['created'] = array(
+      'property' => 'created',
+    );
+
+    $public_fields['changed'] = array(
+      'property' => 'changed',
+    );
 
     // Covered sectors.
     $public_fields['sector_oil'] = array(
