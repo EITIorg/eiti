@@ -553,3 +553,12 @@ function _eiti_ctools_extra_get_google_spreadsheet_id($url = NULL) {
   }
   return FALSE;
 }
+
+/**
+ * Implements hook_ctools_plugin_pre_alter().
+ *
+ * Why? Because of restful API ctools plugin that uses url() function.
+ */
+function eiti_ctools_extra_ctools_plugin_pre_alter(&$plugin, &$info) {
+  require_once DRUPAL_ROOT . '/includes/path.inc';
+}
