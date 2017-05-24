@@ -47,6 +47,11 @@ class MigrateSQLMap extends MigrateMap {
         // return the table name.
         return $this->mapTable;
       }
+      elseif (!empty($options['driver']) && $options['driver'] == 'pgsql') {
+        // Postgres throws an error if we prefix the database name, so just
+        // return the table name as is.
+        return $this->mapTable;
+      }
       return $dbname . '.' . $this->mapTable;
     }
   }

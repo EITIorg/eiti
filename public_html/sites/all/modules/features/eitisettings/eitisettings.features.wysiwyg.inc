@@ -15,10 +15,6 @@ function eitisettings_wysiwyg_default_profiles() {
     'format' => 'filtered_html',
     'editor' => 'ckeditor',
     'settings' => array(
-      'default' => 1,
-      'user_choose' => 0,
-      'show_toggle' => 0,
-      'add_to_summaries' => 0,
       'theme' => '',
       'language' => 'en',
       'buttons' => array(
@@ -80,6 +76,14 @@ Table without borders=table.wysiwyg-noborder',
       'block_formats' => 'p,address,pre,h2,h3,h4,h5,h6,div',
       'forcePasteAsPlainText' => 1,
     ),
+    'preferences' => array(
+      'add_to_summaries' => 0,
+      'default' => 1,
+      'show_toggle' => 0,
+      'user_choose' => 0,
+      'version' => NULL,
+    ),
+    'name' => 'formatfiltered_html',
   );
 
   return $profiles;
