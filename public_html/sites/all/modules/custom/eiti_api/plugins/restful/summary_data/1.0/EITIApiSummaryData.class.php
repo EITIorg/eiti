@@ -37,12 +37,16 @@ class EITIApiSummaryData extends RestfulEntityBase {
     );
     $public_fields['created'] = array(
       'property' => 'created',
+      'process_callbacks' => array(
+          array($this, 'formatISODate'),
+      ),
     );
-
     $public_fields['changed'] = array(
       'property' => 'changed',
+      'process_callbacks' => array(
+          array($this, 'formatISODate'),
+      ),
     );
-
     // Covered sectors.
     $public_fields['sector_oil'] = array(
       'property' => 'field_sd_oil_sector',
@@ -56,7 +60,6 @@ class EITIApiSummaryData extends RestfulEntityBase {
     $public_fields['sector_other'] = array(
       'property' => 'field_sd_other_sector',
     );
-
     // References.
     $public_fields['country'] = array(
       'property' => 'country_id',
@@ -77,5 +80,10 @@ class EITIApiSummaryData extends RestfulEntityBase {
       'property' => 'field_sd_revenue_company',
     );
     return $public_fields;
+  }
+
+  public function formatISODate($str_date) {
+    $obj_date = DateTime::createFromFormat('M d, Y', $str_date);
+    return $obj_date->format(DateTime::ISO8601);
   }
 }
