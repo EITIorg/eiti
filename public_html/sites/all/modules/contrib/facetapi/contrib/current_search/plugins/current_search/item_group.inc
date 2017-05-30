@@ -58,7 +58,9 @@ class CurrentSearchGroup extends CurrentSearchItem {
             'query' => $this->getQueryString($item, $adapter),
           ),
         );
-        $items[] = theme('current_search_link_active', $variables);
+        $row['data'] = theme('current_search_link_active', $variables);
+        $row['class'][] = 'active';
+        $items[] = $row;
       }
 
       // If there are items, add the render array.

@@ -41,14 +41,14 @@ Drupal.facetapi.applyLimit = function(settings) {
     $('ul#' + settings.id).filter(function() {
       return $(this).find('li').length > settings.limit;
     }).each(function() {
-      $('<a href="#" class="facetapi-limit-link"></a>').text(Drupal.t(settings.showMoreText)).click(function() {
+      $('<a href="#" class="facetapi-limit-link"></a>').text(settings.showMoreText).click(function() {
         if ($(this).siblings().find('li:hidden').length > 0) {
           $(this).siblings().find('li:gt(' + limit + ')').slideDown();
-          $(this).addClass('open').text(Drupal.t(settings.showFewerText));
+          $(this).addClass('open').text(settings.showFewerText);
         }
         else {
           $(this).siblings().find('li:gt(' + limit + ')').slideUp();
-          $(this).removeClass('open').text(Drupal.t(settings.showMoreText));
+          $(this).removeClass('open').text(settings.showMoreText);
         }
         return false;
       }).insertAfter($(this));
@@ -76,11 +76,11 @@ Drupal.facetapi.Redirect.prototype.gotoHref = function() {
  */
 Drupal.facetapi.makeCheckboxes = function(facet_id) {
   var $facet = $('#' + facet_id),
-      $links = $('a.facetapi-checkbox', $facet);
+      $items = $('a.facetapi-checkbox, span.facetapi-checkbox', $facet);
 
   // Find all checkbox facet links and give them a checkbox.
-  $links.once('facetapi-makeCheckbox').each(Drupal.facetapi.makeCheckbox);
-  $links.once('facetapi-disableClick').click(function (e) {
+  $items.once('facetapi-makeCheckbox').each(Drupal.facetapi.makeCheckbox);
+  $items.once('facetapi-disableClick').click(function (e) {
     Drupal.facetapi.disableFacet($facet);
   });
 }
@@ -90,9 +90,13 @@ Drupal.facetapi.makeCheckboxes = function(facet_id) {
  * class.
  */
 Drupal.facetapi.disableFacet = function ($facet) {
-  $facet.addClass('facetapi-disabled');
-  $('a.facetapi-checkbox').click(Drupal.facetapi.preventDefault);
-  $('input.facetapi-checkbox', $facet).attr('disabled', true);
+  var $elem = $(this);
+  // Apply only for links.
+  if ($elem[0].tagName == 'A') {
+    $facet.addClass('facetapi-disabled');
+    $('a.facetapi-checkbox').click(Drupal.facetapi.preventDefault);
+    $('input.facetapi-checkbox', $facet).attr('disabled', true);
+  }
 }
 
 /**
@@ -106,11 +110,11 @@ Drupal.facetapi.preventDefault = function (e) {
  * Replace an unclick link with a checked checkbox.
  */
 Drupal.facetapi.makeCheckbox = function() {
-  var $link = $(this),
-      active = $link.hasClass('facetapi-active');
+  var $elem = $(this),
+      active = $elem.hasClass('facetapi-active');
 
-  if (!active && !$link.hasClass('facetapi-inactive')) {
-    // Not a facet link.
+  if (!active && !$elem.hasClass('facetapi-inactive')) {
+    // Not a facet element.
     return;
   }
 
@@ -118,25 +122,33 @@ Drupal.facetapi.makeCheckbox = function() {
   // The label is required for accessibility, but it duplicates information
   // in the link itself, so it should only be shown to screen reader users.
   var id = this.id + '--checkbox',
-      description = $link.find('.element-invisible').html(),
-      label = $('<label class="element-invisible" for="' + id + '">' + description + '</label>'),
-      checkbox = $('<input type="checkbox" class="facetapi-checkbox" id="' + id + '" />'),
+      description = $elem.find('.element-invisible').html(),
+      label = $('<label class="element-invisible" for="' + id + '">' + description + '</label>');
+
+  // Link for elements with count 0.
+  if ($elem[0].tagName == 'A') {
+    var checkbox = $('<input type="checkbox" class="facetapi-checkbox" id="' + id + '" />'),
       // Get the href of the link that is this DOM object.
-      href = $link.attr('href'),
+      href = $elem.attr('href'),
       redirect = new Drupal.facetapi.Redirect(href);
+  }
+  // Link for elements with count more than 0.
+  else {
+    var checkbox = $('<input disabled type="checkbox" class="facetapi-checkbox" id="' + id + '" />');
+  }
 
   checkbox.click(function (e) {
-    Drupal.facetapi.disableFacet($link.parents('ul.facetapi-facetapi-checkbox-links'));
+    Drupal.facetapi.disableFacet($elem.parents('ul.facetapi-facetapi-checkbox-links'));
     redirect.gotoHref();
   });
 
   if (active) {
     checkbox.attr('checked', true);
     // Add the checkbox and label, hide the link.
-    $link.before(label).before(checkbox).hide();
+    $elem.before(label).before(checkbox).hide();
   }
   else {
-    $link.before(label).before(checkbox);
+    $elem.before(label).before(checkbox);
   }
 }
 
