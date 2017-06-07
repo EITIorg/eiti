@@ -2,7 +2,7 @@ export var status = [
   {
     "id": 5329,
     "color": "#6CBCE3",
-    "title": "Yet to be assessed against the 2016 Standard<br/>",
+    "title": "Yet to be assessed against the 2016 Standard<br>",
     "subtitle": ""
   },
   {
@@ -20,7 +20,7 @@ export var status = [
   {
     "id": 5327,
     "color": "#FAC433",
-    "title": "Inadequate progress / suspended<br/>",
+    "title": "Inadequate progress / suspended<br>",
     "subtitle": ""
   },
   {
@@ -36,4 +36,3 @@ export var status = [
     "subtitle": ""
   }
 ];
-

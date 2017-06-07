@@ -5,6 +5,7 @@ import { countryGeoJson } from './data/countries.js';
 //import { countryInfo } from './data/implementing_country.js';
 
 import { helpers } from './helpers.js' ;
+import { translations } from './data/translations.js' ;
 import _ from 'underscore';
 
 // Legend information
@@ -165,7 +166,7 @@ export default class MapWidgetComponent extends Component {
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
-          break;          
+          break;
           case "revenue":
             if(datapoint.revenues) {
               var years = Object.keys(datapoint.revenues);
@@ -177,7 +178,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "revenue_per_capita":
-            if(datapoint.revenues) {  
+            if(datapoint.revenues) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
@@ -223,7 +224,7 @@ export default class MapWidgetComponent extends Component {
       countryGeoJsonProcessed.features.push(country);
 
     }.bind(this));
-  
+
     if(valuetypes === 'range') {
       // Update metadata with ranges
       metadata = this.updateMetadata(countryGeoJsonProcessed, metadata);
@@ -369,24 +370,24 @@ export default class MapWidgetComponent extends Component {
 
 
           var mergedHTML = "";
-          var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>"; 
+          var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
           mergedHTML += headerText;
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
 
-            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br></div>';
 //            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
             if(v.subtitle != "") {
-              mergedHTML += (helpers.t(v.subtitle) || '') + '<br/>';
+              mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
             }
           });
           //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
 
-          var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>"; 
+          var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>";
           mergedHTML += footerText;
 
-          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>"; 
+          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>";
 
           var divLegendBody = document.createElement("DIV");
           divLegendBody.innerHTML = mergedHTML + sourceText;
@@ -443,7 +444,7 @@ export default class MapWidgetComponent extends Component {
 
         return completeType ? completeType.color: '#dddddd';
     }
-    else 
+    else
     {
         if (metadata === undefined) return;
 
@@ -476,7 +477,7 @@ export default class MapWidgetComponent extends Component {
     }
     else {
       geoJsonLayer = <GeoJson data={this.state.baseMap} ref='geoJsonLayer' onEachFeature={hoverDecider} style={helpers.style}></GeoJson>;
-    } 
+    }
     var buttons;
 
     if(this.props.buttons) {
@@ -486,7 +487,7 @@ export default class MapWidgetComponent extends Component {
               {helpers.t('Overview')}
             </li>
             <li>
-              Tax & Legal Framework
+              {helpers.t('Tax & Legal Framework')}
               <ul className="map-option-items">
                 <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online oil registry')}</li>
                 <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online mining registry')}</li>
@@ -494,7 +495,7 @@ export default class MapWidgetComponent extends Component {
               </ul>
             </li>
             <li>
-              Production
+              {helpers.t('Production')}
               <ul className="map-option-items">
                 <li data-indicatorid="oil_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
                 <li data-indicatorid="gas_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
@@ -504,7 +505,7 @@ export default class MapWidgetComponent extends Component {
               </ul>
             </li>
             <li>
-              Revenues
+              {helpers.t('Revenues')}
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
                 <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues per capita')}</li>
