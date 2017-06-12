@@ -11,6 +11,7 @@ let TreeMap = require('./chartWidgets/TreeMap');
 let BubbleChart = require('./chartWidgets/BubbleChart');
 let Sankey = require('./chartWidgets/Sankey');
 let Scorecard = require('./chartWidgets/Scorecard');
+let translations = require('./vendor/translations');
 
 import { render } from 'react-dom';
 
@@ -24,7 +25,7 @@ window.chartWidget.create = function(options, data) {
 	}
 
 	switch(options.type) {
-		case "Bar": 
+		case "Bar":
 			render((
 				<div className={options.className}>
 					<h3>{options.name}</h3>
@@ -41,7 +42,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "Pie": 
+		case "Pie":
 			render((
 				<div className={options.className}>
 					<h3>{options.name}</h3>
@@ -56,7 +57,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "GroupedBar": 
+		case "GroupedBar":
 			render((
 				<div className={options.className}>
 					<GroupedBar
@@ -76,7 +77,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "GroupedBarExport": 
+		case "GroupedBarExport":
 			render((
 				<div className={options.className}>
 					<GroupedBarExport
@@ -88,7 +89,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "StackedBar": 
+		case "StackedBar":
 			render((
 				<div className={options.className}>
 					<StackedBar
@@ -108,7 +109,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "StackedBarExport": 
+		case "StackedBarExport":
 			render((
 				<div className={options.className}>
 					<StackedBarExport
@@ -120,7 +121,7 @@ window.chartWidget.create = function(options, data) {
 		        </div>
 			), document.getElementById(options.container))
 		break;
-		case "TreeMap": 
+		case "TreeMap":
 			render((
 				<div className={options.className}>
 					<TreeMap
@@ -136,7 +137,7 @@ window.chartWidget.create = function(options, data) {
 				</div>
 			), document.getElementById(options.container))
 		break;
-		case "BubbleChart": 
+		case "BubbleChart":
 			render((
 				<div className={options.className}>
 					<BubbleChart
@@ -153,7 +154,7 @@ window.chartWidget.create = function(options, data) {
 				</div>
 			), document.getElementById(options.container))
 		break;
-		case "Sankey": 
+		case "Sankey":
 			render((
 				<div className={options.className}>
 					<Sankey
@@ -169,7 +170,7 @@ window.chartWidget.create = function(options, data) {
 				</div>
 			), document.getElementById(options.container))
 		break;
-		case "Scorecard": 
+		case "Scorecard":
 			render((
 				<div className={options.className}>
 					<Scorecard
@@ -187,4 +188,3 @@ window.chartWidget.create = function(options, data) {
 		break;
 	}
 }
-

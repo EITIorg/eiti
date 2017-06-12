@@ -7,7 +7,7 @@ $().ready(function(){
 
 export var init = function(data, scores, categories, requirements, el) {
 	renderScorecard(
-		{ 
+		{
 			result: data,
 			requirements: requirements.requirements,
 			categories: categories.categories,
@@ -26,20 +26,20 @@ function renderScorecard(data, placeholder) {
 	var tableHeader = $('<THEAD>');
 
 	var tableHeaderUpperRow = $('<TR>');
-	tableHeaderUpperRow.append($('<TH>').attr('colspan', 2).html('EITI Requirements'));
-	tableHeaderUpperRow.append($('<TH>').attr('colspan', 5).html('Level of Progress'));
+	tableHeaderUpperRow.append($('<TH>').attr('colspan', 2).html(translate('EITI Requirements')));
+	tableHeaderUpperRow.append($('<TH>').attr('colspan', 5).html(translate('Level of Progress')));
 	if(hasProgress) {
-		tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html('Direction <br/>of Progress'));
+		tableHeaderUpperRow.append($('<TH>').attr('rowspan', 2).html(translate('Direction <br>of Progress')));
 	}
 
 	var tableHeaderLowerRow = $('<TR>');
-	tableHeaderLowerRow.append($('<TH>').html('Categories'));
-	tableHeaderLowerRow.append($('<TH>').html('Requirements'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>No Progress</span></div>'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Inadequate</span></div>'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Meaningful</span></div>'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Satisfactory</span></div>'));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html('<div><span>Beyond</span></div>'));
+	tableHeaderLowerRow.append($('<TH>').html(translate('Categories')));
+	tableHeaderLowerRow.append($('<TH>').html(translate('Requirements')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>No Progress</span></div>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Inadequate</span></div>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Meaningful</span></div>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Satisfactory</span></div>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Beyond</span></div>')));
 
 	tableHeader.append(tableHeaderUpperRow);
 	tableHeader.append(tableHeaderLowerRow);
@@ -57,44 +57,54 @@ function renderScorecard(data, placeholder) {
 	window.$ = undefined;
 }
 
+function translate(string){
+	//console.log("Drupal.t('" + string + "');");
+	if (window.Drupal && typeof window.Drupal.t === 'function') {
+			return window.Drupal.t(string);
+	}
+	return string;
+}
+
 function getLegend(hasProgress) {
 	var legendHTML = '<div class="scorecard-legend-item">' +
     '  <i style="background:#C00000">&nbsp;</i>' +
     '  <div>' +
-    '    <strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.' +
+    translate('<strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.') +
     '  </div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
-    '  <i style="background:#FAC433">&nbsp;</i>' +
-    '  <div><strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.' +
+    '  <i style="background:#FAC433">&nbsp;</i><div>' +
+    translate('<strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.') +
     '  </div>' +
     '</div>' +
     '<div class="scorecard-legend-item">' +
-    '  <i style="background:#84AD42">&nbsp;</i>' +
-    '  <div><strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.</div>' +
-    '</div>' +
+    '  <i style="background:#84AD42">&nbsp;</i>  <div>' +
+    translate('<strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.') +
+    '</div></div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#2D8B2A">&nbsp;</i>' +
-    '  <div><strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.</div>' +
+    '  <div>' +
+		translate('<strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.') +
     '</div>' +
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#5182bb">&nbsp;</i>' +
-    '  <div><strong>Beyond.</strong> The country has gone beyond the requirements.</div>' +
-    '</div>' +
+    '  <div>' +
+		translate('<strong>Beyond.</strong> The country has gone beyond the requirements.') +
+    '</div></div>' +
     '<div class="scorecard-legend-item">' +
-    '  <i class="only_encouraged">&nbsp;</i>' +
-    '  <div>This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.</div>' +
-    '</div>' +
+    '  <i class="only_encouraged">&nbsp;</i><div>' +
+    translate('This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.') +
+    '</div></div>' +
     '<div class="scorecard-legend-item">' +
-    '  <i class="not_applicable">&nbsp;</i>' +
-    '  <div>The MSG has demonstrated that this requirement is not applicable in the country.</div>' +
-    '</div>';
+    '  <i class="not_applicable">&nbsp;</i><div>' +
+    translate('The MSG has demonstrated that this requirement is not applicable in the country.') +
+    '</div></div>';
 
     if(hasProgress) {
-		legendHTML += '<div style="clear:both;padding-top:15px;"><strong>Direction of progress</strong><br/><br/></div>' +
-		'<div class="scorecard-legend-item"><span style="color:#676767;text-align:center;">&equals;</span><div>No change in performance since the last Validation.</div></div>' +
-		'<div class="scorecard-legend-item"><span style="color:red;text-align:center;">&larr;</span><div>The country is performing worse that in the last Validation. </div></div>' +
-		'<div class="scorecard-legend-item"><span style="color:#84AD42;text-align:center;">&rarr;</span><div>The country is performing better than in the last Validation. </div></div>'
+		legendHTML += '<div style="clear:both;padding-top:15px;"><strong>' + translate('Direction of progress') + '</strong><br/><br/></div>' +
+		'<div class="scorecard-legend-item"><span style="color:#676767;text-align:center;">&equals;</span><div>' + translate('No change in performance since the last Validation.') + '</div></div>' +
+		'<div class="scorecard-legend-item"><span style="color:red;text-align:center;">&larr;</span><div>' + translate('The country is performing worse that in the last Validation.') + ' </div></div>' +
+		'<div class="scorecard-legend-item"><span style="color:#84AD42;text-align:center;">&rarr;</span><div>' + translate('The country is performing better than in the last Validation.') + ' </div></div>'
 
     }
 	return legendHTML;
@@ -116,7 +126,7 @@ function appendRows(data, tableBody, hasProgress) {
 	    var requirements_category = _.filter(requirements, function(requirement) {
 	        return (requirement.Category === category.id);
 	    });
-	    bodyRow.append($("<TD>").css({'border-bottom': '1px solid black'}).attr('rowspan', requirements_category.length).addClass('requirement').html(category.name));
+	    bodyRow.append($("<TD>").css({'border-bottom': '1px solid black'}).attr('rowspan', requirements_category.length).addClass('requirement').html(translate(category.name)));
 
 	    _.each(requirements_category, function(requirement, idx) {
 	        var currentRow;
@@ -142,12 +152,12 @@ function appendRows(data, tableBody, hasProgress) {
 	        if(bottomBorder) {
 	        	req_cell.css({'border-bottom': '1px solid black'});
 	        }
-	        currentRow.append(req_cell.html(requirement.Requirement + ' (#' + requirement.Code + ') '));
+	        currentRow.append(req_cell.html(translate(requirement.Requirement) + ' (#' + requirement.Code + ') '));
 
 	        // Requirement Answers
 	        if (currentScore) {
 	        	if(currentScore.description && currentScore.description !== "") {
-			        let descriptionSpan = $("<DIV>").html("<BR/>" + currentScore.description).addClass("requirement_description").hide();
+			        let descriptionSpan = $("<DIV>").html("<BR/>" + translate(currentScore.description)).addClass("requirement_description").hide();
 			        let button = $("<A>").addClass("requirement_button").html("(+)");
 			        button.on("click", function(){
 		        		if(button.html() === "(+)") {
@@ -200,35 +210,35 @@ function appendRows(data, tableBody, hasProgress) {
 
 			    if(hasProgress){
 			    	let symbol = {
-			    		symbol: '&nbsp', 
+			    		symbol: '&nbsp',
 			    		color: '#676767'
 			    	};
-			    	
+
 			    	switch(currentScore.progress_value) {
 			    		case "0": //Same
 				    		symbol = {
-					    		symbol: '&equals;', 
+					    		symbol: '&equals;',
 					    		color: '#676767'
 					    	}
-			    		break; 
+			    		break;
 			    		case "1": //Better
 				    		symbol = {
-					    		symbol: '&rarr;', 
+					    		symbol: '&rarr;',
 					    		color: '#84AD42'
 					    	}
-			    		break; 
+			    		break;
 			    		case "2": //Worse
 				    		symbol = {
-					    		symbol: '&larr;', 
+					    		symbol: '&larr;',
 					    		color: 'red'
 					    	}
-			    		break; 
+			    		break;
 			    		case "3": //Empty
 				    		symbol = {
-					    		symbol: '&nbsp', 
+					    		symbol: '&nbsp',
 					    		color: '#676767'
 					    	}
-			    		break; 
+			    		break;
 
 			    	}
 			        var symbolElement = $("<DIV>").css({'color': symbol.color,'text-align': 'center', 'font-weight':'bold'}).html(symbol.symbol);
@@ -275,35 +285,35 @@ function appendRows(data, tableBody, hasProgress) {
     });
     if(hasProgress){
     	let symbol = {
-    		symbol: '&nbsp', 
+    		symbol: '&nbsp',
     		color: '#676767'
     	};
-    	
+
     	switch(currentScore.progress_value) {
     		case "0": //Same
 	    		symbol = {
-		    		symbol: '&equals;', 
+		    		symbol: '&equals;',
 		    		color: '#676767'
 		    	}
-    		break; 
+    		break;
     		case "1": //Better
 	    		symbol = {
-		    		symbol: '&rarr;', 
+		    		symbol: '&rarr;',
 		    		color: '#84AD42'
 		    	}
-    		break; 
+    		break;
     		case "2": //Worse
 	    		symbol = {
-		    		symbol: '&larr;', 
+		    		symbol: '&larr;',
 		    		color: 'red'
 		    	}
-    		break; 
+    		break;
     		case "3": //Empty
 	    		symbol = {
-		    		symbol: '&nbsp', 
+		    		symbol: '&nbsp',
 		    		color: '#676767'
 		    	}
-    		break; 
+    		break;
 
     	}
         var symbolElement = $("<DIV>").css({'color': symbol.color,'text-align': 'center', 'font-weight':'bold'}).html(symbol.symbol);
@@ -314,7 +324,3 @@ function appendRows(data, tableBody, hasProgress) {
 	tableBody.append(currentRow);
 
 }
-
-
-
-
