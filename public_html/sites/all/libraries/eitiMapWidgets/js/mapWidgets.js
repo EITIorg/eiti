@@ -24218,10 +24218,10 @@
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
-	          if (v.color && v.color !== "") {
-	            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
-	          } else {
+	          if (v.use_style) {
 	            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	          } else {
+	            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
 	          }
 	          if (v.subtitle != "") {
 	            mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br/>';
@@ -25053,34 +25053,40 @@
 	});
 	var status = exports.status = [{
 	  "id": 5329,
-	  "color": "",
-	  "title": "Yet to be assessed against the 2016 Standard<br/>",
-	  "subtitle": ""
+	  "color": "#6CBCE3",
+	  "title": "Yet to be assessed against the 2016 Standard<br>",
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 75,
-	  "color": "",
+	  "color": "#2D8B2A",
 	  "title": "Satisfactory progress",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 74,
-	  "color": "",
+	  "color": "#84AD42",
 	  "title": "Meaningful progress",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 5327,
-	  "color": "",
-	  "title": "Inadequate progress / suspended<br/>",
-	  "subtitle": ""
+	  "color": "#FAC433",
+	  "title": "Inadequate progress / suspended<br>",
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 8212,
-	  "color": "",
+	  "color": "#FAC433",
 	  "title": "Suspended due to political instability",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 8213,
-	  "color": "",
+	  "color": "#FAC433",
 	  "title": "Suspended for missing deadline",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}];
 
 /***/ }),
