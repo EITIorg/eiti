@@ -24470,6 +24470,7 @@
 	            reportURL = reportObj ? reportObj.url : "";
 	            reportClass = reportObj ? "" : "empty";
 	          }
+	          var country_name = _helpers.helpers.t(sortedCountries[i].label);
 	
 	          items.push(_react2.default.createElement(
 	            'li',
@@ -24478,7 +24479,7 @@
 	            _react2.default.createElement(
 	              'a',
 	              { href: countryPageURL },
-	              sortedCountries[i].label
+	              country_name
 	            )
 	          ));
 	          if ((i + 1) % cutout === 0 || i + 1 === sortedCountries.length) {
@@ -25152,6 +25153,58 @@
 	Drupal.t('Production');
 	Drupal.t('Revenues');
 	
+	Drupal.t('Afghanistan');
+	Drupal.t('Albania');
+	Drupal.t('Armenia');
+	Drupal.t('Burkina Faso');
+	Drupal.t('Cameroon');
+	Drupal.t('Central African Republic');
+	Drupal.t('Chad');
+	Drupal.t('Colombia');
+	Drupal.t('Côte d\'Ivoire');
+	Drupal.t('Democratic Republic of Congo');
+	Drupal.t('Dominican Republic ');
+	Drupal.t('Ethiopia');
+	Drupal.t('Germany');
+	Drupal.t('Ghana');
+	Drupal.t('Guatemala');
+	Drupal.t('Guinea');
+	Drupal.t('Honduras');
+	Drupal.t('Indonesia');
+	Drupal.t('Iraq');
+	Drupal.t('Kazakhstan');
+	Drupal.t('Kyrgyz Republic');
+	Drupal.t('Liberia');
+	Drupal.t('Madagascar');
+	Drupal.t('Malawi');
+	Drupal.t('Mali');
+	Drupal.t('Mauritania');
+	Drupal.t('Mongolia');
+	Drupal.t('Mozambique');
+	Drupal.t('Myanmar');
+	Drupal.t('Niger');
+	Drupal.t('Nigeria');
+	Drupal.t('Norway');
+	Drupal.t('Papua New Guinea');
+	Drupal.t('Peru');
+	Drupal.t('Philippines');
+	Drupal.t('Republic of the Congo');
+	Drupal.t('Sao Tome and Principe');
+	Drupal.t('Senegal');
+	Drupal.t('Seychelles');
+	Drupal.t('Sierra Leone');
+	Drupal.t('Solomon Islands');
+	Drupal.t('Tajikistan');
+	Drupal.t('Tanzania');
+	Drupal.t('Timor-Leste');
+	Drupal.t('Togo');
+	Drupal.t('Trinidad and Tobago');
+	Drupal.t('Ukraine');
+	Drupal.t('United Kingdom');
+	Drupal.t('United States of America');
+	Drupal.t('Yemen');
+	Drupal.t('Zambia');
+	
 	if (drupalPlaceholder) {
 	  Drupal = null;
 	}
@@ -25270,7 +25323,7 @@
 	    // Helper function that can translate strings.
 	    t: function t(string) {
 	        // Check if window.Drupal.t() exists and call it.
-	        console.log(string);
+	        console.log("Drupal.t('" + string + "')");
 	        if (window.Drupal && typeof window.Drupal.t === 'function') {
 	            return window.Drupal.t(string);
 	        }

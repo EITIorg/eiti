@@ -11,12 +11,12 @@ export var helpers = {
     },
 
     getEndPoint: function() {
-        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';   
-    }, 
-    
+        return window.Drupal ? '/api/v1.0/implementing_country' : 'source/scripts/data/implementing_country.json';
+    },
+
     getEndPointPage: function(page) {
-        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';   
-    }, 
+        return window.Drupal ? '/api/v1.0/implementing_country?page=' + page : 'source/scripts/data/implementing_country_page_' + page + '.json';
+    },
 
     getPaletteDivergent: function(index) {
         var colors = ['#42abd8', '#65c32d', '#ff6600', '#dddddd'];
@@ -106,6 +106,7 @@ export var helpers = {
     // Helper function that can translate strings.
     t: function(string) {
         // Check if window.Drupal.t() exists and call it.
+        console.log("Drupal.t('" + string + "')");
         if (window.Drupal && typeof window.Drupal.t === 'function') {
             return window.Drupal.t(string);
         }
@@ -165,12 +166,12 @@ export var helpers = {
 
         // Latest Report Year
         var country_last_report_year = lastMetadata;
-        
+
         // Latest Report Link
         var country_last_report_file = country.annual_report_file;
 
         // Extractives Revenue latest year
-        
+
         var indicator_government_revenue = undefined;
         if(country.revenues && Object.keys(country.revenues).length > 0 ) {
             var years_revenue = Object.keys(country.revenues);
@@ -237,7 +238,7 @@ export var helpers = {
         }
         else
         {
-            country_report_link += '<a href="' + country_last_report_file + '">' 
+            country_report_link += '<a href="' + country_last_report_file + '">'
             country_report_link += country_last_report_year;
             country_report_link += '</a>';
         }
@@ -262,7 +263,7 @@ export var helpers = {
             '   <span class="label">' + this.t('Sectors covered') + ':</span>';
             if(sectors_covered && sectors_covered.length > 0) {
                 for(var i = 0; i < sectors_covered.length;i++) {
-                    info_content_second = info_content_second + 
+                    info_content_second = info_content_second +
                         '   <span class="value">' + this.t(sectors_covered[i]) + ' <img class="icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_' + sectors_covered[i].toLowerCase().replace(' ', '') + '.svg') + '"  /></span>';
 
                 }

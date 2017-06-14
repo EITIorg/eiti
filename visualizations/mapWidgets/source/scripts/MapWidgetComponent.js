@@ -547,11 +547,12 @@ export default class MapWidgetComponent extends Component {
           reportURL = reportObj ? reportObj.url : "";
           reportClass = reportObj ? "" : "empty";
         }
+        var country_name = helpers.t(sortedCountries[i].label);
 
         items.push(
             <li>
               <span className={itemStyle}></span>
-              <a href={countryPageURL}>{sortedCountries[i].label}</a>
+              <a href={countryPageURL}>{country_name}</a>
             </li>
           );
         if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {

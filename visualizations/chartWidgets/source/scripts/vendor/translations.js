@@ -67,6 +67,7 @@ Drupal.t('Direction of progress');
 Drupal.t('No change in performance since the last Validation.');
 Drupal.t('The country is performing worse that in the last Validation.');
 Drupal.t('The country is performing better than in the last Validation.');
+Drupal.t('Overall assessment');
 
 if (drupalPlaceholder) {
   Drupal = null;
