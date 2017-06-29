@@ -30,10 +30,9 @@ class ScoreReqValueEntity extends Entity {
     if (!empty($this->score_req_id)) {
       $this->score_req = entity_load_single('score_req', $this->score_req_id);
       if (empty($this->score_req)) {
-        throw new Exception('Cannot create an Score Requirement Value without a valid Score Requirement.');
+        drupal_set_message(t('Cannot create an Score Requirement Value without a valid Score Requirement. Please checks requirements with suggestions to <strong>EDIT</strong>.'), 'warning');
       }
     }
-
   }
 
   /**

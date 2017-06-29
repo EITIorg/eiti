@@ -148,7 +148,7 @@ function eitientity_score_req_value_get_score_req_label($entity_type, $entity) {
     }
   }
 
-  return '';
+  return t('N/A, please <strong>EDIT</strong>');
 }
 
 /**
@@ -165,7 +165,7 @@ function eitientity_score_req_value_get_score_req_value_value($entity_type, $ent
   /** @var ScoreReqEntity $score_req_entity */
   $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
   if (empty($score_req_entity)) {
-    return '';
+    return t('N/A, please <strong>EDIT</strong>');
   }
 
   if ($entity->value !== '') {
@@ -190,7 +190,7 @@ function eitientity_score_req_value_get_score_req_category($entity_type, $entity
   /** @var ScoreReqEntity $score_req_entity */
   $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
   if (empty($score_req_entity)) {
-    return '';
+    return t('N/A, please <strong>EDIT</strong>');
   }
   $score_req_emw = entity_metadata_wrapper('score_req', $score_req_entity);
   if ($category = $score_req_emw->field_score_req_category->value()) {
