@@ -98,6 +98,9 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
     // Add the cookie library - we have to memorize whether the user has dismissed the footers or not.
     drupal_add_library('system', 'jquery.cookie');
   }
+  else {
+    $block['wrapper']['#attributes']['class'][] = 'no-closing-button';
+  }
 
   // Apply the background.
   if (!empty($conf['hex_background'])) {
@@ -248,7 +251,7 @@ function eiti_ctools_extra__minimalistic_footer__admin_info($subtype, $conf, $co
     $block = new stdClass;
     if (empty($conf['close_dismissible_group'])) {
       $block->title = t('@type Minimalistic Footer Widget', array(
-        '@type' => $conf['close_dismissible'] ? t('Dismissible'): t('Standard'),
+        '@type' => (isset($conf['close_dismissible']) && $conf['close_dismissible']) ? t('Dismissible'): t('Standard'),
       ));
     }
     else {
