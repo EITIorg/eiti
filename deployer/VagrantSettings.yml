@@ -31,7 +31,7 @@ vagrant_volumes:
 # The type of synced directory. By default this is "vboxsf" which is very slow.
 #   - For linux/mac see: https://www.vagrantup.com/docs/synced-folders/nfs.html
 #   - For windows see: https://www.vagrantup.com/docs/synced-folders/smb.html
-vagrant_volumes_type: nfs  # for linux/mac
+#vagrant_volumes_type: nfs  # for linux/mac
 #vagrant_volumes_type: smb  # for windows
 
 # Information about the Vagrant box. Any simple SL7 box should work.

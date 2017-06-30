@@ -513,9 +513,9 @@ function _contentwidget__fact_blocks__get_impl_countries_count() {
     'Meaningful progress',
     'Satisfactory progress',
     'Inadequate progress / suspended',
-    'No progress',
     'Yet to be assessed against the 2016 Standard',
-    'Suspended',
+    'Suspended due to political instability',
+    'Suspended for missing deadline',
   );
   $count = _contentwidget__fact_blocks__get_countries_count($opt_in);
   if ($count == FALSE) {
