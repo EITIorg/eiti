@@ -512,7 +512,7 @@ function _contentwidget__fact_blocks__get_impl_countries_count() {
   $opt_in = array(
     'Meaningful progress',
     'Satisfactory progress',
-    'Inadequate progress',
+    'Inadequate progress / suspended',
     'No progress',
     'Yet to be assessed against the 2016 Standard',
     'Suspended',

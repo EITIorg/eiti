@@ -48334,11 +48334,7 @@
 		"Category": 5
 	}, {
 		"Requirement": "Mandatory social expenditures",
-		"Code": "6.1.a",
-		"Category": 6
-	}, {
-		"Requirement": "Discretionary social expenditures",
-		"Code": "6.1.b",
+		"Code": 6.1,
 		"Category": 6
 	}, {
 		"Requirement": "SOE quasi-fiscal expenditures",
