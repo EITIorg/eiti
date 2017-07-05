@@ -71,6 +71,7 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
 
   // Make the button optional.
   if (!empty($conf['close']) && $conf['close'] == TRUE) {
+
     $block['wrapper']['content']['toggle_btn']['#markup'] = l('Close', '', array(
       'fragment' => 'close',
       'attributes' => array(
@@ -79,7 +80,6 @@ function eiti_ctools_extra__minimalistic_footer__render($subtype, $conf, $panel_
         'data-animation-time' => !empty($conf['close_time']) ? $conf['close_time'] : '200',
         'data-dismissible' => $conf['close_dismissible'],
         'data-group' => !empty($conf['close_dismissible_group']) ? drupal_html_class($conf['close_dismissible_group']) : '',
-        'data-target' => (!empty($panel_args[0]) && !empty($conf['pane_id'])) ? $panel_args[0] . '-' . $conf['pane_id'] : '',
       ),
       'external' => TRUE,
     ));
