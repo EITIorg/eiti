@@ -95,6 +95,7 @@ Drupal.t('Republic of the Congo');
 Drupal.t('Sao Tome and Principe');
 Drupal.t('Senegal');
 Drupal.t('Seychelles');
+Drupal.t('Suriname');
 Drupal.t('Sierra Leone');
 Drupal.t('Solomon Islands');
 Drupal.t('Tajikistan');
