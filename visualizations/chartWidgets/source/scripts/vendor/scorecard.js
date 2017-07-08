@@ -19,7 +19,8 @@ function renderScorecard(data, placeholder) {
 	window.$ = window.jQuery;
 	var countryScore = _.first(data.result);
 	let hasProgress = false;
-	let progress_values = _.filter(countryScore.score_req_values, function(v){return v.progress_value != null && v.progress_value !== "3"});
+	//TODO: Eliminate magic number 3
+	let progress_values = _.filter(countryScore.score_req_values, function(v){return v && v.progress_value != null && v.progress_value !== "3"});
 	hasProgress = (progress_values.length > 0);
 
 	var table = $('<TABLE>').addClass('country_scorecard');
@@ -144,7 +145,7 @@ function appendRows(data, tableBody, hasProgress) {
 	        let currentScore = undefined;
 	        if (countryScore) {
 		        currentScore = _.find(countryScore.score_req_values, function(value) {
-		            return (value.score_req.code == requirement.Code); //Allow type casting
+		            return value && (value.score_req.code == requirement.Code); //Allow type casting
 		        });
 
 	        }
@@ -274,7 +275,7 @@ function appendRows(data, tableBody, hasProgress) {
 
 	var cellStyle = '';
 
-	let currentScore = _.find(_.first(result).score_req_values, function(v){ return v.score_req.code == "0.0";}); // This is the Overall Progress score_id
+	let currentScore = _.find(_.first(result).score_req_values, function(v){ return v && v.score_req.code == "0.0";}); // This is the Overall Progress score_id
 	let currentRow = $("<TR>");
 	currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({'color': '#C00000', 'font-weight': 'bold'}).html(translate('Overall assessment')));
     _.each(scores, function(value) {
