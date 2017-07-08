@@ -48718,8 +48718,9 @@
 		window.$ = window.jQuery;
 		var countryScore = _.first(data.result);
 		var hasProgress = false;
+		//TODO: Eliminate magic number 3
 		var progress_values = _.filter(countryScore.score_req_values, function (v) {
-			return v.progress_value != null && v.progress_value !== "3";
+			return v && v.progress_value != null && v.progress_value !== "3";
 		});
 		hasProgress = progress_values.length > 0;
 
@@ -48808,7 +48809,7 @@
 				var currentScore = undefined;
 				if (countryScore) {
 					currentScore = _.find(countryScore.score_req_values, function (value) {
-						return value.score_req.code == requirement.Code; //Allow type casting
+						return value && value.score_req.code == requirement.Code; //Allow type casting
 					});
 				}
 				var req_cell = $("<TD>");
@@ -48937,7 +48938,7 @@
 		var cellStyle = '';
 
 		var currentScore = _.find(_.first(result).score_req_values, function (v) {
-			return v.score_req.code == "0.0";
+			return v && v.score_req.code == "0.0";
 		}); // This is the Overall Progress score_id
 		var currentRow = $("<TR>");
 		currentRow.append($("<TD>").addClass("overall_progress").attr('colspan', 2).css({ 'color': '#C00000', 'font-weight': 'bold' }).html(translate('Overall assessment')));

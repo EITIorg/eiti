@@ -1,52 +1,845 @@
 {
 "data": [
 {
-"id": 1,
-"label": "United States of America: 1999",
-"self": "https://preprod.eiti.org/api/v1.0/score_data/1",
-"year": "1999",
+"id": 6,
+"label": "Ghana: 2016",
+"self": "http://eiti.local/api/v1.0/score_data/6",
+"year": "2016",
 "country": {
-"id": 16,
-"label": "United States of America",
-"self": "https://preprod.eiti.org/api/v1.0/implementing_country/16",
-"iso2": "US",
-"iso3": "USA",
+"id": "4",
+"label": "Ghana",
+"self": "http://eiti.local/api/v1.0/implementing_country/4",
+"iso2": "GH",
+"iso3": "GHA",
 "status": {
-"tid": "5329",
+"tid": "74",
 "language": "en",
-"name": "Yet to be assessed against the 2016 Standard",
-"color": "6CBCE3"
+"name": "Meaningful progress",
+"color": "2D8B2A"
 },
-"status_date": "1388534400",
-"local_website": "https://useiti.doi.gov/",
+"status_date": "1262304000",
+"local_website": "http://www.gheiti.gov.gh",
 "annual_report_file": null,
-"reports": {},
-"metadata": {},
-"licenses": {},
-"contracts": {},
-"revenues": {}
+"reports": null,
+"metadata": [],
+"licenses": null,
+"contracts": null,
+"revenues": null
 },
 "score_req_values": [
 {
-"id": "1",
+"id": "177",
+"score_req_id": "2",
+"score_req": {
+"id": "2",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Government engagement",
+"code": "1.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7292"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The government is fully, actively and effectively engaged in the design, implementation, monitoring and evaluation of the EITI process and the government appears to have a strong commitment to the implementation of EITI in Ghana. The attendance of the Chair is less frequent than that of other MSG members, but this does not seem to reflect a lack of government engagement on the whole. "
+},
+{
+"id": "178",
+"score_req_id": "3",
+"score_req": {
+"id": "3",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Industry engagement",
+"code": "1.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7292"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Companies are actively engaged with EITI implementation and see value and tangible outcomes resulting from their participation in the process, citing in particular an improvement in their relationship with communities. The more limited participation by companies from the oil/gas sector beyond those represented on the MSG reflects the relatively recent emergence of the sector and lack of organisation among petroleum companies in the country. "
+},
+{
+"id": "179",
+"score_req_id": "4",
+"score_req": {
+"id": "4",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Civil society engagement",
+"code": "1.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7292"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Civil society stakeholders are actively engaged in the EITI process. There is an enabling environment for civil society participation in Ghana, and civil society representatives have been key drivers of the EITI process and implementation. There seem to be some challenges related to communicating and consulting with all interested civil society stakeholders during the EITI reporting cycle, and not only after the publication of reports, which might be related to limited capacity on both sides."
+},
+{
+"id": "180",
+"score_req_id": "5",
+"score_req": {
+"id": "5",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "MSG governance",
+"code": "1.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7292"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Stakeholders are adequately represented on the multi-stakeholder group (MSG). The MSG has a chair and co-chair and meets regularly to review and guide implementation in the country. They have also participated in ad hoc meetings and have established sub-committees tasked with specific aspects of EITI implementation. There seem to be some issues and practices of the MSG that would need to be clarified in the Ghana EITI Bill."
+},
+{
+"id": "181",
+"score_req_id": "6",
+"score_req": {
+"id": "6",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Workplan",
+"code": "1.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7292"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The work plan has clear objectives linked to national priorities for the extractive sector, as well as detailed actions and timelines, although it does not reflect the full scope of GHEITI’s work. Costing is missing for some items, and implementation is slightly behind schedule. In particular missing funds for the 2015 GHEITI report is of concern."
+},
+{
+"id": "182",
+"score_req_id": "7",
+"score_req": {
+"id": "7",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Legal framework",
+"code": "2.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The legal framework and fiscal regime governing the extractive industries are described in different sections of the 2014 EITI Reports. Information on the roles and responsibilities of the relevant government agencies is included in the reports, as is information on reforms of the system."
+},
+{
+"id": "183",
+"score_req_id": "8",
+"score_req": {
+"id": "8",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "License allocations",
+"code": "2.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Reports comprehensively disclose the respective process for awarding licences. The technical and financial criteria for awarding licenses are described in general terms on the Ghana EITI website. The efficiency and effectiveness of licensing procedures are discussed in the reports, leading to recommendations for change which have potentially contributed to sector reforms."
+},
+{
+"id": "184",
+"score_req_id": "9",
+"score_req": {
+"id": "9",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "License register",
+"code": "2.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The EITI Reports have for some time recommended to establish an online cadastre system, and a mining cadastre is in its final stages and is likely to address many of the gaps. In the absence still of the almost-ready online cadastre, the reports document outstanding licenses fairly comprehensively, but not fully so and required data points are missing."
+},
+{
+"id": "185",
+"score_req_id": "10",
+"score_req": {
+"id": "10",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Policy on contract disclosure",
+"code": "2.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The government’s policy of not publishing contracts is clearly described in the 2014 EITI Reports. The report also describes the actual practice of publishing certain contracts. The reports have recommended to make contract public."
+},
+{
+"id": "186",
+"score_req_id": "11",
+"score_req": {
+"id": "11",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Beneficial ownership",
+"code": "2.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": "Stakeholders in Ghana seem committed to and in favour of beneficial ownership transparency and requirements related to beneficial ownership disclosure appear to be well understood. The multi-stakeholder group has already initiated the implementation of the beneficial ownership requirements by advocating for beneficial ownership disclosure in the amended Companies Act 2016."
+},
+{
+"id": "187",
+"score_req_id": "12",
+"score_req": {
+"id": "12",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "State participation",
+"code": "2.6",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7293"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 oil and gas report contains interesting information about the role of Ghana National Petroleum Corporation’s (GNPC) and its operations, but is missing information on own account and as conduit for government revenue. Its financial relationships with the government are not clear, and the requisite quantification cannot be traced."
+},
+{
+"id": "188",
+"score_req_id": "13",
+"score_req": {
+"id": "13",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Exploration data",
+"code": "3.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7294"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Reports contain informative overviews of both the oil/gas and mining sectors and broad information on exploration activities."
+},
+{
+"id": "189",
+"score_req_id": "14",
+"score_req": {
+"id": "14",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Production data",
+"code": "3.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7294"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Production volumes, but not values, for oil, gas and mining are adequately disclosed in the 2014 EITI Reports, including oil production by major field. "
+},
+{
+"id": "190",
+"score_req_id": "15",
+"score_req": {
+"id": "15",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Export data",
+"code": "3.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7294"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Export values, but not volumes, are adequately disclosed in the two reports, including by export commodity and from the artisanal and small-scale mining sector. For the artisanal and small-scale mining sector, export volumes are deemed to be equal to production volumes."
+},
+{
+"id": "191",
+"score_req_id": "16",
+"score_req": {
+"id": "16",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Comprehensiveness",
+"code": "4.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "In each sector, all producing companies are deemed material (as measured by royalty payments). This does not include exploration companies. Although there is good coverage of the payments, there is no materiality definition. Good participation of selected companies; only one notable exception in the oil sector which leaves a significant gap in the reconciliation. Commendable coverage of ASM sector."
+},
+{
+"id": "192",
+"score_req_id": "17",
+"score_req": {
+"id": "17",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "In-kind revenues",
+"code": "4.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "While there is much information provided on the in-kind revenue collected, there is no clear thread running through the 2014 EITI Report of the oil/gas report that would allow the public to understand the management of in-kind revenues collected on the behalf of the government by GNPC, including the process of oil lifting by GNPC on behalf of the state, commercialisation of the in-kind revenue collected, transfer of the sales proceeds to the government and disclosure of taxes paid and reconciliation with company records. There do not appear to be any in-kind revenues in the mining sector."
+},
+{
+"id": "193",
+"score_req_id": "18",
+"score_req": {
+"id": "18",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Barter agreements",
+"code": "4.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "The requirement on infrastructure provisions and barter arrangements is not applicable to Ghana."
+},
+{
+"id": "194",
+"score_req_id": "19",
+"score_req": {
+"id": "19",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Transportation revenues",
+"code": "4.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "No evidence that such revenues exist in Ghana. The requirement on transportation revenue is therefore not applicable to Ghana."
+},
+{
+"id": "195",
+"score_req_id": "20",
+"score_req": {
+"id": "20",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "SOE transactions",
+"code": "4.5",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report on oil and gas contains much information on transactions between Ghana National Petroleum Corporation (GNPC) and the government, but contradictory statements on the direction of flows between GNPC and the government result in confusion despite otherwise significant disclosures. The oil/gas report does not address GNPC transactions on own account."
+},
+{
+"id": "196",
+"score_req_id": "21",
+"score_req": {
+"id": "21",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Direct subnational payments",
+"code": "4.6",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Subnational direct payments exist in the mining sector, and the 2014 EITI Report adequately explains direct payment of property rates by mining companies to District Assemblies."
+},
+{
+"id": "197",
+"score_req_id": "22",
+"score_req": {
+"id": "22",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Disaggregation",
+"code": "4.7",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Reports disclose of revenue data disaggregated by individual company, government entity, and revenue stream."
+},
+{
+"id": "198",
+"score_req_id": "23",
+"score_req": {
+"id": "23",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Data timeliness",
+"code": "4.8",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Reports were published on 18 January 2016, about one year after the end of the financial year covered."
+},
+{
+"id": "199",
+"score_req_id": "24",
+"score_req": {
+"id": "24",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Data quality",
+"code": "4.9",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7295"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "All templates submitted by companies and government entities met the previously agreed completeness, integrity, and reliability tests, concluding that the data provided was reliable. "
+},
+{
+"id": "200",
+"score_req_id": "25",
+"score_req": {
+"id": "25",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Revenue management and expenditures",
+"code": "5.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7296"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report on mining gives a clearer picture of the distribution of revenue than the oil and gas report. The latter report contains much institutional detail and quantitative information on revenue flows but fails to pull this information together into a clear picture of the distribution of revenue, in particular of the streams channelled to/through the Ghana National Petroleum Corporation (GNPC). "
+},
+{
+"id": "201",
+"score_req_id": "26",
+"score_req": {
+"id": "26",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Subnational transfers",
+"code": "5.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7296"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 Ghana EITI mining report discloses sub-national transfers and the applicable revenue sharing formula. There is no discussion of sub-national transfers in the oil and gas report, and there is no evidence that such revenues exist in Ghana."
+},
+{
+"id": "202",
+"score_req_id": "27",
+"score_req": {
+"id": "27",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Distribution of revenues",
+"code": "5.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7296"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "1",
+"description": "The 2014 EITI Reports contain helpful information on Ghana’s budget and auditing process. Information on expenditures from extractive sector revenues is reported in considerable detail across some institutions, but could be more useful if it were complete and presented in a broader budgetary context."
+},
+{
+"id": "203",
+"score_req_id": "28",
+"score_req": {
+"id": "28",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Mandatory social expenditures",
+"code": "6.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7297"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "The 2014 EITI Reports explain that there are no mandatory social expenditures in Ghana. \nThe 2014 EITI Reports contain descriptions and some figures of voluntary corporate social responsibility projects by some companies, without being consistent and comprehensive across each sector."
+},
+null,
+{
+"id": "205",
+"score_req_id": "30",
+"score_req": {
+"id": "30",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "SOE quasi-fiscal expenditures",
+"code": "6.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7297"
+}
+]
+}
+},
+"value": "2",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The oil and gas report does not give a clear picture of GNPC finances and does not mention quasi-fiscal expenditures, when there appear to be such expenditures."
+},
+{
+"id": "206",
+"score_req_id": "31",
+"score_req": {
+"id": "31",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Economic contribution",
+"code": "6.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7297"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The 2014 EITI Report includes, in absolute and relative terms, the contribution of the extractive industries to GDP, government revenue, exports and employment. The only small exception is information on key regions of non-gold production in the mining report."
+},
+{
+"id": "207",
+"score_req_id": "32",
+"score_req": {
+"id": "32",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Public debate",
+"code": "7.1",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7298"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "Ghana EITI has made various efforts to ensure that EITI disclosures are actively promoted. Ghana EITI appears to maintain a high level of dissemination and outreach activities. Public events and roundtables have also been organised to discuss issues such as beneficial ownership, transfer pricing and artisanal and small-scale mining. Some stakeholders find that reports can be made more comprehensible to the public."
+},
+{
+"id": "208",
+"score_req_id": "33",
+"score_req": {
+"id": "33",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Data accessibility",
+"code": "7.2",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7298"
+}
+]
+}
+},
+"value": "5",
+"progress_value": "3",
+"is_applicable": "0",
+"is_required": "0",
+"description": "The EITI Reports are accessible in print and summarised formats. They are not machine readable, although key information is available from the Ghana EITI open data dashboard. The data is from the 2012/13 reports and do not include 2014 data."
+},
+{
+"id": "209",
+"score_req_id": "34",
+"score_req": {
+"id": "34",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Follow up on recommendations",
+"code": "7.3",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7298"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The multi-stakeholder group has taken steps to act upon lessons learnt, to identify, investigate and address the causes of any discrepancies, and to develop and follow up on policy and sector relevant recommendations for improvements in the EITI Reports. Ghana EITI have implemented several of the recommendations to improve sector governance."
+},
+{
+"id": "210",
+"score_req_id": "35",
+"score_req": {
+"id": "35",
+"type": "standard",
+"status": "1",
+"created": "1487798879",
+"name": "Outcomes and impact of implementation",
+"code": "7.4",
+"field_score_req_category": {
+"und": [
+{
+"tid": "7298"
+}
+]
+}
+},
+"value": "3",
+"progress_value": "3",
+"is_applicable": "1",
+"is_required": "0",
+"description": "The annual progress report 2015 was submitted within the deadline and adequately reflects Ghana EITI’s main activities and progress made during 2015. The report and the completion of a formal impact assessment demonstrates openness to public scrutiny."
+},
+{
+"id": "211",
 "score_req_id": "1",
 "score_req": {
 "id": "1",
 "type": "standard",
 "status": "1",
-"created": "1487766754",
+"created": "1487798772",
 "name": "Overall Progress",
 "code": "0.0",
 "field_score_req_category": {
 "und": [
 {
-"tid": "6128"
+"tid": "7291"
 }
 ]
 }
 },
-"value": "0",
-"progress_value": "1",
+"value": "2",
+"progress_value": "3",
 "is_applicable": "1",
 "is_required": "0",
 "description": ""
@@ -57,6 +850,6 @@
 "count": 1,
 "self": {
 "title": "Self",
-"href": "https://preprod.eiti.org/api/v1.0/score_data"
+"href": "http://eiti.local/api/v1.0/score_data"
 }
 }
