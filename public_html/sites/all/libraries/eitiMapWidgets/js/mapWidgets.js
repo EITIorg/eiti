@@ -24220,9 +24220,11 @@
 	        var noDataIncluded = false;
 	        indicatorMetadata.forEach(function (v) {
 	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
-	
-	          mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br></div>';
-	          //            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+	          if (v.use_style) {
+	            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	          } else {
+	            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	          }
 	          if (v.subtitle != "") {
 	            mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br>';
 	          }
@@ -25056,32 +25058,38 @@
 	  "id": 5329,
 	  "color": "#6CBCE3",
 	  "title": "Yet to be assessed against the 2016 Standard<br>",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 75,
 	  "color": "#2D8B2A",
 	  "title": "Satisfactory progress",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 74,
 	  "color": "#84AD42",
 	  "title": "Meaningful progress",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 5327,
 	  "color": "#FAC433",
 	  "title": "Inadequate progress / suspended<br>",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 8212,
 	  "color": "#FAC433",
 	  "title": "Suspended due to political instability",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}, {
 	  "id": 8213,
 	  "color": "#FAC433",
 	  "title": "Suspended for missing deadline",
-	  "subtitle": ""
+	  "subtitle": "",
+	  "use_style": true
 	}];
 
 /***/ }),
@@ -25192,6 +25200,7 @@
 	Drupal.t('Sao Tome and Principe');
 	Drupal.t('Senegal');
 	Drupal.t('Seychelles');
+	Drupal.t('Suriname');
 	Drupal.t('Sierra Leone');
 	Drupal.t('Solomon Islands');
 	Drupal.t('Tajikistan');

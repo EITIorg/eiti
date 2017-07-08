@@ -375,9 +375,12 @@ export default class MapWidgetComponent extends Component {
           var noDataIncluded = false;
           indicatorMetadata.forEach(function(v) {
             noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-
-            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br></div>';
-//            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+            if(v.use_style) {
+              mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+            }
+            else {
+              mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+            }
             if(v.subtitle != "") {
               mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
             }
