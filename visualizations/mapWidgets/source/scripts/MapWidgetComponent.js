@@ -5,6 +5,7 @@ import { countryGeoJson } from './data/countries.js';
 //import { countryInfo } from './data/implementing_country.js';
 
 import { helpers } from './helpers.js' ;
+import { translations } from './data/translations.js' ;
 import _ from 'underscore';
 
 // Legend information
@@ -381,7 +382,7 @@ export default class MapWidgetComponent extends Component {
               mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
             }
             if(v.subtitle != "") {
-              mergedHTML += (helpers.t(v.subtitle) || '') + '<br/>';
+              mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
             }
           });
           //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
@@ -489,7 +490,7 @@ export default class MapWidgetComponent extends Component {
               {helpers.t('Overview')}
             </li>
             <li>
-              Tax & Legal Framework
+              {helpers.t('Tax & Legal Framework')}
               <ul className="map-option-items">
                 <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online oil registry')}</li>
                 <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online mining registry')}</li>
@@ -497,7 +498,7 @@ export default class MapWidgetComponent extends Component {
               </ul>
             </li>
             <li>
-              Production
+              {helpers.t('Production')}
               <ul className="map-option-items">
                 <li data-indicatorid="oil_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
                 <li data-indicatorid="gas_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
@@ -507,7 +508,7 @@ export default class MapWidgetComponent extends Component {
               </ul>
             </li>
             <li>
-              Revenues
+              {helpers.t('Revenues')}
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
                 <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues per capita')}</li>
@@ -549,11 +550,12 @@ export default class MapWidgetComponent extends Component {
           reportURL = reportObj ? reportObj.url : "";
           reportClass = reportObj ? "" : "empty";
         }
+        var country_name = helpers.t(sortedCountries[i].label);
 
         items.push(
             <li>
               <span className={itemStyle}></span>
-              <a href={countryPageURL}>{sortedCountries[i].label}</a>
+              <a href={countryPageURL}>{country_name}</a>
             </li>
           );
         if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {

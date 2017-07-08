@@ -3,8 +3,8 @@ export var indicator_list = [
     "id": 1,
     "name": "status",
     "description": "Implementation status",
-    "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br/><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
-    "footer": "<br/>For an overview of the former status of countries under the EITI Rules, click <a href=\"/countries-archive\">here</a>.<br/>For a list of former members or countries who are preparing to join, click <a href=\"/countries/other\">here</a>.<br/><br/>"
+    "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
+    "footer": "<br>For an overview of the former status of countries under the EITI Rules, click <a href=\"/countries-archive\">here</a>.<br>For a list of former members or countries who are preparing to join, click <a href=\"/countries/other\">here</a>.<br><br>"
   },
   {
     "id": 2,
@@ -84,4 +84,3 @@ export var indicator_list = [
     "footer": ""
   }
 ];
-
