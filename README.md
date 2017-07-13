@@ -25,6 +25,7 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
 
 3.  Build the VM and install all required software.
     ```
+    cd deployer/
     vagrant up --provision
     ```
     NOTES:
@@ -64,7 +65,7 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
 
 1.  Once inside the VM, run to go into the project folder:
     ```
-    cd /var/www/eiti-local/
+    cd /var/www/eiti-local/public_html/
     ```
 
 2.  Prepare drupal for installation, run these inside the VM in the project folder:
@@ -97,16 +98,16 @@ Please see the **happy-deployer** requirements and setup instructions: https://g
         Please note that other `setup.*.php` files exist for other environments.
 
 3.  Install the project.
-    *   If you want a new and clean installation run:
-        ```
-        make install
-        ```
-
-    *   Alternatively, **IF** you have a database dump, you can import it using:
+    *   If you have a database dump, you can import it using:
         ```
         zcat DUMP.sql.gz | drush sqlc
         # Make sure to update the project settings for the current environment.
-        make
+        make update
+        ```
+
+    *   Alternatively, if you want a new and clean installation run:
+        ```
+        make install
         ```
 
 4.  Check if the project has been installed properly, for local development go to: [eiti.local](http://eiti.local/)
