@@ -254,6 +254,7 @@ features[user_role][] = icanlocalize translator
 features[user_role][] = internal editor
 features[user_role][] = investor
 features[user_role][] = restricted user
+features[user_role][] = test user
 features[user_role][] = translation editor
 features[variable][] = field_bundle_settings_user__user
 features[variable][] = pathauto_user_pattern

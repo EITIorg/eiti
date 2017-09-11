@@ -1456,6 +1456,7 @@ function eitipermissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
+      'test user' => 'test user',
     ),
     'module' => 'view_unpublished',
   );

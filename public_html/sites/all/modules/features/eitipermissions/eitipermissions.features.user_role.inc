@@ -52,6 +52,12 @@ function eitipermissions_user_default_roles() {
     'weight' => 5,
   );
 
+  // Exported role: test user.
+  $roles['test user'] = array(
+    'name' => 'test user',
+    'weight' => 12,
+  );
+
   // Exported role: translation editor.
   $roles['translation editor'] = array(
     'name' => 'translation editor',
