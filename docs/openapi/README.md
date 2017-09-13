@@ -42,6 +42,7 @@
     cp ./shins/index.html ./api/index.html
     cp ./shins/pub/ ./api/ -r
     cp ./shins/source/ ./api/ -r
+    cp ./logo.png ./api/source/images/
     rm -rf ./shins
     ```
 

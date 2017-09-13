@@ -23,8 +23,7 @@ paths:
             type: string
       tags:
         - Score Data
-      summary: ''
-      description: ''
+      description: 'Data about the progress of countries in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
       responses:
         '200':
           description: OK
@@ -303,8 +302,7 @@ paths:
             type: string
       tags:
         - Summary Data
-      summary: ''
-      description: ''
+      description: 'Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
       responses:
         '200':
           description: OK
