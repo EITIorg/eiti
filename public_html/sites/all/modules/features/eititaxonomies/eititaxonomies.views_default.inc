@@ -72,6 +72,7 @@ function eititaxonomies_views_default_views() {
 
   /* Display: Stakeholder Listing */
   $handler = $view->new_display('block', 'Stakeholder Listing', 'stakehoder_listing');
+  $handler->display->display_options['field_language'] = 'und';
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -131,6 +132,7 @@ function eititaxonomies_views_default_views() {
     'title_link' => 'content',
     'title_class' => 'title',
   );
+  $handler->display->display_options['fields']['title_field_et']['language'] = 'und';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Field: Title (title_field) */
   $handler->display->display_options['sorts']['title_field_value']['id'] = 'title_field_value';
@@ -145,13 +147,6 @@ function eititaxonomies_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Field: Title (title_field:language) */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'field_data_title_field';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-  );
   $translatables['taxonomy_nodes'] = array(
     t('Master'),
     t('more'),
