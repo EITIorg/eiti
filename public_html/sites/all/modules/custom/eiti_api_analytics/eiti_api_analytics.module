@@ -3,16 +3,17 @@
 /**
  * Sends PageView tracking data to GA.
  *
- * @param string $document_hostname
- *   Document host.
  * @param string $page
  *   Page.
  * @param string $title
  *   Title.
  *
- * @see https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
+ * https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
+ *
+ * @return array
+ *   Returns HTTP response from Google.
  */
-function eiti_api_nalytics_pageview_request($page, $title) {
+function eiti_api_analytics_pageview_request($page, $title) {
   $data = array();
 
   $data['v'] = 1;
@@ -51,7 +52,7 @@ function eiti_api_nalytics_pageview_request($page, $title) {
  * Get an UUID ver 4 identifier form cookie or generates one on fallback.
  *
  * @return string
- *   UUID ver 4 identifier
+ *   UUID ver 4 identifier.
  */
 function eiti_api_analytics_get_uuid() {
   if (isset($_COOKIE['_ga'])) {
