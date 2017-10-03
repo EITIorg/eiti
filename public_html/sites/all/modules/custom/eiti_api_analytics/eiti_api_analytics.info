@@ -1,0 +1,7 @@
+name = EITI API Analytics
+description = This module offers analytics tracking for EITI API.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = googleanalytics
+

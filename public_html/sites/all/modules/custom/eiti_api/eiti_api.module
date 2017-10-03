@@ -65,3 +65,6 @@ function eiti_api_entity_reset_cache($entity, $type, $op) {
   }
 }
 
+function eiti_api_restful_parse_request_alter(&$request) {
+  eiti_api_nalytics_pageview_request(base_path() . $request['q'], 'EITI API');
+}

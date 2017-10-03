@@ -12,5 +12,6 @@ dependencies[] = eitientity_indicator_value
 dependencies[] = eitientity_organisation
 dependencies[] = eitientity_implementing_country
 dependencies[] = eitientity_score_data
+dependencies[] = eiti_api_analytics
 
 files[] = plugins/restful/RestfulDataProviderEITICharts.php
