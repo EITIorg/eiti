@@ -24097,9 +24097,9 @@
 	    key: 'addLayer',
 	    value: function addLayer(e) {
 	      //Deactivate anything selected
-	      jQuery('.map-option-wrapper').find("LI").removeClass('active'
+	      jQuery('.map-option-wrapper').find("LI").removeClass('active');
 	      //Activate current selected
-	      );jQuery(e.target).parents("LI").addClass('active');
+	      jQuery(e.target).parents("LI").addClass('active');
 	      //Activate itself
 	      jQuery(e.target).addClass('active');
 	
@@ -25130,6 +25130,7 @@
 	Drupal.t('Inadequate progress / suspended<br>');
 	Drupal.t('Joined in');
 	Drupal.t('Latest EITI Report covers');
+	Drupal.t('Latest Validation');
 	Drupal.t('Meaningful progress');
 	Drupal.t('Mining');
 	Drupal.t('Number of companies reporting');
@@ -25378,7 +25379,10 @@
 	        var last = _underscore2.default.last(years);
 	        var yearData = country.reports[last] || [];
 	
+	        console.log(country);
+	
 	        var lastMetadata = _underscore2.default.last(Object.keys(country.metadata));
+	        var latest_validation_date = '';
 	        var yearMetaData = country.metadata[lastMetadata] || [];
 	
 	        // Prepare data for info box
@@ -25392,6 +25396,9 @@
 	
 	        // Latest Report Year
 	        var country_last_report_year = lastMetadata;
+	
+	        // Latest Validation Year
+	        var country_lastest_validation_year = latest_validation_date;
 	
 	        // Latest Report Link
 	        var country_last_report_file = country.annual_report_file;
@@ -25437,6 +25444,7 @@
 	        var info_top_indicators_first = '';
 	        var info_content_second = '';
 	        var info_top_indicators_second = '';
+	        var info_top_indicators_third = '';
 	        var info_content_third = '';
 	        var info_content_second_a = '';
 	
@@ -25458,7 +25466,20 @@
 	            country_report_link += country_last_report_year;
 	            country_report_link += '</a>';
 	        }
-	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' + '</span>';
+	
+	        // Add Last Validation Link
+	        var country_validation_link = '';
+	        if (country_last_report_file || country_last_report_file === null) {
+	            country_validation_link += country_lastest_validation_year || 'n/a';
+	        } else {
+	            country_validation_link += '<a href="' + country_last_report_file + '">';
+	            country_validation_link += country_lastest_validation_year;
+	            country_validation_link += '</a>';
+	        }
+	
+	        info_top_indicators_second = info_top_indicators_second + '<span class="info">' + '  <span class="label">' + this.t('Latest Validation') + ':</span> <span class="value"><strong>' + country_validation_link + '</strong></span>' + '</span>';
+	
+	        info_top_indicators_third = info_top_indicators_third + '<span class="info">' + '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' + '</span>';
 	
 	        // Add Revenue
 	        var extractives_revenue_value = indicator_government_revenue > 0 ? this.formatNumber(indicator_government_revenue, { inMillions: true, includeDecimals: true }) + ' million ' + currency_code : this.t('n/a');
@@ -25496,7 +25517,7 @@
 	        // Add info about Online Contracts.
 	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
 	
-	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
+	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_third + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
 	        var popup = L.popup({ autoPan: true, closeButton: true, maxWidth: 400 }).setLatLng(e.latlng).setContent(html).openOn(layer._map);
 	    },

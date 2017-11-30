@@ -152,7 +152,10 @@ export var helpers = {
         var last = _.last(years);
         var yearData = country.reports[last] || [];
 
+        console.log(country);
+
         var lastMetadata = _.last(Object.keys(country.metadata));
+        var latest_validation_date = '';
         var yearMetaData = country.metadata[lastMetadata] || [];
 
         // Prepare data for info box
@@ -166,6 +169,9 @@ export var helpers = {
 
         // Latest Report Year
         var country_last_report_year = lastMetadata;
+
+        // Latest Validation Year
+        var country_lastest_validation_year = latest_validation_date;
 
         // Latest Report Link
         var country_last_report_file = country.annual_report_file;
@@ -211,6 +217,7 @@ export var helpers = {
         var info_top_indicators_first = '';
         var info_content_second = '';
         var info_top_indicators_second = '';
+        var info_top_indicators_third = '';
         var info_content_third = '';
         var info_content_second_a = '';
 
@@ -242,7 +249,25 @@ export var helpers = {
             country_report_link += country_last_report_year;
             country_report_link += '</a>';
         }
+
+        // Add Last Validation Link
+        var country_validation_link = '';
+        if(country_last_report_file || country_last_report_file === null) {
+            country_validation_link += country_lastest_validation_year || 'n/a';
+        }
+        else
+        {
+            country_validation_link += '<a href="' + country_last_report_file + '">'
+            country_validation_link += country_lastest_validation_year;
+            country_validation_link += '</a>';
+        }
+
         info_top_indicators_second = info_top_indicators_second +
+            '<span class="info">' +
+            '  <span class="label">' + this.t('Latest Validation') + ':</span> <span class="value"><strong>' + country_validation_link + '</strong></span>' +
+            '</span>';
+
+        info_top_indicators_third = info_top_indicators_third +
             '<span class="info">' +
             '  <span class="label">' + this.t('Latest EITI Report covers') + ':</span> <span class="value"><strong>' + country_report_link + '</strong></span>' +
             '</span>';
@@ -310,6 +335,7 @@ export var helpers = {
             '<div class="country-info-header">' + info_header + '</div>' +
             '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' +
             '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' +
+            '<div class="country-info-top-indicators">' + info_top_indicators_third + '</div>' +
             '<div class="country-info-content">' + info_content_first + '</div>' +
             '<div class="country-info-content">' + info_content_second + '</div>' +
             '<div class="country-info-content">' + info_content_second_a + '</div>' +

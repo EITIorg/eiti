@@ -64,6 +64,13 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     $public_fields['revenues'] = array(
       'callback' => array($this, 'getRevenues'),
     );
+    $public_fields['latest_validation_date'] = array(
+      'property' => 'field_ic_validation_date',
+    );
+    $public_fields['latest_validation_link'] = array(
+      'property' => 'field_ic_validation_link',
+      'sub_property' => 'url',
+    );
 
     return $public_fields;
   }

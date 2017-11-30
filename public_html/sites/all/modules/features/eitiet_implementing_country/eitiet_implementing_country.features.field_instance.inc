@@ -21,7 +21,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -81,7 +81,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -110,7 +110,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'year_range' => '2003:+1',
       ),
       'type' => 'date_select',
-      'weight' => 5,
+      'weight' => 10,
     ),
   );
 
@@ -124,7 +124,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -208,7 +208,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -293,7 +293,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -310,7 +310,88 @@ function eitiet_implementing_country_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'implementing_country-normal-field_ic_validation_date'.
+  $field_instances['implementing_country-normal-field_ic_validation_date'] = array(
+    'bundle' => 'normal',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'implementing_country',
+    'field_name' => 'field_ic_validation_date',
+    'label' => 'Latest Validation date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '2003:+1',
+      ),
+      'type' => 'date_select',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'implementing_country-normal-field_ic_validation_link'.
+  $field_instances['implementing_country-normal-field_ic_validation_link'] = array(
+    'bundle' => 'normal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please specify the EITI country-specific latest validation page.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'implementing_country',
+    'field_name' => 'field_ic_validation_link',
+    'label' => 'Latest Validation page link',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 8,
     ),
   );
 
@@ -325,7 +406,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -362,7 +443,7 @@ function eitiet_implementing_country_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 6,
+      'weight' => 11,
     ),
   );
 
@@ -377,7 +458,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -488,8 +569,11 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('EITI Member Since');
   t('EITI Reports');
   t('EITI Status');
+  t('Latest Validation date');
+  t('Latest Validation page link');
   t('Logo');
   t('Name');
+  t('Please specify the EITI country-specific latest validation page.');
   t('Please specify the country\'s EITI membership status.');
   t('Please specify the local EITI country-specific website.');
   t('Please specify when did this country change its EITI Status.');

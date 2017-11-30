@@ -25,6 +25,7 @@ Drupal.t('Implementation status');
 Drupal.t('Inadequate progress / suspended<br>');
 Drupal.t('Joined in');
 Drupal.t('Latest EITI Report covers');
+Drupal.t('Latest Validation');
 Drupal.t('Meaningful progress');
 Drupal.t('Mining');
 Drupal.t('Number of companies reporting');
