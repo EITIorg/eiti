@@ -6,7 +6,7 @@ if (!window.Drupal) {
   };
 }
 
-Drupal.t('<br>For an overview of the former status of countries under the EITI Rules, click <a href="/countries-archive">here</a>.<br>For a list of former members or countries who are preparing to join, click <a href="/countries/other">here</a>.<br><br>');
+Drupal.t('<br>For an overview of Validation in each country, click <a href="/document/validation-schedule-decisions">here</a>.<br>For an overview of the former status of countries under the EITI Rules, click <a href="/countries-archive">here</a>.<br>For a list of former members or countries who are preparing to join, click <a href="/countries/other">here</a>.<br><br>');
 Drupal.t('Available');
 Drupal.t('Click on a country to find out more');
 Drupal.t('Coal');

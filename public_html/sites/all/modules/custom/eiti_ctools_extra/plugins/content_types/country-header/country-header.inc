@@ -218,6 +218,35 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     );
   }
 
+  // Add the country latest validation information.
+  if (!empty($entity->field_ic_validation_date)) {
+    $timestamp = $entity_wrapper->field_ic_validation_date->value();
+    $value = format_date($timestamp, 'custom', 'Y');
+
+    $block['info']['latest_validation_date'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('Latest Validation'),
+      '#title_tag' => 'span',
+      '#title_icon' => array(
+        'symbol' => 'status',
+        'options' => array('width' => '1em', 'height' => '1em'),
+      ),
+      '#title_attributes' => array('class' => array('label')),
+      '#attributes' => array(
+        'class' => array(
+          'info',
+        ),
+      ),
+    );
+
+    $block['info']['latest_validation_date']['value'] = array(
+      '#theme' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => $value,
+      '#attributes' => array('class' => array('value')),
+    );
+  }
   // Add the country website information.
   if (!empty($entity->field_ic_website)) {
     $url_info = $entity_wrapper->field_ic_website->value();
