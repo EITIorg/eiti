@@ -151,11 +151,10 @@ export var helpers = {
         var years = Object.keys(country.reports);
         var last = _.last(years);
         var yearData = country.reports[last] || [];
-
-        console.log(country);
-
+        
         var lastMetadata = _.last(Object.keys(country.metadata));
-        var latest_validation_date = '';
+        var latest_validation_date = country.latest_validation_date;
+        var latest_validation_link = country.latest_validation_link;
         var yearMetaData = country.metadata[lastMetadata] || [];
 
         // Prepare data for info box
@@ -171,7 +170,14 @@ export var helpers = {
         var country_last_report_year = lastMetadata;
 
         // Latest Validation Year
-        var country_lastest_validation_year = latest_validation_date;
+        var country_latest_validation_year = latest_validation_date;
+
+        // Latest Validation Link
+        var country_latest_validation_link = latest_validation_link;
+
+        console.log(country);
+        console.log(country_latest_validation_year);
+        console.log(country_latest_validation_link);
 
         // Latest Report Link
         var country_last_report_file = country.annual_report_file;
@@ -250,17 +256,19 @@ export var helpers = {
             country_report_link += '</a>';
         }
 
-        // Add Last Validation Link
+        // Add Latest Validation Link
         var country_validation_link = '';
-        if(country_last_report_file || country_last_report_file === null) {
-            country_validation_link += country_lastest_validation_year || 'n/a';
+        if(!country_latest_validation_link || country_latest_validation_link === null) {
+            country_validation_link += country_latest_validation_year || 'n/a';
         }
         else
         {
-            country_validation_link += '<a href="' + country_last_report_file + '">'
-            country_validation_link += country_lastest_validation_year;
+            country_validation_link += '<a href="' + country_latest_validation_link + '">'
+            country_validation_link += country_latest_validation_year;
             country_validation_link += '</a>';
         }
+
+        console.log(country_validation_link);
 
         info_top_indicators_second = info_top_indicators_second +
             '<span class="info">' +

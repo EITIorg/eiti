@@ -42,7 +42,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'property' => 'field_ic_change_status_date',
     );
     $public_fields['local_website'] = array(
-      'property' => 'field_ic_website',
+      'property' => 'field_ic_validation_link',
       'sub_property' => 'url',
     );
     $public_fields['annual_report_file'] = array(
@@ -66,6 +66,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     );
     $public_fields['latest_validation_date'] = array(
       'property' => 'field_ic_validation_date',
+      'process_callbacks' => array(array($this, 'prepareLatestValidationDate')),
     );
     $public_fields['latest_validation_link'] = array(
       'property' => 'field_ic_validation_link',
@@ -244,6 +245,15 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
   function prepareAnnualReport($values) {
     $last_annual_report = end($values);
     return file_create_url($last_annual_report['uri']);
+  }
+
+  /**
+   * A standard processing callback that returns latest validation year.
+   *
+   * @return array
+   */
+  function prepareLatestValidationDate($date) {
+    return date('Y', $date);
   }
 
   /**
