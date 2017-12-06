@@ -300,7 +300,7 @@ function eitiet_implementing_country_field_default_field_instances() {
     'entity_type' => 'implementing_country',
     'field_name' => 'field_ic_status',
     'label' => 'EITI Status',
-    'required' => 0,
+    'required' => TRUE,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
