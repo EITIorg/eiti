@@ -175,10 +175,6 @@ export var helpers = {
         // Latest Validation Link
         var country_latest_validation_link = latest_validation_link;
 
-        console.log(country);
-        console.log(country_latest_validation_year);
-        console.log(country_latest_validation_link);
-
         // Latest Report Link
         var country_last_report_file = country.annual_report_file;
 
@@ -267,8 +263,6 @@ export var helpers = {
             country_validation_link += country_latest_validation_year;
             country_validation_link += '</a>';
         }
-
-        console.log(country_validation_link);
 
         info_top_indicators_second = info_top_indicators_second +
             '<span class="info">' +
