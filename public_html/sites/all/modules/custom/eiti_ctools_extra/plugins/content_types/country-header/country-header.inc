@@ -221,7 +221,18 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
   // Add the country latest validation information.
   if (!empty($entity->field_ic_validation_date)) {
     $timestamp = $entity_wrapper->field_ic_validation_date->value();
-    $value = format_date($timestamp, 'custom', 'Y');
+
+    $latest_validation_year = format_date($timestamp, 'custom', 'Y');
+
+    $value = $latest_validation_year;
+
+    if (!empty($entity->field_ic_validation_link)) {
+      $node = $entity_wrapper->field_ic_validation_link->value();
+
+      $entity_uri = entity_uri('node', $node);
+
+      $value = l($latest_validation_year, $entity_uri['path']);
+    }
 
     $block['info']['latest_validation_date'] = array(
       '#type' => 'html_container',
@@ -229,7 +240,7 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
       '#title' => t('Latest Validation'),
       '#title_tag' => 'span',
       '#title_icon' => array(
-        'symbol' => 'status',
+        'symbol' => 'validation',
         'options' => array('width' => '1em', 'height' => '1em'),
       ),
       '#title_attributes' => array('class' => array('label')),
