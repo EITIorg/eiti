@@ -27,7 +27,8 @@ function eitiet_implementing_country_field_group_info() {
       1 => 'field_ic_status',
       2 => 'field_ic_validation_date',
       3 => 'field_ic_validation_link',
-      4 => 'field_ic_website',
+      4 => 'field_ic_validation_url',
+      5 => 'field_ic_website',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

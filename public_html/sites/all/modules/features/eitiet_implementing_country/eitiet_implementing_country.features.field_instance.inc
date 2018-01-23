@@ -21,7 +21,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -81,7 +81,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -110,7 +110,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'year_range' => '2003:+1',
       ),
       'type' => 'date_select',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -124,7 +124,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -208,7 +208,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -293,7 +293,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -310,7 +310,7 @@ function eitiet_implementing_country_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -325,7 +325,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -370,7 +370,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -395,6 +395,59 @@ function eitiet_implementing_country_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'implementing_country-normal-field_ic_validation_url'.
+  $field_instances['implementing_country-normal-field_ic_validation_url'] = array(
+    'bundle' => 'normal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Country-specific latest validation url. Will only be used if the latest validation page link field is empty.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'implementing_country',
+    'field_name' => 'field_ic_validation_url',
+    'label' => 'Latest Validation page url',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => '_blank',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'none',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'urlwidget',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'implementing_country-normal-field_ic_website'.
   $field_instances['implementing_country-normal-field_ic_website'] = array(
     'bundle' => 'normal',
@@ -406,7 +459,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -443,7 +496,7 @@ function eitiet_implementing_country_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -458,7 +511,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -564,6 +617,7 @@ function eitiet_implementing_country_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Country-specific latest validation url. Will only be used if the latest validation page link field is empty.');
   t('Cover');
   t('Description');
   t('EITI Member Since');
@@ -571,6 +625,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('EITI Status');
   t('Latest Validation date');
   t('Latest Validation page link');
+  t('Latest Validation page url');
   t('Logo');
   t('Name');
   t('Please specify the EITI country-specific latest validation page.');

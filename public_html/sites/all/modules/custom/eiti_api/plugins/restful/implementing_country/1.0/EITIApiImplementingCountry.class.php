@@ -72,6 +72,10 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'property' => 'field_ic_validation_link',
       'sub_property' => 'url',
     );
+    $public_fields['latest_validation_url'] = array(
+      'property' => 'field_ic_validation_url',
+      'sub_property' => 'url',
+    );
 
     return $public_fields;
   }
