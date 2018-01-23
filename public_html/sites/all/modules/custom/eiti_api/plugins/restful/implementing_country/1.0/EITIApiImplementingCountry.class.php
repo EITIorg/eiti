@@ -42,7 +42,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       'property' => 'field_ic_change_status_date',
     );
     $public_fields['local_website'] = array(
-      'property' => 'field_ic_validation_link',
+      'property' => 'field_ic_website',
       'sub_property' => 'url',
     );
     $public_fields['annual_report_file'] = array(
