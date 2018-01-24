@@ -25382,6 +25382,7 @@
 	        var lastMetadata = _underscore2.default.last(Object.keys(country.metadata));
 	        var latest_validation_date = country.latest_validation_date;
 	        var latest_validation_link = country.latest_validation_link;
+	        var latest_validation_url = country.latest_validation_url;
 	        var yearMetaData = country.metadata[lastMetadata] || [];
 	
 	        // Prepare data for info box
@@ -25401,6 +25402,9 @@
 	
 	        // Latest Validation Link
 	        var country_latest_validation_link = latest_validation_link;
+	
+	        // Latest Validation Url
+	        var country_latest_validation_url = latest_validation_url;
 	
 	        // Latest Report Link
 	        var country_last_report_file = country.annual_report_file;
@@ -25471,10 +25475,14 @@
 	
 	        // Add Latest Validation Link
 	        var country_validation_link = '';
-	        if (!country_latest_validation_link || country_latest_validation_link === null) {
+	        if ((!country_latest_validation_link || country_latest_validation_link === null) && (!country_latest_validation_url || country_latest_validation_url === null)) {
 	            country_validation_link += country_latest_validation_year || 'n/a';
 	        } else {
-	            country_validation_link += '<a href="' + country_latest_validation_link + '">';
+	            if (country_latest_validation_link) {
+	                country_validation_link += '<a href="' + country_latest_validation_link + '">';
+	            } else {
+	                country_validation_link += '<a href="' + country_latest_validation_url + '" target="_blank">';
+	            }
 	            country_validation_link += country_latest_validation_year;
 	            country_validation_link += '</a>';
 	        }
