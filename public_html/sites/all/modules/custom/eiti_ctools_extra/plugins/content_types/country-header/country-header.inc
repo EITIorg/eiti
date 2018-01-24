@@ -233,6 +233,10 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
 
       $value = l($latest_validation_year, $entity_uri['path']);
     }
+    else if (!empty($entity->field_ic_validation_url)) {
+      $url_info = $entity_wrapper->field_ic_validation_url->value();
+      $value = l($latest_validation_year, $url_info['url'], $url_info);
+    }
 
     $block['info']['latest_validation_date'] = array(
       '#type' => 'html_container',
