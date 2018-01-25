@@ -258,7 +258,7 @@ export var helpers = {
 
         // Add Latest Validation Link
         var country_validation_link = '';
-        if((!country_latest_validation_link || country_latest_validation_link === null) && (!country_latest_validation_url || country_latest_validation_url === null)) {
+        if(!country_latest_validation_year || ((!country_latest_validation_link || country_latest_validation_link === null) && (!country_latest_validation_url || country_latest_validation_url === null))) {
             country_validation_link += country_latest_validation_year || 'n/a';
         }
         else
