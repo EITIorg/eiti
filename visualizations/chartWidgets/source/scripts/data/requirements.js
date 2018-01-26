@@ -91,7 +91,7 @@ export var requirements = [{
 		"Code": 4.9,
 		"Category": 4
 	}, {
-		"Requirement": "Revenue management and expenditures",
+		"Requirement": "Distribution of extractive industry revenues",
 		"Code": 5.1,
 		"Category": 5
 	}, {
@@ -99,7 +99,7 @@ export var requirements = [{
 		"Code": 5.2,
 		"Category": 5
 	}, {
-		"Requirement": "Distribution of revenues",
+		"Requirement": "Revenue management and expenditures",
 		"Code": 5.3,
 		"Category": 5
 	}, {

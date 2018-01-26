@@ -2616,7 +2616,7 @@
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		Papa Parse
-		v4.3.3
+		v4.3.6
 		https://github.com/mholt/PapaParse
 		License: MIT
 	*/
@@ -3306,7 +3306,7 @@
 
 				_delimiterError = false;
 				if (!_config.delimiter) {
-					var delimGuess = guessDelimiter(input, _config.newline);
+					var delimGuess = guessDelimiter(input, _config.newline, _config.skipEmptyLines);
 					if (delimGuess.successful) _config.delimiter = delimGuess.bestDelimiter;else {
 						_delimiterError = true; // add error after parsing (otherwise it would be overwritten)
 						_config.delimiter = Papa.DefaultDelimiter;
@@ -3425,14 +3425,15 @@
 				return _results;
 			}
 
-			function guessDelimiter(input, newline) {
+			function guessDelimiter(input, newline, skipEmptyLines) {
 				var delimChoices = [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP];
 				var bestDelim, bestDelta, fieldCountPrevRow;
 
 				for (var i = 0; i < delimChoices.length; i++) {
 					var delim = delimChoices[i];
 					var delta = 0,
-					    avgFieldCount = 0;
+					    avgFieldCount = 0,
+					    emptyLinesCount = 0;
 					fieldCountPrevRow = undefined;
 
 					var preview = new Parser({
@@ -3442,6 +3443,10 @@
 					}).parse(input);
 
 					for (var j = 0; j < preview.data.length; j++) {
+						if (skipEmptyLines && preview.data[j].length === 1 && preview.data[j][0].length === 0) {
+							emptyLinesCount++;
+							continue;
+						}
 						var fieldCount = preview.data[j].length;
 						avgFieldCount += fieldCount;
 
@@ -3454,7 +3459,7 @@
 						}
 					}
 
-					if (preview.data.length > 0) avgFieldCount /= preview.data.length;
+					if (preview.data.length > 0) avgFieldCount /= preview.data.length - emptyLinesCount;
 
 					if ((typeof bestDelta === 'undefined' || delta < bestDelta) && avgFieldCount > 1.99) {
 						bestDelta = delta;
@@ -3589,6 +3594,7 @@
 							// Find closing quote
 							var quoteSearch = input.indexOf(quoteChar, quoteSearch + 1);
 
+							//No other quotes are found - no other delimiters
 							if (quoteSearch === -1) {
 								if (!ignoreLastRow) {
 									// No closing quote... what a pity
@@ -3603,8 +3609,8 @@
 								return finish();
 							}
 
+							// Closing quote at EOF
 							if (quoteSearch === inputLen - 1) {
-								// Closing quote at EOF
 								var value = input.substring(cursor, quoteSearch).replace(quoteCharRegex, quoteChar);
 								return finish(value);
 							}
@@ -3615,8 +3621,8 @@
 								continue;
 							}
 
+							// Closing quote followed by delimiter
 							if (input[quoteSearch + 1] === delim) {
-								// Closing quote followed by delimiter
 								row.push(input.substring(cursor, quoteSearch).replace(quoteCharRegex, quoteChar));
 								cursor = quoteSearch + 1 + delimLen;
 								nextDelim = input.indexOf(delim, cursor);
@@ -3624,8 +3630,8 @@
 								break;
 							}
 
+							// Closing quote followed by newline
 							if (input.substr(quoteSearch + 1, newlineLen) === newline) {
-								// Closing quote followed by newline
 								row.push(input.substring(cursor, quoteSearch).replace(quoteCharRegex, quoteChar));
 								saveRow(quoteSearch + 1 + newlineLen);
 								nextDelim = input.indexOf(delim, cursor); // because we may have skipped the nextDelim in the quoted field
@@ -3639,6 +3645,18 @@
 
 								break;
 							}
+
+							// Checks for valid closing quotes are complete (escaped quotes or quote followed by EOF/delimiter/newline) -- assume these quotes are part of an invalid text string
+							errors.push({
+								type: 'Quotes',
+								code: 'InvalidQuotes',
+								message: 'Trailing quote on quoted field is malformed',
+								row: data.length, // row has yet to be inserted
+								index: cursor
+							});
+
+							quoteSearch++;
+							continue;
 						}
 
 						continue;
@@ -48321,7 +48339,7 @@
 		"Code": 4.9,
 		"Category": 4
 	}, {
-		"Requirement": "Revenue management and expenditures",
+		"Requirement": "Distribution of extractive industry revenues",
 		"Code": 5.1,
 		"Category": 5
 	}, {
@@ -48329,7 +48347,7 @@
 		"Code": 5.2,
 		"Category": 5
 	}, {
-		"Requirement": "Distribution of revenues",
+		"Requirement": "Revenue management and expenditures",
 		"Code": 5.3,
 		"Category": 5
 	}, {
