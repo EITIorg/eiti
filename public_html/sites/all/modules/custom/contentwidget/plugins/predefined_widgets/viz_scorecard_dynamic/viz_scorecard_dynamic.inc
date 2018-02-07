@@ -72,18 +72,38 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $endpoints = _contentwidget__viz_scorecard_dynamic__get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['scorecard_settings']['data_type']];
 
-  // Set year to latest if it's not set, but one is available.
-  $year = $widget_settings['extra_settings']['year'];
-  if ($widget_settings['extra_settings']['country'] && !$widget_settings['extra_settings']['year']) {
+  // Build year select options.
+  $default_year = $widget_settings['extra_settings']['year'];
+  $available_years_options = array();
+  $counter_words = array(t('First'), t('Second'), t('Third'), t('Fourth'), t('Fifth'),
+    t('Sixth'), t('Seventh'), t('Eighth'), t('Ninth'), t('Tenth'));
+  if ($widget_settings['extra_settings']['country']) {
     $score_data = eitientity_score_data_lookup_by_country($widget_settings['extra_settings']['country']);
     if ($score_data !== FALSE && !empty($score_data)) {
+      $counter = 0;
       foreach ($score_data as $score_data_delta => $score_data_entity) {
-        if ($score_data_entity->year > $year) {
-          $year = $score_data_entity->year;
+        // Set year to latest if it's not set, but one is available.
+        if (!$widget_settings['extra_settings']['year'] && $score_data_entity->year > $default_year) {
+          $default_year = $score_data_entity->year;
         }
+        $available_years_options[$score_data_entity->year] = $counter_words[$counter] . ' ' . t('Validation') . ' (' . $score_data_entity->year . ')';
+        $counter++;
       }
     }
   }
+
+  $year_selector_class = drupal_html_class($identifier . '--sc-year-selector');
+  $block['sc_widget_year_selector'] = array(
+    '#type' => 'select',
+    '#name' => 'sc_year_selector',
+    '#title' => t('Validation'),
+    '#title_display' => 'invisible',
+    '#options' => $available_years_options,
+    '#value' => $default_year,
+    '#attributes' => array(
+      'class' => array($year_selector_class),
+    ),
+  );
 
   // Send the settings, so that later we can load them in our behaviour.
   $js_settings = _contentwidget__viz_scorecard_dynamic__get_data_types('js settings');
@@ -91,7 +111,8 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $country_entity = entity_load_single('implementing_country', $widget_settings['extra_settings']['country']);
   $settings = array(
     'type' => 'Scorecard',
-    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $year)),
+    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $default_year)),
+    'country' => $country_entity->name,
     'width' => 800,
     'height' => 600,
     'margin' => array(
@@ -102,19 +123,25 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     ),
     'container' => $identifier,
     'endpoint' => $endpoint,
+    'year_selector_class' => $year_selector_class,
+    'endpoint_data' => array(),
   );
 
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['scorecard_settings']['data_type'] == 'score_data') {
+    // TODO: make this dynamic for year selection.
     $settings['endpoint'] .= '?filter[country]=' . $widget_settings['extra_settings']['country'];
-    $settings['endpoint'] .= '&filter[year]=' . $year;
+    $settings['endpoint'] .= '&filter[year]=' . $default_year;
+    $settings['endpoint_data']['filter']['country'] = $widget_settings['extra_settings']['country'];
+    $settings['endpoint_data']['filter']['year'] = $default_year;
   }
 
   // Wrap things up.
   $settings = array(
     $identifier => $settings,
   );
-  drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+  //drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
+  drupal_add_js(array('contentWidgetScorecard' => $settings), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }
