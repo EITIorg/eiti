@@ -319,7 +319,7 @@ function _contentwidget__viz_scorecard_dynamic_settings(&$form, &$form_state, $w
     '#title' => t('Year'),
     '#description' => t("Please specify for which year the Scorecard is for..."),
     '#options' => $year_options,
-    '#default_value' => isset($widget_settings['extra_settings']['year']) ? $widget_settings['extra_settings']['country'] : $default_year,
+    '#default_value' => isset($widget_settings['extra_settings']['year']) ? $widget_settings['extra_settings']['year'] : '',
     '#prefix' => '<div id="extra-settings-scorecard-dynamic-year">',
     '#suffix' => '</div>',
   );
