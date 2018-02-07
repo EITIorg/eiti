@@ -72,13 +72,26 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $endpoints = _contentwidget__viz_scorecard_dynamic__get_data_types('endpoint');
   $endpoint = $endpoints[$widget_settings['scorecard_settings']['data_type']];
 
+  // Set year to latest if it's not set, but one is available.
+  $year = $widget_settings['extra_settings']['year'];
+  if ($widget_settings['extra_settings']['country'] && !$widget_settings['extra_settings']['year']) {
+    $score_data = eitientity_score_data_lookup_by_country($widget_settings['extra_settings']['country']);
+    if ($score_data !== FALSE && !empty($score_data)) {
+      foreach ($score_data as $score_data_delta => $score_data_entity) {
+        if ($score_data_entity->year > $year) {
+          $year = $score_data_entity->year;
+        }
+      }
+    }
+  }
+
   // Send the settings, so that later we can load them in our behaviour.
   $js_settings = _contentwidget__viz_scorecard_dynamic__get_data_types('js settings');
   $js_settings = $js_settings[$widget_settings['scorecard_settings']['data_type']];
   $country_entity = entity_load_single('implementing_country', $widget_settings['extra_settings']['country']);
   $settings = array(
     'type' => 'Scorecard',
-    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $widget_settings['extra_settings']['year'])),
+    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $year)),
     'width' => 800,
     'height' => 600,
     'margin' => array(
@@ -94,7 +107,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['scorecard_settings']['data_type'] == 'score_data') {
     $settings['endpoint'] .= '?filter[country]=' . $widget_settings['extra_settings']['country'];
-    $settings['endpoint'] .= '&filter[year]=' . $widget_settings['extra_settings']['year'];
+    $settings['endpoint'] .= '&filter[year]=' . $year;
   }
 
   // Wrap things up.
