@@ -111,7 +111,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $country_entity = entity_load_single('implementing_country', $widget_settings['extra_settings']['country']);
   $settings = array(
     'type' => 'Scorecard',
-    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $default_year)),
+    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $available_years_options[$default_year])),
     'country' => $country_entity->name,
     'width' => 800,
     'height' => 600,
@@ -123,13 +123,13 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     ),
     'container' => $identifier,
     'endpoint' => $endpoint,
+    'filter_endpoint' => $endpoint,
     'year_selector_class' => $year_selector_class,
     'endpoint_data' => array(),
   );
 
   // As dynamic as we tried to be, this is a little exception.
   if ($widget_settings['scorecard_settings']['data_type'] == 'score_data') {
-    // TODO: make this dynamic for year selection.
     $settings['endpoint'] .= '?filter[country]=' . $widget_settings['extra_settings']['country'];
     $settings['endpoint'] .= '&filter[year]=' . $default_year;
     $settings['endpoint_data']['filter']['country'] = $widget_settings['extra_settings']['country'];
@@ -141,7 +141,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     $identifier => $settings,
   );
   //drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting', 'scope' => 'footer'));
-  drupal_add_js(array('contentWidgetScorecard' => $settings), array('type' => 'setting'));
+  drupal_add_js(array('contentWidgets' => $settings), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'contentwidget') . '/js/content-widgets.js', array('scope' => 'footer'));
   return $block;
 }

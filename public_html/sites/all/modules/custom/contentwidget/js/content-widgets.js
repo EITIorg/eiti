@@ -191,125 +191,6 @@
     }
   };
 
-  /**
-   * Update Scorecard Chart.
-   *
-   * @param {Object} widgetSetting
-   */
-  Drupal.eitiContentWidget.updateScorecardChart = function (widgetSetting) {
-    // TODO: needs finishing - based on updatePlotlyChart().
-    if (widgetSetting.hasOwnProperty('widgetData')) {
-      var widgetData = widgetSetting.widgetData;
-      chartWidget.create(widgetSetting, widgetData);
-    }
-    else {
-      // Set the processor function that returns JSON.data.
-      widgetSetting.processor = function(input) {
-        if (input.data.length == 0) {
-          return false;
-        }
-        return input.data;
-      };
-
-      // Otherwise just return.
-      chartWidget.create(widgetSetting, widgetSetting.endpoint);
-    }
-  };
-
-  Drupal.behaviors.contentWidgetScorecardInit = {
-    /**
-     * Initialize Custom Chart widgets.
-     *
-     * @param {Object} context
-     * @param {Object} settings
-     * @param {Object} settings.contentWidgets
-     */
-    attach: function (context, settings) {
-      if (!settings.contentWidgetScorecard) {
-        return;
-      }
-
-      for (var key in settings.contentWidgetScorecard) {
-        if (!settings.contentWidgetScorecard.hasOwnProperty(key)) {
-          continue;
-        }
-
-        this._initializeScorecardChart(context, settings.contentWidgetScorecard[key]);
-      }
-
-      // Now that we initialized all chart-related widgets, lets move to others, WAYPOINTS.
-      if ($.fn.waypoint) {
-        // First, let's do some adjustments.
-        var $tickerWaypoint = $('.ticker-waypoint', context);
-        var values = $('.widget-value .value', $tickerWaypoint);
-        values.each(function(index) {
-          var countTo = $(this).text();
-          $(this).data('count', countTo);
-          $(this).text('0');
-        });
-        var isCounted = false;
-
-        // Define our waypoint.
-        $tickerWaypoint.waypoint(function(direction) {
-          if (!isCounted) {
-            var values = $(this.element).find('.widget-value .value');
-            values.each(function(index) {
-              var countTo = $(this).data('count');
-              var counter = new CountUp(this, 0, countTo, $tickerWaypoint.data('counter-decimals'), $tickerWaypoint.data('counter-speed'));
-              counter.start();
-              isCounted = true;
-            });
-          }
-        }, {
-          offset: '50%'
-        });
-      }
-    },
-
-    /**
-     * Initializes the chart.
-     *
-     * @var {Drupal} Drupal
-     * @param {Object} context
-     * @param {Object} widgetSetting
-     * @param {string} widgetSetting.container
-     * @param {string} widgetSetting.endpoint
-     * @param {function} widgetSetting.processor
-     * @param {string} widgetSetting.widgetData
-     *
-     * @private
-     */
-    _initializeScorecardChart: function (context, widgetSetting) {
-      if (!widgetSetting.container || !widgetSetting.endpoint) {
-        return;
-      }
-
-      // Make sure the chart container exists. We should have only one.
-      var chart_container = $('#' + widgetSetting.container, context);
-      if (chart_container.length !== 1) {
-        return;
-      }
-
-      // Enable the year selector.
-      if (widgetSetting.year_selector_class && widgetSetting.year_selector_class !== '') {
-        $('.' + widgetSetting.year_selector_class, context).bind('change', function () {
-          var selected_year = $(this).val();
-          widgetSetting.endpoint_data.filter.year = selected_year;
-
-          widgetSetting.name = Drupal.t('@country - @year', {
-            '@country': widgetSetting.country,
-            '@year': selected_year
-          });
-
-          Drupal.eitiContentWidget.updateScorecardChart(widgetSetting);
-        }).trigger('change');
-      }
-      else {
-        Drupal.eitiContentWidget.updateScorecardChart(widgetSetting);
-      }
-    }
-  };
-
   Drupal.behaviors.contentWidgetInit = {
     /**
      * Initialize Custom Chart widgets.
@@ -320,7 +201,7 @@
      */
     attach: function (context, settings) {
       var chartTypes = [
-        //'Scorecard',
+        'Scorecard',
         'BubbleChart',
         'Sankey'
       ];
@@ -390,6 +271,27 @@
       var chart_container = $('#' + widgetSetting.container, context);
       if (chart_container.length !== 1) {
         return;
+      }
+
+      // Enable the Scorecard year selector.
+      if (typeof widgetSetting.year_selector_class !== 'undefined' && widgetSetting.year_selector_class) {
+        $('.' + widgetSetting.year_selector_class, context).bind('change', function () {
+          widgetSetting.endpoint_data.filter.year = $(this).val();
+
+          widgetSetting.name = Drupal.t('@country - @year', {
+            '@country': widgetSetting.country,
+            '@year': $(this).find(':selected').text()
+          });
+
+          var endpoint = widgetSetting.filter_endpoint;
+          endpoint += '?filter[country]=' + widgetSetting.endpoint_data.filter.country;
+          endpoint += '&filter[year]=' + widgetSetting.endpoint_data.filter.year;
+
+          // There might be better ways of handling this (with react).
+          var $widgetContainer = $('#' + widgetSetting.container);
+          $widgetContainer.html('');
+          chartWidget.create(widgetSetting, endpoint);
+        });
       }
 
       if (widgetSetting.hasOwnProperty('widgetData')) {
