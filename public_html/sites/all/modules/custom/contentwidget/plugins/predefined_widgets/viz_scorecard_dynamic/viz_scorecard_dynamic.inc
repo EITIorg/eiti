@@ -80,13 +80,17 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   if ($widget_settings['extra_settings']['country']) {
     $score_data = eitientity_score_data_lookup_by_country($widget_settings['extra_settings']['country']);
     if ($score_data !== FALSE && !empty($score_data)) {
-      $counter = 0;
       foreach ($score_data as $score_data_delta => $score_data_entity) {
         // Set year to latest if it's not set, but one is available.
         if (!$widget_settings['extra_settings']['year'] && $score_data_entity->year > $default_year) {
           $default_year = $score_data_entity->year;
         }
-        $available_years_options[$score_data_entity->year] = $counter_words[$counter] . ' ' . t('Validation') . ' (' . $score_data_entity->year . ')';
+        $available_years_options[$score_data_entity->year] = $score_data_entity->year;
+      }
+      ksort($available_years_options);
+      $counter = 0;
+      foreach ($available_years_options as $y_key => $y_val) {
+        $available_years_options[$y_key] = $counter_words[$counter] . ' ' . t('Validation') . ' (' . $y_val . ')';
         $counter++;
       }
     }
