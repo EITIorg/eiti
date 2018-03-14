@@ -59,7 +59,9 @@ function eiti_pdf_scorecard_page() {
   }
   $mpdf = new Mpdf();
   if ($html) {
-    $mpdf->WriteHTML($html);
+    $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
+    $mpdf->WriteHTML($css, 1);
+    $mpdf->WriteHTML($html, 2);
   }
   $mpdf->Output();
 }
