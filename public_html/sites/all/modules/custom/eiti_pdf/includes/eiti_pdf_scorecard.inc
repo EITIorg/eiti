@@ -22,18 +22,44 @@ function eiti_pdf_scorecard_page() {
       if (isset($json->data[0]->score_req_values[0]->progress_value) && $json->data[0]->score_req_values[0]->progress_value != 3) {
         $hasProgress = TRUE;
       }
+      // Requirements.
+      $requirements = array();
+      foreach ($json->data[0]->score_req_values as $score_value) {
+        if (isset($score_value->score_req->field_score_req_category->und[0]->tid)) {
+          $category_tid = $score_value->score_req->field_score_req_category->und[0]->tid;
+          $requirements[$category_tid][] = array(
+            'name' => t($score_value->score_req->name) . ' (#' . $score_value->score_req->code . ')',
+            'description' => t($score_value->description),
+            'is_applicable' => $score_value->is_applicable,
+            'is_required' => $score_value->is_required,
+            'value' => $score_value->value,
+            'progress_value' => $score_value->progress_value,
+          );
+        }
+      }
+      // Categories.
+      $category_voc = taxonomy_vocabulary_machine_name_load('score_requirement_category');
+      $category_terms = entity_load('taxonomy_term', FALSE, array('vid' => $category_voc->vid));
+      $categories = array();
+      foreach ($requirements as $c_tid => $requirement) {
+        if (isset($category_terms[$c_tid])) {
+          $categories[$c_tid] = array(
+            'name' => t($category_terms[$c_tid]->name),
+            'count' => count($requirements[$c_tid]),
+          );
+        }
+      }
       $theme_args = array(
-        'data' => $json->data[0],
         'hasProgress' => $hasProgress,
+        'categories' => $categories,
+        'requirements' => $requirements,
       );
       $html = theme('eiti_pdf_scorecard', $theme_args);
-      // $json->data[0]->label
-      // $json->data[0]->year
-      // $json->data[0]->country->label
-      // $json->data[0]->score_req_values[0]->progress_value
     }
   }
   $mpdf = new Mpdf();
-  $mpdf->WriteHTML($html);
+  if ($html) {
+    $mpdf->WriteHTML($html);
+  }
   $mpdf->Output();
 }
