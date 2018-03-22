@@ -287,6 +287,12 @@
           endpoint += '?filter[country]=' + widgetSetting.endpoint_data.filter.country;
           endpoint += '&filter[year]=' + widgetSetting.endpoint_data.filter.year;
 
+          // Update PDF link url.
+          var pdf_url = $('.eiti-chart-widget-wrapper .pdf-link a').data('plain-link');
+          pdf_url += '?filter[country]=' + widgetSetting.endpoint_data.filter.country;
+          pdf_url += '&filter[year]=' + widgetSetting.endpoint_data.filter.year;
+          $('.eiti-chart-widget-wrapper .pdf-link a').attr('href', pdf_url);
+
           // There might be better ways of handling this (with react).
           var $widgetContainer = $('#' + widgetSetting.container);
           $widgetContainer.html('');

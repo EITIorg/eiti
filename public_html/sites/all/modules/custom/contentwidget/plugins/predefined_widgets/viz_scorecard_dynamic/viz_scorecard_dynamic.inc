@@ -96,6 +96,21 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     }
   }
 
+  // Pdf link.
+  $pdf_link = url(
+    'scorecard-pdf',
+    array(
+      'query' => array(
+        'filter[country]' => $widget_settings['extra_settings']['country'],
+        'filter[year]' => $default_year,
+      )
+    )
+  );
+  $pdf_link_plain = url('scorecard-pdf');
+  $block['pdf'] = array(
+    '#markup' => '<div class="pdf-link"><a target="_blank" data-plain-link="' . $pdf_link_plain . '" href="' . $pdf_link . '">' . t('PDF') . '</a></div>',
+  );
+
   $year_selector_class = drupal_html_class($identifier . '--sc-year-selector');
   $block['sc_widget_year_selector'] = array(
     '#type' => 'select',
