@@ -1,0 +1,6 @@
+table.country_scorecard thead tr.first th {background-color:#0093cf; color:#fff; font-style: normal; font-weight: bold; text-align: left;}
+table.country_scorecard thead th.scores {text-rotate: 90;}
+table.country_scorecard tbody td.last {border-bottom: 1px solid black;}
+table.country_scorecard tbody td .progress {color: #676767; text-align: center; font-weight: bold;}
+table.country_scorecard tbody td .progress.value-1 {color: #84AD42;}
+table.country_scorecard tbody td .progress.value-2 {color: red;}
