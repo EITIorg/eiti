@@ -22,7 +22,7 @@ function eiti_pdf_scorecard_page() {
       if (isset($json->data[0]->score_req_values[0]->progress_value) && $json->data[0]->score_req_values[0]->progress_value != 3) {
         $hasProgress = TRUE;
       }
-
+      $hasProgress = TRUE;
       // Requirements.
       $requirements = array();
       foreach ($json->data[0]->score_req_values as $score_value) {
@@ -81,10 +81,63 @@ function eiti_pdf_scorecard_page() {
         }
       }
 
+      // Legend items.
+      $legend_items = array(
+        array(
+          'classes' => 'no',
+          'text' => t('<strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.'),
+        ),
+        array(
+          'classes' => 'inadequate',
+          'text' => t('<strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.'),
+        ),
+        array(
+          'classes' => 'meaningful',
+          'text' => t('<strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.'),
+        ),
+        array(
+          'classes' => 'satisfactory',
+          'text' => t('<strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.'),
+        ),
+        array(
+          'classes' => 'beyond',
+          'text' => t('<strong>Beyond.</strong> The country has gone beyond the requirements.'),
+        ),
+        array(
+          'classes' => 'only_encouraged',
+          'text' => t('This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.'),
+        ),
+        array(
+          'classes' => 'not_applicable',
+          'text' => t('The MSG has demonstrated that this requirement is not applicable in the country.'),
+        ),
+      );
+
+      // Progress (legend) items.
+      $progress_items = array(
+        array(
+          'classes' => '',
+          'symbol' => '=',
+          'text' => t('No change in performance since the last Validation.'),
+        ),
+        array(
+          'classes' => 'value-2',
+          'symbol' => '&larr;',
+          'text' => t('The country is performing worse that in the last Validation.'),
+        ),
+        array(
+          'classes' => 'value-1',
+          'symbol' => '&rarr;',
+          'text' => t('The country is performing better than in the last Validation.'),
+        ),
+      );
+
       $theme_args = array(
         'hasProgress' => $hasProgress,
         'categories' => $categories,
         'requirements' => $requirements,
+        'legend_items' => $legend_items,
+        'progress_items' => $progress_items,
       );
       $html = theme('eiti_pdf_scorecard', $theme_args);
     }

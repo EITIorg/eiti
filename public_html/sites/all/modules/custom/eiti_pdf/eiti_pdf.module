@@ -24,8 +24,11 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
   return array(
     'eiti_pdf_scorecard' => array(
       'variables' => array(
-        'data' => NULL,
         'hasProgress' => FALSE,
+        'categories' => array(),
+        'requirements' => array(),
+        'legend_items' => array(),
+        'progress_items' => array(),
       ),
       'template' => 'eiti-pdf-scorecard',
       'path' => $path . '/templates',

@@ -4,3 +4,16 @@ table.country_scorecard tbody td.last {border-bottom: 1px solid black;}
 table.country_scorecard tbody td .progress {color: #676767; text-align: center; font-weight: bold;}
 table.country_scorecard tbody td .progress.value-1 {color: #84AD42;}
 table.country_scorecard tbody td .progress.value-2 {color: red;}
+
+table.scorecard-legend {margin-top: 25px;}
+table.scorecard-legend .scorecard-legend-item td.color {width: 30px; height: 40px;}
+table.scorecard-legend .scorecard-legend-item td.no {background: #C00000;}
+table.scorecard-legend .scorecard-legend-item td.inadequate {background: #FAC433;}
+table.scorecard-legend .scorecard-legend-item td.meaningful {background: #84AD42;}
+table.scorecard-legend .scorecard-legend-item td.satisfactory {background: #2D8B2A;}
+table.scorecard-legend .scorecard-legend-item td.beyond {background: #5182bb;}
+
+table.scorecard-progress {margin-top: 15px;}
+table.scorecard-progress .symbol {text-align: center; color: #676767;}
+table.scorecard-progress .value-1 .symbol {color: #84AD42;}
+table.scorecard-progress .value-2 .symbol {color: red;}

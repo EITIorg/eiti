@@ -48,3 +48,30 @@
   <?php endforeach; ?>
   </tbody>
 </table>
+
+<table class="scorecard-legend">
+  <tbody>
+  <?php foreach ($legend_items as $l_item): ?>
+    <tr class="spacing"><td colspan="2"></td></tr>
+    <tr class="scorecard-legend-item">
+      <td class="color <?php print $l_item['classes']; ?>"></td>
+      <td class="text"><?php print $l_item['text']; ?></td>
+    </tr>
+  <?php endforeach; ?>
+  </tbody>
+</table>
+
+<?php if ($hasProgress): ?>
+  <table class="scorecard-progress">
+    <tbody>
+      <tr><td colspan="2"><strong><?php print t('Direction of progress'); ?></strong></td></tr>
+      <tr class="spacing"><td colspan="2"></td></tr>
+      <?php foreach ($progress_items as $p_item): ?>
+        <tr class="scorecard-legend-item <?php print $p_item['classes']; ?>">">
+          <td class="symbol"><?php print $p_item['symbol']; ?></td>
+          <td class="text"><?php print $p_item['text']; ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+<?php endif; ?>
