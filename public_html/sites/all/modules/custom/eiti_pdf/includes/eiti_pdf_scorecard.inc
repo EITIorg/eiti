@@ -22,7 +22,7 @@ function eiti_pdf_scorecard_page() {
       if (isset($json->data[0]->score_req_values[0]->progress_value) && $json->data[0]->score_req_values[0]->progress_value != 3) {
         $hasProgress = TRUE;
       }
-      $hasProgress = TRUE;
+
       // Requirements.
       $requirements = array();
       foreach ($json->data[0]->score_req_values as $score_value) {
@@ -142,6 +142,8 @@ function eiti_pdf_scorecard_page() {
       $html = theme('eiti_pdf_scorecard', $theme_args);
     }
   }
+
+  // Generate and output the PDF.
   $mpdf = new Mpdf();
   if ($html) {
     $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');

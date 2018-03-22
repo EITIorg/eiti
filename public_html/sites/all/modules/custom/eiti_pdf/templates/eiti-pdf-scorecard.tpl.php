@@ -26,7 +26,12 @@
           <?php print $category['name']; ?>
         </td>
       <?php endif; ?>
-      <td class="<?php print $requirement['td_classes']; ?>"><?php if ($requirement['print_name']): ?><?php print $requirement['name']; ?><?php endif; ?></td>
+      <td class="name <?php print $requirement['td_classes']; ?>">
+        <?php if ($requirement['print_name']): ?>
+          <?php print $requirement['name']; ?>
+          <annotation content="<?php print $requirement['description']; ?>" icon="Note" />
+        <?php endif; ?>
+      </td>
       <?php if (!$requirement['is_applicable']): ?>
         <td class="not_applicable <?php print $requirement['td_classes']; ?>" colspan="5"></td>
       <?php elseif ($requirement['is_required']): ?>
