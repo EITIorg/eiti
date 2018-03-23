@@ -29,7 +29,9 @@
       <td class="name <?php print $requirement['td_classes']; ?>">
         <?php if ($requirement['print_name']): ?>
           <?php print $requirement['name']; ?>
+          <?php if ($requirement['description']): ?>
           <annotation content="<?php print $requirement['description']; ?>" icon="Note" />
+          <?php endif; ?>
         <?php endif; ?>
       </td>
       <?php if (!$requirement['is_applicable']): ?>
