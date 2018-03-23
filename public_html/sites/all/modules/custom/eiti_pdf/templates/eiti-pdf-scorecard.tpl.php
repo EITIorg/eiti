@@ -46,8 +46,8 @@
         <td class="<?php if ($requirement['value'] == 4): ?>beyond<?php endif; ?> <?php print $requirement['td_classes']; ?>"></td>
       <?php endif; ?>
       <?php if ($hasProgress): ?>
-        <td class="<?php print $requirement['td_classes']; ?>">
-          <div class="<?php print $requirement['progress_classes']; ?>"><?php print $requirement['progress_symbol']; ?></div>
+        <td class="<?php print $requirement['td_classes']; ?> <?php print $requirement['progress_classes']; ?>">
+          <?php print $requirement['progress_symbol']; ?>
         </td>
       <?php endif; ?>
     </tr>

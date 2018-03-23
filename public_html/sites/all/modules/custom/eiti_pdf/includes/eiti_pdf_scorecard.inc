@@ -41,7 +41,7 @@ function eiti_pdf_scorecard_page() {
             'is_applicable' => TRUE,
             'is_required' => FALSE,
             'value' => -1,
-            'progress_value' => '',
+            'progress_value' => -1,
             'print_name' => ($score_req->code == '0.0') ? FALSE : TRUE,
           );
           if ($score_req->code == '0.0') {
