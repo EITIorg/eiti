@@ -29,8 +29,19 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
         'requirements' => array(),
         'legend_items' => array(),
         'progress_items' => array(),
+        'text_before' => '',
+        'text_after' => '',
       ),
       'template' => 'eiti-pdf-scorecard',
+      'path' => $path . '/templates',
+    ),
+    'eiti_pdf_title_page' => array(
+      'variables' => array(
+        'date' => '',
+        'title' => '',
+        'decision_reference' => '',
+      ),
+      'template' => 'eiti-pdf-title-page',
       'path' => $path . '/templates',
     ),
   );
