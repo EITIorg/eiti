@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the EITI Entity Type Score Data feature.
  */
+
+include_once 'eitiet_score_data.features.inc';
