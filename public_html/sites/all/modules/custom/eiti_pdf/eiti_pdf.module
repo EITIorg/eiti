@@ -37,6 +37,7 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
     ),
     'eiti_pdf_title_page' => array(
       'variables' => array(
+        'logo' => '',
         'date' => '',
         'title' => '',
         'decision_reference' => '',

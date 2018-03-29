@@ -15,21 +15,22 @@ function eiti_pdf_scorecard_page() {
   $data = drupal_http_request($url);
   $html_title_page = '';
   $html_scorecard_table = '';
+  $filename = 'EITI - validation';
   if (isset($data->code, $data->data) && $data->code == 200) {
     $json = json_decode($data->data);
     if ($json && isset($json->data[0])) {
       $score_data = entity_object_load($json->data[0]->id, 'score_data');
       // Title page.
       $theme_args = array(
+        'logo' => drupal_get_path('module', 'eiti_pdf') . '/images/logo.png',
         'date' => '',
         'title' => '',
         'decision_reference' => '',
       );
       if (isset($score_data->field_scd_pdf_date['und'][0]['value'])) {
-        $date = strtotime($score_data->field_scd_pdf_date['und'][0]['value']);
-        if ($date) {
-          $date = format_date($date, 'custom', $format = 'j F Y');
-          $theme_args['date'] = $date;
+        $timestamp = strtotime($score_data->field_scd_pdf_date['und'][0]['value']);
+        if ($timestamp) {
+          $theme_args['date'] = format_date($timestamp, 'custom', $format = 'j F Y');
         }
       }
       if (isset($score_data->field_scd_pdf_decision_ref['und'][0]['value'])) {
@@ -58,6 +59,14 @@ function eiti_pdf_scorecard_page() {
         'progress_items' => $legend_data['progress_items'],
       );
       $html_scorecard_table = theme('eiti_pdf_scorecard', $theme_args);
+
+      // File name.
+      if (isset($json->data[0]->country->label) && $json->data[0]->country->label) {
+        $filename = 'EITI - ' . trim(strip_tags($json->data[0]->country->label)) .  ' validation';
+      }
+      if (isset($timestamp) && $timestamp) {
+        $filename .= ' ' . date('Y-m-d', $timestamp);
+      }
     }
   }
 
@@ -74,7 +83,8 @@ function eiti_pdf_scorecard_page() {
     $mpdf->AddPage();
     $mpdf->WriteHTML($html_scorecard_table, 2);
   }
-  $mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE);
+  $filename = $filename . '.pdf';
+  $mpdf->Output($filename, \Mpdf\Output\Destination::INLINE);
 }
 
 /**
