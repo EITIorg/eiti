@@ -13,10 +13,34 @@ function eiti_pdf_scorecard_page() {
   }
   $url = url('api/v1.0/score_data', $url_options);
   $data = drupal_http_request($url);
-  $html = '';
+  $html_title_page = '';
+  $html_scorecard_table = '';
   if (isset($data->code, $data->data) && $data->code == 200) {
     $json = json_decode($data->data);
     if ($json && isset($json->data[0])) {
+      $score_data = entity_object_load($json->data[0]->id, 'score_data');
+      // Title page.
+      $theme_args = array(
+        'date' => '',
+        'title' => '',
+        'decision_reference' => '',
+      );
+      if (isset($score_data->field_scd_pdf_date['und'][0]['value'])) {
+        $date = strtotime($score_data->field_scd_pdf_date['und'][0]['value']);
+        if ($date) {
+          $date = format_date($date, 'custom', $format = 'j F Y');
+          $theme_args['date'] = $date;
+        }
+      }
+      if (isset($score_data->field_scd_pdf_decision_ref['und'][0]['value'])) {
+        $theme_args['decision_reference'] = check_plain($score_data->field_scd_pdf_decision_ref['und'][0]['value']);
+      }
+      if (isset($score_data->field_scd_pdf_title['und'][0]['value'])) {
+        $theme_args['title'] = check_plain($score_data->field_scd_pdf_title['und'][0]['value']);
+      }
+      $html_title_page = theme('eiti_pdf_title_page', $theme_args);
+
+      // Scorecard table.
       // Based on visualizations/chartWidgets/source/scripts/vendor/scorecard.js
       $hasProgress = FALSE;
       if (isset($json->data[0]->score_req_values[0]->progress_value) && $json->data[0]->score_req_values[0]->progress_value != 3) {
@@ -33,20 +57,24 @@ function eiti_pdf_scorecard_page() {
         'legend_items' => $legend_data['legend_items'],
         'progress_items' => $legend_data['progress_items'],
       );
-      $html = theme('eiti_pdf_scorecard', $theme_args);
+      $html_scorecard_table = theme('eiti_pdf_scorecard', $theme_args);
     }
   }
 
   // Generate and output the PDF.
   $mpdf = new Mpdf();
-  if ($html) {
+  if ($html_title_page) {
     $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
     $mpdf->WriteHTML($css, 1);
     $css = file_get_contents(__DIR__ . '/../css/pdf.css');
     $mpdf->WriteHTML($css, 1);
-    $mpdf->WriteHTML($html, 2);
+    $mpdf->WriteHTML($html_title_page, 2);
   }
-  $mpdf->Output();
+  if ($html_scorecard_table) {
+    $mpdf->AddPage();
+    $mpdf->WriteHTML($html_scorecard_table, 2);
+  }
+  $mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE);
 }
 
 /**
