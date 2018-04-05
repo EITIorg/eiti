@@ -13,14 +13,19 @@ function eiti_pdf_scorecard_page() {
   }
   $url = url('api/v1.0/score_data', $url_options);
   $data = drupal_http_request($url);
+
+  $html_footer = theme('eiti_pdf_footer');
   $html_title_page = '';
+  $html_header = '';
   $html_scorecard_table = '';
   $filename = 'EITI - validation';
+
   if (isset($data->code, $data->data) && $data->code == 200) {
     $json = json_decode($data->data);
     if ($json && isset($json->data[0])) {
       $score_data = entity_object_load($json->data[0]->id, 'score_data');
-      // Title page.
+
+      // Title page and header.
       $theme_args = array(
         'logo' => drupal_get_path('module', 'eiti_pdf') . '/images/logo.png',
         'date' => '',
@@ -40,6 +45,8 @@ function eiti_pdf_scorecard_page() {
         $theme_args['title'] = check_plain($score_data->field_scd_pdf_title['und'][0]['value']);
       }
       $html_title_page = theme('eiti_pdf_title_page', $theme_args);
+      unset($theme_args['logo']);
+      $html_header = theme('eiti_pdf_header', $theme_args);
 
       // Scorecard table.
       // Based on visualizations/chartWidgets/source/scripts/vendor/scorecard.js
@@ -57,7 +64,15 @@ function eiti_pdf_scorecard_page() {
         'requirements' => $table_data['requirements'],
         'legend_items' => $legend_data['legend_items'],
         'progress_items' => $legend_data['progress_items'],
+        'text_before' => '',
+        'text_after' => '',
       );
+      if (isset($score_data->field_scd_pdf_text1['und'][0]['safe_value'])) {
+        $theme_args['text_before'] = $score_data->field_scd_pdf_text1['und'][0]['safe_value'];
+      }
+      if (isset($score_data->field_scd_pdf_text2['und'][0]['safe_value'])) {
+        $theme_args['text_after'] = $score_data->field_scd_pdf_text2['und'][0]['safe_value'];
+      }
       $html_scorecard_table = theme('eiti_pdf_scorecard', $theme_args);
 
       // File name.
@@ -71,13 +86,21 @@ function eiti_pdf_scorecard_page() {
   }
 
   // Generate and output the PDF.
-  $mpdf = new Mpdf();
+  $mpdf_config = array(
+    'setAutoTopMargin' => 'stretch',
+    'setAutoBottomMargin' => 'stretch',
+  );
+  $mpdf = new Mpdf($mpdf_config);
+  $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
+  $mpdf->WriteHTML($css, 1);
+  $css = file_get_contents(__DIR__ . '/../css/pdf.css');
+  $mpdf->WriteHTML($css, 1);
+  $mpdf->SetHTMLFooter($html_footer);
   if ($html_title_page) {
-    $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
-    $mpdf->WriteHTML($css, 1);
-    $css = file_get_contents(__DIR__ . '/../css/pdf.css');
-    $mpdf->WriteHTML($css, 1);
     $mpdf->WriteHTML($html_title_page, 2);
+  }
+  if ($html_header) {
+    $mpdf->SetHTMLHeader($html_header);
   }
   if ($html_scorecard_table) {
     $mpdf->AddPage();

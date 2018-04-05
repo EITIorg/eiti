@@ -1,3 +1,9 @@
+<?php if ($text_before): ?>
+  <div class="scorecard-text before-table">
+    <?php print $text_before; ?>
+  </div>
+<?php endif; ?>
+
 <table class="country_scorecard">
   <thead>
     <tr class="first">
@@ -81,4 +87,10 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+<?php endif; ?>
+
+<?php if ($text_after): ?>
+  <div class="scorecard-text after-table">
+    <?php print $text_after; ?>
+  </div>
 <?php endif; ?>

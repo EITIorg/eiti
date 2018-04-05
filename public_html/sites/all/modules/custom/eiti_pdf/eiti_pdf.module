@@ -45,5 +45,18 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
       'template' => 'eiti-pdf-title-page',
       'path' => $path . '/templates',
     ),
+    'eiti_pdf_header' => array(
+      'variables' => array(
+        'title' => '',
+        'decision_reference' => '',
+        'date' => '',
+      ),
+      'template' => 'eiti-pdf-header',
+      'path' => $path . '/templates',
+    ),
+    'eiti_pdf_footer' => array(
+      'template' => 'eiti-pdf-footer',
+      'path' => $path . '/templates',
+    ),
   );
 }
