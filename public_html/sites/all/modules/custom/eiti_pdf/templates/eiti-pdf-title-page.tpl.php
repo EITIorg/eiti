@@ -9,5 +9,7 @@
     </tbody>
   </table>
   <div class="title"><?php print $title; ?></div>
-  <div class="reference"><?php print t('Decision reference:'); ?> <?php print $decision_reference; ?></div>
+  <?php if ($decision_reference): ?>
+    <div class="reference"><?php print t('Decision reference:'); ?> <?php print $decision_reference; ?></div>
+  <?php endif; ?>
 </div>
