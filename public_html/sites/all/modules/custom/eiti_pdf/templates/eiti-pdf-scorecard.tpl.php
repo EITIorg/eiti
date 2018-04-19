@@ -1,9 +1,23 @@
+<?php if ($news_items): ?>
+  <div class="scorecard-news">
+    <tocentry content="<?php print t('News'); ?>" />
+    <?php foreach ($news_items as $news_item): ?>
+      <div class="news-item">
+        <h3 class="title"><?php print $news_item['title']; ?></h3>
+        <div class="body"><?php print $news_item['body']; ?></div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
+
 <?php if ($text_before): ?>
   <div class="scorecard-text before-table">
+    <tocentry content="<?php print t("The Board's decision"); ?>" />
     <?php print $text_before; ?>
   </div>
 <?php endif; ?>
 
+<tocentry content="<?php print t('Scorecard'); ?>" />
 <table class="country_scorecard">
   <thead>
     <tr class="first">
@@ -91,6 +105,7 @@
 
 <?php if ($text_after): ?>
   <div class="scorecard-text after-table">
+    <tocentry content="<?php print t('Recommendations'); ?>" />
     <?php print $text_after; ?>
   </div>
 <?php endif; ?>

@@ -31,6 +31,7 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
         'progress_items' => array(),
         'text_before' => '',
         'text_after' => '',
+        'news_items' => array(),
       ),
       'template' => 'eiti-pdf-scorecard',
       'path' => $path . '/templates',

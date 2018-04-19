@@ -24,6 +24,7 @@ function eiti_pdf_scorecard_page() {
     $json = json_decode($data->data);
     if ($json && isset($json->data[0])) {
       $score_data = entity_object_load($json->data[0]->id, 'score_data');
+      $score_data_emw = entity_metadata_wrapper('score_data', $score_data);
 
       // Title page and header.
       $theme_args = array(
@@ -32,23 +33,22 @@ function eiti_pdf_scorecard_page() {
         'title' => '',
         'decision_reference' => '',
       );
-      if (isset($score_data->field_scd_pdf_date['und'][0]['value'])) {
-        $timestamp = strtotime($score_data->field_scd_pdf_date['und'][0]['value']);
-        if ($timestamp) {
-          $theme_args['date'] = format_date($timestamp, 'custom', $format = 'j F Y');
+      if (isset($score_data->field_scd_pdf_date)) {
+        if ($score_data_emw->field_scd_pdf_date->value()) {
+          $theme_args['date'] = format_date($score_data_emw->field_scd_pdf_date->value(), 'custom', $format = 'j F Y');
         }
       }
-      if (isset($score_data->field_scd_pdf_decision_ref['und'][0]['value'])) {
-        $theme_args['decision_reference'] = check_plain($score_data->field_scd_pdf_decision_ref['und'][0]['value']);
+      if (isset($score_data->field_scd_pdf_decision_ref)) {
+        $theme_args['decision_reference'] = check_plain($score_data_emw->field_scd_pdf_decision_ref->value());
       }
-      if (isset($score_data->field_scd_pdf_title['und'][0]['value'])) {
-        $theme_args['title'] = check_plain($score_data->field_scd_pdf_title['und'][0]['value']);
+      if (isset($score_data->field_scd_pdf_title)) {
+        $theme_args['title'] = check_plain($score_data_emw->field_scd_pdf_title->value());
       }
       $html_title_page = theme('eiti_pdf_title_page', $theme_args);
       unset($theme_args['logo']);
       $html_header = theme('eiti_pdf_header', $theme_args);
 
-      // Scorecard table.
+      // News, texts and scorecard table.
       // Based on visualizations/chartWidgets/source/scripts/vendor/scorecard.js
       $hasProgress = FALSE;
       if (isset($json->data[0]->score_req_values[0]->progress_value) && $json->data[0]->score_req_values[0]->progress_value != 3) {
@@ -66,12 +66,29 @@ function eiti_pdf_scorecard_page() {
         'progress_items' => $legend_data['progress_items'],
         'text_before' => '',
         'text_after' => '',
+        'news_items' => array(),
       );
-      if (isset($score_data->field_scd_pdf_text1['und'][0]['safe_value'])) {
-        $theme_args['text_before'] = $score_data->field_scd_pdf_text1['und'][0]['safe_value'];
+      if (isset($score_data->field_scd_pdf_text1)) {
+        $theme_args['text_before'] = $score_data_emw->field_scd_pdf_text1->value()['safe_value'];
       }
-      if (isset($score_data->field_scd_pdf_text2['und'][0]['safe_value'])) {
-        $theme_args['text_after'] = $score_data->field_scd_pdf_text2['und'][0]['safe_value'];
+      if (isset($score_data->field_scd_pdf_text2)) {
+        $theme_args['text_after'] = $score_data_emw->field_scd_pdf_text2->value()['safe_value'];
+      }
+      if (isset($score_data->field_scd_pdf_news)) {
+        $news_items = array();
+        foreach ($score_data_emw->field_scd_pdf_news->value() as $node) {
+          $node_emw = entity_metadata_wrapper('node', $node);
+          $body = $node_emw->body->value();
+          // TODO: we need to remove unfitting html tags with their content.
+          //$body = check_markup($body['safe_value'], 'min_html');
+          $replace = 'href="' . $GLOBALS['base_url'] . '/';
+          $body = str_replace('href="/', $replace, $body);
+          $news_items[] = array(
+            'title' => $node_emw->title_field->value(),
+            'body' => $body,
+          );
+        }
+        $theme_args['news_items'] = $news_items;
       }
       $html_scorecard_table = theme('eiti_pdf_scorecard', $theme_args);
 
@@ -103,7 +120,12 @@ function eiti_pdf_scorecard_page() {
     $mpdf->SetHTMLHeader($html_header);
   }
   if ($html_scorecard_table) {
-    $mpdf->AddPage();
+    $toc_params = array(
+      'toc-preHTML' => '<h2>' . t('Table of contents') . '</h2>',
+      'resetpagenum' => 3,
+      'links' => 1,
+    );
+    $mpdf->TOCpagebreakByArray($toc_params);
     $mpdf->WriteHTML($html_scorecard_table, 2);
   }
   $filename = $filename . '.pdf';
