@@ -64,7 +64,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -84,6 +84,42 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
+      'weight' => 37,
+    ),
+  );
+
+  // Exported field_instance: 'score_data-standard-field_scd_pdf_news'.
+  $field_instances['score_data-standard-field_scd_pdf_news'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_scd_pdf_news',
+    'label' => 'News',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
       'weight' => 36,
     ),
   );
@@ -99,48 +135,13 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'score_data',
-    'field_name' => 'field_scd_pdf_text1',
-    'label' => 'Text before table',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 37,
-    ),
-  );
-
-  // Exported field_instance: 'score_data-standard-field_scd_pdf_text2'.
-  $field_instances['score_data-standard-field_scd_pdf_text2'] = array(
-    'bundle' => 'standard',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
         'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'score_data',
-    'field_name' => 'field_scd_pdf_text2',
-    'label' => 'Text after table',
+    'field_name' => 'field_scd_pdf_text1',
+    'label' => 'The Board\'s decision',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -155,6 +156,41 @@ function eitiet_score_data_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 38,
+    ),
+  );
+
+  // Exported field_instance: 'score_data-standard-field_scd_pdf_text2'.
+  $field_instances['score_data-standard-field_scd_pdf_text2'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_scd_pdf_text2',
+    'label' => 'Recommendations',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 39,
     ),
   );
 
@@ -243,9 +279,10 @@ function eitiet_score_data_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Date');
   t('Decision reference');
+  t('News');
+  t('Recommendations');
   t('Score Requirements Values');
-  t('Text after table');
-  t('Text before table');
+  t('The Board\'s decision');
   t('Title');
 
   return $field_instances;

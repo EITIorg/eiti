@@ -25,9 +25,10 @@ function eitiet_score_data_field_group_info() {
     'children' => array(
       0 => 'field_scd_pdf_date',
       1 => 'field_scd_pdf_decision_ref',
-      2 => 'field_scd_pdf_text1',
-      3 => 'field_scd_pdf_text2',
-      4 => 'field_scd_pdf_title',
+      2 => 'field_scd_pdf_news',
+      3 => 'field_scd_pdf_text1',
+      4 => 'field_scd_pdf_text2',
+      5 => 'field_scd_pdf_title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

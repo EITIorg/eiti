@@ -79,8 +79,8 @@ function eiti_pdf_scorecard_page() {
         foreach ($score_data_emw->field_scd_pdf_news->value() as $node) {
           $node_emw = entity_metadata_wrapper('node', $node);
           $body = $node_emw->body->value();
-          // TODO: we need to remove unfitting html tags with their content.
-          //$body = check_markup($body['safe_value'], 'min_html');
+          $body = _eiti_pdf_html_cleanup($body['safe_value']);
+          $body = str_replace('<p></p>', '', $body);
           $replace = 'href="' . $GLOBALS['base_url'] . '/';
           $body = str_replace('href="/', $replace, $body);
           $news_items[] = array(
@@ -294,4 +294,36 @@ function _eiti_pdf_get_scorecard_legend_data() {
     'progress_items' => $progress_items
   );
   return $legend_data;
+}
+
+/**
+ * Cleans up html by removing unwanted elements.
+ */
+function _eiti_pdf_html_cleanup($text) {
+  $dom = new DOMDocument();
+  libxml_use_internal_errors(TRUE);
+  $dom->loadHTML(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+
+  $unwanted_tags = array('s', 'u', 'sub', 'hr', 'table', 'iframe', 'img', 'object', 'embed');
+
+  // Remove unwanted tags.
+  foreach ($unwanted_tags as $tag) {
+    $list = $dom->getElementsByTagName($tag);
+    while ($list->length > 0) {
+      $item = $list->item(0);
+      $item->parentNode->removeChild($item);
+    }
+  }
+
+  // Remove media entries.
+  $finder = new DomXPath($dom);
+  // "div"-s with the "file" class.
+  $nodes = $finder->query("//div[contains(concat(' ', normalize-space(@class), ' '), ' file ')]");
+  if ($nodes) {
+    foreach ($nodes as $node) {
+      $node->parentNode->removeChild($node);
+    }
+  }
+
+  return preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
 }

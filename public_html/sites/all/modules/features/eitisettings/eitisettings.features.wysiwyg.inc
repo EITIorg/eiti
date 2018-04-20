@@ -99,6 +99,7 @@ Table without borders=table.wysiwyg-noborder',
       'buttons' => array(
         'default' => array(
           'Bold' => 1,
+          'Italic' => 1,
           'BulletedList' => 1,
           'NumberedList' => 1,
           'Undo' => 1,
