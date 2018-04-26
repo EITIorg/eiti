@@ -14,6 +14,14 @@
  *   Returns HTTP response from Google.
  */
 function eiti_api_analytics_pageview_request($page, $title) {
+  // Do not track in-site API queries.
+  if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+    $referer_parts = parse_url($_SERVER['HTTP_REFERER']);
+    if (isset($referer_parts['host']) && $referer_parts['host'] == $_SERVER['SERVER_NAME']) {
+      return;
+    }
+  }
+
   $data = array();
 
   $data['v'] = 1;
@@ -26,7 +34,7 @@ function eiti_api_analytics_pageview_request($page, $title) {
 
   $user_agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : NULL;
 
-  if (!$user_agent) {
+  if ($user_agent) {
     $data += array(
       'ua' => $user_agent,
     );
@@ -34,7 +42,7 @@ function eiti_api_analytics_pageview_request($page, $title) {
 
   $ip = ip_address();
 
-  if (!$ip) {
+  if ($ip) {
     $data += array(
       'uip' => $ip,
     );
