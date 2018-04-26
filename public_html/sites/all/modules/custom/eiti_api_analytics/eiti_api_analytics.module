@@ -26,6 +26,9 @@ function eiti_api_analytics_pageview_request($page, $title) {
 
   $data['v'] = 1;
   $data['tid'] = variable_get('googleanalytics_account', '');
+  if (!$data['tid']) {
+    return;
+  }
   $data['cid'] = eiti_api_analytics_get_uuid();
 
   $data['t'] = 'pageview';
