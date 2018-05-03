@@ -1,5 +1,8 @@
 <?php
 
+require_once DRUPAL_ROOT . '/../vendor/autoload.php';
+use TheIconic\Tracking\GoogleAnalytics\Analytics;
+
 /**
  * Sends PageView tracking data to GA.
  *
@@ -35,28 +38,14 @@ function eiti_api_analytics_pageview_request($page, $title) {
   $data['dp'] = $page;
   $data['dt'] = $title;
 
-  $user_agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : NULL;
-
-  if ($user_agent) {
-    $data += array(
-      'ua' => $user_agent,
-    );
-  }
-
-  $ip = ip_address();
-
-  if ($ip) {
-    $data += array(
-      'uip' => $ip,
-    );
-  }
-
-  $httpr_options = array(
-    'method' => 'POST',
-    'data' => drupal_http_build_query($data),
-  );
-
-  return drupal_http_request('https://ssl.google-analytics.com/collect', $httpr_options);
+  $analytics = new Analytics(TRUE);
+  $analytics
+    ->setProtocolVersion($data['v'])
+    ->setTrackingId($data['tid'])
+    ->setClientId($data['cid'])
+    ->setDocumentPath($data['dp'])
+    ->setDocumentTitle($data['dt']);
+  $analytics->sendPageview();
 }
 
 /**
