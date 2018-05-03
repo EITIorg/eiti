@@ -28,7 +28,7 @@ function eiti_api_analytics_pageview_request($page, $title) {
   $data = array();
 
   $data['v'] = 1;
-  $data['tid'] = variable_get('googleanalytics_account', '');
+  $data['tid'] = variable_get('eiti_api_analytics_account', '');
   if (!$data['tid']) {
     return;
   }
