@@ -32,11 +32,7 @@ function eiti_api_analytics_pageview_request($page, $title) {
   if (!$data['tid']) {
     return;
   }
-
-  $data['cid'] = ip_address();
-  if (!$data['cid']) {
-    $data['cid'] = eiti_api_analytics_get_uuid();
-  }
+  $data['cid'] = eiti_api_analytics_get_uuid();
 
   $data['t'] = 'pageview';
   $data['dp'] = $page;
@@ -53,12 +49,13 @@ function eiti_api_analytics_pageview_request($page, $title) {
 }
 
 /**
- * Get an UUID ver 4 identifier form cookie or generates one on fallback.
+ * Get an UUID ver 4 identifier from cookie, IP address or random ID as fallback.
  *
  * @return string
- *   UUID ver 4 identifier.
+ *   UUID.
  */
 function eiti_api_analytics_get_uuid() {
+  $ip = ip_address();
   if (isset($_COOKIE['_ga'])) {
     list($version, $domain_depth, $cid1, $cid2) = explode('.', $_COOKIE["_ga"], 4);
 
@@ -69,6 +66,9 @@ function eiti_api_analytics_get_uuid() {
     );
 
     $cid = $contents['cid'];
+  }
+  elseif ($ip) {
+    $cid = $ip;
   }
   else {
     $cid = _eiti_api_analytics_gen_uuid();
