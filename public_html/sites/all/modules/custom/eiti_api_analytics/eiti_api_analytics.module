@@ -32,7 +32,11 @@ function eiti_api_analytics_pageview_request($page, $title) {
   if (!$data['tid']) {
     return;
   }
-  $data['cid'] = eiti_api_analytics_get_uuid();
+
+  $data['cid'] = ip_address();
+  if (!$data['cid']) {
+    $data['cid'] = eiti_api_analytics_get_uuid();
+  }
 
   $data['t'] = 'pageview';
   $data['dp'] = $page;
