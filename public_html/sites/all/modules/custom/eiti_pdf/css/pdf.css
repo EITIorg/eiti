@@ -1,3 +1,12 @@
+@page * {
+  margin-bottom: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* Title page */
 .pdf-title-page .line {width: 100%; background-color:#0093cf; margin: 130px -57px 130px -57px; font-size: 22px;}
 .pdf-title-page .line td {padding: 6px;}
@@ -7,7 +16,21 @@
 .pdf-title-page .reference {font-size: 22px; margin-top: 10px;}
 
 /* Header */
-table.pdf-header .page-no {color: #fff; background-color:#0093cf;}
+table.pdf-header {
+  width: 100%;
+  margin-left: -57px;
+  margin-right: -57px;
+}
+
+table.pdf-header .info {
+  width: 90%;
+  font-size: 9px;
+}
+table.pdf-header .page-no {
+  color: #fff;
+  background-color:#0093cf;
+  padding: 5px 10px;
+}
 
 /* Scorecard */
 table.country_scorecard {width: 100%;}
@@ -30,3 +53,19 @@ table.scorecard-progress {margin-top: 15px;}
 table.scorecard-progress .symbol {text-align: center; color: #676767; width: 30px; height: 40px;}
 table.scorecard-progress .value-1 .symbol {color: #84AD42;}
 table.scorecard-progress .value-2 .symbol {color: red;}
+
+.pdf-footer {
+  background: #f3f8fc;
+  color: #808080;
+  font-size: 10px;
+  padding: 10px 57px 30px 57px;
+  margin: 57px -57px -57px -57px;
+}
+
+.pdf-footer .website {
+  color: #0093cf;
+}
+
+.pdf-footer .name {
+  font-weight: bold;
+}
