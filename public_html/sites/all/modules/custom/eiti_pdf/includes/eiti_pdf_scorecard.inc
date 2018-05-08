@@ -112,12 +112,12 @@ function eiti_pdf_scorecard_page() {
   $mpdf->WriteHTML($css, 1);
   $css = file_get_contents(__DIR__ . '/../css/pdf.css');
   $mpdf->WriteHTML($css, 1);
-  $mpdf->SetHTMLFooter($html_footer);
+  $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
   if ($html_title_page) {
     $mpdf->WriteHTML($html_title_page, 2);
   }
   if ($html_header) {
-    $mpdf->SetHTMLHeader($html_header);
+    $mpdf->DefHTMLHeaderByName('myHeader', $html_header);
   }
   if ($html_scorecard_table) {
     $toc_params = array(

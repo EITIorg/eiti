@@ -1,11 +1,16 @@
-@page * {
-  margin-bottom: 0;
+@page {
+  /*(% of page-box width for LR, of height for TB) */
+  margin-header: 10mm; /* <any of the usual CSS values for margins> */
+  margin-footer: 0mm; /* <any of the usual CSS values for margins> */
+  header: html_myHeader;
+  footer: html_myFooter;
 }
 
-body {
-  margin: 0;
-  padding: 0;
+@page :first {
+  header: _blank;
+  footer: _blank;
 }
+
 
 /* Title page */
 .pdf-title-page .line {width: 100%; background-color:#0093cf; margin: 130px -57px 130px -57px; font-size: 22px;}
@@ -20,11 +25,14 @@ table.pdf-header {
   width: 100%;
   margin-left: -57px;
   margin-right: -57px;
+  margin-bottom: 20px;
 }
 
 table.pdf-header .info {
   width: 90%;
   font-size: 9px;
+  text-align: right;
+  padding-right: 5px;
 }
 table.pdf-header .page-no {
   color: #fff;
@@ -55,17 +63,39 @@ table.scorecard-progress .value-1 .symbol {color: #84AD42;}
 table.scorecard-progress .value-2 .symbol {color: red;}
 
 .pdf-footer {
-  background: #f3f8fc;
-  color: #808080;
+  background: #e9f3f9;
   font-size: 10px;
-  padding: 10px 57px 30px 57px;
+  padding: 10px 57px 20px 57px;
   margin: 57px -57px -57px -57px;
 }
 
-.pdf-footer .website {
-  color: #0093cf;
+.pdf-footer img {
+  /* Padding is not supported on inline elements. */
+  border-right: 2px solid #e9f3f9;
 }
 
 .pdf-footer .name {
   font-weight: bold;
+  /* Padding is not supported on inline elements. */
+  border-right: 3px solid #e9f3f9;
+}
+
+.pdf-footer .address {
+  /* Padding is not supported on inline elements. */
+  border-right: 3px solid #e9f3f9;
+}
+
+.pdf-footer .post {
+  /* Padding is not supported on inline elements. */
+  border-right: 3px solid #e9f3f9;
+}
+
+.pdf-footer .website {
+  /* Padding is not supported on inline elements. */
+  border-right: 3px solid #e9f3f9;
+}
+
+.pdf-footer .phone {
+  /* Padding is not supported on inline elements. */
+  border-right: 3px solid #e9f3f9;
 }
