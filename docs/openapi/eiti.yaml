@@ -923,16 +923,6 @@ paths:
             country, by sending the country’s ISO code
           schema:
             type: string
-        - in: query
-          name: 'filter[years_from]'
-          description: Allows to filter the revenues disbursed starting with a certain year
-          schema:
-            type: string
-        - in: query
-          name: 'filter[years_to]'
-          description: Allows to filter the revenues disbursed ending with a certain year
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -1022,6 +1012,16 @@ paths:
             country, by sending the country’s ISO code
           schema:
             type: string
+        - in: query
+          name: 'filter[years_from]'
+          description: Allows to filter the production volumes starting with a certain year
+          schema:
+            type: string
+        - in: query
+          name: 'filter[years_to]'
+          description: Allows to filter the production volumes ending with a certain year
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1067,6 +1067,17 @@ paths:
       description: >-
         Fetches all the GFS Codes defined in the system and returns them as JSON
         objects
+      parameters:
+        - in: query
+          name: 'filter[code]'
+          description: Allows to filter the GFS Codes by their code value
+          schema:
+            type: string
+        - in: query
+          name: 'filter[parent]'
+          description: Allows to filter the GFS Codes by their parent value
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1147,6 +1158,37 @@ paths:
       tags:
         - Revenue
       description: Fetches all the Revenue entries as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter Revenue entries by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[gfs]'
+          description: Allows to filter Revenue entries by their GFS Code id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[report_status]'
+          description: Allows to filter Revenue entries by their report status
+          schema:
+            type: string
+        - in: query
+          name: 'filter[organisation]'
+          description: Allows to filter Revenue entries by their organisation id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[revenue]'
+          description: Allows to filter Revenue entries by their revenue
+          schema:
+            type: string
+        - in: query
+          name: 'filter[currency]'
+          description: Allows to filter Revenue entries by their currency
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1294,6 +1336,17 @@ paths:
       tags:
         - Organisation
       description: Fetches all the Organisations and their information as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter Organisations by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[country]'
+          description: Allows to filter Organisations by their country id
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1494,6 +1547,27 @@ paths:
       tags:
         - Indicator
       description: Fetches all of the defined indicators and shows them as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter indicators by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[parent]'
+          description: Allows to filter indicators by their parent
+          schema:
+            type: string
+        - in: query
+          name: 'filter[status]'
+          description: Allows to filter indicators by their status
+          schema:
+            type: string
+        - in: query
+          name: 'filter[created]'
+          description: Allows to filter indicators by their created UNIX timestamp
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1582,5 +1656,5 @@ paths:
                         type: string
                       href:
                         type: string
-components:
-  schemas: {}
+#components:
+#  schemas: {}
