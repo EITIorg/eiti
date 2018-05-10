@@ -237,10 +237,6 @@ paths:
     get:
       parameters:
         - in: query
-          name: 'filter[links][url]'
-          schema:
-            type: string
-        - in: query
           name: 'filter[links]'
           schema:
             type: string
@@ -1649,6 +1645,206 @@ paths:
                           type: integer
                         created:
                           type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /implementing_country:
+    get:
+      tags:
+        - Implementing Country
+      description: Fetches all of the implementing countries and shows them as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[iso2]'
+          description: Allows to filter implementing countries by their iso2 code
+          schema:
+            type: string
+        - in: query
+          name: 'filter[status]'
+          description: Allows to filter implementing countries by their status tid value
+          schema:
+            type: string
+        - in: query
+          name: 'filter[status_date]'
+          description: >-
+            Allows to filter implementing countries by their status date
+            in YYYY-MM-DD (YYYY-01-01) format
+          schema:
+            type: string
+        - in: query
+          name: 'filter[local_website]'
+          description: Allows to filter implementing countries by their local_website url
+          schema:
+            type: string
+        - in: query
+          name: 'filter[annual_report_file]'
+          description: Allows to filter implementing countries by their annual report file fid value
+          schema:
+            type: string
+        - in: query
+          name: 'filter[latest_validation_date]'
+          description: >-
+            Allows to filter implementing countries by their latest validation date
+            in YYYY-MM-DD (YYYY-01-01) format
+          schema:
+            type: string
+        - in: query
+          name: 'filter[latest_validation_link]'
+          description: Allows to filter implementing countries by their latest validation link id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[latest_validation_url]'
+          description: Allows to filter implementing countries by their latest validation url
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        iso2:
+                          type: string
+                        iso3:
+                          type: string
+                        status:
+                          type: object
+                          properties:
+                            tid:
+                              type: integer
+                            language:
+                              type: string
+                            name:
+                              type: string
+                            color:
+                              type: string
+                        status_date:
+                          type: integer
+                        local_website:
+                          type: string
+                        annual_report_file:
+                          type: string
+                        reports:
+                          type: object
+                          additionalProperties:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                commodity:
+                                  type: string
+                                parent:
+                                  type: string
+                                id:
+                                  type: integer
+                                value:
+                                  type: integer
+                                value_bool:
+                                  type: integer
+                                value_text:
+                                  type: string
+                                unit:
+                                  type: string
+                                source:
+                                  type: string
+                        metadata:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              contact:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  email:
+                                    type: string
+                                  organisation:
+                                    type: string
+                              year_start:
+                                type: string
+                              year_end:
+                                type: string
+                              currency_rate:
+                                type: number
+                              currency_code:
+                                type: string
+                              sectors_covered:
+                                type: array
+                                items:
+                                  type: string
+                              reporting_organisations:
+                                type: object
+                                properties:
+                                  companies:
+                                    type: integer
+                                  governmental_agencies:
+                                    type: integer
+                              web_report_links:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    url:
+                                      type: string
+                                    title:
+                                      type: string
+                                    attributes:
+                                      type: array
+                              disaggregated:
+                                type: object
+                                properties:
+                                  project:
+                                    type: integer
+                                  revenue_stream:
+                                    type: integer
+                                  company:
+                                    type: integer
+                        licenses:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
+                        contracts:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
+                        revenues:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              government:
+                                type: integer
+                              company:
+                                type: integer
+                        latest_validation_date:
+                          type: string
+                        latest_validation_link:
+                          type: string
+                  count:
+                    type: integer
                   self:
                     type: object
                     properties:
