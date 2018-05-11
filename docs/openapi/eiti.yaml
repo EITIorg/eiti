@@ -233,6 +233,217 @@ paths:
                         type: string
                       href:
                         type: string
+  /score_data/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      tags:
+        - Score Data
+      description: 'Data about the progress of a country in a specific year in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The score_data identifier
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        year:
+                          type: integer
+                        country:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            label:
+                              type: string
+                            self:
+                              type: string
+                            iso2:
+                              type: string
+                            iso3:
+                              type: string
+                            status:
+                              type: object
+                              properties:
+                                tid:
+                                  type: integer
+                                language:
+                                  type: string
+                                name:
+                                  type: string
+                                color:
+                                  type: string
+                            status_date:
+                              type: integer
+                            local_website:
+                              type: string
+                            annual_report_file:
+                              type: string
+                            reports:
+                              type: object
+                              additionalProperties:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    commodity:
+                                      type: string
+                                    parent:
+                                      type: string
+                                    id:
+                                      type: integer
+                                    value:
+                                      type: integer
+                                    value_bool:
+                                      type: integer
+                                    value_text:
+                                      type: string
+                                    unit:
+                                      type: string
+                                    source:
+                                      type: string
+                            metadata:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  contact:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      email:
+                                        type: string
+                                      organisation:
+                                        type: string
+                                  year_start:
+                                    type: string
+                                  year_end:
+                                    type: string
+                                  currency_rate:
+                                    type: number
+                                  currency_code:
+                                    type: string
+                                  sectors_covered:
+                                    type: array
+                                    items:
+                                      type: string
+                                  reporting_organisations:
+                                    type: object
+                                    properties:
+                                      companies:
+                                        type: integer
+                                      governmental_agencies:
+                                        type: integer
+                                  web_report_links:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        url:
+                                          type: string
+                                        title:
+                                          type: string
+                                        attributes:
+                                          type: array
+                                  disaggregated:
+                                    type: object
+                                    properties:
+                                      project:
+                                        type: integer
+                                      revenue_stream:
+                                        type: integer
+                                      company:
+                                        type: integer
+                            licenses:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                additionalProperties:
+                                  type: string
+                            contracts:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                additionalProperties:
+                                  type: string
+                            revenues:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  government:
+                                    type: integer
+                                  company:
+                                    type: integer
+                        score_req_values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              score_req_id:
+                                type: integer
+                              score_req:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  type:
+                                    type: string
+                                  status:
+                                    type: integer
+                                  created:
+                                    type: integer
+                                  name:
+                                    type: string
+                                  code:
+                                    type: string
+                                  field_score_req_category:
+                                    type: object
+                                    properties:
+                                      und:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            tid:
+                                              type: integer
+                              value:
+                                type: integer
+                              progress_value:
+                                type: integer
+                              is_applicable:
+                                type: integer
+                              is_required:
+                                type: integer
+                              description:
+                                type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /summary_data:
     get:
       parameters:
@@ -471,6 +682,12 @@ paths:
                                     type: integer
                                   company:
                                     type: integer
+                            latest_validation_date:
+                              type: string
+                            latest_validation_link:
+                              type: string
+                            latest_validation_url:
+                              type: string
                         indicator_values:
                           type: array
                           items:
@@ -567,11 +784,287 @@ paths:
                         type: string
                       href:
                         type: string
+  /summary_data/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      tags:
+        - Summary Data
+      description: 'Fetches a single summary data entry. Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        links:
+                          type: array
+                          items:
+                            type: string
+                        email:
+                          type: string
+                        government_entities_nr:
+                          type: number
+                        company_entities_nr:
+                          type: number
+                        year_start:
+                          type: string
+                        year_end:
+                          type: string
+                        created:
+                          type: string
+                        changed:
+                          type: string
+                        sector_oil:
+                          type: integer
+                        sector_mining:
+                          type: integer
+                        sector_gas:
+                          type: integer
+                        sector_other:
+                          type: string
+                        country:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            label:
+                              type: string
+                            self:
+                              type: string
+                            iso2:
+                              type: string
+                            iso3:
+                              type: string
+                            status:
+                              type: object
+                              properties:
+                                tid:
+                                  type: integer
+                                language:
+                                  type: string
+                                name:
+                                  type: string
+                                color:
+                                  type: string
+                            status_date:
+                              type: integer
+                            local_website:
+                              type: string
+                            annual_report_file:
+                              type: string
+                            reports:
+                              type: object
+                              additionalProperties:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    commodity:
+                                      type: string
+                                    parent:
+                                      type: string
+                                    id:
+                                      type: integer
+                                    value:
+                                      type: integer
+                                    value_bool:
+                                      type: integer
+                                    value_text:
+                                      type: string
+                                    unit:
+                                      type: string
+                                    source:
+                                      type: string
+                            metadata:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  contact:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      email:
+                                        type: string
+                                      organisation:
+                                        type: string
+                                  year_start:
+                                    type: string
+                                  year_end:
+                                    type: string
+                                  currency_rate:
+                                    type: number
+                                  currency_code:
+                                    type: string
+                                  sectors_covered:
+                                    type: array
+                                    items:
+                                      type: string
+                                  reporting_organisations:
+                                    type: object
+                                    properties:
+                                      companies:
+                                        type: integer
+                                      governmental_agencies:
+                                        type: integer
+                                  web_report_links:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        url:
+                                          type: string
+                                        title:
+                                          type: string
+                                        attributes:
+                                          type: array
+                                  disaggregated:
+                                    type: object
+                                    properties:
+                                      project:
+                                        type: integer
+                                      revenue_stream:
+                                        type: integer
+                                      company:
+                                        type: integer
+                            licenses:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                additionalProperties:
+                                  type: string
+                            contracts:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                additionalProperties:
+                                  type: string
+                            revenues:
+                              type: object
+                              additionalProperties:
+                                type: object
+                                properties:
+                                  government:
+                                    type: integer
+                                  company:
+                                    type: integer
+                            latest_validation_date:
+                              type: string
+                            latest_validation_link:
+                              type: string
+                            latest_validation_url:
+                              type: string
+                        indicator_values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              label:
+                                type: string
+                              self:
+                                type: string
+                              value:
+                                type: integer
+                              unit:
+                                type: string
+                              indicator:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  type:
+                                    type: string
+                                  name:
+                                    type: string
+                                  parent:
+                                    type: integer
+                                  status:
+                                    type: integer
+                                  created:
+                                    type: integer
+                        revenue_government:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              type:
+                                type: string
+                              gfs_code_id:
+                                type: integer
+                              report_status:
+                                type: integer
+                              name:
+                                type: string
+                              organisation_id:
+                                type: integer
+                              revenue:
+                                type: number
+                              currency:
+                                type: string
+                              original_revenue:
+                                type: number
+                              original_currency:
+                                type: string
+                        revenue_company:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              type:
+                                type: string
+                              gfs_code_id:
+                                type: integer
+                              report_status:
+                                type: integer
+                              name:
+                                type: string
+                              organisation_id:
+                                type: integer
+                              revenue:
+                                type: number
+                              currency:
+                                type: string
+                              original_revenue:
+                                type: number
+                              original_currency:
+                                type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /grouped_bar:
     get:
       tags:
         - Grouped Bar Chart
-      description: Returns all the Grouped Bar Chart endpoints
+      description: Returns all the grouped bar chart endpoints
       responses:
         '200':
           description: OK
@@ -610,7 +1103,7 @@ paths:
     get:
       tags:
         - Grouped Bar Chart
-      summary: Global Production for All Countries per year
+      summary: Global production for all countries per year
       description: Production volumes for all the countries
       parameters:
         - in: query
@@ -668,7 +1161,7 @@ paths:
     get:
       tags:
         - Grouped Bar Chart
-      summary: Country Production for all of the Years
+      summary: Country production for all of the years
       description: Production volumes
       parameters:
         - in: query
@@ -726,8 +1219,8 @@ paths:
     get:
       tags:
         - Grouped Bar Chart
-      summary: Country’s External Indicators for all of the years
-      description: External Indicators for all the Reported Years
+      summary: Country’s external indicators for all of the years
+      description: External indicators for all the reported years
       parameters:
         - in: query
           name: 'filter[year]'
@@ -784,7 +1277,7 @@ paths:
     get:
       tags:
         - Stacked Bar Chart
-      description: Returns all the Stacked Bar Chart endpoints
+      description: Returns all the stacked bar chart endpoints
       responses:
         '200':
           description: OK
@@ -821,8 +1314,8 @@ paths:
     get:
       tags:
         - Stacked Bar Chart
-      summary: Country Governmental Revenue
-      description: Revenue disclosed by a Government of a specific country.
+      summary: Country governmental revenue
+      description: Revenue disclosed by a government of a specific country.
       parameters:
         - in: query
           name: 'filter[gfs_code]'
@@ -872,7 +1365,7 @@ paths:
     get:
       tags:
         - Bubble Chart
-      description: Returns all the Bubble Chart endpoints
+      description: Returns all the bubble chart endpoints
       responses:
         '200':
           description: OK
@@ -909,8 +1402,8 @@ paths:
     get:
       tags:
         - Bubble Chart
-      summary: Country’s Disbursed Revenues
-      description: Revenue Disbursed by the Governmental Agencies of a specific country
+      summary: Country’s disbursed revenues
+      description: Revenue disbursed by the governmental agencies of a specific country
       parameters:
         - in: query
           name: 'filter[country_iso]'
@@ -961,7 +1454,7 @@ paths:
     get:
       tags:
         - Sankey Chart
-      description: Returns all the Sankey Chart endpoints
+      description: Returns all the sankey chart endpoints
       responses:
         '200':
           description: OK
@@ -998,8 +1491,8 @@ paths:
     get:
       tags:
         - Sankey Chart
-      summary: Country’s Disbursed Revenues by Companies
-      description: Revenue Disbursed by Companies of a specific country
+      summary: Country’s disbursed revenues by companies
+      description: Revenue disbursed by companies of a specific country
       parameters:
         - in: query
           name: 'filter[country_iso]'
@@ -1061,17 +1554,17 @@ paths:
       tags:
         - GFS Code
       description: >-
-        Fetches all the GFS Codes defined in the system and returns them as JSON
+        Fetches all the GFS codes defined in the system and returns them as JSON
         objects
       parameters:
         - in: query
           name: 'filter[code]'
-          description: Allows to filter the GFS Codes by their code value
+          description: Allows to filter the GFS codes by their code value
           schema:
             type: string
         - in: query
           name: 'filter[parent]'
-          description: Allows to filter the GFS Codes by their parent value
+          description: Allows to filter the GFS codes by their parent value
           schema:
             type: string
       responses:
@@ -1111,7 +1604,7 @@ paths:
       tags:
         - GFS Code
       description: >-
-        Fetches a single GFS Code defined in the system and returns it as a JSON
+        Fetches a single GFS code defined in the system and returns it as a JSON
         object
       parameters:
         - in: path
@@ -1153,36 +1646,36 @@ paths:
     get:
       tags:
         - Revenue
-      description: Fetches all the Revenue entries as JSON objects
+      description: Fetches all the revenue entries as JSON objects
       parameters:
         - in: query
           name: 'filter[type]'
-          description: Allows to filter Revenue entries by their type
+          description: Allows to filter revenue entries by their type
           schema:
             type: string
         - in: query
           name: 'filter[gfs]'
-          description: Allows to filter Revenue entries by their GFS Code id
+          description: Allows to filter revenue entries by their GFS Code id
           schema:
             type: string
         - in: query
           name: 'filter[report_status]'
-          description: Allows to filter Revenue entries by their report status
+          description: Allows to filter revenue entries by their report status
           schema:
             type: string
         - in: query
           name: 'filter[organisation]'
-          description: Allows to filter Revenue entries by their organisation id
+          description: Allows to filter revenue entries by their organisation id
           schema:
             type: string
         - in: query
           name: 'filter[revenue]'
-          description: Allows to filter Revenue entries by their revenue
+          description: Allows to filter revenue entries by their revenue
           schema:
             type: string
         - in: query
           name: 'filter[currency]'
-          description: Allows to filter Revenue entries by their currency
+          description: Allows to filter revenue entries by their currency
           schema:
             type: string
       responses:
@@ -1256,7 +1749,7 @@ paths:
     get:
       tags:
         - Revenue
-      description: Fetches a single Revenue entry as a JSON object
+      description: Fetches a single revenue entry as a JSON object
       parameters:
         - in: path
           name: id
@@ -1331,16 +1824,16 @@ paths:
     get:
       tags:
         - Organisation
-      description: Fetches all the Organisations and their information as JSON objects
+      description: Fetches all the organisations and their information as JSON objects
       parameters:
         - in: query
           name: 'filter[type]'
-          description: Allows to filter Organisations by their type
+          description: Allows to filter organisations by their type
           schema:
             type: string
         - in: query
           name: 'filter[country]'
-          description: Allows to filter Organisations by their country id
+          description: Allows to filter organisations by their country id
           schema:
             type: string
       responses:
@@ -1386,7 +1879,7 @@ paths:
     get:
       tags:
         - Organisation
-      description: Fetches a single Organisations and its information as a JSON object
+      description: Fetches a single organisation and its information as a JSON object
       parameters:
         - in: path
           name: id
@@ -1427,7 +1920,7 @@ paths:
     get:
       tags:
         - Indicator Values
-      description: Fetches all the Indicator Values and their details as JSON objects
+      description: Fetches all the indicator values and their details as JSON objects
       responses:
         '200':
           description: OK
@@ -1486,7 +1979,7 @@ paths:
     get:
       tags:
         - Indicator Values
-      description: Fetches a single Indicator Value and its details as a JSON object
+      description: Fetches a single indicator value and its details as a JSON object
       parameters:
         - in: path
           name: id
@@ -1843,8 +2336,255 @@ paths:
                           type: string
                         latest_validation_link:
                           type: string
+                        latest_validation_url:
+                          type: string
                   count:
                     type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /implementing_country/{id}:
+    get:
+      tags:
+        - Implementing Country
+      description: Fetches a single implementing country and shows it as JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        iso2:
+                          type: string
+                        iso3:
+                          type: string
+                        status:
+                          type: object
+                          properties:
+                            tid:
+                              type: integer
+                            language:
+                              type: string
+                            name:
+                              type: string
+                            color:
+                              type: string
+                        status_date:
+                          type: integer
+                        local_website:
+                          type: string
+                        annual_report_file:
+                          type: string
+                        reports:
+                          type: object
+                          additionalProperties:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                commodity:
+                                  type: string
+                                parent:
+                                  type: string
+                                id:
+                                  type: integer
+                                value:
+                                  type: integer
+                                value_bool:
+                                  type: integer
+                                value_text:
+                                  type: string
+                                unit:
+                                  type: string
+                                source:
+                                  type: string
+                        metadata:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              contact:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  email:
+                                    type: string
+                                  organisation:
+                                    type: string
+                              year_start:
+                                type: string
+                              year_end:
+                                type: string
+                              currency_rate:
+                                type: number
+                              currency_code:
+                                type: string
+                              sectors_covered:
+                                type: array
+                                items:
+                                  type: string
+                              reporting_organisations:
+                                type: object
+                                properties:
+                                  companies:
+                                    type: integer
+                                  governmental_agencies:
+                                    type: integer
+                              web_report_links:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    url:
+                                      type: string
+                                    title:
+                                      type: string
+                                    attributes:
+                                      type: array
+                              disaggregated:
+                                type: object
+                                properties:
+                                  project:
+                                    type: integer
+                                  revenue_stream:
+                                    type: integer
+                                  company:
+                                    type: integer
+                        licenses:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
+                        contracts:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
+                        revenues:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            properties:
+                              government:
+                                type: integer
+                              company:
+                                type: integer
+                        latest_validation_date:
+                          type: string
+                        latest_validation_link:
+                          type: string
+                        latest_validation_url:
+                          type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /country_status:
+    get:
+      tags:
+        - Country Status
+      description: >-
+        Fetches all the country statuses defined in the system and returns them as JSON
+        objects
+      parameters:
+        - in: query
+          name: 'filter[color]'
+          description: Allows to filter the country statuses by their color
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        color:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/country_status/{id}':
+    get:
+      tags:
+        - Country Status
+      description: >-
+        Fetches a single country status defined in the system and returns it as a JSON
+        object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        color:
+                          type: string
                   self:
                     type: object
                     properties:
