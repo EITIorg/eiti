@@ -1,5 +1,8 @@
 <?php
 
+require_once DRUPAL_ROOT . '/../vendor/autoload.php';
+use TheIconic\Tracking\GoogleAnalytics\Analytics;
+
 /**
  * Sends PageView tracking data to GA.
  *
@@ -14,47 +17,45 @@
  *   Returns HTTP response from Google.
  */
 function eiti_api_analytics_pageview_request($page, $title) {
+  // Do not track in-site API queries.
+  if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+    $referer_parts = parse_url($_SERVER['HTTP_REFERER']);
+    if (isset($referer_parts['host']) && $referer_parts['host'] == $_SERVER['SERVER_NAME']) {
+      return;
+    }
+  }
+
   $data = array();
 
   $data['v'] = 1;
-  $data['tid'] = variable_get('googleanalytics_account', '');
+  $data['tid'] = variable_get('eiti_api_analytics_account', '');
+  if (!$data['tid']) {
+    return;
+  }
   $data['cid'] = eiti_api_analytics_get_uuid();
 
   $data['t'] = 'pageview';
   $data['dp'] = $page;
   $data['dt'] = $title;
 
-  $user_agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : NULL;
-
-  if (!$user_agent) {
-    $data += array(
-      'ua' => $user_agent,
-    );
-  }
-
-  $ip = ip_address();
-
-  if (!$ip) {
-    $data += array(
-      'uip' => $ip,
-    );
-  }
-
-  $httpr_options = array(
-    'method' => 'POST',
-    'data' => drupal_http_build_query($data),
-  );
-
-  return drupal_http_request('https://ssl.google-analytics.com/collect', $httpr_options);
+  $analytics = new Analytics(TRUE);
+  $analytics
+    ->setProtocolVersion($data['v'])
+    ->setTrackingId($data['tid'])
+    ->setClientId($data['cid'])
+    ->setDocumentPath($data['dp'])
+    ->setDocumentTitle($data['dt']);
+  $analytics->sendPageview();
 }
 
 /**
- * Get an UUID ver 4 identifier form cookie or generates one on fallback.
+ * Get an UUID ver 4 identifier from cookie, IP address or random ID as fallback.
  *
  * @return string
- *   UUID ver 4 identifier.
+ *   UUID.
  */
 function eiti_api_analytics_get_uuid() {
+  $ip = ip_address();
   if (isset($_COOKIE['_ga'])) {
     list($version, $domain_depth, $cid1, $cid2) = explode('.', $_COOKIE["_ga"], 4);
 
@@ -65,6 +66,9 @@ function eiti_api_analytics_get_uuid() {
     );
 
     $cid = $contents['cid'];
+  }
+  elseif ($ip) {
+    $cid = $ip;
   }
   else {
     $cid = _eiti_api_analytics_gen_uuid();
