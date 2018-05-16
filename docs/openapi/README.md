@@ -20,6 +20,12 @@
     sudo npm install -g widdershins
     ```
 
+    If you encounter problems you can instead try the following and skip step 3
+
+    ```bash
+    npx widdershins ./eiti.yaml > ./eiti.md
+    ```
+
 3) Generate [Shins](https://github.com/mermade/shins) compatible markdown from OpenAPI definition
 
     ```bash
