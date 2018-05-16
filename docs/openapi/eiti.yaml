@@ -100,12 +100,12 @@ paths:
       parameters:
         - in: query
           name: 'filter[code]'
-          description: Allows to filter the GFS codes by their code value
+          description: Allows to filter the GFS codes by their code
           schema:
             type: string
         - in: query
           name: 'filter[parent]'
-          description: Allows to filter the GFS codes by their parent value
+          description: Allows to filter the GFS codes by their parent
           schema:
             type: string
       responses:
@@ -191,12 +191,12 @@ paths:
       parameters:
         - in: query
           name: 'filter[iso2]'
-          description: Allows to filter implementing countries by their iso2 code
+          description: Allows to filter implementing countries by their ISO2 code
           schema:
             type: string
         - in: query
           name: 'filter[status]'
-          description: Allows to filter implementing countries by their status tid value
+          description: Allows to filter implementing countries by their status tid
           schema:
             type: string
         - in: query
@@ -213,7 +213,7 @@ paths:
             type: string
         - in: query
           name: 'filter[annual_report_file]'
-          description: Allows to filter implementing countries by their annual report file fid value
+          description: Allows to filter implementing countries by their annual report file fid
           schema:
             type: string
         - in: query
@@ -884,7 +884,7 @@ paths:
             type: string
         - in: query
           name: 'filter[gfs]'
-          description: Allows to filter revenue entries by their GFS Code id
+          description: Allows to filter revenue entries by their GFS code id
           schema:
             type: string
         - in: query
@@ -1054,14 +1054,17 @@ paths:
       parameters:
         - in: query
           name: 'filter[year]'
+          description: Allows to filter score data by their year
           schema:
             type: string
         - in: query
           name: 'filter[country]'
+          description: Allows to filter score data by their country id
           schema:
             type: string
         - in: query
           name: 'filter[score_req_values]'
+          description: Allows to filter score data by their score requirement values id
           schema:
             type: string
       tags:
@@ -1492,62 +1495,82 @@ paths:
       parameters:
         - in: query
           name: 'filter[links]'
+          description: Allows to filter summary data by their links URL
           schema:
             type: string
         - in: query
           name: 'filter[email]'
+          description: Allows to filter summary data by their email
           schema:
             type: string
         - in: query
           name: 'filter[government_entities_nr]'
+          description: Allows to filter summary data by their government entities number
           schema:
             type: string
         - in: query
           name: 'filter[company_entities_nr]'
+          description: Allows to filter summary data by their company entities number
           schema:
             type: string
         - in: query
           name: 'filter[year_start]'
+          description: Allows to filter summary data by their start year (GMT UNIX timestamp of January 1)
+          schema:
+            type: string
+        - in: query
+          name: 'filter[year_end]'
+          description: Allows to filter summary data by their end year (GMT UNIX timestamp of December 31)
           schema:
             type: string
         - in: query
           name: 'filter[created]'
+          description: Allows to filter summary data by their created date UNIX timestamp (mismatch with display)
           schema:
             type: string
         - in: query
           name: 'filter[changed]'
+          description: Allows to filter summary data by their changed date UNIX timestamp (mismatch with display)
           schema:
             type: string
         - in: query
           name: 'filter[sector_oil]'
+          description: Allows to filter summary data by their oil sector
           schema:
             type: string
         - in: query
           name: 'filter[sector_mining]'
+          description: Allows to filter summary data by their mining sector
           schema:
             type: string
         - in: query
           name: 'filter[sector_gas]'
+          description: Allows to filter summary data by their gas sector
           schema:
             type: string
         - in: query
           name: 'filter[sector_other]'
+          description: Allows to filter summary data by their other sectors
           schema:
             type: string
         - in: query
           name: 'filter[country]'
+          description: Allows to filter summary data by their country id
           schema:
             type: string
         - in: query
           name: 'filter[indicator_values]'
+          description: Allows to filter summary data by their indicator values id
           schema:
             type: string
         - in: query
           name: 'filter[revenue_government]'
+          description: Allows to filter summary data by their government revenue id
           schema:
             type: string
         - in: query
           name: 'filter[revenue_company]'
+          description: Allows to filter summary data by their company revenue id
           schema:
             type: string
       tags:
