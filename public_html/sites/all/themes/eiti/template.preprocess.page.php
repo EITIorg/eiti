@@ -154,6 +154,7 @@ function eiti_css_alter(&$css) {
     'sites/all/modules/contrib/media',
     'sites/all/modules/contrib/owlcarousel',
     'sites/all/modules/contrib/views',
+    'sites/all/modules/contrib/eu_cookie_compliance',
   );
 
   // The CSS_SYSTEM aggregation group doesn't make any sense and most of the
