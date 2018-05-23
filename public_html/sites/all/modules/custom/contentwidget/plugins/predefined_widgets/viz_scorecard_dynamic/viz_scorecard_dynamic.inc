@@ -108,7 +108,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   );
   $pdf_link_plain = url('scorecard-pdf');
   $block['pdf'] = array(
-    '#markup' => '<div class="pdf-link"><a target="_blank" data-plain-link="' . $pdf_link_plain . '" href="' . $pdf_link . '">' . t('PDF') . '</a></div>',
+    '#markup' => '<div class="pdf-link"><a target="_blank" data-plain-link="' . $pdf_link_plain . '" href="' . $pdf_link . '">' . t('Download PDF') . '</a></div>',
   );
 
   $year_selector_class = drupal_html_class($identifier . '--sc-year-selector');
