@@ -25,15 +25,14 @@ function eiti_api_analytics_pageview_request($page, $title) {
     }
   }
 
+  $ip = ip_address();
   $data = array();
-
   $data['v'] = 1;
   $data['tid'] = variable_get('eiti_api_analytics_account', '');
   if (!$data['tid']) {
     return;
   }
-  $data['cid'] = eiti_api_analytics_get_uuid();
-
+  $data['cid'] = eiti_api_analytics_get_uuid($ip);
   $data['t'] = 'pageview';
   $data['dp'] = $page;
   $data['dt'] = $title;
@@ -44,7 +43,8 @@ function eiti_api_analytics_pageview_request($page, $title) {
     ->setTrackingId($data['tid'])
     ->setClientId($data['cid'])
     ->setDocumentPath($data['dp'])
-    ->setDocumentTitle($data['dt']);
+    ->setDocumentTitle($data['dt'])
+    ->setIpOverride($ip);
   $analytics->sendPageview();
 }
 
@@ -54,8 +54,7 @@ function eiti_api_analytics_pageview_request($page, $title) {
  * @return string
  *   UUID.
  */
-function eiti_api_analytics_get_uuid() {
-  $ip = ip_address();
+function eiti_api_analytics_get_uuid($ip) {
   if (isset($_COOKIE['_ga'])) {
     list($version, $domain_depth, $cid1, $cid2) = explode('.', $_COOKIE["_ga"], 4);
 
