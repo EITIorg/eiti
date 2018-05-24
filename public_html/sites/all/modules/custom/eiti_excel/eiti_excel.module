@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function eiti_excel_menu() {
+  $items = array();
+
+  $items['summary-data-excel'] = array(
+    'title' => 'Summary data excel',
+    'page callback' => 'eiti_excel_summary_data_page',
+    'access arguments' => array('access content'),
+    'file' => 'includes/eiti_excel_summary_data.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
