@@ -65,6 +65,46 @@ function eiti_api_entity_reset_cache($entity, $type, $op) {
   }
 }
 
+/**
+ * Implements hook_restful_parse_request_alter().
+ */
 function eiti_api_restful_parse_request_alter(&$request) {
   eiti_api_analytics_pageview_request(base_path() . $request['q'], 'EITI API');
+}
+
+/**
+ * Allows to get the given API page response without a http request.
+ *
+ * Based on restful_menu_process_callback() with simplifications.
+ *
+ * @params $get
+ *   The result of $_GET on the API request page. Should have at minimum $_GET['q'].
+ */
+function eiti_api_restful_get_result($qet) {
+  $major_version = '1';
+  $minor_version = '0';
+  $method = 'get';
+
+  // Assuming $qet['q']-s like "api/v1.0/summary_data/100" and "api/v1.0/implementing_country"
+  $get_parts = explode('/', $qet['q']);
+  $resource_name = $get_parts[2];
+  $path = isset($get_parts[3]) ? $get_parts[3] : '';
+  $request = array(
+    $qet,
+    '__application' => array(
+      'rest_call' => TRUE,
+      'csrf_token' => NULL,
+    )
+  );
+
+  $handler = restful_get_restful_handler($resource_name, $major_version, $minor_version);
+
+  if (!$handler instanceof \RestfulDataProviderInterface) {
+    return;
+  }
+  if (!\RestfulBase::isValidMethod($method, FALSE)) {
+    return;
+  }
+
+  return $handler->{$method}($path, $request);
 }
