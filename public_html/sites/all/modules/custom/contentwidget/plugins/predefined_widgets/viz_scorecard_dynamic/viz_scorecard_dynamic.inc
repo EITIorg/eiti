@@ -111,7 +111,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $pdf_markup .= '<a target="_blank" data-plain-link="' . $pdf_link_plain . '" href="' . $pdf_link . '">' . t('Download PDF') . '</a>';
   $pdf_markup .= '</div>';
   $pdf_markup .= '<div class="pdf-description">';
-  $pdf_markup .= t('For best viewing experience please use Adobe Acrobat Reader. You can download it for free here <a href="https://get.adobe.com/reader/" target="_blank">https://get.adobe.com/reader/</a>');
+  $pdf_markup .= t('We recommend using Adobe Acrobat PDF reader to access all content and features in this document. You can download the program for free here <a href="https://get.adobe.com/reader/" target="_blank">https://get.adobe.com/reader/</a>');
   $pdf_markup .= '</div>';
   $block['pdf'] = array('#markup' => $pdf_markup);
 
