@@ -1436,6 +1436,18 @@ function eitipermissions_user_default_permissions() {
     'module' => 'filter',
   );
 
+  // Exported permission: 'use text format min_html'.
+  $permissions['use text format min_html'] = array(
+    'name' => 'use text format min_html',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: 'view any unpublished article content'.
   $permissions['view any unpublished article content'] = array(
     'name' => 'view any unpublished article content',

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function eiti_pdf_menu() {
+  $items = array();
+
+  $items['scorecard-pdf'] = array(
+    'title' => 'Scorecard PDF',
+    'page callback' => 'eiti_pdf_scorecard_page',
+    'access arguments' => array('access content'),
+    'file' => 'includes/eiti_pdf_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function eiti_pdf_theme($existing, $type, $theme, $path) {
+  return array(
+    'eiti_pdf_scorecard' => array(
+      'variables' => array(
+        'hasProgress' => FALSE,
+        'categories' => array(),
+        'requirements' => array(),
+        'legend_items' => array(),
+        'progress_items' => array(),
+        'text_before' => '',
+        'text_after' => '',
+        'news_items' => array(),
+      ),
+      'template' => 'eiti-pdf-scorecard',
+      'path' => $path . '/templates',
+    ),
+    'eiti_pdf_title_page' => array(
+      'variables' => array(
+        'logo' => '',
+        'date' => '',
+        'title' => '',
+        'decision_reference' => '',
+      ),
+      'template' => 'eiti-pdf-title-page',
+      'path' => $path . '/templates',
+    ),
+    'eiti_pdf_header' => array(
+      'variables' => array(
+        'title' => '',
+        'decision_reference' => '',
+        'date' => '',
+      ),
+      'template' => 'eiti-pdf-header',
+      'path' => $path . '/templates',
+    ),
+    'eiti_pdf_footer' => array(
+      'template' => 'eiti-pdf-footer',
+      'path' => $path . '/templates',
+    ),
+  );
+}

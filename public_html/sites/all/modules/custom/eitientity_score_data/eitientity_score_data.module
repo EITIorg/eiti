@@ -345,3 +345,30 @@ function eitientity_score_data_lookup_by_country($country_id) {
   }
   return FALSE;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter() for score_data_edit_standard_form.
+ */
+function eitientity_score_data_form_score_data_edit_standard_form_alter(&$form, &$form_state, $form_id) {
+  // Limit format of PDF html text fields to min_html.
+  if (isset($form['field_scd_pdf_text1']['und'][0])) {
+    $form['field_scd_pdf_text1']['und']['#after_build'][] = 'eitientity_score_data_pdf_text_after_build';
+    if (!$form['field_scd_pdf_text1']['und'][0]['#format']) {
+      $form['field_scd_pdf_text1']['und'][0]['#format'] = 'min_html';
+    }
+  }
+  if (isset($form['field_scd_pdf_text2']['und'][0])) {
+    $form['field_scd_pdf_text2']['und']['#after_build'][] = 'eitientity_score_data_pdf_text_after_build';
+    if (!$form['field_scd_pdf_text2']['und'][0]['#format']) {
+      $form['field_scd_pdf_text2']['und'][0]['#format'] = 'min_html';
+    }
+  }
+}
+
+/**
+ * After build function for score_data_edit_standard_form PDF html text fields.
+ */
+function eitientity_score_data_pdf_text_after_build(&$element, &$form_state) {
+  $element[0]['format']['format']['#attributes']['disabled'] = 'disabled';
+  return $element;
+}

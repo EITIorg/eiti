@@ -4,11 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1937d254f65e8e5fdf125d2248410c58
+class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
 {
     public static $files = array (
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
@@ -19,7 +20,12 @@ class ComposerStaticInit1937d254f65e8e5fdf125d2248410c58
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+        ),
+        'M' => 
+        array (
+            'Mpdf\\' => 5,
         ),
         'G' => 
         array (
@@ -34,9 +40,17 @@ class ComposerStaticInit1937d254f65e8e5fdf125d2248410c58
         array (
             0 => __DIR__ . '/..' . '/theiconic/php-ga-measurement-protocol/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -52,11 +66,22 @@ class ComposerStaticInit1937d254f65e8e5fdf125d2248410c58
         ),
     );
 
+    public static $classMap = array (
+        'FPDF_TPL' => __DIR__ . '/..' . '/setasign/fpdi/fpdf_tpl.php',
+        'FPDI' => __DIR__ . '/..' . '/setasign/fpdi/fpdi.php',
+        'FilterASCII85' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCII85.php',
+        'FilterASCIIHexDecode' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCIIHexDecode.php',
+        'FilterLZW' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterLZW.php',
+        'fpdi_pdf_parser' => __DIR__ . '/..' . '/setasign/fpdi/fpdi_pdf_parser.php',
+        'pdf_context' => __DIR__ . '/..' . '/setasign/fpdi/pdf_context.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1937d254f65e8e5fdf125d2248410c58::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1937d254f65e8e5fdf125d2248410c58::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5::$classMap;
 
         }, null, ClassLoader::class);
     }
