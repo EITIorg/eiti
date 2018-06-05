@@ -31,6 +31,19 @@ function eitientity_organisation_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'identification_number' => array(
+        'description' => 'The organisation identification number.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'summary_data_id' => array(
+        'description' => 'The summary data id for this entity.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'country_id' => array(
         'description' => 'The country id for this entity.',
         'type' => 'int',
@@ -62,6 +75,10 @@ function eitientity_organisation_schema() {
       'entity_changed' => array('changed'),
     ),
     'foreign keys' => array(
+      'entity_eiti_summary_data' => array(
+        'table' => 'eiti_summary_data',
+        'columns' => array('summary_data_id' => 'id'),
+      ),
       'entity_eiti_implementing_country' => array(
         'table' => 'eiti_implementing_country',
         'columns' => array('country_id' => 'id'),
@@ -82,4 +99,25 @@ function eitientity_organisation_update_7001(&$sandbox) {
   db_add_index('eiti_organisation', 'entity_status_type', array('status', 'type', 'id'));
   db_add_index('eiti_organisation', 'entity_created', array('created'));
   db_add_index('eiti_organisation', 'entity_changed', array('changed'));
+}
+
+/**
+ * Add some additional organisation database fields.
+ */
+function eitientity_organisation_update_7002(&$sandbox) {
+  $field_schema = array(
+    'description' => 'The organisation identification number.',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('eiti_organisation', 'identification_number', $field_schema);
+  $field_schema = array(
+    'description' => 'The summary data id for this entity.',
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+  );
+  db_add_field('eiti_organisation', 'summary_data_id', $field_schema);
 }

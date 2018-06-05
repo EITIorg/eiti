@@ -40,13 +40,12 @@ function eitiet_organisation_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
-  // Exported field_instance:
-  // 'organisation-company-field_o_identification_number'.
-  $field_instances['organisation-company-field_o_identification_number'] = array(
+  // Exported field_instance: 'organisation-company-field_o_sector'.
+  $field_instances['organisation-company-field_o_sector'] = array(
     'bundle' => 'company',
     'default_value' => NULL,
     'deleted' => 0,
@@ -54,36 +53,36 @@ function eitiet_organisation_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'organisation',
-    'field_name' => 'field_o_identification_number',
-    'label' => 'Identification Number',
+    'field_name' => 'field_o_sector',
+    'label' => 'Sector',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Commodities');
-  t('Identification Number');
+  t('Sector');
 
   return $field_instances;
 }
