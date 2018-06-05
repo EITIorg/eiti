@@ -32,6 +32,17 @@ function eititaxonomies_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in company_sectors'.
+  $permissions['delete terms in company_sectors'] = array(
+    'name' => 'delete terms in company_sectors',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in document_category'.
   $permissions['delete terms in document_category'] = array(
     'name' => 'delete terms in document_category',
@@ -79,6 +90,17 @@ function eititaxonomies_user_default_permissions() {
   // Exported permission: 'edit terms in company_commodities'.
   $permissions['edit terms in company_commodities'] = array(
     'name' => 'edit terms in company_commodities',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in company_sectors'.
+  $permissions['edit terms in company_sectors'] = array(
+    'name' => 'edit terms in company_sectors',
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',

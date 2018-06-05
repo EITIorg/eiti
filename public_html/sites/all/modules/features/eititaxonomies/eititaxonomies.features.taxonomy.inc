@@ -29,6 +29,16 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'language' => 'und',
       'i18n_mode' => 0,
     ),
+    'company_sectors' => array(
+      'name' => 'Company Sectors',
+      'machine_name' => 'company_sectors',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 0,
+    ),
     'document_category' => array(
       'name' => 'Document Category',
       'machine_name' => 'document_category',
