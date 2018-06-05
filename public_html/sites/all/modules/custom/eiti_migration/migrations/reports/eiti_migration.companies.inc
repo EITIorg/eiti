@@ -49,10 +49,12 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
     );
 
     // Mappings go here.
-    $this->addFieldMapping('field_c_identification_number', 'company_id');
-    $this->addFieldMapping('field_c_commodities', 'commodity');
     $this->addFieldMapping('name', 'company_name');
+    $this->addFieldMapping('summary_data_id', 'summary_data_id');
     $this->addFieldMapping('country_id', 'country_id');
+    $this->addFieldMapping('identification_number', 'company_id');
+    $this->addFieldMapping('field_o_sector', 'sector');
+    $this->addFieldMapping('field_o_commodities', 'commodity');
   }
 
   /**
@@ -75,7 +77,35 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
     }
     $summary_data = entity_load_single('summary_data', $summary_data_id);
     $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+    $row->summary_data_id = $summary_data_id;
     $row->country_id = $summary_data_emw->country_id->id->value();
+
+    // Create the sector term if needed.
+    if (!$this->checkEmptyValue($row->sector)) {
+      $sector_str = trim($row->sector);
+      $sector_term = FALSE;
+      $vocabulary = taxonomy_vocabulary_machine_name_load('company_sectors');
+
+      if (!empty($sector_str)) {
+        // If we still have a candidate, then we try first to re-use
+        // possibly existing one.
+        $sector_str = ucfirst($sector_str);
+        $term = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+        if ($term) {
+          $sector_term = $term->tid;
+        }
+        else {
+          // And if we have no such term, we create one.
+          $term = new stdClass();
+          $term->name = $sector_str;
+          $term->vid = $vocabulary->vid;
+          taxonomy_term_save($term);
+          $sector_term = $term->tid;
+        }
+      }
+
+      $row->sector = $sector_term;
+    }
 
     // Create the commodity term if needed.
     if (!$this->checkEmptyValue($row->commodity)) {
@@ -93,6 +123,7 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
         if (!empty($candidate)) {
           // If we still have a candidate, then we try first to re-use
           // possibly existing one.
+          $candidate = ucfirst($candidate);
           $term = taxonomy_get_term_by_name($candidate, 'company_commodities');
           if ($term) {
             $commodities_terms[] = $term->tid;
@@ -100,7 +131,7 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
           else {
             // And if we have no such term, we create one.
             $term = new stdClass();
-            $term->name = ucfirst($candidate);
+            $term->name = $candidate;
             $term->vid = $vocabulary->vid;
             taxonomy_term_save($term);
             $commodities_terms[] = $term->tid;

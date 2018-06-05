@@ -39,7 +39,9 @@ class EITIMigrateDestinationCompanies extends MigrateDestinationEntity {
     $fields = array();
 
     $fields['name'] = t('Company Name.');
+    $fields['summary_data_id'] = t('Summary data from where the company originates from.');
     $fields['country_id'] = t('Country where the company is from.');
+    $fields['identification_number'] = t('Company identification number.');
     $fields['status'] = t('Company Status.');
     $fields['created'] = t('Timestamp when the company was created.');
     $fields['changed'] = t('Timestamp when the company was changed.');
