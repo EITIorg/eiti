@@ -419,6 +419,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['company_name'] = t('Company Name.');
         $fields['company_id'] = t('Company Identification Number.');
         $fields['commodity'] = t('Commodity the company works with.');
+        $fields['sector'] = t('Company Sector.');
         break;
 
       case EITI_SOURCE_REVENUE_GOVERNMENT:
@@ -726,13 +727,31 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
             $start_column = $position['column'] + 1;
           }
 
+          // Newer Excel files have sector before commodities.
+          $commodity_row = $start_row + 2;
+          $sector_row = FALSE;
+          $value = trim($revenuesSheet->getCellByColumnAndRow($position['column'], $start_row + 2)->getValue());
+          if (strtolower($value) == 'sector') {
+            $sector_row = $commodity_row;
+            $commodity_row = $commodity_row + 1;
+          }
+
           // Now let's walk through the right cells.
           for ($column = $start_column; $column < $highestColumnIndex; $column++) {
             if ($parsing_type == EITI_PARSING_STANDARD) {
               $migrationRow = array();
               $nameCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row)->getValue());
               $idCellValue = trim($revenuesSheet->getCellByColumnAndRow($column, $start_row + 1)->getFormattedValue());
-              $commoditiesCell = $revenuesSheet->getCellByColumnAndRow($column, $start_row + 2);
+              if ($sector_row !== FALSE) {
+                $sectorCell = $revenuesSheet->getCellByColumnAndRow($column, $sector_row);
+                if ($sectorCell->isFormula()) {
+                  $sectorCellValue = $sectorCell->getFormattedValue();
+                }
+                else {
+                  $sectorCellValue = $sectorCell->getValue();
+                }
+              }
+              $commoditiesCell = $revenuesSheet->getCellByColumnAndRow($column, $commodity_row);
               if ($commoditiesCell->isFormula()) {
                 $commoditiesCellValue = $commoditiesCell->getFormattedValue();
               }
@@ -746,6 +765,7 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $migrationRow['column_id'] = $this->getUniqueId() . ':' . $column;
                 $migrationRow['company_name'] = $nameCellValue;
                 $migrationRow['company_id'] = $idCellValue;
+                $migrationRow['sector'] = isset($sectorCellValue) ? $sectorCellValue : '';
                 $migrationRow['commodity'] = $commoditiesCellValue;
                 $migrationRow['file'] = $this->currentFile;
 
