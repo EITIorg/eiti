@@ -218,3 +218,108 @@ function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results,
     drupal_set_message($message, 'error');
   }
 }
+
+/**
+ * Small helper function that looks up a cell in a sheet, that matches at least
+ * one of the given values in $values.
+ *
+ * Based on findPositionInSheet() in eiti_migration.spreadsheet.inc.
+ */
+function eiti_migration_findPositionInSheet($sheet, $values, $final = NULL) {
+  if (!empty($sheet)) {
+    $highestRow = $sheet->getHighestRow();
+    $highestColumn = $sheet->getHighestColumn();
+    $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+    for ($row = 0; $row < $highestRow; $row++) {
+      for ($column = 0; $column < $highestColumnIndex; $column++) {
+        $cellValue = trim($sheet->getCellByColumnAndRow($column, $row)->getValue());
+        foreach ($values as $value) {
+          if (strtolower($cellValue) == strtolower($value)) {
+            $position['row'] = $row;
+            $position['column'] = $column;
+            return $position;
+          }
+          // Finally check the $final variable.
+          if ($final && (strpos($cellValue, $final) !== FALSE)) {
+            $position['row'] = $row;
+            $position['column'] = $column;
+            return $position;
+          }
+        }
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Given the sector name returns it's tid (the term will be created if it does not already exist).
+ *
+ * Based on functionality in prepareRow() in eiti_migration.companies.inc.
+ */
+function eiti_migration_get_sector_tid($name) {
+  $sector_tid = FALSE;
+  if ($name) {
+    $sector_str = trim($name);
+    $vocabulary = taxonomy_vocabulary_machine_name_load('company_sectors');
+
+    if (!empty($sector_str)) {
+      // If we still have a candidate, then we try first to re-use
+      // possibly existing one.
+      $sector_str = ucfirst($sector_str);
+      $term = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+      if ($term) {
+        $sector_tid = $term->tid;
+      }
+      else {
+        // And if we have no such term, we create one.
+        $term = new stdClass();
+        $term->name = $sector_str;
+        $term->vid = $vocabulary->vid;
+        taxonomy_term_save($term);
+        $sector_tid = $term->tid;
+      }
+    }
+  }
+  return $sector_tid;
+}
+
+/**
+ * Given the commodity names returns their tids (terms will be created if they do not already exist).
+ *
+ * Based on functionality in prepareRow() in eiti_migration.companies.inc.
+ */
+function eiti_migration_get_commodity_tids($names) {
+  $commodity_tids = array();
+  if ($names) {
+    $commodities_str = $names;
+    $vocabulary = taxonomy_vocabulary_machine_name_load('company_commodities');
+
+    $commodities_str = str_replace('and', ',', $commodities_str);
+    $commodities_str = str_replace('or', ',', $commodities_str);
+    $commodities_str = str_replace('/', ',', $commodities_str);
+    $commodities_str = str_replace(';', ',', $commodities_str);
+    $candidates = explode(',', $commodities_str);
+    foreach ($candidates as $candidate) {
+      $candidate = trim($candidate);
+      if (!empty($candidate)) {
+        // If we still have a candidate, then we try first to re-use
+        // possibly existing one.
+        $candidate = ucfirst($candidate);
+        $term = taxonomy_get_term_by_name($candidate, 'company_commodities');
+        if ($term) {
+          $commodity_tids[] = $term->tid;
+        }
+        else {
+          // And if we have no such term, we create one.
+          $term = new stdClass();
+          $term->name = $candidate;
+          $term->vid = $vocabulary->vid;
+          taxonomy_term_save($term);
+          $commodity_tids[] = $term->tid;
+        }
+      }
+    }
+  }
+  return $commodity_tids;
+}
