@@ -254,8 +254,6 @@ function eiti_migration_findPositionInSheet($sheet, $values, $final = NULL) {
 
 /**
  * Given the sector name returns it's tid (the term will be created if it does not already exist).
- *
- * Based on functionality in prepareRow() in eiti_migration.companies.inc.
  */
 function eiti_migration_get_sector_tid($name) {
   $sector_tid = FALSE;
@@ -287,8 +285,6 @@ function eiti_migration_get_sector_tid($name) {
 
 /**
  * Given the commodity names returns their tids (terms will be created if they do not already exist).
- *
- * Based on functionality in prepareRow() in eiti_migration.companies.inc.
  */
 function eiti_migration_get_commodity_tids($names) {
   $commodity_tids = array();
@@ -386,11 +382,12 @@ function eiti_migration_checkEmptyValue($value) {
     return TRUE;
   }
 
-  $is_empty = FALSE;
   switch (strtolower($value)) {
     case 'not applicable':
     case 'not available':
+    case 'notavailable':
     case 'n/a':
+    case 'na':
     case '<text>':
     case '<url>':
     case '...':

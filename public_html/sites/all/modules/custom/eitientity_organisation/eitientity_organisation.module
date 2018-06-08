@@ -311,8 +311,10 @@ function eitientity_organisation_entity_insert($entity, $type) {
  * Implements hook_entity_update().
  */
 function eitientity_organisation_entity_update($entity, $type) {
+  // PDOException due to alias creation during organisation updates.
+  // Probably the same issue as in eitientity_organisation_entity_insert().
   if ($type == 'organisation') {
-    eitientity_organisation_pathauto_update($entity, 'update');
+    //eitientity_organisation_pathauto_update($entity, 'update');
   }
 }
 

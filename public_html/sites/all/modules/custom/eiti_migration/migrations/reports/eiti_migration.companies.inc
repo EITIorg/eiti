@@ -82,65 +82,12 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
 
     // Create the sector term if needed.
     if (!$this->checkEmptyValue($row->sector)) {
-      $sector_str = trim($row->sector);
-      $sector_term = FALSE;
-      $vocabulary = taxonomy_vocabulary_machine_name_load('company_sectors');
-
-      if (!empty($sector_str)) {
-        // If we still have a candidate, then we try first to re-use
-        // possibly existing one.
-        $sector_str = ucfirst($sector_str);
-        $terms = taxonomy_get_term_by_name($sector_str, 'company_sectors');
-        $term = reset($terms);
-        if ($term) {
-          $sector_term = $term->tid;
-        }
-        else {
-          // And if we have no such term, we create one.
-          $term = new stdClass();
-          $term->name = $sector_str;
-          $term->vid = $vocabulary->vid;
-          taxonomy_term_save($term);
-          $sector_term = $term->tid;
-        }
-      }
-
-      $row->sector = $sector_term;
+      $row->sector = eiti_migration_get_sector_tid($row->sector);
     }
 
     // Create the commodity term if needed.
     if (!$this->checkEmptyValue($row->commodity)) {
-      $commodities_str = $row->commodity;
-      $vocabulary = taxonomy_vocabulary_machine_name_load('company_commodities');
-
-      $commodities_str = str_replace('and', ',', $commodities_str);
-      $commodities_str = str_replace('or', ',', $commodities_str);
-      $commodities_str = str_replace('/', ',', $commodities_str);
-      $commodities_str = str_replace(';', ',', $commodities_str);
-      $candidates = explode(',', $commodities_str);
-      $commodities_terms = array();
-      foreach ($candidates as $candidate) {
-        $candidate = trim($candidate);
-        if (!empty($candidate)) {
-          // If we still have a candidate, then we try first to re-use
-          // possibly existing one.
-          $candidate = ucfirst($candidate);
-          $terms = taxonomy_get_term_by_name($candidate, 'company_commodities');
-          $term = reset($terms);
-          if ($term) {
-            $commodities_terms[] = $term->tid;
-          }
-          else {
-            // And if we have no such term, we create one.
-            $term = new stdClass();
-            $term->name = $candidate;
-            $term->vid = $vocabulary->vid;
-            taxonomy_term_save($term);
-            $commodities_terms[] = $term->tid;
-          }
-        }
-      }
-      $row->commodity = $commodities_terms;
+      $row->commodity = eiti_migration_get_commodity_tids($row->commodity);
     }
   }
 
