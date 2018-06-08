@@ -267,7 +267,8 @@ function eiti_migration_get_sector_tid($name) {
       // If we still have a candidate, then we try first to re-use
       // possibly existing one.
       $sector_str = ucfirst($sector_str);
-      $term = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+      $terms = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+      $term = reset($terms);
       if ($term) {
         $sector_tid = $term->tid;
       }
@@ -306,7 +307,8 @@ function eiti_migration_get_commodity_tids($names) {
         // If we still have a candidate, then we try first to re-use
         // possibly existing one.
         $candidate = ucfirst($candidate);
-        $term = taxonomy_get_term_by_name($candidate, 'company_commodities');
+        $terms = taxonomy_get_term_by_name($candidate, 'company_commodities');
+        $term = reset($terms);
         if ($term) {
           $commodity_tids[] = $term->tid;
         }
@@ -322,4 +324,92 @@ function eiti_migration_get_commodity_tids($names) {
     }
   }
   return $commodity_tids;
+}
+
+/**
+ * Fetches a specific sheet from the PHPExcel.
+ *
+ * Based on getSheet() from eiti_migration.spreadsheet.inc.
+ */
+function eiti_migration_getSheet($excel, $sheet_type) {
+  $sheet = NULL;
+
+  // Check the book.
+  if (empty($excel)) {
+    return NULL;
+  }
+
+  // Figure out whether we have "Introduction" tab or not.
+  $introSheet = $excel->getSheetByName('Introduction');
+  $indexAdjustments = 0;
+  if (empty($introSheet)) {
+    $indexAdjustments = -1;
+  }
+
+  switch ($sheet_type) {
+    case 'about':
+      $sheet = $excel->getSheetByName('1. About');
+      if (empty($sheet)) {
+        // Second try, already via index.
+        $sheet = $excel->getSheet(1 + $indexAdjustments);
+      }
+      break;
+
+    case 'context':
+      $sheet = $excel->getSheetByName('2. Contextual');
+      if (empty($sheet)) {
+        // Second try, already via index.
+        $sheet = $excel->getSheet(2 + $indexAdjustments);
+      }
+      break;
+
+    case 'revenues':
+      $sheet = $excel->getSheetByName('3. Revenues');
+      if (empty($sheet)) {
+        // Second try, already via index.
+        $sheet = $excel->getSheet(3 + $indexAdjustments);
+      }
+      break;
+  }
+
+  return $sheet;
+}
+
+/**
+ * Small helper function that checks if the value is empty or not.
+ *
+ * Based on checkEmptyValue() in eiti_migration.generic.inc.
+ */
+function eiti_migration_checkEmptyValue($value) {
+  // Simple empty check.
+  if (empty($value)) {
+    return TRUE;
+  }
+
+  $is_empty = FALSE;
+  switch (strtolower($value)) {
+    case 'not applicable':
+    case 'not available':
+    case 'n/a':
+    case '<text>':
+    case '<url>':
+    case '...':
+    case '…':
+    case '-':
+    case '':
+      $is_empty = TRUE;
+      break;
+
+    default:
+      $is_empty = FALSE;
+      break;
+  }
+
+  // More checking <tag>.
+  if ($is_empty === FALSE) {
+    if (preg_match('/<.+?>/', $value)) {
+      $is_empty = TRUE;
+    }
+  }
+  return $is_empty;
 }
