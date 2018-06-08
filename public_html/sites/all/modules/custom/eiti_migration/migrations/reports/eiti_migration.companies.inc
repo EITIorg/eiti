@@ -90,7 +90,8 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
         // If we still have a candidate, then we try first to re-use
         // possibly existing one.
         $sector_str = ucfirst($sector_str);
-        $term = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+        $terms = taxonomy_get_term_by_name($sector_str, 'company_sectors');
+        $term = reset($terms);
         if ($term) {
           $sector_term = $term->tid;
         }
@@ -124,7 +125,8 @@ class EITICompaniesMigration extends EITISpreadsheetMigration {
           // If we still have a candidate, then we try first to re-use
           // possibly existing one.
           $candidate = ucfirst($candidate);
-          $term = taxonomy_get_term_by_name($candidate, 'company_commodities');
+          $terms = taxonomy_get_term_by_name($candidate, 'company_commodities');
+          $term = reset($terms);
           if ($term) {
             $commodities_terms[] = $term->tid;
           }
