@@ -87,6 +87,7 @@ function eiti_migration_update_7003(&$sandbox) {
  * Import missing organisation data from existing summary data Excel files.
  */
 function eiti_migration_update_7004(&$sandbox) {
+  // TODO: need batch processing/memory cleanup.
   drupal_set_time_limit(10800); // 3 hours.
   // Existing Excel migration functionality doesn't look like a good working fit
   // for a small-scale update of all existing companies so we handle this separately.
@@ -168,7 +169,9 @@ function eiti_migration_update_7004(&$sandbox) {
               if ($orgs) {
                 foreach ($orgs as $org) {
                   if ($org && $org->country_id == $sd->country_id && $org->type == 'company') {
-                    $org->identification_number = $idCellValue;
+                    if (!eiti_migration_checkEmptyValue($idCellValue)) {
+                      $org->identification_number = $idCellValue;
+                    }
                     $org->summary_data_id = $sd->id;
                     if (!eiti_migration_checkEmptyValue($sectorCellValue)) {
                       $sector_tid = eiti_migration_get_sector_tid($sectorCellValue);
@@ -184,7 +187,6 @@ function eiti_migration_update_7004(&$sandbox) {
                         }
                       }
                     }
-                    // TODO: needs testing and fixing (at least something is wrong with alias/path/pathauto still).
                     entity_save('organisation', $org);
                   }
                 }
@@ -192,7 +194,6 @@ function eiti_migration_update_7004(&$sandbox) {
             }
           }
         }
-        break; // TODO: remove when done testing.
       }
     }
   }
