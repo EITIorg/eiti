@@ -415,3 +415,13 @@ function eiti_migration_checkEmptyValue($value) {
   }
   return $is_empty;
 }
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function eiti_migration_update_dependencies() {
+  $dependencies['eiti_migration'][7004] = array(
+    'eitientity_organisation' => 7002,
+  );
+  return $dependencies;
+}

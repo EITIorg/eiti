@@ -60,6 +60,10 @@ class EITIApiSummaryData extends RestfulEntityBase {
     $public_fields['sector_other'] = array(
       'property' => 'field_sd_other_sector',
     );
+    $public_fields['report_file'] = array(
+      'property' => 'field_sd_report_file',
+      'process_callbacks' => array(array($this, 'prepareReport')),
+    );
     // References.
     $public_fields['country'] = array(
       'property' => 'country_id',
@@ -85,5 +89,16 @@ class EITIApiSummaryData extends RestfulEntityBase {
   public function formatISODate($str_date) {
     $obj_date = DateTime::createFromFormat('M d, Y', $str_date);
     return $obj_date->format(DateTime::ISO8601);
+  }
+
+  /**
+   * A standard processing callback that returns the report file url.
+   *
+   * @param $file_data
+   *   File entity array
+   * @return string
+   */
+  function prepareReport($file_data) {
+    return file_create_url($file_data['uri']);
   }
 }
