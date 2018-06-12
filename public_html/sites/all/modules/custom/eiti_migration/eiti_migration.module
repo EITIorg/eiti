@@ -292,10 +292,15 @@ function eiti_migration_get_commodity_tids($names) {
     $commodities_str = $names;
     $vocabulary = taxonomy_vocabulary_machine_name_load('company_commodities');
 
-    $commodities_str = str_replace('and', ',', $commodities_str);
-    $commodities_str = str_replace('or', ',', $commodities_str);
+    $commodities_str = strtolower($commodities_str);
+    $commodities_str = str_replace("'", '', $commodities_str);
+
+    $commodities_str = str_replace(' and ', ',', $commodities_str);
+    $commodities_str = str_replace('&', ',', $commodities_str);
+    $commodities_str = str_replace(' or ', ',', $commodities_str);
     $commodities_str = str_replace('/', ',', $commodities_str);
     $commodities_str = str_replace(';', ',', $commodities_str);
+
     $candidates = explode(',', $commodities_str);
     foreach ($candidates as $candidate) {
       $candidate = trim($candidate);

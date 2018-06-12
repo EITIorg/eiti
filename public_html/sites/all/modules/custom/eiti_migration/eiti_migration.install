@@ -87,22 +87,38 @@ function eiti_migration_update_7003(&$sandbox) {
  * Import missing organisation data from existing summary data Excel files.
  */
 function eiti_migration_update_7004(&$sandbox) {
-  // TODO: need batch processing/memory cleanup.
-  drupal_set_time_limit(10800); // 3 hours.
+  drupal_set_time_limit(3600); // 1 hour.
   // Existing Excel migration functionality doesn't look like a good working fit
   // for a small-scale update of all existing companies so we handle this separately.
-  // Based on functionality from eiti_migration.companies.inc, eiti_migration.spreadsheet.inc and eiti_migration.revenue_streams.inc files.
-  $summary_data = db_select('eiti_summary_data', 'sd');
-  $summary_data->innerJoin('field_data_field_sd_report_file', 'sd_rf', 'sd.id = sd_rf.entity_id');
-  $summary_data->innerJoin('file_managed', 'fm', 'sd_rf.field_sd_report_file_fid = fm.fid');
-  $summary_data->fields('sd', array('id', 'country_id'))
-    ->fields('fm', array('uri'))
-    ->orderBy('year_start', 'ASC');
-  $summary_data =  $summary_data->execute()->fetchAll();
-  if ($summary_data) {
+  // Based on functionality from eiti_migration.companies.inc, eiti_migration.spreadsheet.inc files.
+  if (!isset($sandbox['progress'])) {
+    $summary_data = db_select('eiti_summary_data', 'sd');
+    $summary_data->innerJoin('field_data_field_sd_report_file', 'sd_rf', 'sd.id = sd_rf.entity_id');
+    $summary_data->innerJoin('file_managed', 'fm', 'sd_rf.field_sd_report_file_fid = fm.fid');
+    $summary_data->fields('sd', array('id', 'country_id'))
+      ->fields('fm', array('uri'))
+      ->orderBy('year_start', 'ASC')
+      ->orderBy('id', 'ASC');
+    $summary_data =  $summary_data->execute()->fetchAll();
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = count($summary_data);
+    $sandbox['summary_data'] = $summary_data;
+  }
+
+  if ($sandbox['summary_data']) {
+    $limit = 50;
+    $counter = 0;
     libraries_load('PHPExcel');
-    foreach ($summary_data as $sd) {
+    foreach ($sandbox['summary_data'] as $sd_key => $sd) {
+      $counter++;
       if (file_exists($sd->uri)) {
+        $summary_source_id = db_select('migrate_map_eitisummarydatamigration', 'sm')
+          ->condition('sm.destid1', $sd->id)
+          ->fields('sm', array('sourceid1'))
+          ->execute()
+          ->fetchField();
+
         $file_path = drupal_realpath($sd->uri);
         $type = PHPExcel_IOFactory::identify($file_path);
         $reader = PHPExcel_IOFactory::createReader($type);
@@ -110,7 +126,7 @@ function eiti_migration_update_7004(&$sandbox) {
         $excel = $reader->load($file_path);
         $revenuesSheet = eiti_migration_getSheet($excel, 'revenues');
 
-        if (!empty($revenuesSheet)) {
+        if ($summary_source_id && !empty($revenuesSheet)) {
           // Now let's parse the file.
           $highestColumn = $revenuesSheet->getHighestColumn();
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
@@ -165,23 +181,31 @@ function eiti_migration_update_7004(&$sandbox) {
             }
 
             if (!empty($nameCellValue)) {
-              $orgs = eitientity_organisation_lookup_by_name($nameCellValue);
-              if ($orgs) {
-                foreach ($orgs as $org) {
+              $org_ids = db_select('migrate_map_eiticompaniesmigration', 'cm')
+                ->condition('cm.sourceid1', db_like($summary_source_id . ':') . '%', 'LIKE')
+                ->isNotNull('cm.destid1')
+                ->fields('cm', array('destid1'))
+                ->execute()
+                ->fetchCol();
+              if ($org_ids) {
+                foreach ($org_ids as $org_id) {
+                  $org = entity_load_single('organisation', $org_id);
                   if ($org && $org->country_id == $sd->country_id && $org->type == 'company') {
                     if (!eiti_migration_checkEmptyValue($idCellValue)) {
                       $org->identification_number = $idCellValue;
                     }
                     $org->summary_data_id = $sd->id;
-                    if (!eiti_migration_checkEmptyValue($sectorCellValue)) {
+                    if (isset($sectorCellValue) && !eiti_migration_checkEmptyValue($sectorCellValue)) {
                       $sector_tid = eiti_migration_get_sector_tid($sectorCellValue);
                       if ($sector_tid) {
+                        $org->field_o_sector = array();
                         $org->field_o_sector['und'][0]['target_id'] = $sector_tid;
                       }
                     }
                     if (!eiti_migration_checkEmptyValue($commoditiesCellValue)) {
                       $commodity_tids = eiti_migration_get_commodity_tids($commoditiesCellValue);
                       if ($commodity_tids) {
+                        $org->field_o_commodities = array();
                         foreach ($commodity_tids as $commodity_tid) {
                           $org->field_o_commodities['und'][]['target_id'] = $commodity_tid;
                         }
@@ -195,6 +219,13 @@ function eiti_migration_update_7004(&$sandbox) {
           }
         }
       }
+      $sandbox['progress']++;
+      unset($sandbox['summary_data'][$sd_key]);
+      if ($counter >= $limit) {
+        break;
+      }
     }
   }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 }
