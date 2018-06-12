@@ -35,14 +35,10 @@ function eitientity_organisation_schema() {
         'description' => 'The organisation identification number.',
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
       ),
       'summary_data_id' => array(
         'description' => 'The summary data id for this entity.',
         'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
       ),
       'country_id' => array(
         'description' => 'The country id for this entity.',
@@ -105,19 +101,10 @@ function eitientity_organisation_update_7001(&$sandbox) {
  * Add some additional organisation database fields.
  */
 function eitientity_organisation_update_7002(&$sandbox) {
-  $field_schema = array(
-    'description' => 'The organisation identification number.',
-    'type' => 'varchar',
-    'length' => 255,
-    'not null' => TRUE,
-    'default' => '',
-  );
-  db_add_field('eiti_organisation', 'identification_number', $field_schema);
-  $field_schema = array(
-    'description' => 'The summary data id for this entity.',
-    'type' => 'int',
-    'not null' => TRUE,
-    'default' => 0,
-  );
-  db_add_field('eiti_organisation', 'summary_data_id', $field_schema);
+  $table = 'eiti_organisation';
+  $schema = drupal_get_schema($table);
+  $field = 'identification_number';
+  db_add_field($table, $field, $schema['fields'][$field]);
+  $field = 'summary_data_id';
+  db_add_field($table, $field, $schema['fields'][$field]);
 }
