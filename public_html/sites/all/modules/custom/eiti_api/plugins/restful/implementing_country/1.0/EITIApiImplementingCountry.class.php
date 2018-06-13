@@ -21,6 +21,21 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   protected $range = 200;
 
+  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
+    parent::__construct($plugin, $auth_manager, $cache_controller, $language);
+
+    // This is the point where we make the extra query and then the callback
+    // will fetch the extra reports from this 2nd query.
+    $data = $this->queryIndicatorValues();
+
+    $this->reports = $data['reports'];
+    $this->licenses = $data['licenses'];
+    $this->contracts = $data['contracts'];
+
+    $this->revenues = $this->queryRevenues();
+    $this->metadata = $this->querySummaryDataInfo();
+  }
+
   /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
    */
@@ -78,25 +93,6 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     );
 
     return $public_fields;
-  }
-
-  /**
-   * Overrides the default getList method.
-   */
-  public function getList() {
-    // This is the point where we make the extra query and then the callback
-    // will fetch the extra reports from this 2nd query.
-    $data = $this->queryIndicatorValues();
-
-    $this->reports = $data['reports'];
-    $this->licenses = $data['licenses'];
-    $this->contracts = $data['contracts'];
-
-    $this->revenues = $this->queryRevenues();
-    $this->metadata = $this->querySummaryDataInfo();
-
-    $return = parent::getList();
-    return $return;
   }
 
   /**
