@@ -75,9 +75,22 @@ function eiti_api_restful_parse_request_alter(&$request) {
 /**
  * Converts timestamp to ISO 8601 (YYYY-MM-DD) format and returns it.
  */
-function eiti_api_timestamp_to_iso($timestamp) {
+function eiti_api_timestamp_to_iso_8601_partial($timestamp) {
   if (is_numeric($timestamp)) {
     $date = date('Y-m-d', $timestamp);
+    if ($date) {
+      return $date;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Converts timestamp to ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) format and returns it.
+ */
+function eiti_api_timestamp_to_iso_8601($timestamp) {
+  if (is_numeric($timestamp)) {
+    $date = date('c', $timestamp);
     if ($date) {
       return $date;
     }
