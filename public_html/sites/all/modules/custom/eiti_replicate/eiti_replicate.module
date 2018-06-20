@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function eiti_replicate_menu() {
+  $items = array();
+
+  $r_ui_items = replicate_ui_menu();
+  $items['score_data/%score_data/replicate'] = $r_ui_items['node/%node/replicate'];
+
+  return $items;
+}
+
+/**
+ * Implements hook_replicate_ui_access_check_alter().
+ */
+function eiti_replicate_replicate_ui_access_check_alter(&$access, $type, $entity) {
+  // Only allow necessary entities that have been tested to clone properly.
+  // For example referenced entities are not cloned, but sometimes should.
+  // Note that the site has also node_clone in use (added before replicate).
+  $access = FALSE;
+  if ($type == 'score_data') {
+    $access = TRUE;
+  }
+}
+
+/**
+ * Implements hook_replicate_entity_ENTITY_TYPE() for score_data.
+ */
+function eiti_replicate_replicate_entity_score_data(&$entity) {
+  $entity->id = NULL;
+  $entity->created = REQUEST_TIME;
+  $entity->changed = REQUEST_TIME;
+}
+
+/**
+ * Implements hook_replicate_entity_ENTITY_TYPE() for score_req_value.
+ */
+function eiti_replicate_replicate_entity_score_req_value(&$entity) {
+  $entity->id = NULL;
+}
+
+/**
+ * Implements hook_replicate_field_FIELD_TYPE().
+ */
+function eiti_replicate_replicate_field_entityreference(&$entity, $entity_type, $field_name) {
+  // Make sure to clone necessary referenced entities.
+  $cloned_entity_types = array('score_req_value');
+  $field_info = field_info_field($field_name);
+  $ref_entity_type = $field_info['settings']['target_type'];
+
+  if (in_array($ref_entity_type, $cloned_entity_types)) {
+    foreach ($entity->$field_name as $language => $values) {
+      unset($entity->{$field_name}[$language]);
+      foreach ($values as $value) {
+        if (isset($value['target_id'])) {
+          $id = replicate_entity_by_id($ref_entity_type, $value['target_id']);
+          if ($id) {
+            $entity->{$field_name}[$language][]['target_id'] = $id;
+          }
+        }
+      }
+    }
+  }
+}
