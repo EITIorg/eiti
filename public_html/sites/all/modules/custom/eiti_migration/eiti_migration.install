@@ -107,7 +107,7 @@ function eiti_migration_update_7004(&$sandbox) {
   }
 
   if ($sandbox['summary_data']) {
-    $limit = 50;
+    $limit = 10;
     $counter = 0;
     libraries_load('PHPExcel');
     foreach ($sandbox['summary_data'] as $sd_key => $sd) {
