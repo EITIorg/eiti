@@ -1,0 +1,7 @@
+name = EITI Replicate
+description = Replication handling for custom entities.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = replicate
+dependencies[] = replicate_ui
