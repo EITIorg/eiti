@@ -92,8 +92,7 @@ function eiti_migration_update_7004(&$sandbox) {
   // for a small-scale update of all existing companies so we handle this separately.
   // Based on functionality from eiti_migration.companies.inc, eiti_migration.spreadsheet.inc files.
   if (!isset($sandbox['progress'])) {
-    // The update process starts fast and slows down considerably over time.
-    // We'll keep the progress saved in a variable so it can be restarted where it left off.
+    // We'll keep the progress saved in a variable so it can be restarted where it left off if such a need arises.
     $summary_data = variable_get('eiti_migration_temp_summary_data', FALSE);
 
     if (!$summary_data) {
@@ -102,7 +101,6 @@ function eiti_migration_update_7004(&$sandbox) {
       $summary_data->innerJoin('file_managed', 'fm', 'sd_rf.field_sd_report_file_fid = fm.fid');
       $summary_data->fields('sd', array('id', 'country_id'))
         ->fields('fm', array('uri'))
-        ->orderBy('year_start', 'ASC')
         ->orderBy('id', 'ASC');
       $summary_data =  $summary_data->execute()->fetchAll();
       variable_set('eiti_migration_temp_summary_data', $summary_data);
@@ -120,20 +118,33 @@ function eiti_migration_update_7004(&$sandbox) {
     foreach ($sandbox['summary_data'] as $sd_key => $sd) {
       $counter++;
       if (file_exists($sd->uri)) {
+        watchdog('eiti_migration', 'Summary data ' . $sd->id . ' company updates start.');
+
         $summary_source_id = db_select('migrate_map_eitisummarydatamigration', 'sm')
           ->condition('sm.destid1', $sd->id)
           ->fields('sm', array('sourceid1'))
           ->execute()
           ->fetchField();
+        $org_ids = db_select('migrate_map_eiticompaniesmigration', 'cm')
+          ->condition('cm.sourceid1', db_like($summary_source_id . ':') . '%', 'LIKE')
+          ->isNotNull('cm.destid1')
+          ->fields('cm', array('destid1'))
+          ->execute()
+          ->fetchCol();
+        $orgs = array();
+        if ($org_ids) {
+          $orgs = entity_load('organisation', $org_ids);
+        }
 
         $file_path = drupal_realpath($sd->uri);
         $type = PHPExcel_IOFactory::identify($file_path);
         $reader = PHPExcel_IOFactory::createReader($type);
+        $reader->setReadDataOnly(TRUE);
         $reader->setLoadAllSheets();
         $excel = $reader->load($file_path);
         $revenuesSheet = eiti_migration_getSheet($excel, 'revenues');
 
-        if ($summary_source_id && !empty($revenuesSheet)) {
+        if ($orgs && !empty($revenuesSheet)) {
           // Now let's parse the file.
           $highestColumn = $revenuesSheet->getHighestColumn();
           $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
@@ -188,43 +199,47 @@ function eiti_migration_update_7004(&$sandbox) {
             }
 
             if (!empty($nameCellValue)) {
-              $org_ids = db_select('migrate_map_eiticompaniesmigration', 'cm')
-                ->condition('cm.sourceid1', db_like($summary_source_id . ':') . '%', 'LIKE')
-                ->isNotNull('cm.destid1')
-                ->fields('cm', array('destid1'))
-                ->execute()
-                ->fetchCol();
-              if ($org_ids) {
-                foreach ($org_ids as $org_id) {
-                  $org = entity_load_single('organisation', $org_id);
-                  if ($org && $org->country_id == $sd->country_id && $org->type == 'company') {
-                    if (!eiti_migration_checkEmptyValue($idCellValue)) {
-                      $org->identification_number = $idCellValue;
-                    }
-                    $org->summary_data_id = $sd->id;
-                    if (isset($sectorCellValue) && !eiti_migration_checkEmptyValue($sectorCellValue)) {
-                      $sector_tid = eiti_migration_get_sector_tid($sectorCellValue);
-                      if ($sector_tid) {
-                        $org->field_o_sector = array();
-                        $org->field_o_sector['und'][0]['target_id'] = $sector_tid;
-                      }
-                    }
-                    if (!eiti_migration_checkEmptyValue($commoditiesCellValue)) {
-                      $commodity_tids = eiti_migration_get_commodity_tids($commoditiesCellValue);
-                      if ($commodity_tids) {
-                        $org->field_o_commodities = array();
-                        foreach ($commodity_tids as $commodity_tid) {
-                          $org->field_o_commodities['und'][]['target_id'] = $commodity_tid;
-                        }
-                      }
-                    }
-                    entity_save('organisation', $org);
+              foreach ($orgs as $org_key => $org) {
+                if ($org->type == 'company' && $org->name === $nameCellValue) {
+                  if (!eiti_migration_checkEmptyValue($idCellValue)) {
+                    $org->identification_number = $idCellValue;
                   }
+                  $org->summary_data_id = $sd->id;
+                  if (isset($sectorCellValue) && !eiti_migration_checkEmptyValue($sectorCellValue)) {
+                    $sector_tid = eiti_migration_get_sector_tid($sectorCellValue);
+                    if ($sector_tid) {
+                      $org->field_o_sector = array();
+                      $org->field_o_sector['und'][0]['target_id'] = $sector_tid;
+                    }
+                  }
+                  if (!eiti_migration_checkEmptyValue($commoditiesCellValue)) {
+                    $commodity_tids = eiti_migration_get_commodity_tids($commoditiesCellValue);
+                    if ($commodity_tids) {
+                      $org->field_o_commodities = array();
+                      foreach ($commodity_tids as $commodity_tid) {
+                        $org->field_o_commodities['und'][]['target_id'] = $commodity_tid;
+                      }
+                    }
+                  }
+                  // entity_save is too slow, problematic so we handle things manually (based on save() in entity.controller.inc).
+                  //entity_save('organisation', $org);
+                  field_attach_update('organisation', $org);
+                  drupal_write_record('eiti_organisation', $org, 'id');
+                  unset($orgs[$org_key]);
+                  break;
                 }
               }
             }
+            else {
+              // There should be no more companies.
+              break;
+            }
           }
         }
+        // Free up memory.
+        $excel->disconnectWorksheets();
+        $excel->garbageCollect();
+        unset($excel);
       }
       $sandbox['progress']++;
       unset($sandbox['summary_data'][$sd_key]);
