@@ -79,7 +79,19 @@ function eiti_migration_update_7003(&$sandbox) {
     ->execute()
     ->fetchCol();
   if ($commodity_ids) {
-    entity_delete_multiple('taxonomy_term', $commodity_ids);
+    // Delete in batches of 100.
+    $delete = array();
+    foreach ($commodity_ids as $key => $id) {
+      $delete[] = $id;
+      if ($key % 100 == 0) {
+        entity_delete_multiple('taxonomy_term', $delete);
+        $delete = array();
+      }
+    }
+    // Delete any leftovers.
+    if ($delete) {
+      entity_delete_multiple('taxonomy_term', $delete);
+    }
   }
 }
 
