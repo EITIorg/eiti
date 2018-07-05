@@ -69,29 +69,46 @@ function eiti_migration_update_7002(&$sandbox) {
  * Clean up commodities.
  */
 function eiti_migration_update_7003(&$sandbox) {
-  drupal_set_time_limit(7200); // 2 hours.
+  drupal_set_time_limit(3600); // 1 hour.
   // Sector information has been imported as commodities, there are a lot of duplicates and none of them are linked with any organisations
   // so it should be a good idea to delete and later properly (re)import them all.
-  $vocabulary = taxonomy_vocabulary_machine_name_load('company_commodities');
-  $commodity_ids = db_select('taxonomy_term_data', 'td')
-    ->condition('td.vid', $vocabulary->vid)
-    ->fields('td', array('tid'))
-    ->execute()
-    ->fetchCol();
-  if ($commodity_ids) {
-    // Delete in batches of 100.
+  if (!isset($sandbox['progress'])) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('company_commodities');
+    $commodity_ids = db_select('taxonomy_term_data', 'td')
+      ->condition('td.vid', $vocabulary->vid)
+      ->fields('td', array('tid'))
+      ->execute()
+      ->fetchCol();
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = count($commodity_ids);
+    $sandbox['commodity_ids'] = $commodity_ids;
+  }
+
+  if ($sandbox['commodity_ids']) {
+    // Delete in batches of 500.
     $delete = array();
-    foreach ($commodity_ids as $key => $id) {
+    foreach ($sandbox['commodity_ids'] as $key => $id) {
       $delete[] = $id;
-      if ($key % 100 == 0) {
+      unset($sandbox['commodity_ids'][$key]);
+      $sandbox['progress']++;
+      if ($key > 0 && $key % 500 == 0) {
         entity_delete_multiple('taxonomy_term', $delete);
         $delete = array();
+        break;
       }
     }
     // Delete any leftovers.
     if ($delete) {
       entity_delete_multiple('taxonomy_term', $delete);
     }
+  }
+
+  if ($sandbox['progress'] >= $sandbox['max']) {
+    $sandbox['#finished'] = TRUE;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['progress'] / $sandbox['max']);
   }
 }
 
