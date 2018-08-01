@@ -68,13 +68,21 @@ class EITIApiSummaryData extends RestfulEntityBase {
     $public_fields['country'] = array(
       'property' => 'country_id',
       'resource' => array(
-        'normal' => 'implementing_country',
+        'normal' => array(
+          'name' => 'implementing_country',
+          'major_version' => 1,
+          'minor_version' => 0,
+        ),
       ),
     );
     $public_fields['indicator_values'] = array(
       'property' => 'field_sd_indicator_values',
       'resource' => array(
-        'indicator_value' => 'indicator_value',
+        'indicator_value' => array(
+          'name' => 'indicator_value',
+          'major_version' => 1,
+          'minor_version' => 0,
+        ),
       ),
     );
     $public_fields['revenue_government'] = array(

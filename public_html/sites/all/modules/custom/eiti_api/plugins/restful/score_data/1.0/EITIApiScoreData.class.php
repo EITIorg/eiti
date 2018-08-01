@@ -23,7 +23,11 @@ class EITIApiScoreData extends RestfulEntityBase {
     $public_fields['country'] = array(
       'property' => 'country_id',
       'resource' => array(
-        'normal' => 'implementing_country',
+        'normal' => array(
+          'name' => 'implementing_country',
+          'major_version' => 1,
+          'minor_version' => 0,
+        ),
       ),
     );
 
