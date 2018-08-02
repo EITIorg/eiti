@@ -528,3 +528,20 @@ function eitientity_implementing_country_tokens($type, $tokens, array $data = ar
 
   return $replacements;
 }
+
+/**
+ * Returns country ISO2 code given it's ID.
+ */
+function eitientity_implementing_country_get_iso2($id) {
+  $country_id_iso = &drupal_static(__FUNCTION__);
+  if (!isset($country_id_iso)) {
+    $query = db_select('eiti_implementing_country', 'c');
+    $query->fields('c', array('id', 'iso'));
+    $country_id_iso = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($country_id_iso[$id])) {
+    return $country_id_iso[$id];
+  }
+  return NULL;
+}
