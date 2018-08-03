@@ -11,7 +11,7 @@
 class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
 
   /**
-   * Gets the indicator.
+   * Overrides EITIApiIndicatorValue::getIndicator().
    */
   public function getIndicator($value_emw) {
     $indicator = $value_emw->indicator_id->value();

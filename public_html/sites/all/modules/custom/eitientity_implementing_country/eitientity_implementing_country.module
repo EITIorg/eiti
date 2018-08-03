@@ -545,3 +545,20 @@ function eitientity_implementing_country_get_iso2($id) {
   }
   return NULL;
 }
+
+/**
+ * Returns country ID given it's ISO2 code.
+ */
+function eitientity_implementing_country_get_id($iso) {
+  $country_iso_id = &drupal_static(__FUNCTION__);
+  if (!isset($country_iso_id)) {
+    $query = db_select('eiti_implementing_country', 'c');
+    $query->fields('c', array('iso', 'id'));
+    $country_iso_id = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($country_iso_id[$iso])) {
+    return $country_iso_id[$iso];
+  }
+  return NULL;
+}

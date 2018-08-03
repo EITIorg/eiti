@@ -21,6 +21,9 @@ class EITIApiIndicator2 extends EITIApiIndicator {
     return $public_fields;
   }
 
+  /**
+   * Overrides RestfulBase::parseRequestForListFilter().
+   */
   protected function parseRequestForListFilter() {
     $filters = parent::parseRequestForListFilter();
     foreach ($filters as $key => $filter) {
