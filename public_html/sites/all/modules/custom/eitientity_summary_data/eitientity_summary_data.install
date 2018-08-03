@@ -76,6 +76,11 @@ function eitientity_summary_data_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'id2' => array(
+        'description' => 'Identifier consisting of the country ISO code and summary_data year.',
+        'type' => 'varchar',
+        'length' => 6,
+      ),
     ),
     'indexes' => array(
       'entity_information' => array('id'),
@@ -90,4 +95,39 @@ function eitientity_summary_data_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Add a string ID field for API v2 and populate it with values.
+ */
+function eitientity_summary_data_update_7001(&$sandbox) {
+  // Create field.
+  $table = 'eiti_summary_data';
+  $field = 'id2';
+  if (!db_field_exists($table, $field)) {
+    $schema = drupal_get_schema($table, TRUE);
+    db_add_field($table, $field, $schema['fields'][$field]);
+  }
+
+  // Get the ID values.
+  $query = db_select('eiti_summary_data', 'sd');
+  $query->innerJoin('eiti_implementing_country', 'ic', 'sd.country_id = ic.id');
+  $query
+    ->fields('sd', array('id', 'year_start'))
+    ->fields('ic', array('iso'));
+  $data = $query->execute()->fetchAll();
+  $ids = array();
+  foreach ($data as $d) {
+    if ($d->iso && $d->year_start) {
+      $ids[$d->id] = $d->iso . date('Y', $d->year_start);
+    }
+  }
+
+  // Populate the id2 values.
+  foreach ($ids as $id => $id2) {
+    db_update('eiti_summary_data')
+      ->fields(array('id2' => $id2))
+      ->condition('id', $id)
+      ->execute();
+  }
 }

@@ -606,3 +606,19 @@ function eitientity_summary_data_tokens($type, $tokens, array $data = array(), a
 
   return $replacements;
 }
+
+/**
+ * Implements hook_entity_presave().
+ */
+function eitientity_summary_data_entity_presave($entity, $type) {
+  if ($type == 'summary_data') {
+    if ($entity->country_id && $entity->year_start) {
+      // Update id2 value.
+      $iso = eitientity_implementing_country_get_iso2($entity->country_id);
+      $year = date('Y', $entity->year_start);
+      if ($iso && $year) {
+        $entity->id2 = $iso . $year;
+      }
+    }
+  }
+}
