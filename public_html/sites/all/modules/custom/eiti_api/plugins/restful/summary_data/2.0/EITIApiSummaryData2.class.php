@@ -16,7 +16,18 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
   public function publicFieldsInfo() {
     $public_fields = parent::publicFieldsInfo();
 
-    // References.
+    $public_fields['id'] = array(
+      'property' => 'id2',
+    );
+    $public_fields['label']['process_callbacks'][] = array($this, 'processLabel');
+    $public_fields['government_entities_nr']['process_callbacks'][] = 'eiti_api_numeric_string_to_int';
+    $public_fields['company_entities_nr']['process_callbacks'][] = 'eiti_api_numeric_string_to_int';
+    $public_fields['year_start']['process_callbacks'][] = 'eiti_api_date_to_iso_8601_partial';
+    $public_fields['year_end']['process_callbacks'][] = 'eiti_api_date_to_iso_8601_partial';
+    $public_fields['sector_oil']['process_callbacks'][] = 'eiti_api_value_to_boolean';
+    $public_fields['sector_mining']['process_callbacks'][] = 'eiti_api_value_to_boolean';
+    $public_fields['sector_gas']['process_callbacks'][] = 'eiti_api_value_to_boolean';
+
     $public_fields['country']['resource']['normal']['major_version'] = 2;
     $public_fields['indicator_values']['resource']['indicator_value']['major_version'] = 2;
 
@@ -113,4 +124,97 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     return $filters;
   }
 
+  /**
+   * Overrides \RestfulEntityBase::getList().
+   *
+   * Entities need to be loaded via their ISO code.
+   */
+  public function getList() {
+    $request = $this->getRequest();
+    $autocomplete_options = $this->getPluginKey('autocomplete');
+    if (!empty($autocomplete_options['enable']) && isset($request['autocomplete']['string'])) {
+      // Return autocomplete list.
+      return $this->getListForAutocomplete();
+    }
+
+    $entity_type = $this->entityType;
+    $result = $this
+      ->getQueryForList()
+      ->execute();
+
+    if (empty($result[$entity_type])) {
+      return array();
+    }
+
+    $ids = array_keys($result[$entity_type]);
+
+    // Get the results with their ID2 code.
+    $id2_query = db_select('eiti_summary_data', 'sd');
+    $id2_query->fields('sd', array('id', 'id2'));
+    $id2_query->condition('id', $ids, 'IN');
+    $id2_query_results = $id2_query->execute()->fetchAllKeyed();
+    // Get original order with ID2 code as the key.
+    $id2_results = array();
+    foreach ($ids as $id) {
+      if (isset($id2_query_results[$id])) {
+        $id2_results[$id2_query_results[$id]] = $id;
+      }
+    }
+
+    // Pre-load all entities if there is no render cache.
+    $cache_info = $this->getPluginKey('render_cache');
+    if (!$cache_info['render']) {
+      entity_load($entity_type, $id2_results);
+    }
+
+    $return = array();
+
+    // If no IDs were requested, we should not throw an exception in case an
+    // entity is un-accessible by the user.
+    foreach ($id2_results as $id2 => $id) {
+      if ($row = $this->viewEntity($id2)) {
+        $return[] = $row;
+      }
+    }
+
+    return $return;
+  }
+
+  /**
+   * Overrides \RestfulEntityBase::viewEntity().
+   *
+   * Wrap viewEntity to load the summary data via it's id2 code.
+   */
+  public function viewEntity($id2) {
+    $id2 = strtoupper($id2);
+    $efq = new EntityFieldQuery();
+    $efq_results = $efq->entityCondition('entity_type', 'summary_data')
+      ->propertyCondition('type', 'summary_data')
+      ->propertyCondition('status', 1)
+      ->propertyCondition('id2', $id2)
+      ->range(0, 1)
+      ->execute();
+
+    if (empty($efq_results['summary_data'])) {
+      throw new \RestfulBadRequestException(format_string('Summary data with the given ID is not available.'));
+    }
+
+    $id = key($efq_results['summary_data']);
+    return parent::viewEntity($id);
+  }
+
+  /**
+   * Overrides \RestfulEntityBase::getEntitySelf().
+   */
+  protected function getEntitySelf(\EntityMetadataWrapper $wrapper) {
+    return $this->versionedUrl($wrapper->id2->value());
+  }
+
+  /**
+   * A standard processing callback for the label.
+   */
+  function processLabel($label) {
+    $label = str_replace(':', '', $label);
+    return $label;
+  }
 }

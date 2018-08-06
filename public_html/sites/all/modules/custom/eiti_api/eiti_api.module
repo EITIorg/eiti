@@ -97,3 +97,31 @@ function eiti_api_timestamp_to_iso_8601($timestamp) {
   }
   return NULL;
 }
+
+/**
+ * Converts date to ISO 8601 (YYYY-MM-DD) format and returns it.
+ */
+function eiti_api_date_to_iso_8601_partial($date) {
+  $timestamp = strtotime($date);
+  return eiti_api_timestamp_to_iso_8601_partial($timestamp);
+}
+
+/**
+ * Turn numeric strings into integers.
+ */
+function eiti_api_numeric_string_to_int($number) {
+  if (is_numeric($number)) {
+    $number = (int) $number;
+  }
+  return $number;
+}
+
+/**
+ * Turn values into booleans.
+ */
+function eiti_api_value_to_boolean($value) {
+  if ($value == 1) {
+    return TRUE;
+  }
+  return FALSE;
+}
