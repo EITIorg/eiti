@@ -16,9 +16,11 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
   public function publicFieldsInfo() {
     $public_fields = parent::publicFieldsInfo();
 
-    unset($public_fields['iso2']);
     $public_fields['id'] = array(
       'property' => 'iso',
+    );
+    $public_fields['status'] = array(
+      'callback' => array($this, 'getStatusApiUrl')
     );
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
@@ -112,4 +114,38 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     return $this->versionedUrl($wrapper->iso->value());
   }
 
+  /**
+   * Get the status API url.
+   */
+  function getStatusApiUrl($emw) {
+    if (isset($emw->field_ic_status)) {
+      $id = $emw->field_ic_status->raw();
+      if (isset($id)) {
+        return url('api/v1.0/country_status/' . $id, array('absolute' => TRUE));
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Overrides \EITIApiImplementingCountry::getReports().
+   */
+  function getReports($emw) {
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->leftJoin('field_data_field_sd_indicator_values', 'fiv', 'fiv.entity_id = sd.id');
+    $query->addField('sd', 'year_end', 'year');
+    $query->addField('fiv', 'field_sd_indicator_values_target_id', 'iv_id');
+    $query->condition('sd.status', TRUE);
+    $query->condition('sd.country_id', $emw->id->value());
+    $results = $query->execute()->fetchAll();
+
+    $urls = array();
+    if (is_array($results)) {
+      foreach ($results as $result) {
+        $urls[date('Y', $result->year)][] = url('api/v2.0/indicator_value/' . $result->iv_id, array('absolute' => TRUE));
+      }
+    }
+
+    return $urls;
+  }
 }

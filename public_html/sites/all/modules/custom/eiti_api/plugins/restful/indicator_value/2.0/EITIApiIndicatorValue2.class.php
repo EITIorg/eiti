@@ -11,6 +11,25 @@
 class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
 
   /**
+   * Overrides EITIApiIndicatorValue::publicFieldsInfo().
+   */
+  public function publicFieldsInfo() {
+    $public_fields = parent::publicFieldsInfo();
+
+    $public_fields['value_boolean'] = array(
+      'property' => 'value_boolean',
+    );
+    $public_fields['value_text'] = array(
+      'property' => 'value_text',
+    );
+    $public_fields['source'] = array(
+      'property' => 'source',
+    );
+
+    return $public_fields;
+  }
+
+  /**
    * Overrides EITIApiIndicatorValue::getIndicator().
    */
   public function getIndicator($value_emw) {
