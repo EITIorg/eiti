@@ -28,59 +28,20 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['sector_mining']['process_callbacks'][] = 'eiti_api_value_to_boolean';
     $public_fields['sector_gas']['process_callbacks'][] = 'eiti_api_value_to_boolean';
 
-    $public_fields['country']['resource']['normal']['major_version'] = 2;
-    $public_fields['indicator_values']['resource']['indicator_value']['major_version'] = 2;
+    $public_fields['country'] = array(
+      'callback' => array($this, 'getCountryApiUrl')
+    );
+    $public_fields['indicator_values'] = array(
+      'callback' => array($this, 'getIndicatorValueApiUrls')
+    );
+    $public_fields['revenue_government'] = array(
+      'callback' => array($this, 'getGovernmentRevenueApiUrls'),
+    );
+    $public_fields['revenue_company'] = array(
+      'callback' => array($this, 'getCompanyRevenueApiUrls'),
+    );
 
     return $public_fields;
-  }
-
-  /**
-   * Overrides RestfulEntityBase::getValueFromResource().
-   */
-  protected function getValueFromResource(EntityMetadataWrapper $wrapper, $property, $resource, $public_field_name = NULL, $host_id = NULL) {
-    $handlers = $this->staticCache->get(__CLASS__ . '::' . __FUNCTION__, array());
-
-    if (!$entity = $wrapper->value()) {
-      return;
-    }
-
-    $target_type = $this->getTargetTypeFromEntityReference($wrapper, $property);
-    list($id,, $bundle) = entity_extract_ids($target_type, $entity);
-
-    if (empty($resource[$bundle])) {
-      // Bundle not mapped to a resource.
-      return;
-    }
-
-    if (!$resource[$bundle]['full_view']) {
-      // Show only the ID(s) of the referenced resource.
-      return $wrapper->value(array('identifier' => TRUE));
-    }
-
-    if ($public_field_name) {
-      $this->valueMetadata[$host_id][$public_field_name][] = array(
-        'id' => $id,
-        'entity_type' => $target_type,
-        'bundle' => $bundle,
-        'resource_name' => $resource[$bundle]['name'],
-      );
-    }
-
-    if (empty($handlers[$bundle])) {
-      $handlers[$bundle] = restful_get_restful_handler($resource[$bundle]['name'], $resource[$bundle]['major_version'], $resource[$bundle]['minor_version']);
-    }
-    $bundle_handler = $handlers[$bundle];
-
-    // Pipe the parent request and account to the sub-request.
-    $piped_request = $this->getRequestForSubRequest();
-    $bundle_handler->setAccount($this->getAccount());
-    $bundle_handler->setRequest($piped_request);
-
-    // Countries require the ISO code rather than ID.
-    if ($target_type == 'implementing_country') {
-      return $bundle_handler->viewEntity(eitientity_implementing_country_get_iso2($id));
-    }
-    return $bundle_handler->viewEntity($id);
   }
 
   /**
@@ -216,5 +177,66 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
   function processLabel($label) {
     $label = str_replace(':', '', $label);
     return $label;
+  }
+
+  /**
+   * Gets the implementing country API url.
+   */
+  function getCountryApiUrl($emw) {
+    if (isset($emw->country_id)) {
+      $country = $emw->country_id->value();
+      if (isset($country->iso)) {
+        return url('api/v2.0/implementing_country/' . $country->iso, array('absolute' => TRUE));
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Gets the indicator value API urls.
+   */
+  function getIndicatorValueApiUrls($emw) {
+    $urls = array();
+    if (isset($emw->field_sd_indicator_values)) {
+      $ids = $emw->field_sd_indicator_values->raw();
+      if (is_array($ids)) {
+        foreach ($ids as $id) {
+          $urls[] = url('api/v2.0/indicator_value/' . $id, array('absolute' => TRUE));
+        }
+      }
+    }
+    return $urls;
+  }
+
+  /**
+   * Gets the government revenue API urls.
+   */
+  function getGovernmentRevenueApiUrls($emw) {
+    $urls = array();
+    if (isset($emw->field_sd_revenue_government)) {
+      $ids = $emw->field_sd_revenue_government->raw();
+      if (is_array($ids)) {
+        foreach ($ids as $id) {
+          $urls[] = url('api/v2.0/revenue/' . $id, array('absolute' => TRUE));
+        }
+      }
+    }
+    return $urls;
+  }
+
+  /**
+   * Gets the company revenue API urls.
+   */
+  function getCompanyRevenueApiUrls($emw) {
+    $urls = array();
+    if (isset($emw->field_sd_revenue_company)) {
+      $ids = $emw->field_sd_revenue_company->raw();
+      if (is_array($ids)) {
+        foreach ($ids as $id) {
+          $urls[] = url('api/v2.0/revenue/' . $id, array('absolute' => TRUE));
+        }
+      }
+    }
+    return $urls;
   }
 }
