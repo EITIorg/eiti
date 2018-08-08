@@ -24,6 +24,9 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     );
     // Summary data already provides links to indicator_values.
     unset($public_fields['reports']);
+    // Moved to summary_data.
+    unset($public_fields['licenses']);
+    unset($public_fields['contracts']);
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 
