@@ -41,6 +41,21 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
       'callback' => array($this, 'getCompanyRevenueApiUrls'),
     );
 
+    unset($public_fields['email']);
+    $public_fields['contact'] = array(
+      'callback' => array($this, 'getContactInformation'),
+    );
+    $public_fields['currency_rate'] = array(
+      'property' => 'currency_rate',
+      'process_callbacks' => array('eiti_api_numeric_string_to_float'),
+    );
+    $public_fields['currency_code'] = array(
+      'property' => 'currency_code',
+    );
+    $public_fields['disaggregated'] = array(
+      'callback' => array($this, 'getDisaggregatedData'),
+    );
+
     return $public_fields;
   }
 
@@ -238,5 +253,29 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
       }
     }
     return $urls;
+  }
+
+  /**
+   * Gets the contact information.
+   */
+  function getContactInformation($emw) {
+    $info = array(
+      'name' => $emw->field_sd_contact_name->value(),
+      'email' => $emw->field_sd_contact_email_address->value(),
+      'organisation' => $emw->field_sd_contact_organisation->value(),
+    );
+    return $info;
+  }
+
+  /**
+   * Gets the disaggregated data.
+   */
+  function getDisaggregatedData($emw) {
+    $info = array(
+      'project' => eiti_api_value_to_boolean($emw->field_sd_disagg_project->value()),
+      'revenue_stream' => eiti_api_value_to_boolean($emw->field_sd_disagg_revenue_stream->value()),
+      'company' => eiti_api_value_to_boolean($emw->field_sd_disagg_company->value()),
+    );
+    return $info;
   }
 }

@@ -117,6 +117,16 @@ function eiti_api_numeric_string_to_int($number) {
 }
 
 /**
+ * Turn numeric strings into floats.
+ */
+function eiti_api_numeric_string_to_float($number) {
+  if (is_numeric($number)) {
+    $number = (float) $number;
+  }
+  return $number;
+}
+
+/**
  * Turn values into booleans.
  */
 function eiti_api_value_to_boolean($value) {

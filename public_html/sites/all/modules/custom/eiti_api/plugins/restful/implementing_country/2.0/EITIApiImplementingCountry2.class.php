@@ -22,6 +22,8 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     $public_fields['status'] = array(
       'callback' => array($this, 'getStatusApiUrl')
     );
+    // Summary data already provides links to indicator_values.
+    unset($public_fields['reports']);
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 
@@ -143,6 +145,26 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     if (is_array($results)) {
       foreach ($results as $result) {
         $urls[date('Y', $result->year)][] = url('api/v2.0/indicator_value/' . $result->iv_id, array('absolute' => TRUE));
+      }
+    }
+
+    return $urls;
+  }
+
+  /**
+   * Overrides \EITIApiImplementingCountry::getMetadata().
+   */
+  function getMetadata($emw) {
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->fields('sd', array('year_end', 'id2'));
+    $query->condition('sd.status', 1);
+    $query->condition('sd.country_id', $emw->id->value());
+    $results = $query->execute()->fetchAll();
+
+    $urls = array();
+    if (is_array($results)) {
+      foreach ($results as $result) {
+        $urls[date('Y', $result->year_end)] = url('api/v2.0/summary_data/' . $result->id2, array('absolute' => TRUE));
       }
     }
 
