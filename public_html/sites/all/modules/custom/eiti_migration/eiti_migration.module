@@ -300,6 +300,9 @@ function eiti_migration_get_commodity_tids($names) {
     $commodities_str = str_replace(' or ', ',', $commodities_str);
     $commodities_str = str_replace('/', ',', $commodities_str);
     $commodities_str = str_replace(';', ',', $commodities_str);
+    $commodities_str = str_replace('(', ',', $commodities_str);
+    $commodities_str = str_replace(')', ',', $commodities_str);
+    $commodities_str = str_replace(' - ', ',', $commodities_str);
 
     $candidates = explode(',', $commodities_str);
     foreach ($candidates as $candidate) {
@@ -324,7 +327,7 @@ function eiti_migration_get_commodity_tids($names) {
       }
     }
   }
-  return $commodity_tids;
+  return array_unique($commodity_tids);
 }
 
 /**
