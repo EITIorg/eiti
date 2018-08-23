@@ -40,7 +40,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
   }*/
 
   /**
-   * Overrides RestfulBase::parseRequestForListFilter().
+   * Overrides EITIApiOrganisation::parseRequestForListFilter().
    */
   protected function parseRequestForListFilter() {
     $filters = parent::parseRequestForListFilter();
