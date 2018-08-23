@@ -410,3 +410,26 @@ function eitientity_organisation_tokens($type, $tokens, array $data = array(), a
   return $replacements;
 }
 
+/**
+ * Get sector taxonomy term ID given it's name.
+ */
+function eitientity_organisation_get_sector_tid($name) {
+  $voc = taxonomy_vocabulary_machine_name_load('company_sectors');
+  $query = db_select('taxonomy_term_data', 't');
+  $query->fields('t', array('tid'));
+  $query->condition('vid', $voc->vid);
+  $query->condition('name', $name);
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get commodity taxonomy term ID given it's name.
+ */
+function eitientity_organisation_get_commodity_tid($name) {
+  $voc = taxonomy_vocabulary_machine_name_load('company_commodities');
+  $query = db_select('taxonomy_term_data', 't');
+  $query->fields('t', array('tid'));
+  $query->condition('vid', $voc->vid);
+  $query->condition('name', $name);
+  return $query->execute()->fetchField();
+}
