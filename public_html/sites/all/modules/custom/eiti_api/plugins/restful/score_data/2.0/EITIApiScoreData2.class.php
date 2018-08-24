@@ -17,7 +17,11 @@ class EITIApiScoreData2 extends EITIApiScoreData {
     $public_fields = parent::publicFieldsInfo();
 
     // References.
-    $public_fields['country']['resource']['normal']['major_version'] = 2;
+    //$public_fields['country']['resource']['normal']['major_version'] = 2;
+    $public_fields['country'] = array(
+      'property' => 'country_id',
+      'callback' => array($this, 'getCountryApiUrl')
+    );
 
     $public_fields['score_req_values']['process_callbacks'] = array(array($this, 'prepareScoreReqValues'));
 
@@ -39,7 +43,7 @@ class EITIApiScoreData2 extends EITIApiScoreData {
   /**
    * Overrides RestfulEntityBase::getValueFromResource().
    */
-  protected function getValueFromResource(EntityMetadataWrapper $wrapper, $property, $resource, $public_field_name = NULL, $host_id = NULL) {
+  /*protected function getValueFromResource(EntityMetadataWrapper $wrapper, $property, $resource, $public_field_name = NULL, $host_id = NULL) {
     $handlers = $this->staticCache->get(__CLASS__ . '::' . __FUNCTION__, array());
 
     if (!$entity = $wrapper->value()) {
@@ -83,7 +87,7 @@ class EITIApiScoreData2 extends EITIApiScoreData {
       return $bundle_handler->viewEntity(eitientity_implementing_country_get_iso2($id));
     }
     return $bundle_handler->viewEntity($id);
-  }
+  }*/
 
   /**
    * Overrides RestfulBase::parseRequestForListFilter().
@@ -99,5 +103,18 @@ class EITIApiScoreData2 extends EITIApiScoreData {
       }
     }
     return $filters;
+  }
+
+  /**
+   * Gets the implementing country API url.
+   */
+  function getCountryApiUrl($emw) {
+    if (isset($emw->country_id)) {
+      $country = $emw->country_id->value();
+      if (isset($country->iso)) {
+        return url('api/v2.0/implementing_country/' . $country->iso, array('absolute' => TRUE));
+      }
+    }
+    return NULL;
   }
 }

@@ -19,6 +19,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     // Expose data.
     $public_fields['country']['process_callbacks'] = array('eitientity_implementing_country_get_iso2');
     //$public_fields['country']['callback'] = array($this, 'getCountryApiUrl');
+    $public_fields['summary_data']['process_callbacks'] = array('eitientity_summary_data_get_id2');
 
     return $public_fields;
   }
@@ -49,6 +50,12 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
       if (isset($filter['public_field'], $filter['value'][0]) && $filter['public_field'] == 'country') {
         foreach ($filter['value'] as $k => $v) {
           $filters[$key]['value'][$k] = eitientity_implementing_country_get_id(strtoupper($v));
+        }
+      }
+      // Summary data ID2 to ID.
+      if (isset($filter['public_field'], $filter['value'][0]) && $filter['public_field'] == 'summary_data') {
+        foreach ($filter['value'] as $k => $v) {
+          $filters[$key]['value'][$k] = eitientity_summary_data_get_id(strtoupper($v));
         }
       }
     }

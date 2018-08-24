@@ -20,6 +20,7 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
       'property' => 'iso',
     );
     $public_fields['status'] = array(
+      'property' => 'field_ic_status',
       'callback' => array($this, 'getStatusApiUrl')
     );
     // Summary data already provides links to indicator_values.

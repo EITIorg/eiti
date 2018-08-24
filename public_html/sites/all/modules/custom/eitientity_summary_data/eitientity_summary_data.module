@@ -622,3 +622,37 @@ function eitientity_summary_data_entity_presave($entity, $type) {
     }
   }
 }
+
+/**
+ * Returns summary data ID2 given it's ID.
+ */
+function eitientity_summary_data_get_id2($id) {
+  $sd_id_id2 = &drupal_static(__FUNCTION__);
+  if (!isset($sd_id_id2)) {
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->fields('sd', array('id', 'id2'));
+    $sd_id_id2 = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($sd_id_id2[$id])) {
+    return $sd_id_id2[$id];
+  }
+  return NULL;
+}
+
+/**
+ * Returns summary data ID given it's ID2.
+ */
+function eitientity_summary_data_get_id($id2) {
+  $sd_id2_id = &drupal_static(__FUNCTION__);
+  if (!isset($sd_id2_id)) {
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->fields('sd', array('id2', 'id'));
+    $sd_id2_id = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($sd_id2_id[$id2])) {
+    return $sd_id2_id[$id2];
+  }
+  return NULL;
+}

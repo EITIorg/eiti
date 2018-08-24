@@ -29,17 +29,15 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['sector_gas']['process_callbacks'][] = 'eiti_api_value_to_boolean';
 
     $public_fields['country'] = array(
+      'property' => 'country_id',
       'callback' => array($this, 'getCountryApiUrl')
     );
     $public_fields['indicator_values'] = array(
+      'property' => 'field_sd_indicator_values',
       'callback' => array($this, 'getIndicatorValueApiUrls')
     );
-    $public_fields['revenue_government'] = array(
-      'callback' => array($this, 'getGovernmentRevenueApiUrls'),
-    );
-    $public_fields['revenue_company'] = array(
-      'callback' => array($this, 'getCompanyRevenueApiUrls'),
-    );
+    $public_fields['revenue_government']['callback'] = array($this, 'getGovernmentRevenueApiUrls');
+    $public_fields['revenue_company']['callback'] = array($this, 'getCompanyRevenueApiUrls');
 
     unset($public_fields['email']);
     $public_fields['contact'] = array(
@@ -109,7 +107,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
   /**
    * Overrides \RestfulEntityBase::getList().
    *
-   * Entities need to be loaded via their ISO code.
+   * Entities need to be loaded via their ID2 code.
    */
   public function getList() {
     $request = $this->getRequest();
