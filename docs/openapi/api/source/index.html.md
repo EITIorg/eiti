@@ -49,6 +49,1953 @@ Base URLs:
 
 * <a href="https://eiti.org/api/v1.0">https://eiti.org/api/v1.0</a>
 
+<h1 id="EITI---API-documentation-Chart---Bubble">Chart - Bubble</h1>
+
+## get__bubble
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/bubble \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/bubble HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/bubble',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/bubble',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/bubble',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/bubble', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/bubble");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/bubble", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /bubble`
+
+Returns all the bubble chart endpoints
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "id": "disbursed_revenues",
+      "label": "string",
+      "description": "string",
+      "self": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__bubble-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__bubble-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» id|string|false|none|none|
+|»» label|string|false|none|none|
+|»» description|string|false|none|none|
+|»» self|string|false|none|none|
+|» count|integer|false|none|none|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|id|disbursed_revenues|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__bubble_disbursed_revenues
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/bubble/disbursed_revenues \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/bubble/disbursed_revenues HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/bubble/disbursed_revenues',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/bubble/disbursed_revenues',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/bubble/disbursed_revenues',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/bubble/disbursed_revenues', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/bubble/disbursed_revenues");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/bubble/disbursed_revenues", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /bubble/disbursed_revenues`
+
+*Country’s disbursed revenues*
+
+Revenue disbursed by the governmental agencies of a specific country
+
+<h3 id="get__bubble_disbursed_revenues-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[country_iso]|query|string|false|Allows to filter the revenues disbursed which belong to certain country, by sending the country’s ISO code|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "children": [
+        {
+          "name": "string",
+          "children": [
+            {
+              "name": "string",
+              "size": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__bubble_disbursed_revenues-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__bubble_disbursed_revenues-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» name|string|false|none|none|
+|»» children|[object]|false|none|none|
+|»»» name|string|false|none|none|
+|»»» children|[object]|false|none|none|
+|»»»» name|string|false|none|none|
+|»»»» size|number|false|none|none|
+|»»» self|object|false|none|none|
+|»»»» title|string|false|none|none|
+|»»»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Chart---Grouped-Bar">Chart - Grouped Bar</h1>
+
+## get__grouped_bar
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/grouped_bar \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/grouped_bar HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/grouped_bar',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/grouped_bar',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/grouped_bar', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /grouped_bar`
+
+Returns all the grouped bar chart endpoints
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "id": "production",
+      "label": "string",
+      "description": "string",
+      "self": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__grouped_bar-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__grouped_bar-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» id|string|false|none|none|
+|»» label|string|false|none|none|
+|»» description|string|false|none|none|
+|»» self|string|false|none|none|
+|» count|integer|false|none|none|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|id|production|
+|id|production_per_country|
+|id|external_per_country|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__grouped_bar_production
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/grouped_bar/production \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/grouped_bar/production HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/grouped_bar/production',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/grouped_bar/production',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/production',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/grouped_bar/production', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/production");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/production", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /grouped_bar/production`
+
+*Global production for all countries per year*
+
+Production volumes for all the countries
+
+<h3 id="get__grouped_bar_production-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[year]|query|string|false|Allows to filter the production volumes per year|
+|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
+|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "x": [
+        "string"
+      ],
+      "y": [
+        0
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__grouped_bar_production-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__grouped_bar_production-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» name|string|false|none|none|
+|»» x|[string]|false|none|Countries|
+|»» y|[number]|false|none|Production Volumes|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__grouped_bar_production_per_country
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/grouped_bar/production_per_country \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/grouped_bar/production_per_country HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/grouped_bar/production_per_country',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/grouped_bar/production_per_country',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/production_per_country',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/grouped_bar/production_per_country', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/production_per_country");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/production_per_country", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /grouped_bar/production_per_country`
+
+*Country production for all of the years*
+
+Production volumes
+
+<h3 id="get__grouped_bar_production_per_country-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[year]|query|string|false|Allows to filter the production volumes per year|
+|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
+|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "x": [
+        0
+      ],
+      "y": [
+        0
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__grouped_bar_production_per_country-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__grouped_bar_production_per_country-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» name|string|false|none|none|
+|»» x|[integer]|false|none|Years|
+|»» y|[integer]|false|none|Production Volumes for all the Reported Years|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__grouped_bar_external_per_country
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/grouped_bar/external_per_country \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/grouped_bar/external_per_country HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/grouped_bar/external_per_country',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/grouped_bar/external_per_country',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/external_per_country',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/grouped_bar/external_per_country', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/external_per_country");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/external_per_country", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /grouped_bar/external_per_country`
+
+*Country’s external indicators for all of the years*
+
+External indicators for all the reported years
+
+<h3 id="get__grouped_bar_external_per_country-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[year]|query|string|false|Allows to filter the production volumes per year|
+|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
+|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "x": [
+        0
+      ],
+      "y": [
+        0
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__grouped_bar_external_per_country-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__grouped_bar_external_per_country-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» name|string|false|none|none|
+|»» x|[integer]|false|none|Years|
+|»» y|[integer]|false|none|USD|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Chart---Sankey">Chart - Sankey</h1>
+
+## get__sankey
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/sankey \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/sankey HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/sankey',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/sankey',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/sankey',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/sankey', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/sankey");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/sankey", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /sankey`
+
+Returns all the sankey chart endpoints
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "id": "disbursed_by_companies_per_country",
+      "label": "string",
+      "description": "string",
+      "self": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__sankey-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__sankey-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» id|string|false|none|none|
+|»» label|string|false|none|none|
+|»» description|string|false|none|none|
+|»» self|string|false|none|none|
+|» count|integer|false|none|none|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|id|disbursed_by_companies_per_country|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__sankey_disbursed_by_companies_per_country
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /sankey/disbursed_by_companies_per_country`
+
+*Country’s disbursed revenues by companies*
+
+Revenue disbursed by companies of a specific country
+
+<h3 id="get__sankey_disbursed_by_companies_per_country-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
+|filter[years_from]|query|string|false|Allows to filter the production volumes starting with a certain year|
+|filter[years_to]|query|string|false|Allows to filter the production volumes ending with a certain year|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": {
+    "nodes": [
+      {
+        "name": "string",
+        "type": "string"
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 0,
+        "value": 0
+      }
+    ]
+  },
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__sankey_disbursed_by_companies_per_country-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__sankey_disbursed_by_companies_per_country-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|object|false|none|none|
+|»» nodes|[object]|false|none|none|
+|»»» name|string|false|none|none|
+|»»» type|string|false|none|none|
+|»» links|[object]|false|none|none|
+|»»» source|integer|false|none|none|
+|»»» target|integer|false|none|none|
+|»»» value|number|false|none|none|
+|»» self|object|false|none|none|
+|»»» title|string|false|none|none|
+|»»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Chart---Stacked-Bar">Chart - Stacked Bar</h1>
+
+## get__stacked_bar
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/stacked_bar \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/stacked_bar HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/stacked_bar',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/stacked_bar',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/stacked_bar',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/stacked_bar', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/stacked_bar");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/stacked_bar", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /stacked_bar`
+
+Returns all the stacked bar chart endpoints
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "id": "government_revenues",
+      "label": "string",
+      "description": "string",
+      "self": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__stacked_bar-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__stacked_bar-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» id|string|false|none|none|
+|»» label|string|false|none|none|
+|»» description|string|false|none|none|
+|»» self|string|false|none|none|
+|» count|integer|false|none|none|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|id|government_revenues|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__stacked_bar_government_revenues
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v1.0/stacked_bar/government_revenues \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v1.0/stacked_bar/government_revenues HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v1.0/stacked_bar/government_revenues',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v1.0/stacked_bar/government_revenues',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v1.0/stacked_bar/government_revenues',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v1.0/stacked_bar/government_revenues', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v1.0/stacked_bar/government_revenues");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/stacked_bar/government_revenues", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /stacked_bar/government_revenues`
+
+*Country governmental revenue*
+
+Revenue disclosed by a government of a specific country.
+
+<h3 id="get__stacked_bar_government_revenues-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[gfs_code]|query|string|false|Allows to filter the revenues which belong to certain GFS codes.|
+|filter[country_iso]|query|string|false|Allows to filter the revenues which belong to certain country, by sending the country’s ISO code|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "data": [
+    {
+      "name": "string",
+      "x": [
+        0
+      ],
+      "y": [
+        0
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__stacked_bar_government_revenues-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__stacked_bar_government_revenues-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» data|[object]|false|none|none|
+|»» name|string|false|none|none|
+|»» x|[integer]|false|none|Years|
+|»» y|[number]|false|none|Government Revenue (normalized to USD)|
+|» self|object|false|none|none|
+|»» title|string|false|none|none|
+|»» href|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="EITI---API-documentation-Country-Status">Country Status</h1>
 
 ## get__country_status
@@ -2532,6 +4479,10 @@ Fetches all the organisations and their information as JSON objects
 |---|---|---|---|---|
 |filter[type]|query|string|false|Allows to filter organisations by their type|
 |filter[country]|query|string|false|Allows to filter organisations by their country id|
+|filter[summary_data]|query|string|false|Allows to filter organisations by their summary data id|
+|filter[identification]|query|string|false|Allows to filter organisations by their identification|
+|filter[sector]|query|string|false|Allows to filter organisations by their sector|
+|filter[commodities]|query|string|false|Allows to filter organisations by a commodity|
 
 > Example responses
 
@@ -2545,7 +4496,13 @@ Fetches all the organisations and their information as JSON objects
       "label": "string",
       "self": "string",
       "type": "string",
-      "country": 0
+      "country": 0,
+      "summary_data": 0,
+      "identification": "string",
+      "sector": "string",
+      "commodities": [
+        "string"
+      ]
     }
   ],
   "count": 0,
@@ -2578,6 +4535,10 @@ Status Code **200**
 |»» self|string|false|none|none|
 |»» type|string|false|none|none|
 |»» country|integer|false|none|none|
+|»» summary_data|integer|false|none|none|
+|»» identification|string|false|none|none|
+|»» sector|string|false|none|none|
+|»» commodities|[string]|false|none|none|
 |» count|integer|false|none|none|
 |» self|object|false|none|none|
 |»» title|string|false|none|none|
@@ -2744,7 +4705,13 @@ Fetches a single organisation and its information as a JSON object
       "label": "string",
       "self": "string",
       "type": "string",
-      "country": 0
+      "country": 0,
+      "summary_data": 0,
+      "identification": "string",
+      "sector": "string",
+      "commodities": [
+        "string"
+      ]
     }
   ],
   "self": {
@@ -2772,6 +4739,10 @@ Status Code **200**
 |»» self|string|false|none|none|
 |»» type|string|false|none|none|
 |»» country|integer|false|none|none|
+|»» summary_data|integer|false|none|none|
+|»» identification|string|false|none|none|
+|»» sector|string|false|none|none|
+|»» commodities|[string]|false|none|none|
 |» self|object|false|none|none|
 |»» title|string|false|none|none|
 |»» href|string|false|none|none|
@@ -4249,6 +6220,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
 |filter[sector_mining]|query|string|false|Allows to filter summary data by their mining sector|
 |filter[sector_gas]|query|string|false|Allows to filter summary data by their gas sector|
 |filter[sector_other]|query|string|false|Allows to filter summary data by their other sectors|
+|filter[report_file]|query|string|false|Allows to filter summary data by their report file id|
 |filter[country]|query|string|false|Allows to filter summary data by their country id|
 |filter[indicator_values]|query|string|false|Allows to filter summary data by their indicator values id|
 |filter[revenue_government]|query|string|false|Allows to filter summary data by their government revenue id|
@@ -4279,6 +6251,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
       "sector_mining": 0,
       "sector_gas": 0,
       "sector_other": "string",
+      "report_file": "string",
       "country": {
         "id": 0,
         "label": "string",
@@ -4503,6 +6476,7 @@ Status Code **200**
 |»» sector_mining|integer|false|none|none|
 |»» sector_gas|integer|false|none|none|
 |»» sector_other|string|false|none|none|
+|»» report_file|string|false|none|none|
 |»» country|object|false|none|none|
 |»»» id|integer|false|none|none|
 |»»» label|string|false|none|none|
@@ -4776,6 +6750,7 @@ Fetches a single summary data entry. Summary data is EITI’s tool for collectin
       "sector_mining": 0,
       "sector_gas": 0,
       "sector_other": "string",
+      "report_file": "string",
       "country": {
         "id": 0,
         "label": "string",
@@ -4995,6 +6970,7 @@ Status Code **200**
 |»» sector_mining|integer|false|none|none|
 |»» sector_gas|integer|false|none|none|
 |»» sector_other|string|false|none|none|
+|»» report_file|string|false|none|none|
 |»» country|object|false|none|none|
 |»»» id|integer|false|none|none|
 |»»» label|string|false|none|none|
@@ -5092,1953 +7068,6 @@ Status Code **200**
 |»»»»»»»»» self|object|false|none|none|
 |»»»»»»»»»» title|string|false|none|none|
 |»»»»»»»»»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="EITI---API-documentation-Chart---Bubble">Chart - Bubble</h1>
-
-## get__bubble
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/bubble \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/bubble HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/bubble',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/bubble',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/bubble',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/bubble', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/bubble");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/bubble", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /bubble`
-
-Returns all the bubble chart endpoints
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "id": "disbursed_revenues",
-      "label": "string",
-      "description": "string",
-      "self": "string"
-    }
-  ],
-  "count": 0,
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__bubble-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__bubble-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» id|string|false|none|none|
-|»» label|string|false|none|none|
-|»» description|string|false|none|none|
-|»» self|string|false|none|none|
-|» count|integer|false|none|none|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|id|disbursed_revenues|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__bubble_disbursed_revenues
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/bubble/disbursed_revenues \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/bubble/disbursed_revenues HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/bubble/disbursed_revenues',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/bubble/disbursed_revenues',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/bubble/disbursed_revenues',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/bubble/disbursed_revenues', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/bubble/disbursed_revenues");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/bubble/disbursed_revenues", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /bubble/disbursed_revenues`
-
-*Country’s disbursed revenues*
-
-Revenue disbursed by the governmental agencies of a specific country
-
-<h3 id="get__bubble_disbursed_revenues-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[country_iso]|query|string|false|Allows to filter the revenues disbursed which belong to certain country, by sending the country’s ISO code|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "name": "string",
-      "children": [
-        {
-          "name": "string",
-          "children": [
-            {
-              "name": "string",
-              "size": 0
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__bubble_disbursed_revenues-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__bubble_disbursed_revenues-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» name|string|false|none|none|
-|»» children|[object]|false|none|none|
-|»»» name|string|false|none|none|
-|»»» children|[object]|false|none|none|
-|»»»» name|string|false|none|none|
-|»»»» size|number|false|none|none|
-|»»» self|object|false|none|none|
-|»»»» title|string|false|none|none|
-|»»»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="EITI---API-documentation-Chart---Grouped-Bar">Chart - Grouped Bar</h1>
-
-## get__grouped_bar
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/grouped_bar \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/grouped_bar HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/grouped_bar',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/grouped_bar',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/grouped_bar', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /grouped_bar`
-
-Returns all the grouped bar chart endpoints
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "id": "production",
-      "label": "string",
-      "description": "string",
-      "self": "string"
-    }
-  ],
-  "count": 0,
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__grouped_bar-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__grouped_bar-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» id|string|false|none|none|
-|»» label|string|false|none|none|
-|»» description|string|false|none|none|
-|»» self|string|false|none|none|
-|» count|integer|false|none|none|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|id|production|
-|id|production_per_country|
-|id|external_per_country|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__grouped_bar_production
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/grouped_bar/production \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/grouped_bar/production HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/grouped_bar/production',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/grouped_bar/production',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/production',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/grouped_bar/production', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/production");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/production", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /grouped_bar/production`
-
-*Global production for all countries per year*
-
-Production volumes for all the countries
-
-<h3 id="get__grouped_bar_production-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[year]|query|string|false|Allows to filter the production volumes per year|
-|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
-|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "name": "string",
-      "x": [
-        "string"
-      ],
-      "y": [
-        0
-      ]
-    }
-  ],
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__grouped_bar_production-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__grouped_bar_production-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» name|string|false|none|none|
-|»» x|[string]|false|none|Countries|
-|»» y|[number]|false|none|Production Volumes|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__grouped_bar_production_per_country
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/grouped_bar/production_per_country \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/grouped_bar/production_per_country HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/grouped_bar/production_per_country',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/grouped_bar/production_per_country',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/production_per_country',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/grouped_bar/production_per_country', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/production_per_country");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/production_per_country", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /grouped_bar/production_per_country`
-
-*Country production for all of the years*
-
-Production volumes
-
-<h3 id="get__grouped_bar_production_per_country-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[year]|query|string|false|Allows to filter the production volumes per year|
-|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
-|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "name": "string",
-      "x": [
-        0
-      ],
-      "y": [
-        0
-      ]
-    }
-  ],
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__grouped_bar_production_per_country-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__grouped_bar_production_per_country-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» name|string|false|none|none|
-|»» x|[integer]|false|none|Years|
-|»» y|[integer]|false|none|Production Volumes for all the Reported Years|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__grouped_bar_external_per_country
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/grouped_bar/external_per_country \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/grouped_bar/external_per_country HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/grouped_bar/external_per_country',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/grouped_bar/external_per_country',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/grouped_bar/external_per_country',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/grouped_bar/external_per_country', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/grouped_bar/external_per_country");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/grouped_bar/external_per_country", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /grouped_bar/external_per_country`
-
-*Country’s external indicators for all of the years*
-
-External indicators for all the reported years
-
-<h3 id="get__grouped_bar_external_per_country-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[year]|query|string|false|Allows to filter the production volumes per year|
-|filter[indicator]|query|string|false|Allows to filter the production volumes per a certain set of indicator (by sending their IDs)|
-|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "name": "string",
-      "x": [
-        0
-      ],
-      "y": [
-        0
-      ]
-    }
-  ],
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__grouped_bar_external_per_country-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__grouped_bar_external_per_country-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» name|string|false|none|none|
-|»» x|[integer]|false|none|Years|
-|»» y|[integer]|false|none|USD|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="EITI---API-documentation-Chart---Sankey">Chart - Sankey</h1>
-
-## get__sankey
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/sankey \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/sankey HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/sankey',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/sankey',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/sankey',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/sankey', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/sankey");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/sankey", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /sankey`
-
-Returns all the sankey chart endpoints
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "id": "disbursed_by_companies_per_country",
-      "label": "string",
-      "description": "string",
-      "self": "string"
-    }
-  ],
-  "count": 0,
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__sankey-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__sankey-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» id|string|false|none|none|
-|»» label|string|false|none|none|
-|»» description|string|false|none|none|
-|»» self|string|false|none|none|
-|» count|integer|false|none|none|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|id|disbursed_by_companies_per_country|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__sankey_disbursed_by_companies_per_country
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/sankey/disbursed_by_companies_per_country", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /sankey/disbursed_by_companies_per_country`
-
-*Country’s disbursed revenues by companies*
-
-Revenue disbursed by companies of a specific country
-
-<h3 id="get__sankey_disbursed_by_companies_per_country-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[country_iso]|query|string|false|Allows to filter the production volumes which belong to certain country, by sending the country’s ISO code|
-|filter[years_from]|query|string|false|Allows to filter the production volumes starting with a certain year|
-|filter[years_to]|query|string|false|Allows to filter the production volumes ending with a certain year|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": {
-    "nodes": [
-      {
-        "name": "string",
-        "type": "string"
-      }
-    ],
-    "links": [
-      {
-        "source": 0,
-        "target": 0,
-        "value": 0
-      }
-    ]
-  },
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__sankey_disbursed_by_companies_per_country-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__sankey_disbursed_by_companies_per_country-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|object|false|none|none|
-|»» nodes|[object]|false|none|none|
-|»»» name|string|false|none|none|
-|»»» type|string|false|none|none|
-|»» links|[object]|false|none|none|
-|»»» source|integer|false|none|none|
-|»»» target|integer|false|none|none|
-|»»» value|number|false|none|none|
-|»» self|object|false|none|none|
-|»»» title|string|false|none|none|
-|»»» href|string|false|none|none|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="EITI---API-documentation-Chart---Stacked-Bar">Chart - Stacked Bar</h1>
-
-## get__stacked_bar
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/stacked_bar \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/stacked_bar HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/stacked_bar',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/stacked_bar',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/stacked_bar',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/stacked_bar', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/stacked_bar");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/stacked_bar", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /stacked_bar`
-
-Returns all the stacked bar chart endpoints
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "id": "government_revenues",
-      "label": "string",
-      "description": "string",
-      "self": "string"
-    }
-  ],
-  "count": 0,
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__stacked_bar-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__stacked_bar-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» id|string|false|none|none|
-|»» label|string|false|none|none|
-|»» description|string|false|none|none|
-|»» self|string|false|none|none|
-|» count|integer|false|none|none|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|id|government_revenues|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__stacked_bar_government_revenues
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://eiti.org/api/v1.0/stacked_bar/government_revenues \
-  -H 'Accept: application/json'
-
-```
-
-```http
-GET https://eiti.org/api/v1.0/stacked_bar/government_revenues HTTP/1.1
-Host: eiti.org
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json'
-
-};
-
-$.ajax({
-  url: 'https://eiti.org/api/v1.0/stacked_bar/government_revenues',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json'
-
-};
-
-fetch('https://eiti.org/api/v1.0/stacked_bar/government_revenues',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json'
-}
-
-result = RestClient.get 'https://eiti.org/api/v1.0/stacked_bar/government_revenues',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://eiti.org/api/v1.0/stacked_bar/government_revenues', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("https://eiti.org/api/v1.0/stacked_bar/government_revenues");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://eiti.org/api/v1.0/stacked_bar/government_revenues", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /stacked_bar/government_revenues`
-
-*Country governmental revenue*
-
-Revenue disclosed by a government of a specific country.
-
-<h3 id="get__stacked_bar_government_revenues-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|filter[gfs_code]|query|string|false|Allows to filter the revenues which belong to certain GFS codes.|
-|filter[country_iso]|query|string|false|Allows to filter the revenues which belong to certain country, by sending the country’s ISO code|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "data": [
-    {
-      "name": "string",
-      "x": [
-        0
-      ],
-      "y": [
-        0
-      ]
-    }
-  ],
-  "self": {
-    "title": "string",
-    "href": "string"
-  }
-}
-```
-
-<h3 id="get__stacked_bar_government_revenues-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-
-<h3 id="get__stacked_bar_government_revenues-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» data|[object]|false|none|none|
-|»» name|string|false|none|none|
-|»» x|[integer]|false|none|Years|
-|»» y|[number]|false|none|Government Revenue (normalized to USD)|
-|» self|object|false|none|none|
-|»» title|string|false|none|none|
-|»» href|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication

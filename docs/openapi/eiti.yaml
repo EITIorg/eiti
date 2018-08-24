@@ -791,6 +791,26 @@ paths:
           description: Allows to filter organisations by their country id
           schema:
             type: string
+        - in: query
+          name: 'filter[summary_data]'
+          description: Allows to filter organisations by their summary data id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[identification]'
+          description: Allows to filter organisations by their identification
+          schema:
+            type: string
+        - in: query
+          name: 'filter[sector]'
+          description: Allows to filter organisations by their sector
+          schema:
+            type: string
+        - in: query
+          name: 'filter[commodities]'
+          description: Allows to filter organisations by a commodity
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -814,6 +834,16 @@ paths:
                           type: string
                         country:
                           type: integer
+                        summary_data:
+                          type: integer
+                        identification:
+                          type: string
+                        sector:
+                          type: string
+                        commodities:
+                          type: array
+                          items:
+                            type: string
                   count:
                     type: integer
                   self:
@@ -864,6 +894,16 @@ paths:
                           type: string
                         country:
                           type: integer
+                        summary_data:
+                          type: integer
+                        identification:
+                          type: string
+                        sector:
+                          type: string
+                        commodities:
+                          type: array
+                          items:
+                            type: string
                   self:
                     type: object
                     properties:
@@ -1554,6 +1594,11 @@ paths:
           schema:
             type: string
         - in: query
+          name: 'filter[report_file]'
+          description: Allows to filter summary data by their report file id
+          schema:
+            type: string
+        - in: query
           name: 'filter[country]'
           description: Allows to filter summary data by their country id
           schema:
@@ -1620,6 +1665,8 @@ paths:
                         sector_gas:
                           type: integer
                         sector_other:
+                          type: string
+                        report_file:
                           type: string
                         country:
                           type: object
@@ -1905,6 +1952,8 @@ paths:
                         sector_gas:
                           type: integer
                         sector_other:
+                          type: string
+                        report_file:
                           type: string
                         country:
                           type: object
