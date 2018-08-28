@@ -17,8 +17,8 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     $public_fields = parent::publicFieldsInfo();
 
     // Expose data.
-    $public_fields['country']['process_callbacks'] = array('eitientity_implementing_country_get_iso2');
-    //$public_fields['country']['callback'] = array($this, 'getCountryApiUrl');
+    //$public_fields['country']['process_callbacks'] = array('eitientity_implementing_country_get_iso2');
+    $public_fields['country']['callback'] = array($this, 'getCountryApiUrl');
     $public_fields['summary_data']['process_callbacks'] = array('eitientity_summary_data_get_id2');
 
     return $public_fields;
@@ -27,7 +27,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
   /**
    * Gets the implementing country API url.
    */
-  /*function getCountryApiUrl($emw) {
+  function getCountryApiUrl($emw) {
     if (isset($emw->country_id)) {
       $country_id = $emw->country_id->value();
       if (is_numeric($country_id)) {
@@ -38,7 +38,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
       }
     }
     return NULL;
-  }*/
+  }
 
   /**
    * Overrides EITIApiOrganisation::parseRequestForListFilter().

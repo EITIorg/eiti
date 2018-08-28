@@ -10,6 +10,13 @@
  */
 class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
 
+  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
+    // We don't want to process the direct parent as it is doing quite a bit of unnecessary work.
+    RestfulEntityBase::__construct($plugin, $auth_manager, $cache_controller, $language);
+
+    $this->revenues = $this->queryRevenues();
+  }
+
   /**
    * Overrides EITIApiImplementingCountry::publicFieldsInfo().
    */
@@ -23,9 +30,12 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
       'property' => 'field_ic_status',
       'callback' => array($this, 'getStatusApiUrl')
     );
+    $public_fields['score_data'] = array(
+      'callback' => array($this, 'getScoreData')
+    );
     // Summary data already provides links to indicator_values.
     unset($public_fields['reports']);
-    // Moved to summary_data.
+    // Moved to summary_data indicator_values.
     unset($public_fields['licenses']);
     unset($public_fields['contracts']);
 
@@ -134,28 +144,6 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
   }
 
   /**
-   * Overrides \EITIApiImplementingCountry::getReports().
-   */
-  function getReports($emw) {
-    $query = db_select('eiti_summary_data', 'sd');
-    $query->leftJoin('field_data_field_sd_indicator_values', 'fiv', 'fiv.entity_id = sd.id');
-    $query->addField('sd', 'year_end', 'year');
-    $query->addField('fiv', 'field_sd_indicator_values_target_id', 'iv_id');
-    $query->condition('sd.status', TRUE);
-    $query->condition('sd.country_id', $emw->id->value());
-    $results = $query->execute()->fetchAll();
-
-    $urls = array();
-    if (is_array($results)) {
-      foreach ($results as $result) {
-        $urls[date('Y', $result->year)][] = url('api/v2.0/indicator_value/' . $result->iv_id, array('absolute' => TRUE));
-      }
-    }
-
-    return $urls;
-  }
-
-  /**
    * Overrides \EITIApiImplementingCountry::getMetadata().
    */
   function getMetadata($emw) {
@@ -169,6 +157,26 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     if (is_array($results)) {
       foreach ($results as $result) {
         $urls[date('Y', $result->year_end)] = url('api/v2.0/summary_data/' . $result->id2, array('absolute' => TRUE));
+      }
+    }
+
+    return $urls;
+  }
+
+  /**
+   * Get score data API page url-s.
+   */
+  function getScoreData($emw) {
+    $query = db_select('eiti_score_data', 'sd');
+    $query->fields('sd', array('year', 'id'));
+    $query->condition('sd.status', 1);
+    $query->condition('sd.country_id', $emw->id->value());
+    $results = $query->execute()->fetchAll();
+
+    $urls = array();
+    if (is_array($results)) {
+      foreach ($results as $result) {
+        $urls[$result->year] = url('api/v2.0/score_data/' . $result->id, array('absolute' => TRUE));
       }
     }
 

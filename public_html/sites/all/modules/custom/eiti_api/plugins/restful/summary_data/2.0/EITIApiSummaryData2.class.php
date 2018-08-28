@@ -53,12 +53,6 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['disaggregated'] = array(
       'callback' => array($this, 'getDisaggregatedData'),
     );
-    $public_fields['licenses'] = array(
-      'callback' => array($this, 'getLicenseApiUrls')
-    );
-    $public_fields['contracts'] = array(
-      'callback' => array($this, 'getContractApiUrls'),
-    );
 
     return $public_fields;
   }
@@ -215,12 +209,36 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
    * Gets the indicator value API urls.
    */
   function getIndicatorValueApiUrls($emw) {
-    $urls = array();
+    $urls = array(
+      'licenses' => array(),
+      'contracts' => array(),
+      'other' => array(),
+    );
     if (isset($emw->field_sd_indicator_values)) {
-      $ids = $emw->field_sd_indicator_values->raw();
-      if (is_array($ids)) {
-        foreach ($ids as $id) {
-          $urls[] = url('api/v2.0/indicator_value/' . $id, array('absolute' => TRUE));
+      $licenses_indicators = array(
+        'Public registry of licences, oil',
+        'Public registry of licences, mining',
+        'If incomplete or not available, provide an explanation',
+      );
+      $contract_indicators = array(
+        'Does the report address the government\'s policy on contract disclosure?',
+        'Are contracts disclosed?',
+        'Publicly available registry of contracts',
+        'Registry 2',
+      );
+      $values = $emw->field_sd_indicator_values->value();
+      if (is_array($values)) {
+        foreach ($values as $value) {
+          $url = url('api/v2.0/indicator_value/' . $value->id, array('absolute' => TRUE));
+          if (in_array($value->indicator->name, $licenses_indicators)) {
+            $urls['licenses'][] = $url;
+          }
+          elseif (in_array($value->indicator->name, $contract_indicators)) {
+            $urls['contracts'][] = $url;
+          }
+          else {
+            $urls['other'][] = $url;
+          }
         }
       }
     }
@@ -281,52 +299,5 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
       'company' => eiti_api_value_to_boolean($emw->field_sd_disagg_company->value()),
     );
     return $info;
-  }
-
-  /**
-   * Gets the license indicator value API urls.
-   */
-  function getLicenseApiUrls($emw) {
-    $urls = array();
-    if (isset($emw->field_sd_indicator_values)) {
-      $licenses_indicators = array(
-        'Public registry of licences, oil',
-        'Public registry of licences, mining',
-        'If incomplete or not available, provide an explanation',
-      );
-      $values = $emw->field_sd_indicator_values->value();
-      if (is_array($values)) {
-        foreach ($values as $value) {
-          if (in_array($value->indicator->name, $licenses_indicators)) {
-            $urls[] = url('api/v2.0/indicator_value/' . $value->id, array('absolute' => TRUE));
-          }
-        }
-      }
-    }
-    return $urls;
-  }
-
-  /**
-   * Gets the contract indicator value API urls.
-   */
-  function getContractApiUrls($emw) {
-    $urls = array();
-    if (isset($emw->field_sd_indicator_values)) {
-      $contract_indicators = array(
-        'Does the report address the government\'s policy on contract disclosure?',
-        'Are contracts disclosed?',
-        'Publicly available registry of contracts',
-        'Registry 2',
-      );
-      $values = $emw->field_sd_indicator_values->value();
-      if (is_array($values)) {
-        foreach ($values as $value) {
-          if (in_array($value->indicator->name, $contract_indicators)) {
-            $urls[] = url('api/v2.0/indicator_value/' . $value->id, array('absolute' => TRUE));
-          }
-        }
-      }
-    }
-    return $urls;
   }
 }
