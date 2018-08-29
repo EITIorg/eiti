@@ -10,11 +10,12 @@
  */
 class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
 
+  /**
+   * Overrides EITIApiImplementingCountry::__construct().
+   */
   public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
     // We don't want to process the direct parent as it is doing quite a bit of unnecessary work.
     RestfulEntityBase::__construct($plugin, $auth_manager, $cache_controller, $language);
-
-    $this->revenues = $this->queryRevenues();
   }
 
   /**
@@ -38,6 +39,8 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     // Moved to summary_data indicator_values.
     unset($public_fields['licenses']);
     unset($public_fields['contracts']);
+    // Moved to summary_data as revenue_government_sum and revenue_company_sum.
+    unset($public_fields['revenues']);
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 

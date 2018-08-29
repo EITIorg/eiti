@@ -612,10 +612,10 @@ function eitientity_summary_data_tokens($type, $tokens, array $data = array(), a
  */
 function eitientity_summary_data_entity_presave($entity, $type) {
   if ($type == 'summary_data') {
-    if ($entity->country_id && $entity->year_start) {
+    if ($entity->country_id && $entity->year_end) {
       // Update id2 value.
       $iso = eitientity_implementing_country_get_iso2($entity->country_id);
-      $year = date('Y', $entity->year_start);
+      $year = date('Y', $entity->year_end);
       if ($iso && $year) {
         $entity->id2 = $iso . $year;
       }

@@ -113,13 +113,13 @@ function eitientity_summary_data_update_7001(&$sandbox) {
   $query = db_select('eiti_summary_data', 'sd');
   $query->innerJoin('eiti_implementing_country', 'ic', 'sd.country_id = ic.id');
   $query
-    ->fields('sd', array('id', 'year_start'))
+    ->fields('sd', array('id', 'year_end'))
     ->fields('ic', array('iso'));
   $data = $query->execute()->fetchAll();
   $ids = array();
   foreach ($data as $d) {
-    if ($d->iso && $d->year_start) {
-      $ids[$d->id] = $d->iso . date('Y', $d->year_start);
+    if ($d->iso && $d->year_end) {
+      $ids[$d->id] = $d->iso . date('Y', $d->year_end);
     }
   }
 

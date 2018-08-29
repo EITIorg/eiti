@@ -10,6 +10,17 @@
  */
 class EITIApiSummaryData2 extends EITIApiSummaryData {
 
+  public $revenues;
+
+  /**
+   * Overrides RestfulDataProviderEFQ::__construct().
+   */
+  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
+    parent::__construct($plugin, $auth_manager, $cache_controller, $language);
+
+    $this->revenues = $this->queryRevenues();
+  }
+
   /**
    * Overrides EITIApiSummaryData::publicFieldsInfo().
    */
@@ -52,6 +63,12 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     );
     $public_fields['disaggregated'] = array(
       'callback' => array($this, 'getDisaggregatedData'),
+    );
+    $public_fields['revenue_government_sum'] = array(
+      'callback' => array($this, 'getRevenueGovernmentSum'),
+    );
+    $public_fields['revenue_company_sum'] = array(
+      'callback' => array($this, 'getRevenueCompanySum'),
     );
 
     return $public_fields;
@@ -299,5 +316,117 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
       'company' => eiti_api_value_to_boolean($emw->field_sd_disagg_company->value()),
     );
     return $info;
+  }
+
+  /**
+   * Gets government revenue sum.
+   */
+  function getRevenueGovernmentSum($emw) {
+    $country = $emw->country_id->value();
+    $year = $emw->year_end->value();
+    if (isset($country->iso) && $year) {
+      $year = date('Y', strtotime($year));
+      if (isset($this->revenues[$country->iso][$year]['government'])) {
+        return $this->revenues[$country->iso][$year]['government'];
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Gets company revenue sum.
+   */
+  function getRevenueCompanySum($emw) {
+    $country = $emw->country_id->value();
+    $year = $emw->year_end->value();
+    if (isset($country->iso) && $year) {
+      $year = date('Y', strtotime($year));
+      if (isset($this->revenues[$country->iso][$year]['company'])) {
+        return $this->revenues[$country->iso][$year]['company'];
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Copied from EITIApiImplementingCountry::queryRevenues().
+   *
+   * Helper function that basically builds and executes the query to retrieve all
+   * of the revenues from the SummaryData.
+   */
+  function queryRevenues() {
+    $revenues = array();
+    $version = $this->getVersion();
+    $cid_parts_arr[] = 'v' . $version['major'] . '.' . $version['minor'] . '::' . $this->getResourceName();
+    $cid_parts_arr[] = 'queryRevenues';
+    $cid = implode('::', $cid_parts_arr);
+
+    $cache = $this->getCacheController()->get($cid);
+    if (!empty($cache->data)) {
+      return $cache->data;
+    }
+
+    // First we want to see the sum of all the governmental agencies for each country
+    // for each year.
+    $query = db_select('eiti_summary_data', 'sd');
+
+    $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
+    $query->leftJoin('field_data_field_sd_revenue_government', 'fgrs', 'fgrs.entity_id = sd.id');
+    $query->leftJoin('eiti_revenue_stream', 'grs', 'fgrs.field_sd_revenue_government_target_id = grs.id');
+
+    // Now let's add some expressions.
+    $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
+    $query->addExpression("sum(grs.revenue)", 'sum');
+    $query->addField('ic', 'iso', 'iso2');
+
+    $query->condition('sd.status', TRUE);
+    $query->condition('grs.type', 'agency');
+    $query->condition('grs.revenue', 0, '>');
+
+    $query->groupBy('year');
+    $query->groupBy('iso2');
+
+    $results = $query->execute();
+    $records = array();
+    while ($record = $results->fetchAssoc()) {
+      $records[] = $record;
+    }
+
+    // Now let's form a well-polished array: iso2 > year > revenues (government).
+    foreach ($records as $record) {
+      $revenues[$record['iso2']][$record['year']]['government'] = $record['sum'];
+    }
+
+    // Second we want to see the sum of all the reporting companies for each country
+    // for each year.
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->leftJoin('eiti_implementing_country', 'ic', 'ic.id = sd.country_id');
+    $query->leftJoin('field_data_field_sd_revenue_company', 'cgrs', 'cgrs.entity_id = sd.id');
+    $query->leftJoin('eiti_revenue_stream', 'crs', 'cgrs.field_sd_revenue_company_target_id = crs.id');
+
+    // Now let's add some expressions.
+    $query->addExpression("date_part('year', to_timestamp(sd.year_end))", 'year');
+    $query->addExpression("sum(crs.revenue)", 'sum');
+    $query->addField('ic', 'iso', 'iso2');
+
+    $query->condition('sd.status', TRUE);
+    $query->condition('crs.type', 'company');
+    $query->condition('crs.revenue', 0, '>');
+
+    $query->groupBy('year');
+    $query->groupBy('iso2');
+
+    $results = $query->execute();
+    $records = array();
+    while ($record = $results->fetchAssoc()) {
+      $records[] = $record;
+    }
+
+    // Now let's form a well-polished array: iso2 > year > revenues (company).
+    foreach ($records as $record) {
+      $revenues[$record['iso2']][$record['year']]['company'] = $record['sum'];
+    }
+    $this->getCacheController()->set($cid, $revenues, CACHE_TEMPORARY);
+    return $revenues;
   }
 }

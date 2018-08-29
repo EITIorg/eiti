@@ -21,6 +21,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   protected $range = 200;
 
+  /**
+   * Overrides RestfulDataProviderEFQ::__construct().
+   */
   public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
     parent::__construct($plugin, $auth_manager, $cache_controller, $language);
 
