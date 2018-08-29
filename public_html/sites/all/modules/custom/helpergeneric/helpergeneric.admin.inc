@@ -246,3 +246,65 @@ function helpergeneric_ereference_autocomplete($entity_type) {
 
   drupal_json_output($matches);
 }
+
+/**
+ * Page callback: generates an Excel with all uploaded file url-s.
+ */
+function helpergeneric_generate_uploaded_file_urls_excel() {
+  // Prepare directory.
+  $dir_path = 'public://uploaded_files_excel';
+  file_prepare_directory($dir_path, FILE_CREATE_DIRECTORY);
+  file_prepare_directory($dir_path, FILE_MODIFY_PERMISSIONS);
+
+  // Remove old Excel if it exists.
+  $file_path = $dir_path . '/uploaded_files.xls';
+  if (file_exists($file_path)) {
+    drupal_unlink($file_path);
+  }
+
+  // Find all uploaded files.
+  module_load_include('inc', 'phpexcel');
+  // The file_managed database table may not have everything so we scan directories.
+  $public_realpath = drupal_realpath('public://');
+  $glob_dirs = glob($public_realpath . '/*' , GLOB_ONLYDIR);
+  $exclude_dirs = array('css', 'ctools', 'js', 'languages', 'less', 'media-icons', 'media-youtube',
+    'spreadsheets_temporary', 'styles', 'xmlsitemap');
+  $dirs = array($public_realpath);
+  foreach ($glob_dirs as $g_dir) {
+    $dir = basename($g_dir);
+    if (!in_array($dir, $exclude_dirs)) {
+      $dirs[] = $g_dir;
+    }
+  }
+
+  $files = array();
+  foreach ($dirs as $dir) {
+    $files = array_merge($files, helpergeneric_get_file_urls_from_dir($dir, $public_realpath));
+  }
+
+  // Generate Excel.
+  foreach ($files as $key => $file) {
+    $files[$key] = array($file);
+  }
+  phpexcel_export(NULL, array($files), $file_path, array('ignore_headers' => TRUE));
+
+  return t('List of all uploaded files:') . ' ' . file_create_url($file_path);
+}
+
+/**
+ * Recursively get all file url-s from a directory.
+ */
+function helpergeneric_get_file_urls_from_dir($dir, $public_realpath) {
+  $files = array();
+  $glob_files = glob($dir . '/*.*');
+  foreach ($glob_files as $g_file) {
+    $files[] = file_create_url(str_replace($public_realpath, 'public://', $g_file));
+  }
+  if ($dir != $public_realpath) {
+    $glob_dirs = glob($dir . '/*' , GLOB_ONLYDIR);
+    foreach ($glob_dirs as $g_dir) {
+      $files = array_merge($files, helpergeneric_get_file_urls_from_dir($g_dir, $public_realpath));
+    }
+  }
+  return $files;
+}

@@ -167,6 +167,15 @@ function helpergeneric_menu() {
     'file' => 'helpergeneric.admin.inc',
   );
 
+  // Page for generating an Excel with all uploaded file url-s.
+  $items['admin/settings/generate-uploaded-file-urls-excel'] = array(
+    'title' => 'Generate uploaded file url-s Excel',
+    'page callback' => 'helpergeneric_generate_uploaded_file_urls_excel',
+    'access arguments' => array('administer menu'),
+    'type' => MENU_CALLBACK,
+    'file' => 'helpergeneric.admin.inc',
+  );
+
   return $items;
 }
 

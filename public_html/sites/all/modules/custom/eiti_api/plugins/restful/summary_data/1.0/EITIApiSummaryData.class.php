@@ -9,6 +9,19 @@
  * Class EITIApiSummaryData
  */
 class EITIApiSummaryData extends RestfulEntityBase {
+
+  /**
+   * Overrides RestfulDataProviderEFQ::__construct().
+   */
+  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
+    parent::__construct($plugin, $auth_manager, $cache_controller, $language);
+
+    // Allow the "disabling" of the pager.
+    if (isset($_GET['pagination']) && $_GET['pagination'] === '0') {
+      $this->range = 1000000;
+    }
+  }
+
   /**
    * Overrides RestfulEntityBaseNode::publicFieldsInfo().
    */
