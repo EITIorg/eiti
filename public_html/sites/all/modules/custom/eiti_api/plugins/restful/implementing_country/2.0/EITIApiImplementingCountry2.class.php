@@ -31,9 +31,14 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
       'property' => 'field_ic_status',
       'callback' => array($this, 'getStatusApiUrl')
     );
-    $public_fields['score_data'] = array(
+    $public_fields['summary_data'] = array(
+      'callback' => array($this, 'getSummaryData'),
+    );
+    $public_fields['validation_data'] = array(
       'callback' => array($this, 'getScoreData')
     );
+    // Summary data replaces this one.
+    unset($public_fields['metadata']);
     // Summary data already provides links to indicator_values.
     unset($public_fields['reports']);
     // Moved to summary_data indicator_values.
@@ -147,9 +152,9 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
   }
 
   /**
-   * Overrides \EITIApiImplementingCountry::getMetadata().
+   * Get summary data API page url-s.
    */
-  function getMetadata($emw) {
+  function getSummaryData($emw) {
     $query = db_select('eiti_summary_data', 'sd');
     $query->fields('sd', array('year_end', 'id2'));
     $query->condition('sd.status', 1);
