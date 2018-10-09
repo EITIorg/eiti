@@ -23970,7 +23970,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  console.log(v.unit);return v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
+	                  return v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -24535,6 +24535,8 @@
 	              length: 4,
 	              ref: 'map',
 	              zoom: zoom,
+	              maxZoom: 15,
+	              minZoom: 1,
 	              height: 500,
 	              scrollWheelZoom: false
 	            },
@@ -25333,7 +25335,6 @@
 	    // Helper function that can translate strings.
 	    t: function t(string) {
 	        // Check if window.Drupal.t() exists and call it.
-	        console.log("Drupal.t('" + string + "')");
 	        if (window.Drupal && typeof window.Drupal.t === 'function') {
 	            return window.Drupal.t(string);
 	        }
