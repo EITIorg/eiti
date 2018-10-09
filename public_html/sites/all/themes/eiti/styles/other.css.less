@@ -125,6 +125,20 @@ div.description,
   .leaflet-top, .leaflet-bottom {
     z-index: 100;  // Reduce the z-index.
   }
+  // Fix multiline list align
+  .map-option-widget {
+    .map-option-items {
+      li {
+        padding-left: 22px;
+        position: relative;
+        &:before {
+          position: absolute;
+          left: 0;
+        }
+      }
+
+    }
+  }
 }
 
 .xNormalAndUp() {
