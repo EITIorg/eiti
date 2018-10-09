@@ -70,8 +70,7 @@
         var footer_navigation = $('.footer-site-navigation-wrapper', context);
         if ($(e.target).is('#site-navigation, #site-navigation *')) {
           return;
-        } else if ($('body', context).hasClass('site-navigation-visible')) {
-          console.log('body has class site-navigation-visible');
+        } else if ($('body', context).hasClass('site-navigation-visible')) {          
           footer_navigation.slideUp('fast');
           var navigation_links = footer_navigation.find('.navigation-links');
           navigation_links.removeClass('has-expanded-child');

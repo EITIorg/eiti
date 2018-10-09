@@ -122,7 +122,10 @@ div.description,
 }
 
 .eiti-map-wrapper {
-  .leaflet-top, .leaflet-bottom {
+  .leaflet-top {
+    z-index: 101;  // Zoom buttons always on top.
+  } 
+  .leaflet-bottom {
     z-index: 100;  // Reduce the z-index.
   }
   // Fix multiline list align
