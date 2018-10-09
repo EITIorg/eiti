@@ -142,7 +142,7 @@ export default class MapWidgetComponent extends Component {
               var years = Object.keys(datapoint.reports);
               var last = _.last(years);
               var yearData = datapoint.reports[last];
-              var indicator = yearData.find(function(v){ console.log(v.unit); return (v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons'))});
+              var indicator = yearData.find(function(v){return (v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons'))});
               indicator_value = indicator ? indicator.value : 0;
               indicator_unit = indicator ? indicator.unit : 0;
             }
@@ -178,7 +178,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "revenue_per_capita":
-            if(datapoint.revenues) {
+            if(datapoint.revenues && datapoint.reports) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
@@ -196,7 +196,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "share_revenues":
-            if(datapoint.revenues) {
+            if(datapoint.revenues && datapoint.reports) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
@@ -603,6 +603,8 @@ export default class MapWidgetComponent extends Component {
             length={4}
             ref='map'
             zoom={zoom}
+            maxZoom={15}
+            minZoom={1}
             height={500}
             scrollWheelZoom={false}
             >
