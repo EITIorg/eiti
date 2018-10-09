@@ -106,7 +106,6 @@ export var helpers = {
     // Helper function that can translate strings.
     t: function(string) {
         // Check if window.Drupal.t() exists and call it.
-        console.log("Drupal.t('" + string + "')");
         if (window.Drupal && typeof window.Drupal.t === 'function') {
             return window.Drupal.t(string);
         }
