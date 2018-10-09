@@ -178,7 +178,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "revenue_per_capita":
-            if(datapoint.revenues) {
+            if(datapoint.revenues && datapoint.reports) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];
@@ -196,7 +196,7 @@ export default class MapWidgetComponent extends Component {
             }
           break;
           case "share_revenues":
-            if(datapoint.revenues) {
+            if(datapoint.revenues && datapoint.reports) {
               var years = Object.keys(datapoint.revenues);
               var last = _.last(years);
               var yearData = datapoint.revenues[last];

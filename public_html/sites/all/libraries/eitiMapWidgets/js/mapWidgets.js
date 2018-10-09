@@ -24011,7 +24011,7 @@
 	              }
 	              break;
 	            case "revenue_per_capita":
-	              if (datapoint.revenues) {
+	              if (datapoint.revenues && datapoint.reports) {
 	                var years = Object.keys(datapoint.revenues);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.revenues[last];
@@ -24029,7 +24029,7 @@
 	              }
 	              break;
 	            case "share_revenues":
-	              if (datapoint.revenues) {
+	              if (datapoint.revenues && datapoint.reports) {
 	                var years = Object.keys(datapoint.revenues);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.revenues[last];
