@@ -12,6 +12,8 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
 
   public $revenues;
 
+  public $indicator_groups;
+
   /**
    * Overrides RestfulDataProviderEFQ::__construct().
    */
@@ -19,6 +21,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     parent::__construct($plugin, $auth_manager, $cache_controller, $language);
 
     $this->revenues = $this->queryRevenues();
+    $this->indicator_groups = $this->getIndicatorGroupDisplayNames();
   }
 
   /**
@@ -226,32 +229,14 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
    * Gets the indicator value API urls.
    */
   function getIndicatorValueApiUrls($emw) {
-    $urls = array(
-      'licenses' => array(),
-      'contracts' => array(),
-      'other' => array(),
-    );
+    $urls = array();
     if (isset($emw->field_sd_indicator_values)) {
-      $licenses_indicators = array(
-        'Public registry of licences, oil',
-        'Public registry of licences, mining',
-        'If incomplete or not available, provide an explanation',
-      );
-      $contract_indicators = array(
-        'Does the report address the government\'s policy on contract disclosure?',
-        'Are contracts disclosed?',
-        'Publicly available registry of contracts',
-        'Registry 2',
-      );
       $values = $emw->field_sd_indicator_values->value();
       if (is_array($values)) {
         foreach ($values as $value) {
           $url = url('api/v2.0/indicator_value/' . $value->id, array('absolute' => TRUE));
-          if (in_array($value->indicator->name, $licenses_indicators)) {
-            $urls['licenses'][] = $url;
-          }
-          elseif (in_array($value->indicator->name, $contract_indicators)) {
-            $urls['contracts'][] = $url;
+          if (isset($this->indicator_groups[$value->indicator->parent])) {
+            $urls[$this->indicator_groups[$value->indicator->parent]][] = $url;
           }
           else {
             $urls['other'][] = $url;
@@ -429,4 +414,42 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $this->getCacheController()->set($cid, $revenues, CACHE_TEMPORARY);
     return $revenues;
   }
+
+  /**
+   * Returns group indicator id => display name array.
+   */
+  function getIndicatorGroupDisplayNames() {
+    $query = db_select('eiti_indicator', 'i');
+    $query->fields('i', array('id', 'name'));
+    $query->condition('i.type', 'group');
+    $groups = $query->execute()->fetchAllKeyed();
+
+    $names = array(
+      'Allocation of licences (3.10)' => 'license-allocation',
+      'Beneficial ownership (3.11)' => 'beneficial-ownership',
+      'Contracts (3.12)' => 'contract-disclosure',
+      'Contribution of extractive industries to economy (3.4)' => 'economic-contribution',
+      'Distribution of revenues from extractive industries (3.7.a)' => 'revenue-distribution',
+      'Export volume and value (3.5.b)' => 'exports',
+      'External indicators' => 'external',
+      'Infrastructure provisions and barter arrangements (4.1.d)?' => 'barter-infrastructure',
+      'Production volume and value (3.5.a)' => 'production',
+      'Register of licences (3.9)' => 'license-register',
+      'Sale of the state’s share of production or other sales collected in-kind (4.1.c)' => 'in-kind-revenues',
+      'Social expenditures (4.1.e)' => 'social-expenditures',
+      'Sub-national payments (4.2.d)?' => 'subnational-payments',
+      'Sub-national transfers (4.2.e)?' => 'subnational-transfers',
+      'Transportation revenues (4.1.f)' => 'transportation-revenues',
+    );
+
+    $group_id_names = array();
+    foreach ($groups as $id => $name) {
+      if (isset($names[$name])) {
+        $group_id_names[$id] = $names[$name];
+      }
+    }
+
+    return $group_id_names;
+  }
+
 }
