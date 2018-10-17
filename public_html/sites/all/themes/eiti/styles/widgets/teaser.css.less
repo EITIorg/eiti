@@ -43,7 +43,8 @@
   }
   .ghost-links {
     padding: 0;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
 
     li {
       list-style: none;
@@ -57,8 +58,10 @@
         border: 1px solid @clmain;
         color: @clmain;
         padding: 0.5em 1em;
+        margin: 0.5em 0;
         font-weight: 700;
         .transition(background-color, 400ms, ease-in);
+        background: rgba(0, 0, 0, 0.4);
 
         &:hover {
           background-color: @cldetail__alt;
