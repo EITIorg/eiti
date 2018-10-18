@@ -184,7 +184,7 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     $urls = array();
     if (is_array($results)) {
       foreach ($results as $result) {
-        $urls[$result->year] = url('api/v2.0/score_data/' . $result->id, array('absolute' => TRUE));
+        $urls[$result->year] = url('api/v2.0/validation_data/' . $result->id, array('absolute' => TRUE));
       }
     }
 
