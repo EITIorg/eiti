@@ -31,11 +31,14 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
       'property' => 'field_ic_status',
       'callback' => array($this, 'getStatusApiUrl')
     );
-    $public_fields['summary_data'] = array(
-      'callback' => array($this, 'getSummaryData'),
+    $public_fields['latest_validation_date'] = array(
+      'callback' => array($this, 'getLatestScoreDataDate')
     );
     $public_fields['validation_data'] = array(
       'callback' => array($this, 'getScoreData')
+    );
+    $public_fields['summary_data'] = array(
+      'callback' => array($this, 'getSummaryData'),
     );
     // Summary data replaces this one.
     unset($public_fields['metadata']);
@@ -46,6 +49,9 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     unset($public_fields['contracts']);
     // Moved to summary_data as revenue_government_sum and revenue_company_sum.
     unset($public_fields['revenues']);
+
+    unset($public_fields['latest_validation_link']);
+    unset($public_fields['latest_validation_url']);
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 
@@ -189,5 +195,26 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     }
 
     return $urls;
+  }
+
+  /**
+   * Get the latest score data date.
+   */
+  function getLatestScoreDataDate($emw) {
+    $query = db_select('eiti_score_data', 'sd');
+    $query->innerJoin('field_data_field_scd_pdf_date', 'scd', 'sd.id = scd.entity_id');
+    $query->fields('scd', array('field_scd_pdf_date_value'));
+    $query->condition('sd.status', 1);
+    $query->condition('sd.country_id', $emw->id->value());
+    $query->orderBy('scd.field_scd_pdf_date_value', 'DESC');
+    $query->range(0, 1);
+    $result = $query->execute()->fetchField();
+
+    $date = NULL;
+    if ($result) {
+      $date = eiti_api_date_to_iso_8601_partial($result);
+    }
+
+    return $date;
   }
 }
