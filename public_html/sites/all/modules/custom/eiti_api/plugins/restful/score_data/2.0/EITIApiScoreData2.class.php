@@ -9,6 +9,16 @@
  * Class EITIApiScoreData2
  */
 class EITIApiScoreData2 extends EITIApiScoreData {
+  public $summary_data;
+
+  /**
+   * Overrides RestfulDataProviderEFQ::__construct().
+   */
+  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
+    parent::__construct($plugin, $auth_manager, $cache_controller, $language);
+
+    $this->summary_data = $this->getSummaryData();
+  }
 
   /**
    * Overrides EITIApiScoreData::publicFieldsInfo().
@@ -20,10 +30,20 @@ class EITIApiScoreData2 extends EITIApiScoreData {
       'property' => 'country_id',
       'callback' => array($this, 'getCountryApiUrl')
     );
+    $public_fields['summary_data'] = array(
+      'callback' => array($this, 'getSummaryDataId2')
+    );
     $public_fields['validation_date'] = array(
-      'property' => 'published',
+      // Should match with "latest_validation_date" in EITIApiImplementingCountry2.class.php.
+      //'property' => 'published',
+      'property' => 'field_scd_pdf_date',
       'process_callbacks' => array('eiti_api_timestamp_to_iso_8601_partial')
     );
+
+    // Re-order to the end.
+    $score_req_values = $public_fields['score_req_values'];
+    unset($public_fields['score_req_values']);
+    $public_fields['score_req_values'] = $score_req_values;
 
     $public_fields['score_req_values']['process_callbacks'] = array(array($this, 'prepareScoreReqValues'));
 
@@ -34,9 +54,27 @@ class EITIApiScoreData2 extends EITIApiScoreData {
    * A standard processing callback for score_req_values.
    */
   function prepareScoreReqValues($score_req_values) {
-    foreach ($score_req_values as $key => $sq) {
-      if (isset($sq->score_req->created) && is_numeric($sq->score_req->created)) {
-        $score_req_values[$key]->score_req->created = eiti_api_timestamp_to_iso_8601($sq->score_req->created);
+    foreach ($score_req_values as $key => $sr) {
+      if (isset($score_req_values[$key]->score_req_id)) {
+        unset($score_req_values[$key]->score_req_id);
+        unset($score_req_values[$key]->value);
+        $score_req_values[$key]->is_required = eiti_api_value_to_boolean($score_req_values[$key]->is_required);
+        $score_req_values[$key]->is_applicable = eiti_api_value_to_boolean($score_req_values[$key]->is_applicable);
+      }
+      if (isset($score_req_values[$key]->score_req->type)) {
+        $score_req_values[$key]->score_req->requirement = $score_req_values[$key]->score_req->code;
+        unset($score_req_values[$key]->score_req->code);
+        $scoreReqEmw = entity_metadata_wrapper('score_req', $sr->score_req);
+        $category = $scoreReqEmw->field_score_req_category->value();
+        $score_req_values[$key]->score_req->category = NULL;
+        if ($category) {
+          // Might have to get it from "name_field", but seems like it is not properly in use right now.
+          $score_req_values[$key]->score_req->category = $category->name;
+        }
+        unset($score_req_values[$key]->score_req->field_score_req_category);
+        unset($score_req_values[$key]->score_req->type);
+        unset($score_req_values[$key]->score_req->status);
+        unset($score_req_values[$key]->score_req->created);
       }
     }
     return $score_req_values;
@@ -69,5 +107,38 @@ class EITIApiScoreData2 extends EITIApiScoreData {
       }
     }
     return NULL;
+  }
+
+  /**
+   * Gets the summary data ID2.
+   */
+  function getSummaryDataId2($emw) {
+    if (isset($emw->country_id, $emw->year)) {
+      $country_id = $emw->country_id->value()->id;
+      $year = $emw->year->value();
+      if (isset($this->summary_data[$country_id][$year])) {
+        return $this->summary_data[$country_id][$year];
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Gets summary data ID2-s for country and year combinations.
+   */
+  public function getSummaryData() {
+    $query = db_select('eiti_summary_data', 'sd');
+    $query->fields('sd', array('country_id', 'year_end', 'id2'));
+    $query->condition('sd.status', 1);
+    $results = $query->execute()->fetchAll();
+
+    $summary_data = array();
+    if (is_array($results)) {
+      foreach ($results as $result) {
+        $summary_data[$result->country_id][date('Y', $result->year_end)] = $result->id2;
+      }
+    }
+
+    return $summary_data;
   }
 }
