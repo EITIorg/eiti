@@ -176,7 +176,7 @@ function eitiet_score_data_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'score_data',
     'field_name' => 'field_scd_pdf_text2',
-    'label' => 'Recommendations',
+    'label' => 'Corrective actions',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -277,10 +277,10 @@ function eitiet_score_data_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Corrective actions');
   t('Date');
   t('Decision reference');
   t('News');
-  t('Recommendations');
   t('Score Requirements Values');
   t('The Board\'s decision');
   t('Title');
