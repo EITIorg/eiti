@@ -16,6 +16,9 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
   public function publicFieldsInfo() {
     $public_fields = parent::publicFieldsInfo();
 
+    $public_fields['label'] = array(
+      'callback' => array($this, 'getIndicatorLabel'),
+    );
     $public_fields['indicator'] = array(
       'property' => 'indicator_id',
       'callback' => array($this, 'getIndicatorApiUrl'),
@@ -54,6 +57,17 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
       if (isset($indicator->id)) {
         return url('api/v2.0/indicator/' . $indicator->id, array('absolute' => TRUE));
       }
+    }
+    return NULL;
+  }
+
+  /**
+   * Gets the indicator label as indicator_value label.
+   */
+  function getIndicatorLabel($emw) {
+    $label = $emw->indicator_id->label();
+    if ($label) {
+      return $label;
     }
     return NULL;
   }

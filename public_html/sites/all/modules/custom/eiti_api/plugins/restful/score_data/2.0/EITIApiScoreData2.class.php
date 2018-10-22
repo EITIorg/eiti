@@ -28,16 +28,20 @@ class EITIApiScoreData2 extends EITIApiScoreData {
 
     $public_fields['country'] = array(
       'property' => 'country_id',
-      'callback' => array($this, 'getCountryApiUrl')
+      'callback' => array($this, 'getCountryApiUrl'),
     );
     $public_fields['summary_data'] = array(
-      'callback' => array($this, 'getSummaryDataId2')
+      'callback' => array($this, 'getSummaryDataId2'),
     );
     $public_fields['validation_date'] = array(
       // Should match with "latest_validation_date" in EITIApiImplementingCountry2.class.php.
       //'property' => 'published',
       'property' => 'field_scd_pdf_date',
-      'process_callbacks' => array('eiti_api_timestamp_to_iso_8601_partial')
+      'process_callbacks' => array('eiti_api_timestamp_to_iso_8601_partial'),
+    );
+    $public_fields['overall_progress'] = array(
+      'property' => 'field_scd_score_req_values',
+      'process_callbacks' => array(array($this, 'getOverallProgress')),
     );
 
     // Re-order to the end.
@@ -75,6 +79,10 @@ class EITIApiScoreData2 extends EITIApiScoreData {
         unset($score_req_values[$key]->score_req->type);
         unset($score_req_values[$key]->score_req->status);
         unset($score_req_values[$key]->score_req->created);
+        // Overall progress is being displayed separately.
+        if ($score_req_values[$key]->score_req->requirement == '0.0') {
+          unset($score_req_values[$key]);
+        }
       }
     }
     return $score_req_values;
@@ -140,5 +148,17 @@ class EITIApiScoreData2 extends EITIApiScoreData {
     }
 
     return $summary_data;
+  }
+
+  /**
+   * Gets the overall progress score requirement value.
+   */
+  function getOverallProgress($score_req_values) {
+    foreach ($score_req_values as $key => $sr) {
+      if (isset($score_req_values[$key]->score_req->code) && $score_req_values[$key]->score_req->code == '0.0') {
+        return $score_req_values[$key];
+      }
+    }
+    return NULL;
   }
 }
