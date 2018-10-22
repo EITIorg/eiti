@@ -1,6 +1,9 @@
 <?php if ($news_items): ?>
   <div class="scorecard-news">
-    <tocentry content="<?php print t('News'); ?>" />
+    <h2>
+      <?php print t('News'); ?>
+      <tocentry content="<?php print t('News'); ?>" />
+    </h2>
     <?php foreach ($news_items as $news_item): ?>
       <div class="news-item">
         <h3 class="title"><?php print $news_item['title']; ?></h3>
@@ -12,12 +15,18 @@
 
 <?php if ($text_before): ?>
   <div class="scorecard-text before-table">
-    <tocentry content="<?php print t("The Board's decision"); ?>" />
+    <h2 class="title">
+      <?php print t("The Board's decision"); ?>
+      <tocentry content="<?php print t("The Board's decision"); ?>" />
+    </h2>
     <?php print $text_before; ?>
   </div>
 <?php endif; ?>
 
-<tocentry content="<?php print t('Scorecard'); ?>" />
+<h2 class="title">
+  <?php print t('Scorecard'); ?>
+  <tocentry content="<?php print t('Scorecard'); ?>" />
+</h2>
 <table class="country_scorecard">
   <thead>
     <tr class="first">
@@ -105,7 +114,10 @@
 
 <?php if ($text_after): ?>
   <div class="scorecard-text after-table">
-    <tocentry content="<?php print t('Recommendations'); ?>" />
+    <h2 class="title">
+      <?php print t('Corrective actions'); ?>
+      <tocentry content="<?php print t('Corrective actions'); ?>" />
+    </h2>
     <?php print $text_after; ?>
   </div>
 <?php endif; ?>
