@@ -109,7 +109,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'text_parts' => array(),
         'year_range' => '2003:+1',
       ),
-      'type' => 'date_select',
+      'type' => 'date_popup',
       'weight' => 11,
     ),
   );

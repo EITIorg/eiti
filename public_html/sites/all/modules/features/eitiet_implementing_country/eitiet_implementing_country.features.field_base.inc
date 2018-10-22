@@ -51,10 +51,10 @@ function eitiet_implementing_country_field_default_field_bases() {
       'cache_enabled' => 0,
       'entity_translation_sync' => FALSE,
       'granularity' => array(
-        'day' => 0,
+        'day' => 'day',
         'hour' => 0,
         'minute' => 0,
-        'month' => 0,
+        'month' => 'month',
         'second' => 0,
         'year' => 'year',
       ),
