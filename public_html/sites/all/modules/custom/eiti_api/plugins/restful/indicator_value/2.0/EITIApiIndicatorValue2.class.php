@@ -25,6 +25,7 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
     );
     $public_fields['value_boolean'] = array(
       'property' => 'value_boolean',
+      'process_callbacks' => array(array($this, 'booleanToText')),
     );
     $public_fields['value_text'] = array(
       'property' => 'value_text',
@@ -70,5 +71,23 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
       return $label;
     }
     return NULL;
+  }
+
+  /**
+   * Converts value_boolean to text.
+   *
+   * Based on getBooleanListValue() in eiti_migration.generic.inc.
+   */
+  function booleanToText($value_boolean) {
+    switch ($value_boolean) {
+      case EITIENTITY_INDICATOR_VALUE_VALUE_YES:
+        return 'yes';
+      case EITIENTITY_INDICATOR_VALUE_VALUE_NO:
+        return 'no';
+      case EITIENTITY_INDICATOR_VALUE_VALUE_PARTIALLY:
+        return 'partially';
+      default:
+        return NULL;
+    }
   }
 }
