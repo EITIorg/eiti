@@ -14,6 +14,8 @@ function eitiet_implementing_country_update_7001(&$sandbox) {
     'Meaningful progress' => 'meaningful-progress',
     'Inadequate progress / suspended' => 'suspended-inadequate-progress',
     'Yet to be assessed against the 2016 Standard' => 'to-be-assessed',
+    'Suspended - depricated' => 'suspended_deprecated',
+    'No progress (delisted) - depricated' => 'no-progress_deprecated',
   );
   foreach ($terms as $key => $term) {
     if (isset($name_id_pairs[$term->name])) {

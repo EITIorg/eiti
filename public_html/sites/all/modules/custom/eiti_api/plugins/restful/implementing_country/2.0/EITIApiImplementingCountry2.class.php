@@ -149,9 +149,13 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
    */
   function getStatusApiUrl($emw) {
     if (isset($emw->field_ic_status)) {
-      $id = $emw->field_ic_status->raw();
-      if (isset($id)) {
-        return url('api/v1.0/country_status/' . $id, array('absolute' => TRUE));
+      $status = $emw->field_ic_status->value();
+      if ($status) {
+        $status_emw = entity_metadata_wrapper('taxonomy_term', $status);
+        $status_id = $status_emw->field_country_status_id->value();
+        if (isset($status_id)) {
+          return url('api/v2.0/country_status/' . $status_id, array('absolute' => TRUE));
+        }
       }
     }
     return NULL;
