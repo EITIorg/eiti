@@ -251,7 +251,7 @@ function eititaxonomies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -271,7 +271,7 @@ function eititaxonomies_field_default_field_instances() {
         'size' => 6,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 

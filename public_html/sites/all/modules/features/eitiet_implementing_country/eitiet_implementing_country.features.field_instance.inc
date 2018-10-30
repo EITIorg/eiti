@@ -550,7 +550,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -574,6 +574,42 @@ function eitiet_implementing_country_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-country_status-field_country_status_id'.
+  $field_instances['taxonomy_term-country_status-field_country_status_id'] = array(
+    'bundle' => 'country_status',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A machine-friendly and human-readable ID consisting only of lowercase letters, numbers, dashes, underlines. Examples: to-be-assessed, meaningful-progress, satisfactory-progress, other, suspended-inadequate-progress, suspended-political-instability, suspended-missing-deadline.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_country_status_id',
+    'label' => 'ID',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 1,
     ),
   );
@@ -589,7 +625,7 @@ function eitiet_implementing_country_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -617,12 +653,14 @@ function eitiet_implementing_country_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('A machine-friendly and human-readable ID consisting only of lowercase letters, numbers, dashes, underlines. Examples: to-be-assessed, meaningful-progress, satisfactory-progress, other, suspended-inadequate-progress, suspended-political-instability, suspended-missing-deadline.');
   t('Country-specific latest validation url. Will only be used if the latest validation page link field is empty.');
   t('Cover');
   t('Description');
   t('EITI Member Since');
   t('EITI Reports');
   t('EITI Status');
+  t('ID');
   t('Latest Validation date');
   t('Latest Validation page link');
   t('Latest Validation page url');
