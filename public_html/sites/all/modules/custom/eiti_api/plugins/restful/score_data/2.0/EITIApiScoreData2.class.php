@@ -79,10 +79,10 @@ class EITIApiScoreData2 extends EITIApiScoreData {
         unset($score_req_values[$key]->score_req->type);
         unset($score_req_values[$key]->score_req->status);
         unset($score_req_values[$key]->score_req->created);
-        // Overall progress is being displayed separately.
-        if ($score_req_values[$key]->score_req->requirement == '0.0') {
-          unset($score_req_values[$key]);
-        }
+      }
+      // Overall progress is being displayed separately.
+      if (isset($score_req_values[$key]->score_req->requirement) && $score_req_values[$key]->score_req->requirement == '0.0') {
+        unset($score_req_values[$key]);
       }
     }
     return $score_req_values;
@@ -156,6 +156,9 @@ class EITIApiScoreData2 extends EITIApiScoreData {
   function getOverallProgress($score_req_values) {
     foreach ($score_req_values as $key => $sr) {
       if (isset($score_req_values[$key]->score_req->code) && $score_req_values[$key]->score_req->code == '0.0') {
+        return $score_req_values[$key];
+      }
+      elseif (isset($score_req_values[$key]->score_req->requirement) && $score_req_values[$key]->score_req->requirement == '0.0') {
         return $score_req_values[$key];
       }
     }
