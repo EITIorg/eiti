@@ -10,4 +10,5 @@ $plugin = array(
   'authentication_types' => TRUE,
   'authentication_optional' => TRUE,
   'major_version' => 2,
+  'formatter' => 'eiti_json',
 );

@@ -61,4 +61,56 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     }
     return $filters;
   }
+
+  /**
+   * Gets various organisation counts.
+   */
+  public function getOrganisationCountData() {
+    $data = array(
+      'agencies' => NULL,
+      'companies' => NULL,
+      'companies_with_identification' => NULL,
+      'companies_with_sector' => NULL,
+      'companies_with_commodities' => NULL,
+    );
+    $agencies = db_select('eiti_organisation')
+      ->condition('type', 'agency')
+      ->countQuery()->execute()->fetchField();
+    if (is_numeric($agencies)) {
+      $data['agencies'] = (int) $agencies;
+    }
+    $companies = db_select('eiti_organisation')
+      ->condition('type', 'company')
+      ->countQuery()->execute()->fetchField();
+    if (is_numeric($companies)) {
+      $data['companies'] = (int) $companies;
+    }
+    $companies_w_id = db_select('eiti_organisation')
+      ->condition('type', 'company')
+      ->isNotNull('identification_number')
+      ->countQuery()->execute()->fetchField();
+    if (is_numeric($companies_w_id)) {
+      $data['companies_with_identification'] = (int) $companies_w_id;
+    }
+    $companies_w_s = db_select('eiti_organisation', 'o')
+      ->distinct()
+      ->fields('o', array('id'))
+      ->condition('o.type', 'company');
+    $companies_w_s->innerJoin('field_data_field_o_sector', 's', 'o.id = s.entity_id');
+    $companies_w_s = $companies_w_s->countQuery()->execute()->fetchField();
+    if (is_numeric($companies_w_s)) {
+      $data['companies_with_sector'] = (int) $companies_w_s;
+    }
+    $companies_w_c = db_select('eiti_organisation', 'o')
+      ->distinct()
+      ->fields('o', array('id'))
+      ->condition('o.type', 'company');
+    $companies_w_c->innerJoin('field_data_field_o_commodities', 'c', 'o.id = c.entity_id');
+    $companies_w_c = $companies_w_c->countQuery()->execute()->fetchField();
+    if (is_numeric($companies_w_c)) {
+      $data['companies_with_commodities'] = (int) $companies_w_c;
+    }
+
+    return $data;
+  }
 }
