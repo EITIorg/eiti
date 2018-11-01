@@ -215,7 +215,7 @@ function score_data_form_prepopulate_ief(&$form, &$form_state) {
   $weight = 0;
   $default_score_req_values = array(
     'description' => '',
-    'value' => '',
+    'value' => (string) EITIENTITY_SCORE_REQ_VALUE_NO,
     'is_applicable' => TRUE,
     'type' => 'standard',
     'progress_value' => EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY,
