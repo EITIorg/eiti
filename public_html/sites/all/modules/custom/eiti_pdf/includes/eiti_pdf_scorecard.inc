@@ -7,6 +7,8 @@ use \Mpdf\Mpdf;
  * Scorecard PDF page callback.
  */
 function eiti_pdf_scorecard_page() {
+  // When this page comes from cache it displays gibberish in the browser.
+  drupal_page_is_cacheable(FALSE);
   $url_options = array('absolute' => TRUE);
   if (isset($_GET['filter'])) {
     $url_options['query']['filter'] = $_GET['filter'];
