@@ -24535,7 +24535,7 @@
 	              length: 4,
 	              ref: 'map',
 	              zoom: zoom,
-	              maxZoom: 15,
+	              maxZoom: 8,
 	              minZoom: 1,
 	              height: 500,
 	              scrollWheelZoom: false
