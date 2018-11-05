@@ -9,16 +9,6 @@
  * Class EITIApiScoreData2
  */
 class EITIApiScoreData2 extends EITIApiScoreData {
-  public $summary_data;
-
-  /**
-   * Overrides RestfulDataProviderEFQ::__construct().
-   */
-  public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
-    parent::__construct($plugin, $auth_manager, $cache_controller, $language);
-
-    $this->summary_data = $this->getSummaryData();
-  }
 
   /**
    * Overrides EITIApiScoreData::publicFieldsInfo().
@@ -29,9 +19,6 @@ class EITIApiScoreData2 extends EITIApiScoreData {
     $public_fields['country'] = array(
       'property' => 'country_id',
       'callback' => array($this, 'getCountryApiUrl'),
-    );
-    $public_fields['summary_data'] = array(
-      'callback' => array($this, 'getSummaryDataId2'),
     );
     $public_fields['validation_date'] = array(
       // Should match with "latest_validation_date" in EITIApiImplementingCountry2.class.php.
@@ -115,39 +102,6 @@ class EITIApiScoreData2 extends EITIApiScoreData {
       }
     }
     return NULL;
-  }
-
-  /**
-   * Gets the summary data ID2.
-   */
-  function getSummaryDataId2($emw) {
-    if (isset($emw->country_id, $emw->year)) {
-      $country_id = $emw->country_id->value()->id;
-      $year = $emw->year->value();
-      if (isset($this->summary_data[$country_id][$year])) {
-        return $this->summary_data[$country_id][$year];
-      }
-    }
-    return NULL;
-  }
-
-  /**
-   * Gets summary data ID2-s for country and year combinations.
-   */
-  public function getSummaryData() {
-    $query = db_select('eiti_summary_data', 'sd');
-    $query->fields('sd', array('country_id', 'year_end', 'id2'));
-    $query->condition('sd.status', 1);
-    $results = $query->execute()->fetchAll();
-
-    $summary_data = array();
-    if (is_array($results)) {
-      foreach ($results as $result) {
-        $summary_data[$result->country_id][date('Y', $result->year_end)] = $result->id2;
-      }
-    }
-
-    return $summary_data;
   }
 
   /**
