@@ -118,4 +118,15 @@ class EITIApiScoreData2 extends EITIApiScoreData {
     }
     return NULL;
   }
+
+  /**
+   * Gets score/validation data description.
+   */
+  public function getAdditionalListData() {
+    $data = array(
+      'validation_data_description' => t('This data refers to the scores countries achieve during Validation, which assess the performance against the EITI Requirements. Find out more at eiti.org/validation. An overview of all results can be found at https://eiti.org/document/validation-schedule-decisions.'),
+    );
+
+    return $data;
+  }
 }

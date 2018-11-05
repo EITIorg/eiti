@@ -65,7 +65,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
   /**
    * Gets various organisation counts.
    */
-  public function getOrganisationCountData() {
+  public function getAdditionalListData() {
     $data = array(
       'agencies' => NULL,
       'companies' => NULL,
