@@ -268,7 +268,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
 
     $cache = $this->getCacheController()->get($cid);
     if (!empty($cache->data)) {
-      return $cache->data;
+      //return $cache->data;
     }
 
     $query = db_select('eiti_summary_data', 'sd');
@@ -341,6 +341,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
       if (in_array($record['commodity'], $contract_indicators)) {
         if (isset($record['value_text'])) {
           $contracts[$iso2][$year][$record['commodity']] = $record['value_text'];
+          if ($record['commodity'] === 'Publicly available registry of contracts') {
+            $contracts[$iso2][$year]['contract_registry_url'] = $record['source'];
+          }
         }
         elseif (isset($record['value_bool'])) {
           $contracts[$iso2][$year][$record['commodity']] = $record['value_bool'];
