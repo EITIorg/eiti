@@ -55,7 +55,17 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 
-    return $public_fields;
+    $reordered_fields = array();
+    foreach ($public_fields as $key => $val) {
+      if ($key == 'status_date') {
+        $reordered_fields['member_since'] = $val;
+      }
+      else {
+        $reordered_fields[$key] = $val;
+      }
+    }
+
+    return $reordered_fields;
   }
 
   /**
