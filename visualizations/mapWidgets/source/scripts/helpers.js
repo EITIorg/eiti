@@ -339,7 +339,7 @@ export var helpers = {
         info_content_third = info_content_third +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Contracts') + ':</span>' +
-            '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
+            '  <span class="value">' + (indicator_contracts['contract_registry_url'] ? '<a href="' + indicator_contracts['contract_registry_url'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
         var html = '<aside class="country-info-wrapper">' +
