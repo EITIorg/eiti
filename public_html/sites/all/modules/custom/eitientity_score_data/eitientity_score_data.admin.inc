@@ -215,11 +215,20 @@ function score_data_form_prepopulate_ief(&$form, &$form_state) {
   $weight = 0;
   $default_score_req_values = array(
     'description' => '',
-    'value' => '',
+    'value' => (string) EITIENTITY_SCORE_REQ_VALUE_NO,
     'is_applicable' => TRUE,
     'type' => 'standard',
-    'progress_value' => EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME,
+    'progress_value' => EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_EMPTY,
   );
+  // Move overall progress to the bottom.
+  foreach ($requirements_info['options'] as $score_req_id => $label) {
+    if ($requirements_info['attributes'][$score_req_id]['data-score_req-code'] === '0.0') {
+      $overall_progress = $requirements_info['options'][$score_req_id];
+      unset($requirements_info['options'][$score_req_id]);
+      $requirements_info['options'][$score_req_id] = $overall_progress;
+      break;
+    }
+  }
   foreach ($requirements_info['options'] as $score_req_id => $label) {
     $form_state['inline_entity_form'][$ief_id]['entities'][] = array(
       'entity' => entity_create('score_req_value', array(
