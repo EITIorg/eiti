@@ -1,0 +1,9 @@
+name = EITI Entity: Company identifier
+description = Exposes a custom entity to store company identifiers.
+core = 7.x
+package = Custom
+
+dependencies[] = entity
+
+; Entity handlers.
+files[] = includes/CompanyIdentifierEntity.inc

@@ -1,0 +1,93 @@
+<?php
+/**
+ * @file
+ * Exposes a custom entity to store company identifiers.
+ */
+
+/**
+ * Implements hook_entity_info().
+ */
+function eitientity_company_identifier_entity_info() {
+  $entity_info = array();
+
+  $entity_info['company_identifier'] = array(
+    'label' => t('Company Identifier'),
+    'plural label' => t('Company Identifiers'),
+    'description' => t('Company identifier name and register information.'),
+
+    'base table' => 'eiti_company_identifier',
+    'module' => 'eitientity_company_identifier',
+
+    'entity class' => 'CompanyIdentifierEntity',
+    'controller class' => 'EntityAPIController',
+
+    'static cache' => TRUE,
+    'fieldable' => FALSE,
+
+    'access callback' => 'eitientity_company_identifier_access',
+    'uri callback' => 'entity_class_uri',
+
+    'entity keys' => array(
+      'id' => 'id',
+      'label' => 'name',
+    ),
+
+  );
+
+  return $entity_info;
+}
+
+/**
+ * Access callback for custom company_identifier entities.
+ *
+ * @param $op
+ * @param CompanyIdentifierEntity $entity
+ * @param stdClass $account
+ * @param $entity_type
+ *
+ * @return boolean
+ *   Whether access is allowed or not. If the entity type does not specify any
+ *   access information, NULL is returned.
+ */
+function eitientity_company_identifier_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  $operations = array('administer', 'create', 'view', 'edit', 'update', 'delete');
+  if (!in_array($op, $operations, TRUE)) {
+    // If the $op was not one of the supported ones, we return access denied.
+    return FALSE;
+  }
+
+  if (user_access("$entity_type entity administer")) {
+    return TRUE;
+  }
+  elseif ($op == 'view' && user_access("$entity_type entity $op")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function eitientity_company_identifier_permission() {
+  $perms = array();
+
+  $entity_type = 'company_identifier';
+  $entity_info = entity_get_info($entity_type);
+
+  $operations = array('administer', 'view');
+  foreach ($operations as $op) {
+    $permission_string = "$entity_type entity $op";
+    $action = ucfirst($op);
+    $t_args = array('%entity' => $entity_info['plural label']);
+    $perms[$permission_string] = array(
+      'title' => t("$action %entity", $t_args),
+    );
+
+    if ($op == 'administer') {
+      $perms[$permission_string]['restrict access'] = TRUE;
+    }
+  }
+
+  return $perms;
+}
