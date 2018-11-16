@@ -81,6 +81,27 @@ function eitientity_summary_data_schema() {
         'type' => 'varchar',
         'length' => 6,
       ),
+      'company_id_name' => array(
+        'description' => 'The company identifier name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'company_id_register' => array(
+        'description' => 'The company identifier register.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'company_id_register_url' => array(
+        'description' => 'The company identifier register url.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
     ),
     'indexes' => array(
       'entity_information' => array('id'),
@@ -129,5 +150,23 @@ function eitientity_summary_data_update_7001(&$sandbox) {
       ->fields(array('id2' => $id2))
       ->condition('id', $id)
       ->execute();
+  }
+}
+
+/**
+ * Add company identifier fields.
+ */
+function eitientity_summary_data_update_7002(&$sandbox) {
+  $table = 'eiti_summary_data';
+  $schema = drupal_get_schema($table, TRUE);
+  $fields = array(
+    'company_id_name',
+    'company_id_register',
+    'company_id_register_url',
+  );
+  foreach ($fields as $field) {
+    if (!db_field_exists($table, $field)) {
+      db_add_field($table, $field, $schema['fields'][$field]);
+    }
   }
 }
