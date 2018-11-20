@@ -73,6 +73,15 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['revenue_company_sum'] = array(
       'callback' => array($this, 'getRevenueCompanySum'),
     );
+    $public_fields['company_identifier_name'] = array(
+      'property' => 'company_id_name',
+    );
+    $public_fields['company_identifier_name_register'] = array(
+      'property' => 'company_id_register',
+    );
+    $public_fields['company_identifier_register_URL'] = array(
+      'property' => 'company_id_register_url',
+    );
 
     return $public_fields;
   }

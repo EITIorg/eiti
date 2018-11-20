@@ -85,22 +85,16 @@ function eitientity_summary_data_schema() {
         'description' => 'The company identifier name.',
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
       ),
       'company_id_register' => array(
         'description' => 'The company identifier register.',
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
       ),
       'company_id_register_url' => array(
         'description' => 'The company identifier register url.',
         'type' => 'varchar',
         'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
       ),
     ),
     'indexes' => array(
