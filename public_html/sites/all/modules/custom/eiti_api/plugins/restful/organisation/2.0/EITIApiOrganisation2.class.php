@@ -19,7 +19,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     // Expose data.
     //$public_fields['country']['process_callbacks'] = array('eitientity_implementing_country_get_iso2');
     $public_fields['country']['callback'] = array($this, 'getCountryApiUrl');
-    $public_fields['summary_data']['process_callbacks'] = array('eitientity_summary_data_get_id2');
+    $public_fields['summary_data']['process_callbacks'] = array(array($this, 'getSummaryDataApiUrl'));
 
     return $public_fields;
   }
@@ -37,6 +37,18 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
         }
       }
     }
+    return NULL;
+  }
+
+  /**
+   * Get related summary data API page url.
+   */
+  function getSummaryDataApiUrl($sd_id) {
+    if ($sd_id) {
+      $sd_id2 = eitientity_summary_data_get_id2($sd_id);
+      return url('api/v2.0/summary_data/' . $sd_id2, array('absolute' => TRUE));
+    }
+
     return NULL;
   }
 
