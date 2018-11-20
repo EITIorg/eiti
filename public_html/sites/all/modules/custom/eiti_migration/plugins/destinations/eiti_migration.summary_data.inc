@@ -50,6 +50,9 @@ class EITIMigrateDestinationSummaryData extends MigrateDestinationEntity {
     $fields['status'] = t('Is the report published or now (Default: Published).');
     $fields['created'] = t('Timestamp of summary data creation (Default: Now).');
     $fields['changed'] = t('Timestamp of the change of the summary data (Default: Now).');
+    $fields['company_id_name'] = t('Company identifier name');
+    $fields['company_id_register'] = t('Company identifier register');
+    $fields['company_id_register_url'] = t('Company identifier register url');
 
     // Then add in anything provided by handlers
     $fields += migrate_handler_invoke_all('Entity', 'fields', $this->entityType, $this->bundle, $migration);
