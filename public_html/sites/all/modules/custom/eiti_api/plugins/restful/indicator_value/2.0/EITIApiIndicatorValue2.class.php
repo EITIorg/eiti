@@ -41,18 +41,6 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
   }
 
   /**
-   * Overrides EITIApiIndicatorValue::getIndicator().
-   */
-  /*public function getIndicator($value_emw) {
-    $indicator = $value_emw->indicator_id->value();
-    // For some reason this function is called more than once so we need to make sure the value stays correct.
-    if (is_numeric($indicator->created)) {
-      $indicator->created = eiti_api_timestamp_to_iso_8601($indicator->created);
-    }
-    return $indicator;
-  }*/
-
-  /**
    * Gets the indicator API url.
    */
   function getIndicatorApiUrl($emw) {
@@ -110,5 +98,52 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
     }
 
     return NULL;
+  }
+
+  /**
+   * Overrides RestfulDataProviderEFQ::queryForListFilter().
+   *
+   * We need custom handling for the summary_data filter.
+   */
+  protected function queryForListFilter(\EntityFieldQuery $query) {
+    $public_fields = $this->getPublicFields();
+    foreach ($this->parseRequestForListFilter() as $filter) {
+      // Determine if filtering is by field or property.
+      $property_name = isset($public_fields[$filter['public_field']]['property']) ? $public_fields[$filter['public_field']]['property'] : NULL;
+      if ($filter['public_field'] != 'summary_data' && !$property_name) {
+        throw new \RestfulBadRequestException('The current filter selection does not map to any entity property or Field API field.');
+      }
+      if (field_info_field($property_name)) {
+        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'BETWEEN'))) {
+          $query->fieldCondition($public_fields[$filter['public_field']]['property'], $public_fields[$filter['public_field']]['column'], $filter['value'], $filter['operator'][0]);
+          continue;
+        }
+        for ($index = 0; $index < count($filter['value']); $index++) {
+          $query->fieldCondition($public_fields[$filter['public_field']]['property'], $public_fields[$filter['public_field']]['column'], $filter['value'][$index], $filter['operator'][$index]);
+        }
+      }
+      else {
+        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'BETWEEN'))) {
+          $query->propertyCondition($property_name, $filter['value'], $filter['operator'][0]);
+          continue;
+        }
+        if ($filter['public_field'] != 'summary_data') {
+          $column = $this->getColumnFromProperty($property_name);
+        }
+        for ($index = 0; $index < count($filter['value']); $index++) {
+          if ($filter['public_field'] == 'summary_data') {
+            $sd_query = db_select('eiti_summary_data', 'sd');
+            $sd_query->innerJoin('field_data_field_sd_indicator_values', 'fiv', 'sd.id = fiv.entity_id');
+            $sd_query->fields('fiv', array('field_sd_indicator_values_target_id'));
+            $sd_query->condition('sd.id2', $filter['value'][$index]);
+            $iv_ids = $sd_query->execute()->fetchCol();
+            $query->entityCondition('entity_id', $iv_ids, 'IN');
+          }
+          else {
+            $query->propertyCondition($column, $filter['value'][$index], $filter['operator'][$index]);
+          }
+        }
+      }
+    }
   }
 }
