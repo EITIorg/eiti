@@ -54,6 +54,7 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     unset($public_fields['latest_validation_url']);
 
     $public_fields['status_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
+    $public_fields['leave_date']['process_callbacks'] = array('eiti_api_timestamp_to_iso_8601_partial');
 
     $reordered_fields = array();
     foreach ($public_fields as $key => $val) {
