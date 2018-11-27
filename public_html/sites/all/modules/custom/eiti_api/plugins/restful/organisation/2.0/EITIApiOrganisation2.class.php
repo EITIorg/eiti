@@ -138,6 +138,9 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
             $sd_query2->condition('sd.id2', $filter['value'][$index]);
             $o_ids2 = $sd_query2->execute()->fetchCol();
             $o_ids = array_merge($o_ids1, $o_ids2);
+            if (!$o_ids) {
+              throw new \RestfulBadRequestException('No organisations for the given summary data found.');
+            }
             $query->entityCondition('entity_id', $o_ids, 'IN');
           }
           else {

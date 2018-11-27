@@ -137,6 +137,9 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
             $sd_query->fields('fiv', array('field_sd_indicator_values_target_id'));
             $sd_query->condition('sd.id2', $filter['value'][$index]);
             $iv_ids = $sd_query->execute()->fetchCol();
+            if (!$iv_ids) {
+              throw new \RestfulBadRequestException('No indicator values for the given summary data found.');
+            }
             $query->entityCondition('entity_id', $iv_ids, 'IN');
           }
           else {

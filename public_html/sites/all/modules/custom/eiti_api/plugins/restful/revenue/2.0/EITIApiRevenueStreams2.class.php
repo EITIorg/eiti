@@ -137,14 +137,17 @@ class EITIApiRevenueStreams2 extends EITIApiRevenueStreams {
             $sd_query1->innerJoin('field_data_field_sd_revenue_company', 'frc', 'sd.id = frc.entity_id');
             $sd_query1->fields('frc', array('field_sd_revenue_company_target_id'));
             $sd_query1->condition('sd.id2', $filter['value'][$index]);
-            $iv_ids1 = $sd_query1->execute()->fetchCol();
+            $rs_ids1 = $sd_query1->execute()->fetchCol();
             $sd_query2 = db_select('eiti_summary_data', 'sd');
             $sd_query2->innerJoin('field_data_field_sd_revenue_government', 'frg', 'sd.id = frg.entity_id');
             $sd_query2->fields('frg', array('field_sd_revenue_government_target_id'));
             $sd_query2->condition('sd.id2', $filter['value'][$index]);
-            $iv_ids2 = $sd_query2->execute()->fetchCol();
-            $iv_ids = array_merge($iv_ids1, $iv_ids2);
-            $query->entityCondition('entity_id', $iv_ids, 'IN');
+            $rs_ids2 = $sd_query2->execute()->fetchCol();
+            $rs_ids = array_merge($rs_ids1, $rs_ids2);
+            if (!$rs_ids) {
+              throw new \RestfulBadRequestException('No revenue streams for the given summary data found.');
+            }
+            $query->entityCondition('entity_id', $rs_ids, 'IN');
           }
           else {
             $query->propertyCondition($column, $filter['value'][$index], $filter['operator'][$index]);
