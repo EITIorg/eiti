@@ -198,6 +198,49 @@ function eitiet_implementing_country_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'implementing_country-normal-field_ic_leave_date'.
+  $field_instances['implementing_country-normal-field_ic_leave_date'] = array(
+    'bundle' => 'normal',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'implementing_country',
+    'field_name' => 'field_ic_leave_date',
+    'label' => 'Left the EITI in',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'implementing_country-normal-field_ic_logo'.
   $field_instances['implementing_country-normal-field_ic_logo'] = array(
     'bundle' => 'normal',
@@ -496,7 +539,7 @@ function eitiet_implementing_country_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -626,6 +669,7 @@ function eitiet_implementing_country_field_default_field_instances() {
   t('Latest Validation date');
   t('Latest Validation page link');
   t('Latest Validation page url');
+  t('Left the EITI in');
   t('Logo');
   t('Name');
   t('Please specify the EITI country-specific latest validation page.');
