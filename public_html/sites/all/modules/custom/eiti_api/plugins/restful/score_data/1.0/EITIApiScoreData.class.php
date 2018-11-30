@@ -18,6 +18,12 @@ class EITIApiScoreData extends RestfulEntityBase {
     $public_fields['year'] = array(
       'property' => 'year',
     );
+    $public_fields['board_decision_url'] = array(
+      'property' => 'board_decision_url',
+    );
+    $public_fields['validation_documentation'] = array(
+      'property' => 'validation_documentation_url',
+    );
 
     // References.
     $public_fields['country'] = array(
