@@ -274,7 +274,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
 
     $cache = $this->getCacheController()->get($cid);
     if (!empty($cache->data)) {
-      //return $cache->data;
+      return $cache->data;
     }
 
     $query = db_select('eiti_summary_data', 'sd');
