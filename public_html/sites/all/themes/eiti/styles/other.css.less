@@ -69,6 +69,21 @@ div.description,
   text-align: right;
 }
 
+ul.inline .node-readmore {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 1em;
+  display: inline-block;
+}
+
+.node-teaser {
+  margin-bottom: 0 !important;
+}
+
+.node-document.node-teaser {
+  margin-top: 1em;
+}
+
 .person-quick-links-wrapper {
   @twitter_brand_color: #1da1f2;
   @skype_brand_color: #00AFF0;
@@ -122,8 +137,25 @@ div.description,
 }
 
 .eiti-map-wrapper {
-  .leaflet-top, .leaflet-bottom {
+  .leaflet-top {
+    z-index: 101;  // Zoom buttons always on top.
+  } 
+  .leaflet-bottom {
     z-index: 100;  // Reduce the z-index.
+  }
+  // Fix multiline list align
+  .map-option-widget {
+    .map-option-items {
+      li {
+        padding-left: 22px;
+        position: relative;
+        &:before {
+          position: absolute;
+          left: 0;
+        }
+      }
+
+    }
   }
 }
 

@@ -23970,7 +23970,7 @@
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.reports[last];
 	                var indicator = yearData.find(function (v) {
-	                  console.log(v.unit);return v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
+	                  return v.commodity === "Coal, volume" && v.unit && (v.unit.toLowerCase() === 'tonne' || v.unit.toLowerCase() === 'tonnes' || v.unit.toLowerCase() === 'tons');
 	                });
 	                indicator_value = indicator ? indicator.value : 0;
 	                indicator_unit = indicator ? indicator.unit : 0;
@@ -24011,7 +24011,7 @@
 	              }
 	              break;
 	            case "revenue_per_capita":
-	              if (datapoint.revenues) {
+	              if (datapoint.revenues && datapoint.reports) {
 	                var years = Object.keys(datapoint.revenues);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.revenues[last];
@@ -24029,7 +24029,7 @@
 	              }
 	              break;
 	            case "share_revenues":
-	              if (datapoint.revenues) {
+	              if (datapoint.revenues && datapoint.reports) {
 	                var years = Object.keys(datapoint.revenues);
 	                var last = _underscore2.default.last(years);
 	                var yearData = datapoint.revenues[last];
@@ -24535,6 +24535,8 @@
 	              length: 4,
 	              ref: 'map',
 	              zoom: zoom,
+	              maxZoom: 8,
+	              minZoom: 1,
 	              height: 500,
 	              scrollWheelZoom: false
 	            },
@@ -25333,7 +25335,6 @@
 	    // Helper function that can translate strings.
 	    t: function t(string) {
 	        // Check if window.Drupal.t() exists and call it.
-	        console.log("Drupal.t('" + string + "')");
 	        if (window.Drupal && typeof window.Drupal.t === 'function') {
 	            return window.Drupal.t(string);
 	        }
@@ -25525,7 +25526,7 @@
 	        info_content_third += '</div>';
 	
 	        // Add info about Online Contracts.
-	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
+	        info_content_third = info_content_third + '<div class="info-block">' + '  <span class="label">' + this.t('Online Contracts') + ':</span>' + '  <span class="value">' + (indicator_contracts['contract_registry_url'] ? '<a href="' + indicator_contracts['contract_registry_url'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' + '</div>';
 	
 	        var html = '<aside class="country-info-wrapper">' + '<div class="country-info-header">' + info_header + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_first + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_second + '</div>' + '<div class="country-info-top-indicators">' + info_top_indicators_third + '</div>' + '<div class="country-info-content">' + info_content_first + '</div>' + '<div class="country-info-content">' + info_content_second + '</div>' + '<div class="country-info-content">' + info_content_second_a + '</div>' + '<div class="country-info-content">' + info_content_third + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_websitelink + '</div>' + '<div class="country-link"><img class="country-icon" src="' + this.getResourceUrl('images/icon-dump/eiti_popup_opencountry.svg') + '" /> ' + country_link + '</div>' + '</aside>';
 	
