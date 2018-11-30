@@ -59,6 +59,16 @@ function eitientity_score_data_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'board_decision_url' => array(
+        'description' => 'The board decision_ url.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'validation_documentation_url' => array(
+        'description' => 'The validation documentation url.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
     ),
     'indexes' => array(
       'entity_score_data_info' => array('id'),
@@ -73,4 +83,16 @@ function eitientity_score_data_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Add some additional score_data database fields.
+ */
+function eitientity_score_data_update_7001(&$sandbox) {
+  $table = 'eiti_score_data';
+  $schema = drupal_get_schema($table, TRUE);
+  $field = 'board_decision_url';
+  db_add_field($table, $field, $schema['fields'][$field]);
+  $field = 'validation_documentation_url';
+  db_add_field($table, $field, $schema['fields'][$field]);
 }

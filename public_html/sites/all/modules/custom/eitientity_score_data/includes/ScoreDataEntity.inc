@@ -19,6 +19,8 @@ class ScoreDataEntity extends Entity {
   public $status = TRUE;
   public $created = NULL;
   public $changed = NULL;
+  public $board_decision_url = NULL;
+  public $validation_documentation_url = NULL;
 
   /**
    * URI method for entity_class_uri().

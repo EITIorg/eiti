@@ -128,6 +128,16 @@ function score_data_default_form($form, &$form_state, $entity) {
     '#date_label_position' => 'invisible',
     '#date_year_range' => '-16:+2',
   );
+  $form['board_decision_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link to Board decision URL'),
+    '#default_value' => $entity->board_decision_url,
+  );
+  $form['validation_documentation_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link to Validation documentation'),
+    '#default_value' => $entity->validation_documentation_url,
+  );
 
   $form['options']['status'] = array(
     '#type' => 'checkbox',
