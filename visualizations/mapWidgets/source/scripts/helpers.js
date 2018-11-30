@@ -106,7 +106,6 @@ export var helpers = {
     // Helper function that can translate strings.
     t: function(string) {
         // Check if window.Drupal.t() exists and call it.
-        console.log("Drupal.t('" + string + "')");
         if (window.Drupal && typeof window.Drupal.t === 'function') {
             return window.Drupal.t(string);
         }
@@ -340,7 +339,7 @@ export var helpers = {
         info_content_third = info_content_third +
             '<div class="info-block">' +
             '  <span class="label">' + this.t('Online Contracts') + ':</span>' +
-            '  <span class="value">' + (indicator_contracts['Publicly available registry of contracts'] ? '<a href="' + indicator_contracts['Publicly available registry of contracts'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
+            '  <span class="value">' + (indicator_contracts['contract_registry_url'] ? '<a href="' + indicator_contracts['contract_registry_url'] + '" target="_blank">' + this.t('Yes') + '</a>' : this.t('No')) + '</span>' +
             '</div>';
 
         var html = '<aside class="country-info-wrapper">' +
