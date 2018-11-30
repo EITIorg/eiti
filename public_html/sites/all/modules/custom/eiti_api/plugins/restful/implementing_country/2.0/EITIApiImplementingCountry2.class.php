@@ -59,7 +59,7 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     $reordered_fields = array();
     foreach ($public_fields as $key => $val) {
       if ($key == 'status_date') {
-        $reordered_fields['member_since'] = $val;
+        $reordered_fields['join_date'] = $val;
       }
       else {
         $reordered_fields[$key] = $val;
