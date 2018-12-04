@@ -70,6 +70,24 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
   }
 
   /**
+   * Overrides RestfulBase::parseRequestForListFilter().
+   */
+  protected function parseRequestForListFilter() {
+    $filters = parent::parseRequestForListFilter();
+    foreach ($filters as $key => $filter) {
+      if (isset($filter['public_field'], $filter['value'][0])) {
+        // Status field ID to ID.
+        if ($filter['public_field'] == 'status') {
+          foreach ($filter['value'] as $k => $v) {
+            $filters[$key]['value'][$k] = eitientity_implementing_country_get_status_id(strtolower($v));
+          }
+        }
+      }
+    }
+    return $filters;
+  }
+
+  /**
    * Overrides \RestfulEntityBase::getList().
    *
    * Entities need to be loaded via their ISO code.
