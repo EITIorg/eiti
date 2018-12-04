@@ -90,6 +90,90 @@ paths:
                         type: string
                       href:
                         type: string
+  /v2.0/country_status:
+    get:
+      tags:
+        - Country Status v2
+      description: >-
+        Fetches all the country statuses defined in the system and returns them as JSON
+        objects
+      parameters:
+        - in: query
+          name: 'filter[color]'
+          description: Allows to filter the country statuses by their color
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        color:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/country_status/{id}':
+    get:
+      tags:
+        - Country Status v2
+      description: >-
+        Fetches a single country status defined in the system and returns it as a JSON
+        object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        color:
+                          type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /v1.0/gfs_code:
     get:
       tags:
@@ -183,6 +267,99 @@ paths:
                         type: string
                       href:
                         type: string
+  /v2.0/gfs_code:
+    get:
+      tags:
+        - GFS Code v2
+      description: >-
+        Fetches all the GFS codes defined in the system and returns them as JSON
+        objects
+      parameters:
+        - in: query
+          name: 'filter[code]'
+          description: Allows to filter the GFS codes by their code
+          schema:
+            type: string
+        - in: query
+          name: 'filter[parent]'
+          description: Allows to filter the GFS codes by their parent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        code:
+                          type: string
+                        parent:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/gfs_code/{id}':
+    get:
+      tags:
+        - GFS Code v2
+      description: >-
+        Fetches a single GFS code defined in the system and returns it as a JSON
+        object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        code:
+                          type: string
+                        parent:
+                          type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /v1.0/implementing_country:
     get:
       tags:
@@ -203,7 +380,14 @@ paths:
           name: 'filter[status_date]'
           description: >-
             Allows to filter implementing countries by their status date
-            in YYYY-MM-DD (YYYY-01-01) format
+            in YYYY-MM-DD format
+          schema:
+            type: string
+        - in: query
+          name: 'filter[leave_date]'
+          description: >-
+            Allows to filter implementing countries by their leaving date
+            in YYYY-MM-DD format
           schema:
             type: string
         - in: query
@@ -539,6 +723,159 @@ paths:
                           type: string
                         latest_validation_url:
                           type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /v2.0/implementing_country:
+    get:
+      tags:
+        - Implementing Country v2
+      description: Fetches all of the implementing countries and shows them as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[iso2]'
+          description: Allows to filter implementing countries by their ISO2 code
+          schema:
+            type: string
+        - in: query
+          name: 'filter[status]'
+          description: Allows to filter implementing countries by their status id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[join_date]'
+          description: >-
+            Allows to filter implementing countries by their joining date
+            in YYYY-MM-DD format
+          schema:
+            type: string
+        - in: query
+          name: 'filter[leave_date]'
+          description: >-
+            Allows to filter implementing countries by their leaving date
+            in YYYY-MM-DD format
+          schema:
+            type: string
+        - in: query
+          name: 'filter[local_website]'
+          description: Allows to filter implementing countries by their local_website url
+          schema:
+            type: string
+        - in: query
+          name: 'filter[annual_report_file]'
+          description: Allows to filter implementing countries by their annual report file fid
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        iso2:
+                          type: string
+                        iso3:
+                          type: string
+                        status:
+                          type: string
+                        join_date:
+                          type: string
+                        leave_date:
+                          type: string
+                        local_website:
+                          type: string
+                        annual_report_file:
+                          type: string
+                        latest_validation_date:
+                          type: string
+                        validation_data:
+                          type: array
+                          items:
+                            type: string
+                        summary_data:
+                          type: array
+                          items:
+                            type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/implementing_country/{id}':
+    get:
+      tags:
+        - Implementing Country v2
+      description: Fetches a single implementing country and shows it as JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        iso2:
+                          type: string
+                        iso3:
+                          type: string
+                        status:
+                          type: string
+                        join_date:
+                          type: string
+                        leave_date:
+                          type: string
+                        local_website:
+                          type: string
+                        annual_report_file:
+                          type: string
+                        latest_validation_date:
+                          type: string
+                        validation_data:
+                          type: array
+                          items:
+                            type: string
+                        summary_data:
+                          type: array
+                          items:
+                            type: string
                   self:
                     type: object
                     properties:

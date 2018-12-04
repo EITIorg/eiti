@@ -425,6 +425,382 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="EITI---API-documentation-Country-Status-v2">Country Status v2</h1>
+
+## get__v2.0_country_status
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/country_status \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/country_status HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/country_status',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/country_status',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/country_status',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/country_status', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/country_status");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/country_status", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/country_status`
+
+Fetches all the country statuses defined in the system and returns them as JSON objects
+
+<h3 id="get__v2.0_country_status-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[color]|query|string|false|Allows to filter the country statuses by their color|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "color": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_country_status-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_country_status-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» color|string|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_country_status_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/country_status/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/country_status/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/country_status/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/country_status/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/country_status/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/country_status/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/country_status/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/country_status/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/country_status/{id}`
+
+Fetches a single country status defined in the system and returns it as a JSON object
+
+<h3 id="get__v2.0_country_status_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "color": "string"
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_country_status_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_country_status_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» color|string|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="EITI---API-documentation-GFS-Code-v1">GFS Code v1</h1>
 
 ## get__v1.0_gfs_code
@@ -806,6 +1182,387 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="EITI---API-documentation-GFS-Code-v2">GFS Code v2</h1>
+
+## get__v2.0_gfs_code
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/gfs_code \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/gfs_code HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/gfs_code',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/gfs_code',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/gfs_code',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/gfs_code', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/gfs_code");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/gfs_code", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/gfs_code`
+
+Fetches all the GFS codes defined in the system and returns them as JSON objects
+
+<h3 id="get__v2.0_gfs_code-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[code]|query|string|false|Allows to filter the GFS codes by their code|
+|filter[parent]|query|string|false|Allows to filter the GFS codes by their parent|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "code": "string",
+      "parent": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_gfs_code-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_gfs_code-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» code|string|false|No description|
+|»» parent|string|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_gfs_code_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/gfs_code/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/gfs_code/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/gfs_code/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/gfs_code/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/gfs_code/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/gfs_code/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/gfs_code/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/gfs_code/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/gfs_code/{id}`
+
+Fetches a single GFS code defined in the system and returns it as a JSON object
+
+<h3 id="get__v2.0_gfs_code_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "code": "string",
+      "parent": "string"
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_gfs_code_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_gfs_code_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» code|string|false|No description|
+|»» parent|string|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="EITI---API-documentation-Implementing-Country-v1">Implementing Country v1</h1>
 
 ## get__v1.0_implementing_country
@@ -950,7 +1707,8 @@ Fetches all of the implementing countries and shows them as JSON objects
 |---|---|---|---|---|
 |filter[iso2]|query|string|false|Allows to filter implementing countries by their ISO2 code|
 |filter[status]|query|string|false|Allows to filter implementing countries by their status tid|
-|filter[status_date]|query|string|false|Allows to filter implementing countries by their status date in YYYY-MM-DD (YYYY-01-01) format|
+|filter[status_date]|query|string|false|Allows to filter implementing countries by their status date in YYYY-MM-DD format|
+|filter[leave_date]|query|string|false|Allows to filter implementing countries by their leaving date in YYYY-MM-DD format|
 |filter[local_website]|query|string|false|Allows to filter implementing countries by their local_website url|
 |filter[annual_report_file]|query|string|false|Allows to filter implementing countries by their annual report file fid|
 |filter[latest_validation_date]|query|string|false|Allows to filter implementing countries by their latest validation date in YYYY-MM-DD (YYYY-01-01) format|
@@ -1554,6 +2312,431 @@ Status Code **200**
 |»»»»»»» self|object|false|No description|
 |»»»»»»»» title|string|false|No description|
 |»»»»»»»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Implementing-Country-v2">Implementing Country v2</h1>
+
+## get__v2.0_implementing_country
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/implementing_country \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/implementing_country HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/implementing_country',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/implementing_country',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/implementing_country',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/implementing_country', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/implementing_country");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/implementing_country", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/implementing_country`
+
+Fetches all of the implementing countries and shows them as JSON objects
+
+<h3 id="get__v2.0_implementing_country-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[iso2]|query|string|false|Allows to filter implementing countries by their ISO2 code|
+|filter[status]|query|string|false|Allows to filter implementing countries by their status id|
+|filter[join_date]|query|string|false|Allows to filter implementing countries by their joining date in YYYY-MM-DD format|
+|filter[leave_date]|query|string|false|Allows to filter implementing countries by their leaving date in YYYY-MM-DD format|
+|filter[local_website]|query|string|false|Allows to filter implementing countries by their local_website url|
+|filter[annual_report_file]|query|string|false|Allows to filter implementing countries by their annual report file fid|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "iso2": "string",
+      "iso3": "string",
+      "status": "string",
+      "join_date": "string",
+      "leave_date": "string",
+      "local_website": "string",
+      "annual_report_file": "string",
+      "latest_validation_date": "string",
+      "validation_data": [
+        "string"
+      ],
+      "summary_data": [
+        "string"
+      ]
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_implementing_country-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_implementing_country-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» iso2|string|false|No description|
+|»» iso3|string|false|No description|
+|»» status|string|false|No description|
+|»» join_date|string|false|No description|
+|»» leave_date|string|false|No description|
+|»» local_website|string|false|No description|
+|»» annual_report_file|string|false|No description|
+|»» latest_validation_date|string|false|No description|
+|»» validation_data|[string]|false|No description|
+|»» summary_data|[string]|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_implementing_country_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/implementing_country/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/implementing_country/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/implementing_country/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/implementing_country/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/implementing_country/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/implementing_country/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/implementing_country/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/implementing_country/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/implementing_country/{id}`
+
+Fetches a single implementing country and shows it as JSON object
+
+<h3 id="get__v2.0_implementing_country_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "iso2": "string",
+      "iso3": "string",
+      "status": "string",
+      "join_date": "string",
+      "leave_date": "string",
+      "local_website": "string",
+      "annual_report_file": "string",
+      "latest_validation_date": "string",
+      "validation_data": [
+        "string"
+      ],
+      "summary_data": [
+        "string"
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_implementing_country_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_implementing_country_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» iso2|string|false|No description|
+|»» iso3|string|false|No description|
+|»» status|string|false|No description|
+|»» join_date|string|false|No description|
+|»» leave_date|string|false|No description|
+|»» local_website|string|false|No description|
+|»» annual_report_file|string|false|No description|
+|»» latest_validation_date|string|false|No description|
+|»» validation_data|[string]|false|No description|
+|»» summary_data|[string]|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
