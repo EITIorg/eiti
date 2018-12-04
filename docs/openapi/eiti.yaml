@@ -1,15 +1,15 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://eiti.org/api/v1.0'
+  - url: 'https://eiti.org/api'
 info:
   description: Eiti.org
-  version: '1.0'
+  version: '2.0'
   title: EITI - API documentation
 paths:
-  /country_status:
+  /v1.0/country_status:
     get:
       tags:
-        - Country Status
+        - Country Status v1
       description: >-
         Fetches all the country statuses defined in the system and returns them as JSON
         objects
@@ -49,10 +49,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/country_status/{id}':
+  '/v1.0/country_status/{id}':
     get:
       tags:
-        - Country Status
+        - Country Status v1
       description: >-
         Fetches a single country status defined in the system and returns it as a JSON
         object
@@ -90,10 +90,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /gfs_code:
+  /v1.0/gfs_code:
     get:
       tags:
-        - GFS Code
+        - GFS Code v1
       description: >-
         Fetches all the GFS codes defined in the system and returns them as JSON
         objects
@@ -140,10 +140,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/gfs_code/{id}':
+  '/v1.0/gfs_code/{id}':
     get:
       tags:
-        - GFS Code
+        - GFS Code v1
       description: >-
         Fetches a single GFS code defined in the system and returns it as a JSON
         object
@@ -183,10 +183,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /implementing_country:
+  /v1.0/implementing_country:
     get:
       tags:
-        - Implementing Country
+        - Implementing Country v1
       description: Fetches all of the implementing countries and shows them as JSON objects
       parameters:
         - in: query
@@ -385,10 +385,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/implementing_country/{id}':
+  '/v1.0/implementing_country/{id}':
     get:
       tags:
-        - Implementing Country
+        - Implementing Country v1
       description: Fetches a single implementing country and shows it as JSON object
       parameters:
         - in: path
@@ -546,10 +546,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /indicator:
+  /v1.0/indicator:
     get:
       tags:
-        - Indicator
+        - Indicator v1
       description: Fetches all of the defined indicators and shows them as JSON objects
       parameters:
         - in: query
@@ -615,10 +615,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/indicator/{id}':
+  '/v1.0/indicator/{id}':
     get:
       tags:
-        - Indicator
+        - Indicator v1
       description: Fetches a single indicator and shows it as a JSON object
       parameters:
         - in: path
@@ -660,10 +660,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /indicator_value:
+  /v1.0/indicator_value:
     get:
       tags:
-        - Indicator Values
+        - Indicator Values v1
       description: Fetches all the indicator values and their details as JSON objects
       responses:
         '200':
@@ -719,10 +719,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/indicator_value/{id}':
+  '/v1.0/indicator_value/{id}':
     get:
       tags:
-        - Indicator Values
+        - Indicator Values v1
       description: Fetches a single indicator value and its details as a JSON object
       parameters:
         - in: path
@@ -775,10 +775,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /organisation:
+  /v1.0/organisation:
     get:
       tags:
-        - Organisation
+        - Organisation v1
       description: Fetches all the organisations and their information as JSON objects
       parameters:
         - in: query
@@ -860,10 +860,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/organisation/{id}':
+  '/v1.0/organisation/{id}':
     get:
       tags:
-        - Organisation
+        - Organisation v1
       description: Fetches a single organisation and its information as a JSON object
       parameters:
         - in: path
@@ -911,10 +911,10 @@ paths:
                         type: string
                       href:
                         type: string
-  /revenue:
+  /v1.0/revenue:
     get:
       tags:
-        - Revenue
+        - Revenue v1
       description: Fetches all the revenue entries as JSON objects
       parameters:
         - in: query
@@ -1014,10 +1014,10 @@ paths:
                         type: string
                       href:
                         type: string
-  '/revenue/{id}':
+  '/v1.0/revenue/{id}':
     get:
       tags:
-        - Revenue
+        - Revenue v1
       description: Fetches a single revenue entry as a JSON object
       parameters:
         - in: path
@@ -1089,8 +1089,11 @@ paths:
                         type: string
                       href:
                         type: string
-  /score_data:
+  /v1.0/score_data:
     get:
+      tags:
+        - Score Data v1
+      description: 'Data about the progress of countries in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
       parameters:
         - in: query
           name: 'filter[year]'
@@ -1107,9 +1110,6 @@ paths:
           description: Allows to filter score data by their score requirement values id
           schema:
             type: string
-      tags:
-        - Score Data
-      description: 'Data about the progress of countries in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
       responses:
         '200':
           description: OK
@@ -1319,17 +1319,17 @@ paths:
                         type: string
                       href:
                         type: string
-  '/score_data/{id}':
+  '/v1.0/score_data/{id}':
     get:
+      tags:
+        - Score Data v1
+      description: 'Data about the progress of a country in a specific year in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
       parameters:
         - in: path
           name: id
           description: ''
           schema:
             type: integer
-      tags:
-        - Score Data
-      description: 'Data about the progress of a country in a specific year in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
       responses:
         '200':
           description: OK
@@ -1530,8 +1530,11 @@ paths:
                         type: string
                       href:
                         type: string
-  /summary_data:
+  /v1.0/summary_data:
     get:
+      tags:
+        - Summary Data v1
+      description: 'Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
       parameters:
         - in: query
           name: 'filter[links]'
@@ -1618,9 +1621,6 @@ paths:
           description: Allows to filter summary data by their company revenue id
           schema:
             type: string
-      tags:
-        - Summary Data
-      description: 'Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
       responses:
         '200':
           description: OK
@@ -1897,17 +1897,17 @@ paths:
                         type: string
                       href:
                         type: string
-  '/summary_data/{id}':
+  '/v1.0/summary_data/{id}':
     get:
+      tags:
+        - Summary Data v1
+      description: 'Fetches a single summary data entry. Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
       parameters:
         - in: path
           name: id
           description: ''
           schema:
             type: integer
-      tags:
-        - Summary Data
-      description: 'Fetches a single summary data entry. Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
       responses:
         '200':
           description: OK
@@ -2175,7 +2175,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /bubble:
+  /v1.0/bubble:
     get:
       tags:
         - 'Chart - Bubble'
@@ -2212,7 +2212,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /bubble/disbursed_revenues:
+  /v1.0/bubble/disbursed_revenues:
     get:
       tags:
         - 'Chart - Bubble'
@@ -2264,7 +2264,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /grouped_bar:
+  /v1.0/grouped_bar:
     get:
       tags:
         - 'Chart - Grouped Bar'
@@ -2303,7 +2303,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /grouped_bar/production:
+  /v1.0/grouped_bar/production:
     get:
       tags:
         - 'Chart - Grouped Bar'
@@ -2361,7 +2361,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /grouped_bar/production_per_country:
+  /v1.0/grouped_bar/production_per_country:
     get:
       tags:
         - 'Chart - Grouped Bar'
@@ -2419,7 +2419,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /grouped_bar/external_per_country:
+  /v1.0/grouped_bar/external_per_country:
     get:
       tags:
         - 'Chart - Grouped Bar'
@@ -2477,7 +2477,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /sankey:
+  /v1.0/sankey:
     get:
       tags:
         - 'Chart - Sankey'
@@ -2514,7 +2514,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /sankey/disbursed_by_companies_per_country:
+  /v1.0/sankey/disbursed_by_companies_per_country:
     get:
       tags:
         - 'Chart - Sankey'
@@ -2576,7 +2576,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /stacked_bar:
+  /v1.0/stacked_bar:
     get:
       tags:
         - 'Chart - Stacked Bar'
@@ -2613,7 +2613,7 @@ paths:
                         type: string
                       href:
                         type: string
-  /stacked_bar/government_revenues:
+  /v1.0/stacked_bar/government_revenues:
     get:
       tags:
         - 'Chart - Stacked Bar'
