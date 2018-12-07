@@ -3140,6 +3140,394 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="EITI---API-documentation-Indicator-v2">Indicator v2</h1>
+
+## get__v2.0_indicator
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/indicator \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/indicator HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/indicator',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/indicator',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/indicator',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/indicator', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/indicator");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/indicator", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/indicator`
+
+Fetches all of the defined indicators and shows them as JSON objects
+
+<h3 id="get__v2.0_indicator-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[type]|query|string|false|Allows to filter indicators by their type|
+|filter[parent]|query|string|false|Allows to filter indicators by their parent|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "parent": 0
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_indicator-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_indicator-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» parent|integer|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+|» next|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_indicator_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/indicator/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/indicator/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/indicator/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/indicator/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/indicator/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/indicator/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/indicator/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/indicator/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/indicator/{id}`
+
+Fetches a single indicator and shows it as a JSON object
+
+<h3 id="get__v2.0_indicator_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "parent": 0
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_indicator_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_indicator_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» parent|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="EITI---API-documentation-Indicator-Values-v1">Indicator Values v1</h1>
 
 ## get__v1.0_indicator_value
@@ -3551,6 +3939,407 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="EITI---API-documentation-Indicator-Values-v2">Indicator Values v2</h1>
+
+## get__v2.0_indicator_value
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/indicator_value \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/indicator_value HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/indicator_value',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/indicator_value',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/indicator_value',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/indicator_value', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/indicator_value");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/indicator_value", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/indicator_value`
+
+Fetches all the indicator values and their details as JSON objects
+
+<h3 id="get__v2.0_indicator_value-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[indicator]|query|integer|false|Allows to filter indicator values by their indicator|
+|filter[source]|query|string|false|Allows to filter indicator values by their source|
+|filter[summary_data]|query|string|false|Allows to filter indicator values by their summary data|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "value": "string",
+      "unit": "string",
+      "indicator": "string",
+      "source": "string",
+      "summary_data": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_indicator_value-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_indicator_value-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» value|string|false|Depending of indicator type: numeric, text, boolean - yes, no, partially|
+|»» unit|string|false|No description|
+|»» indicator|string|false|No description|
+|»» source|string|false|No description|
+|»» summary_data|string|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+|» next|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_indicator_value_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/indicator_value/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/indicator_value/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/indicator_value/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/indicator_value/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/indicator_value/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/indicator_value/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/indicator_value/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/indicator_value/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/indicator_value/{id}`
+
+Fetches a single indicator value and its details as a JSON object
+
+<h3 id="get__v2.0_indicator_value_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "value": "string",
+      "unit": "string",
+      "indicator": "string",
+      "source": "string",
+      "summary_data": "string"
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_indicator_value_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_indicator_value_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» value|string|false|Depending of indicator type: numeric, text, boolean - yes, no, partially|
+|»» unit|string|false|No description|
+|»» indicator|string|false|No description|
+|»» source|string|false|No description|
+|»» summary_data|string|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="EITI---API-documentation-Organisation-v1">Organisation v1</h1>
 
 ## get__v1.0_organisation
@@ -3695,7 +4484,7 @@ Fetches all the organisations and their information as JSON objects
 |---|---|---|---|---|
 |filter[type]|query|string|false|Allows to filter organisations by their type|
 |filter[country]|query|string|false|Allows to filter organisations by their country id|
-|filter[summary_data]|query|string|false|Allows to filter organisations by their summary data id|
+|filter[summary_data]|query|string|false|Allows to filter organisations by their summary data id (companies only)|
 |filter[identification]|query|string|false|Allows to filter organisations by their identification|
 |filter[sector]|query|string|false|Allows to filter organisations by their sector|
 |filter[commodities]|query|string|false|Allows to filter organisations by a commodity|
@@ -3952,6 +4741,432 @@ Status Code **200**
 |»» type|string|false|No description|
 |»» country|integer|false|No description|
 |»» summary_data|integer|false|No description|
+|»» identification|string|false|No description|
+|»» sector|string|false|No description|
+|»» commodities|[string]|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Organisation-v2">Organisation v2</h1>
+
+## get__v2.0_organisation
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/organisation \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/organisation HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/organisation',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/organisation',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/organisation',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/organisation', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/organisation");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/organisation", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/organisation`
+
+Fetches all the organisations and their information as JSON objects
+
+<h3 id="get__v2.0_organisation-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[type]|query|string|false|Allows to filter organisations by their type|
+|filter[country]|query|string|false|Allows to filter organisations by their country id|
+|filter[summary_data]|query|string|false|Allows to filter organisations by their summary data id|
+|filter[identification]|query|string|false|Allows to filter organisations by their identification|
+|filter[sector]|query|string|false|Allows to filter organisations by their sector|
+|filter[commodities]|query|string|false|Allows to filter organisations by a commodity|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "country": "string",
+      "summary_data": [
+        "string"
+      ],
+      "identification": "string",
+      "sector": "string",
+      "commodities": [
+        "string"
+      ]
+    }
+  ],
+  "count": 0,
+  "agencies": 0,
+  "copanies": 0,
+  "companies_with_identification": 0,
+  "companies_with_sector": 0,
+  "companies_with_commodities": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_organisation-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_organisation-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» country|string|false|No description|
+|»» summary_data|[string]|false|No description|
+|»» identification|string|false|No description|
+|»» sector|string|false|No description|
+|»» commodities|[string]|false|No description|
+|» count|integer|false|No description|
+|» agencies|integer|false|Total number of agencies|
+|» copanies|integer|false|Total number of companies (note that unlike agencies companies are not shared between summary data entries)|
+|» companies_with_identification|integer|false|No description|
+|» companies_with_sector|integer|false|No description|
+|» companies_with_commodities|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+|» next|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_organisation_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/organisation/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/organisation/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/organisation/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/organisation/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/organisation/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/organisation/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/organisation/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/organisation/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/organisation/{id}`
+
+Fetches a single organisation and its information as a JSON object
+
+<h3 id="get__v2.0_organisation_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "country": "string",
+      "summary_data": [
+        "string"
+      ],
+      "identification": "string",
+      "sector": "string",
+      "commodities": [
+        "string"
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_organisation_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_organisation_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» country|string|false|No description|
+|»» summary_data|[string]|false|No description|
 |»» identification|string|false|No description|
 |»» sector|string|false|No description|
 |»» commodities|[string]|false|No description|

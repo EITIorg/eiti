@@ -997,6 +997,102 @@ paths:
                         type: string
                       href:
                         type: string
+  /v2.0/indicator:
+    get:
+      tags:
+        - Indicator v2
+      description: Fetches all of the defined indicators and shows them as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter indicators by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[parent]'
+          description: Allows to filter indicators by their parent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        parent:
+                          type: integer
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/indicator/{id}':
+    get:
+      tags:
+        - Indicator v2
+      description: Fetches a single indicator and shows it as a JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        parent:
+                          type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /v1.0/indicator_value:
     get:
       tags:
@@ -1112,6 +1208,121 @@ paths:
                         type: string
                       href:
                         type: string
+  /v2.0/indicator_value:
+    get:
+      tags:
+        - Indicator Values v2
+      description: Fetches all the indicator values and their details as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[indicator]'
+          description: Allows to filter indicator values by their indicator
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[source]'
+          description: Allows to filter indicator values by their source
+          schema:
+            type: string
+        - in: query
+          name: 'filter[summary_data]'
+          description: Allows to filter indicator values by their summary data
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        value:
+                          type: string
+                          description: 'Depending of indicator type: numeric, text, boolean - yes, no, partially'
+                        unit:
+                          type: string
+                        indicator:
+                          type: string
+                        source:
+                          type: string
+                        summary_data:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/indicator_value/{id}':
+    get:
+      tags:
+        - Indicator Values v2
+      description: Fetches a single indicator value and its details as a JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        value:
+                          type: string
+                          description: 'Depending of indicator type: numeric, text, boolean - yes, no, partially'
+                        unit:
+                          type: string
+                        indicator:
+                          type: string
+                        source:
+                          type: string
+                        summary_data:
+                          type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
   /v1.0/organisation:
     get:
       tags:
@@ -1130,7 +1341,7 @@ paths:
             type: string
         - in: query
           name: 'filter[summary_data]'
-          description: Allows to filter organisations by their summary data id
+          description: Allows to filter organisations by their summary data id (companies only)
           schema:
             type: string
         - in: query
@@ -1233,6 +1444,158 @@ paths:
                           type: integer
                         summary_data:
                           type: integer
+                        identification:
+                          type: string
+                        sector:
+                          type: string
+                        commodities:
+                          type: array
+                          items:
+                            type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /v2.0/organisation:
+    get:
+      tags:
+        - Organisation v2
+      description: Fetches all the organisations and their information as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter organisations by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[country]'
+          description: Allows to filter organisations by their country id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[summary_data]'
+          description: Allows to filter organisations by their summary data id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[identification]'
+          description: Allows to filter organisations by their identification
+          schema:
+            type: string
+        - in: query
+          name: 'filter[sector]'
+          description: Allows to filter organisations by their sector
+          schema:
+            type: string
+        - in: query
+          name: 'filter[commodities]'
+          description: Allows to filter organisations by a commodity
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        country:
+                          type: string
+                        summary_data:
+                          type: array
+                          items:
+                            type: string
+                        identification:
+                          type: string
+                        sector:
+                          type: string
+                        commodities:
+                          type: array
+                          items:
+                            type: string
+                  count:
+                    type: integer
+                  agencies:
+                    type: integer
+                    description: Total number of agencies
+                  companies:
+                    type: integer
+                    description: Total number of companies (note that unlike agencies companies are not shared between summary data entries)
+                  companies_with_identification:
+                    type: integer
+                  companies_with_sector:
+                    type: integer
+                  companies_with_commodities:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/organisation/{id}':
+    get:
+      tags:
+        - Organisation v2
+      description: Fetches a single organisation and its information as a JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        country:
+                          type: string
+                        summary_data:
+                          type: array
+                          items:
+                            type: string
                         identification:
                           type: string
                         sector:
