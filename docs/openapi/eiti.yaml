@@ -1668,7 +1668,7 @@ paths:
                           type: string
                         type:
                           type: string
-                        gfc:
+                        gfs:
                           type: object
                           properties:
                             id:
@@ -1746,7 +1746,7 @@ paths:
                           type: string
                         type:
                           type: string
-                        gfc:
+                        gfs:
                           type: object
                           properties:
                             id:
@@ -1781,6 +1781,138 @@ paths:
                         revenue:
                           type: number
                         currency:
+                          type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /v2.0/revenue:
+    get:
+      tags:
+        - Revenue v2
+      description: Fetches all the revenue entries as JSON objects
+      parameters:
+        - in: query
+          name: 'filter[type]'
+          description: Allows to filter revenue entries by their type
+          schema:
+            type: string
+        - in: query
+          name: 'filter[gfs]'
+          description: Allows to filter revenue entries by their GFS code id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[organisation]'
+          description: Allows to filter revenue entries by their organisation id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[revenue]'
+          description: Allows to filter revenue entries by their revenue
+          schema:
+            type: string
+        - in: query
+          name: 'filter[currency]'
+          description: Allows to filter revenue entries by their currency
+          schema:
+            type: string
+        - in: query
+          name: 'filter[summary_data]'
+          description: Allows to filter revenue entries by their summary data id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        gfs:
+                          type: string
+                        organisation:
+                          type: string
+                        revenue:
+                          type: number
+                        currency:
+                          type: string
+                        summary_data:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/revenue/{id}':
+    get:
+      tags:
+        - Revenue v2
+      description: Fetches a single revenue entry as a JSON object
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        type:
+                          type: string
+                        gfs:
+                          type: string
+                        organisation:
+                          type: string
+                        revenue:
+                          type: number
+                        currency:
+                          type: string
+                        summary_data:
                           type: string
                   self:
                     type: object
@@ -2221,6 +2353,221 @@ paths:
                                 type: integer
                               is_required:
                                 type: integer
+                              description:
+                                type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /v2.0/validation_data:
+    get:
+      tags:
+        - Validation Data v2
+      description: 'Data about the progress of countries in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
+      parameters:
+        - in: query
+          name: 'filter[year]'
+          description: Allows to filter score data by their year
+          schema:
+            type: string
+        - in: query
+          name: 'filter[country]'
+          description: Allows to filter score data by their country id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[score_req_values]'
+          description: Allows to filter score data by their score requirement values id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        year:
+                          type: integer
+                        board_decision_url:
+                          type: string
+                        validation_documentation:
+                          type: string
+                        country:
+                          type: string
+                        validation_date:
+                          type: string
+                        overall_progress:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            score_req:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                requirement:
+                                  type: string
+                                category:
+                                  type: string
+                            progress_value:
+                              type: integer
+                            is_applicable:
+                              type: boolean
+                            is_required:
+                              type: boolean
+                            description:
+                              type: string
+                        score_req_values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              score_req:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  name:
+                                    type: string
+                                  requirement:
+                                    type: string
+                                  category:
+                                    type: string
+                              progress_value:
+                                type: integer
+                              is_applicable:
+                                type: boolean
+                              is_required:
+                                type: boolean
+                              description:
+                                type: string
+                  count:
+                    type: integer
+                  validation_data_description:
+                    type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/validation_data/{id}':
+    get:
+      tags:
+        - Validation Data v2
+      description: 'Data about the progress of a country in a specific year in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.'
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        year:
+                          type: integer
+                        board_decision_url:
+                          type: string
+                        validation_documentation:
+                          type: string
+                        country:
+                          type: string
+                        validation_date:
+                          type: string
+                        overall_progress:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            score_req:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                requirement:
+                                  type: string
+                                category:
+                                  type: string
+                            progress_value:
+                              type: integer
+                            is_applicable:
+                              type: boolean
+                            is_required:
+                              type: boolean
+                            description:
+                              type: string
+                        score_req_values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              score_req:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  name:
+                                    type: string
+                                  requirement:
+                                    type: string
+                                  category:
+                                    type: string
+                              progress_value:
+                                type: integer
+                              is_applicable:
+                                type: boolean
+                              is_required:
+                                type: boolean
                               description:
                                 type: string
                   self:
@@ -2868,6 +3215,337 @@ paths:
                                 type: number
                               original_currency:
                                 type: string
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  /v2.0/summary_data:
+    get:
+      tags:
+        - Summary Data v2
+      description: 'Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
+      parameters:
+        - in: query
+          name: 'filter[links]'
+          description: Allows to filter summary data by their links URL
+          schema:
+            type: string
+        - in: query
+          name: 'filter[government_entities_nr]'
+          description: Allows to filter summary data by their government entities number
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[company_entities_nr]'
+          description: Allows to filter summary data by their company entities number
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[year_start]'
+          description: Allows to filter summary data by their start date (YYYY-MM-DD)
+          schema:
+            type: string
+        - in: query
+          name: 'filter[year_end]'
+          description: Allows to filter summary data by their end date (YYYY-MM-DD)
+          schema:
+            type: string
+        - in: query
+          name: 'filter[created]'
+          description: Allows to filter summary data by their created date (ISO 8601 format, mismatch with display)
+          schema:
+            type: string
+        - in: query
+          name: 'filter[changed]'
+          description: Allows to filter summary data by their changed date (ISO 8601 format, mismatch with display)
+          schema:
+            type: string
+        - in: query
+          name: 'filter[sector_oil]'
+          description: Allows to filter summary data by their oil sector (0, 1)
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[sector_mining]'
+          description: Allows to filter summary data by their mining sector (0, 1)
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[sector_gas]'
+          description: Allows to filter summary data by their gas sector (0, 1)
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[sector_other]'
+          description: Allows to filter summary data by their other sectors
+          schema:
+            type: string
+        - in: query
+          name: 'filter[report_file]'
+          description: Allows to filter summary data by their report file id
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[country]'
+          description: Allows to filter summary data by their country id
+          schema:
+            type: string
+        - in: query
+          name: 'filter[indicator_values]'
+          description: Allows to filter summary data by their indicator values id
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[revenue_government]'
+          description: Allows to filter summary data by their government revenue id
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[revenue_company]'
+          description: Allows to filter summary data by their company revenue id
+          schema:
+            type: integer
+        - in: query
+          name: 'filter[currency_rate]'
+          description: Allows to filter summary data by their currency rate
+          schema:
+            type: number
+        - in: query
+          name: 'filter[currency_code]'
+          description: Allows to filter summary data by their currency code
+          schema:
+            type: string
+        - in: query
+          name: 'filter[company_identifier_name]'
+          description: Allows to filter summary data by their company identifier name
+          schema:
+            type: string
+        - in: query
+          name: 'filter[company_identifier_name_register]'
+          description: Allows to filter summary data by their company identifier name register
+          schema:
+            type: string
+        - in: query
+          name: 'filter[company_identifier_register_url]'
+          description: Allows to filter summary data by their company identifier register url
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        links:
+                          type: array
+                          items:
+                            type: string
+                        government_entities_nr:
+                          type: number
+                        company_entities_nr:
+                          type: number
+                        year_start:
+                          type: string
+                        year_end:
+                          type: string
+                        created:
+                          type: string
+                        changed:
+                          type: string
+                        sector_oil:
+                          type: boolean
+                        sector_mining:
+                          type: boolean
+                        sector_gas:
+                          type: boolean
+                        sector_other:
+                          type: string
+                        report_file:
+                          type: string
+                        country:
+                          type: string
+                        indicator_values:
+                          type: array
+                          items:
+                            type: array
+                            items:
+                              type: string
+                        revenue_government:
+                          type: array
+                          items:
+                            type: string
+                        revenue_company:
+                          type: array
+                          items:
+                            type: string
+                        contact:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                            email:
+                              organisation: string
+                        currency_rate:
+                          type: number
+                        currency_code:
+                          type: string
+                        disaggregated:
+                          type: object
+                          properties:
+                            project:
+                              type: boolean
+                            revenue_stream:
+                              type: boolean
+                            company:
+                              type: boolean
+                        revenue_government_sum:
+                          type: number
+                        revenue_company_sum:
+                          type: number
+                        company_identifier_name:
+                          type: string
+                        company_identifier_name_register:
+                          type: string
+                        company_identifier_register_url:
+                          type: string
+                  count:
+                    type: integer
+                  self:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+                  next:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      href:
+                        type: string
+  '/v2.0/summary_data/{id}':
+    get:
+      tags:
+        - Summary Data v2
+      description: 'Fetches a single summary data entry. Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.'
+      parameters:
+        - in: path
+          name: id
+          description: ''
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        self:
+                          type: string
+                        links:
+                          type: array
+                          items:
+                            type: string
+                        government_entities_nr:
+                          type: number
+                        company_entities_nr:
+                          type: number
+                        year_start:
+                          type: string
+                        year_end:
+                          type: string
+                        created:
+                          type: string
+                        changed:
+                          type: string
+                        sector_oil:
+                          type: boolean
+                        sector_mining:
+                          type: boolean
+                        sector_gas:
+                          type: boolean
+                        sector_other:
+                          type: string
+                        report_file:
+                          type: string
+                        country:
+                          type: string
+                        indicator_values:
+                          type: array
+                          items:
+                            type: array
+                            items:
+                              type: string
+                        revenue_government:
+                          type: array
+                          items:
+                            type: string
+                        revenue_company:
+                          type: array
+                          items:
+                            type: string
+                        contact:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                            email:
+                              organisation: string
+                        currency_rate:
+                          type: number
+                        currency_code:
+                          type: string
+                        disaggregated:
+                          type: object
+                          properties:
+                            project:
+                              type: boolean
+                            revenue_stream:
+                              type: boolean
+                            company:
+                              type: boolean
+                        revenue_government_sum:
+                          type: number
+                        revenue_company_sum:
+                          type: number
+                        company_identifier_name:
+                          type: string
+                        company_identifier_name_register:
+                          type: string
+                        company_identifier_register_url:
+                          type: string
                   self:
                     type: object
                     properties:

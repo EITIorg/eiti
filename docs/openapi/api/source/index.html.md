@@ -4924,7 +4924,7 @@ Fetches all the organisations and their information as JSON objects
   ],
   "count": 0,
   "agencies": 0,
-  "copanies": 0,
+  "companies": 0,
   "companies_with_identification": 0,
   "companies_with_sector": 0,
   "companies_with_commodities": 0,
@@ -4963,7 +4963,7 @@ Status Code **200**
 |»» commodities|[string]|false|No description|
 |» count|integer|false|No description|
 |» agencies|integer|false|Total number of agencies|
-|» copanies|integer|false|Total number of companies (note that unlike agencies companies are not shared between summary data entries)|
+|» companies|integer|false|Total number of companies (note that unlike agencies companies are not shared between summary data entries)|
 |» companies_with_identification|integer|false|No description|
 |» companies_with_sector|integer|false|No description|
 |» companies_with_commodities|integer|false|No description|
@@ -5337,7 +5337,7 @@ Fetches all the revenue entries as JSON objects
       "label": "string",
       "self": "string",
       "type": "string",
-      "gfc": {
+      "gfs": {
         "id": 0,
         "label": "string",
         "self": "string",
@@ -5384,7 +5384,7 @@ Status Code **200**
 |»» label|string|false|No description|
 |»» self|string|false|No description|
 |»» type|string|false|No description|
-|»» gfc|object|false|No description|
+|»» gfs|object|false|No description|
 |»»» id|integer|false|No description|
 |»»» label|string|false|No description|
 |»»» self|string|false|No description|
@@ -5562,7 +5562,7 @@ Fetches a single revenue entry as a JSON object
       "label": "string",
       "self": "string",
       "type": "string",
-      "gfc": {
+      "gfs": {
         "id": 0,
         "label": "string",
         "self": "string",
@@ -5607,7 +5607,7 @@ Status Code **200**
 |»» label|string|false|No description|
 |»» self|string|false|No description|
 |»» type|string|false|No description|
-|»» gfc|object|false|No description|
+|»» gfs|object|false|No description|
 |»»» id|integer|false|No description|
 |»»» label|string|false|No description|
 |»»» self|string|false|No description|
@@ -5624,6 +5624,414 @@ Status Code **200**
 |»»» chnaged|integer|false|No description|
 |»» revenue|number|false|No description|
 |»» currency|string|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Revenue-v2">Revenue v2</h1>
+
+## get__v2.0_revenue
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/revenue \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/revenue HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/revenue',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/revenue',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/revenue',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/revenue', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/revenue");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/revenue", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/revenue`
+
+Fetches all the revenue entries as JSON objects
+
+<h3 id="get__v2.0_revenue-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[type]|query|string|false|Allows to filter revenue entries by their type|
+|filter[gfs]|query|string|false|Allows to filter revenue entries by their GFS code id|
+|filter[organisation]|query|string|false|Allows to filter revenue entries by their organisation id|
+|filter[revenue]|query|string|false|Allows to filter revenue entries by their revenue|
+|filter[currency]|query|string|false|Allows to filter revenue entries by their currency|
+|filter[summary_data]|query|string|false|Allows to filter revenue entries by their summary data id|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "gfs": "string",
+      "organisation": "string",
+      "revenue": 0,
+      "currency": "string",
+      "summary_data": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_revenue-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_revenue-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» gfs|string|false|No description|
+|»» organisation|string|false|No description|
+|»» revenue|number|false|No description|
+|»» currency|string|false|No description|
+|»» summary_data|string|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+|» next|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_revenue_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/revenue/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/revenue/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/revenue/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/revenue/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/revenue/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/revenue/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/revenue/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/revenue/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/revenue/{id}`
+
+Fetches a single revenue entry as a JSON object
+
+<h3 id="get__v2.0_revenue_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "type": "string",
+      "gfs": "string",
+      "organisation": "string",
+      "revenue": 0,
+      "currency": "string",
+      "summary_data": "string"
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_revenue_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_revenue_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» type|string|false|No description|
+|»» gfs|string|false|No description|
+|»» organisation|string|false|No description|
+|»» revenue|number|false|No description|
+|»» currency|string|false|No description|
+|»» summary_data|string|false|No description|
 |» self|object|false|No description|
 |»» title|string|false|No description|
 |»» href|string|false|No description|
@@ -6480,6 +6888,509 @@ Status Code **200**
 |»»»»»»»»»»» self|object|false|No description|
 |»»»»»»»»»»»» title|string|false|No description|
 |»»»»»»»»»»»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Validation-Data-v2">Validation Data v2</h1>
+
+## get__v2.0_validation_data
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/validation_data \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/validation_data HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/validation_data',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/validation_data',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/validation_data',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/validation_data', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/validation_data");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/validation_data", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/validation_data`
+
+Data about the progress of countries in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.
+
+<h3 id="get__v2.0_validation_data-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[year]|query|string|false|Allows to filter score data by their year|
+|filter[country]|query|string|false|Allows to filter score data by their country id|
+|filter[score_req_values]|query|string|false|Allows to filter score data by their score requirement values id|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "year": 0,
+      "board_decision_url": "string",
+      "validation_documentation": "string",
+      "country": "string",
+      "validation_date": "string",
+      "overall_progress": {
+        "id": 0,
+        "score_req": {
+          "id": 0,
+          "name": "string",
+          "requirement": "string",
+          "category": "string"
+        },
+        "progress_value": 0,
+        "is_applicable": true,
+        "is_required": true,
+        "description": "string"
+      },
+      "score_req_values": [
+        {
+          "id": 0,
+          "score_req": {
+            "id": 0,
+            "name": "string",
+            "requirement": "string",
+            "category": "string"
+          },
+          "progress_value": 0,
+          "is_applicable": true,
+          "is_required": true,
+          "description": "string"
+        }
+      ]
+    }
+  ],
+  "count": 0,
+  "validation_data_description": "string",
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_validation_data-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_validation_data-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» year|integer|false|No description|
+|»» board_decision_url|string|false|No description|
+|»» validation_documentation|string|false|No description|
+|»» country|string|false|No description|
+|»» validation_date|string|false|No description|
+|»» overall_progress|object|false|No description|
+|»»» id|integer|false|No description|
+|»»» score_req|object|false|No description|
+|»»»» id|integer|false|No description|
+|»»»» name|string|false|No description|
+|»»»» requirement|string|false|No description|
+|»»»» category|string|false|No description|
+|»»» progress_value|integer|false|No description|
+|»»» is_applicable|boolean|false|No description|
+|»»» is_required|boolean|false|No description|
+|»»» description|string|false|No description|
+|»» score_req_values|[object]|false|No description|
+|»»» id|integer|false|No description|
+|»»» score_req|object|false|No description|
+|»»»» id|integer|false|No description|
+|»»»» name|string|false|No description|
+|»»»» requirement|string|false|No description|
+|»»»» category|string|false|No description|
+|»»» progress_value|integer|false|No description|
+|»»» is_applicable|boolean|false|No description|
+|»»» is_required|boolean|false|No description|
+|»»» description|string|false|No description|
+|»» count|integer|false|No description|
+|»» validation_data_description|string|false|No description|
+|»» self|object|false|No description|
+|»»» title|string|false|No description|
+|»»» href|string|false|No description|
+|»» next|object|false|No description|
+|»»» title|string|false|No description|
+|»»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_validation_data_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/validation_data/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/validation_data/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/validation_data/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/validation_data/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/validation_data/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/validation_data/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/validation_data/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/validation_data/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/validation_data/{id}`
+
+Data about the progress of a country in a specific year in meeting the requirements of the EITI Standard. All implementing countries are held to the same global standard. Every country that joins the EITI as a member is assessed against the EITI Standard in a process called Validation. EITI Validation reviews the country’s progress against the EITI Requirements, analyses the impact, and makes recommendations for strengthening the process and improving the governance of the sector. Depending on the outcome of its Validation, the country is re-assessed anywhere between three months and three years. This encourages continuous improvement and safeguards the integrity of the EITI. The EITI Board, through the EITI Secretariat, oversees the Validation process. The Board then ascribes the country as having made satisfactory progress (sometimes referred to as ‘compliance’), meaningful progress, inadequate progress or no progress.
+
+<h3 id="get__v2.0_validation_data_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "string",
+      "self": "string",
+      "year": 0,
+      "board_decision_url": "string",
+      "validation_documentation": "string",
+      "country": "string",
+      "validation_date": "string",
+      "overall_progress": {
+        "id": 0,
+        "score_req": {
+          "id": 0,
+          "name": "string",
+          "requirement": "string",
+          "category": "string"
+        },
+        "progress_value": 0,
+        "is_applicable": true,
+        "is_required": true,
+        "description": "string"
+      },
+      "score_req_values": [
+        {
+          "id": 0,
+          "score_req": {
+            "id": 0,
+            "name": "string",
+            "requirement": "string",
+            "category": "string"
+          },
+          "progress_value": 0,
+          "is_applicable": true,
+          "is_required": true,
+          "description": "string"
+        }
+      ]
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_validation_data_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_validation_data_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|integer|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» year|integer|false|No description|
+|»» board_decision_url|string|false|No description|
+|»» validation_documentation|string|false|No description|
+|»» country|string|false|No description|
+|»» validation_date|string|false|No description|
+|»» overall_progress|object|false|No description|
+|»»» id|integer|false|No description|
+|»»» score_req|object|false|No description|
+|»»»» id|integer|false|No description|
+|»»»» name|string|false|No description|
+|»»»» requirement|string|false|No description|
+|»»»» category|string|false|No description|
+|»»» progress_value|integer|false|No description|
+|»»» is_applicable|boolean|false|No description|
+|»»» is_required|boolean|false|No description|
+|»»» description|string|false|No description|
+|»» score_req_values|[object]|false|No description|
+|»»» id|integer|false|No description|
+|»»» score_req|object|false|No description|
+|»»»» id|integer|false|No description|
+|»»»» name|string|false|No description|
+|»»»» requirement|string|false|No description|
+|»»»» category|string|false|No description|
+|»»» progress_value|integer|false|No description|
+|»»» is_applicable|boolean|false|No description|
+|»»» is_required|boolean|false|No description|
+|»»» description|string|false|No description|
+|»» self|object|false|No description|
+|»»» title|string|false|No description|
+|»»» href|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication
@@ -7483,6 +8394,549 @@ Status Code **200**
 |»»»»»»»»» self|object|false|No description|
 |»»»»»»»»»» title|string|false|No description|
 |»»»»»»»»»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="EITI---API-documentation-Summary-Data-v2">Summary Data v2</h1>
+
+## get__v2.0_summary_data
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/summary_data \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/summary_data HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/summary_data',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/summary_data',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/summary_data',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/summary_data', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/summary_data");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/summary_data", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/summary_data`
+
+Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.
+
+<h3 id="get__v2.0_summary_data-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|filter[links]|query|string|false|Allows to filter summary data by their links URL|
+|filter[government_entities_nr]|query|integer|false|Allows to filter summary data by their government entities number|
+|filter[company_entities_nr]|query|integer|false|Allows to filter summary data by their company entities number|
+|filter[year_start]|query|string|false|Allows to filter summary data by their start date (YYYY-MM-DD)|
+|filter[year_end]|query|string|false|Allows to filter summary data by their end date (YYYY-MM-DD)|
+|filter[created]|query|string|false|Allows to filter summary data by their created date (ISO 8601 format, mismatch with display)|
+|filter[changed]|query|string|false|Allows to filter summary data by their changed date (ISO 8601 format, mismatch with display)|
+|filter[sector_oil]|query|integer|false|Allows to filter summary data by their oil sector (0, 1)|
+|filter[sector_mining]|query|integer|false|Allows to filter summary data by their mining sector (0, 1)|
+|filter[sector_gas]|query|integer|false|Allows to filter summary data by their gas sector (0, 1)|
+|filter[sector_other]|query|string|false|Allows to filter summary data by their other sectors|
+|filter[report_file]|query|integer|false|Allows to filter summary data by their report file id|
+|filter[country]|query|string|false|Allows to filter summary data by their country id|
+|filter[indicator_values]|query|integer|false|Allows to filter summary data by their indicator values id|
+|filter[revenue_government]|query|integer|false|Allows to filter summary data by their government revenue id|
+|filter[revenue_company]|query|integer|false|Allows to filter summary data by their company revenue id|
+|filter[currency_rate]|query|number|false|Allows to filter summary data by their currency rate|
+|filter[currency_code]|query|string|false|Allows to filter summary data by their currency code|
+|filter[company_identifier_name]|query|string|false|Allows to filter summary data by their company identifier name|
+|filter[company_identifier_name_register]|query|string|false|Allows to filter summary data by their company identifier name register|
+|filter[company_identifier_register_url]|query|string|false|Allows to filter summary data by their company identifier register url|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "links": [
+        "string"
+      ],
+      "government_entities_nr": 0,
+      "company_entities_nr": 0,
+      "year_start": "string",
+      "year_end": "string",
+      "created": "string",
+      "changed": "string",
+      "sector_oil": true,
+      "sector_mining": true,
+      "sector_gas": true,
+      "sector_other": "string",
+      "report_file": "string",
+      "country": "string",
+      "indicator_values": [
+        [
+          "string"
+        ]
+      ],
+      "revenue_government": [
+        "string"
+      ],
+      "revenue_company": [
+        "string"
+      ],
+      "contact": {
+        "name": "string",
+        "email": null
+      },
+      "currency_rate": 0,
+      "currency_code": "string",
+      "disaggregated": {
+        "project": true,
+        "revenue_stream": true,
+        "company": true
+      },
+      "revenue_government_sum": 0,
+      "revenue_company_sum": 0,
+      "company_identifier_name": "string",
+      "company_identifier_name_register": "string",
+      "company_identifier_register_url": "string"
+    }
+  ],
+  "count": 0,
+  "self": {
+    "title": "string",
+    "href": "string"
+  },
+  "next": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_summary_data-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_summary_data-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» links|[string]|false|No description|
+|»» government_entities_nr|number|false|No description|
+|»» company_entities_nr|number|false|No description|
+|»» year_start|string|false|No description|
+|»» year_end|string|false|No description|
+|»» created|string|false|No description|
+|»» changed|string|false|No description|
+|»» sector_oil|boolean|false|No description|
+|»» sector_mining|boolean|false|No description|
+|»» sector_gas|boolean|false|No description|
+|»» sector_other|string|false|No description|
+|»» report_file|string|false|No description|
+|»» country|string|false|No description|
+|»» indicator_values|[array]|false|No description|
+|»» revenue_government|[string]|false|No description|
+|»» revenue_company|[string]|false|No description|
+|»» contact|object|false|No description|
+|»»» name|string|false|No description|
+|»»» email|any|false|No description|
+|»» currency_rate|number|false|No description|
+|»» currency_code|string|false|No description|
+|»» disaggregated|object|false|No description|
+|»»» project|boolean|false|No description|
+|»»» revenue_stream|boolean|false|No description|
+|»»» company|boolean|false|No description|
+|»» revenue_government_sum|number|false|No description|
+|»» revenue_company_sum|number|false|No description|
+|»» company_identifier_name|string|false|No description|
+|»» company_identifier_name_register|string|false|No description|
+|»» company_identifier_register_url|string|false|No description|
+|» count|integer|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+|» next|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__v2.0_summary_data_{id}
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://eiti.org/api/v2.0/summary_data/{id} \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://eiti.org/api/v2.0/summary_data/{id} HTTP/1.1
+Host: eiti.org
+
+Accept: application/json
+
+```
+
+```javascript
+var headers = {
+  'Accept':'application/json'
+
+};
+
+$.ajax({
+  url: 'https://eiti.org/api/v2.0/summary_data/{id}',
+  method: 'get',
+
+  headers: headers,
+  success: function(data) {
+    console.log(JSON.stringify(data));
+  }
+})
+
+```
+
+```javascript--nodejs
+const request = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json'
+
+};
+
+fetch('https://eiti.org/api/v2.0/summary_data/{id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://eiti.org/api/v2.0/summary_data/{id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://eiti.org/api/v2.0/summary_data/{id}', params={
+
+}, headers = headers)
+
+print r.json()
+
+```
+
+```java
+URL obj = new URL("https://eiti.org/api/v2.0/summary_data/{id}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://eiti.org/api/v2.0/summary_data/{id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v2.0/summary_data/{id}`
+
+Fetches a single summary data entry. Summary data is EITI’s tool for collecting and publishing data from EITI Reports in structured way. The summary data files are excel files, which are filled out by our implementing countries using the Summary Data Template. The national secretariats submit one excel-file for every fiscal year covered by an EITI Report.
+
+<h3 id="get__v2.0_summary_data_{id}-parameters">Parameters</h3>
+
+|Parameter|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|false|No description|
+
+> Example responses
+
+```json
+{
+  "data": [
+    {
+      "id": "string",
+      "label": "string",
+      "self": "string",
+      "links": [
+        "string"
+      ],
+      "government_entities_nr": 0,
+      "company_entities_nr": 0,
+      "year_start": "string",
+      "year_end": "string",
+      "created": "string",
+      "changed": "string",
+      "sector_oil": true,
+      "sector_mining": true,
+      "sector_gas": true,
+      "sector_other": "string",
+      "report_file": "string",
+      "country": "string",
+      "indicator_values": [
+        [
+          "string"
+        ]
+      ],
+      "revenue_government": [
+        "string"
+      ],
+      "revenue_company": [
+        "string"
+      ],
+      "contact": {
+        "name": "string",
+        "email": null
+      },
+      "currency_rate": 0,
+      "currency_code": "string",
+      "disaggregated": {
+        "project": true,
+        "revenue_stream": true,
+        "company": true
+      },
+      "revenue_government_sum": 0,
+      "revenue_company_sum": 0,
+      "company_identifier_name": "string",
+      "company_identifier_name_register": "string",
+      "company_identifier_register_url": "string"
+    }
+  ],
+  "self": {
+    "title": "string",
+    "href": "string"
+  }
+}
+```
+
+<h3 id="get__v2.0_summary_data_{id}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+
+<h3 id="get__v2.0_summary_data_{id}-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|» data|[object]|false|No description|
+|»» id|string|false|No description|
+|»» label|string|false|No description|
+|»» self|string|false|No description|
+|»» links|[string]|false|No description|
+|»» government_entities_nr|number|false|No description|
+|»» company_entities_nr|number|false|No description|
+|»» year_start|string|false|No description|
+|»» year_end|string|false|No description|
+|»» created|string|false|No description|
+|»» changed|string|false|No description|
+|»» sector_oil|boolean|false|No description|
+|»» sector_mining|boolean|false|No description|
+|»» sector_gas|boolean|false|No description|
+|»» sector_other|string|false|No description|
+|»» report_file|string|false|No description|
+|»» country|string|false|No description|
+|»» indicator_values|[array]|false|No description|
+|»» revenue_government|[string]|false|No description|
+|»» revenue_company|[string]|false|No description|
+|»» contact|object|false|No description|
+|»»» name|string|false|No description|
+|»»» email|any|false|No description|
+|»» currency_rate|number|false|No description|
+|»» currency_code|string|false|No description|
+|»» disaggregated|object|false|No description|
+|»»» project|boolean|false|No description|
+|»»» revenue_stream|boolean|false|No description|
+|»»» company|boolean|false|No description|
+|»» revenue_government_sum|number|false|No description|
+|»» revenue_company_sum|number|false|No description|
+|»» company_identifier_name|string|false|No description|
+|»» company_identifier_name_register|string|false|No description|
+|»» company_identifier_register_url|string|false|No description|
+|» self|object|false|No description|
+|»» title|string|false|No description|
+|»» href|string|false|No description|
 
 <aside class="success">
 This operation does not require authentication

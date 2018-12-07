@@ -79,7 +79,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['company_identifier_name_register'] = array(
       'property' => 'company_id_register',
     );
-    $public_fields['company_identifier_register_URL'] = array(
+    $public_fields['company_identifier_register_url'] = array(
       'property' => 'company_id_register_url',
     );
 
