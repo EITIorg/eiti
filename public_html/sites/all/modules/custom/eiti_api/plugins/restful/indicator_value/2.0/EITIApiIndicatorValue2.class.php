@@ -23,13 +23,6 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
       'property' => 'indicator_id',
       'callback' => array($this, 'getIndicatorApiUrl'),
     );
-    $public_fields['value_boolean'] = array(
-      'property' => 'value_boolean',
-      'process_callbacks' => array(array($this, 'booleanToText')),
-    );
-    $public_fields['value_text'] = array(
-      'property' => 'value_text',
-    );
     $public_fields['source'] = array(
       'property' => 'source',
     );
@@ -38,6 +31,18 @@ class EITIApiIndicatorValue2 extends EITIApiIndicatorValue {
     );
 
     return $public_fields;
+  }
+
+  /**
+   * Overrides EITIApiIndicatorValue::getValue().
+   */
+  public function getValue($value_emw) {
+    $entity = $value_emw->value();
+    $value = $entity->getValue();
+    if (isset($entity->indicator->type) && $entity->indicator->type == 'boolean') {
+      $value = $this->booleanToText($value);
+    }
+    return $value;
   }
 
   /**
