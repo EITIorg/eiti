@@ -420,6 +420,25 @@ function eiti_migration_checkEmptyValue($value) {
 }
 
 /**
+ * Based on findBestMatch() in eiti_migration.generic.inc.
+ */
+function eiti_migration_findBestMatch($needle, $haystack) {
+  $matchRating = array();
+  foreach ($haystack as $id => $obj) {
+    $match_percent = 0;
+    similar_text($needle, $obj->name, $match_percent);
+    $matchRating[$id] = $match_percent;
+  }
+  asort($matchRating);
+  end($matchRating);
+  $bestMatchingID = key($matchRating);
+  if ($matchRating[$bestMatchingID] > 95) {
+    return $bestMatchingID;
+  }
+  return FALSE;
+}
+
+/**
  * Implements hook_update_dependencies().
  */
 function eiti_migration_update_dependencies() {
