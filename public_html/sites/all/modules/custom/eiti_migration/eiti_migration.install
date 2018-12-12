@@ -381,3 +381,170 @@ function eiti_migration_update_7005(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['progress'] / $sandbox['max']);
   }
 }
+
+/**
+ * Fix some indicators.
+ */
+function eiti_migration_update_7006(&$sandbox) {
+  db_update('eiti_indicator')
+    ->fields(array('type' => 'numeric'))
+    ->condition('name', 'If yes, what was the total revenue received?')
+    ->execute();
+}
+
+/**
+ * Update some faulty indicator values.
+ */
+function eiti_migration_update_7007(&$sandbox) {
+  drupal_set_time_limit(3600); // 1 hour.
+  if (!isset($sandbox['progress'])) {
+    // We'll keep the progress saved in a variable so it can be restarted where it left off if such a need arises.
+    $summary_data = variable_get('eiti_migration_temp_summary_data', FALSE);
+
+    if (!$summary_data) {
+      $summary_data = db_select('eiti_summary_data', 'sd');
+      $summary_data->innerJoin('field_data_field_sd_report_file', 'sd_rf', 'sd.id = sd_rf.entity_id');
+      $summary_data->innerJoin('file_managed', 'fm', 'sd_rf.field_sd_report_file_fid = fm.fid');
+      $summary_data->fields('sd', array('id'))
+        ->fields('fm', array('uri'))
+        ->orderBy('id', 'ASC');
+      $summary_data =  $summary_data->execute()->fetchAll();
+      variable_set('eiti_migration_temp_summary_data', $summary_data);
+    }
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = count($summary_data);
+    $sandbox['summary_data'] = $summary_data;
+  }
+
+  if ($sandbox['summary_data']) {
+    $limit = 10;
+    $counter = 0;
+    libraries_load('PHPExcel');
+
+    $groups = eitientity_indicator_get_by_bundle('group');
+    $numerics = eitientity_indicator_get_by_bundle('numeric');
+    $valid_indicators = array();
+    foreach ($numerics as $numeric) {
+      if ($numeric->name === 'If yes, what was the total revenue received?') {
+        $valid_indicators[$numeric->id] = $numeric;
+      }
+    }
+
+    foreach ($sandbox['summary_data'] as $sd_key => $sd) {
+      $counter++;
+      if (file_exists($sd->uri)) {
+        watchdog('eiti_migration', 'Summary data ' . $sd->id . ' update start.');
+
+        $file_path = drupal_realpath($sd->uri);
+        $type = PHPExcel_IOFactory::identify($file_path);
+        $reader = PHPExcel_IOFactory::createReader($type);
+        $reader->setReadDataOnly(TRUE);
+        $reader->setLoadAllSheets();
+        $excel = $reader->load($file_path);
+        $contextualSheet = eiti_migration_getSheet($excel, 'context');
+
+        if (!empty($contextualSheet)) {
+          $summary_data = entity_load_single('summary_data', $sd->id);
+          $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+          $rate_to_usd = $summary_data_emw->currency_rate->value();
+
+          // Now let's parse the file.
+          $highestRow = $contextualSheet->getHighestRow();
+
+          // Defaults.
+          $start_row = 4;
+          $start_column = 1;
+
+          // Find the "Entry" and break out (Adjusting defaults).
+          // Find the "Entry" (Adjusting defaults).
+          if ($position = eiti_migration_findPositionInSheet($contextualSheet, array('Entry'))) {
+            $start_row = $position['row'] + 1;
+            $start_column = $position['column'] - 2;
+          }
+
+          // Also we have to make sure that there's a "Unit" column.
+          $unitColumnFound = (eiti_migration_findPositionInSheet($contextualSheet, array('unit')) !== FALSE);
+          if (!$unitColumnFound) {
+            continue;
+          }
+
+          // Now let's walk through the right cells.
+          $lastRememberedGroup = '';
+          for ($row = $start_row; $row < $highestRow; $row++) {
+            $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
+            $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
+
+            // Make sure that this indicator qualifies for fixing.
+            $group_id = eiti_migration_findBestMatch($groupCellValue, $groups);
+            $indicators_in_group = array();
+            foreach ($valid_indicators as $id => $indicator) {
+              if ($indicator->parent == $group_id) {
+                $indicators_in_group[$id] = $indicator;
+              }
+            }
+            $indicator_id = eiti_migration_findBestMatch($subgroupCellValue, $indicators_in_group);
+            if (!$indicator_id) {
+              continue;
+            }
+
+            $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
+            $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
+            $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
+            $valueCell = $contextualSheet->getCellByColumnAndRow($start_column + 2, $row);
+            if ($valueCell->isFormula()) {
+              $valueCellValue = trim($valueCell->getFormattedValue());
+            }
+            else {
+              $valueCellValue = trim($valueCell->getValue());
+            }
+
+            // Before we do the lookup, let's make sure that the group is correct.
+            // If it's empty (or "add rows ..."), we use the previous group-value.
+            if ($groupCellValue == '' || (stripos($groupCellValue, 'modify entry') !== FALSE)
+              || (stripos($groupCellValue, 'add rows') !== FALSE)
+              || (stripos($groupCellValue, 'add/remove') !== FALSE)) {
+              $groupCellValue = $lastRememberedGroup;
+            }
+            else {
+              $lastRememberedGroup = $groupCellValue;
+            }
+
+            if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
+              // TODO: make sure the values are properly processed like in eiti_migration.indicator_values.inc.
+              // TODO: handle data clean-up or re-use with additions so that no duplicate/orphaned records will be created.
+              // TODO: make sure migration module will be aware of these updates.
+              $indicator_value = new stdClass();
+              $indicator_value->indicator_id = $indicator_id;
+              $indicator_value->value_numeric = $valueCellValue;
+              $indicator_value->value_unit = $unitCellValue;
+              $indicator_value->original_value_numeric = $valueCellValue;
+              $indicator_value->original_value_unit = $unitCellValue;
+              $indicator_value->source = $sourceCellValue;
+              $indicator_value->comments = $commentCellValue;
+            }
+          }
+        }
+
+        // Free up memory.
+        $excel->disconnectWorksheets();
+        $excel->garbageCollect();
+        unset($excel);
+      }
+      $sandbox['progress']++;
+      unset($sandbox['summary_data'][$sd_key]);
+      variable_set('eiti_migration_temp_summary_data', $sandbox['summary_data']);
+      if ($counter >= $limit) {
+        break;
+      }
+    }
+  }
+
+  if ($sandbox['progress'] >= $sandbox['max']) {
+    $sandbox['#finished'] = TRUE;
+    variable_del('eiti_migration_temp_summary_data');
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['progress'] / $sandbox['max']);
+  }
+}
