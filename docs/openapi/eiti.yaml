@@ -765,11 +765,6 @@ paths:
           description: Allows to filter implementing countries by their local_website url
           schema:
             type: string
-        - in: query
-          name: 'filter[annual_report_file]'
-          description: Allows to filter implementing countries by their annual report file fid
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -800,8 +795,6 @@ paths:
                         leave_date:
                           type: string
                         local_website:
-                          type: string
-                        annual_report_file:
                           type: string
                         latest_validation_date:
                           type: string
@@ -863,8 +856,6 @@ paths:
                         leave_date:
                           type: string
                         local_website:
-                          type: string
-                        annual_report_file:
                           type: string
                         latest_validation_date:
                           type: string
@@ -2604,6 +2595,11 @@ paths:
           schema:
             type: string
         - in: query
+          name: 'filter[publication_date_EITI_report]'
+          description: Allows to filter summary data by their EITI report publication date timestamp
+          schema:
+            type: string
+        - in: query
           name: 'filter[year_start]'
           description: Allows to filter summary data by their start year (GMT UNIX timestamp of January 1)
           schema:
@@ -2697,6 +2693,8 @@ paths:
                           type: number
                         company_entities_nr:
                           type: number
+                        publication_date_EITI_report:
+                          type: integer
                         year_start:
                           type: string
                         year_end:
@@ -2984,6 +2982,8 @@ paths:
                           type: number
                         company_entities_nr:
                           type: number
+                        publication_date_EITI_report:
+                          type: integer
                         year_start:
                           type: string
                         year_end:
@@ -3244,6 +3244,11 @@ paths:
           schema:
             type: integer
         - in: query
+          name: 'filter[publication_date_EITI_report]'
+          description: Allows to filter summary data by their EITI report publication date (YYYY-MM-DD)
+          schema:
+            type: string
+        - in: query
           name: 'filter[year_start]'
           description: Allows to filter summary data by their start date (YYYY-MM-DD)
           schema:
@@ -3360,6 +3365,8 @@ paths:
                           type: number
                         company_entities_nr:
                           type: number
+                        publication_date_EITI_report:
+                          type: string
                         year_start:
                           type: string
                         year_end:
@@ -3480,6 +3487,8 @@ paths:
                           type: number
                         company_entities_nr:
                           type: number
+                        publication_date_EITI_report:
+                          type: string
                         year_start:
                           type: string
                         year_end:

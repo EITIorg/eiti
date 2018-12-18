@@ -36,6 +36,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $public_fields['label']['process_callbacks'][] = array($this, 'processLabel');
     $public_fields['government_entities_nr']['process_callbacks'][] = 'eiti_api_numeric_string_to_int';
     $public_fields['company_entities_nr']['process_callbacks'][] = 'eiti_api_numeric_string_to_int';
+    $public_fields['publication_date_EITI_report']['process_callbacks'][] = 'eiti_api_timestamp_to_iso_8601_partial';
     $public_fields['year_start']['process_callbacks'][] = 'eiti_api_date_to_iso_8601_partial';
     $public_fields['year_end']['process_callbacks'][] = 'eiti_api_date_to_iso_8601_partial';
     $public_fields['sector_oil']['process_callbacks'][] = 'eiti_api_value_to_boolean';
@@ -94,7 +95,12 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     foreach ($filters as $key => $filter) {
       if (isset($filter['public_field'], $filter['value'][0])) {
         // Date to timestamp.
-        if ($filter['public_field'] == 'year_start') {
+        if ($filter['public_field'] == 'publication_date_EITI_report') {
+          foreach ($filter['value'] as $k => $v) {
+            $filters[$key]['value'][$k] = strtotime($v);
+          }
+        }
+        elseif ($filter['public_field'] == 'year_start') {
           foreach ($filter['value'] as $k => $v) {
             $filters[$key]['value'][$k] = strtotime($v);
           }

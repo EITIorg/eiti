@@ -4175,13 +4175,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>Allows to filter implementing countries by their local_website url</td>
 </tr>
-<tr>
-<td>filter[annual_report_file]</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Allows to filter implementing countries by their annual report file fid</td>
-</tr>
 </tbody>
 </table>
 <blockquote>
@@ -4199,7 +4192,6 @@ System.out.println(response.toString());
       <span class="hljs-attr">"join_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"leave_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"local_website"</span>: <span class="hljs-string">"string"</span>,
-      <span class="hljs-attr">"annual_report_file"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"latest_validation_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"validation_data"</span>: [
         <span class="hljs-string">"string"</span>
@@ -4303,12 +4295,6 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»» local_website</td>
-<td>string</td>
-<td>false</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»» annual_report_file</td>
 <td>string</td>
 <td>false</td>
 <td>No description</td>
@@ -4514,7 +4500,6 @@ System.out.println(response.toString());
       <span class="hljs-attr">"join_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"leave_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"local_website"</span>: <span class="hljs-string">"string"</span>,
-      <span class="hljs-attr">"annual_report_file"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"latest_validation_date"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"validation_data"</span>: [
         <span class="hljs-string">"string"</span>
@@ -4617,12 +4602,6 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»» local_website</td>
-<td>string</td>
-<td>false</td>
-<td>No description</td>
-</tr>
-<tr>
-<td>»» annual_report_file</td>
 <td>string</td>
 <td>false</td>
 <td>No description</td>
@@ -12432,6 +12411,13 @@ System.out.println(response.toString());
 <td>Allows to filter summary data by their company entities number</td>
 </tr>
 <tr>
+<td>filter[publication_date_EITI_report]</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Allows to filter summary data by their EITI report publication date timestamp</td>
+</tr>
+<tr>
 <td>filter[year_start]</td>
 <td>query</td>
 <td>string</td>
@@ -12539,6 +12525,7 @@ System.out.println(response.toString());
       <span class="hljs-attr">"email"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"government_entities_nr"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"company_entities_nr"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"publication_date_EITI_report"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"year_start"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_end"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"created"</span>: <span class="hljs-string">"string"</span>,
@@ -12819,6 +12806,12 @@ System.out.println(response.toString());
 <tr>
 <td>»» company_entities_nr</td>
 <td>number</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» publication_date_EITI_report</td>
+<td>integer</td>
 <td>false</td>
 <td>No description</td>
 </tr>
@@ -13641,6 +13634,7 @@ System.out.println(response.toString());
       <span class="hljs-attr">"email"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"government_entities_nr"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"company_entities_nr"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"publication_date_EITI_report"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"year_start"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_end"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"created"</span>: <span class="hljs-string">"string"</span>,
@@ -13916,6 +13910,12 @@ System.out.println(response.toString());
 <tr>
 <td>»» company_entities_nr</td>
 <td>number</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» publication_date_EITI_report</td>
+<td>integer</td>
 <td>false</td>
 <td>No description</td>
 </tr>
@@ -14713,6 +14713,13 @@ System.out.println(response.toString());
 <td>Allows to filter summary data by their company entities number</td>
 </tr>
 <tr>
+<td>filter[publication_date_EITI_report]</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Allows to filter summary data by their EITI report publication date (YYYY-MM-DD)</td>
+</tr>
+<tr>
 <td>filter[year_start]</td>
 <td>query</td>
 <td>string</td>
@@ -14854,6 +14861,7 @@ System.out.println(response.toString());
       ],
       <span class="hljs-attr">"government_entities_nr"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"company_entities_nr"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"publication_date_EITI_report"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_start"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_end"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"created"</span>: <span class="hljs-string">"string"</span>,
@@ -14974,6 +14982,12 @@ System.out.println(response.toString());
 <tr>
 <td>»» company_entities_nr</td>
 <td>number</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» publication_date_EITI_report</td>
+<td>string</td>
 <td>false</td>
 <td>No description</td>
 </tr>
@@ -15339,6 +15353,7 @@ System.out.println(response.toString());
       ],
       <span class="hljs-attr">"government_entities_nr"</span>: <span class="hljs-number">0</span>,
       <span class="hljs-attr">"company_entities_nr"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"publication_date_EITI_report"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_start"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"year_end"</span>: <span class="hljs-string">"string"</span>,
       <span class="hljs-attr">"created"</span>: <span class="hljs-string">"string"</span>,
@@ -15454,6 +15469,12 @@ System.out.println(response.toString());
 <tr>
 <td>»» company_entities_nr</td>
 <td>number</td>
+<td>false</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>»» publication_date_EITI_report</td>
+<td>string</td>
 <td>false</td>
 <td>No description</td>
 </tr>

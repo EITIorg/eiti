@@ -2464,7 +2464,6 @@ Fetches all of the implementing countries and shows them as JSON objects
 |filter[join_date]|query|string|false|Allows to filter implementing countries by their joining date in YYYY-MM-DD format|
 |filter[leave_date]|query|string|false|Allows to filter implementing countries by their leaving date in YYYY-MM-DD format|
 |filter[local_website]|query|string|false|Allows to filter implementing countries by their local_website url|
-|filter[annual_report_file]|query|string|false|Allows to filter implementing countries by their annual report file fid|
 
 > Example responses
 
@@ -2481,7 +2480,6 @@ Fetches all of the implementing countries and shows them as JSON objects
       "join_date": "string",
       "leave_date": "string",
       "local_website": "string",
-      "annual_report_file": "string",
       "latest_validation_date": "string",
       "validation_data": [
         "string"
@@ -2521,7 +2519,6 @@ Status Code **200**
 |»» join_date|string|false|No description|
 |»» leave_date|string|false|No description|
 |»» local_website|string|false|No description|
-|»» annual_report_file|string|false|No description|
 |»» latest_validation_date|string|false|No description|
 |»» validation_data|[string]|false|No description|
 |»» summary_data|[string]|false|No description|
@@ -2691,7 +2688,6 @@ Fetches a single implementing country and shows it as JSON object
       "join_date": "string",
       "leave_date": "string",
       "local_website": "string",
-      "annual_report_file": "string",
       "latest_validation_date": "string",
       "validation_data": [
         "string"
@@ -2730,7 +2726,6 @@ Status Code **200**
 |»» join_date|string|false|No description|
 |»» leave_date|string|false|No description|
 |»» local_website|string|false|No description|
-|»» annual_report_file|string|false|No description|
 |»» latest_validation_date|string|false|No description|
 |»» validation_data|[string]|false|No description|
 |»» summary_data|[string]|false|No description|
@@ -7542,6 +7537,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
 |filter[email]|query|string|false|Allows to filter summary data by their email|
 |filter[government_entities_nr]|query|string|false|Allows to filter summary data by their government entities number|
 |filter[company_entities_nr]|query|string|false|Allows to filter summary data by their company entities number|
+|filter[publication_date_EITI_report]|query|string|false|Allows to filter summary data by their EITI report publication date timestamp|
 |filter[year_start]|query|string|false|Allows to filter summary data by their start year (GMT UNIX timestamp of January 1)|
 |filter[year_end]|query|string|false|Allows to filter summary data by their end year (GMT UNIX timestamp of December 31)|
 |filter[created]|query|string|false|Allows to filter summary data by their created date UNIX timestamp (mismatch with display)|
@@ -7571,6 +7567,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
       "email": "string",
       "government_entities_nr": 0,
       "company_entities_nr": 0,
+      "publication_date_EITI_report": 0,
       "year_start": "string",
       "year_end": "string",
       "created": "string",
@@ -7796,6 +7793,7 @@ Status Code **200**
 |»» email|string|false|No description|
 |»» government_entities_nr|number|false|No description|
 |»» company_entities_nr|number|false|No description|
+|»» publication_date_EITI_report|integer|false|No description|
 |»» year_start|string|false|No description|
 |»» year_end|string|false|No description|
 |»» created|string|false|No description|
@@ -8068,6 +8066,7 @@ Fetches a single summary data entry. Summary data is EITI’s tool for collectin
       "email": "string",
       "government_entities_nr": 0,
       "company_entities_nr": 0,
+      "publication_date_EITI_report": 0,
       "year_start": "string",
       "year_end": "string",
       "created": "string",
@@ -8288,6 +8287,7 @@ Status Code **200**
 |»» email|string|false|No description|
 |»» government_entities_nr|number|false|No description|
 |»» company_entities_nr|number|false|No description|
+|»» publication_date_EITI_report|integer|false|No description|
 |»» year_start|string|false|No description|
 |»» year_end|string|false|No description|
 |»» created|string|false|No description|
@@ -8544,6 +8544,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
 |filter[links]|query|string|false|Allows to filter summary data by their links URL|
 |filter[government_entities_nr]|query|integer|false|Allows to filter summary data by their government entities number|
 |filter[company_entities_nr]|query|integer|false|Allows to filter summary data by their company entities number|
+|filter[publication_date_EITI_report]|query|string|false|Allows to filter summary data by their EITI report publication date (YYYY-MM-DD)|
 |filter[year_start]|query|string|false|Allows to filter summary data by their start date (YYYY-MM-DD)|
 |filter[year_end]|query|string|false|Allows to filter summary data by their end date (YYYY-MM-DD)|
 |filter[created]|query|string|false|Allows to filter summary data by their created date (ISO 8601 format, mismatch with display)|
@@ -8577,6 +8578,7 @@ Summary data is EITI’s tool for collecting and publishing data from EITI Repor
       ],
       "government_entities_nr": 0,
       "company_entities_nr": 0,
+      "publication_date_EITI_report": "string",
       "year_start": "string",
       "year_end": "string",
       "created": "string",
@@ -8647,6 +8649,7 @@ Status Code **200**
 |»» links|[string]|false|No description|
 |»» government_entities_nr|number|false|No description|
 |»» company_entities_nr|number|false|No description|
+|»» publication_date_EITI_report|string|false|No description|
 |»» year_start|string|false|No description|
 |»» year_end|string|false|No description|
 |»» created|string|false|No description|
@@ -8842,6 +8845,7 @@ Fetches a single summary data entry. Summary data is EITI’s tool for collectin
       ],
       "government_entities_nr": 0,
       "company_entities_nr": 0,
+      "publication_date_EITI_report": "string",
       "year_start": "string",
       "year_end": "string",
       "created": "string",
@@ -8907,6 +8911,7 @@ Status Code **200**
 |»» links|[string]|false|No description|
 |»» government_entities_nr|number|false|No description|
 |»» company_entities_nr|number|false|No description|
+|»» publication_date_EITI_report|string|false|No description|
 |»» year_start|string|false|No description|
 |»» year_end|string|false|No description|
 |»» created|string|false|No description|

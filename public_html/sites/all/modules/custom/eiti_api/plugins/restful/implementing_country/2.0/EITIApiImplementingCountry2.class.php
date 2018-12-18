@@ -50,6 +50,7 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     // Moved to summary_data as revenue_government_sum and revenue_company_sum.
     unset($public_fields['revenues']);
 
+    unset($public_fields['annual_report_file']);
     unset($public_fields['latest_validation_link']);
     unset($public_fields['latest_validation_url']);
 
