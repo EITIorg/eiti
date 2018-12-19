@@ -225,11 +225,17 @@ function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results,
  *
  * Based on findPositionInSheet() in eiti_migration.spreadsheet.inc.
  */
-function eiti_migration_findPositionInSheet($sheet, $values, $final = NULL) {
+function eiti_migration_findPositionInSheet($sheet, $values, $final = NULL, $max_row = NULL, $max_col = NULL) {
   if (!empty($sheet)) {
     $highestRow = $sheet->getHighestRow();
     $highestColumn = $sheet->getHighestColumn();
     $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+    if ($max_row) {
+      $highestRow = $max_row;
+    }
+    if ($max_col) {
+      $highestColumnIndex = $max_col;
+    }
     for ($row = 0; $row < $highestRow; $row++) {
       for ($column = 0; $column < $highestColumnIndex; $column++) {
         $cellValue = trim($sheet->getCellByColumnAndRow($column, $row)->getValue());
@@ -444,6 +450,9 @@ function eiti_migration_findBestMatch($needle, $haystack) {
 function eiti_migration_update_dependencies() {
   $dependencies['eiti_migration'][7004] = array(
     'eitientity_organisation' => 7002,
+  );
+  $dependencies['eiti_migration'][7005] = array(
+    'eitientity_summary_data' => 7002,
   );
   return $dependencies;
 }

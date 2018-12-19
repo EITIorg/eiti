@@ -528,3 +528,54 @@ function eitientity_implementing_country_tokens($type, $tokens, array $data = ar
 
   return $replacements;
 }
+
+/**
+ * Returns country ISO2 code given it's ID.
+ */
+function eitientity_implementing_country_get_iso2($id) {
+  $country_id_iso = &drupal_static(__FUNCTION__);
+  if (!isset($country_id_iso)) {
+    $query = db_select('eiti_implementing_country', 'c');
+    $query->fields('c', array('id', 'iso'));
+    $country_id_iso = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($country_id_iso[$id])) {
+    return $country_id_iso[$id];
+  }
+  return NULL;
+}
+
+/**
+ * Returns country ID given it's ISO2 code.
+ */
+function eitientity_implementing_country_get_id($iso) {
+  $country_iso_id = &drupal_static(__FUNCTION__);
+  if (!isset($country_iso_id)) {
+    $query = db_select('eiti_implementing_country', 'c');
+    $query->fields('c', array('iso', 'id'));
+    $country_iso_id = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($country_iso_id[$iso])) {
+    return $country_iso_id[$iso];
+  }
+  return NULL;
+}
+
+/**
+ * Returns country status ID given it's ID field value.
+ */
+function eitientity_implementing_country_get_status_id($id_field) {
+  $status_idf_id = &drupal_static(__FUNCTION__);
+  if (!isset($status_idf_id)) {
+    $query = db_select('field_data_field_country_status_id', 'sid');
+    $query->fields('sid', array('field_country_status_id_value', 'entity_id'));
+    $status_idf_id = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($status_idf_id[$id_field])) {
+    return $status_idf_id[$id_field];
+  }
+  return NULL;
+}

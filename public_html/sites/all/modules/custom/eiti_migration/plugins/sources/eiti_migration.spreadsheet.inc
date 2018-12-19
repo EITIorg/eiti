@@ -402,6 +402,9 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
         $fields['contact:name'] = t('Contact details to person who has completed this template: Name (text)');
         $fields['contact:organization'] = t('Contact details to person who has completed this template: Organization (text)');
         $fields['contact:email'] = t('Contact details to person who has completed this template: Email (text)');
+        $fields['company_id_name'] = t('Company identifier name');
+        $fields['company_id_register'] = t('Company identifier register');
+        $fields['company_id_register_url'] = t('Company identifier register url');
         break;
 
       case EITI_SOURCE_INDICATOR_VALUE:
@@ -580,6 +583,17 @@ class EITIMigrateSourceSpreadsheet extends MigrateSource {
                 $excelDate = $migrationRow[$dateField][0];
                 $phpDate = PHPExcel_Shared_Date::ExcelToPHP($excelDate);
                 $migrationRow[$dateField] = $phpDate;
+              }
+            }
+
+            // Check the revenue sheet for some additional data.
+            $revenuesSheet = $this->getSheet(EITI_SHEET_TYPE_REVENUES);
+            if (!empty($revenuesSheet)) {
+              $id_position = eiti_migration_findPositionInSheet($revenuesSheet, array('Company identifier name/source'), NULL, 10, 10);
+              if ($id_position) {
+                $migrationRow['company_id_name'] = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 1)->getValue());
+                $migrationRow['company_id_register'] = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 2)->getValue());
+                $migrationRow['company_id_register_url'] = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 3)->getValue());
               }
             }
 

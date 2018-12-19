@@ -65,6 +65,76 @@ function eiti_api_entity_reset_cache($entity, $type, $op) {
   }
 }
 
+/**
+ * Implements hook_restful_parse_request_alter().
+ */
 function eiti_api_restful_parse_request_alter(&$request) {
   eiti_api_analytics_pageview_request(base_path() . $request['q'], 'EITI API');
+}
+
+/**
+ * Converts timestamp to ISO 8601 (YYYY-MM-DD) format and returns it.
+ */
+function eiti_api_timestamp_to_iso_8601_partial($timestamp) {
+  if (is_numeric($timestamp)) {
+    $date = date('Y-m-d', $timestamp);
+    if ($date) {
+      return $date;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Converts timestamp to ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) format and returns it.
+ */
+function eiti_api_timestamp_to_iso_8601($timestamp) {
+  if (is_numeric($timestamp)) {
+    $date = date('c', $timestamp);
+    if ($date) {
+      return $date;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Converts date to ISO 8601 (YYYY-MM-DD) format and returns it.
+ */
+function eiti_api_date_to_iso_8601_partial($date) {
+  $timestamp = strtotime($date);
+  return eiti_api_timestamp_to_iso_8601_partial($timestamp);
+}
+
+/**
+ * Turn numeric strings into integers.
+ */
+function eiti_api_numeric_string_to_int($number) {
+  if (is_numeric($number)) {
+    $number = (int) $number;
+  }
+  return $number;
+}
+
+/**
+ * Turn numeric strings into floats.
+ */
+function eiti_api_numeric_string_to_float($number) {
+  if (is_numeric($number)) {
+    $number = (float) $number;
+  }
+  return $number;
+}
+
+/**
+ * Turn values into booleans.
+ */
+function eiti_api_value_to_boolean($value) {
+  if (is_numeric($value)) {
+    if ($value > 0) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+  return NULL;
 }

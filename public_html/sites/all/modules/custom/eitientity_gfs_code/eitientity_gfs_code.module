@@ -378,3 +378,37 @@ function eitientity_gfs_code_get_gfs_code_information() {
 
   return $information;
 }
+
+/**
+ * Returns gfs code value given it's ID.
+ */
+function eitientity_gfs_code_get_code($id) {
+  $gfs_id_code = &drupal_static(__FUNCTION__);
+  if (!isset($gfs_id_code)) {
+    $query = db_select('eiti_gfs_code', 'g');
+    $query->fields('g', array('id', 'code'));
+    $gfs_id_code = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($gfs_id_code[$id])) {
+    return $gfs_id_code[$id];
+  }
+  return NULL;
+}
+
+/**
+ * Returns gfs code ID given it's code.
+ */
+function eitientity_gfs_code_get_id($code) {
+  $gfs_code_id = &drupal_static(__FUNCTION__);
+  if (!isset($gfs_code_id)) {
+    $query = db_select('eiti_gfs_code', 'g');
+    $query->fields('g', array('code', 'id'));
+    $gfs_code_id = $query->execute()->fetchAllKeyed();
+  }
+
+  if (isset($gfs_code_id[$code])) {
+    return $gfs_code_id[$code];
+  }
+  return NULL;
+}

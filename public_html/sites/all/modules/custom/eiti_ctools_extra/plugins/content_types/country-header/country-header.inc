@@ -161,7 +161,7 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     $block['info']['date'] = array(
       '#type' => 'html_container',
       '#tag' => 'div',
-      '#title' => t('EITI Member Since'),
+      '#title' => t('Joined EITI in'),
       '#title_tag' => 'span',
       '#title_icon' => array(
         'symbol' => 'member',
@@ -181,6 +181,35 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
       '#value' => $value,
       '#attributes' => array('class' => array('value')),
     );
+
+    if (!empty($entity->field_ic_leave_date)) {
+      $timestamp = $entity_wrapper->field_ic_leave_date->value();
+      $value = format_date($timestamp, 'custom', 'Y');
+
+      $block['info']['date']['leave'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'div',
+        '#title' => t('Left EITI in'),
+        '#title_tag' => 'span',
+        '#title_icon' => array(
+          'symbol' => 'minus',
+          'options' => array('width' => '1em', 'height' => '1em'),
+        ),
+        '#title_attributes' => array('class' => array('label')),
+        '#attributes' => array(
+          'class' => array(
+            'bottom',
+          ),
+        ),
+      );
+
+      $block['info']['date']['leave']['value'] = array(
+        '#theme' => 'html_tag',
+        '#tag' => 'span',
+        '#value' => $value,
+        '#attributes' => array('class' => array('value')),
+      );
+    }
   }
 
   // Add the country latest summary data information.

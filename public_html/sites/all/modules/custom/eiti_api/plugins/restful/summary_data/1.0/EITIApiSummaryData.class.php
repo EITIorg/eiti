@@ -42,6 +42,9 @@ class EITIApiSummaryData extends RestfulEntityBase {
     $public_fields['company_entities_nr'] = array(
       'property' => 'field_sd_no_reporting_com',
     );
+    $public_fields['publication_date_EITI_report'] = array(
+      'property' => 'published',
+    );
     $public_fields['year_start'] = array(
       'property' => 'year_start',
     );

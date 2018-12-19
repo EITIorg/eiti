@@ -21,6 +21,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
    */
   protected $range = 200;
 
+  /**
+   * Overrides RestfulDataProviderEFQ::__construct().
+   */
   public function __construct(array $plugin, \RestfulAuthenticationManager $auth_manager = NULL, \DrupalCacheInterface $cache_controller = NULL, $language = NULL) {
     parent::__construct($plugin, $auth_manager, $cache_controller, $language);
 
@@ -55,6 +58,9 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     );
     $public_fields['status_date'] = array(
       'property' => 'field_ic_change_status_date',
+    );
+    $public_fields['leave_date'] = array(
+      'property' => 'field_ic_leave_date',
     );
     $public_fields['local_website'] = array(
       'property' => 'field_ic_website',
@@ -181,7 +187,7 @@ class EITIApiImplementingCountry extends RestfulEntityBase {
     foreach ($this->metadata as $summaryData) {
       $summaryDataEmw = entity_metadata_wrapper('summary_data', $summaryData);
       $implementingCountry = $summaryDataEmw->country_id->value();
-      if ($implementingCountry->iso == $iso2) {
+      if ($implementingCountry && $implementingCountry->iso == $iso2) {
         $year = format_date($summaryData->year_end, 'custom', 'Y');
         $countrySummaryDataInfo[$year]['contact']['name']  = $summaryDataEmw->field_sd_contact_name->value();
         $countrySummaryDataInfo[$year]['contact']['email']  = $summaryDataEmw->field_sd_contact_email_address->value();
