@@ -29,9 +29,11 @@ class EITIApiOrganisation extends RestfulEntityBase {
       'property' => 'identification_number',
     );
     $public_fields['sector'] = array(
+      'property' => 'field_o_sector',
       'callback' => array($this, 'getSector'),
     );
     $public_fields['commodities'] = array(
+      'property' => 'field_o_commodities',
       'callback' => array($this, 'getCommodities'),
     );
     return $public_fields;
@@ -73,11 +75,35 @@ class EITIApiOrganisation extends RestfulEntityBase {
       if ($commodities) {
         $result = array();
         foreach ($commodities as $commodity) {
-          $result[] = $commodity->name;
+          if ($commodity) {
+            $result[] = $commodity->name;
+          }
         }
         return $result;
       }
     }
     return NULL;
+  }
+
+  /**
+   * Overrides RestfulBase::parseRequestForListFilter().
+   */
+  protected function parseRequestForListFilter() {
+    $filters = parent::parseRequestForListFilter();
+    foreach ($filters as $key => $filter) {
+      // Sector name to tid.
+      if (isset($filter['public_field'], $filter['value'][0]) && $filter['public_field'] == 'sector') {
+        foreach ($filter['value'] as $k => $v) {
+          $filters[$key]['value'][$k] = eitientity_organisation_get_sector_tid($v);
+        }
+      }
+      // Commodity name to tid.
+      if (isset($filter['public_field'], $filter['value'][0]) && $filter['public_field'] == 'commodities') {
+        foreach ($filter['value'] as $k => $v) {
+          $filters[$key]['value'][$k] = eitientity_organisation_get_commodity_tid($v);
+        }
+      }
+    }
+    return $filters;
   }
 }

@@ -89,6 +89,10 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
     $this->addFieldMapping('field_sd_disagg_company', 'dissaggregation:company');
     $this->addFieldMapping('field_sd_disagg_project', 'dissaggregation:project');
 
+    $this->addFieldMapping('company_id_name', 'company_id_name');
+    $this->addFieldMapping('company_id_register', 'company_id_register');
+    $this->addFieldMapping('company_id_register_url', 'company_id_register_url');
+
     $this->addUnmigratedDestinations(array(
       'status',
       'created',
@@ -253,6 +257,9 @@ class EITISummaryDataMigration extends EITISpreadsheetMigration {
       'independent_administrator',
       'number:reporting_gov',
       'number:reporting_comp',
+      'company_id_name',
+      'company_id_register',
+      'company_id_register_url',
     );
     foreach ($checkIfEmptyArr as $fieldToCheck) {
       if (is_array($row->{$fieldToCheck})) {

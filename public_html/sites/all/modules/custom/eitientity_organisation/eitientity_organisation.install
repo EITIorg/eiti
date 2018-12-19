@@ -102,7 +102,7 @@ function eitientity_organisation_update_7001(&$sandbox) {
  */
 function eitientity_organisation_update_7002(&$sandbox) {
   $table = 'eiti_organisation';
-  $schema = drupal_get_schema($table);
+  $schema = drupal_get_schema($table, TRUE);
   $field = 'identification_number';
   db_add_field($table, $field, $schema['fields'][$field]);
   $field = 'summary_data_id';

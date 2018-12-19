@@ -22,7 +22,11 @@ class EITIApiRevenueStreams extends RestfulEntityBase {
     $public_fields['gfs'] = array(
       'property' => 'gfs_code_id',
       'resource' => array(
-        'gfs_code' => 'gfs_code',
+        'gfs_code' => array(
+          'name' => 'gfs_code',
+          'major_version' => 1,
+          'minor_version' => 0,
+        ),
       )
     );
     $public_fields['report_status'] = array(

@@ -26,9 +26,9 @@ function eitientity_score_data_entity_info() {
 
   $menu_wildcard = '%score_data';
   $entity_info['score_data'] = array(
-    'label' => t('Score Data'),
-    'plural label' => t('Score Data'),
-    'description' => t('Score Data represents a single score data report.'),
+    'label' => t('Validation Data'),
+    'plural label' => t('Validation Data'),
+    'description' => t('Validation Data represents a single validation data report.'),
 
     'base table' => 'eiti_score_data',
     'module' => 'eitientity_score_data',
@@ -131,7 +131,7 @@ function eitientity_score_data_get_types() {
 
   $items['standard'] = array(
     'label' => t('Standard'),
-    'description' => t('Score Data represent a single report.'),
+    'description' => t('Validation Data represent a single report.'),
   );
 
   return $items;

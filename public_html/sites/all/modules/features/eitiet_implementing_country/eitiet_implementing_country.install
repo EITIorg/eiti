@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Add ID values to country_status terms.
+ */
+function eitiet_implementing_country_update_7001(&$sandbox) {
+  $voc = taxonomy_vocabulary_machine_name_load('country_status');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $voc->vid));
+  $name_id_pairs = array(
+    'Suspended due to political instability' => 'suspended-political-instability',
+    'Suspended for missing deadline' => 'suspended-missing-deadline',
+    'Other' => 'other',
+    'Satisfactory progress' => 'satisfactory-progress',
+    'Meaningful progress' => 'meaningful-progress',
+    'Inadequate progress / suspended' => 'suspended-inadequate-progress',
+    'Yet to be assessed against the 2016 Standard' => 'to-be-assessed',
+    'Suspended - depricated' => 'suspended_deprecated',
+    'No progress (delisted) - depricated' => 'no-progress_deprecated',
+  );
+  foreach ($terms as $key => $term) {
+    if (isset($name_id_pairs[$term->name])) {
+      $term->field_country_status_id['und'][0]['value'] = $name_id_pairs[$term->name];
+      taxonomy_term_save($term);
+    }
+  }
+}

@@ -287,3 +287,97 @@ function eiti_migration_update_7004(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['progress'] / $sandbox['max']);
   }
 }
+
+/**
+ * Import missing company identifier information.
+ */
+function eiti_migration_update_7005(&$sandbox) {
+  drupal_set_time_limit(3600); // 1 hour.
+  if (!isset($sandbox['progress'])) {
+    // We'll keep the progress saved in a variable so it can be restarted where it left off if such a need arises.
+    $summary_data = variable_get('eiti_migration_temp_summary_data', FALSE);
+
+    if (!$summary_data) {
+      $summary_data = db_select('eiti_summary_data', 'sd');
+      $summary_data->innerJoin('field_data_field_sd_report_file', 'sd_rf', 'sd.id = sd_rf.entity_id');
+      $summary_data->innerJoin('file_managed', 'fm', 'sd_rf.field_sd_report_file_fid = fm.fid');
+      $summary_data->fields('sd', array('id'))
+        ->fields('fm', array('uri'))
+        ->orderBy('id', 'ASC');
+      $summary_data =  $summary_data->execute()->fetchAll();
+      variable_set('eiti_migration_temp_summary_data', $summary_data);
+    }
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = count($summary_data);
+    $sandbox['summary_data'] = $summary_data;
+  }
+
+  if ($sandbox['summary_data']) {
+    $limit = 100;
+    $counter = 0;
+    libraries_load('PHPExcel');
+    foreach ($sandbox['summary_data'] as $sd_key => $sd) {
+      $counter++;
+      if (file_exists($sd->uri)) {
+        watchdog('eiti_migration', 'Summary data ' . $sd->id . ' update start.');
+
+        $file_path = drupal_realpath($sd->uri);
+        $type = PHPExcel_IOFactory::identify($file_path);
+        $reader = PHPExcel_IOFactory::createReader($type);
+        $reader->setReadDataOnly(TRUE);
+        $reader->setLoadAllSheets();
+        $excel = $reader->load($file_path);
+        $revenuesSheet = eiti_migration_getSheet($excel, 'revenues');
+
+        if (!empty($revenuesSheet)) {
+          // eiti_migration_findPositionInSheet can run into out of memory issues with no row/col limits.
+          $id_position = eiti_migration_findPositionInSheet($revenuesSheet, array('Company identifier name/source'), NULL, 10, 10);
+          if ($id_position) {
+            $name = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 1)->getValue());
+            $register = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 2)->getValue());
+            $register_url = trim($revenuesSheet->getCellByColumnAndRow($id_position['column'], $id_position['row'] + 3)->getValue());
+
+            $update_fields = array();
+            if (!eiti_migration_checkEmptyValue($name)) {
+              $update_fields['company_id_name'] = $name;
+            }
+            if (!eiti_migration_checkEmptyValue($register)) {
+              $update_fields['company_id_register'] = $register;
+            }
+            if (!eiti_migration_checkEmptyValue($register_url)) {
+              $update_fields['company_id_register_url'] = $register_url;
+            }
+
+            if ($update_fields) {
+              // We're doing a direct/fast save for performance reasons (there should be no unwanted side-effects).
+              db_update('eiti_summary_data')
+                ->fields($update_fields)
+                ->condition('id', $sd->id)
+                ->execute();
+            }
+          }
+        }
+
+        // Free up memory.
+        $excel->disconnectWorksheets();
+        $excel->garbageCollect();
+        unset($excel);
+      }
+      $sandbox['progress']++;
+      unset($sandbox['summary_data'][$sd_key]);
+      variable_set('eiti_migration_temp_summary_data', $sandbox['summary_data']);
+      if ($counter >= $limit) {
+        break;
+      }
+    }
+  }
+
+  if ($sandbox['progress'] >= $sandbox['max']) {
+    $sandbox['#finished'] = TRUE;
+    variable_del('eiti_migration_temp_summary_data');
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['progress'] / $sandbox['max']);
+  }
+}
