@@ -383,17 +383,80 @@ function eiti_migration_update_7005(&$sandbox) {
 }
 
 /**
- * Fix some indicators.
+ * Fix some indicators and delete related indicator values.
  */
 function eiti_migration_update_7006(&$sandbox) {
+  $indicator_name = 'If yes, what was the total revenue received?';
+  // Change faulty boolean indicators to numeric.
   db_update('eiti_indicator')
     ->fields(array('type' => 'numeric'))
-    ->condition('name', 'If yes, what was the total revenue received?')
+    ->condition('name', $indicator_name)
     ->execute();
+
+  // Get all related broken indicator value id-s.
+  $ids = db_select('eiti_indicator_value', 'iv');
+  $ids->innerJoin('eiti_indicator', 'i', 'iv.indicator_id = i.id');
+  $ids->condition('name', $indicator_name);
+  $ids->fields('iv', array('id'));
+  $ids = $ids->execute()->fetchCol();
+
+  if ($ids) {
+    // Migration cleanup.
+    $source_ids = db_select('migrate_map_eitiindicatorvaluesmigration', 'ivm');
+    $source_ids->condition('destid1', $ids, 'IN');
+    $source_ids->fields('ivm', array('sourceid1'));
+    $source_ids = $source_ids->execute()->fetchCol();
+    if ($source_ids) {
+      db_delete('migrate_message_eitiindicatorvaluesmigration')
+        ->condition('sourceid1', $source_ids, 'IN')
+        ->execute();
+    }
+    db_delete('migrate_map_eitiindicatorvaluesmigration')
+      ->condition('destid1', $ids, 'IN')
+      ->execute();
+
+    // Summary data relationship cleanup.
+    $ids_for_sd = array_combine($ids, $ids);
+    foreach ($ids_for_sd as $key => $id) {
+      $sd_id = db_select('field_data_field_sd_indicator_values', 'sd_iv');
+      $sd_id->condition('field_sd_indicator_values_target_id', $id);
+      $sd_id->fields('sd_iv', array('entity_id'));
+      $sd_id = $sd_id->execute()->fetchField();
+      if ($sd_id) {
+        $summary_data = entity_load_single('summary_data', $sd_id);
+        $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
+        if (isset($summary_data_emw->field_sd_indicator_values)) {
+          // TODO: check if this works.
+          foreach ($summary_data_emw->field_sd_indicator_values as $iv_key => $value) {
+            if (isset($ids_for_sd[$value])) {
+              unset($summary_data_emw->field_sd_indicator_values[$iv_key]);
+            }
+          }
+          $summary_data_emw->save();
+        }
+      }
+    }
+
+    // Entity cleanup.
+    // Delete in batches of 100.
+    $delete = array();
+    foreach ($ids as $key => $id) {
+      $delete[] = $id;
+      if ($key > 0 && $key % 100 == 0) {
+        entity_delete_multiple('indicator_value', $delete);
+        $delete = array();
+      }
+    }
+    // Delete any leftovers.
+    if ($delete) {
+      entity_delete_multiple('indicator_value', $delete);
+    }
+  }
+
 }
 
 /**
- * Update some faulty indicator values.
+ * Import indicator values that were broken or missing.
  */
 function eiti_migration_update_7007(&$sandbox) {
   drupal_set_time_limit(3600); // 1 hour.
@@ -511,17 +574,23 @@ function eiti_migration_update_7007(&$sandbox) {
             }
 
             if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
-              // TODO: make sure the values are properly processed like in eiti_migration.indicator_values.inc.
-              // TODO: handle data clean-up or re-use with additions so that no duplicate/orphaned records will be created.
-              // TODO: make sure migration module will be aware of these updates.
-              $indicator_value = new stdClass();
-              $indicator_value->indicator_id = $indicator_id;
-              $indicator_value->value_numeric = $valueCellValue;
-              $indicator_value->value_unit = $unitCellValue;
-              $indicator_value->original_value_numeric = $valueCellValue;
-              $indicator_value->original_value_unit = $unitCellValue;
-              $indicator_value->source = $sourceCellValue;
-              $indicator_value->comments = $commentCellValue;
+              if (strpos($valueCellValue, ',') !== FALSE) {
+                $valueCellValue = str_replace(',', '.', $valueCellValue);
+              }
+              if (is_numeric($valueCellValue)) {
+                $indicator_value = array();
+                $indicator_value['indicator_id'] = $indicator_id;
+                $indicator_value['value_unit'] = eiti_migration_normalizeUnit($unitCellValue);
+                $indicator_value['value_numeric'] = eiti_migration_normalizeValue($valueCellValue, $indicator_value['value_unit'], $rate_to_usd);
+                $indicator_value['original_value_numeric'] = $valueCellValue;
+                $indicator_value['original_value_unit'] = $indicator_value['value_unit'];
+                $indicator_value['source'] = $sourceCellValue;
+                $indicator_value['comments'] = $commentCellValue;
+                $entity = entity_create('indicator_value', $indicator_value);
+                entity_save('indicator_value', $entity);
+                // TODO: make sure migration module will be aware of these updates.
+                // TODO: add relationship with summary_data.
+              }
             }
           }
         }
