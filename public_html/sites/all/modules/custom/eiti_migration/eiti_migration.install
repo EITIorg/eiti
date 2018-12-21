@@ -386,6 +386,7 @@ function eiti_migration_update_7005(&$sandbox) {
  * Fix some indicators and delete related indicator values.
  */
 function eiti_migration_update_7006(&$sandbox) {
+  drupal_set_time_limit(3600); // 1 hour.
   $indicator_name = 'If yes, what was the total revenue received?';
   // Change faulty boolean indicators to numeric.
   db_update('eiti_indicator')
@@ -424,15 +425,13 @@ function eiti_migration_update_7006(&$sandbox) {
       $sd_id = $sd_id->execute()->fetchField();
       if ($sd_id) {
         $summary_data = entity_load_single('summary_data', $sd_id);
-        $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
-        if (isset($summary_data_emw->field_sd_indicator_values)) {
-          // TODO: check if this works.
-          foreach ($summary_data_emw->field_sd_indicator_values as $iv_key => $value) {
-            if (isset($ids_for_sd[$value])) {
-              unset($summary_data_emw->field_sd_indicator_values[$iv_key]);
+        if (isset($summary_data->field_sd_indicator_values['und'][0]['target_id'])) {
+          foreach ($summary_data->field_sd_indicator_values['und'] as $iv_key => $value) {
+            if (isset($ids_for_sd[$value['target_id']])) {
+              unset($summary_data->field_sd_indicator_values['und'][$iv_key]);
             }
           }
-          $summary_data_emw->save();
+          entity_save('summary_data', $summary_data);
         }
       }
     }
@@ -511,6 +510,11 @@ function eiti_migration_update_7007(&$sandbox) {
           $summary_data = entity_load_single('summary_data', $sd->id);
           $summary_data_emw = entity_metadata_wrapper('summary_data', $summary_data);
           $rate_to_usd = $summary_data_emw->currency_rate->value();
+          $summary_source_id = db_select('migrate_map_eitisummarydatamigration', 'sm')
+            ->condition('sm.destid1', $sd->id)
+            ->fields('sm', array('sourceid1'))
+            ->execute()
+            ->fetchField();
 
           // Now let's parse the file.
           $highestRow = $contextualSheet->getHighestRow();
@@ -537,20 +541,6 @@ function eiti_migration_update_7007(&$sandbox) {
           for ($row = $start_row; $row < $highestRow; $row++) {
             $groupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column, $row)->getValue());
             $subgroupCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 1, $row)->getValue());
-
-            // Make sure that this indicator qualifies for fixing.
-            $group_id = eiti_migration_findBestMatch($groupCellValue, $groups);
-            $indicators_in_group = array();
-            foreach ($valid_indicators as $id => $indicator) {
-              if ($indicator->parent == $group_id) {
-                $indicators_in_group[$id] = $indicator;
-              }
-            }
-            $indicator_id = eiti_migration_findBestMatch($subgroupCellValue, $indicators_in_group);
-            if (!$indicator_id) {
-              continue;
-            }
-
             $unitCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 3, $row)->getValue());
             $sourceCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 4, $row)->getValue());
             $commentCellValue = trim($contextualSheet->getCellByColumnAndRow($start_column + 5, $row)->getValue());
@@ -560,6 +550,9 @@ function eiti_migration_update_7007(&$sandbox) {
             }
             else {
               $valueCellValue = trim($valueCell->getValue());
+            }
+            if (strpos($valueCellValue, ',') !== FALSE) {
+              $valueCellValue = str_replace(',', '.', $valueCellValue);
             }
 
             // Before we do the lookup, let's make sure that the group is correct.
@@ -573,26 +566,55 @@ function eiti_migration_update_7007(&$sandbox) {
               $lastRememberedGroup = $groupCellValue;
             }
 
-            if (!empty($groupCellValue) && !empty($subgroupCellValue)) {
-              if (strpos($valueCellValue, ',') !== FALSE) {
-                $valueCellValue = str_replace(',', '.', $valueCellValue);
+            if (!is_numeric($valueCellValue) || !$groupCellValue) {
+              continue;
+            }
+
+            // Make sure that this indicator qualifies for fixing.
+            $group_id = eiti_migration_findBestMatch($groupCellValue, $groups);
+            $indicators_in_group = array();
+            foreach ($valid_indicators as $id => $indicator) {
+              if ($indicator->parent == $group_id) {
+                $indicators_in_group[$id] = $indicator;
               }
-              if (is_numeric($valueCellValue)) {
-                $indicator_value = array();
-                $indicator_value['indicator_id'] = $indicator_id;
-                $indicator_value['value_unit'] = eiti_migration_normalizeUnit($unitCellValue);
-                $indicator_value['value_numeric'] = eiti_migration_normalizeValue($valueCellValue, $indicator_value['value_unit'], $rate_to_usd);
-                $indicator_value['original_value_numeric'] = $valueCellValue;
-                $indicator_value['original_value_unit'] = $indicator_value['value_unit'];
-                $indicator_value['source'] = $sourceCellValue;
-                $indicator_value['comments'] = $commentCellValue;
-                $entity = entity_create('indicator_value', $indicator_value);
-                entity_save('indicator_value', $entity);
-                // TODO: make sure migration module will be aware of these updates.
-                // TODO: add relationship with summary_data.
+            }
+            if (!$indicators_in_group) {
+              continue;
+            }
+            $indicator_id = eiti_migration_findBestMatch($subgroupCellValue, $indicators_in_group);
+
+            // Save necessary information.
+            if ($indicator_id) {
+              // Entity.
+              $indicator_value = array();
+              $indicator_value['indicator_id'] = $indicator_id;
+              $indicator_value['value_unit'] = eiti_migration_normalizeUnit($unitCellValue);
+              $indicator_value['value_numeric'] = eiti_migration_normalizeValue($valueCellValue, $indicator_value['value_unit'], $rate_to_usd);
+              $indicator_value['original_value_numeric'] = $valueCellValue;
+              $indicator_value['original_value_unit'] = $indicator_value['value_unit'];
+              $indicator_value['source'] = $sourceCellValue;
+              $indicator_value['comments'] = $commentCellValue;
+              $entity = entity_create('indicator_value', $indicator_value);
+              $saved = entity_save('indicator_value', $entity);
+
+              if ($saved) {
+                // Migration relationship.
+                $source_id = $summary_source_id . ':' . $row;
+                db_delete('migrate_map_eitiindicatorvaluesmigration')
+                  ->condition('sourceid1', $source_id)
+                  ->execute();
+                db_insert('migrate_map_eitiindicatorvaluesmigration')
+                  ->fields(array(
+                    'sourceid1' => $source_id,
+                    'destid1' => $entity->id,
+                  ))
+                  ->execute();
+                // Summary data relationship.
+                $summary_data_emw->field_sd_indicator_values[] = $entity->id;
               }
             }
           }
+          $summary_data_emw->save();
         }
 
         // Free up memory.
