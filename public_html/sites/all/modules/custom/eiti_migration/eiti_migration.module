@@ -544,7 +544,9 @@ function eiti_migration_normalizeValue($value, &$unit, $rate_to_usd = FALSE) {
   // Last try, let's try and see if it's a currency.
   $found_currency = FALSE;
   if ($rate_to_usd !== FALSE && !$normalized) {
-    foreach ($this->allCurrencies as $code => $currency) {
+    ctools_include('export');
+    $allCurrencies = ctools_export_crud_load_all('currency');
+    foreach ($allCurrencies as $code => $currency) {
       if ($code == strtoupper($unit)) {
         $found_currency = TRUE;
         break;
