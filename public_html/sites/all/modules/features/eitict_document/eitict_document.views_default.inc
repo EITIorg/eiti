@@ -148,6 +148,144 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['pane_category']['name'] = 'Widget Library';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['inherit_panels_path'] = '1';
+
+  /* Display: Feed */
+  $handler = $view->new_display('feed', 'Feed', 'feed');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'rss';
+  $handler->display->display_options['row_plugin'] = 'rss_fields';
+  $handler->display->display_options['row_options']['title_field'] = 'title';
+  $handler->display->display_options['row_options']['link_field'] = 'view_node';
+  $handler->display->display_options['row_options']['description_field'] = 'body';
+  $handler->display->display_options['row_options']['creator_field'] = 'name';
+  $handler->display->display_options['row_options']['date_field'] = 'field_doc_published_date';
+  $handler->display->display_options['row_options']['guid_field_options'] = array(
+    'guid_field' => 'nid',
+    'guid_field_is_permalink' => 0,
+  );
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Entity translation: translations */
+  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
+  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
+  $handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  /* Field: Content: Public Sub-Type */
+  $handler->display->display_options['fields']['field_doc_type_public']['id'] = 'field_doc_type_public';
+  $handler->display->display_options['fields']['field_doc_type_public']['table'] = 'field_data_field_doc_type_public';
+  $handler->display->display_options['fields']['field_doc_type_public']['field'] = 'field_doc_type_public';
+  $handler->display->display_options['fields']['field_doc_type_public']['label'] = '';
+  $handler->display->display_options['fields']['field_doc_type_public']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_doc_type_public']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_doc_type_public']['type'] = 'i18n_taxonomy_term_reference_plain';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = 'Publication type: [field_doc_type_public]
+<br>
+[body]';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'helpergeneric_clean_summary';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Content: Published Date */
+  $handler->display->display_options['fields']['field_doc_published_date']['id'] = 'field_doc_published_date';
+  $handler->display->display_options['fields']['field_doc_published_date']['table'] = 'field_data_field_doc_published_date';
+  $handler->display->display_options['fields']['field_doc_published_date']['field'] = 'field_doc_published_date';
+  $handler->display->display_options['fields']['field_doc_published_date']['label'] = '';
+  $handler->display->display_options['fields']['field_doc_published_date']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_doc_published_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_doc_published_date']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'r',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Entity translation: Language */
+  $handler->display->display_options['filters']['language_1']['id'] = 'language_1';
+  $handler->display->display_options['filters']['language_1']['table'] = 'entity_translation';
+  $handler->display->display_options['filters']['language_1']['field'] = 'language';
+  $handler->display->display_options['filters']['language_1']['relationship'] = 'entity_translations';
+  $handler->display->display_options['filters']['language_1']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+  );
+  $handler->display->display_options['filters']['language_1']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'document' => 'document',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Internal Sub-Type (field_doc_type_internal) */
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['id'] = 'field_doc_type_internal_tid';
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['table'] = 'field_data_field_doc_type_internal';
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['field'] = 'field_doc_type_internal_tid';
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_doc_type_internal_tid']['vocabulary'] = 'publication_types_internal';
+  /* Filter criterion: Content: Public Sub-Type (field_doc_type_public) */
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['id'] = 'field_doc_type_public_tid';
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['table'] = 'field_data_field_doc_type_public';
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['field'] = 'field_doc_type_public_tid';
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['value'] = array(
+    4861 => '4861',
+  );
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_doc_type_public_tid']['vocabulary'] = 'publication_types_public';
+  $handler->display->display_options['path'] = 'publications.xml';
   $translatables['publications'] = array(
     t('Master'),
     t('Publications'),
@@ -172,6 +310,11 @@ function eitict_document_views_default_views() {
     t('Listing'),
     t('Listing: Publications'),
     t('Widget Library'),
+    t('Feed'),
+    t('author'),
+    t('Publication type: [field_doc_type_public]
+<br>
+[body]'),
   );
   $export['publications'] = $view;
 
