@@ -92,6 +92,18 @@ function eitientity_summary_data_entity_info() {
 }
 
 /**
+ * Implements hook_entity_property_info_alter().
+ */
+function eitientity_summary_data_entity_property_info_alter(&$info) {
+  $properties = &$info['summary_data']['properties'];
+
+  // Timestamp date handling for Views.
+  $properties['published']['type'] = 'date';
+  $properties['year_start']['type'] = 'date';
+  $properties['year_end']['type'] = 'date';
+}
+
+/**
  * Menu loader function: load summary data from its path.
  *
  * @see entity_object_load()
