@@ -41,7 +41,7 @@ class EITIApiStackedBar extends RestfulDataProviderEITICharts {
     $query->addField('gfs', 'code', 'gfs_code');
     $query->condition('sd.status', TRUE);
     $query->condition('grs.type', 'agency');
-    $query->condition('grs.revenue', 0, '>');
+    $query->condition('grs.revenue', 0, '!=');
     $query->orderBy('year_end', 'ASC');
 
     // Check for the filters.
