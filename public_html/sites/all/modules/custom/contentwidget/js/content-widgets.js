@@ -143,6 +143,11 @@
         }
       });
 
+      // Years should only displayed as integeres.
+      if (chartSettings.xlabel === Drupal.t('Years')) {
+        chartSettings.layout.xaxis.tickformat = 'd';
+      }
+
       // Show the legend above the chart when there are many options or the options have long names.
       if (chartSettings.legend_position) {
         if (chartSettings.legend_position === 'above') {
