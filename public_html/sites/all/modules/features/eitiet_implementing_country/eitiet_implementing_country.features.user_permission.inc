@@ -105,8 +105,6 @@ function eitiet_implementing_country_user_default_permissions() {
     'name' => 'implementing_country entity create',
     'roles' => array(
       'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_implementing_country',
   );
@@ -116,8 +114,6 @@ function eitiet_implementing_country_user_default_permissions() {
     'name' => 'implementing_country entity delete',
     'roles' => array(
       'administrator' => 'administrator',
-      'internal editor' => 'internal editor',
-      'translation editor' => 'translation editor',
     ),
     'module' => 'eitientity_implementing_country',
   );
