@@ -452,6 +452,15 @@ function eiti_migration_update_7006(&$sandbox) {
     }
   }
 
+  // Create missing indicator.
+  $indicator = array();
+  $indicator['type'] = 'numeric';
+  $indicator['name'] = $indicator_name;
+  $indicator['parent'] = 35;
+  $indicator['status'] = 1;
+  $indicator['created'] = time();
+  $entity = entity_create('indicator', $indicator);
+  entity_save('indicator', $entity);
 }
 
 /**
