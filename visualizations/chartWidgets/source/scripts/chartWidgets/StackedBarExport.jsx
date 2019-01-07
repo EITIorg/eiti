@@ -68,8 +68,14 @@ let StackedBarExport = React.createClass ({
 	    });
 
 	    for(var index = 0; index < output.length; index++) {
-	    	data.forEach(function(dataPoint){
-	    		output[index][dataPoint.name] = dataPoint.y[index];
+	    	data.forEach(function(dataPoint) {
+	    		let val_index = dataPoint.x.indexOf(output[index][xlabel]);
+          if (val_index !== -1) {
+            output[index][dataPoint.name] = dataPoint.y[val_index];
+					}
+          else {
+            output[index][dataPoint.name] = '';
+          }
 	    	})
 	    }
 
