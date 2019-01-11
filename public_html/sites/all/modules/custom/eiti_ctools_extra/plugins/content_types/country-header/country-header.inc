@@ -321,6 +321,38 @@ function eiti_ctools_extra__country_header__render($subtype, $conf, $panel_args,
     );
   }
 
+  // Add an additional row for information.
+  $block['info2'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'country-information-wrapper',
+      ),
+    ),
+    '#prefix' => '<div class="single-fluid-row-wrapper">',
+    '#suffix' => '</div>',
+  );
+
+  // Add the country website information.
+  if (!empty($entity->changed)) {
+    $c_day = date('j', $entity->changed);
+    $c_month = format_date($entity->changed, 'custom', 'F');
+    $c_year = date('Y', $entity->changed);
+
+    $block['info2']['changed'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('Last updated @day @month @year', array('@day' => $c_day, '@month' => $c_month, '@year' => $c_year)),
+      '#title_tag' => 'span',
+      '#title_attributes' => array('class' => array('label')),
+      '#attributes' => array(
+        'class' => array(
+          'info',
+        ),
+      ),
+    );
+  }
+
   return (object) array(
     'content' => $block,
   );
