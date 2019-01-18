@@ -81,7 +81,7 @@ function eitict_document_field_default_field_instances() {
     'label' => 'Attachments',
     'required' => 0,
     'settings' => array(
-      'description_field' => 0,
+      'description_field' => 1,
       'entity_translation_sync' => 0,
       'file_directory' => 'documents',
       'file_extensions' => 'xls xlsx doc docx ppt pptx pdf jpeg jpg gif png ai psd tif rtf txt',
