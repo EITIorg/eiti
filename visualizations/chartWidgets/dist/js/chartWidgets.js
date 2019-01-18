@@ -47823,9 +47823,35 @@
 		doExport: function doExport(xlabel) {
 			var output = [];
 			var data = this.state.chartData;
+			var xlabels = [];
+			var xlabels_are_numbers = true;
+
+			function sortNumber(a, b) {
+				return a - b;
+			}
+
+			function isNumeric(n) {
+				return !isNaN(parseFloat(n)) && isFinite(n);
+			}
+
+			// Make sure we get all the existing x values.
+			data.forEach(function (dataPoint) {
+				dataPoint.x.forEach(function (dataX) {
+					var val_index = xlabels.indexOf(dataX);
+					if (val_index === -1) {
+						xlabels.push(dataX);
+						if (!isNumeric(dataX)) {
+							xlabels_are_numbers = false;
+						}
+					}
+				});
+			});
+			if (xlabels_are_numbers) {
+				xlabels.sort(sortNumber);
+			}
 
 			// Get the X values first (years, usually)
-			data[0].x.forEach(function (item) {
+			xlabels.forEach(function (item) {
 				var outputObj = {};
 				outputObj[xlabel] = item;
 				output.push(outputObj);
