@@ -122,7 +122,44 @@ function eitiet_summary_data_views_default_views() {
     'guid_field' => 'id',
     'guid_field_is_permalink' => 0,
   );
-  $handler->display->display_options['path'] = 'summary-data.xml';
+  $handler->display->display_options['path'] = 'feed/summary-data.xml';
+  $handler->display->display_options['displays'] = array(
+    'default' => 0,
+  );
+
+  /* Display: Country feed */
+  $handler = $view->new_display('feed', 'Country feed', 'feed_country');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'rss';
+  $handler->display->display_options['row_plugin'] = 'rss_fields';
+  $handler->display->display_options['row_options']['title_field'] = 'id2';
+  $handler->display->display_options['row_options']['link_field'] = 'field_sd_report_file';
+  $handler->display->display_options['row_options']['description_field'] = 'name_field';
+  $handler->display->display_options['row_options']['creator_field'] = 'nothing';
+  $handler->display->display_options['row_options']['date_field'] = 'published';
+  $handler->display->display_options['row_options']['guid_field_options'] = array(
+    'guid_field' => 'id',
+    'guid_field_is_permalink' => 0,
+  );
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Summary Data: Implementing Country */
+  $handler->display->display_options['relationships']['country_id']['id'] = 'country_id';
+  $handler->display->display_options['relationships']['country_id']['table'] = 'eiti_summary_data';
+  $handler->display->display_options['relationships']['country_id']['field'] = 'country_id';
+  $handler->display->display_options['relationships']['country_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Implementing Country: Iso */
+  $handler->display->display_options['arguments']['iso']['id'] = 'iso';
+  $handler->display->display_options['arguments']['iso']['table'] = 'eiti_implementing_country';
+  $handler->display->display_options['arguments']['iso']['field'] = 'iso';
+  $handler->display->display_options['arguments']['iso']['relationship'] = 'country_id';
+  $handler->display->display_options['arguments']['iso']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['iso']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['iso']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['iso']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['iso']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['iso']['limit'] = '0';
+  $handler->display->display_options['path'] = 'feed/%/summary-data.xml';
   $handler->display->display_options['displays'] = array(
     'default' => 0,
   );
@@ -142,6 +179,8 @@ function eitiet_summary_data_views_default_views() {
 <br>
 [year_end]'),
     t('Feed'),
+    t('Country feed'),
+    t('All'),
   );
   $export['summary_data'] = $view;
 
