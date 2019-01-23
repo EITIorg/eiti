@@ -22,6 +22,7 @@ class ImplementingCountryPanelizerEntity extends PanelizerEntityDefault {
   }
 
   public function entity_save($entity) {
+    $entity->changed = REQUEST_TIME;
     entity_save('implementing_country', $entity);
   }
 
