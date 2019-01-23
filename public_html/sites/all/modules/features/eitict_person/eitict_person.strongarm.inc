@@ -154,7 +154,7 @@ function eitict_person_strongarm() {
         'custom_settings' => FALSE,
       ),
       'teaser_alternative' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
