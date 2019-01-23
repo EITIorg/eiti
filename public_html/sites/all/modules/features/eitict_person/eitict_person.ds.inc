@@ -56,6 +56,23 @@ function eitict_person_ds_field_settings_info() {
   );
   $export['node|person|teaser'] = $ds_fieldsetting;
 
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|person|teaser_alternative';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'person';
+  $ds_fieldsetting->view_mode = 'teaser_alternative';
+  $ds_fieldsetting->settings = array(
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+  );
+  $export['node|person|teaser_alternative'] = $ds_fieldsetting;
+
   return $export;
 }
 
@@ -187,6 +204,44 @@ function eitict_person_ds_layout_settings_info() {
     'layout_disable_css' => FALSE,
   );
   $export['node|person|teaser'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|person|teaser_alternative';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'person';
+  $ds_layout->view_mode = 'teaser_alternative';
+  $ds_layout->layout = 'simplelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'main' => array(
+        0 => 'field_person_picture',
+        1 => 'title_field',
+        2 => 'field_position',
+      ),
+    ),
+    'fields' => array(
+      'field_person_picture' => 'main',
+      'title_field' => 'main',
+      'field_position' => 'main',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
+    'wrappers' => array(
+      'main' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'article',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['node|person|teaser_alternative'] = $ds_layout;
 
   return $export;
 }

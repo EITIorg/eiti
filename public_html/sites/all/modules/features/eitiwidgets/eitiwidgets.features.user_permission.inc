@@ -171,6 +171,17 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'create fieldable persons_grid'.
+  $permissions['create fieldable persons_grid'] = array(
+    'name' => 'create fieldable persons_grid',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable quote'.
   $permissions['create fieldable quote'] = array(
     'name' => 'create fieldable quote',
@@ -321,6 +332,17 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable persons_grid'.
+  $permissions['delete fieldable persons_grid'] = array(
+    'name' => 'delete fieldable persons_grid',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable quote'.
   $permissions['delete fieldable quote'] = array(
     'name' => 'delete fieldable quote',
@@ -461,6 +483,17 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'edit fieldable icon_blocks'.
   $permissions['edit fieldable icon_blocks'] = array(
     'name' => 'edit fieldable icon_blocks',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable persons_grid'.
+  $permissions['edit fieldable persons_grid'] = array(
+    'name' => 'edit fieldable persons_grid',
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
