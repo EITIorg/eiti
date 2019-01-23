@@ -100,13 +100,13 @@ function eitientities_image_default_styles() {
 
   // Exported image style: pr-photo.
   $styles['pr-photo'] = array(
-    'label' => 'Person Photo (100px by 100px)',
+    'label' => 'Person Photo',
     'effects' => array(
-      2 => array(
+      1 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 100,
-          'height' => 100,
+          'width' => 200,
+          'height' => 200,
         ),
         'weight' => 1,
       ),
