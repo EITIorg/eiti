@@ -1,0 +1,103 @@
+.field-name-field-fpp-person-list {
+    .field-items {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        box-sizing: border-box;
+        .field-item {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                opacity: 0.7;
+                .field-name-field-person-picture {
+                    background-size: 45%;
+                    background-position: center;
+                    >img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+            h3,
+            .field-name-field-position {
+                text-align: center;
+                margin-bottom: 0;
+            }
+            .field-name-field-person-picture {
+                background: #f1f1f1 url(~"@{theme_path}images/icons/user.svg") no-repeat;
+                background-size: 40%;
+                background-position: center;
+                width: 100%;
+                height: 232px;
+                overflow: hidden;
+                transition: all 0.3s ease-in-out;
+                >img {
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+            .person-link {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.xNormalAndUp() {
+    .field-name-field-fpp-person-list {
+        .field-items {
+            .field-item {
+                -ms-flex: 0 0 33.333333%;
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
+        }
+    }
+}
+
+.xSmallOnly() {
+    .field-name-field-fpp-person-list {
+        margin-top: 30px;
+        .field-items {
+            display: block;
+            margin-left: 0;
+            margin-right: 0;
+            .field-item {
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                width: 100%;
+                display: block;
+                padding: 0;
+                margin-bottom: 50px;
+                .field-name-field-person-picture {
+                    min-height: 60vw;
+                    height: auto;
+                    >img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
