@@ -87,6 +87,8 @@ ul.inline .node-readmore {
 .person-quick-links-wrapper {
   @twitter_brand_color: #1da1f2;
   @skype_brand_color: #00AFF0;
+  margin-top: 1em;
+  margin-bottom: 1em;
 
   .field-name-field-twitter-handle {
     margin: 0 0.5em 0 0;
@@ -107,15 +109,18 @@ ul.inline .node-readmore {
         img {
           width: 65px;
           max-width: 65px;
-          margin: 0 !important;
-          padding: 0  !important;;
-          vertical-align: middle  !important;;
+          margin: 5px 0 0 0 !important;
+          padding: 0  !important;
+          vertical-align: middle  !important;
         }
       }
     }
     .skype-id {
       color: @skype_brand_color;
       font-size: 12px;
+    }
+    .skype-button {
+      display: none;
     }
   }
 }

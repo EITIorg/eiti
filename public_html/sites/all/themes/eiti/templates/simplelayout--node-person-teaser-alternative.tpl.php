@@ -17,7 +17,7 @@
 <?php endif; ?>
 <?php print $main; ?>
 <a class="person-link" href="<?php print $node_url; ?>"></a>
-
+<p class="person-profile"><?php print t('View profile'); ?></p>
 <?php if (!empty($drupal_render_children)): ?>
   <?php print $drupal_render_children ?>
 <?php endif; ?>
