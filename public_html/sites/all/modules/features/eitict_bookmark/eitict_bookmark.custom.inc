@@ -142,6 +142,7 @@ function eitict_bookmark_autocreate($details) {
     'status' => 1,
     'comment' => 0,
     'promote' => 0,
+    'language' => 'en',
   );
 
   // Set the basics.
