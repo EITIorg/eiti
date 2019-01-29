@@ -19,7 +19,7 @@
             padding-right: 15px;
             padding-left: 15px;
             box-sizing: border-box;
-            margin-bottom: 60px;
+            margin-bottom: 10px;
             transition: all 0.3s ease-in-out;
             &:hover {
                 opacity: 0.7;
@@ -30,11 +30,15 @@
                         transform: scale(1.1);
                     }
                 }
+                .person-profile {
+                    color: #f5822a;
+                }
             }
             h3,
             .field-name-field-position {
                 text-align: center;
                 margin-bottom: 0;
+                margin-top: 10px;
             }
             .field-name-field-person-picture {
                 background: #f1f1f1 url(~"@{theme_path}images/icons/user.svg") no-repeat;
@@ -55,6 +59,11 @@
                 display: block;
                 width: 100%;
                 height: 100%;
+            }
+            .person-profile {
+                margin-top: 5px;
+                text-align: center;
+                color: #0093cf;
             }
         }
     }
@@ -86,7 +95,7 @@
                 width: 100%;
                 display: block;
                 padding: 0;
-                margin-bottom: 50px;
+                margin-bottom: 40px;
                 .field-name-field-person-picture {
                     min-height: 60vw;
                     height: auto;
