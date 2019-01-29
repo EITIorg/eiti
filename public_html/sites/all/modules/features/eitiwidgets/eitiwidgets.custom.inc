@@ -587,6 +587,9 @@ function eitiwidgets_ctools_plugin_pre_alter(&$plugin, &$info) {
  * @inheritdoc
  */
 function eitiwidgets_preprocess_panels_add_content_modal(&$vars) {
+  if (isset($vars['categories']['bookmark--news--blogs-and-more'])) {
+    unset($vars['categories']['bookmark--news--blogs-and-more']);
+  }
   // Change the categories order.
   // @see: panels_renderer_editor::get_category()
   $category = 'Widget library';
