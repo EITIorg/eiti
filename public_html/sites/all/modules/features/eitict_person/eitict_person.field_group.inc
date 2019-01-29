@@ -87,7 +87,7 @@ function eitict_person_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Links',
-    'weight' => '2',
+    'weight' => '8',
     'children' => array(
       0 => 'field_twitter_handle',
       1 => 'field_skype_id',
