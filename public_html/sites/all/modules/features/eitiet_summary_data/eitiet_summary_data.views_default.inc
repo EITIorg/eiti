@@ -65,9 +65,18 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['fields']['field_sd_report_file']['table'] = 'field_data_field_sd_report_file';
   $handler->display->display_options['fields']['field_sd_report_file']['field'] = 'field_sd_report_file';
   $handler->display->display_options['fields']['field_sd_report_file']['label'] = '';
+  $handler->display->display_options['fields']['field_sd_report_file']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_sd_report_file']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_sd_report_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_sd_report_file']['type'] = 'file_url_plain';
+  /* Field: Summary Data: URL */
+  $handler->display->display_options['fields']['url']['id'] = 'url';
+  $handler->display->display_options['fields']['url']['table'] = 'views_entity_summary_data';
+  $handler->display->display_options['fields']['url']['field'] = 'url';
+  $handler->display->display_options['fields']['url']['label'] = '';
+  $handler->display->display_options['fields']['url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+  $handler->display->display_options['fields']['url']['link_to_entity'] = 0;
   /* Field: Summary Data: Year End */
   $handler->display->display_options['fields']['year_end']['id'] = 'year_end';
   $handler->display->display_options['fields']['year_end']['table'] = 'eiti_summary_data';
@@ -114,7 +123,7 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'rss';
   $handler->display->display_options['row_plugin'] = 'rss_fields';
   $handler->display->display_options['row_options']['title_field'] = 'id2';
-  $handler->display->display_options['row_options']['link_field'] = 'field_sd_report_file';
+  $handler->display->display_options['row_options']['link_field'] = 'url';
   $handler->display->display_options['row_options']['description_field'] = 'name_field';
   $handler->display->display_options['row_options']['creator_field'] = 'nothing';
   $handler->display->display_options['row_options']['date_field'] = 'published';
@@ -133,7 +142,7 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'rss';
   $handler->display->display_options['row_plugin'] = 'rss_fields';
   $handler->display->display_options['row_options']['title_field'] = 'id2';
-  $handler->display->display_options['row_options']['link_field'] = 'field_sd_report_file';
+  $handler->display->display_options['row_options']['link_field'] = 'url';
   $handler->display->display_options['row_options']['description_field'] = 'name_field';
   $handler->display->display_options['row_options']['creator_field'] = 'nothing';
   $handler->display->display_options['row_options']['date_field'] = 'published';
