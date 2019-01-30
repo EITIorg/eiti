@@ -21,15 +21,37 @@
 function eitisearch_search_api_solr_documents_alter(array &$documents, SearchApiIndex $index, array $items) {
   if ($index->machine_name == 'document_search') {
     $document_relevance_field_key ='is_field_relevance';
+    $document_published_field_key ='ds_field_doc_published_date';
 
     foreach ($documents as $document) {
+      $boost = 0;
       $relevance_field = $document->getField($document_relevance_field_key);
       if (!empty($relevance_field)) {
-        $relevance_value = $relevance_field['value'];
-        $document->setBoost($relevance_value);
+        $boost += $relevance_field['value'];
+      }
+      // Boost documents based on their published date so newer ones appear first.
+      $published_field = $document->getField($document_published_field_key);
+      if (!empty($published_field)) {
+        $boost += eitisearch_date_based_boost(strtotime($published_field['value']));
+      }
+      if ($boost > 0) {
+        $document->setBoost($boost);
       }
     }
   }
+}
+
+/**
+ * Calculates and returns search boost number based on the given timestamp.
+ */
+function eitisearch_date_based_boost($timestamp) {
+  $boost = 0;
+  if (idate('Y', $timestamp) > 1999) {
+    $year = idate('y', $timestamp);
+    $month = round((idate('m', $timestamp) / 12), 2);
+    $boost = $year + $month;
+  }
+  return $boost;
 }
 
 /**
