@@ -1,0 +1,15 @@
+diff --git a/views/entity_translation_handler_relationship.inc b/views/entity_translation_handler_relationship.inc
+index a88132b..69d3909 100644
+--- a/views/entity_translation_handler_relationship.inc
++++ b/views/entity_translation_handler_relationship.inc
+@@ -27,7 +27,9 @@ class entity_translation_handler_relationship extends views_handler_relationship
+     $alias = $def['table'] . '_' . $this->table;
+     // We need to add a condition on entity type to the join to avoid getting
+     // relationships to entities with other types.
+-    $join->extra = "$alias.entity_type = '{$def['entity type']}'";
++    $join->extra = array(
++      array('field' => 'entity_type', 'value' => $def['entity type']),
++    );
+     $this->alias = $this->query->add_relationship($alias, $join, 'entity_translation', $this->relationship);
+   }
+ }
