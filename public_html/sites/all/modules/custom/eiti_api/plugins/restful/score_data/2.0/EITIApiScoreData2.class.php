@@ -72,6 +72,7 @@ class EITIApiScoreData2 extends EITIApiScoreData {
         unset($score_req_values[$key]);
       }
     }
+    $score_req_values = array_values($score_req_values);
     return $score_req_values;
   }
 
