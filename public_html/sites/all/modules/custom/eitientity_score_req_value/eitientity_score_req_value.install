@@ -67,3 +67,13 @@ function eitientity_score_req_value_schema() {
 
   return $schema;
 }
+
+/**
+ * Fix "is_required" in the database.
+ * Should be 1 when required and 0 when not (optional, encouraged).
+ */
+function eitientity_score_req_value_update_7001(&$sandbox) {
+  db_update('eiti_score_req_value')
+    ->expression('is_required', '1 - is_required')
+    ->execute();
+}

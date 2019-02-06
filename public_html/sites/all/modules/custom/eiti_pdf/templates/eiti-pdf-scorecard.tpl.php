@@ -65,7 +65,7 @@
       </td>
       <?php if (!$requirement['is_applicable']): ?>
         <td class="not_applicable <?php print $requirement['td_classes']; ?>" colspan="5"></td>
-      <?php elseif ($requirement['is_required']): ?>
+      <?php elseif (!$requirement['is_required']): ?>
         <td class="only_encouraged <?php print $requirement['td_classes']; ?>" colspan="5"></td>
       <?php else: ?>
         <td class="<?php if ($requirement['value'] == 0): ?>no_progress<?php endif; ?> <?php print $requirement['td_classes']; ?>"></td>
