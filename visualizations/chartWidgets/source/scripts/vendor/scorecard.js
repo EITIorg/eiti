@@ -186,7 +186,7 @@ function appendRows(data, tableBody, hasProgress) {
 
 			        currentRow.append(cell.attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
 			    }
-			    else if(currentScore.is_required === "1") //This means it's encouraged
+			    else if(currentScore.is_required === "0") //This means it's encouraged
 			    {
 			        cellStyle = 'only_encouraged ';
 			        let cell = $("<TD>");
