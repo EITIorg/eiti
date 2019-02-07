@@ -684,12 +684,14 @@ function eitict_person_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'title',
+        'module' => 'text',
         'settings' => array(
           'title_class' => 'title element-no-margin',
           'title_link' => '',
           'title_style' => 'h3',
         ),
+        'type' => 'text_default',
+        'weight' => 20,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
