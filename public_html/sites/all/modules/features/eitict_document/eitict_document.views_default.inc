@@ -158,7 +158,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'path';
   $handler->display->display_options['row_options']['description_field'] = 'body';
   $handler->display->display_options['row_options']['creator_field'] = 'name';
-  $handler->display->display_options['row_options']['date_field'] = 'field_doc_published_date';
+  $handler->display->display_options['row_options']['date_field'] = 'created';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'nid',
     'guid_field_is_permalink' => 0,
@@ -227,22 +227,15 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
-  /* Field: Content: Published Date */
-  $handler->display->display_options['fields']['field_doc_published_date']['id'] = 'field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['table'] = 'field_data_field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['field'] = 'field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['label'] = '';
-  $handler->display->display_options['fields']['field_doc_published_date']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_doc_published_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_doc_published_date']['settings'] = array(
-    'format_type' => 'custom',
-    'custom_date_format' => 'r',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'r';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'html5_tools_iso8601';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Entity translation: Language */
@@ -300,7 +293,7 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'path';
   $handler->display->display_options['row_options']['description_field'] = 'body';
   $handler->display->display_options['row_options']['creator_field'] = 'name';
-  $handler->display->display_options['row_options']['date_field'] = 'field_doc_published_date';
+  $handler->display->display_options['row_options']['date_field'] = 'created';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'nid',
     'guid_field_is_permalink' => 0,
@@ -375,22 +368,15 @@ function eitict_document_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
-  /* Field: Content: Published Date */
-  $handler->display->display_options['fields']['field_doc_published_date']['id'] = 'field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['table'] = 'field_data_field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['field'] = 'field_doc_published_date';
-  $handler->display->display_options['fields']['field_doc_published_date']['label'] = '';
-  $handler->display->display_options['fields']['field_doc_published_date']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_doc_published_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_doc_published_date']['settings'] = array(
-    'format_type' => 'custom',
-    'custom_date_format' => 'r',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'r';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'html5_tools_iso8601';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Countries: ISO2 */
   $handler->display->display_options['arguments']['iso2']['id'] = 'iso2';
