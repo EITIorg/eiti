@@ -51,15 +51,15 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Eiti';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Summary Data: Published Date */
-  $handler->display->display_options['fields']['published']['id'] = 'published';
-  $handler->display->display_options['fields']['published']['table'] = 'eiti_summary_data';
-  $handler->display->display_options['fields']['published']['field'] = 'published';
-  $handler->display->display_options['fields']['published']['label'] = '';
-  $handler->display->display_options['fields']['published']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['published']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['published']['custom_date_format'] = 'r';
-  $handler->display->display_options['fields']['published']['second_date_format'] = 'html5_tools_iso8601';
+  /* Field: Summary Data: Changed */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'eiti_summary_data';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'r';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'html5_tools_iso8601';
   /* Field: Summary Data: Summary Data Report File */
   $handler->display->display_options['fields']['field_sd_report_file']['id'] = 'field_sd_report_file';
   $handler->display->display_options['fields']['field_sd_report_file']['table'] = 'field_data_field_sd_report_file';
@@ -106,11 +106,11 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['fields']['id2']['field'] = 'id2';
   $handler->display->display_options['fields']['id2']['label'] = '';
   $handler->display->display_options['fields']['id2']['element_label_colon'] = FALSE;
-  /* Sort criterion: Summary Data: Published Date */
-  $handler->display->display_options['sorts']['published']['id'] = 'published';
-  $handler->display->display_options['sorts']['published']['table'] = 'eiti_summary_data';
-  $handler->display->display_options['sorts']['published']['field'] = 'published';
-  $handler->display->display_options['sorts']['published']['order'] = 'DESC';
+  /* Sort criterion: Summary Data: Changed */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'eiti_summary_data';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   /* Filter criterion: Summary Data: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'eiti_summary_data';
@@ -126,7 +126,7 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'url';
   $handler->display->display_options['row_options']['description_field'] = 'name_field';
   $handler->display->display_options['row_options']['creator_field'] = 'nothing';
-  $handler->display->display_options['row_options']['date_field'] = 'published';
+  $handler->display->display_options['row_options']['date_field'] = 'changed';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'id',
     'guid_field_is_permalink' => 0,
@@ -145,7 +145,7 @@ function eitiet_summary_data_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'url';
   $handler->display->display_options['row_options']['description_field'] = 'name_field';
   $handler->display->display_options['row_options']['creator_field'] = 'nothing';
-  $handler->display->display_options['row_options']['date_field'] = 'published';
+  $handler->display->display_options['row_options']['date_field'] = 'changed';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'id',
     'guid_field_is_permalink' => 0,

@@ -101,6 +101,8 @@ function eitientity_summary_data_entity_property_info_alter(&$info) {
   $properties['published']['type'] = 'date';
   $properties['year_start']['type'] = 'date';
   $properties['year_end']['type'] = 'date';
+  $properties['created']['type'] = 'date';
+  $properties['changed']['type'] = 'date';
 }
 
 /**
