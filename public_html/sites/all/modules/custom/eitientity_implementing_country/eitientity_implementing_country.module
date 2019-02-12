@@ -579,3 +579,32 @@ function eitientity_implementing_country_get_status_id($id_field) {
   }
   return NULL;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter() for fieldable_panels_panes_entity_edit_form-s.
+ */
+function eitientity_implementing_country_form_fieldable_panels_panes_entity_edit_form_alter(&$form, &$form_state, $form_id) {
+  // In case destination is not enough or not reliable enough we'll probably have to obtain the
+  // panels pane and entity relationship from the database (panelizer_entity and panels_pane tables possibly).
+  if (isset($_GET['destination']) && strpos($_GET['destination'], 'implementing_country/') === 0) {
+    $parts = explode('/', $_GET['destination']);
+    if (isset($parts[1]) && is_numeric($parts[1])) {
+      $form_state['storage']['implementing_country'] = $parts[1];
+      $form['#submit'][] = 'eitientity_implementing_country_fieldable_panels_pane_form_submit';
+    }
+  }
+}
+
+/**
+ * Custom submit handler for fieldable panels pane forms.
+ */
+function eitientity_implementing_country_fieldable_panels_pane_form_submit($form, &$form_state) {
+  // Save the parent implementing_country with changed timestamp update.
+  if (isset($form_state['storage']['implementing_country'])) {
+    $entity = entity_object_load($form_state['storage']['implementing_country'], 'implementing_country');
+    if ($entity) {
+      $entity->changed = REQUEST_TIME;
+      entity_save('implementing_country', $entity);
+    }
+  }
+}
