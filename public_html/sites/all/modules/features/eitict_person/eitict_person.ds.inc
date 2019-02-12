@@ -35,9 +35,16 @@ function eitict_person_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'node_link' => array(
-      'weight' => '7',
+      'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
+      'formatter_settings' => array(
+        'link text' => 'View profile',
+        'link class' => '',
+        'wrapper' => '',
+        'class' => '',
+        'ft' => array(),
+      ),
     ),
     'field_person_picture' => array(
       'formatter_settings' => array(
@@ -163,29 +170,27 @@ function eitict_person_ds_layout_settings_info() {
       ),
       'main' => array(
         1 => 'title_field',
-        2 => 'field_board_membership',
-        3 => 'field_position',
-        4 => 'field_twitter_handle',
-        5 => 'group_quick_links',
-        6 => 'field_email',
+        2 => 'group_quick_links',
+        3 => 'field_board_membership',
+        4 => 'field_position',
+        5 => 'group_details',
+        6 => 'field_twitter_handle',
         7 => 'field_skype_id',
-        8 => 'group_details',
-        9 => 'body',
-        10 => 'node_link',
+        8 => 'node_link',
+        9 => 'field_email',
       ),
     ),
     'fields' => array(
       'field_person_picture' => 'side',
       'title_field' => 'main',
+      'group_quick_links' => 'main',
       'field_board_membership' => 'main',
       'field_position' => 'main',
-      'field_twitter_handle' => 'main',
-      'group_quick_links' => 'main',
-      'field_email' => 'main',
-      'field_skype_id' => 'main',
       'group_details' => 'main',
-      'body' => 'main',
+      'field_twitter_handle' => 'main',
+      'field_skype_id' => 'main',
       'node_link' => 'main',
+      'field_email' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(

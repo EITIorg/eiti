@@ -26,12 +26,9 @@ function eitict_person_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'helpergeneric',
-        'settings' => array(
-          'trim_length' => 256,
-        ),
-        'type' => 'helpergeneric_clean_summary',
-        'weight' => 6,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -80,7 +77,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 13,
       ),
       'teaser_alternative' => array(
         'label' => 'inline',
@@ -218,7 +215,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 17,
       ),
       'teaser_alternative' => array(
         'label' => 'inline',
@@ -373,7 +370,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 14,
       ),
       'teaser_alternative' => array(
         'label' => 'inline',
@@ -468,7 +465,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 15,
       ),
       'teaser_alternative' => array(
         'label' => 'inline',
@@ -618,7 +615,7 @@ function eitict_person_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 16,
       ),
       'teaser_alternative' => array(
         'label' => 'inline',
@@ -684,14 +681,14 @@ function eitict_person_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
+        'module' => 'title',
         'settings' => array(
           'title_class' => 'title element-no-margin',
           'title_link' => '',
           'title_style' => 'h3',
         ),
-        'type' => 'text_default',
-        'weight' => 20,
+        'type' => 'title_linked',
+        'weight' => 1,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
