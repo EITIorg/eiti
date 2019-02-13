@@ -65,6 +65,26 @@
                 text-align: center;
                 color: #0093cf;
             }
+            .field-name-field-email {
+                a {
+                    word-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+// Name aligned to left - board page
+.pane-bundle-featured-persons {
+    .field-name-field-fpp-person-list {
+        .field-items {
+            .field-item {
+                h3 {
+                    margin-top: 0;
+                    text-align: left;
+                    margin-bottom: 6px;
+                }
+            }
         }
     }
 }
@@ -76,6 +96,17 @@
                 -ms-flex: 0 0 33.333333%;
                 flex: 0 0 33.333333%;
                 max-width: 33.333333%;
+            }
+        }
+    }
+    .pane-bundle-featured-persons {
+        .field-name-field-fpp-person-list {
+            .field-items {
+                .field-item {
+                    -ms-flex: 0 0 50%;
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                }
             }
         }
     }
@@ -101,6 +132,20 @@
                     height: auto;
                     >img {
                         width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .pane-bundle-featured-persons {
+        .field-name-field-fpp-person-list {
+            .field-items {
+                .field-item {
+                    .mobject:not(.mobject--small) .group-side {
+                        // Float image left on mobile - board page
+                        float: left;
+                        margin-right: 1rem;
+                        text-align: left;
                     }
                 }
             }
