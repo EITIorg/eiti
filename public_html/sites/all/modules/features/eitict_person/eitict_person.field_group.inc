@@ -55,9 +55,8 @@ function eitict_person_field_group_info() {
     'label' => 'Details',
     'weight' => '3',
     'children' => array(
-      0 => 'field_email',
-      1 => 'field_position',
-      2 => 'field_board_membership',
+      0 => 'field_position',
+      1 => 'field_board_membership',
     ),
     'format_type' => 'div',
     'format_settings' => array(

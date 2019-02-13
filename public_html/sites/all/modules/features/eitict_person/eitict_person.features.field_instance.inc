@@ -168,9 +168,8 @@ function eitict_person_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'email',
         'settings' => array(),
-        'type' => 'email_default',
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'teaser_alternative' => array(
