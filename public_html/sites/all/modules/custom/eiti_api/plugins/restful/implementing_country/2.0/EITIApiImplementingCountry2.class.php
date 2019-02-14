@@ -154,7 +154,9 @@ class EITIApiImplementingCountry2 extends EITIApiImplementingCountry {
     $efq = new EntityFieldQuery();
     $efq_results = $efq->entityCondition('entity_type', 'implementing_country')
       ->propertyCondition('type', 'normal')
-      ->propertyCondition('status', 1)
+      // In case this needs to be included we also have to handle other queries (list, count)
+      // for things to work properly.
+      //->propertyCondition('status', 1)
       ->propertyCondition('iso', $iso)
       ->range(0, 1)
       ->execute();
