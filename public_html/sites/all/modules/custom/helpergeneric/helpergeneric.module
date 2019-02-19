@@ -419,3 +419,45 @@ function helpergeneric_variable_info($options) {
 
   return $variables;
 }
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function helpergeneric_preprocess_field(&$variables) {
+  if (isset($variables['element']['#formatter'])) {
+    // Add jquery_countdown translation js file if it exists.
+    if ($variables['element']['#formatter'] == 'field_timer_jquery_countdown') {
+      global $language;
+      $path = libraries_get_path('jquery.countdown');
+      $js_file = $path . '/js/jquery.countdown-' . $language->language . '.js';
+      if (file_exists($js_file)) {
+        drupal_add_js($path . '/js/jquery.countdown-' . $language->language . '.js');
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function helpergeneric_js_alter(&$javascript) {
+  global $language;
+  $path = libraries_get_path('jquery.countdown');
+  $js_file = $path . '/js/jquery.countdown-' . $language->language . '.js';
+  if (isset($javascript[$js_file], $javascript['settings']['data'])) {
+    foreach ($javascript['settings']['data'] as $key => &$val) {
+      // Change field_timer settings for jquery_countdown translations to work.
+      if (isset($val['field_timer'])) {
+        foreach ($val['field_timer'] as $k => &$v) {
+          if (isset($v['options']['regional'])) {
+            $v['options']['regional'] = $language->language;
+          }
+          if (isset($v['options']['regional2'])) {
+            $v['options']['regional'] = $language->language;
+          }
+        }
+        break;
+      }
+    }
+  }
+}
