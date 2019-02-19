@@ -13,6 +13,14 @@ function eitiwidgets_default_fieldable_panels_pane_type() {
   $fieldable_panels_pane_type = new stdClass();
   $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
   $fieldable_panels_pane_type->api_version = 1;
+  $fieldable_panels_pane_type->name = 'countdown';
+  $fieldable_panels_pane_type->title = 'Countdown';
+  $fieldable_panels_pane_type->description = 'Event information display with a countdown';
+  $export['countdown'] = $fieldable_panels_pane_type;
+
+  $fieldable_panels_pane_type = new stdClass();
+  $fieldable_panels_pane_type->disabled = FALSE; /* Edit this to true to make a default fieldable_panels_pane_type disabled initially */
+  $fieldable_panels_pane_type->api_version = 1;
   $fieldable_panels_pane_type->name = 'fact_blocks';
   $fieldable_panels_pane_type->title = 'Fact Blocks';
   $fieldable_panels_pane_type->description = 'Widget that contains a couple of key facts.';

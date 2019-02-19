@@ -94,6 +94,17 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: 'create fieldable countdown'.
+  $permissions['create fieldable countdown'] = array(
+    'name' => 'create fieldable countdown',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'create fieldable fact_blocks'.
   $permissions['create fieldable fact_blocks'] = array(
     'name' => 'create fieldable fact_blocks',
@@ -255,6 +266,17 @@ function eitiwidgets_user_default_permissions() {
     'module' => 'fieldable_panels_panes',
   );
 
+  // Exported permission: 'delete fieldable countdown'.
+  $permissions['delete fieldable countdown'] = array(
+    'name' => 'delete fieldable countdown',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
   // Exported permission: 'delete fieldable fact_blocks'.
   $permissions['delete fieldable fact_blocks'] = array(
     'name' => 'delete fieldable fact_blocks',
@@ -406,6 +428,17 @@ function eitiwidgets_user_default_permissions() {
   // Exported permission: 'delete fieldable visualization'.
   $permissions['delete fieldable visualization'] = array(
     'name' => 'delete fieldable visualization',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'fieldable_panels_panes',
+  );
+
+  // Exported permission: 'edit fieldable countdown'.
+  $permissions['edit fieldable countdown'] = array(
+    'name' => 'edit fieldable countdown',
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',
