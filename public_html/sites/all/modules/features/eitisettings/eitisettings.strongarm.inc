@@ -114,9 +114,13 @@ function eitisettings_strongarm() {
   $strongarm->name = 'eu_cookie_compliance';
   $strongarm->value = array(
     'popup_enabled' => 1,
-    'popup_clicking_confirmation' => 0,
+    'method' => 'opt_in',
+    'disabled_javascripts' => '',
+    'whitelisted_cookies' => '',
+    'consent_storage_method' => 'do_not_store',
+    'popup_clicking_confirmation' => FALSE,
     'popup_info' => array(
-      'value' => '<h2>We use cookies to understand how you use this website.</h2><p>By clicking any link on this page you are giving your consent for us to set cookies.&nbsp;</p>',
+      'value' => '<h2>We use cookies to understand how you use this website.</h2><p>By clicking any link on this page you are giving your consent for us to set cookies. If you agree all cookies are used, by declining only essential ones will.</p>',
       'format' => 'filtered_html',
     ),
     'use_mobile_message' => 0,
@@ -126,8 +130,16 @@ function eitisettings_strongarm() {
     ),
     'mobile_breakpoint' => '768',
     'popup_agree_button_message' => 'OK, I agree',
-    'show_disagree_button' => 1,
-    'popup_disagree_button_message' => 'No, give me more info',
+    'show_disagree_button' => TRUE,
+    'popup_disagree_button_message' => 'Give me more info',
+    'disagree_button_label' => 'Decline',
+    'withdraw_enabled' => 1,
+    'withdraw_message' => array(
+      'value' => '<h2>We use cookies to understand how you use this website.</h2><p>By clicking decline only essential cookies are used.</p>',
+      'format' => 'filtered_html',
+    ),
+    'withdraw_tab_button_label' => 'Privacy settings',
+    'withdraw_action_button_label' => 'Decline',
     'popup_agreed_enabled' => 0,
     'popup_hide_agreed' => 0,
     'popup_agreed' => array(
@@ -148,15 +160,16 @@ function eitisettings_strongarm() {
     'popup_delay' => '1000',
     'disagree_do_not_show_popup' => 0,
     'reload_page' => 0,
-    'popup_scrolling_confirmation' => 0,
+    'popup_scrolling_confirmation' => FALSE,
     'cookie_name' => '',
     'domains_option' => '1',
     'domains_list' => '',
     'exclude_paths' => '',
     'exclude_admin_pages' => 0,
     'exclude_uid_1' => 0,
-    'script_scope' => 'footer',
+    'script_scope' => 'header',
     'better_support_for_screen_readers' => 0,
+    'cookie_session' => 0,
   );
   $export['eu_cookie_compliance'] = $strongarm;
 
