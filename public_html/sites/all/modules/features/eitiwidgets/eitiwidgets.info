@@ -45,6 +45,7 @@ features[ds_field_settings][] = fieldable_panels_pane|table|default
 features[ds_field_settings][] = fieldable_panels_pane|text|default
 features[ds_field_settings][] = fieldable_panels_pane|value_chain|default
 features[ds_field_settings][] = fieldable_panels_pane|visualization|default
+features[ds_fields][] = countdown_widget
 features[ds_fields][] = quote_widget
 features[ds_layout_settings][] = fieldable_panels_pane|countdown|default
 features[ds_layout_settings][] = fieldable_panels_pane|fact_blocks|default
