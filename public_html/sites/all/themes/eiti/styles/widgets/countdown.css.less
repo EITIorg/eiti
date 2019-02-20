@@ -1,0 +1,78 @@
+.predefined-widget--countdown {
+    .countdown-content {
+        padding: 60px 0;
+    }
+    .title {
+        font-size: 1.875rem;
+        font-weight: normal;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    .field-name-field-fpp-text {
+        margin: 0;
+        text-align: center;
+        font-size: 1rem;
+    }
+    .field-name-field-fpp-datetime {
+        margin-top: 40px;
+        .is-countdown {
+            border: none;
+            background: transparent;
+            display: flex;
+            max-width: 400px;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+        }
+        .countdown {
+            min-width: 60px;
+            .label {
+                color: #9DE1FD;
+                font-size: 0.875rem;
+                display: block;
+                text-align: center;
+            }
+            .value {
+                font-size: 2.5rem;
+                display: block;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+    }
+    .field-name-field-fpp-link {
+        text-align: center;
+        margin: 50px 0 0;
+        a {
+            .border-radius(3px);
+            display: inline-block;
+            border: 1px solid @clmain;
+            color: @clmain;
+            padding: 0.6em 1em 0.7em;
+            margin: 0;
+            font-weight: 700;
+            .transition(background-color, 400ms, ease-in);
+            background: rgba(0, 0, 0, 0.4);
+            &:hover {
+                background-color: @cldetail__alt;
+            }
+        }
+    }
+}
+
+.xSmallOnly() {
+    .predefined-widget--countdown {
+        .field-name-field-fpp-datetime {
+            .countdown {
+                min-width: 50px;
+                .value {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
