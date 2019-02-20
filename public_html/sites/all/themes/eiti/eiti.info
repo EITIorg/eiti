@@ -45,6 +45,7 @@ stylesheets[all][] = styles/widgets/icon_blocks.css.less
 stylesheets[all][] = styles/widgets/mailchimp.css.less
 stylesheets[all][] = styles/widgets/quote.css.less
 stylesheets[all][] = styles/widgets/ppl_grid.css.less
+stylesheets[all][] = styles/widgets/countdown.css.less
 stylesheets[all][] = styles/widgets/table.css.less
 stylesheets[all][] = styles/widgets/tabs_with_widgets.css.less
 stylesheets[all][] = styles/widgets/teaser.css.less
