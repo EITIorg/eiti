@@ -480,6 +480,8 @@ function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $la
         'single-fluid-row-wrapper',
       ),
     ),
+    '#opacity' => 92,
+    '#background-color' => '196080',
   );
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
