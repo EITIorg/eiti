@@ -17,6 +17,11 @@ function eitiwidgets_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'countdown';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'countdown_widget' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -327,6 +332,18 @@ function eitiwidgets_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'countdown_widget';
+  $ds_field->label = 'Countdown widget';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'fieldable_panels_pane' => 'fieldable_panels_pane',
+  );
+  $ds_field->ui_limit = 'countdown|*';
+  $ds_field->properties = array();
+  $export['countdown_widget'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'quote_widget';
   $ds_field->label = 'Quote Widget';
   $ds_field->field_type = 3;
@@ -356,21 +373,21 @@ function eitiwidgets_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'main' => array(
-        0 => 'title_field',
-        1 => 'field_fpp_text',
-        2 => 'field_fpp_datetime',
-        3 => 'field_fpp_link',
+        0 => 'countdown_widget',
       ),
       'ds_hidden' => array(
-        4 => 'field_fpp_background_image',
+        1 => 'title_field',
+        2 => 'field_fpp_text',
+        3 => 'field_fpp_datetime',
+        4 => 'field_fpp_link',
       ),
     ),
     'fields' => array(
-      'title_field' => 'main',
-      'field_fpp_text' => 'main',
-      'field_fpp_datetime' => 'main',
-      'field_fpp_link' => 'main',
-      'field_fpp_background_image' => 'ds_hidden',
+      'countdown_widget' => 'main',
+      'title_field' => 'ds_hidden',
+      'field_fpp_text' => 'ds_hidden',
+      'field_fpp_datetime' => 'ds_hidden',
+      'field_fpp_link' => 'ds_hidden',
     ),
     'classes' => array(
       'layout_class' => array(
