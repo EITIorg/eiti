@@ -171,7 +171,17 @@ abstract class RestfulDataProviderEFQ extends \RestfulBase implements \RestfulDa
         throw new \RestfulBadRequestException('The current filter selection does not map to any entity property or Field API field.');
       }
       if (field_info_field($property_name)) {
-        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'BETWEEN'))) {
+        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'NOT IN', 'BETWEEN'))) {
+          if (is_array($filter['value']) && empty($filter['value'])) {
+            if (strtoupper($filter['operator'][0]) == 'NOT IN') {
+              // Skip filtering by an empty value when operator is 'NOT IN',
+              // since it throws an SQL error.
+              continue;
+            }
+            // Since Drupal doesn't know how to handle an empty array within a
+            // condition we add the `NULL` as an element to the array.
+            $filter['value'] = array(NULL);
+          }
           $query->fieldCondition($public_fields[$filter['public_field']]['property'], $public_fields[$filter['public_field']]['column'], $filter['value'], $filter['operator'][0]);
           continue;
         }
@@ -180,11 +190,21 @@ abstract class RestfulDataProviderEFQ extends \RestfulBase implements \RestfulDa
         }
       }
       else {
-        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'BETWEEN'))) {
-          $query->propertyCondition($property_name, $filter['value'], $filter['operator'][0]);
+        $column = $this->getColumnFromProperty($property_name);
+        if (in_array(strtoupper($filter['operator'][0]), array('IN', 'NOT IN', 'BETWEEN'))) {
+          if (is_array($filter['value']) && empty($filter['value'])) {
+            if (strtoupper($filter['operator'][0]) == 'NOT IN') {
+              // Skip filtering by an empty value when operator is 'NOT IN',
+              // since it throws an SQL error.
+              continue;
+            }
+            // Since Drupal doesn't know how to handle an empty array within a
+            // condition we add the `NULL` as an element to the array.
+            $filter['value'] = array(NULL);
+          }
+          $query->propertyCondition($column, $filter['value'], $filter['operator'][0]);
           continue;
         }
-        $column = $this->getColumnFromProperty($property_name);
         for ($index = 0; $index < count($filter['value']); $index++) {
           $query->propertyCondition($column, $filter['value'][$index], $filter['operator'][$index]);
         }
