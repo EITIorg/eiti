@@ -7,9 +7,8 @@ dependencies[] = entity_feature
 dependencies[] = entityreference
 hidden = TRUE
 
-; Information added by Drupal.org packaging script on 2017-02-15
-version = "7.x-1.8"
+; Information added by Drupal.org packaging script on 2019-02-19
+version = "7.x-1.9"
 core = "7.x"
 project = "restful"
-datestamp = "1487139788"
-
+datestamp = "1550575394"
