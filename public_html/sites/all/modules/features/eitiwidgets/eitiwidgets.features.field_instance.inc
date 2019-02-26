@@ -95,6 +95,42 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_body'] = array(
+    'bundle' => 'countdown',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Information',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance:
   // 'fieldable_panels_pane-countdown-field_fpp_datetime'.
   $field_instances['fieldable_panels_pane-countdown-field_fpp_datetime'] = array(
@@ -2806,6 +2842,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
+  t('Information');
   t('Layout');
   t('Link');
   t('Person List');
