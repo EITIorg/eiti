@@ -184,9 +184,10 @@ function theme_svg_inline(array $elements) {
  * Returns HTML for the header items.
  */
 function theme_header_items() {
-  $elements['secondary_navigation_toggle'] = _theme_header_items__secondary_navigation_toggle();
   $elements['identity'] = _theme_header_items__identity();
   $elements['items'] = _theme_header_items__navigation();
+  $elements['secondary_navigation_toggle'] = _theme_header_items__secondary_navigation_toggle();
+  $elements['language_switcher'] = _theme_header_items__language_switcher();
 
   // Render the HTML.
   $output = drupal_render($elements);
@@ -201,21 +202,15 @@ function theme_header_items() {
 function _theme_header_items__secondary_navigation_toggle() {
   $elements = array();
 
-  $menu_name = 'menu-site-navigation';
   $elements['site_navigation'] = array(
     '#type' => 'html_container',
     '#tag' => 'div',
-    '#title' => t('Site Navigation'),
+    '#title' => t('More'),
     '#title_tag' => 'a',
     '#title_attributes' => array(
       'href' => '#site-navigation',
       'class' => array('link'),
     ),
-    '#title_icon' => array(
-      'symbol' => 'hamburger_button',
-      'options' => array('width' => '3em', 'height' => '2.4em'),
-    ),
-    // '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
     '#attributes' => array(
       'class' => array(
         'site-navigation-toggle-wrapper',
@@ -313,13 +308,60 @@ function _theme_header_items__identity() {
 }
 
 function _theme_header_items__navigation() {
-  global $language;
   $elements = array(
     '#type' => 'container',
     '#attributes' => array(
       'class' => array(
         'header-items',
         'clearfix',
+      ),
+    ),
+  );
+
+  // Get the menu links.
+  $menu_name = 'main-menu';
+  $elements['navigation'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'nav',
+    '#title' => t('Main Menu'),
+    '#title_attributes' => array('class' => array('section-title', 'element-invisible')),
+    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      'role' => 'navigation',
+      'class' => array(
+        'main-navigation',
+      ),
+    ),
+  );
+  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
+    $links['#extras']['svgicon_size'] = '1.5em';  // @TODO: Remove this hack!
+    $elements['navigation']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'action-link',
+      '#attributes' => array(
+        'class' => array(
+          'header-links',
+        ),
+      ),
+    );
+  }
+  else {
+    $elements['navigation']['empty'] = array(
+      '#markup' => t('Main Menu not configured!'),
+    );
+  }
+
+  return $elements;
+}
+
+function _theme_header_items__language_switcher() {
+  global $language;
+  $elements = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'header-language',
       ),
     ),
   );
@@ -378,40 +420,6 @@ function _theme_header_items__navigation() {
         ),
       );
     }
-  }
-
-  // Get the menu links.
-  $menu_name = 'main-menu';
-  $elements['navigation'] = array(
-    '#type' => 'html_container',
-    '#tag' => 'nav',
-    '#title' => t('Main Menu'),
-    '#title_attributes' => array('class' => array('section-title', 'element-invisible')),
-    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
-    '#attributes' => array(
-      'role' => 'navigation',
-      'class' => array(
-        'main-navigation',
-      ),
-    ),
-  );
-  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
-    $links['#extras']['svgicon_size'] = '1.5em';  // @TODO: Remove this hack!
-    $elements['navigation']['links'] = array(
-      '#theme' => 'links__enhanced',
-      '#links' => $links,
-      '#links_prefix' => 'action-link',
-      '#attributes' => array(
-        'class' => array(
-          'header-links',
-        ),
-      ),
-    );
-  }
-  else {
-    $elements['navigation']['empty'] = array(
-      '#markup' => t('Main Menu not configured!'),
-    );
   }
 
   return $elements;
