@@ -100,6 +100,7 @@ features[field_group][] = group_title_wrapper|fieldable_panels_pane|text|default
 features[field_group][] = group_title_wrapper|fieldable_panels_pane|value_chain|default
 features[field_group][] = group_title_wrapper|fieldable_panels_pane|visualization|default
 features[field_instance][] = fieldable_panels_pane-countdown-field_fpp_background_image
+features[field_instance][] = fieldable_panels_pane-countdown-field_fpp_body
 features[field_instance][] = fieldable_panels_pane-countdown-field_fpp_datetime
 features[field_instance][] = fieldable_panels_pane-countdown-field_fpp_link
 features[field_instance][] = fieldable_panels_pane-countdown-title_field
