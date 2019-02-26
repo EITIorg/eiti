@@ -494,6 +494,9 @@ function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $la
     helpertheme_get_background_image_with_overlay($elements, $featured_image_data, $selector_prefix);
   }
 
+  if (isset($entity->content['field_fpp_body'][0]['#markup'])) {
+    $entity->content['field_fpp_body'][0]['#markup'] = nl2br($entity->content['field_fpp_body'][0]['#markup']);
+  }
   $elements['overlay'] += $entity->content;
 
   return $elements;
