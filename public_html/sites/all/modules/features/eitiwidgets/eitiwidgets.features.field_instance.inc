@@ -21,7 +21,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -91,7 +91,7 @@ function eitiwidgets_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -142,7 +142,7 @@ function eitiwidgets_field_default_field_instances() {
           'type2' => 'auto',
         ),
         'type' => 'field_timer_jquery_countdown',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -171,7 +171,7 @@ function eitiwidgets_field_default_field_instances() {
         'year_range' => '-0:+5',
       ),
       'type' => 'date_popup',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -187,7 +187,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -224,43 +224,7 @@ function eitiwidgets_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_text'.
-  $field_instances['fieldable_panels_pane-countdown-field_fpp_text'] = array(
-    'bundle' => 'countdown',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'fieldable_panels_pane',
-    'field_name' => 'field_fpp_text',
-    'label' => 'Information',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 5,
     ),
   );
 
@@ -2842,7 +2806,6 @@ function eitiwidgets_field_default_field_instances() {
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
-  t('Information');
   t('Layout');
   t('Link');
   t('Person List');

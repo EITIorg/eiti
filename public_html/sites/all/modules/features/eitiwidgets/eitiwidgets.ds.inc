@@ -377,7 +377,7 @@ function eitiwidgets_ds_layout_settings_info() {
       ),
       'ds_hidden' => array(
         1 => 'title_field',
-        2 => 'field_fpp_text',
+        2 => 'field_fpp_body',
         3 => 'field_fpp_datetime',
         4 => 'field_fpp_link',
       ),
@@ -385,7 +385,7 @@ function eitiwidgets_ds_layout_settings_info() {
     'fields' => array(
       'countdown_widget' => 'main',
       'title_field' => 'ds_hidden',
-      'field_fpp_text' => 'ds_hidden',
+      'field_fpp_body' => 'ds_hidden',
       'field_fpp_datetime' => 'ds_hidden',
       'field_fpp_link' => 'ds_hidden',
     ),
