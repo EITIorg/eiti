@@ -187,6 +187,7 @@ function theme_header_items() {
   $elements['identity'] = _theme_header_items__identity();
   $elements['items'] = _theme_header_items__navigation();
   $elements['secondary_navigation_toggle'] = _theme_header_items__secondary_navigation_toggle();
+  $elements['search'] = _theme_header_items__search();
   $elements['language_switcher'] = _theme_header_items__language_switcher();
 
   // Render the HTML.
@@ -351,6 +352,68 @@ function _theme_header_items__navigation() {
       '#markup' => t('Main Menu not configured!'),
     );
   }
+
+  return $elements;
+}
+
+function _theme_header_items__search() {
+  $elements['search'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'class' => array(
+        'header-site-search',
+      ),
+    ),
+  );
+
+  $elements['search']['form'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'form',
+    '#attributes' => array(
+      'action' => url('search'),
+      'method' => 'get',
+      'accept-charset' => 'UTF-8',
+      'class' => array(
+        'form',
+      ),
+    ),
+  );
+
+  $elements['search']['form']['textfield'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search Content'),
+    '#title_tag' => 'h3',
+    '#title_display' => 'invisible',
+    '#name' => 'query',
+    '#required' => TRUE,
+    '#size' => 20,
+    '#attributes' => array(
+      'placeholder' => t('Enter search terms'),
+    ),
+  );
+
+  $elements['search']['form']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+    '#name' => '',
+  );
+
+  $elements['search']['close'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#title' => t('Close'),
+    '#title_tag' => 'a',
+    '#title_attributes' => array(
+      'href' => '#',
+      'class' => array('link'),
+    ),
+    '#attributes' => array(
+      'class' => array(
+        'search-close',
+      ),
+    ),
+  );
 
   return $elements;
 }
@@ -613,32 +676,6 @@ function helpertheme_preprocess_main_footer(&$variables) {
 function _theme_main_footer__site_navigation() {
   $menu_name = 'menu-site-navigation';
 
-  $elements['search'] = array(
-    '#type' => 'html_container',
-    '#tag' => 'form',
-    '#attributes' => array(
-      'action' => url('search'),
-      'method' => 'get',
-      'accept-charset' => 'UTF-8',
-      'class' => array(
-        'footer-site-search',
-      ),
-    ),
-  );
-
-  $elements['search']['textfield'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Search Content'),
-    '#title_tag' => 'h3',
-    '#title_display' => 'invisible',
-    '#name' => 'query',
-    '#required' => TRUE,
-    '#size' => 20,
-    '#attributes' => array(
-      'placeholder' => t('Enter search terms'),
-    ),
-  );
-
   $elements['site_navigation'] = array(
     '#type' => 'html_container',
     '#tag' => 'nav',
@@ -689,95 +726,6 @@ function _theme_main_footer__site_navigation() {
       '#markup' => t('!menu_name not configured!', array('!menu_name' => t('Site Navigation'))),
     );
   }
-
-  $menu_name = 'menu-footer-social';
-  $elements['social'] = array(
-    '#type' => 'html_container',
-    '#tag' => 'nav',
-    '#title' => t('Stay connected'),
-    '#title_tag' => 'h3',
-    '#title_attributes' => array(
-      'class' => array('section-title', 'element-invisible'),
-    ),
-    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
-    '#attributes' => array(
-      //'role' => 'navigation',
-      'class' => array(
-        'footer-social',
-      ),
-    ),
-    '#prefix' => '<div class="footer-social-wrapper">',
-    '#suffix' => '</div>',
-  );
-
-  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
-    $elements['social']['links'] = array(
-      '#theme' => 'links__enhanced',
-      '#links' => $links,
-      '#links_prefix' => 'social-link',
-      '#attributes' => array(
-        'class' => array(
-          'footer-social-links',
-        ),
-      ),
-    );
-  }
-  else {
-    $elements['social']['empty'] = array(
-      '#markup' => t('Menu not configured!'),
-    );
-  }
-
-
-  // Add the language switcher links.
-  if (drupal_multilingual()) {
-    $path = drupal_is_front_page() ? '<front>' : $_GET['q'];
-    $lang_links = language_negotiation_get_switch_links('language', $path);
-    if (isset($lang_links->links)) {
-      $elements['language_switcher'] = array(
-        '#type' => 'html_container',
-        '#tag' => 'nav',
-        '#title' => t('Change language'),
-        '#title_attributes' => array('class' => array('language-switcher-title')),
-        '#title_tag' => 'h4',
-        '#attributes' => array(
-          'role' => 'navigation',
-          'class' => array(
-            'navigation-language-switcher',
-          ),
-        ),
-      );
-
-      $elements['site_navigation']['language_switcher']['wrapper'] = array(
-        '#type' => 'html_container',
-        '#attributes' => array(
-          'class' => array(
-            'locale-links-wrapper',
-          ),
-        ),
-      );
-
-      // Add language info to all links.
-      $languages = language_list();
-      foreach ($lang_links->links as &$link) {
-        if (isset($link['attributes']['lang']) && isset($languages[$link['attributes']['lang']])) {
-          $link['language'] = $languages[$link['attributes']['lang']];
-        }
-      }
-
-      $elements['language_switcher']['wrapper']['links'] = array(
-        '#theme' => 'links__language_switcher',
-        '#links' => $lang_links->links,
-        '#attributes' => array(
-          'class' => array(
-            'language-switcher-' . $lang_links->provider,
-            'locale-links',
-          ),
-        ),
-      );
-    }
-  }
-
 
   return $elements;
 }
