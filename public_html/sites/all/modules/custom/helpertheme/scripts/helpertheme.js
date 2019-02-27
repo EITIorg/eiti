@@ -44,6 +44,7 @@
           navigation_links.removeClass('has-expanded-child');
           navigation_links.find('.item').removeClass('expanded');
           $('body', context).removeClass('site-navigation-visible');
+          button_wrapper.removeClass('open');
         }
         else {
           footer_navigation.css({
@@ -63,6 +64,7 @@
           });
           footer_navigation.slideDown('fast');
           $('body', context).addClass('site-navigation-visible');
+          button_wrapper.addClass('open');
         }
       });
       // Close hamburger menu when clicking outside toggle button
@@ -76,6 +78,7 @@
           navigation_links.removeClass('has-expanded-child');
           navigation_links.find('.item').removeClass('expanded');
           $('body', context).removeClass('site-navigation-visible');
+          $('.site-navigation-toggle-wrapper', context).removeClass('open');
         }
       });
     }
@@ -105,6 +108,25 @@
         $(this).find('.item.has-sublevel > a.link').click(function (e) {
           e.preventDefault();
         })
+      });
+    }
+  };
+
+  Drupal.behaviors.toggleSiteSearch = {
+    /**
+     * Enable the header search show-hide functionality.
+     * @param context
+     */
+    attach: function (context) {
+      $('.header-site-search .search-open .link', context).click(function (e) {
+        e.preventDefault();
+        $(this).closest('.header-site-search').find('.form').fadeIn('fast');
+        $(this).parent().fadeOut('fast');
+      });
+      $('.header-site-search .search-close .link', context).click(function (e) {
+        e.preventDefault();
+        $(this).closest('.form').fadeOut('fast');
+        $(this).closest('.header-site-search').find('.search-open').fadeIn('fast');
       });
     }
   };

@@ -367,6 +367,26 @@ function _theme_header_items__search() {
     ),
   );
 
+  $elements['search']['open'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#title' => '',
+    '#title_tag' => 'a',
+    '#title_attributes' => array(
+      'href' => '#',
+      'class' => array('link'),
+    ),
+    '#title_icon' => array(
+      'symbol' => 'search',
+      'options' => array('width' => '1.125em', 'height' => '1.125em'),
+    ),
+    '#attributes' => array(
+      'class' => array(
+        'search-open',
+      ),
+    ),
+  );
+
   $elements['search']['form'] = array(
     '#type' => 'html_container',
     '#tag' => 'form',
@@ -376,6 +396,7 @@ function _theme_header_items__search() {
       'accept-charset' => 'UTF-8',
       'class' => array(
         'form',
+        'element-hidden',
       ),
     ),
   );
@@ -399,7 +420,7 @@ function _theme_header_items__search() {
     '#name' => '',
   );
 
-  $elements['search']['close'] = array(
+  $elements['search']['form']['close'] = array(
     '#type' => 'html_container',
     '#tag' => 'div',
     '#title' => t('Close'),
