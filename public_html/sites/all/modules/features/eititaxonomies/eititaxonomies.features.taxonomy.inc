@@ -9,6 +9,16 @@
  */
 function eititaxonomies_taxonomy_default_vocabularies() {
   return array(
+    'board_decision_bases' => array(
+      'name' => 'Board decision bases',
+      'machine_name' => 'board_decision_bases',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 32768,
+    ),
     'bookmark_type' => array(
       'name' => 'Bookmark Type',
       'machine_name' => 'bookmark_type',

@@ -19,18 +19,14 @@ function eitict_board_decision_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
@@ -40,7 +36,7 @@ function eitict_board_decision_field_default_field_instances() {
     'label' => 'Board decision long',
     'required' => 0,
     'settings' => array(
-      'display_summary' => 0,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
@@ -53,7 +49,7 @@ function eitict_board_decision_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
@@ -66,9 +62,8 @@ function eitict_board_decision_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'teaser' => array(
@@ -105,9 +100,8 @@ function eitict_board_decision_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'teaser' => array(
@@ -138,8 +132,8 @@ function eitict_board_decision_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-board_decision-field_bd_paper'.
-  $field_instances['node-board_decision-field_bd_paper'] = array(
+  // Exported field_instance: 'node-board_decision-field_board_decisions'.
+  $field_instances['node-board_decision-field_board_decisions'] = array(
     'bundle' => 'board_decision',
     'default_value' => NULL,
     'deleted' => 0,
@@ -147,10 +141,9 @@ function eitict_board_decision_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -161,38 +154,39 @@ function eitict_board_decision_field_default_field_instances() {
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
-    'field_name' => 'field_bd_paper',
-    'label' => 'Related board paper',
+    'field_name' => 'field_board_decisions',
+    'label' => 'Related board decisions',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 4,
+      'type' => 'entityreference_autocomplete',
+      'weight' => 9,
     ),
   );
 
-  // Exported field_instance: 'node-board_decision-field_bd_where'.
-  $field_instances['node-board_decision-field_bd_where'] = array(
+  // Exported field_instance:
+  // 'node-board_decision-field_board_meeting_circular'.
+  $field_instances['node-board_decision-field_board_meeting_circular'] = array(
     'bundle' => 'board_decision',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Used in generating the full board decision number. For example: BC-266, BM-38.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -203,8 +197,8 @@ function eitict_board_decision_field_default_field_instances() {
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
-    'field_name' => 'field_bd_where',
-    'label' => 'Where',
+    'field_name' => 'field_board_meeting_circular',
+    'label' => 'Related board meeting or circular',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -231,9 +225,8 @@ function eitict_board_decision_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'countries',
         'settings' => array(),
-        'type' => 'country_default',
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'teaser' => array(
@@ -257,7 +250,133 @@ function eitict_board_decision_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_decision-field_internal_content'.
+  $field_instances['node-board_decision-field_internal_content'] = array(
+    'bundle' => 'board_decision',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_internal_content',
+    'label' => 'Related internal content',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_decision-field_public_content'.
+  $field_instances['node-board_decision-field_public_content'] = array(
+    'bundle' => 'board_decision',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_public_content',
+    'label' => 'Related public content',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_decision-field_validation'.
+  $field_instances['node-board_decision-field_validation'] = array(
+    'bundle' => 'board_decision',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_validation',
+    'label' => 'Related validation',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 10,
     ),
   );
 
@@ -313,8 +432,12 @@ function eitict_board_decision_field_default_field_instances() {
   t('Country');
   t('Decision basis');
   t('Decision number');
-  t('Related board paper');
-  t('Where');
+  t('Related board decisions');
+  t('Related board meeting or circular');
+  t('Related internal content');
+  t('Related public content');
+  t('Related validation');
+  t('Used in generating the full board decision number. For example: BC-266, BM-38.');
 
   return $field_instances;
 }

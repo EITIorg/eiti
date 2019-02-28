@@ -71,16 +71,16 @@ function eitict_board_decision_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '11',
+          'weight' => '14',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '11',
         ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '12',
         ),
         'xmlsitemap' => array(
-          'weight' => '10',
+          'weight' => '13',
         ),
         'language' => array(
           'weight' => '0',
