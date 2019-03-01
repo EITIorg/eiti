@@ -10,6 +10,28 @@
 function eititaxonomies_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'delete terms in board_decision_bases'.
+  $permissions['delete terms in board_decision_bases'] = array(
+    'name' => 'delete terms in board_decision_bases',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'delete terms in board_decision_keywords'.
+  $permissions['delete terms in board_decision_keywords'] = array(
+    'name' => 'delete terms in board_decision_keywords',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in bookmark_type'.
   $permissions['delete terms in bookmark_type'] = array(
     'name' => 'delete terms in bookmark_type',
@@ -68,6 +90,28 @@ function eititaxonomies_user_default_permissions() {
   // Exported permission: 'delete terms in tags'.
   $permissions['delete terms in tags'] = array(
     'name' => 'delete terms in tags',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in board_decision_bases'.
+  $permissions['edit terms in board_decision_bases'] = array(
+    'name' => 'edit terms in board_decision_bases',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in board_decision_keywords'.
+  $permissions['edit terms in board_decision_keywords'] = array(
+    'name' => 'edit terms in board_decision_keywords',
     'roles' => array(
       'administrator' => 'administrator',
       'internal editor' => 'internal editor',

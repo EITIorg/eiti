@@ -91,6 +91,44 @@ function eitict_board_decision_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-board_decision-field_bd_keywords'.
+  $field_instances['node-board_decision-field_bd_keywords'] = array(
+    'bundle' => 'board_decision',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_bd_keywords',
+    'label' => 'Keywords',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-board_decision-field_bd_number'.
   $field_instances['node-board_decision-field_bd_number'] = array(
     'bundle' => 'board_decision',
@@ -170,7 +208,7 @@ function eitict_board_decision_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -250,7 +288,7 @@ function eitict_board_decision_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -292,7 +330,7 @@ function eitict_board_decision_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -334,7 +372,7 @@ function eitict_board_decision_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -376,7 +414,7 @@ function eitict_board_decision_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -432,6 +470,7 @@ function eitict_board_decision_field_default_field_instances() {
   t('Country');
   t('Decision basis');
   t('Decision number');
+  t('Keywords');
   t('Related board decisions');
   t('Related board meeting or circular');
   t('Related internal content');

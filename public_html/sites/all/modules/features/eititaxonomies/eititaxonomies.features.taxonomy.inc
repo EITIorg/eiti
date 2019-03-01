@@ -19,6 +19,16 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'language' => 'und',
       'i18n_mode' => 32768,
     ),
+    'board_decision_keywords' => array(
+      'name' => 'Board decision keywords',
+      'machine_name' => 'board_decision_keywords',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 32768,
+    ),
     'bookmark_type' => array(
       'name' => 'Bookmark Type',
       'machine_name' => 'bookmark_type',
