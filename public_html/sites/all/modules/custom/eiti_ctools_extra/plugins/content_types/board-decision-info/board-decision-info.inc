@@ -141,14 +141,6 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
   // Country.
   $country = $entity_wrapper->field_country->value();
   if ($country) {
-    // Looks like the ID value is not available.
-    $c_id = db_select('eiti_implementing_country', 'ic')
-      ->fields('ic', array('id'))
-      ->condition('iso', $country->iso2)
-      ->execute()
-      ->fetchField();
-    $country = entity_object_load($c_id, 'implementing_country');
-    $country_emw = entity_metadata_wrapper('implementing_country', $country);
     $block['bottom_info']['country'] = array(
       '#type' => 'html_container',
       '#tag' => 'div',
@@ -164,7 +156,7 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
     $block['bottom_info']['country']['value'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'span',
-      '#value' => l($country_emw->name->value(), 'implementing_country/' . $country_emw->id->value()),
+      '#value' => l($country->name, 'implementing_country/' . $country->id),
       '#attributes' => array('class' => array('value')),
     );
   }

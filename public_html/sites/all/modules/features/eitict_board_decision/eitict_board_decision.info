@@ -77,6 +77,7 @@ features[variable][] = pathauto_node_board_decision_pattern
 features[variable][] = pathauto_node_board_decision_ru_pattern
 features[variable][] = pathauto_node_board_decision_und_pattern
 features[variable][] = xmlsitemap_settings_node_board_decision
+features[views_view][] = board_decisions
 features[views_view][] = content_reference
 features[views_view][] = validation_data
 features_exclude[field_base][field_link] = field_link

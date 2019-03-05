@@ -157,21 +157,37 @@ function eitict_board_decision_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_country',
     'indexes' => array(
-      'iso2' => array(
-        0 => 'iso2',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'countries',
+    'module' => 'entityreference',
     'settings' => array(
-      'continents' => array(),
-      'countries' => array(),
-      'enabled' => 1,
       'entity_translation_sync' => FALSE,
-      'size' => 5,
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'entityqueue' => array(
+            'status' => 0,
+          ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'direction' => 'ASC',
+          'property' => 'name',
+          'type' => 'property',
+        ),
+        'target_bundles' => array(
+          'normal' => 'normal',
+        ),
+      ),
+      'target_type' => 'implementing_country',
     ),
     'translatable' => 0,
-    'type' => 'country',
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_internal_content'.

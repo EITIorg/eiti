@@ -11,6 +11,122 @@ function eitict_board_decision_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'board_decisions';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Board decisions';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Board decisions';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd.m.Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'html5_tools_iso8601';
+  /* Field: Content: Related board meeting or circular */
+  $handler->display->display_options['fields']['field_board_meeting_circular']['id'] = 'field_board_meeting_circular';
+  $handler->display->display_options['fields']['field_board_meeting_circular']['table'] = 'field_data_field_board_meeting_circular';
+  $handler->display->display_options['fields']['field_board_meeting_circular']['field'] = 'field_board_meeting_circular';
+  $handler->display->display_options['fields']['field_board_meeting_circular']['label'] = '';
+  $handler->display->display_options['fields']['field_board_meeting_circular']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_board_meeting_circular']['element_label_colon'] = FALSE;
+  /* Field: Content: Decision number */
+  $handler->display->display_options['fields']['field_bd_number']['id'] = 'field_bd_number';
+  $handler->display->display_options['fields']['field_bd_number']['table'] = 'field_data_field_bd_number';
+  $handler->display->display_options['fields']['field_bd_number']['field'] = 'field_bd_number';
+  $handler->display->display_options['fields']['field_bd_number']['label'] = 'Decision #';
+  $handler->display->display_options['fields']['field_bd_number']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_bd_number']['alter']['text'] = '[field_bd_number]/[field_board_meeting_circular]';
+  $handler->display->display_options['fields']['field_bd_number']['element_label_colon'] = FALSE;
+  /* Field: Field: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = 'Decision';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
+  /* Field: Content: Keywords */
+  $handler->display->display_options['fields']['field_bd_keywords']['id'] = 'field_bd_keywords';
+  $handler->display->display_options['fields']['field_bd_keywords']['table'] = 'field_data_field_bd_keywords';
+  $handler->display->display_options['fields']['field_bd_keywords']['field'] = 'field_bd_keywords';
+  $handler->display->display_options['fields']['field_bd_keywords']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_bd_keywords']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_bd_keywords']['delta_offset'] = '0';
+  /* Field: Content: Country */
+  $handler->display->display_options['fields']['field_country']['id'] = 'field_country';
+  $handler->display->display_options['fields']['field_country']['table'] = 'field_data_field_country';
+  $handler->display->display_options['fields']['field_country']['field'] = 'field_country';
+  $handler->display->display_options['fields']['field_country']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_country']['settings'] = array(
+    'link' => 0,
+  );
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'board_decision' => 'board_decision',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'board-decisions-list';
+  $translatables['board_decisions'] = array(
+    t('Master'),
+    t('Board decisions'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Date'),
+    t('Decision #'),
+    t('[field_bd_number]/[field_board_meeting_circular]'),
+    t('Decision'),
+    t('Keywords'),
+    t('Country'),
+    t('Page'),
+  );
+  $export['board_decisions'] = $view;
+
+  $view = new view();
   $view->name = 'content_reference';
   $view->description = '';
   $view->tag = 'default';

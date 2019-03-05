@@ -265,7 +265,7 @@ function eitict_board_decision_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
