@@ -171,32 +171,34 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
 
   // Validation PDF.
   $validation = $entity_wrapper->field_validation->value();
-  $pdf_url = url(
-    'scorecard-pdf',
-    array(
-      'query' => array(
-        'filter[country]' => $validation->country_id,
-        'filter[year]' => $validation->year,
+  if ($validation) {
+    $pdf_url = url(
+      'scorecard-pdf',
+      array(
+        'query' => array(
+          'filter[country]' => $validation->country_id,
+          'filter[year]' => $validation->year,
+        )
       )
-    )
-  );
-  $block['validation'] = array(
-    '#type' => 'html_container',
-    '#tag' => 'div',
-    '#title' => t('Save decision as PDF'),
-    '#title_tag' => 'a',
-    '#title_attributes' => array(
-      'href' => $pdf_url,
-      'target' => '_blank',
-      'class' => array('link'),
-    ),
-    '#attributes' => array(
-      'class' => array(
-        'validation',
-        'single-fluid-row-wrapper',
+    );
+    $block['validation'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('Save decision as PDF'),
+      '#title_tag' => 'a',
+      '#title_attributes' => array(
+        'href' => $pdf_url,
+        'target' => '_blank',
+        'class' => array('link'),
       ),
-    ),
-  );
+      '#attributes' => array(
+        'class' => array(
+          'validation',
+          'single-fluid-row-wrapper',
+        ),
+      ),
+    );
+  }
 
   // Related public content.
   $public_content = $entity_wrapper->field_public_content->value();
