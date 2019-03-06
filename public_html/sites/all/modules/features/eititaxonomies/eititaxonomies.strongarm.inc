@@ -104,6 +104,19 @@ function eititaxonomies_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_taxonomy';
+  $strongarm->value = array(
+    'country_status' => TRUE,
+    'stakeholder_types' => TRUE,
+    'publication_types_public' => TRUE,
+    'board_decision_bases' => TRUE,
+    'board_decision_keywords' => TRUE,
+  );
+  $export['entity_translation_taxonomy'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_taxonomy_term_bookmark_type_pattern';
   $strongarm->value = '';
   $export['pathauto_taxonomy_term_bookmark_type_pattern'] = $strongarm;

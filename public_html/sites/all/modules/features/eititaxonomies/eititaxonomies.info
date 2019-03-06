@@ -77,6 +77,7 @@ features[variable][] = entity_translation_settings_taxonomy_term__company_commod
 features[variable][] = entity_translation_settings_taxonomy_term__document_category
 features[variable][] = entity_translation_settings_taxonomy_term__person_positions
 features[variable][] = entity_translation_settings_taxonomy_term__tags
+features[variable][] = entity_translation_taxonomy
 features[variable][] = pathauto_taxonomy_term_bookmark_type_pattern
 features[variable][] = pathauto_taxonomy_term_company_commodities_pattern
 features[variable][] = pathauto_taxonomy_term_company_sectors_pattern
