@@ -554,6 +554,16 @@ function eitiwidgets_preprocess_panelizer_view_mode(&$variables) {
       $entity_label = entity_label('node', $entity);
     }
 
+    // Board decision title override if summary exists.
+    if (isset($entity->type) && $entity->type == 'board_decision') {
+      global $language;
+      $entity_wrapper = entity_metadata_wrapper('node', $entity);
+      $body = $entity_wrapper->language($language->language)->body->value();
+      if ($body['safe_summary']) {
+        $entity_label = trim(strip_tags($body['safe_summary']));
+      }
+    }
+
     if ($entity_label) {
       $variables['title'] = $entity_label;
     }
