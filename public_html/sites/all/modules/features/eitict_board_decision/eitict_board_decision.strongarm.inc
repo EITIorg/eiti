@@ -60,9 +60,9 @@ function eitict_board_decision_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__board_decision';
   $strongarm->value = array(
-    'default_language' => 'und',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 0,
+    'exclude_language_none' => 1,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
@@ -158,10 +158,13 @@ function eitict_board_decision_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
         'redirect' => array(
-          'weight' => '3',
+          'weight' => '4',
+        ),
+        'language' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -178,10 +181,13 @@ function eitict_board_decision_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
+        ),
+        'language' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
