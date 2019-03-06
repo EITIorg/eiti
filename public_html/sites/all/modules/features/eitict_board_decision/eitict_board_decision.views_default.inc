@@ -27,10 +27,16 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_country_target_id']['id'] = 'field_country_target_id';
+  $handler->display->display_options['relationships']['field_country_target_id']['table'] = 'field_data_field_country';
+  $handler->display->display_options['relationships']['field_country_target_id']['field'] = 'field_country_target_id';
+  $handler->display->display_options['relationships']['field_country_target_id']['label'] = 'Country';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -69,14 +75,14 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['fields']['field_bd_keywords']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_bd_keywords']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_bd_keywords']['delta_offset'] = '0';
-  /* Field: Content: Country */
-  $handler->display->display_options['fields']['field_country']['id'] = 'field_country';
-  $handler->display->display_options['fields']['field_country']['table'] = 'field_data_field_country';
-  $handler->display->display_options['fields']['field_country']['field'] = 'field_country';
-  $handler->display->display_options['fields']['field_country']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_country']['settings'] = array(
-    'link' => 0,
-  );
+  /* Field: Field: Name */
+  $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
+  $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['relationship'] = 'field_country_target_id';
+  $handler->display->display_options['fields']['name_field']['label'] = 'Country';
+  $handler->display->display_options['fields']['name_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -95,6 +101,33 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'board_decision' => 'board_decision',
+  );
+  /* Filter criterion: Global: Combine fields filter */
+  $handler->display->display_options['filters']['combine']['id'] = 'combine';
+  $handler->display->display_options['filters']['combine']['table'] = 'views';
+  $handler->display->display_options['filters']['combine']['field'] = 'combine';
+  $handler->display->display_options['filters']['combine']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
+    11 => 0,
+  );
+  $handler->display->display_options['filters']['combine']['fields'] = array(
+    'title_field' => 'title_field',
+    'name_field' => 'name_field',
   );
 
   /* Display: Page */
@@ -116,12 +149,13 @@ function eitict_board_decision_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Country'),
     t('Date'),
     t('Decision #'),
     t('[field_bd_number]/[field_board_meeting_circular]'),
     t('Decision'),
     t('Keywords'),
-    t('Country'),
+    t('Search'),
     t('Page'),
   );
   $export['board_decisions'] = $view;
