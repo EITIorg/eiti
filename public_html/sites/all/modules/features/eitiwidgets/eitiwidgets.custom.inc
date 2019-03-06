@@ -395,6 +395,10 @@ function eitiwidgets_entity_view($entity, $type, $view_mode, $langcode) {
       unset($entity->content['field_fpp_source']);
     }
   }
+
+  elseif ($entity->bundle == 'countdown') {
+    $entity->content['countdown_widget'] = eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $langcode);
+  }
 }
 
 /**
@@ -413,7 +417,6 @@ function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars
     }
   }
 }
-
 
 /**
  * Prepares the content for the quote widget DS preprocessed field.
@@ -458,6 +461,48 @@ function eitiwidgets_get_quote_widget_markup($entity, $type, $view_mode, $langco
 }
 
 /**
+ * Prepares the content for the countdown widget DS preprocessed field.
+ */
+function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $langcode) {
+  $elements = array(
+    '#type' => 'html_container',
+    '#attributes' => array(
+      'class' => array(
+        'countdown-content',
+      ),
+    ),
+  );
+
+  $elements['overlay'] = array(
+    '#type' => 'html_container',
+    '#attributes' => array(
+      'class' => array(
+        'single-fluid-row-wrapper',
+      ),
+    ),
+    '#opacity' => 92,
+    '#background-color' => '196080',
+  );
+
+  $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
+  if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
+    $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
+
+    // Use the featured image as background image.
+    $entity_id = entity_id('fieldable_panels_pane', $entity);
+    $selector_prefix = implode('-', array('fieldable_panels_pane', $entity_id));
+    helpertheme_get_background_image_with_overlay($elements, $featured_image_data, $selector_prefix);
+  }
+
+  if (isset($entity->content['field_fpp_body'][0]['#markup'])) {
+    $entity->content['field_fpp_body'][0]['#markup'] = nl2br($entity->content['field_fpp_body'][0]['#markup']);
+  }
+  $elements['overlay'] += $entity->content;
+
+  return $elements;
+}
+
+/**
  * Implements hook_preprocess_fieldable_panels_pane().
  *
  * @inheritdoc
@@ -472,7 +517,7 @@ function eitiwidgets_preprocess_fieldable_panels_pane(&$variables) {
     $variables['main_classes'] = '';
   }
 
-  if (empty($entity->field_fpp_background_image) && !in_array($entity->bundle, array('quote', 'header'))) {
+  if (empty($entity->field_fpp_background_image) && !in_array($entity->bundle, array('quote', 'header', 'countdown'))) {
     $variables['main_classes'] .= ' single-fluid-row-wrapper';
   }
 }

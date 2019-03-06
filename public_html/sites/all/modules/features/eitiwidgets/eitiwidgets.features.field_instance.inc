@@ -11,6 +11,302 @@ function eitiwidgets_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-countdown-field_fpp_background_image'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_background_image'] = array(
+    'bundle' => 'countdown',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_background_image',
+    'label' => 'Background Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '960x300',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_body'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_body'] = array(
+    'bundle' => 'countdown',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_body',
+    'label' => 'Information',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'fieldable_panels_pane-countdown-field_fpp_datetime'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_datetime'] = array(
+    'bundle' => 'countdown',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_timer',
+        'settings' => array(
+          'compact' => 0,
+          'compact2' => 0,
+          'format' => 'DHMS',
+          'format2' => 'dHMS',
+          'fromto' => 'both',
+          'layout' => '<span class="countdown days">
+<span class="label">{dl}</span>
+<span class="value">{dn}</span>
+</span>
+<span class="countdown hours">
+<span class="label">{hl}</span>
+<span class="value">{hn}</span>
+</span>
+ <span class="countdown minutes">
+<span class="label">{ml}</span>
+<span class="value">{mn}</span>
+</span>
+<span class="countdown seconds">
+<span class="label">{sl}</span>
+<span class="value">{sn}</span>
+</span>',
+          'layout2' => '',
+          'padZeroes' => 0,
+          'padZeroes2' => 0,
+          'regional' => 'en',
+          'regional2' => 'en',
+          'significant' => 0,
+          'significant2' => 0,
+          'timeSeparator' => '',
+          'timeSeparator2' => ':',
+          'title' => '',
+          'title2' => '',
+          'type' => 'countdown',
+          'type2' => 'auto',
+        ),
+        'type' => 'field_timer_jquery_countdown',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_datetime',
+    'label' => 'Datetime',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'd.m.Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-0:+5',
+      ),
+      'type' => 'date_popup',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_link'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_link'] = array(
+    'bundle' => 'countdown',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_link',
+    'label' => 'Link',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'user',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'required',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-countdown-title_field'.
+  $field_instances['fieldable_panels_pane-countdown-title_field'] = array(
+    'bundle' => 'countdown',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A field replacing fieldable panel pane title.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 'entity',
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-fact_blocks-field_fpp_background_image'.
   $field_instances['fieldable_panels_pane-fact_blocks-field_fpp_background_image'] = array(
     'bundle' => 'fact_blocks',
@@ -1670,7 +1966,10 @@ function eitiwidgets_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'tablefield',
-        'settings' => array(),
+        'settings' => array(
+          'trim_trailing_cols' => FALSE,
+          'trim_trailing_rows' => FALSE,
+        ),
         'type' => 'tablefield_default',
         'weight' => 2,
       ),
@@ -2536,13 +2835,16 @@ function eitiwidgets_field_default_field_instances() {
   t('Bookmark List');
   t('Bookmark widget configuration.');
   t('Content Widgets');
+  t('Datetime');
   t('Description');
   t('For a proper video playback you should upload 3 videos of 3 different types, at least. The formats of the videos are the following: webm, mp4, ogv (ogg).');
   t('Header Type');
   t('Icon');
   t('If this quote leads somewhere, please specify the absolute URL (even if it is a local one).');
   t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
+  t('Information');
   t('Layout');
+  t('Link');
   t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');

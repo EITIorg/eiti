@@ -12,6 +12,28 @@ function eitiwidgets_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'fieldable_panels_pane|countdown|default';
+  $ds_fieldsetting->entity_type = 'fieldable_panels_pane';
+  $ds_fieldsetting->bundle = 'countdown';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'countdown_widget' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+  );
+  $export['fieldable_panels_pane|countdown|default'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'fieldable_panels_pane|featured_articles|default';
   $ds_fieldsetting->entity_type = 'fieldable_panels_pane';
   $ds_fieldsetting->bundle = 'featured_articles';
@@ -310,6 +332,18 @@ function eitiwidgets_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'countdown_widget';
+  $ds_field->label = 'Countdown widget';
+  $ds_field->field_type = 3;
+  $ds_field->entities = array(
+    'fieldable_panels_pane' => 'fieldable_panels_pane',
+  );
+  $ds_field->ui_limit = 'countdown|*';
+  $ds_field->properties = array();
+  $export['countdown_widget'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'quote_widget';
   $ds_field->label = 'Quote Widget';
   $ds_field->field_type = 3;
@@ -328,6 +362,50 @@ function eitiwidgets_ds_custom_fields_info() {
  */
 function eitiwidgets_ds_layout_settings_info() {
   $export = array();
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'fieldable_panels_pane|countdown|default';
+  $ds_layout->entity_type = 'fieldable_panels_pane';
+  $ds_layout->bundle = 'countdown';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 'simplelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'main' => array(
+        0 => 'countdown_widget',
+      ),
+      'ds_hidden' => array(
+        1 => 'title_field',
+        2 => 'field_fpp_body',
+        3 => 'field_fpp_datetime',
+        4 => 'field_fpp_link',
+      ),
+    ),
+    'fields' => array(
+      'countdown_widget' => 'main',
+      'title_field' => 'ds_hidden',
+      'field_fpp_body' => 'ds_hidden',
+      'field_fpp_datetime' => 'ds_hidden',
+      'field_fpp_link' => 'ds_hidden',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
+    'wrappers' => array(
+      'main' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['fieldable_panels_pane|countdown|default'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
