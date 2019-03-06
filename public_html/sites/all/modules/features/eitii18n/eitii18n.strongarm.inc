@@ -18,10 +18,12 @@ function eitii18n_strongarm() {
     'node' => 'node',
     'taxonomy_term' => 'taxonomy_term',
     'implementing_country' => 'implementing_country',
+    'score_data' => 'score_data',
     'fieldable_panels_pane' => 'fieldable_panels_pane',
     'file' => 'file',
     'organisation' => 0,
     'revenue_stream' => 0,
+    'score_req' => 0,
     'summary_data' => 0,
     'user' => 0,
   );

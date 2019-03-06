@@ -24,6 +24,7 @@ function eiti_ctools_extra__validation_actions__render($subtype, $conf, $panel_a
     return NULL;
   }
 
+  global $language;
   $block = array();
   $entity_type = 'node';
   $entity_wrapper = entity_metadata_wrapper($entity_type, $entity);
@@ -32,7 +33,7 @@ function eiti_ctools_extra__validation_actions__render($subtype, $conf, $panel_a
   $validation = $entity_wrapper->field_validation->value();
   if ($validation) {
     $validation_emw = entity_metadata_wrapper('score_data', $validation);
-    $text = $validation_emw->field_scd_pdf_text2->value();
+    $text = $validation_emw->language($language->language)->field_scd_pdf_text2->value();
     if ($text['safe_value']) {
       $block['actions'] = array(
         '#type' => 'html_container',

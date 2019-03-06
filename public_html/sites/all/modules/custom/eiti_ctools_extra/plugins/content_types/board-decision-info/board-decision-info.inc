@@ -73,7 +73,7 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
   }
 
   // The Board's decision.
-  $body = $entity_wrapper->body->value();
+  $body = $entity_wrapper->language($language->language)->body->value();
   if ($body['safe_value']) {
     $block['body'] = array(
       '#type' => 'html_container',
