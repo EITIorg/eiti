@@ -49,7 +49,7 @@
         else {
           footer_navigation.css({
             'position': 'absolute',
-            'top': button_offset.top + button_height,
+            'top': button_offset.top + button_height - 1,
             'left': button_offset.left
           });
           // Change hamburger menu position on window resize
@@ -58,7 +58,7 @@
             button_height = button_wrapper.outerHeight();
             footer_navigation.css({
               'position': 'absolute',
-              'top': button_offset.top + button_height,
+              'top': button_offset.top + button_height - 1,
               'left': button_offset.left
             });
           });
@@ -120,13 +120,13 @@
     attach: function (context) {
       $('.header-site-search .search-open .link', context).click(function (e) {
         e.preventDefault();
-        $(this).closest('.header-site-search').find('.form').fadeIn('fast');
-        $(this).parent().fadeOut('fast');
+        $(this).closest('.header-site-search').find('.form').fadeIn('fast').addClass('open');        
       });
       $('.header-site-search .search-close .link', context).click(function (e) {
         e.preventDefault();
-        $(this).closest('.form').fadeOut('fast');
-        $(this).closest('.header-site-search').find('.search-open').fadeIn('fast');
+        $(this).closest('.form').fadeOut('fast', function() {
+            $(this).removeClass('open');
+        });        
       });
     }
   };
