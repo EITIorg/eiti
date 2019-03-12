@@ -397,6 +397,7 @@ function _theme_header_items__search() {
       'class' => array(
         'form',
         'element-hidden',
+        'header-search-form',
       ),
     ),
   );
@@ -717,6 +718,7 @@ function _theme_main_footer__site_navigation() {
 
   if ($links = helpertheme_menu_navigation_links($menu_name, 2)) {
     $links['#extras']['svgicon_size'] = '1.25em';
+    $links['#extras']['menu_name'] = $menu_name;
     $elements['site_navigation']['links'] = array(
       '#theme' => 'links__enhanced',
       '#links' => $links,

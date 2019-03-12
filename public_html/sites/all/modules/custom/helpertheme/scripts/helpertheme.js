@@ -120,13 +120,20 @@
     attach: function (context) {
       $('.header-site-search .search-open .link', context).click(function (e) {
         e.preventDefault();
-        $(this).closest('.header-site-search').find('.form').fadeIn('fast').addClass('open');        
+        $(this).closest('.header-site-search').find('.header-search-form').fadeIn('fast').addClass('open');
       });
       $('.header-site-search .search-close .link', context).click(function (e) {
         e.preventDefault();
-        $(this).closest('.form').fadeOut('fast', function() {
+        $(this).closest('.header-search-form').fadeOut('fast', function() {
             $(this).removeClass('open');
         });        
+      });
+      $('body', context).click(function (e) {
+        if (!$(e.target).closest('.header-site-search').length) {
+          $('.header-search-form').fadeOut('fast', function() {
+            $(this).removeClass('open');
+          });
+        }
       });
     }
   };
