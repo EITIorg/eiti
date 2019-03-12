@@ -67,6 +67,20 @@
           button_wrapper.addClass('open');
         }
       });
+      $('#site-navigation .nav-close .link', context).click(function (e) {
+        e.preventDefault();
+        var footer_navigation = $('.footer-site-navigation-wrapper', context);
+        var button_wrapper = $('.main-header .site-navigation-toggle-wrapper', context);
+
+        if ($('body', context).hasClass('site-navigation-visible')) {
+          footer_navigation.slideUp('fast');
+          var navigation_links = footer_navigation.find('.navigation-links');
+          navigation_links.removeClass('has-expanded-child');
+          navigation_links.find('.item').removeClass('expanded');
+          $('body', context).removeClass('site-navigation-visible');
+          button_wrapper.removeClass('open');
+        }
+      });
       // Close hamburger menu when clicking outside toggle button
       $('body', context).click(function (e) {
         var footer_navigation = $('.footer-site-navigation-wrapper', context);
