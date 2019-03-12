@@ -118,3 +118,24 @@ function eitict_document_date_select_process_alter(&$element, &$form_state, $con
     $element['year']['#options'][''] = t('----');
   }
 }
+
+/**
+ * Implements hook_ds_pre_render_alter().
+ */
+function eitict_document_ds_pre_render_alter(&$layout_render_array, $context, &$vars) {
+  // Add feedback form for documents if necessary.
+  if ($context['entity_type'] === 'node' && $context['bundle'] === 'document' && $context['view_mode'] === 'full') {
+    if (isset($vars['field_feedback_form']['und'][0]['value']) && $vars['field_feedback_form']['und'][0]['value']) {
+      $webform_nid = FALSE;
+      if (function_exists('eitict_webform_get_feedback_nid')) {
+        $webform_nid = eitict_webform_get_feedback_nid();
+      }
+      if ($webform_nid) {
+        $webform_node = node_load($webform_nid);
+        $webform_view = node_view($webform_node, 'full');
+        $webform_view['#weight'] = 100;
+        $layout_render_array['right'][] = $webform_view;
+      }
+    }
+  }
+}

@@ -56,6 +56,7 @@ features[field_instance][] = node-document-field_doc_publisher
 features[field_instance][] = node-document-field_doc_type_internal
 features[field_instance][] = node-document-field_doc_type_public
 features[field_instance][] = node-document-field_document_category
+features[field_instance][] = node-document-field_feedback_form
 features[field_instance][] = node-document-field_mailchimp_signup_form
 features[field_instance][] = node-document-field_relevance
 features[field_instance][] = node-document-title_field

@@ -18,6 +18,7 @@ features[ctools][] = panelizer:panelizer:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_layout_settings][] = node|page|full
 features[features_api][] = api:2
+features[field_instance][] = node-page-field_feedback_form
 features[field_instance][] = node-page-title_field
 features[node][] = page
 features[panelizer_defaults][] = node:page:default:default

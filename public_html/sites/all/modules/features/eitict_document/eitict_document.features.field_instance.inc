@@ -502,6 +502,51 @@ function eitict_document_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-document-field_feedback_form'.
+  $field_instances['node-document-field_feedback_form'] = array(
+    'bundle' => 'document',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 19,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_feedback_form',
+    'label' => 'Add feedback form',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-document-field_mailchimp_signup_form'.
   $field_instances['node-document-field_mailchimp_signup_form'] = array(
     'bundle' => 'document',
@@ -638,6 +683,7 @@ function eitict_document_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add feedback form');
   t('Attachments');
   t('Body');
   t('Country');
