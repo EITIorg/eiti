@@ -698,6 +698,48 @@ function helpertheme_preprocess_main_footer(&$variables) {
 function _theme_main_footer__site_navigation() {
   $menu_name = 'menu-site-navigation';
 
+  $elements['close'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#title' => t('Close'),
+    '#title_tag' => 'a',
+    '#title_attributes' => array(
+      'href' => '#',
+      'class' => array('link'),
+    ),
+    '#attributes' => array(
+      'class' => array(
+        'nav-close',
+      ),
+    ),
+  );
+
+  $elements['search'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'form',
+    '#attributes' => array(
+      'action' => url('search'),
+      'method' => 'get',
+      'accept-charset' => 'UTF-8',
+      'class' => array(
+        'footer-site-search',
+      ),
+    ),
+  );
+
+  $elements['search']['textfield'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search Content'),
+    '#title_tag' => 'h3',
+    '#title_display' => 'invisible',
+    '#name' => 'query',
+    '#required' => TRUE,
+    '#size' => 20,
+    '#attributes' => array(
+      'placeholder' => t('Enter search terms'),
+    ),
+  );
+
   $elements['site_navigation'] = array(
     '#type' => 'html_container',
     '#tag' => 'nav',
@@ -715,6 +757,21 @@ function _theme_main_footer__site_navigation() {
     ),
   );
 
+  // Get the main menu links for small displays.
+  if ($links = helpertheme_menu_navigation_links('main-menu', 1)) {
+    $links['#extras']['svgicon_size'] = '1.25em';
+    $elements['site_navigation']['main_links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'action-link',
+      '#attributes' => array(
+        'class' => array(
+          'navigation-links',
+          'small-display',
+        ),
+      ),
+    );
+  }
 
   if ($links = helpertheme_menu_navigation_links($menu_name, 2)) {
     $links['#extras']['svgicon_size'] = '1.25em';
