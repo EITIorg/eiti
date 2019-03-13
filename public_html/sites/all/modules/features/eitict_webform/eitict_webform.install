@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function eitict_webform_install() {
+  // Add base value for feedback form for all page nodes.
+  $nids = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'page')
+    ->execute()
+    ->fetchCol();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    $node->field_feedback_form['und'][0]['value'] = 1;
+    field_attach_update('node', $node);
+  }
+}

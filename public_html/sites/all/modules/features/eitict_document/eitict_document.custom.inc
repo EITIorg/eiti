@@ -123,7 +123,7 @@ function eitict_document_date_select_process_alter(&$element, &$form_state, $con
  * Implements hook_ds_pre_render_alter().
  */
 function eitict_document_ds_pre_render_alter(&$layout_render_array, $context, &$vars) {
-  // Add feedback form for documents if necessary.
+  // Add feedback form for documents if it's enabled.
   if ($context['entity_type'] === 'node' && $context['bundle'] === 'document' && $context['view_mode'] === 'full') {
     if (isset($vars['field_feedback_form']['und'][0]['value']) && $vars['field_feedback_form']['und'][0]['value']) {
       $webform_nid = FALSE;
@@ -134,6 +134,8 @@ function eitict_document_ds_pre_render_alter(&$layout_render_array, $context, &$
         $webform_node = node_load($webform_nid);
         $webform_view = node_view($webform_node, 'full');
         $webform_view['#weight'] = 100;
+        $webform_view['#prefix'] = '<div class="feedback-form">';
+        $webform_view['#suffix'] = '</div>';
         $layout_render_array['right'][] = $webform_view;
       }
     }

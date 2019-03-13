@@ -110,7 +110,6 @@ function eitict_page_entity_view($entity, $type, $view_mode, $langcode) {
   $entity->article_info = render($article_info);
 }
 
-
 /**
  * Helper function for article entity info.
  *
@@ -126,4 +125,30 @@ function _eitict_page_entity_view_get_article_info($entity, $type, $view_mode, $
       ),
     ),
   );
+}
+
+/**
+ * Implements hook_panels_post_render().
+ */
+function eitict_page_panels_post_render($panels_display, $renderer) {
+  // Add feedback form to page node panels display if it's enabled.
+  if (isset($panels_display->context['panelizer']->data)) {
+    $data = $panels_display->context['panelizer']->data;
+    if (isset($data->type) && $data->type === 'page') {
+      if (isset($data->field_feedback_form['und'][0]['value']) && $data->field_feedback_form['und'][0]['value']) {
+        $webform_nid = FALSE;
+        if (function_exists('eitict_webform_get_feedback_nid')) {
+          $webform_nid = eitict_webform_get_feedback_nid();
+        }
+        if ($webform_nid) {
+          $webform_node = node_load($webform_nid);
+          $webform_view = node_view($webform_node, 'full');
+          $webform_display = '<div class="feedback-form single-fluid-row-wrapper">';
+          $webform_display .= drupal_render($webform_view);
+          $webform_display .= '</div>';
+          return $webform_display;
+        }
+      }
+    }
+  }
 }
