@@ -143,7 +143,7 @@ function eitict_page_panels_post_render($panels_display, $renderer) {
         if ($webform_nid) {
           $webform_node = node_load($webform_nid);
           $webform_view = node_view($webform_node, 'full');
-          $webform_display = '<div class="feedback-form single-fluid-row-wrapper">';
+          $webform_display = '<div class="feedback-form single-fluid-row-wrapper" style="display: none;">';
           $webform_display .= drupal_render($webform_view);
           $webform_display .= '</div>';
           return $webform_display;

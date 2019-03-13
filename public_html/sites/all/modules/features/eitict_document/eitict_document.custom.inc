@@ -134,7 +134,7 @@ function eitict_document_ds_pre_render_alter(&$layout_render_array, $context, &$
         $webform_node = node_load($webform_nid);
         $webform_view = node_view($webform_node, 'full');
         $webform_view['#weight'] = 100;
-        $webform_view['#prefix'] = '<div class="feedback-form">';
+        $webform_view['#prefix'] = '<div class="feedback-form" style="display: none;">';
         $webform_view['#suffix'] = '</div>';
         $layout_render_array['right'][] = $webform_view;
       }
