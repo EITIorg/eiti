@@ -807,5 +807,43 @@ function _theme_main_footer__site_navigation() {
     );
   }
 
+  $menu_name = 'menu-footer-social';
+  $elements['social'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'nav',
+    '#title' => t('Stay connected'),
+    '#title_tag' => 'h3',
+    '#title_attributes' => array(
+      'class' => array('section-title', 'element-invisible'),
+    ),
+    '#contextual_info' => array('admin/structure/menu/manage', array($menu_name)),
+    '#attributes' => array(
+      //'role' => 'navigation',
+      'class' => array(
+        'footer-social',
+      ),
+    ),
+    '#prefix' => '<div class="footer-social-wrapper">',
+    '#suffix' => '</div>',
+  );
+
+  if ($links = helpertheme_menu_navigation_links($menu_name, 1)) {
+    $elements['social']['links'] = array(
+      '#theme' => 'links__enhanced',
+      '#links' => $links,
+      '#links_prefix' => 'social-link',
+      '#attributes' => array(
+        'class' => array(
+          'footer-social-links',
+        ),
+      ),
+    );
+  }
+  else {
+    $elements['social']['empty'] = array(
+      '#markup' => t('Menu not configured!'),
+    );
+  }
+
   return $elements;
 }
