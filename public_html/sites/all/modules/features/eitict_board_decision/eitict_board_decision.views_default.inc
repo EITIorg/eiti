@@ -23,15 +23,24 @@ function eitict_board_decision_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Board decisions';
+  $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No results.';
+  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_country_target_id']['id'] = 'field_country_target_id';
   $handler->display->display_options['relationships']['field_country_target_id']['table'] = 'field_data_field_country';
@@ -129,10 +138,6 @@ function eitict_board_decision_views_default_views() {
     'title_field' => 'title_field',
     'name_field' => 'name_field',
   );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'board-decisions-list';
   $translatables['board_decisions'] = array(
     t('Master'),
     t('Board decisions'),
@@ -149,6 +154,7 @@ function eitict_board_decision_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('No results.'),
     t('Country'),
     t('Date'),
     t('Decision #'),
@@ -156,7 +162,6 @@ function eitict_board_decision_views_default_views() {
     t('Decision'),
     t('Keywords'),
     t('Search'),
-    t('Page'),
   );
   $export['board_decisions'] = $view;
 
