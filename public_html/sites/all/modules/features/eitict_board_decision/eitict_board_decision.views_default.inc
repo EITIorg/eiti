@@ -181,11 +181,6 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: Content: Entity translation: translations */
-  $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
-  $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
-  $handler->display->display_options['relationships']['entity_translations']['field'] = 'entity_translations';
-  $handler->display->display_options['relationships']['entity_translations']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -223,14 +218,6 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['filters']['field_doc_type_internal_tid']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_doc_type_internal_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_doc_type_internal_tid']['vocabulary'] = 'publication_types_internal';
-  /* Filter criterion: Entity translation: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['relationship'] = 'entity_translations';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-  );
 
   /* Display: Public content */
   $handler = $view->new_display('entityreference', 'Public content', 'public_content');
@@ -312,7 +299,6 @@ function eitict_board_decision_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('Translations'),
     t('Public content'),
     t('Private documents'),
   );
