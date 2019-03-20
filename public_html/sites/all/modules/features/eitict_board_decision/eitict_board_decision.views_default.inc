@@ -32,8 +32,72 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '25, 50, 100';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'created' => 'created',
+    'field_board_meeting_circular' => 'field_board_meeting_circular',
+    'field_bd_number' => 'field_bd_number',
+    'title_field' => 'title_field',
+    'field_bd_keywords' => 'field_bd_keywords',
+    'name_field' => 'name_field',
+    'body' => 'body',
+  );
+  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_board_meeting_circular' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_bd_number' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title_field' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_bd_keywords' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name_field' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'body' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -46,6 +110,11 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['relationships']['field_country_target_id']['table'] = 'field_data_field_country';
   $handler->display->display_options['relationships']['field_country_target_id']['field'] = 'field_country_target_id';
   $handler->display->display_options['relationships']['field_country_target_id']['label'] = 'Country';
+  /* Relationship: Content: Keywords (field_bd_keywords) */
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['id'] = 'field_bd_keywords_tid';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['table'] = 'field_data_field_bd_keywords';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['field'] = 'field_bd_keywords_tid';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['label'] = 'Keywords';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -92,11 +161,22 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['fields']['name_field']['label'] = 'Country';
   $handler->display->display_options['fields']['name_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -111,11 +191,13 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'board_decision' => 'board_decision',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
   $handler->display->display_options['filters']['combine']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['combine']['group'] = 2;
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
   $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
@@ -137,6 +219,7 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['filters']['combine']['fields'] = array(
     'title_field' => 'title_field',
     'name_field' => 'name_field',
+    'body' => 'body',
   );
   $translatables['board_decisions'] = array(
     t('Master'),
@@ -156,11 +239,11 @@ function eitict_board_decision_views_default_views() {
     t('last »'),
     t('No results.'),
     t('Country'),
+    t('Keywords'),
     t('Date'),
     t('Decision #'),
     t('[field_bd_number]/[field_board_meeting_circular]'),
     t('Decision'),
-    t('Keywords'),
     t('Search'),
   );
   $export['board_decisions'] = $view;
