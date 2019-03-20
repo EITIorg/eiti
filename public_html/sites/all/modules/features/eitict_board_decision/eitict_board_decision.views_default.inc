@@ -221,6 +221,26 @@ function eitict_board_decision_views_default_views() {
     'name_field' => 'name_field',
     'body' => 'body',
   );
+
+  /* Display: Validation */
+  $handler = $view->new_display('block', 'Validation', 'validation');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_country_target_id']['id'] = 'field_country_target_id';
+  $handler->display->display_options['relationships']['field_country_target_id']['table'] = 'field_data_field_country';
+  $handler->display->display_options['relationships']['field_country_target_id']['field'] = 'field_country_target_id';
+  $handler->display->display_options['relationships']['field_country_target_id']['label'] = 'Country';
+  /* Relationship: Content: Keywords (field_bd_keywords) */
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['id'] = 'field_bd_keywords_tid';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['table'] = 'field_data_field_bd_keywords';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['field'] = 'field_bd_keywords_tid';
+  $handler->display->display_options['relationships']['field_bd_keywords_tid']['label'] = 'Keywords';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_validation_target_id']['id'] = 'field_validation_target_id';
+  $handler->display->display_options['relationships']['field_validation_target_id']['table'] = 'field_data_field_validation';
+  $handler->display->display_options['relationships']['field_validation_target_id']['field'] = 'field_validation_target_id';
+  $handler->display->display_options['relationships']['field_validation_target_id']['label'] = 'Validation';
+  $handler->display->display_options['relationships']['field_validation_target_id']['required'] = TRUE;
   $translatables['board_decisions'] = array(
     t('Master'),
     t('Board decisions'),
@@ -245,6 +265,7 @@ function eitict_board_decision_views_default_views() {
     t('[field_bd_number]/[field_board_meeting_circular]'),
     t('Decision'),
     t('Search'),
+    t('Validation'),
   );
   $export['board_decisions'] = $view;
 

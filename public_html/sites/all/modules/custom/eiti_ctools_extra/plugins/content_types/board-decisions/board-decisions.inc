@@ -10,6 +10,10 @@ $plugin = array(
   'description' => t('Board decisions list.'),
   'category' => t('Widget Library'),
   'render callback'  => 'eiti_ctools_extra__board_decisions__render',
+  'edit form' => 'eiti_ctools_extra__board_decisions__settings_form',
+  'defaults' => array(
+    'display' => 'default',
+  ),
 );
 
 /**
@@ -34,14 +38,57 @@ function eiti_ctools_extra__board_decisions__render($subtype, $conf, $panel_args
     '#prefix' => '<div class="pane-title-wrapper">',
     '#suffix' => '</div>',
   );
+  $display = isset($conf['display']) ? $conf['display'] : 'default';
   $block['board_decisions']['list'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'div',
-    '#value' => views_embed_view('board_decisions', 'default'),
+    '#value' => views_embed_view('board_decisions', $display),
     '#attributes' => array('class' => array('list')),
   );
 
   return (object) array(
     'content' => $block,
   );
+}
+
+/**
+ * Settings form for board decisions.
+ */
+function eiti_ctools_extra__board_decisions__settings_form($form, &$form_state) {
+  $conf = $form_state['conf'];
+
+  $cleanup_list = array(
+    'override_title',
+    'override_title_text',
+    'override_title_heading',
+    'override_title_markup',
+  );
+  foreach ($cleanup_list as $key) {
+    if (isset($form[$key])) {
+      $form[$key]['#access'] = FALSE;
+    }
+  }
+
+  $form['display'] = array(
+    '#title' => t('Display'),
+    '#type' => 'select',
+    '#options' => array(
+      'default' => t('All'),
+      'validation' => t('With validation only'),
+    ),
+    '#default_value' => $conf['display'],
+  );
+
+  return $form;
+}
+
+function eiti_ctools_extra__board_decisions__settings_form_submit($form, &$form_state) {
+  // Remove unneeded values.
+  form_state_values_clean($form_state);
+
+  foreach (element_children($form) as $key) {
+    if (isset($form_state['values'][$key])) {
+      $form_state['conf'][$key] = $form_state['values'][$key];
+    }
+  }
 }
