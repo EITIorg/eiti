@@ -3,8 +3,8 @@ description = Example module for the RESTful module.
 core = 7.x
 dependencies[] = restful
 
-; Information added by Drupal.org packaging script on 2019-02-19
-version = "7.x-1.9"
+; Information added by Drupal.org packaging script on 2019-03-20
+version = "7.x-1.10"
 core = "7.x"
 project = "restful"
-datestamp = "1550575394"
+datestamp = "1553083388"
