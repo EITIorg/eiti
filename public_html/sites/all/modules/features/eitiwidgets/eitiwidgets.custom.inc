@@ -335,6 +335,15 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
   }
 
   if (isset($content->content['title_field'][0]['#markup'])) {
+    // Progress by requirement title translation.
+    if (isset($content->content['title_field']['#items'][0]['safe_value'])) {
+      $title_o = 'Progress by requirement';
+      if ($content->content['title_field']['#items'][0]['safe_value'] === $title_o) {
+        $title_t = t($title_o);
+        $content->content['title_field'][0]['#markup'] = str_replace($title_o, $title_t, $content->content['title_field'][0]['#markup']);
+      }
+    }
+
     $title_markup = $content->content['title_field'][0]['#markup'];
 
     // Add ID attribute, used for anchor links.

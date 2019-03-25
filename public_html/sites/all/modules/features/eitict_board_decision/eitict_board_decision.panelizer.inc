@@ -46,29 +46,6 @@ function eitict_board_decision_panelizer_defaults() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-962fbae5-c29f-48df-a54c-f3ff2ec0a5d7';
-  $pane->panel = 'main';
-  $pane->type = 'toc';
-  $pane->subtype = 'toc';
-  $pane->shown = TRUE;
-  $pane->access = array();
-  $pane->configuration = array(
-    'override_title' => 0,
-    'override_title_text' => '',
-    'override_title_heading' => 'h2',
-  );
-  $pane->cache = array();
-  $pane->style = array(
-    'settings' => NULL,
-  );
-  $pane->css = array();
-  $pane->extras = array();
-  $pane->position = 0;
-  $pane->locks = array();
-  $pane->uuid = '962fbae5-c29f-48df-a54c-f3ff2ec0a5d7';
-  $display->content['new-962fbae5-c29f-48df-a54c-f3ff2ec0a5d7'] = $pane;
-  $display->panels['main'][0] = 'new-962fbae5-c29f-48df-a54c-f3ff2ec0a5d7';
-  $pane = new stdClass();
   $pane->pid = 'new-91d5a5d9-126e-4c69-baf1-204106973fe4';
   $pane->panel = 'main';
   $pane->type = 'board-decision-info';
@@ -82,11 +59,11 @@ function eitict_board_decision_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 0;
   $pane->locks = array();
   $pane->uuid = '91d5a5d9-126e-4c69-baf1-204106973fe4';
   $display->content['new-91d5a5d9-126e-4c69-baf1-204106973fe4'] = $pane;
-  $display->panels['main'][1] = 'new-91d5a5d9-126e-4c69-baf1-204106973fe4';
+  $display->panels['main'][0] = 'new-91d5a5d9-126e-4c69-baf1-204106973fe4';
   $pane = new stdClass();
   $pane->pid = 'new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a';
   $pane->panel = 'main';
@@ -101,11 +78,11 @@ function eitict_board_decision_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 1;
   $pane->locks = array();
   $pane->uuid = 'ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a';
   $display->content['new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a'] = $pane;
-  $display->panels['main'][2] = 'new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a';
+  $display->panels['main'][1] = 'new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a';
   $pane = new stdClass();
   $pane->pid = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
   $pane->panel = 'main';
@@ -120,11 +97,11 @@ function eitict_board_decision_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 3;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = '22f38487-f872-4075-9c4c-8574d22e0c0a';
   $display->content['new-22f38487-f872-4075-9c4c-8574d22e0c0a'] = $pane;
-  $display->panels['main'][3] = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
+  $display->panels['main'][2] = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
   $display->hide_title = '99';
   $display->title_pane = '0';
   $panelizer->display = $display;
