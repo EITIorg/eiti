@@ -39,18 +39,99 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
       ),
     ),
   );
-  $block['top_info']['created'] = array(
+  $block['top_info']['upper'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'class' => array(
+        'upper',
+      ),
+    ),
+  );
+  $block['top_info']['upper']['left'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'class' => array(
+        'left',
+      ),
+    ),
+  );
+  $block['top_info']['upper']['left']['created'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#value' => date('d.m.Y', $entity->created),
     '#attributes' => array('class' => array('created')),
   );
-  $block['top_info']['decision'] = array(
+  $block['top_info']['upper']['left']['decision'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
     '#value' => t('Decision') . ' ' . $entity_wrapper->field_bd_number->value() . '/' . $entity_wrapper->field_board_meeting_circular->value(),
     '#attributes' => array('class' => array('decision')),
   );
+
+  // Previous and next links.
+  $block['top_info']['upper']['right'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#attributes' => array(
+      'class' => array(
+        'right',
+      ),
+    ),
+  );
+  $prev_bd_nid = db_select('node', 'n')
+    ->condition('n.status', 1)
+    ->condition('n.type', 'board_decision')
+    ->condition('n.created', $entity->created, '<')
+    ->fields('n', array('nid'))
+    ->orderBy('n.created', 'DESC')
+    ->range(0, 1)
+    ->execute()
+    ->fetchField();
+  if ($prev_bd_nid) {
+    $block['top_info']['upper']['right']['prev'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'span',
+      '#title' => '<',
+      '#title_tag' => 'a',
+      '#title_attributes' => array(
+        'href' => url('node/' . $prev_bd_nid),
+        'class' => array('link'),
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'prev',
+        ),
+      ),
+    );
+  }
+  $next_bd_nid = db_select('node', 'n')
+    ->condition('n.status', 1)
+    ->condition('n.type', 'board_decision')
+    ->condition('n.created', $entity->created, '>')
+    ->fields('n', array('nid'))
+    ->orderBy('n.created', 'ASC')
+    ->range(0, 1)
+    ->execute()
+    ->fetchField();
+  if ($next_bd_nid) {
+    $block['top_info']['upper']['right']['next'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'span',
+      '#title' => '>',
+      '#title_tag' => 'a',
+      '#title_attributes' => array(
+        'href' => url('node/' . $next_bd_nid),
+        'class' => array('link'),
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'next',
+        ),
+      ),
+    );
+  }
 
   // Basis.
   $basis = $entity_wrapper->field_bd_basis->value();
@@ -63,7 +144,16 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
         $options['attributes']['target'] = $link_field['attributes']['target'];
       }
       $link = l($link_field['title'], $link_field['url'], $options);
-      $block['top_info']['basis'] = array(
+      $block['top_info']['lower'] = array(
+        '#type' => 'html_container',
+        '#tag' => 'div',
+        '#attributes' => array(
+          'class' => array(
+            'lower',
+          ),
+        ),
+      );
+      $block['top_info']['lower']['basis'] = array(
         '#type' => 'html_tag',
         '#tag' => 'div',
         '#value' => t('Based on') . ' ' . $link,
