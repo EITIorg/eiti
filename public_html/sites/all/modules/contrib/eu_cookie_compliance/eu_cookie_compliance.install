@@ -208,7 +208,7 @@ function eu_cookie_compliance_update_7001(&$sandbox) {
   else {
     // Multiple languages, need to install variable_realm module.
     $variable_exists = TRUE;
-    if (module_exists('i18n_variable')) {
+    if (!module_exists('i18n_variable')) {
       $variable_exists = module_enable(array('i18n_variable'));
     }
     if ($variable_exists) {
@@ -335,7 +335,9 @@ function eu_cookie_compliance_update_7006() {
     ),
   );
 
-  db_create_table('eu_cookie_compliance_basic_consent', $schema['eu_cookie_compliance_basic_consent']);
+  if (!db_table_exists('eu_cookie_compliance_basic_consent')) {
+    db_create_table('eu_cookie_compliance_basic_consent', $schema['eu_cookie_compliance_basic_consent']);
+  }
   $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
   $eu_cookie_settings['consent_storage_method'] = 'do_not_store';
   variable_set('eu_cookie_compliance', $eu_cookie_settings);
