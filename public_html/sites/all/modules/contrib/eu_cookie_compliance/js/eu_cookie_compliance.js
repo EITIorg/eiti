@@ -457,7 +457,9 @@
           var euCookieComplianceWhitelist = settings.eu_cookie_compliance.whitelisted_cookies.split(/\r\n|\n|\r/g);
 
           // Add the EU Cookie Compliance cookie.
-          euCookieComplianceWhitelist.push((typeof settings.eu_cookie_compliance.cookie_name === 'undefined' || settings.eu_cookie_compliance.cookie_name === '') ? 'cookie-agreed' : settings.eu_cookie_compliance.cookie_name);
+          var cookieName = (typeof eu_cookie_compliance_cookie_name === 'undefined' || eu_cookie_compliance_cookie_name === '') ? 'cookie-agreed' : eu_cookie_compliance_cookie_name;
+          euCookieComplianceWhitelist.push(cookieName);
+
           euCookieComplianceBlockCookies = setInterval(function () {
             // Load all cookies from jQuery.
             var cookies = $.cookie();

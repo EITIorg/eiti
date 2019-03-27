@@ -25,6 +25,20 @@ function eiti_api_analytics_pageview_request($page, $title) {
     }
   }
 
+  // Do not track users who have opted out.
+  if (module_exists('eu_cookie_compliance')) {
+    $cookie_name = FALSE;
+    if (function_exists('eu_cookie_compliance_get_settings')) {
+      $cookie_name = eu_cookie_compliance_get_settings('cookie_name');
+    }
+    if (!$cookie_name) {
+      $cookie_name = 'cookie-agreed';
+    }
+    if (isset($_COOKIE[$cookie_name]) && !$_COOKIE[$cookie_name]) {
+      return;
+    }
+  }
+
   $ip = ip_address();
   $data = array();
   $data['v'] = 1;
