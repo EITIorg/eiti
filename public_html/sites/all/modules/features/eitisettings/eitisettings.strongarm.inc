@@ -115,8 +115,10 @@ function eitisettings_strongarm() {
   $strongarm->value = array(
     'popup_enabled' => 1,
     'method' => 'opt_in',
+    'info_template' => 'new',
     'disabled_javascripts' => '',
-    'whitelisted_cookies' => '',
+    'whitelisted_cookies' => 'MCPopupClosed
+has_js',
     'consent_storage_method' => 'do_not_store',
     'popup_clicking_confirmation' => FALSE,
     'popup_info' => array(
