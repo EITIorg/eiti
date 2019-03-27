@@ -460,4 +460,18 @@ function helpergeneric_js_alter(&$javascript) {
       }
     }
   }
+  // Google Analytics eu_cookie_compliance handling.
+  $eu_cookie_compliance_js = 'sites/all/modules/contrib/eu_cookie_compliance/js/eu_cookie_compliance.js';
+  if (isset($javascript[$eu_cookie_compliance_js])) {
+    foreach ($javascript as $key => $js) {
+      if ($js['type'] === 'inline' && isset($js['data']) && is_string($js['data'])) {
+        if (strpos($js['data'], 'GoogleAnalyticsObject') !== FALSE) {
+          $javascript[$eu_cookie_compliance_js]['group'] = 0;
+          $javascript[$eu_cookie_compliance_js]['weight'] = 0;
+          $javascript[$key]['data'] = 'if (Drupal.eu_cookie_compliance.hasAgreed()) {' . $js['data'] . '}';
+          break;
+        }
+      }
+    }
+  }
 }
