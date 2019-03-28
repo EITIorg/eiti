@@ -92,3 +92,5 @@ features_exclude[field_instance][taxonomy_term-board_decision_bases-description_
 features_exclude[field_instance][taxonomy_term-board_decision_bases-field_link] = taxonomy_term-board_decision_bases-field_link
 features_exclude[field_instance][taxonomy_term-board_decision_bases-name_field] = taxonomy_term-board_decision_bases-name_field
 features_exclude[taxonomy][board_decision_bases] = board_decision_bases
+features_exclude[variable][pathauto_taxonomy_term_board_decision_bases_pattern] = pathauto_taxonomy_term_board_decision_bases_pattern
+features_exclude[variable][pathauto_taxonomy_term_board_decision_keywords_pattern] = pathauto_taxonomy_term_board_decision_keywords_pattern
