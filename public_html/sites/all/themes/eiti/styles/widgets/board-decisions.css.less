@@ -1,0 +1,150 @@
+.board-decisions {
+    .view-board-decisions {
+        .view-content {
+            .views-table {
+                min-width: 700px;
+                width: 100%;
+                margin: 0;
+                .views-field-field-bd-number,
+                .views-field-created,
+                .views-field-name-field {
+                    white-space: nowrap;
+                    width: 1%;
+                }
+            }
+        }
+    }
+}
+
+.pane-board-decision-info {
+    margin-bottom: 1em;
+    .top-info {
+        .upper {
+            margin-left: -0.5em;
+            margin-right: -0.5em;
+            padding: 1em 0.5em;
+            border-top: 1px solid #d3d3d3;
+            border-bottom: 1px solid #d3d3d3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .right {
+                height: 40px;
+            }
+            .prev,
+            .next {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                .link {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 0;
+                    text-indent: -9999px;
+                    overflow: hidden;
+                    display: inline-block;
+                    cursor: pointer;
+                    transition: opacity 0.3s ease-in-out;
+                    &:hover {
+                        opacity: 0.6;
+                    }
+                }
+            }
+            .prev {
+                .link {
+                    background-image: url(~"@{theme_path}images/icons/angle-left.svg");
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+                &+.next {
+                    margin-left: 0.5em;
+                }
+            }
+            .next {
+                .link {
+                    background-image: url(~"@{theme_path}images/icons/angle-right.svg");
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+            }
+        }
+        .lower {
+            margin-top: 1.5em;
+        }
+    }
+    .bottom-info {
+        margin-bottom: 1em;
+        .label {
+            font-weight: bold;
+            margin-right: 4px;
+        }
+    }
+    .validation {
+        margin-bottom: 1em;
+        a {
+            display: inline-block;
+            padding-left: 20px;
+            background: url(~"@{base_path}modules/file/icons/application-pdf.png") no-repeat 0 center;
+        }
+    }
+    .link-items {
+        margin-bottom: 1em;
+        .label {
+            color: white;
+            background: #0076AF;
+            padding: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+            font-weight: bold;
+            &:after {
+                content: "";
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                background-image: url(~"@{theme_path}images/icons/angle-down-white.svg");
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                display: block;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+                transition: background 0.3s ease;
+            }
+            &.open {
+                background: #676767;
+                &:after {
+                    background-image: url(~"@{theme_path}images/icons/angle-up-white.svg");
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+            }
+            &:hover {
+                background: #676767;
+            }
+        }
+        .field-items {
+            display: none;
+            padding: 1em;
+            background: #f9f9f9;
+        }
+    }
+}
+
+.xSmallOnly() {
+    .pane-board-decision-info {
+        .top-info {
+            .upper {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
