@@ -282,6 +282,10 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
     );
   }
 
+  // General data for links.
+  $icon = helpertheme_get_svg_icon('arrow', array('height' => '1em', 'width' => '1em'));
+  $link_options = array('html' => TRUE, 'attributes' => array('class' => array('link-title-with-icon')));
+
   // Related public content.
   $public_content = $entity_wrapper->field_public_content->value();
   if ($public_content) {
@@ -294,19 +298,22 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
       '#attributes' => array(
         'class' => array(
           'public-content',
+          'link-items',
           'single-fluid-row-wrapper',
         ),
       ),
     );
-    $links = array();
+    $links = '';
     foreach ($public_content as $node) {
-      $links[] = l($node->title, 'node/' . $node->nid);
+      $links .= '<div class="field-item">';
+      $links .= l($icon . $node->title, 'node/' . $node->nid, $link_options);
+      $links .= '</div>';
     }
     $block['public_content']['links'] = array(
-      '#theme' => 'item_list',
-      '#items' => $links,
-      '#title' => '',
-      '#type' => 'ul',
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => $links,
+      '#attributes' => array('class' => array('field-items')),
     );
   }
 
@@ -322,19 +329,22 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
       '#attributes' => array(
         'class' => array(
           'related-decisions',
+          'link-items',
           'single-fluid-row-wrapper',
         ),
       ),
     );
-    $links = array();
+    $links = '';
     foreach ($related_decisions as $node) {
-      $links[] = l($node->title, 'node/' . $node->nid);
+      $links .= '<div class="field-item">';
+      $links .= l($icon . $node->title, 'node/' . $node->nid, $link_options);
+      $links .= '</div>';
     }
     $block['related_decisions']['links'] = array(
-      '#theme' => 'item_list',
-      '#items' => $links,
-      '#title' => '',
-      '#type' => 'ul',
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => $links,
+      '#attributes' => array('class' => array('field-items')),
     );
   }
 
@@ -350,19 +360,22 @@ function eiti_ctools_extra__board_decision_info__render($subtype, $conf, $panel_
       '#attributes' => array(
         'class' => array(
           'internal-content',
+          'link-items',
           'single-fluid-row-wrapper',
         ),
       ),
     );
-    $links = array();
+    $links = '';
     foreach ($internal_content as $node) {
-      $links[] = l($node->title, 'node/' . $node->nid);
+      $links .= '<div class="field-item">';
+      $links .= l($icon . $node->title, 'node/' . $node->nid, $link_options);
+      $links .= '</div>';
     }
     $block['internal_content']['links'] = array(
-      '#theme' => 'item_list',
-      '#items' => $links,
-      '#title' => '',
-      '#type' => 'ul',
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => $links,
+      '#attributes' => array('class' => array('field-items')),
     );
   }
 
