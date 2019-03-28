@@ -75,3 +75,23 @@ function eitict_board_decision_views_query_alter(&$view, &$query) {
     }
   }
 }
+
+/**
+ * Implements hook_init().
+ */
+function eitict_board_decision_init() {
+  if (isset($_SERVER['SCRIPT_URL']) && strpos($_SERVER['SCRIPT_URL'], '/BD/') === 0) {
+    $parts = explode('/', $_SERVER['SCRIPT_URL']);
+    if (isset($parts[2])) {
+      $alias1 = 'board-decision/' . $parts[2];
+      $alias2 = 'decision-conseil/' . $parts[2];
+      $path = drupal_lookup_path('source', $alias1);
+      if (!$path) {
+        $path = drupal_lookup_path('source', $alias2);
+      }
+      if ($path && $path !== $_GET['q']) {
+        drupal_goto($path, array(), 301);
+      }
+    }
+  }
+}
