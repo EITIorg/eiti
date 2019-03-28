@@ -243,7 +243,7 @@ function contentwidget__viz_bubble_dynamic__get_data_types($return = FALSE) {
   $items['disbursed_revenues_per_country'] = array(
     'label' => t('Country: Disbursed Revenues'),
     'endpoint' => '/api/v1.0/bubble/disbursed_revenues',
-    'title' => t('Disbursed Revenue'),
+    'title' => t('Revenues by recipient'),
     'extra settings' => '_contentwidget__viz_bubble_dynamic__disbursed_revenues_settings',
     'context required' => 'entity:implementing_country',
   );
