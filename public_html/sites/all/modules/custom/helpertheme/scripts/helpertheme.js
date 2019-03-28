@@ -317,6 +317,39 @@
     }
   };
 
+  Drupal.behaviors.responsiveTables = {    
+    attach: function (context) {      
+      // Adding classes for board decisions table
+      $('.board-decisions .view-board-decisions .view-content').addClass('table-wrapper');
+      $('.board-decisions .view-board-decisions .view-content .views-table').wrap('<div class="table-responsive"></div>');
+      // Adding scroll bg on right of the table
+        function tableScroll() {
+            if ($('.table-wrapper').length > 0) {
+                $('.table-wrapper').each(function (index, value) {
+                    if ($(this).find('table').outerWidth() > $(this).outerWidth()) {
+                        $(this).addClass('scroll');
+                    } else {
+                        $(this).removeClass('scroll');
+                    }
+                });
+            }
+        }
+        tableScroll();
+        $(window).on('resize', function () {  
+            tableScroll();           
+        });
+    }
+  };
+
+  Drupal.behaviors.boardCollapseMenu = {    
+    attach: function (context) {      
+      $('.pane-board-decision-info .link-items .label').on('click', function () {
+            $(this).toggleClass('open');
+            $(this).siblings('.field-items').slideToggle('fast');
+        });
+    }
+  };
+
   /**
    * Define a small helper class with handy functions.
    */
