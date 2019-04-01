@@ -309,6 +309,7 @@ function _helpertheme_links__enhanced($variables) {
 
     $num_links = count($links);
     $i = 1;
+    $menu_name = isset($links['#extras']['menu_name']) ? $links['#extras']['menu_name'] : '';
 
     foreach (element_children($links) as $key) {
       $link = &$links[$key];
@@ -328,7 +329,7 @@ function _helpertheme_links__enhanced($variables) {
       }
 
       $selected_icon = variable_get(HELPERTHEME_SVG_ICON_NAME_PREFIX . $link['mlid'], '');
-      if (!empty($selected_icon)) {
+      if (!empty($selected_icon) && $menu_name !== 'menu-site-navigation') {
         // Add icon.
         $link['title'] = _helpertheme_menu_link_title($link['title'], $selected_icon, $svgicon_size);
         $link['html'] = TRUE;
