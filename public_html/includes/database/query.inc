@@ -845,8 +845,8 @@ class DeleteQuery extends Query implements QueryConditionInterface {
   /**
    * Executes the DELETE query.
    *
-   * @return
-   *   The return value is dependent on the database connection.
+   * @return int
+   *   The number of rows affected by the delete query.
    */
   public function execute() {
     $values = array();
@@ -1242,7 +1242,7 @@ class UpdateQuery extends Query implements QueryConditionInterface {
  * MergeQuery::updateFields() and MergeQuery::insertFields() needs to be called
  * instead. MergeQuery::fields() can also be called which calls both of these
  * methods as the common case is to use the same column-value pairs for both
- * INSERT and UPDATE. However, this is not mandatory. Another convinient
+ * INSERT and UPDATE. However, this is not mandatory. Another convenient
  * wrapper is MergeQuery::key() which adds the same column-value pairs to the
  * condition and the INSERT query part.
  *
@@ -1856,13 +1856,7 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
                 $placeholders[] = $placeholder;
               }
             }
-            // HACK: Fix currency.module on PostgreSQL.
-            // @see: https://www.drupal.org/node/2007388
-            $escaped_field = $connection->escapeField($condition['field']);
-            if (in_array($escaped_field, array('ISO4217Code', 'ISO4217Number'))) {
-              $escaped_field = '"'. $escaped_field . '"';
-            }
-            $condition_fragments[] = ' (' . $escaped_field . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
+            $condition_fragments[] = ' (' . $connection->escapeField($condition['field']) . ' ' . $operator['operator'] . ' ' . $operator['prefix'] . implode($operator['delimiter'], $placeholders) . $operator['postfix'] . ') ';
           }
         }
       }
