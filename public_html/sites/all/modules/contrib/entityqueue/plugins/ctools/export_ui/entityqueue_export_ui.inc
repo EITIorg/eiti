@@ -18,8 +18,8 @@ $plugin = array(
 
   'menu' => array(
     'menu item' => 'entityqueue',
-    'menu title' => 'Entityqueues',
-    'menu description' => 'Manage entity queues.',
+    'menu title' => 'Entity queues',
+    'menu description' => 'Manage orderable queues of content.',
     // Add entityqueue specific menu callbacks.
     'items' => array(
       'subqueues' => array(
@@ -162,7 +162,7 @@ function entityqueue_export_ui_form(&$form, &$form_state) {
   }
   $form['settings']['entityreference_field'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Entityreference field settings'),
+    '#title' => t('Entity reference field settings'),
     '#collapsible' => TRUE,
   );
   $form['settings']['entityreference_field']['target_bundles'] = array(
@@ -181,27 +181,35 @@ function entityqueue_export_ui_form(&$form, &$form_state) {
     '#title' => t('Queue properties'),
     '#collapsible' => TRUE,
   );
-  $form['settings']['properties']['min_size'] = array(
-    '#type' => 'textfield',
-    '#size' => 3,
-    '#default_value' => isset($queue->settings['min_size']) ? $queue->settings['min_size'] : 0,
-    '#prefix' => '<div class="container-inline form-item">',
-    '#field_prefix' => t('Restrict this queue to a minimum of'),
+  $form['settings']['properties']['size'] = array(
+    '#type' => 'item',
+    '#attributes' => array('class' => array('container-inline')),
+    '#title' => t('Queue limits'),
   );
-  $form['settings']['properties']['max_size'] = array(
+  $form['settings']['properties']['size']['min_size'] = array(
     '#type' => 'textfield',
     '#size' => 3,
+    '#attributes' => array('style' => 'width: auto;'),
+    '#default_value' => isset($queue->settings['min_size']) ? $queue->settings['min_size'] : 0,
+    '#field_prefix' => t('Restrict this queue to a minimum of'),
+    '#field_suffix' => t('items'),
+    '#parents' => array('settings', 'properties', 'min_size'),
+  );
+  $form['settings']['properties']['size']['max_size'] = array(
+    '#type' => 'textfield',
+    '#size' => 3,
+    '#attributes' => array('style' => 'width: auto;'),
     '#default_value' => isset($queue->settings['max_size']) ? $queue->settings['max_size'] : 0,
     '#field_prefix' => t('and a maximum of'),
     '#field_suffix' => t('items.'),
-    '#suffix' => '</div>',
+    '#parents' => array('settings', 'properties', 'max_size'),
   );
   $form['settings']['properties']['act_as_queue'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Act as queue'),
-    '#default_value' => isset($queue->settings['act_as_queue']) ? 1 : 0,
+    '#title' => t('Remove items exceeding maximum limit'),
+    '#default_value' => isset($queue->settings['act_as_queue']) ? $queue->settings['act_as_queue'] : 0,
     '#return_value' => 1,
-    '#description' => t('When enabled, adding more than the maximum number of items will remove extra items from the top of the queue.'),
+    '#description' => t('When enabled, adding more than the maximum number of items will remove extra items from the queue.'),
     '#states' => array(
       'invisible' => array(
         ':input[name="settings[properties][max_size]"]' => array('value' => 0),

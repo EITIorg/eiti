@@ -2,16 +2,15 @@
 
 /**
  * @file
- *
  * CTools content type to render a fielded panel pane.
  */
 
 /**
  * Small hook implementation of plugin.
  *
- * We have to use this because the form here can be loaded via form
- * caching and if this .inc file is loaded before the plugin is
- * requested, the $plugin = array() notation doesn't work.
+ * We have to use this because the form here can be loaded via form caching and
+ * if this .inc file is loaded before the plugin is requested, the $plugin =
+ * array() notation doesn't work.
  */
 function fieldable_panels_panes_fieldable_panels_pane_ctools_content_types() {
   return array(
@@ -32,9 +31,10 @@ function fieldable_panels_panes_fieldable_panels_pane_ctools_content_types() {
     // Form API callback.
     'edit form' => 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form',
     // Access callback.
-    'check editable' => 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_access',
+    'check editable' => 'fieldable_panels_pane_content_type_edit_form_access',
   );
 }
+
 // --------------------------------------------------------------------------
 // Callbacks, many of them automatically named, for rendering content.
 
@@ -62,7 +62,7 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type($subtype_id, 
     }
   }
 
-  // If nothing was loaded yet,
+  // If nothing was loaded yet.
   if (empty($content_type)) {
     $type = 'fieldable_panels_pane';
     $subtypes = ctools_content_get_subtypes($type);
@@ -75,6 +75,9 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type($subtype_id, 
       $content_type = current($subtypes);
     }
   }
+
+  // Trigger hook_fieldable_panels_pane_content_type_alter().
+  drupal_alter('fieldable_panels_pane_content_type', $content_type, $subtype_id, $plugin);
 
   return $content_type;
 }
@@ -104,9 +107,9 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type_content_types
   // The current function is called as part of the standard panel pane rendering
   // pipeline. To prevent a full list of FPP entities from being generated every
   // time that a panel is rendered, generate the list only when a request is
-  // made from an administrative URL.
+  // made from an administrative URL or Panel Nodes pages.
   // @see https://www.drupal.org/node/2374577
-  if (path_is_admin(current_path()) || preg_match('/panels/i', current_path())) {
+  if (path_is_admin(current_path()) || preg_match('#(panels|panel_content$)#i', current_path())) {
     $fpp_info = entity_get_info('fieldable_panels_pane');
     foreach ($fpp_info['bundles'] as $bundle_name => $bundle) {
       $ids = db_query('SELECT fpid FROM {fieldable_panels_panes} WHERE reusable = 1 AND bundle = :bundle', array(':bundle' => $bundle_name))->fetchCol();
@@ -122,15 +125,15 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type_content_types
 /**
  * Returns a list of all reusable FPP entities of a given bundle.
  *
- * @param $bundle
+ * @param string $bundle
  *   Fieldable panel pane bundle machine name.
- * @param $ids
+ * @param array $ids
  *   An array of fieldable panel pane entity ids.
  *
  * @return array
  *   An array of content type information for each fpp entity.
  */
-function fieldable_panels_panes_build_content_type_info($bundle, $ids) {
+function fieldable_panels_panes_build_content_type_info($bundle, array $ids) {
   $types = array();
   $cid = "fieldable_panels_panes_{$bundle}_content_type";
 
@@ -161,6 +164,9 @@ function fieldable_panels_panes_build_content_type_info($bundle, $ids) {
 
 /**
  * Callback to render our content type.
+ *
+ * Note: don't add the 'array' type hint for $panel_args or $context as they
+ * might be NULL.
  */
 function fieldable_panels_panes_fieldable_panels_pane_content_type_render($subtype, $conf, $panel_args = array(), $context = array()) {
   $entity = fieldable_panels_panes_load_from_subtype($subtype);
@@ -179,14 +185,16 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type_render($subty
       // Is this view mode configured?
       $is_view_mode_set = isset($settings['extra_fields']['display']['title'][$view_mode]['visible']);
 
-      // Is the title configured for this view mode?
-      $show_view_mode_title = ($is_view_mode_set && $settings['extra_fields']['display']['title'][$view_mode]['visible']);
-
       // Should the default view mode show the title?
       $show_default_title = !empty($settings['extra_fields']['display']['title']['default']['visible']);
 
+      // Is the title configured for this view mode?
+      $show_view_mode_title = ($is_view_mode_set && $settings['extra_fields']['display']['title'][$view_mode]['visible']);
+
       // Combine all of the above logic.
-      if (empty($settings['extra_fields']['display']) || (!$is_view_mode_set && $show_default_title) || $show_view_mode_title) {
+      if (empty($settings['extra_fields']['display'])
+          || (!$is_view_mode_set && $show_default_title)
+          || $show_view_mode_title) {
         $block->title = filter_xss_admin($entity->title);
       }
     }
@@ -365,8 +373,13 @@ function fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_sub
 /**
  * Callback for the 'edit' permission.
  */
-function fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_access($content_type, $subtype, $view_mode = 'full') {
-  return fieldable_panels_panes_check_access_update($subtype);
+function fieldable_panels_pane_content_type_edit_form_access($content_type, $subtype, $view_mode = 'full') {
+  $return = fieldable_panels_panes_check_access_update($subtype);
+
+  // Trigger hook_fieldable_panels_pane_content_type_edit_form_access_alter().
+  drupal_alter('fieldable_panels_pane_content_type_edit_form_access', $return, $content_type, $subtype, $view_mode);
+
+  return $return;
 }
 
 // --------------------------------------------------------------------------
@@ -436,6 +449,7 @@ function _fieldable_panels_panes_custom_content_type($entity) {
   }
 
   $info['entity_id'] = $info['name'];
+  $info['bundle'] = $entity->bundle;
   return $info;
 }
 

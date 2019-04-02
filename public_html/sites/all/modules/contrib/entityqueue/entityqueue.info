@@ -2,6 +2,7 @@ name = Entityqueue
 description = Allows users to collect entities in arbitrarily ordered lists.
 package = Entityqueue
 core = 7.x
+php = 5.3
 ;configure = admin/structure/entityqueue/settings
 
 dependencies[] = system (>7.11)
@@ -25,9 +26,9 @@ files[] = includes/views/entityqueue_handler_sort_position.inc
 files[] = includes/views/entityqueue_handler_argument_subqueue_id.inc
 files[] = includes/views/entityqueue_handler_filter_in_queue.inc
 
-; Information added by Drupal.org packaging script on 2015-08-20
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2018-03-09
+version = "7.x-1.5"
 core = "7.x"
 project = "entityqueue"
-datestamp = "1440098806"
+datestamp = "1520587695"
 
