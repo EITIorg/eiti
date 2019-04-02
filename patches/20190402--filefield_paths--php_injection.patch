@@ -1,0 +1,19 @@
+diff --git a/sites/all/modules/contrib/filefield_paths/filefield_paths.module b/sites/all/modules/contrib/filefield_paths/filefield_paths.module
+index cca12b7..eab3659 100644
+--- a/sites/all/modules/contrib/filefield_paths/filefield_paths.module
++++ b/sites/all/modules/contrib/filefield_paths/filefield_paths.module
+@@ -444,9 +444,12 @@ function _filefield_paths_replace_path($old, $new, $entity) {
+   // Build regular expression pattern.
+   $pattern = "/({$prefixes})({$styles})*({$paths}){$itok}/";
+ 
++  $new_escaped = addslashes($new);
++  $old_escaped = addslashes($old);
++
+   // Create an anonymous function for the replacement via preg_replace_callback.
+-  $callback = function ($matches) use ($new, $old) {
+-    return filefield_paths_replace_path_callback($matches, $new, $old);
++  $callback = function ($matches) use ($new_escaped, $old_escaped) {
++    return filefield_paths_replace_path_callback($matches, $new_escaped, $old_escaped);
+   };
+   if (!$callback) {
+     watchdog('filefield_paths', 'Unable to create an anonymous function to find references of %old and replace with %new.', array(
