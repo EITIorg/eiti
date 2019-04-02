@@ -62,8 +62,8 @@ function i18n_menu_menu_alter(&$items) {
  * @param $variables
  */
 function i18n_menu_preprocess_menu_admin_overview(&$variables) {
-  $variables['title'] = i18n_string(array('menu', 'menu', $variables['name'], 'title'), $variables['title']);
-  $variables['description'] = i18n_string(array('menu', 'menu', $variables['name'], 'description'), $variables['description']);
+  $variables['title'] = i18n_string(array('menu', 'menu', $variables['name'], 'title'), $variables['title'], array('sanitize' => FALSE));
+  $variables['description'] = i18n_string(array('menu', 'menu', $variables['name'], 'description'), $variables['description'], array('sanitize' => FALSE));
 }
 
 /**
@@ -198,7 +198,6 @@ function i18n_menu_menu_link_alter(&$item) {
   // We just make sure every link has a valid language property.
   if (!i18n_object_langcode($item)) {
     $item['language'] = LANGUAGE_NONE;
-    $item['i18n_tsid'] = 0;
   }
 }
 
@@ -398,7 +397,7 @@ function i18n_menu_localize_tree($tree, $langcode = NULL) {
     if (_i18n_menu_link_process($item['link'])) {
       if (!_i18n_menu_link_is_visible($item['link'], $langcode)) {
         // Remove links for other languages than current.
-        // Links with language wont be localized.
+        // Links with language won't be localized.
         unset($tree[$index]);
         // @todo Research whether the above has any advantage over:
         // $item['hidden'] = TRUE;
@@ -523,7 +522,7 @@ function _i18n_menu_link_localize(&$link, $langcode = NULL) {
 function _i18n_menu_link_description($link, $langcode = NULL) {
   if (!empty($link['options']['attributes']['title'])) {
     $key = i18n_object_info('menu_link', 'key');
-    return i18n_string_translate(array('menu', 'item', $link[$key], 'description'), $link['options']['attributes']['title'], array('langcode' => $langcode));
+    return i18n_string_translate(array('menu', 'item', $link[$key], 'description'), $link['options']['attributes']['title'], array('langcode' => $langcode, 'sanitize' => FALSE));
   }
   else {
     return NULL;
@@ -600,7 +599,7 @@ function _i18n_menu_link_is_visible($link, $langcode = NULL) {
 }
 
 /**
- * Get localizable properties for menu link checking agains the router item.
+ * Get localizable properties for menu link checking against the router item.
  */
 function _i18n_menu_link_localizable_properties($link) {
   $props = array();

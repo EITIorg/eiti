@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Contains the relationship plugin for relating entities to translation metadata.
+ * Contains a views plugin for relating entities to translation metadata.
  */
 
 /**
@@ -32,4 +33,5 @@ class entity_translation_handler_relationship extends views_handler_relationship
     );
     $this->alias = $this->query->add_relationship($alias, $join, 'entity_translation', $this->relationship);
   }
+
 }
