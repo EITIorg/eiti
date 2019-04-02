@@ -1287,19 +1287,6 @@ function media_set_browser_params() {
 }
 
 /**
- * Implements hook_ctools_plugin_api().
- *
- * Lets CTools know which plugin APIs are implemented by Media module.
- */
-function media_ctools_plugin_api($module, $api) {
-  if ($module == 'file_entity' && $api == 'file_default_displays') {
-    return array(
-      'version' => 1,
-    );
-  }
-}
-
-/**
  * Implements hook_form_FORM_ID_alter().
  *
  * This alter enhances the default admin/content/file page, addding JS and CSS.
