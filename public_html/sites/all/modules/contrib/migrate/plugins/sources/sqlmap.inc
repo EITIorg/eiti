@@ -45,6 +45,11 @@ class MigrateSQLMap extends MigrateMap {
         // Backtick the db name on mysql to ensure dbs with hyphens work.
         $dbname = "`{$dbname}`";
       }
+      elseif (!empty($options['driver']) && $options['driver'] == 'pgsql') {
+        // Postgres throws an error if we prefix the database name, so just
+        // return the table name as is.
+        return $this->mapTable;
+      }
       return $dbname . '.' . $this->mapTable;
     }
   }
