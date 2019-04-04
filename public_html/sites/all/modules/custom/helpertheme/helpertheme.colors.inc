@@ -35,7 +35,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['primary']['clnormal'] = array(
-    '#value' => '#676767',
+    '#value' => '#222222',
     '#desc' => 'default text color',
     '#variants' => array(
       'clnormal__dark' => array(
@@ -43,22 +43,22 @@ function helpertheme_color_palette() {
         '#desc' => 'important text',
       ),
       'clnormal__alt' => array(
-        '#value' => '#57ba47',
+        '#value' => '#2b8636',
         '#desc' => 'alternative color for footer text',
       ),
     ),
   );
 
   $colors['primary']['cldetail'] = array(
-    '#value' => '#2e5983',
+    '#value' => '#165b89',
     '#desc' => 'links, highlighted items, page border',
     '#variants' => array(
       'cldetail__highlight' => array(
-        '#value' => '#ffca00',
+        '#value' => '#f6a70a',
         '#desc' => 'alternative highlight detail',
       ),
       'cldetail__alt' => array(
-        '#value' => '#108cd2',
+        '#value' => '#188fbb',
         '#desc' => 'alternative detail',
       ),
       'cldetail__separator' => array(
@@ -76,14 +76,14 @@ function helpertheme_color_palette() {
   );
 
   $colors['secondary']['claltmain'] = array(
-    '#value' => '#002c47',
+    '#value' => '#132856',
     '#desc' => 'alternative content background',
     '#variants' => array(
     ),
   );
 
   $colors['secondary']['claltnormal'] = array(
-    '#value' => '#9de1fd',
+    '#value' => '#1bc2ee',
     '#desc' => 'alternative text color',
     '#variants' => array(
       'claltnormal__light' => array(
@@ -91,18 +91,18 @@ function helpertheme_color_palette() {
         '#desc' => 'alternative important text text',
       ),
       'claltnormal__alt' => array(
-        '#value' => '#57ba47',
+        '#value' => 'lighten(@claltnormal, 18%)',
         '#desc' => 'alternative color for footer text',
       ),
     ),
   );
 
   $colors['secondary']['clactive'] = array(
-    '#value' => '#4fa600',
+    '#value' => '#d24228',
     '#desc' => 'highlighted items',
     '#variants' => array(
       'clactive__alt' => array(
-        '#value' => '#f5822a',
+        '#value' => '#f6a70a',
         '#desc' => 'alternative color for highlighted items',
       ),
     ),
@@ -115,7 +115,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['htmltag']['clanchor'] = array(
-    '#value' => '#0093cf',
+    '#value' => '#188fbb',
     '#desc' => 'color for anchor tags',
     '#variants' => array(
       'clanchor__hover' => array(
