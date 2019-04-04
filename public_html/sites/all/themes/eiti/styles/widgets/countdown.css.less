@@ -5,19 +5,24 @@
         background-color: #196080;
     }
     .title {
-        font-size: 2rem;
-        font-weight: normal;
+        font-size: 2.5rem;
+        font-weight: bold;
         text-align: center;
         margin-top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 2rem;
     }
     .field-name-field-fpp-body {
-        margin: 0;
+        margin: 0 0 1em;
         text-align: center;
         font-size: 1rem;
     }
+    .field-name-field-fpp-text {
+        margin: 0 0 1em;
+        text-align: center;
+        font-size: 1.25rem;
+    }
     .field-name-field-fpp-datetime {
-        margin-top: 40px;
+        margin-top: 5rem;
         .is-countdown {
             border: none;
             background: transparent;
@@ -30,10 +35,11 @@
         .countdown {
             min-width: 60px;
             .label {
-                color: #9DE1FD;
-                font-size: 0.875rem;
+                color: white;
+                font-size: 1.125rem;
                 display: block;
                 text-align: center;
+                font-weight: 500;
             }
             .value {
                 font-size: 2.5rem;
@@ -47,11 +53,12 @@
         text-align: center;
         margin: 50px 0 0;
         a {
-            .border-radius(3px);
+            .border-radius(11px);
             display: inline-block;
-            border: 1px solid @clmain;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-size: 1.5em;
+            padding: 0.2em 1.875em 0.3em;
             color: @clmain;
-            padding: 0.6em 1em 0.7em;
             margin: 0;
             font-weight: 700;
             .transition(background-color, 400ms, ease-in);
