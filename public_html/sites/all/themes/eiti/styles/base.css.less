@@ -3,58 +3,113 @@
  * Contains theme CSS declarations.
  */
 
-html {
-  // Set the base font style.
-  color: @clnormal;
-  font-family: @fstack_default;
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-black-webfont.eot');
+    src: url('fonts/metropolis-black-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-black-webfont.woff2') format('woff2'), url('fonts/metropolis-black-webfont.woff') format('woff'), url('fonts/metropolis-black-webfont.ttf') format('truetype'), url('fonts/metropolis-black-webfont.svg#metropolisblack') format('svg');
+    font-weight: 900;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-bold-webfont.eot');
+    src: url('fonts/metropolis-bold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-bold-webfont.woff2') format('woff2'), url('fonts/metropolis-bold-webfont.woff') format('woff'), url('fonts/metropolis-bold-webfont.ttf') format('truetype'), url('fonts/metropolis-bold-webfont.svg#metropolisbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-medium-webfont.eot');
+    src: url('fonts/metropolis-medium-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-medium-webfont.woff2') format('woff2'), url('fonts/metropolis-medium-webfont.woff') format('woff'), url('fonts/metropolis-medium-webfont.ttf') format('truetype'), url('fonts/metropolis-medium-webfont.svg#metropolismedium') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-semibold-webfont.eot');
+    src: url('fonts/metropolis-semibold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-semibold-webfont.woff2') format('woff2'), url('fonts/metropolis-semibold-webfont.woff') format('woff'), url('fonts/metropolis-semibold-webfont.ttf') format('truetype'), url('fonts/metropolis-semibold-webfont.svg#metropolissemi_bold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-regular-webfont.eot');
+    src: url('fonts/metropolis-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-regular-webfont.woff2') format('woff2'), url('fonts/metropolis-regular-webfont.woff') format('woff'), url('fonts/metropolis-regular-webfont.ttf') format('truetype'), url('fonts/metropolis-regular-webfont.svg#metropolisregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('fonts/metropolis-thin-webfont.eot');
+    src: url('fonts/metropolis-thin-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/metropolis-thin-webfont.woff2') format('woff2'), url('fonts/metropolis-thin-webfont.woff') format('woff'), url('fonts/metropolis-thin-webfont.ttf') format('truetype'), url('fonts/metropolis-thin-webfont.svg#metropolisthin') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+html {
+    // Set the base font style.
+    color: @clnormal;
+    font-family: @fstack_default;
+}
+
 
 /**
  * Set the base style for anchor tags.
  */
+
 a {
-  .link-color(@clanchor, @clanchor__active, @clanchor__visited, @clanchor__hover);
-
-  .transition(color, 400ms, ease-in);
-  svg {
-    .transition(fill, 400ms, ease-in);
-  }
-
-  text-decoration: none;
-  &:focus,
-  &:hover {
+    .link-color(@clanchor,
+    @clanchor__active,
+    @clanchor__visited,
+    @clanchor__hover);
+    .transition(color,
+    400ms,
+    ease-in);
+    svg {
+        .transition(fill,
+        400ms,
+        ease-in);
+    }
     text-decoration: none;
-  }
-
-  &.link-title-with-icon .icon {
-    fill: @clanchor;
-    margin-right: 0.5em;
-  }
-  &.link-title-with-icon:hover .icon {
-    fill: @clanchor__active;
-  }
-
-  // @TODO: Only change links inside text fields. Use a class for the used text format.
-  //.field & {
-  //  font-weight: bold;
-  //}
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+    &.link-title-with-icon .icon {
+        fill: @clanchor;
+        margin-right: 0.5em;
+    }
+    &.link-title-with-icon:hover .icon {
+        fill: @clanchor__active;
+    } // @TODO: Only change links inside text fields. Use a class for the used text format.
+    //.field & {
+    //  font-weight: bold;
+    //}
 }
+
 
 /**
  * Define border style.
  */
+
 hr {
-  border: none;
-  border-top: 1px solid @clnormal;
-  clear: both;
-  height: 1px;
-  margin-bottom: 1em;
-  margin-top: 1em;
-  width: 100%;
-  &.dashed {
-    border-style: dashed;
-  }
+    border: none;
+    border-top: 1px solid @clnormal;
+    clear: both;
+    height: 1px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    width: 100%;
+    &.dashed {
+        border-style: dashed;
+    }
 }
+
 
 /**
  * For modern browsers
@@ -70,117 +125,120 @@ hr {
  * @see http://www.satzansatz.de/cssd/onhavinglayout.html
  * @see http://quirksmode.org/css/css2/display.html
  */
+
 .clearfix {
-  &:before,
-  &:after {
-    clear: both;
-    content: " "; // 1.
-    display: table; // 2.
-  }
+    &:before,
+    &:after {
+        clear: both;
+        content: " "; // 1.
+        display: table; // 2.
+    }
 }
+
 
 /**
  * Style the accessibility "Skip to main content" link.
  */
+
 #skip-link {
-  @block_width: 20em;
-
-  // Center the block.
-  left: 50%;
-  margin-left: -1 * @block_width / 2;
-  position: absolute;
-  text-align: center;
-  width: @block_width;
-  z-index: 10000;
-
-  a {
-    background: @clmain__header;
-    border: 2px solid @clnormal;
-    color: @cldetail;
-    display: block;
-    padding: 1em;
-    text-decoration: none;
-
-    &:link {
-      color: @cldetail__alt;
+    @block_width: 20em; // Center the block.
+    left: 50%;
+    margin-left: -1 * @block_width / 2;
+    position: absolute;
+    text-align: center;
+    width: @block_width;
+    z-index: 10000;
+    a {
+        background: @clmain__header;
+        border: 2px solid @clnormal;
+        color: @cldetail;
+        display: block;
+        padding: 1em;
+        text-decoration: none;
+        &:link {
+            color: @cldetail__alt;
+        }
     }
-  }
 }
+
 
 /**
  * Style the browser warning messages.
  */
+
 .browser-warnings-wrapper {
-  text-align: center;
-  position: relative;
-  p {
-    background: @clerror__light;
-    border: 1px solid @clerror__faded;
-    color: @clerror__dark;
-    margin-bottom: 1em;
-    margin-top: 0em;
-    padding: 1em 2em;
-  }
-  .ignore-link {
-    cursor: pointer;
-    padding: 0.5em;
-    position: absolute;
-    right: 0em;
-    top: 0em;
-    .no-js & {
-      display: none;
+    text-align: center;
+    position: relative;
+    p {
+        background: @clerror__light;
+        border: 1px solid @clerror__faded;
+        color: @clerror__dark;
+        margin-bottom: 1em;
+        margin-top: 0em;
+        padding: 1em 2em;
     }
-  }
+    .ignore-link {
+        cursor: pointer;
+        padding: 0.5em;
+        position: absolute;
+        right: 0em;
+        top: 0em;
+        .no-js & {
+            display: none;
+        }
+    }
 }
+
 
 /**
  * Set the style for a 2 column CSS Media Object, first column is optional.
  */
+
 .mobject {
-  position: relative;
-  .group-side {
-    display: block;
-    float: left;
-    margin-right: 1em;
-    // Equal width of images in search results
-    .field-name-field-featured-image {
-      a {
-        img {
-          width: 120px;
-        }
-      }
-    }
-    &.image-wrapped {
-      img {
-        max-width: 116px;
-      }
-      .field-name-field-person-picture {
-        img {
-          max-width: none;
-        }
-      }
-    }
-  }
-  .group-main {
-    display: table-cell;
-    width: 500em;
-    img {
-      width: auto;
-    }
-  }
-}
-.xSmallOnly() {
-  .mobject:not(.mobject--small) {
+    position: relative;
     .group-side {
-      float: none;
-      margin-right: 0;
-      text-align: center;
+        display: block;
+        float: left;
+        margin-right: 1em; // Equal width of images in search results
+        .field-name-field-featured-image {
+            a {
+                img {
+                    width: 120px;
+                }
+            }
+        }
+        &.image-wrapped {
+            img {
+                max-width: 116px;
+            }
+            .field-name-field-person-picture {
+                img {
+                    max-width: none;
+                }
+            }
+        }
     }
     .group-main {
-      display: block;
-      width: auto;
+        display: table-cell;
+        width: 500em;
+        img {
+            width: auto;
+        }
     }
-  }
+}
+
+.xSmallOnly() {
+    .mobject:not(.mobject--small) {
+        .group-side {
+            float: none;
+            margin-right: 0;
+            text-align: center;
+        }
+        .group-main {
+            display: block;
+            width: auto;
+        }
+    }
 }
 
 @import './lib/custom-responsive.less';

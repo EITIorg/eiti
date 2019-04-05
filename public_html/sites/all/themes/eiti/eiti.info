@@ -68,5 +68,5 @@ less[vars][@to_em] = 16
 less[vars][@border_width] = 1px
 
 ; Font stacks
-less[vars][fstack_default] = "Open Sans", "sans-serif"
+less[vars][fstack_default] = "metropolis", "sans-serif"
 less[vars][fstack_alt] = "Arial", "Helvetica", "sans-serif"
