@@ -484,6 +484,13 @@ function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $la
     '#background-color' => '196080',
   );
 
+  if (isset($entity->field_fpp_colour['und'][0]['rgb'])) {
+    $elements['overlay']['#background-color'] = str_replace('#', '', $entity->field_fpp_colour['und'][0]['rgb']);
+  }
+  if (isset($entity->field_fpp_number['und'][0]['value'])) {
+    $elements['overlay']['#opacity'] = $entity->field_fpp_number['und'][0]['value'];
+  }
+
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
   if (!empty($entity->field_fpp_background_image[$image_field_language][0])) {
     $featured_image_data = $entity->field_fpp_background_image[$image_field_language][0];
