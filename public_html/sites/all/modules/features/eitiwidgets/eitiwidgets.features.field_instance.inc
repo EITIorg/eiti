@@ -132,6 +132,43 @@ function eitiwidgets_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'fieldable_panels_pane-countdown-field_fpp_colour'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_colour'] = array(
+    'bundle' => 'countdown',
+    'default_value' => array(
+      0 => array(
+        'rgb' => '#196080',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_colour',
+    'label' => 'Overlay colour',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'color_field',
+      'settings' => array(),
+      'type' => 'color_field_spectrum_widget',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
   // 'fieldable_panels_pane-countdown-field_fpp_datetime'.
   $field_instances['fieldable_panels_pane-countdown-field_fpp_datetime'] = array(
     'bundle' => 'countdown',
@@ -211,6 +248,94 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_image'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_image'] = array(
+    'bundle' => 'countdown',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_image',
+    'label' => 'Logo',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '8 MB',
+      'max_resolution' => '4800x1500',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'report' => 0,
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 'media_library--image_library',
+          'media_library--video_library' => 0,
+          'upload' => 'upload',
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-countdown-field_fpp_link'.
   $field_instances['fieldable_panels_pane-countdown-field_fpp_link'] = array(
     'bundle' => 'countdown',
@@ -264,6 +389,47 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'fieldable_panels_pane-countdown-field_fpp_number'.
+  $field_instances['fieldable_panels_pane-countdown-field_fpp_number'] = array(
+    'bundle' => 'countdown',
+    'default_value' => array(
+      0 => array(
+        'value' => 92,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_number',
+    'label' => 'Overlay opacity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => 100,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'numberfield',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-countdown-title_field'.
   $field_instances['fieldable_panels_pane-countdown-title_field'] = array(
     'bundle' => 'countdown',
@@ -280,7 +446,7 @@ function eitiwidgets_field_default_field_instances() {
           'title_style' => 'h2',
         ),
         'type' => 'title_linked',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -302,7 +468,7 @@ function eitiwidgets_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -2845,6 +3011,9 @@ function eitiwidgets_field_default_field_instances() {
   t('Information');
   t('Layout');
   t('Link');
+  t('Logo');
+  t('Overlay colour');
+  t('Overlay opacity');
   t('Person List');
   t('Please specify a list of widgets that will be used as the content of the tabs.');
   t('Please specify any useful links (internal or external).');
