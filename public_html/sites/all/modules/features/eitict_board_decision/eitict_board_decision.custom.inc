@@ -53,6 +53,14 @@ function eitict_board_decision_views_query_alter(&$view, &$query) {
     if ($search) {
       foreach ($query->where as $key => $value) {
         if (isset($value['type']) && $value['type'] === 'OR') {
+          // Turn search case insensitive.
+          if (isset($value['conditions'][0]['field']) && is_object($value['conditions'][0]['field'])) {
+            $conditions = &$query->where[$key]['conditions'][0]['field']->conditions();
+            if (isset($conditions[0]['field']) && is_string($conditions[0]['field'])) {
+              $conditions[0]['field'] = str_replace(' LIKE ', ' ILIKE ', $conditions[0]['field']);
+            }
+          }
+          // Include keywords in search.
           $words = explode(' ', $search);
           $keyword_tids = db_select('field_data_name_field', 'n')
             ->fields('n', array('entity_id'))
@@ -60,7 +68,7 @@ function eitict_board_decision_views_query_alter(&$view, &$query) {
             ->condition('bundle', 'board_decision_keywords')
             ->condition('deleted', 0);
           foreach ($words as $word) {
-            $keyword_tids->condition('name_field_value', '%' . db_like(trim($word)) . '%', 'LIKE');
+            $keyword_tids->condition('name_field_value', '%' . db_like(trim($word)) . '%', 'ILIKE');
           }
           $keyword_tids = $keyword_tids->execute()->fetchCol();
           $keyword_tids = $keyword_tids ? array_unique($keyword_tids) : array(0);
