@@ -19,16 +19,12 @@
 
 # Drupal specific files and folders.
 # Ignore configuration files that may contain sensitive information.
-/public_html/.htaccess
 /public_html/sites/*/drushrc.custom.php
 /public_html/sites/*/settings.custom.php
 
 # Ignore paths that contain user-generated content.
 /public_html/sites/*/files
 /public_html/sites/*/private
-
-# Ignore local .htaccess and robots.txt files.
-/public_html/robots.txt
 
 # Ignore PHP development specific files.
 /public_html/sites/all/modules/dev
