@@ -503,6 +503,7 @@ function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $la
 
   if (isset($entity->content['field_fpp_body'][0]['#markup'])) {
     $entity->content['field_fpp_body'][0]['#markup'] = nl2br($entity->content['field_fpp_body'][0]['#markup']);
+    $entity->content['field_fpp_body'][0]['#markup'] = str_replace('<br />', '<span></span>', $entity->content['field_fpp_body'][0]['#markup']);
   }
   $elements['overlay'] += $entity->content;
 
