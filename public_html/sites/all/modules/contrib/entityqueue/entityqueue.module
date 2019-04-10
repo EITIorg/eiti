@@ -349,7 +349,7 @@ function entityqueue_entity_info() {
         'real path' => 'admin/structure/entityqueue/list/' . $name,
         'bundle argument' => 4,
         'access callback' => 'entityqueue_queue_access',
-        'access arguments' => array('view', 4),
+        'access arguments' => array('view', $name),
       ),
     );
   }
@@ -624,7 +624,7 @@ function entityqueue_contextual_links_view_alter(&$element, $items) {
           $subqueue = entityqueue_subqueue_load(reset($referenced_subqueues));
 
           if ($subqueue) {
-            $path = 'admin/structure/entityqueue/list/' . $subqueue->name . '/subqueues/' . $subqueue->subqueue_id . '/edit';
+            $path = 'admin/structure/entityqueue/list/' . $subqueue->queue . '/subqueues/' . $subqueue->subqueue_id . '/edit';
             $element['#links']['entityqueue-order'] = array(
               'title' => t('Edit subqueue'),
               'href' => $path,
@@ -770,7 +770,7 @@ function _entityqueue_queue_ensure_instance(EntityQueue $queue) {
 }
 
 /**
- * Creates a locked instance of a entityreference field on the specified bundle.
+ * Creates an instance of a entityreference field on the specified bundle.
  *
  * @param EntityQueue $queue
  *   An EntityQueue object.
@@ -806,7 +806,6 @@ function _entityqueue_create_entityreference_field($queue, $field_name, $entity_
       'cardinality' => FIELD_CARDINALITY_UNLIMITED,
       'entity_types' => array($entity_type),
       'translatable' => FALSE,
-      'locked' => TRUE,
       'settings' => array(
         'target_type' => $queue->target_type,
         'handler' => 'entityqueue',
@@ -850,6 +849,7 @@ function entityqueue_field_widget_info() {
       'settings' => array(
         'match_operator' => 'CONTAINS',
         'size' => 60,
+        'add_position' => 'bottom',
       ),
       'behaviors' => array(
         'multiple values' => FIELD_BEHAVIOR_CUSTOM,
@@ -890,6 +890,16 @@ function entityqueue_field_widget_settings_form($field, $instance) {
       '#element_validate' => array('_element_validate_integer_positive'),
       '#required' => TRUE,
     );
+    $form['add_position'] = array(
+      '#type' => 'radios',
+      '#title' => t('Position for new items'),
+      '#options' => array(
+        'top' => t('Top of the queue'),
+        'bottom' => t('Bottom of the queue'),
+      ),
+      '#default_value' => $settings['add_position'],
+      '#description' => t('Changing this setting will move the autocomplete field above or below the draggable table.')
+    );
   }
 
   return $form;
@@ -913,6 +923,8 @@ function entityqueue_field_widget_form(&$form, &$form_state, $field, $instance, 
     list($entity_id) = entity_extract_ids($entity_type, $entity);
     $value_key = key($field['columns']);
     $subform['#value_key'] = $value_key;
+    $subform['#add_position'] = $instance['widget']['settings']['add_position'];
+
     // We don't use drupal_html_id() here because our ajax callback needs
     // to be able to know what the table id is. We should never have
     // the same form field multiple times on a page anyway.
@@ -977,7 +989,7 @@ function entityqueue_field_widget_form(&$form, &$form_state, $field, $instance, 
         $label = t('- Restricted access -');
       }
 
-      $actions[] = array(
+      $actions['remove'] = array(
         '#type' => 'button',
         '#value' => t('Remove'),
         '#name' => $field_name . '_remove_' . $weight,
@@ -1024,13 +1036,16 @@ function entityqueue_field_widget_form(&$form, &$form_state, $field, $instance, 
     $subform['add'] = array(
       '#type' => 'container',
       '#attributes' => array('class' => array('container-inline')),
-      '#weight' => 10,
+      '#weight' => $subform['#add_position'] === 'top' ? -1 : 10,
       'entity' => array(
         '#type' => 'textfield',
         '#maxlength' => 1024,
         '#default_value' => '',
         '#autocomplete_path' => $autocomplete_path,
         '#size' => $instance['widget']['settings']['size'],
+        '#entity_type' => $element['#entity_type'],
+        '#bundle' => $element['#bundle'],
+        '#field_name' => $element['#field_name'],
         '#element_validate' => array('_entityreference_autocomplete_validate'),
         '#attributes' => array(
           'class' => array(
@@ -1038,7 +1053,7 @@ function entityqueue_field_widget_form(&$form, &$form_state, $field, $instance, 
           ),
         ),
       ),
-      'submit' => array(
+      'add' => array(
         '#type' => 'submit',
         '#value' => t('Add item'),
         '#ajax' => array(
@@ -1077,13 +1092,19 @@ function entityqueue_widget_dragtable_element_validate($element, &$form_state) {
   else {
     $existing_values = array();
   }
-  // If the trigger was a remove button.
+
+  // Determine which button has been clicked.
   $triggering_element = $form_state['triggering_element'];
-  $offset = drupal_strlen($field_name) + 8;
-  if (drupal_substr($triggering_element['#name'], 0, $offset) == $field_name . '_remove_') {
-    $remove_key = drupal_substr($triggering_element['#name'], $offset);
+  $triggering_key = end($triggering_element['#array_parents']);
+  $triggering_field = reset($triggering_element['#array_parents']);
+
+  // Remove an item from the queue through the Remove button.
+  if ($triggering_field === $field_name && $triggering_key === 'remove') {
+    $remove_key = $triggering_element['#array_parents'][3];
     unset($existing_values[$remove_key]);
+    $form_state['entityqueue_changed'] = TRUE;
   }
+
   $values = array();
   $weights = array();
   foreach ($existing_values as $key => $row) {
@@ -1096,15 +1117,27 @@ function entityqueue_widget_dragtable_element_validate($element, &$form_state) {
       $value_key => $row[$value_key],
     );
   }
+
+  // Add new items to the queue.
   $new_value = $form_state['values'][$field_name][$lang]['add'];
-  if (!empty($new_value['entity'])) {
-    $items[] = array(
-      $value_key => $new_value['entity'],
-    );
+  if ($triggering_field === $field_name && $triggering_key === 'add' && !empty($new_value['entity'])) {
+    if ($element['#add_position'] === 'top') {
+      array_unshift($items, array(
+        $value_key => $new_value['entity'],
+      ));
+    }
+    else {
+      $items[] = array(
+        $value_key => $new_value['entity'],
+      );
+    }
+    $form_state['entityqueue_changed'] = TRUE;
   }
+
   form_set_value($element, $items, $form_state);
+
   // Rebuild form if ajax callback button was clicked.
-  if (current_path() == 'system/ajax') {
+  if (current_path() == 'system/ajax' && $triggering_element['#ajax']['callback'] == 'entityqueue_field_widget_ajax_callback') {
     $form_state['rebuild'] = TRUE;
   }
 }
@@ -1125,9 +1158,12 @@ function entityqueue_field_widget_ajax_callback($form, $form_state) {
   $add_id = drupal_clean_css_identifier('entityqueue-dragtable-' . $field_name . '-add');
   $commands[] = ajax_command_invoke('.' . $add_id, 'val', array(''));
   $settings = array(
-    drupal_clean_css_identifier('entityqueue-dragtable-' . $field_name) => true,
+    drupal_clean_css_identifier('entityqueue-dragtable-' . $field_name) => TRUE,
   );
-  drupal_add_js(array('entityqueue_changed' => $settings), 'setting');
+
+  if (!empty($form_state['entityqueue_changed'])) {
+    drupal_add_js(array('entityqueue_changed' => $settings), 'setting');
+  }
   return array(
     '#type' => 'ajax',
     '#commands' => $commands,
@@ -1139,7 +1175,7 @@ function entityqueue_field_widget_ajax_callback($form, $form_state) {
  */
 function entityqueue_subqueue_ajax_callback($form, $form_state) {
   $settings = array(
-    drupal_clean_css_identifier('entityqueue-dragtable-' . $form_state['field_name']) => true,
+    drupal_clean_css_identifier('entityqueue-dragtable-' . $form_state['field_name']) => TRUE,
   );
   drupal_add_js(array('entityqueue_changed' => $settings), 'setting');
 
@@ -1159,14 +1195,25 @@ function entityqueue_subqueue_ajax_callback($form, $form_state) {
  *
  * @todo Remove when http://drupal.org/node/576290 is fixed.
  */
-function _entityqueue_set_breadcrumb($path = 'admin/structure/entityqueue') {
+function _entityqueue_set_breadcrumb($path = 'admin/structure/entityqueue/list') {
   $breadcrumb = array();
   $path = explode('/', $path);
   do {
     $menu_path = implode('/', $path);
     $menu_item = menu_get_item($menu_path);
+
+    // Skip default tabs such as the "list" page, which is the same as it's parent.
+    if ($menu_item['type'] == MENU_DEFAULT_LOCAL_TASK) {
+      continue;
+    }
+    $last_item = end($menu_item['map']);
+    if (is_object($last_item) && method_exists($last_item, 'label')) {
+      $menu_item['title'] = $last_item->label();
+    }
+
     array_unshift($breadcrumb, l($menu_item['title'], $menu_path));
   } while (array_pop($path) && !empty($path));
   array_unshift($breadcrumb, l(t('Home'), NULL));
+  array_pop($breadcrumb);
   drupal_set_breadcrumb($breadcrumb);
 }

@@ -86,7 +86,7 @@ function mailchimp_signup_block_info() {
     if (intval($signup->mode) == MAILCHIMP_SIGNUP_BLOCK || intval($signup->mode) == MAILCHIMP_SIGNUP_BOTH) {
       $blocks[$signup->identifier()] = array(
         'info' => t('Mailchimp Subscription Form: @name', array('@name' => $signup->label())),
-        'cache' => DRUPAL_CACHE_PER_USER,
+        'cache' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_ROLE,
       );
     }
   }
@@ -169,8 +169,8 @@ function mailchimp_signup_load_multiple_by_name($name = NULL) {
 function mailchimp_signup_entity_info() {
   $entities = array(
     'mailchimp_signup' => array(
-      'label' => t('MailChimp Signup'),
-      'plural label' => t('MailChimp Signups'),
+      'label' => t('Mailchimp Signup'),
+      'plural label' => t('Mailchimp Signups'),
       'entity class' => 'MailchimpSignup',
       'controller class' => 'EntityAPIControllerExportable',
       'base table' => 'mailchimp_signup',
@@ -185,7 +185,7 @@ function mailchimp_signup_entity_info() {
       ),
       'bundles' => array(
         'mailchimp_signup' => array(
-          'label' => t('MailChimp Signup'),
+          'label' => t('Mailchimp Signup'),
         ),
       ),
       'view modes' => array(
@@ -211,7 +211,7 @@ function mailchimp_signup_entity_info() {
  * Entity label callback.
  */
 function mailchimp_signup_entity_info_label($entity, $entity_type) {
-  return empty($entity) ? t('New MailChimp Signup') : $entity->getTranslation('title');
+  return empty($entity) ? t('New Mailchimp Signup') : $entity->getTranslation('title');
 }
 
 /**
@@ -300,6 +300,12 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
           ),
         );
         $form['mailchimp_lists'][$wrapper_key]['interest_groups'] += mailchimp_interest_groups_form_elements($list);
+        foreach ($form['mailchimp_lists'][$wrapper_key]['interest_groups'] as $group_id => $group) {
+          $form['mailchimp_lists'][$wrapper_key]['interest_groups'][$group_id]['#title'] = mailchimp_signup_tt("mailchimp_signup:mailchimp_signup:$signup->name:intgroup_$group_id", $group['#title']);
+          foreach ($group['#options'] as $interest_id => $interest_name) {
+            $form['mailchimp_lists'][$wrapper_key]['interest_groups'][$group_id]['#options'][$interest_id] = mailchimp_signup_tt('mailchimp_signup:mailchimp_signup:' . $signup->name . ':intgroup_' . $group_id . '_interest_' . $interest_id, $interest_name);
+          }
+        }
       }
     }
   }
@@ -308,6 +314,12 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
     if ($use_interest_groups && isset($list->intgroups)) {
       $form['mailchimp_lists']['#weight'] = 9;
       $form['mailchimp_lists']['interest_groups'] = mailchimp_interest_groups_form_elements($list);
+      foreach ($form['mailchimp_lists']['interest_groups'] as $group_id => $group) {
+        $form['mailchimp_lists']['interest_groups'][$group_id]['#title'] = mailchimp_signup_tt("mailchimp_signup:mailchimp_signup:$signup->name:intgroup_$group_id", $group['#title']);
+        foreach ($group['#options'] as $interest_id => $interest_name) {
+          $form['mailchimp_lists']['interest_groups'][$group_id]['#options'][$interest_id] = mailchimp_signup_tt('mailchimp_signup:mailchimp_signup:' . $signup->name . ':intgroup_' . $group_id . '_interest_' . $interest_id, $interest_name);
+        }
+      }
     }
   }
   $form['mergevars'] = array(
@@ -318,7 +330,8 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
   foreach ($signup->settings['mergefields'] as $tag => $mergevar) {
     if (!empty($mergevar)) {
       $mergevar->name = mailchimp_signup_tt("mailchimp_signup:mailchimp_signup:$signup->name:mergefield:$tag", $mergevar->name);
-      $form['mergevars'][$tag] = mailchimp_insert_drupal_form_tag($mergevar);
+      $placeholder = isset($signup->settings['placeholder']) ? $signup->settings['placeholder'] : NULL;
+      $form['mergevars'][$tag] = mailchimp_insert_drupal_form_tag($mergevar, $placeholder);
       if (empty($lists)) {
         $form['mergevars'][$tag]['#disabled'] = TRUE;
       }
@@ -391,13 +404,21 @@ function mailchimp_signup_subscribe_form_submit($form, &$form_state) {
     // Parse interests from interest groups.
     $interests = array();
     foreach ($interest_groups as $interest_group) {
-      foreach ($interest_group as $interest_id => $interest_status) {
-        $interests[$interest_id] = ($interest_status !== 0);
+      // Check if interest group is an array. Checkbox options will appear in an
+      // array, and unset options will be an empty array.
+      if (is_array($interest_group)) {
+        foreach ($interest_group as $interest_id => $interest_status) {
+          $interests[$interest_id] = ($interest_status !== 0);
+        }
+      }
+      // If it's not an array, the single option will be the interest ID.
+      else if ($interest_group != 0) {
+        $interests[$interest_group] = TRUE;
       }
     }
     $result = mailchimp_subscribe($list_id, $email, $mergevars, $interests, $signup->settings['doublein']);
     // Let other modules act on the results in hook_form_alter.
-    $form_state['mailchimp_results'] = $result;
+    $form_state['mailchimp_results'][$list_id] = $result;
     if (empty($result) || (isset($result->success) && $result->success === FALSE)) {
       drupal_set_message(t('There was a problem with your newsletter signup to %list.', array(
         '%list' => $list_details[$list_id]->name,
@@ -447,14 +468,14 @@ function mailchimp_signup_tt($name, $string, $langcode = NULL, $update = FALSE) 
  * Implements hook_feeds_node_processor_targets_alter().
  */
 function mailchimp_signup_feeds_processor_targets_alter(&$targets, $type, $bundle) {
-  // Create target for all MailChimp list subscription fields.
+  // Create target for all Mailchimp list subscription fields.
   $field_info = field_info_field_types('mailchimp_lists_subscription');
   $field_instances = field_info_instances($type, $bundle);
   foreach ($field_instances as $field_name => $field) {
     if ($field['widget']['type'] == $field_info['default_widget']) {
       $targets[$field_name . ':subscribe'] = array(
         'name' => t($field['label']),
-        'description' => t('MailChimp subscription field.'),
+        'description' => t('Mailchimp subscription field.'),
         'callback' => 'mailchimp_signup_set_target',
       );
     }

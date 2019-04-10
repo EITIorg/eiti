@@ -1,19 +1,24 @@
 <?php
+
 /**
  * @file
  * Support for fieldable_panels_pane destinations.
  *
  * Based on MigrateDestinationNode in migrate module
  * (migrate/plugins/destinations/node.inc).
+ *
+ * @todo Make sure this works with updates, explicit destination keys.
  */
-// @todo Make sure this works with updates, explicit destination keys.
 
 /**
  * Destination class implementing migration into fieldable panels panes.
  */
 class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
 
-  static public function getKeySchema() {
+  /**
+   * {@inheritdoc}
+   */
+  public static function getKeySchema() {
     return array(
       'fpid' => array(
         'type' => 'int',
@@ -33,34 +38,28 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
    *   Default text format for fieldable panels panes created via this
    *   destination class.
    */
-  static public function options($language, $text_format) {
+  public static function options($language, $text_format) {
     return compact('language', 'text_format');
   }
 
   /**
-   * Basic initialization.
-   *
-   * @param string $bundle
-   *   A.k.a. the fieldable panels pane type (the default fieldable_panels_pane,
-   *   etc.) of the fieldable panels pane.
-   * @param array $options
-   *   Options applied to fieldable panels panes.
+   * {@inheritdoc}
    */
   public function __construct($bundle, array $options = array()) {
     parent::__construct('fieldable_panels_pane', $bundle, $options);
   }
 
   /**
-   * Returns a list of fields available to be mapped for the fieldable panels
-   * pane type (bundle).
+   * Returns a list of fields available to be mapped for the FPP type (bundle).
    *
    * @param Migration $migration
    *   Optionally, the migration containing this destination.
+   *
    * @return array
    *   Keys: machine names of the fields (to be passed to addFieldMapping)
    *   Values: Human-friendly descriptions of the fields.
    */
-  public function fields($migration = NULL) {
+  public function fields(Migration $migration = NULL) {
     $fields = array();
     // First the core (fieldable_panels_panes table) properties.
     $fields['fpid'] = t('The primary identifier for the entity.');
@@ -90,7 +89,7 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
   /**
    * Delete a batch of fieldable panels panes at once.
    *
-   * @param $fpids
+   * @param array $fpids
    *   Array of fieldable panels pane IDs to be deleted.
    */
   public function bulkRollback(array $fpids) {
@@ -104,11 +103,12 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
   /**
    * Import a single fieldable panels pane.
    *
-   * @param $fieldable_panels_pane
+   * @param object $fieldable_panels_pane
    *   Fieldable panels pane object to build. Prefilled with any fields mapped
    *   in the Migration.
-   * @param $row
+   * @param object $row
    *   Raw source data object - passed through to prepare/complete handlers.
+   *
    * @return array
    *   Array of key fields (fpid only in this case) of the fieldable panels pane
    *   that was saved if successful. FALSE on failure.
@@ -144,7 +144,7 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
       if (!isset($fieldable_panels_pane->fpid)) {
         throw new MigrateException(t('System-of-record is DESTINATION, but no destination fpid provided'));
       }
-      $old_fieldable_panels_panes = entity_load_single('fieldable_panels_panes', $fieldable_panels_pane->fpid);
+      $old_fieldable_panels_panes = entity_load_single('fieldable_panels_pane', $fieldable_panels_pane->fpid);
       if (empty($old_fieldable_panels_panes)) {
         throw new MigrateException(t('System-of-record is DESTINATION, but fieldable panels pane !fpid does not exist',
           array('!fpid' => $fieldable_panels_pane->fpid)));
@@ -228,15 +228,15 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
       // the changed timestamp.
       if (isset($changed)) {
         db_update('fieldable_panels_panes')
-            ->fields(array('changed' => $changed))
-            ->condition('fpid', $fieldable_panels_pane->fpid)
-            ->execute();
+          ->fields(array('changed' => $changed))
+          ->condition('fpid', $fieldable_panels_pane->fpid)
+          ->execute();
         $fieldable_panels_pane->changed = $changed;
       }
 
       // Potentially fix timestamp in fieldable_panels_panes_revision.
       $query = db_update('fieldable_panels_panes_revision')
-          ->condition('vid', $fieldable_panels_pane->vid);
+        ->condition('vid', $fieldable_panels_pane->vid);
       if (isset($changed)) {
         $fields['timestamp'] = $changed;
       }
@@ -257,4 +257,183 @@ class MigrateDestinationFieldablePanelsPanes extends MigrateDestinationEntity {
     $this->complete($fieldable_panels_pane, $row);
     return $return;
   }
+
+}
+
+/**
+ * Handling specific to a Drupal 7 source for Fieldable Panels Panes.
+ */
+class DrupalFieldablePanelsPanesMigration extends DrupalMigration {
+
+  /**
+   * The source and destination content types (bundles) we're dealing with.
+   *
+   * @var string
+   */
+  protected $destinationType;
+
+  /**
+   * Default language to apply to the node and it's body field.
+   *
+   * @var string
+   */
+  protected $defaultLanguage = LANGUAGE_NONE;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(array $arguments) {
+    $this->destinationType = $arguments['destination_type'];
+    $this->sourceType = $arguments['source_type'];
+    if (!empty($arguments['default_language'])) {
+      $this->defaultLanguage = $arguments['default_language'];
+    }
+    $arguments['source_version'] = 7;
+    parent::__construct($arguments);
+
+    // Document known core fields.
+    $this->sourceFields += array(
+      'fpid' => t('The primary identifier for the entity.'),
+      'vid' => t('The current version in use for this entity.'),
+      'bundle' => t('The bundle of the entity.'),
+      'title' => t('The title of the entity.'),
+      'link' => t('Whether or not this entity title will link to another page.'),
+      'path' => t('The path the title should link to.'),
+      'reusable' => t('Whether or not this entity will appear in the Add Content dialog.'),
+      'admin_title' => t('The title it will appear in the Add Content dialog as.'),
+      'admin_description' => t('The description it will appear in the Add Content dialog with.'),
+      'category' => t('The category it will appear in the Add Content dialog under.'),
+      'view_access' => t('Access rules to describe if the user has view access to this entity.'),
+      'edit_access' => t('Access rules to describe if the user has view access to this entity.'),
+      'created' => t('The Unix timestamp when the entity was created.'),
+      'changed' => t('The Unix timestamp when the entity was most recently saved.'),
+      'uuid' => t('The Universally Unique Identifier.'),
+      'language' => t('The languages.language of this entity.'),
+      'uid' => t('The users.uid of the current revision.'),
+      'log' => t('The log message of the current revision.'),
+      'vuuid' => t('The Universally Unique Identifier of the current revision.'),
+    );
+
+    $this->sourceFields += $this->version->getSourceFields('fieldable_panels_pane', $this->sourceType);
+
+    $this->source = new MigrateSourceSQL($this->query(), $this->sourceFields, NULL, $this->sourceOptions);
+
+    $this->destination = new MigrateDestinationFieldablePanelsPanes($this->destinationType);
+
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'fpid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'description' => 'Source entity ID',
+          'alias' => 'fpp',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema(),
+      $this->mapConnection
+    );
+
+    if (!$this->newOnly) {
+      $this->highwaterField = array(
+        'name' => 'changed',
+        'alias' => 'fpp',
+        'type' => 'int',
+      );
+    }
+
+    // Setup common mappings.
+    $this->addSimpleMappings(array(
+      'title',
+      'link',
+      'path',
+      'reusable',
+      'admin_title',
+      'admin_description',
+      'category',
+      'view_access',
+      'edit_access',
+      'created',
+      'changed',
+      'uuid',
+      'language',
+    ));
+
+    $this->addUnmigratedSources(array('vid'));
+    $this->addUnmigratedDestinations(array());
+
+    if (isset($arguments['default_uid'])) {
+      $default_uid = $arguments['default_uid'];
+    }
+    else {
+      $default_uid = 1;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function query() {
+    $query = Database::getConnection('default', $this->sourceConnection)
+      ->select('fieldable_panels_panes', 'fpp')
+      ->fields('fpp', array(
+        'fpid',
+        'vid',
+        'title',
+        'link',
+        'path',
+        'reusable',
+        'admin_title',
+        'admin_description',
+        'category',
+        'view_access',
+        'edit_access',
+        'created',
+        'changed',
+        'uuid',
+        'language',
+      ));
+    $query->join('fieldable_panels_panes_revision', 'fppv',
+      'fppv.fpid = fpp.fpid and fppv.vid = fpp.vid');
+    $query->fields('fppv', array(
+      'uid',
+      'log',
+      'vuuid',
+    ));
+    $query->condition('fpp.bundle', $this->sourceType);
+    $query->orderBy($this->newOnly ? 'fpp.fpid' : 'fpp.changed');
+    return $query;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow($row) {
+    if (parent::prepareRow($row) === FALSE) {
+      return FALSE;
+    }
+
+    $this->version->getSourceValues($row, $row->fpid);
+
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function createStub($migration) {
+    migrate_instrument_start('DrupalNodeMigration::createStub');
+    $entity = new stdClass();
+    $entity->title = t('Stub');
+    $entity->type = $this->destination->getBundle();
+    fieldable_panels_panes_save($entity);
+    migrate_instrument_stop('DrupalFieldablePanelsPanesMigration::createStub');
+    if (isset($entity->fpid)) {
+      return array($entity->fpid);
+    }
+    else {
+      return FALSE;
+    }
+  }
+
 }

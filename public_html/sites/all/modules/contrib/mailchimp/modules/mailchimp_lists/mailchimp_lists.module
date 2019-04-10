@@ -2,7 +2,7 @@
 
 /**
  * @file
- * MailChimp lists module.
+ * Mailchimp lists module.
  */
 
 module_load_include('inc', 'mailchimp_lists', 'includes/mailchimp_lists.field');
@@ -15,7 +15,7 @@ function mailchimp_lists_menu() {
 
   $items['admin/config/services/mailchimp/lists'] = array(
     'title' => t('Lists'),
-    'description' => t('Display MailChimp Lists and configure Webhooks.'),
+    'description' => t('Display Mailchimp Lists and configure Webhooks.'),
     'page callback' => 'mailchimp_lists_overview_page',
     'access callback' => 'mailchimp_apikey_ready_access',
     'access arguments' => array('administer mailchimp'),
@@ -25,7 +25,7 @@ function mailchimp_lists_menu() {
   );
   $items['admin/config/services/mailchimp/fields'] = array(
     'title' => t('Fields'),
-    'description' => t('Display MailChimp Subscription Fields and trigger merge variable updates.'),
+    'description' => t('Display Mailchimp Subscription Fields and trigger merge variable updates.'),
     'page callback' => 'mailchimp_lists_fields_overview_page',
     'access callback' => 'mailchimp_apikey_ready_access',
     'access arguments' => array('administer mailchimp'),
@@ -88,7 +88,7 @@ function mailchimp_lists_load_email($instance, $entity, $log_errors = TRUE) {
 
   if (!isset($instance['settings']['mergefields']['EMAIL'])) {
     if ($log_errors) {
-      watchdog('mailchimp_lists', 'MailChimp Lists field "@field" on @entity -> @bundle has no EMAIL field configured, subscription actions cannot take place.', array(
+      watchdog('mailchimp_lists', 'Mailchimp Lists field "@field" on @entity -> @bundle has no EMAIL field configured, subscription actions cannot take place.', array(
         '@field' => $instance['field_name'],
         '@entity' => $instance['entity_type'],
         '@bundle' => $instance['bundle'],
@@ -297,10 +297,10 @@ function mailchimp_lists_process_subscribe_form_choices($choices, $instance, $fi
 }
 
 /**
- * Helper function to avoid sending superfluous updates to MailChimp.
+ * Helper function to avoid sending superfluous updates to Mailchimp.
  *
  * This is necessary due to the nature of the field implementation of
- * subscriptions. If we don't do this, we send an update to MailChimp every time
+ * subscriptions. If we don't do this, we send an update to Mailchimp every time
  * an entity is updated.
  * 
  * returns bool
@@ -338,7 +338,7 @@ function _mailchimp_lists_subscription_has_changed($instance, $field, $entity, $
     }
   }
   // We don't have an old entity to compare values so we have to retrieve our
-  // old settings from MailChimp. This means the only possible change is in our
+  // old settings from Mailchimp. This means the only possible change is in our
   // interest group settings, so we only analyze those:
   else {
     $member_info = mailchimp_get_memberinfo($field['settings']['mc_list_id'], $email);
@@ -363,9 +363,9 @@ function _mailchimp_lists_subscription_has_changed($instance, $field, $entity, $
 }
 
 /**
- * Helper function to complete a MailChimp-API-ready mergevars array.
+ * Helper function to complete a Mailchimp-API-ready mergevars array.
  */
-function _mailchimp_lists_mergevars_populate($mergefields, $entity, $entity_type, $list_id) {
+function _mailchimp_lists_mergevars_populate($mergefields, $entity, $entity_type, $list_id = NULL) {
   $mergevars = mailchimp_mergevars_populate($mergefields, $entity, $entity_type, $list_id);
   drupal_alter('mailchimp_lists_mergevars', $mergevars, $entity, $entity_type, $list_id);
   return $mergevars;
@@ -382,23 +382,22 @@ function mailchimp_lists_update_member_merge_values($entity_type, $bundle_name, 
   // cache would kill the point of doing this as a batch API operation.
   $batch = array(
     'operations' => array(
-      array('mailchimp_lists_get_subscribers', array($field)),
       array(
-        'mailchimp_lists_populate_member_batch',
+        'mailchimp_lists_update_member_batch',
         array(
           $entity_type,
           $bundle_name,
           $field,
           $mergefields,
+          $field['settings']['mc_list_id'],
         ),
       ),
-      array('mailchimp_lists_execute_mergevar_batch_update', array($field['settings']['mc_list_id'])),
     ),
     'finished' => 'mailchimp_lists_populate_member_batch_complete',
     'title' => t('Processing Merge Variable Updates'),
-    'init_message' => t('Starting MailChimp Merge Variable Update.'),
+    'init_message' => t('Starting Mailchimp Merge Variable Update.'),
     'progress_message' => t('Processed @current out of @total.'),
-    'error_message' => t('MailChimp Merge Variable Update Failed.'),
+    'error_message' => t('Mailchimp Merge Variable Update Failed.'),
   );
   batch_set($batch);
 }
@@ -413,7 +412,7 @@ function mailchimp_lists_get_subscribers($field, &$context) {
   }
   $batch_size = variable_get('mailchimp_batch_limit', 100);
   $options = array(
-    'offset' => $context['sandbox']['progress'] / $batch_size,
+    'offset' => $context['sandbox']['progress'],
     'count' => $batch_size,
   );
   $matches = mailchimp_get_members($field['settings']['mc_list_id'], 'subscribed', $options);
@@ -431,80 +430,141 @@ function mailchimp_lists_get_subscribers($field, &$context) {
 }
 
 /**
- * Batch processor for member mergevar updates to built the mergevar arrays.
+ * Batch processor for member mergevar updates.
  */
-function mailchimp_lists_populate_member_batch($entity_type, $bundle_name, $field, $mergefields, &$context) {
+function mailchimp_lists_update_member_batch($entity_type, $bundle_name, $field, $mergefields, $list_id, &$context) {
   if (!isset($context['sandbox']['progress'])) {
-    // Load up all our eligible entities.
+    $context['sandbox']['entity_info'] = entity_get_info($entity_type);
+    $context['sandbox']['progress'] = 0;
+    $context['results']['errors'] = 0;
+    $context['results']['updates'] = 0;
+    $context['results']['no_entity'] = 0;
+  }
+
+  $batch_size = variable_get('mailchimp_batch_limit', 100);
+
+  // Query Mailchimp for list subscribers in batches to limit resource usage.
+  $options = array(
+    'offset' => $context['sandbox']['progress'],
+    'count' => $batch_size,
+  );
+
+  // Get the email addresses of all subscribers of the Mailchimp list.
+  $subscriber_emails = array();
+  $subscribers = array();
+  $update_queue = array();
+
+  $matches = mailchimp_get_members($field['settings']['mc_list_id'], 'subscribed', $options);
+  if (!empty($matches) && ($matches->total_items > 0)) {
+    if (!isset($context['sandbox']['max'])) {
+      $context['sandbox']['max'] = $matches->total_items;
+    }
+    foreach ($matches->members as $result) {
+      $subscribers[strtolower($result->email_address)] = $result;
+      $subscriber_emails[] = strtolower($result->email_address);
+    }
+  }
+
+  // Split up mergefield token to determine referenced entity field or property.
+  $entity_email_field_parts = explode(':', str_replace(array(']', '['), '', $mergefields['EMAIL']));
+
+  // Determine the Drupal field name from the mergefield token.
+  $entity_email_field_name = str_replace('-', '_', $entity_email_field_parts[1]);
+  $entity_email_field_info = field_info_field($entity_email_field_name);
+
+  if (!empty($entity_email_field_info)) {
+    // Set the default field value column in the field database table.
+    $entity_email_field_column = 'value';
+  }
+  else {
+    // If not a field, then the mergefield token refers to a property.
+    $entity_email_property_column = $entity_email_field_parts[1];
+  }
+
+  // Unable to match email mergefield token with a field/property of the entity.
+  if (empty($entity_email_field_column) && empty($entity_email_property_column)) {
+    watchdog('mailchimp_lists', 'Could not update merge variables. Unable to match token @email with a field or property of the @entity entity.', array(
+      '@email' => $mergefields['EMAIL'],
+      '@entity' => $entity_type,
+    ), WATCHDOG_ERROR);
+
+    drupal_set_message(t('Unable to update merge variables. Please see your error log for details.'), 'error');
+
+    // Not possible to send merge variables. End batch process.
+    $context['finished'] = 1;
+    return;
+  }
+
+  // For each list subscriber email, load the associated entity.
+  foreach ($subscriber_emails as $subscriber_email) {
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', $entity_type);
     if ($entity_type !== 'user') {
       $query->entityCondition('bundle', $bundle_name);
     }
-    $query_results = $query->execute();
-    $context['sandbox']['progress'] = 0;
-    $context['sandbox']['max'] = isset($query_results[$entity_type]) ? count($query_results[$entity_type]) : 0;
-    if ($context['sandbox']['max']) {
-      $context['sandbox']['entity_ids'] = array_keys($query_results[$entity_type]);
-      $context['results']['update_queue'] = array();
+
+    if (!empty($entity_email_field_column)) {
+      $query->fieldCondition($entity_email_field_name, $entity_email_field_column, $subscriber_email, '=');
     }
-  }
-  if ($context['sandbox']['progress'] < $context['sandbox']['max']) {
-    $batch_size = variable_get('mailchimp_batch_limit', 100);
-    $item_ids = array_slice($context['sandbox']['entity_ids'], $context['sandbox']['progress'], $batch_size);
-    $entities = entity_load($entity_type, $item_ids);
-    foreach ($entities as $entity) {
-      $merge_vars = _mailchimp_lists_mergevars_populate($mergefields, $entity, $entity_type);
-      if ($merge_vars['EMAIL'] && isset($context['results']['subscribers'][strtolower($merge_vars['EMAIL'])])) {
-        $context['results']['update_queue'][] = array(
+    elseif (!empty($entity_email_property_column)) {
+      $query->propertyCondition($entity_email_property_column, $subscriber_email, '=');
+    }
+
+    $query_results = $query->execute();
+
+    if (isset($query_results[$entity_type])) {
+      $entity_id = array_keys($query_results[$entity_type])[0];
+      $entity = entity_load_single($entity_type, $entity_id);
+    }
+
+    // If an entity exists, populate the mergevars for Mailchimp.
+    if (!empty($entity)) {
+      $merge_vars = _mailchimp_lists_mergevars_populate($mergefields, $entity, $entity_type, $field['settings']['mc_list_id']);
+      if ($merge_vars['EMAIL'] && isset($subscribers[strtolower($merge_vars['EMAIL'])])) {
+        $update_queue[] = array(
           'email' => $merge_vars['EMAIL'],
-          // Preserve subscribers's email type selection:
-          'email_type' => $context['results']['subscribers'][strtolower($merge_vars['EMAIL'])]->email_type,
+          // Preserve subscriber's email type selection.
+          'email_type' => $subscribers[strtolower($merge_vars['EMAIL'])]->email_type,
           'merge_vars' => $merge_vars,
         );
       }
     }
-    $context['sandbox']['progress'] += count($item_ids);
-    $context['message'] = t('Checking for changes on items %count - %next.',
-      array(
-        '%count' => $context['sandbox']['progress'],
-        '%next' => $context['sandbox']['progress'] + $batch_size,
-      )
-    );
-    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+    else {
+      $context['results']['no_entity']++;
+    }
   }
+
+  // Send updated mergevars to Mailchimp.
+  $batch_result = mailchimp_lists_execute_mergevar_batch_update($list_id, $update_queue);
+
+  // Log any errors returned by Mailchimp.
+  $context['results']['errors'] += $batch_result->errored_operations;
+
+  // Update batch operation progress.
+  $context['sandbox']['progress'] += count($subscriber_emails);
+  $context['results']['updates'] += count($subscriber_emails);
+
+  $context['message'] = t('Updating items %count - %next of %total.',
+    array(
+      '%count' => $context['sandbox']['progress'],
+      '%next' => $context['sandbox']['progress'] + $batch_size,
+      '%total' => $context['sandbox']['max'],
+    )
+  );
+
+  $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
 }
 
 /**
- * Batch processor for member mergevar updates to submit batches to MailChimp.
+ * Sends batch mergevar data to Mailchimp.
  */
-function mailchimp_lists_execute_mergevar_batch_update($list_id, &$context) {
-  if (!isset($context['sandbox']['progress'])) {
-    $context['sandbox']['progress'] = 0;
-    $context['sandbox']['total'] = count($context['results']['update_queue']);
-    $context['results']['updates'] = 0;
-    $context['results']['errors'] = 0;
-  }
-  if ($context['sandbox']['progress'] < $context['sandbox']['total']) {
-    $batch_size = variable_get('mailchimp_batch_limit', 100);
-    $batch = array_slice($context['results']['update_queue'], $context['sandbox']['progress'], $batch_size);
-    $result = mailchimp_batch_update_members($list_id, $batch, FALSE, TRUE, FALSE);
-    if ($result) {
-      /* @var \Mailchimp\Mailchimp $mc */
-      $mc = mailchimp_get_api_object();
-      $batch_result = $mc->getBatchOperation($result->id);
+function mailchimp_lists_execute_mergevar_batch_update($list_id, $batch) {
+  $result = mailchimp_batch_update_members($list_id, $batch, FALSE, TRUE, FALSE);
+  if ($result) {
+    /* @var \Mailchimp\Mailchimp $mc */
+    $mc = mailchimp_get_api_object();
 
-      $context['results']['updates'] += count($context['results']['update_queue']);
-      $context['results']['errors'] += $batch_result->errored_operations;
-    }
-    $context['sandbox']['progress'] += count($batch);
-    $context['message'] = t('Updating MailChimp mergevars for items %count - %next.',
-      array(
-        '%count' => $context['sandbox']['progress'],
-        '%next' => $context['sandbox']['progress'] + $batch_size,
-      )
-    );
-    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['total'];
+    return $mc->getBatchOperation($result->id);
   }
 }
 
@@ -522,9 +582,10 @@ function mailchimp_lists_populate_member_batch_complete($success, $results, $ope
       ), 'warning');
     }
     else {
-      drupal_set_message(t('Merge variables updated on %count records.',
+      drupal_set_message(t('Merge variables updated on %count records. %no_entity subscribers had no matching entity in Drupal.',
         array(
           '%count' => $results['updates'],
+          '%no_entity' => $results['no_entity'],
         )
       ), 'status');
     }
@@ -542,7 +603,7 @@ function mailchimp_lists_populate_member_batch_complete($success, $results, $ope
 function mailchimp_lists_mollom_form_list() {
   $forms = array();
   $forms['mailchimp_lists_subscribe_form'] = array(
-    'title' => t('MailChimp Newsletter Subscription Fields'),
+    'title' => t('Mailchimp Newsletter Subscription Fields'),
   );
 
   return $forms;
@@ -638,7 +699,7 @@ function mailchimp_lists_action_info() {
   $actions = array(
     'mailchimp_lists_add_to_segment_action' => array(
       'type' => 'entity',
-      'label' => t('Add to MailChimp Lists Segment'),
+      'label' => t('Add to Mailchimp Lists Segment'),
       'configurable' => FALSE,
       'triggers' => array('any'),
       'vbo_configurable' => TRUE,
@@ -652,7 +713,7 @@ function mailchimp_lists_action_info() {
  * 
  * Does the actual subscription work. Builds a queue of segment adds and then
  * intermittently builds a batched API action from the queue and sends to
- * MailChimp.
+ * Mailchimp.
  */
 function mailchimp_lists_add_to_segment_action($entity, $context = array()) {
   list($id, $vid, $bundle) = entity_extract_ids($context['entity_type'], $entity);
@@ -663,8 +724,8 @@ function mailchimp_lists_add_to_segment_action($entity, $context = array()) {
   if ($email) {
     mailchimp_segment_add_subscriber($list_id, $context['segment_id'], $email, TRUE, $queue_id);
   }
-  // Send to MailChimp in a batch when we are done, or when we reach 10000, as
-  // 10000 records is the maximum batch size MailChimp recommends.
+  // Send to Mailchimp in a batch when we are done, or when we reach 10000, as
+  // 10000 records is the maximum batch size Mailchimp recommends.
   if ($context['progress']['current'] == $context['progress']['total'] || !($context['progress']['current'] % 10000)) {
     $batch_queue = DrupalQueue::get($queue_id);
     $batch_queue->createQueue();
@@ -705,7 +766,7 @@ function mailchimp_lists_add_to_segment_action_form($context, &$form_state) {
   }
   $form['mailchimp_field'] = array(
     '#type' => 'select',
-    '#title' => t('Select a MailChimp List'),
+    '#title' => t('Select a Mailchimp List'),
     '#options' => $mailchimp_field_options,
     '#required' => TRUE,
     '#ajax' => array(
@@ -809,10 +870,10 @@ function mailchimp_lists_add_to_segment_action_views_bulk_operations_form($optio
   }
   $form['mailchimp_field'] = array(
     '#type' => 'select',
-    '#title' => t('REQUIRED: MailChimp List Field(s)'),
+    '#title' => t('REQUIRED: Mailchimp List Field(s)'),
     '#options' => $field_options,
     '#multiple' => TRUE,
-    '#description' => t('Select the MailChimp fields for which to allow segmentation.'),
+    '#description' => t('Select the Mailchimp fields for which to allow segmentation.'),
     '#default_value' => isset($options['mailchimp_field']) ? $options['mailchimp_field'] : NULL,
     '#states' => array(
       'required' => array(

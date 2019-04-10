@@ -448,7 +448,16 @@ function _filefield_paths_replace_path($old, $new, $entity) {
   $old_escaped = addslashes($old);
 
   // Create an anonymous function for the replacement via preg_replace_callback.
-  $callback = create_function('$matches', "return filefield_paths_replace_path_callback(\$matches, '{$new_escaped}', '{$old_escaped}');");
+  $callback = function ($matches) use ($new_escaped, $old_escaped) {
+    return filefield_paths_replace_path_callback($matches, $new_escaped, $old_escaped);
+  };
+  if (!$callback) {
+    watchdog('filefield_paths', 'Unable to create an anonymous function to find references of %old and replace with %new.', array(
+      '%old' => $old,
+      '%new' => $new,
+    ));
+    return;
+  }
 
   $fields = field_info_fields();
   foreach ($fields as $name => $field) {
