@@ -205,6 +205,7 @@ features[user_permission][] = score_data entity create
 features[user_permission][] = score_data entity delete
 features[user_permission][] = score_data entity edit
 features[user_permission][] = score_data entity view
+features[user_permission][] = score_data entity view unpublished
 features[user_permission][] = score_req entity administer
 features[user_permission][] = score_req entity view
 features[user_permission][] = score_req_value entity administer

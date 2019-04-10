@@ -1222,6 +1222,18 @@ function eitipermissions_user_default_permissions() {
     'module' => 'eitientity_score_data',
   );
 
+  // Exported permission: 'score_data entity view unpublished'.
+  $permissions['score_data entity view unpublished'] = array(
+    'name' => 'score_data entity view unpublished',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'restricted user' => 'restricted user',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'eitientity_score_data',
+  );
+
   // Exported permission: 'score_req entity administer'.
   $permissions['score_req entity administer'] = array(
     'name' => 'score_req entity administer',
