@@ -585,22 +585,78 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  */
 # $conf['theme_debug'] = TRUE;
 
+/**
+ * Include AWS configuration additions.
+ */
+if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings_aws.php')) {
+  include_once('settings_aws.php');
+}
+
+/**
+ * The current project environment.
+ * NOTE: The variable can be used inside update scripts, use only the following
+ *       values: local, staging, preprod, production, other.
+ */
+if (isset($_SERVER['EITI_ENV'])) {
+  define('PROJECT_ENVIRONMENT', $_SERVER['EITI_ENV']);
+}
+
+/**
+ * Main database settings.
+ */
+$databases['default']['default'] = array(
+  'driver'   => 'pgsql',
+  'prefix'   => '',
+);
+if (isset($_SERVER['EITI_DB_NAME'])) {
+  $databases['default']['default']['database'] = $_SERVER['EITI_DB_NAME'];
+}
+if (isset($_SERVER['EITI_DB_USER'])) {
+  $databases['default']['default']['username'] = $_SERVER['EITI_DB_USER'];
+}
+if (isset($_SERVER['EITI_DB_PASS'])) {
+  $databases['default']['default']['password'] = $_SERVER['EITI_DB_PASS'];
+}
+if (isset($_SERVER['EITI_DB_HOST'])) {
+  $databases['default']['default']['host'] = $_SERVER['EITI_DB_HOST'];
+}
+
+/**
+ * Set the Google Analytics Account (Web Property ID) on production.
+ */
+if (PROJECT_ENVIRONMENT == 'production') {
+  if (isset($_SERVER['EITI_GA'])) {
+    $conf['googleanalytics_account'] = $_SERVER['EITI_GA'];
+  }
+  if (isset($_SERVER['EITI_API_GA'])) {
+    $conf['eiti_api_analytics_account'] = $_SERVER['EITI_API_GA'];
+  }
+}
+
+/**
+ * S3 settings.
+ */
+if (isset($_SERVER['EITI_S3_ACCESS_KEY'])) {
+  $conf['awssdk2_access_key'] = $_SERVER['EITI_S3_ACCESS_KEY'];
+}
+if (isset($_SERVER['EITI_S3_SECRET_KEY'])) {
+  $conf['s3fs_use_s3_for_public'] = TRUE;
+  $conf['awssdk2_secret_key'] = $_SERVER['EITI_S3_SECRET_KEY'];
+}
+if (isset($_SERVER['EITI_S3_DOMAIN'])) {
+  $conf['s3fs_use_cname'] = TRUE;
+  $conf['s3fs_domain'] = $_SERVER['EITI_S3_DOMAIN'];
+}
+if (isset($_SERVER['EITI_S3_BUCKET'])) {
+  $conf['s3fs_bucket'] = $_SERVER['EITI_S3_BUCKET'];
+}
+if (isset($_SERVER['EITI_S3_REGION'])) {
+  $conf['s3fs_region'] = $_SERVER['EITI_S3_REGION'];
+}
 
 /**
  * Allow environment specific configuration overrides.
  */
 if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.custom.php')) {
   include_once('settings.custom.php');
-}
-else {
-  $message = array();
-  $message[] = 'Environment specific configuration file "settings.custom.php" is missing.';
-  $message[] = '';
-  $message[] = 'You can use the sample file:';
-  $message[] = '    cp sites/default/settings.{sample,custom}.php';
-  $message[] = 'But remember to update the content:';
-  $message[] = '    vi sites/default/settings.custom.php';
-  $message[] = '';
-  $message[] = '';
-  die(implode("\n", $message));
 }

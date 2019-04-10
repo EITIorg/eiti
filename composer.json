@@ -1,6 +1,7 @@
 {
     "require": {
         "mpdf/mpdf": "^7.1",
-        "theiconic/php-ga-measurement-protocol": "^2.7"
+        "theiconic/php-ga-measurement-protocol": "^2.7",
+        "drush/drush": "^8.0"
     }
 }
