@@ -19,9 +19,8 @@ function eiti_replicate_replicate_ui_access_check_alter(&$access, $type, $entity
   // Only allow necessary entities that have been tested to clone properly.
   // For example referenced entities are not cloned, but sometimes should.
   // Note that the site has also node_clone in use (added before replicate).
-  $access = FALSE;
-  if ($type == 'score_data') {
-    $access = TRUE;
+  if ($type != 'score_data') {
+    $access = FALSE;
   }
 }
 
