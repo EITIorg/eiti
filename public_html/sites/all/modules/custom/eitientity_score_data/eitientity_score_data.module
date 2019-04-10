@@ -162,7 +162,7 @@ function eitientity_score_data_type_get_name($bundle) {
  */
 function eitientity_score_data_access($op, $entity = NULL, $account = NULL, $entity_type) {
 
-  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete', 'view unpublished');
   if (!in_array($op, $operations, TRUE)) {
     // If the $op was not one of the supported ones, we return access denied.
     return FALSE;
@@ -176,6 +176,9 @@ function eitientity_score_data_access($op, $entity = NULL, $account = NULL, $ent
   if ($op == 'view') {
     $allow = FALSE;
     if (user_access("$entity_type entity administer")) {
+      $allow = TRUE;
+    }
+    else if (user_access("$entity_type entity view unpublished")) {
       $allow = TRUE;
     }
     else if ($entity->status && user_access("$entity_type entity $op")) {
@@ -203,7 +206,7 @@ function eitientity_score_data_permission() {
   $entity_type = 'score_data';
   $entity_info = entity_get_info($entity_type);
 
-  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete');
+  $operations = array('administer', 'access overview', 'create', 'view', 'edit', 'delete', 'view unpublished');
   foreach ($operations as $op) {
     $permission_string = "$entity_type entity $op";
     $action = ucfirst($op);

@@ -115,5 +115,15 @@ function eitict_board_decision_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'view any unpublished board_decision content'.
+  $permissions['view any unpublished board_decision content'] = array(
+    'name' => 'view any unpublished board_decision content',
+    'roles' => array(
+      'restricted user' => 'restricted user',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'view_unpublished',
+  );
+
   return $permissions;
 }
