@@ -162,6 +162,33 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_fpp_colour'.
+  $field_bases['field_fpp_colour'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_colour',
+    'indexes' => array(
+      'rgb' => array(
+        0 => 'rgb',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'color_field',
+    'settings' => array(
+      'allow_empty' => 0,
+      'entity_translation_sync' => FALSE,
+      'palette' => '',
+      'show_buttons' => 1,
+      'show_input' => 1,
+      'show_palette' => 0,
+      'show_palette_only' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'color_field_rgb',
+  );
+
   // Exported field_base: 'field_fpp_content_widgets'.
   $field_bases['field_fpp_content_widgets'] = array(
     'active' => 1,
@@ -284,6 +311,31 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'helperfield_icon',
   );
 
+  // Exported field_base: 'field_fpp_image'.
+  $field_bases['field_fpp_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_image',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_fpp_layout'.
   $field_bases['field_fpp_layout'] = array(
     'active' => 1,
@@ -338,6 +390,23 @@ function eitiwidgets_field_default_field_bases() {
     ),
     'translatable' => 1,
     'type' => 'link_field',
+  );
+
+  // Exported field_base: 'field_fpp_number'.
+  $field_bases['field_fpp_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_number',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_fpp_person_list'.
