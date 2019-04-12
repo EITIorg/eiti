@@ -119,6 +119,8 @@ function eitict_board_decision_user_default_permissions() {
   $permissions['view any unpublished board_decision content'] = array(
     'name' => 'view any unpublished board_decision content',
     'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
       'restricted user' => 'restricted user',
       'translation editor' => 'translation editor',
     ),
