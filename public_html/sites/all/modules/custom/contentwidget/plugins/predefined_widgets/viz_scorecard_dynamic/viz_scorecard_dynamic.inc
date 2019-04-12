@@ -81,6 +81,10 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     $score_data = eitientity_score_data_lookup_by_country($widget_settings['extra_settings']['country']);
     if ($score_data !== FALSE && !empty($score_data)) {
       foreach ($score_data as $score_data_delta => $score_data_entity) {
+        if (!entity_access('view', 'score_data', $score_data_entity)) {
+          unset($score_data[$score_data_delta]);
+          continue;
+        }
         // Set year to latest if it's not set, but one is available.
         if (!$widget_settings['extra_settings']['year'] && $score_data_entity->year > $default_year) {
           $default_year = $score_data_entity->year;

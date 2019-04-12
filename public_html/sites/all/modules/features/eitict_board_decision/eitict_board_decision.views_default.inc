@@ -241,6 +241,62 @@ function eitict_board_decision_views_default_views() {
   $handler->display->display_options['relationships']['field_validation_target_id']['field'] = 'field_validation_target_id';
   $handler->display->display_options['relationships']['field_validation_target_id']['label'] = 'Validation';
   $handler->display->display_options['relationships']['field_validation_target_id']['required'] = TRUE;
+
+  /* Display: Unpublished */
+  $handler = $view->new_display('block', 'Unpublished', 'unpublished');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view any unpublished board_decision content';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'board_decision' => 'board_decision',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Global: Combine fields filter */
+  $handler->display->display_options['filters']['combine']['id'] = 'combine';
+  $handler->display->display_options['filters']['combine']['table'] = 'views';
+  $handler->display->display_options['filters']['combine']['field'] = 'combine';
+  $handler->display->display_options['filters']['combine']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['combine']['group'] = 2;
+  $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'search';
+  $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    9 => 0,
+    7 => 0,
+    8 => 0,
+    6 => 0,
+    5 => 0,
+    10 => 0,
+    4 => 0,
+    11 => 0,
+  );
+  $handler->display->display_options['filters']['combine']['fields'] = array(
+    'title_field' => 'title_field',
+    'name_field' => 'name_field',
+    'body' => 'body',
+  );
   $translatables['board_decisions'] = array(
     t('Master'),
     t('Board decisions'),
@@ -266,6 +322,7 @@ function eitict_board_decision_views_default_views() {
     t('Decision'),
     t('Search'),
     t('Validation'),
+    t('Unpublished'),
   );
   $export['board_decisions'] = $view;
 

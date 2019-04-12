@@ -73,8 +73,9 @@ function eiti_ctools_extra__board_decisions__settings_form($form, &$form_state) 
     '#title' => t('Display'),
     '#type' => 'select',
     '#options' => array(
-      'default' => t('All'),
-      'validation' => t('With validation only'),
+      'default' => t('All published'),
+      'validation' => t('Published with validation'),
+      'unpublished' => t('All unpublished'),
     ),
     '#default_value' => $conf['display'],
   );
