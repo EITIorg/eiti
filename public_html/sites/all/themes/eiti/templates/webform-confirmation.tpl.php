@@ -23,9 +23,9 @@
 
 <div class="webform-confirmation">
   <?php if ($confirmation_message): ?>
-    <h3><?php print t('Thank you!'); ?></h3>
+    <h3><?php print t('Thank you for your feedback.'); ?></h3>
     <p><?php print $confirmation_message ?></p>
   <?php else: ?>
-    <p><?php print t('Thank you, your submission has been received.'); ?></p>
+    <h3><?php print t('Thank you for your feedback.'); ?></h3>
   <?php endif; ?>
 </div>
