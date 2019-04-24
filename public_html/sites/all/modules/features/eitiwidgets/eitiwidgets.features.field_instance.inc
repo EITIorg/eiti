@@ -354,7 +354,7 @@ function eitiwidgets_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'fieldable_panels_pane',
     'field_name' => 'field_fpp_link',
-    'label' => 'Link',
+    'label' => 'Links',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
@@ -3010,7 +3010,7 @@ function eitiwidgets_field_default_field_instances() {
   t('If you\'d like to use a paragraph of description for your teaser, please write it here.');
   t('Information');
   t('Layout');
-  t('Link');
+  t('Links');
   t('Logo');
   t('Overlay colour');
   t('Overlay opacity');
