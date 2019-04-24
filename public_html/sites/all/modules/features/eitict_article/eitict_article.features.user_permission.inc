@@ -10,6 +10,56 @@
 function eitict_article_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'administer panelizer node article content'.
+  $permissions['administer panelizer node article content'] = array(
+    'name' => 'administer panelizer node article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node article context'.
+  $permissions['administer panelizer node article context'] = array(
+    'name' => 'administer panelizer node article context',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node article defaults'.
+  $permissions['administer panelizer node article defaults'] = array(
+    'name' => 'administer panelizer node article defaults',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node article layout'.
+  $permissions['administer panelizer node article layout'] = array(
+    'name' => 'administer panelizer node article layout',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node article overview'.
+  $permissions['administer panelizer node article overview'] = array(
+    'name' => 'administer panelizer node article overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'internal editor' => 'internal editor',
+      'translation editor' => 'translation editor',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: 'administer panelizer node article settings'.
+  $permissions['administer panelizer node article settings'] = array(
+    'name' => 'administer panelizer node article settings',
+    'roles' => array(),
+    'module' => 'panelizer',
+  );
+
   // Exported permission: 'create article content'.
   $permissions['create article content'] = array(
     'name' => 'create article content',
