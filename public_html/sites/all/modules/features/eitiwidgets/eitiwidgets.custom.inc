@@ -507,6 +507,10 @@ function eitiwidgets_get_countdown_widget_markup($entity, $type, $view_mode, $la
   }
   $elements['overlay'] += $entity->content;
 
+  if (isset($entity->conf['show_title']) && !$entity->conf['show_title'] && isset($elements['overlay']['title_field'])) {
+    unset($elements['overlay']['title_field']);
+  }
+
   return $elements;
 }
 
