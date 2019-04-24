@@ -611,6 +611,7 @@ function eitict_article_field_default_field_instances() {
         'weight' => 15,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_related_country',
     'label' => 'Related Country',
