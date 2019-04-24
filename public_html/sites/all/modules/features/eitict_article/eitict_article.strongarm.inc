@@ -521,6 +521,41 @@ function eitict_article_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_defaults_node_article';
+  $strongarm->value = array(
+    'status' => 1,
+    'view modes' => array(
+      'page_manager' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'default' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'full' => array(
+        'status' => 1,
+        'substitute' => '',
+        'default' => 1,
+        'choice' => 0,
+      ),
+      'teaser_alternative' => array(
+        'status' => 0,
+        'substitute' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+    ),
+  );
+  $export['panelizer_defaults_node_article'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_node:article_allowed_layouts';
   $strongarm->value = 'O:22:"panels_allowed_layouts":4:{s:9:"allow_new";b:1;s:11:"module_name";s:22:"panelizer_node:article";s:23:"allowed_layout_settings";a:13:{s:8:"flexible";b:1;s:6:"twocol";b:1;s:6:"onecol";b:1;s:17:"threecol_33_34_33";b:1;s:13:"twocol_bricks";b:1;s:25:"threecol_25_50_25_stacked";b:1;s:14:"twocol_stacked";b:1;s:25:"threecol_33_34_33_stacked";b:1;s:17:"threecol_25_50_25";b:1;s:11:"bricklayout";b:1;s:10:"widelayout";b:1;s:12:"simplelayout";b:1;s:12:"doublelayout";b:1;}s:10:"form_state";N;}';
   $export['panelizer_node:article_allowed_layouts'] = $strongarm;
