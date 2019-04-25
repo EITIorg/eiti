@@ -140,6 +140,31 @@ function eitict_article_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|article|teaser';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'article';
+  $ds_fieldsetting->view_mode = 'teaser';
+  $ds_fieldsetting->settings = array(
+    'post_date' => array(
+      'weight' => '3',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_shortest',
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
+    'field_featured_image' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
+        ),
+      ),
+    ),
+  );
+  $export['node|article|teaser'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|article|teaser_alternative';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'article';
@@ -383,6 +408,50 @@ function eitict_article_ds_layout_settings_info() {
     'page_option_title' => '',
   );
   $export['node|article|full'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|article|teaser';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'article';
+  $ds_layout->view_mode = 'teaser';
+  $ds_layout->layout = 'widelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'main' => array(
+        0 => 'field_featured_image',
+        1 => 'field_article_type',
+        2 => 'title_field',
+        3 => 'post_date',
+        4 => 'body',
+      ),
+    ),
+    'fields' => array(
+      'field_featured_image' => 'main',
+      'field_article_type' => 'main',
+      'title_field' => 'main',
+      'post_date' => 'main',
+      'body' => 'main',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        'single-fluid-row-wrapper' => 'single-fluid-row-wrapper',
+      ),
+    ),
+    'wrappers' => array(
+      'above' => 'div',
+      'main' => 'div',
+      'below' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'article',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['node|article|teaser'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;

@@ -33,6 +33,15 @@ function eitict_article_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'trim_length' => 256,
+        ),
+        'type' => 'helpergeneric_clean_summary',
+        'weight' => 4,
+      ),
       'teaser_alternative' => array(
         'label' => 'hidden',
         'module' => 'helpergeneric',
@@ -88,6 +97,13 @@ function eitict_article_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 20,
       ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
       'teaser_alternative' => array(
         'label' => 'above',
         'settings' => array(),
@@ -130,6 +146,12 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -237,6 +259,12 @@ function eitict_article_field_default_field_instances() {
         'type' => 'date_default',
         'weight' => 11,
       ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
       'teaser_alternative' => array(
         'label' => 'hidden',
         'module' => 'date',
@@ -302,6 +330,12 @@ function eitict_article_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 12,
       ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
       'teaser_alternative' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -355,6 +389,16 @@ function eitict_article_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'img-article-slider',
+        ),
+        'type' => 'image',
+        'weight' => 0,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
@@ -461,6 +505,12 @@ function eitict_article_field_default_field_instances() {
         'type' => 'owlcarousel_formatter',
         'weight' => 5,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'teaser_alternative' => array(
         'label' => 'above',
         'settings' => array(),
@@ -560,6 +610,12 @@ function eitict_article_field_default_field_instances() {
         'type' => 'eiti_mailchimp_signup_form',
         'weight' => 6,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'teaser_alternative' => array(
         'label' => 'above',
         'settings' => array(),
@@ -603,6 +659,12 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
       ),
       'teaser_alternative' => array(
         'label' => 'above',
@@ -653,6 +715,12 @@ function eitict_article_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator_localized',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 13,
       ),
       'teaser_alternative' => array(
@@ -714,6 +782,17 @@ function eitict_article_field_default_field_instances() {
         ),
         'type' => 'title_linked',
         'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => 'title',
+          'title_link' => 'content',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 2,
       ),
       'teaser_alternative' => array(
         'label' => 'hidden',
