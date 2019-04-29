@@ -344,3 +344,39 @@ function eitict_article_tokens($type, $tokens, array $data = array(), array $opt
 
   return $replacements;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function eitict_article_preprocess_views_view(&$variables) {
+  if ($variables['name'] === 'articles' && $variables['display_id'] === 'default') {
+    // Attachment is not being attached automatically when using views_embed_view().
+    if (isset($variables['attachment_before']) && !trim(strip_tags($variables['attachment_before']))) {
+      $variables['attachment_before'] = views_embed_view('articles', 'sticky');
+    }
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function eitict_article_node_update($node) {
+  // There should only ever be one stickied article.
+  if ($node->type === 'article' && $node->sticky) {
+    $query = db_select('node')
+      ->fields('node', array('nid'))
+      ->condition('type', 'article')
+      ->condition('sticky', 1);
+    if ($node->nid) {
+      $query->condition('nid', $node->nid, '!=');
+    }
+    $nids = $query->execute()->fetchCol();
+    if ($nids) {
+      foreach ($nids as $nid) {
+        $article = node_load($nid);
+        $article->sticky = 0;
+        node_save($article);
+      }
+    }
+  }
+}

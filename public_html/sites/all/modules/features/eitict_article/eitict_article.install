@@ -14,3 +14,21 @@ function eitict_article_update_7001() {
   $title = 'Shortest';
   _us_system__add_date_format_type($machine_name, $title, $date_format);
 }
+
+/**
+ * Unsticky all articles.
+ */
+function eitict_article_update_7002() {
+  $nids = db_select('node')
+    ->fields('node', array('nid'))
+    ->condition('type', 'article')
+    ->condition('sticky', 1)
+    ->execute()->fetchCol();
+  if ($nids) {
+    foreach ($nids as $nid) {
+      $article = node_load($nid);
+      $article->sticky = 0;
+      node_save($article);
+    }
+  }
+}
