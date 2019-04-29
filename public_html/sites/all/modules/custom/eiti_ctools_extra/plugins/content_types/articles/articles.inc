@@ -38,10 +38,32 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     '#suffix' => '</div>',
   );
   $display = isset($conf['display']) ? $conf['display'] : 'default';
+  if ($display === 'latest' && isset($conf['tags']) && $conf['tags']) {
+    $tags = explode(',', $conf['tags']);
+    $voc = taxonomy_vocabulary_machine_name_load('tags');
+    foreach ($tags as $key => $tag) {
+      $tags[$key] = trim($tag);
+    }
+    $tids = db_select('taxonomy_term_data')
+      ->fields('taxonomy_term_data', array('tid'))
+      ->condition('vid', $voc->vid)
+      ->condition('name', $tags, 'IN')
+      ->execute()->fetchCol();
+    if ($tids) {
+      $tids = implode('+', $tids);
+      $view = views_embed_view('articles', $display, $tids);
+    }
+    else {
+      $view = views_embed_view('articles', $display);
+    }
+  }
+  else {
+    $view = views_embed_view('articles', $display);
+  }
   $block['articles']['list'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'div',
-    '#value' => views_embed_view('articles', $display),
+    '#value' => $view,
     '#attributes' => array('class' => array('list')),
   );
   return (object) array(
@@ -79,7 +101,7 @@ function eiti_ctools_extra__articles__settings_form($form, &$form_state) {
     '#type' => 'textfield',
     '#default_value' => $conf['tags'],
     '#autocomplete_path' => 'taxonomy/autocomplete/field_tags',
-    '#description' => t('Limit the results to the entered tags.'),
+    '#description' => t('Limit the results to the entered tags. This only works with the latest 6 display (has no effect otherwise).'),
   );
   return $form;
 }
