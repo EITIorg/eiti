@@ -3,6 +3,7 @@ description = Article content-type lives here, with all its features.
 core = 7.x
 package = EITI Entities
 version = 7.x-1.0
+dependencies[] = better_exposed_filters
 dependencies[] = countries
 dependencies[] = ctools
 dependencies[] = date
