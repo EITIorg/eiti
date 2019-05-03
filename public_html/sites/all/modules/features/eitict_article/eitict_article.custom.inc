@@ -79,6 +79,13 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
       $entity->article_summary = check_markup($article_summary, $article_summary_format);
     }
   }
+
+  // Modifications for teaser display.
+  if ($view_mode === 'teaser') {
+    if (isset($entity->content['field_featured_image'], $entity->content['body'])) {
+      unset($entity->content['body']);
+    }
+  }
 }
 
 /**
@@ -358,9 +365,9 @@ function eitict_article_preprocess_views_view(&$variables) {
 }
 
 /**
- * Implements hook_node_update().
+ * Implements hook_node_presave().
  */
-function eitict_article_node_update($node) {
+function eitict_article_node_presave($node) {
   // There should only ever be one stickied article.
   if ($node->type === 'article' && $node->sticky) {
     $query = db_select('node')

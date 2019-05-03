@@ -4,6 +4,7 @@
  * @file
  * Articles.
  */
+
 $plugin = array(
   'title' => t('Articles'),
   'description' => t('Article list.'),
@@ -38,6 +39,7 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     '#suffix' => '</div>',
   );
   $display = isset($conf['display']) ? $conf['display'] : 'default';
+  $view = '';
   if ($display === 'latest' && isset($conf['tags']) && $conf['tags']) {
     $tags = explode(',', $conf['tags']);
     $voc = taxonomy_vocabulary_machine_name_load('tags');
@@ -53,19 +55,31 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
       $tids = implode('+', $tids);
       $view = views_embed_view('articles', $display, $tids);
     }
-    else {
-      $view = views_embed_view('articles', $display);
-    }
   }
-  else {
+  if (!$view) {
     $view = views_embed_view('articles', $display);
+  }
+  if ($display === 'latest') {
+    $block['articles']['top'] = array(
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => t('<a href="articles">See all</a>'),
+      '#attributes' => array('class' => array('top')),
+    );
   }
   $block['articles']['list'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'div',
     '#value' => $view,
-    '#attributes' => array('class' => array('list')),
   );
+  if ($display === 'latest') {
+    $block['articles']['bottom'] = array(
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => t('<a href="articles">See all</a>'),
+      '#attributes' => array('class' => array('bottom')),
+    );
+  }
   return (object) array(
     'content' => $block,
   );
