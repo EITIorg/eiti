@@ -35,7 +35,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['primary']['clnormal'] = array(
-    '#value' => '#222222',
+    '#value' => '#7f7f7f',
     '#desc' => 'default text color',
     '#variants' => array(
       'clnormal__dark' => array(
@@ -76,7 +76,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['secondary']['claltmain'] = array(
-    '#value' => '#132856',
+    '#value' => '#165b89',
     '#desc' => 'alternative content background',
     '#variants' => array(
     ),
