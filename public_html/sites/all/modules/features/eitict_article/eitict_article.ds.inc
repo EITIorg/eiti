@@ -51,11 +51,6 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'body' => array(
-      'formatter_settings' => array(
-        'ft' => array(),
-      ),
-    ),
   );
   $export['node|article|default'] = $ds_fieldsetting;
 
@@ -81,27 +76,16 @@ function eitict_article_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'author' => array(
-      'weight' => '10',
-      'label' => 'hidden',
-      'format' => 'author',
-    ),
     'post_date' => array(
-      'weight' => '9',
+      'weight' => '10',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_helpertheme_ds_field_simple',
-        ),
-      ),
-    ),
-    'field_tags' => array(
+    'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
+          'classes' => 'field-highlighted',
         ),
       ),
     ),
@@ -112,7 +96,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_event_date' => array(
+    'field_authors' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -127,11 +111,24 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_image_gallery' => array(
+    'field_tags' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
-          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_helpertheme_ds_field_simple',
+        ),
+      ),
+    ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -356,12 +353,12 @@ function eitict_article_ds_layout_settings_info() {
         4 => 'field_attachments',
         5 => 'field_image_gallery',
         6 => 'field_mailchimp_signup_form',
+        7 => 'field_authors',
       ),
       'ds_hidden' => array(
-        7 => 'field_featured_image',
-        8 => 'title_field',
-        9 => 'post_date',
-        10 => 'author',
+        8 => 'field_featured_image',
+        9 => 'title_field',
+        10 => 'post_date',
         11 => 'field_event_date',
         12 => 'field_event_location',
         13 => 'field_tags',
@@ -375,10 +372,10 @@ function eitict_article_ds_layout_settings_info() {
       'field_attachments' => 'main',
       'field_image_gallery' => 'main',
       'field_mailchimp_signup_form' => 'main',
+      'field_authors' => 'main',
       'field_featured_image' => 'ds_hidden',
       'title_field' => 'ds_hidden',
       'post_date' => 'ds_hidden',
-      'author' => 'ds_hidden',
       'field_event_date' => 'ds_hidden',
       'field_event_location' => 'ds_hidden',
       'field_tags' => 'ds_hidden',

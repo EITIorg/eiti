@@ -479,6 +479,25 @@ function eitict_article_panelizer_defaults() {
   $pane->uuid = 'ee30c107-23bc-4fd1-ad63-b1cb9c5b82c2';
   $display->content['new-ee30c107-23bc-4fd1-ad63-b1cb9c5b82c2'] = $pane;
   $display->panels['main'][0] = 'new-ee30c107-23bc-4fd1-ad63-b1cb9c5b82c2';
+  $pane = new stdClass();
+  $pane->pid = 'new-2fea3b61-0dc4-4f71-8bc0-1149217c9b5f';
+  $pane->panel = 'main';
+  $pane->type = 'related-articles';
+  $pane->subtype = 'related-articles';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array();
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = '2fea3b61-0dc4-4f71-8bc0-1149217c9b5f';
+  $display->content['new-2fea3b61-0dc4-4f71-8bc0-1149217c9b5f'] = $pane;
+  $display->panels['main'][1] = 'new-2fea3b61-0dc4-4f71-8bc0-1149217c9b5f';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;

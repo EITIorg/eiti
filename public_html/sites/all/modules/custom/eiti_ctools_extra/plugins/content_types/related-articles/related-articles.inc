@@ -44,7 +44,7 @@ function eiti_ctools_extra__related_articles__render($subtype, $conf, $panel_arg
     '#attributes' => array(
       'class' => array(
         'related-articles',
-        'single-fluid-row-wrapper',
+        'single-narrow-row-wrapper',
       ),
     ),
   );
