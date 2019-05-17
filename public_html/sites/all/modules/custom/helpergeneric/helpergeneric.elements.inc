@@ -78,9 +78,10 @@ function form_process_ereference($element, &$form_state) {
     return $element;
   }
 
-  if (!empty($element['#default_value'])) {
+  // Convert integer to human-readable country name if necessary.
+  if (isset($element['#value']) && filter_var($element['#value'], FILTER_VALIDATE_INT) !== FALSE) {
     /** @var Entity $entity */
-    $entity = entity_load_single($element['#referenced_type'], $element['#default_value']);
+    $entity = entity_load_single($element['#referenced_type'], $element['#value']);
 
     if ($entity) {
       $eid = $entity->identifier();
@@ -90,7 +91,7 @@ function form_process_ereference($element, &$form_state) {
       unset($element['#value']);
       $args = array(
         '%type' => $entity_info['label'],
-        '%id' => (int) $element['#default_value'],
+        '%id' => (int) $element['#value'],
       );
       $message = t('The referenced %type entity with ID %id does not exist.', $args);
       form_set_error(implode('][', $element['#parents']), $message);
