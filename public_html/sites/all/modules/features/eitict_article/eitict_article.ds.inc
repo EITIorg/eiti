@@ -77,9 +77,14 @@ function eitict_article_ds_field_settings_info() {
       'format' => 'default',
     ),
     'post_date' => array(
-      'weight' => '10',
+      'weight' => '11',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
+    ),
+    'addtoany' => array(
+      'weight' => '15',
+      'label' => 'hidden',
+      'format' => 'default',
     ),
     'field_image_gallery' => array(
       'formatter_settings' => array(
@@ -357,11 +362,13 @@ function eitict_article_ds_layout_settings_info() {
       ),
       'ds_hidden' => array(
         8 => 'field_featured_image',
-        9 => 'title_field',
-        10 => 'post_date',
-        11 => 'field_event_date',
-        12 => 'field_event_location',
-        13 => 'field_tags',
+        9 => 'field_article_type',
+        10 => 'title_field',
+        11 => 'post_date',
+        12 => 'field_event_date',
+        13 => 'field_event_location',
+        14 => 'field_tags',
+        15 => 'addtoany',
       ),
     ),
     'fields' => array(
@@ -374,11 +381,13 @@ function eitict_article_ds_layout_settings_info() {
       'field_mailchimp_signup_form' => 'main',
       'field_authors' => 'main',
       'field_featured_image' => 'ds_hidden',
+      'field_article_type' => 'ds_hidden',
       'title_field' => 'ds_hidden',
       'post_date' => 'ds_hidden',
       'field_event_date' => 'ds_hidden',
       'field_event_location' => 'ds_hidden',
       'field_tags' => 'ds_hidden',
+      'addtoany' => 'ds_hidden',
     ),
     'classes' => array(
       'layout_class' => array(

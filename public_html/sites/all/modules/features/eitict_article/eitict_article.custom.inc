@@ -149,6 +149,21 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
     ),
   );
 
+  // Add article type.
+  if (isset($entity->content['field_article_type'])) {
+    $elements['overlay']['article_type_wrapper'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array(
+          'article-type-wrapper',
+          'single-narrow-row-wrapper',
+        ),
+      ),
+    );
+    $elements['overlay']['article_type_wrapper']['article_type'] = $entity->content['field_article_type'];
+    $entity->content['field_article_type']['#printed'] = TRUE;
+  }
+
   // Add title to the article_header.
   if (isset($entity->content['title_field'])) {
     $elements['overlay']['title_wrapper'] = array(
@@ -289,6 +304,35 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
         $entity->content['field_tags']['#printed'] = TRUE;
       }
       break;
+  }
+
+  // Add right side elements.
+  $elements['right'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'right',
+      ),
+    ),
+  );
+  $elements['right']['print'] = array(
+    '#type' => 'html_container',
+    '#tag' => 'div',
+    '#title' => t('Print'),
+    '#title_tag' => 'a',
+    '#title_attributes' => array(
+      'href' => 'javascript:window.print()',
+      'class' => array('link'),
+    ),
+    '#attributes' => array(
+      'class' => array(
+        'print',
+      ),
+    ),
+  );
+  if (isset($entity->content['addtoany'])) {
+    $elements['right']['addtoany'] = $entity->content['addtoany'];
+    $entity->content['addtoany']['#printed'] = TRUE;
   }
 
   return $elements;
