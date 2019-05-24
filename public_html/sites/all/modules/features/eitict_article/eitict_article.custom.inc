@@ -315,6 +315,31 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
       ),
     ),
   );
+  $rss_url = FALSE;
+  if ($article_type == 'news') {
+    $rss_url = 'feed/news.xml';
+  }
+  elseif ($article_type == 'blog') {
+    $rss_url = 'feed/blog.xml';
+  }
+  if ($rss_url) {
+    $elements['right']['rss'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('RSS'),
+      '#title_tag' => 'a',
+      '#title_attributes' => array(
+        'href' => url($rss_url),
+        'class' => array('link'),
+        'target' => '_blank',
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'rss',
+        ),
+      ),
+    );
+  }
   $elements['right']['print'] = array(
     '#type' => 'html_container',
     '#tag' => 'div',
