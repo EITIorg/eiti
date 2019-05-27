@@ -180,6 +180,10 @@ changeYear: true',
   $handler->display->display_options['sorts']['nid']['table'] = 'node';
   $handler->display->display_options['sorts']['nid']['field'] = 'nid';
   $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -306,6 +310,23 @@ changeYear: true',
     'title' => 'title',
     'body' => 'body',
   );
+  /* Filter criterion: Content: Don&#039;t show in lists (field_no_list_display) */
+  $handler->display->display_options['filters']['field_no_list_display_value']['id'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value']['table'] = 'field_data_field_no_list_display';
+  $handler->display->display_options['filters']['field_no_list_display_value']['field'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_no_list_display_value']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_no_list_display_value']['group'] = 2;
+  /* Filter criterion: Content: Don&#039;t show in lists (field_no_list_display) */
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['id'] = 'field_no_list_display_value_1';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['table'] = 'field_data_field_no_list_display';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['field'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['group'] = 2;
 
   /* Display: Sticky */
   $handler = $view->new_display('attachment', 'Sticky', 'sticky');
@@ -349,6 +370,10 @@ changeYear: true',
   $handler->display->display_options['arguments']['field_tags_tid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_tid']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -374,6 +399,20 @@ changeYear: true',
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
   );
   $handler->display->display_options['filters']['language']['group'] = 1;
+  /* Filter criterion: Content: Don&#039;t show in lists (field_no_list_display) */
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['id'] = 'field_no_list_display_value_1';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['table'] = 'field_data_field_no_list_display';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['field'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_no_list_display_value_1']['group'] = 2;
+  /* Filter criterion: Content: Don&#039;t show in lists (field_no_list_display) */
+  $handler->display->display_options['filters']['field_no_list_display_value']['id'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value']['table'] = 'field_data_field_no_list_display';
+  $handler->display->display_options['filters']['field_no_list_display_value']['field'] = 'field_no_list_display_value';
+  $handler->display->display_options['filters']['field_no_list_display_value']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_no_list_display_value']['group'] = 2;
 
   /* Display: Related */
   $handler = $view->new_display('block', 'Related', 'related');
