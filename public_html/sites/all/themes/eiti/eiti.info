@@ -61,7 +61,7 @@ stylesheets[print][] = styles/print.css.less
 
 ; Grid Settings.
 less[vars][@gen_total_columns] = 12
-less[vars][@gen_column_width] = 4em
+less[vars][@gen_column_width] = 5.25em
 less[vars][@gen_gutter_width] = 1em
 less[vars][@to_em] = 16
 
@@ -70,3 +70,4 @@ less[vars][@border_width] = 1px
 ; Font stacks
 less[vars][fstack_default] = "metropolis", "sans-serif"
 less[vars][fstack_alt] = "Arial", "Helvetica", "sans-serif"
+less[vars][fstack_ru] = "Montserrat", "sans-serif"

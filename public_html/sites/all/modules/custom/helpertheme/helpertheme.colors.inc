@@ -24,18 +24,18 @@ function helpertheme_color_palette() {
     '#desc' => 'page content background color',
     '#variants' => array(
       'clmain__header' => array(
-        '#value' => '#f0f0f0',
+        '#value' => '#FFFFFF',
         '#desc' => 'alternative content background color',
       ),
       'clmain__separator' => array(
-        '#value' => '#d3d3d3',
+        '#value' => '#DDDDDD',
         '#desc' => 'border header and content',
       ),
     ),
   );
 
   $colors['primary']['clnormal'] = array(
-    '#value' => '#7f7f7f',
+    '#value' => '#132856',
     '#desc' => 'default text color',
     '#variants' => array(
       'clnormal__dark' => array(
@@ -76,7 +76,7 @@ function helpertheme_color_palette() {
   );
 
   $colors['secondary']['claltmain'] = array(
-    '#value' => '#165b89',
+    '#value' => '#132856',
     '#desc' => 'alternative content background',
     '#variants' => array(
     ),
@@ -105,6 +105,13 @@ function helpertheme_color_palette() {
         '#value' => '#f6a70a',
         '#desc' => 'alternative color for highlighted items',
       ),
+    ),
+  );
+
+  $colors['secondary']['claltdetail'] = array(
+    '#value' => '#7F7F7F',
+    '#desc' => 'forms input text',
+    '#variants' => array(
     ),
   );
 

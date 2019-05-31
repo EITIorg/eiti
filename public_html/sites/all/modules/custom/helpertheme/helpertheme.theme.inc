@@ -187,8 +187,8 @@ function theme_header_items() {
   $elements['identity'] = _theme_header_items__identity();
   $elements['items'] = _theme_header_items__navigation();
   $elements['secondary_navigation_toggle'] = _theme_header_items__secondary_navigation_toggle();
-  $elements['search'] = _theme_header_items__search();
   $elements['language_switcher'] = _theme_header_items__language_switcher();
+  $elements['search'] = _theme_header_items__search();
 
   // Render the HTML.
   $output = drupal_render($elements);
@@ -211,7 +211,7 @@ function _theme_header_items__secondary_navigation_toggle() {
     '#title_attributes' => array(
       'href' => '#site-navigation',
       'class' => array('link'),
-    ),
+    ),   
     '#attributes' => array(
       'class' => array(
         'site-navigation-toggle-wrapper',
