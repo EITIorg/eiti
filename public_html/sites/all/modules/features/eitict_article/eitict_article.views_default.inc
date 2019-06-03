@@ -128,12 +128,6 @@ changeYear: true',
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* No results behavior: Global: Unfiltered text */
-  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = 'There are no items to display.';
   /* Relationship: Content: Entity translation: translations */
   $handler->display->display_options['relationships']['entity_translations']['id'] = 'entity_translations';
   $handler->display->display_options['relationships']['entity_translations']['table'] = 'node';
@@ -199,6 +193,15 @@ changeYear: true',
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Article Type (field_article_type) */
+  $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
+  $handler->display->display_options['filters']['field_article_type_value']['field'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
+    'news' => 'news',
+    'blog' => 'blog',
+  );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
   /* Filter criterion: Entity translation: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
@@ -333,7 +336,6 @@ changeYear: true',
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['displays'] = array(
     'default' => 'default',
     'block_1' => 0,
@@ -390,6 +392,15 @@ changeYear: true',
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Article Type (field_article_type) */
+  $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
+  $handler->display->display_options['filters']['field_article_type_value']['field'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
+    'news' => 'news',
+    'blog' => 'blog',
+  );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
   /* Filter criterion: Entity translation: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
@@ -470,6 +481,15 @@ changeYear: true',
     'article' => 'article',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Article Type (field_article_type) */
+  $handler->display->display_options['filters']['field_article_type_value']['id'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['table'] = 'field_data_field_article_type';
+  $handler->display->display_options['filters']['field_article_type_value']['field'] = 'field_article_type_value';
+  $handler->display->display_options['filters']['field_article_type_value']['value'] = array(
+    'news' => 'news',
+    'blog' => 'blog',
+  );
+  $handler->display->display_options['filters']['field_article_type_value']['group'] = 1;
   /* Filter criterion: Entity translation: Language */
   $handler->display->display_options['filters']['language']['id'] = 'language';
   $handler->display->display_options['filters']['language']['table'] = 'entity_translation';
@@ -501,7 +521,6 @@ changeYear: true'),
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('There are no items to display.'),
     t('Translations'),
     t('Date min'),
     t('Date max'),
