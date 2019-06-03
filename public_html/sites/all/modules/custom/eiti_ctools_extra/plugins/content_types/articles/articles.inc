@@ -33,8 +33,8 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
   $block['articles']['title'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'h2',
-    '#value' => t('News, blog posts and events'),
-    '#attributes' => array('class' => array('title'), 'id' => drupal_html_id('News, blog posts and events')),
+    '#value' => t('News and blog posts'),
+    '#attributes' => array('class' => array('title'), 'id' => drupal_html_id('News and blog posts')),
     '#prefix' => '<div class="pane-title-wrapper">',
     '#suffix' => '</div>',
   );

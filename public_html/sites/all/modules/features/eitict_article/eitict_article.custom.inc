@@ -426,9 +426,14 @@ function eitict_article_tokens($type, $tokens, array $data = array(), array $opt
  */
 function eitict_article_preprocess_views_view(&$variables) {
   if ($variables['name'] === 'articles' && $variables['display_id'] === 'default') {
-    // Attachment is not being attached automatically when using views_embed_view().
+    // Attachment is not being attached automatically when using views_embed_view()
+    // and no results behavior is not working properly.
     if (isset($variables['attachment_before']) && !trim(strip_tags($variables['attachment_before']))) {
-      $variables['attachment_before'] = views_embed_view('articles', 'sticky');
+      $attachment_html = views_embed_view('articles', 'sticky');
+      if (!trim(strip_tags($attachment_html))) {
+        $attachment_html = '<div class="view-empty">' . t('There are no items to display.') . '</div>';
+      }
+      $variables['attachment_before'] = $attachment_html;
     }
   }
 }
@@ -452,6 +457,37 @@ function eitict_article_node_presave($node) {
         $article = node_load($nid);
         $article->sticky = 0;
         node_save($article);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function eitict_article_views_query_alter(&$view, &$query) {
+  if ($view->name == 'articles') {
+    foreach ($query->where as $k1 => $v1) {
+      if (isset($v1['type']) && $v1['type'] === 'AND') {
+        foreach ($v1['conditions'] as $k2 => $v2) {
+          if (is_string($v2['field'])) {
+            // End date needs to be end of the given day.
+            if (strpos($v2['field'], "node.created <= ") === 0) {
+              $parts = explode(' ', $v2['field']);
+              if (isset($parts[2]) && is_numeric($parts[2])) {
+                $end_date = $parts[2] + ((24 * 60 * 60) - 1);
+                $query->where[$k1]['conditions'][$k2]['field'] = str_replace($parts[2], $end_date, $v2['field']);
+              }
+            }
+          }
+          elseif (is_object($v2['field'])) {
+            $conditions = &$query->where[$k1]['conditions'][$k2]['field']->conditions();
+            // Turn search case insensitive.
+            if (isset($conditions[0]['field']) && is_string($conditions[0]['field'])) {
+              $conditions[0]['field'] = str_replace(' LIKE ', ' ILIKE ', $conditions[0]['field']);
+            }
+          }
+        }
       }
     }
   }
