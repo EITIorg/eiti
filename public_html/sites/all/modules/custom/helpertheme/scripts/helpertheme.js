@@ -34,11 +34,17 @@
         e.preventDefault();
         e.stopPropagation(); //Prevent toggle hamburger menu 
 
+        // Close search
+        $('.header-search-form').fadeOut('fast', function () {
+          $(this).removeClass('open');
+        });
+        $('.search-open').removeClass('open');
+
         // Remove the current warning.
         var button_wrapper = $(this).closest('.site-navigation-toggle-wrapper');
         var button_offset = button_wrapper.offset();
         var button_height = button_wrapper.outerHeight();
-        if (window.matchMedia("(max-width: 61em)").matches) {          
+        if (window.matchMedia("(max-width: 76em)").matches) {
           if ($('body', context).hasClass('site-navigation-visible')) {
             footer_navigation.slideUp('fast');
             var navigation_links = footer_navigation.find('.navigation-links');
@@ -69,30 +75,30 @@
           else {
             footer_navigation.css({
               'position': 'absolute',
-              'top': button_offset.top + button_height - 1,
+              'top': button_offset.top + button_height - 40,
               'left': button_offset.left,
               'right': 'initial'
-            });            
+            });
             footer_navigation.slideDown('fast');
             $('body', context).addClass('site-navigation-visible');
             button_wrapper.addClass('open');
           }
         }
         // Change hamburger menu position on window resize
-        $(window).on('resize', function () {          
-          if (window.matchMedia("(max-width: 61em)").matches) {            
+        $(window).on('resize', function () {
+          if (window.matchMedia("(max-width: 76em)").matches) {
             footer_navigation.css({
               'position': 'fixed',
               'top': 0,
               'right': 0,
               'left': 'initial'
             });
-          } else {            
+          } else {
             button_offset = button_wrapper.offset();
             button_height = button_wrapper.outerHeight();
             footer_navigation.css({
               'position': 'absolute',
-              'top': button_offset.top + button_height - 1,
+              'top': button_offset.top + button_height - 40,
               'left': button_offset.left,
               'right': 'initial'
             });
@@ -167,18 +173,21 @@
       $('.header-site-search .search-open .link', context).click(function (e) {
         e.preventDefault();
         $(this).closest('.header-site-search').find('.header-search-form').fadeIn('fast').addClass('open');
+        $(this).closest('.header-site-search').find('.search-open').addClass('open');
       });
       $('.header-site-search .search-close .link', context).click(function (e) {
         e.preventDefault();
         $(this).closest('.header-search-form').fadeOut('fast', function () {
           $(this).removeClass('open');
         });
+        $('.search-open').removeClass('open');
       });
       $('body', context).click(function (e) {
         if (!$(e.target).closest('.header-site-search').length) {
           $('.header-search-form').fadeOut('fast', function () {
             $(this).removeClass('open');
           });
+          $('.search-open').removeClass('open');
         }
       });
     }
@@ -317,36 +326,36 @@
     }
   };
 
-  Drupal.behaviors.responsiveTables = {    
-    attach: function (context) {      
+  Drupal.behaviors.responsiveTables = {
+    attach: function (context) {
       // Adding classes for board decisions table
       $('.board-decisions .view-board-decisions .view-content').addClass('table-wrapper');
       $('.board-decisions .view-board-decisions .view-content .views-table').wrap('<div class="table-responsive"></div>');
       // Adding scroll bg on right of the table
-        function tableScroll() {
-            if ($('.table-wrapper').length > 0) {
-                $('.table-wrapper').each(function (index, value) {
-                    if ($(this).find('table').outerWidth() > $(this).outerWidth()) {
-                        $(this).addClass('scroll');
-                    } else {
-                        $(this).removeClass('scroll');
-                    }
-                });
+      function tableScroll() {
+        if ($('.table-wrapper').length > 0) {
+          $('.table-wrapper').each(function (index, value) {
+            if ($(this).find('table').outerWidth() > $(this).outerWidth()) {
+              $(this).addClass('scroll');
+            } else {
+              $(this).removeClass('scroll');
             }
+          });
         }
+      }
+      tableScroll();
+      $(window).on('resize', function () {
         tableScroll();
-        $(window).on('resize', function () {  
-            tableScroll();           
-        });
+      });
     }
   };
 
-  Drupal.behaviors.boardCollapseMenu = {    
-    attach: function (context) {      
+  Drupal.behaviors.boardCollapseMenu = {
+    attach: function (context) {
       $('.pane-board-decision-info .link-items .label').on('click', function () {
-            $(this).toggleClass('open');
-            $(this).siblings('.field-items').slideToggle('fast');
-        });
+        $(this).toggleClass('open');
+        $(this).siblings('.field-items').slideToggle('fast');
+      });
     }
   };
 
