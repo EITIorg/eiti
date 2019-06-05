@@ -1,4 +1,4 @@
-@footer_default_font_size: 0.7em;
+@footer_default_font_size: 1.125rem;
 .main-header-inner {
     position: relative;
     .icon {
@@ -13,7 +13,7 @@
     }
     @media (max-width: 415px) {
         // Fit on small mobile with menu
-        width: 7em !important;
+        width: 6rem !important;
     }
 }
 
@@ -35,6 +35,9 @@
 .xMediumAndUp() {
     .header-items {
         text-align: right;
+    }
+    .site-logo {
+        margin-top: -8px;
     }
 }
 
@@ -449,7 +452,7 @@
     }
     .language-link {
         font-size: 1rem;
-        line-height: 1.5rem;        
+        line-height: 1.5rem;
         .link-color(@cldetail, @clactive__alt);
     }
     .ru {
@@ -559,14 +562,14 @@
 }
 
 .main-footer {
-    color: @claltnormal;
+    color: @clmain;
     a {
         .link-color(@claltnormal__light, @clanchor__hover);
     }
     .section-title {
-        color: @claltnormal__light;
-        font-size: 0.8em;
-        font-weight: normal;
+        color: @clmain;
+        font-size: 1.125rem;
+        font-weight: 600;
         margin-top: 0;
     }
 }
@@ -588,28 +591,47 @@
         vertical-align: bottom;
     }
     .footer-slogan {
-        color: @claltnormal__light;
-        font-size: 1.2em;
+        color: @clmain;
+        font-size: 1rem;
         font-weight: lighter;
     }
 }
 
 .xSmallOnly() {
     .footer-identity {
+        margin-top: 3rem;
         margin-bottom: 0em;
         .footer-slogan {
-            margin-top: 1em;
+            margin-top: 1.5rem;
         }
     }
 }
 
 .xMediumAndUp() {
     .footer-identity {
-        margin-top: 2em;
-        margin-bottom: 2em;
+        margin-top: 6rem;
+        margin-bottom: 4.5rem;
+        display: flex;
         .footer-slogan {
-            display: inline;
-            margin-left: 1em;
+            display: inline-block;
+            margin-left: 2.25rem;
+            margin-top: 0.5rem;
+            width: 32%;
+        }
+    }
+    .columns {
+        display: flex;
+        align-content: space-between;
+    }
+    .footer-column {
+        flex: 1 1 auto;
+    }
+    .footer-contact-wrapper {
+        flex: 3 1 auto;
+    }
+    .footer-navigation-legal-wrapper {
+        .footer-social-wrapper {
+            margin-top: 8.75rem;
         }
     }
 }
@@ -619,10 +641,31 @@
     padding: 0;
     list-style: none;
     font-size: @footer_default_font_size;
-    font-weight: bold;
-    line-height: 1.5em;
+    font-weight: 600;
+    line-height: 2.25rem;
     .link-toplevel {
-        text-transform: uppercase;
+        position: relative;
+        padding-left: 1.625rem;
+        &:before {
+            content: "";
+            background-image: url(~"@{theme_path}images/icons/angle-right-blue.svg");
+            background-size: contain;
+            display: inline-block;
+            width: 10px;
+            height: 14px;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            transition: transform 200ms ease;
+            transform-origin: center;
+            position: absolute;
+            left: 0;
+            top: 4px;
+        }
+        &:hover {
+            &:before {
+                transform: translateX(5px);
+            }
+        }
     }
 }
 
@@ -630,6 +673,12 @@
     .footer-social-links {
         margin: 0;
         padding: 0;
+        .link {
+            &:hover {
+                color: @clmain;
+                opacity: 0.6;
+            }
+        }
     }
     .item {
         display: inline;
@@ -645,9 +694,9 @@
     .icon {
         .transition(fill, 400ms, ease-in);
         fill: @claltnormal__light;
-        &:hover {
-            fill: @clanchor__hover;
-        }
+    }
+    .section-title {
+        display: none;
     }
 }
 
@@ -669,20 +718,50 @@
 }
 
 .footer-contact {
+    line-height: 1.875rem;
     .section-title {
         margin-bottom: 0;
     }
 }
 
 .footer-legal {
+    margin-top: -2rem;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 6rem;
+    width: 30%;
     .section-title {
-        margin: 1em 0 0;
+        margin: 0 0 .4rem;
     }
 }
 
-.footer-contact-info,
-.footer-legal-info {
+.footer-contact-info {
     font-size: @footer_default_font_size;
+    font-weight: 300;
+    a {
+        position: relative;
+        display: inline-block;
+        &:before {
+            position: absolute;
+            content: "";
+            bottom: 5px;
+            width: 100%;
+            height: 1px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        &:hover {
+            color: @clactive__alt;
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+.footer-legal-info {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5rem;
 }
 
 .footer-site-navigation-wrapper {
@@ -982,6 +1061,60 @@
                 opacity: 0.6;
             }
         }
+    }
+}
+
+.xSmallOnly() {
+    .footer-legal {
+        width: 100%;
+        margin-top: 3rem;
+        margin-left: 0;
+        margin-right: 0m;
+        margin-bottom: 3.75rem;
+    }
+    .footer-column {
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    .footer-information-wrapper {
+        margin-bottom: 2.25rem;
+    }
+    .footer-navigation-legal-wrapper {
+        margin-bottom: 0 !important;
+        .footer-social-wrapper {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid @cldetail;
+            border-top: 1px solid @cldetail;
+            overflow: hidden;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            .footer-social-links {
+                text-align: center;
+            }
+        }
+    }
+    .footer-slogan {
+        line-height: 1.5rem;
+    }
+    .footer-contact {
+        line-height: 1.5rem;
+        .footer-contact-info {
+            font-size: 1rem;
+        }
+    }
+    .footer-contact-info a:before {
+        bottom: 3px;
+    }
+    .main-footer .section-title {
+        font-size: 1rem;
+    }
+    .footer-legal-info {
+        font-size: 0.875rem;
+    }
+    .footer-links {
+        font-size: 1rem;
     }
 }
 

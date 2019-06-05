@@ -19,18 +19,20 @@
 
   <div class="columns clearfix">
     <div class="footer-column footer-contact-wrapper">
-      <?php print render($contact); ?>
+      <?php print render($contact); ?>      
     </div>
     <div class="footer-column footer-information-wrapper">
       <?php print render($information); ?>
-    </div>
-    <div class="footer-column footer-social-wrapper">
-      <?php print render($social); ?>
-    </div>
+    </div>    
     <div class="footer-column footer-navigation-legal-wrapper">
       <?php print render($legal_navigation); ?>
-      <?php print render($legal); ?>
+      <div class="footer-social-wrapper">
+        <?php print render($social); ?>
+      </div>
     </div>
+  </div>
+  <div class="footer-legal-wrapper clearfix">
+    <?php print render($legal); ?>
   </div>
 </footer>
 

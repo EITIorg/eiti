@@ -531,7 +531,7 @@ function helpertheme_preprocess_main_footer(&$variables) {
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
   $variables['identity']['logo_markup']['png'] = array(
     '#theme' => 'image',
-    '#path' => file_create_url($theme_path . '/images/logo-white.png'),
+    '#path' => file_create_url($theme_path . '/images/logo-with-slogan.svg'),
     '#alt' => $site_name,
     '#attributes' => array(
       'role' => 'presentation',
