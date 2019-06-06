@@ -188,7 +188,7 @@ function helpergeneric_ereference_autocomplete_access($entity_type) {
     return FALSE;
   }
 
-  return entity_access('create', $entity_type);
+  return entity_access('edit', $entity_type);
 }
 
 /**
