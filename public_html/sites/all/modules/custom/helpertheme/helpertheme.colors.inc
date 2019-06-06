@@ -115,6 +115,13 @@ function helpertheme_color_palette() {
     ),
   );
 
+  $colors['secondary']['claltdetail__light'] = array(
+    '#value' => '#BBBBBB',
+    '#desc' => 'forms input text',
+    '#variants' => array(
+    ),
+  );
+
   // HTML tag specific colors.
   $colors['htmltag'] = array(
     '#title' => 'HTML tag specific colors',

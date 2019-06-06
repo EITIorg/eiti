@@ -104,7 +104,7 @@ function contentwidget__value_chain__render($plugin, $widget_settings, $entity, 
         '#attributes' => array(
           'class' => array('arrow'),
         ),
-        '#value' => helpertheme_get_svg_icon('narrow-arrow', $options),
+        '#value' => helpertheme_get_svg_icon('angle-right-grey', $options),
         '#weight' => -1,
       );
     }

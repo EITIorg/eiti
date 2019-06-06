@@ -1,145 +1,166 @@
-
 .predefined-widget--value-chain {
-  margin-bottom: 1em;
-
-  .value-chain-list {
-    font-weight: bold;
-    margin: 0;
-    padding: 1em;
-    list-style-type: none;
-
-    & > li {
-      display: inline-block;
-      padding: 1em 0;
-
-      &.first,
-      &.last {
-        font-size: 0.75em;
-        .icon {
-          fill: @clmain__separator;
+    margin-bottom: 8em;
+    .value-chain-list {
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        &>li {
+            display: inline-block;
+            padding: 1em 0;
+            &.first,
+            &.last {
+                .title {
+                    color: @claltdetail;
+                }
+                .icon {
+                    fill: @claltdetail__light;
+                }
+            }
+            &.first {
+                padding-right: 1.5rem;
+            }
+            &.last {
+                padding-left: 1.5rem;
+            }
         }
-      }
     }
-  }
-
-  .value-chain-wrapper {
-    margin: 0 0.75em;
-
-    position: relative;
-    .arrow {
-      position: absolute;
-      right: -1.25em; // We are left with 0.125em spacing on each side of the arrow.
-      top: 50%;
-      .icon {
-        fill: @clmain__separator;
-        //position: relative;
-        //top: -3em;
-        margin-top: -3em;
-      }
-    }
-
-    .chain-info {
-      display: block;
-
-      .link-color(@clnormal, @clanchor__hover);
-      .icon {
-        fill: @clanchor;
-      }
-      &:hover {
-        .icon {
-          fill: @clanchor__hover;
+    .value-chain-wrapper {
+        margin: 0 0.75em;
+        position: relative;
+        .arrow {
+            position: absolute;
+            right: -1.25em; // We are left with 0.125em spacing on each side of the arrow.
+            top: 30%;
+            .icon {
+                // fill: @clmain__separator;
+                //position: relative;
+                //top: -3em;
+                margin-top: -3em;
+            }
         }
-      }
+        .chain-info {
+            display: block;
+            text-align: center;
+            .link-color(@clnormal, @clanchor__hover);
+            .icon {
+                fill: @claltnormal;
+            }
+            &:hover {
+                .icon {
+                    fill: @clanchor__hover;
+                }
+                .title {
+                    color: @clanchor__hover;
+                }
+            }
+        }
+        .title {
+            margin: 1.5rem 0 0;
+            padding: 0.5em 10%;
+            font-size: 0.875rem;
+            line-height: 1.3em;
+            min-height: 4em;
+        }
     }
-
-    .title {
-      border-top: 1px solid @clmain__separator;
-      border-bottom: 1px solid @clmain__separator;
-      margin: 0.5em 0;
-      padding: 0.5em 0.25em;
-
-      font-size: 0.8em;
-      line-height: 1.3em;
-      min-height: 2.6em;
-    }
-  }
 }
 
 .xSmallOnly() {
-  .predefined-widget--value-chain {
-    .value-chain-list {
-      align-items: center;
-      text-align: center;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-      & > li {
-        width: 10em;
-      }
-    }
-
-    .value-chain-wrapper {
-      .title {
-        border: none;
-        min-height: 0;
-      }
-      .arrow {
-        position: absolute;
-        right: 50%;
-        top: auto;
-        bottom: 0;
-        height: 0;
-        margin-left: -5.5em;
-
-        .icon {
-          fill: @clmain__separator;
-          margin-top: 0;
-          transform: translateY(-50%) rotate(90deg);
+    .predefined-widget--value-chain {
+        margin-bottom: 6em;
+        .value-chain-list {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-direction: column;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            &>li {
+                width: 10em;
+                padding: 2em 0;
+                &.first {
+                    padding-right: 0;
+                    padding-bottom: 1.5rem;
+                }
+                &.last {
+                    padding-left: 0;
+                    padding-bottom: 1.5rem;
+                }
+            }
         }
-      }
+        .value-chain-wrapper {
+            .title {
+                min-height: 0;
+                margin: 1.25rem 0 0;
+            }
+            .arrow {
+                position: absolute;
+                right: ~"calc(50% - 7px)";
+                top: ~"calc(100% + 2rem)";
+                bottom: 0;
+                height: 0;
+                margin-left: -5.5em;
+                .icon {
+                    margin-top: 0;
+                    -webkit-transform: translateY(-50%) rotate(90deg);
+                    transform: translateY(-50%) rotate(90deg);
+                }
+            }
+        }
     }
-  }
 }
+
 .xMediumOnly() {
-  .predefined-widget--value-chain {
-    .value-chain-list {
-      align-items: center;
-      align-content: center;
-      text-align: center;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-      & > li {
-        width: 10em;
-      }
+    .predefined-widget--value-chain {
+        .value-chain-list {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-line-pack: center;
+            align-content: center;
+            text-align: center;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            &>li {
+                width: 10em;
+            }
+        }
+        .value-chain-wrapper {}
     }
-
-    .value-chain-wrapper {
-    }
-  }
 }
+
 .xNormalAndUp() {
-  .predefined-widget--value-chain {
-    .value-chain-list {
-      align-items: center;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      & > li {
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-      }
+    .predefined-widget--value-chain {
+        .value-chain-list {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            &>li {
+                -ms-flex: 1 1 0;
+                -webkit-box-flex: 1;
+                flex: 1 1 0;
+            }
+        }
     }
-    .chain-icon .icon {
-      padding-right: 2em;
-    }
-  }
 }
-
 
 @import '../lib/custom-responsive.less';
 @import '../lib/helpers.less';
