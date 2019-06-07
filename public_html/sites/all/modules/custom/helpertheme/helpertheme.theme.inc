@@ -457,7 +457,18 @@ function _theme_header_items__language_switcher() {
     $lang_links = language_negotiation_get_switch_links('language', $path);
 
     if (isset($lang_links->links)) {
-      $active_language = check_plain($language->native);
+      $language_mappings = array(
+        'en' => 'ENG',
+        'fr' => 'FRA',
+        'ru' => 'RUS',
+        'es' => 'SPA',
+      );
+      if (isset($language_mappings[$language->language])) {
+        $active_language = $language_mappings[$language->language];
+      }
+      else {
+        $active_language = check_plain($language->native);
+      }
       $title_attributes = array(
         'class' => array('language-switcher-title'),
         'xml:lang' => $language->language,
