@@ -773,7 +773,7 @@ function helpertheme_site_map() {
  *
  * @param bool $with_overlay
  */
-function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix, $with_overlay = TRUE) {
+function helpertheme_get_background_image_with_overlay(&$elements, $image_data, $selector_prefix, $with_overlay = TRUE, $additions = array()) {
   global $theme, $theme_info;
   if ($theme != 'eiti') {
     return;
@@ -799,7 +799,13 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
   $featured_image_fid = $image_data['fid'];
   $selector = drupal_html_id($selector_prefix . '-background-image-' . $featured_image_fid);
   $elements['#attributes']['class'][] = $selector;
-  $elements['#attributes']['class'][] = 'with-background-image';
+
+  if (isset($additions['selector_suffix'])) {
+    $selector .= ' .' . $additions['selector_suffix'];
+  }
+  else {
+    $elements['#attributes']['class'][] = 'with-background-image';
+  }
 
   if ($with_overlay) {
     $elements['#attributes']['class'][] = 'with-overlay';

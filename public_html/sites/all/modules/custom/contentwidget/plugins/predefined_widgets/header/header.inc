@@ -55,8 +55,33 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
     '#attributes' => array()
   );
 
-  $block['overlay']['headers'] = array(
+  $block['overlay'] = array();
+  $bg_additions = array();
+  $layout = (!empty($widget_settings['layout'])) ? $widget_settings['layout'] : 'one-column';
+  $content = &$block['overlay'];
+  if ($layout == 'two-column') {
+    $block['overlay']['left'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array('column-left'),
+      ),
+    );
+    $block['overlay']['right'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => array('column-right'),
+      ),
+    );
+    $content = &$block['overlay']['left'];
+    $block['overlay']['#attributes']['class'][] = 'two-column';
+    $bg_additions['selector_suffix'] = 'column-right';
+  }
+
+  $content['headers'] = array(
     '#type' => 'container',
+    '#attributes' => array(
+      'class' => array('headers'),
+    ),
   );
 
   $image_field_language = field_language('fieldable_panels_pane', $entity, 'field_fpp_background_image', $langcode);
@@ -66,7 +91,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
 
     // Use the featured image as background image.
     $selector_prefix = implode('-', array('fieldable_panels_pane', entity_id('fieldable_panels_pane', $entity)));
-    helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
+    helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix, TRUE, $bg_additions);
     $block['overlay']['#attributes']['class'][] = 'clearfix';
   }
   elseif (!empty($entity->field_fpp_background_video[$video_field_language])) {
@@ -84,7 +109,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
 
   // Only if it's set, we want to show the tag.
   if ($header_big) {
-    $block['overlay']['headers']['header_big'] = array(
+    $content['headers']['header_big'] = array(
       '#type' => 'html_tag',
       '#tag' => 'h2',
       '#value' => $header_big,
@@ -96,7 +121,7 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
 
   // Only if it's set, we want to show the tag.
   if ($header_small) {
-    $block['overlay']['headers']['header_small'] = array(
+    $content['headers']['header_small'] = array(
       '#type' => 'html_tag',
       '#tag' => 'p',
       '#value' => $header_small,
@@ -107,13 +132,13 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   }
 
   if (!empty($link_items)) {
-    $block['overlay']['links_wrapper'] = array(
+    $content['links_wrapper'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'class' => array('links-wrapper'),
       ),
     );
-    $block['overlay']['links_wrapper']['links'] = array(
+    $content['links_wrapper']['links'] = array(
       '#theme' => 'item_list',
       '#items' => $link_items,
       '#type' => 'ul',
@@ -125,8 +150,8 @@ function contentwidget__header__render($plugin, $widget_settings, $entity, $lang
   }
 
   if (empty($entity->field_fpp_background_image[$image_field_language][0]) && empty($entity->field_fpp_background_video[$video_field_language])) {
-    $block['overlay']['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
-    $block['overlay']['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $content['headers']['#attributes']['class'][] = 'single-fluid-row-wrapper';
+    $content['links_wrapper']['links']['#attributes']['class'][] = 'single-fluid-row-wrapper';
   }
   else {
     $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
@@ -146,6 +171,7 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
 
   $header_small = isset($widget_settings['header_small']) ? $widget_settings['header_small'] : '';
   $header_big = isset($widget_settings['header_big']) ? $widget_settings['header_big'] : '';
+  $layout = isset($widget_settings['layout']) ? $widget_settings['layout'] : 'one-column';
   $links_max = isset($widget_settings['links']['links_number']) ? $widget_settings['links']['links_number'] : 4;
   $video_muted = isset($widget_settings['video_settings']['video_muted']) ? $widget_settings['video_settings']['video_muted'] : TRUE;
   $video_loop = isset($widget_settings['video_settings']['video_loop']) ? $widget_settings['video_settings']['video_loop'] : TRUE;
@@ -166,6 +192,23 @@ function contentwidget__header__settings(&$element, &$form_state, $plugin, $widg
     '#title' => t('Subtitle (simple paragraph)'),
     '#default_value' => $header_small,
     '#size' => 100,
+  );
+
+  $settings_form['layout'] = array(
+    '#type' => 'radios',
+    '#title' => t('Layout'),
+    '#default_value' => $layout,
+    '#options' => array(
+      'one-column' => t('One column'),
+      'two-column' => t('Two colums'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        array(
+          'input[name="field_fpp_header_type[' . $field_header_type_language . ']"]' => array('value' => 'image'),
+        )
+      )
+    )
   );
 
   // Let's add video-related settings.
