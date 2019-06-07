@@ -59,7 +59,10 @@ function contentwidget__fact_blocks__render($plugin, $widget_settings, $entity, 
     helpertheme_get_background_image_with_overlay($block, $featured_image_data, $selector_prefix);
   }
   else {
-    $block['#attributes']['class'][] = 'no-background-image';
+    $block['overlay']['#type'] = 'container';
+    $block['overlay']['#attributes']['class'][] = 'overlay-wrapper';
+    $block['#attributes']['class'][] = 'with-background-image';
+    $block['#attributes']['class'][] = 'with-overlay';
   }
 
   $block['overlay']['#attributes']['class'][] = 'single-fluid-row-wrapper';
