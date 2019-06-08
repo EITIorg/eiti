@@ -56,9 +56,9 @@ function theme_facetapi_link_inactive($variables) {
     $variables['element'] = array(
       '#value' => $text,
       '#tag' => 'span',
-      '#attributes' => $variables['options']['attributes']
+      '#attributes' => $variables['options']['attributes'],
     );
-    return theme_html_tag($variables);
+    return theme('html_tag', $variables);
   }
   // More than zero elements.
   else {
@@ -74,7 +74,7 @@ function theme_facetapi_link_inactive($variables) {
     // link text and are providing additional markup for accessibility.
     $variables['text'] = $text . $accessible_markup;
     $variables['options']['html'] = TRUE;
-    return theme_link($variables);
+    return l($variables['text'], $variables['path'], $variables['options']);
   }
 }
 
@@ -123,7 +123,8 @@ function theme_facetapi_link_active($variables) {
   );
   $variables['text'] = t('!facetapi_deactivate_widget !facetapi_accessible_markup', $replacements);
   $variables['options']['html'] = TRUE;
-  return theme_link($variables) . $link_text;
+  $variables['options']['attributes']['class'][] = 'active';
+  return l($variables['text'], $variables['path'], $variables['options']) . $link_text;
 }
 
 /**

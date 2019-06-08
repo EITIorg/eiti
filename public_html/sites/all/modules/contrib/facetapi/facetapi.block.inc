@@ -238,7 +238,7 @@ function facetapi_get_delta_map() {
  *   A string containing the raw delta.
  */
 function facetapi_build_delta($searcher, $realm_name, $facet_name) {
-  return $searcher . ':' . $realm_name . ':' . urlencode($facet_name);
+  return $searcher . ':' . $realm_name . ':' . rawurlencode($facet_name);
 }
 
 /**

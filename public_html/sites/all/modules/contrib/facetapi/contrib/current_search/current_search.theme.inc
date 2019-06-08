@@ -115,7 +115,8 @@ function theme_current_search_link_active($variables) {
   );
   $variables['text'] = t('!current_search_deactivate_widget !current_search_accessible_markup', $replacements);
   $variables['options']['html'] = TRUE;
-  return theme_link($variables) . $link_text;
+  $variables['options']['attributes']['class'][] = 'active';
+  return l($variables['text'], $variables['path'], $variables['options']) . $link_text;
 }
 
 /**

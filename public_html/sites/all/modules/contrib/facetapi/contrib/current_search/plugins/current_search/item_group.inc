@@ -76,7 +76,7 @@ class CurrentSearchGroup extends CurrentSearchItem {
 
         // Builds the list.
         $build[$facet_name]['list'] = array(
-          '#theme' => 'item_list',
+          '#theme' => 'item_list__facetapi__current_search_group',
           '#items' => $items,
           '#attributes' => array('class' => array('inline')),
         );

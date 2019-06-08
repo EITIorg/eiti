@@ -116,7 +116,7 @@ class CurrentSearchItemActive extends CurrentSearchItem {
     if ($items) {
       $classes = ($this->settings['css']) ? current_search_get_classes($this->settings['classes']) : array();
       return array(
-        '#theme' => 'item_list',
+        '#theme' => 'item_list__facetapi__current_search_item_active',
         '#items' => $items,
         '#attributes' => array('class' => $classes),
       );
