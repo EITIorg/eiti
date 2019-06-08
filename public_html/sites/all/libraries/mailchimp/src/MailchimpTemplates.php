@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Templates library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpTemplates extends Mailchimp {
 
   /**
@@ -14,7 +19,7 @@ class MailchimpTemplates extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates
    */
-  public function getTemplates($parameters = array()) {
+  public function getTemplates($parameters = []) {
     return $this->request('GET', '/templates', NULL, $parameters);
   }
 
@@ -30,10 +35,10 @@ class MailchimpTemplates extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates_template_id
    */
-  public function getTemplate($template_id, $parameters = array()) {
-    $tokens = array(
+  public function getTemplate($template_id, $parameters = []) {
+    $tokens = [
       'template_id' => $template_id,
-    );
+    ];
 
     return $this->request('GET', '/templates/{template_id}', $tokens, $parameters);
   }
@@ -50,10 +55,10 @@ class MailchimpTemplates extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/templates/default-content/#read-get_templates_template_id_default_content
    */
-  public function getTemplateContent($template_id, $parameters = array()) {
-    $tokens = array(
+  public function getTemplateContent($template_id, $parameters = []) {
+    $tokens = [
       'template_id' => $template_id,
-    );
+    ];
 
     return $this->request('GET', '/templates/{template_id}/default-content', $tokens, $parameters);
   }

@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * MailChimp Campaigns library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpCampaigns extends Mailchimp {
 
   const EMAIL_TYPE_HTML = 'html';
@@ -23,7 +28,7 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#read-get_campaigns
    */
-  public function getCampaigns($parameters = array()) {
+  public function getCampaigns($parameters = []) {
     return $this->request('GET', '/campaigns', NULL, $parameters);
   }
 
@@ -39,10 +44,10 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#read-get_campaigns_campaign_id
    */
-  public function getCampaign($campaign_id, $parameters = array()) {
-    $tokens = array(
+  public function getCampaign($campaign_id, $parameters = []) {
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
     return $this->request('GET', '/campaigns/{campaign_id}', $tokens, $parameters);
   }
@@ -65,14 +70,34 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#create-post_campaigns
    */
-  public function addCampaign($type, $recipients, $settings, $parameters = array(), $batch = FALSE) {
-    $parameters += array(
+  public function addCampaign($type, $recipients, $settings, $parameters = [], $batch = FALSE) {
+    $parameters += [
       'type' => $type,
       'recipients' => $recipients,
       'settings' => $settings,
-    );
+    ];
 
     return $this->request('POST', '/campaigns', NULL, $parameters, $batch);
+  }
+
+  /**
+   * Gets the HTML, plain-text, and template content for a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/#read-get_campaigns_campaign_id_content
+   */
+  public function getCampaignContent($campaign_id, $parameters = []) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('GET', '/campaigns/{campaign_id}/content', $tokens, $parameters);
   }
 
   /**
@@ -87,12 +112,30 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/content/#edit-put_campaigns_campaign_id_content
    */
-  public function setCampaignContent($campaign_id, $parameters = array()) {
-    $tokens = array(
+  public function setCampaignContent($campaign_id, $parameters = []) {
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
     return $this->request('PUT', '/campaigns/{campaign_id}/content', $tokens, $parameters);
+  }
+
+  /**
+   * Get the send checklist for a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/send-checklist
+   */
+  public function getSendChecklist($campaign_id) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('GET', '/campaigns/{campaign_id}/send-checklist', $tokens, NULL);
   }
 
   /**
@@ -115,16 +158,16 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#edit-patch_campaigns_campaign_id
    */
-  public function updateCampaign($campaign_id, $type, $recipients, $settings, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateCampaign($campaign_id, $type, $recipients, $settings, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'type' => $type,
       'recipients' => $recipients,
       'settings' => $settings,
-    );
+    ];
 
     return $this->request('PATCH', '/campaigns/{campaign_id}', $tokens, $parameters, $batch);
   }
@@ -147,17 +190,68 @@ class MailchimpCampaigns extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_test
    */
-  public function sendTest($campaign_id, $test_emails, $send_type, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function sendTest($campaign_id, $test_emails, $send_type, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'test_emails' => $test_emails,
       'send_type' => $send_type,
-    );
+    ];
 
     return $this->request('POST', '/campaigns/{campaign_id}/actions/test', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Schedule a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   * @param schedule_time $schedule_time
+   *   The date and time in UTC to schedule the campaign for delivery.
+   * @param bool $timewarp
+   *   Choose whether the campaign should use Timewarp when sending.
+   * @param object $batch_delivery
+   *   Choose whether the campaign should use Batch Delivery.
+   *   Cannot be set to true for campaigns using Timewarp.
+   * @param bool $batch
+   *   TRUE to create a new pending batch operation.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_schedule
+   */
+  public function schedule($campaign_id, $schedule_time, $timewarp = FALSE, $batch_delivery = FALSE, $parameters = [], $batch = FALSE) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    $parameters += [
+      'schedule_time' => $schedule_time,
+      'timewarp' => $timewarp,
+      'batch_delivery' => $batch_delivery,
+    ];
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/schedule', $tokens, $parameters, $batch);
+  }
+
+  /**
+   * Unschedule a MailChimp campaign.
+   *
+   * @param string $campaign_id
+   *   The ID of the campaign.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_unschedule
+   */
+  public function unschedule($campaign_id) {
+    $tokens = [
+      'campaign_id' => $campaign_id,
+    ];
+
+    return $this->request('POST', '/campaigns/{campaign_id}/actions/unschedule', $tokens, NULL);
   }
 
   /**
@@ -173,9 +267,9 @@ class MailchimpCampaigns extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#action-post_campaigns_campaign_id_actions_send
    */
   public function send($campaign_id, $batch = FALSE) {
-    $tokens = array(
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
     return $this->request('POST', '/campaigns/{campaign_id}/actions/send', $tokens, NULL, $batch);
   }
@@ -191,9 +285,9 @@ class MailchimpCampaigns extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/campaigns/#delete-delete_campaigns_campaign_id
    */
   public function delete($campaign_id) {
-    $tokens = array(
+    $tokens = [
       'campaign_id' => $campaign_id,
-    );
+    ];
 
     return $this->request('DELETE', '/campaigns/{campaign_id}', $tokens);
   }

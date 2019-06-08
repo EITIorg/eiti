@@ -2,6 +2,11 @@
 
 namespace Mailchimp;
 
+/**
+ * Mailchimp Lists library.
+ *
+ * @package Mailchimp
+ */
 class MailchimpLists extends Mailchimp {
 
   const MEMBER_STATUS_SUBSCRIBED = 'subscribed';
@@ -19,7 +24,7 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#read-get_lists
    */
-  public function getLists($parameters = array()) {
+  public function getLists($parameters = []) {
     return $this->request('GET', '/lists', NULL, $parameters);
   }
 
@@ -35,10 +40,10 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#read-get_lists_list_id
    */
-  public function getList($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getList($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}', $tokens, $parameters);
   }
@@ -55,10 +60,10 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/#read-get_lists_list_id_interest_categories
    */
-  public function getInterestCategories($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getInterestCategories($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/interest-categories', $tokens, $parameters);
   }
@@ -77,11 +82,11 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/interest-categories/interests/#read-get_lists_list_id_interest_categories_interest_category_id_interests
    */
-  public function getInterests($list_id, $interest_category_id, $parameters = array()) {
-    $tokens = array(
+  public function getInterests($list_id, $interest_category_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'interest_category_id' => $interest_category_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/interest-categories/{interest_category_id}/interests', $tokens, $parameters);
   }
@@ -98,12 +103,41 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#read-get_lists_list_id_merge_fields
    */
-  public function getMergeFields($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getMergeFields($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/merge-fields', $tokens, $parameters);
+  }
+
+  /**
+   * Add merge field associated with a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $name
+   *   The name of the merge field.
+   * @param string $type
+   *   The type for the merge field.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/merge-fields/#create-post_lists_list_id_merge_fields
+   */
+  public function addMergeField($list_id, $name, $type, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+    ];
+
+    $parameters += [
+      'name' => $name,
+      'type' => $type,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/merge-fields', $tokens, $parameters);
   }
 
   /**
@@ -118,10 +152,10 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#read-get_lists_list_id_members
    */
-  public function getMembers($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getMembers($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/members', $tokens, $parameters);
   }
@@ -140,13 +174,39 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#read-get_lists_list_id_members_subscriber_hash
    */
-  public function getMemberInfo($list_id, $email, $parameters = array()) {
-    $tokens = array(
+  public function getMemberInfo($list_id, $email, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters);
+  }
+
+  /**
+   * Gets information about a member of a MailChimp list.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $mc_eid
+   *   The member's unique ID.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see https://developer.mailchimp.com/documentation/mailchimp/guides/getting-started-with-ecommerce/
+   */
+  public function getMemberInfoById($list_id, $mc_eid, $parameters = []) {
+    $tokens = [
+        'list_id' => $list_id,
+    ];
+
+    $parameters = [
+        'unique_email_id' => $mc_eid,
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/members/', $tokens, $parameters);
   }
 
   /**
@@ -163,11 +223,11 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/activity/#read-get_lists_list_id_members_subscriber_hash_activity
    */
-  public function getMemberActivity($list_id, $email, $parameters = array()) {
-    $tokens = array(
+  public function getMemberActivity($list_id, $email, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/members/{subscriber_hash}/activity', $tokens, $parameters);
   }
@@ -188,14 +248,14 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
    */
-  public function addMember($list_id, $email, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addMember($list_id, $email, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'email_address' => $email,
-    );
+    ];
 
     return $this->request('POST', '/lists/{list_id}/members', $tokens, $parameters, $batch);
   }
@@ -213,10 +273,10 @@ class MailchimpLists extends Mailchimp {
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#delete-delete_lists_list_id_members_subscriber_hash
    */
   public function removeMember($list_id, $email) {
-    $tokens = array(
+    $tokens = [
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
-    );
+    ];
 
     return $this->request('DELETE', '/lists/{list_id}/members/{subscriber_hash}', $tokens);
   }
@@ -237,11 +297,11 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-patch_lists_list_id_members_subscriber_hash
    */
-  public function updateMember($list_id, $email, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateMember($list_id, $email, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
-    );
+    ];
 
     return $this->request('PATCH', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
   }
@@ -262,15 +322,15 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#edit-put_lists_list_id_members_subscriber_hash
    */
-  public function addOrUpdateMember($list_id, $email, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addOrUpdateMember($list_id, $email, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
       'subscriber_hash' => md5(strtolower($email)),
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'email_address' => $email,
-    );
+    ];
 
     return $this->request('PUT', '/lists/{list_id}/members/{subscriber_hash}', $tokens, $parameters, $batch);
   }
@@ -287,12 +347,35 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#read-get_lists_list_id_segments
    */
-  public function getSegments($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getSegments($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/segments', $tokens, $parameters);
+  }
+
+  /**
+   * Gets a MailChimp list segment.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $segment_id
+   *   The ID of the list segment.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#read-get_lists_list_id_segments_segment_id
+   */
+  public function getSegment($list_id, $segment_id, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+    ];
+
+    return $this->request('GET', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters);
   }
 
   /**
@@ -311,14 +394,14 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#create-post_lists_list_id_segments
    */
-  public function addSegment($list_id, $name, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addSegment($list_id, $name, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'name' => $name,
-    );
+    ];
 
     return $this->request('POST', '/lists/{list_id}/segments', $tokens, $parameters, $batch);
   }
@@ -341,15 +424,15 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/#edit-patch_lists_list_id_segments_segment_id
    */
-  public function updateSegment($list_id, $segment_id, $name, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function updateSegment($list_id, $segment_id, $name, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
       'segment_id' => $segment_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'name' => $name,
-    );
+    ];
 
     return $this->request('PATCH', '/lists/{list_id}/segments/{segment_id}', $tokens, $parameters, $batch);
   }
@@ -368,13 +451,42 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/#read-get_lists_list_id_segments_segment_id_members
    */
-  public function getSegmentMembers($list_id, $segment_id, $parameters = array()) {
-    $tokens = array(
+  public function getSegmentMembers($list_id, $segment_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'segment_id' => $segment_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
+  }
+
+  /**
+   * Adds a member to a list segment.
+   *
+   * @param string $list_id
+   *   The ID of the list.
+   * @param string $segment_id
+   *   The ID of the segment.
+   * @param array $email
+   *   The email address to add to the segment.
+   * @param array $parameters
+   *   Associative array of optional request parameters.
+   *
+   * @return object
+   *
+   * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/segments/members/
+   */
+  public function addSegmentMember($list_id, $segment_id, $email, $parameters = []) {
+    $tokens = [
+      'list_id' => $list_id,
+      'segment_id' => $segment_id,
+    ];
+
+    $parameters += [
+      'email_address' => $email,
+    ];
+
+    return $this->request('POST', '/lists/{list_id}/segments/{segment_id}/members', $tokens, $parameters);
   }
 
   /**
@@ -389,10 +501,10 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks
    */
-  public function getWebhooks($list_id, $parameters = array()) {
-    $tokens = array(
+  public function getWebhooks($list_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/webhooks', $tokens, $parameters);
   }
@@ -411,11 +523,11 @@ class MailchimpLists extends Mailchimp {
    *
    * @see http://developer.mailchimp.com/documentation/mailchimp/reference/lists/webhooks/#read-get_lists_list_id_webhooks_webhook_id
    */
-  public function getWebhook($list_id, $webhook_id, $parameters = array()) {
-    $tokens = array(
+  public function getWebhook($list_id, $webhook_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'webhook_id' => $webhook_id,
-    );
+    ];
 
     return $this->request('GET', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
   }
@@ -434,14 +546,14 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    */
-  public function addWebhook($list_id, $url, $parameters = array(), $batch = FALSE) {
-    $tokens = array(
+  public function addWebhook($list_id, $url, $parameters = [], $batch = FALSE) {
+    $tokens = [
       'list_id' => $list_id,
-    );
+    ];
 
-    $parameters += array(
+    $parameters += [
       'url' => $url,
-    );
+    ];
 
     return $this->request('POST', '/lists/{list_id}/webhooks', $tokens, $parameters, $batch);
   }
@@ -458,11 +570,11 @@ class MailchimpLists extends Mailchimp {
    *
    * @return object
    */
-  public function deleteWebhook($list_id, $webhook_id, $parameters = array()) {
-    $tokens = array(
+  public function deleteWebhook($list_id, $webhook_id, $parameters = []) {
+    $tokens = [
       'list_id' => $list_id,
       'webhook_id' => $webhook_id,
-    );
+    ];
 
     return $this->request('DELETE', '/lists/{list_id}/webhooks/{webhook_id}', $tokens, $parameters);
   }
@@ -481,7 +593,7 @@ class MailchimpLists extends Mailchimp {
   public function getListsForEmail($email) {
     $list_data = $this->getLists();
 
-    $subscribed_lists = array();
+    $subscribed_lists = [];
 
     // Check each list for a subscriber matching the email address.
     if ($list_data->total_items > 0) {
@@ -492,11 +604,12 @@ class MailchimpLists extends Mailchimp {
           if (isset($member_data->id)) {
             $subscribed_lists[] = $list;
           }
-        } catch (MailchimpAPIException $e) {
+        }
+        catch (MailchimpAPIException $e) {
           if ($e->getCode() !== 404) {
             // 404 indicates the email address is not subscribed to this list
             // and can be safely ignored. Surface all other exceptions.
-            throw new MailchimpAPIException($e->getResponse()->getBody(), $e->getCode(), $e);
+            throw new MailchimpAPIException($e->getMessage(), $e->getCode(), $e);
           }
         }
       }

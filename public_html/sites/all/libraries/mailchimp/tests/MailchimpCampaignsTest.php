@@ -2,7 +2,14 @@
 
 namespace Mailchimp\Tests;
 
-class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+/**
+ * MailChimp Campaign test library.
+ *
+ * @package Mailchimp\Tests
+ */
+class MailchimpCampaignsTest extends TestCase {
 
   /**
    * Tests library functionality for campaigns information.
@@ -33,13 +40,13 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
    */
   public function testAddCampaign() {
     $type = 'regular';
-    $recipients = (object) array(
+    $recipients = (object) [
       'list_id' => '3c307a9f3f',
-    );
-    $settings = (object) array(
+    ];
+    $settings = (object) [
       'subject_line' => 'Your Purchase Receipt',
       'from_name' => 'Customer Service',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->addCampaign($type, $recipients, $settings);
@@ -59,13 +66,26 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for getting campaign content.
+   */
+  public function testGetCampaignContent() {
+    $campaign_id = '42694e9e57';
+
+    $mc = new MailchimpCampaigns();
+    $mc->getCampaignContent($campaign_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/content', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for setting campaign content.
    */
   public function testSetCampaignContent() {
     $campaign_id = '42694e9e57';
-    $parameters = array(
+    $parameters = [
       'html' => '<p>The HTML to use for the saved campaign.</p>',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->setCampaignContent($campaign_id, $parameters);
@@ -81,18 +101,31 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Tests library functionality for getting a campaign send checklist.
+   */
+  public function testGetSendChecklist() {
+    $campaign_id = '42694e9e57';
+
+    $mc = new MailchimpCampaigns();
+    $mc->getSendChecklist($campaign_id);
+
+    $this->assertEquals('GET', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/send-checklist', $mc->getClient()->uri);
+  }
+
+  /**
    * Tests library functionality for updating a campaign.
    */
   public function testUpdateCampaign() {
     $campaign_id = '3e06f4ec92';
     $type = 'regular';
-    $recipients = (object) array(
+    $recipients = (object) [
       'list_id' => '3c307a9f3f',
-    );
-    $settings = (object) array(
+    ];
+    $settings = (object) [
       'subject_line' => 'This is an updated subject line',
       'from_name' => 'Customer Service',
-    );
+    ];
 
     $mc = new MailchimpCampaigns();
     $mc->updateCampaign($campaign_id, $type, $recipients, $settings);
@@ -116,9 +149,9 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
    */
   public function testSendTest() {
     $campaign_id = 'b03bfc273a';
-    $emails = array(
+    $emails = [
       'test@example.com',
-    );
+    ];
     $send_type = 'html';
 
     $mc = new MailchimpCampaigns();
@@ -126,6 +159,45 @@ class MailchimpCampaignsTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals('POST', $mc->getClient()->method);
     $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/actions/test', $mc->getClient()->uri);
+  }
+
+  /**
+   * Tests library functionality for scheduling a campaign.
+   */
+  public function testSchedule() {
+    $campaign_id = 'b03bfc273a';
+    $schedule_time = '2017-02-04T19:13:00+00:00';
+    $timewarp = FALSE;
+    $batch_delivery = (object) [
+      'batch_delay' => 5,
+      'batch_count' => 100,
+    ];
+
+    $mc = new MailchimpCampaigns();
+    $mc->schedule($campaign_id, $schedule_time, $timewarp, $batch_delivery);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/actions/schedule', $mc->getClient()->uri);
+
+    $request_body = $mc->getClient()->options['json'];
+
+    $this->assertEquals($schedule_time, $request_body->schedule_time);
+    $this->assertEquals($timewarp, $request_body->timewarp);
+    $this->assertEquals($batch_delivery->batch_delay, $request_body->batch_delivery->batch_delay);
+    $this->assertEquals($batch_delivery->batch_count, $request_body->batch_delivery->batch_count);
+  }
+
+  /**
+   * Tests library functionality for unscheduling a campaign.
+   */
+  public function testUnschedule() {
+    $campaign_id = 'b03bfc273a';
+
+    $mc = new MailchimpCampaigns();
+    $mc->unschedule($campaign_id);
+
+    $this->assertEquals('POST', $mc->getClient()->method);
+    $this->assertEquals($mc->getEndpoint() . '/campaigns/' . $campaign_id . '/actions/unschedule', $mc->getClient()->uri);
   }
 
   /**

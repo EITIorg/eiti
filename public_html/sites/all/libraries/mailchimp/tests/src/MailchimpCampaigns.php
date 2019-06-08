@@ -2,13 +2,18 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * MailChimp Campaigns library test cases.
+ *
+ * @package Mailchimp\Tests
+ */
 class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
 
   /**
    * @inheritdoc
    */
-  public function __construct($api_key = 'apikey', $api_user = 'apikey', $timeout = 60) {
-    $this->client = new Client();
+  public function __construct($api_key = 'apikey', $api_user = 'apikey', $http_options = []) {
+    $this->client = new MailchimpTestHttpClient();
   }
 
   public function getClient() {
@@ -22,23 +27,23 @@ class MailchimpCampaigns extends \Mailchimp\MailchimpCampaigns {
   /**
    * @inheritdoc
    */
-  public function getCampaign($campaign_id, $parameters = array()) {
+  public function getCampaign($campaign_id, $parameters = []) {
     parent::getCampaign($campaign_id, $parameters);
 
-    $response = (object) array(
+    $response = (object) [
       'id' => $campaign_id,
       'type' => 'regular',
-      'recipients' => (object) array(
+      'recipients' => (object) [
         'list_id' => '57afe96172',
-      ),
-      'settings' => (object) array(
+      ],
+      'settings' => (object) [
         'subject_line' => 'Test Campaign',
-      ),
-      'tracking' => (object) array(
+      ],
+      'tracking' => (object) [
         'html_clicks' => TRUE,
         'text_clicks' => FALSE,
-      ),
-    );
+      ],
+    ];
 
     return $response;
   }

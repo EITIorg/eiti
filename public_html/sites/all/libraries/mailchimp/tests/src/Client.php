@@ -2,6 +2,11 @@
 
 namespace Mailchimp\Tests;
 
+/**
+ * Test HTTP client.
+ *
+ * @package Mailchimp\Tests
+ */
 class Client extends \GuzzleHttp\Client {
 
   public $method;
@@ -13,7 +18,7 @@ class Client extends \GuzzleHttp\Client {
   /**
    * @inheritdoc
    */
-  public function request($method, $uri = null, array $options = []) {
+  public function request($method, $uri = NULL, array $options = []) {
     $this->method = $method;
     $this->uri = $uri;
     $this->options = $options;
