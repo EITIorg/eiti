@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.features.field_base.inc
@@ -575,11 +576,7 @@ function eitiwidgets_field_default_field_bases() {
     'locked' => 0,
     'module' => 'tablefield',
     'settings' => array(
-      'cell_processing' => 0,
       'entity_translation_sync' => FALSE,
-      'export' => 0,
-      'lock_values' => 0,
-      'restrict_rebuild' => 0,
     ),
     'translatable' => 1,
     'type' => 'tablefield',

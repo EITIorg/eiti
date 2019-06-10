@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eititaxonomies.features.taxonomy.inc
@@ -18,6 +19,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 32768,
+      'base_i18n_mode' => 32768,
+      'base_language' => 'und',
     ),
     'board_decision_keywords' => array(
       'name' => 'Board decision keywords',
@@ -28,6 +31,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 32768,
+      'base_i18n_mode' => 32768,
+      'base_language' => 'und',
     ),
     'bookmark_type' => array(
       'name' => 'Bookmark Type',
@@ -38,6 +43,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
     'company_commodities' => array(
       'name' => 'Company Commodities',
@@ -48,6 +55,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
     'company_sectors' => array(
       'name' => 'Company Sectors',
@@ -58,6 +67,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
     'document_category' => array(
       'name' => 'Document Category',
@@ -68,6 +79,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
     'person_positions' => array(
       'name' => 'Person Positions',
@@ -78,6 +91,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
     'publication_types_internal' => array(
       'name' => 'Publication Types Internal',
@@ -88,6 +103,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 1,
+      'base_i18n_mode' => 1,
+      'base_language' => 'und',
     ),
     'publication_types_public' => array(
       'name' => 'Publication Types Public',
@@ -98,6 +115,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 1,
+      'base_i18n_mode' => 1,
+      'base_language' => 'und',
     ),
     'publishers' => array(
       'name' => 'Publishers',
@@ -108,6 +127,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 1,
+      'base_i18n_mode' => 1,
+      'base_language' => 'und',
     ),
     'tags' => array(
       'name' => 'Tags',
@@ -118,6 +139,8 @@ function eititaxonomies_taxonomy_default_vocabularies() {
       'weight' => 0,
       'language' => 'und',
       'i18n_mode' => 0,
+      'base_i18n_mode' => 0,
+      'base_language' => 'und',
     ),
   );
 }

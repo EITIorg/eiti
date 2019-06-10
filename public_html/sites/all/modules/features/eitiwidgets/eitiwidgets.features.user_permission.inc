@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.features.user_permission.inc

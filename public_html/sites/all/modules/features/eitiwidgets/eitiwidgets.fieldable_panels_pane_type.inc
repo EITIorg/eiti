@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.fieldable_panels_pane_type.inc

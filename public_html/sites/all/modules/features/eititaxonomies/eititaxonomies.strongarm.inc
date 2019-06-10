@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eititaxonomies.strongarm.inc

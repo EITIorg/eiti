@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.field_group.inc

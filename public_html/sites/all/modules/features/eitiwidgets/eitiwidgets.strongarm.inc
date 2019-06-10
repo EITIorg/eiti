@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.strongarm.inc

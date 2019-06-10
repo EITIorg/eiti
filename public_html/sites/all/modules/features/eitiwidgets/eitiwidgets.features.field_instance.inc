@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiwidgets.features.field_instance.inc
@@ -770,6 +771,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -2133,6 +2135,15 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'tablefield',
         'settings' => array(
+          'export_csv' => FALSE,
+          'header_orientation' => 'Horizontal',
+          'hide_cols_skip_head' => FALSE,
+          'hide_empty_cols' => FALSE,
+          'hide_empty_rows' => FALSE,
+          'hide_header' => FALSE,
+          'sortable' => FALSE,
+          'sticky_header' => TRUE,
+          'striping' => TRUE,
           'trim_trailing_cols' => FALSE,
           'trim_trailing_rows' => FALSE,
         ),
@@ -2211,6 +2222,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
