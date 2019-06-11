@@ -24507,10 +24507,12 @@
 	        );
 	      }
 	      var screenWidth = window.innerWidth > 0 ? window.innerWidth : screen.width;
-	      var zoom = 2;
+	      var zoom = 3;
+	      var min_zoom = 2;
 	
 	      if (screenWidth <= 400) {
 	        zoom = 1;
+	        min_zoom = 1;
 	      }
 	
 	      // If there's a selector, add the responsive classes.
@@ -24536,7 +24538,7 @@
 	              ref: 'map',
 	              zoom: zoom,
 	              maxZoom: 8,
-	              minZoom: 1,
+	              minZoom: min_zoom,
 	              height: 500,
 	              scrollWheelZoom: false
 	            },
