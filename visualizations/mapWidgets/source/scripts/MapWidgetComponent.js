@@ -443,7 +443,11 @@ export default class MapWidgetComponent extends Component {
 
   getColor(indicator_type, indicator_value, metadata) {
     if(indicator_type == 'fixed') {
-        var completeType = _.find(metadata, function(v){ return (v.id == indicator_value)});
+        var i_val = 0;
+        if (this.isNumeric(indicator_value) && jQuery.inArray(indicator_value, ['5329', '75', '74', '5327', '8212', '8213']) > -1) {
+          i_val = 1;
+        }
+        var completeType = _.find(metadata, function(v){ return (v.id == i_val)});
 
         return completeType ? completeType.color: '#dddddd';
     }

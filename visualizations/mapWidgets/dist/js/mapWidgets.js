@@ -24300,8 +24300,12 @@
 	    key: 'getColor',
 	    value: function getColor(indicator_type, indicator_value, metadata) {
 	      if (indicator_type == 'fixed') {
+	        var i_val = 0;
+	        if (this.isNumeric(indicator_value) && jQuery.inArray(indicator_value, ['5329', '75', '74', '5327', '8212', '8213']) > -1) {
+	          i_val = 1;
+	        }
 	        var completeType = _underscore2.default.find(metadata, function (v) {
-	          return v.id == indicator_value;
+	          return v.id == i_val;
 	        });
 	
 	        return completeType ? completeType.color : '#dddddd';
@@ -25059,41 +25063,15 @@
 	  value: true
 	});
 	var status = exports.status = [{
-	  "id": 5329,
-	  "color": "#6CBCE3",
-	  "title": "Yet to be assessed against the 2016 Standard<br>",
-	  "subtitle": "",
-	  "use_style": true
+	  "id": 1,
+	  "color": "#42abd8",
+	  "title": "Available",
+	  "subtitle": ""
 	}, {
-	  "id": 75,
-	  "color": "#2D8B2A",
-	  "title": "Satisfactory progress",
-	  "subtitle": "",
-	  "use_style": true
-	}, {
-	  "id": 74,
-	  "color": "#84AD42",
-	  "title": "Meaningful progress",
-	  "subtitle": "",
-	  "use_style": true
-	}, {
-	  "id": 5327,
-	  "color": "#FAC433",
-	  "title": "Inadequate progress / suspended<br>",
-	  "subtitle": "",
-	  "use_style": true
-	}, {
-	  "id": 8212,
-	  "color": "#FAC433",
-	  "title": "Suspended due to political instability",
-	  "subtitle": "",
-	  "use_style": true
-	}, {
-	  "id": 8213,
-	  "color": "#FAC433",
-	  "title": "Suspended for missing deadline",
-	  "subtitle": "",
-	  "use_style": true
+	  "id": 0,
+	  "color": "#dddddd",
+	  "title": "Unavailable",
+	  "subtitle": ""
 	}];
 
 /***/ }),
