@@ -273,7 +273,7 @@ export default class MapWidgetComponent extends Component {
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
     const hoverDecider = this.props.infobox ? function(feature, layer){this.onEachFeaturePage(feature, layer)}.bind(this) : function(feature, layer){this.onEachFeatureStatus(feature, layer)}.bind(this);
 
-    ::this.addLegend(map, indicator_id, countryDataProcessed);
+    ::this.updateLegend(e, indicator_id);
 
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
   }
@@ -327,95 +327,58 @@ export default class MapWidgetComponent extends Component {
     map.removeLayer(geoJsonLayer);
   }
 
-  addLegend(map, indicator_id, countryDataProcessed) {
-      var info = L.control({position: 'bottomleft'});
+  legend(indicator_id) {
+    var legend = document.createElement("DIV");
 
-      info.onAdd = function (map) {
-          if(map.options.legend === undefined) {
-              map.options.legend = L.DomUtil.create('div', 'info legend');
-          }
-          this.update();
-          return map.options.legend;
-      };
+    var indicatorMetadata;
+    indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
 
-      info.update = function (props) {
-          var indicatorMetadata;
-          indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
+    var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
+    var indicatorDescription = indicatorData["description"];
+    var indicatorHeader = indicatorData["header"];
+    var indicatorFooter = indicatorData["footer"];
 
-          var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
-          var indicatorName = indicatorData["name"];
-          var indicatorDescription = indicatorData["description"];
-          var indicatorHeader = indicatorData["header"];
-          var indicatorFooter = indicatorData["footer"];
+    var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
 
-          var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
+    var h2El_2 = document.createElement("H2");
+    h2El_2.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
 
-          var h2El = document.createElement("H2");
-          h2El.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
-          h2El.className = "responsive-header";
+    var mergedHTML = "";
+    var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
+    mergedHTML += headerText;
+    var noDataIncluded = false;
+    indicatorMetadata.forEach(function(v) {
+      noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
+      if(v.use_style) {
+        mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+      }
+      else {
+        mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+      }
+      if(v.subtitle != "") {
+        mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
+      }
+    });
 
-          var spanEl = document.createElement("SPAN");
-          spanEl.innerText = helpers.t("show");
-          h2El.appendChild(spanEl);
+    var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>";
+    mergedHTML += footerText;
 
-          var h2El_2 = document.createElement("H2");
-          h2El_2.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
+    var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>";
 
-          var spanEl_2 = document.createElement("SPAN");
-          spanEl_2.innerText = helpers.t("hide");
-          h2El_2.appendChild(spanEl_2);
+    var divLegendBody = document.createElement("DIV");
+    divLegendBody.className = "inner";
+    divLegendBody.innerHTML = mergedHTML + sourceText;
 
-          var divLegend = document.createElement("DIV");
-          divLegend.className = "responsive-legend";
+    legend.appendChild(h2El_2);
+    legend.appendChild(divLegendBody);
 
+    return legend;
+  }
 
-          var mergedHTML = "";
-          var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
-          mergedHTML += headerText;
-          var noDataIncluded = false;
-          indicatorMetadata.forEach(function(v) {
-            noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-            if(v.use_style) {
-              mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
-            }
-            else {
-              mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
-            }
-            if(v.subtitle != "") {
-              mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
-            }
-          });
-          //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
-
-          var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>";
-          mergedHTML += footerText;
-
-          var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>";
-
-          var divLegendBody = document.createElement("DIV");
-          divLegendBody.innerHTML = mergedHTML + sourceText;
-          divLegend.appendChild(h2El_2);
-          divLegend.appendChild(divLegendBody);
-
-          while (map.options.legend.firstChild) {
-              map.options.legend.removeChild(map.options.legend.firstChild);
-          }
-
-          map.options.legend.appendChild(h2El);
-          map.options.legend.appendChild(divLegend);
-
-          spanEl.onclick = function() {
-            divLegend.style.display = 'block';
-            h2El.style.display = 'none';
-          };
-
-          spanEl_2.onclick = function() {
-            divLegend.style.display = 'none';
-            h2El.style.display = 'block';
-          };
-      }.bind(this);
-
-      info.addTo(map);
+  updateLegend(e, indicator_id) {
+    var legend = this.legend(indicator_id);
+    var legend_wrapper = jQuery(e.target).closest('.eiti-map-wrapper').find('.top.legend');
+    legend_wrapper.html(legend.innerHTML);
   }
 
   getIndicatorData(indicator_id){
@@ -593,17 +556,20 @@ export default class MapWidgetComponent extends Component {
 
     // If there's a selector, add the responsive classes.
     var containerClass = 'map-container';
-    var elementClass;
+    var elementClass = 'map';
     if(selector) {
       containerClass = 'map-container media-resizable-element';
       elementClass = 'resizable-map';
     }
 
+    var legend = this.legend(this.state.indicator_id);
+
     return (
 
       <div className={containerClass}>
         {buttons}
-        <div>
+        <div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>
+        <div className="map-wrap">
           <Map className={elementClass}
             center={this.state.latlng}
             length={4}
@@ -618,7 +584,6 @@ export default class MapWidgetComponent extends Component {
               url=''
               onLeafletLoad={function(e) {
                 if(!this.state.initialized) {
-                  this.addLegend(e.target._map, this.state.indicator_id);
                   this.setState({initialized:true});
                 }
               }.bind(this)}

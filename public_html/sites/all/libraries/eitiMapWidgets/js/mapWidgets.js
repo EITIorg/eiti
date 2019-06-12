@@ -24114,7 +24114,7 @@
 	        this.onEachFeatureStatus(feature, layer);
 	      }.bind(this);
 	
-	      this.addLegend.call(this, map, indicator_id, countryDataProcessed);
+	      this.updateLegend.call(this, e, indicator_id);
 	
 	      this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, { style: _helpers.helpers.style, onEachFeature: hoverDecider }).addTo(map);
 	    }
@@ -24170,96 +24170,61 @@
 	      map.removeLayer(geoJsonLayer);
 	    }
 	  }, {
-	    key: 'addLegend',
-	    value: function addLegend(map, indicator_id, countryDataProcessed) {
-	      var info = L.control({ position: 'bottomleft' });
+	    key: 'legend',
+	    value: function legend(indicator_id) {
+	      var legend = document.createElement("DIV");
 	
-	      info.onAdd = function (map) {
-	        if (map.options.legend === undefined) {
-	          map.options.legend = L.DomUtil.create('div', 'info legend');
+	      var indicatorMetadata;
+	      indicatorMetadata = this.getValues.call(this, indicator_id || this.state.indicator_id);
+	
+	      var indicatorData = this.getIndicatorData.call(this, indicator_id || this.state.indicator_id);
+	      var indicatorDescription = indicatorData["description"];
+	      var indicatorHeader = indicatorData["header"];
+	      var indicatorFooter = indicatorData["footer"];
+	
+	      var unit = _underscore2.default.find(_underscore2.default.pluck(indicatorMetadata, 'unit'), function (v) {
+	        return v !== undefined;
+	      });
+	
+	      var h2El_2 = document.createElement("H2");
+	      h2El_2.innerText = _helpers.helpers.t(indicatorDescription) + " " + (unit ? "(" + unit + ")" : "");
+	
+	      var mergedHTML = "";
+	      var headerText = '<div class="legend_header" >' + _helpers.helpers.t(indicatorHeader) + "</div>";
+	      mergedHTML += headerText;
+	      var noDataIncluded = false;
+	      indicatorMetadata.forEach(function (v) {
+	        noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
+	        if (v.use_style) {
+	          mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
+	        } else {
+	          mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
 	        }
-	        this.update();
-	        return map.options.legend;
-	      };
-	
-	      info.update = function (props) {
-	        var indicatorMetadata;
-	        indicatorMetadata = this.getValues.call(this, indicator_id || this.state.indicator_id);
-	
-	        var indicatorData = this.getIndicatorData.call(this, indicator_id || this.state.indicator_id);
-	        var indicatorName = indicatorData["name"];
-	        var indicatorDescription = indicatorData["description"];
-	        var indicatorHeader = indicatorData["header"];
-	        var indicatorFooter = indicatorData["footer"];
-	
-	        var unit = _underscore2.default.find(_underscore2.default.pluck(indicatorMetadata, 'unit'), function (v) {
-	          return v !== undefined;
-	        });
-	
-	        var h2El = document.createElement("H2");
-	        h2El.innerText = _helpers.helpers.t(indicatorDescription) + " " + (unit ? "(" + unit + ")" : "");
-	        h2El.className = "responsive-header";
-	
-	        var spanEl = document.createElement("SPAN");
-	        spanEl.innerText = _helpers.helpers.t("show");
-	        h2El.appendChild(spanEl);
-	
-	        var h2El_2 = document.createElement("H2");
-	        h2El_2.innerText = _helpers.helpers.t(indicatorDescription) + " " + (unit ? "(" + unit + ")" : "");
-	
-	        var spanEl_2 = document.createElement("SPAN");
-	        spanEl_2.innerText = _helpers.helpers.t("hide");
-	        h2El_2.appendChild(spanEl_2);
-	
-	        var divLegend = document.createElement("DIV");
-	        divLegend.className = "responsive-legend";
-	
-	        var mergedHTML = "";
-	        var headerText = '<div class="legend_header" >' + _helpers.helpers.t(indicatorHeader) + "</div>";
-	        mergedHTML += headerText;
-	        var noDataIncluded = false;
-	        indicatorMetadata.forEach(function (v) {
-	          noDataIncluded = v.color === "#dddddd" && noDataIncluded === false ? noDataIncluded = true : false;
-	          if (v.use_style) {
-	            mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g, "_") + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
-	          } else {
-	            mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">' + _helpers.helpers.t(v.title) + '<br/></div>';
-	          }
-	          if (v.subtitle != "") {
-	            mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br>';
-	          }
-	        });
-	        //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
-	
-	        var footerText = '<div class="legend_footer" >' + _helpers.helpers.t(indicatorFooter) + "</div>";
-	        mergedHTML += footerText;
-	
-	        var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
-	
-	        var divLegendBody = document.createElement("DIV");
-	        divLegendBody.innerHTML = mergedHTML + sourceText;
-	        divLegend.appendChild(h2El_2);
-	        divLegend.appendChild(divLegendBody);
-	
-	        while (map.options.legend.firstChild) {
-	          map.options.legend.removeChild(map.options.legend.firstChild);
+	        if (v.subtitle != "") {
+	          mergedHTML += (_helpers.helpers.t(v.subtitle) || '') + '<br>';
 	        }
+	      });
 	
-	        map.options.legend.appendChild(h2El);
-	        map.options.legend.appendChild(divLegend);
+	      var footerText = '<div class="legend_footer" >' + _helpers.helpers.t(indicatorFooter) + "</div>";
+	      mergedHTML += footerText;
 	
-	        spanEl.onclick = function () {
-	          divLegend.style.display = 'block';
-	          h2El.style.display = 'none';
-	        };
+	      var sourceText = '<a class="legend_source" href="/data">' + _helpers.helpers.t('Source: EITI summary data') + "</a>";
 	
-	        spanEl_2.onclick = function () {
-	          divLegend.style.display = 'none';
-	          h2El.style.display = 'block';
-	        };
-	      }.bind(this);
+	      var divLegendBody = document.createElement("DIV");
+	      divLegendBody.className = "inner";
+	      divLegendBody.innerHTML = mergedHTML + sourceText;
 	
-	      info.addTo(map);
+	      legend.appendChild(h2El_2);
+	      legend.appendChild(divLegendBody);
+	
+	      return legend;
+	    }
+	  }, {
+	    key: 'updateLegend',
+	    value: function updateLegend(e, indicator_id) {
+	      var legend = this.legend(indicator_id);
+	      var legend_wrapper = jQuery(e.target).closest('.eiti-map-wrapper').find('.top.legend');
+	      legend_wrapper.html(legend.innerHTML);
 	    }
 	  }, {
 	    key: 'getIndicatorData',
@@ -24521,19 +24486,22 @@
 	
 	      // If there's a selector, add the responsive classes.
 	      var containerClass = 'map-container';
-	      var elementClass;
+	      var elementClass = 'map';
 	      if (selector) {
 	        containerClass = 'map-container media-resizable-element';
 	        elementClass = 'resizable-map';
 	      }
 	
+	      var legend = this.legend(this.state.indicator_id);
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: containerClass },
 	        buttons,
+	        _react2.default.createElement('div', { className: 'legend top', dangerouslySetInnerHTML: { __html: legend.innerHTML } }),
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'map-wrap' },
 	          _react2.default.createElement(
 	            _reactLeaflet.Map,
 	            { className: elementClass,
@@ -24550,7 +24518,6 @@
 	              url: '',
 	              onLeafletLoad: function (e) {
 	                if (!this.state.initialized) {
-	                  this.addLegend(e.target._map, this.state.indicator_id);
 	                  this.setState({ initialized: true });
 	                }
 	              }.bind(this)

@@ -59,7 +59,7 @@ function eiti_ctools_extra_map_simple_render($subtype, $conf, $panel_args, $cont
     )
   );
   // For now, this is hardcoded, we should change it later.
-  $map_html_id = drupal_html_id('map1');
+  $map_html_id = drupal_html_id('map_overview');
   $content['map-div'] = array(
     '#type' => 'html_tag',
     '#tag' => 'div',
