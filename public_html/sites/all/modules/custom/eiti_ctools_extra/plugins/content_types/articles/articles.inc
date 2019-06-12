@@ -63,7 +63,7 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     $block['articles']['top'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
-      '#value' => t('<a href="articles">See all</a>'),
+      '#value' => t('<a href="/articles">See all</a>'),
       '#attributes' => array('class' => array('top')),
     );
   }
@@ -76,7 +76,7 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     $block['articles']['bottom'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
-      '#value' => t('<a href="articles">See all</a>'),
+      '#value' => t('<a href="/articles">See all</a>'),
       '#attributes' => array('class' => array('bottom')),
     );
   }
@@ -106,7 +106,7 @@ function eiti_ctools_extra__articles__settings_form($form, &$form_state) {
     '#type' => 'select',
     '#options' => array(
       'default' => t('Full list with filters'),
-      'latest' => t('Latest 6'),
+      'latest' => t('Latest 5'),
     ),
     '#default_value' => $conf['display'],
   );
@@ -115,7 +115,7 @@ function eiti_ctools_extra__articles__settings_form($form, &$form_state) {
     '#type' => 'textfield',
     '#default_value' => $conf['tags'],
     '#autocomplete_path' => 'taxonomy/autocomplete/field_tags',
-    '#description' => t('Limit the results to the entered tags. This only works with the latest 6 display (has no effect otherwise).'),
+    '#description' => t('Limit the results to the entered tags. This only works with the latest 5 display (has no effect otherwise).'),
   );
   return $form;
 }

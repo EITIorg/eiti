@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_article.ds.inc
@@ -148,7 +149,7 @@ function eitict_article_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'post_date' => array(
-      'weight' => '3',
+      'weight' => '2',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
       'formatter_settings' => array(
@@ -424,19 +425,21 @@ function eitict_article_ds_layout_settings_info() {
   $ds_layout->layout = 'widelayout';
   $ds_layout->settings = array(
     'regions' => array(
-      'main' => array(
+      'above' => array(
         0 => 'field_featured_image',
-        1 => 'field_article_type',
-        2 => 'title_field',
-        3 => 'post_date',
+      ),
+      'main' => array(
+        1 => 'title_field',
+        2 => 'post_date',
+        3 => 'field_article_type',
         4 => 'body',
       ),
     ),
     'fields' => array(
-      'field_featured_image' => 'main',
-      'field_article_type' => 'main',
+      'field_featured_image' => 'above',
       'title_field' => 'main',
       'post_date' => 'main',
+      'field_article_type' => 'main',
       'body' => 'main',
     ),
     'classes' => array(
