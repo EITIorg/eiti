@@ -460,7 +460,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'img-article-slider',
+          'image_style' => 'article_teaser',
         ),
         'type' => 'image',
         'weight' => 0,

@@ -36,6 +36,22 @@ function eitict_article_views_api($module = NULL, $api = NULL) {
 function eitict_article_image_default_styles() {
   $styles = array();
 
+  // Exported image style: article_teaser.
+  $styles['article_teaser'] = array(
+    'label' => 'Article teaser (1200 x 1200)',
+    'effects' => array(
+      5 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1200,
+          'height' => 1200,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: img-article-slider.
   $styles['img-article-slider'] = array(
     'label' => 'Image: Article Slider (590px wide)',

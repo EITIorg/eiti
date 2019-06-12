@@ -69,6 +69,7 @@ features[field_instance][] = node-article-field_no_list_display
 features[field_instance][] = node-article-field_related_country
 features[field_instance][] = node-article-field_tags
 features[field_instance][] = node-article-title_field
+features[image][] = article_teaser
 features[image][] = img-article-slider
 features[node][] = article
 features[panelizer_defaults][] = node:article:default:default
