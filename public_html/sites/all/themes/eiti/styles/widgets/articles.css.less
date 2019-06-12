@@ -1,5 +1,6 @@
 .pane-articles {
     * {
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
     .articles {
@@ -19,7 +20,11 @@
                     height: 14px;
                     vertical-align: middle;
                     background-repeat: no-repeat;
+                    -webkit-transition: -webkit-transform 200ms ease;
+                    transition: -webkit-transform 200ms ease;
                     transition: transform 200ms ease;
+                    transition: transform 200ms ease, -webkit-transform 200ms ease;
+                    -webkit-transform-origin: center;
                     transform-origin: center;
                     position: absolute;
                     left: 0;
@@ -27,6 +32,7 @@
                 }
                 &:hover {
                     &:before {
+                        -webkit-transform: translateX(5px);
                         transform: translateX(5px);
                     }
                 }
@@ -55,21 +61,19 @@
                 padding-left: 12px;
                 padding-right: 12px;
                 -ms-flex: 0 0 50%;
+                -webkit-box-flex: 0;
                 flex: 0 0 50%;
                 max-width: 50%;
                 min-height: 26.25rem;
                 overflow: hidden;
-                &.views-row-first {
-                    -ms-flex: 0 0 100%;
-                    flex: 0 0 100%;
-                    max-width: 100%;
-                }
+                margin-bottom: 24px;
             }
             .views-field {
                 height: 100%;
                 .node-article {
                     background-color: @clnormal;
                     height: 100%;
+                    position: relative;
                 }
             }
             .title {
@@ -79,10 +83,54 @@
                     .link-color(@clmain, @clanchor__hover);
                 }
             }
-            .field-name-field-article-type {
+            .field-name-field-article-type,
+            .field-name-post-date {
                 color: @claltnormal;
                 font-size: 1.125rem;
                 line-height: 1.875rem;
+                display: inline-block;
+            }
+            .group-main {
+                position: absolute;
+                z-index: 21;
+                bottom: 0;
+                left: 0;
+                padding: 1.5em 3rem;
+                background-color: rgba(19, 40, 86, .84);
+                width: 100%;
+            }
+            .group-above {
+                position: absolute;
+                z-index: 20;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                .field-name-field-featured-image {
+                    position: absolute;
+                    width: 100%;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    img {
+                        min-width: 100%;
+                        min-height: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .view-display-id-latest_sticky {
+        .view-content {
+            .views-row {
+                -ms-flex: 0 0 100%;
+                -webkit-box-flex: 0;
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            .group-main {
+                width: ~"calc(50% - 12px)";
             }
         }
     }
