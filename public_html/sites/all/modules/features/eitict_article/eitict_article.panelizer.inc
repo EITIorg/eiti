@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_article.panelizer.inc

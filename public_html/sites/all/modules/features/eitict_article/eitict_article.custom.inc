@@ -47,6 +47,14 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
     return;
   }
 
+  // Modifications for teaser display.
+  if ($view_mode === 'teaser') {
+    if (isset($entity->content['field_featured_image'], $entity->content['body'])) {
+      unset($entity->content['body']);
+    }
+    return;
+  }
+
   // Add the article header (title and featured image)
   if (in_array($view_mode, array('full', 'teaser_alternative'))) {
     $article_header = _eitict_article_entity_view_get_article_header($entity, $type, $view_mode, $langcode);
@@ -77,13 +85,6 @@ function eitict_article_entity_view($entity, $type, $view_mode, $langcode) {
       }
 
       $entity->article_summary = check_markup($article_summary, $article_summary_format);
-    }
-  }
-
-  // Modifications for teaser display.
-  if ($view_mode === 'teaser') {
-    if (isset($entity->content['field_featured_image'], $entity->content['body'])) {
-      unset($entity->content['body']);
     }
   }
 }
@@ -432,6 +433,12 @@ function eitict_article_preprocess_views_view(&$variables) {
       $attachment_html = views_embed_view('articles', 'sticky');
       if (!trim(strip_tags($attachment_html))) {
         $attachment_html = '<div class="view-empty">' . t('There are no items to display.') . '</div>';
+      }
+      // Display attachment on first page only.
+      elseif (isset($variables['view']->query->pager->current_page) && is_numeric($variables['view']->query->pager->current_page)) {
+        if ($variables['view']->query->pager->current_page > 0) {
+          $attachment_html = '';
+        }
       }
       $variables['attachment_before'] = $attachment_html;
     }
