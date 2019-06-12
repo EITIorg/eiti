@@ -1,0 +1,92 @@
+.pane-articles {
+    * {
+        box-sizing: border-box;
+    }
+    .articles {
+        position: relative;
+        .top,
+        .bottom {
+            text-align: right;
+            a {
+                position: relative;
+                padding-left: 1.625rem;
+                &:before {
+                    content: "";
+                    background-image: url(~"@{theme_path}images/icons/angle-right-blue.svg");
+                    background-size: contain;
+                    display: inline-block;
+                    width: 10px;
+                    height: 14px;
+                    vertical-align: middle;
+                    background-repeat: no-repeat;
+                    transition: transform 200ms ease;
+                    transform-origin: center;
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                }
+                &:hover {
+                    &:before {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+        }
+        .top {
+            position: absolute;
+            top: 40px;
+            right: 0;
+        }
+    }
+    .view-articles {
+        .view-content {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -12px;
+            margin-left: -12px;
+            .single-fluid-row-wrapper {
+                width: auto;
+                padding: 0;
+            }
+            .views-row {
+                padding-left: 12px;
+                padding-right: 12px;
+                -ms-flex: 0 0 50%;
+                flex: 0 0 50%;
+                max-width: 50%;
+                min-height: 26.25rem;
+                overflow: hidden;
+                &.views-row-first {
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
+            .views-field {
+                height: 100%;
+                .node-article {
+                    background-color: @clnormal;
+                    height: 100%;
+                }
+            }
+            .title {
+                font-size: 1.5rem;
+                line-height: 2.25rem;
+                a {
+                    .link-color(@clmain, @clanchor__hover);
+                }
+            }
+            .field-name-field-article-type {
+                color: @claltnormal;
+                font-size: 1.125rem;
+                line-height: 1.875rem;
+            }
+        }
+    }
+}
+
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
