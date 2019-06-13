@@ -707,3 +707,20 @@ function eitiwidgets_preprocess_panels_add_content_modal(&$vars) {
     $vars['categories_array'][] = ctools_ajax_text_button($title, $url, '', $class);
   }
 }
+
+/**
+ * Implements hook_field_group_pre_render_alter().
+ */
+function eitiwidgets_field_group_pre_render_alter(&$element, $group, &$form) {
+  // Add background color to text widget video section if one is set.
+  if (isset($form['field_fpp_bg_colour']['#items'][0]['value']) && $group->group_name == 'group_video_wrapper') {
+    $colors = array(
+      'white' => '#ffffff',
+      'blue' => '#e6f5f9',
+    );
+    if (isset($colors[$form['field_fpp_bg_colour']['#items'][0]['value']])) {
+      $style = 'background-color:' . $colors[$form['field_fpp_bg_colour']['#items'][0]['value']] . ';';
+    }
+    $element['#prefix'] = str_replace('<div', '<div style="' . $style . '"', $element['#prefix']);
+  }
+}

@@ -2775,7 +2775,7 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'helpergeneric',
         'settings' => array(
-          'icon' => 'arrow',
+          'icon' => 'angle-right-blue',
           'size' => '1em',
         ),
         'type' => 'link_icon',
