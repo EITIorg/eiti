@@ -334,6 +334,14 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
     $pane->css['css_class'] .= ' has-background-image';
   }
 
+  // Text widgets.
+  if ($entity->bundle == 'text') {
+    // Video section.
+    if (!empty($content->content['field_fpp_text1']) || !empty($content->content['field_fpp_text2']) || !empty($content->content['field_fpp_video'])) {
+      $pane->css['css_class'] .= ' has-video';
+    }
+  }
+
   if (isset($content->content['title_field'][0]['#markup'])) {
     // Progress by requirement title translation.
     if (isset($content->content['title_field']['#items'][0]['safe_value'])) {

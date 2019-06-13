@@ -94,6 +94,7 @@ features[field_base][] = field_fpp_useful_links
 features[field_base][] = field_fpp_video
 features[field_base][] = field_fpp_widget
 features[field_group][] = group_blockquote|fieldable_panels_pane|quote|default
+features[field_group][] = group_main_content_wrapper|fieldable_panels_pane|text|default
 features[field_group][] = group_title_display|fieldable_panels_pane|featured_bookmarks|form
 features[field_group][] = group_title_display|fieldable_panels_pane|icon_blocks|form
 features[field_group][] = group_title_display|fieldable_panels_pane|table|form

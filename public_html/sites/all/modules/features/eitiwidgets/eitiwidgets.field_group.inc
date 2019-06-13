@@ -44,6 +44,40 @@ function eitiwidgets_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_main_content_wrapper|fieldable_panels_pane|text|default';
+  $field_group->group_name = 'group_main_content_wrapper';
+  $field_group->entity_type = 'fieldable_panels_pane';
+  $field_group->bundle = 'text';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Main content wrapper',
+    'weight' => '0',
+    'children' => array(
+      0 => 'field_fpp_body',
+      1 => 'field_fpp_useful_links',
+      2 => 'group_title_wrapper',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Main content wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'pane-main-content-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_main_content_wrapper|fieldable_panels_pane|text|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_title_display|fieldable_panels_pane|featured_bookmarks|form';
   $field_group->group_name = 'group_title_display';
   $field_group->entity_type = 'fieldable_panels_pane';
@@ -450,10 +484,10 @@ function eitiwidgets_field_group_info() {
   $field_group->entity_type = 'fieldable_panels_pane';
   $field_group->bundle = 'text';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_main_content_wrapper';
   $field_group->data = array(
     'label' => 'Title Wrapper',
-    'weight' => '0',
+    'weight' => '1',
     'children' => array(
       0 => 'title_field',
       1 => 'field_fpp_icon',
@@ -584,7 +618,7 @@ function eitiwidgets_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Video wrapper',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_fpp_text1',
       1 => 'field_fpp_video',
@@ -610,6 +644,7 @@ function eitiwidgets_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Blockquote');
+  t('Main content wrapper');
   t('Title Display');
   t('Title Wrapper');
   t('Video display');
