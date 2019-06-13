@@ -1,0 +1,106 @@
+.pane-map-simple {
+    .semi-interactive-map-wrapper.media-resizable-wrapper {
+        padding-top: 0;
+        height: auto;
+    }
+    .media-resizable-wrapper {
+        .media-resizable-element {
+            position: relative;
+        }
+        .map-wrap {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            .map {
+                height: 640px;
+                width: 100%;
+            }
+        }
+    }
+    .eiti-map-wrapper {
+        .legend {
+            color: initial;
+            margin-bottom: 2.25rem;
+            h2 {
+                color: @clnormal;
+                font-size: 1.875rem;
+                line-height: 2.5rem;
+                font-weight: 300;
+                margin: 0;
+                padding: 1.5rem 0;
+            }
+            .legend_footer {
+                color: initial;
+            }
+            .inner {
+                font-size: 1rem;
+                line-height: 1.5rem;
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.xSmallOnly() {
+    .pane-map-simple {
+        .eiti-map-wrapper {
+            .legend {
+                width: auto;
+                margin-left: 1.5rem;
+                margin-right: 1.5rem;
+            }
+        }
+    }
+}
+
+.xMediumOnly() {
+    .pane-map-simple {
+        .eiti-map-wrapper {
+            .legend {
+                .single-fluid-row-wrapper(8);
+            }
+        }
+    }
+}
+
+.xMediumAndUp() {
+    .pane-map-simple {
+        .eiti-map-wrapper {
+            .legend {
+                .single-fluid-row-wrapper(8);
+                h2 {
+                    font-size: 3rem;
+                    line-height: 3.75rem;
+                    padding: 2.25rem 0;
+                }
+                .inner {
+                    font-size: 1.125rem;
+                    line-height: 1.875rem;
+                }
+            }
+        }
+        .media-resizable-wrapper {
+            .map-wrap {
+                .map {
+                    height: 740px;
+                }
+            }
+        }
+    }
+}
+
+.xNormalAndUp() {
+    .pane-map-simple {
+        .eiti-map-wrapper {
+            .legend {
+                .single-fluid-row-wrapper(12);
+            }
+        }
+    }
+}
+
+@import '../lib/custom-grid.less';
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
