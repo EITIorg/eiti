@@ -103,6 +103,32 @@ function eitiwidgets_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_fpp_bg_colour'.
+  $field_bases['field_fpp_bg_colour'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_bg_colour',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'white' => 'White',
+        'blue' => 'Blue',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_fpp_body'.
   $field_bases['field_fpp_body'] = array(
     'active' => 1,
@@ -576,10 +602,58 @@ function eitiwidgets_field_default_field_bases() {
     'locked' => 0,
     'module' => 'tablefield',
     'settings' => array(
+      'cell_processing' => 0,
       'entity_translation_sync' => FALSE,
+      'export' => 0,
+      'lock_values' => 0,
+      'restrict_rebuild' => 0,
     ),
     'translatable' => 1,
     'type' => 'tablefield',
+  );
+
+  // Exported field_base: 'field_fpp_text1'.
+  $field_bases['field_fpp_text1'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_text1',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 1,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_fpp_text2'.
+  $field_bases['field_fpp_text2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_text2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 1,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_fpp_useful_links'.
@@ -610,6 +684,32 @@ function eitiwidgets_field_default_field_bases() {
     ),
     'translatable' => 1,
     'type' => 'link_field',
+  );
+
+  // Exported field_base: 'field_fpp_video'.
+  $field_bases['field_fpp_video'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_fpp_video',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 0,
+      'display_field' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 1,
+    'type' => 'file',
   );
 
   // Exported field_base: 'field_fpp_widget'.

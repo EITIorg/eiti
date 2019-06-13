@@ -374,6 +374,7 @@ function eitiwidgets_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'rel_remove' => 'default',
       'title' => 'required',
+      'title_allowed_values' => '',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
       'title_value' => '',
@@ -2096,34 +2097,48 @@ function eitiwidgets_field_default_field_instances() {
     'default_value' => array(
       0 => array(
         'tablefield' => array(
-          'cell_0_0' => 'Commodity',
-          'cell_0_1' => 'Reserves',
-          'cell_0_2' => 'Unit',
-          'cell_0_3' => 'Significance',
-          'cell_1_0' => '',
-          'cell_1_1' => '',
-          'cell_1_2' => '',
-          'cell_1_3' => '',
-          'cell_2_0' => '',
-          'cell_2_1' => '',
-          'cell_2_2' => '',
-          'cell_2_3' => '',
-          'cell_3_0' => '',
-          'cell_3_1' => '',
-          'cell_3_2' => '',
-          'cell_3_3' => '',
-          'cell_4_0' => '',
-          'cell_4_1' => '',
-          'cell_4_2' => '',
-          'cell_4_3' => '',
+          'caption' => NULL,
           'import' => array(
             'file' => '',
             'import' => 'Upload CSV',
           ),
+          'paste' => NULL,
           'rebuild' => array(
             'count_cols' => 4,
             'count_rows' => 5,
             'rebuild' => 'Rebuild Table',
+          ),
+          'tabledata' => array(
+            'row_0' => array(
+              'col_0' => 'Commodity',
+              'col_1' => 'Reserves',
+              'col_2' => 'Unit',
+              'col_3' => 'Significance',
+            ),
+            'row_1' => array(
+              'col_0' => '',
+              'col_1' => '',
+              'col_2' => '',
+              'col_3' => '',
+            ),
+            'row_2' => array(
+              'col_0' => '',
+              'col_1' => '',
+              'col_2' => '',
+              'col_3' => '',
+            ),
+            'row_3' => array(
+              'col_0' => '',
+              'col_1' => '',
+              'col_2' => '',
+              'col_3' => '',
+            ),
+            'row_4' => array(
+              'col_0' => '',
+              'col_1' => '',
+              'col_2' => '',
+              'col_3' => '',
+            ),
           ),
         ),
       ),
@@ -2135,12 +2150,12 @@ function eitiwidgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'tablefield',
         'settings' => array(
-          'export_csv' => FALSE,
+          'export_csv' => 0,
           'header_orientation' => 'Horizontal',
           'hide_cols_skip_head' => FALSE,
           'hide_empty_cols' => FALSE,
           'hide_empty_rows' => FALSE,
-          'hide_header' => FALSE,
+          'hide_header' => 0,
           'sortable' => FALSE,
           'sticky_header' => TRUE,
           'striping' => TRUE,
@@ -2163,7 +2178,11 @@ function eitiwidgets_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'tablefield',
-      'settings' => array(),
+      'settings' => array(
+        'cell_processing' => 0,
+        'lock_values' => 0,
+        'restrict_rebuild' => 0,
+      ),
       'type' => 'tablefield',
       'weight' => 5,
     ),
@@ -2529,6 +2548,42 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_bg_colour'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_bg_colour'] = array(
+    'bundle' => 'text',
+    'default_value' => array(
+      0 => array(
+        'value' => 'blue',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_bg_colour',
+    'label' => 'Background colour',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_body'.
   $field_instances['fieldable_panels_pane-text-field_fpp_body'] = array(
     'bundle' => 'text',
@@ -2541,7 +2596,7 @@ function eitiwidgets_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -2636,6 +2691,78 @@ function eitiwidgets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_text1'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_text1'] = array(
+    'bundle' => 'text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_text1',
+    'label' => 'Video title',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_text2'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_text2'] = array(
+    'bundle' => 'text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_text2',
+    'label' => 'Video description',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance:
   // 'fieldable_panels_pane-text-field_fpp_useful_links'.
   $field_instances['fieldable_panels_pane-text-field_fpp_useful_links'] = array(
@@ -2652,7 +2779,7 @@ function eitiwidgets_field_default_field_instances() {
           'size' => '1em',
         ),
         'type' => 'link_icon',
-        'weight' => 4,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'fieldable_panels_pane',
@@ -2689,6 +2816,89 @@ function eitiwidgets_field_default_field_instances() {
       'settings' => array(),
       'type' => 'link_field',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'fieldable_panels_pane-text-field_fpp_video'.
+  $field_instances['fieldable_panels_pane-text-field_fpp_video'] = array(
+    'bundle' => 'text',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 7,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'fieldable_panels_pane',
+    'field_name' => 'field_fpp_video',
+    'label' => 'Video',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'entity_translation_sync' => 0,
+      'file_directory' => '',
+      'file_extensions' => '',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 0,
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 0,
+          'vimeo' => 0,
+          'youtube' => 0,
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 0,
+          'report' => 0,
+          'video' => 'video',
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 'media_internet',
+          'media_library--audio_library' => 0,
+          'media_library--document_library' => 0,
+          'media_library--image_library' => 0,
+          'media_library--video_library' => 'media_library--video_library',
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 9,
     ),
   );
 
@@ -3009,6 +3219,7 @@ function eitiwidgets_field_default_field_instances() {
   t('Article List');
   t('Background Image');
   t('Background Video');
+  t('Background colour');
   t('Body');
   t('Bookmark List');
   t('Bookmark widget configuration.');
@@ -3046,6 +3257,9 @@ function eitiwidgets_field_default_field_instances() {
   t('Upload a relevant image, it should have a landscape orientation and it should be at least 960 pixels wide and 300 pixels tall.');
   t('Upload a relevant image, it should have a landscape orientation.');
   t('Useful Links');
+  t('Video');
+  t('Video description');
+  t('Video title');
   t('Widget');
 
   return $field_instances;

@@ -257,17 +257,17 @@ function eitiwidgets_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_fpp_useful_links' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_fpp_icon' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_fpp_useful_links' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
         ),
       ),
     ),
@@ -867,20 +867,32 @@ function eitiwidgets_ds_layout_settings_info() {
     'regions' => array(
       'main' => array(
         0 => 'group_title_wrapper',
-        1 => 'field_fpp_icon',
-        2 => 'field_fpp_body',
-        3 => 'field_fpp_useful_links',
-        4 => 'title_field',
+        1 => 'field_fpp_body',
+        2 => 'field_fpp_useful_links',
+        3 => 'field_fpp_icon',
+        4 => 'group_video_wrapper',
+        5 => 'title_field',
+        6 => 'field_fpp_text1',
+        7 => 'field_fpp_video',
+        8 => 'field_fpp_text2',
       ),
     ),
     'fields' => array(
       'group_title_wrapper' => 'main',
-      'field_fpp_icon' => 'main',
       'field_fpp_body' => 'main',
       'field_fpp_useful_links' => 'main',
+      'field_fpp_icon' => 'main',
+      'group_video_wrapper' => 'main',
       'title_field' => 'main',
+      'field_fpp_text1' => 'main',
+      'field_fpp_video' => 'main',
+      'field_fpp_text2' => 'main',
     ),
-    'classes' => array(),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
     'wrappers' => array(
       'main' => 'div',
       'ds_hidden' => 'div',

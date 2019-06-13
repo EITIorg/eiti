@@ -765,13 +765,7 @@ function eitiwidgets_strongarm() {
   $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_fact_blocks';
   $strongarm->value = array(
     'status' => 0,
-    'view modes' => array(
-      'default' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-    ),
+    'view modes' => array(),
   );
   $export['panelizer_defaults_fieldable_panels_pane_fact_blocks'] = $strongarm;
 
@@ -791,13 +785,7 @@ function eitiwidgets_strongarm() {
   $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_header';
   $strongarm->value = array(
     'status' => 0,
-    'view modes' => array(
-      'default' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-    ),
+    'view modes' => array(),
   );
   $export['panelizer_defaults_fieldable_panels_pane_header'] = $strongarm;
 
@@ -817,13 +805,7 @@ function eitiwidgets_strongarm() {
   $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_quote';
   $strongarm->value = array(
     'status' => 0,
-    'view modes' => array(
-      'default' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-    ),
+    'view modes' => array(),
   );
   $export['panelizer_defaults_fieldable_panels_pane_quote'] = $strongarm;
 
@@ -873,13 +855,7 @@ function eitiwidgets_strongarm() {
   $strongarm->name = 'panelizer_defaults_fieldable_panels_pane_visualization';
   $strongarm->value = array(
     'status' => 0,
-    'view modes' => array(
-      'default' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-    ),
+    'view modes' => array(),
   );
   $export['panelizer_defaults_fieldable_panels_pane_visualization'] = $strongarm;
 

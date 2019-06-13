@@ -541,11 +541,79 @@ function eitiwidgets_field_group_info() {
   );
   $field_groups['group_title_wrapper|fieldable_panels_pane|visualization|default'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_video_display|fieldable_panels_pane|text|form';
+  $field_group->group_name = 'group_video_display';
+  $field_group->entity_type = 'fieldable_panels_pane';
+  $field_group->bundle = 'text';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Video display',
+    'weight' => '8',
+    'children' => array(
+      0 => 'field_fpp_bg_colour',
+      1 => 'field_fpp_text1',
+      2 => 'field_fpp_text2',
+      3 => 'field_fpp_video',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Video display',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-video-display field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_video_display|fieldable_panels_pane|text|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_video_wrapper|fieldable_panels_pane|text|default';
+  $field_group->group_name = 'group_video_wrapper';
+  $field_group->entity_type = 'fieldable_panels_pane';
+  $field_group->bundle = 'text';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Video wrapper',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_fpp_text1',
+      1 => 'field_fpp_video',
+      2 => 'field_fpp_text2',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Video wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'pane-video-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_video_wrapper|fieldable_panels_pane|text|default'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Blockquote');
   t('Title Display');
   t('Title Wrapper');
+  t('Video display');
+  t('Video wrapper');
 
   return $field_groups;
 }
