@@ -46,6 +46,10 @@ function helpertheme_color_palette() {
         '#value' => '#2b8636',
         '#desc' => 'alternative color for footer text',
       ),
+      'clnormal__black' => array(
+        '#value' => '#000000',
+        '#desc' => 'alternative color for text',
+      ),
     ),
   );
 

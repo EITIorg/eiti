@@ -55,7 +55,7 @@
 
 html {
     // Set the base font style.
-    color: @clnormal;
+    color: @clnormal__black;
     font-family: @fstack_default;
     .i18n-ru {
         font-family: @fstack_ru;
@@ -65,6 +65,9 @@ html {
 p {
     font-size: 1rem;
     line-height: 1.5rem;
+    >a {
+        text-decoration: underline;
+    }
 }
 
 .xMediumAndUp() {
