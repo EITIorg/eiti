@@ -63,7 +63,7 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     $block['articles']['top'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
-      '#value' => t('<a href="/articles">See all</a>'),
+      '#value' => t('<a href="/news">See all</a>'),
       '#attributes' => array('class' => array('top')),
     );
   }
@@ -76,7 +76,7 @@ function eiti_ctools_extra__articles__render($subtype, $conf, $panel_args, $cont
     $block['articles']['bottom'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
-      '#value' => t('<a href="/articles">See all</a>'),
+      '#value' => t('<a href="/news">See all</a>'),
       '#attributes' => array('class' => array('bottom')),
     );
   }
