@@ -485,7 +485,7 @@ function eitict_article_panelizer_defaults() {
   $pane->panel = 'main';
   $pane->type = 'related-articles';
   $pane->subtype = 'related-articles';
-  $pane->shown = TRUE;
+  $pane->shown = FALSE;
   $pane->access = array();
   $pane->configuration = array();
   $pane->cache = array();
