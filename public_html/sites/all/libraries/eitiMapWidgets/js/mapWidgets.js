@@ -24172,6 +24172,26 @@
 	  }, {
 	    key: 'legend',
 	    value: function legend(indicator_id) {
+	      // For simple status/overview map.
+	      if (indicator_id == 'status' && !this.props.buttons) {
+	        var legend = document.createElement("DIV");
+	        var h2El_2 = document.createElement("H2");
+	        h2El_2.innerText = _helpers.helpers.t('EITI members');
+	        var indicatorData = this.getIndicatorData.call(this, indicator_id || this.state.indicator_id);
+	        var indicatorHeader = indicatorData["header"];
+	        var mergedHTML = "";
+	        var headerText = '<div class="legend_header" >' + _helpers.helpers.t(indicatorHeader) + "</div>";
+	        mergedHTML += headerText;
+	        var divLegendBody = document.createElement("DIV");
+	        divLegendBody.className = "inner";
+	        divLegendBody.innerHTML = mergedHTML;
+	
+	        legend.appendChild(h2El_2);
+	        legend.appendChild(divLegendBody);
+	
+	        return legend;
+	      }
+	
 	      var legend = document.createElement("DIV");
 	
 	      var indicatorMetadata;
