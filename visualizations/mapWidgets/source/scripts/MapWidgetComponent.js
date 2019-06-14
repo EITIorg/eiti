@@ -11,6 +11,7 @@ import _ from 'underscore';
 // Legend information
 import { indicator_list } from './data/indicator_list.js';
 import { status } from './data/status.js';
+import { status2 } from './data/status2.js';
 import { online_oil_registry } from './data/online_oil_registry.js';
 import { online_mining_registry } from './data/online_mining_registry.js';
 import { online_contracts } from './data/online_contracts.js';
@@ -233,7 +234,7 @@ export default class MapWidgetComponent extends Component {
     // Assign color with the new metadata
     countryGeoJsonProcessed.features.forEach(function(feature) {
         var indicator_color;
-        indicator_color = ::this.getColor(feature.indicator_type, feature.indicator_value, metadata);
+        indicator_color = ::this.getColor(feature.indicator_type, feature.indicator_value, metadata, indicator_id);
         feature['indicator_color'] = indicator_color;
       }.bind(this));
 
@@ -273,7 +274,12 @@ export default class MapWidgetComponent extends Component {
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
     const hoverDecider = this.props.infobox ? function(feature, layer){this.onEachFeaturePage(feature, layer)}.bind(this) : function(feature, layer){this.onEachFeatureStatus(feature, layer)}.bind(this);
 
-    ::this.updateLegend(e, indicator_id);
+    if(this.props.selector) {
+      ::this.addLegend(map, indicator_id, countryDataProcessed);
+    }
+    else {
+      ::this.updateLegend(e, indicator_id);
+    }
 
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
   }
@@ -283,6 +289,9 @@ export default class MapWidgetComponent extends Component {
     switch(indicator_id) {
       case "status":
         values = status;
+        if(this.props.selector) {
+          values = status2;
+        }
       break;
       case "online_oil_registry":
         values = online_oil_registry;
@@ -325,6 +334,97 @@ export default class MapWidgetComponent extends Component {
     const map = this.refs['map'].leafletElement;
     const geoJsonLayer = this.refs['geoJsonLayer'].leafletElement;
     map.removeLayer(geoJsonLayer);
+  }
+
+  addLegend(map, indicator_id, countryDataProcessed) {
+    var info = L.control({position: 'bottomleft'});
+
+    info.onAdd = function (map) {
+      if(map.options.legend === undefined) {
+        map.options.legend = L.DomUtil.create('div', 'info legend');
+      }
+      this.update();
+      return map.options.legend;
+    };
+
+    info.update = function (props) {
+      var indicatorMetadata;
+      indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
+
+      var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
+      var indicatorName = indicatorData["name"];
+      var indicatorDescription = indicatorData["description"];
+      var indicatorHeader = indicatorData["header"];
+      var indicatorFooter = indicatorData["footer"];
+
+      var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
+
+      var h2El = document.createElement("H2");
+      h2El.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
+      h2El.className = "responsive-header";
+
+      var spanEl = document.createElement("SPAN");
+      spanEl.innerText = helpers.t("show");
+      h2El.appendChild(spanEl);
+
+      var h2El_2 = document.createElement("H2");
+      h2El_2.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
+
+      var spanEl_2 = document.createElement("SPAN");
+      spanEl_2.innerText = helpers.t("hide");
+      h2El_2.appendChild(spanEl_2);
+
+      var divLegend = document.createElement("DIV");
+      divLegend.className = "responsive-legend";
+
+
+      var mergedHTML = "";
+      var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
+      mergedHTML += headerText;
+      var noDataIncluded = false;
+      indicatorMetadata.forEach(function(v) {
+        noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
+        if(v.use_style) {
+          mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+        }
+        else {
+          mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
+        }
+        if(v.subtitle != "") {
+          mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
+        }
+      });
+      //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
+
+      var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>";
+      mergedHTML += footerText;
+
+      var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>";
+
+      var divLegendBody = document.createElement("DIV");
+      divLegendBody.innerHTML = mergedHTML + sourceText;
+      divLegend.appendChild(h2El_2);
+      divLegend.appendChild(divLegendBody);
+
+      while (map.options.legend.firstChild) {
+        map.options.legend.removeChild(map.options.legend.firstChild);
+      }
+
+      map.options.legend.appendChild(h2El);
+      map.options.legend.appendChild(divLegend);
+
+      spanEl.onclick = function() {
+        divLegend.style.display = 'block';
+        h2El.style.display = 'none';
+      };
+
+      spanEl_2.onclick = function() {
+        divLegend.style.display = 'none';
+        h2El.style.display = 'block';
+      };
+    }.bind(this);
+
+    info.addTo(map);
   }
 
   legend(indicator_id) {
@@ -424,15 +524,19 @@ export default class MapWidgetComponent extends Component {
   }
 
 
-  getColor(indicator_type, indicator_value, metadata) {
+  getColor(indicator_type, indicator_value, metadata, indicator_id) {
     if(indicator_type == 'fixed') {
-        var i_val = 0;
+      var i_val = indicator_value;
+      // Limit overview to 2 colors together with status.js changes.
+      if (indicator_id == 'status' && !this.props.buttons) {
+        i_val = 0;
         if (this.isNumeric(indicator_value) && jQuery.inArray(indicator_value, ['5329', '75', '74', '5327', '8212', '8213']) > -1) {
           i_val = 1;
         }
-        var completeType = _.find(metadata, function(v){ return (v.id == i_val)});
+      }
+      var completeType = _.find(metadata, function(v){ return (v.id == i_val)});
 
-        return completeType ? completeType.color: '#dddddd';
+      return completeType ? completeType.color: '#dddddd';
     }
     else
     {
@@ -582,13 +686,17 @@ export default class MapWidgetComponent extends Component {
       elementClass = 'resizable-map';
     }
 
-    var legend = this.legend(this.state.indicator_id);
+    var legend_html = '';
+    if (!buttons) {
+      var legend = this.legend(this.state.indicator_id);
+      legend_html = (<div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>);
+    }
 
     return (
 
       <div className={containerClass}>
         {buttons}
-        <div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>
+        {legend_html}
         <div className="map-wrap">
           <Map className={elementClass}
             center={this.state.latlng}
@@ -604,6 +712,9 @@ export default class MapWidgetComponent extends Component {
               url=''
               onLeafletLoad={function(e) {
                 if(!this.state.initialized) {
+                  if (buttons) {
+                    this.addLegend(e.target._map, this.state.indicator_id);
+                  }
                   this.setState({initialized:true});
                 }
               }.bind(this)}
