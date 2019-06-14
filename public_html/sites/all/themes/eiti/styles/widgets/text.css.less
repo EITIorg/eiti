@@ -12,21 +12,20 @@
             .pane-video-wrapper {
                 max-width: 40%;
                 -webkit-box-flex: 0;
-                    -ms-flex: 0 0 40%;
-                        flex: 0 0 40%;
+                -ms-flex: 0 0 40%;
+                flex: 0 0 40%;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
                 -webkit-box-orient: vertical;
                 -webkit-box-direction: normal;
-                    -ms-flex-direction: column;
-                        flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
                 -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                        justify-content: center;
-                background-color: #EAF6FA;
+                -ms-flex-pack: center;
+                justify-content: center;
                 -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
+                box-sizing: border-box;
                 padding: 2.25rem;
                 .field-name-field-fpp-video {
                     margin: 0;
@@ -47,10 +46,10 @@
             .pane-main-content-wrapper {
                 max-width: 60%;
                 -webkit-box-flex: 0;
-                    -ms-flex: 0 0 60%;
-                        flex: 0 0 60%;
+                -ms-flex: 0 0 60%;
+                flex: 0 0 60%;
                 -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
+                box-sizing: border-box;
                 padding-right: 3.125rem;
                 .field-name-field-fpp-useful-links {
                     .field-items {
@@ -58,7 +57,7 @@
                         display: -ms-flexbox;
                         display: flex;
                         -ms-flex-wrap: wrap;
-                            flex-wrap: wrap;
+                        flex-wrap: wrap;
                         .field-item {
                             margin-right: 3.125rem;
                             &:last-child {
@@ -66,6 +65,53 @@
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+.xMediumAndDown() {
+    .predefined-widget--text {
+        &.has-video {
+            .group-main {
+                flex-direction: column-reverse;
+                .pane-video-wrapper {
+                    max-width: 100%;
+                    -webkit-box-flex: 0;
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    .field-name-field-fpp-video {
+                        margin: 0;
+                    }
+                    .field-name-field-fpp-text2 {
+                        font-size: 1rem;
+                        line-height: 1.5rem;
+                        margin: 1.5rem 0;
+                    }
+                }
+                .pane-main-content-wrapper {
+                    max-width: 100%;
+                    -webkit-box-flex: 0;
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100%;
+                    padding-right: 0;
+                    padding-top: 3rem;
+                }
+            }
+        }
+    }
+}
+
+.xSmallOnly() {
+    .predefined-widget--text {
+        &.has-video {
+            .group-main {
+                .pane-video-wrapper {
+                    max-width: initial !important;
+                    padding: 1.5rem;
+                    margin-left: -1.5rem;
+                    margin-right: -1.5rem;
                 }
             }
         }

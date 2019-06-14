@@ -52,7 +52,6 @@
 }
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900&display=swap&subset=cyrillic');
-
 html {
     // Set the base font style.
     color: @clnormal__black;
@@ -77,6 +76,7 @@ p {
     }
 }
 
+
 /**
  * Set the base style for anchor tags.
  */
@@ -100,11 +100,16 @@ a {
         text-decoration: none;
     }
     &.link-title-with-icon .icon {
-        fill: @clanchor;
+        // fill: @clanchor;
         margin-right: 0.5em;
+        vertical-align: initial;
+        margin-bottom: -2px;
+        display: inline-block;
+        transition: transform 0.3s ease
     }
     &.link-title-with-icon:hover .icon {
-        fill: @clanchor__active;
+        // fill: @clanchor__active;
+        transform: translateX(8px);
     } // @TODO: Only change links inside text fields. Use a class for the used text format.
     //.field & {
     //  font-weight: bold;
