@@ -55,6 +55,7 @@ function eiti_ctools_extra_map_simple_render($subtype, $conf, $panel_args, $cont
         'eiti-map-wrapper',
         'semi-interactive-map-wrapper',
         'media-resizable-wrapper',
+        'simple-map-wrapper',
       ),
     )
   );
@@ -68,6 +69,7 @@ function eiti_ctools_extra_map_simple_render($subtype, $conf, $panel_args, $cont
       'class' => array(
         'semi-interactive-map',
         'media-resizable-element',
+        'overview-map',
       ),
     )
   );
