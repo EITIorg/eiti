@@ -127,6 +127,10 @@ changeYear: true',
   $handler->display->display_options['pager']['options']['offset'] = '1';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['first'] = 'First';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = 'Previous';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'Next';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'Last';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Content: Entity translation: translations */
@@ -220,21 +224,11 @@ changeYear: true',
   $handler->display->display_options['filters']['created']['group'] = 1;
   $handler->display->display_options['filters']['created']['exposed'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['label'] = 'Date min';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Date from';
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'date_min';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'date_from';
   $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    3 => 0,
-    9 => 0,
-    7 => 0,
-    8 => 0,
-    6 => 0,
-    5 => 0,
-    10 => 0,
-    4 => 0,
-    11 => 0,
   );
   /* Filter criterion: Content: Post date */
   $handler->display->display_options['filters']['created_1']['id'] = 'created_1';
@@ -244,21 +238,11 @@ changeYear: true',
   $handler->display->display_options['filters']['created_1']['group'] = 1;
   $handler->display->display_options['filters']['created_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['created_1']['expose']['operator_id'] = 'created_1_op';
-  $handler->display->display_options['filters']['created_1']['expose']['label'] = 'Date max';
+  $handler->display->display_options['filters']['created_1']['expose']['label'] = 'Date to';
   $handler->display->display_options['filters']['created_1']['expose']['operator'] = 'created_1_op';
-  $handler->display->display_options['filters']['created_1']['expose']['identifier'] = 'date_max';
+  $handler->display->display_options['filters']['created_1']['expose']['identifier'] = 'date_to';
   $handler->display->display_options['filters']['created_1']['expose']['remember_roles'] = array(
     2 => '2',
-    1 => 0,
-    3 => 0,
-    9 => 0,
-    7 => 0,
-    8 => 0,
-    6 => 0,
-    5 => 0,
-    10 => 0,
-    4 => 0,
-    11 => 0,
   );
   /* Filter criterion: Content: Tags (field_tags) */
   $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
@@ -608,13 +592,13 @@ changeYear: true'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('First'),
+    t('Previous'),
+    t('Next'),
+    t('Last'),
     t('Translations'),
-    t('Date min'),
-    t('Date max'),
+    t('Date from'),
+    t('Date to'),
     t('Tags'),
     t('Search'),
     t('Sticky'),
