@@ -1,0 +1,194 @@
+.panel-pane {
+    .eiti-map-wrapper {
+        .legend {
+            color: initial;
+            h2 {
+                color: @clnormal;
+                font-size: 1.875rem;
+                line-height: 2.5rem;
+                font-weight: 300;
+                margin: 0;
+                padding: 1.5rem 0;
+            }
+            .legend_footer {
+                color: initial;
+            }
+            .inner {
+                font-size: 1rem;
+                line-height: 1.5rem;
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+        .country-list {
+            li {
+                border-bottom: none;
+                margin-bottom: 1rem;
+                padding-bottom: 0;
+            }
+        }
+        .country-info-wrapper {
+            padding: 0 1.5rem 1.5rem;
+        }
+        .country-info-header {
+            background: transparent;
+            border-bottom: 1px solid @clmain__separator;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: @clnormal;
+            padding: 1.5rem;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .country-info-top-indicators,
+        .country-info-content,
+        .country-link {
+            font-size: 0.875rem;
+            line-height: 1.375rem;
+        }
+        .leaflet-container {
+            a {
+                &.leaflet-popup-close-button {
+                    display: inline-block;
+                    text-indent: -9999px;
+                    padding: 0;
+                    width: 16px;
+                    height: 16px;
+                    top: 1.75rem;
+                    right: 1.5rem;
+                    &:before {
+                        content: "";
+                        background-image: url(~"@{theme_path}images/icons/close.svg");
+                        background-size: contain;
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        vertical-align: middle;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                    }
+                    &:hover {
+                        &:before {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+            }
+        }
+        .map-option-wrapper {            
+            .map-option-widget {
+                border: none;
+                >li {
+                    color: @clnormal;
+                    font-weight: bold;
+                    background: transparent;
+                    position: relative;
+                    font-size: 1.125rem;
+                    line-height: 1.875rem;
+                    text-transform: none;
+                    padding-left: 1.75rem;
+                    margin-bottom: 1.5em;
+                    &:before {
+                        content: "";
+                        background-image: url(~"@{theme_path}images/icons/angle-down.svg");
+                        background-size: contain;
+                        display: inline-block;
+                        width: 14px;
+                        height: 10px;
+                        vertical-align: middle;
+                        background-repeat: no-repeat;
+                        transition: transform 200ms ease;
+                        transform-origin: center;
+                        position: absolute;
+                        left: 0;
+                        top: 10px;
+                    }
+                    >span {
+                        border-right: none;
+                    }
+                    .map-option-items {
+                        padding: 0.75rem 0 0;
+                        background: transparent;
+                        li {
+                            padding: 0;
+                            margin: 0 0 0.5rem;
+                            font-weight: normal;
+                            color: @cldetail;
+                            font-size: 1.125rem;
+                            line-height: 1.875rem;
+                            &:before {
+                                content: "";
+                                margin: 0;
+                            }
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                            &:hover {
+                                color: @claltnormal;
+                            }
+                            &.active {
+                                padding-left: 1.25rem;
+                                font-weight: bold;
+                                color: @claltnormal;
+                                &:before {
+                                    content: "";
+                                    background-color: @claltnormal;
+                                    background-image: url(~"@{theme_path}images/icons/check-white.svg");
+                                    background-size: 60%;
+                                    background-position: center;
+                                    display: inline-block;
+                                    width: 14px;
+                                    height: 14px;
+                                    vertical-align: middle;
+                                    background-repeat: no-repeat;
+                                    transition: transform 200ms ease;
+                                    transform-origin: center;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 7px;
+                                    border-radius: 50%;
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        &:before {
+                            transform: rotate(-180deg);
+                        }
+                        .map-option-items {
+                            display: block;
+                            position: static;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.xMediumAndUp() {
+    .panel-pane {
+        .eiti-map-wrapper {
+            .legend {
+                h2 {
+                    font-size: 3rem;
+                    line-height: 3.75rem;
+                    padding: 2.25rem 0;
+                }
+                .inner {
+                    font-size: 1.125rem;
+                    line-height: 1.875rem;
+                }
+            }
+        }
+    }
+}
+
+@import '../lib/custom-grid.less';
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';
