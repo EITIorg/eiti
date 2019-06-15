@@ -36,11 +36,11 @@ function eitict_article_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'helpergeneric',
+        'module' => 'text',
         'settings' => array(
-          'trim_length' => 256,
+          'trim_length' => 400,
         ),
-        'type' => 'helpergeneric_clean_summary',
+        'type' => 'text_summary_or_trimmed',
         'weight' => 4,
       ),
       'teaser_alternative' => array(

@@ -163,6 +163,11 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
+    'body' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|article|teaser'] = $ds_fieldsetting;
 
