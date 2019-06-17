@@ -80,7 +80,7 @@
                 }
             }
         }
-        .map-option-wrapper {            
+        .map-option-wrapper {
             .map-option-widget {
                 border: none;
                 >li {
@@ -102,7 +102,11 @@
                         height: 10px;
                         vertical-align: middle;
                         background-repeat: no-repeat;
+                        -webkit-transition: -webkit-transform 200ms ease;
+                        transition: -webkit-transform 200ms ease;
                         transition: transform 200ms ease;
+                        transition: transform 200ms ease, -webkit-transform 200ms ease;
+                        -webkit-transform-origin: center;
                         transform-origin: center;
                         position: absolute;
                         left: 0;
@@ -146,7 +150,11 @@
                                     height: 14px;
                                     vertical-align: middle;
                                     background-repeat: no-repeat;
+                                    -webkit-transition: -webkit-transform 200ms ease;
+                                    transition: -webkit-transform 200ms ease;
                                     transition: transform 200ms ease;
+                                    transition: transform 200ms ease, -webkit-transform 200ms ease;
+                                    -webkit-transform-origin: center;
                                     transform-origin: center;
                                     position: absolute;
                                     left: 0;
@@ -158,6 +166,7 @@
                     }
                     &:hover {
                         &:before {
+                            -webkit-transform: rotate(-180deg);
                             transform: rotate(-180deg);
                         }
                         .map-option-items {
