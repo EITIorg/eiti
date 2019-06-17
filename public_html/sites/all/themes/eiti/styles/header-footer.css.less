@@ -278,7 +278,7 @@
                 .link {
                     svg {
                         path {
-                            stroke: @clactive__alt;
+                            stroke: @claltnormal;
                         }
                     }
                 }
@@ -375,7 +375,7 @@
         display: inline-block;
     }
     .link-toplevel {
-        .link-color(@cldetail, @clactive__alt);
+        .link-color(@cldetail, @claltnormal);
         font-weight: bold;
         font-size: 1.125rem;
     }
@@ -406,6 +406,25 @@
         }
         .link-toplevel {
             padding: 0.6rem;
+            position: relative;
+            &:before {
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background: @claltnormal;
+                transition: width .3s;
+                position: absolute;
+                bottom: 0;
+                left: 0.6rem;
+            }
+            &:hover,
+            &.active,
+            &:active {
+                &:before {
+                    width: ~"calc(100% - 1.2rem)";
+                }
+            }
         }
     }
 }
@@ -453,7 +472,7 @@
     .language-link {
         font-size: 1rem;
         line-height: 1.5rem;
-        .link-color(@cldetail, @clactive__alt);
+        .link-color(@cldetail, @claltnormal);
     }
     .ru {
         .language-link {
@@ -564,7 +583,7 @@
 .main-footer {
     color: @clmain;
     a {
-        .link-color(@claltnormal__light, @clanchor__hover);
+        .link-color(@claltnormal__light, @claltnormal);
     }
     .section-title {
         color: @clmain;
@@ -750,7 +769,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.5);
         }
         &:hover {
-            color: @clactive__alt;
+            color: @claltnormal;
             &:before {
                 display: none;
             }

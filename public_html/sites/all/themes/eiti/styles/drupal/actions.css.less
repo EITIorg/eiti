@@ -202,6 +202,14 @@
 }
 
 .xSmallOnly() {
+    .item-list {
+        .pager {
+            li {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
     .pager-next,
     .pager-previous,
     .pager-last,
@@ -223,6 +231,11 @@
                 top: 0 !important;
             }
         }
+    }
+    .pager-current {
+        margin-top: -4px;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
     }
 }
 
