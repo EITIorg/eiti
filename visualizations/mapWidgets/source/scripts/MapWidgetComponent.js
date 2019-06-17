@@ -433,8 +433,7 @@ export default class MapWidgetComponent extends Component {
       var legend = document.createElement("DIV");
       var h2El_2 = document.createElement("H2");
       h2El_2.innerText = helpers.t('EITI members');
-      var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
-      var indicatorHeader = indicatorData["header"];
+      var indicatorHeader = '<a href="/countries">Click here to view the full interactive map</a>';
       var mergedHTML = "";
       var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
       mergedHTML += headerText;
