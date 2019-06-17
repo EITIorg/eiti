@@ -1,9 +1,11 @@
-.pane-articles {
+.pane-articles,
+.pane-related-articles {
     * {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
-    .articles {
+    .articles,
+    .related-articles {
         position: relative;
         .top,
         .bottom {
@@ -171,9 +173,35 @@
     }
 }
 
+.xMediumOnly() {
+    .pane-related-articles {
+        .related-articles {
+            .single-fluid-row-wrapper(8);
+        }
+    }
+}
+
+.xMediumAndUp() {
+    .pane-related-articles {
+        .related-articles {
+            .single-fluid-row-wrapper(8);
+        }
+    }
+}
+
+.xNormalAndUp() {
+    .pane-related-articles {
+        .related-articles {
+            .single-fluid-row-wrapper(12);
+        }
+    }
+}
+
 .xMediumAndDown() {
-    .pane-articles {
-        .articles {
+    .pane-articles,
+    .pane-related-articles {
+        .articles,
+        .related-articles {
             .top {
                 top: 38px;
             }
@@ -201,8 +229,10 @@
 }
 
 .xSmallOnly() {
-    .pane-articles {
-        .articles {
+    .pane-articles,
+    .pane-related-articles {
+        .articles,
+        .related-articles {
             position: relative;
             .top,
             .bottom {
@@ -254,7 +284,8 @@
 }
 
 @media (max-width: 460px) {
-    .pane-articles {
+    .pane-articles,
+    .pane-related-articles {
         .view-articles {
             .view-content {
                 .group-above {
@@ -277,5 +308,6 @@
     }
 }
 
+@import '../lib/custom-grid.less';
 @import '../lib/custom-responsive.less';
 @import '../lib/helpers.less';

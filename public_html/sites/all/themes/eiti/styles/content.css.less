@@ -32,10 +32,14 @@
 
 .article-header {
     .title {
-        font-weight: normal;
+        font-weight: 300;
+        font-size: 1.5rem;
+        line-height: 2.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
     &.with-background-image {
-        @aspect_ratio: (5 / 16) * 100%;
+        @aspect_ratio: 10.5%;
         display: block; // We need a block element for this to work.
         height: auto;
         padding-top: @aspect_ratio;
@@ -84,10 +88,6 @@
 
 .article-info-wrapper {
     background-color: @clmain__header;
-}
-
-.node-article {
-    overflow: hidden;
 }
 
 .article-info {
@@ -220,6 +220,32 @@
     }
 }
 
+.node-article {
+    overflow: hidden;
+    .article-header {
+        &.with-background-image {
+            .overlay-wrapper {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                width: 100%;
+                background-color: rgba(19, 40, 86, 0.84);
+            }
+            +.article-info-wrapper {
+                .article-info {
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .xMediumAndUp() {
     .article-info {
         &:before {
@@ -256,6 +282,23 @@
             margin: 0 0 0.75rem;
             font-size: 1.125rem;
             line-height: 1.875rem;
+        }
+    }
+    .node-article {
+        .article-header {
+            &.with-background-image {
+                .overlay-wrapper {
+                    width: ~"calc(50em + 100px)";
+                }
+            }
+        }
+    }
+    .article-header {
+        .title {
+            font-size: 3rem;
+            line-height: 3.75rem;
+            margin-top: 2.25rem;
+            margin-bottom: 2.25rem;
         }
     }
 }
