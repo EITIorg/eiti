@@ -176,12 +176,27 @@
         .eiti-map-wrapper {
             .map-option-wrapper {
                 .map-option-widget {
-                    li {
+                    >li {
+                        padding: 0 0 0 1.5rem;
+                    }
+                    li,
+                    li.simple,
+                    li .map-option-items li {
                         font-size: 1rem;
                         line-height: 1.5rem;
-                        text-transform: none;
-                        padding: 0 0 0 1.5rem;
+                        text-transform: none;                        
                         width: 100%;
+                    }
+                    li {
+                        &:before {
+                            top: 7px;
+                        }
+                        .map-option-items li.active,
+                        &.simple.active {
+                            &:before {
+                                top: 5px;
+                            }
+                        }
                     }
                 }
             }

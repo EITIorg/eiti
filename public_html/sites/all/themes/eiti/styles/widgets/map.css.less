@@ -116,6 +116,7 @@
                         border-right: none;
                     }
                     .map-option-items {
+                        display: none;
                         padding: 0.75rem 0 0;
                         background: transparent;
                         li {
@@ -164,14 +165,56 @@
                             }
                         }
                     }
-                    &:hover {
+                    &.simple {
+                        padding: 0;
+                        font-weight: normal;
+                        color: @cldetail;
+                        font-size: 1.125rem;
+                        line-height: 1.875rem;
+                        &:before {
+                            display: none;
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                        &:hover {
+                            color: @claltnormal;
+                        }
+                        &.active {
+                            padding-left: 1.25rem;
+                            font-weight: bold;
+                            color: @claltnormal;
+                            &:before {
+                                content: "";
+                                background-color: @claltnormal;
+                                background-image: url(~"@{theme_path}images/icons/check-white.svg");
+                                background-size: 60%;
+                                background-position: center;
+                                display: inline-block;
+                                width: 14px;
+                                height: 14px;
+                                vertical-align: middle;
+                                background-repeat: no-repeat;
+                                -webkit-transition: -webkit-transform 200ms ease;
+                                transition: -webkit-transform 200ms ease;
+                                transition: transform 200ms ease;
+                                transition: transform 200ms ease, -webkit-transform 200ms ease;
+                                -webkit-transform-origin: center;
+                                transform-origin: center;
+                                position: absolute;
+                                left: 0;
+                                top: 7px;
+                                border-radius: 50%;
+                            }
+                        }
+                    }
+                    &.open {
+                        .map-option-items {
+                            display: block;
+                        }
                         &:before {
                             -webkit-transform: rotate(-180deg);
                             transform: rotate(-180deg);
-                        }
-                        .map-option-items {
-                            display: block;
-                            position: static;
                         }
                     }
                 }
