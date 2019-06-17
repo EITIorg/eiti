@@ -86,12 +86,37 @@
     background-color: @clmain__header;
 }
 
+.node-article {
+    overflow: hidden;
+}
+
 .article-info {
     padding: 0.5em;
     display: flex;
     display: -ms-flexbox;
     flex-wrap: wrap;
     -ms-flex-wrap: wrap;
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        height: 1px;
+        border-bottom: 1px solid @clmain__separator;
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        left: ~"calc(-1 * (100vw - 100%) / 2)";
+    }
+    &:after {
+        content: "";
+        display: block;
+        height: 1px;
+        border-bottom: 1px solid @clmain__separator;
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        left: ~"calc(-1 * (100vw - 100%) / 2)";
+    }
     .field {
         margin-right: 2em;
         &:last-child {
@@ -106,9 +131,22 @@
             display: inline;
         }
     }
+    .field-name-post-date {
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+        color: @claltdetail;
+    }
     .icon {
-        fill: @clanchor;
-        vertical-align: baseline;
+        // fill: @clanchor;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+    }
+    a {
+        vertical-align: middle;
+        .link-color(@cldetail, @claltnormal);
+        text-decoration: underline;
+        font-size: 0.875rem;
+        line-height: 1.375rem;
     }
     &.simple {
         border-bottom: 1px solid @clmain__separator;
@@ -116,6 +154,135 @@
         .field {
             margin-bottom: 0;
             margin-top: 0;
+        }
+    }
+}
+
+.field-name-field-authors {
+    position: relative;
+    margin: 3rem 0;
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+    &:before {
+        content: "";
+        display: block;
+        height: 1px;
+        border-bottom: 1px solid @clmain__separator;
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        left: ~"calc(-1 * (100vw - 100%) / 2)";
+    }
+    &:after {
+        content: "";
+        display: block;
+        height: 1px;
+        border-bottom: 1px solid @clmain__separator;
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        left: ~"calc(-1 * (100vw - 100%) / 2)";
+    }
+    .field-label {
+        font-size: 1.25rem;
+        line-height: 1.875rem;
+        color: @clnormal;
+        margin-bottom: 1.5rem;
+    }
+    .field-items {
+        margin-left: 0;
+    }
+    .field-item {
+        margin-bottom: 1.5rem;
+        &:before,
+        &:after {
+            clear: both;
+            content: " ";
+            display: table;
+        }
+    }
+    .field-name-field-person-picture {
+        float: left;
+        width: 200px;
+        margin: 0 1.5rem 0 0;
+    }
+    h3 {
+        margin: 0;
+        padding-top: .5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: @cldetail;
+    }
+    .field-name-field-position {
+        margin: 0 0 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+.xMediumAndUp() {
+    .article-info {
+        &:before {
+            width: ~"calc(100% + 100px)";
+            left: -50px;
+        }
+        &:after {
+            width: ~"calc(100% + 100px)";
+            left: -50px;
+        }
+        .field-name-post-date {
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+        .icon {
+            margin-right: 0.75rem;
+        }
+        a {
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+    }
+    .field-name-field-authors {
+        .field-label {
+            font-size: 1.5rem;
+            line-height: 2.25rem;
+        }
+        h3 {
+            padding-top: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+        .field-name-field-position {
+            margin: 0 0 0.75rem;
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+    }
+}
+
+.xNormalAndUp() {
+    .field-name-field-authors {
+        position: relative;
+        margin: 6rem 0;
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+        &:before {
+            width: ~"calc(100% + 400px)";
+            left: -200px;
+        }
+        &:after {
+            width: ~"calc(100% + 400px)";
+            left: -200px;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .field-name-field-authors {
+        .field-name-field-person-picture {
+            float: none;
+            width: 100%;
+            margin: 0;
         }
     }
 }
