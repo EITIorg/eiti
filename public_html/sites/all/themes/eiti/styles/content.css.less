@@ -37,6 +37,7 @@
         line-height: 2.25rem;
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+        color: @claltmain;
     }
     &.with-background-image {
         @aspect_ratio: 10.5%;
@@ -242,6 +243,15 @@
                     }
                 }
             }
+        }
+    }
+}
+
+.xSmallOnly() {
+    .article-header {
+        &.with-background-image {
+            @aspect_ratio: 32%;
+            padding-top: @aspect_ratio;
         }
     }
 }
