@@ -59,13 +59,19 @@ function eiti_ctools_extra__related_articles__render($subtype, $conf, $panel_arg
   $block['articles']['top'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'div',
-    '#value' => t('<a href="/articles">See all</a>'),
+    '#value' => t('<a href="/latest">See all</a>'),
     '#attributes' => array('class' => array('top')),
   );
   $block['articles']['list'] = array(
     '#theme' => 'html_tag',
     '#tag' => 'div',
     '#value' => $view,
+  );
+  $block['articles']['bottom'] = array(
+    '#theme' => 'html_tag',
+    '#tag' => 'div',
+    '#value' => t('<a href="/latest">See all</a>'),
+    '#attributes' => array('class' => array('bottom')),
   );
   return (object) array(
     'content' => $block,

@@ -150,19 +150,26 @@ function _eitict_article_entity_view_get_article_header($entity, $type, $view_mo
     ),
   );
 
-  // Add article type.
-  if (isset($entity->content['field_article_type'])) {
-    $elements['overlay']['article_type_wrapper'] = array(
-      '#type' => 'container',
+  $article_type = helperfield_field_get_value('node', $entity, 'field_article_type', 0, 'value');
+
+  // Add link to list display.
+  if ($article_type != 'event') {
+    $elements['overlay']['article_list_link'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('News and blog posts'),
+      '#title_tag' => 'a',
+      '#title_attributes' => array(
+        'href' => url('latest'),
+        'class' => array('link'),
+      ),
       '#attributes' => array(
         'class' => array(
-          'article-type-wrapper',
+          'article-list-link',
           'single-narrow-row-wrapper',
         ),
       ),
     );
-    $elements['overlay']['article_type_wrapper']['article_type'] = $entity->content['field_article_type'];
-    $entity->content['field_article_type']['#printed'] = TRUE;
   }
 
   // Add title to the article_header.
@@ -216,11 +223,21 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
   // Get the type of article.
   $article_type = helperfield_field_get_value('node', $entity, 'field_article_type', 0, 'value');
 
+  // Left side elements.
+  $elements['left'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'left',
+      ),
+    ),
+  );
+
   // Prepare the article information "field".
   switch ($article_type) {
     case 'event':
       if (isset($entity->content['field_event_date'])) {
-        $elements['field_event_date'] = $entity->content['field_event_date'];
+        $elements['left']['field_event_date'] = $entity->content['field_event_date'];
 
         $size = '1em';
         $options = array(
@@ -228,13 +245,13 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
           'height' => $size,
         );
         $svgicon = helpertheme_get_svg_icon('date', $options);
-        $elements['field_event_date'][0]['#prefix'] = $svgicon;
+        $elements['left']['field_event_date'][0]['#prefix'] = $svgicon;
 
         $entity->content['field_event_date']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_event_location'])) {
-        $elements['field_event_location'] = $entity->content['field_event_location'];
+        $elements['left']['field_event_location'] = $entity->content['field_event_location'];
 
         $size = '1em';
         $options = array(
@@ -242,13 +259,13 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
           'height' => $size,
         );
         $svgicon = helpertheme_get_svg_icon('country', $options);
-        $elements['field_event_location'][0]['#prefix'] = $svgicon;
+        $elements['left']['field_event_location'][0]['#prefix'] = $svgicon;
 
         $entity->content['field_event_location']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_tags'])) {
-        $elements['field_tags'] = $entity->content['field_tags'];
+        $elements['left']['field_tags'] = $entity->content['field_tags'];
 
         $size = '1em';
         $options = array(
@@ -256,7 +273,7 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
           'height' => $size,
         );
         $svgicon = helpertheme_get_svg_icon('tag', $options);
-        $elements['field_tags'][0]['#prefix'] = $svgicon;
+        $elements['left']['field_tags'][0]['#prefix'] = $svgicon;
 
         $entity->content['field_tags']['#printed'] = TRUE;
       }
@@ -264,7 +281,7 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
 
     default:
       if (isset($entity->content['author'])) {
-        $elements['author'] = $entity->content['author'];
+        $elements['left']['author'] = $entity->content['author'];
 
         $size = '1em';
         $options = array(
@@ -272,27 +289,18 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
           'height' => $size,
         );
         $svgicon = helpertheme_get_svg_icon('author', $options);
-        $elements['author'][0]['#prefix'] = $svgicon;
+        $elements['left']['author'][0]['#prefix'] = $svgicon;
 
         $entity->content['author']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['post_date'])) {
-        $elements['post_date'] = $entity->content['post_date'];
-
-        $size = '1em';
-        $options = array(
-          'width' => $size,
-          'height' => $size,
-        );
-        $svgicon = helpertheme_get_svg_icon('date', $options);
-        $elements['post_date'][0]['#prefix'] = $svgicon;
-
+        $elements['left']['post_date'] = $entity->content['post_date'];
         $entity->content['post_date']['#printed'] = TRUE;
       }
 
       if (isset($entity->content['field_tags'])) {
-        $elements['field_tags'] = $entity->content['field_tags'];
+        $elements['left']['field_tags'] = $entity->content['field_tags'];
 
         $size = '1em';
         $options = array(
@@ -300,14 +308,14 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
           'height' => $size,
         );
         $svgicon = helpertheme_get_svg_icon('tag', $options);
-        $elements['field_tags'][0]['#prefix'] = $svgicon;
+        $elements['left']['field_tags'][0]['#prefix'] = $svgicon;
 
         $entity->content['field_tags']['#printed'] = TRUE;
       }
       break;
   }
 
-  // Add right side elements.
+  // Right side elements.
   $elements['right'] = array(
     '#type' => 'container',
     '#attributes' => array(
