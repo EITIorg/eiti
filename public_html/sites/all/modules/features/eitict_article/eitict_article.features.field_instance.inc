@@ -94,10 +94,9 @@ function eitict_article_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -250,7 +249,7 @@ function eitict_article_field_default_field_instances() {
         'settings' => array(
           'links' => 0,
           'use_content_language' => 1,
-          'view_mode' => 'teaser_alternative',
+          'view_mode' => 'summary',
         ),
         'type' => 'entityreference_entity_view',
         'weight' => 7,
@@ -322,7 +321,7 @@ function eitict_article_field_default_field_instances() {
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -393,7 +392,7 @@ function eitict_article_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -729,7 +728,7 @@ function eitict_article_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -838,7 +837,7 @@ function eitict_article_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator_localized',
-        'weight' => 14,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -904,7 +903,7 @@ function eitict_article_field_default_field_instances() {
           'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'hidden',

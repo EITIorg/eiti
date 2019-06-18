@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitientities.ds.inc
@@ -36,6 +37,15 @@ function eitientities_ds_view_modes_info() {
     'node' => 'node',
   );
   $export['bm_small_tile'] = $ds_view_mode;
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'summary';
+  $ds_view_mode->label = 'Summary';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['summary'] = $ds_view_mode;
 
   $ds_view_mode = new stdClass();
   $ds_view_mode->api_version = 1;

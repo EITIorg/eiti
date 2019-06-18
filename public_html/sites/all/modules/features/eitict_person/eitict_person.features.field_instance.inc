@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_person.features.field_instance.inc
@@ -22,6 +23,12 @@ function eitict_person_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'summary' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -73,6 +80,12 @@ function eitict_person_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 3,
       ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -115,6 +128,12 @@ function eitict_person_field_default_field_instances() {
     'description' => 'Please specify if this person is a member of the board or not.',
     'display' => array(
       'default' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+      'summary' => array(
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
@@ -166,6 +185,12 @@ function eitict_person_field_default_field_instances() {
         'type' => 'email_default',
         'weight' => 7,
       ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -208,6 +233,12 @@ function eitict_person_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'teaser' => array(
@@ -254,6 +285,16 @@ function eitict_person_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
+          'image_style' => 'pr-photo',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'summary' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
           'image_style' => 'pr-photo',
         ),
         'type' => 'image',
@@ -365,6 +406,12 @@ function eitict_person_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 5,
       ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -410,6 +457,13 @@ function eitict_person_field_default_field_instances() {
         'module' => 'i18n_taxonomy',
         'settings' => array(),
         'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 2,
+      ),
+      'summary' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 2,
       ),
       'teaser' => array(
@@ -460,6 +514,12 @@ function eitict_person_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 19,
       ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -473,6 +533,7 @@ function eitict_person_field_default_field_instances() {
         'weight' => 20,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_related_country',
     'label' => 'Related Country',
@@ -504,6 +565,12 @@ function eitict_person_field_default_field_instances() {
           'link_type' => 'skype_icon',
         ),
         'type' => 'helpergeneric_link',
+        'weight' => 4,
+      ),
+      'summary' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -559,6 +626,12 @@ function eitict_person_field_default_field_instances() {
         'type' => 'helpergeneric_link',
         'weight' => 3,
       ),
+      'summary' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'helpergeneric',
@@ -608,6 +681,12 @@ function eitict_person_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
+        'weight' => 9,
+      ),
+      'summary' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'teaser' => array(
@@ -668,6 +747,17 @@ function eitict_person_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h3',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
+      ),
+      'summary' => array(
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(

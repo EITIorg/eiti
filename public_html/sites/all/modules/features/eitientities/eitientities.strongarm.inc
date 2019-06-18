@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitientities.strongarm.inc

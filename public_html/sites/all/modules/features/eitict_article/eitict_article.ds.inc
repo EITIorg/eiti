@@ -78,22 +78,14 @@ function eitict_article_ds_field_settings_info() {
       'format' => 'default',
     ),
     'post_date' => array(
-      'weight' => '11',
+      'weight' => '10',
       'label' => 'hidden',
       'format' => 'ds_post_date_shortest',
     ),
     'addtoany' => array(
-      'weight' => '15',
+      'weight' => '14',
       'label' => 'hidden',
       'format' => 'default',
-    ),
-    'field_image_gallery' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-          'classes' => 'field-highlighted',
-        ),
-      ),
     ),
     'field_featured_image' => array(
       'formatter_settings' => array(
@@ -102,14 +94,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_authors' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_attachments' => array(
+    'field_image_gallery' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -124,6 +109,21 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_attachments' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+          'classes' => 'field-highlighted',
+        ),
+      ),
+    ),
+    'field_event_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -131,7 +131,7 @@ function eitict_article_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_event_date' => array(
+    'field_authors' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
@@ -368,13 +368,12 @@ function eitict_article_ds_layout_settings_info() {
       ),
       'ds_hidden' => array(
         8 => 'field_featured_image',
-        9 => 'field_article_type',
-        10 => 'title_field',
-        11 => 'post_date',
-        12 => 'field_event_date',
-        13 => 'field_event_location',
-        14 => 'field_tags',
-        15 => 'addtoany',
+        9 => 'title_field',
+        10 => 'post_date',
+        11 => 'field_event_date',
+        12 => 'field_event_location',
+        13 => 'field_tags',
+        14 => 'addtoany',
       ),
     ),
     'fields' => array(
@@ -387,7 +386,6 @@ function eitict_article_ds_layout_settings_info() {
       'field_mailchimp_signup_form' => 'main',
       'field_authors' => 'main',
       'field_featured_image' => 'ds_hidden',
-      'field_article_type' => 'ds_hidden',
       'title_field' => 'ds_hidden',
       'post_date' => 'ds_hidden',
       'field_event_date' => 'ds_hidden',

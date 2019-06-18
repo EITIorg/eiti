@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_person.ds.inc
@@ -26,6 +27,23 @@ function eitict_person_ds_field_settings_info() {
     ),
   );
   $export['node|person|default'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|person|summary';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'person';
+  $ds_fieldsetting->view_mode = 'summary';
+  $ds_fieldsetting->settings = array(
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+  );
+  $export['node|person|summary'] = $ds_fieldsetting;
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
@@ -109,10 +127,10 @@ function eitict_person_ds_layout_settings_info() {
       'main' => array(
         1 => 'title_field',
         2 => 'field_position',
-        3 => 'field_board_member_type',
-        4 => 'field_twitter_handle',
-        5 => 'field_skype_id',
-        6 => 'body',
+        3 => 'field_twitter_handle',
+        4 => 'field_board_member_type',
+        5 => 'body',
+        6 => 'field_skype_id',
         7 => 'field_phone_number',
         8 => 'field_fax_number',
         9 => 'field_email',
@@ -124,10 +142,10 @@ function eitict_person_ds_layout_settings_info() {
       'field_person_picture' => 'side',
       'title_field' => 'main',
       'field_position' => 'main',
-      'field_board_member_type' => 'main',
       'field_twitter_handle' => 'main',
-      'field_skype_id' => 'main',
+      'field_board_member_type' => 'main',
       'body' => 'main',
+      'field_skype_id' => 'main',
       'field_phone_number' => 'main',
       'field_fax_number' => 'main',
       'field_email' => 'main',
@@ -155,6 +173,44 @@ function eitict_person_ds_layout_settings_info() {
     'layout_disable_css' => FALSE,
   );
   $export['node|person|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|person|summary';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'person';
+  $ds_layout->view_mode = 'summary';
+  $ds_layout->layout = 'simplelayout';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'main' => array(
+        0 => 'field_person_picture',
+        1 => 'title_field',
+        2 => 'field_position',
+      ),
+    ),
+    'fields' => array(
+      'field_person_picture' => 'main',
+      'title_field' => 'main',
+      'field_position' => 'main',
+    ),
+    'classes' => array(
+      'layout_class' => array(
+        '' => '',
+      ),
+    ),
+    'wrappers' => array(
+      'main' => 'div',
+      'ds_hidden' => 'div',
+    ),
+    'layout_wrapper' => 'article',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['node|person|summary'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;

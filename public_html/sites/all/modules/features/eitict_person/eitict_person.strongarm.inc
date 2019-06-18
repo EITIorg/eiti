@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_person.strongarm.inc
@@ -154,6 +155,9 @@ function eitict_person_strongarm() {
         'custom_settings' => FALSE,
       ),
       'teaser_alternative' => array(
+        'custom_settings' => TRUE,
+      ),
+      'summary' => array(
         'custom_settings' => TRUE,
       ),
     ),
