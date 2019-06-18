@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { renderToString } from 'react-dom/server';
 import { Map, Marker, Popup, TileLayer, GeoJson } from 'react-leaflet';
 
 import { countryGeoJson } from './data/countries.js';
@@ -274,11 +275,9 @@ export default class MapWidgetComponent extends Component {
     var countryDataProcessed = ::this.decorate(this.state.data, indicator_id, valuetypes);
     const hoverDecider = this.props.infobox ? function(feature, layer){this.onEachFeaturePage(feature, layer)}.bind(this) : function(feature, layer){this.onEachFeatureStatus(feature, layer)}.bind(this);
 
-    if(this.props.selector) {
-      ::this.addLegend(map, indicator_id, countryDataProcessed);
-    }
-    else {
-      ::this.updateLegend(e, indicator_id);
+    ::this.updateLegend(e, indicator_id);
+    if (this.props.buttons) {
+      ::this.updateCountriesList(e, countryDataProcessed);
     }
 
     this.refs['geoJsonLayer'].leafletElement = L.geoJson(countryDataProcessed, {style:helpers.style, onEachFeature:hoverDecider}).addTo(map);
@@ -334,97 +333,6 @@ export default class MapWidgetComponent extends Component {
     const map = this.refs['map'].leafletElement;
     const geoJsonLayer = this.refs['geoJsonLayer'].leafletElement;
     map.removeLayer(geoJsonLayer);
-  }
-
-  addLegend(map, indicator_id, countryDataProcessed) {
-    var info = L.control({position: 'bottomleft'});
-
-    info.onAdd = function (map) {
-      if(map.options.legend === undefined) {
-        map.options.legend = L.DomUtil.create('div', 'info legend');
-      }
-      this.update();
-      return map.options.legend;
-    };
-
-    info.update = function (props) {
-      var indicatorMetadata;
-      indicatorMetadata = ::this.getValues(indicator_id || this.state.indicator_id);
-
-      var indicatorData = ::this.getIndicatorData(indicator_id || this.state.indicator_id)
-      var indicatorName = indicatorData["name"];
-      var indicatorDescription = indicatorData["description"];
-      var indicatorHeader = indicatorData["header"];
-      var indicatorFooter = indicatorData["footer"];
-
-      var unit = _.find(_.pluck(indicatorMetadata, 'unit'), function(v) {return v !== undefined});
-
-      var h2El = document.createElement("H2");
-      h2El.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
-      h2El.className = "responsive-header";
-
-      var spanEl = document.createElement("SPAN");
-      spanEl.innerText = helpers.t("show");
-      h2El.appendChild(spanEl);
-
-      var h2El_2 = document.createElement("H2");
-      h2El_2.innerText = helpers.t(indicatorDescription) + " " + (unit ? "("+unit+ ")" : "");
-
-      var spanEl_2 = document.createElement("SPAN");
-      spanEl_2.innerText = helpers.t("hide");
-      h2El_2.appendChild(spanEl_2);
-
-      var divLegend = document.createElement("DIV");
-      divLegend.className = "responsive-legend";
-
-
-      var mergedHTML = "";
-      var headerText = '<div class="legend_header" >' + helpers.t(indicatorHeader) + "</div>";
-      mergedHTML += headerText;
-      var noDataIncluded = false;
-      indicatorMetadata.forEach(function(v) {
-        noDataIncluded = (v.color === "#dddddd" && noDataIncluded === false) ? noDataIncluded = true : false;
-        if(v.use_style) {
-          mergedHTML += '<i class="' + v.title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\/| /g,"_") + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
-        }
-        else {
-          mergedHTML += '<i style="background:' + v.color + '"></i> <div class="legend_title">'+helpers.t(v.title)+ '<br/></div>';
-        }
-        if(v.subtitle != "") {
-          mergedHTML += (helpers.t(v.subtitle) || '') + '<br>';
-        }
-      });
-      //if (noDataIncluded === false) mergedHTML += ('<i style="background:#dddddd"></i> <strong>'+helpers.t('No data')+ '</strong><br/><br/>' ) ;
-
-      var footerText = '<div class="legend_footer" >' + helpers.t(indicatorFooter) + "</div>";
-      mergedHTML += footerText;
-
-      var sourceText = '<a class="legend_source" href="/data">' + helpers.t('Source: EITI summary data') + "</a>";
-
-      var divLegendBody = document.createElement("DIV");
-      divLegendBody.innerHTML = mergedHTML + sourceText;
-      divLegend.appendChild(h2El_2);
-      divLegend.appendChild(divLegendBody);
-
-      while (map.options.legend.firstChild) {
-        map.options.legend.removeChild(map.options.legend.firstChild);
-      }
-
-      map.options.legend.appendChild(h2El);
-      map.options.legend.appendChild(divLegend);
-
-      spanEl.onclick = function() {
-        divLegend.style.display = 'block';
-        h2El.style.display = 'none';
-      };
-
-      spanEl_2.onclick = function() {
-        divLegend.style.display = 'none';
-        h2El.style.display = 'block';
-      };
-    }.bind(this);
-
-    info.addTo(map);
   }
 
   legend(indicator_id) {
@@ -559,7 +467,102 @@ export default class MapWidgetComponent extends Component {
         return !jQuery.isArray( obj ) && (obj - parseFloat( obj ) + 1) >= 0;
   }
 
+  getCountriesList(countryDataProcessed) {
+    var selector;
+    if(this.props.selector) {
+      var listed_countries = [];
+      if (countryDataProcessed) {
+        for (var i = 0; i < countryDataProcessed.features.length; i++) {
+          if (countryDataProcessed.features[i].indicator_value) {
+            if (countryDataProcessed.features[i].indicator_value != 0 && countryDataProcessed.features[i].indicator_value != 'n/a') {
+              listed_countries[countryDataProcessed.features[i].id] = [];
+              listed_countries[countryDataProcessed.features[i].id]['value'] = countryDataProcessed.features[i].indicator_value;
+              listed_countries[countryDataProcessed.features[i].id]['color'] = countryDataProcessed.features[i].indicator_color;
+            }
+          }
+        }
+      }
 
+      var items = [];
+      var cols = [];
+      var countries = _.sortBy(this.state.data, 'label');
+      var sortedCountries = countries.filter(function(k,v){ return (k.status.name !== "Other")});
+      if (countryDataProcessed) {
+        sortedCountries = countries.filter(function(k,v){ return (listed_countries[k.iso3] !== undefined)});
+      }
+      var cutout = Math.ceil(sortedCountries.length/4);
+      for (var i = 0; i < sortedCountries.length;i++) {
+        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/\/| /g,"_") : "member-status other";
+
+        var inlineStyles = {};
+        if (countryDataProcessed) {
+          inlineStyles = {
+            background: listed_countries[sortedCountries[i].iso3]['color']
+          }
+        }
+        else if (sortedCountries[i].status.name === "Other") {
+          continue;
+        }
+
+        var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
+
+        var years = Object.keys(sortedCountries[i].metadata);
+        var last = _.last(years);
+        var yearData = sortedCountries[i].metadata[last];
+        // If there's an attached report to the implementing country, use that one. If not, look for it in the metadata
+        var reportURL = sortedCountries[i].annual_report_file;
+        var reportClass = "";
+        if(reportURL === undefined || reportURL === null) {
+          var reportObj = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _.first(yearData.web_report_links) : undefined;
+          reportURL = reportObj ? reportObj.url : "";
+          reportClass = reportObj ? "" : "empty";
+        }
+        var country_name = helpers.t(sortedCountries[i].label);
+
+        items.push(
+          <li>
+            <span style={inlineStyles} className={itemStyle}></span>
+            <a href={countryPageURL}>{country_name}</a>
+          </li>
+        );
+        if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {
+          cols.push(
+            <div className="country-col">
+              <ul className="country-list">
+                {items}
+              </ul>
+            </div>
+          );
+          items = [];
+        }
+      }
+
+      //Divide in columns by 4
+
+      selector = (
+        <div className="country-list-wrapper clearfix">
+          {cols}
+        </div>
+      );
+
+      return selector;
+    }
+  }
+
+  updateCountriesList(e, countryDataProcessed) {
+    if (jQuery(e.target).data('indicatorid') == 'status') {
+      var selector = this.getCountriesList();
+    }
+    else {
+      var selector = this.getCountriesList(countryDataProcessed);
+    }
+    var list_wrapper = jQuery(e.target).closest('.eiti-map-wrapper').find('.country-list-wrapper');
+    list_wrapper.replaceWith(renderToString(selector));
+  }
+
+  filterToggleOpen(e) {
+    jQuery(e.target).closest('li').toggleClass('open');
+  }
 
   render() {
     //if(!this.state || !this.state.baseMap) return;
@@ -575,20 +578,21 @@ export default class MapWidgetComponent extends Component {
 
     if(this.props.buttons) {
         buttons = (<div className="map-option-wrapper">
+          <h2>{helpers.t('Apply filter')}</h2>
           <ul className="map-option-widget">
-            <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer} className="active">
-              {helpers.t('Overview')}
+            <li data-indicatorid="status" data-valuetypes="fixed" onClick={::this.addLayer} className="simple active">
+              {helpers.t('Implementation status')}
             </li>
-            <li>
-              {helpers.t('Tax & Legal Framework')}
+            <li className="open">
+              <span onClick={::this.filterToggleOpen}>{helpers.t('Tax & Legal Framework')}</span>
               <ul className="map-option-items">
                 <li data-indicatorid="online_oil_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online oil registry')}</li>
                 <li data-indicatorid="online_mining_registry" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online mining registry')}</li>
                 <li data-indicatorid="online_contracts" data-valuetypes="fixed" onClick={::this.addLayer}>{helpers.t('Online registry of contracts')}</li>
               </ul>
             </li>
-            <li>
-              {helpers.t('Production')}
+            <li className="open">
+              <span onClick={::this.filterToggleOpen}>{helpers.t('Production')}</span>
               <ul className="map-option-items">
                 <li data-indicatorid="oil_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Oil, volume')}</li>
                 <li data-indicatorid="gas_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Gas, volume')}</li>
@@ -597,8 +601,8 @@ export default class MapWidgetComponent extends Component {
                 <li data-indicatorid="copper_volume" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Copper, tons')}</li>
               </ul>
             </li>
-            <li>
-              {helpers.t('Revenues')}
+            <li className="open">
+              <span onClick={::this.filterToggleOpen}>{helpers.t('Revenues')}</span>
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
                 <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues per capita')}</li>
@@ -617,57 +621,7 @@ export default class MapWidgetComponent extends Component {
           </svg>);*/
 
 
-    var selector;
-    if(this.props.selector) {
-      var items = [];
-      var cols = [];
-      var countries = _.sortBy(this.state.data, 'label');
-      var sortedCountries = countries.filter(function(k,v){ return (k.status.name !== "Other")})
-      var cutout = Math.ceil(sortedCountries.length/4);
-      for (var i = 0; i < sortedCountries.length;i++) {
-        var itemStyle = sortedCountries[i].status ? "member-status " + sortedCountries[i].status.name.toLowerCase().replace(/\/| /g,"_") : "member-status other";
-        if(sortedCountries[i].status.name === "Other") continue;
-        var countryPageURL = "/implementing_country/" + sortedCountries[i].id;
-
-        var years = Object.keys(sortedCountries[i].metadata);
-        var last = _.last(years);
-        var yearData = sortedCountries[i].metadata[last];
-        // If there's an attached report to the implementing country, use that one. If not, look for it in the metadata
-        var reportURL = sortedCountries[i].annual_report_file;
-        var reportClass = "";
-        if(reportURL === undefined || reportURL === null) {
-          var reportObj = yearData && yearData.web_report_links && yearData.web_report_links.length > 0 ? _.first(yearData.web_report_links) : undefined;
-          reportURL = reportObj ? reportObj.url : "";
-          reportClass = reportObj ? "" : "empty";
-        }
-        var country_name = helpers.t(sortedCountries[i].label);
-
-        items.push(
-            <li>
-              <span className={itemStyle}></span>
-              <a href={countryPageURL}>{country_name}</a>
-            </li>
-          );
-        if((i+1)%cutout === 0 || i+1 === sortedCountries.length) {
-          cols.push(
-              <div className="country-col">
-                <ul className="country-list">
-                {items}
-                </ul>
-              </div>
-            );
-          items = [];
-        }
-      }
-
-      //Divide in columns by 4
-
-      selector = (
-        <div className="country-list-wrapper clearfix">
-          {cols}
-        </div>
-      );
-    }
+    var selector = this.getCountriesList();
     var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var zoom = 3;
     var min_zoom = 2;
@@ -685,44 +639,56 @@ export default class MapWidgetComponent extends Component {
       elementClass = 'resizable-map';
     }
 
-    var legend_html = '';
-    if (!buttons) {
-      var legend = this.legend(this.state.indicator_id);
-      legend_html = (<div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>);
+    var legend = this.legend(this.state.indicator_id);
+
+    var map_output = (
+      <Map className={elementClass}
+           center={this.state.latlng}
+           length={4}
+           ref='map'
+           zoom={zoom}
+           maxZoom={8}
+           minZoom={min_zoom}
+           height={500}
+           scrollWheelZoom={false}
+      >
+        <TileLayer
+          url=''
+          onLeafletLoad={function(e) {
+            if(!this.state.initialized) {
+              this.setState({initialized:true});
+            }
+          }.bind(this)}
+        />
+        {geoJsonLayer}
+      </Map>
+    );
+
+    if (buttons) {
+      return (
+        <div className={containerClass}>
+          <div className="map-data">
+            <div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>
+            <div className="map-wrap">
+              {map_output}
+            </div>
+          </div>
+          {buttons}
+          {selector}
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className={containerClass}>
+          <div className="legend top" dangerouslySetInnerHTML={{__html: legend.innerHTML}}></div>
+          <div className="map-wrap">
+            {map_output}
+          </div>
+          {selector}
+        </div>
+      );
     }
 
-    return (
-
-      <div className={containerClass}>
-        {buttons}
-        {legend_html}
-        <div className="map-wrap">
-          <Map className={elementClass}
-            center={this.state.latlng}
-            length={4}
-            ref='map'
-            zoom={zoom}
-            maxZoom={8}
-            minZoom={min_zoom}
-            height={500}
-            scrollWheelZoom={false}
-            >
-            <TileLayer
-              url=''
-              onLeafletLoad={function(e) {
-                if(!this.state.initialized) {
-                  if (buttons) {
-                    this.addLegend(e.target._map, this.state.indicator_id);
-                  }
-                  this.setState({initialized:true});
-                }
-              }.bind(this)}
-            />
-            {geoJsonLayer}
-          </Map>
-        </div>
-        {selector}
-      </div>
-    );
   }
 }

@@ -82,7 +82,7 @@ export var helpers = {
 
     showHint: function (e) {
         var layer = e.target;
-        var country_link = '<strong>' + this.t('Click on a country to find out more') + '</strong>';
+        var country_link = '<strong>' + layer.feature.properties.name + '</strong>';
 
         e.latlng.lat = e.latlng.lat+2.5;
         var popup = L.popup({autoPan:false, closeButton:false})
@@ -124,7 +124,7 @@ export var helpers = {
         var layer = e.target;
         var country = _.find(countryInfo, function(v){ return v.iso3 === layer.feature.id;});
         var country_link = '';
-        if(!country['id']) return;
+        if(country === undefined || !country['id']) return;
         var country_url = '/implementing_country/' +  country.id;
 
         if(country_url === '') {
