@@ -39,8 +39,8 @@ export default class MapWidgetComponent extends Component {
       baseMap: undefined,
       data: {},
       latlng: {
-          lat: 12.897489183755892,
-          lng: -12.76171875
+          lat: 18.897489183755892,
+          lng: 15.76171875
       },
       hasLocation: false,
     };
@@ -624,6 +624,9 @@ export default class MapWidgetComponent extends Component {
     var selector = this.getCountriesList();
     var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var zoom = 3;
+    if(this.props.buttons) {
+      zoom = 2;
+    }
     var min_zoom = 2;
 
     if(screenWidth <= 400) {
