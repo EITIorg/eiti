@@ -40,7 +40,6 @@ Drupal.t('Open Country Page');
 Drupal.t('Open Local EITI Website');
 Drupal.t('Overview');
 Drupal.t('Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br><a href="/about/how-we-work#upholding-the-standard-internationally-validation">Country statuses explained</a>');
-Drupal.t('Revenues per capita');
 Drupal.t('Satisfactory progress');
 Drupal.t('Sectors covered');
 Drupal.t('Share of revenues');

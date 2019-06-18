@@ -22,7 +22,6 @@ import { coal_volume } from './data/coal_volume.js';
 import { gold_volume} from './data/gold_volume.js';
 import { copper_volume } from './data/copper_volume.js';
 import { revenue } from './data/revenue.js';
-import { revenue_per_capita } from './data/revenue_per_capita.js';
 import { share_revenues } from './data/share_revenues.js';
 
 import geostats from 'geostats';
@@ -179,24 +178,6 @@ export default class MapWidgetComponent extends Component {
               indicator_unit = 'USD';
             }
           break;
-          case "revenue_per_capita":
-            if(datapoint.revenues && datapoint.reports) {
-              var years = Object.keys(datapoint.revenues);
-              var last = _.last(years);
-              var yearData = datapoint.revenues[last];
-              var generalYearData = datapoint.reports[last];
-              var indicator = yearData.government;
-              var population = generalYearData ? generalYearData.find(function(v){ return (v.commodity === "Population")}) : undefined;
-              if(population && indicator) {
-                indicator_value = indicator/population.value;
-              }
-              else
-              {
-                indicator_value = 0;
-              }
-              indicator_unit = 'USD/population';
-            }
-          break;
           case "share_revenues":
             if(datapoint.revenues && datapoint.reports) {
               var years = Object.keys(datapoint.revenues);
@@ -318,9 +299,6 @@ export default class MapWidgetComponent extends Component {
       break;
       case "revenue":
         values = revenue;
-      break;
-      case "revenue_per_capita":
-        values = revenue_per_capita;
       break;
       case "share_revenues":
         values = share_revenues;
@@ -605,7 +583,6 @@ export default class MapWidgetComponent extends Component {
               <span onClick={::this.filterToggleOpen}>{helpers.t('Revenues')}</span>
               <ul className="map-option-items">
                 <li data-indicatorid="revenue" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Government extractives revenue')}</li>
-                <li data-indicatorid="revenue_per_capita" data-valuetypes="range" onClick={::this.addLayer}>{helpers.t('Revenues per capita')}</li>
                 <li data-indicatorid="share_revenues" data-valuetypes="percentage" onClick={::this.addLayer}>{helpers.t('Share of revenues')}</li>
               </ul>
             </li>

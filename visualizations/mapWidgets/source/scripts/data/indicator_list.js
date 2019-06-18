@@ -71,13 +71,6 @@ export var indicator_list = [
   },
   {
     "id": 11,
-    "name": "revenue_per_capita",
-    "description": "Government revenue - extractive industries per capita",
-    "header": "",
-    "footer": ""
-  },
-  {
-    "id": 12,
     "name": "share_revenues",
     "description": "% Extractives revenue as a share of total government revenue",
     "header": "",
