@@ -143,8 +143,7 @@
                     margin: 0;
                     height: 100%;
                     img {
-                        transition: transform 0.3s ease;
-                        // min-width: 100%;
+                        transition: transform 0.3s ease; // min-width: 100%;
                         min-height: 100%;
                         max-width: 100%;
                         position: absolute;
@@ -185,6 +184,16 @@
     .pane-related-articles {
         .related-articles {
             .single-fluid-row-wrapper(8);
+        }
+    }
+    .pane-related-articles {
+        .articles,
+        .related-articles {
+            .bottom {
+                a {
+                    display: none;
+                }
+            }
         }
     }
 }
