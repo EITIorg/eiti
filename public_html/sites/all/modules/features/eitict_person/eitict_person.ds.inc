@@ -35,6 +35,11 @@ function eitict_person_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'person';
   $ds_fieldsetting->view_mode = 'summary';
   $ds_fieldsetting->settings = array(
+    'body' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -187,12 +192,14 @@ function eitict_person_ds_layout_settings_info() {
         0 => 'field_person_picture',
         1 => 'title_field',
         2 => 'field_position',
+        3 => 'body',
       ),
     ),
     'fields' => array(
       'field_person_picture' => 'main',
       'title_field' => 'main',
       'field_position' => 'main',
+      'body' => 'main',
     ),
     'classes' => array(
       'layout_class' => array(

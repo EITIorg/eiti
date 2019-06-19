@@ -27,8 +27,11 @@ function eitict_person_field_default_field_instances() {
       ),
       'summary' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'trim_length' => 100,
+        ),
+        'type' => 'helpergeneric_clean_summary',
         'weight' => 4,
       ),
       'teaser' => array(
