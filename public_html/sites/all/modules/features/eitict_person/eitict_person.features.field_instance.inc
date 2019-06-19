@@ -27,11 +27,11 @@ function eitict_person_field_default_field_instances() {
       ),
       'summary' => array(
         'label' => 'hidden',
-        'module' => 'helpergeneric',
+        'module' => 'text',
         'settings' => array(
-          'trim_length' => 100,
+          'trim_length' => 200,
         ),
-        'type' => 'helpergeneric_clean_summary',
+        'type' => 'text_summary_or_trimmed',
         'weight' => 4,
       ),
       'teaser' => array(
