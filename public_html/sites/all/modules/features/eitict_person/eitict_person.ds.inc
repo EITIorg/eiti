@@ -35,11 +35,6 @@ function eitict_person_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'person';
   $ds_fieldsetting->view_mode = 'summary';
   $ds_fieldsetting->settings = array(
-    'body' => array(
-      'formatter_settings' => array(
-        'ft' => array(),
-      ),
-    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
