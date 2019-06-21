@@ -1,37 +1,37 @@
 export var revenue = [
   {
     "id": 1,
-    "range": {start: 0, end: 1},
+    "range": {start: 0, end: 1000000000},
     "color": "#fef0d9",
-    "title": "No data",
+    "title": "0 - 1 000 000 000",
     "subtitle": ""
   },
   {
     "id": 2,
-    "range": {start: 1, end:8000000},
+    "range": {start: 1000000000, end:5000000000},
     "color": "#fdcc8a",
-    "title": "0 - 8000000",
+    "title": "1 000 000 000 - 5 000 000 000",
     "subtitle": ""
   },
   {
     "id": 3,
-    "range": {start: 8000000, end:25000000},
+    "range": {start: 5000000000, end:20000000000},
     "color": "#fc8d59",
-    "title": "8000001 - 25000000",
+    "title": "5 000 000 000 - 20 000 000 000",
     "subtitle": ""
   },
   {
     "id": 4,
-    "range": {start: 25000000, end:163000000},
+    "range": {start: 20000000000, end:30000000000},
     "color": "#e34a33",
-    "title": "250000001 - 163000000",
+    "title": "20 000 000 000 - 30 000 000 000",
     "subtitle": ""
   },
   {
     "id": 5,
-    "range": {start: 163000000, end:1090000000},
+    "range": {start: 30000000000, end:false},
     "color": "#b30000",
-    "title": "163000001 - 1090000000",
+    "title": "30 000 000 000 +",
     "subtitle": ""
   }
   ];

@@ -224,19 +224,19 @@ export default class MapWidgetComponent extends Component {
   }
 
   updateMetadata(data, metadata) {
-    var values = _.map(_.pluck(data.features, 'indicator_value'),function(v){ return v?v*1:0;});
+    //var values = _.map(_.pluck(data.features, 'indicator_value'),function(v){ return v?v*1:0;});
     var part = _.pluck(data.features, 'indicator_unit');
 
     var unit = _.find(part, function(v) { return v !== undefined && v !== "" && v !== 0;});
 
-    var classifier = new geostats(values);
-    var ranges = classifier.getEqInterval(metadata.length);
+    //var classifier = new geostats(values);
+    //var ranges = classifier.getEqInterval(metadata.length);
 
     for(var i=0; i< metadata.length;i++) {
       metadata[i].unit = unit;
-      metadata[i].range.start = ranges[i];
-      metadata[i].range.end = ranges[i+1];
-      metadata[i].title = helpers.formatNumber(ranges[i]) + ' - ' + helpers.formatNumber(ranges[i+1]);
+      //metadata[i].range.start = ranges[i];
+      //metadata[i].range.end = ranges[i+1];
+      //metadata[i].title = helpers.formatNumber(ranges[i]) + ' - ' + helpers.formatNumber(ranges[i+1]);
     }
     return metadata;
   }
@@ -429,7 +429,7 @@ export default class MapWidgetComponent extends Component {
 
         if(this.isNumeric(indicator_value)) {
             var value = Number(indicator_value);
-            var completeType = _.find(metadata, function(v){ return value > v.range.start && value <= v.range.end;});
+            var completeType = _.find(metadata, function(v){ return value > v.range.start && (!v.range.end || value <= v.range.end);});
 
             return completeType !== undefined ? completeType.color : '#dddddd';
         }
