@@ -61,23 +61,34 @@ html {
     }
 }
 
-p {
+p,
+li,
+table,
+table tr,
+table tr td {
     font-size: 1rem;
     line-height: 1.5rem;
+}
+
+p {
     >a {
         text-decoration: underline;
     }
 }
 
 .xMediumAndUp() {
-    p {
+    p,
+    li,
+    table,
+    table tr,
+    table tr td {
         font-size: 1.125rem;
         line-height: 1.875rem;
     }
 }
 
 .page-title {
-    color: @clnormal;    
+    color: @clnormal;
     font-size: 1.875rem;
     line-height: 2.5rem;
     font-weight: 300;
@@ -89,7 +100,7 @@ p {
         font-size: 3rem;
         line-height: 3.75rem;
         margin: 3rem 0 1.5rem;
-    }   
+    }
 }
 
 

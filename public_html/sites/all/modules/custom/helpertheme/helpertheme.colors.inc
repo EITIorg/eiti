@@ -47,7 +47,7 @@ function helpertheme_color_palette() {
         '#desc' => 'alternative color for footer text',
       ),
       'clnormal__black' => array(
-        '#value' => '#000000',
+        '#value' => '#333333',
         '#desc' => 'alternative color for text',
       ),
     ),
