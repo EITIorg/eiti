@@ -87,6 +87,8 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
     '#attributes' => array(
       'class' => array(
         'minimalistic-wrapper',
+        'minimalistic-header',
+        'single-fluid-row-wrapper',
       ),
     )
   );
@@ -97,7 +99,16 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
     $block['wrapper']['#attributes']['style'] = $inline_style;
   }
 
-  $block['wrapper']['logo'] = $logo_markup;
+  $block['wrapper']['logo'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'logo-wrapper',
+        'header-element',
+      ),
+    )
+  );
+  $block['wrapper']['logo']['link'] = $logo_markup;
 
   // Add the optional title.
   if (!empty($conf['title'])) {
@@ -108,6 +119,7 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
       '#attributes' => array(
         'class' => array(
           'minimalistic-page-title',
+          'header-element',
         ),
       ),
     );
@@ -120,6 +132,7 @@ function eiti_ctools_extra__minimalistic_header__render($subtype, $conf, $panel_
       'class' => array(
         'header-items',
         'clearfix',
+        'header-element',
       ),
     ),
   );
