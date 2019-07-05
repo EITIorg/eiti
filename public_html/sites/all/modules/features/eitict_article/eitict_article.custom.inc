@@ -435,6 +435,8 @@ function eitict_article_tokens($type, $tokens, array $data = array(), array $opt
  */
 function eitict_article_preprocess_views_view(&$variables) {
   if ($variables['name'] === 'articles' && $variables['display_id'] === 'default') {
+    // Add js.
+    drupal_add_js(drupal_get_path('module', 'eitict_article') . '/scripts/eitict_article.js');
     // Attachment is not being attached automatically when using views_embed_view()
     // and no results behavior is not working properly.
     if (isset($variables['attachment_before']) && !trim(strip_tags($variables['attachment_before']))) {

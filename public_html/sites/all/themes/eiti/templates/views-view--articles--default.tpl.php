@@ -39,6 +39,16 @@
     </div>
   <?php endif; ?>
 
+  <?php if ($exposed): ?>
+    <div class="filter-toggle">
+      <div class="filter"><?php print t('Filter'); ?></div>
+      <div class="date"><?php print t('Date'); ?></div>
+    </div>
+    <div class="view-filters" style="display: none;">
+      <?php print $exposed; ?>
+    </div>
+  <?php endif; ?>
+
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
@@ -52,12 +62,6 @@
   <?php elseif ($empty): ?>
     <div class="view-empty">
       <?php print $empty; ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if ($exposed): ?>
-    <div class="view-filters">
-      <?php print $exposed; ?>
     </div>
   <?php endif; ?>
 
