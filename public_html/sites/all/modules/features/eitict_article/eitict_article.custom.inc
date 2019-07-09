@@ -365,6 +365,23 @@ function _eitict_article_entity_view_get_article_info($entity, $type, $view_mode
     ),
   );
   if (isset($entity->content['addtoany'])) {
+    drupal_add_js(drupal_get_path('module', 'eitict_article') . '/scripts/eitict_article.js');
+    $elements['right']['social'] = array(
+      '#type' => 'html_container',
+      '#tag' => 'div',
+      '#title' => t('Share'),
+      '#title_tag' => 'span',
+      '#title_attributes' => array(
+        'class' => array('social-btn'),
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'social-btn-wrapper',
+        ),
+      ),
+    );
+    $entity->content['addtoany']['#prefix'] = '<div class="social-share" style="display: none;">';
+    $entity->content['addtoany']['#suffix'] = '</div>';
     $elements['right']['addtoany'] = $entity->content['addtoany'];
     $entity->content['addtoany']['#printed'] = TRUE;
   }

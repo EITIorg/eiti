@@ -1,8 +1,8 @@
 (function ($) {
 
-  Drupal.behaviors.eitiArticles = {
+  Drupal.behaviors.eitiArticleList = {
     /**
-     * Enables show/hide functionality for filters.
+     * Enables show/hide functionality for list filters.
      * @param context
      */
     attach: function (context) {
@@ -70,6 +70,29 @@
           }
           $(this).closest('.view-articles').find('.views-exposed-widgets .views-widget-filter-created').hide();
           $(this).closest('.view-articles').find('.views-exposed-widgets .views-widget-filter-created_1').hide();
+        }
+      });
+
+    }
+  };
+
+  Drupal.behaviors.eitiArticleDetail = {
+    /**
+     * Enables show/hide functionality for social share links.
+     * @param context
+     */
+    attach: function (context) {
+
+      // Social button click.
+      $('.article-info .social-btn').once('social-btn-click').click(function (e) {
+        $(this).toggleClass('open');
+        $(this).parent().parent().find('.social-share').toggle();
+      });
+      // Close social share links when clicking outside share element wrappers.
+      $('body').once('social-share').click(function (e) {
+        if (!$(e.target).is('.article-info .social-btn, .article-info .social-share, .article-info .social-share *')) {
+          $('.article-info .social-btn').removeClass('open');
+          $('.article-info .social-share').hide();
         }
       });
 

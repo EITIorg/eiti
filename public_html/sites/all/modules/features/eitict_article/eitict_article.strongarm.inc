@@ -22,7 +22,10 @@ function eitict_article_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'addtoany_additional_html';
-  $strongarm->value = '<a class="a2a_button_twitter"></a>';
+  $strongarm->value = '<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_linkedin"></a>
+<a class="a2a_button_email"></a>';
   $export['addtoany_additional_html'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -131,7 +134,6 @@ function eitict_article_strongarm() {
     'person' => 0,
     'progress_report' => 0,
     'stakeholder' => 0,
-    'webform' => 0,
   );
   $export['addtoany_nodetypes'] = $strongarm;
 
