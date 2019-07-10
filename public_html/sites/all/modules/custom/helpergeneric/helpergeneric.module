@@ -293,8 +293,8 @@ function helpergeneric_menu_alter(&$items) {
 
   // Change access on user field and display settings. Replaces "administer users".
   $items['admin/config/people/accounts']['access arguments'] = array('helpergeneric administer users');
-  $items['admin/config/people/accounts/fields']['access arguments'] = array('helpergeneric administer users');
-  $items['admin/config/people/accounts/display']['access arguments'] = array('helpergeneric administer users');
+  $items['admin/config/people/accounts/fields']['access arguments'] = array('user_access', ('helpergeneric administer users'));
+  $items['admin/config/people/accounts/display']['access arguments'] = array('user_access', ('helpergeneric administer users'));
 
   // Display the "Edit" link in user pages contextual links.
   $items['user/%user/edit']['context'] = MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE;
