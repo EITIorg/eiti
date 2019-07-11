@@ -55,7 +55,10 @@ function _helpergeneric_s3fs_copy_file_system_to_s3() {
     }
   }
 
-  drupal_set_message(t('Copied all local %scheme files to S3.', array('%scheme' => $scheme)), 'status');
+  db_truncate('s3fs_file')->execute();
+
+  drupal_set_message(t('Copied all local %scheme files to S3.', array('%scheme' => $scheme)));
+  drupal_set_message(t('When you set S3 to take over the public file system run "drush s3fs-rc" to refresh the metadata cache.'));
 }
 
 /**
