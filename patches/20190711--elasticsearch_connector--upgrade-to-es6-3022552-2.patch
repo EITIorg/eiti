@@ -1,0 +1,303 @@
+From 51dc1c5fc9ff61210b2030ab896ada9ab4df7cec Mon Sep 17 00:00:00 2001
+From: Chris Darke <chrisdarke42@gmail.com>
+Date: Thu, 17 Jan 2019 14:37:36 +0000
+Subject: [PATCH] Issue #3022552 by ChrisDarke: Creating ES6.x version for D7.
+
+---
+ composer.json                                 |  2 +-
+ elasticsearch_connector.admin.inc             |  9 +++
+ elasticsearch_connector.module                | 47 ++++++++++++-
+ .../elasticsearch_connector_search_api.info   |  2 +-
+ .../elasticsearch_connector_search_api.module |  3 +-
+ .../service.inc                               | 66 ++++++++++++++-----
+ 6 files changed, 108 insertions(+), 21 deletions(-)
+
+diff --git a/composer.json b/composer.json
+index 5b5c609..150051c 100644
+--- a/composer.json
++++ b/composer.json
+@@ -1,6 +1,6 @@
+ {
+   "require": {
+-    "nodespark/des-connector": "5.x-dev"
++    "nodespark/des-connector": "6.x-dev"
+   },
+   "minimum-stability": "dev"
+ }
+diff --git a/elasticsearch_connector.admin.inc b/elasticsearch_connector.admin.inc
+index 87573a0..366b2d3 100644
+--- a/elasticsearch_connector.admin.inc
++++ b/elasticsearch_connector.admin.inc
+@@ -233,6 +233,8 @@ function elasticsearch_connector_info_cluster($cluster) {
+       'delayed_unassigned_shards' => t('Delayed unassigned shards'),
+       'number_of_pending_tasks' => t('Number of pending tasks'),
+       'number_of_in_flight_fetch' => t('Number of in flight fetch'),
++      'task_max_waiting_in_queue_millis'  => t('Max time waiting in queue'),
++      'active_shards_percent_as_number' => t('Active shards percentage'),
+     );
+ 
+     foreach ($cluster_status['health'] as $health_key => $health_value) {
+@@ -426,6 +428,13 @@ function elasticsearch_connector_edit_cluster($form, $form_state, $cluster = NUL
+     '#default_value' => (!empty($cluster->options['timeout']) ? $cluster->options['timeout'] : ELASTICSEARCH_CONNECTOR_DEFAULT_TIMEOUT),
+   );
+ 
++  $form['options']['elasticsearch_connector_upgraded_types'] = array(
++    '#type' => 'checkbox',
++    '#title' => t('Use v7.x compatible _doc mapping type.'),
++    '#description' => t('As of 7.x the mapping type will be limited to _doc, this will keep new indices from using the Search API index machine name.'),
++    '#default_value' => (!empty($cluster->options['elasticsearch_connector_upgraded_types']) ? 1 : 0),
++  );
++
+   $form['actions'] = array(
+     '#type' => 'actions',
+   );
+diff --git a/elasticsearch_connector.module b/elasticsearch_connector.module
+index dc0d5f6..9698c80 100644
+--- a/elasticsearch_connector.module
++++ b/elasticsearch_connector.module
+@@ -404,7 +404,15 @@ function _elasticsearch_connector_ec_index_process($element, &$form_state, $form
+     $index = $element['#default_value']['index'];
+   }
+ 
++  $prefix_warning = '';
+   if (!empty($index)) {
++    if (isset($form_state['triggering_element'])) {
++      $mapping_types = elasticsearch_connector_get_index_mappings($cluster_id, $index);
++      if(($mapping_types !== FALSE) && count($mapping_types)) {
++        $prefix_warning = '<span class="error">Index already contains a mapping, if you continue it will be overwritten.</span>';
++      }
++    }
++
+     $links[] = array(
+       'title' => t('Edit @index index', array('@index' => $index)),
+       'href' => 'admin/config/elasticsearch-connector/clusters/' .$cluster_id . '/indices/' . $index . '/edit',
+@@ -439,7 +447,7 @@ function _elasticsearch_connector_ec_index_process($element, &$form_state, $form
+       'effect' => 'fade',
+     ),
+     '#prefix' => '<div id="' . $wrapper_id . '">',
+-    '#suffix' =>'<div id="' . $element['#id'] . '-dialog-links" class="dialog-links ' . $element['#id'] . '">'
++    '#suffix' =>'<div id="' . $element['#id'] . '-dialog-links" class="dialog-links ' . $element['#id'] . '">' . $prefix_warning
+         . theme('links__es_index_links', array(
+             'links' => $links,
+             'attributes' => array('class' => 'index-dialog-links')
+@@ -619,6 +627,29 @@ function elasticsearch_connector_cluster_delete($cluster) {
+     ->execute();
+ }
+ 
++/**
++ * Get the mapping types for a given index in a given cluster
++ *
++ * @param string $cluster_id
++ *   Cluster ID.
++ * @param string $index_name
++ *   Index Name.
++ *
++ * @return bool|array
++ *   A list of the mapping types, or false if no connection.
++ */
++function elasticsearch_connector_get_index_mappings($cluster_id, $index_name) {
++  $client = elasticsearch_connector_get_client_by_id($cluster_id);
++  if ($client) {
++    $mappings = $client->indices()->getMapping(array(
++      'index' => $index_name,
++    ));
++    $mapping_types = $mappings[$index_name]['mappings'];
++    return $mapping_types;
++  }
++  return FALSE;
++}
++
+ /**
+  * Get the indeces based on cluster id.
+  * @param string $cluster_id
+@@ -637,7 +668,19 @@ function elasticsearch_connector_get_indices_options($cluster_id, $empty_option
+     if (!empty($indices['indices'])) {
+       foreach ($indices['indices'] as $index_name => $index_info) {
+         // TODO: Check index status if such e.g. index closed or s.o.
+-        $result[$index_name] = $index_name;
++        $mapping_types = elasticsearch_connector_get_index_mappings($cluster_id, $index_name);
++        if ($mapping_types !== FALSE) {
++          $mapping_count = count($mapping_types);
++          if ($mapping_count <= 1) {
++            if ($mapping_count === 0) {
++              $description = 'no mapping';
++            }
++            else {
++              $description = key($mapping_types);
++            }
++            $result[$index_name] = $index_name . ' [' . $description . ']';
++          }
++        }
+       }
+     }
+   }
+diff --git a/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.info b/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.info
+index 046bbd2..4fd1f54 100644
+--- a/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.info
++++ b/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.info
+@@ -11,4 +11,4 @@ files[] = includes/spellcheck.inc
+ files[] = includes/elasticsearch_stats.inc
+ files[] = includes/processor_highlight.inc
+ files[] = includes/processor_prefix_search.inc
+-files[] = includes/more_like_this_handler.inc
+\ No newline at end of file
++files[] = includes/more_like_this_handler.inc
+diff --git a/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.module b/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.module
+index 0da7f79..bfa0887 100644
+--- a/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.module
++++ b/modules/elasticsearch_connector_search_api/elasticsearch_connector_search_api.module
+@@ -47,9 +47,10 @@ function elasticsearch_connector_search_api_search_api_service_info() {
+  * Implements hook_search_api_processor_info().
+  */
+ function elasticsearch_connector_search_api_search_api_processor_info() {
++
+   $processors['search_api_elasticsearch_highlighting'] = array(
+     'name' => t('Elasticsearch Highlighting'),
+-    'description' => t('Adds highlighting for search results for Elasticsearch server. This will throw error if the server your are using is not'),
++    'description' => t('Adds highlighting for search results for Elasticsearch server. This will throw an error if the server you\'re are using is not SOMETHING SOMETHING FIX THIS'),
+     'class' => 'ElasticsearchConnectorSearchApiHighlight',
+     'weight' => 35,
+   );
+diff --git a/modules/elasticsearch_connector_search_api/service.inc b/modules/elasticsearch_connector_search_api/service.inc
+index 8391c3d..5fd04a2 100644
+--- a/modules/elasticsearch_connector_search_api/service.inc
++++ b/modules/elasticsearch_connector_search_api/service.inc
+@@ -267,7 +267,7 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+   /**
+    * Overrides addIndex().
+    */
+-  public function addIndex(SearchApiIndex $index) {
++  public function addIndex(SearchApiIndex $index, $update_mapping = TRUE) {
+     $index_name = $this->getIndexName($index);
+     if (!empty($index_name)) {
+       try {
+@@ -292,12 +292,14 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+             }
+           }
+           else {
+-            throw new SearchApiElasticsearchConnectorException(t('The index you have selected, does not exist.'));
++            throw new SearchApiElasticsearchConnectorException(t('The index you have selected does not exist.'));
+           }
+         }
+ 
+         // Update mapping.
+-        $this->fieldsUpdated($index);
++        if ($update_mapping) {
++          $this->fieldsUpdated($index);
++        }
+       }
+       catch (Exception $e) {
+         drupal_set_message($e->getMessage(), 'error');
+@@ -305,14 +307,29 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+     }
+   }
+ 
++  /**
++   * Rebuild the index to update mappings.
++   *
++   * @param object $index
++   *   Elasticsearch Connector Index object.
++   */
++  protected function recreateIndex($index) {
++    $settings = $this->getElasticsearchIndexSettings($index);
++    $index->force_create['number_of_shards'] = $settings['index']['number_of_shards'];
++    $index->force_create['number_of_replicas'] = $settings['index']['number_of_replicas'];
++    $this->removeIndex($index);
++    $this->addIndex($index, FALSE);
++  }
++
+   /**
+    * Overrides fieldsUpdated().
+    */
+   public function fieldsUpdated(SearchApiIndex $index) {
++    $this->recreateIndex($index);
+     $params = $this->getIndexParam($index, TRUE);
+ 
+     $properties = array(
+-      'id' => array('type' => 'keyword', 'include_in_all' => FALSE),
++      'id' => array('type' => 'keyword'),
+     );
+ 
+     // Map index fields.
+@@ -324,18 +341,10 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+ 
+     // Not remapping for read only indexes as it removes all data
+     if (!isset($index->read_only) || !$index->read_only) {
++      // What we need to do here is delete and recreate the index.
+       try {
+-        if ($this->elasticsearchClient->indices()->existsType($params)) {
+-          $current_mapping = $this->elasticsearchClient->indices()->getMapping($params);
+-          if (!empty($current_mapping)) {
+-            // If the mapping exits, delete it to be able to re-create it.
+-            $this->elasticsearchClient->indices()->deleteMapping($params);
+-          }
+-        }
+-
+         $params['body'][$params['type']]['properties'] = $properties;
+         drupal_alter('elasticsearch_connector_search_api_mapping_update', $index, $params['body'][$params['type']]);
+-
+         $results = $this->elasticsearchClient->indices()->putMapping($params);
+         if (!elasticsearch_connector_check_response_ack($results)) {
+           drupal_set_message(t('Cannot create the mapping of the fields!'), 'error');
+@@ -361,8 +370,11 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+     $params = array();
+     $params['index'] = $index_name;
+ 
++    $cluster = elasticsearch_connector_cluster_load($this->cluster_id);
++    $type = ($cluster->options['elasticsearch_connector_upgraded_types'] === 1) ? '_doc' : $index->machine_name;
++
+     if ($with_type) {
+-      $params['type'] = $index->machine_name;
++      $params['type'] = $type;
+     }
+ 
+     return $params;
+@@ -433,6 +445,25 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+     }
+   }
+ 
++  /**
++   * Process boolean types that aren't being dealt with correctly for ES6.x.
++   * @todo this could be redone as a custom type: hook_search_api_data_type_info
++   *
++   * @param array $item
++   *   Item being indexed.
++   *
++   * @return bool
++   *  Return actual boolean instead of 1 or 0.
++   */
++  protected function itemsDataPostProcessBoolean($item) {
++    if (isset($item['type']) && $item['type'] === 'boolean') {
++      if ($item['value']) {
++        return TRUE;
++      }
++    }
++    return FALSE;
++  }
++
+   /**
+    * Overrides indexItems().
+    */
+@@ -448,14 +479,17 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
+ 
+     $params = $this->getIndexParam($index, TRUE);
+ 
+-    $documents = array();
+     $params['refresh'] = TRUE;
++
+     foreach ($items as $id => $fields) {
+       $data = array('id' => $id);
+       foreach ($fields as $field_id => $field_data) {
++        $postProcessFunction = 'itemsDataPostProcess' . ucfirst($field_data['type']);
++        if (method_exists($this, $postProcessFunction)) {
++          $field_data['value'] = $this->{$postProcessFunction}($field_data);
++        }
+         $data[$field_id] = $field_data['value'];
+       }
+-
+       $params['body'][] = array('index' => array('_id' => $this->getSafeId($data['id'])));
+       $params['body'][] = $data;
+     }
+-- 
+2.17.1 (Apple Git-112)
+

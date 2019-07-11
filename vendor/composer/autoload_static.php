@@ -8,17 +8,22 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'n' => 
+        array (
+            'nodespark\\DESConnector\\' => 23,
+        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -43,6 +48,10 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
         ),
+        'R' => 
+        array (
+            'React\\Promise\\' => 14,
+        ),
         'P' => 
         array (
             'Psy\\' => 4,
@@ -61,9 +70,15 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
         ),
         'G' => 
         array (
+            'GuzzleHttp\\Stream\\' => 18,
+            'GuzzleHttp\\Ring\\' => 16,
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+        ),
+        'E' => 
+        array (
+            'Elasticsearch\\' => 14,
         ),
         'D' => 
         array (
@@ -78,6 +93,10 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
     );
 
     public static $prefixDirsPsr4 = array (
+        'nodespark\\DESConnector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nodespark/des-connector/src/DESConnector',
+        ),
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
@@ -126,6 +145,10 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
         'Psy\\' => 
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src',
@@ -154,6 +177,14 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
         ),
+        'GuzzleHttp\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/streams/src',
+        ),
+        'GuzzleHttp\\Ring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -165,6 +196,10 @@ class ComposerStaticInit253c6e9efaa8e0685f51035d95bf18a5
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Elasticsearch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch',
         ),
         'Drush\\' => 
         array (
