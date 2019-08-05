@@ -34,4 +34,5 @@ features[search_api_index][] = documents
 features[search_api_index][] = node_search
 features[search_api_server][] = elastic
 features[search_api_server][] = solr_server
+features[views_view][] = content_search
 features[views_view][] = search
