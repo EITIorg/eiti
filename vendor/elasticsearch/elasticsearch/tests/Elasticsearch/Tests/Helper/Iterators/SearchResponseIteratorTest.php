@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Elasticsearch\Tests\Helper\Iterators;
 
+use Elasticsearch\Client;
 use Elasticsearch\Helper\Iterators\SearchResponseIterator;
 use Mockery as m;
 
 /**
  * Class SearchResponseIteratorTest
+ *
  * @package Elasticsearch\Tests\Helper\Iterators
  * @author  Arturo Mejia <arturo.mejia@kreatetechnology.com>
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link    http://Elasticsearch.org
  */
-class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
+class SearchResponseIteratorTest extends \PHPUnit\Framework\TestCase
 {
 
     public function tearDown()
@@ -22,24 +26,24 @@ class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
 
     public function testWithNoResults()
     {
-        $search_params = array(
+        $search_params = [
             'scroll'      => '5m',
             'index'       => 'twitter',
             'size'        => 1000,
-            'body'        => array(
-                'query' => array(
-                    'match_all' => new \StdClass
-                )
-            )
-        );
+            'body'        => [
+                'query' => [
+                    'match_all' => new \stdClass
+                ]
+            ]
+        ];
 
-        $mock_client = m::mock('\Elasticsearch\Client');
+        $mock_client = m::mock(Client::class);
 
         $mock_client->shouldReceive('search')
             ->once()
             ->ordered()
             ->with($search_params)
-            ->andReturn(array('_scroll_id' => 'scroll_id_01'));
+            ->andReturn(['_scroll_id' => 'scroll_id_01']);
 
         $mock_client->shouldReceive('scroll')
             ->never();
@@ -57,24 +61,25 @@ class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
 
     public function testWithHits()
     {
-        $search_params = array(
+        $search_params = [
             'scroll'      => '5m',
             'index'       => 'twitter',
             'size'        => 1000,
-            'body'        => array(
-                'query' => array(
-                    'match_all' => new \StdClass
-                )
-            )
-        );
+            'body'        => [
+                'query' => [
+                    'match_all' => new \stdClass
+                ]
+            ]
+        ];
 
-        $mock_client = m::mock('\Elasticsearch\Client');
+        $mock_client = m::mock(Client::class);
 
         $mock_client->shouldReceive('search')
             ->once()
             ->ordered()
             ->with($search_params)
-            ->andReturn([
+            ->andReturn(
+                [
                 '_scroll_id' => 'scroll_id_01',
                 'hits' => [
                     'hits' => [
@@ -83,7 +88,8 @@ class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
                         ]
                     ]
                 ]
-            ]);
+                ]
+            );
 
         $mock_client->shouldReceive('scroll')
             ->once()
@@ -104,7 +110,8 @@ class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
                             ]
                         ]
                     ]
-                ]);
+                ]
+            );
 
         $mock_client->shouldReceive('scroll')
             ->once()
@@ -161,7 +168,12 @@ class SearchResponseIteratorTest extends \PHPUnit_Framework_TestCase
             ->withAnyArgs();
 
         $responses = new SearchResponseIterator($mock_client, $search_params);
-
-        $this->assertCount(4, $responses);
+        $count = 0;
+        $i = 0;
+        foreach ($responses as $response) {
+            $count += count($response['hits']['hits']);
+            $this->assertEquals($response['_scroll_id'], sprintf("scroll_id_%02d", ++$i));
+        }
+        $this->assertEquals(3, $count);
     }
 }

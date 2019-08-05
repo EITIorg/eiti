@@ -24,16 +24,6 @@ class Terms extends Bucket
     const ORDER_BY_TERM = '_term';
     const ORDER_BY_COUNT = '_count';
 
-    /**
-     * DateHistogram constructor.
-     * @param string $aggrName
-     * @param string $aggrFieldName
-     */
-    public function __construct($aggrName, $aggrFieldName)
-    {
-        parent::__construct($aggrName, $aggrFieldName, static::TYPE);
-    }
-
     public function setSize($size)
     {
         $this->size = $size;
@@ -51,6 +41,10 @@ class Terms extends Bucket
         // Set the additional parameters if needed.
         if (isset($this->size)) {
             $aggregation[$this->name][static::TYPE]['size'] = $this->size;
+            // Also set the parameters if global name is set.
+            if (isset($aggregation[$this->name . '_global'])) {
+              $aggregation[$this->name . '_global']['aggs'][$this->name][static::TYPE]['size'] = $this->size;
+            }
         }
 
         if (isset($this->order)) {

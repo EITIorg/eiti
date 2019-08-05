@@ -1,12 +1,7 @@
 language: php
 
-jdk:
-  - oraclejdk8
-
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
+services:
+  - docker
 
 branches:
   except:
@@ -17,39 +12,35 @@ sudo: true
 matrix:
   fast_finish: true
   include:
-    - php: 5.6
-      env: ES_VERSION="5.0" TEST_BUILD_REF="origin/5.0"
-    - php: 5.6
-      env: ES_VERSION="5.5" TEST_BUILD_REF="origin/5.5"
-
     - php: 7.0
-      env: ES_VERSION="5.0" TEST_BUILD_REF="origin/5.0"
-    - php: 7.0
-      env: ES_VERSION="5.5" TEST_BUILD_REF="origin/5.5"
+      env: ES_VERSION="6.5.0"
 
     - php: 7.1
-      env: ES_VERSION="5.0" TEST_BUILD_REF="origin/5.0"
-    - php: 7.1
-      env: ES_VERSION="5.5" TEST_BUILD_REF="origin/5.5"
+      env: ES_VERSION="6.5.0"
 
     - php: 7.2
-      env: ES_VERSION="5.0" TEST_BUILD_REF="origin/5.0"
-    - php: 7.2
-      env: ES_VERSION="5.5" TEST_BUILD_REF="origin/5.5"
+      env: ES_VERSION="6.5.0"
 
     - php: 7.3
-      env: ES_VERSION="5.0" TEST_BUILD_REF="origin/5.0"
+      env: ES_VERSION="6.0.0"
     - php: 7.3
-      env: ES_VERSION="5.5" TEST_BUILD_REF="origin/5.5"
+      env: ES_VERSION="6.1.0"
+    - php: 7.3
+      env: ES_VERSION="6.2.0"
+    - php: 7.3
+      env: ES_VERSION="6.3.0"
+    - php: 7.3
+      env: ES_VERSION="6.4.0"
+    - php: 7.3
+      env: ES_VERSION="6.5.0"
+
 
 env:
   global:
     - ES_TEST_HOST=http://localhost:9200
-    - JAVA_HOME="/usr/lib/jvm/java-8-oracle/jre"
 
 before_install:
-  - sudo update-java-alternatives -s java-8-oracle
-  - ./travis/download_and_run_es.sh
+  - ./travis/run_es_docker.sh
 
 install:
   - composer install --prefer-dist
@@ -60,8 +51,13 @@ before_script:
   - php util/EnsureClusterAlive.php
 
 script:
+  - if [ $TRAVIS_PHP_VERSION != '7.3' ]; then composer run-script phpcs; fi
+  - composer run-script phpstan
   - vendor/bin/phpunit $PHPUNIT_FLAGS
   - vendor/bin/phpunit -c phpunit-integration.xml --group sync $PHPUNIT_FLAGS
 
 after_script:
   - if [ $TRAVIS_PHP_VERSION = '7.3' ]; then php vendor/bin/coveralls; fi
+
+notifications:
+  email: true

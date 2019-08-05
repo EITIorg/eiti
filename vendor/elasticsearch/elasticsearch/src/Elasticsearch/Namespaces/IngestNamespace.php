@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Elasticsearch\Namespaces;
 
 use Elasticsearch\Endpoints\Ingest\Pipeline\Delete;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Get;
+use Elasticsearch\Endpoints\Ingest\Pipeline\ProcessorGrok;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
 use Elasticsearch\Endpoints\Ingest\Simulate;
 
@@ -22,7 +25,7 @@ class IngestNamespace extends AbstractNamespace
      * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
      *        ['timeout']                    = (time) Explicit operation timeout
      *
-     * @param $params array Associative array of parameters
+     * @param array $params Associative array of parameters
      *
      * @return array
      */
@@ -30,7 +33,7 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        /** @var callback $endpointBuilder */
+        /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
 
         /** @var Delete $endpoint */
@@ -44,7 +47,7 @@ class IngestNamespace extends AbstractNamespace
     /**
      * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
      *
-     * @param $params array Associative array of parameters
+     * @param array $params Associative array of parameters
      *
      * @return array
      */
@@ -52,7 +55,7 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        /** @var callback $endpointBuilder */
+        /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
 
         /** @var Get $endpoint */
@@ -67,7 +70,7 @@ class IngestNamespace extends AbstractNamespace
      * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
      *        ['timeout']                    = (time) Explicit operation timeout
      *
-     * @param $params array Associative array of parameters
+     * @param array $params Associative array of parameters
      *
      * @return array
      */
@@ -76,7 +79,7 @@ class IngestNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
         $id = $this->extractArgument($params, 'id');
 
-        /** @var callback $endpointBuilder */
+        /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
 
         /** @var Put $endpoint */
@@ -91,7 +94,7 @@ class IngestNamespace extends AbstractNamespace
     /**
      * $params['verbose'] = (bool) Verbose mode. Display data output for each processor in executed pipeline
      *
-     * @param $params array Associative array of parameters
+     * @param array $params Associative array of parameters
      *
      * @return array
      */
@@ -100,7 +103,7 @@ class IngestNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
         $id = $this->extractArgument($params, 'id');
 
-        /** @var callback $endpointBuilder */
+        /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
 
         /** @var Simulate $endpoint */
@@ -108,6 +111,24 @@ class IngestNamespace extends AbstractNamespace
         $endpoint->setID($id)
             ->setBody($body)
             ->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * $params[]
+     *
+     * @param array $params Associative array of parameters
+     *
+     * @return array
+     */
+    public function processorGrok($params = [])
+    {
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+
+        /** @var ProcessorGrok $endpoint */
+        $endpoint = $endpointBuilder('Ingest\ProcessorGrok');
 
         return $this->performRequest($endpoint);
     }
