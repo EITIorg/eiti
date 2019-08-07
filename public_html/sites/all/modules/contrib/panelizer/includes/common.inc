@@ -78,6 +78,7 @@ function panelizer_settings_form($form, &$form_state) {
     $form['css_class'] = array(
       '#type' => 'textfield',
       '#size' => 35,
+      '#maxlength' => 255,
       '#default_value' => $panelizer->css_class,
       '#title' => t('CSS class'),
       '#description' => t('The CSS class to apply to this display. You may use context substitions here.'),
@@ -87,6 +88,7 @@ function panelizer_settings_form($form, &$form_state) {
     $form['css_class'] = array(
       '#type' => 'textfield',
       '#size' => 35,
+      '#maxlength' => 255,
       '#default_value' => $panelizer->css_class,
       '#title' => t('Body class'),
       '#description' => t('The CSS class to apply to the BODY tag. You may use context substitions here.'),
@@ -153,14 +155,14 @@ function panelizer_settings_form_submit(&$form, &$form_state) {
  * we can properly handle revisioning.
  */
 function panelizer_add_revision_info_form(&$form, &$form_state) {
-  if (empty($form_state['entity'])) {
+  if (empty($form_state['display']->context['panelizer']->data)) {
     return;
   }
   if (empty($form_state['revision info'])) {
     return;
   }
 
-  $entity = $form_state['entity'];
+  $entity = $form_state['display']->context['panelizer']->data;
 
   list($use_revisions, $control_revisions, $default_revision) = $form_state['revision info'];
 
@@ -174,6 +176,7 @@ function panelizer_add_revision_info_form(&$form, &$form_state) {
     $form_state['use revisions'] = TRUE;
     $form['revision_information'] = array(
       '#weight' => 11,
+      '#access' => $control_revisions || $entity->revision,
     );
 
     $form['revision_information']['revision'] = array(
@@ -184,17 +187,16 @@ function panelizer_add_revision_info_form(&$form, &$form_state) {
       '#access' => $control_revisions,
     );
 
-    if ($control_revisions || $entity->revision) {
-      $form['revision_information']['log'] = array(
-        '#type' => 'textarea',
-        '#title' => t('Log message'),
-        '#description' => t('Provide an explanation of the changes you are making. This will help other authors understand your motivations.'),
-        '#default_value' => $entity->log,
-      );
+    $form['revision_information']['log'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Log message'),
+      '#description' => t('Provide an explanation of the changes you are making. This will help other authors understand your motivations.'),
+      '#default_value' => $entity->log,
+      '#access' => $control_revisions || $entity->revision,
+    );
 
-      if ($control_revisions) {
-        $form['revision_information']['log']['#dependency'] = array('edit-revision' => array(1));
-      }
+    if ($control_revisions) {
+      $form['revision_information']['log']['#dependency'] = array('edit-revision' => array(1));
     }
 
     // Don't override the existing submit, eh?
@@ -211,6 +213,9 @@ function panelizer_add_revision_info_form(&$form, &$form_state) {
     elseif (!empty($form['buttons']['return']['#submit'])) {
       $form['buttons']['return']['#submit'][] = $submit_handler;
     }
+    elseif (!empty($form['submit']['#submit'])) {
+      $form['submit']['#submit'][] = $submit_handler;
+    }
     else {
       $form['#submit'][] = $submit_handler;
     }
@@ -221,7 +226,7 @@ function panelizer_add_revision_info_form(&$form, &$form_state) {
  * Form submission callback for panelizer_add_revision_info_form().
  */
 function panelizer_add_revision_info_form_submit(&$form, &$form_state) {
-  $entity = &$form_state['entity'];
+  $entity = &$form_state['display']->context['panelizer']->data;
   if (!empty($form_state['use revisions'])) {
     $entity->revision = $form_state['values']['revision'];
     $entity->log = $form_state['values']['log'];

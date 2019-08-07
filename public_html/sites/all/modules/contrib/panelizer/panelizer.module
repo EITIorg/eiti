@@ -39,7 +39,7 @@ function panelizer_permission() {
   $items = array(
     'administer panelizer' => array(
       'title' => t('administer panelizer'),
-      'description' => t('Fully administer panelizer and all panelizer settings.'),
+      'description' => t('Fully administer Panelizer - customize which entities can be managed with Panelizer, manage their default displays, etc.'),
     ),
   );
 
@@ -170,15 +170,28 @@ function panelizer_panels_ipe_access($display) {
   if (isset($display->context['panelizer'])) {
     // The type array contains 3 elements, where the first is the full context
     // type (ie. 'entity:ENTITY_TYPE'), and the remaining two are the parts
-    // seperated by ':', so 'entity' and the entity type name.
+    // separated by ':', so 'entity' and the entity type name.
     $entity_type = $display->context['panelizer']->type[2];
     if ($handler = panelizer_entity_plugin_get_handler($entity_type)) {
-      // Only allow access to use the IPE if the user has 'update' access to
+      // Deny access to the IPE if the user doesn't have 'update' access to
       // the underlying entity.
       $entity = $display->context['panelizer']->data;
-      return $handler->entity_access('update', $entity);
+      if (!$handler->entity_access('update', $entity)) {
+        return FALSE;
+      }
+      // Also deny access to the IPE if the user doesn't have either the
+      // Administer Panelizer content or Administer Panelizer layout permission
+      // for this bundle.
+      if (!empty($entity->panelizer_view_mode)) {
+        $view_mode = $entity->panelizer_view_mode;
+        if (!$handler->panelizer_access("layout", $entity, $view_mode) && !$handler->panelizer_access("content", $entity, $view_mode)) {
+          return FALSE;
+        }
+      }
     }
+    return TRUE;
   }
+  return NULL;
 }
 
 /**
@@ -1278,6 +1291,9 @@ function panelizer_panels_cache_get($argument) {
     return;
   }
 
+  $entity_info = entity_get_info($entity_type);
+  $revision_key = isset($entity_info['entity keys']['revision']) ? $entity_info['entity keys']['revision'] : 'vid';
+
   // Extract the entity ID and view mode.
   list($entity_id, $view_mode) = explode(':', $key, 2);
   // If this entity supports revisions, and a custom revision is being
@@ -1302,7 +1318,7 @@ function panelizer_panels_cache_get($argument) {
       }
     }
     else {
-      $conditions = (isset($vid) ? array('vid' => $vid) : array());
+      $conditions = (isset($vid) ? array($revision_key => $vid) : array());
       $entities = entity_load($entity_type, array($entity_id), $conditions);
       if (!empty($entities[$entity_id]) && !empty($entities[$entity_id]->panelizer[$view_mode])) {
         $panelizer = $entities[$entity_id]->panelizer[$view_mode];
@@ -1330,7 +1346,7 @@ function panelizer_panels_cache_get($argument) {
      }
   }
   else {
-    $conditions = (isset($vid) ? array('vid' => $vid) : array());
+    $conditions = (isset($vid) ? array($revision_key => $vid) : array());
     $entities = entity_load($entity_type, array($entity_id), $conditions);
     if (empty($entities[$entity_id]) || empty($entities[$entity_id]->panelizer[$view_mode])) {
       return $cache;
@@ -1422,17 +1438,16 @@ function panelizer_panels_cache_save($argument, $cache) {
     ctools_export_crud_save('panelizer_defaults', $panelizer);
   }
   else {
-    list($entity_id, $view_mode) = explode(':', $key);
-    $conditions = (isset($vid) ? array('vid' => $vid) : array());
-    $entities = entity_load($entity_type, array($entity_id), $conditions);
-    if ($entities[$entity_id] && $entities[$entity_id]->panelizer[$view_mode]) {
-      $entities[$entity_id]->panelizer[$view_mode]->display = $cache->display;
-      $entities[$entity_id]->panelizer[$view_mode]->display_is_modified = TRUE;
-      $handler->entity_save($entities[$entity_id]);
-      // The display may have been cloned in the save process, so need to be
-      // sure to put the old display back, and its contexts.
-      $cache->display = $entities[$entity_id]->panelizer[$view_mode]->display;
-      $cache->display->context = $handler->get_contexts($entities[$entity_id]->panelizer[$view_mode], $entities[$entity_id]);
+    list($entity_id, $view_mode, $vid) = explode(':', $key);
+    $entity = $cache->display->context['panelizer']->data;
+    if ($entity->panelizer[$view_mode]) {
+      $entity->panelizer[$view_mode]->display = $cache->display;
+      $entity->panelizer[$view_mode]->display_is_modified = TRUE;
+      $handler->entity_save($entity);
+      // The display may have been cloned in the save process, so we need
+      // to be sure to put the old display back, and its contexts.
+      $cache->display = $entity->panelizer[$view_mode]->display;
+      $cache->display->context = $handler->get_contexts($entity->panelizer[$view_mode], $entity);
     }
   }
   panelizer_panels_cache_clear($original, $cache);
@@ -1905,6 +1920,28 @@ function panelizer_form_panels_change_layout_alter(&$form, &$form_state) {
       }
     }
 
+    module_load_include('inc', 'panelizer', 'includes/common');
+    $revision_info = $handler->entity_allows_revisions($entity);
+
+    // If this entity has revisions enabled we can assume that they have
+    // permissions to add revisions via IPE.
+    if (!empty($revision_info)) {
+      // Re-load the entity so we get one from the entity cache, which is
+      // necessary for panelizer_panels_cache_save() to get our changes.
+      $entities = entity_load($handler->entity_type, array($entity_id));
+      $form_state['entity'] = $entities[$entity_id];
+      $form_state['revision info'] = $revision_info;
+      panelizer_add_revision_info_form($form, $form_state);
+      // Make it clear from description that this only affects custom displays.
+      if (isset($form['revision_information']['revision'])) {
+        $form['revision_information']['revision']['#description'] = t('This only affects changes saved as custom.');
+      }
+    }
+
+    // Move the submit buttons down so they'll appear after the revision info.
+    $form['back']['#weight'] = 20;
+    $form['submit']['#weight'] = 25;
+
     // Change the default button to say "Save as custom".
     $form['submit']['#value'] = t('Save as custom');
 
@@ -1916,6 +1953,7 @@ function panelizer_form_panels_change_layout_alter(&$form, &$form_state) {
       '#save-display' => TRUE,
       '#cache_key' => 'default:' . $handler->entity_type . ':' . $bundle . '.' . $panelizer->view_mode . ':' . $name,
       '#access' => $handler->panelizer_access('defaults', $entity, $panelizer->view_mode),
+      '#weight' => 30,
     );
   }
 }
@@ -2062,32 +2100,9 @@ function panelizer_node_revision_load($revision_id = NULL) {
  */
 function panelizer_clone_node_alter(&$node, $context) {
   if (!empty($node->panelizer)) {
-    foreach ($node->panelizer as $view_mode => &$panelizer) {
-      // Only deal with custom displays, ignore default displays which would
-      // be selected in $panelizer->name.
-      if (!empty($panelizer->did) && !empty($panelizer->display)) {
-        // Loop over each pane.
-        foreach ($panelizer->display->content as &$pane) {
-          // Clone each FPP and then assign the new fpid.
-          if ($pane->type == 'fieldable_panels_pane') {
-            list($subtype, $fpid) = explode(':', $pane->subtype);
-            if ($subtype == 'fpid') {
-              // Clone the FPP object.
-              $fpp = fieldable_panels_panes_load($fpid);
-
-              // Clean the some basic settings.
-              $fpp->fpid = NULL;
-              $fpp->created = NULL;
-              $fpp->timestamp = NULL;
-
-              // Save the cloned FPP.
-              $newfpp = fieldable_panels_panes_save($fpp);
-
-              // Update the FPP reference.
-              $pane->subtype = 'fpid:' . $newfpp->fpid;
-            }
-          }
-        }
+    if ($handler = panelizer_entity_plugin_get_handler('node')) {
+      foreach ($node->panelizer as $view_mode => $panelizer) {
+        $node->panelizer[$view_mode] = $handler->clone_panelizer($panelizer, $node);
       }
     }
   }

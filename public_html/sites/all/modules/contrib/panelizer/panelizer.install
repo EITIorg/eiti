@@ -499,21 +499,31 @@ function panelizer_update_7105() {
     'length' => '128',
     'description' => 'Contains the view mode this panelizer is for.',
     'not null' => TRUE,
+    'default' => 'page_manager',
   );
-  db_add_field('panelizer_defaults', 'view_mode', $spec);
-  db_add_field('panelizer_entity', 'view_mode', $spec);
 
-  db_update('panelizer_defaults')
-    ->fields(array(
-      'view_mode' => 'page_manager',
-    ))
-    ->execute();
+  // Update both of the Panelizer tables.
+  foreach (array('panelizer_defaults', 'panelizer_entity') as $table) {
+    if (db_field_exists($table, 'view_mode')) {
+      // Update all existing records so they have a valid "view_mode" value.
+      db_update($table)
+        ->fields(array(
+          'view_mode' => 'page_manager',
+        ))
+        ->execute();
 
-  db_update('panelizer_entity')
-    ->fields(array(
-      'view_mode' => 'page_manager',
-    ))
-    ->execute();
+      // Providing a code path for sites that errored out when running a
+      // previous version of this update hook.
+      db_change_field($table, 'view_mode', 'view_mode', $spec);
+    }
+    else {
+      db_add_field($table, 'view_mode', $spec);
+    }
+
+    // Remove the default value; default was set only to allow tables with
+    // existing data to run this update nicely.
+    db_field_set_no_default($table, 'view_mode');
+  }
 }
 
 /**
@@ -815,6 +825,7 @@ function panelizer_update_7115(&$sandbox) {
               'extras' => serialize($new_pane->extras),
               'locks' => serialize($new_pane->locks),
               'uuid' => $new_pane->uuid,
+              'position' => $new_pane->position,
             ))
             ->execute();
 
@@ -1079,7 +1090,7 @@ function panelizer_update_7120(&$sandbox) {
               $new_pane = clone $pane;
 
               // Erase the pid so a new record can be saved.
-              $new_pane->pid = NULL;
+              unset($new_pane->pid);
 
               // Tie the pane to this display.
               $new_pane->did = $display->did;
@@ -1195,12 +1206,17 @@ function panelizer_update_7300(&$sandbox) {
     }
 
     // Delete panelizer records that have one of the default names.
-    $deleted = db_delete('panelizer_entity')
-      ->condition('name', $default_names, 'IN')
-      ->condition('entity_type', $entity_type)
-      ->execute();
-    if ($deleted > 0) {
-      watchdog('panelizer', '@count default panelizer records were removed for entity type: @entity_type.', array('@count' => $deleted, '@entity_type' => $entity_type));
+    if (!empty($default_names)) {
+      $deleted = db_delete('panelizer_entity')
+        ->condition('name', $default_names, 'IN')
+        ->condition('entity_type', $entity_type)
+        ->execute();
+      if ($deleted > 0) {
+        watchdog('panelizer', '@count default panelizer records were removed for entity type: @entity_type.', array('@count' => $deleted, '@entity_type' => $entity_type));
+      }
+      else {
+        watchdog('panelizer', 'No default panelizer records were found for entity type: @entity_type.', array('@entity_type' => $entity_type));
+      }
     }
     else {
       watchdog('panelizer', 'No default panelizer records were found for entity type: @entity_type.', array('@entity_type' => $entity_type));
@@ -1237,10 +1253,10 @@ function panelizer_update_7302(&$sandbox) {
     // Initialize batch update information.
     $sandbox['progress'] = (float)0;
     $sandbox['current_did'] = -1;
-    $sandbox['max'] = db_query("SELECT COUNT(pd.did)
+    $sandbox['max'] = db_query("SELECT COUNT(p.did)
       FROM {panels_display} pd
         JOIN {panelizer_defaults} p ON p.did = pd.did
-      WHERE pd.storage_type = ''")->fetchField();
+      WHERE p.name IS NOT NULL AND pd.storage_type = ''")->fetchField();
     if (empty($sandbox['max'])) {
       return t('Nothing to be fixed in Panelizer update 7302.');
     }
@@ -1249,12 +1265,12 @@ function panelizer_update_7302(&$sandbox) {
   // Set a limit of how many rows to process per batch.
   $limit = 100;
 
-  // Run the query
-  $result = db_query_range("SELECT pd.did, p.name
+  // Run the query.
+  $result = db_query_range("SELECT p.did, p.name
     FROM {panels_display} pd
       JOIN {panelizer_defaults} p ON p.did = pd.did
-    WHERE pd.storage_type = '' AND pd.did > :current_did
-    ORDER BY pd.did ASC", 0, $limit, array(
+    WHERE p.name IS NOT NULL AND pd.storage_type = '' AND p.did > :current_did
+    ORDER BY p.did ASC", 0, $limit, array(
       ':current_did' => $sandbox['current_did'],
     ));
 
@@ -1343,5 +1359,81 @@ function panelizer_update_7303(&$sandbox) {
 
   if ($sandbox['#finished']) {
     return t('Added the storage type for panelizer_entities to relevant panels displays');
+  }
+}
+
+/**
+ * Rerun update 7302. Set the storage type and ID on existing
+ * {panelizer_default} records.
+ */
+function panelizer_update_7304(&$sandbox) {
+  return panelizer_update_7302($sandbox);
+}
+
+/**
+ * Fix the default config variables from 7.x-2.x.
+ */
+function panelizer_update_7305() {
+  foreach (entity_get_info() as $entity_type => $entity_info) {
+    if (isset($entity_info['bundles'])) {
+      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
+        // Check to see if this entity bundle was configured for use in
+        // Panelizer.
+        $var_name = "panelizer_defaults_{$entity_type}_{$bundle_name}";
+        $config = variable_get($var_name);
+        if (!empty($config)) {
+          // In 7.x-2.x the structure was:
+          // $config = array(
+          //   'status' => 0,
+          //   'default' => 0,
+          //   'choice' => 0,
+          // );
+          // In 7.x-3.x the structure is:
+          // $config = array(
+          //   'view modes' => array(
+          //     'page_manager' => array(
+          //       'status' => 0,
+          //       'default' => 0,
+          //       'choice' => 0,
+          //     ),
+          //   ),
+          // );
+          if (isset($config['status']) && !isset($config['view modes'])) {
+            $new_config = array(
+              'status' => !empty($config['status']),
+              'help' => '',
+              'view modes' => array(
+                'page_manager' => array(
+                  'status' => !empty($config['status']),
+                  'default' => !empty($config['default']),
+                  'choice' => !empty($config['choice']),
+                ),
+              ),
+            );
+            variable_set($var_name, $new_config);
+            drupal_set_message(t('Fixed the config for @entity, @bundle.', array('@entity' => $entity_type, '@bundle' => $bundle_name)));
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Update new variables to reflect the new Panelizer behavior for revision
+ * handling when using Workbench Moderation.
+ */
+function panelizer_update_7306() {
+  foreach (node_type_get_types() as $type) {
+    $options = variable_get('node_options_' . $type->type, array(
+      'status',
+      'promote',
+      'panelizer',
+    ));
+    // Only set the variable if it wasn't previously configured.
+    if (!in_array('panelizer', $options)) {
+      $options[] = 'panelizer';
+      variable_set('node_options_' . $type->type, $options);
+    }
   }
 }

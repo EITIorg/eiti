@@ -1,3 +1,58 @@
+Panelizer 7.x-3.x-dev, xxxx-xx-xx
+---------------------------------
+#2788851 by dsnopek, DamienMcKenna: Don't require the entity permissions to
+  customize an entity's default displays.
+#2788633 by sylus: Fixes to panelizer_update_7120() and panelizer_update_7300()
+  to make them more robust and fix compatibility problems with PostgreSQL.
+#2792907 by mbm80: Don't assume entities use 'vid' as the revision ID field.
+#2796175 by azinck: Workaround for adding the view_mode column to the Panelizer
+  tables when there are already records present.
+#2795735 by azinck: Missing {panels_pane}.position value in update 7115.
+#2785945 by DamienMcKenna, awroblewski, gilgabar, easp: Fixes to update 7302.
+#2776173 by david.hughes, ron_s: If no view modes exist for an entity, make sure
+  a data structure is still created in get_available_view_modes() for the
+  requested bundle.
+#2635862 by mrmikedewolf: Cloning a Panelizer record should always result in an
+  object, not an array.
+#2627618 by DamienMcKenna, drumm: Override hook_admin_paths() for nodes so that
+  it adheres to the node_admin_theme setting.
+#2124517 by DamienMcKenna: Update the entity configuration variables when
+  updating from Panelizer 2.x to 3.x.
+#2812807 by lucas.constantino, DamienMcKenna: Expand hook_panelizer_access() and
+  hook_panelizer_access_alter() to also pass in the entity that is being
+  examined.
+By DamienMcKenna: Fixed incorrect t() usage in panelizer_update_7305().
+#2828550 by a.milkovsky: Not all entities use 'vid' as the revision key.
+#2823912 by cboyden: Fixed IPE permissions.
+#2854655 by DamienMcKenna: Added files for controlling the codeclimate testing
+  system.
+#2880214 by Chris Burge: PanelizerEntityNode::entity_save does not clear page
+  cache.
+#2945985 by DamienMcKenna: Remove hardcoded Panels version dependency.
+#2843119 by ctestama: Notice: Undefined index: content in
+  PanelizerSearchApiAlterCallback->alterItems().
+#2825786 by joelstein: "Undefined index: log" if user cannot control revisions.
+#2783711 by dmsmidt, drupalstrap, zserno, muntjac, coenvanvliet, b_sharpe: Reset
+  display functionality broken for entities without revisions.
+#2833086 by junaidpv, DamienMcKenna: Panel's "From pane" option of "Title type"
+  does not work with Panelizer.
+#2866792 by Chris Burge: Revision operation menu paths are only created for last
+  view mode.
+#2846011 by nerdcore, DamienMcKenna, jenlampton, azinck: Unable to complete
+  running update hooks after running bad version of panelizer_update_7105().
+#2835582 by DamienMcKenna, dalin, bneil: IPE is only showing if user has
+  permission to change content _and_ layout.
+#2070891 by DamienMcKenna, jhodgdon, dsnopek, ruloweb, dimitrov.adrian, drumm,
+  seanr, jyve, bmunslow, japerry: Support core Content Translation by cloning
+  the Panelizer display for the new entity.
+#2189477 by rgristroph, dsnopek, fullerja, cboyden: Expose "Create new revision"
+  checkbox in IPE when changing layout.
+#2457113 by EclipseGc, DamienMcKenna, heddn, japerry, drumm, reescott,
+  brantwynn, muschpusch, gremy, joelstein, cboyden, dsnopek, dawehner, RobLoach:
+  Better Revision Handling inside and outside of Workbench Moderation.
+#2996796 by osopolar: Increase maxlength of css class settings.
+
+
 Panelizer 7.x-3.4, 2016-08-19
 -----------------------------
 #2785821 by DamienMcKenna: Resolve issues with tests running on drupalci.
