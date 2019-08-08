@@ -19,6 +19,7 @@ dependencies[] = file
 dependencies[] = filefield_paths
 dependencies[] = helpergeneric
 dependencies[] = image
+dependencies[] = inline_entity_form
 dependencies[] = list
 dependencies[] = media
 dependencies[] = node
