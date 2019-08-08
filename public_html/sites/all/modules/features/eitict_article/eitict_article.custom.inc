@@ -457,12 +457,14 @@ function eitict_article_preprocess_views_view(&$variables) {
  * Implements hook_node_presave().
  */
 function eitict_article_node_presave($node) {
-  // There should only ever be one stickied article.
+  // Limit stickied articles to 3.
   if ($node->type === 'article' && $node->sticky) {
     $query = db_select('node')
       ->fields('node', array('nid'))
       ->condition('type', 'article')
-      ->condition('sticky', 1);
+      ->condition('sticky', 1)
+      ->orderBy('created', 'DESC')
+      ->range(2, 10); // Ideally this would be an offset with no limit.
     if ($node->nid) {
       $query->condition('nid', $node->nid, '!=');
     }
