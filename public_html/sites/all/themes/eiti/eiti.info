@@ -44,6 +44,7 @@ stylesheets[all][] = styles/widgets/map.css.less
 stylesheets[all][] = styles/widgets/map-simple.css.less
 stylesheets[all][] = styles/widgets/map-full.css.less
 stylesheets[all][] = styles/widgets/fact_blocks.css.less
+stylesheets[all][] = styles/widgets/featured-publications.css.less
 stylesheets[all][] = styles/widgets/header.css.less
 stylesheets[all][] = styles/widgets/icon_blocks.css.less
 stylesheets[all][] = styles/widgets/mailchimp.css.less
