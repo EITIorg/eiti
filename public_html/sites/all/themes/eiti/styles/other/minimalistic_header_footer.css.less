@@ -2,8 +2,14 @@
   background-color: @clmain__header;
   min-height: 3em;
 
+  &.minimalistic-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .header-element {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     width: 20%;
     padding: 0 15px;
@@ -16,12 +22,13 @@
   .minimalistic-page-title {
     font-size: 1.25em;
     line-height: 1.5em;
-    width: 59%;
+    width: 65%;
   }
   .header-items {
     margin: 0;
     float: none;
     z-index: 10;
+    width: 14%;
 
     > nav, > .header-close-action, > .header-show-action {
       display: inline-block;
@@ -82,13 +89,32 @@
   }
 }
 
+.xMediumOnly() {
+  .minimalistic-wrapper {
+    .minimalistic-page-title {
+      width: 59%;
+    }
+    .header-items {
+      width: 20%;
+    }
+  }
+}
+
 .xSmallOnly() {
   .minimalistic-wrapper {
     text-align: center;
 
+    &.minimalistic-header {
+      display: block;
+    }
+
     .header-element {
       display: block;
       width: auto;
+    }
+
+    .logo-wrapper {
+      padding-top: 15px;
     }
 
     .header-items {
