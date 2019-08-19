@@ -184,6 +184,7 @@
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+        margin-left: auto;
         .field-name-addtoany {
             .a2a_s_twitter {
                 background: @claltnormal !important;
@@ -233,6 +234,72 @@
                 }
             }
         }
+        .social-btn-wrapper {
+            -webkit-box-ordinal-group: 4;
+            -ms-flex-order: 3;
+            order: 3;
+            width: 22px;
+            height: 22px;
+            span {
+                position: relative;
+                width: 22px;
+                height: 42px;
+                display: inline-block;
+                overflow: hidden;
+                text-indent: -9999px;
+                cursor: pointer;
+                &:before {
+                    content: "";
+                    display: inline-block;
+                    width: 22px;
+                    height: 22px;
+                    vertical-align: middle;
+                    -webkit-transition: -webkit-transform 200ms ease;
+                    transition: -webkit-transform 200ms ease;
+                    transition: transform 200ms ease;
+                    transition: transform 200ms ease, -webkit-transform 200ms ease;
+                    -webkit-transform-origin: center;
+                    transform-origin: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    text-indent: 0;
+                    background-image: url(~"@{theme_path}images/icons/social-share-small.svg");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                &:after {
+                    content: '';
+                    display: block;
+                    width: 0;
+                    height: 2px;
+                    background: @clnormal;
+                    -webkit-transition: width .3s;
+                    transition: width .3s;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
+                -webkit-transition: opacity 0.3s ease;
+                transition: opacity 0.3s ease;
+                &:hover {
+                    opacity: 0.6;
+                }
+                &.open {
+                    &:before {
+                        background-image: url(~"@{theme_path}images/icons/social-share-small-dark.svg");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    &:after {
+                        width: 100%;
+                    }
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
         .rss {
             margin-right: 1.5rem;
             a {
@@ -251,6 +318,25 @@
                     background-size: contain;
                     background-repeat: no-repeat;
                 }
+            }
+        }
+        .social-share {
+            position: absolute;
+            top: ~"calc(100% - 2px)";
+            background: white;
+            padding: 30px;
+            right: -1.5rem;
+            -webkit-box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            .field-name-addtoany {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            .a2a_svg {
+                height: 30px;
+                line-height: 30px;
+                width: 30px;
             }
         }
     }
@@ -428,6 +514,28 @@
             line-height: 1.875rem;
         }
         .right {
+            .social-btn-wrapper {
+                width: 32px;
+                height: 32px;
+                span {
+                    width: 32px;
+                    height: 54px;
+                    &:before {
+                        width: 32px;
+                        height: 32px;
+                        background-image: url(~"@{theme_path}images/icons/social-share.svg");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    &.open {
+                        &:before {
+                            background-image: url(~"@{theme_path}images/icons/social-share-dark.svg");
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                        }
+                    }
+                }
+            }
             .rss,
             .print {
                 display: block;
@@ -568,8 +676,8 @@
 
 
 /**
- * Style responsive tables.
- */
+* Style responsive tables.
+*/
 
 .table-wrapper {
     overflow: hidden;

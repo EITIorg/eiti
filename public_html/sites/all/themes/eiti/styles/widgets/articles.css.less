@@ -75,6 +75,7 @@
                 &:hover {
                     .field-name-field-featured-image {
                         img {
+                            -webkit-transform: scale(1.05) translate(-50%, -50%);
                             transform: scale(1.05) translate(-50%, -50%);
                         }
                     }
@@ -143,14 +144,18 @@
                     margin: 0;
                     height: 100%;
                     img {
-                        transition: transform 0.3s ease; // min-width: 100%;
                         object-fit: cover;
+                        -webkit-transition: -webkit-transform 0.3s ease;
+                        transition: -webkit-transform 0.3s ease;
+                        transition: transform 0.3s ease;
+                        transition: transform 0.3s ease, -webkit-transform 0.3s ease; // min-width: 100%;
                         min-height: 100%;
                         max-width: 100%;
                         position: absolute;
                         display: block;
                         top: 50%;
                         left: 50%;
+                        -webkit-transform: translate(-50%, -50%);
                         transform: translate(-50%, -50%);
                     }
                 }
@@ -170,6 +175,62 @@
                 width: ~"calc(50% - 12px)";
             }
         }
+    }
+    .filter-toggle {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        position: absolute;
+        top: 50px;
+        right: 8px;
+        .filter {
+            margin-right: 32px;
+        }
+        .filter,
+        .date {
+            cursor: pointer;
+            padding: 0.5em;
+            color: @cldetail;
+            font-size: 1.125rem;
+            font-weight: bold;
+            position: relative;
+            &:after {
+                content: "";
+                background-image: url(~"@{theme_path}images/icons/angle-down.svg");
+                background-size: contain;
+                display: inline-block;
+                width: 14px;
+                height: 10px;
+                vertical-align: middle;
+                background-repeat: no-repeat;
+                margin-left: 6px;
+                margin-bottom: 6px;
+                -webkit-transition: -webkit-transform 200ms ease;
+                transition: -webkit-transform 200ms ease;
+                transition: transform 200ms ease;
+                transition: transform 200ms ease, -webkit-transform 200ms ease;
+                -webkit-transform-origin: center;
+                transform-origin: center;
+            }
+            &:hover,
+            &.open {
+                &:after {
+                    -webkit-transform: rotate(-180deg);
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+    }
+    .view-filters {
+        position: absolute;
+        top: 70px;
+        z-index: 100;
+        background: white;
+        right: 8px;
+        max-width: 600px;
+        padding: 30px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 36px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 36px;
     }
 }
 
@@ -233,6 +294,32 @@
                 .group-main {
                     padding: 1.125em;
                 }
+            }
+        }
+        .filter-toggle {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: static;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+            .filter,
+            .date {
+                font-size: 1rem;
+            }
+        }
+        .view-filters {
+            position: static;
+            background: white;
+            max-width: 100%;
+            padding: 30px;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 36px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 36px;
+            margin-bottom: 1.5rem;
+            .form-text {
+                width: 100%;
             }
         }
     }
@@ -301,7 +388,10 @@
                 .group-above {
                     .field-name-field-featured-image {
                         img {
+                            -webkit-transition: -webkit-transform 0.3s ease;
+                            transition: -webkit-transform 0.3s ease;
                             transition: transform 0.3s ease;
+                            transition: transform 0.3s ease, -webkit-transform 0.3s ease;
                             min-width: initial;
                             max-height: 100%;
                             max-width: initial;
@@ -309,6 +399,7 @@
                             display: block;
                             top: 50%;
                             left: 50%;
+                            -webkit-transform: translate(-50%, -50%);
                             transform: translate(-50%, -50%);
                         }
                     }
