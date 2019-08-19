@@ -48,7 +48,6 @@ class EITIApiScoreData2 extends EITIApiScoreData {
     foreach ($score_req_values as $key => $sr) {
       if (isset($score_req_values[$key]->score_req_id)) {
         unset($score_req_values[$key]->score_req_id);
-        unset($score_req_values[$key]->value);
         $score_req_values[$key]->is_required = eiti_api_value_to_boolean($score_req_values[$key]->is_required);
         $score_req_values[$key]->is_applicable = eiti_api_value_to_boolean($score_req_values[$key]->is_applicable);
       }
