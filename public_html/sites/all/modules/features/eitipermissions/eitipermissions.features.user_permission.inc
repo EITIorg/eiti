@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitipermissions.features.user_permission.inc
@@ -530,6 +531,22 @@ function eitipermissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'clone node'.
+  $permissions['clone node'] = array(
+    'name' => 'clone node',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'clone',
+  );
+
+  // Exported permission: 'clone own nodes'.
+  $permissions['clone own nodes'] = array(
+    'name' => 'clone own nodes',
+    'roles' => array(),
+    'module' => 'clone',
   );
 
   // Exported permission: 'configure tablefield'.
