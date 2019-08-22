@@ -631,6 +631,8 @@ export default class MapWidgetComponent extends Component {
            minZoom={min_zoom}
            height={500}
            scrollWheelZoom={false}
+           maxBounds={[[-90, -180], [90, 180]]}
+           maxBoundsViscosity={0.8}
       >
         <TileLayer
           url=''
