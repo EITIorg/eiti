@@ -67,11 +67,15 @@ function eiti_pdf_scorecard_page() {
         'legend_items' => $legend_data['legend_items'],
         'progress_items' => $legend_data['progress_items'],
         'text_before' => '',
+        'text_before2' => '',
         'text_after' => '',
         'news_items' => array(),
       );
       if (isset($score_data->field_scd_pdf_text1)) {
         $theme_args['text_before'] = $score_data_emw->field_scd_pdf_text1->value()['safe_value'];
+      }
+      if (isset($score_data->field_scd_pdf_text3)) {
+        $theme_args['text_before2'] = $score_data_emw->field_scd_pdf_text3->value()['safe_value'];
       }
       if (isset($score_data->field_scd_pdf_text2)) {
         $theme_args['text_after'] = $score_data_emw->field_scd_pdf_text2->value()['safe_value'];

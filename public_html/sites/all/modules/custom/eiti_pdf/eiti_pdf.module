@@ -30,6 +30,7 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
         'legend_items' => array(),
         'progress_items' => array(),
         'text_before' => '',
+        'text_before2' => '',
         'text_after' => '',
         'news_items' => array(),
       ),

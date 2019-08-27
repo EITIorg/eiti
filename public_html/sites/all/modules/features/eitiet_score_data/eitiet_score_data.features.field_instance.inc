@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_score_data.features.field_instance.inc
@@ -194,6 +195,42 @@ function eitiet_score_data_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'score_data-standard-field_scd_pdf_text3'.
+  $field_instances['score_data-standard-field_scd_pdf_text3'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_scd_pdf_text3',
+    'label' => 'Background',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 40,
+    ),
+  );
+
   // Exported field_instance: 'score_data-standard-field_scd_pdf_title'.
   $field_instances['score_data-standard-field_scd_pdf_title'] = array(
     'bundle' => 'standard',
@@ -239,6 +276,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -277,6 +315,7 @@ function eitiet_score_data_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Background');
   t('Corrective actions');
   t('Date');
   t('Decision reference');

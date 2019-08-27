@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_score_data.field_group.inc
@@ -28,7 +29,8 @@ function eitiet_score_data_field_group_info() {
       2 => 'field_scd_pdf_news',
       3 => 'field_scd_pdf_text1',
       4 => 'field_scd_pdf_text2',
-      5 => 'field_scd_pdf_title',
+      5 => 'field_scd_pdf_text3',
+      6 => 'field_scd_pdf_title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

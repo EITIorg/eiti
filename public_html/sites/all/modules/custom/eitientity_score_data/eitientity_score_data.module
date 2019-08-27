@@ -354,16 +354,14 @@ function eitientity_score_data_lookup_by_country($country_id) {
  */
 function eitientity_score_data_form_score_data_edit_standard_form_alter(&$form, &$form_state, $form_id) {
   // Limit format of PDF html text fields to min_html.
-  if (isset($form['field_scd_pdf_text1']['und'][0])) {
-    $form['field_scd_pdf_text1']['und']['#after_build'][] = 'eitientity_score_data_pdf_text_after_build';
-    if (!$form['field_scd_pdf_text1']['und'][0]['#format']) {
-      $form['field_scd_pdf_text1']['und'][0]['#format'] = 'min_html';
-    }
-  }
-  if (isset($form['field_scd_pdf_text2']['und'][0])) {
-    $form['field_scd_pdf_text2']['und']['#after_build'][] = 'eitientity_score_data_pdf_text_after_build';
-    if (!$form['field_scd_pdf_text2']['und'][0]['#format']) {
-      $form['field_scd_pdf_text2']['und'][0]['#format'] = 'min_html';
+  $fields = array('field_scd_pdf_text1', 'field_scd_pdf_text2', 'field_scd_pdf_text3');
+  foreach ($fields as $field) {
+    $lang = isset($form[$field]['#language']) ? $form[$field]['#language'] : 'und';
+    if (isset($form[$field][$lang][0])) {
+      $form[$field][$lang]['#after_build'][] = 'eitientity_score_data_pdf_text_after_build';
+      if (!$form[$field][$lang][0]['#format']) {
+        $form[$field][$lang][0]['#format'] = 'min_html';
+      }
     }
   }
 }
