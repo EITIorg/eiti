@@ -29,7 +29,11 @@ function eitiet_score_data_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_score_data__standard';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
