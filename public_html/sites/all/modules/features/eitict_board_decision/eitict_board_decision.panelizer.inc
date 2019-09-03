@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_board_decision.panelizer.inc
@@ -84,6 +85,25 @@ function eitict_board_decision_panelizer_defaults() {
   $display->content['new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a'] = $pane;
   $display->panels['main'][1] = 'new-ecd29663-7f8b-4035-bb3c-a2a5d7ee5b9a';
   $pane = new stdClass();
+  $pane->pid = 'new-fbf03bd4-3449-45d3-a637-d8dac6048ef6';
+  $pane->panel = 'main';
+  $pane->type = 'validation-background';
+  $pane->subtype = 'validation-background';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array();
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 2;
+  $pane->locks = array();
+  $pane->uuid = 'fbf03bd4-3449-45d3-a637-d8dac6048ef6';
+  $display->content['new-fbf03bd4-3449-45d3-a637-d8dac6048ef6'] = $pane;
+  $display->panels['main'][2] = 'new-fbf03bd4-3449-45d3-a637-d8dac6048ef6';
+  $pane = new stdClass();
   $pane->pid = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
   $pane->panel = 'main';
   $pane->type = 'validation-actions';
@@ -97,11 +117,11 @@ function eitict_board_decision_panelizer_defaults() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = '22f38487-f872-4075-9c4c-8574d22e0c0a';
   $display->content['new-22f38487-f872-4075-9c4c-8574d22e0c0a'] = $pane;
-  $display->panels['main'][2] = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
+  $display->panels['main'][3] = 'new-22f38487-f872-4075-9c4c-8574d22e0c0a';
   $display->hide_title = '99';
   $display->title_pane = '0';
   $panelizer->display = $display;
