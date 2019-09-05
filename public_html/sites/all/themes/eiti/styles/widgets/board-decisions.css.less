@@ -84,15 +84,15 @@
     }
     .board-decision {
         .title {
-            color: #0093cf;
+            color: @clnormal;
             display: block;
-            font-size: 1.25em;
             font-weight: 300;
             margin: 0;
             border-bottom: 1px solid #d3d3d3;
-            color: #0093cf;
             padding: 1rem 0;
             position: relative;
+            font-size: 1.875rem;
+            line-height: 2.5rem;
         }
     }
     .validation {
@@ -156,6 +156,17 @@
         padding: 1rem 0;
         position: relative;
     }
+}
+
+.xNormalAndUp() {
+  .pane-board-decision-info {
+    .board-decision {
+      .title {
+        font-size: 3rem;
+        line-height: 3.75rem;
+      }
+    }
+  }
 }
 
 .xSmallOnly() {
