@@ -1167,6 +1167,15 @@ function eitipermissions_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'replicate entities'.
+  $permissions['replicate entities'] = array(
+    'name' => 'replicate entities',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'replicate_ui',
+  );
+
   // Exported permission: 'revert revisions'.
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
