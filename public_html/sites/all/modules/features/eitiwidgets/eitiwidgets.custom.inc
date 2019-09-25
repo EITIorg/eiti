@@ -343,6 +343,17 @@ function eitiwidgets_panels_pane_content_alter($content, $pane, $args, $contexts
   }
 
   if (isset($content->content['title_field'][0]['#markup'])) {
+    // Visualization: Scorecard dynamic title override on board decision node pages.
+    if (isset($field_values["widget"]) && $field_values["widget"] == 'viz_scorecard_dynamic') {
+      if (isset($contexts["panelizer"]->data->type) && $contexts["panelizer"]->data->type == 'board_decision') {
+        if (isset($content->content['title_field']['#items'][0]['safe_value'])) {
+          $title_o = $content->content['title_field']['#items'][0]['safe_value'];
+          $title_t = t('Assessment card');
+          $content->content['title_field'][0]['#markup'] = str_replace($title_o, $title_t, $content->content['title_field'][0]['#markup']);
+        }
+      }
+    }
+
     // Progress by requirement title translation.
     if (isset($content->content['title_field']['#items'][0]['safe_value'])) {
       $title_o = 'Progress by requirement';
