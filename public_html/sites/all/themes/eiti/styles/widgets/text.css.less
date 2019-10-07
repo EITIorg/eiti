@@ -1,14 +1,17 @@
 .predefined-widget--text {
     margin-top: 1em;
     margin-bottom: 1em;
+
     &.has-video {
         .group-main {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+
             .pane-title-wrapper {
                 padding-top: 0;
             }
+
             .pane-video-wrapper {
                 max-width: 40%;
                 -webkit-box-flex: 0;
@@ -27,9 +30,11 @@
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 padding: 2.25rem;
+
                 .field-name-field-fpp-video {
                     margin: 0;
                 }
+
                 .field-name-field-fpp-text1 {
                     font-size: 1.875rem;
                     line-height: 2.5rem;
@@ -37,12 +42,14 @@
                     color: @clnormal;
                     margin: 1.5rem 0;
                 }
+
                 .field-name-field-fpp-text2 {
                     font-size: 1.125rem;
                     line-height: 1.875rem;
                     margin: 1.5rem 0;
                 }
             }
+
             .pane-main-content-wrapper {
                 max-width: 60%;
                 -webkit-box-flex: 0;
@@ -51,6 +58,7 @@
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 padding-right: 3.125rem;
+
                 .field-name-field-fpp-useful-links {
                     .field-items {
                         display: -webkit-box;
@@ -58,8 +66,10 @@
                         display: flex;
                         -ms-flex-wrap: wrap;
                         flex-wrap: wrap;
+
                         .field-item {
                             margin-right: 3.125rem;
+
                             &:last-child {
                                 margin-right: 0;
                             }
@@ -71,25 +81,39 @@
     }
 }
 
+.field-name-field-fpp-useful-links {
+    .field-items {
+
+        .field-item {
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+    }
+}
+
 .xMediumAndDown() {
     .predefined-widget--text {
         &.has-video {
             .group-main {
                 flex-direction: column-reverse;
+
                 .pane-video-wrapper {
                     max-width: 100%;
                     -webkit-box-flex: 0;
                     -ms-flex: 0 0 100%;
                     flex: 0 0 100%;
+
                     .field-name-field-fpp-video {
                         margin: 0;
                     }
+
                     .field-name-field-fpp-text2 {
                         font-size: 1rem;
                         line-height: 1.5rem;
                         margin: 1.5rem 0;
                     }
                 }
+
                 .pane-main-content-wrapper {
                     max-width: 100%;
                     -webkit-box-flex: 0;
@@ -98,6 +122,16 @@
                     padding-right: 0;
                     padding-top: 3rem;
                 }
+            }
+        }
+    }
+
+    .field-name-field-fpp-useful-links {
+        .field-items {
+
+            .field-item {
+                font-size: 1rem;
+                line-height: 1.5rem;
             }
         }
     }
@@ -113,13 +147,18 @@
                     margin-left: -1.5rem;
                     margin-right: -1.5rem;
                 }
+
                 .pane-main-content-wrapper {
                     .field-name-field-fpp-useful-links {
                         .field-items {
                             display: block;
+
                             .field-item {
+                                font-size: 1rem;
+                                line-height: 1.5rem;
                                 margin-right: 0;
                                 margin-bottom: 1.5rem;
+
                                 &:last-child {
                                     margin-right: 0;
                                     margin-bottom: 0;
