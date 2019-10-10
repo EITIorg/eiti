@@ -94,7 +94,7 @@ function helpertheme_menu() {
   );
 
   $items['page-403'] = array(
-    'title' => 'Access denied',
+    'title' => 'Please log in to view this page',
     'page callback' => 'helpertheme_page_access_denied',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -122,15 +122,24 @@ function helpertheme_menu() {
  * @return string
  */
 function helpertheme_page_access_denied() {
-  $elements['message']['#markup'] = t('You are not authorized to access this page.');
+  $elements['info_top'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('The content you want to view is for internal use.'),
+  );
 
   // Only display the login form for authenticated users.
   if (empty($GLOBALS['user']->uid)) {
     $elements['login_form'] = drupal_get_form('user_login');
   }
 
-  return drupal_render($elements);
+  $elements['info_bottom'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t("If you don't have a login but would like to view this content, contact us at <a href=\"mailto:secretariat@eiti.org\">secretariat@eiti.org</a>, stating the page you would like to access."),
+  );
 
+  return drupal_render($elements);
 }
 
 /**
