@@ -24733,7 +24733,9 @@
 	          maxZoom: 8,
 	          minZoom: min_zoom,
 	          height: 500,
-	          scrollWheelZoom: false
+	          scrollWheelZoom: false,
+	          maxBounds: [[-84, -180], [90, 180]],
+	          maxBoundsViscosity: 0.8
 	        },
 	        _react2.default.createElement(_reactLeaflet.TileLayer, {
 	          url: '',
