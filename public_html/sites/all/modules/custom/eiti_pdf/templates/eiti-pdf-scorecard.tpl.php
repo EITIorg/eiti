@@ -34,11 +34,11 @@
     <tr>
       <th><?php print t('Categories'); ?></th>
       <th><?php print t('Requirements'); ?></th>
-      <th class="scores"><?php print t('<div><span>No Progress</span></div>'); ?></th>
-      <th class="scores"><?php print t('<div><span>Inadequate</span></div>'); ?></th>
-      <th class="scores"><?php print t('<div><span>Meaningful</span></div>'); ?></th>
-      <th class="scores"><?php print t('<div><span>Satisfactory</span></div>'); ?></th>
-      <th class="scores"><?php print t('<div><span>Beyond</span></div>'); ?></th>
+      <th class="scores"><?php print t('<p><span>No Progress</span></p>'); ?></th>
+      <th class="scores"><?php print t('<p><span>Inadequate</span></p>'); ?></th>
+      <th class="scores"><?php print t('<p><span>Meaningful</span></p>'); ?></th>
+      <th class="scores"><?php print t('<p><span>Satisfactory</span></p>'); ?></th>
+      <th class="scores"><?php print t('<p><span>Beyond</span></p>'); ?></th>
     </tr>
   </thead>
   <tbody>

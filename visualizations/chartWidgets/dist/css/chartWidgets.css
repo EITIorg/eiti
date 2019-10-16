@@ -280,8 +280,8 @@ TABLE.country_scorecard {
   white-space: nowrap;
 }
 
-.country_scorecard TH.scores > div {
-  transform: 
+.country_scorecard TH.scores > p {
+  transform:
     translate(0px, 30px)
     rotate(-90deg);
   width: 30px;
