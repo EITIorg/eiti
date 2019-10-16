@@ -36,11 +36,11 @@ function renderScorecard(data, placeholder) {
 	var tableHeaderLowerRow = $('<TR>');
 	tableHeaderLowerRow.append($('<TH>').html(translate('Categories')));
 	tableHeaderLowerRow.append($('<TH>').html(translate('Requirements')));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>No Progress</span></div>')));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Inadequate</span></div>')));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Meaningful</span></div>')));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Satisfactory</span></div>')));
-	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<div><span>Beyond</span></div>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<p><span>No Progress</span></p>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<p><span>Inadequate</span></p>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<p><span>Meaningful</span></p>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<p><span>Satisfactory</span></p>')));
+	tableHeaderLowerRow.append($('<TH>').addClass('scores').html(translate('<p><span>Beyond</span></p>')));
 
 	tableHeader.append(tableHeaderUpperRow);
 	tableHeader.append(tableHeaderLowerRow);
