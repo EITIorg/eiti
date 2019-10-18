@@ -35,3 +35,8 @@
 # Ignore JS development specific files and folders.
 node_modules/
 /visualizations/prototype/js/rd3
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
