@@ -1,5 +1,9 @@
 <?php
 
+require_once DRUPAL_ROOT . '/../vendor/autoload.php';
+require_once DRUPAL_ROOT . '/sites/all/libraries/awssdk2/aws-autoloader.php';
+use Aws\ElasticBeanstalk\ElasticBeanstalkClient;
+
 /**
  * Implements hook_drush_command().
  */
@@ -10,6 +14,12 @@ function helpergeneric_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
     'aliases' => array('eiti-s3-cl'),
     'callback' => 'drush_eiti_s3fs_copy_local',
+  );
+  $items['eiti-aws-is-first-instance'] = array(
+    'description' => dt('Check if this is the first AWS instance.'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+    'aliases' => array('aws-is-first-instance'),
+    'callback' => 'drush_eiti_aws_first_instance',
   );
   return $items;
 }
@@ -102,4 +112,56 @@ function _helpergeneric_s3fs_recursive_dir_scan($dir) {
     }
   }
   return $output;
+}
+
+/**
+ * Checks if this is the first AWS instance.
+ */
+function drush_eiti_aws_first_instance() {
+  $http_client = new GuzzleHttp\Client();
+  $response = $http_client->get('http://169.254.169.254/latest/meta-data/instance-id');
+  $current_instance_id = (string) $response->getBody();
+
+  if (!$current_instance_id) {
+    $message = 'drush aws-is-first-instance: Fetching current instance ID failed!';
+    watchdog('helpergeneric', $message, array(), WATCHDOG_ERROR);
+    exit(1);
+  }
+
+  $message = 'drush aws-is-first-instance: Instance ID (current): ' . $current_instance_id;
+  watchdog('helpergeneric', $message, array(), WATCHDOG_INFO);
+
+  putenv("AWS_ACCESS_KEY_ID=");
+  putenv("AWS_SECRET_ACCESS_KEY=");
+
+  $client = ElasticBeanstalkClient::factory(array(
+    'region'  => 'eu-west-1',
+    'version' => 'latest',
+  ));
+
+  if (!$client) {
+    $message = 'drush aws-is-first-instance: Client initialization failed!';
+    watchdog('helpergeneric', $message, array(), WATCHDOG_ERROR);
+    exit(1);
+  }
+
+  $result = $client->describeEnvironmentResources(array(
+    'EnvironmentName' => $_SERVER['AWS_ENV_NAME'],
+  ));
+
+  if (!$result) {
+    $message = 'drush aws-is-first-instance: Environment resources failed!';
+    watchdog('helpergeneric', $message, array(), WATCHDOG_ERROR);
+    exit(1);
+  }
+
+  $instance_id = $result['EnvironmentResources']['Instances'][0]['Id'];
+  $message = 'drush aws-is-first-instance: Instance ID (0): ' . $instance_id;
+  watchdog('helpergeneric', $message, array(), WATCHDOG_INFO);
+
+  if ($current_instance_id == $instance_id) {
+    return;
+  }
+
+  exit(1);
 }
