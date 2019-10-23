@@ -89,7 +89,7 @@ function eitict_board_decision_views_query_alter(&$view, &$query) {
 /**
  * Implements hook_init().
  */
-/*function eitict_board_decision_init() {
+function eitict_board_decision_init() {
   if (isset($_SERVER['SCRIPT_URL']) && strpos($_SERVER['SCRIPT_URL'], '/BD/') === 0) {
     $parts = explode('/', $_SERVER['SCRIPT_URL']);
     if (isset($parts[2])) {
@@ -104,4 +104,4 @@ function eitict_board_decision_views_query_alter(&$view, &$query) {
       }
     }
   }
-}*/
+}
