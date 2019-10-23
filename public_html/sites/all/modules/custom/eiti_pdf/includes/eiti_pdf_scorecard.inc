@@ -28,6 +28,7 @@ function eiti_pdf_scorecard_page() {
     if ($json && isset($json->data[0])) {
       $score_data = entity_object_load($json->data[0]->id, 'score_data');
       $score_data_emw = entity_metadata_wrapper('score_data', $score_data);
+      $score_data_emw = $score_data_emw->language($language->language);
 
       // Title page and header.
       $theme_args = array(
@@ -73,25 +74,26 @@ function eiti_pdf_scorecard_page() {
         'news_items' => array(),
       );
       if (isset($score_data->field_scd_pdf_text1)) {
-        $theme_args['text_before'] = $score_data_emw->language($language->language)->field_scd_pdf_text1->value()['safe_value'];
+        $theme_args['text_before'] = $score_data_emw->field_scd_pdf_text1->value()['safe_value'];
       }
       if (isset($score_data->field_scd_pdf_text3)) {
-        $theme_args['text_before2'] = $score_data_emw->language($language->language)->field_scd_pdf_text3->value()['safe_value'];
+        $theme_args['text_before2'] = $score_data_emw->field_scd_pdf_text3->value()['safe_value'];
       }
       if (isset($score_data->field_scd_pdf_text2)) {
-        $theme_args['text_after'] = $score_data_emw->language($language->language)->field_scd_pdf_text2->value()['safe_value'];
+        $theme_args['text_after'] = $score_data_emw->field_scd_pdf_text2->value()['safe_value'];
       }
       if (isset($score_data->field_scd_pdf_news)) {
         $news_items = array();
         foreach ($score_data_emw->field_scd_pdf_news->value() as $node) {
           $node_emw = entity_metadata_wrapper('node', $node);
-          $body = $node_emw->language($language->language)->body->value();
+          $node_emw = $node_emw->language($language->language);
+          $body = $node_emw->body->value();
           $body = _eiti_pdf_html_cleanup($body['safe_value']);
           $body = str_replace('<p></p>', '', $body);
           $replace = 'href="' . $GLOBALS['base_url'] . '/';
           $body = str_replace('href="/', $replace, $body);
           $news_items[] = array(
-            'title' => $node_emw->language($language->language)->title_field->value(),
+            'title' => $node_emw->title_field->value(),
             'body' => $body,
           );
         }
