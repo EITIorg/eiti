@@ -1,8 +1,9 @@
 version: '3.6'
+
 services:
   postgres:
     container_name: ddev-${DDEV_SITENAME}-postgres
-    image: mdillon/postgis
+    image: postgres:10.6-alpine
     volumes:
       - type: "volume"
         source: postgresdb-database
@@ -18,7 +19,6 @@ services:
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
-      com.ddev.app-url: $DDEV_URL
   web:
     links:
       - postgres
