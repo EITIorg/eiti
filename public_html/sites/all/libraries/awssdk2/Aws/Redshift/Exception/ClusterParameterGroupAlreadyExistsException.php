@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * A cluster parameter group with the same name already exists.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Http\Message\Header\HeaderInterface;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderInterface;
 
 /**
  * Represents a header and all of the values stored by that header

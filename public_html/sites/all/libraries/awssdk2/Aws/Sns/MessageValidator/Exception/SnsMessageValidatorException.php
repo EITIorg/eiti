@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\MessageValidator\Exception;
+namespace AwsSdk2\Aws\Sns\MessageValidator\Exception;
 
-use Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
 
 /**
  * Generic exception thrown by the SNS Message Validator.

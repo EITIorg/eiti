@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
 /**
  * Provides mappings of file extensions to mimetypes

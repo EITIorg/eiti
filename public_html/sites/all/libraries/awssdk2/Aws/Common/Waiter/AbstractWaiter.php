@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Aws\Common\Exception\RuntimeException;
-use Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
 
 /**
  * Abstract wait implementation

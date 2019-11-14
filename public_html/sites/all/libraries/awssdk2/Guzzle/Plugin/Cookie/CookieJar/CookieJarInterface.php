@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Cookie\CookieJar;
+namespace AwsSdk2\Guzzle\Plugin\Cookie\CookieJar;
 
-use Guzzle\Plugin\Cookie\Cookie;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Plugin\Cookie\Cookie;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Interface for persisting cookies
@@ -54,7 +54,7 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
     public function add(Cookie $cookie);
 
     /**
-     * Add cookies from a {@see Guzzle\Http\Message\Response} object
+     * Add cookies from a {@see AwsSdk2\Guzzle\Http\Message\Response} object
      *
      * @param Response         $response Response object
      * @param RequestInterface $request  Request that received the response

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * The S3 bucket name is invalid. For more information about naming rules, go to Bucket Restrictions and Limitations in the Amazon Simple Storage Service (S3) Developer Guide.

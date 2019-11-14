@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\SimpleDb\Exception;
+namespace AwsSdk2\Aws\SimpleDb\Exception;
 
 /**
  * The item name was specified more than once.

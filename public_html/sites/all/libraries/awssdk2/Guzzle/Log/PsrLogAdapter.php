@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
-use Psr\Log\LogLevel;
-use Psr\Log\LoggerInterface;
+use AwsSdk2\Psr\Log\LogLevel;
+use AwsSdk2\Psr\Log\LoggerInterface;
 
 /**
  * PSR-3 log adapter

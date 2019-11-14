@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudSearch\Enum;
+namespace AwsSdk2\Aws\CloudSearch\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable SourceDataFunction values

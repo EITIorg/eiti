@@ -79,7 +79,7 @@ return array (
         'AddPermission' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -134,7 +134,7 @@ return array (
         'ChangeMessageVisibility' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -178,7 +178,7 @@ return array (
         'ChangeMessageVisibilityBatch' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ChangeMessageVisibilityBatchResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -243,7 +243,7 @@ return array (
         'CreateQueue' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateQueueResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -292,7 +292,7 @@ return array (
         'DeleteMessage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -331,7 +331,7 @@ return array (
         'DeleteMessageBatch' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteMessageBatchResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -393,7 +393,7 @@ return array (
         'DeleteQueue' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -417,7 +417,7 @@ return array (
         'GetQueueAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetQueueAttributesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -456,7 +456,7 @@ return array (
         'GetQueueUrl' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetQueueUrlResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -490,7 +490,7 @@ return array (
         'ListDeadLetterSourceQueues' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListDeadLetterSourceQueuesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -520,7 +520,7 @@ return array (
         'ListQueues' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListQueuesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -543,7 +543,7 @@ return array (
         'PurgeQueue' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -577,7 +577,7 @@ return array (
         'ReceiveMessage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReceiveMessageResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -637,7 +637,7 @@ return array (
         'RemovePermission' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -666,7 +666,7 @@ return array (
         'SendMessage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SendMessageResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -752,7 +752,7 @@ return array (
         'SendMessageBatch' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SendMessageBatchResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -867,7 +867,7 @@ return array (
         'SetQueueAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1056,7 +1056,7 @@ return array (
                     ),
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'Attribute',
@@ -1182,7 +1182,7 @@ return array (
                                 ),
                                 'filters' => array(
                                     array(
-                                        'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                                        'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                                         'args' => array(
                                             '@value',
                                             'Attribute',
@@ -1218,7 +1218,7 @@ return array (
                                 ),
                                 'filters' => array(
                                     array(
-                                        'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                                        'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                                         'args' => array(
                                             '@value',
                                             'MessageAttribute',

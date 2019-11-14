@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
 /**
  * Divides batches into smaller batches under a certain size

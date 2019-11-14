@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
 /**
  * Interface used to accept a completed OperationCommand and parse the result into a specific response type

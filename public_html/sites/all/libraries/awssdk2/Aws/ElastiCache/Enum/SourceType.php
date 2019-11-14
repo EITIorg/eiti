@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElastiCache\Enum;
+namespace AwsSdk2\Aws\ElastiCache\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable SourceType values

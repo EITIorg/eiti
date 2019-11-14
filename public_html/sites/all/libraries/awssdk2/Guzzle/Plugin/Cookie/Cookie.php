@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Plugin\Cookie;
+namespace AwsSdk2\Guzzle\Plugin\Cookie;
 
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Set-Cookie object

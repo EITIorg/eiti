@@ -28,7 +28,7 @@ return array (
         'DeleteDeliveryChannel' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -68,7 +68,7 @@ return array (
         'DeliverConfigSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeliverConfigSnapshotResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -112,7 +112,7 @@ return array (
         'DescribeConfigurationRecorderStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeConfigurationRecorderStatusResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -151,7 +151,7 @@ return array (
         'DescribeConfigurationRecorders' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeConfigurationRecordersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -190,7 +190,7 @@ return array (
         'DescribeDeliveryChannelStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeDeliveryChannelStatusResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -229,7 +229,7 @@ return array (
         'DescribeDeliveryChannels' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeDeliveryChannelsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -268,7 +268,7 @@ return array (
         'GetResourceConfigHistory' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetResourceConfigHistoryResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -358,7 +358,7 @@ return array (
         'PutConfigurationRecorder' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -410,7 +410,7 @@ return array (
         'PutDeliveryChannel' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -484,7 +484,7 @@ return array (
         'StartConfigurationRecorder' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -524,7 +524,7 @@ return array (
         'StopConfigurationRecorder' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(

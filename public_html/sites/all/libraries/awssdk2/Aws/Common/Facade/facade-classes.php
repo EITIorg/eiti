@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Facade;
+namespace AwsSdk2\Aws\Common\Facade;
 
 /**
  * The following classes are used to implement the static client facades and are aliased into the global namespaced. We

@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Exception\UnexpectedValueException;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\ReadLimitEntityBody;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\ReadLimitEntityBody;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Allows you to resume the download of a partially downloaded object.
@@ -34,13 +34,13 @@ class ResumableDownload
     /** @var S3Client The S3 client to use to download objects and issue HEAD requests */
     protected $client;
 
-    /** @var \Guzzle\Service\Resource\Model Model object returned when the initial HeadObject operation was called */
+    /** @var \AwsSdk2\Guzzle\Service\Resource\Model Model object returned when the initial HeadObject operation was called */
     protected $meta;
 
     /** @var array Array of parameters to pass to a GetObject operation */
     protected $params;
 
-    /** @var \Guzzle\Http\EntityBody Where the object will be downloaded */
+    /** @var \AwsSdk2\Guzzle\Http\EntityBody Where the object will be downloaded */
     protected $target;
 
     /**

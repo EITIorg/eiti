@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * The requested subnet is not valid, or not all of the subnets are in the same VPC.

@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\S3\Enum\Permission;
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Aws\S3\Enum\Permission;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Amazon S3 Grant model

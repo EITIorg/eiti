@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Cache;
+namespace AwsSdk2\Guzzle\Plugin\Cache;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\BadResponseException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Exception\BadResponseException;
 
 /**
  * Default revalidation strategy

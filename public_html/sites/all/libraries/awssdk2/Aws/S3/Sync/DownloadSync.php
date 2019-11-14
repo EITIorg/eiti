@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\S3\ResumableDownload;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\S3\ResumableDownload;
 
 /**
  * Downloads and Amazon S3 bucket to a local directory

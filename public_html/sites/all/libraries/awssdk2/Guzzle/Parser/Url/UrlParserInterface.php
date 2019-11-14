@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\Url;
+namespace AwsSdk2\Guzzle\Parser\Url;
 
 /**
  * URL parser interface

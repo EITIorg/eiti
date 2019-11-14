@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticBeanstalk\Exception;
+namespace AwsSdk2\Aws\ElasticBeanstalk\Exception;
 
 /**
  * The web service attempted to create a bucket in an Amazon S3 account that already has 100 buckets.

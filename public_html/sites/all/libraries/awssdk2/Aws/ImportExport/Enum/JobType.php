@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Enum;
+namespace AwsSdk2\Aws\ImportExport\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable JobType values

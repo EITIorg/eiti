@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Cannot restore from vpc backup to non-vpc DB instance.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Provisioned IOPS not available in the specified Availability Zone.

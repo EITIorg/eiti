@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\AutoScaling\Exception;
+namespace AwsSdk2\Aws\AutoScaling\Exception;
 
 /**
  * The named Auto Scaling group or launch configuration already exists.

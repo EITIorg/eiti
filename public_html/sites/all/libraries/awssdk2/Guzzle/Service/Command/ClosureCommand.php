@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\UnexpectedValueException;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * A ClosureCommand is a command that allows dynamic commands to be created at runtime using a closure to prepare the

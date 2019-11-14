@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb;
+namespace AwsSdk2\Aws\DynamoDb;
 
-use Guzzle\Http\Exception\HttpException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
-use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
-use Guzzle\Stream\Stream;
+use AwsSdk2\Guzzle\Http\Exception\HttpException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffStrategyInterface;
+use AwsSdk2\Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use AwsSdk2\Guzzle\Stream\Stream;
 
 /**
  * Validates the x-amz-crc32 header of a response, and if corrupt, will retry the request

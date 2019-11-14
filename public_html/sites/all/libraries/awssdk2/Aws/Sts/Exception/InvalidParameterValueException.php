@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * A bad or out-of-range value was supplied for the input parameter.

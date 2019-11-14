@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\S3\Enum\Group;
-use Aws\S3\Enum\GranteeType;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\UnexpectedValueException;
-use Aws\Common\Exception\LogicException;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Aws\S3\Enum\Group;
+use AwsSdk2\Aws\S3\Enum\GranteeType;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Aws\Common\Exception\LogicException;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Amazon S3 Grantee model

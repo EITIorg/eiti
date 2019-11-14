@@ -12,7 +12,7 @@ return array (
         'Search' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-01-01/search?format=sdk&pretty=true',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'SearchResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -85,7 +85,7 @@ return array (
         'Suggest' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-01-01/suggest?format=sdk&pretty=true',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'SuggestResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -115,7 +115,7 @@ return array (
         'UploadDocuments' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-01-01/documents/batch?format=sdk',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UploadDocumentsResponse',
             'responseType' => 'model',
             'parameters' => array(

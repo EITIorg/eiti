@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\LineFormatter;
+use AwsSdk2\Monolog\Formatter\FormatterInterface;
+use AwsSdk2\Monolog\Logger;
 use Raven_Client;
 
 /**

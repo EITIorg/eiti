@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\InstanceMetadata\Waiter;
+namespace AwsSdk2\Aws\Common\InstanceMetadata\Waiter;
 
-use Aws\Common\Waiter\AbstractResourceWaiter;
-use Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Aws\Common\Waiter\AbstractResourceWaiter;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
 
 /**
  * Waits until the instance metadata service is responding.  Will send up to

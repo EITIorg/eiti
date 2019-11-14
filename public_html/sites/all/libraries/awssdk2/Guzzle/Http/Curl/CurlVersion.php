@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
 /**
  * Class used for querying curl_version data

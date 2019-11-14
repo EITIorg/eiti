@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudTrail\Exception;
+namespace AwsSdk2\Aws\CloudTrail\Exception;
 
 /**
  * Exception that occurs when a InternalErrorException error is encountered

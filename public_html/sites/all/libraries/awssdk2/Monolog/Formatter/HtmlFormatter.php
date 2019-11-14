@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace AwsSdk2\Monolog\Formatter;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Formats incoming records into an HTML table

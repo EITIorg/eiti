@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Command;
+namespace AwsSdk2\Aws\Common\Command;
 
-use Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
 
 /**
  * Adds AWS Query service serialization

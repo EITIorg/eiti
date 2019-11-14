@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Swf\Exception;
+namespace AwsSdk2\Aws\Swf\Exception;
 
 /**
  * Returned when the caller does not have sufficient permissions to invoke the action.

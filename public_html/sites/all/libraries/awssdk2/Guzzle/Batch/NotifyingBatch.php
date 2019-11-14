@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * BatchInterface decorator used to call a method each time flush is called

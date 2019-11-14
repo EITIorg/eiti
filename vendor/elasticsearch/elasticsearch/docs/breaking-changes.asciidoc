@@ -1,4 +1,0 @@
-[[breaking_changes]]
-== Breaking changes from 5.x
-
-None! :)

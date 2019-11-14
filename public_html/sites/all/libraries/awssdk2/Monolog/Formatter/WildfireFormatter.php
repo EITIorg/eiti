@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace AwsSdk2\Monolog\Formatter;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Serializes a log message according to Wildfire's header requirements

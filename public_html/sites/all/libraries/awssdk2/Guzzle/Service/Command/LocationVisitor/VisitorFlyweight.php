@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command\LocationVisitor;
+namespace AwsSdk2\Guzzle\Service\Command\LocationVisitor;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface;
-use Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
 
 /**
  * Flyweight factory used to instantiate request and response visitors
@@ -16,21 +16,21 @@ class VisitorFlyweight
 
     /** @var array Default array of mappings of location names to classes */
     protected static $defaultMappings = array(
-        'request.body'          => 'Guzzle\Service\Command\LocationVisitor\Request\BodyVisitor',
-        'request.header'        => 'Guzzle\Service\Command\LocationVisitor\Request\HeaderVisitor',
-        'request.json'          => 'Guzzle\Service\Command\LocationVisitor\Request\JsonVisitor',
-        'request.postField'     => 'Guzzle\Service\Command\LocationVisitor\Request\PostFieldVisitor',
-        'request.postFile'      => 'Guzzle\Service\Command\LocationVisitor\Request\PostFileVisitor',
-        'request.query'         => 'Guzzle\Service\Command\LocationVisitor\Request\QueryVisitor',
-        'request.response_body' => 'Guzzle\Service\Command\LocationVisitor\Request\ResponseBodyVisitor',
-        'request.responseBody'  => 'Guzzle\Service\Command\LocationVisitor\Request\ResponseBodyVisitor',
-        'request.xml'           => 'Guzzle\Service\Command\LocationVisitor\Request\XmlVisitor',
-        'response.body'         => 'Guzzle\Service\Command\LocationVisitor\Response\BodyVisitor',
-        'response.header'       => 'Guzzle\Service\Command\LocationVisitor\Response\HeaderVisitor',
-        'response.json'         => 'Guzzle\Service\Command\LocationVisitor\Response\JsonVisitor',
-        'response.reasonPhrase' => 'Guzzle\Service\Command\LocationVisitor\Response\ReasonPhraseVisitor',
-        'response.statusCode'   => 'Guzzle\Service\Command\LocationVisitor\Response\StatusCodeVisitor',
-        'response.xml'          => 'Guzzle\Service\Command\LocationVisitor\Response\XmlVisitor'
+        'request.body'          => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\BodyVisitor',
+        'request.header'        => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\HeaderVisitor',
+        'request.json'          => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\JsonVisitor',
+        'request.postField'     => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\PostFieldVisitor',
+        'request.postFile'      => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\PostFileVisitor',
+        'request.query'         => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\QueryVisitor',
+        'request.response_body' => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\ResponseBodyVisitor',
+        'request.responseBody'  => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\ResponseBodyVisitor',
+        'request.xml'           => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\XmlVisitor',
+        'response.body'         => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\BodyVisitor',
+        'response.header'       => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\HeaderVisitor',
+        'response.json'         => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\JsonVisitor',
+        'response.reasonPhrase' => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\ReasonPhraseVisitor',
+        'response.statusCode'   => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\StatusCodeVisitor',
+        'response.xml'          => 'AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\XmlVisitor'
     );
 
     /** @var array Array of mappings of location names to classes */

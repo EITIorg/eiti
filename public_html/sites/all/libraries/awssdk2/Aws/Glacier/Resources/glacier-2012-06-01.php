@@ -62,7 +62,7 @@ return array (
         'AbortMultipartUpload' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -104,7 +104,7 @@ return array (
         'CompleteMultipartUpload' => array(
             'httpMethod' => 'POST',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ArchiveCreationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -156,7 +156,7 @@ return array (
         'CreateVault' => array(
             'httpMethod' => 'PUT',
             'uri' => '/{accountId}/vaults/{vaultName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateVaultOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -193,7 +193,7 @@ return array (
         'DeleteArchive' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/{accountId}/vaults/{vaultName}/archives/{archiveId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -235,7 +235,7 @@ return array (
         'DeleteVault' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/{accountId}/vaults/{vaultName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -272,7 +272,7 @@ return array (
         'DeleteVaultNotifications' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/{accountId}/vaults/{vaultName}/notification-configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -309,7 +309,7 @@ return array (
         'DescribeJob' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/jobs/{jobId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GlacierJobDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -351,7 +351,7 @@ return array (
         'DescribeVault' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DescribeVaultOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -388,7 +388,7 @@ return array (
         'GetDataRetrievalPolicy' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/policies/data-retrieval',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetDataRetrievalPolicyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -416,7 +416,7 @@ return array (
         'GetJobOutput' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/jobs/{jobId}/output',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetJobOutputOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -466,7 +466,7 @@ return array (
         'GetVaultNotifications' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/notification-configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetVaultNotificationsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -503,7 +503,7 @@ return array (
         'InitiateJob' => array(
             'httpMethod' => 'POST',
             'uri' => '/{accountId}/vaults/{vaultName}/jobs',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'InitiateJobOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -586,7 +586,7 @@ return array (
         'InitiateMultipartUpload' => array(
             'httpMethod' => 'POST',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'InitiateMultipartUploadOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -633,7 +633,7 @@ return array (
         'ListJobs' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/jobs',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListJobsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -686,7 +686,7 @@ return array (
         'ListMultipartUploads' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListMultipartUploadsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -731,7 +731,7 @@ return array (
         'ListParts' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListPartsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -781,7 +781,7 @@ return array (
         'ListVaults' => array(
             'httpMethod' => 'GET',
             'uri' => '/{accountId}/vaults',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListVaultsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -821,7 +821,7 @@ return array (
         'SetDataRetrievalPolicy' => array(
             'httpMethod' => 'PUT',
             'uri' => '/{accountId}/policies/data-retrieval',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -870,7 +870,7 @@ return array (
         'SetVaultNotifications' => array(
             'httpMethod' => 'PUT',
             'uri' => '/{accountId}/vaults/{vaultName}/notification-configuration',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -919,7 +919,7 @@ return array (
         'UploadArchive' => array(
             'httpMethod' => 'POST',
             'uri' => '/{accountId}/vaults/{vaultName}/archives',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ArchiveCreationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -980,7 +980,7 @@ return array (
         'UploadMultipartPart' => array(
             'httpMethod' => 'PUT',
             'uri' => '/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UploadMultipartPartOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1235,7 +1235,7 @@ return array (
             'properties' => array(
                 'body' => array(
                     'type' => 'string',
-                    'instanceOf' => 'Guzzle\\Http\\EntityBody',
+                    'instanceOf' => 'AwsSdk2\Guzzle\\Http\\EntityBody',
                     'location' => 'body',
                 ),
                 'checksum' => array(

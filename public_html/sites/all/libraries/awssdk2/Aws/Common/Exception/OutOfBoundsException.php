@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
 /**
  * AWS SDK namespaced version of the SPL OverflowException.

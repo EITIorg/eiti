@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\OpsWorks\Exception;
+namespace AwsSdk2\Aws\OpsWorks\Exception;
 
 /**
  * Indicates that a resource was not found.

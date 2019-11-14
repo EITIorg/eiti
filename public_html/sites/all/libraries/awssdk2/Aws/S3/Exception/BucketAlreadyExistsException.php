@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.

@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Iterator;
+namespace AwsSdk2\Aws\DynamoDb\Iterator;
 
-use Aws\Common\Iterator\AwsResourceIterator;
-use Guzzle\Common\Version;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Iterator\AwsResourceIterator;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Iterator for a DynamoDB Scan operation. Can also get the total scanned count

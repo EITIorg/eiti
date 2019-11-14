@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Http\Exception;
+namespace AwsSdk2\Guzzle\Http\Exception;
 
-use Guzzle\Common\Exception\ExceptionCollection;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Common\Exception\ExceptionCollection;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Exception encountered during a multi transfer

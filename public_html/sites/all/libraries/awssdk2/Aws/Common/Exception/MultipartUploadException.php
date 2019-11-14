@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
-use Aws\Common\Model\MultipartUpload\TransferStateInterface;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\TransferStateInterface;
 
 /**
- * Thrown when a {@see Aws\Common\MultipartUpload\TransferInterface} object encounters an error during transfer
+ * Thrown when a {@see AwsSdk2\Aws\Common\MultipartUpload\TransferInterface} object encounters an error during transfer
  */
 class MultipartUploadException extends RuntimeException
 {

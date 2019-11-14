@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Inflection;
+namespace AwsSdk2\Guzzle\Inflection;
 
 /**
  * Decorator used to add memoization to previously inflected words

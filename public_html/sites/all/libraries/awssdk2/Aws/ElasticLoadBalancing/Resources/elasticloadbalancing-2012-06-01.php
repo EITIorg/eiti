@@ -78,7 +78,7 @@ return array (
         'AddTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -144,7 +144,7 @@ return array (
         'ApplySecurityGroupsToLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplySecurityGroupsToLoadBalancerOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -192,7 +192,7 @@ return array (
         'AttachLoadBalancerToSubnets' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AttachLoadBalancerToSubnetsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -244,7 +244,7 @@ return array (
         'ConfigureHealthCheck' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigureHealthCheckOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -309,7 +309,7 @@ return array (
         'CreateAppCookieStickinessPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -361,7 +361,7 @@ return array (
         'CreateLBCookieStickinessPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -412,7 +412,7 @@ return array (
         'CreateLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateAccessPointOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -563,7 +563,7 @@ return array (
         'CreateLoadBalancerListeners' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -637,7 +637,7 @@ return array (
         'CreateLoadBalancerPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -710,7 +710,7 @@ return array (
         'DeleteLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -734,7 +734,7 @@ return array (
         'DeleteLoadBalancerListeners' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -774,7 +774,7 @@ return array (
         'DeleteLoadBalancerPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -813,7 +813,7 @@ return array (
         'DeregisterInstancesFromLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeregisterEndPointsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -862,7 +862,7 @@ return array (
         'DescribeInstanceHealth' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeEndPointStateOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -910,7 +910,7 @@ return array (
         'DescribeLoadBalancerAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeLoadBalancerAttributesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -944,7 +944,7 @@ return array (
         'DescribeLoadBalancerPolicies' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeLoadBalancerPoliciesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -986,7 +986,7 @@ return array (
         'DescribeLoadBalancerPolicyTypes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeLoadBalancerPolicyTypesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1020,7 +1020,7 @@ return array (
         'DescribeLoadBalancers' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAccessPointsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1064,7 +1064,7 @@ return array (
         'DescribeTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeTagsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1101,7 +1101,7 @@ return array (
         'DetachLoadBalancerFromSubnets' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DetachLoadBalancerFromSubnetsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1145,7 +1145,7 @@ return array (
         'DisableAvailabilityZonesForLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RemoveAvailabilityZonesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1189,7 +1189,7 @@ return array (
         'EnableAvailabilityZonesForLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AddAvailabilityZonesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1229,7 +1229,7 @@ return array (
         'ModifyLoadBalancerAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ModifyLoadBalancerAttributesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1343,7 +1343,7 @@ return array (
         'RegisterInstancesWithLoadBalancer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RegisterEndPointsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1392,7 +1392,7 @@ return array (
         'RemoveTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1445,7 +1445,7 @@ return array (
         'SetLoadBalancerListenerSSLCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1497,7 +1497,7 @@ return array (
         'SetLoadBalancerPoliciesForBackendServer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1550,7 +1550,7 @@ return array (
         'SetLoadBalancerPoliciesOfListener' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(

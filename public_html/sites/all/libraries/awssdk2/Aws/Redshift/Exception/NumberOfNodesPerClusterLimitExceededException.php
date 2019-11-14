@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * The operation would exceed the number of nodes allowed for a cluster.

@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common;
+namespace AwsSdk2\Aws\Common;
 
-use Aws\Common\Facade\Facade;
-use Guzzle\Service\Builder\ServiceBuilder;
-use Guzzle\Service\Builder\ServiceBuilderLoader;
+use AwsSdk2\Aws\Common\Facade\Facade;
+use AwsSdk2\Guzzle\Service\Builder\ServiceBuilder;
+use AwsSdk2\Guzzle\Service\Builder\ServiceBuilderLoader;
 
 /**
  * Base class for interacting with web service clients

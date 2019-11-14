@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudSearch\Exception;
+namespace AwsSdk2\Aws\CloudSearch\Exception;
 
 /**
  * The request was rejected because it attempted to reference a resource that does not exist.

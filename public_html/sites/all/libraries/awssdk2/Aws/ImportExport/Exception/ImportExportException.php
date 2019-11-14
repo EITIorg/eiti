@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Default service exception class

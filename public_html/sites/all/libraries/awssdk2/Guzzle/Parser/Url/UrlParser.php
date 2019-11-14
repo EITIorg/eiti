@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Parser\Url;
+namespace AwsSdk2\Guzzle\Parser\Url;
 
-use Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Version;
 
 /**
  * Parses URLs into parts using PHP's built-in parse_url() function

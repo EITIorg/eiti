@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Mimetypes;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Mimetypes;
 
 /**
  * POST file upload

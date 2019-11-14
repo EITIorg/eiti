@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront\Exception;
+namespace AwsSdk2\Aws\CloudFront\Exception;
 
 /**
  * No origin exists with the specified Origin Id.

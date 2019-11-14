@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticLoadBalancing\Exception;
+namespace AwsSdk2\Aws\ElasticLoadBalancing\Exception;
 
 /**
  * Invalid value for scheme. Scheme can only be specified for load balancers in VPC.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Proxies requests and connections to a pool of internal curl_multi handles. Each recursive call will add requests
@@ -28,8 +28,8 @@ class CurlMultiProxy extends AbstractHasDispatcher implements CurlMultiInterface
         // You can get some weird "Too many open files" errors when sending a large amount of requests in parallel.
         // These two statements autoload classes before a system runs out of file descriptors so that you can get back
         // valuable error messages if you run out.
-        class_exists('Guzzle\Http\Message\Response');
-        class_exists('Guzzle\Http\Exception\CurlException');
+        class_exists('AwsSdk2\Guzzle\Http\Message\Response');
+        class_exists('AwsSdk2\Guzzle\Http\Exception\CurlException');
     }
 
     public function add(RequestInterface $request)

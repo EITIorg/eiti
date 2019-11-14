@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * The specified HSM client certificate is not in the available state, or it is still in use by one or more Amazon Redshift clusters.

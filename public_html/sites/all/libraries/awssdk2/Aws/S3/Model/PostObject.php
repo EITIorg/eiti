@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\Common\Enum\DateFormat;
-use Aws\S3\S3Client;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Url;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Aws\S3\S3Client;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Encapsulates the logic for getting the data for an S3 object POST upload form

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * SourceDBInstanceIdentifier refers to a DB instance with BackupRetentionPeriod equal to 0.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Event;
 
 /**
  * Event class emitted with the operation.parse_class event

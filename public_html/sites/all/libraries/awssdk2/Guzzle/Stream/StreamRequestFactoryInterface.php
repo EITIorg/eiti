@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Stream;
+namespace AwsSdk2\Guzzle\Stream;
 
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Interface used for creating streams from requests
@@ -18,7 +18,7 @@ interface StreamRequestFactoryInterface
      * @param array            $params  Optional array of parameters specific to the factory
      *
      * @return StreamInterface Returns a stream object
-     * @throws \Guzzle\Common\Exception\RuntimeException if the stream cannot be opened or an error occurs
+     * @throws \AwsSdk2\Guzzle\Common\Exception\RuntimeException if the stream cannot be opened or an error occurs
      */
     public function fromRequest(RequestInterface $request, $context = array(), array $params = array());
 }

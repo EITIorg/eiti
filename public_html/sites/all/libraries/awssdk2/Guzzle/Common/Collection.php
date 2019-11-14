@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Common;
+namespace AwsSdk2\Guzzle\Common;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 /**
  * Key value pair collection object

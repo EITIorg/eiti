@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * AWS query string is malformed, does not adhere to AWS standards.

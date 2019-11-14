@@ -14,18 +14,18 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\Exception\NoSuchKeyException;
-use Aws\S3\Iterator\ListObjectsIterator;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\CachingEntityBody;
-use Guzzle\Http\Mimetypes;
-use Guzzle\Iterator\FilterIterator;
-use Guzzle\Stream\PhpStreamRequestFactory;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\S3\Exception\S3Exception;
+use AwsSdk2\Aws\S3\Exception\NoSuchKeyException;
+use AwsSdk2\Aws\S3\Iterator\ListObjectsIterator;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\CachingEntityBody;
+use AwsSdk2\Guzzle\Http\Mimetypes;
+use AwsSdk2\Guzzle\Iterator\FilterIterator;
+use AwsSdk2\Guzzle\Stream\PhpStreamRequestFactory;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Amazon S3 stream wrapper to use "s3://<bucket>/<key>" files with PHP streams, supporting "r", "w", "a", "x".
@@ -689,7 +689,7 @@ class StreamWrapper
         $request = $this->getSignedRequest(static::$client->getCommand('GetObject', $params));
         // Create a stream that uses the EntityBody object
         $factory = $this->getOption('stream_factory') ?: new PhpStreamRequestFactory();
-        $this->body = $factory->fromRequest($request, array(), array('stream_class' => 'Guzzle\Http\EntityBody'));
+        $this->body = $factory->fromRequest($request, array(), array('stream_class' => 'AwsSdk2\Guzzle\Http\EntityBody'));
 
         // Wrap the body in a caching entity body if seeking is allowed
         if ($this->getOption('seekable')) {

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront\Exception;
+namespace AwsSdk2\Aws\CloudFront\Exception;
 
 /**
  * Your request contains more trusted signers than are allowed per distribution.

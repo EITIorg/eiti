@@ -1,12 +1,12 @@
 <?php
 
-namespace Aws\Common\Command;
+namespace AwsSdk2\Aws\Common\Command;
 
-use Guzzle\Service\Description\Operation;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Command\LocationVisitor\Response\XmlVisitor;
+use AwsSdk2\Guzzle\Service\Description\Operation;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\XmlVisitor;
 
 /**
  * Class used for custom AWS XML response parsing of query services

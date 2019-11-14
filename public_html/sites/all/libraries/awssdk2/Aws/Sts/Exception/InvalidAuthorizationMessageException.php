@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * The error returned if the message passed to DecodeAuthorizationMessage was invalid. This can happen if the token contains invalid characters, such as linebreaks.

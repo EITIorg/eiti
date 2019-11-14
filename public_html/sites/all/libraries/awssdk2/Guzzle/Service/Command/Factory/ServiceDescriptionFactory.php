@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
-use Guzzle\Service\Description\ServiceDescriptionInterface;
-use Guzzle\Inflection\InflectorInterface;
+use AwsSdk2\Guzzle\Service\Description\ServiceDescriptionInterface;
+use AwsSdk2\Guzzle\Inflection\InflectorInterface;
 
 /**
  * Command factory used to create commands based on service descriptions

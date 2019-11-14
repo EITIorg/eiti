@@ -34,7 +34,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
   /**
    * The AWS SDK for PHP S3Client object.
    *
-   * @var Aws\S3\S3Client
+   * @var AwsSdk2\Aws\S3\S3Client
    */
   protected $s3 = NULL;
 
@@ -103,7 +103,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
   /**
    * Stream wrapper constructor.
    *
-   * Creates the Aws\S3\S3Client client object and activates the options
+   * Creates the AwsSdk2\Aws\S3\S3Client client object and activates the options
    * specified on the S3 File System Settings page.
    */
   public function __construct() {
@@ -496,7 +496,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
     try {
       $this->s3->waitUntilObjectExists($wait_params);
     }
-    catch (Aws\Common\Exception\RuntimeException $e) {
+    catch (AwsSdk2\Aws\Common\Exception\RuntimeException $e) {
       return FALSE;
     }
     return TRUE;
@@ -1425,9 +1425,9 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
     // Create a stream that uses the EntityBody object.
     $factory = $this->_get_option('stream_factory');
     if (empty($factory)) {
-      $factory = new Guzzle\Stream\PhpStreamRequestFactory();
+      $factory = new AwsSdk2\Guzzle\Stream\PhpStreamRequestFactory();
     }
-    $this->body = $factory->fromRequest($request, array(), array('stream_class' => 'Guzzle\Http\EntityBody'));
+    $this->body = $factory->fromRequest($request, array(), array('stream_class' => 'AwsSdk2\Guzzle\Http\EntityBody'));
 
     // Wrap the body in an S3fsSeekableCachingEntityBody, so that seeks can
     // go to not-yet-read sections of the file.
@@ -1452,7 +1452,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
       $this->body = $this->s3->getObject($params)->get('Body');
       $this->body->seek(0, SEEK_END);
     }
-    catch (Aws\S3\Exception\S3Exception $e) {
+    catch (AwsSdk2\Aws\S3\Exception\S3Exception $e) {
       // The object does not exist, so use a simple write stream.
       $this->_open_write_stream($params, $errors);
     }
@@ -1469,7 +1469,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
   protected function _open_write_stream($params, &$errors) {
     $this->_debug("_open_write_stream({$params['Key']}) called.", TRUE);
 
-    $this->body = new Guzzle\Http\EntityBody(fopen('php://temp', 'r+'));
+    $this->body = new AwsSdk2\Guzzle\Http\EntityBody(fopen('php://temp', 'r+'));
   }
 
   /**
@@ -1508,7 +1508,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
     try {
       $result = $this->s3->headObject($params);
     }
-    catch (Aws\S3\Exception\NoSuchKeyException $e) {
+    catch (AwsSdk2\Aws\S3\Exception\NoSuchKeyException $e) {
       // headObject() throws this exception if the requested key doesn't exist
       // in the bucket.
       return FALSE;
@@ -1596,7 +1596,7 @@ class S3fsStreamWrapper implements DrupalStreamWrapperInterface {
   }
 }
 
-// Guzzle\Http\CachingEntityBody is only defined once the SDK has been loaded,
+// AwsSdk2\Guzzle\Http\CachingEntityBody is only defined once the SDK has been loaded,
 // so we need to load it before we can inherit from it.
 $library = _s3fs_load_awssdk2_library();
 if ($library['loaded']) {
@@ -1606,7 +1606,7 @@ if ($library['loaded']) {
    * Any instantiation of this class must be wrapped in a check for its
    * existence, since it may not be defined under certain circumstances.
    */
-  class S3fsSeekableCachingEntityBody extends Guzzle\Http\CachingEntityBody {
+  class S3fsSeekableCachingEntityBody extends AwsSdk2\Guzzle\Http\CachingEntityBody {
 
     /**
      * This version of seek() allows seeking past the end of the cache.

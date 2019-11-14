@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Enum;
+namespace AwsSdk2\Aws\S3\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable GranteeType values

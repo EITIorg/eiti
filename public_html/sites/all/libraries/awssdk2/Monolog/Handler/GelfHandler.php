@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
 use Gelf\IMessagePublisher;
 use Gelf\PublisherInterface;
 use InvalidArgumentException;
-use Monolog\Logger;
-use Monolog\Formatter\GelfMessageFormatter;
+use AwsSdk2\Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\GelfMessageFormatter;
 
 /**
  * Handler to send messages to a Graylog2 (http://www.graylog2.org) server

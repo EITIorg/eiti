@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticTranscoder\Exception;
+namespace AwsSdk2\Aws\ElasticTranscoder\Exception;
 
 /**
  * Exception that occurs when a IncompatibleVersionException error is encountered

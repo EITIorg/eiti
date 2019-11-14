@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * A ServiceDescription stores service information based on a service document

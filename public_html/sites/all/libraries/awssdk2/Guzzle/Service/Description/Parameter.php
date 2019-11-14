@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * API parameter object used with service descriptions

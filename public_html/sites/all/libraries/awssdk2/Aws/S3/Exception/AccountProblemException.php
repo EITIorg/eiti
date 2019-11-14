@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * There is a problem with your AWS account that prevents the operation from completing successfully. Please use Contact Us.

@@ -14,16 +14,16 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\MultipartUploadException;
-use Aws\Common\Exception\RuntimeException;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\MultipartUploadException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Abstract class for transfer commonalities

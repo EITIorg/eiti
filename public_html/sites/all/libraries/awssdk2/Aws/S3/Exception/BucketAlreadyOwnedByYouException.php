@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * Your previous request to create the named bucket succeeded and you already own it.

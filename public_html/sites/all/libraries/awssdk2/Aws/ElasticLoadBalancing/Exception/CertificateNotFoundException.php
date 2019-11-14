@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticLoadBalancing\Exception;
+namespace AwsSdk2\Aws\ElasticLoadBalancing\Exception;
 
 /**
  * The specified SSL ID does not refer to a valid SSL certificate in the AWS Identity and Access Management Service.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser;
+namespace AwsSdk2\Guzzle\Parser;
 
 /**
  * Registry of parsers used by the application
@@ -15,10 +15,10 @@ class ParserRegistry
 
     /** @var array Mapping of parser name to default class */
     protected $mapping = array(
-        'message'      => 'Guzzle\\Parser\\Message\\MessageParser',
-        'cookie'       => 'Guzzle\\Parser\\Cookie\\CookieParser',
-        'url'          => 'Guzzle\\Parser\\Url\\UrlParser',
-        'uri_template' => 'Guzzle\\Parser\\UriTemplate\\UriTemplate',
+        'message'      => 'AwsSdk2\Guzzle\\Parser\\Message\\MessageParser',
+        'cookie'       => 'AwsSdk2\Guzzle\\Parser\\Cookie\\CookieParser',
+        'url'          => 'AwsSdk2\Guzzle\\Parser\\Url\\UrlParser',
+        'uri_template' => 'AwsSdk2\Guzzle\\Parser\\UriTemplate\\UriTemplate',
     );
 
     /**
@@ -38,7 +38,7 @@ class ParserRegistry
     {
         // Use the PECL URI template parser if available
         if (extension_loaded('uri_template')) {
-            $this->mapping['uri_template'] = 'Guzzle\\Parser\\UriTemplate\\PeclUriTemplate';
+            $this->mapping['uri_template'] = 'AwsSdk2\Guzzle\\Parser\\UriTemplate\\PeclUriTemplate';
         }
     }
 

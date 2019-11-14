@@ -14,17 +14,17 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Exception\UnexpectedValueException;
-use Aws\Common\Model\MultipartUpload\TransferInterface;
-use Aws\S3\S3Client;
-use Aws\S3\Iterator\OpendirIterator;
-use Guzzle\Common\Event;
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Iterator\FilterIterator;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\TransferInterface;
+use AwsSdk2\Aws\S3\S3Client;
+use AwsSdk2\Aws\S3\Iterator\OpendirIterator;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Iterator\FilterIterator;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 abstract class AbstractSyncBuilder
 {

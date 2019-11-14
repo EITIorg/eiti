@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Swf\Exception;
+namespace AwsSdk2\Aws\Swf\Exception;
 
 /**
  * Exception that occurs when a DefaultUndefinedException error is encountered

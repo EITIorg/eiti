@@ -2,48 +2,48 @@
 
 ## 2.7.25 - 2015-03-26
 
-* `Aws\ElasticTranscoder` - Added support for job timing.
-* `Aws\Iam` - Adding NamedPolicy to GetAccountAuthorizationDetails.
-* `Aws\OpsWorks` - Adding BlockDeviceMapping support.
+* `AwsSdk2\Aws\ElasticTranscoder` - Added support for job timing.
+* `AwsSdk2\Aws\Iam` - Adding NamedPolicy to GetAccountAuthorizationDetails.
+* `AwsSdk2\Aws\OpsWorks` - Adding BlockDeviceMapping support.
 
 ## 2.7.24 - 2015-03-24
 
-* `Aws\S3` - Added support for cross-region replication.
-* `Aws\S3` - Added support for ["Requester Pays" buckets](http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
+* `AwsSdk2\Aws\S3` - Added support for cross-region replication.
+* `AwsSdk2\Aws\S3` - Added support for ["Requester Pays" buckets](http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
 
 ## 2.7.23 - 2015-03-19
 
-* `Aws\ElasticTranscoder` - API update to support AppliedColorSpaceConversion.
-* `Aws\CloudSearchDomain` - Adding 504 status code to retry list.
+* `AwsSdk2\Aws\ElasticTranscoder` - API update to support AppliedColorSpaceConversion.
+* `AwsSdk2\Aws\CloudSearchDomain` - Adding 504 status code to retry list.
 
 ## 2.7.22 - 2015-03-12
 
-* `Aws\CloudFront` - Fixed #482, which affected pre-signing CloudFront URLs.
-* `Aws\CloudTrail` - Added support for the `LookupEvents` operation.
-* `Aws\CloudWatchLogs` - Added ordering parameters to the `DescribeLogStreams`
-* `Aws\Ec2` - Added pagination parameters to the `DescribeSnapshots` operation.
+* `AwsSdk2\Aws\CloudFront` - Fixed #482, which affected pre-signing CloudFront URLs.
+* `AwsSdk2\Aws\CloudTrail` - Added support for the `LookupEvents` operation.
+* `AwsSdk2\Aws\CloudWatchLogs` - Added ordering parameters to the `DescribeLogStreams`
+* `AwsSdk2\Aws\Ec2` - Added pagination parameters to the `DescribeSnapshots` operation.
   operation.
 
 ## 2.7.21 - 2015-03-04
 
-* `Aws\CognitoSync` - Added support for Amazon Cognito Streams.
+* `AwsSdk2\Aws\CognitoSync` - Added support for Amazon Cognito Streams.
 
 ## 2.7.20 - 2015-02-23
 
-* `Aws\DataPipeline` - Added support for pipeline tagging via the `AddTags` and
+* `AwsSdk2\Aws\DataPipeline` - Added support for pipeline tagging via the `AddTags` and
   `RemoveTags` operations.
-* `Aws\Route53` - Added support for the `GetHostedZoneCount` and
+* `AwsSdk2\Aws\Route53` - Added support for the `GetHostedZoneCount` and
   `ListHostedZonesByName` operations.
 
 ## 2.7.19 - 2015-02-20
 
-* `Aws\CloudFront` - Added support for origin paths in web distributions.
-* `Aws\Ecs` - Added support for specifying volumes and mount points. Also
-* `Aws\ElasticTranscoder` - Added support for cross-regional resource warnings.
-* `Aws\Route53Domains` - Add iterators for `ListDomains` and `ListOperations`.
-* `Aws\Ssm` - Added support for the **Amazon Simple Systems Management Service
+* `AwsSdk2\Aws\CloudFront` - Added support for origin paths in web distributions.
+* `AwsSdk2\Aws\Ecs` - Added support for specifying volumes and mount points. Also
+* `AwsSdk2\Aws\ElasticTranscoder` - Added support for cross-regional resource warnings.
+* `AwsSdk2\Aws\Route53Domains` - Add iterators for `ListDomains` and `ListOperations`.
+* `AwsSdk2\Aws\Ssm` - Added support for the **Amazon Simple Systems Management Service
   (SSM)**.
-* `Aws\Sts` - Added support for regional endpoints.
+* `AwsSdk2\Aws\Sts` - Added support for regional endpoints.
   switched the client to use a JSON protocol.
 * Changed our CHANGELOG format. ;-)
 
@@ -191,10 +191,10 @@
 * Added document model support to the Amazon DynamoDB client, including support
   for the new data types (`L`, `M`, `BOOL`, and `NULL`), nested attributes, and
   expressions.
-* Deprecated the `Aws\DynamoDb\Model\Attribute`, `Aws\DynamoDb\Model\Item`,
-  and `Aws\DynamoDb\Iterator\ItemIterator` classes, and the
-  `Aws\DynamoDb\DynamoDbClient::formatValue` and
-  `Aws\DynamoDb\DynamoDbClient::formatAttribute` methods, since they do not
+* Deprecated the `AwsSdk2\Aws\DynamoDb\Model\Attribute`, `AwsSdk2\Aws\DynamoDb\Model\Item`,
+  and `AwsSdk2\Aws\DynamoDb\Iterator\ItemIterator` classes, and the
+  `AwsSdk2\Aws\DynamoDb\DynamoDbClient::formatValue` and
+  `AwsSdk2\Aws\DynamoDb\DynamoDbClient::formatAttribute` methods, since they do not
   support the new types in the DynamoDB document model. These deprecated classes
   and methods still work reliably with `S`, `N`, `B`, `SS`, `NS`, and `BS`
   attributes.
@@ -579,10 +579,10 @@
 * Added support for progress reporting on snapshot restore operations to the the Amazon Redshift client
 * Updated the Amazon Elastic MapReduce client to use JSON serialization
 * Updated the Amazon Elastic MapReduce client to sign requests with Signature V4
-* Updated the SDK to throw `Aws\Common\Exception\TransferException` exceptions when a network error occurs instead of a
-  `Guzzle\Http\Exception\CurlException`. The TransferException class, however, extends from
-  `Guzzle\Http\Exception\CurlException`. You can continue to catch the Guzzle `CurlException` or catch
-  `Aws\Common\Exception\AwsExceptionInterface` to catch any exception that can be thrown by an AWS client
+* Updated the SDK to throw `AwsSdk2\Aws\Common\Exception\TransferException` exceptions when a network error occurs instead of a
+  `AwsSdk2\Guzzle\Http\Exception\CurlException`. The TransferException class, however, extends from
+  `AwsSdk2\Guzzle\Http\Exception\CurlException`. You can continue to catch the Guzzle `CurlException` or catch
+  `AwsSdk2\Aws\Common\Exception\AwsExceptionInterface` to catch any exception that can be thrown by an AWS client
 * Fixed an issue with the Amazon S3 stream wrapper where trailing slashes were being added when listing directories
 
 ## 2.4.2 - 2013-07-25
@@ -596,15 +596,15 @@
 * Fixed an unmarshalling error with the Amazon EC2 `CreateKeyPair` operation
 * Fixed an unmarshalling error with the Amazon S3 `ListMultipartUploads` operation
 * Fixed an issue with the Amazon S3 stream wrapper "x" fopen mode
-* Fixed an issue with `Aws\S3\S3Client::downloadBucket` by removing leading slashes from the passed `$keyPrefix` argument
+* Fixed an issue with `AwsSdk2\Aws\S3\S3Client::downloadBucket` by removing leading slashes from the passed `$keyPrefix` argument
 
 ## 2.4.1 - 2013-06-08
 
 * Added support for setting watermarks and max framerates to the Amazon Elastic Transcoder client
-* Added the `Aws\DynamoDb\Iterator\ItemIterator` class to make it easier to get items from the results of DynamoDB
+* Added the `AwsSdk2\Aws\DynamoDb\Iterator\ItemIterator` class to make it easier to get items from the results of DynamoDB
   operations in a simpler form
-* Added support for the `cr1.8xlarge` EC2 instance type. Use `Aws\Ec2\Enum\InstanceType::CR1_8XLARGE`
-* Added support for the suppression list SES mailbox simulator. Use `Aws\Ses\Enum\MailboxSimulator::SUPPRESSION_LIST`
+* Added support for the `cr1.8xlarge` EC2 instance type. Use `AwsSdk2\Aws\Ec2\Enum\InstanceType::CR1_8XLARGE`
+* Added support for the suppression list SES mailbox simulator. Use `AwsSdk2\Aws\Ses\Enum\MailboxSimulator::SUPPRESSION_LIST`
 * [SDK] Fixed an issue with data formats throughout the SDK due to a regression. Dates are now sent over the wire with
   the correct format. This issue affected the Amazon EC2, Amazon ElastiCache, AWS Elastic Beanstalk, Amazon EMR, and
   Amazon RDS clients
@@ -630,7 +630,7 @@
 * Added an easy to way to upload an object to Amazon S3 that automatically uses a multipart upload if the size of the
   object exceeds a customizable threshold (`$s3->upload()`)
 * [SDK] Added facade classes for simple, static access to clients (e.g., `S3::putObject([...])`)
-* Added the `Aws\S3\S3Client::getObjectUrl` convenience method for getting the URL of an Amazon S3 object. This works
+* Added the `AwsSdk2\Aws\S3\S3Client::getObjectUrl` convenience method for getting the URL of an Amazon S3 object. This works
   for both public and pre-signed URLs
 * Added support for using the `ap-northeast-1` region to the Amazon Redshift client
 * Added support for configuring custom SSL certificates to the Amazon CloudFront client via the `ViewerCertificate`
@@ -646,7 +646,7 @@
 * Updated the Amazon SNS client to sign requests with Signature V4, which enables larger payloads
 * Updated the S3 Stream Wrapper so that you can use stream resources in any S3 operation without having to manually
   specify the `ContentLength` option
-* Fixed issue #94 so that the `Aws\S3\BucketStyleListener` is invoked on `command.after_prepare` and presigned URLs
+* Fixed issue #94 so that the `AwsSdk2\Aws\S3\BucketStyleListener` is invoked on `command.after_prepare` and presigned URLs
   are generated correctly from S3 commands
 * Fixed an issue so that creating presigned URLs using the Amazon S3 client now works with temporary credentials
 * Fixed an issue so that the `CORSRules.AllowedHeaders` parameter is now available when configuring CORS for Amazon S3
@@ -673,7 +673,7 @@
   of when instantiating the client
 * Added a new [Zip Download](http://pear.amazonwebservices.com/get/aws.zip) for installing the SDK
 * Fixed the API version for the AWS Support client to be `2013-04-15`
-* Fixed issue #78 by implementing `Aws\S3\StreamWrapper::stream_cast()` for the S3 stream wrapper
+* Fixed issue #78 by implementing `AwsSdk2\Aws\S3\StreamWrapper::stream_cast()` for the S3 stream wrapper
 * Fixed issue #79 by updating the S3 `ClearBucket` object to work with the `ListObjects` operation
 * Fixed issue #80 where the `ETag` was incorrectly labeled as a header value instead of being in the XML body for
   the S3 `CompleteMultipartUpload` operation response
@@ -725,7 +725,7 @@
 ## 2.2.1 - 2013-03-18
 
 * Added support for viewing and downloading DB log files to the Amazon RDS client
-* Added the ability to validate incoming Amazon SNS messages. See the `Aws\Sns\MessageValidator` namespace
+* Added the ability to validate incoming Amazon SNS messages. See the `AwsSdk2\Aws\Sns\MessageValidator` namespace
 * Added the ability to easily change the credentials that a client is configured to use via `$client->setCredentials()`
 * Added the `client.region_changed` and `client.credentials_changed` events on the client that are triggered when the
   `setRegion()` and `setCredentials()` methods are called, respectively
@@ -838,13 +838,13 @@
 * Fixed an issue with the service description for the Amazon S3 `UploadPart` operation so that it works correctly
 * Fixed an issue with the Amazon S3 service description dealing with `response-*` query parameters of `GetObject`
 * Fixed an issue with the Amazon S3 client where object keys prefixed by the bucket name were being treated incorrectly
-* Fixed an issue with `Aws\S3\Model\MultipartUpload\ParallelTransfer` class
+* Fixed an issue with `AwsSdk2\Aws\S3\Model\MultipartUpload\ParallelTransfer` class
 * Added support for the `AssumeRole` operation for AWS STS
 * Added a the `UploadBodyListener` which allows upload operations in Amazon S3 and Amazon Glacier to accept file handles
   in the `Body` parameter and file paths in the `SourceFile` parameter
 * Added Content-Type guessing for uploads
 * Added new region endpoints, including sa-east-1 and us-gov-west-1 for Amazon DynamoDB
-* Added methods to `Aws\S3\Model\MultipartUpload\UploadBuilder` class to make setting ACL and Content-Type easier
+* Added methods to `AwsSdk2\Aws\S3\Model\MultipartUpload\UploadBuilder` class to make setting ACL and Content-Type easier
 
 ## 2.0.1 - 2012-11-13
 

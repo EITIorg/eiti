@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * The request has failed due to a temporary failure of the server.

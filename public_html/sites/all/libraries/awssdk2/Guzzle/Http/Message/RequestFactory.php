@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\RedirectPlugin;
-use Guzzle\Http\Url;
-use Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\RedirectPlugin;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
 
 /**
  * Default HTTP request factory used to create the default {@see Request} and {@see EntityEnclosingRequest} objects.
@@ -20,10 +20,10 @@ class RequestFactory implements RequestFactoryInterface
     protected $methods;
 
     /** @var string Class to instantiate for requests with no body */
-    protected $requestClass = 'Guzzle\\Http\\Message\\Request';
+    protected $requestClass = 'AwsSdk2\Guzzle\\Http\\Message\\Request';
 
     /** @var string Class to instantiate for requests with a body */
-    protected $entityEnclosingRequestClass = 'Guzzle\\Http\\Message\\EntityEnclosingRequest';
+    protected $entityEnclosingRequestClass = 'AwsSdk2\Guzzle\\Http\\Message\\EntityEnclosingRequest';
 
     /**
      * Get a cached instance of the default request factory
@@ -128,7 +128,7 @@ class RequestFactory implements RequestFactoryInterface
 
     /**
      * Clone a request while changing the method. Emulates the behavior of
-     * {@see Guzzle\Http\Message\Request::clone}, but can change the HTTP method.
+     * {@see AwsSdk2\Guzzle\Http\Message\Request::clone}, but can change the HTTP method.
      *
      * @param RequestInterface $request Request to clone
      * @param string           $method  Method to set
@@ -269,7 +269,7 @@ class RequestFactory implements RequestFactoryInterface
         if ($value === false || $value === 0) {
             $dispatcher = $request->getEventDispatcher();
             foreach ($dispatcher->getListeners('request.error') as $listener) {
-                if (is_array($listener) && $listener[0] == 'Guzzle\Http\Message\Request' && $listener[1] = 'onRequestError') {
+                if (is_array($listener) && $listener[0] == 'AwsSdk2\Guzzle\Http\Message\Request' && $listener[1] = 'onRequestError') {
                     $dispatcher->removeListener('request.error', $listener);
                     break;
                 }

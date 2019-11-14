@@ -1,5 +1,5 @@
 <?php
-namespace Aws\Common;
+namespace AwsSdk2\Aws\Common;
 
 /**
  * Provides endpoints based on a rules configuration file.

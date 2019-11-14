@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
 /**
  * Base class for all mail handlers

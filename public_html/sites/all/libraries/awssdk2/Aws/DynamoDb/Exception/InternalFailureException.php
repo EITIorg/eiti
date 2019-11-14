@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
 /**
  * The server encountered an internal error trying to fulfill the request.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudSearch\Exception;
+namespace AwsSdk2\Aws\CloudSearch\Exception;
 
 /**
  * An error occurred while processing the request.

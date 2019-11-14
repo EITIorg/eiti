@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Request would result in user exceeding the allowed number of DB subnet groups.

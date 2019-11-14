@@ -14,18 +14,18 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront;
+namespace AwsSdk2\Aws\CloudFront;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
-use Aws\Common\Exception\RequiredExtensionNotLoadedException;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Url;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
+use AwsSdk2\Aws\Common\Exception\RequiredExtensionNotLoadedException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client to interact with Amazon CloudFront

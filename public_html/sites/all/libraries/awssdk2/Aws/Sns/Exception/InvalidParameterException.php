@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\Exception;
+namespace AwsSdk2\Aws\Sns\Exception;
 
 /**
  * Indicates that a request parameter does not comply with the associated constraints.

@@ -47,7 +47,7 @@ else {
         $deleted_files_count = $this->s3->clearBucket($this->s3_bucket);
         debug("Deleted $deleted_files_count file(s) from S3 to prepare for the test.");
       }
-      catch (Aws\S3\Exception\NoSuchBucketException $e) {
+      catch (AwsSdk2\Aws\S3\Exception\NoSuchBucketException $e) {
         $this->bucket_not_found = TRUE;
       }
       global $_s3fs_debug, $_s3fs_debug_internal;

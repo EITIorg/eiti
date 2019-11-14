@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
-use Guzzle\Inflection\InflectorInterface;
-use Guzzle\Inflection\Inflector;
-use Guzzle\Service\ClientInterface;
+use AwsSdk2\Guzzle\Inflection\InflectorInterface;
+use AwsSdk2\Guzzle\Inflection\Inflector;
+use AwsSdk2\Guzzle\Service\ClientInterface;
 
 /**
  * Command factory used to create commands referencing concrete command classes

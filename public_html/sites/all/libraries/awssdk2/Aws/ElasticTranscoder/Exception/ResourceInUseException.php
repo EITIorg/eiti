@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticTranscoder\Exception;
+namespace AwsSdk2\Aws\ElasticTranscoder\Exception;
 
 /**
  * The resource you are attempting to change is in use. For example, you are attempting to delete a pipeline that is currently in use.

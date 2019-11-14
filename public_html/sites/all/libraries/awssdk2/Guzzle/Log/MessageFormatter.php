@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
-use Guzzle\Http\Curl\CurlHandle;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Curl\CurlHandle;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Message formatter used in various places in the framework

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\Message;
+namespace AwsSdk2\Guzzle\Parser\Message;
 
 /**
  * HTTP message parser interface used to parse HTTP messages into an array

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Iam\Exception;
+namespace AwsSdk2\Aws\Iam\Exception;
 
 /**
  * The request was rejected because the certificate was malformed or expired. The error message describes the specific error.

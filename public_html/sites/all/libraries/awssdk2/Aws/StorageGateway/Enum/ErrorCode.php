@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\StorageGateway\Enum;
+namespace AwsSdk2\Aws\StorageGateway\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable ErrorCode values

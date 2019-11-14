@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Enum;
+namespace AwsSdk2\Aws\DynamoDb\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable ReturnItemCollectionMetrics values

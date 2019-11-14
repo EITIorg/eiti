@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Parses and generates URLs based on URL parts. In favor of performance, URL parts are not validated.

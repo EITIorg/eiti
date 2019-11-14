@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticLoadBalancing\Exception;
+namespace AwsSdk2\Aws\ElasticLoadBalancing\Exception;
 
 /**
  * Quota for number of policies for this load balancer has already been reached.

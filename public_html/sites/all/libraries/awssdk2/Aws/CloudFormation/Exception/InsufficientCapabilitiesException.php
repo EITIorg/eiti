@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFormation\Exception;
+namespace AwsSdk2\Aws\CloudFormation\Exception;
 
 /**
  * The template contains resources with capabilities that were not specified in the Capabilities parameter.

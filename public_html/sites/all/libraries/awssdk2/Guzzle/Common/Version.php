@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Common;
+namespace AwsSdk2\Guzzle\Common;
 
 /**
  * Guzzle version information

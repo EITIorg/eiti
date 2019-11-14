@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Emr\Exception;
+namespace AwsSdk2\Aws\Emr\Exception;
 
 /**
  * This exception occurs when there is something wrong with user input.

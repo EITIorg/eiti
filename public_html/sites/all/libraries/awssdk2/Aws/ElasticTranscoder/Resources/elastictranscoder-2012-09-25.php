@@ -57,7 +57,7 @@ return array (
         'CancelJob' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2012-09-25/jobs/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -96,7 +96,7 @@ return array (
         'CreateJob' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/jobs',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateJobResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -793,7 +793,7 @@ return array (
         'CreatePipeline' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/pipelines',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreatePipelineResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -947,7 +947,7 @@ return array (
         'CreatePreset' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/presets',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreatePresetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1147,7 +1147,7 @@ return array (
         'DeletePipeline' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2012-09-25/pipelines/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1186,7 +1186,7 @@ return array (
         'DeletePreset' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2012-09-25/presets/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1221,7 +1221,7 @@ return array (
         'ListJobsByPipeline' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/jobsByPipeline/{PipelineId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListJobsByPipelineResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1264,7 +1264,7 @@ return array (
         'ListJobsByStatus' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/jobsByStatus/{Status}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListJobsByStatusResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1307,7 +1307,7 @@ return array (
         'ListPipelines' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/pipelines',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListPipelinesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1341,7 +1341,7 @@ return array (
         'ListPresets' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/presets',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListPresetsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1375,7 +1375,7 @@ return array (
         'ReadJob' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/jobs/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ReadJobResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1410,7 +1410,7 @@ return array (
         'ReadPipeline' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/pipelines/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ReadPipelineResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1445,7 +1445,7 @@ return array (
         'ReadPreset' => array(
             'httpMethod' => 'GET',
             'uri' => '/2012-09-25/presets/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ReadPresetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1480,7 +1480,7 @@ return array (
         'TestRole' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/roleTests',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'TestRoleResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1535,7 +1535,7 @@ return array (
         'UpdatePipeline' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2012-09-25/pipelines/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdatePipelineResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1687,7 +1687,7 @@ return array (
         'UpdatePipelineNotifications' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/pipelines/{Id}/notifications',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdatePipelineNotificationsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1745,7 +1745,7 @@ return array (
         'UpdatePipelineStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/2012-09-25/pipelines/{Id}/status',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdatePipelineStatusResponse',
             'responseType' => 'model',
             'parameters' => array(

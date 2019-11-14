@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * The option group you are trying to create already exists.

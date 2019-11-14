@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * The list of parts was not in ascending order.Parts list must specified in order by part number.

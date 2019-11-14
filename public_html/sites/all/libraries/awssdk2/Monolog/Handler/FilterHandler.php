@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Simple handler wrapper that filters records based on a list of levels
@@ -26,7 +26,7 @@ class FilterHandler extends AbstractHandler
     /**
      * Handler or factory callable($record, $this)
      *
-     * @var callable|\Monolog\Handler\HandlerInterface
+     * @var callable|\AwsSdk2\Monolog\Handler\HandlerInterface
      */
     protected $handler;
 
@@ -57,7 +57,7 @@ class FilterHandler extends AbstractHandler
         $this->setAcceptedLevels($minLevelOrList, $maxLevel);
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a AwsSdk2\Monolog\Handler\HandlerInterface object");
         }
     }
 
@@ -76,7 +76,7 @@ class FilterHandler extends AbstractHandler
     public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY)
     {
         if (is_array($minLevelOrList)) {
-            $acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
+            $acceptedLevels = array_map('AwsSdk2\Monolog\Logger::toMonologLevel', $minLevelOrList);
         } else {
             $minLevelOrList = Logger::toMonologLevel($minLevelOrList);
             $maxLevel = Logger::toMonologLevel($maxLevel);

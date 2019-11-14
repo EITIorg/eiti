@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model\MultipartUpload;
+namespace AwsSdk2\Aws\S3\Model\MultipartUpload;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Model\MultipartUpload\AbstractTransfer as CommonAbstractTransfer;
-use Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransfer as CommonAbstractTransfer;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
 
 /**
  * Abstract class for transfer commonalities

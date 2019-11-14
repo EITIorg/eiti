@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Parser\UriTemplate;
+namespace AwsSdk2\Guzzle\Parser\UriTemplate;
 
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 /**
  * Expands URI templates using the uri_template pecl extension (pecl install uri_template-beta)

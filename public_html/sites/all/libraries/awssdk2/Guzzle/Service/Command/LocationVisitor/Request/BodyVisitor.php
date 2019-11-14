@@ -1,13 +1,13 @@
 <?php
 
-namespace Guzzle\Service\Command\LocationVisitor\Request;
+namespace AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request;
 
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
 
 /**
  * Visitor used to apply a body to a request

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticBeanstalk\Exception;
+namespace AwsSdk2\Aws\ElasticBeanstalk\Exception;
 
 /**
  * The caller does not have a subscription to Amazon S3.

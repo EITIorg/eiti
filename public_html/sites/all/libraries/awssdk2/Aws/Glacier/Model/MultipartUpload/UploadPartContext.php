@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Common\Hash\ChunkHash;
-use Aws\Common\Hash\TreeHash;
-use Aws\Common\Exception\LogicException;
+use AwsSdk2\Aws\Common\Hash\ChunkHash;
+use AwsSdk2\Aws\Common\Hash\TreeHash;
+use AwsSdk2\Aws\Common\Exception\LogicException;
 
 /**
  * An object that encapsulates the data for a Glacier upload operation

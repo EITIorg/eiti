@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Ses\Exception;
+namespace AwsSdk2\Aws\Ses\Exception;
 
 /**
  * Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.

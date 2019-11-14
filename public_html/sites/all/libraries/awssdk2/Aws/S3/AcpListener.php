@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\S3\Model\Acp;
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\S3\Model\Acp;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to add an Access Control Policy to a request
@@ -43,14 +43,14 @@ class AcpListener implements EventSubscriberInterface
      */
     public function onCommandBeforePrepare(Event $event)
     {
-        /** @var $command \Guzzle\Service\Command\AbstractCommand */
+        /** @var $command \AwsSdk2\Guzzle\Service\Command\AbstractCommand */
         $command = $event['command'];
         $operation = $command->getOperation();
         if ($operation->hasParam('ACP') && $command->hasKey('ACP')) {
             if ($acp = $command->get('ACP')) {
                 // Ensure that the correct object was passed
                 if (!($acp instanceof Acp)) {
-                    throw new InvalidArgumentException('ACP must be an instance of Aws\S3\Model\Acp');
+                    throw new InvalidArgumentException('ACP must be an instance of AwsSdk2\Aws\S3\Model\Acp');
                 }
 
                 // Check if the user specified both an ACP and Grants

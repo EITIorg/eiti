@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\Common\Model\MultipartUpload\AbstractTransfer as CommonAbstractTransfer;
-use Aws\Glacier\Model\MultipartUpload\TransferState;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\ReadLimitEntityBody;
-use Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransfer as CommonAbstractTransfer;
+use AwsSdk2\Aws\Glacier\Model\MultipartUpload\TransferState;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\ReadLimitEntityBody;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
 
 /**
  * Abstract class for transfer commonalities

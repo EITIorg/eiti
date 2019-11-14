@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Session;
+namespace AwsSdk2\Aws\DynamoDb\Session;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyInterface;
-use Aws\DynamoDb\Session\LockingStrategy\LockingStrategyFactory;
-use Aws\DynamoDb\Model\BatchRequest\WriteRequestBatch;
-use Aws\DynamoDb\Model\BatchRequest\DeleteRequest;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\DynamoDb\DynamoDbClient;
+use AwsSdk2\Aws\DynamoDb\Session\LockingStrategy\LockingStrategyInterface;
+use AwsSdk2\Aws\DynamoDb\Session\LockingStrategy\LockingStrategyFactory;
+use AwsSdk2\Aws\DynamoDb\Model\BatchRequest\WriteRequestBatch;
+use AwsSdk2\Aws\DynamoDb\Model\BatchRequest\DeleteRequest;
 
 /**
  * Provides an interface for using Amazon DynamoDB as a session store by hooking into PHP's session handler hooks. Once

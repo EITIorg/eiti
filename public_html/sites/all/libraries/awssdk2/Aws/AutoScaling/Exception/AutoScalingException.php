@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\AutoScaling\Exception;
+namespace AwsSdk2\Aws\AutoScaling\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Default service exception class

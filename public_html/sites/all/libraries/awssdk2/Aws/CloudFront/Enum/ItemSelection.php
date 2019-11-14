@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront\Enum;
+namespace AwsSdk2\Aws\CloudFront\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable ItemSelection values

@@ -1,13 +1,13 @@
 <?php
 
-namespace Guzzle\Plugin\ErrorResponse;
+namespace AwsSdk2\Guzzle\Plugin\ErrorResponse;
 
-use Guzzle\Common\Event;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Description\Operation;
-use Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Description\Operation;
+use AwsSdk2\Guzzle\Plugin\ErrorResponse\Exception\ErrorResponseException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Converts generic Guzzle response exceptions into errorResponse exceptions

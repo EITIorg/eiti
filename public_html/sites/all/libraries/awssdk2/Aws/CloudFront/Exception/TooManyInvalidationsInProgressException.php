@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront\Exception;
+namespace AwsSdk2\Aws\CloudFront\Exception;
 
 /**
  * You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.

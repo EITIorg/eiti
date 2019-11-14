@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Signature;
+namespace AwsSdk2\Aws\Common\Signature;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Enum\DateFormat;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Implementation of Signature Version 3 HTTPS

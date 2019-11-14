@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Indicates the DBSubnetGroup does not belong to the same VPC as that of an existing cross region read replica of the same source instance.

@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Iterator;
+namespace AwsSdk2\Aws\DynamoDb\Iterator;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Collection;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Converts items to a simple associative array form with type information

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
 /**
  * Transfers multipart upload parts serially

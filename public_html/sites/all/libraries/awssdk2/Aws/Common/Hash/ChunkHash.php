@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Hash;
+namespace AwsSdk2\Aws\Common\Hash;
 
-use Aws\Common\Exception\LogicException;
+use AwsSdk2\Aws\Common\Exception\LogicException;
 
 /**
  * Encapsulates the creation of a hash from streamed chunks of data

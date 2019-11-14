@@ -14,39 +14,39 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Client\ExpiredCredentialsChecker;
-use Aws\Common\Client\UploadBodyListener;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Signature\SignatureV4;
-use Aws\Common\Model\MultipartUpload\AbstractTransfer;
-use Aws\S3\Exception\AccessDeniedException;
-use Aws\S3\Exception\Parser\S3ExceptionParser;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\Model\ClearBucket;
-use Aws\S3\Model\MultipartUpload\AbstractTransfer as AbstractMulti;
-use Aws\S3\Model\MultipartUpload\UploadBuilder;
-use Aws\S3\Sync\DownloadSyncBuilder;
-use Aws\S3\Sync\UploadSyncBuilder;
-use Guzzle\Common\Collection;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Iterator\FilterIterator;
-use Guzzle\Plugin\Backoff\BackoffPlugin;
-use Guzzle\Plugin\Backoff\CurlBackoffStrategy;
-use Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
-use Guzzle\Plugin\Backoff\HttpBackoffStrategy;
-use Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Command\Factory\AliasFactory;
-use Guzzle\Service\Command\Factory\CompositeFactory;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Client\ExpiredCredentialsChecker;
+use AwsSdk2\Aws\Common\Client\UploadBodyListener;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Signature\SignatureV4;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransfer;
+use AwsSdk2\Aws\S3\Exception\AccessDeniedException;
+use AwsSdk2\Aws\S3\Exception\Parser\S3ExceptionParser;
+use AwsSdk2\Aws\S3\Exception\S3Exception;
+use AwsSdk2\Aws\S3\Model\ClearBucket;
+use AwsSdk2\Aws\S3\Model\MultipartUpload\AbstractTransfer as AbstractMulti;
+use AwsSdk2\Aws\S3\Model\MultipartUpload\UploadBuilder;
+use AwsSdk2\Aws\S3\Sync\DownloadSyncBuilder;
+use AwsSdk2\Aws\S3\Sync\UploadSyncBuilder;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Iterator\FilterIterator;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffPlugin;
+use AwsSdk2\Guzzle\Plugin\Backoff\CurlBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\HttpBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Command\Factory\AliasFactory;
+use AwsSdk2\Guzzle\Service\Command\Factory\CompositeFactory;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client to interact with Amazon Simple Storage Service
@@ -225,7 +225,7 @@ class S3Client extends AbstractClient
         $default = CompositeFactory::getDefaultChain($client);
         $default->add(
             new AliasFactory($client, static::$commandAliases),
-            'Guzzle\Service\Command\Factory\ServiceDescriptionFactory'
+            'AwsSdk2\Guzzle\Service\Command\Factory\ServiceDescriptionFactory'
         );
         $client->setCommandFactory($default);
 
@@ -261,7 +261,7 @@ class S3Client extends AbstractClient
      *
      * @param $config
      *
-     * @return \Aws\Common\Signature\SignatureInterface
+     * @return \AwsSdk2\Aws\Common\Signature\SignatureInterface
      * @throws InvalidArgumentException
      */
     private static function createSignature($config)
@@ -478,7 +478,7 @@ class S3Client extends AbstractClient
      *
      * @param string $bucket  Bucket to upload the object
      * @param string $key     Key of the object
-     * @param mixed  $body    Object data to upload. Can be a Guzzle\Http\EntityBodyInterface, stream resource, or
+     * @param mixed  $body    Object data to upload. Can be a AwsSdk2\Guzzle\Http\EntityBodyInterface, stream resource, or
      *                        string of data to upload.
      * @param string $acl     ACL to apply to the object
      * @param array  $options Custom options used when executing commands:
@@ -487,10 +487,10 @@ class S3Client extends AbstractClient
      *     - min_part_size: Minimum size to allow for each uploaded part when performing a multipart upload.
      *     - concurrency: Maximum number of concurrent multipart uploads.
      *     - before_upload: Callback to invoke before each multipart upload. The callback will receive a
-     *       Guzzle\Common\Event object with context.
+     *       AwsSdk2\Guzzle\Common\Event object with context.
      *
-     * @see Aws\S3\Model\MultipartUpload\UploadBuilder for more options and customization
-     * @return \Guzzle\Service\Resource\Model Returns the modeled result of the performed operation
+     * @see AwsSdk2\Aws\S3\Model\MultipartUpload\UploadBuilder for more options and customization
+     * @return \AwsSdk2\Guzzle\Service\Resource\Model Returns the modeled result of the performed operation
      */
     public function upload($bucket, $key, $body, $acl = 'private', array $options = array())
     {
@@ -549,7 +549,7 @@ class S3Client extends AbstractClient
      *     - multipart_upload_size: When the size of a file exceeds this value, the file will be uploaded using a
      *       multipart upload.
      *
-     * @see Aws\S3\S3Sync\S3Sync for more options and customization
+     * @see AwsSdk2\Aws\S3\S3Sync\S3Sync for more options and customization
      */
     public function uploadDirectory($directory, $bucket, $keyPrefix = null, array $options = array())
     {
@@ -623,10 +623,10 @@ class S3Client extends AbstractClient
      * @param string $regex   Delete only objects that match this regex
      * @param array  $options Options used when deleting the object:
      *     - before_delete: Callback to invoke before each delete. The callback will receive a
-     *       Guzzle\Common\Event object with context.
+     *       AwsSdk2\Guzzle\Common\Event object with context.
      *
-     * @see Aws\S3\S3Client::listObjects
-     * @see Aws\S3\Model\ClearBucket For more options or customization
+     * @see AwsSdk2\Aws\S3\S3Client::listObjects
+     * @see AwsSdk2\Aws\S3\Model\ClearBucket For more options or customization
      * @return int Returns the number of deleted keys
      * @throws RuntimeException if no prefix and no regex is given
      */

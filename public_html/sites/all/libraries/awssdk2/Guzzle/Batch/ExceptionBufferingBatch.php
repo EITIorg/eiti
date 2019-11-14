@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Batch\Exception\BatchTransferException;
+use AwsSdk2\Guzzle\Batch\Exception\BatchTransferException;
 
 /**
  * BatchInterface decorator used to buffer exceptions encountered during a transfer.  The exceptions can then later be

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * The web identity token that was passed could not be validated by AWS. Get a new identity token from the identity provider and then retry the request.

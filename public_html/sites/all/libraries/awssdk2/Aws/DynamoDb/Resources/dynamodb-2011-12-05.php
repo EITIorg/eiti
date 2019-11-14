@@ -75,7 +75,7 @@ return array (
         'BatchGetItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'BatchGetItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -250,7 +250,7 @@ return array (
         'BatchWriteItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'BatchWriteItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -481,7 +481,7 @@ return array (
         'CreateTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateTableOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -601,7 +601,7 @@ return array (
         'DeleteItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -833,7 +833,7 @@ return array (
         'DeleteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteTableOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -884,7 +884,7 @@ return array (
         'DescribeTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTableOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -927,7 +927,7 @@ return array (
         'GetItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -1092,7 +1092,7 @@ return array (
         'ListTables' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListTablesOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -1136,7 +1136,7 @@ return array (
         'PutItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'PutItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -1320,7 +1320,7 @@ return array (
         'Query' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'QueryOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -1631,7 +1631,7 @@ return array (
         'Scan' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ScanOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -1887,7 +1887,7 @@ return array (
         'UpdateItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateItemOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',
@@ -2188,7 +2188,7 @@ return array (
         'UpdateTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateTableOutput',
             'responseType' => 'model',
             'responseNotes' => 'Returns a json_decoded array of the response body',

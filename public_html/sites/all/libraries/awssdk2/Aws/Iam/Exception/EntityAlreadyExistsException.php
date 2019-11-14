@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Iam\Exception;
+namespace AwsSdk2\Aws\Iam\Exception;
 
 /**
  * The request was rejected because it attempted to create a resource that already exists.

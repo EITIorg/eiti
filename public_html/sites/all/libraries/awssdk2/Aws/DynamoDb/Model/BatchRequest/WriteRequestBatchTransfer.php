@@ -14,16 +14,16 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Enum\UaString as Ua;
-use Aws\DynamoDb\Exception\DynamoDbException;
-use Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
-use Guzzle\Batch\BatchTransferInterface;
-use Guzzle\Common\Exception\ExceptionCollection;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\DynamoDb\Exception\DynamoDbException;
+use AwsSdk2\Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
+use AwsSdk2\Guzzle\Batch\BatchTransferInterface;
+use AwsSdk2\Guzzle\Common\Exception\ExceptionCollection;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Transfer logic for executing the write request batch
@@ -73,7 +73,7 @@ class WriteRequestBatchTransfer implements BatchTransferInterface
      * @param array                             $batch               A batch of write requests
      * @param UnprocessedWriteRequestsException $unprocessedRequests Collection of unprocessed items
      *
-     * @throws \Guzzle\Common\Exception\ExceptionCollection
+     * @throws \AwsSdk2\Guzzle\Common\Exception\ExceptionCollection
      */
     protected function performTransfer(
         array $batch,

@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Backoff;
+namespace AwsSdk2\Guzzle\Plugin\Backoff;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\HttpException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Exception\HttpException;
 
 /**
  * Abstract backoff strategy that allows for a chain of responsibility

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
 /**
  * Thrown when a particular PHP extension is required to execute the guarded logic, but the extension is not loaded

@@ -1,7 +1,7 @@
 <?php
 
-namespace Guzzle\Plugin\ErrorResponse\Exception;
+namespace AwsSdk2\Guzzle\Plugin\ErrorResponse\Exception;
 
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 class ErrorResponseException extends RuntimeException {}

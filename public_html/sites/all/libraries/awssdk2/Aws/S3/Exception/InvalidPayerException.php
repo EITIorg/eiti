@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * All access to this object has been disabled.

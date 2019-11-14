@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
 use Zend\Log\Logger;
 

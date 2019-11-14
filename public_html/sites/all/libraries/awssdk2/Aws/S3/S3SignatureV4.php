@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Signature\SignatureV4;
-use Aws\Common\Credentials\CredentialsInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureV4;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Amazon S3 signature version 4 overrides.

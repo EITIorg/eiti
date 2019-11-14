@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Exception\ServiceResponseException;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Exception\ValidationException;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Exception\ValidationException;
 
 /**
  * Resource waiter driven by configuration options

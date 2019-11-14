@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier;
+namespace AwsSdk2\Aws\Glacier;
 
-use Aws\Glacier\Model\MultipartUpload\UploadPartGenerator;
-use Guzzle\Common\Event;
-use Guzzle\Http\Message\EntityEnclosingRequest;
-use Guzzle\Service\Command\AbstractCommand;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Glacier\Model\MultipartUpload\UploadPartGenerator;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequest;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Adds the content sha256 and tree hash to Glacier upload requests if not set

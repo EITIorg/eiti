@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Enum;
+namespace AwsSdk2\Aws\Common\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * User-Agent header strings for various high level operations

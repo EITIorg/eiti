@@ -14,15 +14,15 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DirectConnect;
+namespace AwsSdk2\Aws\DirectConnect;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\Parser\JsonQueryExceptionParser;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\Parser\JsonQueryExceptionParser;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client to interact with AWS Direct Connect

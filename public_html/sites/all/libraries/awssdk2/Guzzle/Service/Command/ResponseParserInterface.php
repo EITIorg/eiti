@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
 /**
  * Parses the HTTP response of a command and sets the appropriate result on a command object

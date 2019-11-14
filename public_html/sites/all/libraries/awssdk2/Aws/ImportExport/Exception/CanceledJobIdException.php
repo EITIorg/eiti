@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
 /**
  * The specified job ID has been canceled and is no longer valid.

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\WildfireFormatter;
+use AwsSdk2\Monolog\Formatter\WildfireFormatter;
 
 /**
  * Simple FirePHP Handler (http://www.firephp.org/), which uses the Wildfire protocol.

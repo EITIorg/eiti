@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticTranscoder\Exception;
+namespace AwsSdk2\Aws\ElasticTranscoder\Exception;
 
 /**
  * One or more required parameter values were not provided in the request.

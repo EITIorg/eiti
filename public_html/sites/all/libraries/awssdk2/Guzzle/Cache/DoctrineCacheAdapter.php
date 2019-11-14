@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Cache;
+namespace AwsSdk2\Guzzle\Cache;
 
-use Doctrine\Common\Cache\Cache;
+use AwsSdk2\Doctrine\Common\Cache\Cache;
 
 /**
  * Doctrine 2 cache adapter

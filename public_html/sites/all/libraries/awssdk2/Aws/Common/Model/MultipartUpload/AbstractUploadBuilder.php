@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\EntityBody;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\EntityBody;
 
 /**
  * Easily create a multipart uploader used to quickly and reliably upload a

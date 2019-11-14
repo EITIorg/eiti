@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Common\Model\MultipartUpload\AbstractUploadPart;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractUploadPart;
 
 /**
  * An object that encapsulates the data for a Glacier upload operation

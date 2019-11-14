@@ -79,7 +79,7 @@ return array (
         'DeleteAlarms' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -117,7 +117,7 @@ return array (
         'DescribeAlarmHistory' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAlarmHistoryOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -180,7 +180,7 @@ return array (
         'DescribeAlarms' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAlarmsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -243,7 +243,7 @@ return array (
         'DescribeAlarmsForMetric' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAlarmsForMetricOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -313,7 +313,7 @@ return array (
         'DisableAlarmActions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -345,7 +345,7 @@ return array (
         'EnableAlarmActions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -377,7 +377,7 @@ return array (
         'GetMetricStatistics' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetMetricStatisticsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -494,7 +494,7 @@ return array (
         'ListMetrics' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListMetricsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -562,7 +562,7 @@ return array (
         'PutMetricAlarm' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -709,7 +709,7 @@ return array (
         'PutMetricData' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -829,7 +829,7 @@ return array (
         'SetAlarmState' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(

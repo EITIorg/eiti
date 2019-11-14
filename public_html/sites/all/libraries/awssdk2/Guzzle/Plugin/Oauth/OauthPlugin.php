@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Plugin\Oauth;
+namespace AwsSdk2\Guzzle\Plugin\Oauth;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\QueryString;
-use Guzzle\Http\Url;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * OAuth signing plugin

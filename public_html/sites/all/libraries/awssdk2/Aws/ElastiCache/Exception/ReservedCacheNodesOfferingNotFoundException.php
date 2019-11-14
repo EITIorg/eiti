@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElastiCache\Exception;
+namespace AwsSdk2\Aws\ElastiCache\Exception;
 
 /**
  * The requested cache node offering does not exist.

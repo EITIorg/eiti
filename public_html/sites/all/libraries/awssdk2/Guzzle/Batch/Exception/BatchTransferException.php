@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Batch\Exception;
+namespace AwsSdk2\Guzzle\Batch\Exception;
 
-use Guzzle\Common\Exception\GuzzleException;
-use Guzzle\Batch\BatchTransferInterface as TransferStrategy;
-use Guzzle\Batch\BatchDivisorInterface as DivisorStrategy;
+use AwsSdk2\Guzzle\Common\Exception\GuzzleException;
+use AwsSdk2\Guzzle\Batch\BatchTransferInterface as TransferStrategy;
+use AwsSdk2\Guzzle\Batch\BatchDivisorInterface as DivisorStrategy;
 
 /**
  * Exception thrown during a batch transfer

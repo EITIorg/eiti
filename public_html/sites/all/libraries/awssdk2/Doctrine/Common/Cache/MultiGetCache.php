@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Cache;
+namespace AwsSdk2\AwsSdk2\Doctrine\Common\Cache;
 
 /**
  * Interface for cache drivers that allows to get many items at once.

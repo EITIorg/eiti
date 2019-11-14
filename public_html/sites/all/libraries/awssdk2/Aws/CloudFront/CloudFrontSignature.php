@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront;
+namespace AwsSdk2\Aws\CloudFront;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Enum\DateFormat;
-use Aws\Common\Signature\AbstractSignature;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Aws\Common\Signature\AbstractSignature;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Amazon CloudFront signature implementation

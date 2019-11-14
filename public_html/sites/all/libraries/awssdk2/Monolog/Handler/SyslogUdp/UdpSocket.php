@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler\SyslogUdp;
+namespace AwsSdk2\Monolog\Handler\SyslogUdp;
 
 class UdpSocket
 {

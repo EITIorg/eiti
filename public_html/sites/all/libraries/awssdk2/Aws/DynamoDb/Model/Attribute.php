@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model;
+namespace AwsSdk2\Aws\DynamoDb\Model;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\DynamoDb\Enum\Type;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\DynamoDb\Enum\Type;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Class representing a DynamoDB item attribute. Contains helpers for building

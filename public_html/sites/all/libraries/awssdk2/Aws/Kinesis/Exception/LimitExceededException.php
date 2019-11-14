@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Kinesis\Exception;
+namespace AwsSdk2\Aws\Kinesis\Exception;
 
 /**
  * Exception that occurs when a LimitExceededException error is encountered

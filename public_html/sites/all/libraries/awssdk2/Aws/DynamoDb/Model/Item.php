@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model;
+namespace AwsSdk2\Aws\DynamoDb\Model;
 
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Amazon DynamoDB item model

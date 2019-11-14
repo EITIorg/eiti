@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Interface for transferring the contents of a data source to an AWS service via a multipart upload interface

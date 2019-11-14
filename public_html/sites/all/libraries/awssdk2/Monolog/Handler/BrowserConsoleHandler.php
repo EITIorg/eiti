@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\LineFormatter;
+use AwsSdk2\Monolog\Formatter\LineFormatter;
 
 /**
  * Handler sending logs to browser's javascript console with no browser extension required
@@ -49,7 +49,7 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
         // Register shutdown handler if not already done
         if (PHP_SAPI !== 'cli' && !self::$initialized) {
             self::$initialized = true;
-            register_shutdown_function(array('Monolog\Handler\BrowserConsoleHandler', 'send'));
+            register_shutdown_function(array('AwsSdk2\Monolog\Handler\BrowserConsoleHandler', 'send'));
         }
     }
 

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * The health check you are trying to get or delete does not exist.

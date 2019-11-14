@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Service;
+namespace AwsSdk2\Guzzle\Service;
 
-use Guzzle\Common\FromConfigInterface;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\ClientInterface as HttpClientInterface;
-use Guzzle\Service\Exception\CommandTransferException;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Description\ServiceDescriptionInterface;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Guzzle\Common\FromConfigInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\ClientInterface as HttpClientInterface;
+use AwsSdk2\Guzzle\Service\Exception\CommandTransferException;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Description\ServiceDescriptionInterface;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client interface for executing commands on a web service.

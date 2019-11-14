@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\NormalizerFormatter;
-use Doctrine\CouchDB\CouchDBClient;
+use AwsSdk2\Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\NormalizerFormatter;
+use AwsSdk2\AwsSdk2\Doctrine\CouchDB\CouchDBClient;
 
 /**
  * CouchDB handler for Doctrine CouchDB ODM

@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Common;
+namespace AwsSdk2\Guzzle\Common;
 
-use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
+use AwsSdk2\Symfony\Component\EventDispatcher\Event as SymfonyEvent;
 
 /**
  * Default event for Guzzle notifications

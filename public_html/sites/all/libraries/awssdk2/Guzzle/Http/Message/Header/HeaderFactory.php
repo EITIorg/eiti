@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http\Message\Header;
+namespace AwsSdk2\Guzzle\Http\Message\Header;
 
-use Guzzle\Http\Message\Header;
+use AwsSdk2\Guzzle\Http\Message\Header;
 
 /**
  * Default header factory implementation
@@ -11,8 +11,8 @@ class HeaderFactory implements HeaderFactoryInterface
 {
     /** @var array */
     protected $mapping = array(
-        'cache-control' => 'Guzzle\Http\Message\Header\CacheControl',
-        'link'          => 'Guzzle\Http\Message\Header\Link',
+        'cache-control' => 'AwsSdk2\Guzzle\Http\Message\Header\CacheControl',
+        'link'          => 'AwsSdk2\Guzzle\Http\Message\Header\Link',
     );
 
     public function createHeader($header, $value = null)

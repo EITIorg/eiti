@@ -14,16 +14,16 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Credentials;
+namespace AwsSdk2\Aws\Common\Credentials;
 
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\RequiredExtensionNotLoadedException;
-use Aws\Common\Exception\RuntimeException;
-use Guzzle\Common\FromConfigInterface;
-use Guzzle\Cache\CacheAdapterInterface;
-use Guzzle\Cache\DoctrineCacheAdapter;
-use Guzzle\Common\Collection;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\RequiredExtensionNotLoadedException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\FromConfigInterface;
+use AwsSdk2\Guzzle\Cache\CacheAdapterInterface;
+use AwsSdk2\Guzzle\Cache\DoctrineCacheAdapter;
+use AwsSdk2\Guzzle\Common\Collection;
 
 /**
  * Basic implementation of the AWSCredentials interface that allows callers to
@@ -292,15 +292,15 @@ class Credentials implements CredentialsInterface, FromConfigInterface
             if (!extension_loaded('apc')) {
                 throw new RequiredExtensionNotLoadedException('PHP has not been compiled with APC. Unable to cache '
                     . 'the credentials.');
-            } elseif (!class_exists('Doctrine\Common\Cache\ApcCache')) {
+            } elseif (!class_exists('AwsSdk2\Doctrine\Common\Cache\ApcCache')) {
                 throw new RuntimeException(
                     'Cannot set ' . Options::CREDENTIALS_CACHE . ' to true because the Doctrine cache component is '
                     . 'not installed. Either install doctrine/cache or pass in an instantiated '
-                    . 'Guzzle\Cache\CacheAdapterInterface object'
+                    . 'AwsSdk2\Guzzle\Cache\CacheAdapterInterface object'
                 );
             }
             // @codeCoverageIgnoreEnd
-            $cache = new DoctrineCacheAdapter(new \Doctrine\Common\Cache\ApcCache());
+            $cache = new DoctrineCacheAdapter(new \AwsSdk2\Doctrine\Common\Cache\ApcCache());
         } elseif (!($cache instanceof CacheAdapterInterface)) {
             throw new InvalidArgumentException('Unable to utilize caching with the specified options');
         }

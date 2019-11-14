@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Iterator;
+namespace AwsSdk2\Aws\S3\Iterator;
 
 /**
  * Provides an iterator around an opendir resource. This is useful when you need to provide context to an opendir so

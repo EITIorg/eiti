@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Batch transfer strategy where transfer logic can be defined via a Closure.
- * This class is to be used with {@see Guzzle\Batch\BatchInterface}
+ * This class is to be used with {@see AwsSdk2\Guzzle\Batch\BatchInterface}
  */
 class BatchClosureTransfer implements BatchTransferInterface
 {

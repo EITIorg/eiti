@@ -5,8 +5,8 @@
  * Hook implementations and other primary functionality for S3 File System.
  */
 
-use Doctrine\Common\Cache\FilesystemCache;
-use Guzzle\Cache\DoctrineCacheAdapter;
+use AwsSdk2\Doctrine\Common\Cache\FilesystemCache;
+use AwsSdk2\Guzzle\Cache\DoctrineCacheAdapter;
 
 /**
  * Class used to differentiate between known and unknown exception states.
@@ -343,19 +343,19 @@ function _s3fs_validate_config($config) {
     // bucket name, or region are invalid/mismatched.
     $s3->listObjects($list_obj_args);
   }
-  catch (Aws\S3\Exception\InvalidAccessKeyIdException $e) {
+  catch (AwsSdk2\Aws\S3\Exception\InvalidAccessKeyIdException $e) {
     form_set_error('s3fs_awssdk2_access_key', t('The Access Key in your AWS credentials is invalid.'));
     return FALSE;
   }
-  catch (Aws\S3\Exception\SignatureDoesNotMatchException $e) {
+  catch (AwsSdk2\Aws\S3\Exception\SignatureDoesNotMatchException $e) {
     form_set_error('s3fs_awssdk2_secret_key', t('The Secret Key in your AWS credentials is invalid.'));
     return FALSE;
   }
-  catch (Aws\S3\Exception\NoSuchBucketException $e) {
+  catch (AwsSdk2\Aws\S3\Exception\NoSuchBucketException $e) {
     form_set_error('s3fs_bucket', t('The specified bucket does not exist.'));
     return FALSE;
   }
-  catch (Aws\S3\Exception\PermanentRedirectException $e) {
+  catch (AwsSdk2\Aws\S3\Exception\PermanentRedirectException $e) {
     form_set_error('s3fs_region', t('This bucket exists, but it is not in the specified region.'));
     return FALSE;
   }
@@ -718,7 +718,7 @@ function _s3fs_convert_metadata($uri, $s3_metadata) {
  * @param $config Array
  *   Array of configuration settings from which to configure the client.
  *
- * @return Aws\S3\S3Client
+ * @return AwsSdk2\Aws\S3\S3Client
  *   The fully-configured S3Client object.
  */
 function _s3fs_get_amazons3_client($config) {
@@ -753,9 +753,9 @@ function _s3fs_get_amazons3_client($config) {
         t('Unable to load the AWS SDK. Please ensure that the awssdk2 library is installed correctly.')
       );
     }
-    elseif (!class_exists('Aws\S3\S3Client')) {
+    elseif (!class_exists('AwsSdk2\Aws\S3\S3Client')) {
       throw new S3fsException(
-        t('Cannot load Aws\S3\S3Client class. Please ensure that the awssdk2 library is installed correctly.')
+        t('Cannot load AwsSdk2\Aws\S3\S3Client class. Please ensure that the awssdk2 library is installed correctly.')
       );
     }
     elseif (!$use_instance_profile && (!$secret_key || !$access_key)) {
@@ -800,8 +800,8 @@ function _s3fs_get_amazons3_client($config) {
     if (!empty($config['use_customhost']) && !empty($config['hostname'])) {
       $client_config['base_url'] = $config['hostname'];
     }
-    // Create the Aws\S3\S3Client object with the specified configuration.
-    $s3 = Aws\S3\S3Client::factory($client_config);
+    // Create the AwsSdk2\Aws\S3\S3Client object with the specified configuration.
+    $s3 = AwsSdk2\Aws\S3\S3Client::factory($client_config);
   }
   $static_config = $config;
   return $s3;

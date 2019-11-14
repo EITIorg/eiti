@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Data object holding the information of an API command
@@ -10,7 +10,7 @@ use Guzzle\Common\Exception\InvalidArgumentException;
 class Operation implements OperationInterface
 {
     /** @var string Default command class to use when none is specified */
-    const DEFAULT_COMMAND_CLASS = 'Guzzle\\Service\\Command\\OperationCommand';
+    const DEFAULT_COMMAND_CLASS = 'AwsSdk2\Guzzle\\Service\\Command\\OperationCommand';
 
     /** @var array Hashmap of properties that can be specified. Represented as a hash to speed up constructor. */
     protected static $properties = array(
@@ -348,7 +348,7 @@ class Operation implements OperationInterface
 
     /**
      * Set what is returned from the method. Can be a primitive, class name, or model. For example: 'array',
-     * 'Guzzle\\Foo\\Baz', or 'MyModelName' (to reference a model by ID).
+     * 'AwsSdk2\Guzzle\\Foo\\Baz', or 'MyModelName' (to reference a model by ID).
      *
      * @param string $responseClass Type of response
      *

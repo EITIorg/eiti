@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http\QueryAggregator;
+namespace AwsSdk2\Guzzle\Http\QueryAggregator;
 
-use Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\QueryString;
 
 /**
  * Aggregates nested query string variables using commas

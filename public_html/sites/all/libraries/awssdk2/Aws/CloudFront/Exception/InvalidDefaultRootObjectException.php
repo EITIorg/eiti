@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFront\Exception;
+namespace AwsSdk2\Aws\CloudFront\Exception;
 
 /**
  * The default root object file name is too big or contains an invalid character.

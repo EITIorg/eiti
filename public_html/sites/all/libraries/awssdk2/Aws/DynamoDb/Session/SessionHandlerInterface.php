@@ -1,6 +1,6 @@
 <?php
 
-namespace Aws\DynamoDb\Session;
+namespace AwsSdk2\Aws\DynamoDb\Session;
 
 if (PHP_VERSION_ID >= 50400) {
     /**

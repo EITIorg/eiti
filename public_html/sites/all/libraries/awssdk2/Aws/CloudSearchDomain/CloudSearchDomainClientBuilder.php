@@ -1,23 +1,23 @@
 <?php
 
-namespace Aws\CloudSearchDomain;
+namespace AwsSdk2\Aws\CloudSearchDomain;
 
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Client\ThrottlingErrorChecker;
-use Aws\Common\Client\UserAgentListener;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\ExceptionListener;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\NamespaceExceptionFactory;
-use Aws\Common\Exception\Parser\JsonQueryExceptionParser;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Url;
-use Guzzle\Plugin\Backoff\BackoffPlugin;
-use Guzzle\Plugin\Backoff\CurlBackoffStrategy;
-use Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
-use Guzzle\Plugin\Backoff\HttpBackoffStrategy;
-use Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
-use Guzzle\Service\Description\ServiceDescription;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Client\ThrottlingErrorChecker;
+use AwsSdk2\Aws\Common\Client\UserAgentListener;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\ExceptionListener;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\NamespaceExceptionFactory;
+use AwsSdk2\Aws\Common\Exception\Parser\JsonQueryExceptionParser;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffPlugin;
+use AwsSdk2\Guzzle\Plugin\Backoff\CurlBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\HttpBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
+use AwsSdk2\Guzzle\Service\Description\ServiceDescription;
 
 /**
  * Builder for creating CloudSearchDomain clients

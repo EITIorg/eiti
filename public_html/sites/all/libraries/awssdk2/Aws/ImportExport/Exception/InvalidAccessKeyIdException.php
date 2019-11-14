@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
 /**
  * The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFormation\Exception;
+namespace AwsSdk2\Aws\CloudFormation\Exception;
 
 /**
  * Resource with the name requested already exists.

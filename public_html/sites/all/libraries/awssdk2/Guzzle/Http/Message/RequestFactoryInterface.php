@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Collection;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Request factory used to create HTTP requests

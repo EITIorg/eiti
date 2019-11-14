@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Signature\SignatureV4;
-use Aws\Common\Signature\SignatureInterface;
-use Guzzle\Common\Event;
-use Guzzle\Service\Command\CommandInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureV4;
+use AwsSdk2\Aws\Common\Signature\SignatureInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Adds required and optional Content-MD5 headers

@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\ClientInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\ClientInterface;
 
 /**
  * Command factory used when you need to provide aliases to commands

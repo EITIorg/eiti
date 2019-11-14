@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Aws\Common\Aws;
-use Aws\DynamoDb\DynamoDbClient;
-use Monolog\Formatter\ScalarFormatter;
-use Monolog\Logger;
+use AwsSdk2\Aws\Common\Aws;
+use AwsSdk2\Aws\DynamoDb\DynamoDbClient;
+use AwsSdk2\Monolog\Formatter\ScalarFormatter;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Amazon DynamoDB handler (http://aws.amazon.com/dynamodb/)
@@ -44,7 +44,7 @@ class DynamoDbHandler extends AbstractProcessingHandler
      */
     public function __construct(DynamoDbClient $client, $table, $level = Logger::DEBUG, $bubble = true)
     {
-        if (!defined('Aws\Common\Aws::VERSION') || version_compare('3.0', Aws::VERSION, '<=')) {
+        if (!defined('AwsSdk2\Aws\Common\Aws::VERSION') || version_compare('3.0', Aws::VERSION, '<=')) {
             throw new \RuntimeException('The DynamoDbHandler is only known to work with the AWS SDK 2.x releases');
         }
 

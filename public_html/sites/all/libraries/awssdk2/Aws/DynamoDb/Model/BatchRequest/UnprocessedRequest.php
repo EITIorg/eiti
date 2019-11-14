@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
 /**
  * Represents a batch delete request. It is composed of a table name and key

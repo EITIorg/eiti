@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service;
+namespace AwsSdk2\Guzzle\Service;
 
-use Guzzle\Cache\CacheAdapterInterface;
+use AwsSdk2\Guzzle\Cache\CacheAdapterInterface;
 
 /**
  * Decorator that adds caching to a service description loader

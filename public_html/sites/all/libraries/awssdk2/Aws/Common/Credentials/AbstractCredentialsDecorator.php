@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Credentials;
+namespace AwsSdk2\Aws\Common\Credentials;
 
 /**
  * Abstract credentials decorator

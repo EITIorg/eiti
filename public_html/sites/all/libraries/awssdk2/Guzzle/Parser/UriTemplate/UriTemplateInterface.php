@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\UriTemplate;
+namespace AwsSdk2\Guzzle\Parser\UriTemplate;
 
 /**
  * Expands URI templates using an array of variables

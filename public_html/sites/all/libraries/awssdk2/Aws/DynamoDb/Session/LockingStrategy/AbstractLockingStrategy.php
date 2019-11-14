@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Session\LockingStrategy;
+namespace AwsSdk2\Aws\DynamoDb\Session\LockingStrategy;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\DynamoDb\Session\SessionHandlerConfig;
-use Aws\DynamoDb\DynamoDbClient;
-use Aws\DynamoDb\Exception\DynamoDbException;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\DynamoDb\Session\SessionHandlerConfig;
+use AwsSdk2\Aws\DynamoDb\DynamoDbClient;
+use AwsSdk2\Aws\DynamoDb\Exception\DynamoDbException;
 
 /**
  * Base class for session locking strategies. Includes write and delete logic

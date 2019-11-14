@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace AwsSdk2\Monolog\Formatter;
 
 /**
  * Formats a record for use with the MongoDBHandler.

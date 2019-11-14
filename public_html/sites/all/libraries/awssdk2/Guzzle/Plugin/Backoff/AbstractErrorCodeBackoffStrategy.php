@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Plugin\Backoff;
+namespace AwsSdk2\Guzzle\Plugin\Backoff;
 
 /**
  * Strategy used to retry when certain error codes are encountered

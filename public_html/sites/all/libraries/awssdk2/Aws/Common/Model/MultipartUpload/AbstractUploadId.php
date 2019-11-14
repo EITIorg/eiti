@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
-use Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
 
 /**
  * An object that encapsulates the data identifying an upload

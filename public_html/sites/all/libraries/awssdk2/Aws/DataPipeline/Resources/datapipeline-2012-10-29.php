@@ -54,7 +54,7 @@ return array (
         'ActivatePipeline' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -123,7 +123,7 @@ return array (
         'AddTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -194,7 +194,7 @@ return array (
         'CreatePipeline' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreatePipelineOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -268,7 +268,7 @@ return array (
         'DeletePipeline' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -312,7 +312,7 @@ return array (
         'DescribeObjects' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeObjectsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -381,7 +381,7 @@ return array (
         'DescribePipelines' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribePipelinesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -433,7 +433,7 @@ return array (
         'EvaluateExpression' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EvaluateExpressionOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -498,7 +498,7 @@ return array (
         'GetPipelineDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetPipelineDefinitionOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -551,7 +551,7 @@ return array (
         'ListPipelines' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListPipelinesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -589,7 +589,7 @@ return array (
         'PollForTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'PollForTaskOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -652,7 +652,7 @@ return array (
         'PutPipelineDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'PutPipelineDefinitionOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -806,7 +806,7 @@ return array (
         'QueryObjects' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'QueryObjectsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -895,7 +895,7 @@ return array (
         'RemoveTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -953,7 +953,7 @@ return array (
         'ReportTaskProgress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ReportTaskProgressOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1030,7 +1030,7 @@ return array (
         'ReportTaskRunnerHeartbeat' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ReportTaskRunnerHeartbeatOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1081,7 +1081,7 @@ return array (
         'SetStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1146,7 +1146,7 @@ return array (
         'SetTaskStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1217,7 +1217,7 @@ return array (
         'ValidatePipelineDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ValidatePipelineDefinitionOutput',
             'responseType' => 'model',
             'parameters' => array(

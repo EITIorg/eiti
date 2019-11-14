@@ -27,7 +27,7 @@ return array (
         'CreateHapg' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateHapgResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -69,7 +69,7 @@ return array (
         'CreateHsm' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateHsmResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -142,7 +142,7 @@ return array (
         'CreateLunaClient' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateLunaClientResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -190,7 +190,7 @@ return array (
         'DeleteHapg' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteHapgResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -232,7 +232,7 @@ return array (
         'DeleteHsm' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteHsmResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -274,7 +274,7 @@ return array (
         'DeleteLunaClient' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteLunaClientResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -316,7 +316,7 @@ return array (
         'DescribeHapg' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeHapgResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -358,7 +358,7 @@ return array (
         'DescribeHsm' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeHsmResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -403,7 +403,7 @@ return array (
         'DescribeLunaClient' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeLunaClientResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -448,7 +448,7 @@ return array (
         'GetConfig' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetConfigResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -504,7 +504,7 @@ return array (
         'ListAvailableZones' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListAvailableZonesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -541,7 +541,7 @@ return array (
         'ListHapgs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListHapgsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -582,7 +582,7 @@ return array (
         'ListHsms' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListHsmsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -623,7 +623,7 @@ return array (
         'ListLunaClients' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListLunaClientsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -664,7 +664,7 @@ return array (
         'ModifyHapg' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ModifyHapgResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -718,7 +718,7 @@ return array (
         'ModifyHsm' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ModifyHsmResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -780,7 +780,7 @@ return array (
         'ModifyLunaClient' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ModifyLunaClientResponse',
             'responseType' => 'model',
             'parameters' => array(

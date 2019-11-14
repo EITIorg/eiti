@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
+use AwsSdk2\Monolog\Formatter\FormatterInterface;
 
 /**
  * Interface that all Monolog Handlers must implement

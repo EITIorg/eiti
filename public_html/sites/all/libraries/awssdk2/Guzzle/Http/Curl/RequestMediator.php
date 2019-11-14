@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Mediator between curl handles and request objects

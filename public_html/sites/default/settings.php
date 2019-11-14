@@ -593,12 +593,29 @@ if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings_aws.php')) {
 }
 
 /**
+ * Include keys.
+ */
+if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.keys.php')) {
+  include_once('settings.keys.php');
+}
+
+/**
+ * Include environment specific config.
+ */
+if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.custom.php')) {
+  include_once('settings.custom.php');
+}
+
+/**
  * The current project environment.
  * NOTE: The variable can be used inside update scripts, use only the following
  *       values: local, staging, preprod, production, other.
  */
 if (isset($_SERVER['EITI_ENV'])) {
   define('PROJECT_ENVIRONMENT', $_SERVER['EITI_ENV']);
+}
+else {
+  define('PROJECT_ENVIRONMENT', 'dev');
 }
 
 /**
@@ -636,30 +653,17 @@ if (PROJECT_ENVIRONMENT == 'production') {
 /**
  * S3 settings.
  */
-if (isset($_SERVER['EITI_S3_ACCESS_KEY'])) {
-  $conf['awssdk2_access_key'] = $_SERVER['EITI_S3_ACCESS_KEY'];
-}
-if (isset($_SERVER['EITI_S3_SECRET_KEY'])) {
-  $conf['s3fs_use_s3_for_public'] = TRUE;
-  $conf['awssdk2_secret_key'] = $_SERVER['EITI_S3_SECRET_KEY'];
-}
-if (isset($_SERVER['EITI_S3_DOMAIN'])) {
-  $conf['s3fs_use_cname'] = TRUE;
-  $conf['s3fs_domain'] = $_SERVER['EITI_S3_DOMAIN'];
-}
-if (isset($_SERVER['EITI_S3_BUCKET'])) {
-  $conf['s3fs_bucket'] = $_SERVER['EITI_S3_BUCKET'];
-}
-if (isset($_SERVER['EITI_S3_REGION'])) {
-  $conf['s3fs_region'] = $_SERVER['EITI_S3_REGION'];
-}
-
-/**
- * Allow environment specific configuration overrides.
- */
-if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.custom.php')) {
-  include_once('settings.custom.php');
-}
+$conf['awssdk2_access_key'] = EITI_AWS_S3_ACCESS_KEY;
+$conf['awssdk2_secret_key'] = EITI_AWS_S3_SECRET_KEY;
+$conf['s3fs_use_s3_for_public'] = TRUE;
+$conf['s3fs_use_s3_for_private'] = TRUE;
+$conf['s3fs_use_cname'] = TRUE;
+$conf['s3fs_use_https'] = TRUE;
+$conf['s3fs_cache_control_header'] = 'public, max-age=31556926';
+$conf['s3fs_encryption'] = 'AES256';
+$conf['s3fs_domain'] = $_SERVER['EITI_S3_DOMAIN'];
+$conf['s3fs_bucket'] = $_SERVER['EITI_S3_BUCKET'];
+$conf['s3fs_region'] = $_SERVER['EITI_S3_REGION'];
 
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';

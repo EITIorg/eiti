@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Cache;
+namespace AwsSdk2\Guzzle\Cache;
 
-use Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Version;
 
 /**
  * Zend Framework 1 cache adapter

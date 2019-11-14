@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Common;
+namespace AwsSdk2\Guzzle\Common;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Holds an event dispatcher

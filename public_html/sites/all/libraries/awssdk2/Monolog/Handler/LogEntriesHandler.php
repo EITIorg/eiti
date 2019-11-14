@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * @author Robert Kaufmann III <rok3@rok3.me>

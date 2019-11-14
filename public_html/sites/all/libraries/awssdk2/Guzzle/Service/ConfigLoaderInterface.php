@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service;
+namespace AwsSdk2\Guzzle\Service;
 
 /**
  * Interface used for loading configuration data (service descriptions, service builder configs, etc)

@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Http\QueryAggregator\DuplicateAggregator;
-use Guzzle\Http\QueryAggregator\QueryAggregatorInterface;
-use Guzzle\Http\QueryAggregator\PhpAggregator;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Http\QueryAggregator\DuplicateAggregator;
+use AwsSdk2\Guzzle\Http\QueryAggregator\QueryAggregatorInterface;
+use AwsSdk2\Guzzle\Http\QueryAggregator\PhpAggregator;
 
 /**
  * Query string object to handle managing query string parameters and aggregating those parameters together as a string.
@@ -155,7 +155,7 @@ class QueryString extends Collection
      *                                                  reasons, this function accepts a callable that must accepts a
      *                                                  $key, $value, and query object.
      * @return self
-     * @see \Guzzle\Http\QueryString::aggregateUsingComma()
+     * @see \AwsSdk2\Guzzle\Http\QueryString::aggregateUsingComma()
      */
     public function setAggregator(QueryAggregatorInterface $aggregator = null)
     {

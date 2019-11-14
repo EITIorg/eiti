@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Ec2;
+namespace AwsSdk2\Aws\Ec2;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Signature\SignatureV4;
-use Guzzle\Common\Event;
-use Guzzle\Service\Command\CommandInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureV4;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Adds computed values to the CopySnapshot operation
@@ -35,7 +35,7 @@ class CopySnapshotListener implements EventSubscriberInterface
 
     public function onCommandBeforePrepare(Event $event)
     {
-        /** @var $command \Guzzle\Service\Command\CommandInterface */
+        /** @var $command \AwsSdk2\Guzzle\Service\Command\CommandInterface */
         $command = $event['command'];
 
         if ($command->getName() !== 'CopySnapshot') {
@@ -46,7 +46,7 @@ class CopySnapshotListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var $client \Aws\Common\Client\AwsClientInterface */
+        /** @var $client \AwsSdk2\Aws\Common\Client\AwsClientInterface */
         $client = $command->getClient();
         $presignedUrl = $this->createPresignedUrl($client, $command);
         $command['DestinationRegion'] = $client->getRegion();
@@ -71,7 +71,7 @@ class CopySnapshotListener implements EventSubscriberInterface
         );
 
         $preCommand['__internal'] = true;
-        /** @var \Guzzle\Http\Message\EntityEnclosingRequest $preRequest */
+        /** @var \AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequest $preRequest */
         $preRequest = $preCommand->prepare();
 
         return $newClient->getSignature()->createPresignedUrl(

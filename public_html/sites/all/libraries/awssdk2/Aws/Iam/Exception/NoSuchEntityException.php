@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Iam\Exception;
+namespace AwsSdk2\Aws\Iam\Exception;
 
 /**
  * The request was rejected because it referenced an entity that does not exist. The error message describes the entity.

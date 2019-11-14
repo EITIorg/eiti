@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
 /**
  * An object that encapsulates the data identifying an upload

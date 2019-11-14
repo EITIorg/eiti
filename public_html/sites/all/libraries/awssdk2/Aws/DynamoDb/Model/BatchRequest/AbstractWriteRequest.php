@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
 /**
  * A base batch write request defining the ability to get the table name

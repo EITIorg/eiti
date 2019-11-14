@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Plugin\ErrorResponse;
+namespace AwsSdk2\Guzzle\Plugin\ErrorResponse;
 
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Interface used to create an exception from an error response

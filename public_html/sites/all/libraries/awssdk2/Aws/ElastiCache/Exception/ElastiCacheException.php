@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElastiCache\Exception;
+namespace AwsSdk2\Aws\ElastiCache\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Default service exception class

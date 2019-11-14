@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Facade;
+namespace AwsSdk2\Aws\Common\Facade;
 
 /**
  * Interface that defines a client facade. Facades are convenient static classes that allow you to run client methods

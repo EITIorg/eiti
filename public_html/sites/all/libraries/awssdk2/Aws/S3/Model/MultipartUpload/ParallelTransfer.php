@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model\MultipartUpload;
+namespace AwsSdk2\Aws\S3\Model\MultipartUpload;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Enum\DateFormat;
-use Aws\Common\Enum\UaString as Ua;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\ReadLimitEntityBody;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\ReadLimitEntityBody;
 
 /**
  * Transfers multipart upload parts in parallel
@@ -87,7 +87,7 @@ class ParallelTransfer extends AbstractTransfer
             }
 
             // Execute each command, iterate over the results, and add to the transfer state
-            /** @var $command \Guzzle\Service\Command\OperationCommand */
+            /** @var $command \AwsSdk2\Guzzle\Service\Command\OperationCommand */
             foreach ($this->client->execute($commands) as $command) {
                 $this->state->addPart(UploadPart::fromArray(array(
                     'PartNumber'   => count($this->state) + 1,

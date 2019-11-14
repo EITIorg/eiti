@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * The request was rejected because Route 53 was still processing a prior request.

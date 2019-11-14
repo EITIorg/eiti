@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Inflection\Inflector;
-use Guzzle\Inflection\InflectorInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Inflection\Inflector;
+use AwsSdk2\Guzzle\Inflection\InflectorInterface;
 
 /**
  * Factory for creating {@see WaiterInterface} objects using a configuration DSL.

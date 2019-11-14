@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElastiCache\Exception;
+namespace AwsSdk2\Aws\ElastiCache\Exception;
 
 /**
  * The request cannot be processed because it would exceed the allowed number of cache security groups.

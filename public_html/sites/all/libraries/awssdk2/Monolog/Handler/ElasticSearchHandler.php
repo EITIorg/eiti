@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\ElasticaFormatter;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\FormatterInterface;
+use AwsSdk2\Monolog\Formatter\ElasticaFormatter;
+use AwsSdk2\Monolog\Logger;
 use Elastica\Client;
 use Elastica\Exception\ExceptionInterface;
 

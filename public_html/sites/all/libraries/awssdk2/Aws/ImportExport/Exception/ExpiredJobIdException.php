@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
 /**
  * Indicates that the specified job has expired out of the system.

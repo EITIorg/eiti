@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElastiCache\Exception;
+namespace AwsSdk2\Aws\ElastiCache\Exception;
 
 /**
  * The requested cache security group name does not refer to an existing cache security group.

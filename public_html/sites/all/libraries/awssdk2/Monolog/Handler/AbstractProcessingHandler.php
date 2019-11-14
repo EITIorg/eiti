@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
 /**
  * Base Handler class providing the Handler structure

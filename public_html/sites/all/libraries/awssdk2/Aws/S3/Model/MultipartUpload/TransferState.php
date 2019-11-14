@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model\MultipartUpload;
+namespace AwsSdk2\Aws\S3\Model\MultipartUpload;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Model\MultipartUpload\AbstractTransferState;
-use Aws\Common\Model\MultipartUpload\UploadIdInterface;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransferState;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\UploadIdInterface;
 
 /**
  * State of a multipart upload

@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * EITI Search module.
+ */
+
+use Aws\Credentials\CredentialProvider;
+use Aws\Credentials\Credentials;
+use Aws\ElasticsearchService\ElasticsearchPhpHandler;
+
+const EITI_SEARCH_MAIN_CLUSTER_ID = 'main';
+
+/**
+ * Implements hook_elasticsearch_connector_clusters_alter().
+ */
+function eiti_search_elasticsearch_connector_clusters_alter(array $clusters) {
+  if (isset($clusters[EITI_SEARCH_MAIN_CLUSTER_ID])) {
+    $clusters[EITI_SEARCH_MAIN_CLUSTER_ID]->url = EITI_ES_ENDPOINT;
+  }
+
+  return $clusters;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function eiti_search_form_elasticsearch_connector_edit_cluster_alter(array &$form, array &$form_state, string $form_id){
+  if ($form["cluster_id"]["#default_value"] === EITI_SEARCH_MAIN_CLUSTER_ID) {
+    // Hide these since they are controlled by the environment config.
+    $form["url"]['#disabled'] = TRUE;
+    $form["url"]["#description"] = t('The URL for the main cluster is handled with environmental config.');
+    $form["options"]["use_authentication"]['#access'] = FALSE;
+    $form["options"]["authentication_type"]['#access'] = FALSE;
+    $form["options"]["username"]['#access'] = FALSE;
+    $form["options"]["password"]['#access'] = FALSE;
+  }
+}
+
+/**
+ * Alter cluster options to sign ES requests.
+ *
+ * @param array &$options
+ *   Options array ref.
+ * @param \stdClass $cluster
+ *   Cluster object.
+ */
+function eiti_search_elasticsearch_connector_load_library_options_alter(array &$options, stdClass $cluster) {
+  if ($cluster->cluster_id === EITI_SEARCH_MAIN_CLUSTER_ID) {
+    $provider = CredentialProvider::fromCredentials(
+      new Credentials(EITI_AWS_ES_ACCESS_KEY, EITI_AWS_ES_SECRET_KEY)
+    );
+    $aws_region = $_SERVER['EITI_ES_REGION'];
+    $options['handler'] = new ElasticsearchPhpHandler($aws_region, $provider);
+  }
+}

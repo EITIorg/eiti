@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
 /**
  * Request must contain a valid (registered) AWS Access Key ID.

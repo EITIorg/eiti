@@ -69,7 +69,7 @@ return array (
         'CheckDNSAvailability' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CheckDNSAvailabilityResultMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -95,7 +95,7 @@ return array (
         'CreateApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationDescriptionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -132,7 +132,7 @@ return array (
         'CreateApplicationVersion' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationVersionDescriptionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -207,7 +207,7 @@ return array (
         'CreateConfigurationTemplate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigurationSettingsDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -300,7 +300,7 @@ return array (
         'CreateEnvironment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnvironmentDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -444,7 +444,7 @@ return array (
         'CreateStorageLocation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateStorageLocationResultMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -477,7 +477,7 @@ return array (
         'DeleteApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -514,7 +514,7 @@ return array (
         'DeleteApplicationVersion' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -570,7 +570,7 @@ return array (
         'DeleteConfigurationTemplate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -609,7 +609,7 @@ return array (
         'DeleteEnvironmentConfiguration' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -642,7 +642,7 @@ return array (
         'DescribeApplicationVersions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationVersionDescriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -678,7 +678,7 @@ return array (
         'DescribeApplications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationDescriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -708,7 +708,7 @@ return array (
         'DescribeConfigurationOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigurationOptionsDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -767,7 +767,7 @@ return array (
         'DescribeConfigurationSettings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigurationSettingsDescriptions',
             'responseType' => 'model',
             'parameters' => array(
@@ -805,7 +805,7 @@ return array (
         'DescribeEnvironmentResources' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnvironmentResourceDescriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -840,7 +840,7 @@ return array (
         'DescribeEnvironments' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnvironmentDescriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -905,7 +905,7 @@ return array (
         'DescribeEvents' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventDescriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -988,7 +988,7 @@ return array (
         'ListAvailableSolutionStacks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListAvailableSolutionStacksResultMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1007,7 +1007,7 @@ return array (
         'RebuildEnvironment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1042,7 +1042,7 @@ return array (
         'RequestEnvironmentInfo' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1076,7 +1076,7 @@ return array (
         'RestartAppServer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1105,7 +1105,7 @@ return array (
         'RetrieveEnvironmentInfo' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RetrieveEnvironmentInfoResultMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1139,7 +1139,7 @@ return array (
         'SwapEnvironmentCNAMEs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1178,7 +1178,7 @@ return array (
         'TerminateEnvironment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnvironmentDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -1218,7 +1218,7 @@ return array (
         'UpdateApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationDescriptionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1249,7 +1249,7 @@ return array (
         'UpdateApplicationVersion' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ApplicationVersionDescriptionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1287,7 +1287,7 @@ return array (
         'UpdateConfigurationTemplate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigurationSettingsDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -1368,7 +1368,7 @@ return array (
         'UpdateEnvironment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnvironmentDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -1472,7 +1472,7 @@ return array (
         'ValidateConfigurationSettings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfigurationSettingsValidationMessages',
             'responseType' => 'model',
             'parameters' => array(

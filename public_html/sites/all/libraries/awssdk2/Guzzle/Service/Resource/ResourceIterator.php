@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 abstract class ResourceIterator extends AbstractHasDispatcher implements ResourceIteratorInterface
 {

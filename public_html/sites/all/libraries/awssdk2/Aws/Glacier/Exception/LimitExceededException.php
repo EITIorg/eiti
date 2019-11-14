@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Exception;
+namespace AwsSdk2\Aws\Glacier\Exception;
 
 /**
  * Returned if the request results in a vault or account limit being exceeded.

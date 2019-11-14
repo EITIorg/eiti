@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Redshift\Exception;
+namespace AwsSdk2\Aws\Redshift\Exception;
 
 /**
  * The quota for HSM client certificates has been reached. For information about increasing your quota, go to Limits in Amazon Redshift in the Amazon Redshift Management Guide.

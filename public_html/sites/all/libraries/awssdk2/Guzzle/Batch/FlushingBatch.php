@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
 /**
  * BatchInterface decorator used to add automatic flushing of the queue when the size of the queue reaches a threshold.

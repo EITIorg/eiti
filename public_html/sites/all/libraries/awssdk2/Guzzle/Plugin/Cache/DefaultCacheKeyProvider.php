@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Cache;
+namespace AwsSdk2\Guzzle\Plugin\Cache;
 
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
-\Guzzle\Common\Version::warn('Guzzle\Plugin\Cache\DefaultCacheKeyProvider is no longer used');
+\AwsSdk2\Guzzle\Common\Version::warn('AwsSdk2\Guzzle\Plugin\Cache\DefaultCacheKeyProvider is no longer used');
 
 /**
  * @deprecated This class is no longer used

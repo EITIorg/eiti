@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
-use Aws\Common\Exception\Parser\ExceptionParserInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Aws\Common\Exception\Parser\ExceptionParserInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Attempts to create exceptions by inferring the name from the code and a base
@@ -51,7 +51,7 @@ class NamespaceExceptionFactory implements ExceptionFactoryInterface
     public function __construct(
         ExceptionParserInterface $parser,
         $baseNamespace,
-        $defaultException = 'Aws\Common\Exception\ServiceResponseException'
+        $defaultException = 'AwsSdk2\Aws\Common\Exception\ServiceResponseException'
     ) {
         $this->parser = $parser;
         $this->baseNamespace = $baseNamespace;

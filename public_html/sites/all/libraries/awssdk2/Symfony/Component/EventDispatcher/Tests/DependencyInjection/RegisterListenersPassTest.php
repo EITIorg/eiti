@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Tests\DependencyInjection;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Tests\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
+use AwsSdk2\Symfony\Component\DependencyInjection\ContainerBuilder;
+use AwsSdk2\Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 
 class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +29,7 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
             'my_event_subscriber' => array(0 => array()),
         );
 
-        $definition = $this->getMock('Symfony\Component\DependencyInjection\Definition');
+        $definition = $this->getMock('AwsSdk2\Symfony\Component\DependencyInjection\Definition');
         $definition->expects($this->atLeastOnce())
             ->method('isPublic')
             ->will($this->returnValue(true));
@@ -38,7 +38,7 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('stdClass'));
 
         $builder = $this->getMock(
-            'Symfony\Component\DependencyInjection\ContainerBuilder',
+            'AwsSdk2\Symfony\Component\DependencyInjection\ContainerBuilder',
             array('hasDefinition', 'findTaggedServiceIds', 'getDefinition')
         );
         $builder->expects($this->any())
@@ -64,16 +64,16 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
             'my_event_subscriber' => array(0 => array()),
         );
 
-        $definition = $this->getMock('Symfony\Component\DependencyInjection\Definition');
+        $definition = $this->getMock('AwsSdk2\Symfony\Component\DependencyInjection\Definition');
         $definition->expects($this->atLeastOnce())
             ->method('isPublic')
             ->will($this->returnValue(true));
         $definition->expects($this->atLeastOnce())
             ->method('getClass')
-            ->will($this->returnValue('Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService'));
+            ->will($this->returnValue('AwsSdk2\Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService'));
 
         $builder = $this->getMock(
-            'Symfony\Component\DependencyInjection\ContainerBuilder',
+            'AwsSdk2\Symfony\Component\DependencyInjection\ContainerBuilder',
             array('hasDefinition', 'findTaggedServiceIds', 'getDefinition', 'findDefinition')
         );
         $builder->expects($this->any())
@@ -157,7 +157,7 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
     {
         $container = new ContainerBuilder();
 
-        $container->setParameter('subscriber.class', 'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService');
+        $container->setParameter('subscriber.class', 'AwsSdk2\Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService');
         $container->register('foo', '%subscriber.class%')->addTag('kernel.event_subscriber', array());
         $container->register('event_dispatcher', 'stdClass');
 
@@ -170,7 +170,7 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
                 'addSubscriberService',
                 array(
                     'foo',
-                    'Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService',
+                    'AwsSdk2\Symfony\Component\EventDispatcher\Tests\DependencyInjection\SubscriberService',
                 ),
             ),
         );
@@ -192,7 +192,7 @@ class RegisterListenersPassTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class SubscriberService implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+class SubscriberService implements \AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
 /**
  * One or more manifest fields was invalid. Please correct and resubmit.

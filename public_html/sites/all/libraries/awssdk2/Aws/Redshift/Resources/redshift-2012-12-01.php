@@ -58,7 +58,7 @@ return array (
         'AuthorizeClusterSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -112,7 +112,7 @@ return array (
         'AuthorizeSnapshotAccess' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -159,7 +159,7 @@ return array (
         'CopyClusterSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -210,7 +210,7 @@ return array (
         'CreateCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -425,7 +425,7 @@ return array (
         'CreateClusterParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterParameterGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -494,7 +494,7 @@ return array (
         'CreateClusterSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -558,7 +558,7 @@ return array (
         'CreateClusterSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -630,7 +630,7 @@ return array (
         'CreateClusterSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -716,7 +716,7 @@ return array (
         'CreateEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -839,7 +839,7 @@ return array (
         'CreateHsmClientCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'HsmClientCertificateWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -898,7 +898,7 @@ return array (
         'CreateHsmConfiguration' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'HsmConfigurationWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -982,7 +982,7 @@ return array (
         'CreateTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1038,7 +1038,7 @@ return array (
         'DeleteCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1089,7 +1089,7 @@ return array (
         'DeleteClusterParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1123,7 +1123,7 @@ return array (
         'DeleteClusterSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1157,7 +1157,7 @@ return array (
         'DeleteClusterSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1195,7 +1195,7 @@ return array (
         'DeleteClusterSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1233,7 +1233,7 @@ return array (
         'DeleteEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1267,7 +1267,7 @@ return array (
         'DeleteHsmClientCertificate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1301,7 +1301,7 @@ return array (
         'DeleteHsmConfiguration' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1335,7 +1335,7 @@ return array (
         'DeleteTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1375,7 +1375,7 @@ return array (
         'DescribeClusterParameterGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterParameterGroupsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1430,7 +1430,7 @@ return array (
         'DescribeClusterParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterParameterGroupDetails',
             'responseType' => 'model',
             'parameters' => array(
@@ -1472,7 +1472,7 @@ return array (
         'DescribeClusterSecurityGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSecurityGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1527,7 +1527,7 @@ return array (
         'DescribeClusterSnapshots' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1612,7 +1612,7 @@ return array (
         'DescribeClusterSubnetGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSubnetGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1667,7 +1667,7 @@ return array (
         'DescribeClusterVersions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterVersionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1702,7 +1702,7 @@ return array (
         'DescribeClusters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClustersMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1757,7 +1757,7 @@ return array (
         'DescribeDefaultClusterParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DefaultClusterParametersWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1789,7 +1789,7 @@ return array (
         'DescribeEventCategories' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventCategoriesMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1812,7 +1812,7 @@ return array (
         'DescribeEventSubscriptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1849,7 +1849,7 @@ return array (
         'DescribeEvents' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1906,7 +1906,7 @@ return array (
         'DescribeHsmClientCertificates' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'HsmClientCertificateMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1961,7 +1961,7 @@ return array (
         'DescribeHsmConfigurations' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'HsmConfigurationMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2016,7 +2016,7 @@ return array (
         'DescribeLoggingStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'LoggingStatus',
             'responseType' => 'model',
             'parameters' => array(
@@ -2046,7 +2046,7 @@ return array (
         'DescribeOrderableClusterOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OrderableClusterOptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2081,7 +2081,7 @@ return array (
         'DescribeReservedNodeOfferings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedNodeOfferingsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2118,7 +2118,7 @@ return array (
         'DescribeReservedNodes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedNodesMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2155,7 +2155,7 @@ return array (
         'DescribeResize' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ResizeProgressMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2189,7 +2189,7 @@ return array (
         'DescribeTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TaggedResourceListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2248,7 +2248,7 @@ return array (
         'DisableLogging' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'LoggingStatus',
             'responseType' => 'model',
             'parameters' => array(
@@ -2278,7 +2278,7 @@ return array (
         'DisableSnapshotCopy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2320,7 +2320,7 @@ return array (
         'EnableLogging' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'LoggingStatus',
             'responseType' => 'model',
             'parameters' => array(
@@ -2375,7 +2375,7 @@ return array (
         'EnableSnapshotCopy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2438,7 +2438,7 @@ return array (
         'ModifyCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2579,7 +2579,7 @@ return array (
         'ModifyClusterParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2650,7 +2650,7 @@ return array (
         'ModifyClusterSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2710,7 +2710,7 @@ return array (
         'ModifyEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2807,7 +2807,7 @@ return array (
         'ModifySnapshotCopyRetentionPeriod' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2854,7 +2854,7 @@ return array (
         'PurchaseReservedNodeOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedNodeWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2896,7 +2896,7 @@ return array (
         'RebootCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2930,7 +2930,7 @@ return array (
         'ResetClusterParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -3005,7 +3005,7 @@ return array (
         'RestoreFromClusterSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3188,7 +3188,7 @@ return array (
         'RevokeClusterSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3238,7 +3238,7 @@ return array (
         'RevokeSnapshotAccess' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3285,7 +3285,7 @@ return array (
         'RotateEncryptionKey' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(

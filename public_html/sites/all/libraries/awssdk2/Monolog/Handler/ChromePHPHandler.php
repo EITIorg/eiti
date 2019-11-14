@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\ChromePHPFormatter;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\ChromePHPFormatter;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Handler sending logs to the ChromePHP extension (http://www.chromephp.com/)
@@ -58,7 +58,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
+            throw new \RuntimeException('PHP\'s json extension is required to use AwsSdk2\Monolog\'s ChromePHPHandler');
         }
     }
 

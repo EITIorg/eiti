@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Batch\BatchBuilder;
-use Guzzle\Batch\BatchSizeDivisor;
-use Guzzle\Batch\BatchClosureTransfer;
-use Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Batch\BatchBuilder;
+use AwsSdk2\Guzzle\Batch\BatchSizeDivisor;
+use AwsSdk2\Guzzle\Batch\BatchClosureTransfer;
+use AwsSdk2\Guzzle\Common\Version;
 
 /**
  * Apply a callback to the contents of a {@see ResourceIteratorInterface}

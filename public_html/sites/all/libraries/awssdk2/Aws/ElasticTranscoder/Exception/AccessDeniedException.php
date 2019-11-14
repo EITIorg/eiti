@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticTranscoder\Exception;
+namespace AwsSdk2\Aws\ElasticTranscoder\Exception;
 
 /**
  * General authentication failure. The request was not signed correctly.

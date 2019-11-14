@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Iterator;
+namespace AwsSdk2\Guzzle\Iterator;
 
 /**
  * Proxies missing method calls to the innermost iterator

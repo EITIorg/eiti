@@ -11,8 +11,8 @@
 
 namespace Monolog;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
+use AwsSdk2\Psr\Log\LoggerInterface;
+use AwsSdk2\Psr\Log\LogLevel;
 
 /**
  * Monolog error handler

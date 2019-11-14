@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\Common\Client\AwsClientInterface;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Batch\FlushingBatch;
-use Guzzle\Batch\ExceptionBufferingBatch;
-use Guzzle\Batch\NotifyingBatch;
-use Guzzle\Common\Exception\ExceptionCollection;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Batch\FlushingBatch;
+use AwsSdk2\Guzzle\Batch\ExceptionBufferingBatch;
+use AwsSdk2\Guzzle\Batch\NotifyingBatch;
+use AwsSdk2\Guzzle\Common\Exception\ExceptionCollection;
 
 /**
  * Class used to clear the contents of a bucket or the results of an iterator

@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Cache;
+namespace AwsSdk2\Guzzle\Cache;
 
-use Doctrine\Common\Cache\Cache;
-use Guzzle\Common\Version;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Common\FromConfigInterface;
+use AwsSdk2\Doctrine\Common\Cache\Cache;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\FromConfigInterface;
 use Zend\Cache\Storage\StorageInterface;
 
 /**
@@ -57,7 +57,7 @@ class CacheAdapterFactory implements FromConfigInterface
         }
 
         if (!isset($config['cache.adapter']) && !isset($config['cache.provider'])) {
-            $config['cache.adapter'] = 'Guzzle\Cache\NullCacheAdapter';
+            $config['cache.adapter'] = 'AwsSdk2\Guzzle\Cache\NullCacheAdapter';
             $config['cache.provider'] = null;
         } else {
             // Validate that the options are valid

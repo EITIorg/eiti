@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Plugin\Cookie\CookieJar;
+namespace AwsSdk2\Guzzle\Plugin\Cookie\CookieJar;
 
-use Guzzle\Plugin\Cookie\Cookie;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Parser\ParserRegistry;
-use Guzzle\Plugin\Cookie\Exception\InvalidCookieException;
+use AwsSdk2\Guzzle\Plugin\Cookie\Cookie;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Guzzle\Plugin\Cookie\Exception\InvalidCookieException;
 
 /**
  * Cookie cookieJar that stores cookies an an array
@@ -225,7 +225,7 @@ class ArrayCookieJar implements CookieJarInterface, \Serializable
      * If a cookie already exists and the server asks to set it again with a null value, the
      * cookie must be deleted.
      *
-     * @param \Guzzle\Plugin\Cookie\Cookie $cookie
+     * @param \AwsSdk2\Guzzle\Plugin\Cookie\Cookie $cookie
      */
     private function removeCookieIfEmpty(Cookie $cookie)
     {

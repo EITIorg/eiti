@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model\MultipartUpload;
+namespace AwsSdk2\Aws\S3\Model\MultipartUpload;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Model\MultipartUpload\AbstractUploadBuilder;
-use Aws\S3\Model\Acp;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractUploadBuilder;
+use AwsSdk2\Aws\S3\Model\Acp;
 
 /**
  * Easily create a multipart uploader used to quickly and reliably upload a

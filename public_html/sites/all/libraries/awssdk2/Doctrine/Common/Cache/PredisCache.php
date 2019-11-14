@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\Common\Cache;
+namespace AwsSdk2\Doctrine\Common\Cache;
 
 use Predis\Client;
 

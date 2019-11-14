@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
 /**
  * An item collection is too large. This exception is only returned for tables that have one or more local secondary indexes.

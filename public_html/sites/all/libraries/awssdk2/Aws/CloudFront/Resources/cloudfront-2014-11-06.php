@@ -69,7 +69,7 @@ return array (
         'CreateCloudFrontOriginAccessIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateCloudFrontOriginAccessIdentityResult',
             'responseType' => 'model',
             'data' => array(
@@ -122,7 +122,7 @@ return array (
         'CreateDistribution' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-06/distribution',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateDistributionResult',
             'responseType' => 'model',
             'data' => array(
@@ -734,7 +734,7 @@ return array (
         'CreateInvalidation' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-06/distribution/{DistributionId}/invalidation',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateInvalidationResult',
             'responseType' => 'model',
             'data' => array(
@@ -812,7 +812,7 @@ return array (
         'CreateStreamingDistribution' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-06/streaming-distribution',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateStreamingDistributionResult',
             'responseType' => 'model',
             'data' => array(
@@ -974,7 +974,7 @@ return array (
         'DeleteCloudFrontOriginAccessIdentity' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteCloudFrontOriginAccessIdentity2014_11_06Output',
             'responseType' => 'model',
             'parameters' => array(
@@ -1014,7 +1014,7 @@ return array (
         'DeleteDistribution' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2014-11-06/distribution/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteDistribution2014_11_06Output',
             'responseType' => 'model',
             'parameters' => array(
@@ -1054,7 +1054,7 @@ return array (
         'DeleteStreamingDistribution' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2014-11-06/streaming-distribution/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteStreamingDistribution2014_11_06Output',
             'responseType' => 'model',
             'parameters' => array(
@@ -1094,7 +1094,7 @@ return array (
         'GetCloudFrontOriginAccessIdentity' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetCloudFrontOriginAccessIdentityResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1122,7 +1122,7 @@ return array (
         'GetCloudFrontOriginAccessIdentityConfig' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetCloudFrontOriginAccessIdentityConfigResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1150,7 +1150,7 @@ return array (
         'GetDistribution' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/distribution/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetDistributionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1178,7 +1178,7 @@ return array (
         'GetDistributionConfig' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/distribution/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetDistributionConfigResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1206,7 +1206,7 @@ return array (
         'GetInvalidation' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/distribution/{DistributionId}/invalidation/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetInvalidationResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1243,7 +1243,7 @@ return array (
         'GetStreamingDistribution' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/streaming-distribution/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetStreamingDistributionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1271,7 +1271,7 @@ return array (
         'GetStreamingDistributionConfig' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/streaming-distribution/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetStreamingDistributionConfigResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1299,7 +1299,7 @@ return array (
         'ListCloudFrontOriginAccessIdentities' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListCloudFrontOriginAccessIdentitiesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1326,7 +1326,7 @@ return array (
         'ListDistributions' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/distribution',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListDistributionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1353,7 +1353,7 @@ return array (
         'ListInvalidations' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/distribution/{DistributionId}/invalidation',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListInvalidationsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1393,7 +1393,7 @@ return array (
         'ListStreamingDistributions' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-06/streaming-distribution',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListStreamingDistributionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1420,7 +1420,7 @@ return array (
         'UpdateCloudFrontOriginAccessIdentity' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2014-11-06/origin-access-identity/cloudfront/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateCloudFrontOriginAccessIdentityResult',
             'responseType' => 'model',
             'data' => array(
@@ -1495,7 +1495,7 @@ return array (
         'UpdateDistribution' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2014-11-06/distribution/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateDistributionResult',
             'responseType' => 'model',
             'data' => array(
@@ -2117,7 +2117,7 @@ return array (
         'UpdateStreamingDistribution' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2014-11-06/streaming-distribution/{Id}/config',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateStreamingDistributionResult',
             'responseType' => 'model',
             'data' => array(

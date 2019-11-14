@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Emr\Exception;
+namespace AwsSdk2\Aws\Emr\Exception;
 
 /**
  * Indicates that an error occurred while processing the request and that the request was not completed.

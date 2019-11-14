@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception\Parser;
+namespace AwsSdk2\Aws\Common\Exception\Parser;
 
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Parses JSON encoded exception responses from query services

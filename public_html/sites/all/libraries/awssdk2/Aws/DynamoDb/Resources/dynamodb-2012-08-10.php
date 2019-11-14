@@ -80,7 +80,7 @@ return array (
         'BatchGetItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -102,14 +102,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'BatchWriteItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -131,14 +131,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'CreateTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -164,7 +164,7 @@ return array (
         'DeleteItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -186,14 +186,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'DeleteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -219,7 +219,7 @@ return array (
         'DescribeTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -245,7 +245,7 @@ return array (
         'GetItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -267,14 +267,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'ListTables' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -300,7 +300,7 @@ return array (
         'PutItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -322,14 +322,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'Query' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -351,14 +351,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'Scan' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -380,14 +380,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'UpdateItem' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -409,14 +409,14 @@ return array (
             'additionalParameters' => array(
                 'location' => 'json',
                 'filters' => array(
-                    'Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
+                    'AwsSdk2\Aws\DynamoDb\DynamoDbCommand::marshalAttributes',
                 ),
             ),
         ),
         'UpdateTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\DynamoDb\\DynamoDbCommand',
+            'class' => 'AwsSdk2\\Aws\\DynamoDb\\DynamoDbCommand',
             'responseClass' => 'JsonOutput',
             'responseType' => 'model',
             'parameters' => array(

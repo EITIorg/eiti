@@ -11,10 +11,10 @@
 
 namespace Monolog;
 
-use Monolog\Handler\HandlerInterface;
-use Monolog\Handler\StreamHandler;
-use Psr\Log\LoggerInterface;
-use Psr\Log\InvalidArgumentException;
+use AwsSdk2\Monolog\Handler\HandlerInterface;
+use AwsSdk2\Monolog\Handler\StreamHandler;
+use AwsSdk2\Psr\Log\LoggerInterface;
+use AwsSdk2\Psr\Log\InvalidArgumentException;
 
 /**
  * Monolog log channel

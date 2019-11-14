@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Exception;
+namespace AwsSdk2\Guzzle\Service\Exception;
 
-use Guzzle\Http\Exception\MultiTransferException;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Exception\MultiTransferException;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Exception thrown when transferring commands in parallel

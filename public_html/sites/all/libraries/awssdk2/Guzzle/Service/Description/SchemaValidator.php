@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Default parameter validator

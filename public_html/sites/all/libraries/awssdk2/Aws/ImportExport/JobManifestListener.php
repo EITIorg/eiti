@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport;
+namespace AwsSdk2\Aws\ImportExport;
 
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to assist with formatting the Manifest parameter of CreateJob operation into YAML
@@ -39,12 +39,12 @@ class JobManifestListener implements EventSubscriberInterface
      */
     public function onCommandBeforePrepare(Event $event)
     {
-        /** @var $command \Guzzle\Service\Command\AbstractCommand */
+        /** @var $command \AwsSdk2\Guzzle\Service\Command\AbstractCommand */
         $command = $event['command'];
         if ($command->getName() === 'CreateJob') {
             $manifest = $command->get('Manifest');
-            if (!is_string($manifest) && class_exists('Symfony\Component\Yaml\Yaml')) {
-                $command->set('Manifest', \Symfony\Component\Yaml\Yaml::dump($manifest));
+            if (!is_string($manifest) && class_exists('AwsSdk2\Symfony\Component\Yaml\Yaml')) {
+                $command->set('Manifest', \AwsSdk2\Symfony\Component\Yaml\Yaml::dump($manifest));
             }
         }
     }

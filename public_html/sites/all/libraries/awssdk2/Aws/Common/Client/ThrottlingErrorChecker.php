@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Client;
+namespace AwsSdk2\Aws\Common\Client;
 
-use Aws\Common\Exception\Parser\ExceptionParserInterface;
-use Guzzle\Http\Exception\HttpException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
-use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use AwsSdk2\Aws\Common\Exception\Parser\ExceptionParserInterface;
+use AwsSdk2\Guzzle\Http\Exception\HttpException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffStrategyInterface;
+use AwsSdk2\Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
 
 /**
  * Backoff logic that handles throttling exceptions from services

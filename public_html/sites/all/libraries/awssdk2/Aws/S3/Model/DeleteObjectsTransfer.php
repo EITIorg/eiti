@@ -14,15 +14,15 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\OverflowException;
-use Aws\Common\Enum\UaString as Ua;
-use Aws\S3\Exception\InvalidArgumentException;
-use Aws\S3\Exception\DeleteMultipleObjectsException;
-use Guzzle\Batch\BatchTransferInterface;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\OverflowException;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\S3\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\S3\Exception\DeleteMultipleObjectsException;
+use AwsSdk2\Guzzle\Batch\BatchTransferInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Transfer logic for deleting multiple objects from an Amazon S3 bucket in a

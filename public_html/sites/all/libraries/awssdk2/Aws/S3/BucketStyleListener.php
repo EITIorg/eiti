@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to change the way in which buckets are referenced (path/virtual style) based on context

@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
-use Guzzle\Service\AbstractConfigLoader;
-use Guzzle\Service\Exception\DescriptionBuilderException;
+use AwsSdk2\Guzzle\Service\AbstractConfigLoader;
+use AwsSdk2\Guzzle\Service\Exception\DescriptionBuilderException;
 
 /**
  * Loader for service descriptions

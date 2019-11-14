@@ -1,19 +1,19 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Curl\CurlHandle;
-use Guzzle\Service\Client;
-use Guzzle\Service\ClientInterface;
-use Guzzle\Service\Description\Operation;
-use Guzzle\Service\Description\OperationInterface;
-use Guzzle\Service\Description\ValidatorInterface;
-use Guzzle\Service\Description\SchemaValidator;
-use Guzzle\Service\Exception\CommandException;
-use Guzzle\Service\Exception\ValidationException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Curl\CurlHandle;
+use AwsSdk2\Guzzle\Service\Client;
+use AwsSdk2\Guzzle\Service\ClientInterface;
+use AwsSdk2\Guzzle\Service\Description\Operation;
+use AwsSdk2\Guzzle\Service\Description\OperationInterface;
+use AwsSdk2\Guzzle\Service\Description\ValidatorInterface;
+use AwsSdk2\Guzzle\Service\Description\SchemaValidator;
+use AwsSdk2\Guzzle\Service\Exception\CommandException;
+use AwsSdk2\Guzzle\Service\Exception\ValidationException;
 
 /**
  * Command object to handle preparing and processing client requests and responses of the requests

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DataPipeline\Exception;
+namespace AwsSdk2\Aws\DataPipeline\Exception;
 
 /**
  * An internal service error occurred.

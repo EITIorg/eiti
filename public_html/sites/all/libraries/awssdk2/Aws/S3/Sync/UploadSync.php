@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\S3\Model\MultipartUpload\UploadBuilder;
-use Aws\S3\Model\MultipartUpload\AbstractTransfer;
-use Guzzle\Http\EntityBody;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\S3\Model\MultipartUpload\UploadBuilder;
+use AwsSdk2\Aws\S3\Model\MultipartUpload\AbstractTransfer;
+use AwsSdk2\Guzzle\Http\EntityBody;
 
 /**
  * Uploads a local directory tree to Amazon S3

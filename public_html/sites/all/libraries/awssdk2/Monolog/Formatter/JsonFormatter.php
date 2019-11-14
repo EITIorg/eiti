@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace AwsSdk2\Monolog\Formatter;
 
 /**
  * Encodes whatever record data is passed to it as json

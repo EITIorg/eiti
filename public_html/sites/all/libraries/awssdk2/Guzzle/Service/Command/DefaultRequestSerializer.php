@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface;
-use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
-use Guzzle\Service\Description\OperationInterface;
-use Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\RequestVisitorInterface;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
+use AwsSdk2\Guzzle\Service\Description\OperationInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
 
 /**
  * Default request serializer that transforms command options and operation parameters into a request
@@ -64,7 +64,7 @@ class DefaultRequestSerializer implements RequestSerializerInterface
 
         // Add arguments to the request using the location attribute
         foreach ($operation->getParams() as $name => $arg) {
-            /** @var $arg \Guzzle\Service\Description\Parameter */
+            /** @var $arg \AwsSdk2\Guzzle\Service\Description\Parameter */
             $location = $arg->getLocation();
             // Skip 'uri' locations because they've already been processed
             if ($location && $location != 'uri') {

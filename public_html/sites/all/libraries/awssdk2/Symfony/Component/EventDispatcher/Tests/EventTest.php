@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Tests;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Tests;
 
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use AwsSdk2\Symfony\Component\EventDispatcher\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Test class for Event.
@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class EventTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Symfony\Component\EventDispatcher\Event
+     * @var \AwsSdk2\Symfony\Component\EventDispatcher\Event
      */
     protected $event;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     * @var \AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher
      */
     protected $dispatcher;
 

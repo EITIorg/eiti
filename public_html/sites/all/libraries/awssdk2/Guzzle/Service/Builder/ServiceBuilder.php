@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Service\Builder;
+namespace AwsSdk2\Guzzle\Service\Builder;
 
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Service\ClientInterface;
-use Guzzle\Service\Exception\ServiceBuilderException;
-use Guzzle\Service\Exception\ServiceNotFoundException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Service\ClientInterface;
+use AwsSdk2\Guzzle\Service\Exception\ServiceBuilderException;
+use AwsSdk2\Guzzle\Service\Exception\ServiceNotFoundException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * {@inheritdoc}

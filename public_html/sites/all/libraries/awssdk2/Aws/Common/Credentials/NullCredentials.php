@@ -1,5 +1,5 @@
 <?php
-namespace Aws\Common\Credentials;
+namespace AwsSdk2\Aws\Common\Credentials;
 
 /**
  * A blank set of credentials. AWS clients must be provided credentials, but

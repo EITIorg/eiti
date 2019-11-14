@@ -21,6 +21,7 @@
 # Ignore configuration files that may contain sensitive information.
 /public_html/sites/*/drushrc.custom.php
 /public_html/sites/*/settings.custom.php
+/public_html/sites/*/settings.keys.php
 
 # Ignore paths that contain user-generated content.
 /public_html/sites/*/files
@@ -40,3 +41,6 @@ node_modules/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Ignore built folders
+/vendor/

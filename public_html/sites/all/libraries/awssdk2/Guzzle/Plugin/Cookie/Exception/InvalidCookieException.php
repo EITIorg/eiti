@@ -1,7 +1,7 @@
 <?php
 
-namespace Guzzle\Plugin\Cookie\Exception;
+namespace AwsSdk2\Guzzle\Plugin\Cookie\Exception;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 class InvalidCookieException extends InvalidArgumentException {}

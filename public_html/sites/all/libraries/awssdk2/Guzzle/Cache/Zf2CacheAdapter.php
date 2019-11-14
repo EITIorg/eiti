@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Cache;
+namespace AwsSdk2\Guzzle\Cache;
 
 use Zend\Cache\Storage\StorageInterface;
 

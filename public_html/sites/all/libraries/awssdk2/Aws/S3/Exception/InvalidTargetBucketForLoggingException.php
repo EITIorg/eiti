@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * The target bucket for logging does not exist, is not owned by you, or does not have the appropriate grants for the log-delivery group.

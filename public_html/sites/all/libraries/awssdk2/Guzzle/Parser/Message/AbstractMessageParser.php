@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\Message;
+namespace AwsSdk2\Guzzle\Parser\Message;
 
 /**
  * Implements shared message parsing functionality

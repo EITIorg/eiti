@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Collection;
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Http\Exception\RequestException;
-use Guzzle\Http\ClientInterface;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\Url;
-use Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Http\Exception\RequestException;
+use AwsSdk2\Guzzle\Http\ClientInterface;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Http\QueryString;
 
 /**
  * Generic HTTP request interface

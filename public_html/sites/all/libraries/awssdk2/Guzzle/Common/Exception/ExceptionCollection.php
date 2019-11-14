@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Common\Exception;
+namespace AwsSdk2\Guzzle\Common\Exception;
 
 /**
  * Collection of exceptions

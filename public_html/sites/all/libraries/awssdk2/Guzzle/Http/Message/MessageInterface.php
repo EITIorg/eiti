@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
 /**
  * Request and response message interface
@@ -10,7 +10,7 @@ interface MessageInterface
     /**
      * Get application and plugin specific parameters set on the message.
      *
-     * @return \Guzzle\Common\Collection
+     * @return \AwsSdk2\Guzzle\Common\Collection
      */
     public function getParams();
 
@@ -45,7 +45,7 @@ interface MessageInterface
     /**
      * Get all headers as a collection
      *
-     * @return \Guzzle\Http\Message\Header\HeaderCollection
+     * @return \AwsSdk2\Guzzle\Http\Message\Header\HeaderCollection
      */
     public function getHeaders();
 

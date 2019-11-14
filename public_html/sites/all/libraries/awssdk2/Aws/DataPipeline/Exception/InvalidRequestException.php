@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DataPipeline\Exception;
+namespace AwsSdk2\Aws\DataPipeline\Exception;
 
 /**
  * The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.

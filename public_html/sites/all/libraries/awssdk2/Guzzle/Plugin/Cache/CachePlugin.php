@@ -1,18 +1,18 @@
 <?php
 
-namespace Guzzle\Plugin\Cache;
+namespace AwsSdk2\Guzzle\Plugin\Cache;
 
-use Guzzle\Cache\CacheAdapterFactory;
-use Guzzle\Cache\CacheAdapterInterface;
-use Guzzle\Common\Event;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Version;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Guzzle\Cache\DoctrineCacheAdapter;
-use Guzzle\Http\Exception\CurlException;
-use Doctrine\Common\Cache\ArrayCache;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Cache\CacheAdapterFactory;
+use AwsSdk2\Guzzle\Cache\CacheAdapterInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Cache\DoctrineCacheAdapter;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Doctrine\Common\Cache\ArrayCache;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Plugin to enable the caching of GET and HEAD requests.  Caching can be done on all requests passing through this
@@ -57,7 +57,7 @@ class CachePlugin implements EventSubscriberInterface
                 $options = array('storage' => $options);
             } elseif ($options) {
                 $options = array('storage' => new DefaultCacheStorage(CacheAdapterFactory::fromCache($options)));
-            } elseif (!class_exists('Doctrine\Common\Cache\ArrayCache')) {
+            } elseif (!class_exists('AwsSdk2\Doctrine\Common\Cache\ArrayCache')) {
                 // @codeCoverageIgnoreStart
                 throw new InvalidArgumentException('No cache was provided and Doctrine is not installed');
                 // @codeCoverageIgnoreEnd

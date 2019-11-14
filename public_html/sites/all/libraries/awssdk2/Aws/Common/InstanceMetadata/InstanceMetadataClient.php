@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\InstanceMetadata;
+namespace AwsSdk2\Aws\Common\InstanceMetadata;
 
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\InstanceProfileCredentialsException;
-use Aws\Common\Credentials\Credentials;
-use Aws\Common\Client\AbstractClient;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Message\RequestFactory;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\InstanceProfileCredentialsException;
+use AwsSdk2\Aws\Common\Credentials\Credentials;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Message\RequestFactory;
 
 /**
  * Client used for interacting with the Amazon EC2 instance metadata server
@@ -81,7 +81,7 @@ class InstanceMetadataClient extends AbstractClient
             $message = sprintf('Error retrieving credentials from the instance profile metadata server. When you are'
                 . ' not running inside of Amazon EC2, you must provide your AWS access key ID and secret access key in'
                 . ' the "key" and "secret" options when creating a client or provide an instantiated'
-                . ' Aws\\Common\\Credentials\\CredentialsInterface object. (%s)', $e->getMessage());
+                . ' AwsSdk2\Aws\\Common\\Credentials\\CredentialsInterface object. (%s)', $e->getMessage());
             throw new InstanceProfileCredentialsException($message, $e->getCode());
         }
 

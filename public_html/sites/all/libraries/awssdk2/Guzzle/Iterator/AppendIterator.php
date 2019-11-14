@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Iterator;
+namespace AwsSdk2\Guzzle\Iterator;
 
 /**
  * AppendIterator that is not affected by https://bugs.php.net/bug.php?id=49104

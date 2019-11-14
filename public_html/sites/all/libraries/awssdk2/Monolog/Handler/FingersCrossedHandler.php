@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
-use Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
+use AwsSdk2\Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Buffers all records until a certain level is reached
@@ -23,7 +23,7 @@ use Monolog\Logger;
  * in the logs, but they will contain all records, not only those above the level threshold.
  *
  * You can find the various activation strategies in the
- * Monolog\Handler\FingersCrossed\ namespace.
+ * AwsSdk2\Monolog\Handler\FingersCrossed\ namespace.
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
@@ -64,7 +64,7 @@ class FingersCrossedHandler extends AbstractHandler
         $this->passthruLevel = $passthruLevel;
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a AwsSdk2\Monolog\Handler\HandlerInterface object");
         }
     }
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Guzzle\Plugin\Mock;
+namespace AwsSdk2\Guzzle\Plugin\Mock;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Http\Exception\CurlException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\Response;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Queues mock responses or exceptions and delivers mock responses or exceptions in a fifo order.

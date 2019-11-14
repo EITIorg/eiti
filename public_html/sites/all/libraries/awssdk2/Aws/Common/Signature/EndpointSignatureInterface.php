@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Signature;
+namespace AwsSdk2\Aws\Common\Signature;
 
 /**
  * Interface for signatures that use specific region and service names when

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Common\Model\MultipartUpload;
 
-use Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
 
 /**
  * State of a multipart upload

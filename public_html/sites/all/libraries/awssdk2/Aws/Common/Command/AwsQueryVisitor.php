@@ -1,11 +1,11 @@
 <?php
 
-namespace Aws\Common\Command;
+namespace AwsSdk2\Aws\Common\Command;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Command\LocationVisitor\Request\AbstractRequestVisitor;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request\AbstractRequestVisitor;
 
 /**
  * Location visitor used to serialize AWS query parameters (e.g. EC2, SES, SNS, SQS, etc) as POST fields

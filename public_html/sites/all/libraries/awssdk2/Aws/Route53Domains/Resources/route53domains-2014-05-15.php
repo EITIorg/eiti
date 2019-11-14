@@ -34,7 +34,7 @@ return array (
         'CheckDomainAvailability' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CheckDomainAvailabilityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -78,7 +78,7 @@ return array (
         'DeleteTagsForDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -126,7 +126,7 @@ return array (
         'DisableDomainAutoRenew' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -161,7 +161,7 @@ return array (
         'DisableDomainTransferLock' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DisableDomainTransferLockResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -208,7 +208,7 @@ return array (
         'EnableDomainAutoRenew' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -243,7 +243,7 @@ return array (
         'EnableDomainTransferLock' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EnableDomainTransferLockResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -290,7 +290,7 @@ return array (
         'GetDomainDetail' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDomainDetailResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -325,7 +325,7 @@ return array (
         'GetOperationDetail' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetOperationDetailResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -360,7 +360,7 @@ return array (
         'ListDomains' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDomainsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -399,7 +399,7 @@ return array (
         'ListOperations' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListOperationsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -438,7 +438,7 @@ return array (
         'ListTagsForDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListTagsForDomainResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -477,7 +477,7 @@ return array (
         'RegisterDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RegisterDomainResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -789,7 +789,7 @@ return array (
         'RetrieveDomainAuthCode' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RetrieveDomainAuthCodeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -824,7 +824,7 @@ return array (
         'TransferDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'TransferDomainResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1164,7 +1164,7 @@ return array (
         'UpdateDomainContact' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateDomainContactResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1433,7 +1433,7 @@ return array (
         'UpdateDomainContactPrivacy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateDomainContactPrivacyResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1495,7 +1495,7 @@ return array (
         'UpdateDomainNameservers' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateDomainNameserversResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1570,7 +1570,7 @@ return array (
         'UpdateTagsForDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(

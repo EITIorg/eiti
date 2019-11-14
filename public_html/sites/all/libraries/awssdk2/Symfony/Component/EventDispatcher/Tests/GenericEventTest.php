@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Tests;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Tests;
 
-use Symfony\Component\EventDispatcher\GenericEvent;
+use AwsSdk2\Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Test class for Event.

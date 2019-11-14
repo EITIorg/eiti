@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\S3\Enum\GranteeType;
+use AwsSdk2\Aws\S3\Enum\GranteeType;
 
 /**
  * Builder for creating Access Control Policies

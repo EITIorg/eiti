@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Batch\Exception\BatchTransferException;
+use AwsSdk2\Guzzle\Batch\Exception\BatchTransferException;
 
 /**
  * Default batch implementation used to convert queued items into smaller chunks of batches using a

@@ -1,8 +1,8 @@
 <?php
 
-namespace Psr\Log\Test;
+namespace AwsSdk2\Psr\Log\Test;
 
-use Psr\Log\LogLevel;
+use AwsSdk2\Psr\Log\LogLevel;
 
 /**
  * Provides a base test class for ensuring compliance with the LoggerInterface
@@ -27,7 +27,7 @@ abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function testImplements()
     {
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $this->getLogger());
+        $this->assertInstanceOf('AwsSdk2\Psr\Log\LoggerInterface', $this->getLogger());
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Psr\Log\InvalidArgumentException
+     * @expectedException AwsSdk2\Psr\Log\InvalidArgumentException
      */
     public function testThrowsOnInvalidLevel()
     {
@@ -80,7 +80,7 @@ abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectCastToString()
     {
-        $dummy = $this->getMock('Psr\Log\Test\DummyTest', array('__toString'));
+        $dummy = $this->getMock('AwsSdk2\Psr\Log\Test\DummyTest', array('__toString'));
         $dummy->expects($this->once())
             ->method('__toString')
             ->will($this->returnValue('DUMMY'));

@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Stream;
+namespace AwsSdk2\Guzzle\Stream;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Factory used to create fopen streams using PHP's http and https stream wrappers
@@ -31,7 +31,7 @@ class PhpStreamRequestFactory implements StreamRequestFactoryInterface
      * {@inheritdoc}
      *
      * The $params array can contain the following custom keys specific to the PhpStreamRequestFactory:
-     * - stream_class: The name of a class to create instead of a Guzzle\Stream\Stream object
+     * - stream_class: The name of a class to create instead of a AwsSdk2\Guzzle\Stream\Stream object
      */
     public function fromRequest(RequestInterface $request, $context = array(), array $params = array())
     {

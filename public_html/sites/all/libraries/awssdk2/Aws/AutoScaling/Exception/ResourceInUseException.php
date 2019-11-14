@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\AutoScaling\Exception;
+namespace AwsSdk2\Aws\AutoScaling\Exception;
 
 /**
  * This is returned when you cannot delete a launch configuration or Auto Scaling group because it is being used.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudWatch\Exception;
+namespace AwsSdk2\Aws\CloudWatch\Exception;
 
 /**
  * Indicates that the request processing has failed due to some unknown error, exception, or failure.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common;
+namespace AwsSdk2\Aws\Common;
 
 /**
  * Represents an enumerable set of values

@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model\MultipartUpload;
+namespace AwsSdk2\Aws\S3\Model\MultipartUpload;
 
-use Aws\Common\Enum\DateFormat;
-use Aws\Common\Enum\Size;
-use Aws\Common\Enum\UaString as Ua;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\ReadLimitEntityBody;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Aws\Common\Enum\Size;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\ReadLimitEntityBody;
 
 /**
  * Transfers multipart upload parts serially

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
 /**
  * Command factory used when explicitly mapping strings to command classes

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticBeanstalk\Exception;
+namespace AwsSdk2\Aws\ElasticBeanstalk\Exception;
 
 /**
  * The specified S3 bucket does not belong to the S3 region in which the service is running.

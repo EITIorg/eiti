@@ -1,5 +1,5 @@
 <?php
-namespace Aws\DynamoDb;
+namespace AwsSdk2\Aws\DynamoDb;
 
 /**
  * Marshals JSON documents or array representations of JSON documents into the

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * Exception that occurs when a TooManyHealthChecksException error is encountered

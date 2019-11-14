@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Client;
+namespace AwsSdk2\Aws\Common\Client;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Signature\SignatureInterface;
-use Aws\Common\Waiter\WaiterFactoryInterface;
-use Aws\Common\Waiter\WaiterInterface;
-use Guzzle\Service\ClientInterface;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureInterface;
+use AwsSdk2\Aws\Common\Waiter\WaiterFactoryInterface;
+use AwsSdk2\Aws\Common\Waiter\WaiterInterface;
+use AwsSdk2\Guzzle\Service\ClientInterface;
 
 /**
  * Interface that all AWS clients implement

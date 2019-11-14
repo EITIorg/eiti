@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * This error contains a list of one or more error messages. Each error message indicates one error in the change batch. For more information, see Example InvalidChangeBatch Errors.

@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Message\EntityEnclosingRequest;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Parser\ParserRegistry;
-use Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequest;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Immutable wrapper for a cURL handle

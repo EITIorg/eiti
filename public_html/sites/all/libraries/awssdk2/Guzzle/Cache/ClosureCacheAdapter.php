@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Cache;
+namespace AwsSdk2\Guzzle\Cache;
 
 /**
  * Cache adapter that defers to closures for implementation

@@ -28,7 +28,7 @@ return array (
         'CreateCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateClusterResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -65,7 +65,7 @@ return array (
         'DeleteCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteClusterResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -103,7 +103,7 @@ return array (
         'DeregisterContainerInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeregisterContainerInstanceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -150,7 +150,7 @@ return array (
         'DeregisterTaskDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeregisterTaskDefinitionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -188,7 +188,7 @@ return array (
         'DescribeClusters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeClustersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -229,7 +229,7 @@ return array (
         'DescribeContainerInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeContainerInstancesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -275,7 +275,7 @@ return array (
         'DescribeTaskDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTaskDefinitionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -313,7 +313,7 @@ return array (
         'DescribeTasks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTasksResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -359,7 +359,7 @@ return array (
         'DiscoverPollEndpoint' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DiscoverPollEndpointResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -400,7 +400,7 @@ return array (
         'ListClusters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListClustersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -441,7 +441,7 @@ return array (
         'ListContainerInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListContainerInstancesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -486,7 +486,7 @@ return array (
         'ListTaskDefinitionFamilies' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListTaskDefinitionFamiliesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -531,7 +531,7 @@ return array (
         'ListTaskDefinitions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListTaskDefinitionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -576,7 +576,7 @@ return array (
         'ListTasks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListTasksResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -629,7 +629,7 @@ return array (
         'RegisterContainerInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RegisterContainerInstanceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -686,7 +686,7 @@ return array (
         'RegisterTaskDefinition' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RegisterTaskDefinitionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -858,7 +858,7 @@ return array (
         'RunTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RunTaskResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -929,7 +929,7 @@ return array (
         'StartTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'StartTaskResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1005,7 +1005,7 @@ return array (
         'StopTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'StopTaskResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1047,7 +1047,7 @@ return array (
         'SubmitContainerStateChange' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'SubmitContainerStateChangeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1123,7 +1123,7 @@ return array (
         'SubmitTaskStateChange' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'SubmitTaskStateChangeResponse',
             'responseType' => 'model',
             'parameters' => array(

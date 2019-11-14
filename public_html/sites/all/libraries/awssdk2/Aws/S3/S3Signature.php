@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\QueryString;
-use Guzzle\Http\Url;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Default Amazon S3 signature implementation

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Exception;
+namespace AwsSdk2\Aws\Glacier\Exception;
 
 /**
  * Returned if, when uploading an archive, Amazon Glacier times out while receiving the upload.

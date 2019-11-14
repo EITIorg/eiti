@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Stream\StreamInterface;
+use AwsSdk2\Guzzle\Stream\StreamInterface;
 
 /**
  * EntityBody decorator used to return only a subset of an entity body

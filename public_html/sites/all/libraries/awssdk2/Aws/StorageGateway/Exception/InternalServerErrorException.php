@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\StorageGateway\Exception;
+namespace AwsSdk2\Aws\StorageGateway\Exception;
 
 /**
  * An internal server error has occurred during the request. See the error and message fields for more information.

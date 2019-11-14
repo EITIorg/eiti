@@ -1,8 +1,8 @@
 <?php
 
-namespace Aws\CodeDeploy\Exception;
+namespace AwsSdk2\Aws\CodeDeploy\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Exception thrown by the CodeDeploy service client.

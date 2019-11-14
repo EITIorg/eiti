@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Debug;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Debug;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

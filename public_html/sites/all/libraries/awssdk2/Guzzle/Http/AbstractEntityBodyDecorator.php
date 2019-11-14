@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Stream\Stream;
+use AwsSdk2\Guzzle\Stream\Stream;
 
 /**
  * Abstract decorator used to wrap entity bodies

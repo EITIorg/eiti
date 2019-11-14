@@ -1,23 +1,23 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\Event;
-use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Exception\RequestException;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\ClientInterface;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\Message\Header\HeaderInterface;
-use Guzzle\Http\Url;
-use Guzzle\Parser\ParserRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Exception\RequestException;
+use AwsSdk2\Guzzle\Http\Exception\BadResponseException;
+use AwsSdk2\Guzzle\Http\ClientInterface;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderInterface;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * HTTP request class to send requests
@@ -601,14 +601,14 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @deprecated Use Guzzle\Plugin\Cache\DefaultCanCacheStrategy
+     * @deprecated Use AwsSdk2\Guzzle\Plugin\Cache\DefaultCanCacheStrategy
      * @codeCoverageIgnore
      */
     public function canCache()
     {
-        Version::warn(__METHOD__ . ' is deprecated. Use Guzzle\Plugin\Cache\DefaultCanCacheStrategy.');
-        if (class_exists('Guzzle\Plugin\Cache\DefaultCanCacheStrategy')) {
-            $canCache = new \Guzzle\Plugin\Cache\DefaultCanCacheStrategy();
+        Version::warn(__METHOD__ . ' is deprecated. Use AwsSdk2\Guzzle\Plugin\Cache\DefaultCanCacheStrategy.');
+        if (class_exists('AwsSdk2\Guzzle\Plugin\Cache\DefaultCanCacheStrategy')) {
+            $canCache = new \AwsSdk2\Guzzle\Plugin\Cache\DefaultCanCacheStrategy();
             return $canCache->canCacheRequest($this);
         } else {
             return false;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
-use Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Version;
 
 /**
  * Adapts a Zend Framework 1 logger object

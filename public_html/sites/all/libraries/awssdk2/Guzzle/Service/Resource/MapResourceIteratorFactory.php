@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Resource iterator factory used when explicitly mapping strings to iterator classes

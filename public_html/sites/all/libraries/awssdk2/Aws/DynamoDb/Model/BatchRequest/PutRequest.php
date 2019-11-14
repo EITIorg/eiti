@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
-use Aws\DynamoDb\Model\Item;
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Aws\DynamoDb\Model\Item;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
 
 /**
  * Represents a batch put request. It is composed of a table name and item

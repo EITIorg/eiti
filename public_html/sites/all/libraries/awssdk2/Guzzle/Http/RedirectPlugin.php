@@ -1,17 +1,17 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Event;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\Url;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\RequestFactory;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Exception\TooManyRedirectsException;
-use Guzzle\Http\Exception\CouldNotRewindStreamException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Exception\BadResponseException;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestFactory;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Exception\TooManyRedirectsException;
+use AwsSdk2\Guzzle\Http\Exception\CouldNotRewindStreamException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Plugin to implement HTTP redirects. Can redirect like a web browser or using strict RFC 2616 compliance

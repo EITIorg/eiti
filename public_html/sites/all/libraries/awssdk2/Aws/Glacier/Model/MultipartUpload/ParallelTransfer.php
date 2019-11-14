@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Common\Exception\RuntimeException;
-use Guzzle\Iterator\ChunkedIterator;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Iterator\ChunkedIterator;
 
 /**
  * Transfers multipart upload parts in parallel
@@ -65,7 +65,7 @@ class ParallelTransfer extends AbstractTransfer
             }
 
             // Execute each command, iterate over the results, and add to the transfer state
-            /** @var $command \Guzzle\Service\Command\OperationCommand */
+            /** @var $command \AwsSdk2\Guzzle\Service\Command\OperationCommand */
             foreach ($this->client->execute($commands) as $command) {
                 $this->state->addPart($command->get('part'));
                 $this->dispatch(self::AFTER_PART_UPLOAD, $this->getEventData($command));

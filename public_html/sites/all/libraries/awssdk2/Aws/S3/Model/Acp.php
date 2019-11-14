@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\OverflowException;
-use Guzzle\Common\ToArrayInterface;
-use Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\OverflowException;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
 
 /**
  * Amazon S3 Access Control Policy (ACP)

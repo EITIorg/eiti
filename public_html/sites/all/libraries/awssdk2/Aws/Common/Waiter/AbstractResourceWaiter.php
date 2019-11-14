@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
 
 /**
  * Abstract waiter implementation used to wait on resources

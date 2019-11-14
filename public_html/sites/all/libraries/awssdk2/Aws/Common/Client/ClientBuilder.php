@@ -14,35 +14,35 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Client;
+namespace AwsSdk2\Aws\Common\Client;
 
-use Aws\Common\Credentials\Credentials;
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Credentials\NullCredentials;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\ExceptionListener;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\NamespaceExceptionFactory;
-use Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
-use Aws\Common\Exception\Parser\ExceptionParserInterface;
-use Aws\Common\Iterator\AwsResourceIteratorFactory;
-use Aws\Common\RulesEndpointProvider;
-use Aws\Common\Signature\EndpointSignatureInterface;
-use Aws\Common\Signature\SignatureInterface;
-use Aws\Common\Signature\SignatureV2;
-use Aws\Common\Signature\SignatureV3Https;
-use Aws\Common\Signature\SignatureV4;
-use Guzzle\Common\Collection;
-use Guzzle\Plugin\Backoff\BackoffPlugin;
-use Guzzle\Plugin\Backoff\CurlBackoffStrategy;
-use Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
-use Guzzle\Plugin\Backoff\HttpBackoffStrategy;
-use Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
-use Guzzle\Service\Description\ServiceDescription;
-use Guzzle\Service\Resource\ResourceIteratorClassFactory;
-use Guzzle\Log\LogAdapterInterface;
-use Guzzle\Log\ClosureLogAdapter;
-use Guzzle\Plugin\Backoff\BackoffLogger;
+use AwsSdk2\Aws\Common\Credentials\Credentials;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Credentials\NullCredentials;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\ExceptionListener;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\NamespaceExceptionFactory;
+use AwsSdk2\Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
+use AwsSdk2\Aws\Common\Exception\Parser\ExceptionParserInterface;
+use AwsSdk2\Aws\Common\Iterator\AwsResourceIteratorFactory;
+use AwsSdk2\Aws\Common\RulesEndpointProvider;
+use AwsSdk2\Aws\Common\Signature\EndpointSignatureInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureV2;
+use AwsSdk2\Aws\Common\Signature\SignatureV3Https;
+use AwsSdk2\Aws\Common\Signature\SignatureV4;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffPlugin;
+use AwsSdk2\Guzzle\Plugin\Backoff\CurlBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\HttpBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
+use AwsSdk2\Guzzle\Service\Description\ServiceDescription;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorClassFactory;
+use AwsSdk2\Guzzle\Log\LogAdapterInterface;
+use AwsSdk2\Guzzle\Log\ClosureLogAdapter;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffLogger;
 
 /**
  * Builder for creating AWS service clients
@@ -117,7 +117,7 @@ class ClientBuilder
         $this->clientNamespace = $namespace;
 
         // Determine service and class name
-        $this->clientClass = 'Aws\Common\Client\DefaultClient';
+        $this->clientClass = 'AwsSdk2\Aws\Common\Client\DefaultClient';
 
         if ($this->clientNamespace) {
             $this->serviceName = substr($this->clientNamespace, strrpos($this->clientNamespace, '\\') + 1);
@@ -302,7 +302,7 @@ class ClientBuilder
             } elseif (!($logger instanceof LogAdapterInterface)) {
                 throw new InvalidArgumentException(
                     Options::BACKOFF_LOGGER . ' must be set to `debug` or an instance of '
-                        . 'Guzzle\\Common\\Log\\LogAdapterInterface'
+                        . 'AwsSdk2\Guzzle\\Common\\Log\\LogAdapterInterface'
                 );
             }
             // Create the plugin responsible for logging exponential backoff retries
@@ -374,7 +374,7 @@ class ClientBuilder
      * Return an appropriate signature object for a a client based on the
      * "signature" configuration setting, or the default signature specified in
      * a service description. The signature can be set to a valid signature
-     * version identifier string or an instance of Aws\Common\Signature\SignatureInterface.
+     * version identifier string or an instance of AwsSdk2\Aws\Common\Signature\SignatureInterface.
      *
      * @param ServiceDescription $description Description that holds a signature option
      * @param Collection         $config      Configuration options
@@ -401,7 +401,7 @@ class ClientBuilder
         } elseif (!($signature instanceof SignatureInterface)) {
             throw new InvalidArgumentException('The provided signature is not '
                 . 'a signature version string or an instance of '
-                . 'Aws\\Common\\Signature\\SignatureInterface');
+                . 'AwsSdk2\Aws\\Common\\Signature\\SignatureInterface');
         }
 
         // Allow a custom service name or region value to be provided

@@ -25,7 +25,7 @@ return array (
         'AddEventSource' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-13/event-source-mappings/',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EventSourceConfiguration',
             'responseType' => 'model',
             'parameters' => array(
@@ -75,7 +75,7 @@ return array (
         'DeleteFunction' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2014-11-13/functions/{FunctionName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -101,7 +101,7 @@ return array (
         'GetEventSource' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-13/event-source-mappings/{UUID}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EventSourceConfiguration',
             'responseType' => 'model',
             'parameters' => array(
@@ -129,7 +129,7 @@ return array (
         'GetFunction' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-13/functions/{FunctionName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetFunctionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -155,7 +155,7 @@ return array (
         'GetFunctionConfiguration' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-13/functions/{FunctionName}/configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'FunctionConfiguration',
             'responseType' => 'model',
             'parameters' => array(
@@ -181,7 +181,7 @@ return array (
         'InvokeAsync' => array(
             'httpMethod' => 'POST',
             'uri' => '/2014-11-13/functions/{FunctionName}/invoke-async/',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'InvokeAsyncResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -219,7 +219,7 @@ return array (
         'ListEventSources' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-13/event-source-mappings/',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListEventSourcesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -263,7 +263,7 @@ return array (
         'ListFunctions' => array(
             'httpMethod' => 'GET',
             'uri' => '/2014-11-13/functions/',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListFunctionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -288,7 +288,7 @@ return array (
         'RemoveEventSource' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2014-11-13/event-source-mappings/{UUID}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -316,7 +316,7 @@ return array (
         'UpdateFunctionConfiguration' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2014-11-13/functions/{FunctionName}/configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'FunctionConfiguration',
             'responseType' => 'model',
             'parameters' => array(
@@ -371,7 +371,7 @@ return array (
         'UploadFunction' => array(
             'httpMethod' => 'PUT',
             'uri' => '/2014-11-13/functions/{FunctionName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'FunctionConfiguration',
             'responseType' => 'model',
             'parameters' => array(

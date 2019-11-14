@@ -1,11 +1,11 @@
 <?php
 
-namespace Aws\Common\Iterator;
+namespace AwsSdk2\Aws\Common\Iterator;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Resource\ResourceIteratorFactoryInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorFactoryInterface;
 
 /**
  * Resource iterator factory used to instantiate the default AWS resource iterator with the correct configuration or

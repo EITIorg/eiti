@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Common\Collection;
-use Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
 
 /**
  * Default model created when commands create service description model responses

@@ -1,16 +1,16 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Batch\BatchTransferInterface;
-use Guzzle\Batch\BatchDivisorInterface;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\Exception\InconsistentClientTransferException;
+use AwsSdk2\Guzzle\Batch\BatchTransferInterface;
+use AwsSdk2\Guzzle\Batch\BatchDivisorInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Exception\InconsistentClientTransferException;
 
 /**
  * Efficiently transfers multiple commands in parallel per client
- * This class is to be used with {@see Guzzle\Batch\BatchInterface}
+ * This class is to be used with {@see AwsSdk2\Guzzle\Batch\BatchInterface}
  */
 class BatchCommandTransfer implements BatchTransferInterface, BatchDivisorInterface
 {
@@ -34,7 +34,7 @@ class BatchCommandTransfer implements BatchTransferInterface, BatchDivisorInterf
         $groups = new \SplObjectStorage();
         foreach ($queue as $item) {
             if (!$item instanceof CommandInterface) {
-                throw new InvalidArgumentException('All items must implement Guzzle\Service\Command\CommandInterface');
+                throw new InvalidArgumentException('All items must implement AwsSdk2\Guzzle\Service\Command\CommandInterface');
             }
             $client = $item->getClient();
             if (!$groups->contains($client)) {

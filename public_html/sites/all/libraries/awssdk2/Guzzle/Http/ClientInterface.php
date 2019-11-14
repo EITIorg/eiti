@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Common\Collection;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Client interface for send HTTP requests
@@ -42,7 +42,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param bool|string $key Configuration value to retrieve. Set to FALSE to retrieve all values of the client.
      *                         The object return can be modified, and modifications will affect the client's config.
      * @return mixed|Collection
-     * @see \Guzzle\Http\Message\RequestFactoryInterface::applyOptions for a full list of request.options options
+     * @see \AwsSdk2\Guzzle\Http\Message\RequestFactoryInterface::applyOptions for a full list of request.options options
      */
     public function getConfig($key = false);
 
@@ -80,7 +80,7 @@ interface ClientInterface extends HasDispatcherInterface
      *                                  string to tell Guzzle to download the body of the response to a particular
      *                                  location. Use the 'body' option instead for forward compatibility.
      * @return RequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function get($uri = null, $headers = null, $options = array());
 
@@ -92,7 +92,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array            $options Options to apply to the request
      *
      * @return RequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function head($uri = null, $headers = null, array $options = array());
 
@@ -105,7 +105,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array                               $options Options to apply to the request
      *
      * @return EntityEnclosingRequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function delete($uri = null, $headers = null, $body = null, array $options = array());
 
@@ -118,7 +118,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array                               $options Options to apply to the request
      *
      * @return EntityEnclosingRequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function put($uri = null, $headers = null, $body = null, array $options = array());
 
@@ -131,7 +131,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array                               $options Options to apply to the request
      *
      * @return EntityEnclosingRequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function patch($uri = null, $headers = null, $body = null, array $options = array());
 
@@ -147,7 +147,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array                                       $options Options to apply to the request
      *
      * @return EntityEnclosingRequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function post($uri = null, $headers = null, $postBody = null, array $options = array());
 
@@ -158,7 +158,7 @@ interface ClientInterface extends HasDispatcherInterface
      * @param array        $options Options to apply to the request
      *
      * @return RequestInterface
-     * @see    Guzzle\Http\ClientInterface::createRequest()
+     * @see    AwsSdk2\Guzzle\Http\ClientInterface::createRequest()
      */
     public function options($uri = null, array $options = array());
 
@@ -167,7 +167,7 @@ interface ClientInterface extends HasDispatcherInterface
      *
      * @param array|RequestInterface $requests One or more RequestInterface objects to send
      *
-     * @return \Guzzle\Http\Message\Response|array Returns a single Response or an array of Response objects
+     * @return \AwsSdk2\Guzzle\Http\Message\Response|array Returns a single Response or an array of Response objects
      */
     public function send($requests);
 

@@ -1,7 +1,7 @@
 <?php
-namespace Aws\DynamoDb;
+namespace AwsSdk2\Aws\DynamoDb;
 
-use Aws\Common\Command\JsonCommand;
+use AwsSdk2\Aws\Common\Command\JsonCommand;
 
 /**
  * Short-circuits validation for DynamoDB and handles binary value decoding in

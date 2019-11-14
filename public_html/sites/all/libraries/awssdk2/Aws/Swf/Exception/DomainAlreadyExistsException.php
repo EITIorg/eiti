@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Swf\Exception;
+namespace AwsSdk2\Aws\Swf\Exception;
 
 /**
  * Returned if the specified domain already exists. You will get this fault even if the existing domain is in deprecated status.

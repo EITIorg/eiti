@@ -14,17 +14,17 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Signature;
+namespace AwsSdk2\Aws\Common\Signature;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Enum\DateFormat;
-use Aws\Common\HostNameUtils;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestFactory;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\QueryString;
-use Guzzle\Http\Url;
-use Guzzle\Stream\Stream;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Enum\DateFormat;
+use AwsSdk2\Aws\Common\HostNameUtils;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestFactory;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Stream\Stream;
 
 /**
  * Signature Version 4

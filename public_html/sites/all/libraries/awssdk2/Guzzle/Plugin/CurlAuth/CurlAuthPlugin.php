@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\CurlAuth;
+namespace AwsSdk2\Guzzle\Plugin\CurlAuth;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\Version;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Adds specified curl auth to all requests sent from a client. Defaults to CURLAUTH_BASIC if none supplied.

@@ -69,7 +69,7 @@ return array (
         'AllocateConnectionOnInterconnect' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Connection',
             'responseType' => 'model',
             'parameters' => array(
@@ -127,7 +127,7 @@ return array (
         'AllocatePrivateVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualInterface',
             'responseType' => 'model',
             'parameters' => array(
@@ -198,7 +198,7 @@ return array (
         'AllocatePublicVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualInterface',
             'responseType' => 'model',
             'parameters' => array(
@@ -284,7 +284,7 @@ return array (
         'ConfirmConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ConfirmConnectionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -322,7 +322,7 @@ return array (
         'ConfirmPrivateVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ConfirmPrivateVirtualInterfaceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -365,7 +365,7 @@ return array (
         'ConfirmPublicVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ConfirmPublicVirtualInterfaceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -403,7 +403,7 @@ return array (
         'CreateConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Connection',
             'responseType' => 'model',
             'parameters' => array(
@@ -451,7 +451,7 @@ return array (
         'CreateInterconnect' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Interconnect',
             'responseType' => 'model',
             'parameters' => array(
@@ -499,7 +499,7 @@ return array (
         'CreatePrivateVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualInterface',
             'responseType' => 'model',
             'parameters' => array(
@@ -569,7 +569,7 @@ return array (
         'CreatePublicVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualInterface',
             'responseType' => 'model',
             'parameters' => array(
@@ -650,7 +650,7 @@ return array (
         'DeleteConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Connection',
             'responseType' => 'model',
             'parameters' => array(
@@ -688,7 +688,7 @@ return array (
         'DeleteInterconnect' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteInterconnectResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -726,7 +726,7 @@ return array (
         'DeleteVirtualInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteVirtualInterfaceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -764,7 +764,7 @@ return array (
         'DescribeConnections' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Connections',
             'responseType' => 'model',
             'parameters' => array(
@@ -801,7 +801,7 @@ return array (
         'DescribeConnectionsOnInterconnect' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Connections',
             'responseType' => 'model',
             'parameters' => array(
@@ -839,7 +839,7 @@ return array (
         'DescribeInterconnects' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Interconnects',
             'responseType' => 'model',
             'parameters' => array(
@@ -876,7 +876,7 @@ return array (
         'DescribeLocations' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'Locations',
             'responseType' => 'model',
             'parameters' => array(
@@ -909,7 +909,7 @@ return array (
         'DescribeVirtualGateways' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualGateways',
             'responseType' => 'model',
             'parameters' => array(
@@ -942,7 +942,7 @@ return array (
         'DescribeVirtualInterfaces' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'VirtualInterfaces',
             'responseType' => 'model',
             'parameters' => array(

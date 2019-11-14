@@ -69,7 +69,7 @@ return array (
         'AssociateVPCWithHostedZone' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/associatevpc',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'AssociateVPCWithHostedZoneResponse',
             'responseType' => 'model',
             'data' => array(
@@ -136,7 +136,7 @@ return array (
         'ChangeResourceRecordSets' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/rrset/',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ChangeResourceRecordSetsResponse',
             'responseType' => 'model',
             'data' => array(
@@ -154,7 +154,7 @@ return array (
                     'location' => 'uri',
                     'maxLength' => 32,
                     'filters' => array(
-                        'Aws\\Route53\\Route53Client::cleanId',
+                        'AwsSdk2\Aws\\Route53\\Route53Client::cleanId',
                     ),
                 ),
                 'ChangeBatch' => array(
@@ -308,7 +308,7 @@ return array (
         'ChangeTagsForResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/tags/{ResourceType}/{ResourceId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ChangeTagsForResourceResponse',
             'responseType' => 'model',
             'data' => array(
@@ -387,7 +387,7 @@ return array (
         'CreateHealthCheck' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/healthcheck',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateHealthCheckResponse',
             'responseType' => 'model',
             'data' => array(
@@ -470,7 +470,7 @@ return array (
         'CreateHostedZone' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateHostedZoneResponse',
             'responseType' => 'model',
             'data' => array(
@@ -575,7 +575,7 @@ return array (
         'CreateReusableDelegationSet' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/delegationset',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'CreateReusableDelegationSetResponse',
             'responseType' => 'model',
             'data' => array(
@@ -638,7 +638,7 @@ return array (
         'DeleteHealthCheck' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2013-04-01/healthcheck/{HealthCheckId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteHealthCheckResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -667,7 +667,7 @@ return array (
         'DeleteHostedZone' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2013-04-01/hostedzone/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteHostedZoneResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -677,7 +677,7 @@ return array (
                     'location' => 'uri',
                     'maxLength' => 32,
                     'filters' => array(
-                        'Aws\\Route53\\Route53Client::cleanId',
+                        'AwsSdk2\Aws\\Route53\\Route53Client::cleanId',
                     ),
                 ),
                 'command.expects' => array(
@@ -706,7 +706,7 @@ return array (
         'DeleteReusableDelegationSet' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/2013-04-01/delegationset/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteReusableDelegationSetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -739,7 +739,7 @@ return array (
         'DisassociateVPCFromHostedZone' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/disassociatevpc',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DisassociateVPCFromHostedZoneResponse',
             'responseType' => 'model',
             'data' => array(
@@ -807,7 +807,7 @@ return array (
         'GetChange' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/change/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetChangeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -817,7 +817,7 @@ return array (
                     'location' => 'uri',
                     'maxLength' => 32,
                     'filters' => array(
-                        'Aws\\Route53\\Route53Client::cleanId',
+                        'AwsSdk2\Aws\\Route53\\Route53Client::cleanId',
                     ),
                 ),
                 'command.expects' => array(
@@ -838,7 +838,7 @@ return array (
         'GetCheckerIpRanges' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/checkeripranges',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetCheckerIpRangesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -851,7 +851,7 @@ return array (
         'GetGeoLocation' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/geolocation',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetGeoLocationResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -895,7 +895,7 @@ return array (
         'GetHealthCheck' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/healthcheck/{HealthCheckId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHealthCheckResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -928,7 +928,7 @@ return array (
         'GetHealthCheckCount' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/healthcheckcount',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHealthCheckCountResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -941,7 +941,7 @@ return array (
         'GetHealthCheckLastFailureReason' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHealthCheckLastFailureReasonResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -966,7 +966,7 @@ return array (
         'GetHealthCheckStatus' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/healthcheck/{HealthCheckId}/status',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHealthCheckStatusResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -991,7 +991,7 @@ return array (
         'GetHostedZone' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzone/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHostedZoneResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1001,7 +1001,7 @@ return array (
                     'location' => 'uri',
                     'maxLength' => 32,
                     'filters' => array(
-                        'Aws\\Route53\\Route53Client::cleanId',
+                        'AwsSdk2\Aws\\Route53\\Route53Client::cleanId',
                     ),
                 ),
                 'command.expects' => array(
@@ -1022,7 +1022,7 @@ return array (
         'GetHostedZoneCount' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzonecount',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetHostedZoneCountResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1041,7 +1041,7 @@ return array (
         'GetReusableDelegationSet' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/delegationset/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetReusableDelegationSetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1074,7 +1074,7 @@ return array (
         'ListGeoLocations' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/geolocations',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListGeoLocationsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1119,7 +1119,7 @@ return array (
         'ListHealthChecks' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/healthcheck',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListHealthChecksResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1153,7 +1153,7 @@ return array (
         'ListHostedZones' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzone',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListHostedZonesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1197,7 +1197,7 @@ return array (
         'ListHostedZonesByName' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzonesbyname',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListHostedZonesByNameResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1237,7 +1237,7 @@ return array (
         'ListResourceRecordSets' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/hostedzone/{HostedZoneId}/rrset',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListResourceRecordSetsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1247,7 +1247,7 @@ return array (
                     'location' => 'uri',
                     'maxLength' => 32,
                     'filters' => array(
-                        'Aws\\Route53\\Route53Client::cleanId',
+                        'AwsSdk2\Aws\\Route53\\Route53Client::cleanId',
                     ),
                 ),
                 'StartRecordName' => array(
@@ -1291,7 +1291,7 @@ return array (
         'ListReusableDelegationSets' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/delegationset',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListReusableDelegationSetsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1321,7 +1321,7 @@ return array (
         'ListTagsForResource' => array(
             'httpMethod' => 'GET',
             'uri' => '/2013-04-01/tags/{ResourceType}/{ResourceId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListTagsForResourceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1365,7 +1365,7 @@ return array (
         'ListTagsForResources' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/tags/{ResourceType}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListTagsForResourcesResponse',
             'responseType' => 'model',
             'data' => array(
@@ -1423,7 +1423,7 @@ return array (
         'UpdateHealthCheck' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/healthcheck/{HealthCheckId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateHealthCheckResponse',
             'responseType' => 'model',
             'data' => array(
@@ -1500,7 +1500,7 @@ return array (
         'UpdateHostedZoneComment' => array(
             'httpMethod' => 'POST',
             'uri' => '/2013-04-01/hostedzone/{Id}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateHostedZoneCommentResponse',
             'responseType' => 'model',
             'data' => array(

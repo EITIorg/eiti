@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
 /**
  * Rate of requests exceeds the allowed throughput.

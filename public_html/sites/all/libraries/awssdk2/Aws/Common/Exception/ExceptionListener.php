@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Converts generic Guzzle response exceptions into AWS specific exceptions

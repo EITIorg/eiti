@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\SimpleDb\Exception;
+namespace AwsSdk2\Aws\SimpleDb\Exception;
 
 /**
  * The specified query expression syntax is not valid.

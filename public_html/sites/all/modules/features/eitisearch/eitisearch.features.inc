@@ -149,7 +149,7 @@ function eitisearch_default_search_api_index() {
     "name" : "Document Search",
     "machine_name" : "document_search",
     "description" : "We use this index for Publications only.",
-    "server" : "solr_server",
+    "server" : null,
     "item_type" : "node",
     "options" : {
       "datasource" : { "bundles" : [ "document" ] },
@@ -276,7 +276,7 @@ function eitisearch_default_search_api_index() {
         }
       }
     },
-    "enabled" : "1",
+    "enabled" : "0",
     "read_only" : "0"
   }');
   $items['documents'] = entity_import('search_api_index', '{
@@ -461,7 +461,7 @@ function eitisearch_default_search_api_index() {
     "name" : "Content Search",
     "machine_name" : "node_search",
     "description" : null,
-    "server" : "solr_server",
+    "server" : null,
     "item_type" : "node",
     "options" : {
       "datasource" : { "bundles" : [ "article", "document", "page" ] },
@@ -563,7 +563,7 @@ function eitisearch_default_search_api_index() {
         }
       }
     },
-    "enabled" : "1",
+    "enabled" : "0",
     "read_only" : "0"
   }');
   return $items;
@@ -605,7 +605,7 @@ function eitisearch_default_search_api_server() {
       "log_query" : 0,
       "log_response" : 0
     },
-    "enabled" : "1"
+    "enabled" : "0"
   }');
   return $items;
 }

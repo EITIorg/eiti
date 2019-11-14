@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Credentials;
+namespace AwsSdk2\Aws\Common\Credentials;
 
-use Aws\Common\InstanceMetadata\InstanceMetadataClient;
-use Aws\Common\Exception\InstanceProfileCredentialsException;
+use AwsSdk2\Aws\Common\InstanceMetadata\InstanceMetadataClient;
+use AwsSdk2\Aws\Common\Exception\InstanceProfileCredentialsException;
 
 /**
  * Credentials decorator used to implement retrieving credentials from the

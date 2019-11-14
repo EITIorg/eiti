@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Handler\SyslogUdp\UdpSocket;
+use AwsSdk2\Monolog\Logger;
+use AwsSdk2\Monolog\Handler\SyslogUdp\UdpSocket;
 
 /**
  * A Handler for logging to a remote syslogd server.

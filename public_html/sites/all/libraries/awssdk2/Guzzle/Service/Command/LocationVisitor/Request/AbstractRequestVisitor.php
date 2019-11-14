@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command\LocationVisitor\Request;
+namespace AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request;
 
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
 
 abstract class AbstractRequestVisitor implements RequestVisitorInterface
 {
@@ -22,7 +22,7 @@ abstract class AbstractRequestVisitor implements RequestVisitorInterface
      * Prepare (filter and set desired name for request item) the value for request.
      *
      * @param mixed                                     $value
-     * @param \Guzzle\Service\Description\Parameter     $param
+     * @param \AwsSdk2\Guzzle\Service\Description\Parameter     $param
      *
      * @return array|mixed
      */

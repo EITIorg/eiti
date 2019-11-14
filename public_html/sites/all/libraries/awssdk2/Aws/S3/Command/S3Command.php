@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Command;
+namespace AwsSdk2\Aws\S3\Command;
 
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Common\Event;
 
 /**
  * Adds functionality to Amazon S3 commands:

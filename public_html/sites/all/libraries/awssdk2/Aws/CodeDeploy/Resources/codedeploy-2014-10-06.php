@@ -29,7 +29,7 @@ return array (
         'BatchGetApplications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'BatchGetApplicationsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -76,7 +76,7 @@ return array (
         'BatchGetDeployments' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'BatchGetDeploymentsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -117,7 +117,7 @@ return array (
         'CreateApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateApplicationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -165,7 +165,7 @@ return array (
         'CreateDeployment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateDeploymentOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -306,7 +306,7 @@ return array (
         'CreateDeploymentConfig' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateDeploymentConfigOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -366,7 +366,7 @@ return array (
         'CreateDeploymentGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateDeploymentGroupOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -494,7 +494,7 @@ return array (
         'DeleteApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -534,7 +534,7 @@ return array (
         'DeleteDeploymentConfig' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -582,7 +582,7 @@ return array (
         'DeleteDeploymentGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteDeploymentGroupOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -641,7 +641,7 @@ return array (
         'GetApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetApplicationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -685,7 +685,7 @@ return array (
         'GetApplicationRevision' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetApplicationRevisionOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -782,7 +782,7 @@ return array (
         'GetDeployment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDeploymentOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -824,7 +824,7 @@ return array (
         'GetDeploymentConfig' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDeploymentConfigOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -868,7 +868,7 @@ return array (
         'GetDeploymentGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDeploymentGroupOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -931,7 +931,7 @@ return array (
         'GetDeploymentInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDeploymentInstanceOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -986,7 +986,7 @@ return array (
         'ListApplicationRevisions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListApplicationRevisionsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1082,7 +1082,7 @@ return array (
         'ListApplications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListApplicationsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1115,7 +1115,7 @@ return array (
         'ListDeploymentConfigs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDeploymentConfigsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1148,7 +1148,7 @@ return array (
         'ListDeploymentGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDeploymentGroupsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1200,7 +1200,7 @@ return array (
         'ListDeploymentInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDeploymentInstancesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1266,7 +1266,7 @@ return array (
         'ListDeployments' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDeploymentsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1373,7 +1373,7 @@ return array (
         'RegisterApplicationRevision' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1474,7 +1474,7 @@ return array (
         'StopDeployment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'StopDeploymentOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1520,7 +1520,7 @@ return array (
         'UpdateApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1573,7 +1573,7 @@ return array (
         'UpdateDeploymentGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateDeploymentGroupOutput',
             'responseType' => 'model',
             'parameters' => array(

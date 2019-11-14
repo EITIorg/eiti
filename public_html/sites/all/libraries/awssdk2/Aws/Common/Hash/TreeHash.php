@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Hash;
+namespace AwsSdk2\Aws\Common\Hash;
 
-use Aws\Common\Enum\Size;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\LogicException;
-use Guzzle\Http\EntityBody;
+use AwsSdk2\Aws\Common\Enum\Size;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\LogicException;
+use AwsSdk2\Guzzle\Http\EntityBody;
 
 /**
  * Encapsulates the creation of a tree hash from streamed chunks of data
@@ -60,7 +60,7 @@ class TreeHash implements ChunkHashInterface
         $treeHash = new self($algorithm);
 
         // Convert checksums to binary form if provided in hex form and add them to the tree hash
-        $treeHash->checksums = $inBinaryForm ? $checksums : array_map('Aws\Common\Hash\HashUtils::hexToBin', $checksums);
+        $treeHash->checksums = $inBinaryForm ? $checksums : array_map('AwsSdk2\Aws\Common\Hash\HashUtils::hexToBin', $checksums);
 
         // Pre-calculate hash
         $treeHash->getHash();

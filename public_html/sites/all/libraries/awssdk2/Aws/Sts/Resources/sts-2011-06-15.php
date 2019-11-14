@@ -80,7 +80,7 @@ return array (
         'AssumeRole' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AssumeRoleResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -153,7 +153,7 @@ return array (
         'AssumeRoleWithSAML' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AssumeRoleWithSAMLResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -227,7 +227,7 @@ return array (
         'AssumeRoleWithWebIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AssumeRoleWithWebIdentityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -311,7 +311,7 @@ return array (
         'DecodeAuthorizationMessage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DecodeAuthorizationMessageResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -343,7 +343,7 @@ return array (
         'GetFederationToken' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetFederationTokenResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -391,7 +391,7 @@ return array (
         'GetSessionToken' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetSessionTokenResponse',
             'responseType' => 'model',
             'parameters' => array(

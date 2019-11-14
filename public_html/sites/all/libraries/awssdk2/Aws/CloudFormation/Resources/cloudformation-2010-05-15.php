@@ -78,7 +78,7 @@ return array (
         'CancelUpdateStack' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -102,7 +102,7 @@ return array (
         'CreateStack' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateStackOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -234,7 +234,7 @@ return array (
         'DeleteStack' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -258,7 +258,7 @@ return array (
         'DescribeStackEvents' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeStackEventsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -287,7 +287,7 @@ return array (
         'DescribeStackResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeStackResourceOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -316,7 +316,7 @@ return array (
         'DescribeStackResources' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeStackResourcesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -347,7 +347,7 @@ return array (
         'DescribeStacks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeStacksOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -376,7 +376,7 @@ return array (
         'EstimateTemplateCost' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EstimateTemplateCostOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -427,7 +427,7 @@ return array (
         'GetStackPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetStackPolicyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -451,7 +451,7 @@ return array (
         'GetTemplate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetTemplateOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -475,7 +475,7 @@ return array (
         'GetTemplateSummary' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetTemplateSummaryOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -510,7 +510,7 @@ return array (
         'ListStackResources' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListStackResourcesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -540,7 +540,7 @@ return array (
         'ListStacks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListStacksOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -574,7 +574,7 @@ return array (
         'SetStackPolicy' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -610,7 +610,7 @@ return array (
         'SignalResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -652,7 +652,7 @@ return array (
         'UpdateStack' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UpdateStackOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -762,7 +762,7 @@ return array (
         'ValidateTemplate' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ValidateTemplateOutput',
             'responseType' => 'model',
             'parameters' => array(

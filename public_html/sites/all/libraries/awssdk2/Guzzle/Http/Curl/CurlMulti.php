@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Common\Event;
-use Guzzle\Http\Exception\MultiTransferException;
-use Guzzle\Http\Exception\CurlException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Exception\RequestException;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Exception\MultiTransferException;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Exception\RequestException;
 
 /**
  * Send {@see RequestInterface} objects in parallel using curl_multi

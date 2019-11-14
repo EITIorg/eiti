@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Hash;
+namespace AwsSdk2\Aws\Common\Hash;
 
 /**
  * Interface for objects that encapsulate the creation of a hash from streamed chunks of data

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Facade;
+namespace AwsSdk2\Aws\Common\Facade;
 
-use Aws\Common\Aws;
+use AwsSdk2\Aws\Common\Aws;
 
 /**
  * Base facade class that handles the delegation logic
@@ -53,7 +53,7 @@ abstract class Facade implements FacadeInterface
     /**
      * Returns the instance of the client that the facade operates on
      *
-     * @return \Aws\Common\Client\AwsClientInterface
+     * @return \AwsSdk2\Aws\Common\Client\AwsClientInterface
      */
     public static function getClient()
     {

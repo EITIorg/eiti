@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Indicates that the DBSubnetGroup should not be specified while creating read replicas that lie in the same region as the source instance.

@@ -68,7 +68,7 @@ return array (
         'BuildSuggesters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'BuildSuggestersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -108,7 +108,7 @@ return array (
         'CreateDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateDomainResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -148,7 +148,7 @@ return array (
         'DefineAnalysisScheme' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DefineAnalysisSchemeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -233,7 +233,7 @@ return array (
         'DefineExpression' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DefineExpressionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -300,7 +300,7 @@ return array (
         'DefineIndexField' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DefineIndexFieldResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -659,7 +659,7 @@ return array (
         'DefineSuggester' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DefineSuggesterResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -738,7 +738,7 @@ return array (
         'DeleteAnalysisScheme' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteAnalysisSchemeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -789,7 +789,7 @@ return array (
         'DeleteDomain' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteDomainResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -825,7 +825,7 @@ return array (
         'DeleteExpression' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteExpressionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -876,7 +876,7 @@ return array (
         'DeleteIndexField' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteIndexFieldResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -927,7 +927,7 @@ return array (
         'DeleteSuggester' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteSuggesterResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -978,7 +978,7 @@ return array (
         'DescribeAnalysisSchemes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAnalysisSchemesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1034,7 +1034,7 @@ return array (
         'DescribeAvailabilityOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAvailabilityOptionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1091,7 +1091,7 @@ return array (
         'DescribeDomains' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeDomainsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1131,7 +1131,7 @@ return array (
         'DescribeExpressions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeExpressionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1187,7 +1187,7 @@ return array (
         'DescribeIndexFields' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeIndexFieldsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1243,7 +1243,7 @@ return array (
         'DescribeScalingParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeScalingParametersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1283,7 +1283,7 @@ return array (
         'DescribeServiceAccessPolicies' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeServiceAccessPoliciesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1328,7 +1328,7 @@ return array (
         'DescribeSuggesters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSuggestersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1384,7 +1384,7 @@ return array (
         'IndexDocuments' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'IndexDocumentsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1424,7 +1424,7 @@ return array (
         'ListDomainNames' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListDomainNamesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1449,7 +1449,7 @@ return array (
         'UpdateAvailabilityOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UpdateAvailabilityOptionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1507,7 +1507,7 @@ return array (
         'UpdateScalingParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UpdateScalingParametersResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1571,7 +1571,7 @@ return array (
         'UpdateServiceAccessPolicies' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UpdateServiceAccessPoliciesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -3333,7 +3333,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',

@@ -1,5 +1,5 @@
 <?php
 
-namespace Guzzle\Service\Exception;
+namespace AwsSdk2\Guzzle\Service\Exception;
 
 class ServiceNotFoundException extends ServiceBuilderException {}

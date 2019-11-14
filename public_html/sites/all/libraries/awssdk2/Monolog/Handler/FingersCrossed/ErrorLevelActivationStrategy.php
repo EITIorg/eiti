@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler\FingersCrossed;
+namespace AwsSdk2\Monolog\Handler\FingersCrossed;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Error level based activation strategy.

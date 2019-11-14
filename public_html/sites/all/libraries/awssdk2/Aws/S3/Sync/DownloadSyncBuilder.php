@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\S3\ResumableDownload;
-use Guzzle\Common\Event;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\S3\ResumableDownload;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 class DownloadSyncBuilder extends AbstractSyncBuilder
 {

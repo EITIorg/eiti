@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\StorageGateway\Exception;
+namespace AwsSdk2\Aws\StorageGateway\Exception;
 
 /**
  * An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.

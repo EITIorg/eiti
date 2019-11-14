@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Md5;
+namespace AwsSdk2\Guzzle\Plugin\Md5;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\Exception\UnexpectedValueException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Ensures that an the MD5 hash of an entity body matches the Content-MD5

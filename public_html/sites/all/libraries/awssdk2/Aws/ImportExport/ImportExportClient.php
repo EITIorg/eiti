@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport;
+namespace AwsSdk2\Aws\ImportExport;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Enum\ClientOptions as Options;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client to interact with AWS Import/Export
@@ -61,7 +61,7 @@ class ImportExportClient extends AbstractClient
 
         // If the Symfony YAML component is installed, add a listener that will convert arrays to proper YAML in when
         // specifying the "Manifest" parameter of the "CreateJob" operation
-        if (class_exists('Symfony\Component\Yaml\Yaml')) {
+        if (class_exists('AwsSdk2\Symfony\Component\Yaml\Yaml')) {
             $client->addSubscriber(new JobManifestListener());
         }
 

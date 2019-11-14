@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Formatter;
+namespace AwsSdk2\Monolog\Formatter;
 
 use Exception;
 
@@ -31,7 +31,7 @@ class NormalizerFormatter implements FormatterInterface
     {
         $this->dateFormat = $dateFormat ?: static::SIMPLE_DATE;
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
+            throw new \RuntimeException('PHP\'s json extension is required to use AwsSdk2\Monolog\'s NormalizerFormatter');
         }
     }
 

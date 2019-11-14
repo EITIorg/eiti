@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DirectConnect\Enum;
+namespace AwsSdk2\Aws\DirectConnect\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable InterconnectState values

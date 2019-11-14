@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticBeanstalk\Exception;
+namespace AwsSdk2\Aws\ElasticBeanstalk\Exception;
 
 /**
  * Unable to perform the specified operation because the user does not have enough privileges for one of more downstream aws services

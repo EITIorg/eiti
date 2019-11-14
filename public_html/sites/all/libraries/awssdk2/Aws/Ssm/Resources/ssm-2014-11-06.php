@@ -28,7 +28,7 @@ return array (
         'CreateAssociation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateAssociationResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -87,7 +87,7 @@ return array (
         'CreateAssociationBatch' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateAssociationBatchResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -153,7 +153,7 @@ return array (
         'CreateDocument' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateDocumentResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -211,7 +211,7 @@ return array (
         'DeleteAssociation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -270,7 +270,7 @@ return array (
         'DeleteDocument' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -314,7 +314,7 @@ return array (
         'DescribeAssociation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeAssociationResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -369,7 +369,7 @@ return array (
         'DescribeDocument' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeDocumentResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -409,7 +409,7 @@ return array (
         'GetDocument' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetDocumentResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -449,7 +449,7 @@ return array (
         'ListAssociations' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListAssociationsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -513,7 +513,7 @@ return array (
         'ListDocuments' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListDocumentsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -576,7 +576,7 @@ return array (
         'UpdateAssociationStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateAssociationStatusResult',
             'responseType' => 'model',
             'parameters' => array(

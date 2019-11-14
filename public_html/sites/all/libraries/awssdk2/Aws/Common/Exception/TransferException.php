@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
-use Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
 
 /**
  * Transfer request exception

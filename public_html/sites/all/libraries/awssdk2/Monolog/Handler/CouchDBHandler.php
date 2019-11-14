@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\JsonFormatter;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\JsonFormatter;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * CouchDB handler

@@ -1,6 +1,6 @@
 <?php
 
-namespace Psr\Log;
+namespace AwsSdk2\Psr\Log;
 
 /**
  * This Logger can be used to avoid conditional log calls

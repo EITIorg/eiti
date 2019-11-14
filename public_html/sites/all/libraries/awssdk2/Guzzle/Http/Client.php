@@ -1,22 +1,22 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Collection;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Common\Exception\ExceptionCollection;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Common\Version;
-use Guzzle\Parser\ParserRegistry;
-use Guzzle\Parser\UriTemplate\UriTemplateInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\RequestFactory;
-use Guzzle\Http\Message\RequestFactoryInterface;
-use Guzzle\Http\Curl\CurlMultiInterface;
-use Guzzle\Http\Curl\CurlMultiProxy;
-use Guzzle\Http\Curl\CurlHandle;
-use Guzzle\Http\Curl\CurlVersion;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Common\Exception\ExceptionCollection;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Guzzle\Parser\UriTemplate\UriTemplateInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestFactory;
+use AwsSdk2\Guzzle\Http\Message\RequestFactoryInterface;
+use AwsSdk2\Guzzle\Http\Curl\CurlMultiInterface;
+use AwsSdk2\Guzzle\Http\Curl\CurlMultiProxy;
+use AwsSdk2\Guzzle\Http\Curl\CurlHandle;
+use AwsSdk2\Guzzle\Http\Curl\CurlVersion;
 
 /**
  * HTTP client

@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\HasDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * EntityBody decorator that emits events for read and write methods

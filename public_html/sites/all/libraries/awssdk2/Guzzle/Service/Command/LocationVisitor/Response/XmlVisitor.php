@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command\LocationVisitor\Response;
+namespace AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response;
 
-use Guzzle\Http\Message\Response;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Location visitor used to marshal XML response data into a formatted array

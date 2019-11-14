@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Client;
+namespace AwsSdk2\Aws\Common\Client;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Event;
-use Guzzle\Http\EntityBody;
-use Guzzle\Service\Command\AbstractCommand as Command;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand as Command;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Prepares the body parameter of a command such that the parameter is more flexible (e.g. accepts file handles) with

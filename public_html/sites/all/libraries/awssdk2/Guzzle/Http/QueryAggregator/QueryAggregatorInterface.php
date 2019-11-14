@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http\QueryAggregator;
+namespace AwsSdk2\Guzzle\Http\QueryAggregator;
 
-use Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\QueryString;
 
 /**
  * Interface used for aggregating nested query string variables into a flattened array of key value pairs

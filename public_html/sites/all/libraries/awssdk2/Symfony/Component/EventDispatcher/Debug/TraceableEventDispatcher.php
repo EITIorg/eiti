@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Debug;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Debug;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Psr\Log\LoggerInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\Event;
+use AwsSdk2\Symfony\Component\Stopwatch\Stopwatch;
+use AwsSdk2\Psr\Log\LoggerInterface;
 
 /**
  * Collects some data about event listeners.

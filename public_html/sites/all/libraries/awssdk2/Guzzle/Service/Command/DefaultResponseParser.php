@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Default HTTP response parser used to marshal JSON responses into arrays and XML responses into SimpleXMLElement

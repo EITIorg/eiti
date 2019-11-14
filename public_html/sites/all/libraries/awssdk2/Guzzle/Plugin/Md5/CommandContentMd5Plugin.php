@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Md5;
+namespace AwsSdk2\Guzzle\Plugin\Md5;
 
-use Guzzle\Common\Event;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to add a ContentMD5 header to the body of a command and adds ContentMD5 validation if the

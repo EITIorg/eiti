@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Glacier\Model\MultipartUpload\UploadPartGenerator;
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Model\MultipartUpload\AbstractTransferState;
-use Aws\Common\Model\MultipartUpload\UploadIdInterface;
+use AwsSdk2\Aws\Glacier\Model\MultipartUpload\UploadPartGenerator;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransferState;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\UploadIdInterface;
 
 /**
  * State of a multipart upload

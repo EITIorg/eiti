@@ -14,15 +14,15 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\MessageValidator;
+namespace AwsSdk2\Aws\Sns\MessageValidator;
 
-use Aws\Common\Exception\RequiredExtensionNotLoadedException;
-use Aws\Sns\MessageValidator\Exception\CannotGetPublicKeyFromCertificateException;
-use Aws\Sns\MessageValidator\Exception\CertificateFromUnrecognizedSourceException;
-use Aws\Sns\MessageValidator\Exception\InvalidMessageSignatureException;
-use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
-use Guzzle\Http\Url;
-use Guzzle\Http\Client;
+use AwsSdk2\Aws\Common\Exception\RequiredExtensionNotLoadedException;
+use AwsSdk2\Aws\Sns\MessageValidator\Exception\CannotGetPublicKeyFromCertificateException;
+use AwsSdk2\Aws\Sns\MessageValidator\Exception\CertificateFromUnrecognizedSourceException;
+use AwsSdk2\Aws\Sns\MessageValidator\Exception\InvalidMessageSignatureException;
+use AwsSdk2\Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
+use AwsSdk2\Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Http\Client;
 
 /**
  * This class uses openssl to verify SNS messages to ensure that they were sent by AWS.
@@ -84,7 +84,7 @@ class MessageValidator
     private function validateUrl(Url $url)
     {
         // The host must match the following pattern
-        $hostPattern = '/^sns\.[a-zA-Z0-9\-]{3,}\.amazonaws\.com(\.cn)?$/';
+        $hostPattern = '/^sns\.[a-zA-Z0-9\-]{3,}\.amazonAwsSdk2\Aws\.com(\.cn)?$/';
 
         if ($url->getScheme() !== 'https' ||
             substr($url, -4) !== '.pem' ||

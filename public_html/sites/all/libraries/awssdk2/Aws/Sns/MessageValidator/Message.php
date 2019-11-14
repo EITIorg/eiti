@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\MessageValidator;
+namespace AwsSdk2\Aws\Sns\MessageValidator;
 
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\UnexpectedValueException;
-use Guzzle\Common\Collection;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\UnexpectedValueException;
+use AwsSdk2\Guzzle\Common\Collection;
 
 class Message
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Stream;
+namespace AwsSdk2\Guzzle\Stream;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * PHP stream implementation

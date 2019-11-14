@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Cache;
+namespace AwsSdk2\AwsSdk2\Doctrine\Common\Cache;
 
 /**
  * Xcache cache driver.
@@ -87,7 +87,7 @@ class XcacheCache extends CacheProvider
     {
         if (ini_get('xcache.admin.enable_auth')) {
             throw new \BadMethodCallException(
-                'To use all features of \Doctrine\Common\Cache\XcacheCache, '
+                'To use all features of \AwsSdk2\AwsSdk2\Doctrine\Common\Cache\XcacheCache, '
                 . 'you must set "xcache.admin.enable_auth" to "Off" in your php.ini.'
             );
         }

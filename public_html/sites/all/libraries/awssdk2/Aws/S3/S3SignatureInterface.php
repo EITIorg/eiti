@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Signature\SignatureInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureInterface;
 
 /**
  * @deprecated

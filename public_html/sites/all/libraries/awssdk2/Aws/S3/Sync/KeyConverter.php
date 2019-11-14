@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
 /**
  * Converts filenames from one system to another

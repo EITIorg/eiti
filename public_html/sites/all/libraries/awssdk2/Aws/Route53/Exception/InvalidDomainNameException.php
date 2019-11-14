@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * This error indicates that the specified domain name is not valid.

@@ -1,15 +1,15 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\ToArrayInterface;
-use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\RedirectPlugin;
-use Guzzle\Parser\ParserRegistry;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\Exception\BadResponseException;
+use AwsSdk2\Guzzle\Http\RedirectPlugin;
+use AwsSdk2\Guzzle\Parser\ParserRegistry;
 
 /**
  * Guzzle HTTP response object

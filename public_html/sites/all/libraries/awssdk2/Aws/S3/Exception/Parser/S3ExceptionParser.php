@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception\Parser;
+namespace AwsSdk2\Aws\S3\Exception\Parser;
 
-use Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Aws\Common\Exception\Parser\DefaultXmlExceptionParser;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Parses S3 exception responses

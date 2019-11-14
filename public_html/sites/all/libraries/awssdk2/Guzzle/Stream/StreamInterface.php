@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Stream;
+namespace AwsSdk2\Guzzle\Stream;
 
 /**
  * OO interface to PHP streams

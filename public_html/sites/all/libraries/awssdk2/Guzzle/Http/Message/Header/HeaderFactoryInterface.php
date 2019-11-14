@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Http\Message\Header;
+namespace AwsSdk2\Guzzle\Http\Message\Header;
 
 /**
  * Interface for creating headers

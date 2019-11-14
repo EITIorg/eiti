@@ -9,9 +9,9 @@
 * file that was distributed with this source code.
 */
 
-namespace Monolog\Handler\FingersCrossed;
+namespace AwsSdk2\Monolog\Handler\FingersCrossed;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Channel and Error level based monolog activation strategy. Allows to trigger activation
@@ -45,7 +45,7 @@ class ChannelLevelActivationStrategy implements ActivationStrategyInterface
     public function __construct($defaultActionLevel, $channelToActionLevel = array())
     {
         $this->defaultActionLevel = Logger::toMonologLevel($defaultActionLevel);
-        $this->channelToActionLevel = array_map('Monolog\Logger::toMonologLevel', $channelToActionLevel);
+        $this->channelToActionLevel = array_map('AwsSdk2\Monolog\Logger::toMonologLevel', $channelToActionLevel);
     }
 
     public function isHandlerActivated(array $record)

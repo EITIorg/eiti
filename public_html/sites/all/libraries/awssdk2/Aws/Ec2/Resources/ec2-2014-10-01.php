@@ -78,7 +78,7 @@ return array (
         'AcceptVpcPeeringConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AcceptVpcPeeringConnectionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -106,7 +106,7 @@ return array (
         'AllocateAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AllocateAddressResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -134,7 +134,7 @@ return array (
         'AssignPrivateIpAddresses' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -176,7 +176,7 @@ return array (
         'AssociateAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AssociateAddressResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -225,7 +225,7 @@ return array (
         'AssociateDhcpOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -259,7 +259,7 @@ return array (
         'AssociateRouteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AssociateRouteTableResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -293,7 +293,7 @@ return array (
         'AttachClassicLinkVpc' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AttachClassicLinkVpcResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -337,7 +337,7 @@ return array (
         'AttachInternetGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -371,7 +371,7 @@ return array (
         'AttachNetworkInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AttachNetworkInterfaceResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -410,7 +410,7 @@ return array (
         'AttachVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'attachment',
             'responseType' => 'model',
             'parameters' => array(
@@ -449,7 +449,7 @@ return array (
         'AttachVpnGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'AttachVpnGatewayResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -483,7 +483,7 @@ return array (
         'AuthorizeSecurityGroupEgress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -586,7 +586,7 @@ return array (
         'AuthorizeSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -692,7 +692,7 @@ return array (
         'BundleInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'BundleInstanceResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -748,7 +748,7 @@ return array (
         'CancelBundleTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CancelBundleTaskResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -777,7 +777,7 @@ return array (
         'CancelConversionTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -810,7 +810,7 @@ return array (
         'CancelExportTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -834,7 +834,7 @@ return array (
         'CancelReservedInstancesListing' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CancelReservedInstancesListingResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -858,7 +858,7 @@ return array (
         'CancelSpotInstanceRequests' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CancelSpotInstanceRequestsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -892,7 +892,7 @@ return array (
         'ConfirmProductInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfirmProductInstanceResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -926,7 +926,7 @@ return array (
         'CopyImage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CopyImageResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -973,7 +973,7 @@ return array (
         'CopySnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CopySnapshotResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1019,7 +1019,7 @@ return array (
         'CreateCustomerGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateCustomerGatewayResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1059,7 +1059,7 @@ return array (
         'CreateDhcpOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateDhcpOptionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1106,7 +1106,7 @@ return array (
         'CreateImage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateImageResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1194,7 +1194,7 @@ return array (
         'CreateInstanceExportTask' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateInstanceExportTaskResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1245,7 +1245,7 @@ return array (
         'CreateInternetGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateInternetGatewayResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1269,7 +1269,7 @@ return array (
         'CreateKeyPair' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateKeyPairResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1298,7 +1298,7 @@ return array (
         'CreateNetworkAcl' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateNetworkAclResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1327,7 +1327,7 @@ return array (
         'CreateNetworkAclEntry' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1407,7 +1407,7 @@ return array (
         'CreateNetworkInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateNetworkInterfaceResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1475,7 +1475,7 @@ return array (
         'CreatePlacementGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1509,7 +1509,7 @@ return array (
         'CreateReservedInstancesListing' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateReservedInstancesListingResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1563,7 +1563,7 @@ return array (
         'CreateRoute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1613,7 +1613,7 @@ return array (
         'CreateRouteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateRouteTableResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1642,7 +1642,7 @@ return array (
         'CreateSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateSecurityGroupResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1681,7 +1681,7 @@ return array (
         'CreateSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'snapshot',
             'responseType' => 'model',
             'parameters' => array(
@@ -1714,7 +1714,7 @@ return array (
         'CreateSpotDatafeedSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateSpotDatafeedSubscriptionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1747,7 +1747,7 @@ return array (
         'CreateSubnet' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateSubnetResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1785,7 +1785,7 @@ return array (
         'CreateTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1837,7 +1837,7 @@ return array (
         'CreateVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'volume',
             'responseType' => 'model',
             'parameters' => array(
@@ -1891,7 +1891,7 @@ return array (
         'CreateVpc' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateVpcResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1924,7 +1924,7 @@ return array (
         'CreateVpcPeeringConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateVpcPeeringConnectionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -1960,7 +1960,7 @@ return array (
         'CreateVpnConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateVpnConnectionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2009,7 +2009,7 @@ return array (
         'CreateVpnConnectionRoute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2038,7 +2038,7 @@ return array (
         'CreateVpnGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateVpnGatewayResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2071,7 +2071,7 @@ return array (
         'DeleteCustomerGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2100,7 +2100,7 @@ return array (
         'DeleteDhcpOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2129,7 +2129,7 @@ return array (
         'DeleteInternetGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2158,7 +2158,7 @@ return array (
         'DeleteKeyPair' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2187,7 +2187,7 @@ return array (
         'DeleteNetworkAcl' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2216,7 +2216,7 @@ return array (
         'DeleteNetworkAclEntry' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2256,7 +2256,7 @@ return array (
         'DeleteNetworkInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2285,7 +2285,7 @@ return array (
         'DeletePlacementGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2314,7 +2314,7 @@ return array (
         'DeleteRoute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2348,7 +2348,7 @@ return array (
         'DeleteRouteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2377,7 +2377,7 @@ return array (
         'DeleteSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2409,7 +2409,7 @@ return array (
         'DeleteSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2438,7 +2438,7 @@ return array (
         'DeleteSpotDatafeedSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2462,7 +2462,7 @@ return array (
         'DeleteSubnet' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2491,7 +2491,7 @@ return array (
         'DeleteTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2542,7 +2542,7 @@ return array (
         'DeleteVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2571,7 +2571,7 @@ return array (
         'DeleteVpc' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2600,7 +2600,7 @@ return array (
         'DeleteVpcPeeringConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DeleteVpcPeeringConnectionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2629,7 +2629,7 @@ return array (
         'DeleteVpnConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2658,7 +2658,7 @@ return array (
         'DeleteVpnConnectionRoute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2687,7 +2687,7 @@ return array (
         'DeleteVpnGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2716,7 +2716,7 @@ return array (
         'DeregisterImage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2745,7 +2745,7 @@ return array (
         'DescribeAccountAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAccountAttributesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2778,7 +2778,7 @@ return array (
         'DescribeAddresses' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAddressesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2842,7 +2842,7 @@ return array (
         'DescribeAvailabilityZones' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeAvailabilityZonesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2897,7 +2897,7 @@ return array (
         'DescribeBundleTasks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeBundleTasksResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -2952,7 +2952,7 @@ return array (
         'DescribeClassicLinkInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeClassicLinkInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3015,7 +3015,7 @@ return array (
         'DescribeConversionTasks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeConversionTasksResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3070,7 +3070,7 @@ return array (
         'DescribeCustomerGateways' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeCustomerGatewaysResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3125,7 +3125,7 @@ return array (
         'DescribeDhcpOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeDhcpOptionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3180,7 +3180,7 @@ return array (
         'DescribeExportTasks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeExportTasksResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3208,7 +3208,7 @@ return array (
         'DescribeImageAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'imageAttribute',
             'responseType' => 'model',
             'parameters' => array(
@@ -3242,7 +3242,7 @@ return array (
         'DescribeImages' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeImagesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3315,7 +3315,7 @@ return array (
         'DescribeInstanceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'InstanceAttribute',
             'responseType' => 'model',
             'parameters' => array(
@@ -3349,7 +3349,7 @@ return array (
         'DescribeInstanceStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeInstanceStatusResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3417,7 +3417,7 @@ return array (
         'DescribeInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3480,7 +3480,7 @@ return array (
         'DescribeInternetGateways' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeInternetGatewaysResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3535,7 +3535,7 @@ return array (
         'DescribeKeyPairs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeKeyPairsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3590,7 +3590,7 @@ return array (
         'DescribeNetworkAcls' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeNetworkAclsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3645,7 +3645,7 @@ return array (
         'DescribeNetworkInterfaceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeNetworkInterfaceAttributeResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3678,7 +3678,7 @@ return array (
         'DescribeNetworkInterfaces' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeNetworkInterfacesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3733,7 +3733,7 @@ return array (
         'DescribePlacementGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribePlacementGroupsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3788,7 +3788,7 @@ return array (
         'DescribeRegions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeRegionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3843,7 +3843,7 @@ return array (
         'DescribeReservedInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeReservedInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3902,7 +3902,7 @@ return array (
         'DescribeReservedInstancesListings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeReservedInstancesListingsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -3950,7 +3950,7 @@ return array (
         'DescribeReservedInstancesModifications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeReservedInstancesModificationsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4004,7 +4004,7 @@ return array (
         'DescribeReservedInstancesOfferings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeReservedInstancesOfferingsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4104,7 +4104,7 @@ return array (
         'DescribeRouteTables' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeRouteTablesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4159,7 +4159,7 @@ return array (
         'DescribeSecurityGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSecurityGroupsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4223,7 +4223,7 @@ return array (
         'DescribeSnapshotAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSnapshotAttributeResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4257,7 +4257,7 @@ return array (
         'DescribeSnapshots' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSnapshotsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4338,7 +4338,7 @@ return array (
         'DescribeSpotDatafeedSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSpotDatafeedSubscriptionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4362,7 +4362,7 @@ return array (
         'DescribeSpotInstanceRequests' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSpotInstanceRequestsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4417,7 +4417,7 @@ return array (
         'DescribeSpotPriceHistory' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSpotPriceHistoryResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4511,7 +4511,7 @@ return array (
         'DescribeSubnets' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSubnetsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4566,7 +4566,7 @@ return array (
         'DescribeTags' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeTagsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4620,7 +4620,7 @@ return array (
         'DescribeVolumeAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVolumeAttributeResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4653,7 +4653,7 @@ return array (
         'DescribeVolumeStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVolumeStatusResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4716,7 +4716,7 @@ return array (
         'DescribeVolumes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVolumesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4779,7 +4779,7 @@ return array (
         'DescribeVpcAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpcAttributeResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4812,7 +4812,7 @@ return array (
         'DescribeVpcClassicLink' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpcClassicLinkResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4867,7 +4867,7 @@ return array (
         'DescribeVpcPeeringConnections' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpcPeeringConnectionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4922,7 +4922,7 @@ return array (
         'DescribeVpcs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpcsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -4977,7 +4977,7 @@ return array (
         'DescribeVpnConnections' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpnConnectionsResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5032,7 +5032,7 @@ return array (
         'DescribeVpnGateways' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeVpnGatewaysResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5087,7 +5087,7 @@ return array (
         'DetachClassicLinkVpc' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DetachClassicLinkVpcResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5121,7 +5121,7 @@ return array (
         'DetachInternetGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5155,7 +5155,7 @@ return array (
         'DetachNetworkInterface' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5189,7 +5189,7 @@ return array (
         'DetachVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'attachment',
             'responseType' => 'model',
             'parameters' => array(
@@ -5231,7 +5231,7 @@ return array (
         'DetachVpnGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5265,7 +5265,7 @@ return array (
         'DisableVgwRoutePropagation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5294,7 +5294,7 @@ return array (
         'DisableVpcClassicLink' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DisableVpcClassicLinkResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5323,7 +5323,7 @@ return array (
         'DisassociateAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5355,7 +5355,7 @@ return array (
         'DisassociateRouteTable' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5384,7 +5384,7 @@ return array (
         'EnableVgwRoutePropagation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5413,7 +5413,7 @@ return array (
         'EnableVolumeIO' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5442,7 +5442,7 @@ return array (
         'EnableVpcClassicLink' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EnableVpcClassicLinkResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5471,7 +5471,7 @@ return array (
         'GetConsoleOutput' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetConsoleOutputResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5500,7 +5500,7 @@ return array (
         'GetPasswordData' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetPasswordDataResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5529,7 +5529,7 @@ return array (
         'ImportInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ImportInstanceResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5668,7 +5668,7 @@ return array (
         'ImportKeyPair' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ImportKeyPairResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5705,7 +5705,7 @@ return array (
         'ImportVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ImportVolumeResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -5768,7 +5768,7 @@ return array (
         'ModifyImageAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -5881,7 +5881,7 @@ return array (
         'ModifyInstanceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6043,7 +6043,7 @@ return array (
         'ModifyNetworkInterfaceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6113,7 +6113,7 @@ return array (
         'ModifyReservedInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ModifyReservedInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6170,7 +6170,7 @@ return array (
         'ModifySnapshotAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6261,7 +6261,7 @@ return array (
         'ModifySubnetAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6295,7 +6295,7 @@ return array (
         'ModifyVolumeAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6334,7 +6334,7 @@ return array (
         'ModifyVpcAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6378,7 +6378,7 @@ return array (
         'MonitorInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'MonitorInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6412,7 +6412,7 @@ return array (
         'PurchaseReservedInstancesOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'PurchaseReservedInstancesOfferingResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6458,7 +6458,7 @@ return array (
         'RebootInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6492,7 +6492,7 @@ return array (
         'RegisterImage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RegisterImageResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6598,7 +6598,7 @@ return array (
         'RejectVpcPeeringConnection' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RejectVpcPeeringConnectionResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6627,7 +6627,7 @@ return array (
         'ReleaseAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6659,7 +6659,7 @@ return array (
         'ReplaceNetworkAclAssociation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplaceNetworkAclAssociationResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6693,7 +6693,7 @@ return array (
         'ReplaceNetworkAclEntry' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6773,7 +6773,7 @@ return array (
         'ReplaceRoute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6823,7 +6823,7 @@ return array (
         'ReplaceRouteTableAssociation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplaceRouteTableAssociationResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -6857,7 +6857,7 @@ return array (
         'ReportInstanceStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -6928,7 +6928,7 @@ return array (
         'RequestSpotInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'RequestSpotInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -7178,7 +7178,7 @@ return array (
         'ResetImageAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7212,7 +7212,7 @@ return array (
         'ResetInstanceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7246,7 +7246,7 @@ return array (
         'ResetNetworkInterfaceAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7279,7 +7279,7 @@ return array (
         'ResetSnapshotAttribute' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7313,7 +7313,7 @@ return array (
         'RevokeSecurityGroupEgress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7416,7 +7416,7 @@ return array (
         'RevokeSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7522,7 +7522,7 @@ return array (
         'RunInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'reservation',
             'responseType' => 'model',
             'parameters' => array(
@@ -7774,7 +7774,7 @@ return array (
         'StartInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'StartInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -7812,7 +7812,7 @@ return array (
         'StopInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'StopInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -7851,7 +7851,7 @@ return array (
         'TerminateInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TerminateInstancesResult',
             'responseType' => 'model',
             'parameters' => array(
@@ -7885,7 +7885,7 @@ return array (
         'UnassignPrivateIpAddresses' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -7919,7 +7919,7 @@ return array (
         'UnmonitorInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UnmonitorInstancesResult',
             'responseType' => 'model',
             'parameters' => array(

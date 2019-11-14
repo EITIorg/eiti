@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudWatch\Exception;
+namespace AwsSdk2\Aws\CloudWatch\Exception;
 
 /**
  * The quota for alarms for this customer has already been reached.

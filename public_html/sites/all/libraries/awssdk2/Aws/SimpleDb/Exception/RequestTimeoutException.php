@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\SimpleDb\Exception;
+namespace AwsSdk2\Aws\SimpleDb\Exception;
 
 /**
  * A timeout occurred when attempting to query the specified domain with specified query expression.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Http\Exception\RequestException;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\Exception\RequestException;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\QueryString;
 
 /**
  * HTTP request that sends an entity-body in the request message (POST, PUT)

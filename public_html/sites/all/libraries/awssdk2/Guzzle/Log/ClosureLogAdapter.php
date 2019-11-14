@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
 /**
  * Logs messages using Closures. Closures combined with filtering can trigger application events based on log messages.

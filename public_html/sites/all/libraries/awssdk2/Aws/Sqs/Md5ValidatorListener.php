@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sqs;
+namespace AwsSdk2\Aws\Sqs;
 
-use Aws\Sqs\Exception\SqsException;
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Sqs\Exception\SqsException;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to validate the MD5 of the ReceiveMessage body

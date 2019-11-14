@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Signature;
+namespace AwsSdk2\Aws\Common\Signature;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Credentials\NullCredentials;
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Credentials\NullCredentials;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Listener used to sign requests before they are sent over the wire

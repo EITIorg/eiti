@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Common\Collection;
 
 /**
  * Configuration info of a waiter object

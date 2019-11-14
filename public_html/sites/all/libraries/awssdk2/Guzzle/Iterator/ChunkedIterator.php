@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Iterator;
+namespace AwsSdk2\Guzzle\Iterator;
 
 /**
  * Pulls out chunks from an inner iterator and yields the chunks as arrays

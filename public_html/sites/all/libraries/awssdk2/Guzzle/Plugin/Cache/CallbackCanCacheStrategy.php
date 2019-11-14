@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Plugin\Cache;
+namespace AwsSdk2\Guzzle\Plugin\Cache;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Determines if a request can be cached using a callback

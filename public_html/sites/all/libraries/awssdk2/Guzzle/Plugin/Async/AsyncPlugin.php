@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Plugin\Async;
+namespace AwsSdk2\Guzzle\Plugin\Async;
 
-use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\CurlException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Sends requests but does not wait for the response

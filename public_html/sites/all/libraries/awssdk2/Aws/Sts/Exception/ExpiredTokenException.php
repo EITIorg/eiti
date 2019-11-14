@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts\Exception;
+namespace AwsSdk2\Aws\Sts\Exception;
 
 /**
  * The web identity token that was passed is expired or is not valid. Get a new identity token from the identity provider and then retry the request.

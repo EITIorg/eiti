@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 /**
  * EntityBody decorator that can cache previously read bytes from a sequentially read tstream

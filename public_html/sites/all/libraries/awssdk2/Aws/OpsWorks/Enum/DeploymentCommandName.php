@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\OpsWorks\Enum;
+namespace AwsSdk2\Aws\OpsWorks\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable DeploymentCommandName values

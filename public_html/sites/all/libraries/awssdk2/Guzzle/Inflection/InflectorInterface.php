@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Inflection;
+namespace AwsSdk2\Guzzle\Inflection;
 
 /**
  * Inflector interface used to convert the casing of words

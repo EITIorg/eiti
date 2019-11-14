@@ -1,8 +1,8 @@
 <?php
 
-namespace Aws\CloudSearchDomain\Exception;
+namespace AwsSdk2\Aws\CloudSearchDomain\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Exception thrown by the CloudSearchDomain client.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Command\LocationVisitor\Request;
+namespace AwsSdk2\Guzzle\Service\Command\LocationVisitor\Request;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Location visitor used to add values to different locations in a request with different behaviors as needed

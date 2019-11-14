@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
 /**
  * The operation tried to access a nonexistent table or index. The resource may not be specified correctly, or its status may not be ACTIVE.

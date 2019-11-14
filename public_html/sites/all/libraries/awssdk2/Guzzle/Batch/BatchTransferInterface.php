@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
 /**
  * Interface used for transferring batches of items

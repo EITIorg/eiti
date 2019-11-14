@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\ClientInterface;
-use Guzzle\Stream\StreamRequestFactoryInterface;
-use Guzzle\Stream\PhpStreamRequestFactory;
+use AwsSdk2\Guzzle\Http\Client;
+use AwsSdk2\Guzzle\Http\ClientInterface;
+use AwsSdk2\Guzzle\Stream\StreamRequestFactoryInterface;
+use AwsSdk2\Guzzle\Stream\PhpStreamRequestFactory;
 
 /**
  * Simplified interface to Guzzle that does not require a class to be instantiated
@@ -32,8 +32,8 @@ final class StaticClient
     /**
      * @param  string $method  HTTP request method (GET, POST, HEAD, DELETE, PUT, etc)
      * @param  string $url     URL of the request
-     * @param  array  $options Options to use with the request. See: Guzzle\Http\Message\RequestFactory::applyOptions()
-     * @return \Guzzle\Http\Message\Response|\Guzzle\Stream\Stream
+     * @param  array  $options Options to use with the request. See: AwsSdk2\Guzzle\Http\Message\RequestFactory::applyOptions()
+     * @return \AwsSdk2\Guzzle\Http\Message\Response|\AwsSdk2\Guzzle\Stream\Stream
      */
     public static function request($method, $url, $options = array())
     {
@@ -63,7 +63,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function get($url, $options = array())
@@ -77,7 +77,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function head($url, $options = array())
@@ -91,7 +91,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function delete($url, $options = array())
@@ -105,7 +105,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function post($url, $options = array())
@@ -119,7 +119,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function put($url, $options = array())
@@ -133,7 +133,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function patch($url, $options = array())
@@ -147,7 +147,7 @@ final class StaticClient
      * @param string $url     URL of the request
      * @param array  $options Array of request options
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \AwsSdk2\Guzzle\Http\Message\Response
      * @see Guzzle::request for a list of available options
      */
     public static function options($url, $options = array())

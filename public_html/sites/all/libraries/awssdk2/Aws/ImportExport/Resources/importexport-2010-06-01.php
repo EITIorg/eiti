@@ -69,7 +69,7 @@ return array (
         'CancelJob' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CancelJobOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -123,7 +123,7 @@ return array (
         'CreateJob' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateJobOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -232,7 +232,7 @@ return array (
         'GetShippingLabel' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetShippingLabelOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -335,7 +335,7 @@ return array (
         'GetStatus' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetStatusOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -385,7 +385,7 @@ return array (
         'ListJobs' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListJobsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -430,7 +430,7 @@ return array (
         'UpdateJob' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'UpdateJobOutput',
             'responseType' => 'model',
             'parameters' => array(

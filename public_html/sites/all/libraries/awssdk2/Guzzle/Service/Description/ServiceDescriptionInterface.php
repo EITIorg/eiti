@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
 /**
  * A ServiceDescription stores service information based on a service document

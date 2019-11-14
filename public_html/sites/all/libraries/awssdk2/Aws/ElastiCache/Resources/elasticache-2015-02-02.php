@@ -73,7 +73,7 @@ return array (
         'AddTagsToResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TagListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -133,7 +133,7 @@ return array (
         'AuthorizeCacheSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -189,7 +189,7 @@ return array (
         'CopySnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -244,7 +244,7 @@ return array (
         'CreateCacheCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -444,7 +444,7 @@ return array (
         'CreateCacheParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheParameterGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -500,7 +500,7 @@ return array (
         'CreateCacheSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -547,7 +547,7 @@ return array (
         'CreateCacheSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -604,7 +604,7 @@ return array (
         'CreateReplicationGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplicationGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -806,7 +806,7 @@ return array (
         'CreateSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -865,7 +865,7 @@ return array (
         'DeleteCacheCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -923,7 +923,7 @@ return array (
         'DeleteCacheParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -965,7 +965,7 @@ return array (
         'DeleteCacheSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1007,7 +1007,7 @@ return array (
         'DeleteCacheSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1041,7 +1041,7 @@ return array (
         'DeleteReplicationGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplicationGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1104,7 +1104,7 @@ return array (
         'DeleteSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1146,7 +1146,7 @@ return array (
         'DescribeCacheClusters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheClusterMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1196,7 +1196,7 @@ return array (
         'DescribeCacheEngineVersions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheEngineVersionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1240,7 +1240,7 @@ return array (
         'DescribeCacheParameterGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheParameterGroupsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1285,7 +1285,7 @@ return array (
         'DescribeCacheParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheParameterGroupDetails',
             'responseType' => 'model',
             'parameters' => array(
@@ -1335,7 +1335,7 @@ return array (
         'DescribeCacheSecurityGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSecurityGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1380,7 +1380,7 @@ return array (
         'DescribeCacheSubnetGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSubnetGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1417,7 +1417,7 @@ return array (
         'DescribeEngineDefaultParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EngineDefaultsWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1459,7 +1459,7 @@ return array (
         'DescribeEvents' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1526,7 +1526,7 @@ return array (
         'DescribeReplicationGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplicationGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1571,7 +1571,7 @@ return array (
         'DescribeReservedCacheNodes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedCacheNodeMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1636,7 +1636,7 @@ return array (
         'DescribeReservedCacheNodesOfferings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedCacheNodesOfferingMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1697,7 +1697,7 @@ return array (
         'DescribeSnapshots' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeSnapshotsListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1754,7 +1754,7 @@ return array (
         'ListTagsForResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TagListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1792,7 +1792,7 @@ return array (
         'ModifyCacheCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1944,7 +1944,7 @@ return array (
         'ModifyCacheParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2004,7 +2004,7 @@ return array (
         'ModifyCacheSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2059,7 +2059,7 @@ return array (
         'ModifyReplicationGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReplicationGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2210,7 +2210,7 @@ return array (
         'PurchaseReservedCacheNodesOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedCacheNodeWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2264,7 +2264,7 @@ return array (
         'RebootCacheCluster' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheClusterWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2308,7 +2308,7 @@ return array (
         'RemoveTagsFromResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TagListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2360,7 +2360,7 @@ return array (
         'ResetCacheParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2425,7 +2425,7 @@ return array (
         'RevokeCacheSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CacheSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(

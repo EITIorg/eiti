@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticTranscoder\Exception;
+namespace AwsSdk2\Aws\ElasticTranscoder\Exception;
 
 /**
  * The requested resource does not exist or is not available. For example, the pipeline to which you're trying to add a job doesn't exist or is still being created.

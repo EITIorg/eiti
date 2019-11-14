@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Plugin\Log;
+namespace AwsSdk2\Guzzle\Plugin\Log;
 
-use Guzzle\Common\Event;
-use Guzzle\Log\LogAdapterInterface;
-use Guzzle\Log\MessageFormatter;
-use Guzzle\Log\ClosureLogAdapter;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Log\LogAdapterInterface;
+use AwsSdk2\Guzzle\Log\MessageFormatter;
+use AwsSdk2\Guzzle\Log\ClosureLogAdapter;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Plugin class that will add request and response logging to an HTTP request.

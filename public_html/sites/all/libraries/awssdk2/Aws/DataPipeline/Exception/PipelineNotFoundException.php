@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DataPipeline\Exception;
+namespace AwsSdk2\Aws\DataPipeline\Exception;
 
 /**
  * The specified pipeline was not found. Verify that you used the correct user and account identifiers.

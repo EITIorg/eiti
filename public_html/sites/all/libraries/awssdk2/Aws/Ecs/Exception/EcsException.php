@@ -1,7 +1,7 @@
 <?php
-namespace Aws\Ecs\Exception;
+namespace AwsSdk2\Aws\Ecs\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Default service exception class

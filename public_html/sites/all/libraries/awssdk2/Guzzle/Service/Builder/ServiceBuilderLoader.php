@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Builder;
+namespace AwsSdk2\Guzzle\Service\Builder;
 
-use Guzzle\Service\AbstractConfigLoader;
-use Guzzle\Service\Exception\ServiceNotFoundException;
+use AwsSdk2\Guzzle\Service\AbstractConfigLoader;
+use AwsSdk2\Guzzle\Service\Exception\ServiceNotFoundException;
 
 /**
  * Service builder config loader

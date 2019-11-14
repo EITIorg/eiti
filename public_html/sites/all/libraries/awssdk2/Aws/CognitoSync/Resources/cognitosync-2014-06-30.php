@@ -26,7 +26,7 @@ return array (
         'BulkPublish' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/bulkpublish',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'BulkPublishResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -68,7 +68,7 @@ return array (
         'DeleteDataset' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DeleteDatasetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -120,7 +120,7 @@ return array (
         'DescribeDataset' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DescribeDatasetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -172,7 +172,7 @@ return array (
         'DescribeIdentityPoolUsage' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DescribeIdentityPoolUsageResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -210,7 +210,7 @@ return array (
         'DescribeIdentityUsage' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'DescribeIdentityUsageResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -255,7 +255,7 @@ return array (
         'GetBulkPublishDetails' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/getBulkPublishDetails',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetBulkPublishDetailsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -289,7 +289,7 @@ return array (
         'GetIdentityPoolConfiguration' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}/configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'GetIdentityPoolConfigurationResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -327,7 +327,7 @@ return array (
         'ListDatasets' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListDatasetsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -378,7 +378,7 @@ return array (
         'ListIdentityPoolUsage' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListIdentityPoolUsageResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -415,7 +415,7 @@ return array (
         'ListRecords' => array(
             'httpMethod' => 'GET',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'ListRecordsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -483,7 +483,7 @@ return array (
         'RegisterDevice' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/identity/{IdentityId}/device',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'RegisterDeviceResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -541,7 +541,7 @@ return array (
         'SetIdentityPoolConfiguration' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/configuration',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'SetIdentityPoolConfigurationResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -616,7 +616,7 @@ return array (
         'SubscribeToDataset' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -678,7 +678,7 @@ return array (
         'UnsubscribeFromDataset' => array(
             'httpMethod' => 'DELETE',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -740,7 +740,7 @@ return array (
         'UpdateRecords' => array(
             'httpMethod' => 'POST',
             'uri' => '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}',
-            'class' => 'Guzzle\\Service\\Command\\OperationCommand',
+            'class' => 'AwsSdk2\\Guzzle\\Service\\Command\\OperationCommand',
             'responseClass' => 'UpdateRecordsResponse',
             'responseType' => 'model',
             'parameters' => array(

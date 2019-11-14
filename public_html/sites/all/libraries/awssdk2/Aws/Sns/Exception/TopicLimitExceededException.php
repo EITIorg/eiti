@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\Exception;
+namespace AwsSdk2\Aws\Sns\Exception;
 
 /**
  * Indicates that the customer already owns the maximum allowed number of topics.

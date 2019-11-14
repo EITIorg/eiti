@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Plugin\Cache;
+namespace AwsSdk2\Guzzle\Plugin\Cache;
 
-use Guzzle\Cache\CacheAdapterFactory;
-use Guzzle\Cache\CacheAdapterInterface;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\Message\MessageInterface;
-use Guzzle\Http\Message\Request;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Cache\CacheAdapterFactory;
+use AwsSdk2\Guzzle\Cache\CacheAdapterInterface;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\Message\MessageInterface;
+use AwsSdk2\Guzzle\Http\Message\Request;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
 
 /**
  * Default cache storage implementation

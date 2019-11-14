@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Plugin\History;
+namespace AwsSdk2\Guzzle\Plugin\History;
 
-use Guzzle\Common\Event;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Maintains a list of requests and responses sent using a request or client

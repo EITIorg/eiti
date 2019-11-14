@@ -1,13 +1,13 @@
 <?php
 
-namespace Aws\CognitoSync;
+namespace AwsSdk2\Aws\CognitoSync;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\Parser\JsonRestExceptionParser;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\Parser\JsonRestExceptionParser;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Client to interact with Amazon Cognito Sync

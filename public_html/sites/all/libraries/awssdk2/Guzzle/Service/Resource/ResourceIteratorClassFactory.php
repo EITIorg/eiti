@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Inflection\InflectorInterface;
-use Guzzle\Inflection\Inflector;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Inflection\InflectorInterface;
+use AwsSdk2\Guzzle\Inflection\Inflector;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Factory for creating {@see ResourceIteratorInterface} objects using a convention of storing iterator classes under a

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudWatch\Exception;
+namespace AwsSdk2\Aws\CloudWatch\Exception;
 
 /**
  * Parameters that must not be used together were used together.

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Credentials;
+namespace AwsSdk2\Aws\Common\Credentials;
 
-use Guzzle\Cache\CacheAdapterInterface;
+use AwsSdk2\Guzzle\Cache\CacheAdapterInterface;
 
 /**
  * Credentials decorator used to implement caching credentials

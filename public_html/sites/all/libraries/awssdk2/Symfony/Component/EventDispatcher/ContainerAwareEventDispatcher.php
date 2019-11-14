@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher;
+namespace AwsSdk2\Symfony\Component\EventDispatcher;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use AwsSdk2\Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Lazily loads listeners and subscribers from the dependency injection

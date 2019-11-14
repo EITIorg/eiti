@@ -74,7 +74,7 @@ return array (
         'ActivateGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ActivateGatewayOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -153,7 +153,7 @@ return array (
         'AddCache' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'AddCacheOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -204,7 +204,7 @@ return array (
         'AddUploadBuffer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'AddUploadBufferOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -255,7 +255,7 @@ return array (
         'AddWorkingStorage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'AddWorkingStorageOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -306,7 +306,7 @@ return array (
         'CancelArchival' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CancelArchivalOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -353,7 +353,7 @@ return array (
         'CancelRetrieval' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CancelRetrievalOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -400,7 +400,7 @@ return array (
         'CreateCachediSCSIVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateCachediSCSIVolumeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -468,7 +468,7 @@ return array (
         'CreateSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateSnapshotOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -515,7 +515,7 @@ return array (
         'CreateSnapshotFromVolumeRecoveryPoint' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateSnapshotFromVolumeRecoveryPointOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -562,7 +562,7 @@ return array (
         'CreateStorediSCSIVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateStorediSCSIVolumeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -631,7 +631,7 @@ return array (
         'CreateTapes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateTapesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -697,7 +697,7 @@ return array (
         'DeleteBandwidthRateLimit' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteBandwidthRateLimitOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -744,7 +744,7 @@ return array (
         'DeleteChapCredentials' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteChapCredentialsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -791,7 +791,7 @@ return array (
         'DeleteGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteGatewayOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -831,7 +831,7 @@ return array (
         'DeleteSnapshotSchedule' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteSnapshotScheduleOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -871,7 +871,7 @@ return array (
         'DeleteTape' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteTapeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -918,7 +918,7 @@ return array (
         'DeleteTapeArchive' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteTapeArchiveOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -958,7 +958,7 @@ return array (
         'DeleteVolume' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DeleteVolumeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -998,7 +998,7 @@ return array (
         'DescribeBandwidthRateLimit' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeBandwidthRateLimitOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1038,7 +1038,7 @@ return array (
         'DescribeCache' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeCacheOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1078,7 +1078,7 @@ return array (
         'DescribeCachediSCSIVolumes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeCachediSCSIVolumesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1122,7 +1122,7 @@ return array (
         'DescribeChapCredentials' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeChapCredentialsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1162,7 +1162,7 @@ return array (
         'DescribeGatewayInformation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeGatewayInformationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1202,7 +1202,7 @@ return array (
         'DescribeMaintenanceStartTime' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeMaintenanceStartTimeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1242,7 +1242,7 @@ return array (
         'DescribeSnapshotSchedule' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeSnapshotScheduleOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1282,7 +1282,7 @@ return array (
         'DescribeStorediSCSIVolumes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeStorediSCSIVolumesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1326,7 +1326,7 @@ return array (
         'DescribeTapeArchives' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTapeArchivesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1380,7 +1380,7 @@ return array (
         'DescribeTapeRecoveryPoints' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTapeRecoveryPointsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1431,7 +1431,7 @@ return array (
         'DescribeTapes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTapesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1492,7 +1492,7 @@ return array (
         'DescribeUploadBuffer' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeUploadBufferOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1532,7 +1532,7 @@ return array (
         'DescribeVTLDevices' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeVTLDevicesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1593,7 +1593,7 @@ return array (
         'DescribeWorkingStorage' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeWorkingStorageOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1633,7 +1633,7 @@ return array (
         'DisableGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DisableGatewayOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1673,7 +1673,7 @@ return array (
         'ListGateways' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListGatewaysOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1717,7 +1717,7 @@ return array (
         'ListLocalDisks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListLocalDisksOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1757,7 +1757,7 @@ return array (
         'ListVolumeRecoveryPoints' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListVolumeRecoveryPointsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1797,7 +1797,7 @@ return array (
         'ListVolumes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListVolumesOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1848,7 +1848,7 @@ return array (
         'ResetCache' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ResetCacheOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1888,7 +1888,7 @@ return array (
         'RetrieveTapeArchive' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RetrieveTapeArchiveOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1935,7 +1935,7 @@ return array (
         'RetrieveTapeRecoveryPoint' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RetrieveTapeRecoveryPointOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1982,7 +1982,7 @@ return array (
         'ShutdownGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ShutdownGatewayOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2022,7 +2022,7 @@ return array (
         'StartGateway' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'StartGatewayOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2062,7 +2062,7 @@ return array (
         'UpdateBandwidthRateLimit' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateBandwidthRateLimitOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2112,7 +2112,7 @@ return array (
         'UpdateChapCredentials' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateChapCredentialsOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2172,7 +2172,7 @@ return array (
         'UpdateGatewayInformation' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateGatewayInformationOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2224,7 +2224,7 @@ return array (
         'UpdateGatewaySoftwareNow' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateGatewaySoftwareNowOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2264,7 +2264,7 @@ return array (
         'UpdateMaintenanceStartTime' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateMaintenanceStartTimeOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2322,7 +2322,7 @@ return array (
         'UpdateSnapshotSchedule' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateSnapshotScheduleOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -2381,7 +2381,7 @@ return array (
         'UpdateVTLDeviceType' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'UpdateVTLDeviceTypeOutput',
             'responseType' => 'model',
             'parameters' => array(

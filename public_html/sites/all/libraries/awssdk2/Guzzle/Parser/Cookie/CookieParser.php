@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\Cookie;
+namespace AwsSdk2\Guzzle\Parser\Cookie;
 
 /**
  * Default Guzzle implementation of a Cookie parser

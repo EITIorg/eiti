@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
 /**
  * Abstract decorator used when decorating a BatchInterface

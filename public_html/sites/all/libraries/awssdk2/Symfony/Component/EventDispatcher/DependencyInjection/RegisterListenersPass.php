@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\DependencyInjection;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use AwsSdk2\Symfony\Component\DependencyInjection\ContainerBuilder;
+use AwsSdk2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * Compiler pass to register tagged services for an event dispatcher.
@@ -99,7 +99,7 @@ class RegisterListenersPass implements CompilerPassInterface
             $class = $container->getParameterBag()->resolveValue($def->getClass());
 
             $refClass = new \ReflectionClass($class);
-            $interface = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
+            $interface = 'AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface';
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }

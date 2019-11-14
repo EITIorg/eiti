@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Interface for creating commands by name

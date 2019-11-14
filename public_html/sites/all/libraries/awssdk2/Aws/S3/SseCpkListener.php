@@ -1,11 +1,11 @@
 <?php
 
-namespace Aws\S3;
+namespace AwsSdk2\Aws\S3;
 
-use Aws\Common\Exception\RuntimeException;
-use Guzzle\Common\Event;
-use Guzzle\Service\Command\CommandInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * This listener simplifies the SSE-C process by encoding and hashing the key.

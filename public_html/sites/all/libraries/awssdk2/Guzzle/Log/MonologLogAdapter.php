@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Log;
+namespace AwsSdk2\Guzzle\Log;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * @deprecated

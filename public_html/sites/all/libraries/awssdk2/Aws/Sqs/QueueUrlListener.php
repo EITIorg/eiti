@@ -14,11 +14,11 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sqs;
+namespace AwsSdk2\Aws\Sqs;
 
-use Guzzle\Common\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
 
 /**
  * Listener used to change the endpoint to the queue URL

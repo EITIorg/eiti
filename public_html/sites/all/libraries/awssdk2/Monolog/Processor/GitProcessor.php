@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace AwsSdk2\Monolog\Processor;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Injects Git branch and Git commit SHA in all records

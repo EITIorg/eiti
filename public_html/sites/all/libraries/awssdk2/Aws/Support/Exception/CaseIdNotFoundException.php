@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Support\Exception;
+namespace AwsSdk2\Aws\Support\Exception;
 
 /**
  * The requested CaseId could not be located.

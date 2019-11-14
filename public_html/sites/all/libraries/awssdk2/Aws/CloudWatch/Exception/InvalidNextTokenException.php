@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudWatch\Exception;
+namespace AwsSdk2\Aws\CloudWatch\Exception;
 
 /**
  * The next token specified is invalid.

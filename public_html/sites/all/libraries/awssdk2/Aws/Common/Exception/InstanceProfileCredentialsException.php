@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Exception;
+namespace AwsSdk2\Aws\Common\Exception;
 
-use Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
 
 /**
  * Exception thrown when an error occurs with instance profile credentials

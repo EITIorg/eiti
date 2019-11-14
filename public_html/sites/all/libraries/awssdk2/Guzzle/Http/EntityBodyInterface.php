@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Stream\StreamInterface;
+use AwsSdk2\Guzzle\Stream\StreamInterface;
 
 /**
  * Entity body used with an HTTP request or response

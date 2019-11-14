@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace AwsSdk2\Monolog\Processor;
 
 /**
  * Adds a unique identifier into records

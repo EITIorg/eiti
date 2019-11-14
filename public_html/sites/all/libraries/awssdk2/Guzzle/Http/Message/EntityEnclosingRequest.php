@@ -1,12 +1,12 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\EntityBodyInterface;
-use Guzzle\Http\QueryString;
-use Guzzle\Http\RedirectPlugin;
-use Guzzle\Http\Exception\RequestException;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Guzzle\Http\QueryString;
+use AwsSdk2\Guzzle\Http\RedirectPlugin;
+use AwsSdk2\Guzzle\Http\Exception\RequestException;
 
 /**
  * HTTP request that sends an entity-body in the request message (POST, PUT, PATCH, DELETE)

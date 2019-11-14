@@ -14,13 +14,13 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
-use Aws\S3\S3Client;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Common\Collection;
-use Guzzle\Iterator\ChunkedIterator;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\S3\S3Client;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Iterator\ChunkedIterator;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 abstract class AbstractSync extends AbstractHasDispatcher
 {

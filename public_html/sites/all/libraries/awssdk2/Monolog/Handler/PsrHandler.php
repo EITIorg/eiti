@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
+use AwsSdk2\Monolog\Logger;
+use AwsSdk2\Psr\Log\LoggerInterface;
 
 /**
  * Proxies log messages to an existing PSR-3 compliant logger.

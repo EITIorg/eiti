@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Command;
+namespace AwsSdk2\Aws\Common\Command;
 
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Http\Curl\CurlHandle;
+use AwsSdk2\Guzzle\Service\Command\OperationCommand;
+use AwsSdk2\Guzzle\Http\Curl\CurlHandle;
 
 /**
  * Adds AWS JSON body functionality to dynamically generated HTTP requests

@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Cache;
+namespace AwsSdk2\Doctrine\Common\Cache;
 
 /**
  * APC cache provider.

@@ -14,18 +14,18 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
-use Aws\DynamoDb\Model\Item;
-use Guzzle\Batch\AbstractBatchDecorator;
-use Guzzle\Batch\BatchBuilder;
-use Guzzle\Batch\BatchSizeDivisor;
-use Guzzle\Batch\FlushingBatch;
-use Guzzle\Batch\Exception\BatchTransferException;
-use Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
+use AwsSdk2\Aws\DynamoDb\Model\Item;
+use AwsSdk2\Guzzle\Batch\AbstractBatchDecorator;
+use AwsSdk2\Guzzle\Batch\BatchBuilder;
+use AwsSdk2\Guzzle\Batch\BatchSizeDivisor;
+use AwsSdk2\Guzzle\Batch\FlushingBatch;
+use AwsSdk2\Guzzle\Batch\Exception\BatchTransferException;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
 
 /**
  * The BatchWriteItemQueue is a BatchDecorator for Guzzle that implements a

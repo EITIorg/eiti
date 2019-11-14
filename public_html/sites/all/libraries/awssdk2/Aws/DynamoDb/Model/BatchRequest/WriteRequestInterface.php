@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Model\BatchRequest;
+namespace AwsSdk2\Aws\DynamoDb\Model\BatchRequest;
 
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * An interface used to describe a batch write request

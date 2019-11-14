@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
 /**
- * A command that creates requests based on {@see Guzzle\Service\Description\OperationInterface} objects, and if the
+ * A command that creates requests based on {@see AwsSdk2\Guzzle\Service\Description\OperationInterface} objects, and if the
  * matching operation uses a service description model in the responseClass attribute, then this command will marshal
  * the response into an associative array based on the JSON schema of the model.
  */

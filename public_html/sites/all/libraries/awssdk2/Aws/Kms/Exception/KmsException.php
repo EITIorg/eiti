@@ -1,8 +1,8 @@
 <?php
 
-namespace Aws\Kms\Exception;
+namespace AwsSdk2\Aws\Kms\Exception;
 
-use Aws\Common\Exception\ServiceResponseException;
+use AwsSdk2\Aws\Common\Exception\ServiceResponseException;
 
 /**
  * Exception thrown by the KMS service client.

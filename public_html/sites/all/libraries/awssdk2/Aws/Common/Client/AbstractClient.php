@@ -14,26 +14,26 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Client;
+namespace AwsSdk2\Aws\Common\Client;
 
-use Aws\Common\Aws;
-use Aws\Common\Credentials\CredentialsInterface;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\TransferException;
-use Aws\Common\RulesEndpointProvider;
-use Aws\Common\Signature\EndpointSignatureInterface;
-use Aws\Common\Signature\SignatureInterface;
-use Aws\Common\Signature\SignatureListener;
-use Aws\Common\Waiter\WaiterClassFactory;
-use Aws\Common\Waiter\CompositeWaiterFactory;
-use Aws\Common\Waiter\WaiterFactoryInterface;
-use Aws\Common\Waiter\WaiterConfigFactory;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Exception\CurlException;
-use Guzzle\Http\QueryAggregator\DuplicateAggregator;
-use Guzzle\Service\Client;
-use Guzzle\Service\Description\ServiceDescriptionInterface;
+use AwsSdk2\Aws\Common\Aws;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\TransferException;
+use AwsSdk2\Aws\Common\RulesEndpointProvider;
+use AwsSdk2\Aws\Common\Signature\EndpointSignatureInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureInterface;
+use AwsSdk2\Aws\Common\Signature\SignatureListener;
+use AwsSdk2\Aws\Common\Waiter\WaiterClassFactory;
+use AwsSdk2\Aws\Common\Waiter\CompositeWaiterFactory;
+use AwsSdk2\Aws\Common\Waiter\WaiterFactoryInterface;
+use AwsSdk2\Aws\Common\Waiter\WaiterConfigFactory;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Guzzle\Http\QueryAggregator\DuplicateAggregator;
+use AwsSdk2\Guzzle\Service\Client;
+use AwsSdk2\Guzzle\Service\Description\ServiceDescriptionInterface;
 
 /**
  * Abstract AWS client
@@ -248,7 +248,7 @@ abstract class AbstractClient extends Client implements AwsClientInterface
 
     /**
      * {@inheritdoc}
-     * @throws \Aws\Common\Exception\TransferException
+     * @throws \AwsSdk2\Aws\Common\Exception\TransferException
      */
     public function send($requests)
     {

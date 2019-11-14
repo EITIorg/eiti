@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Plugin\Backoff;
+namespace AwsSdk2\Guzzle\Plugin\Backoff;
 
-use Guzzle\Common\Event;
-use Guzzle\Log\LogAdapterInterface;
-use Guzzle\Log\MessageFormatter;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Log\LogAdapterInterface;
+use AwsSdk2\Guzzle\Log\MessageFormatter;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Logs backoff retries triggered from the BackoffPlugin

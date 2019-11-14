@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Tests;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Tests;
 
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Symfony\Component\EventDispatcher\Event;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -114,8 +114,8 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $this->dispatcher->dispatch(self::preFoo);
         $this->assertTrue($this->listener->preFooInvoked);
         $this->assertFalse($this->listener->postFooInvoked);
-        $this->assertInstanceOf('Symfony\Component\EventDispatcher\Event', $this->dispatcher->dispatch('noevent'));
-        $this->assertInstanceOf('Symfony\Component\EventDispatcher\Event', $this->dispatcher->dispatch(self::preFoo));
+        $this->assertInstanceOf('AwsSdk2\Symfony\Component\EventDispatcher\Event', $this->dispatcher->dispatch('noevent'));
+        $this->assertInstanceOf('AwsSdk2\Symfony\Component\EventDispatcher\Event', $this->dispatcher->dispatch(self::preFoo));
         $event = new Event();
         $return = $this->dispatcher->dispatch(self::preFoo, $event);
         $this->assertEquals('pre.foo', $event->getName());
@@ -195,7 +195,7 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $listeners = $this->dispatcher->getListeners('pre.foo');
         $this->assertTrue($this->dispatcher->hasListeners(self::preFoo));
         $this->assertCount(2, $listeners);
-        $this->assertInstanceOf('Symfony\Component\EventDispatcher\Tests\TestEventSubscriberWithPriorities', $listeners[0][0]);
+        $this->assertInstanceOf('AwsSdk2\Symfony\Component\EventDispatcher\Tests\TestEventSubscriberWithPriorities', $listeners[0][0]);
     }
 
     public function testAddSubscriberWithMultipleListeners()

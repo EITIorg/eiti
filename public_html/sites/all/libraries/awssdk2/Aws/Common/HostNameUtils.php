@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common;
+namespace AwsSdk2\Aws\Common;
 
-use Guzzle\Http\Url;
+use AwsSdk2\Guzzle\Http\Url;
 
 /**
  * Utility class for parsing regions and services from URLs

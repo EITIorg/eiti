@@ -1,15 +1,15 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Batch\BatchTransferInterface;
-use Guzzle\Batch\BatchDivisorInterface;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Batch\BatchTransferInterface;
+use AwsSdk2\Guzzle\Batch\BatchDivisorInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Batch transfer strategy used to efficiently transfer a batch of requests.
- * This class is to be used with {@see Guzzle\Batch\BatchInterface}
+ * This class is to be used with {@see AwsSdk2\Guzzle\Batch\BatchInterface}
  */
 class BatchRequestTransfer implements BatchTransferInterface, BatchDivisorInterface
 {
@@ -36,7 +36,7 @@ class BatchRequestTransfer implements BatchTransferInterface, BatchDivisorInterf
         $groups = new \SplObjectStorage();
         foreach ($queue as $item) {
             if (!$item instanceof RequestInterface) {
-                throw new InvalidArgumentException('All items must implement Guzzle\Http\Message\RequestInterface');
+                throw new InvalidArgumentException('All items must implement AwsSdk2\Guzzle\Http\Message\RequestInterface');
             }
             $client = $item->getClient();
             if (!$groups->contains($client)) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Description;
+namespace AwsSdk2\Guzzle\Service\Description;
 
 /**
  * Validator responsible for preparing and validating parameters against the parameter's schema

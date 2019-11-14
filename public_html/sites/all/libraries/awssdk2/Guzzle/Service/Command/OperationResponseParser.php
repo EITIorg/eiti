@@ -1,15 +1,15 @@
 <?php
 
-namespace Guzzle\Service\Command;
+namespace AwsSdk2\Guzzle\Service\Command;
 
-use Guzzle\Http\Message\Response;
-use Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
-use Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
-use Guzzle\Service\Description\Parameter;
-use Guzzle\Service\Description\OperationInterface;
-use Guzzle\Service\Description\Operation;
-use Guzzle\Service\Exception\ResponseClassException;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Http\Message\Response;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\VisitorFlyweight;
+use AwsSdk2\Guzzle\Service\Command\LocationVisitor\Response\ResponseVisitorInterface;
+use AwsSdk2\Guzzle\Service\Description\Parameter;
+use AwsSdk2\Guzzle\Service\Description\OperationInterface;
+use AwsSdk2\Guzzle\Service\Description\Operation;
+use AwsSdk2\Guzzle\Service\Exception\ResponseClassException;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Response parser that attempts to marshal responses into an associative array based on models in a service description

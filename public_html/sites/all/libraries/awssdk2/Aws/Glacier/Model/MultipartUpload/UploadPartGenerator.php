@@ -14,16 +14,16 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Model\MultipartUpload;
+namespace AwsSdk2\Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Common\Enum\Size;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\OutOfBoundsException;
-use Aws\Common\Exception\OverflowException;
-use Aws\Common\Exception\RuntimeException;
-use Aws\Common\Hash\TreeHash;
-use Guzzle\Http\EntityBody;
-use Guzzle\Http\EntityBodyInterface;
+use AwsSdk2\Aws\Common\Enum\Size;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Exception\OutOfBoundsException;
+use AwsSdk2\Aws\Common\Exception\OverflowException;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\Common\Hash\TreeHash;
+use AwsSdk2\Guzzle\Http\EntityBody;
+use AwsSdk2\Guzzle\Http\EntityBodyInterface;
 
 /**
  * Generates UploadPart objects from a string/stream that encapsulate the data needed for upload requests

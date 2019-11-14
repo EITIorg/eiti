@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Parser\Message;
+namespace AwsSdk2\Guzzle\Parser\Message;
 
 /**
  * Default request and response parser used by Guzzle. Optimized for speed.

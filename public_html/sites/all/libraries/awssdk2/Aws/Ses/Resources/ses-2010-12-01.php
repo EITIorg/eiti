@@ -44,7 +44,7 @@ return array (
         'DeleteIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -68,7 +68,7 @@ return array (
         'DeleteVerifiedEmailAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'deprecated' => true,
@@ -93,7 +93,7 @@ return array (
         'GetIdentityDkimAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetIdentityDkimAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -122,7 +122,7 @@ return array (
         'GetIdentityNotificationAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetIdentityNotificationAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -151,7 +151,7 @@ return array (
         'GetIdentityVerificationAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetIdentityVerificationAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -180,7 +180,7 @@ return array (
         'GetSendQuota' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetSendQuotaResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -199,7 +199,7 @@ return array (
         'GetSendStatistics' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetSendStatisticsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -218,7 +218,7 @@ return array (
         'ListIdentities' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListIdentitiesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -249,7 +249,7 @@ return array (
         'ListVerifiedEmailAddresses' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListVerifiedEmailAddressesResponse',
             'responseType' => 'model',
             'deprecated' => true,
@@ -269,7 +269,7 @@ return array (
         'SendEmail' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SendEmailResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -393,7 +393,7 @@ return array (
         'SendRawEmail' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SendRawEmailResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -442,7 +442,7 @@ return array (
         'SetIdentityDkimEnabled' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -472,7 +472,7 @@ return array (
         'SetIdentityFeedbackForwardingEnabled' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -502,7 +502,7 @@ return array (
         'SetIdentityNotificationTopic' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -535,7 +535,7 @@ return array (
         'VerifyDomainDkim' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'VerifyDomainDkimResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -559,7 +559,7 @@ return array (
         'VerifyDomainIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'VerifyDomainIdentityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -583,7 +583,7 @@ return array (
         'VerifyEmailAddress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'deprecated' => true,
@@ -608,7 +608,7 @@ return array (
         'VerifyEmailIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -644,7 +644,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -696,7 +696,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -746,7 +746,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',

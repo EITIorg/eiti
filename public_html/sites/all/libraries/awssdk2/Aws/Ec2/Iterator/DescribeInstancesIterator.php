@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Ec2\Iterator;
+namespace AwsSdk2\Aws\Ec2\Iterator;
 
-use Aws\Common\Iterator\AwsResourceIterator;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Iterator\AwsResourceIterator;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Iterator for an EC2 DescribeInstances command.

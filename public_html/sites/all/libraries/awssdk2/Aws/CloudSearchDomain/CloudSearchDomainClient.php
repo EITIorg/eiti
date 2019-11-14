@@ -1,12 +1,12 @@
 <?php
 
-namespace Aws\CloudSearchDomain;
+namespace AwsSdk2\Aws\CloudSearchDomain;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\BadMethodCallException;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Resource\Model;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\BadMethodCallException;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Resource\Model;
 
 /**
  * Client to interact with Amazon CloudSearch Domain

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Enum;
+namespace AwsSdk2\Aws\Common\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable default factory options that can be passed to a client's factory method
@@ -46,7 +46,7 @@ class ClientOptions extends Enum
 
     /**
      * Provide an array of "key", "secret", and "token" or an instance of
-     * `Aws\Common\Credentials\CredentialsInterface`.
+     * `AwsSdk2\Aws\Common\Credentials\CredentialsInterface`.
      */
     const CREDENTIALS = 'credentials';
 
@@ -62,7 +62,7 @@ class ClientOptions extends Enum
 
     /**
      * @var string Used to cache credentials when using providers that require HTTP requests. Set the trueto use the
-     *             default APC cache or provide a `Guzzle\Cache\CacheAdapterInterface` object.
+     *             default APC cache or provide a `AwsSdk2\Guzzle\Cache\CacheAdapterInterface` object.
      */
     const CREDENTIALS_CACHE = 'credentials.cache';
 
@@ -72,7 +72,7 @@ class ClientOptions extends Enum
     const CREDENTIALS_CACHE_KEY = 'credentials.cache.key';
 
     /**
-     * @var string Pass this option to specify a custom `Guzzle\Http\ClientInterface` to use if your credentials require
+     * @var string Pass this option to specify a custom `AwsSdk2\Guzzle\Http\ClientInterface` to use if your credentials require
      *             a HTTP request (e.g. RefreshableInstanceProfileCredentials)
      */
     const CREDENTIALS_CLIENT = 'credentials.client';
@@ -121,14 +121,14 @@ class ClientOptions extends Enum
     const BACKOFF = 'client.backoff';
 
     /**
-     * @var string `Guzzle\Log\LogAdapterInterface` object used to log backoff retries. Use 'debug' to emit PHP
+     * @var string `AwsSdk2\Guzzle\Log\LogAdapterInterface` object used to log backoff retries. Use 'debug' to emit PHP
      *             warnings when a retry is issued.
      */
     const BACKOFF_LOGGER = 'client.backoff.logger';
 
     /**
      * @var string Optional template to use for exponential backoff log messages. See
-     *             `Guzzle\Plugin\Backoff\BackoffLogger` for formatting information.
+     *             `AwsSdk2\Guzzle\Plugin\Backoff\BackoffLogger` for formatting information.
      */
     const BACKOFF_LOGGER_TEMPLATE = 'client.backoff.logger.template';
 

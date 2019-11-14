@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Exception;
+namespace AwsSdk2\Aws\Glacier\Exception;
 
 /**
  * Returned if the specified resource, such as a vault, upload ID, or job ID, does not exist.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Guzzle\Http\Curl;
+namespace AwsSdk2\Guzzle\Http\Curl;
 
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Common\Exception\ExceptionCollection;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Common\Exception\ExceptionCollection;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 /**
  * Interface for sending a pool of {@see RequestInterface} objects in parallel

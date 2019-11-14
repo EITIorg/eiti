@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudTrail\Exception;
+namespace AwsSdk2\Aws\CloudTrail\Exception;
 
 /**
  * This exception is thrown when the maximum number of trails is reached.

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudFormation\Exception;
+namespace AwsSdk2\Aws\CloudFormation\Exception;
 
 /**
  * Quota for the resource has already been reached.

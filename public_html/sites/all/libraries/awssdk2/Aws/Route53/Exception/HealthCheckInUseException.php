@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Route53\Exception;
+namespace AwsSdk2\Aws\Route53\Exception;
 
 /**
  * There are resource records associated with this health check. Before you can delete the health check, you must disassociate it from the resource record sets.

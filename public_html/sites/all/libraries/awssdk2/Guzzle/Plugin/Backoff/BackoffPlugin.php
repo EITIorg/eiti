@@ -1,14 +1,14 @@
 <?php
 
-namespace Guzzle\Plugin\Backoff;
+namespace AwsSdk2\Guzzle\Plugin\Backoff;
 
-use Guzzle\Common\Event;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Curl\CurlMultiInterface;
-use Guzzle\Http\Exception\CurlException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Common\AbstractHasDispatcher;
+use AwsSdk2\Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Guzzle\Http\Curl\CurlMultiInterface;
+use AwsSdk2\Guzzle\Http\Exception\CurlException;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Plugin to automatically retry failed HTTP requests using a backoff strategy

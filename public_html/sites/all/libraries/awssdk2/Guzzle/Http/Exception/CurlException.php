@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Http\Exception;
+namespace AwsSdk2\Guzzle\Http\Exception;
 
-use Guzzle\Http\Curl\CurlHandle;
+use AwsSdk2\Guzzle\Http\Curl\CurlHandle;
 
 /**
  * cURL request exception

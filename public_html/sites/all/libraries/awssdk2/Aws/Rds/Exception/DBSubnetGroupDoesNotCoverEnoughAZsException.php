@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Rds\Exception;
+namespace AwsSdk2\Aws\Rds\Exception;
 
 /**
  * Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone.

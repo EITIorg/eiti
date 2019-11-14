@@ -14,19 +14,19 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sts;
+namespace AwsSdk2\Aws\Sts;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Credentials\Credentials;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Signature\SignatureListener;
-use Guzzle\Common\Collection;
-use Guzzle\Service\Command\AbstractCommand;
-use Guzzle\Service\Resource\Model;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\Event;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Credentials\Credentials;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\Common\Signature\SignatureListener;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher;
+use AwsSdk2\Symfony\Component\EventDispatcher\Event;
 
 /**
  * Client to interact with AWS Security Token Service

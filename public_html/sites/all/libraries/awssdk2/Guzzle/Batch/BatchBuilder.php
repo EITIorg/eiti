@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Batch;
+namespace AwsSdk2\Guzzle\Batch;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 /**
  * Builder used to create custom batch objects
@@ -30,8 +30,8 @@ class BatchBuilder
 
     /** @var array of Mapped transfer strategies by handle name */
     protected static $mapping = array(
-        'request' => 'Guzzle\Batch\BatchRequestTransfer',
-        'command' => 'Guzzle\Batch\BatchCommandTransfer'
+        'request' => 'AwsSdk2\Guzzle\Batch\BatchRequestTransfer',
+        'command' => 'AwsSdk2\Guzzle\Batch\BatchCommandTransfer'
     );
 
     /**
@@ -99,7 +99,7 @@ class BatchBuilder
     }
 
     /**
-     * Configures the batch to transfer batches of requests. Associates a {@see \Guzzle\Http\BatchRequestTransfer}
+     * Configures the batch to transfer batches of requests. Associates a {@see \AwsSdk2\Guzzle\Http\BatchRequestTransfer}
      * object as both the transfer and divisor strategy.
      *
      * @param int $batchSize Batch size for each batch of requests
@@ -117,7 +117,7 @@ class BatchBuilder
 
     /**
      * Configures the batch to transfer batches commands. Associates as
-     * {@see \Guzzle\Service\Command\BatchCommandTransfer} as both the transfer and divisor strategy.
+     * {@see \AwsSdk2\Guzzle\Service\Command\BatchCommandTransfer} as both the transfer and divisor strategy.
      *
      * @param int $batchSize Batch size for each batch of commands
      *

@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Signature;
+namespace AwsSdk2\Aws\Common\Signature;
 
-use Aws\Common\Credentials\CredentialsInterface;
-use Guzzle\Http\Message\RequestInterface;
+use AwsSdk2\Aws\Common\Credentials\CredentialsInterface;
+use AwsSdk2\Guzzle\Http\Message\RequestInterface;
 
 abstract class AbstractSignature implements SignatureInterface
 {

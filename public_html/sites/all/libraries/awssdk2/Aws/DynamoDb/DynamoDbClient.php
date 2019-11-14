@@ -14,25 +14,25 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb;
+namespace AwsSdk2\Aws\DynamoDb;
 
-use Aws\Common\Client\AbstractClient;
-use Aws\Common\Client\ClientBuilder;
-use Aws\Common\Client\ExpiredCredentialsChecker;
-use Aws\Common\Client\ThrottlingErrorChecker;
-use Aws\Common\Enum\ClientOptions as Options;
-use Aws\Common\Exception\Parser\JsonQueryExceptionParser;
-use Aws\DynamoDb\Model\Attribute;
-use Aws\DynamoDb\Session\SessionHandler;
-use Guzzle\Common\Collection;
-use Guzzle\Plugin\Backoff\BackoffPlugin;
-use Guzzle\Plugin\Backoff\CallbackBackoffStrategy;
-use Guzzle\Plugin\Backoff\CurlBackoffStrategy;
-use Guzzle\Plugin\Backoff\HttpBackoffStrategy;
-use Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
-use Guzzle\Service\Command\AbstractCommand as Cmd;
-use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIteratorInterface;
+use AwsSdk2\Aws\Common\Client\AbstractClient;
+use AwsSdk2\Aws\Common\Client\ClientBuilder;
+use AwsSdk2\Aws\Common\Client\ExpiredCredentialsChecker;
+use AwsSdk2\Aws\Common\Client\ThrottlingErrorChecker;
+use AwsSdk2\Aws\Common\Enum\ClientOptions as Options;
+use AwsSdk2\Aws\Common\Exception\Parser\JsonQueryExceptionParser;
+use AwsSdk2\Aws\DynamoDb\Model\Attribute;
+use AwsSdk2\Aws\DynamoDb\Session\SessionHandler;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Plugin\Backoff\BackoffPlugin;
+use AwsSdk2\Guzzle\Plugin\Backoff\CallbackBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\CurlBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\HttpBackoffStrategy;
+use AwsSdk2\Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand as Cmd;
+use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIteratorInterface;
 
 /**
  * Client to interact with Amazon DynamoDB

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Sns\MessageValidator\Exception;
+namespace AwsSdk2\Aws\Sns\MessageValidator\Exception;
 
-use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
+use AwsSdk2\Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
 
 /**
  * Indicates that the signature for SNS message was invalid.

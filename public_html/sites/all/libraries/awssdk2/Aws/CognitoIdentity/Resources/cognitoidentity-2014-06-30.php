@@ -27,7 +27,7 @@ return array (
         'CreateIdentityPool' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'IdentityPool',
             'responseType' => 'model',
             'parameters' => array(
@@ -118,7 +118,7 @@ return array (
         'DeleteIdentityPool' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -170,7 +170,7 @@ return array (
         'DescribeIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'IdentityDescription',
             'responseType' => 'model',
             'parameters' => array(
@@ -222,7 +222,7 @@ return array (
         'DescribeIdentityPool' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'IdentityPool',
             'responseType' => 'model',
             'parameters' => array(
@@ -274,7 +274,7 @@ return array (
         'GetCredentialsForIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetCredentialsForIdentityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -347,7 +347,7 @@ return array (
         'GetId' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetIdResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -426,7 +426,7 @@ return array (
         'GetIdentityPoolRoles' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetIdentityPoolRolesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -481,7 +481,7 @@ return array (
         'GetOpenIdToken' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetOpenIdTokenResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -550,7 +550,7 @@ return array (
         'GetOpenIdTokenForDeveloperIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'GetOpenIdTokenForDeveloperIdentityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -636,7 +636,7 @@ return array (
         'ListIdentities' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListIdentitiesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -700,7 +700,7 @@ return array (
         'ListIdentityPools' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ListIdentityPoolsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -753,7 +753,7 @@ return array (
         'LookupDeveloperIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'LookupDeveloperIdentityResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -832,7 +832,7 @@ return array (
         'MergeDeveloperIdentities' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'MergeDeveloperIdentitiesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -909,7 +909,7 @@ return array (
         'SetIdentityPoolRoles' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -979,7 +979,7 @@ return array (
         'UnlinkDeveloperIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1056,7 +1056,7 @@ return array (
         'UnlinkIdentity' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1137,7 +1137,7 @@ return array (
         'UpdateIdentityPool' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'IdentityPool',
             'responseType' => 'model',
             'parameters' => array(

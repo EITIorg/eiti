@@ -1,13 +1,13 @@
 <?php
 
-namespace Guzzle\Http\Message;
+namespace AwsSdk2\Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\Collection;
-use Guzzle\Http\Message\Header\HeaderCollection;
-use Guzzle\Http\Message\Header\HeaderFactory;
-use Guzzle\Http\Message\Header\HeaderFactoryInterface;
-use Guzzle\Http\Message\Header\HeaderInterface;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Common\Collection;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderCollection;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderFactory;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderFactoryInterface;
+use AwsSdk2\Guzzle\Http\Message\Header\HeaderInterface;
 
 /**
  * Abstract HTTP request/response message

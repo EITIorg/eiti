@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DirectConnect\Exception;
+namespace AwsSdk2\Aws\DirectConnect\Exception;
 
 /**
  * The API was called with invalid parameters. The error message will contain additional details about the cause.

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Processor;
+namespace AwsSdk2\Monolog\Processor;
 
-use Monolog\Logger;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Injects line/file:class/function where the log message came from
@@ -30,7 +30,7 @@ class IntrospectionProcessor
 
     private $skipClassesPartials;
 
-    public function __construct($level = Logger::DEBUG, array $skipClassesPartials = array('Monolog\\'))
+    public function __construct($level = Logger::DEBUG, array $skipClassesPartials = array('AwsSdk2\Monolog\\'))
     {
         $this->level = Logger::toMonologLevel($level);
         $this->skipClassesPartials = $skipClassesPartials;

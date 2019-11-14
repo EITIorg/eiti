@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\CloudWatch\Enum;
+namespace AwsSdk2\Aws\CloudWatch\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable ComparisonOperator values

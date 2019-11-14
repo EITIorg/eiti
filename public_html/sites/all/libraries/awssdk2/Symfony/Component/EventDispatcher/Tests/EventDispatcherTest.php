@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\EventDispatcher\Tests;
+namespace AwsSdk2\Symfony\Component\EventDispatcher\Tests;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use AwsSdk2\Symfony\Component\EventDispatcher\EventDispatcher;
 
 class EventDispatcherTest extends AbstractEventDispatcherTest
 {

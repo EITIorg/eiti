@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Common\ToArrayInterface;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Common\ToArrayInterface;
 
 /**
  * Iterates over a paginated resource using subsequent requests in order to retrieve the entire matching result set

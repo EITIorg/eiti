@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\AutoScaling\Enum;
+namespace AwsSdk2\Aws\AutoScaling\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable LifecycleState values

@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Plugin\Cookie\CookieJar;
+namespace AwsSdk2\Guzzle\Plugin\Cookie\CookieJar;
 
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 /**
  * Persists non-session cookies using a JSON formatted file

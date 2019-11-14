@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Command\Factory;
+namespace AwsSdk2\Guzzle\Service\Command\Factory;
 
-use Guzzle\Service\Command\CommandInterface;
-use Guzzle\Service\ClientInterface;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Service\ClientInterface;
 
 /**
  * Composite factory used by a client object to create command objects utilizing multiple factories

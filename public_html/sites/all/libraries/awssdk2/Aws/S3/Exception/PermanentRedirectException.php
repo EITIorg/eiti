@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Exception;
+namespace AwsSdk2\Aws\S3\Exception;
 
 /**
  * The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.

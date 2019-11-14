@@ -34,7 +34,7 @@ return array (
         'AddAttachmentsToSet' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'AddAttachmentsToSetResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -103,7 +103,7 @@ return array (
         'AddCommunicationToCase' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'AddCommunicationToCaseResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -168,7 +168,7 @@ return array (
         'CreateCase' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'CreateCaseResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -254,7 +254,7 @@ return array (
         'DescribeAttachment' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeAttachmentResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -296,7 +296,7 @@ return array (
         'DescribeCases' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeCasesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -374,7 +374,7 @@ return array (
         'DescribeCommunications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeCommunicationsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -430,7 +430,7 @@ return array (
         'DescribeServices' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeServicesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -472,7 +472,7 @@ return array (
         'DescribeSeverityLevels' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeSeverityLevelsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -505,7 +505,7 @@ return array (
         'DescribeTrustedAdvisorCheckRefreshStatuses' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTrustedAdvisorCheckRefreshStatusesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -543,7 +543,7 @@ return array (
         'DescribeTrustedAdvisorCheckResult' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTrustedAdvisorCheckResultResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -581,7 +581,7 @@ return array (
         'DescribeTrustedAdvisorCheckSummaries' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTrustedAdvisorCheckSummariesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -619,7 +619,7 @@ return array (
         'DescribeTrustedAdvisorChecks' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'DescribeTrustedAdvisorChecksResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -653,7 +653,7 @@ return array (
         'RefreshTrustedAdvisorCheck' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'RefreshTrustedAdvisorCheckResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -687,7 +687,7 @@ return array (
         'ResolveCase' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\JsonCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\JsonCommand',
             'responseClass' => 'ResolveCaseResponse',
             'responseType' => 'model',
             'parameters' => array(

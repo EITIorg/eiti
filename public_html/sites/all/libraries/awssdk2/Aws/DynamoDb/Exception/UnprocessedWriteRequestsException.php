@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Exception;
+namespace AwsSdk2\Aws\DynamoDb\Exception;
 
-use Aws\Common\Exception\RuntimeException;
-use Aws\DynamoDb\Model\BatchRequest\WriteRequestInterface;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+use AwsSdk2\Aws\DynamoDb\Model\BatchRequest\WriteRequestInterface;
 
 /**
  * This exception may contain unprocessed write request items

@@ -79,7 +79,7 @@ return array (
         'AddPermission' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -146,7 +146,7 @@ return array (
         'ConfirmSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ConfirmSubscriptionResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -201,7 +201,7 @@ return array (
         'CreatePlatformApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreatePlatformApplicationResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -256,7 +256,7 @@ return array (
         'CreatePlatformEndpoint' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateEndpointResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -318,7 +318,7 @@ return array (
         'CreateTopic' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'CreateTopicResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -360,7 +360,7 @@ return array (
         'DeleteEndpoint' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -398,7 +398,7 @@ return array (
         'DeletePlatformApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -436,7 +436,7 @@ return array (
         'DeleteTopic' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -478,7 +478,7 @@ return array (
         'GetEndpointAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetEndpointAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -520,7 +520,7 @@ return array (
         'GetPlatformApplicationAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetPlatformApplicationAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -562,7 +562,7 @@ return array (
         'GetSubscriptionAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetSubscriptionAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -604,7 +604,7 @@ return array (
         'GetTopicAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'GetTopicAttributesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -646,7 +646,7 @@ return array (
         'ListEndpointsByPlatformApplication' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListEndpointsByPlatformApplicationResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -692,7 +692,7 @@ return array (
         'ListPlatformApplications' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListPlatformApplicationsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -729,7 +729,7 @@ return array (
         'ListSubscriptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListSubscriptionsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -766,7 +766,7 @@ return array (
         'ListSubscriptionsByTopic' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListSubscriptionsByTopicResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -812,7 +812,7 @@ return array (
         'ListTopics' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ListTopicsResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -849,7 +849,7 @@ return array (
         'Publish' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'PublishResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -946,7 +946,7 @@ return array (
         'RemovePermission' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -993,7 +993,7 @@ return array (
         'SetEndpointAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1047,7 +1047,7 @@ return array (
         'SetPlatformApplicationAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1101,7 +1101,7 @@ return array (
         'SetSubscriptionAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1152,7 +1152,7 @@ return array (
         'SetTopicAttributes' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1203,7 +1203,7 @@ return array (
         'Subscribe' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'SubscribeResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1258,7 +1258,7 @@ return array (
         'Unsubscribe' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1352,7 +1352,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -1388,7 +1388,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -1424,7 +1424,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -1460,7 +1460,7 @@ return array (
                     'location' => 'xml',
                     'filters' => array(
                         array(
-                            'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                            'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                             'args' => array(
                                 '@value',
                                 'entry',
@@ -1506,7 +1506,7 @@ return array (
                                 'type' => 'array',
                                 'filters' => array(
                                     array(
-                                        'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                                        'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                                         'args' => array(
                                             '@value',
                                             'entry',
@@ -1559,7 +1559,7 @@ return array (
                                 'type' => 'array',
                                 'filters' => array(
                                     array(
-                                        'method' => 'Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
+                                        'method' => 'AwsSdk2\Aws\\Common\\Command\\XmlResponseLocationVisitor::xmlMap',
                                         'args' => array(
                                             '@value',
                                             'entry',

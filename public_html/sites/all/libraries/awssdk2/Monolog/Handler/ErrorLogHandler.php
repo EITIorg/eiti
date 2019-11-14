@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace AwsSdk2\Monolog\Handler;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Logger;
+use AwsSdk2\Monolog\Formatter\LineFormatter;
+use AwsSdk2\Monolog\Logger;
 
 /**
  * Stores to PHP error_log() handler.

@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Waiter;
+namespace AwsSdk2\Aws\Common\Waiter;
 
-use Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
 
 /**
  * Interface used in conjunction with clients to wait on a resource

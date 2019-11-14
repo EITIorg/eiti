@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Common\Iterator;
+namespace AwsSdk2\Aws\Common\Iterator;
 
-use Aws\Common\Enum\UaString as Ua;
-use Aws\Common\Exception\RuntimeException;
-Use Guzzle\Service\Resource\Model;
-use Guzzle\Service\Resource\ResourceIterator;
+use AwsSdk2\Aws\Common\Enum\UaString as Ua;
+use AwsSdk2\Aws\Common\Exception\RuntimeException;
+Use AwsSdk2\Guzzle\Service\Resource\Model;
+use AwsSdk2\Guzzle\Service\Resource\ResourceIterator;
 
 /**
  * Iterate over a client command

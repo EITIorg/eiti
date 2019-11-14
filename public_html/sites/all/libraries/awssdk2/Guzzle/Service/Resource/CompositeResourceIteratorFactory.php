@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Service\Resource;
+namespace AwsSdk2\Guzzle\Service\Resource;
 
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 /**
  * Factory that utilizes multiple factories for creating iterators

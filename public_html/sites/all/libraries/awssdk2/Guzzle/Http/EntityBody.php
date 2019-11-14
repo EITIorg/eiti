@@ -1,11 +1,11 @@
 <?php
 
-namespace Guzzle\Http;
+namespace AwsSdk2\Guzzle\Http;
 
-use Guzzle\Common\Version;
-use Guzzle\Stream\Stream;
-use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Mimetypes;
+use AwsSdk2\Guzzle\Common\Version;
+use AwsSdk2\Guzzle\Stream\Stream;
+use AwsSdk2\Guzzle\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Http\Mimetypes;
 
 /**
  * Entity body used with an HTTP request or response

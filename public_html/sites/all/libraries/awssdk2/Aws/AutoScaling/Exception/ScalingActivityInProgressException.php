@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\AutoScaling\Exception;
+namespace AwsSdk2\Aws\AutoScaling\Exception;
 
 /**
  * You cannot delete an Auto Scaling group while there are scaling activities in progress for that group.

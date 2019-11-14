@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ImportExport\Exception;
+namespace AwsSdk2\Aws\ImportExport\Exception;
 
 /**
  * Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit.

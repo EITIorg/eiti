@@ -14,10 +14,10 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\DynamoDb\Session;
+namespace AwsSdk2\Aws\DynamoDb\Session;
 
-use Aws\DynamoDb\DynamoDbClient;
-use Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Aws\DynamoDb\DynamoDbClient;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
 
 /**
  * A simple object containing config values for the session handler

@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Model;
+namespace AwsSdk2\Aws\S3\Model;
 
-use Aws\Common\Client\AwsClientInterface;
-use Aws\Common\Exception\InvalidArgumentException;
-use Guzzle\Service\Command\AbstractCommand;
-use Guzzle\Batch\BatchBuilder;
-use Guzzle\Batch\BatchSizeDivisor;
-use Guzzle\Batch\AbstractBatchDecorator;
+use AwsSdk2\Aws\Common\Client\AwsClientInterface;
+use AwsSdk2\Aws\Common\Exception\InvalidArgumentException;
+use AwsSdk2\Guzzle\Service\Command\AbstractCommand;
+use AwsSdk2\Guzzle\Batch\BatchBuilder;
+use AwsSdk2\Guzzle\Batch\BatchSizeDivisor;
+use AwsSdk2\Guzzle\Batch\AbstractBatchDecorator;
 
 /**
  * The DeleteObjectsBatch is a BatchDecorator for Guzzle that implements a

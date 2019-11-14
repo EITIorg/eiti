@@ -14,14 +14,14 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\S3\Sync;
+namespace AwsSdk2\Aws\S3\Sync;
 
 use \FilesystemIterator as FI;
-use Aws\Common\Model\MultipartUpload\AbstractTransfer;
-use Aws\S3\Model\Acp;
-use Guzzle\Common\HasDispatcherInterface;
-use Guzzle\Common\Event;
-use Guzzle\Service\Command\CommandInterface;
+use AwsSdk2\Aws\Common\Model\MultipartUpload\AbstractTransfer;
+use AwsSdk2\Aws\S3\Model\Acp;
+use AwsSdk2\Guzzle\Common\HasDispatcherInterface;
+use AwsSdk2\Guzzle\Common\Event;
+use AwsSdk2\Guzzle\Service\Command\CommandInterface;
 
 class UploadSyncBuilder extends AbstractSyncBuilder
 {

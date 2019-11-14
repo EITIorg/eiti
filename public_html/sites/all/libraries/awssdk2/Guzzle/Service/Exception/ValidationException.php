@@ -1,8 +1,8 @@
 <?php
 
-namespace Guzzle\Service\Exception;
+namespace AwsSdk2\Guzzle\Service\Exception;
 
-use Guzzle\Common\Exception\RuntimeException;
+use AwsSdk2\Guzzle\Common\Exception\RuntimeException;
 
 class ValidationException extends RuntimeException
 {

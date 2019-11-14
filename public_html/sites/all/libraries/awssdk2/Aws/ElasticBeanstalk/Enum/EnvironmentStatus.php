@@ -14,9 +14,9 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\ElasticBeanstalk\Enum;
+namespace AwsSdk2\Aws\ElasticBeanstalk\Enum;
 
-use Aws\Common\Enum;
+use AwsSdk2\Aws\Common\Enum;
 
 /**
  * Contains enumerable EnvironmentStatus values

@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-namespace Aws\Glacier\Exception;
+namespace AwsSdk2\Aws\Glacier\Exception;
 
 /**
  * Returned if a parameter of the request is incorrectly specified.

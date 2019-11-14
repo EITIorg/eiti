@@ -79,7 +79,7 @@ return array (
         'AddSourceIdentifierToSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -118,7 +118,7 @@ return array (
         'AddTagsToResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -170,7 +170,7 @@ return array (
         'ApplyPendingMaintenanceAction' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ResourcePendingMaintenanceActionsWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -210,7 +210,7 @@ return array (
         'AuthorizeDBSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -268,7 +268,7 @@ return array (
         'CopyDBParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -333,7 +333,7 @@ return array (
         'CopyDBSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -397,7 +397,7 @@ return array (
         'CopyOptionGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OptionGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -462,7 +462,7 @@ return array (
         'CreateDBInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -696,7 +696,7 @@ return array (
         'CreateDBInstanceReadReplica' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -854,7 +854,7 @@ return array (
         'CreateDBParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -915,7 +915,7 @@ return array (
         'CreateDBSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -975,7 +975,7 @@ return array (
         'CreateDBSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1039,7 +1039,7 @@ return array (
         'CreateDBSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1117,7 +1117,7 @@ return array (
         'CreateEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1220,7 +1220,7 @@ return array (
         'CreateOptionGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OptionGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1286,7 +1286,7 @@ return array (
         'DeleteDBInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1337,7 +1337,7 @@ return array (
         'DeleteDBParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1371,7 +1371,7 @@ return array (
         'DeleteDBSecurityGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1405,7 +1405,7 @@ return array (
         'DeleteDBSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSnapshotWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1439,7 +1439,7 @@ return array (
         'DeleteDBSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1477,7 +1477,7 @@ return array (
         'DeleteEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -1511,7 +1511,7 @@ return array (
         'DeleteOptionGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -1545,7 +1545,7 @@ return array (
         'DescribeDBEngineVersions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBEngineVersionMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1618,7 +1618,7 @@ return array (
         'DescribeDBInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1679,7 +1679,7 @@ return array (
         'DescribeDBLogFiles' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DescribeDBLogFilesResponse',
             'responseType' => 'model',
             'parameters' => array(
@@ -1753,7 +1753,7 @@ return array (
         'DescribeDBParameterGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1814,7 +1814,7 @@ return array (
         'DescribeDBParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupDetails',
             'responseType' => 'model',
             'parameters' => array(
@@ -1880,7 +1880,7 @@ return array (
         'DescribeDBSecurityGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSecurityGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -1941,7 +1941,7 @@ return array (
         'DescribeDBSnapshots' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSnapshotMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2010,7 +2010,7 @@ return array (
         'DescribeDBSubnetGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSubnetGroupMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2071,7 +2071,7 @@ return array (
         'DescribeEngineDefaultParameters' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EngineDefaultsWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -2127,7 +2127,7 @@ return array (
         'DescribeEventCategories' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventCategoriesMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2174,7 +2174,7 @@ return array (
         'DescribeEventSubscriptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2235,7 +2235,7 @@ return array (
         'DescribeEvents' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2325,7 +2325,7 @@ return array (
         'DescribeOptionGroupOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OptionGroupOptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2385,7 +2385,7 @@ return array (
         'DescribeOptionGroups' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OptionGroups',
             'responseType' => 'model',
             'parameters' => array(
@@ -2454,7 +2454,7 @@ return array (
         'DescribeOrderableDBInstanceOptions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OrderableDBInstanceOptionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2527,7 +2527,7 @@ return array (
         'DescribePendingMaintenanceActions' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'PendingMaintenanceActionsMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2588,7 +2588,7 @@ return array (
         'DescribeReservedDBInstances' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedDBInstanceMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2674,7 +2674,7 @@ return array (
         'DescribeReservedDBInstancesOfferings' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedDBInstancesOfferingMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2756,7 +2756,7 @@ return array (
         'DownloadDBLogFilePortion' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DownloadDBLogFilePortionDetails',
             'responseType' => 'model',
             'parameters' => array(
@@ -2799,7 +2799,7 @@ return array (
         'ListTagsForResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'TagListMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -2857,7 +2857,7 @@ return array (
         'ModifyDBInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3033,7 +3033,7 @@ return array (
         'ModifyDBParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -3110,7 +3110,7 @@ return array (
         'ModifyDBSubnetGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSubnetGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3170,7 +3170,7 @@ return array (
         'ModifyEventSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3242,7 +3242,7 @@ return array (
         'ModifyOptionGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'OptionGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3363,7 +3363,7 @@ return array (
         'PromoteReadReplica' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3405,7 +3405,7 @@ return array (
         'PurchaseReservedDBInstancesOffering' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'ReservedDBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3468,7 +3468,7 @@ return array (
         'RebootDBInstance' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3507,7 +3507,7 @@ return array (
         'RemoveSourceIdentifierFromSubscription' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EventSubscriptionWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3546,7 +3546,7 @@ return array (
         'RemoveTagsFromResource' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'EmptyOutput',
             'responseType' => 'model',
             'parameters' => array(
@@ -3590,7 +3590,7 @@ return array (
         'ResetDBParameterGroup' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBParameterGroupNameMessage',
             'responseType' => 'model',
             'parameters' => array(
@@ -3671,7 +3671,7 @@ return array (
         'RestoreDBInstanceFromDBSnapshot' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -3846,7 +3846,7 @@ return array (
         'RestoreDBInstanceToPointInTime' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBInstanceWrapper',
             'responseType' => 'model',
             'parameters' => array(
@@ -4039,7 +4039,7 @@ return array (
         'RevokeDBSecurityGroupIngress' => array(
             'httpMethod' => 'POST',
             'uri' => '/',
-            'class' => 'Aws\\Common\\Command\\QueryCommand',
+            'class' => 'AwsSdk2\\Aws\\Common\\Command\\QueryCommand',
             'responseClass' => 'DBSecurityGroupWrapper',
             'responseType' => 'model',
             'parameters' => array(
