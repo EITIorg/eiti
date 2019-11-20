@@ -50,7 +50,7 @@ function eiti_search_elasticsearch_connector_load_library_options_alter(array &$
     $provider = CredentialProvider::fromCredentials(
       new Credentials(EITI_AWS_ES_ACCESS_KEY, EITI_AWS_ES_SECRET_KEY)
     );
-    $aws_region = $_SERVER['EITI_ES_REGION'];
+    $aws_region = EITI_ES_REGION;
     $options['handler'] = new ElasticsearchPhpHandler($aws_region, $provider);
   }
 }
