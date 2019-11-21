@@ -1,6 +1,13 @@
 {
     "require": {
         "mpdf/mpdf": "^7.1",
-        "theiconic/php-ga-measurement-protocol": "^2.7"
-    }
+        "theiconic/php-ga-measurement-protocol": "^2.7",
+        "drush/drush": "^8.0",
+        "nodespark/des-connector": "6.x-dev",
+        "elasticsearch/elasticsearch": "6.5",
+        "aws/aws-sdk-php": "^3.114",
+        "jsq/amazon-es-php": "^0.3.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

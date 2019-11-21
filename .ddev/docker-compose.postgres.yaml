@@ -1,0 +1,35 @@
+version: '3.6'
+
+services:
+  postgres:
+    container_name: ddev-${DDEV_SITENAME}-postgres
+    image: postgres:10.6-alpine
+    volumes:
+      - type: "volume"
+        source: postgresdb-database
+        target: "/var/lib/postgresql"
+        volume:
+          nocopy: true
+      - type: "volume"
+        source: postgresdb-database-data
+        target: "/var/lib/postgresql/data"
+        volume:
+          nocopy: true
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_PASSWORD=db
+      - POSTGRES_USER=db
+      - POSTGRES_DB=db
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+  web:
+    links:
+      - postgres
+
+volumes:
+  postgresdb-database:
+    name: "${DDEV_SITENAME}-postgresdb"
+  postgresdb-database-data:
+    name: "${DDEV_SITENAME}-postgresdb-data"

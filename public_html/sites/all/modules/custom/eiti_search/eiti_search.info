@@ -1,0 +1,4 @@
+name = EITI Search
+description = Everything related to searching.
+core = 7.x
+package = EITI Custom

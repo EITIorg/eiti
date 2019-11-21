@@ -51,7 +51,7 @@ function eiti_preprocess_views_view_table(&$variables) {
 /**
  * Implements template_preprocess_views_view() for the search view.
  */
-function __eiti_preprocess_views_view__search(&$variables) {
+function __eiti_preprocess_views_view__content_search(&$variables) {
   switch ($variables['view']->current_display) {
     case 'page':
       if (!empty($variables['view']->result)) {
@@ -63,7 +63,7 @@ function __eiti_preprocess_views_view__search(&$variables) {
 
         // Get the realm info.
         // For a list of facet names see the features export page: admin/structure/features/eitisearch/recreate
-        $searcher = 'search_api@node_search';
+        $searcher = 'search_api@content';
         $realm_name = 'block';
         $realm = facetapi_build_realm($searcher, $realm_name);
 
