@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the EITI Webforms feature.
+ */
+
+include_once 'eiti_webforms.features.inc';
