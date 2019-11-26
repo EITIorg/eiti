@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'webform_client_form_11045':
+
+      $page_num = $form['details']['page_num']['#value'];
+      $page_count = $form['details']['page_count']['#value'];
+
+      if (($page_num != $page_count) && (!empty($form['captcha']))) {
+        unset($form['captcha']);
+      }
+    break;
+  }
+}

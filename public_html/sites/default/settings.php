@@ -604,3 +604,9 @@ else {
   $message[] = '';
   die(implode("\n", $message));
 }
+
+// Automatically generated include for settings managed by ddev.
+$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
+if (is_readable($ddev_settings)) {
+  require $ddev_settings;
+}
