@@ -61,7 +61,7 @@ $webforms = array();
     'pathauto' => 0,
   ),
   'webform' => array(
-    'confirmation' => '<p>Thank you for submitting your concern.</p><p>We aim to respond within two weeks.</p><p>Next steps will depend on the nature of your concern. We will keep you updated on progress. Addressing concerns may require us to convene Board committees, which may take some time.</p>',
+    'confirmation' => '<p>Thank you for submitting your concern.</p><p>We aim to respond within two weeks.</p><p>Next steps will depend on the nature of your concern. We will keep you updated on progress. Addressing concerns may require us to convene <a href="https://eiti.org/board-committees" target="_blank">Board committees</a>, which may take some time.</p>',
     'confirmation_format' => 'filtered_html',
     'redirect_url' => '<confirmation>',
     'status' => 1,
@@ -293,7 +293,7 @@ B|Other (e.g. the EITI Board, National Secretariat, the Members’ Meeting)',
         'form_key' => 'personal_information',
         'name' => 'Personal information',
         'type' => 'markup',
-        'value' => '<p>When explaining your concern, please avoid as far as possible providing personal information about yourself or information that may make it possible for your identity to be inferred.</p><p>By submitting your concern through this form, you acknowledge that the recipient will need to handle and process the information that you provide. Depending on the nature of the concern, the recipient may need to seek advice from Board committees, such as the EITI Governance and Oversight Committee, or other third parties.</p><p>If you have concerns about submitting information that could identify you to third parties, please state this in the following sections and we will consider suitable alternatives, such as a confidential telephone call.</p><p>Some concerns, including those referring to possible violations of the EITI Code of Conduct, will include personal information about a third party. Please limit the personal information about this third party to details required for the recipient to understand, and act upon, your concern. The EITI will seek to address your concern in accordance with the policy on voicing concerns and taking into consideration the privacy rights of the individual(s) in question.</p>',
+        'value' => '<p>When explaining your concern, please avoid as far as possible providing personal information about yourself or information that may make it possible for your identity to be inferred.</p><p>By submitting your concern through this form, you acknowledge that the recipient will need to handle and process the information that you provide. Depending on the nature of the concern, the recipient may need to seek advice from Board committees, such as the EITI Governance and Oversight Committee, or other third parties.</p><p>If you have concerns about submitting information that could identify you to third parties, please state this in the following sections and we will consider suitable alternatives, such as a confidential telephone call.</p><p>Some concerns, including those referring to possible violations of the EITI Code of Conduct, will include personal information about a third party. <strong>Please limit the personal information about this third party to details required for the recipient to understand, and act upon, your concern.</strong> The EITI will seek to address your concern in accordance with the <a href="https://eiti.org/document/eiti-policy-on-voicing-concerns" target="_blank">policy on voicing concerns</a> and taking into consideration the privacy rights of the individual(s) in question.</p>',
         'extra' => array(
           'format' => 'filtered_html',
           'private' => 0,
@@ -313,7 +313,7 @@ B|Other (e.g. the EITI Board, National Secretariat, the Members’ Meeting)',
           'description' => 'Stakeholders with a concern should first raise it with the immediate EITI body or, in the case of International Secretariat staff, with their line manager. This form should be used in cases where it would not be appropriate to raise the concern in this manner or if the concern has been raised but remains unresolved. 
 
 Read more:
-EITI policy on voicing concerns
+<a href="https://eiti.org/document/eiti-policy-on-voicing-concerns" target="_blank">EITI policy on voicing concerns</a>
 
 
 Please let us know which of the following apply (you can select more than one):',
@@ -361,8 +361,8 @@ c|It would not be appropriate to raise this concern directly with the immediate 
         'type' => 'select',
         'value' => '',
         'extra' => array(
-          'items' => 'A possible violation of the EITI Code of Conduct|A possible violation of the EITI Code of Conduct. (?) The EITI Code of Conduct seeks to ensure that EITI office holders observe the highest standards of integrity. This code applies to all EITI office holders.
-The working environment or other employment-related issues|The working environment or other employment-related issues (?) Use this if concerns be resolved with reference to the Working Environment Act, the EITI International Secretariat Staff Manual or through line management.
+          'items' => 'A possible violation of the EITI Code of Conduct|A possible violation of the <a href="https://eiti.org/document/eiti-association-code-of-conduct" target="_blank">EITI Code of Conduct</a>.<span>(?) The EITI Code of Conduct seeks to ensure that EITI office holders observe the highest standards of integrity. This code applies to all EITI office holders.</span>
+The working environment or other employment-related issues|The working environment or other employment-related issues <span>(?) Use this if concerns be resolved with reference to the Working Environment Act, the EITI International Secretariat Staff Manual or through line management.</span>
 Other|Other
 ',
           'multiple' => 0,
@@ -486,11 +486,12 @@ Other|Other
         'type' => 'select',
         'value' => '',
         'extra' => array(
-          'items' => 'A possible violation of the EITI Code of Conduct|A possible violation of the EITI Code of Conduct (?)  The EITI Code of Conduct seeks to ensure that EITI office holders observe the highest standards of integrity. This code applies to all EITI office holders, including Board members and staff. The way in which the EITI is being implemented in a specific country|The way in which the EITI is being implemented in a specific country which I do not believe is in accordance with the EITI Standard. (?) The EITI requires effective multi-stakeholder oversight. Issues relating to implementation should therefore be addressed in the first instance to the multi-stakeholder group (MSG). 
-A decision by the EITI Board regarding an implementing country|A decision by the EITI Board regarding an implementing country. (?) The EITI Board decides on progress towards meeting the EITI Standard (including the civil society protocol), decisions on adapted implementation, deadlines for reporting and timeframes for meeting the EITI Standard. 
-A decision by the EITI’s Members’ Meeting|A decision by the EITI’s Members’ Meeting. (?) The Members’ Meeting makes decisions on the activity report, the accounts and the activity plan of the EITI Board, the election of EITI Board Members and Alternates, the election of the EITI Chair and any other matters pursuant to requests from a Member.
-A decision by the EITI Board concerning the broader governance of the EITI|A decision by the EITI Board concerning the broader governance of the EITI. (?) This could include decisions about EITI policy or membership in the EITI Association (Article 5.5 in the Articles of Association). The EITI Board exercises the executive powers of the EITI Association. 
-An action or inaction by an EITI constituency|An action or inaction by an EITI constituency. The EITI’s membership is organised in three constituencies: countries, which includes implementing and supporting countries; companies, which includes companies in the extractive sector, financial institutions and commodity traders; and civil society organisations. Concerns should first be raised with the Constituency Coordinator.
+          'items' => 'A possible violation of the EITI Code of Conduct|A possible violation of the <a href="https://eiti.org/document/eiti-association-code-of-conduct" target="_blank">EITI Code of Conduct</a> <span>(?)  The EITI Code of Conduct seeks to ensure that EITI office holders observe the highest standards of integrity. This code applies to all EITI office holders, including Board members and staff.</span>
+The way in which the EITI is being implemented in a specific country|The way in which the EITI is being implemented in a specific country which I do not believe is in accordance with the EITI Standard. <span>(?) The EITI requires effective multi-stakeholder oversight. Issues relating to implementation should therefore be addressed in the first instance to the multi-stakeholder group (MSG).</span>
+A decision by the EITI Board regarding an implementing country|A decision by the EITI Board regarding an <a href="https://eiti.org/countries" target="_blank">implementing country</a>. <span>(?) The EITI Board decides on progress towards meeting the EITI Standard (including the civil society protocol), decisions on adapted implementation, deadlines for reporting and timeframes for meeting the EITI Standard.</span>
+A decision by the EITI’s Members’ Meeting|A decision by the <a href="https://eiti.org/members-meeting" target="_blank">EITI’s Members’ Meeting</a>. <span>(?) The Members’ Meeting makes decisions on the activity report, the accounts and the activity plan of the EITI Board, the election of EITI Board Members and Alternates, the election of the EITI Chair and any other matters pursuant to requests from a Member.</span>
+A decision by the EITI Board concerning the broader governance of the EITI|A decision by the EITI Board concerning the broader governance of the EITI. <span>(?) This could include decisions about EITI policy or membership in the EITI Association (Article 5.5 in the Articles of Association). The EITI Board exercises the executive powers of the EITI Association. </span>
+An action or inaction by an EITI constituency|An action or inaction by an <a href="https://eiti.org/governance#how-the-eiti-association-is-organised" target="_blank">EITI constituency</a>. <span>The EITI’s membership is organised in three constituencies: countries, which includes implementing and supporting countries; companies, which includes companies in the extractive sector, financial institutions and commodity traders; and civil society organisations. Concerns should first be raised with the <a href="https://eiti.org/document/eiti-constituency-guidelines" target="_blank">Constituency Coordinator</a>.</span>
 Other|Other',
           'multiple' => 0,
           'title_display' => 'before',
