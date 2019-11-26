@@ -4,15 +4,17 @@
  * Implements hook_form_alter().
  */
 function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
-  switch ($form_id) {
-    case 'webform_client_form_11045':
 
+  if (substr_count($form_id, 'webform_client_form_') > 0) {
+  	if (isset($form['details']['page_num']['#value']) 
+  	  && isset($form['details']['page_count']['#value'])) {
+      
       $page_num = $form['details']['page_num']['#value'];
       $page_count = $form['details']['page_count']['#value'];
 
-      if (($page_num != $page_count) && (!empty($form['captcha']))) {
+      if (($page_num != $page_count) && (isset($form['captcha']) && !empty($form['captcha']))) {
         unset($form['captcha']);
       }
-    break;
+  	}
   }
 }
