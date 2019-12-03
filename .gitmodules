@@ -1,0 +1,3 @@
+[submodule ".ebextensions"]
+	path = .ebextensions
+	url = https://github.com/RolandSaks/.ebextensions
