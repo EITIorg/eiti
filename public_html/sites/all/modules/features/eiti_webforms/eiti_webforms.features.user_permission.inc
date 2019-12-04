@@ -47,15 +47,6 @@ function eiti_webforms_user_default_permissions() {
     'module' => 'captcha',
   );
 
-  // Exported permission: 'administer panelizer node webform defaults'.
-  $permissions['administer panelizer node webform defaults'] = array(
-    'name' => 'administer panelizer node webform defaults',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'panelizer',
-  );
-
   // Exported permission: 'administer recaptcha'.
   $permissions['administer recaptcha'] = array(
     'name' => 'administer recaptcha',
