@@ -57,6 +57,7 @@ stylesheets[all][] = styles/widgets/teaser.css.less
 stylesheets[all][] = styles/widgets/text.css.less
 stylesheets[all][] = styles/widgets/value_chain.css.less
 stylesheets[all][] = styles/widgets/visualization.css.less
+stylesheets[all][] = styles/widgets/report-a-concern.css.less
 
 stylesheets[print][] = styles/print.css.less
 
