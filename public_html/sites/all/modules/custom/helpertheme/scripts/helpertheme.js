@@ -359,6 +359,14 @@
     }
   };
 
+  Drupal.behaviors.webformTooltips = {
+    attach: function (context) {
+      // $('.eiti-webform-tooltip').tooltip();
+      // tippy('.eiti-webform-tooltip');
+      $('.eiti-webform-tooltip').tooltipster();
+    }
+  };
+
   /**
    * Define a small helper class with handy functions.
    */
@@ -372,5 +380,7 @@
       scrollTop: (offset.top + diffOffset)
     }, 500);
   };
+  // $('.eiti-webform-tooltip').tooltip();
+  // tippy('.eiti-webform-tooltip');
 
 })(jQuery);

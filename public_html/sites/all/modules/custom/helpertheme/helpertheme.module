@@ -339,8 +339,30 @@ function helpertheme_preprocess_page(&$variables) {
     'defer' => TRUE,
   );
 
+  // Set tooltip js options.
+  $js_tooltip_options = array(
+    'group' => JS_DEFAULT,
+    'every_page' => TRUE,
+    'scope' => 'footer',    
+  );
+  // Add the helpertheme script.
+  drupal_add_js($module_path . '/scripts/tooltipster.bundle.min.js', $js_tooltip_options);
+
+  // Add popper script.
+  // drupal_add_js($module_path . '/scripts/popper.min.js', $js_tooltip_options);
+
+  // Add tooltip script.
+  // drupal_add_js($module_path . '/scripts/tippy-bundle.min.js', $js_tooltip_options);
+
+  // Add popper script.
+  // drupal_add_js($module_path . '/scripts/tips.js', $js_tooltip_options);
+
+  // Add popper script.
+  // drupal_add_js($module_path . '/scripts/bootstrap.bundle.min.js', $js_options);
+
   // Add the helpertheme script.
   drupal_add_js($module_path . '/scripts/helpertheme.js', $js_options);
+
 
   // Set the default css options.
   $css_options = array(
@@ -348,6 +370,8 @@ function helpertheme_preprocess_page(&$variables) {
     'every_page' => TRUE,
     'media' => 'all',
   );
+
+  drupal_add_css($module_path . '/styles/tooltipster.bundle.min.css', $css_options);
 
   // Fix Admin UI style.
   drupal_add_css($module_path . '/styles/helpertheme.admin.css', $css_options);
