@@ -70,11 +70,6 @@ function webform_optionsmarkup_get_filter_format() {
     if (empty($format_id)) {
       $format_id = filter_fallback_format();
     }
-    $format = filter_format_load($format_id);
-    if (!filter_access($format)) {
-      $format_id = NULL;
-      return $format_id;
-    }
   }
 
   return $format_id;
