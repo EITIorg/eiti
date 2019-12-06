@@ -9,19 +9,6 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
   	if (isset($form['details']['page_num']['#value']) 
   	  && isset($form['details']['page_count']['#value'])) {
 
-      if (isset($form['progressbar']['#page_labels'])) {
-        foreach ($form['progressbar']['#page_labels'] as $delta => $label) {
-          if (substr_count($label, t('Step ')) > 0) {
-            $items = explode(':', $label);
-            if (isset($items[0]) && !empty($items[0])) {
-              $items[0] = '<span>' . $items[0] . '</span>';
-              $label = implode('', $items);
-              $form['progressbar']['#page_labels'][$delta] = $label;
-            }
-          }
-        }
-      }
-      
       $page_num = $form['details']['page_num']['#value'];
       $page_count = $form['details']['page_count']['#value'];
 
