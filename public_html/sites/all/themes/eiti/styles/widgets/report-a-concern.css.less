@@ -75,6 +75,50 @@
         }
     }
 
+    .webform-component {
+        &.webform-component--i-have-a-concern-about-a {
+            margin-bottom: 0.4em;
+        }
+    }
+
+    .form-radios .webform-component--i-have-a-concern-about-a {
+        .description {
+            display: inline;
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+
+            >p {
+                display: inline;
+            }
+        }
+
+        .eiti-webform-tooltip {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: 300;
+            background-color: @clmain__separator;
+            vertical-align: top;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-left: 5px;
+
+            >span {
+                font-size: 1rem;
+                vertical-align: top;
+                margin-top: -2px;
+                display: inline-block;
+            }
+
+            &:hover {
+                color: white;
+                background-color: @claltnormal;
+            }
+        }
+    }
+
     .webform-component--name,
     .webform-component--email-address,
     .webform-component--telephone-number {
@@ -102,6 +146,21 @@
 
         .description {
             margin-left: 2rem;
+        }
+    }
+
+    .webform-component--i-have-a-concern-about-a {
+        >label {
+            font-weight: 300;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .form-radios .webform-component--i-have-a-concern-about-a {
+        >label {
+            font-weight: 300;
+            font-size: 1rem;
         }
     }
 
@@ -215,8 +274,8 @@
             }
 
             >p {
-                font-size: 1.125rem;
-                line-height: 1.875rem;
+                font-weight: 300;
+                font-size: 1rem;
                 margin: 0;
                 vertical-align: top;
                 display: inline;
@@ -321,10 +380,7 @@
         flex-wrap: wrap;
         margin-right: -15px;
         margin-left: -15px;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .webform-progressbar-inner,
@@ -403,6 +459,43 @@
     }
 }
 
+.webform-confirmation {
+    border-bottom: 1px solid @clmain__separator;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
+
+    +.links {
+        padding-left: 1.25rem;
+        padding-right: 0;
+        position: relative;
+
+        &:after {
+            content: "";
+            background-image: url(~"@{theme_path}images/icons/angle-right-blue.svg");
+            background-size: contain;
+            display: inline-block;
+            width: 10px;
+            height: 14px;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            transition: transform 200ms ease;
+            transform-origin: center;
+            position: absolute;
+
+            top: 4px;
+            transform: rotate(180deg);
+            right: initial;
+            left: 0;
+        }
+
+        &:hover {
+            &:after {
+                transform: rotate(180deg) translateX(5px);
+            }
+        }
+    }
+}
+
 .webform-steps-buttons {
     display: none;
 }
@@ -474,6 +567,21 @@
             }
         }
 
+        .form-radios .webform-component--i-have-a-concern-about-a {
+            >label {
+                font-weight: 300;
+                font-size: 1.125rem;
+                margin: 0;
+                >p {
+                    font-size: 1.125rem;
+                    line-height: 1.875rem;
+                    margin: 0;
+                    vertical-align: top;
+                    display: inline;
+                }
+            }
+        }
+
         .webform-component--title {
             >p {
                 font-weight: 300;
@@ -488,7 +596,16 @@
             }
         }
 
+        .webform-progressbar {
+            margin-bottom: 4rem;
 
+            .webform-progressbar-outer {
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: row;
+                flex-direction: row;
+            }
+        }
     }
 }
 

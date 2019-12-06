@@ -360,10 +360,12 @@
   };
 
   Drupal.behaviors.webformTooltips = {
-    attach: function (context) {
-      // $('.eiti-webform-tooltip').tooltip();
-      // tippy('.eiti-webform-tooltip');
-      $('.eiti-webform-tooltip').tooltipster();
+    attach: function (context) {   
+      tippy('.eiti-webform-tooltip', {
+        trigger: 'click',
+        theme: 'light',
+        placement: 'right',
+      });
     }
   };
 
@@ -379,8 +381,6 @@
     $(scrollTarget).animate({
       scrollTop: (offset.top + diffOffset)
     }, 500);
-  };
-  // $('.eiti-webform-tooltip').tooltip();
-  // tippy('.eiti-webform-tooltip');
+  };  
 
 })(jQuery);
