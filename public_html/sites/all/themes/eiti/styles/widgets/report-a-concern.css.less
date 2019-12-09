@@ -76,46 +76,52 @@
     }
 
     .webform-component {
-        &.webform-component--i-have-a-concern-about-a {
+
+        &.webform-component--i-have-a-concern-about-a,
+        &.webform-component--i-have-a-concern-about-b {
             margin-bottom: 0.4em;
         }
     }
 
-    .form-radios .webform-component--i-have-a-concern-about-a {
-        .description {
-            display: inline;
-            font-size: 1.125rem;
-            line-height: 1.875rem;
+    .form-radios {
 
-            >p {
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
+            .description {
                 display: inline;
+                font-size: 1.125rem;
+                line-height: 1.875rem;
+
+                >p {
+                    display: inline;
+                }
             }
         }
+    }
 
-        .eiti-webform-tooltip {
-            display: inline-block;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            text-align: center;
-            font-weight: 300;
-            background-color: @clmain__separator;
+    .eiti-webform-tooltip {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: 300;
+        background-color: @clmain__separator;
+        vertical-align: top;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-left: 5px;
+
+        >span {
+            font-size: 1rem;
             vertical-align: top;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin-left: 5px;
+            margin-top: -2px;
+            display: inline-block;
+        }
 
-            >span {
-                font-size: 1rem;
-                vertical-align: top;
-                margin-top: -2px;
-                display: inline-block;
-            }
-
-            &:hover {
-                color: white;
-                background-color: @claltnormal;
-            }
+        &:hover {
+            color: white;
+            background-color: @claltnormal;
         }
     }
 
@@ -149,7 +155,8 @@
         }
     }
 
-    .webform-component--i-have-a-concern-about-a {
+    .webform-component--i-have-a-concern-about-a,
+    .webform-component--i-have-a-concern-about-b {
         >label {
             font-weight: 300;
             font-size: 1.25rem;
@@ -157,10 +164,14 @@
         }
     }
 
-    .form-radios .webform-component--i-have-a-concern-about-a {
-        >label {
-            font-weight: 300;
-            font-size: 1rem;
+    .form-radios {
+
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
+            >label {
+                font-weight: 300;
+                font-size: 1rem;
+            }
         }
     }
 
@@ -218,7 +229,8 @@
 
     .form-type-radio,
     .form-type-checkbox,
-    .form-radios .webform-component--i-have-a-concern-about-a {
+    .form-radios .webform-component--i-have-a-concern-about-a,
+    .form-radios .webform-component--i-have-a-concern-about-b {
         position: relative;
         display: block;
         min-height: 1.5rem;
@@ -332,7 +344,8 @@
     }
 
     .form-type-radio,
-    .form-radios .webform-component--i-have-a-concern-about-a {
+    .form-radios .webform-component--i-have-a-concern-about-a,
+    .form-radios .webform-component--i-have-a-concern-about-b {
         >label {
             &:before {
                 border-radius: 50%;
@@ -559,7 +572,8 @@
             }
         }
 
-        .webform-component--i-have-a-concern-about-a {
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
             >label {
                 font-weight: 300;
                 font-size: 1.5rem;
@@ -567,17 +581,22 @@
             }
         }
 
-        .form-radios .webform-component--i-have-a-concern-about-a {
-            >label {
-                font-weight: 300;
-                font-size: 1.125rem;
-                margin: 0;
-                >p {
+        .form-radios {
+
+            .webform-component--i-have-a-concern-about-a,
+            .webform-component--i-have-a-concern-about-b {
+                >label {
+                    font-weight: 300;
                     font-size: 1.125rem;
-                    line-height: 1.875rem;
                     margin: 0;
-                    vertical-align: top;
-                    display: inline;
+
+                    >p {
+                        font-size: 1.125rem;
+                        line-height: 1.875rem;
+                        margin: 0;
+                        vertical-align: top;
+                        display: inline;
+                    }
                 }
             }
         }
@@ -596,15 +615,16 @@
             }
         }
 
-        .webform-progressbar {
-            margin-bottom: 4rem;
+    }
 
-            .webform-progressbar-outer {
-                -webkit-box-orient: horizontal;
-                -webkit-box-direction: normal;
-                -ms-flex-direction: row;
-                flex-direction: row;
-            }
+    .webform-progressbar {
+        margin-bottom: 4rem;
+
+        .webform-progressbar-outer {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
         }
     }
 }
