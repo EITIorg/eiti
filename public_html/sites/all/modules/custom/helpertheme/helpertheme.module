@@ -47,8 +47,8 @@ function helpertheme_libraries_info() {
     'download url' => 'https://github.com/jonathantneal/svg4everybody/archive/master.tar.gz',
     'version arguments' => array(
       'file' => 'VERSION.txt',
-      'pattern' => '/([0-9a-zA-Z\.-]+)/',
-      'lines' => 1,
+      'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
+      'lines' => 64,
       'cols' => 64,
     ),
     'files' => array('js' => array('svg4everybody.js')),
@@ -58,6 +58,42 @@ function helpertheme_libraries_info() {
       ),
     ),
   );
+
+  // $libraries['popper'] = array(
+  //   'name' => 'Popper',
+  //   'vendor url' => 'https://github.com/jonathantneal/svg4everybody',
+  //   'download url' => 'https://github.com/jonathantneal/svg4everybody',
+  //   'version arguments' => array(
+  //     'file' => 'popper.js',
+  //     'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
+  //     'lines' => 64,
+  //     'cols' => 64,
+  //   ),
+  //   'files' => array('js' => array('popper.js')),
+  //   'variants' => array(
+  //     'minified' => array(
+  //       'files' => array('js' => array('popper.min.js')),
+  //     ),
+  //   ),
+  // );
+
+  // $libraries['tippy'] = array(
+  //   'name' => 'Tippy',
+  //   'vendor url' => 'https://github.com/jonathantneal/svg4everybody',
+  //   'download url' => 'https://github.com/jonathantneal/svg4everybody',
+  //   'version arguments' => array(
+  //     'file' => 'tippy.js',
+  //     'pattern' => '/([0-9a-zA-Z\.-]+)/',
+  //     'lines' => 1,
+  //     'cols' => 64,
+  //   ),
+  //   'files' => array('js' => array('tippy.js')),
+  //   'variants' => array(
+  //     'minified' => array(
+  //       'files' => array('js' => array('tippy-bundle.min.js')),
+  //     ),
+  //   ),
+  // );
 
   return $libraries;
 }
@@ -94,7 +130,7 @@ function helpertheme_menu() {
   );
 
   $items['page-403'] = array(
-    'title' => 'Access denied',
+    'title' => 'Please log in to view this page',
     'page callback' => 'helpertheme_page_access_denied',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -122,15 +158,24 @@ function helpertheme_menu() {
  * @return string
  */
 function helpertheme_page_access_denied() {
-  $elements['message']['#markup'] = t('You are not authorized to access this page.');
+  $elements['info_top'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('The content you want to view is for internal use.'),
+  );
 
   // Only display the login form for authenticated users.
   if (empty($GLOBALS['user']->uid)) {
     $elements['login_form'] = drupal_get_form('user_login');
   }
 
-  return drupal_render($elements);
+  $elements['info_bottom'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t("If you don't have a login but would like to view this content, contact us at <a href=\"mailto:secretariat@eiti.org\">secretariat@eiti.org</a>, stating the page you would like to access."),
+  );
 
+  return drupal_render($elements);
 }
 
 /**
@@ -321,6 +366,9 @@ function helpertheme_preprocess_page(&$variables) {
   // We already have those styles from normalize.css
   drupal_add_js("html5 = { 'shivCSS': false };", 'inline');
 
+  // libraries_load('popper', 'minified');
+  // libraries_load('tippy', 'minified');
+
   // Load the "Modernizr" JavaScript library.
   libraries_load('modernizr', 'minified');
 
@@ -339,8 +387,24 @@ function helpertheme_preprocess_page(&$variables) {
     'defer' => TRUE,
   );
 
+  // Set tooltip js options.
+  $js_tooltip_options = array(    
+    'every_page' => TRUE,
+    'scope' => 'footer',    
+  );
+ 
+  // Add popper script.
+  drupal_add_js($module_path . '/scripts/popper.min.js', $js_tooltip_options);
+
+  // Add tippy script.
+  drupal_add_js($module_path . '/scripts/tippy-bundle.min.js', $js_tooltip_options);
+
+  // Add custom call script.
+  // drupal_add_js($module_path . '/scripts/tips.js', $js_tooltip_options);  
+
   // Add the helpertheme script.
   drupal_add_js($module_path . '/scripts/helpertheme.js', $js_options);
+
 
   // Set the default css options.
   $css_options = array(
@@ -348,6 +412,8 @@ function helpertheme_preprocess_page(&$variables) {
     'every_page' => TRUE,
     'media' => 'all',
   );
+
+  drupal_add_css($module_path . '/styles/tippy-light.css', $css_options);
 
   // Fix Admin UI style.
   drupal_add_css($module_path . '/styles/helpertheme.admin.css', $css_options);

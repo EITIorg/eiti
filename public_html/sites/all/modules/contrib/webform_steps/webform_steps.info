@@ -1,0 +1,14 @@
+name = "Webform steps"
+description = "Visualize steps in multi-step webforms."
+core = 7.x
+package = "Webform"
+
+dependencies[] = webform
+
+scripts[] = webform_steps.js
+
+; Information added by Drupal.org packaging script on 2019-03-18
+version = "7.x-2.2"
+core = "7.x"
+project = "webform_steps"
+datestamp = "1552904888"

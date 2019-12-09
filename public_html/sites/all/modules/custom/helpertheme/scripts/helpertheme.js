@@ -359,6 +359,16 @@
     }
   };
 
+  Drupal.behaviors.webformTooltips = {
+    attach: function (context) {   
+      tippy('.eiti-webform-tooltip', {
+        trigger: 'click',
+        theme: 'light',
+        placement: 'right',
+      });
+    }
+  };
+
   /**
    * Define a small helper class with handy functions.
    */
@@ -371,6 +381,6 @@
     $(scrollTarget).animate({
       scrollTop: (offset.top + diffOffset)
     }, 500);
-  };
+  };  
 
 })(jQuery);
