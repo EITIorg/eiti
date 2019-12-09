@@ -8,7 +8,7 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
   if (substr_count($form_id, 'webform_client_form_') > 0) {
   	if (isset($form['details']['page_num']['#value']) 
   	  && isset($form['details']['page_count']['#value'])) {
-      
+
       $page_num = $form['details']['page_num']['#value'];
       $page_count = $form['details']['page_count']['#value'];
 
