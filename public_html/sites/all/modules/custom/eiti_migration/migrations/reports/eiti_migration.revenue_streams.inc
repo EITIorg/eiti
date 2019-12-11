@@ -68,7 +68,7 @@ class EITIRevenueStreamsGovernmentMigration extends EITIRevenueStreamMigration {
     // Prepare the Source.
     if (isset($arguments['single_file'])) {
       $file = $arguments['single_file'];
-      $real_path = drupal_realpath($file->uri);
+      $real_path = drupal_realpath($file->temp_uri);
       $real_paths = array($real_path);
     }
     else {
@@ -327,7 +327,7 @@ class EITIRevenueStreamsCompaniesMigration extends EITIRevenueStreamMigration {
     // Prepare the Source.
     if (isset($arguments['single_file'])) {
       $file = $arguments['single_file'];
-      $real_path = drupal_realpath($file->uri);
+      $real_path = drupal_realpath($file->temp_uri);
       $real_paths = array($real_path);
     }
     else {

@@ -83,6 +83,8 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
   $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_RENAME);
   $file->status = FILE_STATUS_PERMANENT;
   $file = file_save($file);
+  $temp_uri = _eiti_migration_s3_create_local_temp_file($file->uri);
+  $file->temp_uri = $temp_uri;
 
   // Check if we have the module ready and enabled.
   if (!module_exists('eiti_migration')) {
@@ -131,6 +133,7 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
         array($migration, $arguments));
     }
     $batch['operations'][] = array('migrate_static_registration', array($migrations));
+    $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_cleanup', array(array($file->temp_uri)));
 
     // Run the batch.
     batch_set($batch);
