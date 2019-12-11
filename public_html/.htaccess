@@ -21,6 +21,8 @@
   </IfModule>
 </FilesMatch>
 
+RedirectMatch 301 /sites/default/files/(.*) https://eiti.org/files/$1
+
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
 

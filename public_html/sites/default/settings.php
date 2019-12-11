@@ -644,6 +644,8 @@ $conf['s3fs_encryption'] = 'AES256';
 $conf['s3fs_domain'] = EITI_S3_DOMAIN;
 $conf['s3fs_bucket'] = EITI_S3_BUCKET;
 $conf['s3fs_region'] = EITI_S3_REGION;
+$conf['s3fs_public_folder'] = 'files';
+$conf['s3fs_private_folder'] = 'files-private';
 
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
