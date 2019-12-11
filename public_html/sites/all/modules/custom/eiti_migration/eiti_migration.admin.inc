@@ -92,7 +92,7 @@ function eiti_migration_spreadsheets_import_settings($form, &$form_state) {
 function eiti_migration_spreadsheets_import_validate($form, $form_state) {
   $values = $form_state['values'];
   $folder_path = 'public://' . $values['eiti_migration_import_folder'];
-  if (!file_prepare_directory($folder_path)) {
+  if (!_eiti_migration_s3_is_public_schema() && !file_prepare_directory($folder_path)) {
     form_set_error('eiti_migration_import_folder', t('Specified folder either does not exist or is not writable.'));
   }
 }
@@ -103,7 +103,10 @@ function eiti_migration_spreadsheets_import_validate($form, $form_state) {
 function eiti_migration_spreadsheets_import_submit($form, $form_state) {
   $values = $form_state['values'];
   $folder_path = 'public://' . $values['eiti_migration_import_folder'];
-  $folder_path = drupal_realpath($folder_path);
+  $s3_is_public = _eiti_migration_s3_is_public_schema();
+  if (!$s3_is_public) {
+    $folder_path = drupal_realpath($folder_path);
+  }
   $files_xlsx = file_scan_directory($folder_path, '/.*\.xlsx$/');
   $files_xls = file_scan_directory($folder_path, '/.*\.xls$/');
   $files = $files_xlsx + $files_xls;
@@ -114,15 +117,22 @@ function eiti_migration_spreadsheets_import_submit($form, $form_state) {
     return;
   }
 
-  $real_paths = array();
-  foreach ($files as $file_path => $file) {
-    $real_paths[] = drupal_realpath($file_path);
+  $file_paths = array();
+  if ($s3_is_public) {
+    $file_paths = array_keys($files);
+  }
+  else {
+    foreach ($files as $file_path => $file) {
+      $file_paths[] = drupal_realpath($file_path);
+    }
   }
 
   $batch = array(
     'title' => t('Importing to Drupal'),
     'operations' => array(
-      array('eiti_migration_spreadsheets_import', array($real_paths)),
+      array(
+        'eiti_migration_spreadsheets_import', array($file_paths),
+      ),
     ),
     'finished' => 'eiti_migration_spreadsheets_import_finished',
   );
