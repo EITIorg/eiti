@@ -290,7 +290,7 @@ class EITISpreadsheetMigration extends Migration {
 
       $real_paths = array();
       foreach ($files as $fid => $file) {
-        $real_paths[$fid] = drupal_realpath($file->temp_uri);
+        $real_paths[$fid] = drupal_realpath(_eiti_migration_s3_get_temp_file($file));
       }
 
       return $real_paths;
