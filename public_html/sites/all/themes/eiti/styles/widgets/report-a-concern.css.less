@@ -108,6 +108,7 @@
         font-weight: 300;
         background-color: @clmain__separator;
         vertical-align: top;
+        -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
         cursor: pointer;
         margin-left: 5px;
@@ -393,6 +394,9 @@
         flex-wrap: wrap;
         margin-right: -15px;
         margin-left: -15px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
     }
 
@@ -406,8 +410,6 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
         -webkit-box-flex: 1;
         -ms-flex-positive: 1;
         flex-grow: 1;
@@ -417,6 +419,7 @@
         align-items: center;
 
         .webform-progressbar-page-label {
+            display: block;
             font-size: 0.875rem;
             line-height: 1.2rem;
             color: @claltdetail;
@@ -491,11 +494,16 @@
             height: 14px;
             vertical-align: middle;
             background-repeat: no-repeat;
+            -webkit-transition: -webkit-transform 200ms ease;
+            transition: -webkit-transform 200ms ease;
             transition: transform 200ms ease;
+            transition: transform 200ms ease, -webkit-transform 200ms ease;
+            -webkit-transform-origin: center;
             transform-origin: center;
             position: absolute;
 
             top: 4px;
+            -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
             right: initial;
             left: 0;
@@ -503,6 +511,7 @@
 
         &:hover {
             &:after {
+                -webkit-transform: rotate(180deg) translateX(5px);
                 transform: rotate(180deg) translateX(5px);
             }
         }
@@ -625,6 +634,11 @@
             -webkit-box-direction: normal;
             -ms-flex-direction: row;
             flex-direction: row;
+        }
+
+        .webform-progressbar-page {
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
         }
     }
 }
