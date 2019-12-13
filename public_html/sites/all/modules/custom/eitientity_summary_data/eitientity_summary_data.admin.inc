@@ -120,7 +120,6 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
       }
     }
 
-    $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_generate_temp', array(array($file)));
     // Now complete the operation list.
     foreach ($migrations as $migration) {
       // If this is an EDIT, we want to rollback first all migrations and then import them.

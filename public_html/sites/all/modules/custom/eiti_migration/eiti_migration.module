@@ -198,21 +198,6 @@ function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summar
 }
 
 /**
- * Generate local temp files to provide compatibility for s3
- *
- * @param array $files
- *   Files to generate temps for.
- * @param array &$context
- *   Batch context.
- */
-function _eiti_migration_spreadsheet_dynamic_upload_generate_temp(array $files, array &$context) {
-  foreach ($files as $file) {
-    $temp_uri = _eiti_migration_s3_create_local_temp_file($file->uri, $file->temp_uri);
-    $file->temp_uri = $temp_uri;
-  }
-}
-
-/**
  * Clean up local temp files created for spreadsheet upload.
  *
  * @param array $files
@@ -612,16 +597,19 @@ function _eiti_migration_s3_is_public_schema() {
 }
 
 /**
- * Create local temp file to use with functions that require local files.
+ * Try to get temp file, create it if it doesn't exist.
  *
- * @param string $file
- *   Source file uri.
+ * @param object $file
  *
  * @return string|false
  *   Temp file uri or false if failed.
  */
-function _eiti_migration_s3_create_local_temp_file(string $file, string $temp_file_name) {
-  return file_unmanaged_copy($file, $temp_file_name, FILE_EXISTS_REPLACE);
+function _eiti_migration_s3_get_temp_file(object $file) {
+  if (file_exists($file->temp_uri)) {
+    return $file->temp_uri;
+  }
+
+  return file_unmanaged_copy($file->uri, $file->temp_uri, FILE_EXISTS_REPLACE);
 }
 
 /**
