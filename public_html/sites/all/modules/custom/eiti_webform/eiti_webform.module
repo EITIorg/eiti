@@ -18,3 +18,19 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
   	}
   }
 }
+
+/**
+ * Implements hook_page_alter()
+ */
+function eiti_webform_init() {
+  global $user;
+  $path = current_path($path);
+
+  if (substr_count($path, 'webform-results') > 0) {
+    $has_role = user_has_role('complaints viewer', $user);
+
+    if ($has_role == FALSE || $user->uid == 1) {
+      drupal_access_denied();
+    }
+  }
+}

@@ -795,7 +795,7 @@ Other|Other',
       ),
       'report_concern__step_3' => array(
         'form_key' => 'step_3',
-        'name' => 'Step 3: What would be your preferred outcome of this process?',
+        'name' => 'Step 3: What would be your preferred outcome of this process?*',
         'type' => 'pagebreak',
         'value' => '',
         'extra' => array(
@@ -1926,7 +1926,7 @@ Autre|Autre',
       ),
       'report_concern__step_3' => array(
         'form_key' => 'step_3',
-        'name' => 'Étape 3 : Quelle serait pour vous l’issue la plus souhaitable à ce processus ?',
+        'name' => 'Étape 3 : Quelle serait pour vous l’issue la plus souhaitable à ce processus ?*',
         'type' => 'pagebreak',
         'value' => '',
         'extra' => array(
