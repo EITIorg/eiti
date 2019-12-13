@@ -82,10 +82,10 @@ $webforms = array();
     'progressbar_include_confirmation' => 1,
     'progressbar_label_first' => 'Step 1: Overview and contact details',
     'progressbar_label_confirmation' => 'Complete',
-    'preview' => 0,
-    'preview_next_button_label' => '',
+    'preview' => 1,
+    'preview_next_button_label' => 'Review',
     'preview_prev_button_label' => '',
-    'preview_title' => '',
+    'preview_title' => 'Review',
     'preview_message' => '',
     'preview_message_format' => 'filtered_html',
     'preview_excluded_components' => array(),
@@ -452,7 +452,7 @@ c|It would not be appropriate to raise this concern directly with the immediate 
         'value' => '',
         'extra' => array(
           'items' => 'A possible violation of the EITI Code of Conduct|A possible violation of the <a href="https://eiti.org/document/eiti-association-code-of-conduct" target="_blank">EITI Code of Conduct</a>|<span class="eiti-webform-description">The EITI Code of Conduct seeks to ensure that EITI office holders observe the highest standards of integrity. This code applies to all EITI office holders.</span>
-The working environment or other employment-related issues|The working environment or other employment-related issues|<span class="eiti-webform-description">Use this if concerns be resolved with reference to the Working Environment Act, the EITI International Secretariat Staff Manual or through line</span>
+The working environment or other employment-related issues|The working environment or other employment-related issues|<span class="eiti-webform-description">Use this if concerns could be resolved with reference to the Working Environment Act, the EITI International Secretariat Staff Manual or through line</span>
 Other|Other|<span class="eiti-webform-description">Please specify the nature of your concern. Administrative or logistical concerns, for example about the organisation of an international meeting or conference, should be addressed directly to the organisers.</span>',
           'multiple' => 0,
           'title_display' => 'before',
