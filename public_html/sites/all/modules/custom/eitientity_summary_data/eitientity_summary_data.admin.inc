@@ -132,7 +132,6 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
         array($migration, $arguments));
     }
     $batch['operations'][] = array('migrate_static_registration', array($migrations));
-    $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_cleanup', array(array($file->temp_uri)));
 
     // Run the batch.
     batch_set($batch);

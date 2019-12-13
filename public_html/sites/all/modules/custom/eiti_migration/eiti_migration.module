@@ -198,20 +198,6 @@ function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summar
 }
 
 /**
- * Clean up local temp files created for spreadsheet upload.
- *
- * @param array $files
- *   Files to clean up.
- * @param array &$context
- *   Batch context.
- */
-function _eiti_migration_spreadsheet_dynamic_upload_cleanup(array $files, array &$context) {
-  foreach ($files as $file) {
-    file_unmanaged_delete($file);
-  }
-}
-
-/**
  * Simple batch operation callback function that just informs how many files were
  * imported successfully.
  */
