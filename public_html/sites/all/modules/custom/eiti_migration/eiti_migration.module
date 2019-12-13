@@ -207,8 +207,7 @@ function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summar
  */
 function _eiti_migration_spreadsheet_dynamic_upload_generate_temp(array $files, array &$context) {
   foreach ($files as $file) {
-    $temp_uri = _eiti_migration_s3_create_local_temp_file($file->uri, $file->temp_uri);
-    $file->temp_uri = $temp_uri;
+    _eiti_migration_s3_create_local_temp_file($file->uri, $file->temp_uri);
   }
 }
 
