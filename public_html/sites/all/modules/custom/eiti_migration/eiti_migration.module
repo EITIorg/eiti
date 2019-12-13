@@ -198,6 +198,21 @@ function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summar
 }
 
 /**
+ * Generate local temp files to provide compatibility for s3
+ *
+ * @param array $files
+ *   Files to generate temps for.
+ * @param array &$context
+ *   Batch context.
+ */
+function _eiti_migration_spreadsheet_dynamic_upload_generate_temp(array $files, array &$context) {
+  foreach ($files as $file) {
+    $temp_uri = _eiti_migration_s3_create_local_temp_file($file->uri, $file->temp_uri);
+    $file->temp_uri = $temp_uri;
+  }
+}
+
+/**
  * Clean up local temp files created for spreadsheet upload.
  *
  * @param array $files
@@ -605,12 +620,18 @@ function _eiti_migration_s3_is_public_schema() {
  * @return string|false
  *   Temp file uri or false if failed.
  */
-function _eiti_migration_s3_create_local_temp_file(string $file) {
-  // Create temp file outside of s3 to keep compatibility with functions that
-  // require local files.
-  $temp_file = drupal_tempnam('temporary://', 'eiti_s3_temp_');
-  $temp_uri_no_extension = file_unmanaged_copy($file, $temp_file, FILE_EXISTS_REPLACE);
-  $path_info = pathinfo($file);
-  // Add extension to temp file. There is probably a better way.
-  return file_unmanaged_move($temp_uri_no_extension, $temp_uri_no_extension . '.' . $path_info['extension']);
+function _eiti_migration_s3_create_local_temp_file(string $file, string $temp_file_name) {
+  return file_unmanaged_copy($file, $temp_file_name, FILE_EXISTS_REPLACE);
+}
+
+/**
+ * Generate name to use for temp files.
+ *
+ * @param object $file
+ *
+ * @return string
+ */
+function _eiti_migration_s3_generate_temp_name(object $file) {
+  $path_info = pathinfo($file->uri);
+  return 'temporary://eiti_s3_temp_' . $path_info['filename'] . '_' . time() . '.' . $path_info['extension'];
 }

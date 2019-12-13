@@ -83,8 +83,7 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
   $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_RENAME);
   $file->status = FILE_STATUS_PERMANENT;
   $file = file_save($file);
-  $temp_uri = _eiti_migration_s3_create_local_temp_file($file->uri);
-  $file->temp_uri = $temp_uri;
+  $file->temp_uri = _eiti_migration_s3_generate_temp_name($file);
 
   // Check if we have the module ready and enabled.
   if (!module_exists('eiti_migration')) {
@@ -121,6 +120,7 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
       }
     }
 
+    $batch['operations'][] = array('_eiti_migration_spreadsheet_dynamic_upload_generate_temp', array(array($file)));
     // Now complete the operation list.
     foreach ($migrations as $migration) {
       // If this is an EDIT, we want to rollback first all migrations and then import them.
