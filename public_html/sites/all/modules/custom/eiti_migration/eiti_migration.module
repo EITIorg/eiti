@@ -596,7 +596,7 @@ function _eiti_migration_s3_is_public_schema() {
  */
 function _eiti_migration_s3_get_temp_file(object $file) {
   $path_info = pathinfo($file->uri);
-  $temp_dir = EITI_MIGRATION_TEMP_DIR . str_replace('public://', '', $path_info['dirname']) . '/';
+  $temp_dir = str_replace('public://', EITI_MIGRATION_TEMP_DIR, $path_info['dirname']) . '/';
   file_prepare_directory($temp_dir, FILE_CREATE_DIRECTORY);
   $temp_uri = $temp_dir . $path_info['basename'];
 
