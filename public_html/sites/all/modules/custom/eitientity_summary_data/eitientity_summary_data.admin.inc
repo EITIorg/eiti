@@ -83,7 +83,6 @@ function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
   $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_RENAME);
   $file->status = FILE_STATUS_PERMANENT;
   $file = file_save($file);
-  $file->temp_uri = _eiti_migration_s3_generate_temp_name($file);
 
   // Check if we have the module ready and enabled.
   if (!module_exists('eiti_migration')) {
