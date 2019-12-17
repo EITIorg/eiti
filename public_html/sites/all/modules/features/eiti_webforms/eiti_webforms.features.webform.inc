@@ -38,7 +38,7 @@ $webforms = array();
     'data' => array(),
   ),
   'title_original' => 'Report a concern',
-  'entity_translation_handler_id' => 'node-webform-eid-11067-11067',
+  'entity_translation_handler_id' => 'node-webform-eid-11045-11045',
   'metatags' => array(
     'en' => array(
       'robots' => array(
@@ -81,7 +81,7 @@ $webforms = array();
     'progressbar_pagebreak_labels' => 1,
     'progressbar_include_confirmation' => 1,
     'progressbar_label_first' => 'Step 1: Overview and contact details',
-    'progressbar_label_confirmation' => 'Complete',
+    'progressbar_label_confirmation' => 'Submit',
     'preview' => 1,
     'preview_next_button_label' => 'Review',
     'preview_prev_button_label' => '',
@@ -97,60 +97,77 @@ $webforms = array();
     ),
     'emails' => array(
       0 => array(
-        'email' => 'secretariat@eiti.org',
-        'subject' => 'Notification: A concern has been submitted through eiti.org',
+        'email' => 'report_concern__email_address',
+        'subject' => 'Your concern has been submitted through eiti.org',
         'from_name' => 'default',
         'from_address' => 'default',
-        'template' => 'This is an automated alert. A concern regarding the International Secretariat has been submitted on [submission:date:long] through the online platform for voicing concerns. 
-Please follow the procedures in the SOP on logging and addressing concerns.',
-        'excluded_components' => array(),
+        'template' => 'You have submitted the following concern via eiti.org on [submission:date:long].
+
+Content:
+[submission:values]
+',
+        'excluded_components' => array(
+          0 => 1,
+          1 => 5,
+          2 => 7,
+          3 => 8,
+          4 => 12,
+          5 => 14,
+          6 => 16,
+          7 => 19,
+          8 => 21,
+          9 => 23,
+          10 => 27,
+          11 => 29,
+          12 => 31,
+        ),
         'html' => 0,
         'attachments' => 0,
-        'exclude_empty' => 0,
+        'exclude_empty' => 1,
         'extra' => FALSE,
         'status' => 1,
         'components_machine_names' => array(
-          'email' => FALSE,
+          'email' => TRUE,
           'subject' => FALSE,
           'from_name' => FALSE,
           'from_address' => FALSE,
         ),
       ),
       1 => array(
-        'email' => 'report_concern__email_address',
-        'subject' => 'Your concern has been submitted through eiti.org ',
+        'email' => 'report_concern__my_issue_concerns',
+        'subject' => 'A concern has been submitted through eiti.org',
         'from_name' => 'default',
         'from_address' => 'default',
-        'template' => 'You have submitted the following concern via eiti.org on [submission:date:long]. 
+        'template' => 'A concern regarding the Executive Director has been submitted on [submission:date:long].
 
-Content: 
-[submission:values]
-
-
-
-
-',
+Content:
+[submission:values]',
         'excluded_components' => array(
           0 => 1,
           1 => 5,
           2 => 6,
           3 => 7,
           4 => 8,
-          5 => 10,
-          6 => 12,
-          7 => 14,
-          8 => 16,
-          9 => 19,
-          10 => 21,
-          11 => 23,
-          12 => 25,
-          13 => 26,
-          14 => 29,
+          5 => 12,
+          6 => 14,
+          7 => 16,
+          8 => 19,
+          9 => 21,
+          10 => 23,
+          11 => 27,
+          12 => 29,
+          13 => 31,
         ),
         'html' => 0,
         'attachments' => 0,
-        'exclude_empty' => 0,
-        'extra' => FALSE,
+        'exclude_empty' => 1,
+        'extra' => array(
+          'email_mapping' => array(
+            'A' => '',
+            'B' => 'rhollars@eiti.org',
+            'C' => '',
+          ),
+        ),
         'status' => 1,
         'components_machine_names' => array(
           'email' => TRUE,
@@ -164,34 +181,51 @@ Content:
         'subject' => 'Notification: A concern has been submitted through eiti.org',
         'from_name' => 'default',
         'from_address' => 'default',
-        'template' => 'A concern regarding the EITI Board, National Secretariat, the Members’ Meeting, etc. has been submitted on [submission:date:long] through the online form for voicing concerns. Please follow the procedures in the SOP on logging and addressing concerns. 
-
+        'template' => 'This is an automated alert. 
+A concern regarding the International Secretariat has been submitted on[submission:date:long] through the online platform for voicing concerns. 
+Please follow the procedures in the SOP on logging and addressing concerns.
 ',
         'excluded_components' => array(
           0 => 1,
           1 => 2,
-          2 => 5,
-          3 => 6,
-          4 => 7,
-          5 => 8,
-          6 => 10,
-          7 => 12,
-          8 => 14,
-          9 => 16,
-          10 => 19,
-          11 => 21,
-          12 => 23,
-          13 => 25,
-          14 => 26,
-          15 => 29,
+          2 => 3,
+          3 => 4,
+          4 => 5,
+          5 => 6,
+          6 => 7,
+          7 => 8,
+          8 => 9,
+          9 => 10,
+          10 => 11,
+          11 => 12,
+          12 => 13,
+          13 => 14,
+          14 => 15,
+          15 => 16,
+          16 => 17,
+          17 => 18,
+          18 => 19,
+          19 => 20,
+          20 => 21,
+          21 => 22,
+          22 => 23,
+          23 => 24,
+          24 => 25,
+          25 => 26,
+          26 => 27,
+          27 => 28,
+          28 => 29,
+          29 => 30,
+          30 => 31,
         ),
         'html' => 0,
         'attachments' => 0,
         'exclude_empty' => 0,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'rhollars@eiti.org',
-            'B' => 'cberger@eiti.org',
+            'A' => '',
+            'B' => 'secretariat@eiti.org',
+            'C' => '',
           ),
         ),
         'status' => 1,
@@ -204,38 +238,96 @@ Content:
       ),
       3 => array(
         'email' => 'report_concern__my_issue_concerns',
-        'subject' => 'A concern has been submitted through eiti.org ',
+        'subject' => 'A concern has been submitted through eiti.org',
         'from_name' => 'default',
         'from_address' => 'default',
         'template' => 'This concern regarding the EITI Board, National Secretariat, the Members’ Meeting, etc. has been submitted on [submission:date:long]. 
-
-Content: 
-
-[submission:values]',
+Content:
+[submission:values]
+',
         'excluded_components' => array(
           0 => 1,
           1 => 5,
           2 => 6,
           3 => 7,
           4 => 8,
-          5 => 10,
-          6 => 12,
-          7 => 14,
-          8 => 16,
-          9 => 19,
-          10 => 21,
-          11 => 23,
-          12 => 25,
-          13 => 26,
-          14 => 29,
+          5 => 12,
+          6 => 14,
+          7 => 16,
+          8 => 19,
+          9 => 21,
+          10 => 23,
+          11 => 27,
+          12 => 29,
+          13 => 31,
+        ),
+        'html' => 0,
+        'attachments' => 0,
+        'exclude_empty' => 1,
+        'extra' => array(
+          'email_mapping' => array(
+            'A' => 'cberger@eiti.org',
+            'B' => '',
+            'C' => 'cberger@eiti.org',
+          ),
+        ),
+        'status' => 1,
+        'components_machine_names' => array(
+          'email' => TRUE,
+          'subject' => FALSE,
+          'from_name' => FALSE,
+          'from_address' => FALSE,
+        ),
+      ),
+      4 => array(
+        'email' => 'report_concern__my_issue_concerns',
+        'subject' => 'A concern has been submitted through eiti.org',
+        'from_name' => 'default',
+        'from_address' => 'default',
+        'template' => 'A concern regarding the EITI Board, National Secretariat, the Members’ Meeting, etc. has been submitted on [submission:date:long] through the online form for voicing concerns. 
+Please follow the procedures in the SOP on logging and addressing concerns. 
+',
+        'excluded_components' => array(
+          0 => 1,
+          1 => 2,
+          2 => 3,
+          3 => 4,
+          4 => 5,
+          5 => 6,
+          6 => 7,
+          7 => 8,
+          8 => 9,
+          9 => 10,
+          10 => 11,
+          11 => 12,
+          12 => 13,
+          13 => 14,
+          14 => 15,
+          15 => 16,
+          16 => 17,
+          17 => 18,
+          18 => 19,
+          19 => 20,
+          20 => 21,
+          21 => 22,
+          22 => 23,
+          23 => 24,
+          24 => 25,
+          25 => 26,
+          26 => 27,
+          27 => 28,
+          28 => 29,
+          29 => 30,
+          30 => 31,
         ),
         'html' => 0,
         'attachments' => 0,
         'exclude_empty' => 0,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'rhollars@eiti.org',
-            'B' => 'cberger@eiti.org',
+            'A' => 'secretariat@eiti.org',
+            'B' => '',
+            'C' => 'secretariat@eiti.org',
           ),
         ),
         'status' => 1,
@@ -366,9 +458,10 @@ Content:
         'type' => 'select',
         'value' => '',
         'extra' => array(
-          'description' => 'Your complaint will be sent to the EITI Executive Director, unless it concerns him/her. In that case, it will be sent directly to the EITI Chair.',
-          'items' => 'A|The Executive Director
-B|Other (e.g. the EITI Board, International or National Secretariats, the Members’ Meeting)',
+          'description' => 'Note: Your complaint will be sent to the EITI Executive Director, unless it concerns him/her. In that case, it will be sent directly to the EITI Chair.',
+          'items' => 'A|The EITI Board, International or National Secretariats, the Members’ Meeting
+B|The Executive Director
+C|Other',
           'multiple' => 0,
           'title_display' => 'inline',
           'description_above' => 0,
@@ -963,7 +1056,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'source_type' => 'component',
             'source' => 'report_concern__my_issue_concerns',
             'operator' => 'equal',
-            'value' => 'A',
+            'value' => 'B',
             'source_component_machine_name' => TRUE,
           ),
         ),
@@ -1031,23 +1124,32 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
         ),
       ),
       1 => array(
-        'rgid' => 2,
-        'andor' => NULL,
+        'rgid' => 1,
+        'andor' => 'or',
         'weight' => 1,
         'rules' => array(
           0 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'rid' => 0,
             'source_type' => 'component',
             'source' => 'report_concern__my_issue_concerns',
             'operator' => 'equal',
-            'value' => 'B',
+            'value' => 'A',
+            'source_component_machine_name' => TRUE,
+          ),
+          1 => array(
+            'rgid' => 1,
+            'rid' => 1,
+            'source_type' => 'component',
+            'source' => 'report_concern__my_issue_concerns',
+            'operator' => 'equal',
+            'value' => 'C',
             'source_component_machine_name' => TRUE,
           ),
         ),
         'actions' => array(
           0 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 0,
             'target_type' => 'component',
             'target' => 'report_concern__i_have_a_concern_about_b',
@@ -1057,7 +1159,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           1 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 1,
             'target_type' => 'component',
             'target' => 'report_concern__i_have_a_concern_about_b',
@@ -1067,7 +1169,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           4 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 4,
             'target_type' => 'component',
             'target' => 'report_concern__eplain_description_b',
@@ -1077,7 +1179,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           5 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 5,
             'target_type' => 'component',
             'target' => 'report_concern__explain_the_concern_b',
@@ -1087,7 +1189,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           6 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 6,
             'target_type' => 'component',
             'target' => 'report_concern__docs_description_b',
@@ -1097,7 +1199,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           7 => array(
-            'rgid' => 2,
+            'rgid' => 1,
             'aid' => 7,
             'target_type' => 'component',
             'target' => 'report_concern__concern_supporting_documents_b',
@@ -1109,12 +1211,12 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
         ),
       ),
       2 => array(
-        'rgid' => 3,
+        'rgid' => 2,
         'andor' => NULL,
         'weight' => 2,
         'rules' => array(
           0 => array(
-            'rgid' => 3,
+            'rgid' => 2,
             'rid' => 0,
             'source_type' => 'component',
             'source' => 'report_concern__i_have_a_concern_about_a',
@@ -1125,7 +1227,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
         ),
         'actions' => array(
           0 => array(
-            'rgid' => 3,
+            'rgid' => 2,
             'aid' => 0,
             'target_type' => 'component',
             'target' => 'report_concern__nature_description_a',
@@ -1135,7 +1237,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           1 => array(
-            'rgid' => 3,
+            'rgid' => 2,
             'aid' => 1,
             'target_type' => 'component',
             'target' => 'report_concern__nature_of_concern',
@@ -1147,12 +1249,12 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
         ),
       ),
       3 => array(
-        'rgid' => 4,
+        'rgid' => 3,
         'andor' => NULL,
         'weight' => 3,
         'rules' => array(
           0 => array(
-            'rgid' => 4,
+            'rgid' => 3,
             'rid' => 0,
             'source_type' => 'component',
             'source' => 'report_concern__i_have_a_concern_about_b',
@@ -1163,7 +1265,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
         ),
         'actions' => array(
           0 => array(
-            'rgid' => 4,
+            'rgid' => 3,
             'aid' => 0,
             'target_type' => 'component',
             'target' => 'report_concern__nature_description_b',
@@ -1173,7 +1275,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
             'target_component_machine_name' => TRUE,
           ),
           1 => array(
-            'rgid' => 4,
+            'rgid' => 3,
             'aid' => 1,
             'target_type' => 'component',
             'target' => 'report_concern__nature_of_concern_b',
@@ -1218,7 +1320,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
     'data' => array(),
   ),
   'title_original' => 'Rapporter une préoccupation',
-  'entity_translation_handler_id' => 'node-webform-eid-11068-11068',
+  'entity_translation_handler_id' => 'node-webform-eid-11046-11046',
   'metatags' => array(
     'en' => array(
       'robots' => array(
