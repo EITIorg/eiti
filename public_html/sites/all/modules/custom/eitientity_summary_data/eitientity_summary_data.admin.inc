@@ -78,6 +78,8 @@ function summary_data_spreadsheet_upload_form($form, &$form_state, $entity) {
  * @param array $form_state
  */
 function _summary_data_spreadsheet_upload_form_submit($form, $form_state) {
+  _eiti_migration_s3_cleanup_spreadsheet_temp();
+
   $fid = $form_state['values']['report_upload'];
   $file = file_load($fid);
   $file = file_move($file, 'public://spreadsheets/' . $file->filename, FILE_EXISTS_RENAME);
