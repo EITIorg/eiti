@@ -16,7 +16,6 @@ function eiti_webforms_user_default_permissions() {
     'name' => 'access all webform results',
     'roles' => array(
       'administrator' => 'administrator',
-      'complaints viewer' => 'complaints viewer',
     ),
     'module' => 'webform',
   );
@@ -107,7 +106,6 @@ function eiti_webforms_user_default_permissions() {
     'name' => 'edit all webform submissions',
     'roles' => array(
       'administrator' => 'administrator',
-      'complaints viewer' => 'complaints viewer',
     ),
     'module' => 'webform',
   );
