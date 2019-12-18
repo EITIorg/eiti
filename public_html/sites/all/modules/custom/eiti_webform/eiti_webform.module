@@ -21,16 +21,101 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Implements hook_page_alter()
+ * @todo Now we are using Webforms for Concerns only, so this logic is ok, 
+ * but we need to rework it in scope of possible using Webforms for other purposes
  */
 function eiti_webform_init() {
-  global $user;
-  $path = current_path($path);
+  
+  // Need to check only for logged in users
+  if (user_is_logged_in()) {
 
-  if (substr_count($path, 'webform-results') > 0) {
-    $has_role = user_has_role('complaints viewer', $user);
-
-    if ($has_role == FALSE || $user->uid == 1) {
+    $path = current_path($path);
+    
+    // Deny access to Webform standard paths by pattern
+    $patterns = "node/*/webform-results/analysis\nnode/*/webform-results/analysis\nnode/*/webform-results/analysis/*\nnode/*/webform-results/table\nnode/*/webform-results/download\nnode/*/webform-results/clear";
+    if (drupal_match_path($path, $patterns)) {
       drupal_access_denied();
+    }
+
+    // Check access for Webform submissions overview page
+    $patterns = "node/*/webform-results\n";
+    if (drupal_match_path($path, $patterns)) {
+      global $user;
+      
+      if (!in_array('complaints overviewer', $user->roles)) {
+        drupal_access_denied();
+      }
+    } 
+
+    // Deny access to Webform submission standard paths by pattern
+    $patterns = "node/*/submissions\nnode/*/submission/*/edit\nnode/*/submission/*/delete";
+    if (drupal_match_path($path, $patterns)) {
+      drupal_access_denied();
+    }
+
+    // Deny access to Webform submission standard paths by pattern
+    $patterns = "node/*/submission/*\nnode/*/submission/*/view";
+    if (drupal_match_path($path, $patterns)) {
+      global $user;
+
+      $can_view = FALSE;
+
+      $mail = $user->mail;
+      $parsed_path = explode("/", $path);
+      $nid = $parsed_path[1];
+      $sid = $parsed_path[3];
+      
+      module_load_include('inc','webform','includes/webform.submissions');
+      $submissions = webform_get_submissions(array('sid' => $sid));
+
+      if (isset($submissions[$sid])) {
+        $submission = $submissions[$sid];
+        
+        $node = node_load($nid);
+
+        if (isset($node->webform)) {
+          $webform = $node->webform;
+
+          if (isset($webform['machine_name'])) {
+            switch ($webform['machine_name']) {
+              case 'report_concern':
+              case 'report_concern_fr':
+
+                $cid = '';
+                foreach ($webform['components'] as $cid_n => $cid_value) {
+                  if (isset($cid_value['form_key']) && $cid_value['form_key'] == 'my_issue_concerns') {
+                    $cid = $cid_n;
+                  }
+                }
+
+                if (!empty($cid) && isset($submission->data[$cid])) {
+                  $concern_type = array_shift($submission->data[$cid]);
+
+                  switch ($concern_type) {
+                    case 'B':
+                      if (in_array('complaints viewer ceo', $user->roles)) {
+                        $can_view = TRUE;
+                      }
+                    break;
+                    case 'A':
+                    case 'C':
+                      if (in_array('complaints viewer', $user->roles)) {
+                        $can_view = TRUE;
+                      }
+                    break;
+                  }
+                }
+              break;
+            }
+          }
+        }
+      }
+
+      if ($can_view == FALSE) {
+        drupal_access_denied();
+      }
     }
   }
 }
+
+
