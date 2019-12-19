@@ -19,21 +19,10 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'smtp_admin_settings') {
-    if (defined('SES_SERVER')) {
-      $form['server']['smtp_host']['#default_value'] = SES_SERVER;
-    }
-
-    if (defined('SES_PORT')) {
-      $form['server']['smtp_port']['#default_value'] = SES_PORT;
-    }
-
-    if (defined('SES_ACCESS')) {
-      $form['auth']['smtp_username']['#default_value'] = SES_ACCESS;
-    }
-
-    if (defined('SES_SECRET')) {
-      $form['auth']['smtp_password']['#default_value'] = SES_SECRET;
-    }
+    $form['server']['smtp_host']['#default_value'] = getenv ('SES_SERVER');
+    $form['server']['smtp_port']['#default_value'] = getenv ('SES_PORT');
+    $form['auth']['smtp_username']['#default_value'] = getenv ('SES_ACCESS');
+    $form['auth']['smtp_password']['#default_value'] = getenv ('SES_SECRET');
   }
 }
 
