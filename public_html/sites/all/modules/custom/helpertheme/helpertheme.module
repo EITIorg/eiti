@@ -58,43 +58,6 @@ function helpertheme_libraries_info() {
       ),
     ),
   );
-
-  // $libraries['popper'] = array(
-  //   'name' => 'Popper',
-  //   'vendor url' => 'https://github.com/jonathantneal/svg4everybody',
-  //   'download url' => 'https://github.com/jonathantneal/svg4everybody',
-  //   'version arguments' => array(
-  //     'file' => 'popper.js',
-  //     'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
-  //     'lines' => 64,
-  //     'cols' => 64,
-  //   ),
-  //   'files' => array('js' => array('popper.js')),
-  //   'variants' => array(
-  //     'minified' => array(
-  //       'files' => array('js' => array('popper.min.js')),
-  //     ),
-  //   ),
-  // );
-
-  // $libraries['tippy'] = array(
-  //   'name' => 'Tippy',
-  //   'vendor url' => 'https://github.com/jonathantneal/svg4everybody',
-  //   'download url' => 'https://github.com/jonathantneal/svg4everybody',
-  //   'version arguments' => array(
-  //     'file' => 'tippy.js',
-  //     'pattern' => '/([0-9a-zA-Z\.-]+)/',
-  //     'lines' => 1,
-  //     'cols' => 64,
-  //   ),
-  //   'files' => array('js' => array('tippy.js')),
-  //   'variants' => array(
-  //     'minified' => array(
-  //       'files' => array('js' => array('tippy-bundle.min.js')),
-  //     ),
-  //   ),
-  // );
-
   return $libraries;
 }
 
@@ -366,9 +329,6 @@ function helpertheme_preprocess_page(&$variables) {
   // We already have those styles from normalize.css
   drupal_add_js("html5 = { 'shivCSS': false };", 'inline');
 
-  // libraries_load('popper', 'minified');
-  // libraries_load('tippy', 'minified');
-
   // Load the "Modernizr" JavaScript library.
   libraries_load('modernizr', 'minified');
 
@@ -387,24 +347,8 @@ function helpertheme_preprocess_page(&$variables) {
     'defer' => TRUE,
   );
 
-  // Set tooltip js options.
-  $js_tooltip_options = array(    
-    'every_page' => TRUE,
-    'scope' => 'footer',    
-  );
- 
-  // Add popper script.
-  drupal_add_js($module_path . '/scripts/popper.min.js', $js_tooltip_options);
-
-  // Add tippy script.
-  drupal_add_js($module_path . '/scripts/tippy-bundle.min.js', $js_tooltip_options);
-
-  // Add custom call script.
-  // drupal_add_js($module_path . '/scripts/tips.js', $js_tooltip_options);  
-
   // Add the helpertheme script.
   drupal_add_js($module_path . '/scripts/helpertheme.js', $js_options);
-
 
   // Set the default css options.
   $css_options = array(

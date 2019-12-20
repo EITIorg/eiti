@@ -359,16 +359,6 @@
     }
   };
 
-  Drupal.behaviors.webformTooltips = {
-    attach: function (context) {   
-      tippy('.eiti-webform-tooltip', {
-        trigger: 'click',
-        theme: 'light',
-        placement: 'right',
-      });
-    }
-  };
-
   /**
    * Define a small helper class with handy functions.
    */
