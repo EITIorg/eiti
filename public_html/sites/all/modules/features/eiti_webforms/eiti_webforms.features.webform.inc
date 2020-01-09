@@ -38,7 +38,7 @@ $webforms = array();
     'data' => array(),
   ),
   'title_original' => 'Report a concern',
-  'entity_translation_handler_id' => 'node-webform-eid-11045-11045',
+  'entity_translation_handler_id' => 'node-webform-eid-11117-11117',
   'metatags' => array(
     'en' => array(
       'robots' => array(
@@ -164,7 +164,7 @@ Content:
         'extra' => array(
           'email_mapping' => array(
             'A' => '',
-            'B' => 'rhollars@eiti.org',
+            'B' => 'hclark@eiti.org',
             'C' => '',
           ),
         ),
@@ -182,7 +182,7 @@ Content:
         'from_name' => 'default',
         'from_address' => 'default',
         'template' => 'This is an automated alert. 
-A concern regarding the International Secretariat has been submitted on[submission:date:long] through the online platform for voicing concerns. 
+A concern regarding the Executive Director has been submitted on[submission:date:long] through the online platform for voicing concerns. 
 Please follow the procedures in the SOP on logging and addressing concerns.
 ',
         'excluded_components' => array(
@@ -224,7 +224,7 @@ Please follow the procedures in the SOP on logging and addressing concerns.
         'extra' => array(
           'email_mapping' => array(
             'A' => '',
-            'B' => 'secretariat@eiti.org',
+            'B' => 'concern@eiti.org',
             'C' => '',
           ),
         ),
@@ -266,9 +266,9 @@ Content:
         'exclude_empty' => 1,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'cberger@eiti.org',
+            'A' => 'mrobinson@eiti.org',
             'B' => '',
-            'C' => 'cberger@eiti.org',
+            'C' => 'mrobinson@eiti.org',
           ),
         ),
         'status' => 1,
@@ -325,9 +325,9 @@ Please follow the procedures in the SOP on logging and addressing concerns.
         'exclude_empty' => 0,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'secretariat@eiti.org',
+            'A' => 'concern@eiti.org',
             'B' => '',
-            'C' => 'secretariat@eiti.org',
+            'C' => 'concern@eiti.org',
           ),
         ),
         'status' => 1,
@@ -1320,7 +1320,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
     'data' => array(),
   ),
   'title_original' => 'Rapporter une préoccupation',
-  'entity_translation_handler_id' => 'node-webform-eid-11047-11047',
+  'entity_translation_handler_id' => 'node-webform-eid-11118-11118',
   'metatags' => array(
     'en' => array(
       'robots' => array(
@@ -1340,7 +1340,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
     ),
   ),
   'path' => array(
-    'pathauto' => 1,
+    'pathauto' => 0,
   ),
   'webform' => array(
     'confirmation' => '<p>Merci de nous avoir transmis votre préoccupation.</p><p>Nous nous efforcerons d’y répondre dans un délai de deux semaines.</p><p>Les prochaines étapes dépendront de la nature de votre préoccupation. Nous vous tiendrons informé des progrès. Pour répondre à certaines préoccupations, il peut s’avérer nécessaire de réunir certains <a href="https://eiti.org/fr/apropos/comites">comités du Conseil d’administration</a>, ce qui peut prendre du temps.</p><p>&nbsp;</p>',
@@ -1446,7 +1446,7 @@ Content:
         'extra' => array(
           'email_mapping' => array(
             'A' => '',
-            'B' => 'rhollars@eiti.org',
+            'B' => 'hclark@eiti.org',
             'C' => '',
           ),
         ),
@@ -1506,7 +1506,7 @@ Please follow the procedures in the SOP on logging and addressing concerns.
         'extra' => array(
           'email_mapping' => array(
             'A' => '',
-            'B' => 'secretariat@eiti.org',
+            'B' => 'concern@eiti.org',
             'C' => '',
           ),
         ),
@@ -1548,9 +1548,9 @@ Content:
         'exclude_empty' => 1,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'cberger@eiti.org',
+            'A' => 'mrobinson@eiti.org',
             'B' => '',
-            'C' => 'cberger@eiti.org',
+            'C' => 'mrobinson@eiti.org',
           ),
         ),
         'status' => 1,
@@ -1607,9 +1607,9 @@ Please follow the procedures in the SOP on logging and addressing concerns.
         'exclude_empty' => 0,
         'extra' => array(
           'email_mapping' => array(
-            'A' => 'secretariat@eiti.org',
+            'A' => 'concern@eiti.org',
             'B' => '',
-            'C' => 'secretariat@eiti.org',
+            'C' => 'concern@eiti.org',
           ),
         ),
         'status' => 1,
