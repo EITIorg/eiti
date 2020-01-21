@@ -652,3 +652,28 @@ $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
 if (is_readable($ddev_settings)) {
   require $ddev_settings;
 }
+
+// Implements Memcache settings
+$conf['cache_backends'][] = 'sites/all/modules/contrib/memcache/memcache.inc';
+$conf['lock_inc'] = 'sites/all/modules/contrib/memcache/memcache-lock.inc';
+$conf['memcache_stampede_protection'] = TRUE;
+$conf['cache_default_class'] = 'MemCacheDrupal';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+$conf['page_cache_without_database'] = TRUE;
+$conf['page_cache_invoke_hooks'] = FALSE;
+$conf['memcache_servers'] = array(EITI_EC_ENDPOINT => 'default');
+$conf['memcache_bins'] = array(
+  'cache'                 =>  'default',
+  'cache_block'           =>  'default',
+  'cache_field'           =>  'default',
+  'cache_filter'          =>  'default',
+  'cache_image'           =>  'default',
+  'cache_libraries'       =>  'default',
+  'cache_menu'            =>  'default',
+  'cache_page'            =>  'default',
+  'cache_path'            =>  'default',
+  'cache_rules'           =>  'default',
+  'cache_token'           =>  'default',
+  'cache_views'           =>  'default',
+  'cache_views_data'      =>  'default',
+);
