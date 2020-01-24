@@ -80,5 +80,6 @@ features[variable][] = smtp_verify_peer
 features[variable][] = smtp_verify_peer_name
 features[variable][] = xmlsitemap_settings_node_webform
 features[webform][] = report_concern
+features[webform][] = report_concern_es
 features[webform][] = report_concern_fr
 features_exclude[dependencies][ctools] = ctools
