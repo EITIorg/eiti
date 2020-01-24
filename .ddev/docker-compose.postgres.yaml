@@ -10,6 +10,11 @@ services:
         target: "/var/lib/postgresql"
         volume:
           nocopy: true
+      - type: "volume"
+        source: postgresdb-database-data
+        target: "/var/lib/postgresql/data"
+        volume:
+          nocopy: true
     ports:
       - 5432
     environment:
@@ -26,3 +31,5 @@ services:
 volumes:
   postgresdb-database:
     name: "${DDEV_SITENAME}-postgresdb"
+  postgresdb-database-data:
+    name: "${DDEV_SITENAME}-postgresdb-data"
