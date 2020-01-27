@@ -170,21 +170,14 @@ function eiti_webforms_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_on';
-  $strongarm->value = '1';
+  $strongarm->value = 0;
   $export['smtp_on'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_password';
-  $strongarm->value = '';
-  $export['smtp_password'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'smtp_port';
-  $strongarm->value = '465';
+  $strongarm->value = '587';
   $export['smtp_port'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -198,7 +191,7 @@ function eiti_webforms_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'smtp_protocol';
-  $strongarm->value = 'standard';
+  $strongarm->value = 'tls';
   $export['smtp_protocol'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -221,13 +214,6 @@ function eiti_webforms_strongarm() {
   $strongarm->name = 'smtp_reroute_address';
   $strongarm->value = '';
   $export['smtp_reroute_address'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'smtp_username';
-  $strongarm->value = '';
-  $export['smtp_username'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
