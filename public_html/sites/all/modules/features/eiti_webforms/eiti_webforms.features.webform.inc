@@ -1352,7 +1352,7 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => 'Submit',
+    'submit_text' => 'Enviar',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -1363,11 +1363,11 @@ Other|Other|<span class="eiti-webform-description">Please specify the nature of 
     'progressbar_pagebreak_labels' => 1,
     'progressbar_include_confirmation' => 1,
     'progressbar_label_first' => 'Paso 1. Resumen y detalles de contacto',
-    'progressbar_label_confirmation' => 'Submit',
+    'progressbar_label_confirmation' => 'Enviar',
     'preview' => 1,
-    'preview_next_button_label' => 'Review',
-    'preview_prev_button_label' => '',
-    'preview_title' => 'Review',
+    'preview_next_button_label' => 'Revisión',
+    'preview_prev_button_label' => 'Volver',
+    'preview_title' => 'Revisión',
     'preview_message' => '',
     'preview_message_format' => 'filtered_html',
     'preview_excluded_components' => array(),
@@ -1736,7 +1736,7 @@ Please follow the procedures in the SOP on logging and addressing concerns.
       ),
       'report_concern__my_issue_concerns' => array(
         'form_key' => 'my_issue_concerns',
-        'name' => 'Mi inquietud se refiere a a',
+        'name' => 'Mi inquietud le incumbe a:',
         'type' => 'select',
         'value' => '',
         'extra' => array(
@@ -1830,8 +1830,8 @@ c|No sería adecuado tratar esta inquietud directamente con el órgano del EITI 
         'type' => 'pagebreak',
         'value' => '',
         'extra' => array(
-          'next_page_label' => 'Next',
-          'prev_page_label' => 'Previous',
+          'next_page_label' => 'Siguiente',
+          'prev_page_label' => 'Volver',
           'private' => 0,
         ),
         'required' => 0,
@@ -2193,8 +2193,8 @@ Otros|Otros|<span class="eiti-webform-description">Indique la naturaleza de su i
         'type' => 'pagebreak',
         'value' => '',
         'extra' => array(
-          'next_page_label' => 'Next',
-          'prev_page_label' => 'Previous',
+          'next_page_label' => 'Siguiente',
+          'prev_page_label' => 'Volver',
           'private' => 0,
         ),
         'required' => 0,
@@ -3916,7 +3916,7 @@ Autre|Autre|<span class="eiti-webform-description">Veuillez préciser la nature 
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => 'Submit',
+    'submit_text' => 'Отправить',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -3926,12 +3926,12 @@ Autre|Autre|<span class="eiti-webform-description">Veuillez préciser la nature 
     'progressbar_percent' => 0,
     'progressbar_pagebreak_labels' => 1,
     'progressbar_include_confirmation' => 1,
-    'progressbar_label_first' => 'Шаг 1 Обзор и контактные данные ',
+    'progressbar_label_first' => 'Шаг 1: Обзор и контактные данные ',
     'progressbar_label_confirmation' => 'Отправить',
     'preview' => 1,
-    'preview_next_button_label' => 'Review',
-    'preview_prev_button_label' => '',
-    'preview_title' => 'Review',
+    'preview_next_button_label' => 'Просмотр',
+    'preview_prev_button_label' => 'Назад',
+    'preview_title' => 'Просмотр',
     'preview_message' => '',
     'preview_message_format' => 'filtered_html',
     'preview_excluded_components' => array(),
@@ -4582,7 +4582,7 @@ Other|Прочее|<span class="eiti-webform-description">Укажите сут�
         'extra' => array(
           'items' => 'A possible violation of the EITI Code of Conduct|Возможное нарушение <a href="https://eiti.org/ru/document/eiti-association-code-of-conduct" target="_blank">Кодекса Поведения ИПДО</a>|<span class="eiti-webform-description">Целью кодекса поведения ИПДО является обеспечение соблюдения должностными лицами ИПДО высочайших стандартов добросовестности. Этот кодекс применим ко всем должностным лицам ИПДО, включая членов Правления и сотрудников.</span>
 The way in which the EITI is being implemented in a specific country|То, как осуществляется внедрение ИПДО в конкретной стране, что, на мой взгляд, не соответствует Стандарту ИПДО.|<span class="eiti-webform-description">ИПДО необходим эффективный контроль со стороны многих заинтересованных сторон. Поэтому с проблемами, касающимися внедрения, следует в первую очередь обращаться к многосторонней группе заинтересованных сторон (МГЗС).</span>
-A decision by the EITI Board regarding an implementing country|Решение Правления ИПДО касательно <a href="https://eiti.org/countries" target="_blank">внедряющей страны</a>.|<span class="eiti-webform-description">Принятие решений Правлением ИПДО касательно прогресса в выполнении Стандарта ИПДО (включая протокол об участии гражданского общества), решений об адаптированном внедрении, о сроках отчетности и сроках выполнения требований Стандарта ИПДО.</span>
+A decision by the EITI Board regarding an implementing country|Решение Правления ИПДО касательно <a href="https://eiti.org/ru/countries" target="_blank">внедряющей страны</a>.|<span class="eiti-webform-description">Принятие решений Правлением ИПДО касательно прогресса в выполнении Стандарта ИПДО (включая протокол об участии гражданского общества), решений об адаптированном внедрении, о сроках отчетности и сроках выполнения требований Стандарта ИПДО.</span>
 A decision by the EITI’s Members’ Meeting|Принятие решения на <a href="https://eiti.org/members-meeting" target="_blank">Заседании членов </a> ИПДО.|<span class="eiti-webform-description">На Заседании членов принимаются решения касательно отчета о проведенной работе, финансовой отчетности и плана работы Правления ИПДО, избрания членов Правления ИПДО и их замещающих лиц, избрания Председателя Правления ИПДО и любых других вопросов на основе запросов, поступивших от какого-либо члена.</span>
 A decision by the EITI Board concerning the broader governance of the EITI|Решение Правления ИПДО касательно более общего управления ИПДО.|<span class="eiti-webform-description">Это может включать в себя решения касательно политики ИПДО или членства в Ассоциации ИПДО (статья 5.5 Устава Ассоциации). Правление ИПДО осуществляет исполнительные полномочия Ассоциации ИПДО. </span>
 An action or inaction by an EITI constituency|Какое-либо действие или бездействие со стороны одного из <a href="https://eiti.org/ru/governance-of-eiti#how-the-eiti-association-is-organised" target="_blank">электоратов ИПДО</a>.|<span class="eiti-webform-description">Члены ИПДО организованы в качестве трех электоратов: электората стран, который включает в себя внедряющие и поддерживающие страны; электората компаний, который включает в себя компании добывающего сектора, финансовые учреждения и торговцев сырьевыми товарами; а также электората общественных организаций. С вопросами, вызывающими обеспокоенность, в первую очередь следует обращаться к <a href=\'https://eiti.org/ru/node/3532\' target=\'_blank\'>Координатору электората</a>.</span>
