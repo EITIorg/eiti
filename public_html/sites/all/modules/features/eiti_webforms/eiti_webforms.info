@@ -82,4 +82,5 @@ features[variable][] = xmlsitemap_settings_node_webform
 features[webform][] = report_concern
 features[webform][] = report_concern_es
 features[webform][] = report_concern_fr
+features[webform][] = report_concern_ru
 features_exclude[dependencies][ctools] = ctools
