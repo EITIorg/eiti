@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_summary_data.features.field_instance.inc
@@ -114,6 +115,58 @@ function eitiet_summary_data_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_date_other_file_public'.
+  $field_instances['summary_data-summary_data-field_sd_date_other_file_public'] = array(
+    'bundle' => 'summary_data',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 36,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_date_other_file_public',
+    'label' => 'Date that other file was made public',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 29,
+    ),
+  );
+
+  // Exported field_instance:
   // 'summary_data-summary_data-field_sd_disagg_company'.
   $field_instances['summary_data-summary_data-field_sd_disagg_company'] = array(
     'bundle' => 'summary_data',
@@ -132,7 +185,41 @@ function eitiet_summary_data_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_company',
-    'label' => 'Disaggregation of data by company',
+    'label' => '...by company',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_disagg_gover_agg'.
+  $field_instances['summary_data-summary_data-field_sd_disagg_gover_agg'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 43,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_disagg_gover_agg',
+    'label' => '… by government agency',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -166,7 +253,7 @@ function eitiet_summary_data_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_project',
-    'label' => 'Disaggregation of data by project',
+    'label' => '...by project',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -177,7 +264,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -200,7 +287,7 @@ function eitiet_summary_data_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_disagg_revenue_stream',
-    'label' => 'Disaggregation of data by revenue stream',
+    'label' => '...by revenue stream',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -212,6 +299,41 @@ function eitiet_summary_data_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 17,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_exchange_rate_src_url'.
+  $field_instances['summary_data-summary_data-field_sd_exchange_rate_src_url'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 41,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_exchange_rate_src_url',
+    'label' => 'Exchange rate source (URL,…)',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'urlwidget',
+      'weight' => 9,
     ),
   );
 
@@ -264,7 +386,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 13,
+      'weight' => 30,
     ),
   );
 
@@ -301,6 +423,74 @@ function eitiet_summary_data_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_gov_system_discl_locat'.
+  $field_instances['summary_data-summary_data-field_sd_gov_system_discl_locat'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 32,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_gov_system_discl_locat',
+    'label' => 'Does the government systematically disclose EITI data at a single location?',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_goverm_open_data_policy'.
+  $field_instances['summary_data-summary_data-field_sd_goverm_open_data_policy'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 37,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_goverm_open_data_policy',
+    'label' => 'Does the government have an open data policy?',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance:
   // 'summary_data-summary_data-field_sd_independent_admin'.
   $field_instances['summary_data-summary_data-field_sd_independent_admin'] = array(
     'bundle' => 'summary_data',
@@ -332,7 +522,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 8,
     ),
   );
 
@@ -374,7 +564,44 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 12,
+      'weight' => 17,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_iso_alpha_3_code'.
+  $field_instances['summary_data-summary_data-field_sd_iso_alpha_3_code'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 29,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_iso_alpha_3_code',
+    'label' => 'ISO Alpha-3 Code',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -394,9 +621,10 @@ function eitiet_summary_data_field_default_field_instances() {
         'weight' => 13,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_mining_sector',
-    'label' => 'Mining',
+    'label' => 'Mining (incl. Quarrying)',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -408,6 +636,80 @@ function eitiet_summary_data_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_nation_currency_iso4217'.
+  $field_instances['summary_data-summary_data-field_sd_nation_currency_iso4217'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 42,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_nation_currency_iso4217',
+    'label' => 'National currency ISO-4217',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_national_currency_name'.
+  $field_instances['summary_data-summary_data-field_sd_national_currency_name'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 30,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_national_currency_name',
+    'label' => 'National currency name',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
     ),
   );
 
@@ -432,9 +734,10 @@ function eitiet_summary_data_field_default_field_instances() {
         'weight' => 4,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_no_reporting_com',
-    'label' => 'Number of reporting companies',
+    'label' => 'Number of reporting companies (incl SOEs if payer)',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -449,7 +752,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 14,
     ),
   );
 
@@ -474,9 +777,10 @@ function eitiet_summary_data_field_default_field_instances() {
         'weight' => 3,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
     'field_name' => 'field_sd_no_reporting_gov',
-    'label' => 'Number of reporting government entities',
+    'label' => 'Number of reporting government entities (incl SOEs if recipient)',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -491,7 +795,81 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_not_applicable'.
+  $field_instances['summary_data-summary_data-field_sd_not_applicable'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 46,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_not_applicable',
+    'label' => 'Not applicable',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_not_available'.
+  $field_instances['summary_data-summary_data-field_sd_not_available'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_not_available',
+    'label' => 'Not available',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
     ),
   );
 
@@ -527,8 +905,9 @@ function eitiet_summary_data_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'summary_data-summary_data-field_sd_other_sector'.
-  $field_instances['summary_data-summary_data-field_sd_other_sector'] = array(
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_open_data_portal_files'.
+  $field_instances['summary_data-summary_data-field_sd_open_data_portal_files'] = array(
     'bundle' => 'summary_data',
     'default_value' => NULL,
     'deleted' => 0,
@@ -536,19 +915,119 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'title',
-        'settings' => array(
-          'title_class' => '',
-          'title_link' => '',
-          'title_style' => '',
-        ),
-        'type' => 'title_linked',
-        'weight' => 14,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 38,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'summary_data',
-    'field_name' => 'field_sd_other_sector',
-    'label' => 'Other',
+    'field_name' => 'field_sd_open_data_portal_files',
+    'label' => 'Open data portal / files',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'urlwidget',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_other_files_relecance'.
+  $field_instances['summary_data-summary_data-field_sd_other_files_relecance'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 35,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_other_files_relecance',
+    'label' => 'Are there other files of relevance?',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 28,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_other_non_upstr_sectors'.
+  $field_instances['summary_data-summary_data-field_sd_other_non_upstr_sectors'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 39,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_other_non_upstr_sectors',
+    'label' => 'Other, non-upstream sectors',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_other_sector_name'.
+  $field_instances['summary_data-summary_data-field_sd_other_sector_name'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 40,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_other_sector_name',
+    'label' => 'If yes, please specify name (insert new rows if multiple)',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -563,6 +1042,58 @@ function eitiet_summary_data_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_public_date_eiti_data'.
+  $field_instances['summary_data-summary_data-field_sd_public_date_eiti_data'] = array(
+    'bundle' => 'summary_data',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 33,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_public_date_eiti_data',
+    'label' => 'Publication date of the EITI data',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 26,
     ),
   );
 
@@ -643,7 +1174,41 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 0,
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_report_prep_independent'.
+  $field_instances['summary_data-summary_data-field_sd_report_prep_independent'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 31,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_report_prep_independent',
+    'label' => 'Has an EITI Report been prepared by an Independent Administrator?',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 21,
     ),
   );
 
@@ -686,7 +1251,7 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 14,
+      'weight' => 19,
     ),
   );
 
@@ -729,30 +1294,157 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 13,
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_site_link_url_eiti_data'.
+  $field_instances['summary_data-summary_data-field_sd_site_link_url_eiti_data'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 34,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_site_link_url_eiti_data',
+    'label' => 'Website link (URL) to EITI data',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'urlwidget',
+      'weight' => 27,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_systematic_disclosed'.
+  $field_instances['summary_data-summary_data-field_sd_systematic_disclosed'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 44,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_systematic_disclosed',
+    'label' => 'Systematically disclosed',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_through_eiti_reporting'.
+  $field_instances['summary_data-summary_data-field_sd_through_eiti_reporting'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_through_eiti_reporting',
+    'label' => 'Through EITI Reporting',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Disaggregation of data by company');
-  t('Disaggregation of data by project');
-  t('Disaggregation of data by revenue stream');
+  t('...by company');
+  t('...by project');
+  t('...by revenue stream');
+  t('Are there other files of relevance?');
+  t('Date that other file was made public');
+  t('Does the government have an open data policy?');
+  t('Does the government systematically disclose EITI data at a single location?');
   t('Email address');
+  t('Exchange rate source (URL,…)');
   t('Gas');
+  t('Has an EITI Report been prepared by an Independent Administrator?');
+  t('ISO Alpha-3 Code');
+  t('If yes, please specify name (insert new rows if multiple)');
   t('Independent Administrator');
   t('Indicator Values');
-  t('Mining');
+  t('Mining (incl. Quarrying)');
   t('Name');
-  t('Number of reporting companies');
-  t('Number of reporting government entities');
+  t('National currency ISO-4217');
+  t('National currency name');
+  t('Not applicable');
+  t('Not available');
+  t('Number of reporting companies (incl SOEs if payer)');
+  t('Number of reporting government entities (incl SOEs if recipient)');
   t('Oil');
+  t('Open data portal / files');
   t('Organisation');
-  t('Other');
   t('Other data files');
+  t('Other, non-upstream sectors');
+  t('Publication date of the EITI data');
   t('Reconciled Revenue Streams per Company');
   t('Revenue Stream as Disclosed by Government');
   t('Summary Data Report File');
+  t('Systematically disclosed');
+  t('Through EITI Reporting');
+  t('Website link (URL) to EITI data');
+  t('… by government agency');
 
   return $field_instances;
 }
