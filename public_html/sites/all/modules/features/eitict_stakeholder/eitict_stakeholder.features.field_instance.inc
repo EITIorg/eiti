@@ -22,14 +22,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -58,7 +58,100 @@ function eitict_stakeholder_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-stakeholder-field_fpp_person_list'.
+  $field_instances['node-stakeholder-field_fpp_person_list'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Add EITI board member.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 23,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 12,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_fpp_person_list',
+    'label' => 'Person List',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-stakeholder-field_short_intro'.
+  $field_instances['node-stakeholder-field_short_intro'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please, enter a short description of the stakeholder.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_short_intro',
+    'label' => 'Short intro',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 6,
     ),
   );
 
@@ -73,14 +166,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 1,
+        'weight' => 6,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -97,7 +190,54 @@ function eitict_stakeholder_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-stakeholder-field_stk_content_title'.
+  $field_instances['node-stakeholder-field_stk_content_title'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The title above the main content.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 7,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_stk_content_title',
+    'label' => 'Stakeholder content title',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
     ),
   );
 
@@ -112,7 +252,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 11,
       ),
       'full' => array(
         'label' => 'above',
@@ -122,13 +262,13 @@ function eitict_stakeholder_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_stk_countries',
-    'label' => 'Implementing Countries',
+    'label' => 'Operating in these EITI countries',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -157,14 +297,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'full' => array(
         'label' => 'above',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 6,
+        'weight' => 11,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -209,7 +349,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 12,
     ),
   );
 
@@ -311,6 +451,100 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-stakeholder-field_stk_quote_text'.
+  $field_instances['node-stakeholder-field_stk_quote_text'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Quote text.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'owlcarousel_fields',
+        'settings' => array(
+          'image_style' => 'large',
+          'settings_group' => 'owlcarousel_settings_default',
+          'trim_length' => '',
+        ),
+        'type' => 'owlcarousel_formatter',
+        'weight' => 14,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_stk_quote_text',
+    'label' => 'Stakeholder quote text',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance: 'node-stakeholder-field_stk_quote_title'.
+  $field_instances['node-stakeholder-field_stk_quote_title'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The title of quote',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 21,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => '',
+        ),
+        'type' => 'title_linked',
+        'weight' => 13,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_stk_quote_title',
+    'label' => 'Stakeholder quote title',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-stakeholder-field_stk_statement'.
   $field_instances['node-stakeholder-field_stk_statement'] = array(
     'bundle' => 'stakeholder',
@@ -322,14 +556,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'full' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 10,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -349,7 +583,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 13,
     ),
   );
 
@@ -364,14 +598,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'full' => array(
         'label' => 'above',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 8,
+        'weight' => 12,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -408,7 +642,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 10,
+      'weight' => 14,
     ),
   );
 
@@ -423,13 +657,13 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'full' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 22,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -461,14 +695,14 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 10,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -509,6 +743,49 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-stakeholder-field_supporter_since'.
+  $field_instances['node-stakeholder-field_supporter_since'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The year when company became a supporter.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_supporter_since',
+    'label' => 'Supporter since',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 5,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-stakeholder-title_field'.
   $field_instances['node-stakeholder-title_field'] = array(
     'bundle' => 'stakeholder',
@@ -536,7 +813,7 @@ function eitict_stakeholder_field_default_field_instances() {
           'title_style' => 'h1',
         ),
         'type' => 'title_linked',
-        'weight' => 4,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -694,20 +971,32 @@ function eitict_stakeholder_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add EITI board member.');
   t('Body');
   t('Category');
   t('Description');
-  t('Implementing Countries');
   t('Input the names of the EITI countries this company works with.');
   t('Logo');
   t('Name');
+  t('Operating in these EITI countries');
   t('Optionally flagging text that can be displayed with the company information.');
+  t('Person List');
   t('Please enter the Statement of support URL.');
+  t('Please, enter a short description of the stakeholder.');
+  t('Quote text.');
+  t('Short intro');
   t('Stakeholder Form');
   t('Stakeholder Statement');
   t('Stakeholder Type Sidebar');
+  t('Stakeholder content title');
+  t('Stakeholder quote text');
+  t('Stakeholder quote title');
   t('Statement of Support');
+  t('Supporter since');
   t('The full URL (including http://) of the stakeholder website.');
+  t('The title above the main content.');
+  t('The title of quote');
+  t('The year when company became a supporter.');
   t('Type');
   t('Upload the stakeholder logo, it should be at least 240 pixels on all sides.');
   t('Website');

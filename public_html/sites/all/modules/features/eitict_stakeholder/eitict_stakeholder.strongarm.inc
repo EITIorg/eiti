@@ -115,17 +115,26 @@ function eitict_stakeholder_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'summary' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '12',
+          'weight' => '17',
         ),
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '16',
         ),
         'language' => array(
           'weight' => '0',
+        ),
+        'metatags' => array(
+          'weight' => '19',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '18',
         ),
       ),
       'display' => array(),
