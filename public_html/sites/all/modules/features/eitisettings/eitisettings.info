@@ -4,6 +4,7 @@ core = 7.x
 package = EITI General
 version = 7.x-1.0
 dependencies[] = ctools
+dependencies[] = fe_block
 dependencies[] = features
 dependencies[] = filter
 dependencies[] = htmlpurifier

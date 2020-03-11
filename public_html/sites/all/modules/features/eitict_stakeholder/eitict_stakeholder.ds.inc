@@ -50,20 +50,6 @@ function eitict_stakeholder_ds_field_settings_info() {
         'ft' => array(),
       ),
     ),
-    'title_field' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
-    'field_stk_countries' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
     'field_stk_content_title' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -79,6 +65,20 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
+    'title_field' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_reset',
+        ),
+      ),
+    ),
+    'field_stk_countries' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
   );
   $export['node|stakeholder|full'] = $ds_fieldsetting;
 
@@ -89,10 +89,19 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder_types';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'stakehoder_listing' => array(
-      'weight' => '3',
-      'label' => 'hidden',
-      'format' => 'default',
+    'field_contact_eiti' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'lb-col' => TRUE,
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'stk-type-contact',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
     ),
   );
   $export['taxonomy_term|stakeholder_types|default'] = $ds_fieldsetting;
@@ -105,6 +114,22 @@ function eitict_stakeholder_ds_field_settings_info() {
  */
 function eitict_stakeholder_ds_custom_fields_info() {
   $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'board_link';
+  $ds_field->label = 'Board link';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'stakeholder|*';
+  $ds_field->properties = array(
+    'block' => 'block|1',
+    'block_render' => '3',
+    'block_visibility' => 0,
+  );
+  $export['board_link'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -191,11 +216,11 @@ function eitict_stakeholder_ds_layout_settings_info() {
         9 => 'body',
         10 => 'field_stk_statement',
         11 => 'field_stk_form',
-        12 => 'field_stk_support',
-        13 => 'field_fpp_person_list',
+        12 => 'field_fpp_person_list',
+        13 => 'field_stk_support',
         14 => 'board_link',
-        15 => 'field_stk_quote_title',
-        16 => 'group_board',
+        15 => 'group_board',
+        16 => 'field_stk_quote_title',
         17 => 'field_stk_quote_text',
       ),
     ),
@@ -212,11 +237,11 @@ function eitict_stakeholder_ds_layout_settings_info() {
       'body' => 'right',
       'field_stk_statement' => 'right',
       'field_stk_form' => 'right',
-      'field_stk_support' => 'right',
       'field_fpp_person_list' => 'right',
+      'field_stk_support' => 'right',
       'board_link' => 'right',
-      'field_stk_quote_title' => 'right',
       'group_board' => 'right',
+      'field_stk_quote_title' => 'right',
       'field_stk_quote_text' => 'right',
     ),
     'classes' => array(
@@ -256,17 +281,15 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
       'left' => array(
         1 => 'description_field',
-        2 => 'stakehoder_listing',
       ),
       'right' => array(
-        3 => 'field_stakeholder_type_sidebar',
+        2 => 'field_contact_eiti',
       ),
     ),
     'fields' => array(
       'name_field' => 'above',
       'description_field' => 'left',
-      'stakehoder_listing' => 'left',
-      'field_stakeholder_type_sidebar' => 'right',
+      'field_contact_eiti' => 'right',
     ),
     'classes' => array(
       'layout_class' => array(

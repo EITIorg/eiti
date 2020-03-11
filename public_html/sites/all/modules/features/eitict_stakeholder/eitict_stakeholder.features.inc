@@ -21,6 +21,13 @@ function eitict_stakeholder_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function eitict_stakeholder_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function eitict_stakeholder_node_info() {

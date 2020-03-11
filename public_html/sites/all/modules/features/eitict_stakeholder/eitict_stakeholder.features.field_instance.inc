@@ -33,12 +33,9 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -71,12 +68,8 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 23,
       ),
       'full' => array(
@@ -89,6 +82,12 @@ function eitict_stakeholder_field_default_field_instances() {
         ),
         'type' => 'entityreference_entity_view',
         'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -133,6 +132,17 @@ function eitict_stakeholder_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'module' => 'owlcarousel_fields',
+        'settings' => array(
+          'image_style' => 'large',
+          'settings_group' => 'owlcarousel_settings_default',
+          'trim_length' => '',
+        ),
+        'type' => 'owlcarousel_formatter',
+        'weight' => 2,
+      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -175,6 +185,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 6,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -203,9 +219,8 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 20,
       ),
       'full' => array(
@@ -218,6 +233,12 @@ function eitict_stakeholder_field_default_field_instances() {
         ),
         'type' => 'title_linked',
         'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -264,6 +285,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 1,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -305,6 +332,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -374,6 +407,16 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
+          'image_style' => 'logo-small',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
           'image_style' => 'logo-small',
         ),
         'type' => 'image',
@@ -460,21 +503,22 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 22,
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'owlcarousel_fields',
-        'settings' => array(
-          'image_style' => 'large',
-          'settings_group' => 'owlcarousel_settings_default',
-          'trim_length' => '',
-        ),
-        'type' => 'owlcarousel_formatter',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
         'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -507,21 +551,22 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 21,
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'title',
-        'settings' => array(
-          'title_class' => '',
-          'title_link' => '',
-          'title_style' => '',
-        ),
-        'type' => 'title_linked',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
         'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -565,6 +610,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 10,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -606,6 +657,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -665,6 +722,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 22,
       ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
@@ -703,6 +766,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -752,9 +821,8 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 24,
       ),
       'full' => array(
@@ -763,6 +831,12 @@ function eitict_stakeholder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -817,9 +891,14 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => '',
+        ),
+        'type' => 'title_linked',
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -889,6 +968,48 @@ function eitict_stakeholder_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-stakeholder_types-field_contact_eiti'.
+  $field_instances['taxonomy_term-stakeholder_types-field_contact_eiti'] = array(
+    'bundle' => 'stakeholder_types',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_contact_eiti',
+    'label' => 'Contact EITI',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-stakeholder_types-field_stakeholder_type_sidebar'.
   $field_instances['taxonomy_term-stakeholder_types-field_stakeholder_type_sidebar'] = array(
     'bundle' => 'stakeholder_types',
@@ -898,10 +1019,9 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
+        'type' => 'hidden',
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -921,7 +1041,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 6,
     ),
   );
 
@@ -974,6 +1094,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Add EITI board member.');
   t('Body');
   t('Category');
+  t('Contact EITI');
   t('Description');
   t('Input the names of the EITI countries this company works with.');
   t('Logo');
