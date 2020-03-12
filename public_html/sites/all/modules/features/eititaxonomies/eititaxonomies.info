@@ -89,4 +89,5 @@ features[variable][] = pathauto_taxonomy_term_publication_types_public_pattern
 features[variable][] = pathauto_taxonomy_term_publishers_pattern
 features[variable][] = pathauto_taxonomy_term_tags_pattern
 features[variable][] = title_taxonomy_term
+features[views_view][] = supporters
 features[views_view][] = taxonomy_nodes

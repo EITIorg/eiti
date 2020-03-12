@@ -116,7 +116,7 @@ function eitict_stakeholder_views_default_views() {
   $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
+  $handler = $view->new_display('block', 'Block', 'stakeholders');
   $translatables['stakeholders'] = array(
     t('Master'),
     t('Stakeholders'),

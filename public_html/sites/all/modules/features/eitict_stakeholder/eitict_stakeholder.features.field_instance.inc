@@ -992,7 +992,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1034,7 +1034,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -1070,7 +1070,76 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-stakeholder_types-field_stk_type_image'.
+  $field_instances['taxonomy_term-stakeholder_types-field_stk_type_image'] = array(
+    'bundle' => 'stakeholder_types',
+    'deleted' => 0,
+    'description' => 'The image of stakeholder type term',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_stk_type_image',
+    'label' => 'Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 0,
+            'slashes' => 0,
+            'transliterate' => 0,
+          ),
+          'value' => '',
+        ),
+        'redirect' => 0,
+        'retroactive_update' => 0,
+      ),
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '2 MB',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 1,
     ),
   );
 
@@ -1114,7 +1183,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -1125,6 +1194,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Category');
   t('Contact EITI');
   t('Description');
+  t('Image');
   t('Input the names of the EITI countries this company works with.');
   t('Logo');
   t('Name');
@@ -1145,6 +1215,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Statement of Support');
   t('Support duration');
   t('The full URL (including http://) of the stakeholder website.');
+  t('The image of stakeholder type term');
   t('The title above the main content.');
   t('The title of quote');
   t('Type');
