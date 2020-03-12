@@ -58,6 +58,13 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_stk_countries' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
     'field_supporter_since' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -69,13 +76,6 @@ function eitict_stakeholder_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
-        ),
-      ),
-    ),
-    'field_stk_countries' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'func' => 'theme_field',
         ),
       ),
     ),
@@ -218,9 +218,9 @@ function eitict_stakeholder_ds_layout_settings_info() {
         11 => 'field_stk_form',
         12 => 'field_fpp_person_list',
         13 => 'field_stk_support',
-        14 => 'board_link',
-        15 => 'group_board',
-        16 => 'field_stk_quote_title',
+        14 => 'field_stk_quote_title',
+        15 => 'board_link',
+        16 => 'group_board',
         17 => 'field_stk_quote_text',
       ),
     ),
@@ -239,9 +239,9 @@ function eitict_stakeholder_ds_layout_settings_info() {
       'field_stk_form' => 'right',
       'field_fpp_person_list' => 'right',
       'field_stk_support' => 'right',
+      'field_stk_quote_title' => 'right',
       'board_link' => 'right',
       'group_board' => 'right',
-      'field_stk_quote_title' => 'right',
       'field_stk_quote_text' => 'right',
     ),
     'classes' => array(

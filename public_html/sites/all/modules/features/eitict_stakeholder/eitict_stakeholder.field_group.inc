@@ -55,10 +55,10 @@ function eitict_stakeholder_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Quote ',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
-      0 => 'field_stk_quote_title',
-      1 => 'field_stk_quote_text',
+      0 => 'field_stk_quote_text',
+      1 => 'field_stk_quote_title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -87,8 +87,8 @@ function eitict_stakeholder_field_group_info() {
     'label' => 'Quote ',
     'weight' => '8',
     'children' => array(
-      0 => 'field_stk_quote_title',
-      1 => 'field_stk_quote_text',
+      0 => 'field_stk_quote_text',
+      1 => 'field_stk_quote_title',
     ),
     'format_type' => 'div',
     'format_settings' => array(

@@ -55,7 +55,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -108,7 +108,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -165,6 +165,43 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-stakeholder-field_since_year'.
+  $field_instances['node-stakeholder-field_since_year'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 25,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_since_year',
+    'label' => 'Since year',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-stakeholder-field_stk_category'.
   $field_instances['node-stakeholder-field_stk_category'] = array(
     'bundle' => 'stakeholder',
@@ -206,7 +243,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -258,7 +295,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -382,7 +419,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -634,7 +671,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -699,7 +736,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -817,45 +854,37 @@ function eitict_stakeholder_field_default_field_instances() {
     'bundle' => 'stakeholder',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'The year when company became a supporter.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'list_default',
         'weight' => 24,
       ),
       'full' => array(
-        'label' => 'inline',
-        'module' => 'text',
+        'label' => 'hidden',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'list_default',
         'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_supporter_since',
-    'label' => 'Supporter since',
+    'label' => 'Support duration',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 5,
-      ),
-      'type' => 'text_textfield',
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 7,
     ),
   );
@@ -1106,6 +1135,7 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Please, enter a short description of the stakeholder.');
   t('Quote text.');
   t('Short intro');
+  t('Since year');
   t('Stakeholder Form');
   t('Stakeholder Statement');
   t('Stakeholder Type Sidebar');
@@ -1113,11 +1143,10 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Stakeholder quote text');
   t('Stakeholder quote title');
   t('Statement of Support');
-  t('Supporter since');
+  t('Support duration');
   t('The full URL (including http://) of the stakeholder website.');
   t('The title above the main content.');
   t('The title of quote');
-  t('The year when company became a supporter.');
   t('Type');
   t('Upload the stakeholder logo, it should be at least 240 pixels on all sides.');
   t('Website');

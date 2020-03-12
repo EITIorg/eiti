@@ -122,19 +122,19 @@ function eitict_stakeholder_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '17',
+          'weight' => '18',
         ),
         'redirect' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'metatags' => array(
-          'weight' => '19',
+          'weight' => '20',
         ),
         'xmlsitemap' => array(
-          'weight' => '18',
+          'weight' => '19',
         ),
       ),
       'display' => array(),
