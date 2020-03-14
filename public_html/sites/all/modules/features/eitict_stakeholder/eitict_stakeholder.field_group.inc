@@ -21,20 +21,20 @@ function eitict_stakeholder_field_group_info() {
   $field_group->mode = 'full';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'EITI Board member',
-    'weight' => '13',
+    'label' => '',
+    'weight' => '10',
     'children' => array(
       0 => 'field_fpp_person_list',
       1 => 'board_link',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'EITI Board member',
+      'label' => '',
       'instance_settings' => array(
         'id' => '',
         'classes' => 'group-board field-group-div',
         'description' => '',
-        'show_label' => '1',
+        'show_label' => '0',
         'label_element' => 'h2',
         'effect' => 'none',
         'speed' => 'fast',
@@ -59,6 +59,7 @@ function eitict_stakeholder_field_group_info() {
     'children' => array(
       0 => 'field_stk_quote_text',
       1 => 'field_stk_quote_title',
+      2 => 'field_stk_quote_source',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -88,7 +89,7 @@ function eitict_stakeholder_field_group_info() {
     'weight' => '8',
     'children' => array(
       0 => 'field_stk_quote_text',
-      1 => 'field_stk_quote_title',
+      1 => 'field_stk_quote_source',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -109,7 +110,6 @@ function eitict_stakeholder_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('EITI Board member');
   t('Quote ');
 
   return $field_groups;

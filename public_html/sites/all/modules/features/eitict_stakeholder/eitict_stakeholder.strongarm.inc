@@ -161,10 +161,10 @@ function eitict_stakeholder_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '6',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '5',
+          'weight' => '7',
         ),
         'language' => array(
           'weight' => '0',

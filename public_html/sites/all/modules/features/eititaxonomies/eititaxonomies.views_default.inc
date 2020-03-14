@@ -58,25 +58,9 @@ function eititaxonomies_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'learn more';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'taxonomy/term/[tid]';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Filter criterion: Taxonomy vocabulary: Machine name */
-  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
-  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['value'] = array(
-    'stakeholder_types' => 'stakeholder_types',
-  );
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
+  /* Display: Supporters types */
+  $handler = $view->new_display('block', 'Supporters types', 's_types');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -120,6 +104,54 @@ function eititaxonomies_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'taxonomy/term/[tid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy term: Term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    715 => '715',
+    714 => '714',
+    716 => '716',
+  );
+  $handler->display->display_options['filters']['tid']['type'] = 'select';
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'stakeholder_types';
+  $handler->display->display_options['filters']['tid']['hierarchy'] = 1;
+  $handler->display->display_options['block_caching'] = '4';
+
+  /* Display: Companies categories */
+  $handler = $view->new_display('block', 'Companies categories', 'companies_categories');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Companies categories';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Parent term */
+  $handler->display->display_options['arguments']['parent']['id'] = 'parent';
+  $handler->display->display_options['arguments']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['arguments']['parent']['field'] = 'parent';
+  $handler->display->display_options['arguments']['parent']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['parent']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['parent']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['parent']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['parent']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy term: Parent term */
+  $handler->display->display_options['filters']['parent']['id'] = 'parent';
+  $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['filters']['parent']['field'] = 'parent';
+  $handler->display->display_options['filters']['parent']['value']['value'] = '715';
+  $handler->display->display_options['block_caching'] = '4';
   $translatables['supporters'] = array(
     t('Master'),
     t('Supporters types'),
@@ -132,7 +164,8 @@ function eititaxonomies_views_default_views() {
     t('.'),
     t(','),
     t('learn more'),
-    t('Block'),
+    t('Companies categories'),
+    t('All'),
   );
   $export['supporters'] = $view;
 

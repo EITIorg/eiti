@@ -455,7 +455,7 @@ function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars
         $lan = LANGUAGE_NONE;
         $year = $vars['field_since_year'][$lan][0]['value'];
         if ($item['#items'][0]['value'] == 'supporter') {
-          $item[0]['#markup'] = $supporter . ' ' . $year;
+          $item[0]['#markup'] = t($supporter) . ' ' . $year;
         }
       }
     }

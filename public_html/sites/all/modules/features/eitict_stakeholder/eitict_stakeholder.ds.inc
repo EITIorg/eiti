@@ -50,18 +50,24 @@ function eitict_stakeholder_ds_field_settings_info() {
         'ft' => array(),
       ),
     ),
-    'field_stk_content_title' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'classes' => 'clearfix',
-          'lbw' => 1,
-        ),
-      ),
-    ),
     'field_stk_countries' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_stk_quote_title' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'classes' => 'clearfix',
+        ),
+      ),
+    ),
+    'field_fpp_person_list' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb-col' => TRUE,
         ),
       ),
     ),
@@ -100,6 +106,31 @@ function eitict_stakeholder_ds_field_settings_info() {
           'ow-def-cl' => TRUE,
           'ow-at' => '',
           'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_fpp_useful_links' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => TRUE,
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'field-items',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'field-item',
+          'fi-at' => '',
+          'fi-def-at' => TRUE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -211,17 +242,14 @@ function eitict_stakeholder_ds_layout_settings_info() {
         4 => 'field_short_intro',
         5 => 'field_supporter_since',
         6 => 'field_stk_category',
-        7 => 'field_stk_content_title',
+        7 => 'field_stk_quote_title',
         8 => 'group_quote',
         9 => 'body',
-        10 => 'field_stk_statement',
-        11 => 'field_stk_form',
-        12 => 'field_fpp_person_list',
-        13 => 'field_stk_support',
-        14 => 'field_stk_quote_title',
-        15 => 'board_link',
-        16 => 'group_board',
-        17 => 'field_stk_quote_text',
+        10 => 'group_board',
+        11 => 'field_fpp_person_list',
+        12 => 'board_link',
+        13 => 'field_stk_quote_source',
+        14 => 'field_stk_quote_text',
       ),
     ),
     'fields' => array(
@@ -232,16 +260,13 @@ function eitict_stakeholder_ds_layout_settings_info() {
       'field_short_intro' => 'right',
       'field_supporter_since' => 'right',
       'field_stk_category' => 'right',
-      'field_stk_content_title' => 'right',
+      'field_stk_quote_title' => 'right',
       'group_quote' => 'right',
       'body' => 'right',
-      'field_stk_statement' => 'right',
-      'field_stk_form' => 'right',
-      'field_fpp_person_list' => 'right',
-      'field_stk_support' => 'right',
-      'field_stk_quote_title' => 'right',
-      'board_link' => 'right',
       'group_board' => 'right',
+      'field_fpp_person_list' => 'right',
+      'board_link' => 'right',
+      'field_stk_quote_source' => 'right',
       'field_stk_quote_text' => 'right',
     ),
     'classes' => array(
@@ -281,14 +306,16 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
       'left' => array(
         1 => 'description_field',
+        2 => 'field_fpp_useful_links',
       ),
       'right' => array(
-        2 => 'field_contact_eiti',
+        3 => 'field_contact_eiti',
       ),
     ),
     'fields' => array(
       'name_field' => 'above',
       'description_field' => 'left',
+      'field_fpp_useful_links' => 'left',
       'field_contact_eiti' => 'right',
     ),
     'classes' => array(

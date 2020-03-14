@@ -13,15 +13,13 @@ function eitict_stakeholder_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views-stakeholders-block'] = array(
+  $export['block-persons_board_link'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'stakeholders-block',
-    'module' => 'views',
+    'machine_name' => 'persons_board_link',
+    'module' => 'block',
     'node_types' => array(),
-    'pages' => 'supporters/companies
-supporters/civil-society
-supporters/countries',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'adminimal' => array(
@@ -37,14 +35,14 @@ supporters/countries',
         'weight' => 0,
       ),
       'eiti' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'eiti',
         'weight' => 0,
       ),
     ),
-    'title' => '<none>',
-    'visibility' => 1,
+    'title' => '',
+    'visibility' => 0,
   );
 
   return $export;

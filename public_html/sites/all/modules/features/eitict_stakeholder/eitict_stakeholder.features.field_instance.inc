@@ -73,10 +73,10 @@ function eitict_stakeholder_field_default_field_instances() {
         'weight' => 23,
       ),
       'full' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'links' => 0,
+          'links' => 1,
           'use_content_language' => 1,
           'view_mode' => 'teaser',
         ),
@@ -93,7 +93,7 @@ function eitict_stakeholder_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_fpp_person_list',
-    'label' => 'Person List',
+    'label' => 'EITI Board member',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -247,58 +247,6 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-stakeholder-field_stk_content_title'.
-  $field_instances['node-stakeholder-field_stk_content_title'] = array(
-    'bundle' => 'stakeholder',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'The title above the main content.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 20,
-      ),
-      'full' => array(
-        'label' => 'hidden',
-        'module' => 'title',
-        'settings' => array(
-          'title_class' => '',
-          'title_link' => '',
-          'title_style' => 'h2',
-        ),
-        'type' => 'title_linked',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_stk_content_title',
-    'label' => 'Stakeholder content title',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 10,
-    ),
-  );
-
   // Exported field_instance: 'node-stakeholder-field_stk_countries'.
   $field_instances['node-stakeholder-field_stk_countries'] = array(
     'bundle' => 'stakeholder',
@@ -365,10 +313,9 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'file',
         'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 11,
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -531,6 +478,49 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-stakeholder-field_stk_quote_source'.
+  $field_instances['node-stakeholder-field_stk_quote_source'] = array(
+    'bundle' => 'stakeholder',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The source of quote',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 26,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_stk_quote_source',
+    'label' => 'Stakeholder quote source',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-stakeholder-field_stk_quote_text'.
   $field_instances['node-stakeholder-field_stk_quote_text'] = array(
     'bundle' => 'stakeholder',
@@ -549,7 +539,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -575,7 +565,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -594,10 +584,14 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 13,
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h2',
+        ),
+        'type' => 'title_linked',
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -642,10 +636,9 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 10,
+        'type' => 'hidden',
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -690,10 +683,9 @@ function eitict_stakeholder_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'above',
-        'module' => 'link',
         'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 12,
+        'type' => 'hidden',
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -777,9 +769,9 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'hs_taxonomy',
       'settings' => array(),
-      'type' => 'options_select',
+      'type' => 'taxonomy_hs',
       'weight' => 2,
     ),
   );
@@ -996,6 +988,60 @@ function eitict_stakeholder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-stakeholder_types-field_bs_link'.
+  $field_instances['taxonomy_term-stakeholder_types-field_bs_link'] = array(
+    'bundle' => 'stakeholder_types',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 10,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_bs_link',
+    'label' => 'Becoming supporter link',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_allowed_values' => '',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 0,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-stakeholder_types-field_contact_eiti'.
   $field_instances['taxonomy_term-stakeholder_types-field_contact_eiti'] = array(
@@ -1013,7 +1059,7 @@ function eitict_stakeholder_field_default_field_instances() {
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -1034,6 +1080,64 @@ function eitict_stakeholder_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-stakeholder_types-field_fpp_useful_links'.
+  $field_instances['taxonomy_term-stakeholder_types-field_fpp_useful_links'] = array(
+    'bundle' => 'stakeholder_types',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'helpergeneric',
+        'settings' => array(
+          'icon' => 'angle-right-blue',
+          'size' => '',
+        ),
+        'type' => 'link_icon',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_fpp_useful_links',
+    'label' => 'Useful Links',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_allowed_values' => '',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
       'weight' => 4,
     ),
   );
@@ -1050,7 +1154,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -1070,7 +1174,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -1083,13 +1187,9 @@ function eitict_stakeholder_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 4,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -1190,17 +1290,18 @@ function eitict_stakeholder_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Add EITI board member.');
+  t('Becoming supporter link');
   t('Body');
   t('Category');
   t('Contact EITI');
   t('Description');
+  t('EITI Board member');
   t('Image');
   t('Input the names of the EITI countries this company works with.');
   t('Logo');
   t('Name');
   t('Operating in these EITI countries');
   t('Optionally flagging text that can be displayed with the company information.');
-  t('Person List');
   t('Please enter the Statement of support URL.');
   t('Please, enter a short description of the stakeholder.');
   t('Quote text.');
@@ -1209,17 +1310,18 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Stakeholder Form');
   t('Stakeholder Statement');
   t('Stakeholder Type Sidebar');
-  t('Stakeholder content title');
+  t('Stakeholder quote source');
   t('Stakeholder quote text');
   t('Stakeholder quote title');
   t('Statement of Support');
   t('Support duration');
   t('The full URL (including http://) of the stakeholder website.');
   t('The image of stakeholder type term');
-  t('The title above the main content.');
+  t('The source of quote');
   t('The title of quote');
   t('Type');
   t('Upload the stakeholder logo, it should be at least 240 pixels on all sides.');
+  t('Useful Links');
   t('Website');
 
   return $field_instances;
