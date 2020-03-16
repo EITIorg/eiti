@@ -85,6 +85,13 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_stk_membership' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb-col' => TRUE,
+        ),
+      ),
+    ),
   );
   $export['node|stakeholder|full'] = $ds_fieldsetting;
 
@@ -241,7 +248,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
         3 => 'field_stk_website',
         4 => 'field_short_intro',
         5 => 'field_supporter_since',
-        6 => 'field_stk_category',
+        6 => 'field_stk_membership',
         7 => 'field_stk_quote_title',
         8 => 'group_quote',
         9 => 'body',
@@ -259,7 +266,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
       'field_stk_website' => 'right',
       'field_short_intro' => 'right',
       'field_supporter_since' => 'right',
-      'field_stk_category' => 'right',
+      'field_stk_membership' => 'right',
       'field_stk_quote_title' => 'right',
       'group_quote' => 'right',
       'body' => 'right',

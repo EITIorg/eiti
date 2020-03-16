@@ -15,7 +15,7 @@ function eitict_stakeholder_default_fe_block_boxes() {
   $fe_block_boxes->info = 'Link to persons board';
   $fe_block_boxes->format = 'filtered_html';
   $fe_block_boxes->machine_name = 'persons_board_link';
-  $fe_block_boxes->body = '<a href="/about/board">See the board</a>';
+  $fe_block_boxes->body = '<p><a href="/about/board">@board_link</a></p>';
 
   $export['persons_board_link'] = $fe_block_boxes;
 

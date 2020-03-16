@@ -451,11 +451,13 @@ function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars
         if (!isset($item['#field_name']) || $item['#field_name'] != 'field_supporter_since') {
           continue;
         }
-        $supporter = $item[0]['#markup'];
         $lan = LANGUAGE_NONE;
-        $year = $vars['field_since_year'][$lan][0]['value'];
-        if ($item['#items'][0]['value'] == 'supporter') {
-          $item[0]['#markup'] = t($supporter) . ' ' . $year;
+        if (!empty($item[0]['#markup']) && isset($vars['field_since_year'][$lan][0]['value'], $item['#items'][0]['value'])) {
+          $supporter = $item[0]['#markup'];
+          $year = $vars['field_since_year'][$lan][0]['value'];
+          if ($item['#items'][0]['value'] == 'supporter') {
+            $item[0]['#markup'] = t($supporter) . ' ' . $year;
+          }
         }
       }
     }

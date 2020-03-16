@@ -105,8 +105,8 @@ function helpertheme_form_stakeholder_node_form_alter(&$form, &$form_state, $for
   if (isset($form['field_supporter_since'], $form['field_since_year'])) {
     /** @var Entity $entity */
     $entity = $form['#entity'];
-    $field_lan = $form["field_supporter_since"]["#language"];
     $lan = LANGUAGE_NONE;
+    $field_lan = !empty($form["field_supporter_since"]["#language"]) ? $form["field_supporter_since"]["#language"] : $lan;
     $years_range = range('2004', date('Y'));
     $default_year = !empty($entity->field_since_year) ? $entity->field_since_year[$lan][0]['value'] : '';
     $form['field_since_year'][$lan]['#title'] = '';
@@ -118,6 +118,11 @@ function helpertheme_form_stakeholder_node_form_alter(&$form, &$form_state, $for
         ':input[name="field_supporter_since[' . $field_lan . ']"]' => ['value' => 'supporter'],
       ],
     ];
+    // Hide old field field_stk_category.
+    // It replaced by field_stk_membership.
+    if (isset($form['field_stk_category']) && isset($form['field_stk_membership'])) {
+      $form['field_stk_category']['#access'] = FALSE;
+    }
   }
 
 }
