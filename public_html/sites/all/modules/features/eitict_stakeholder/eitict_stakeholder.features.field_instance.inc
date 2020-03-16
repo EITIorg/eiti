@@ -232,7 +232,7 @@ function eitict_stakeholder_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_stk_category',
-    'label' => 'Category',
+    'label' => 'Membership',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -242,7 +242,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 9,
     ),
   );
@@ -1292,13 +1292,13 @@ function eitict_stakeholder_field_default_field_instances() {
   t('Add EITI board member.');
   t('Becoming supporter link');
   t('Body');
-  t('Category');
   t('Contact EITI');
   t('Description');
   t('EITI Board member');
   t('Image');
   t('Input the names of the EITI countries this company works with.');
   t('Logo');
+  t('Membership');
   t('Name');
   t('Operating in these EITI countries');
   t('Optionally flagging text that can be displayed with the company information.');

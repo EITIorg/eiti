@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_bookmark.strongarm.inc
@@ -115,6 +116,12 @@ function eitict_bookmark_strongarm() {
         ),
         'language' => array(
           'weight' => '0',
+        ),
+        'metatags' => array(
+          'weight' => '40',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),
