@@ -18,14 +18,14 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'title_field' => array(
+    'field_stk_logo' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
         ),
       ),
     ),
-    'field_stk_logo' => array(
+    'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
           'func' => 'theme_ds_field_reset',
@@ -42,6 +42,42 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'board_link' => array(
+      'weight' => '13',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
+    'field_stk_countries' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_field',
+        ),
+      ),
+    ),
+    'field_stk_quote_title' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'classes' => 'clearfix',
+        ),
+      ),
+    ),
+    'field_fpp_person_list' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb-col' => TRUE,
+        ),
+      ),
+    ),
+    'field_supporter_since' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Founding supporter since',
+        ),
+      ),
+    ),
     'title_field' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -49,10 +85,10 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_stk_countries' => array(
+    'field_stk_membership' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'func' => 'theme_field',
+          'lb-col' => TRUE,
         ),
       ),
     ),
@@ -66,10 +102,44 @@ function eitict_stakeholder_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'stakeholder_types';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'stakehoder_listing' => array(
-      'weight' => '3',
-      'label' => 'hidden',
-      'format' => 'default',
+    'field_contact_eiti' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'lb-col' => TRUE,
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'stk-type-contact',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_fpp_useful_links' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'func' => 'theme_ds_field_expert',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => '',
+          'ow-def-cl' => TRUE,
+          'ow-at' => '',
+          'ow-def-at' => TRUE,
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'field-items',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'field-item',
+          'fi-at' => '',
+          'fi-def-at' => TRUE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
+        ),
+      ),
     ),
   );
   $export['taxonomy_term|stakeholder_types|default'] = $ds_fieldsetting;
@@ -82,6 +152,22 @@ function eitict_stakeholder_ds_field_settings_info() {
  */
 function eitict_stakeholder_ds_custom_fields_info() {
   $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'board_link';
+  $ds_field->label = 'Board link';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'stakeholder|*';
+  $ds_field->properties = array(
+    'block' => 'block|1',
+    'block_render' => '3',
+    'block_visibility' => 0,
+  );
+  $export['board_link'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -155,28 +241,40 @@ function eitict_stakeholder_ds_layout_settings_info() {
     'regions' => array(
       'left' => array(
         0 => 'field_stk_logo',
-        1 => 'field_stk_category',
-        2 => 'field_stk_website',
-        3 => 'field_stk_countries',
+        1 => 'field_stk_countries',
       ),
       'right' => array(
-        4 => 'title_field',
-        5 => 'body',
-        6 => 'field_stk_form',
-        7 => 'field_stk_statement',
-        8 => 'field_stk_support',
+        2 => 'title_field',
+        3 => 'field_stk_website',
+        4 => 'field_short_intro',
+        5 => 'field_supporter_since',
+        6 => 'field_stk_membership',
+        7 => 'field_stk_quote_title',
+        8 => 'group_quote',
+        9 => 'body',
+        10 => 'group_board',
+        11 => 'field_fpp_person_list',
+        12 => 'board_link',
+        13 => 'field_stk_quote_source',
+        14 => 'field_stk_quote_text',
       ),
     ),
     'fields' => array(
       'field_stk_logo' => 'left',
-      'field_stk_category' => 'left',
-      'field_stk_website' => 'left',
       'field_stk_countries' => 'left',
       'title_field' => 'right',
+      'field_stk_website' => 'right',
+      'field_short_intro' => 'right',
+      'field_supporter_since' => 'right',
+      'field_stk_membership' => 'right',
+      'field_stk_quote_title' => 'right',
+      'group_quote' => 'right',
       'body' => 'right',
-      'field_stk_form' => 'right',
-      'field_stk_statement' => 'right',
-      'field_stk_support' => 'right',
+      'group_board' => 'right',
+      'field_fpp_person_list' => 'right',
+      'board_link' => 'right',
+      'field_stk_quote_source' => 'right',
+      'field_stk_quote_text' => 'right',
     ),
     'classes' => array(
       'layout_class' => array(
@@ -184,8 +282,10 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
     ),
     'wrappers' => array(
+      'above' => 'div',
       'left' => 'div',
       'right' => 'div',
+      'below' => 'div',
       'ds_hidden' => 'div',
     ),
     'layout_wrapper' => 'article',
@@ -213,17 +313,17 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
       'left' => array(
         1 => 'description_field',
-        2 => 'stakehoder_listing',
+        2 => 'field_fpp_useful_links',
       ),
       'right' => array(
-        3 => 'field_stakeholder_type_sidebar',
+        3 => 'field_contact_eiti',
       ),
     ),
     'fields' => array(
       'name_field' => 'above',
       'description_field' => 'left',
-      'stakehoder_listing' => 'left',
-      'field_stakeholder_type_sidebar' => 'right',
+      'field_fpp_useful_links' => 'left',
+      'field_contact_eiti' => 'right',
     ),
     'classes' => array(
       'layout_class' => array(

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitisettings.features.wysiwyg.inc
@@ -10,7 +11,7 @@
 function eitisettings_wysiwyg_default_profiles() {
   $profiles = array();
 
-  // Exported profile: filtered_html
+  // Exported profile: filtered_html.
   $profiles['filtered_html'] = array(
     'format' => 'filtered_html',
     'editor' => 'ckeditor',
@@ -91,7 +92,7 @@ Table without borders=table.wysiwyg-noborder',
     'name' => 'formatfiltered_html',
   );
 
-  // Exported profile: min_html
+  // Exported profile: min_html.
   $profiles['min_html'] = array(
     'format' => 'min_html',
     'editor' => 'ckeditor',

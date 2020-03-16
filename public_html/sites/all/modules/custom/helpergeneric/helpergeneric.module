@@ -435,6 +435,15 @@ function helpergeneric_preprocess_field(&$variables) {
       }
     }
   }
+  // Force translating DS field from custom block.
+  if ($variables['element']['#field_name'] == 'board_link') {
+    if (!empty($variables['items'][0]['#markup'])) {
+      $placeholders = [
+        '@board_link' => t('See the board'),
+      ];
+      $variables['items'][0]['#markup'] = format_string($variables['items'][0]['#markup'], $placeholders);
+    }
+  }
 }
 
 /**

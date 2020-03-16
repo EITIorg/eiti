@@ -115,17 +115,26 @@ function eitict_stakeholder_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'summary' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '12',
+          'weight' => '18',
         ),
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '17',
         ),
         'language' => array(
           'weight' => '0',
+        ),
+        'metatags' => array(
+          'weight' => '20',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '19',
         ),
       ),
       'display' => array(),
@@ -152,10 +161,10 @@ function eitict_stakeholder_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '5',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '4',
+          'weight' => '7',
         ),
         'language' => array(
           'weight' => '0',
