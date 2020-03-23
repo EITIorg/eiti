@@ -128,5 +128,119 @@ table {
   }
 }
 
+// supporters list
+.view-supporters {
+  margin-bottom: 3rem;
+
+  // grid
+  & > .view-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  // grid item
+  .views-row {
+    -webkit-flex: 1 100%;
+    -ms-flex: 1 100%;
+    flex: 1 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    padding-top: 2rem;
+    text-align: center;
+  }
+
+  // grid item image
+  .views-field-field-stk-type-image {
+    width: 100%;
+    max-width: 4rem;
+    max-height: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  // grid item title
+  .views-field-name {
+    margin: 0 5% 1.5rem;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.3334em;
+    color: @claltmain;
+
+    a {
+      color: @claltmain;
+    }
+  }
+
+  // grid item link
+  .views-field-nothing {
+    margin-bottom: 2rem;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1em;
+    color: @claltnormal;
+
+    a {
+      color: @claltnormal;
+    }
+  }
+}
+
+.xMediumAndUp() {
+  .view-supporters {
+    & > .view-content {
+      margin-right: -0.75rem;
+      margin-left: -0.75rem;
+    }
+    .views-row {
+      -ms-flex: 1;
+      -webkit-box-flex: 1;
+      flex: 1;
+      min-height: 16rem;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      margin-bottom: 0;
+      padding-top: 3rem;
+    }
+    .views-field-name {
+      margin: 0 15% 1.5rem;
+    }
+    .views-field-nothing {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.xNormalAndUp() {
+  .view-supporters {
+    & > .view-content {
+      margin-right: -1.5rem;
+      margin-left: -1.5rem;
+    }
+    .views-row {
+      min-height: 22.5rem;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+      padding-top: 4.375rem; // 70px
+    }
+    .views-field-name {
+      font-size: 30px;
+    }
+    .views-field-nothing {
+      font-size: 20px;
+      line-height: 3em;
+    }
+  }
+}
+
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';
