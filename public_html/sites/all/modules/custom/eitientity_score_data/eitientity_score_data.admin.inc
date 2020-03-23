@@ -76,33 +76,33 @@ function score_data_default_form($form, &$form_state, $entity) {
   }
 
   // Entity options for administrators
-  $form['options'] = array(
+  $form['options'] = [
     '#type' => 'fieldset',
     '#title' => t('Publishing options'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#group' => 'additional_settings',
-    '#attributes' => array(
-      'class' => array("{$entity_type}-form-options"),
-    ),
+    '#attributes' => [
+      'class' => ["{$entity_type}-form-options"],
+    ],
     '#weight' => 95,
-  );
+  ];
 
-  $form['country_id'] = array(
+  $form['country_id'] = [
     '#type' => 'ereference',
     '#title' => t('Implementing Country'),
     '#default_value' => $entity->country_id,
     '#required' => TRUE,
     '#referenced_type' => 'implementing_country',
     '#autocomplete_path' => 'helpergeneric/ereference/implementing_country',
-  );
+  ];
 
 //  $year_start_value = date('Y');
 //  if (!empty($entity->year_start)) {
 //    $year_start_date = new DateObject($entity->year, NULL);
 //    $year_start_value = $year_start_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
 //  }
-  $form['year'] = array(
+  $form['year'] = [
     '#type' => 'date_select',
     '#title' => t('Year'),
     '#required' => TRUE,
@@ -110,7 +110,7 @@ function score_data_default_form($form, &$form_state, $entity) {
     '#date_format' => 'Y',
     '#date_label_position' => 'none',
     '#date_year_range' => '-20:+2',
-  );
+  ];
 
   $published_value = 0;
 
@@ -118,61 +118,61 @@ function score_data_default_form($form, &$form_state, $entity) {
     $published_date = new DateObject($entity->published, NULL);
     $published_value = $published_date->format(EITIENTITY_SUMMARYDATA_DATE_FORMAT);
   }
-  $form['published'] = array(
+  $form['published'] = [
     '#type' => 'date_popup',
     '#title' => t('Published on'),
-    '#description' => t('Date that the EITI Report was published (i.e., made publicly available)'),
+    '#description' => t('Date the Validation decision was taken bu the EITI Board.'),
     '#required' => TRUE,
     '#default_value' => $published_value,
     '#date_format' => EITIENTITY_SUMMARYDATA_DATE_FORMAT,
     '#date_label_position' => 'invisible',
     '#date_year_range' => '-16:+2',
-  );
-  $form['board_decision_url'] = array(
+  ];
+  $form['board_decision_url'] = [
     '#type' => 'textfield',
     '#title' => t('Link to Board decision URL'),
     '#default_value' => $entity->board_decision_url,
-  );
-  $form['validation_documentation_url'] = array(
+  ];
+  $form['validation_documentation_url'] = [
     '#type' => 'textfield',
     '#title' => t('Link to Validation documentation'),
     '#default_value' => $entity->validation_documentation_url,
-  );
+  ];
 
-  $form['options']['status'] = array(
+  $form['options']['status'] = [
     '#type' => 'checkbox',
     '#title' => t('Published'),
     '#default_value' => $entity->status,
     '#weight' => 98,
-  );
+  ];
 
   // Add the buttons.
-  $form['actions'] = array('#type' => 'actions', '#weight' => 99);
-  $form['actions']['submit'] = array(
+  $form['actions'] = ['#type' => 'actions', '#weight' => 99];
+  $form['actions']['submit'] = [
     '#type' => 'submit',
     '#value' => t('Save'),
-    '#validate' => array('_score_data_form_validate'),
-    '#submit' => array('_score_data_form_submit'),
-  );
+    '#validate' => ['_score_data_form_validate'],
+    '#submit' => ['_score_data_form_submit'],
+  ];
 
   if ($entity->identifier() && entity_access('delete', $entity_type, $entity)) {
-    $form['actions']['delete'] = array(
+    $form['actions']['delete'] = [
       '#type' => 'submit',
       '#value' => t('Delete'),
-      '#submit' => array('_score_data_form_delete_submit'),
-    );
+      '#submit' => ['_score_data_form_delete_submit'],
+    ];
   }
 
   // Setup the destination and cancel link URL.
   $form_state['destination'] = drupal_get_destination();
   $entity_uri = $entity->uri();
   if ($entity_uri) {
-    $form['actions']['cancel'] = array(
+    $form['actions']['cancel'] = [
       '#type' => 'link',
       '#title' => t('Cancel'),
       '#href' => $entity_uri['path'],
       '#weight' => 100,
-    );
+    ];
   }
 
   if (!empty($_GET['destination'])) {
@@ -188,21 +188,59 @@ function score_data_default_form($form, &$form_state, $entity) {
   $ief_id = $form['field_scd_score_req_values']['und']['#ief_id'];
   if ($form_state['submitted'] == FALSE || !in_array('score_data_form_prepopulate_ief', $form_state['submit_handlers'])) {
     $form['field_scd_score_req_values']['und']['actions']['ief_add']['#weight'] = 5;
-    $form['field_scd_score_req_values']['und']['actions']['prepopulate'] = array(
+    $form['field_scd_score_req_values']['und']['actions']['prepopulate'] = [
       '#type' => 'submit',
       '#weight' => 0,
       '#value' => t('Prepopulate with Standard Requirements'),
       '#name' => 'ief-' . $ief_id . '-prepopulate',
       '#ief_form' => 'prepopulate',
-      '#submit' => array('score_data_form_prepopulate_ief'),
-      '#ajax' => array(
+      '#submit' => ['score_data_form_prepopulate_ief'],
+      '#ajax' => [
         'callback' => 'inline_entity_form_get_element',
         'wrapper' => 'inline-entity-form-' . $ief_id,
-      ),
-      '#limit_validation_errors' => $form['field_scd_score_req_values']['und']['actions']['ief_add']['#limit_validation_errors']
-    );
-  }
+      ],
+      '#limit_validation_errors' => $form['field_scd_score_req_values']['und']['actions']['ief_add']['#limit_validation_errors'],
+    ];
 
+    // Pre-populate PDF Title value.
+    if (isset($form['field_scd_pdf_title_prefix'])) {
+      $lan = $form['field_scd_pdf_title_prefix']['#language'];
+      if (empty($form['field_scd_pdf_title_prefix'][$lan][0]['value']['#default_value'])) {
+        $form['field_scd_pdf_title_prefix'][$lan][0]['value']['#default_value'] = t('Validation of');
+      }
+      $form['field_scd_pdf_title_prefix']['#disabled'] = TRUE;
+    }
+    if (!empty($form['field_scd_pdf_title'])) {
+      if (!empty($form['country_id']['#default_value'])) {
+        $lan = $form['field_scd_pdf_title']['#language'];
+        $country = entity_load_single('implementing_country', $form['country_id']['#default_value']);
+        if ($country) {
+          $default = '';
+          $form['field_scd_pdf_title'][$lan][0]['value']['#description'] = t('The title of Validation in PDF will be: Validation of (country_name)');
+          if (!empty($entity->field_scd_pdf_title[$lan][0]['value'])) {
+            $default = $entity->field_scd_pdf_title[$lan][0]['value'];
+          }
+          elseif (!empty($country->name_field[$lan][0]['value'])) {
+            $default = $country->name_field[$lan][0]['value'];
+          }
+          $form['field_scd_pdf_title'][$lan][0]['value']['#default_value'] = $default;
+        }
+      }
+    }
+    // Pre-populate Decision reference by data from Board decision.
+    if (isset($form['field_scd_pdf_decision_ref'])) {
+      $lan = $form['field_scd_pdf_decision_ref']['#language'];
+      if (!empty($decision = _get_board_decision_data($entity))) {
+        $form['field_scd_pdf_decision_ref'][$lan][0]['value']['#default_value'] = $decision['field_bd_number_value'] . '/' . $decision['field_board_meeting_circular_value'];
+        $form['field_scd_pdf_decision_ref']['#disabled'] = TRUE;
+      }
+
+    }
+  }
+  // Hide PDF-date, it will be pre-populated by published value on validate.
+  if (isset($form["field_scd_pdf_date"])) {
+    $form['field_scd_pdf_date']['#access'] = FALSE;
+  }
   if (function_exists('helpergeneric_cleanup_ui') && helpergeneric_cleanup_ui()) {
     if (isset($form['redirect'])) {
       $form['redirect']['#access'] = FALSE;
@@ -210,6 +248,26 @@ function score_data_default_form($form, &$form_state, $entity) {
   }
 
   return $form;
+}
+
+/**
+ * Helper to get Board decision data by it validation.
+ *
+ * @param object $validation
+ *   The validation entity.
+ *
+ * @return array
+ *   Board decision data
+ */
+function _get_board_decision_data($validation) {
+  $query = db_select('field_data_field_validation', 'v');
+  $query->condition('v.field_validation_target_id', $validation->id);
+  $query->innerJoin('field_data_field_bd_number', 'bd', 'v.entity_id = bd.entity_id');
+  $query->addField('bd', 'field_bd_number_value');
+  $query->innerJoin('field_data_field_board_meeting_circular', 'bmc', 'v.entity_id = bmc.entity_id');
+  $query->addField('bmc', 'field_board_meeting_circular_value');
+  $result = $query->execute()->fetchAssoc();
+  return !empty($result) ? $result : [];
 }
 
 /**
@@ -297,7 +355,16 @@ function _score_data_form_validate($form, &$form_state) {
     }
   }
   $form_state['inline_entity_form'][$ief_key]['entities'] = array_values($form_state['inline_entity_form'][$ief_key]['entities']);
-  $form_state['values']['field_scd_score_req_values']['und']['entities'] = array_values($form_state['values']['field_scd_score_req_values']['und']['entities']);
+  if (!empty($form_state['values']['field_scd_score_req_values']['und']['entities'])) {
+    $form_state['values']['field_scd_score_req_values']['und']['entities'] = array_values($form_state['values']['field_scd_score_req_values']['und']['entities']);
+  }
+  // Pre-populate Pdf-date field by Published on value.
+  if (!empty($form_state['values']['published']) && isset($form["field_scd_pdf_date"])) {
+    $date = date(EITIENTITY_SUMMARYDATA_DATE_FORMAT, $form_state['values']['published']);
+    $lan = $form['field_scd_pdf_date']['#language'];
+    $form_state['values']['field_scd_pdf_date'][$lan][0]['value'] = $date . ' 00:00:00';
+  }
+
   field_attach_form_validate($entity_type, $entity, $form, $form_state);
 }
 

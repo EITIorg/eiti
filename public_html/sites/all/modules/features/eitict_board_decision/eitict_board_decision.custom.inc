@@ -4,6 +4,10 @@
  * Implements hook_form_FORM_ID_alter() for board_decision_node_form.
  */
 function eitict_board_decision_form_board_decision_node_form_alter(&$form, &$form_state, $form_id) {
+  // Add js library for masked input.
+  drupal_add_js(drupal_get_path('module', 'eitientity_score_data') . '/scripts/maskedinput/jquery.maskedinput.min.js');
+  drupal_add_js(drupal_get_path('module', 'eitientity_score_data') . '/scripts/mask.js');
+
   // Add a default value for field_bd_number if it's empty.
   if (!$form['field_bd_number']['und'][0]['value']['#default_value']) {
     $year = date('Y');
