@@ -211,7 +211,7 @@ function _theme_header_items__secondary_navigation_toggle() {
     '#title_attributes' => array(
       'href' => '#site-navigation',
       'class' => array('link'),
-    ),   
+    ),
     '#attributes' => array(
       'class' => array(
         'site-navigation-toggle-wrapper',
