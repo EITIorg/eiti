@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitii18n.features.language.inc
@@ -30,8 +31,8 @@ function eitii18n_locale_default_languages() {
     'native' => 'Español',
     'direction' => 0,
     'enabled' => 1,
-    'plurals' => 0,
-    'formula' => '',
+    'plurals' => 2,
+    'formula' => '($n!=1)',
     'domain' => '',
     'prefix' => 'es',
     'weight' => 0,
@@ -43,8 +44,8 @@ function eitii18n_locale_default_languages() {
     'native' => 'Français',
     'direction' => 0,
     'enabled' => 1,
-    'plurals' => 0,
-    'formula' => '',
+    'plurals' => 2,
+    'formula' => '($n>1)',
     'domain' => '',
     'prefix' => 'fr',
     'weight' => 0,
@@ -56,8 +57,8 @@ function eitii18n_locale_default_languages() {
     'native' => 'Русский',
     'direction' => 0,
     'enabled' => 1,
-    'plurals' => 0,
-    'formula' => '',
+    'plurals' => 3,
+    'formula' => '(((($n%10)==1)&&(($n%100)!=11))?(0):((((($n%10)>=2)&&(($n%10)<=4))&&((($n%100)<10)||(($n%100)>=20)))?(1):2))',
     'domain' => '',
     'prefix' => 'ru',
     'weight' => 0,

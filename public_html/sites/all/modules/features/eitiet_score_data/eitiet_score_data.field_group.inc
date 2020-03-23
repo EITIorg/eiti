@@ -31,6 +31,8 @@ function eitiet_score_data_field_group_info() {
       4 => 'field_scd_pdf_text2',
       5 => 'field_scd_pdf_text3',
       6 => 'field_scd_pdf_title',
+      7 => 'field_scd_pdf_title_prefix',
+      8 => 'group_progress',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
