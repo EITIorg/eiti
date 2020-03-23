@@ -21,7 +21,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -59,13 +59,13 @@ function eitiet_score_data_field_default_field_instances() {
     'bundle' => 'standard',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'This field will be pre-populated by Board decision data if it already related to current Validation.',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -85,7 +85,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 37,
+      'weight' => 39,
     ),
   );
 
@@ -100,7 +100,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -121,7 +121,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 36,
+      'weight' => 37,
     ),
   );
 
@@ -136,7 +136,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -156,7 +156,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 38,
+      'weight' => 40,
     ),
   );
 
@@ -171,7 +171,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -191,7 +191,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 40,
+      'weight' => 42,
     ),
   );
 
@@ -206,7 +206,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -226,7 +226,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 39,
+      'weight' => 41,
     ),
   );
 
@@ -235,20 +235,20 @@ function eitiet_score_data_field_default_field_instances() {
     'bundle' => 'standard',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The title of PDF will be: "Validation of (Country name)"',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'score_data',
     'field_name' => 'field_scd_pdf_title',
-    'label' => 'Title',
-    'required' => 0,
+    'label' => 'Country name',
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'text_processing' => 0,
@@ -261,7 +261,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 36,
     ),
   );
 
@@ -316,12 +316,14 @@ function eitiet_score_data_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Background');
   t('Corrective actions');
+  t('Country name');
   t('Date');
   t('Decision reference');
   t('News');
   t('Score Requirements Values');
   t('The Board\'s decision');
-  t('Title');
+  t('The title of PDF will be: "Validation of (Country name)"');
+  t('This field will be pre-populated by Board decision data if it already related to current Validation.');
 
   return $field_instances;
 }
