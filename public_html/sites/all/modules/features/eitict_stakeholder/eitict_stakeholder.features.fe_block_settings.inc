@@ -45,5 +45,37 @@ function eitict_stakeholder_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['views-11095694fe68b9668dc8660623f88aac'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '11095694fe68b9668dc8660623f88aac',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'supporters/*',
+    'roles' => array(),
+    'themes' => array(
+      'adminimal' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'adminimal',
+        'weight' => 0,
+      ),
+      'adminimal_helpertheme' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'adminimal_helpertheme',
+        'weight' => 0,
+      ),
+      'eiti' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'eiti',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 1,
+  );
+
   return $export;
 }
