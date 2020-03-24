@@ -327,9 +327,9 @@ table {
       display: flex;
       -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-      -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
+      -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
@@ -422,17 +422,23 @@ table {
       line-height: 1.3em;
       color: @clnormal;
     }
-    
+
     // category item link
     .views-field-nothing {
       font-size: 16px;
       font-weight: bold;
       line-height: 1.3em;
       color: @claltnormal;
-  
+
       a {
         color: @claltnormal;
       }
+    }
+  }
+
+  .view-footer {
+    .supporters-back {
+      float: right;
     }
   }
 }
@@ -443,7 +449,7 @@ table {
       .stk-total {
         font-size: 3rem; // 48px
       }
-  
+
       h2 {
         font-size: 1.875rem; // 30px
       }
@@ -452,7 +458,7 @@ table {
     .view-supporters {
       .views-row {
         min-height: 14.75rem; // 236px
-        
+
         .inner {
           padding-top: 2.5rem; // 40px
         }

@@ -150,6 +150,13 @@ function eitict_stakeholder_views_default_views() {
   $handler->display->display_options['header']['view']['table'] = 'views';
   $handler->display->display_options['header']['view']['field'] = 'view';
   $handler->display->display_options['header']['view']['view_to_insert'] = 'supporters:companies_categories';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['content'] = '<span class="supporters-back"><a href="/supporters">Back to supporters page</a></span>';
+  $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -257,6 +264,7 @@ function eitict_stakeholder_views_default_views() {
     t('Stakeholders companies'),
     t('<span class="stk-total">@total </span>'),
     t('<h2>%1 support the EITI</h2>'),
+    t('<span class="supporters-back"><a href="/supporters">Back to supporters page</a></span>'),
   );
   $export['stakeholders'] = $view;
 
