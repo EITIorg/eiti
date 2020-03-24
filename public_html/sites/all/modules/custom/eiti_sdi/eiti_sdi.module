@@ -1,0 +1,82 @@
+<?php
+
+include_once 'includes/EITISummaryDataImporter.inc';
+
+/**
+ * Implements hook_menu()
+ */
+function eiti_sdi_menu() {
+  $items = array();
+
+  $items['admin/content/summary_data/import'] = array(
+    'title' => t('Import Summary data XLSX datasheet'),
+    'description' => 'My Profile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eiti_sdi_summary_data_import_form'),
+    'access arguments' => array('view own profile'),
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name' => 'sdi',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission()
+ */
+function eiti_sdi_permission() {
+  return array(
+    'use summary data import' => array(
+      'title' => t('Use Summary data import'),
+      'description' => t('Allows to use Summary data import'),
+    ),
+  );
+}
+
+/**
+ * Implements Summary data import form
+ */
+function eiti_sdi_summary_data_import_form($form, &$form_state) {
+
+  $form['file'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Summary data'),
+    '#description' => t('Allowed extensions: xlsx'),
+    '#default_value' => '',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('xlsx'),
+    ),
+    '#required' => TRUE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Import'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements validation callback for Summary data import form
+ */
+function eiti_sdi_summary_data_import_form_validate($form, &$form_state) {
+
+}
+
+/**
+ * Implements submit callback for Summary data import form
+ */
+function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
+
+
+  $fid = $form_state['values']['file'];
+  $file = file_load($fid);
+
+  if (isset($file->uri)) {
+    $dataImporter = new EITISummaryDataImporter();
+    $dataImporter->importSummaryData($file->uri);
+  }
+
+
+}
