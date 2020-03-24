@@ -61,6 +61,8 @@ function eititaxonomies_views_default_views() {
 
   /* Display: Supporters types */
   $handler = $view->new_display('block', 'Supporters types', 's_types');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Supporters categories';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -123,6 +125,7 @@ function eititaxonomies_views_default_views() {
   $handler->display->display_options['filters']['tid']['type'] = 'select';
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'stakeholder_types';
   $handler->display->display_options['filters']['tid']['hierarchy'] = 1;
+  $handler->display->display_options['block_description'] = 'Supporters categories';
   $handler->display->display_options['block_caching'] = '4';
 
   /* Display: Companies categories */
@@ -163,6 +166,7 @@ function eititaxonomies_views_default_views() {
     t('Desc'),
     t('.'),
     t(','),
+    t('Supporters categories'),
     t('learn more'),
     t('Companies categories'),
     t('All'),
