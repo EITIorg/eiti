@@ -137,7 +137,7 @@ function eitict_stakeholder_views_default_views() {
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '<span class="stk-total">@total <span>';
+  $handler->display->display_options['header']['result']['content'] = '<span class="stk-total">@total </span>';
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
@@ -255,7 +255,7 @@ function eitict_stakeholder_views_default_views() {
     t('All'),
     t('Block'),
     t('Stakeholders companies'),
-    t('<span class="stk-total">@total <span>'),
+    t('<span class="stk-total">@total </span>'),
     t('<h2>%1 support the EITI</h2>'),
   );
   $export['stakeholders'] = $view;

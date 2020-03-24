@@ -308,10 +308,8 @@ function eitict_stakeholder_ds_layout_settings_info() {
   $ds_layout->layout = 'doublelayout';
   $ds_layout->settings = array(
     'regions' => array(
-      'above' => array(
-        0 => 'name_field',
-      ),
       'left' => array(
+        0 => 'name_field',
         1 => 'description_field',
         2 => 'field_fpp_useful_links',
       ),
@@ -320,7 +318,7 @@ function eitict_stakeholder_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'name_field' => 'above',
+      'name_field' => 'left',
       'description_field' => 'left',
       'field_fpp_useful_links' => 'left',
       'field_contact_eiti' => 'right',
