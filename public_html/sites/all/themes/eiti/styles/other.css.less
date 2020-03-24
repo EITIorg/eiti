@@ -222,5 +222,95 @@ ul.inline .node-readmore {
   }
 }
 
+// node stakeholder
+.node-stakeholder {
+  margin-top: 1.25rem; // 20px
+
+  // left sidebar
+  .group-left {
+
+    // logo
+    .field-name-field-stk-logo {
+      margin: 0 0 2.25rem; // 36px
+      img {
+        display: block;
+        max-width: 100%;
+      }
+    }
+
+    // list
+    .field-name-field-stk-countries {
+      font-size: 1.125rem; // 18px
+      line-height: 1.6667em; // 30px
+
+      .field-item {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  // node title
+  .page-title {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  .group-right {
+
+    .field {
+      margin: 0;
+    }
+
+    // website link
+    .field-name-field-stk-website {
+      margin-bottom: 1.5rem;
+      font-size: 1.125rem;
+      line-height: 1.6667em;
+    }
+
+    // intro text
+    .field-name-field-short-intro {
+      margin-bottom: 1.125rem;
+      font-size: 1.125rem;
+      line-height: 1.4445em;
+      color: @clnormal;
+    }
+
+    .field-name-field-supporter-since,
+    .field-name-field-stk-membership {
+      font-style: italic;
+      line-height: 1.875em;
+    }
+
+    // quote block
+    .field-name-field-stk-quote-title {
+      margin-top: 1.875rem;
+      margin-bottom: 4px;
+    }
+
+    .group-quote {
+      margin-bottom: 3.375rem;
+      padding: 2.5rem 2rem 1.5rem 6.625rem;
+      background-color: #EAF6FA;
+      line-height: 1.875rem;
+    }
+
+    .field-name-field-stk-quote-source {
+      font-weight: bold;
+    }
+
+    .field-name-field-stk-quote-text {
+      font-size: 1.125rem;
+    }
+
+    // main text
+    .field-name-body {
+      margin-bottom: 4.75rem;
+      font-size: 1.125rem;
+      line-height: 1.4445em;
+    }
+  }
+}
+
 @import './lib/custom-responsive.less';
 @import './lib/helpers.less';
