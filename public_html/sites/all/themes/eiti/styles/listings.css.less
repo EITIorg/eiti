@@ -185,7 +185,7 @@ table {
     width: 100%;
     max-width: 4rem;
     max-height: 4rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.375rem; // 22px
   }
 
   // grid item title
@@ -198,6 +198,10 @@ table {
 
     a {
       color: @claltmain;
+
+      &:hover {
+        color: @claltnormal;
+      }
     }
   }
 
@@ -225,11 +229,11 @@ table {
       -webkit-box-flex: 0 33.333%;
       flex: 0 33.333%;
       min-height: 16rem;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
       margin-bottom: 0.75rem;
 
       .inner {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
         padding-top: 3rem;
         padding-bottom: 0.5rem;
       }
@@ -251,6 +255,7 @@ table {
     }
     .views-field-name {
       font-size: 30px;
+      min-height: 5rem;
     }
     .views-field-nothing {
       font-size: 20px;
@@ -278,7 +283,7 @@ table {
     }
 
     h2 {
-      margin: 0 0 2px;
+      margin: 0 0 4px;
       font-size: 1.25rem;
       font-weight: bold;
       color: @clnormal;
@@ -297,8 +302,11 @@ table {
     -webkit-flex: 1 100%;
     -ms-flex: 1 100%;
     flex: 1 100%;
-    margin-top: 2rem;
-    margin-bottom: 75px;
+
+    .view-content {
+      margin-top: 1rem;
+      margin-bottom: 1rem;  
+    }
 
     .views-row {
       margin-bottom: 1.5rem; // 24px
@@ -333,8 +341,11 @@ table {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
-      margin-top: 2.5rem;
       margin-bottom: 1rem;
+
+      &:not(:first-child) {
+        margin-top: 2.5rem;
+      }
     }
 
     .lineage-item {
@@ -404,6 +415,7 @@ table {
 
     // category item title
     .views-field-title-field-et {
+      max-width: 100%; // IE hack
       margin-bottom: 0.75rem;
       font-size: 1.25rem; // 20px
       font-weight: bold;
@@ -417,6 +429,7 @@ table {
 
     // category item intro
     .views-field-field-short-intro-et {
+      max-width: 100%; // IE hack
       margin-bottom: 0.75rem;
       font-size: 0.75rem;
       line-height: 1.3em;
@@ -456,11 +469,42 @@ table {
     }
 
     .view-supporters {
+      .view-content {
+        margin-top: 2rem;
+        margin-bottom: 75px;
+      }
+
       .views-row {
-        min-height: 14.75rem; // 236px
+        min-height: 16.5rem;
 
         .inner {
-          padding-top: 2.5rem; // 40px
+
+          .views-field-field-stk-type-image img {
+            -webkit-transition: transform .2s ease-in;
+            -moz-transition: transform .2s ease-in;
+            -o-transition: transform .2s ease-in;
+            -ms-transition: transform .2s ease-in;
+            transition: transform .2s ease-in;
+          }
+
+          &:hover {
+
+            .views-field-field-stk-type-image img {
+              zoom: 1.25;
+              -moz-transform: scale(1.25);
+              -moz-transform-origin: 50% 50%;
+              -o-transform: scale(1.25);
+              -o-transform-origin: 50% 50%;
+              -webkit-transform: scale(1.25);
+              -webkit-transform-origin: 50% 50%;
+              transform: scale(1.25);
+              transform-origin: 50% 50%;
+            }
+
+            .views-field-name a {
+              color: @claltnormal;
+            }
+          }
         }
       }
     }
@@ -470,7 +514,11 @@ table {
       margin-left: -0.75rem;
 
       .list-title {
-        margin: 4rem 0.75rem 2.5rem;
+        margin: 0 0.75rem 2.5rem;
+
+        &:not(:first-child) {
+          margin-top: 4rem;
+        }
       }
 
       .lineage-item {
@@ -493,8 +541,11 @@ table {
         -ms-flex: 0 50%;
         -webkit-box-flex: 0 50%;
         flex: 0 50%;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
+
+        .inner {
+          margin-left: 0.75rem;
+          margin-right: 0.75rem;
+        }
       }
     }
   }
@@ -502,6 +553,14 @@ table {
 
 .xNormalAndUp() {
   .view-stakeholders {
+
+    .view-supporters {
+
+      .views-row {
+        min-height: 19.25rem; // 308px
+      }
+    }
+
     & > .view-content {
       .bm-link a {
         font-size: 1.875rem; // 30px

@@ -267,8 +267,12 @@ ul.inline .node-readmore {
       font-size: 1.125rem; // 18px
       line-height: 1.6667em; // 30px
 
+      .field-label {
+        margin-bottom: 0.5rem;
+      }
+
       .field-item {
-        margin-bottom: 0 !important;
+        margin-bottom: 0.3rem !important;
       }
     }
   }
@@ -288,7 +292,7 @@ ul.inline .node-readmore {
 
   // intro text
   .field-name-field-short-intro {
-    margin-bottom: 1.125rem;
+    margin-bottom: 0.5625rem;
     font-size: 1.125rem;
     line-height: 1.4445em;
     color: @clnormal;
@@ -296,14 +300,15 @@ ul.inline .node-readmore {
 
   .field-name-field-supporter-since,
   .field-name-field-stk-membership {
+    margin-bottom: 0.1875rem;
     font-style: italic;
     line-height: 1.875em;
   }
 
   // quote block
   .field-name-field-stk-quote-title {
-    margin-top: 1.875rem;
-    margin-bottom: 4px;
+    margin-top: 3rem;
+    margin-bottom: 1.75rem;
 
     h2 {
       margin: 0;
@@ -317,6 +322,7 @@ ul.inline .node-readmore {
     background-color: #EAF6FA;
     font-size: 1rem;
     line-height: 1.5em;
+    color: @clnormal;
 
     &:before {
       position: absolute;
@@ -332,6 +338,7 @@ ul.inline .node-readmore {
   }
 
   .field-name-field-stk-quote-source {
+    margin-bottom: 1.25rem; // 20px
     font-weight: bold;
   }
 
@@ -357,6 +364,7 @@ ul.inline .node-readmore {
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
       line-height: 1.25em;
+      color: @clnormal;
     }
   }
 
@@ -402,7 +410,8 @@ ul.inline .node-readmore {
 
       img {
         width: 8rem;
-      }
+      color: @clnormal;
+    }
     }
   }
 }
@@ -414,29 +423,46 @@ ul.inline .node-readmore {
     }
 
     .group-quote {
-      margin-bottom: 3.375rem;
-      padding: 2.5rem 2rem 1.5rem 6.625rem;
+      margin-bottom: 3rem;
+      padding: 2.625rem 2rem 2.625rem 6.875rem;
       font-size: 1.125rem;
       line-height: 1.875rem;
   
       &:before {
-        top: 34px;
-        left: 44px;
+        top: 2.25rem;
+        left: 3rem;
         width: 2.25rem;
         height: 2rem;
       }
     }
 
+    .field-name-field-stk-quote-text {
+      font-size: 1.25rem; // 20px
+      line-height: 1.8em; // 36px
+    }
+
     .field-name-body {
-      margin-bottom: 4.75rem;
+      margin-bottom: 3rem;
     }
 
     .field-name-board-link {
       position: absolute;
-      top: 4px;
+      top: 0.375rem; // 6px
       right: 0;
       z-index: 1;
       margin-top: 0;
+      padding-left: 1.5rem;
+
+      &:before {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 0;
+        width: 8px;
+        height: 14px;
+        background: url(~"@{theme_path}images/icons/angle-right-blue.svg");
+        content: '';
+      }
     }
 
     .person-teaser {
