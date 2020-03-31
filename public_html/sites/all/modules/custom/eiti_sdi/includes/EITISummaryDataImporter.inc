@@ -74,6 +74,19 @@ class EITISummaryDataImporter {
       $parsed_data = $this->parseAboutSection($about, $max_row);
       $entity = $this->buildSummaryDataReportFromXls($parsed_data);
     }
+
+    // Process Disclosure checklist section
+    $disclosure_checklist = $this->getSpreadsheet($xls, 2);
+    $disclosure_parsed_data = array();
+    if ($disclosure_checklist) {
+      $max_row = $xls->setActiveSheetIndex(2)->getHighestRow();
+      $disclosure_parsed_data = $this->parseDisclosureChecklistSection($disclosure_checklist, $max_row);
+      $disclosure_parsed_data_items = $disclosure_parsed_data['items'];
+      $max = $disclosure_parsed_data['max'];
+    }
+
+    // Process Batch for iterating Indicators
+    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max);
   }
 
   /**
@@ -112,7 +125,7 @@ class EITISummaryDataImporter {
    * Build Summary data report item entity from parsed data from xlsx datasheet
    */
   private function buildSummaryDataReportFromXls($data) {
-
+    $id = NULL;
     if (isset($data['country_id']) && isset($data['year_start']) && isset($data['year_end'])) {
       $start = $this->getYearByDate($data['year_start']);
       $end = $this->getYearByDate($data['year_end']);
@@ -134,15 +147,16 @@ class EITISummaryDataImporter {
         $entity_item->currency_code = $data['currency_code'];
         $entity_item->currency_rate = $data['currency_rate'];
       }
-      
+
       $entity_item = $this->mappingAboutSection($entity_item, $data);
 
       $entity = entity_metadata_wrapper('summary_data', $entity_item);
 
       entity_save('summary_data', $entity);
+      $id = $entity_item->id;
     }
 
-    return $entity;
+    return $id;
   }
 
   /**
@@ -381,6 +395,295 @@ class EITISummaryDataImporter {
     return $item;
   }
 
+  /**
+   * Processing data parsing for Disclosure checklist section
+   */
+  public function parseDisclosureChecklistSection($sheet, $max_row) {
+    $data = array();
+
+    // Skip table header
+    $max = 0;
+    $i = 17;
+    $dataMapping = new EITISummaryDataMapping();
+
+    $sections = $dataMapping->disclosureCheclishGetSubsections();
+    $skip_sections = $dataMapping->disclosureCheclishGetSkipItems();
+    $active_section = '';
+
+    while ($i < $max_row) {
+      $requirement_cell = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+
+      if (in_array($requirement_cell, $sections)) {
+        $active_section = $requirement_cell;
+
+        $data['items'][] = array(
+          'parent' => '',
+          'requirement_cell' => $requirement_cell,
+          'inclusion' => '',
+          'source' => '',
+        );
+
+        $max++;
+      } else {
+        if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
+          $inclusion_cell = $sheet->getCellByColumnAndRow(3, $i);
+          if ($inclusion_cell->isFormula()) {
+            $value = $inclusion_cell->getOldCalculatedValue();
+          } else {
+            $value = $inclusion_cell->getFormattedValue();
+          }
+
+          $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
+
+          $data['items'][] = array(
+            'parent' => $active_section,
+            'requirement_cell' => $requirement_cell,
+            'inclusion' => $value,
+            'source' => $source_cell,
+          );
+          $max++;
+        }
+      }
+
+      $i++;
+    }
+
+    $data['max'] = $max;
+
+    return $data;
+  }
+
+  /**
+   * Implements functuon
+   */
+  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max) {
+    $batch = array(
+      'title' => t('Importing summary data'),
+      'operations' => array(
+        array(
+          'eiti_sdi_batch_process_disclosure_checklist_import',
+          array(
+            $entity,
+            $disclosure_parsed_data,
+            $max,
+          ),
+        ),
+      ),
+      'finished' => 'eiti_sdi_batch_process_finish_callback',
+    );
+    batch_set($batch);
+    //batch_process('admin/content/summary_data');
+  }
+}
+
+/**
+ * Implements Batch process for Disclosure checklist
+ */
+function eiti_sdi_batch_process_disclosure_checklist_import($entity, $disclosure_parsed_data, $max, &$context) {
+  if (empty($context['sandbox'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['disclosure_parsed_data'] = $disclosure_parsed_data;
+    $context['sandbox']['entity'] = $entity;
+    $context['sandbox']['max'] = $max;
+  }
+
+  if (isset($context['sandbox']['disclosure_parsed_data'][$context['sandbox']['progress']])) {
+    $disclosure = $context['sandbox']['disclosure_parsed_data'][$context['sandbox']['progress']];
+
+    $indicator_id = '';
+    if ($disclosure['requirement_cell']) {
+      $indicator_id = eiti_sdi_create_indicator_item($disclosure);
+    }
+
+    if (!empty($disclosure['parent']) && is_numeric($indicator_id)) {
+      $summary_data = entity_load('summary_data', array($entity));
+      if ($summary_data) {
+        $summary_data = array_shift($summary_data);
+        $summary_data->field_sd_indicator_values['und'][]['target_id'] = $indicator_id;
+        entity_save('summary_data', $summary_data);
+      }
+    }
+  }
+
+  $context['sandbox']['progress']++;
+
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+/**
+ * Implements Batch process finish callback for Summary data import
+ */
+function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
+  $message = t('Summary data import completed');
+  drupal_set_message($message);
+}
+
+/**
+ * Create indicator item
+ */
+function eiti_sdi_create_indicator_item($values) {
+  $indicator_id = NULL;
+  $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent']);
+
+  if (!$id) {
+    $id = eiti_sdi_create_indicator_type($values);
+  }
+
+  if ($id) {
+    // Load indicator
+    $indicator = entity_load('indicator', array($id));
+
+    if ($indicator) {
+      $indicator = array_shift($indicator);
+
+      if ($indicator->type != 'group') {
+        // Create indicator value there
+        $entity_item = entity_get_controller('indicator_value')->create();
+
+        $entity_item->indicator_id = $indicator->id;
+
+        switch ($indicator->type) {
+          case 'boolean':
+            $entity_item->value_boolean = $values['inclusion'];
+            break;
+          case 'numeric':
+            $entity_item->value_numeric = $values['inclusion'];
+            break;
+          case 'text':
+            $entity_item->value_text = $values['inclusion'];
+            break;
+          case 'reporting_type':
+
+            $value_reporting_type = '';
+
+            switch ($values['inclusion']) {
+              case 'Yes, systematically disclosed':
+                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_SYSTEMATICALLY_DISCLOSED';
+                break;
+              case 'Yes, through EITI reporting':
+                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_THROUGH_EITI_REPORTING';
+                break;
+              case 'Not applicable':
+                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_APPLICABLE';
+                break;
+              case 'Not available':
+                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_AVAILABLE';
+                break;
+            }
+
+            $entity_item->value_reporting_type = $value_reporting_type;
+            break;
+        }
+
+        if ($values['source']) {
+
+          if (sizeof($values['source']) < 10) {
+            $entity_item->value_unit = $values['source'];
+          } else {
+            $entity_item->source = $values['source'];
+          }
+        }
+
+        entity_save('indicator_value', $entity_item);
+        $indicator_id = $entity_item->id;
+      }
+    }
+  }
+  
+  return $indicator_id;
+}
+
+/**
+ * Get indicator type by name
+ */
+function eiti_sdi_get_indicator_type_by_name($name, $parent) {
+  $id = NULL;
+
+  if ($name) {
+
+    if ($parent) {
+      $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $parent))->fetchAll();
+
+      if ($parent_id_query) {
+        $parent_id_result = array_shift($parent_id_query);
+
+        if (isset($parent_id_result->id)) {
+          $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.parent = :parent", array(':name' => $name, ':parent' => $parent_id_result->id))->fetchAll();
+        }
+      }
+    } else {
+      $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $name))->fetchAll();
+    }
+
+    if (!empty($query)) {
+      $result = array_shift($query);
+      if (isset($result->id)) {
+        $id = $result->id;
+      }
+    }
+  }
+
+  return $id;
+}
 
 
+
+/**
+ * Implements indicator type by source data
+ */
+function eiti_sdi_create_indicator_type($values) {
+  $id = NULL;
+
+  if (empty($values['parent'])) {
+    $type = 'group';
+  } else {
+    $type = eiti_sdi_get_indicator_data_type_by_value($values['inclusion']);
+  }
+
+  $entity_item = entity_get_controller('indicator')->create();
+  $entity_item->type = $type;
+  $entity_item->name = $values['requirement_cell'];
+
+  if (!empty($values['parent'])) {
+    $parent_id = eiti_sdi_get_indicator_type_by_name($values['parent'], '');
+
+    if ($parent_id) {
+      $entity_item->parent = $parent_id;
+    }
+  }
+
+  $entity_item->status = 1;
+  $entity_item->created = time();
+
+  entity_save('indicator', $entity_item);
+  $id = $entity_item->id;
+
+  return $id;
+}
+
+/**
+ * Parse indicator type by value
+ */
+function eiti_sdi_get_indicator_data_type_by_value($value) {
+
+  if (empty($value)) {
+    return NULL;
+  }
+
+  if ($value == 'Yes, systematically disclosed' || $value == 'Yes, through EITI reporting'
+    || $value == 'Not available' || $value == 'Not applicable') {
+    return 'reporting_type';
+  }
+
+  if (is_numeric($value)) {
+    return 'numeric';
+  }
+
+  if (is_bool($value)) {
+    return 'boolean';
+  }
+
+  return 'text';
 }
