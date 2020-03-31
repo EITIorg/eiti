@@ -51,4 +51,45 @@ class EITISummaryDataMapping {
       'Email address' => 'field_sd_contact_email_address',
     );
   }
+
+  /**
+   * Get subsections structure for disclosure checklist section
+   */
+  public function disclosureCheclishGetSubsections() {
+    return array(
+      'EITI Requirement 2.1: Legal framework and fiscal regime',
+      'EITI Requirement 2.2: Contract and license allocations',
+      'EITI Requirement 2.3: Register of licenses',
+      'EITI Requirement 2.5: Beneficial ownership',
+      'EITI Requirement 2.6: State participation',
+      'EITI Requirement 3.1: Exploration',
+      'EITI Requirement 3.2: Production by commodity',
+      'EITI Requirement 3.3: Exports',
+      'EITI Requirement 4.1: Comprehensiveness',
+      'EITI Requirement 4.2: In-kind revenues',
+      'EITI Requirement 4.3: Barter agreements',
+      'EITI Requirement 4.4: Transportation revenues',
+      'EITI Requirement 4.5: SOE transactions',
+      'EITI Requirement 4.6: Direct subnational payments',
+      'EITI Requirement 4.8: Data timeliness',
+      'EITI Requirement 4.9: Data quality',
+      'EITI Requirement 5.1: Distribution of extractive industry revenues',
+      'EITI Requirement 5.2: Subnational transfers',
+      'EITI Requirement 5.3: Revenue management and expenditures',
+      'EITI Requirement 6.1: Social expenditures',
+      'EITI Requirement 6.2: Quasi-fiscal expenditures',
+      'EITI Requirement 6.3: Economic contribution',
+      'EITI Requirement 6.4: Environmental impact',
+    );
+  }
+
+  /**
+   * Get elements to be skipped during data parsing
+   */
+  public function disclosureCheclishGetSkipItems() {
+    return array(
+      'Does the government publish information about',
+      '(Harmonised System Codes)',
+    );
+  }
 }
