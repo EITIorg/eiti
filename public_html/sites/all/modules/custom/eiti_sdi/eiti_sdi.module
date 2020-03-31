@@ -69,7 +69,6 @@ function eiti_sdi_summary_data_import_form_validate($form, &$form_state) {
  */
 function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
 
-
   $fid = $form_state['values']['file'];
   $file = file_load($fid);
 
@@ -77,6 +76,4 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
     $dataImporter = new EITISummaryDataImporter();
     $dataImporter->importSummaryData($file->uri);
   }
-
-
 }
