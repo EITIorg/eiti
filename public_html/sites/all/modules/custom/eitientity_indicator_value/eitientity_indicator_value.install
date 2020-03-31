@@ -110,3 +110,17 @@ function eitientity_indicator_value_update_7001(&$sandbox) {
   );
   db_change_field('eiti_indicator_value', 'indicator_id', 'indicator_id', $field_schema);
 }
+
+/**
+ * Add reporting type value to indicator types
+ */
+function eitientity_indicator_value_update_7002(&$sandbox) {
+  $spec = array(
+    'description' => 'The reporting type value for this entity.',
+    'type' => 'varchar',
+    'length' => 64,
+    'not null' => FALSE,
+    'default' => NULL,
+  );
+  db_add_field('eiti_indicator_value', 'value_reporting_type', $spec);
+}
