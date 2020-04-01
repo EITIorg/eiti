@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the EITI Content Type Revenue Streams feature.
+ */
+
+include_once 'eiti_content_type_revenue_streams.features.inc';
