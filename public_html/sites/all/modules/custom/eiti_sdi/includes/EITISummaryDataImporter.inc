@@ -538,7 +538,7 @@ function eiti_sdi_create_indicator_item($values) {
     if ($indicator) {
       $indicator = array_shift($indicator);
 
-      if ($indicator->type != 'group') {
+      if ($indicator->type != 'group' && !empty($values['inclusion'])) {
         // Create indicator value there
         $entity_item = entity_get_controller('indicator_value')->create();
 
@@ -577,11 +577,13 @@ function eiti_sdi_create_indicator_item($values) {
             break;
         }
 
-        if ($values['source']) {
+        if (!empty($values['source'])) {
+          $values['source'] = trim($values['source']);
 
-          if (sizeof($values['source']) < 10) {
+          if (strlen($values['source']) < 32) {
             $entity_item->value_unit = $values['source'];
           } else {
+            $values['source'] = substr($values['source'], 0, 255);
             $entity_item->source = $values['source'];
           }
         }
@@ -591,7 +593,7 @@ function eiti_sdi_create_indicator_item($values) {
       }
     }
   }
-  
+
   return $indicator_id;
 }
 
@@ -642,23 +644,25 @@ function eiti_sdi_create_indicator_type($values) {
     $type = eiti_sdi_get_indicator_data_type_by_value($values['inclusion']);
   }
 
-  $entity_item = entity_get_controller('indicator')->create();
-  $entity_item->type = $type;
-  $entity_item->name = $values['requirement_cell'];
+  if ($type) {
+    $entity_item = entity_get_controller('indicator')->create();
+    $entity_item->type = $type;
+    $entity_item->name = $values['requirement_cell'];
 
-  if (!empty($values['parent'])) {
-    $parent_id = eiti_sdi_get_indicator_type_by_name($values['parent'], '');
+    if (!empty($values['parent'])) {
+      $parent_id = eiti_sdi_get_indicator_type_by_name($values['parent'], '');
 
-    if ($parent_id) {
-      $entity_item->parent = $parent_id;
+      if ($parent_id) {
+        $entity_item->parent = $parent_id;
+      }
     }
+
+    $entity_item->status = 1;
+    $entity_item->created = time();
+
+    entity_save('indicator', $entity_item);
+    $id = $entity_item->id;
   }
-
-  $entity_item->status = 1;
-  $entity_item->created = time();
-
-  entity_save('indicator', $entity_item);
-  $id = $entity_item->id;
 
   return $id;
 }
