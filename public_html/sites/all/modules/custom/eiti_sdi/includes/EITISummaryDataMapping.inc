@@ -60,6 +60,7 @@ class EITISummaryDataMapping {
       'EITI Requirement 2.1: Legal framework and fiscal regime',
       'EITI Requirement 2.2: Contract and license allocations',
       'EITI Requirement 2.3: Register of licenses',
+      'EITI Requirement 2.4: Contract disclosure',
       'EITI Requirement 2.5: Beneficial ownership',
       'EITI Requirement 2.6: State participation',
       'EITI Requirement 3.1: Exploration',
@@ -90,6 +91,8 @@ class EITISummaryDataMapping {
     return array(
       'Does the government publish information about',
       '(Harmonised System Codes)',
+      'If yes, what was the volume received?',
+      'If yes, what was sold?',
     );
   }
 }
