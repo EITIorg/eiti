@@ -113,6 +113,12 @@ function eitientity_organisation_get_types() {
     'description' => t('Used on summary data %name field.', $t_args),
   );
 
+  $t_args = array('%name' => t('Reconciled Revenue Streams per Project'));
+  $items['project'] = array(
+    'label' => t('Project'),
+    'description' => t('Used on summary data %name field.', $t_args),
+  );
+
   return $items;
 }
 
