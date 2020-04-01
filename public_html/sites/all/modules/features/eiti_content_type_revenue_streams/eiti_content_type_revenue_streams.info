@@ -1,0 +1,17 @@
+name = EITI Content Type Revenue Streams
+core = 7.x
+package = EITI Entities
+version = 7.x-1.0
+dependencies[] = ctools
+dependencies[] = eitientity_revenue_stream
+dependencies[] = features
+dependencies[] = list
+dependencies[] = options
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[field_base][] = field_currency
+features[field_base][] = field_sector
+features[field_instance][] = revenue_stream-agency-field_currency
+features[field_instance][] = revenue_stream-agency-field_sector
+features[variable][] = field_bundle_settings_revenue_stream__agency
