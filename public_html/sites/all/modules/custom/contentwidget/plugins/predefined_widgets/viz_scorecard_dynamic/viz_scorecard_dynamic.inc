@@ -75,6 +75,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   // Build year select options.
   $default_year = $widget_settings['extra_settings']['year'];
   $available_years_options = array();
+  $assessment_summary = [];
   $counter_words = array(t('First'), t('Second'), t('Third'), t('Fourth'), t('Fifth'),
     t('Sixth'), t('Seventh'), t('Eighth'), t('Ninth'), t('Tenth'));
   if ($widget_settings['extra_settings']['country']) {
@@ -86,15 +87,62 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
           continue;
         }
         // Set year to latest if it's not set, but one is available.
+        $langcode = $langcode ?? 'en';
         if (!$widget_settings['extra_settings']['year'] && $score_data_entity->year > $default_year) {
           $default_year = $score_data_entity->year;
         }
         $available_years_options[$score_data_entity->year] = $score_data_entity->year;
+
+        // Set assessment_summary values.
+        $ent_type = $score_data_entity->entityType();
+        $ent_bundle = $score_data_entity->bundle();
+        if (!empty($score_data[$score_data_delta]->field_overall_assessment[$langcode][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_overall_assessment', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $assessment_summary['overall_assessment']['label'] = $label;
+          $assessment_summary['overall_assessment']['value'] = $score_data[$score_data_delta]->field_overall_assessment[$langcode][0]['value'];
+        }
+        if (!empty($score_data[$score_data_delta]->field_assessment_date[LANGUAGE_NONE][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_assessment_date', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $assessment_summary['assessment_date']['label'] = $label;
+          $assessment_summary['assessment_date']['value'] = format_date(strtotime($score_data[$score_data_delta]->field_assessment_date[LANGUAGE_NONE][0]['value']), 'custom', 'j F Y');
+        }
+        if (!empty($score_data[$score_data_delta]->field_validation_against[$langcode][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_validation_against', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $key = $score_data[$score_data_delta]->field_validation_against[$langcode][0]['value'];
+          $field = field_info_field('field_validation_against');
+          $assessment_summary['validation_against']['label'] = $label;
+          $assessment_summary['validation_against']['value'] = t('Validation against @standard', [
+            '@standard' => $field['settings']['allowed_values'][$key],
+          ]);
+        }
+        if (!empty($score_data[$score_data_delta]->field_validation_fiscal_year[LANGUAGE_NONE][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_validation_fiscal_year', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $assessment_summary['validation_fiscal_year']['label'] = $label;
+          $assessment_summary['validation_fiscal_year']['value'] = format_date(strtotime($score_data[$score_data_delta]->field_validation_fiscal_year[LANGUAGE_NONE][0]['value']), 'custom', 'Y');
+        }
+        if (!empty($score_data[$score_data_delta]->field_corrective_actions_num[LANGUAGE_NONE][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_corrective_actions_num', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $assessment_summary['corrective_actions_num']['label'] = $label;
+          $assessment_summary['corrective_actions_num']['value'] = $score_data[$score_data_delta]->field_corrective_actions_num[LANGUAGE_NONE][0]['value'];
+        }
+        if (!empty($score_data[$score_data_delta]->field_next_validation_commences[LANGUAGE_NONE][0]['value'])) {
+          $instance = field_info_instance($ent_type, 'field_next_validation_commences', $ent_bundle);
+          $label = $instance ? $instance['label'] : '';
+          $assessment_summary['validation_commences']['label'] = $label;
+          $assessment_summary['validation_commences']['value'] = format_date(strtotime($score_data[$score_data_delta]->field_next_validation_commences[LANGUAGE_NONE][0]['value']), 'custom', 'j F Y');
+        }
       }
+
       ksort($available_years_options);
       $counter = 0;
       foreach ($available_years_options as $y_key => $y_val) {
-        $available_years_options[$y_key] = $counter_words[$counter] . ' ' . t('Validation') . ' (' . $y_val . ')';
+//        $available_years_options[$y_key] = $counter_words[$counter] . ' ' . t('Validation') . ' (' . $y_val . ')';
+        $available_years_options[$y_key] = $counter_words[$counter] . ' ' . t('Validation');
         $counter++;
       }
     }
@@ -117,7 +165,27 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $pdf_markup .= '<div class="pdf-description">';
   $pdf_markup .= t('We recommend using Adobe Acrobat PDF reader to access all content and features in this document. You can download the program for free here <a href="https://get.adobe.com/reader/" target="_blank">https://get.adobe.com/reader/</a>');
   $pdf_markup .= '</div>';
-  $block['pdf'] = array('#markup' => $pdf_markup);
+  $block['pdf'] = [
+    '#markup' => $pdf_markup,
+    '#weight' => 9,
+  ];
+
+  if (!empty($assessment_summary)) {
+    $assessment_markup = '<div class="form-item">';
+    foreach ($assessment_summary as $item) {
+      $assessment_markup .= '<div class="form-item">';
+      $assessment_markup .= t("@label: <b>@value</b>", [
+        '@label' => $item['label'],
+        '@value' => $item['value'],
+      ]);
+      $assessment_markup .= '</div>';
+    }
+    $assessment_markup .= '</div>';
+  }
+  $block['assessment_summary'] = [
+    '#markup' => $assessment_markup,
+    '#weight' => 7,
+  ];
 
   $year_selector_class = drupal_html_class($identifier . '--sc-year-selector');
   $block['sc_widget_year_selector'] = array(
@@ -127,6 +195,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
     '#title_display' => 'invisible',
     '#options' => $available_years_options,
     '#value' => $default_year,
+    '#weight' => 2,
     '#attributes' => array(
       'class' => array($year_selector_class),
     ),

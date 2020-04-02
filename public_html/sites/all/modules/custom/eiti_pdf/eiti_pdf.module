@@ -60,9 +60,5 @@ function eiti_pdf_theme($existing, $type, $theme, $path) {
       'template' => 'eiti-pdf-footer',
       'path' => $path . '/templates',
     ),
-    'eiti_pdf_footer_first' => array(
-      'template' => 'eiti-pdf-footer-first',
-      'path' => $path . '/templates',
-    ),
   );
 }
