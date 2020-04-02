@@ -216,9 +216,10 @@ function __eiti_preprocess_views_view_unformatted__stakeholders(&$variables) {
 function __eiti_get_becoming_supporter_link ($tid) {
   $term = taxonomy_term_load($tid);
   $link_markup = '';
-  if (!empty($term->field_bs_link[$term->language][0])) {
-    $bm_link = $term->field_bs_link[$term->language][0];
-    $link = l(t('@link', ['@link' => $bm_link['title']]), $bm_link['url']);
+  global $language;
+  if (!empty($term->field_bs_link[$language->language][0])) {
+    $bm_link = $term->field_bs_link[$language->language][0];
+    $link = l($bm_link['title'], $bm_link['url']);
     $link_markup = '<span class="bm-link">' . $link . '</span>';
   }
   return $link_markup;
