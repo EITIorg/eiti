@@ -51,7 +51,16 @@ function eitict_stakeholder_default_fe_block_settings() {
     'delta' => '11095694fe68b9668dc8660623f88aac',
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'supporters/*',
+    'pages' => 'supporters/*
+taxonomy/term/714
+taxonomy/term/715
+taxonomy/term/716
+taxonomy/term/10386
+taxonomy/term/10387
+taxonomy/term/10388
+taxonomy/term/10389
+taxonomy/term/10390
+taxonomy/term/10391',
     'roles' => array(),
     'themes' => array(
       'adminimal' => array(

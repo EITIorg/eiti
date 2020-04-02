@@ -448,15 +448,28 @@ function eitiwidgets_ds_pre_render_alter(&$layout_render_array, $context, &$vars
     // Customise Support since field.
     if (!empty($layout_render_array['right'])) {
       foreach ($layout_render_array['right'] as $key => &$item) {
-        if (!isset($item['#field_name']) || $item['#field_name'] != 'field_supporter_since') {
+        if (!isset($item['#field_name']) || empty($item[0]['#markup'])) {
           continue;
         }
-        $lan = LANGUAGE_NONE;
-        if (!empty($item[0]['#markup']) && isset($vars['field_since_year'][$lan][0]['value'], $item['#items'][0]['value'])) {
-          $supporter = $item[0]['#markup'];
-          $year = $vars['field_since_year'][$lan][0]['value'];
-          if ($item['#items'][0]['value'] == 'supporter') {
-            $item[0]['#markup'] = t($supporter) . ' ' . $year;
+
+        if ($item['#field_name'] == 'field_stk_membership') {
+          // Forced translate field membership.
+          // t('@text', ['@text' => $text]) doesn't translate in this case.
+          $text = $item[0]['#markup'];
+          $item[0]['#markup'] = t($text);
+        }
+
+        if ($item['#field_name'] == 'field_supporter_since') {
+          // Custom field_since_year markup.
+          if (isset($vars['field_since_year'][LANGUAGE_NONE][0]['value'], $item['#items'][0]['value'])) {
+            $supporter = $item[0]['#markup'];
+            $year = $vars['field_since_year'][LANGUAGE_NONE][0]['value'];
+            if ($item['#items'][0]['value'] == 'supporter') {
+              $item[0]['#markup'] = t($supporter) . ' ' . $year;
+            }
+            else {
+              $item[0]['#markup'] = t($supporter);
+            }
           }
         }
       }
