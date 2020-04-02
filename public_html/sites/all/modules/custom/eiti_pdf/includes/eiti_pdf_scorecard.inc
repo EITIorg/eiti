@@ -17,7 +17,6 @@ function eiti_pdf_scorecard_page() {
   $url = url('api/v1.0/score_data', $url_options);
   $data = drupal_http_request($url);
 
-  $html_footer_first = theme('eiti_pdf_footer_first');
   $html_footer = theme('eiti_pdf_footer');
   $html_title_page = '';
   $html_header = '';
@@ -49,12 +48,13 @@ function eiti_pdf_scorecard_page() {
       // Title and pre-title.
       if (isset($score_data->field_scd_pdf_title)) {
         $theme_args['pre_title'] = t('Board decision');
-        $title_prefix = !empty($score_data_emw->field_scd_pdf_title_prefix->value()) ? check_plain($score_data_emw->field_scd_pdf_title_prefix->value()) : t('Validation of');
+        $title_prefix = !empty($score_data_emw->field_scd_pdf_title_prefix) ? check_plain($score_data_emw->field_scd_pdf_title_prefix->value()) : t('Validation of');
         $year = !empty($score_data_emw->year->value()) ? check_plain($score_data_emw->year->value()) : '';
         $theme_args['title'] = $title_prefix . ' ' . check_plain($score_data_emw->field_scd_pdf_title->value()) . ' ' . $year;
       }
       // Subtitle.
       if (isset($score_data->field_progress_level)) {
+        $theme_args['progress_level'] = '';
         if (!empty($score_data_emw->field_progress_level->value())) {
           $progress_level = check_plain($score_data_emw->field_progress_level->value());
           $progress_level_field = field_info_field('field_progress_level');
@@ -141,7 +141,6 @@ function eiti_pdf_scorecard_page() {
   $mpdf->WriteHTML($css, 1);
   $css = file_get_contents(__DIR__ . '/../css/pdf.css');
   $mpdf->WriteHTML($css, 1);
-  $mpdf->DefHTMLFooterByName('html_firstpagefooter', $html_footer_first);
   $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
   if ($html_title_page) {
     $mpdf->WriteHTML($html_title_page, 2);
