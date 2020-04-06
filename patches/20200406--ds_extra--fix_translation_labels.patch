@@ -1,0 +1,29 @@
+diff --git a/public_html/sites/all/modules/contrib/ds/modules/ds_extras/ds_extras.module b/public_html/sites/all/modules/contrib/ds/modules/ds_extras/ds_extras.module
+index ac0fba5..6b0d797 100644
+--- a/public_html/sites/all/modules/contrib/ds/modules/ds_extras/ds_extras.module
++++ b/public_html/sites/all/modules/contrib/ds/modules/ds_extras/ds_extras.module
+@@ -756,7 +756,7 @@ function theme_ds_field_minimal($variables) {
+ 
+   // Render the label.
+   if (!$variables['label_hidden']) {
+-    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . $variables['label'];
++    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . t($variables['label']);
+     if (!isset($config['lb-col'])) {
+       $output .= ':&nbsp;';
+     }
+@@ -799,13 +799,13 @@ function theme_ds_field_expert($variables) {
+     if (!empty($config['lb-at'])) $attributes[] = $config['lb-at'];
+     if (!empty($config['lb-def-at'])) $attributes[] = $variables['title_attributes'];
+     $attributes = (!empty($attributes)) ? ' ' . implode(' ', $attributes) : '';
+-    $styled_label = '<' . $label_wrapper . $class . $attributes . '>' . $styled_label . '</' . $label_wrapper . '>';
++    $styled_label = '<' . $label_wrapper . $class . $attributes . '>' . t($styled_label) . '</' . $label_wrapper . '>';
+ 
+     // Place it inside a wrapper
+     if (isset($config['lbw'])) {
+       $class = !empty($config['lbw-cl']) ? ' class="' . $config['lbw-cl'] . '"' : '';
+       $attributes = !empty($config['lbw-at']) ?  ' ' . $config['lbw-at'] : '';
+-      $styled_label = '<' . $config['lbw-el'] . $class . $attributes . '>' . $styled_label . '</' . $config['lbw-el'] . '>';
++      $styled_label = '<' . $config['lbw-el'] . $class . $attributes . '>' . t($styled_label) . '</' . $config['lbw-el'] . '>';
+     }
+ 
+     $output .= $styled_label;

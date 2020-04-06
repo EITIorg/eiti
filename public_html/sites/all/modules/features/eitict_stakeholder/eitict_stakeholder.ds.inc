@@ -50,17 +50,10 @@ function eitict_stakeholder_ds_field_settings_info() {
         'ft' => array(),
       ),
     ),
-    'field_stk_countries' => array(
+    'field_stk_membership' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'func' => 'theme_field',
-        ),
-      ),
-    ),
-    'field_stk_quote_title' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'classes' => 'clearfix',
+          'lb-col' => TRUE,
         ),
       ),
     ),
@@ -68,6 +61,13 @@ function eitict_stakeholder_ds_field_settings_info() {
       'formatter_settings' => array(
         'ft' => array(
           'lb-col' => TRUE,
+        ),
+      ),
+    ),
+    'field_stk_quote_title' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'classes' => 'clearfix',
         ),
       ),
     ),
@@ -85,7 +85,7 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_stk_membership' => array(
+    'field_stk_countries' => array(
       'formatter_settings' => array(
         'ft' => array(
           'lb-col' => TRUE,
