@@ -263,7 +263,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'bypass_access' => FALSE,
+          'bypass_access' => 0,
           'link' => 1,
         ),
         'type' => 'entityreference_label',
