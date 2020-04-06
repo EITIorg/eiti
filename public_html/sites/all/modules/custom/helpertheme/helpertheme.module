@@ -709,7 +709,7 @@ function theme_helpertheme_ds_field_simple($variables) {
 
   // Render the label.
   if (!$variables['label_hidden']) {
-    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . $variables['label'];
+    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . t($variables['label']);
     if (!isset($config['lb-col'])) {
       $output .= ':&nbsp;';
     }
