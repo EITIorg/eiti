@@ -291,6 +291,30 @@ table {
       -ms-flex-item-align: end;
     }
 
+    .list-title {
+      align-items: center;
+      margin-bottom: 1rem;
+
+      &:not(:first-child) {
+        margin-top: 2.5rem;
+      }
+    }
+
+    // action button
+    .bm-link {
+      margin-top: 0.5rem;
+
+      a {
+        display: block;
+        padding: 0 20px;
+        background-color: @claltnormal;
+        font-size: 1.125rem;
+        font-weight: bold;
+        line-height: 2em;
+        color: #fff;
+      }
+    }
+
     .view-content {
       -webkit-flex: 1 100%;
       -ms-flex: 1 100%;
@@ -562,9 +586,6 @@ table {
     }
 
     & > .view-content {
-      .bm-link a {
-        font-size: 1.875rem; // 30px
-      }
 
       .views-row {
         -ms-flex: 0 33.333%;
