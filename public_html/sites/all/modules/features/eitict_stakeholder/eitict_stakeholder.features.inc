@@ -28,6 +28,30 @@ function eitict_stakeholder_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function eitict_stakeholder_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: stk-teaser-226-x.
+  $styles['stk-teaser-226-x'] = array(
+    'label' => 'Stakeholder-teaser 226x85',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 226,
+          'height' => 85,
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function eitict_stakeholder_node_info() {

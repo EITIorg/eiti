@@ -181,7 +181,26 @@ function __eiti_preprocess_views_view__news(&$variables) {
 }
 
 /**
- * Implements template_preprocess_views_view_unformatted() for the news view.
+ * Implements template_preprocess_views_view() for the stakeholders view.
+ */
+function __eiti_preprocess_views_view__stakeholders(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'stakeholders_companies':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      $variables["sup_link"] = '';
+      $tid = $variables["view"]->args[0];
+
+      if (!empty($tid)) {
+        $variables["sup_link"] = __eiti_get_becoming_supporter_link($tid);
+      }
+
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view_unformatted() for the stakeholders view.
  */
 function __eiti_preprocess_views_view_unformatted__stakeholders(&$variables) {
   switch ($variables['view']->current_display) {
@@ -198,8 +217,7 @@ function __eiti_preprocess_views_view_unformatted__stakeholders(&$variables) {
       }
       $lineage_tid = end($lineage)['tid'];
       if (!empty($lineage) && $lineage_tid == $tid) {
-        $link = __eiti_get_becoming_supporter_link($tid);
-        $variables["title"] = $link;
+        $variables["title"] = '';
       }
       elseif (!empty($variables["view"]->result[$current_row[0]]->field_data_field_stk_type_field_stk_type_tid)) {
         // Show only Become supporter link.

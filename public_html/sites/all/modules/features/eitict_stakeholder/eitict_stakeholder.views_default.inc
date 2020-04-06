@@ -184,7 +184,7 @@ function eitict_stakeholder_views_default_views() {
   $handler->display->display_options['fields']['field_stk_logo']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_stk_logo']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_stk_logo']['settings'] = array(
-    'image_style' => 'logo-small',
+    'image_style' => 'stk-teaser-226-x',
     'image_link' => 'content',
   );
   /* Field: Entity translation: Title: translated */
