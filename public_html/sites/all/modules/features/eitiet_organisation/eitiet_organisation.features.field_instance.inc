@@ -11,8 +11,8 @@
 function eitiet_organisation_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'organisation-agency-field_id_number'.
-  $field_instances['organisation-agency-field_id_number'] = array(
+  // Exported field_instance: 'organisation-agency-field_agency_type'.
+  $field_instances['organisation-agency-field_agency_type'] = array(
     'bundle' => 'agency',
     'default_value' => NULL,
     'deleted' => 0,
@@ -23,13 +23,13 @@ function eitiet_organisation_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'organisation',
-    'field_name' => 'field_id_number',
-    'label' => 'ID number',
+    'field_name' => 'field_agency_type',
+    'label' => 'Agency type',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -43,12 +43,55 @@ function eitiet_organisation_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance: 'organisation-agency-field_total_reported'.
+  $field_instances['organisation-agency-field_total_reported'] = array(
+    'bundle' => 'agency',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_total_reported',
+    'label' => 'Total reported',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
       'weight' => 31,
     ),
   );
 
-  // Exported field_instance: 'organisation-company-field_id_number'.
-  $field_instances['organisation-company-field_id_number'] = array(
+  // Exported field_instance:
+  // 'organisation-company-field_audited_financial_state'.
+  $field_instances['organisation-company-field_audited_financial_state'] = array(
     'bundle' => 'company',
     'default_value' => NULL,
     'deleted' => 0,
@@ -59,13 +102,13 @@ function eitiet_organisation_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'organisation',
-    'field_name' => 'field_id_number',
-    'label' => 'ID number',
+    'field_name' => 'field_audited_financial_state',
+    'label' => 'Audited financial statement (or balance sheet, cash flows, profit/loss statement if unavailable)',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -79,7 +122,7 @@ function eitiet_organisation_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 6,
     ),
   );
 
@@ -151,6 +194,86 @@ function eitiet_organisation_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'organisation-company-field_payments_to_governments'.
+  $field_instances['organisation-company-field_payments_to_governments'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_payments_to_governments',
+    'label' => 'Payments to Governments Report',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'organisation-company-field_stock_exchange_listing'.
+  $field_instances['organisation-company-field_stock_exchange_listing'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_stock_exchange_listing',
+    'label' => 'Stock exchange listing or company website ',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
     ),
   );
 
@@ -440,14 +563,18 @@ function eitiet_organisation_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Affiliated companies, start with Operator');
+  t('Agency type');
+  t('Audited financial statement (or balance sheet, cash flows, profit/loss statement if unavailable)');
   t('Commodities');
   t('Currency');
-  t('ID number');
   t('Legal agreement reference number(s): contract, licence, lease, concession');
+  t('Payments to Governments Report');
   t('Production');
   t('Production (volume)');
   t('Sector');
   t('Status');
+  t('Stock exchange listing or company website ');
+  t('Total reported');
   t('Unit');
 
   return $field_instances;

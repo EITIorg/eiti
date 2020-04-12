@@ -85,8 +85,31 @@ class EITISummaryDataImporter {
       $max = $disclosure_parsed_data['max'];
     }
 
+    // Process Reporting entities section
+    $reporting_entities =$this->getSpreadsheet($xls, 3);
+    if ($reporting_entities) {
+      $max_row = $xls->setActiveSheetIndex(3)->getHighestRow();
+      $reporting_entities_parsed_data = $this->parseReportingEntitiesSection($reporting_entities, $max_row);
+    }
+
+    // Process Goverment revenues section
+    $goverment_revenues = $this->getSpreadsheet($xls, 4);
+
+    if ($goverment_revenues) {
+      $max_row = $xls->setActiveSheetIndex(4)->getHighestRow();
+      $goverment_revenues_parsed_data = $this->parseGovermentRevenuesSection($goverment_revenues, $max_row);
+    }
+
+    // Process Company data section
+    $company_data = $this->getSpreadsheet($xls, 5);
+
+    if ($company_data) {
+      $max_row = $xls->setActiveSheetIndex(5)->getHighestRow();
+      $company_parsed_data = $this->parseCompanySection($company_data, $max_row);
+    }
+
     // Process Batch for iterating Indicators
-    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max);
+    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data);
   }
 
   /**
@@ -456,7 +479,7 @@ class EITISummaryDataImporter {
   /**
    * Implements functuon
    */
-  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max) {
+  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data) {
     $batch = array(
       'title' => t('Importing summary data'),
       'operations' => array(
@@ -468,11 +491,180 @@ class EITISummaryDataImporter {
             $max,
           ),
         ),
+        array(
+          'eiti_sdi_batch_process_reporting_entities_import',
+          array(
+            $entity,
+            $reporting_entities_parsed_data,
+          ),
+        ),
+        array(
+          'eiti_sdi_batch_process_goverment_revenues_import',
+          array(
+            $entity,
+            $goverment_revenues_parsed_data,
+          ),
+        ),
+        array(
+          'eiti_sdi_batch_process_company_import',
+          array(
+            $entity,
+            $company_parsed_data,
+          ),
+        ),
       ),
       'finished' => 'eiti_sdi_batch_process_finish_callback',
     );
     batch_set($batch);
     //batch_process('admin/content/summary_data');
+  }
+
+  /**
+   * Parse Reporting entities section
+   */
+  private function parseReportingEntitiesSection($sheet, $max_row) {
+    $data = array();
+
+    $i = 13;
+
+    $dataMapping = new EITISummaryDataMapping();
+    $reporting_entities_sections = $dataMapping->reportingEntitiesSections();
+    $reporting_entities_active_section = '';
+    $reporting_entities_skip_rows = $dataMapping->reportingEntitiesSkipRows();
+
+    while ($i < $max_row) {
+      $requirement_cell = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+
+      if (in_array($requirement_cell, $reporting_entities_sections)) {
+        switch ($requirement_cell) {
+          case "Reporting government entities list":
+            $reporting_entities_active_section = 'goverment_entity';
+            break;
+          case "Reporting companies' list":
+            $reporting_entities_active_section = 'company';
+            break;
+          case "Reporting projects' list":
+            $reporting_entities_active_section = 'project';
+            break;
+        }
+      } else {
+        if (empty($requirement_cell) && $reporting_entities_active_section == 'project') {
+          $i = $max_row;
+        } else {
+          if (!empty($requirement_cell) && !in_array($requirement_cell, $reporting_entities_skip_rows)) {
+
+            // Doing parsing for subsections
+            $item = array();
+
+            switch ($reporting_entities_active_section) {
+              case 'goverment_entity':
+                $item = array(
+                  'full_agency_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
+                  'agency_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'id_number' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'total_reported' => $sheet->getCellByColumnAndRow(4, $i)->getOldCalculatedValue(),
+                );
+                break;
+              case 'company':
+                $item = array(
+                  'full_company_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
+                  'company_id' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'sector' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'payment_to_goverment_report' => $sheet->getCellByColumnAndRow(7, $i)->getOldCalculatedValue(),
+                );
+                break;
+              case 'project':
+                $item = array(
+                  'full_project_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
+                  'legal_Agreement_ref_number' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'affiliated_companies' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'status' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'production_volume' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'unit' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+                  'production_value' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+                  'currency' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+                );
+                break;
+            }
+
+            $data[$reporting_entities_active_section][] = $item;
+
+          }
+        }
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
+  /**
+   * Parse Goverment revenues section
+   */
+  private function parseGovermentRevenuesSection($sheet, $max_row) {
+    $data = array();
+    $i = 22;
+
+    while ($i < $max_row) {
+      $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
+
+      if (empty($gfs_classification)) {
+        $i = $max_row;
+      } else {
+        $data[] = array(
+          'gfs_classification' => $gfs_classification,
+          'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+          'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+          'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
+        );
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
+  /**
+   * Parse company data
+   */
+  private function parseCompanySection($sheet, $max_row) {
+    $data = array();
+    $i = 15;
+
+    while ($i < $max_row) {
+      $company = $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue();
+
+      if (empty($company)) {
+        $i = $max_row;
+      } else {
+        $data[] = array(
+          'company' => $company,
+          'goverment_entity' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+          'revenue_stream_name' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+          'levied_on_project' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+          'reported_by_project' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+          'project_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+          'reporting_currency' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'payment_made_in_kind' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
+          'in_kind_volume' => $sheet->getCellByColumnAndRow(11, $i)->getFormattedValue(),
+          'unit' => $sheet->getCellByColumnAndRow(12, $i)->getFormattedValue(),
+          'comments' => $sheet->getCellByColumnAndRow(13, $i)->getFormattedValue(),
+        );
+      }
+
+      $i++;
+    }
+
+    return $data;
   }
 }
 
@@ -504,6 +696,260 @@ function eiti_sdi_batch_process_disclosure_checklist_import($entity, $disclosure
       }
     }
   }
+
+  $context['sandbox']['progress']++;
+
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+/**
+ * Implements Batch process for Reporting entities
+ */
+function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_entities_parsed_data, &$context) {
+
+  if (empty($context['sandbox'])) {
+
+    $max = 0;
+    $context['sandbox']['goverment_entity_max'] = 0;
+    $context['sandbox']['goverment_entity_progress'] = 0;
+    $context['sandbox']['company_max'] = 0;
+    $context['sandbox']['company_progress'] = 0;
+    $context['sandbox']['project_max'] = 0;
+    $context['sandbox']['project_progress'] = 0;
+    $context['sandbox']['active_subsection'] = '';
+    $context['sandbox']['country_id'] = '';
+
+    $country_query = db_query("SELECT esd.country_id FROM {eiti_summary_data} esd WHERE esd.id = :entity_id", array(':entity_id' => $entity))->fetchAll();
+    if ($country_query) {
+      $country_query = array_shift($country_query);
+      if (isset($country_query->country_id)) {
+        $context['sandbox']['country_id'] = $country_query->country_id;
+      }
+    }
+
+    if ($reporting_entities_parsed_data['goverment_entity'] && !empty($reporting_entities_parsed_data['goverment_entity'])) {
+      $context['sandbox']['goverment_entity_max'] = sizeof($reporting_entities_parsed_data['goverment_entity']) - 1;
+      $max += $context['sandbox']['goverment_entity_max'];
+    }
+
+    if ($reporting_entities_parsed_data['company'] && !empty($reporting_entities_parsed_data['company'])) {
+      $context['sandbox']['company_max'] = sizeof($reporting_entities_parsed_data['company']) - 1;
+      $max += $context['sandbox']['company_max'];
+    }
+
+    if ($reporting_entities_parsed_data['company'] && !empty($reporting_entities_parsed_data['company'])) {
+      $context['sandbox']['company_max'] = sizeof($reporting_entities_parsed_data['company']) - 1;
+      $max += $context['sandbox']['company_max'];
+    }
+
+    if ($reporting_entities_parsed_data['project'] && !empty($reporting_entities_parsed_data['project'])) {
+      $context['sandbox']['project_max'] = sizeof($reporting_entities_parsed_data['project']) - 1;
+      $max += $context['sandbox']['project_max'];
+    }
+
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['reporting_entities_parsed_data'] = $reporting_entities_parsed_data;
+    $context['sandbox']['entity'] = $entity;
+    $context['sandbox']['max'] = $max;
+  }
+
+  if (empty($context['sandbox']['active_subsection'])) {
+    $context['sandbox']['active_subsection'] = 'goverment_entity';
+  }
+
+  switch ($context['sandbox']['active_subsection']) {
+    case 'goverment_entity':
+      if (isset($reporting_entities_parsed_data['goverment_entity'][$context['sandbox']['goverment_entity_progress']])) {
+        $item = $reporting_entities_parsed_data['goverment_entity'][$context['sandbox']['goverment_entity_progress']];
+
+        if (isset($item['id_number'])) {
+
+          if ($item['id_number'] != 'Not applicable') {
+            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type", array(':id_number' => $item['id_number'], ':type' => 'goverment_entity'))->fetchAll();
+          } else {
+            $entity_id_query = FALSE;
+          }
+
+          if ($entity_id_query) {
+            $entity_id_query = array_shift($entity_id_query);
+
+            if (isset($entity_id_query->id)) {
+              $reporting_entity = entity_load('organisation', array($entity_id_query->id));
+
+              if ($reporting_entity) {
+                $reporting_entity = array_shift($reporting_entity);
+                $reporting_entity->summary_data_id = $entity;
+                $reporting_entity->country_id = $context['sandbox']['country_id'];
+                $reporting_entity->name = $item['full_agency_name'];
+                $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+                $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
+                $reporting_entity->changed = time();
+                entity_save('organisation', $reporting_entity);
+              }
+            }
+          } else {
+            $reporting_entity = entity_get_controller('organisation')->create();
+            $reporting_entity->type = 'agency';
+            $reporting_entity->name = $item['full_agency_name'];
+
+            if ($item['id_number'] == 'Not applicable') {
+              $item['id_number'] = '';
+            }
+
+            $reporting_entity->identification_number = $item['id_number'];
+            $reporting_entity->summary_data_id = $entity;
+            $reporting_entity->country_id = $context['sandbox']['country_id'];
+            $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+            $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
+            $reporting_entity->status = 1;
+            $reporting_entity->created = time();
+            $reporting_entity->changed = time();
+            entity_save('organisation', $reporting_entity);
+          }
+        }
+      }
+
+      $context['sandbox']['goverment_entity_progress']++;
+      if ($context['sandbox']['goverment_entity_progress'] > $context['sandbox']['goverment_entity_max']) {
+        $context['sandbox']['active_subsection'] = 'company';
+      }
+      break;
+    case 'company':
+      if (isset($reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']])) {
+        $item = $reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']];
+
+        if (isset($item['company_id'])) {
+          if ($item['company_id'] != 'Not applicable') {
+            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type", array(':id_number' => $item['company_id'], ':type' => 'company'))->fetchAll();
+          } else {
+            $entity_id_query = FALSE;
+          }
+
+          if ($entity_id_query) {
+            $entity_id_query = array_shift($entity_id_query);
+
+            if (isset($entity_id_query->id)) {
+              $reporting_entity = entity_load('organisation', array($entity_id_query->id));
+
+              if ($reporting_entity) {
+                $reporting_entity = array_shift($reporting_entity);
+                $reporting_entity->summary_data_id = $entity;
+                $reporting_entity->country_id = $context['sandbox']['country_id'];
+                $reporting_entity->name = $item['full_company_name'];
+                $reporting_entity->changed = time();
+
+                $sector = eitientity_organisation_get_sector_tid($item['sector']);
+                if ($sector) {
+                  $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
+                }
+
+                $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+                if ($comodity) {
+                  $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+                }
+
+                $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
+                $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
+                $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+
+                entity_save('organisation', $reporting_entity);
+              }
+            }
+          } else {
+            $reporting_entity = entity_get_controller('organisation')->create();
+            $reporting_entity->type = 'company';
+            $reporting_entity->name = $item['full_company_name'];
+
+            if ($item['company_id'] == 'Not applicable') {
+              $item['company_id'] = '';
+            }
+
+            $reporting_entity->identification_number = $item['company_id'];
+            $reporting_entity->summary_data_id = $entity;
+            $reporting_entity->country_id = $context['sandbox']['country_id'];
+            $reporting_entity->status = 1;
+            $reporting_entity->created = time();
+            $reporting_entity->changed = time();
+
+            $sector = eitientity_organisation_get_sector_tid($item['sector']);
+            if ($sector) {
+              $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
+            }
+
+            $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+            if ($comodity) {
+              $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+            }
+
+            $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
+	          $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
+            $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+
+            entity_save('organisation', $reporting_entity);
+          }
+        }
+      }
+
+      $context['sandbox']['company_progress']++;
+      if ($context['sandbox']['company_progress'] > $context['sandbox']['company_max']) {
+        $context['sandbox']['active_subsection'] = 'project';
+      }
+      break;
+    case 'project':
+      if (isset($reporting_entities_parsed_data['project'][$context['sandbox']['project_progress']])) {
+        $item = $reporting_entities_parsed_data['project'][$context['sandbox']['project_progress']];
+
+        $reporting_entity = entity_get_controller('organisation')->create();
+        $reporting_entity->type = 'project';
+        $reporting_entity->name = $item['full_project_name'];
+
+        $reporting_entity->summary_data_id = $entity;
+        $reporting_entity->country_id = $context['sandbox']['country_id'];
+        $reporting_entity->status = 1;
+        $reporting_entity->created = time();
+        $reporting_entity->changed = time();
+
+        $reporting_entity->field_legal_agreem_ref_num['und'][0]['value'] = $item['legal_Agreement_ref_number'];
+        $reporting_entity->field_affiliated_companies_start['und'][0]['value'] = $item['affiliated_companies'];
+	      $reporting_entity->field_commodities['und'][0]['value'] = $item['commodities'];
+	      $reporting_entity->field_status['und'][0]['value'] = $item['status'];
+	      $reporting_entity->field_production_volume['und'][0]['value'] = $item['production_volume'];
+	      $reporting_entity->field_unit['und'][0]['value'] = $item['unit'];
+	      $reporting_entity->field_production['und'][0]['value'] = $item['production_value'];
+        $reporting_entity->field_currency['und'][0]['value'] = $item['currency'];
+
+        entity_save('organisation', $reporting_entity);
+      }
+
+      $context['sandbox']['project_progress']++;
+      break;
+  }
+
+  $context['sandbox']['progress']++;
+
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+/**
+ * Implements Batch process for Goverment revenues
+ */
+function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_revenues_parsed_data, &$context) {
+
+  $context['sandbox']['progress']++;
+
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+/**
+ * Implements Batch process for Companies
+ */
+function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$context) {
 
   $context['sandbox']['progress']++;
 
