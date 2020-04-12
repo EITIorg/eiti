@@ -16,7 +16,11 @@ function eitiet_organisation_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_organisation__agency';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
