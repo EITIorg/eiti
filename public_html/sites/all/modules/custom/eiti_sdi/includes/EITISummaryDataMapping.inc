@@ -95,4 +95,28 @@ class EITISummaryDataMapping {
       'If yes, what was sold?',
     );
   }
+
+  /**
+   * Get sections for Reporting entities tab
+   */
+  public function reportingEntitiesSections() {
+    return array(
+      'Reporting government entities list',
+      "Reporting companies' list",
+      "Reporting projects' list",
+    );
+  }
+
+  /**
+   * Get skip rows items for Reporting entities section
+   */
+  public function reportingEntitiesSkipRows() {
+    return array(
+      'Full name of agency',
+      'Company ID references',
+      'Tax Identification Number',
+      'Full company name',
+      'Full project name',
+    );
+  }
 }
