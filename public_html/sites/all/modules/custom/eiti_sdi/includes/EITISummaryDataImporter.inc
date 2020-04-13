@@ -950,7 +950,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
     $item = $goverment_revenues_parsed_data[$context['sandbox']['progress']];
 
     $entity_item = entity_get_controller('revenue_stream')->create();
-    $entity_item->type = 'agency'; //company
+    $entity_item->type = 'agency';
     $gfs = '';
     $gfs_parsed = explode(' ', $item['gfs_classification']);
     $gfs = end($gfs_parsed);
@@ -998,6 +998,56 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
  * Implements Batch process for Companies
  */
 function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$context) {
+
+  if (empty($context['sandbox'])) {
+    $context['sandbox']['max'] = sizeof($company_parsed_data) - 1;
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['entity_id'] = $entity;
+    $context['sandbox']['company'] = $company_parsed_data;
+  }
+
+  if (isset($company_parsed_data[$context['sandbox']['progress']])) {
+    $item = $company_parsed_data[$context['sandbox']['progress']];
+
+    $entity_item = entity_get_controller('revenue_stream')->create();
+    $entity_item->type = 'company';
+    $entity_item->report_status = 1;
+
+    $organisation_id = '';
+    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'company', ':name' => $item['company']))->fetchAll();
+
+    if ($organisation_query) {
+      $organisation_query = array_shift($organisation_query);
+
+      if (isset($organisation_query->id)) {
+        $organisation_id = $organisation_query->id;
+      }
+    }
+
+    $entity_item->organisation_id = $organisation_id;
+    $entity_item->field_goverment_entity['und'][0]['value'] = $item['goverment_entity'];
+    $entity_item->name = $item['revenue_stream_name'];
+    $entity_item->field_levied_on_project['und'][0]['value'] = $item['levied_on_project'];
+    $entity_item->field_reported_by_project['und'][0]['value'] = $item['reported_by_project'];
+    $entity_item->field_project_name['und'][0]['value'] = $item['project_name'];
+    $entity_item->field_currency['und'][0]['value'] = $item['reporting_currency'];
+    $entity_item->currency = $item['reporting_currency'];
+    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+    $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+    $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
+    $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
+    $entity_item->field_unit['und'][0]['value'] = $item['unit'];
+    $entity_item->field_comments['und'][0]['value'] = $item['comments'];
+
+    entity_save('revenue_stream', $entity_item);
+
+    $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
+    if ($entity) {
+      $entity = array_shift($entity);
+      $entity->field_sd_revenue_company['und'][] = array('target_id' => $entity_item->id);
+      entity_save('summary_data', $entity);
+    }
+  }
 
   $context['sandbox']['progress']++;
 
