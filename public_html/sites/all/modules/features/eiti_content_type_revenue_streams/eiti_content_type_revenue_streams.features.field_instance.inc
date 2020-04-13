@@ -146,6 +146,42 @@ function eiti_content_type_revenue_streams_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'revenue_stream-company-field_goverment_entity'.
+  $field_instances['revenue_stream-company-field_goverment_entity'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'revenue_stream',
+    'field_name' => 'field_goverment_entity',
+    'label' => 'Goverment entity',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
+    ),
+  );
+
   // Exported field_instance: 'revenue_stream-company-field_in_kind_volume'.
   $field_instances['revenue_stream-company-field_in_kind_volume'] = array(
     'bundle' => 'company',
@@ -404,6 +440,7 @@ function eiti_content_type_revenue_streams_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Comments');
   t('Currency');
+  t('Goverment entity');
   t('In-kind volume (if applicable)');
   t('Levied on project');
   t('Payment made in-kind');

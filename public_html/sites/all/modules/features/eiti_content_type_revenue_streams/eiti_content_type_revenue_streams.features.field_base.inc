@@ -213,6 +213,28 @@ function eiti_content_type_revenue_streams_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_goverment_entity'.
+  $field_bases['field_goverment_entity'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_goverment_entity',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_in_kind_volume'.
   $field_bases['field_in_kind_volume'] = array(
     'active' => 1,
