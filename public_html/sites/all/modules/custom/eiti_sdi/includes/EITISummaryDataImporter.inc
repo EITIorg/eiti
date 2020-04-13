@@ -939,6 +939,54 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
  */
 function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_revenues_parsed_data, &$context) {
 
+  if (empty($context['sandbox'])) {
+    $context['sandbox']['max'] = sizeof($goverment_revenues_parsed_data ) - 1;
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['entity_id'] = $entity;
+    $context['sandbox']['goverment_revenues'] = $goverment_revenues_parsed_data;
+  }
+
+  if (isset($goverment_revenues_parsed_data[$context['sandbox']['progress']])) {
+    $item = $goverment_revenues_parsed_data[$context['sandbox']['progress']];
+
+    $entity_item = entity_get_controller('revenue_stream')->create();
+    $entity_item->type = 'agency'; //company
+    $gfs = '';
+    $gfs_parsed = explode(' ', $item['gfs_classification']);
+    $gfs = end($gfs_parsed);
+    $gfs = str_replace('(', '', $gfs);
+    $gfs = str_replace(')', '', $gfs);
+    $entity_item->gfs_code_id = $gfs;
+    $entity_item->field_sector['und'][0]['value'] = $item['sector'];
+    $entity_item->name = $item['revenue_stream_name'];
+    $entity_item->report_status = 1;
+
+    $organisation_id = '';
+    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'goverment_entity', ':name' => $item['goverment_entity']))->fetchAll();
+
+    if ($organisation_query) {
+      $organisation_query = array_shift($organisation_query);
+
+      if (isset($organisation_query->id)) {
+        $organisation_id = $organisation_query->id;
+      }
+    }
+
+    $entity_item->organisation_id = $organisation_id;
+    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+    $entity_item->field_currency['und'][0]['value'] = $item['currency'];
+    $entity_item->currency = $item['currency'];
+
+    entity_save('revenue_stream', $entity_item);
+
+    $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
+    if ($entity) {
+      $entity = array_shift($entity);
+      $entity->field_sd_revenue_government['und'][] = array('target_id' => $entity_item->id);
+      entity_save('summary_data', $entity);
+    }
+  }
+
   $context['sandbox']['progress']++;
 
   if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
