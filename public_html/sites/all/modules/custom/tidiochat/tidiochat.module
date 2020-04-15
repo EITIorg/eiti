@@ -13,7 +13,6 @@ include 'TidioChat.php';
 function tidiochat_page_build(&$page) {
 
     $tidiochat = new TidioChat();
-
     if ($tidiochat->isAdmin()) {
         $page['page_bottom']['tidiochat'] = array(
             '#type' => 'markup',

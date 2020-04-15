@@ -2,6 +2,9 @@
 
 class TidioChat {
 
+    // Set constant for testing.
+    const PUBLIC_KEY_TEST = 'uxjqqsj0txwedj7idiikcle0loizegz1';
+    const PRIVATE_KEY_TEST = '7t2vuzuvouyo2kxsfz4aj9mfxp2hqqxp';
     private $platform = 'drupal';
     private $domain;
 
@@ -56,9 +59,21 @@ class TidioChat {
 
         $data = $this->getContentData($this->getPrivateKeyUrl());
         $data = json_decode($data, true);
+        $private_key = $data['value']['private_key'];
+        $public_key = $data['value']['public_key'];
+        if (empty($data['value']['private_key'])) {
+          $private_key = self::PRIVATE_KEY_TEST;
+          drupal_set_message(t("Tidiochat uses test account, check connection and settings https://www.tidio.com/panel/settings/developer"), 'warning');
+          watchdog('tidiochat', 'Tidiochat uses test account, check connection and settings https://www.tidio.com/panel/settings/developer');
+        }
+        if (empty($data['value']['public_key'])) {
+          $public_key = self::PUBLIC_KEY_TEST;
+          drupal_set_message(t("Tidiochat uses test account, check connection and settings https://www.tidio.com/panel/settings/developer"), 'warning');
+          watchdog('tidiochat', 'Tidiochat uses test account, check connection and settings https://www.tidio.com/panel/settings/developer');
+        }
 
-        variable_set('tidiochat-key-private', $data['value']['private_key']);
-        variable_set('tidiochat-key-public', $data['value']['public_key']);
+        variable_set('tidiochat-key-private', $private_key);
+        variable_set('tidiochat-key-public', $public_key);
 
         return $data['value']['private_key'];
     }
