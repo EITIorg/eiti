@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * A module which change website content with help of Visual Editor by Tidio Ltd.
+ */
+include 'TidioChat.php';
+
+/**
+ * Adds jquery code to open Visual Editor in new window.
+ * @param string $page
+ */
+function tidiochat_page_build(&$page) {
+
+    $tidiochat = new TidioChat();
+
+    if ($tidiochat->isAdmin()) {
+        $page['page_bottom']['tidiochat'] = array(
+            '#type' => 'markup',
+            '#markup' => '<script>jQuery(document).ready(function(){
+        jQuery("#toolbar-link-admin-tidiochat").click(function() { 
+        window.open(this.href, true); return false; 
+        }); 
+        });</script>',
+        );
+    }
+    if (!$tidiochat->isAdminArea()) {
+        drupal_add_js($tidiochat->getJsUrl(), 'external');
+    }
+}
+
+/**
+ * Adds new menu item.
+ * @note Options attribute seems to not working.
+ * @return array
+ */
+function tidiochat_menu() {
+
+    $items = array();
+
+    $items['admin/tidiochat'] = array(
+        'title' => 'Tidio Chat',
+        'description' => 'Menu button for Tidio Chat',
+        'position' => 'left',
+        'weight' => 100,
+        'page callback' => 'editor_redirect',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+        'options' => array(
+            'attributes' => array(
+                'target' => '_blank',
+                'class' => 'tidiochat-link'
+            ),
+        )
+    );
+    return $items;
+}
+
+function editor_redirect() {
+
+
+    global $user;
+    $tidiochat = new TidioChat();
+
+    // Check to see if $user has the administrator role.
+    if ($tidiochat->isAdmin()) {
+
+        $url = $tidiochat->getEditorUrl();
+        header("Location: " . $url);
+    }
+    exit;
+}
