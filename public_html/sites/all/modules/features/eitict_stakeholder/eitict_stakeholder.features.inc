@@ -28,40 +28,6 @@ function eitict_stakeholder_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_image_default_styles().
- */
-function eitict_stakeholder_image_default_styles() {
-  $styles = array();
-
-  // Exported image style: logo_scaled_226x150.
-  $styles['logo_scaled_226x150'] = array(
-    'label' => 'Logo: Scaled to 226x150',
-    'effects' => array(
-      7 => array(
-        'name' => 'image_scale',
-        'data' => array(
-          'width' => '',
-          'height' => 150,
-          'upscale' => 1,
-        ),
-        'weight' => 1,
-      ),
-      8 => array(
-        'name' => 'image_scale',
-        'data' => array(
-          'width' => 226,
-          'height' => '',
-          'upscale' => 0,
-        ),
-        'weight' => 2,
-      ),
-    ),
-  );
-
-  return $styles;
-}
-
-/**
  * Implements hook_node_info().
  */
 function eitict_stakeholder_node_info() {
