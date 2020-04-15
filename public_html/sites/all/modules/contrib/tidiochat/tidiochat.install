@@ -1,0 +1,9 @@
+<?php
+
+function tidiochat_install() {
+  
+}
+
+function tidiochat_uninstall() {
+  return true;
+}
