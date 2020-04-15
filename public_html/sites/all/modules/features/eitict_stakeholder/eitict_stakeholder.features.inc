@@ -33,15 +33,25 @@ function eitict_stakeholder_views_api($module = NULL, $api = NULL) {
 function eitict_stakeholder_image_default_styles() {
   $styles = array();
 
-  // Exported image style: stk-teaser-226-x.
-  $styles['stk-teaser-226-x'] = array(
-    'label' => 'Stakeholder-teaser 226x85',
+  // Exported image style: logo_scaled_226x150.
+  $styles['logo_scaled_226x150'] = array(
+    'label' => 'Logo: Scaled to 226x150',
     'effects' => array(
-      6 => array(
-        'name' => 'image_scale_and_crop',
+      7 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => '',
+          'height' => 150,
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+      8 => array(
+        'name' => 'image_scale',
         'data' => array(
           'width' => 226,
-          'height' => 85,
+          'height' => '',
+          'upscale' => 0,
         ),
         'weight' => 2,
       ),

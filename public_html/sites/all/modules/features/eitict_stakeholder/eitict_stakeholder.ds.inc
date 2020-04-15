@@ -92,6 +92,11 @@ function eitict_stakeholder_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_stk_logo' => array(
+      'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
   );
   $export['node|stakeholder|full'] = $ds_fieldsetting;
 
