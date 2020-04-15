@@ -1,7 +1,10 @@
 
 Module: Tidio Chat
 Author: Tidio Ltd. <http://www.tidiochat.com/>
-https://www.drupal.org/sandbox/tytus-tytus/2299801
+
+Overridden.
+
+original: https://www.drupal.org/sandbox/tytus-tytus/2299801
 
 CONTENTS OF THIS FILE
 ---------------------
