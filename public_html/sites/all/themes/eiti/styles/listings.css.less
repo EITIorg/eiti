@@ -347,7 +347,9 @@ table {
   }
 
   >.view-header {
-    align-items: flex-end;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
 
     .list-title {
       margin-top: 10px !important;
@@ -476,6 +478,12 @@ table {
       max-width: 90%;
       margin-bottom: 1.5rem;
       height: 150px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
 
       img {
         display: block;
