@@ -204,8 +204,11 @@ function eitict_stakeholder_views_default_views() {
   $handler->display->display_options['fields']['field_short_intro_et']['table'] = 'field_data_field_short_intro';
   $handler->display->display_options['fields']['field_short_intro_et']['field'] = 'field_short_intro_et';
   $handler->display->display_options['fields']['field_short_intro_et']['label'] = '';
+  $handler->display->display_options['fields']['field_short_intro_et']['alter']['max_length'] = '68';
+  $handler->display->display_options['fields']['field_short_intro_et']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['field_short_intro_et']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_short_intro_et']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_short_intro_et']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_short_intro_et']['type'] = 'text_plain';
   $handler->display->display_options['fields']['field_short_intro_et']['settings'] = array(
     'trim_length' => '300',
   );
