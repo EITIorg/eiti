@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitipanels.features.inc

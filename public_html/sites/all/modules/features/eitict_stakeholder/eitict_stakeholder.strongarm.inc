@@ -115,17 +115,26 @@ function eitict_stakeholder_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'summary' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '12',
+          'weight' => '18',
         ),
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '17',
         ),
         'language' => array(
           'weight' => '0',
+        ),
+        'metatags' => array(
+          'weight' => '20',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '19',
         ),
       ),
       'display' => array(),
@@ -152,10 +161,10 @@ function eitict_stakeholder_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '5',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '4',
+          'weight' => '7',
         ),
         'language' => array(
           'weight' => '0',
@@ -213,28 +222,6 @@ function eitict_stakeholder_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'panelizer_defaults_node_stakeholder';
-  $strongarm->value = array(
-    'status' => 0,
-    'help' => '',
-    'view modes' => array(),
-  );
-  $export['panelizer_defaults_node_stakeholder'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'panelizer_defaults_taxonomy_term_stakeholder_types';
-  $strongarm->value = array(
-    'status' => 0,
-    'help' => '',
-    'view modes' => array(),
-  );
-  $export['panelizer_defaults_taxonomy_term_stakeholder_types'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_stakeholder_en_pattern';
   $strongarm->value = 'supporter/[node:title_field]';
   $export['pathauto_node_stakeholder_en_pattern'] = $strongarm;
@@ -280,6 +267,13 @@ function eitict_stakeholder_strongarm() {
   $strongarm->name = 'pathauto_taxonomy_term_stakeholder_types_pattern';
   $strongarm->value = 'supporters/[term:i18n-name]';
   $export['pathauto_taxonomy_term_stakeholder_types_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'termstatus_enable';
+  $strongarm->value = 1;
+  $export['termstatus_enable'] = $strongarm;
 
   return $export;
 }

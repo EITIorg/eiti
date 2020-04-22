@@ -15,6 +15,7 @@ services:
         target: "/var/lib/postgresql/data"
         volume:
           nocopy: true
+      - ".:/mnt/ddev_config"
     ports:
       - 5432
     environment:
@@ -24,6 +25,7 @@ services:
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
+      com.ddev.app-url: $DDEV_URL
   web:
     links:
       - postgres

@@ -179,3 +179,66 @@ function __eiti_preprocess_views_view__news(&$variables) {
       helpertheme_set_html_classes($class);
   }
 }
+
+/**
+ * Implements template_preprocess_views_view() for the stakeholders view.
+ */
+function __eiti_preprocess_views_view__stakeholders(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'stakeholders_companies':
+      if (empty($variables['view']->result)) {
+        return;
+      }
+      $variables["sup_link"] = '';
+      $tid = $variables["view"]->args[0];
+
+      if (!empty($tid)) {
+        $variables["sup_link"] = __eiti_get_becoming_supporter_link($tid);
+      }
+
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view_unformatted() for the stakeholders view.
+ */
+function __eiti_preprocess_views_view_unformatted__stakeholders(&$variables) {
+  switch ($variables['view']->current_display) {
+    case 'stakeholders_companies':
+      if (empty($variables['view']->result) || empty($variables["view"]->args[0])) {
+        return;
+      }
+      // Hide group title if it is the single one.
+      // And show only Become supporter link.
+      $tid = $variables["view"]->args[0];
+      $current_row = array_keys($variables["rows"]);
+      if (!empty($variables["view"]->result[$current_row[0]]->field_field_stk_type[0]["raw"]["hs_lineages"])) {
+        $lineage = $variables["view"]->result[$current_row[0]]->field_field_stk_type[0]["raw"]["hs_lineages"];
+      }
+      $lineage_tid = end($lineage)['tid'];
+      if (!empty($lineage) && $lineage_tid == $tid) {
+        $variables["title"] = '';
+      }
+      elseif (!empty($variables["view"]->result[$current_row[0]]->field_data_field_stk_type_field_stk_type_tid)) {
+        // Show only Become supporter link.
+        $tid = $variables["view"]->result[$current_row[0]]->field_data_field_stk_type_field_stk_type_tid;
+        $link = __eiti_get_becoming_supporter_link($tid);
+        $variables["title"] .= $link;
+      }
+  }
+}
+
+/**
+ * Helper to get becoming_supporter link.
+ */
+function __eiti_get_becoming_supporter_link ($tid) {
+  $term = taxonomy_term_load($tid);
+  $link_markup = '';
+  global $language;
+  if (!empty($term->field_bs_link[$language->language][0])) {
+    $bm_link = $term->field_bs_link[$language->language][0];
+    $link = l($bm_link['title'], $bm_link['url']);
+    $link_markup = '<span class="bm-link">' . $link . '</span>';
+  }
+  return $link_markup;
+}
