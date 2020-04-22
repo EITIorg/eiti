@@ -222,6 +222,28 @@ function eitict_stakeholder_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_defaults_node_stakeholder';
+  $strongarm->value = array(
+    'status' => 0,
+    'help' => '',
+    'view modes' => array(),
+  );
+  $export['panelizer_defaults_node_stakeholder'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_defaults_taxonomy_term_stakeholder_types';
+  $strongarm->value = array(
+    'status' => 0,
+    'help' => '',
+    'view modes' => array(),
+  );
+  $export['panelizer_defaults_taxonomy_term_stakeholder_types'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_stakeholder_en_pattern';
   $strongarm->value = 'supporter/[node:title_field]';
   $export['pathauto_node_stakeholder_en_pattern'] = $strongarm;
