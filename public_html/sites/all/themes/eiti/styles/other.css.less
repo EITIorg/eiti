@@ -266,12 +266,21 @@ ul.inline .node-readmore {
     .field-name-field-stk-countries {
       font-size: 1.125rem; // 18px
       line-height: 1.6667em; // 30px
+      .clearfix-mixin();
 
-      .field-label {
+      .field-label,
+      .label-above {
         margin-bottom: 0.5rem;
       }
 
-      .field-item {
+      >a {
+        float: left;
+        clear: both;
+        display: block;
+      }
+
+      .field-item,
+      >a {
         margin-bottom: 0.3rem !important;
       }
     }
@@ -481,6 +490,19 @@ ul.inline .node-readmore {
           width: 11rem;
         }
       }
+    }
+  }
+}
+
+.xNormalAndUp() {
+  .node-stakeholder {    
+    .group-left {     
+      .field-name-field-stk-logo {    
+        img {
+          width: 100%;
+          max-width: 70%;
+        }
+      }  
     }
   }
 }

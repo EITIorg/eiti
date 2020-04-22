@@ -263,7 +263,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'bypass_access' => 0,
+          'bypass_access' => FALSE,
           'link' => 1,
         ),
         'type' => 'entityreference_label',
@@ -390,7 +390,7 @@ function eitict_stakeholder_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'logo-small',
+          'image_style' => 'logo_scaled_226x150',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -441,7 +441,7 @@ function eitict_stakeholder_field_default_field_instances() {
       'filefield_paths_enabled' => 1,
       'max_filesize' => '4 MB',
       'max_resolution' => '2400x2400',
-      'min_resolution' => '120x120',
+      'min_resolution' => '',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
