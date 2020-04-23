@@ -14,9 +14,7 @@
       <?php endif; ?>
       </<?php print $title_element;?>>
     </div>
-  <?php endif; ?>
-  <div class="single-fluid-row-wrapper">
-    <?php print render($title_suffix); ?>
-    <?php print $content; ?>
-  </div>
+  <?php endif; ?>  
+  <?php print render($title_suffix); ?>
+  <?php print $content; ?>
 </div>
