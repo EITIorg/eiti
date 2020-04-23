@@ -229,6 +229,7 @@ class EITISummaryDataImporter {
 
     // Process countries data
     $countries = eitientity_implementing_country_lookup_by_name($data['country_id']);
+
     if ($countries) {
       $country = array_shift($countries);
 
@@ -239,6 +240,14 @@ class EITISummaryDataImporter {
     }
 
     // Process text and numeric fields
+    if (isset($data['company_id_name'])) {
+      $entity->	field_sd_company_name['und'][0]['value'] = $data['company_id_name'];
+    }
+
+    if (isset($data['field_sd_report_file'])) {
+      $entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
+    }
+
     if (isset($data['field_sd_iso_alpha_3_code'])) {
       $entity->field_sd_iso_alpha_3_code['und'][0]['value'] = $data['field_sd_iso_alpha_3_code'];
     }
