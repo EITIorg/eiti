@@ -11,6 +11,41 @@
 function eitiet_summary_data_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'summary_data-summary_data-field_sd_company_name'.
+  $field_instances['summary_data-summary_data-field_sd_company_name'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 48,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_company_name',
+    'label' => 'What is the name of the company?',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance:
   // 'summary_data-summary_data-field_sd_contact_email_address'.
   $field_instances['summary_data-summary_data-field_sd_contact_email_address'] = array(
@@ -123,16 +158,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 36,
       ),
     ),
@@ -162,7 +189,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 29,
+      'weight' => 31,
     ),
   );
 
@@ -210,9 +237,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 43,
       ),
     ),
@@ -312,9 +338,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 41,
       ),
     ),
@@ -386,7 +411,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 30,
+      'weight' => 32,
     ),
   );
 
@@ -432,9 +457,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 32,
       ),
     ),
@@ -452,7 +476,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 25,
+      'weight' => 27,
     ),
   );
 
@@ -466,9 +490,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 37,
       ),
     ),
@@ -578,9 +601,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 29,
       ),
     ),
@@ -649,9 +671,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 42,
       ),
     ),
@@ -686,9 +707,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 30,
       ),
     ),
@@ -809,9 +829,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 46,
       ),
     ),
@@ -846,9 +865,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 47,
       ),
     ),
@@ -915,9 +933,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 38,
       ),
     ),
@@ -950,9 +967,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 35,
       ),
     ),
@@ -970,7 +986,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 28,
+      'weight' => 30,
     ),
   );
 
@@ -984,9 +1000,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 39,
       ),
     ),
@@ -1018,9 +1033,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 40,
       ),
     ),
@@ -1054,16 +1068,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 33,
       ),
     ),
@@ -1093,7 +1099,7 @@ function eitiet_summary_data_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 26,
+      'weight' => 28,
     ),
   );
 
@@ -1174,7 +1180,7 @@ function eitiet_summary_data_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 24,
+      'weight' => 26,
     ),
   );
 
@@ -1188,9 +1194,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 31,
       ),
     ),
@@ -1308,9 +1313,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 34,
       ),
     ),
@@ -1329,7 +1333,7 @@ function eitiet_summary_data_field_default_field_instances() {
       'module' => 'html5_tools',
       'settings' => array(),
       'type' => 'urlwidget',
-      'weight' => 27,
+      'weight' => 29,
     ),
   );
 
@@ -1343,9 +1347,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 44,
       ),
     ),
@@ -1380,9 +1383,8 @@ function eitiet_summary_data_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 45,
       ),
     ),
@@ -1404,6 +1406,42 @@ function eitiet_summary_data_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 34,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'summary_data-summary_data-field_sd_url_eiti_report'.
+  $field_instances['summary_data-summary_data-field_sd_url_eiti_report'] = array(
+    'bundle' => 'summary_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 49,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'summary_data',
+    'field_name' => 'field_sd_url_eiti_report',
+    'label' => 'URL, EITI Report',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 25,
     ),
   );
 
@@ -1443,7 +1481,9 @@ function eitiet_summary_data_field_default_field_instances() {
   t('Summary Data Report File');
   t('Systematically disclosed');
   t('Through EITI Reporting');
+  t('URL, EITI Report');
   t('Website link (URL) to EITI data');
+  t('What is the name of the company?');
   t('… by government agency');
 
   return $field_instances;
