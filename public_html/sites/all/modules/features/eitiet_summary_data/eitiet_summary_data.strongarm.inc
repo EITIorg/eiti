@@ -36,7 +36,7 @@ function eitiet_summary_data_strongarm() {
           'weight' => '3',
         ),
         'published' => array(
-          'weight' => '23',
+          'weight' => '24',
         ),
         'currency_code' => array(
           'weight' => '7',
@@ -60,7 +60,7 @@ function eitiet_summary_data_strongarm() {
           'weight' => '2',
         ),
         'company_id_name' => array(
-          'weight' => '22',
+          'weight' => '23',
         ),
         'company_id_register' => array(
           'weight' => '5',
@@ -134,6 +134,42 @@ function eitiet_summary_data_strongarm() {
           'default' => array(
             'weight' => '3',
             'visible' => TRUE,
+          ),
+        ),
+        'id2' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_name' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_register' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_register_url' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'gov_revenue_extractive' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'gov_revenue_calculated' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
           ),
         ),
       ),
