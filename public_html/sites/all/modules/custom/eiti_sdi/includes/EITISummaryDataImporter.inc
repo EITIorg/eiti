@@ -168,6 +168,7 @@ class EITISummaryDataImporter {
         $entity_item->created = time();
         $entity_item->changed = time();
         $entity_item->currency_code = $data['currency_code'];
+        $data['currency_rate'] = number_format($data['currency_rate'], 2, '.', '');
         $entity_item->currency_rate = $data['currency_rate'];
       }
 
