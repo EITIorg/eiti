@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_summary_data.views_default.inc

@@ -6784,6 +6784,10 @@ function drupal_array_diff_assoc_recursive($array1, $array2) {
  * @see drupal_array_get_nested_value()
  */
 function drupal_array_set_nested_value(array &$array, array $parents, $value, $force = FALSE) {
+  // Fix issues with documents/publications search.
+  if (isset($parents[0]) && strpos($parents[0], 'field_doc_published_date') === 0) {
+    $force = TRUE;
+  }
   $ref = &$array;
   foreach ($parents as $parent) {
     // PHP auto-creates container arrays and NULL entries without error if $ref

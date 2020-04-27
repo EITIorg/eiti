@@ -35,6 +35,7 @@ stylesheets[all][] = styles/other/navigation_floating.css.less
 stylesheets[all][] = styles/other/minimalistic_header_footer.css.less
 stylesheets[all][] = styles/other/quick_summary_tool.css.less
 stylesheets[all][] = styles/other/timeline.css.less
+stylesheets[all][] = styles/other/person-teaser.css.less
 
 ; @TODO: Implement a proper hook and move widget specific styles to the widget page.
 stylesheets[all][] = styles/widgets/all.css.less
@@ -57,6 +58,7 @@ stylesheets[all][] = styles/widgets/teaser.css.less
 stylesheets[all][] = styles/widgets/text.css.less
 stylesheets[all][] = styles/widgets/value_chain.css.less
 stylesheets[all][] = styles/widgets/visualization.css.less
+stylesheets[all][] = styles/widgets/report-a-concern.css.less
 
 stylesheets[print][] = styles/print.css.less
 

@@ -22,6 +22,7 @@ class IndicatorValueEntity extends Entity {
   public $original_value_numeric = NULL;
   public $original_value_unit = NULL;
   public $value_text = NULL;
+  public $value_reporting_type = NULL;
 
   public $source = NULL;
   public $comments = NULL;
@@ -67,6 +68,8 @@ class IndicatorValueEntity extends Entity {
         return $this->value_enum;
       case 'numeric':
         return $this->value_numeric;
+      case 'reporting_type':
+        return $this->value_reporting_type;
       case 'text':
       default:
         return $this->value_text;

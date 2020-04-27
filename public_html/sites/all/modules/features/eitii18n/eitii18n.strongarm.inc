@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitii18n.strongarm.inc
@@ -69,7 +70,10 @@ function eitii18n_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'i18n_string_allowed_formats';
   $strongarm->value = array(
+    'filtered_html' => 'filtered_html',
     'plain_text' => 'plain_text',
+    'clean_summary' => 0,
+    'min_html' => 0,
   );
   $export['i18n_string_allowed_formats'] = $strongarm;
 

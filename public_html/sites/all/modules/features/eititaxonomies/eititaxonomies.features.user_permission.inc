@@ -196,5 +196,14 @@ function eititaxonomies_user_default_permissions() {
     'module' => 'entity_translation',
   );
 
+  // Exported permission: 'view unpublished taxonomy terms'.
+  $permissions['view unpublished taxonomy terms'] = array(
+    'name' => 'view unpublished taxonomy terms',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'termstatus',
+  );
+
   return $permissions;
 }

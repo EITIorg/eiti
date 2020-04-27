@@ -12,9 +12,9 @@
       <?php else: ?>
         <?php print $title; ?>
       <?php endif; ?>
-    </<?php print $title_element;?>>
+      </<?php print $title_element;?>>
     </div>
-  <?php endif; ?>
+  <?php endif; ?>  
   <?php print render($title_suffix); ?>
   <?php print $content; ?>
 </div>

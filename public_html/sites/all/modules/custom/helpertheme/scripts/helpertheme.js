@@ -371,6 +371,6 @@
     $(scrollTarget).animate({
       scrollTop: (offset.top + diffOffset)
     }, 500);
-  };
+  };  
 
 })(jQuery);

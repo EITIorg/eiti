@@ -1,0 +1,4 @@
+name = EITI Summary data import
+description = Implements summary data import functionality.
+core = 7.x
+package = EITI Custom

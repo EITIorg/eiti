@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_summary_data.strongarm.inc
@@ -23,10 +24,10 @@ function eitiet_summary_data_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '15',
+          'weight' => '20',
         ),
         'country_id' => array(
-          'weight' => '1',
+          'weight' => '6',
         ),
         'year_start' => array(
           'weight' => '2',
@@ -35,7 +36,7 @@ function eitiet_summary_data_strongarm() {
           'weight' => '3',
         ),
         'published' => array(
-          'weight' => '4',
+          'weight' => '24',
         ),
         'currency_code' => array(
           'weight' => '7',
@@ -54,6 +55,18 @@ function eitiet_summary_data_strongarm() {
         ),
         'url' => array(
           'weight' => '1',
+        ),
+        'id2' => array(
+          'weight' => '2',
+        ),
+        'company_id_name' => array(
+          'weight' => '23',
+        ),
+        'company_id_register' => array(
+          'weight' => '5',
+        ),
+        'company_id_register_url' => array(
+          'weight' => '3',
         ),
       ),
       'display' => array(
@@ -121,6 +134,42 @@ function eitiet_summary_data_strongarm() {
           'default' => array(
             'weight' => '3',
             'visible' => TRUE,
+          ),
+        ),
+        'id2' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_name' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_register' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'company_id_register_url' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'gov_revenue_extractive' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'gov_revenue_calculated' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
           ),
         ),
       ),

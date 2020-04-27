@@ -33,7 +33,7 @@ function helpertheme_theme_form_element($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-disabled';
   }
-  if (!empty($element['#return_value'])) {
+  if (!empty($element['#return_value']) && is_string($element['#return_value'])) {
     $attributes['class'][] = 'form-item-value-' . strtr($element['#return_value'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
   }
 
