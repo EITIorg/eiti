@@ -46,6 +46,7 @@ function eiti_sdi_summary_data_import_form($form, &$form_state) {
     '#upload_validators' => array(
       'file_validate_extensions' => array('xlsx'),
     ),
+    '#upload_location' => 'public://spreadsheets/',
     '#required' => TRUE,
   );
 
@@ -72,8 +73,13 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
   $fid = $form_state['values']['file'];
   $file = file_load($fid);
 
+  if ($file) {
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+  }
+
   if (isset($file->uri)) {
     $dataImporter = new EITISummaryDataImporter();
-    $dataImporter->importSummaryData($file->uri);
+    $dataImporter->importSummaryData($file->uri, $fid);
   }
 }

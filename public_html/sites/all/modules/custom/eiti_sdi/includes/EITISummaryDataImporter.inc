@@ -11,7 +11,7 @@ class EITISummaryDataImporter {
   /**
    * Process Summary data import
    */
-  public function importSummaryData($uri) {
+  public function importSummaryData($uri, $fid) {
     $result = FALSE;
 
     if ($uri) {
@@ -21,7 +21,7 @@ class EITISummaryDataImporter {
         $is_valid = $this->validateXLS($xls);
 
         if ($is_valid) {
-          $this->processDataImport($xls);
+          $this->processDataImport($xls, $fid);
         }
       }
     }
@@ -65,14 +65,14 @@ class EITISummaryDataImporter {
   /**
    * Process data import for Summary Data
    */
-  private function processDataImport($xls) {
+  private function processDataImport($xls, $fid) {
 
     // Process About section
     $about = $this->getSpreadsheet($xls, 1);
     if ($about) {
       $max_row = $xls->setActiveSheetIndex(1)->getHighestRow();
       $parsed_data = $this->parseAboutSection($about, $max_row);
-      $entity = $this->buildSummaryDataReportFromXls($parsed_data);
+      $entity = $this->buildSummaryDataReportFromXls($parsed_data, $fid);
     }
 
     // Process Disclosure checklist section
@@ -147,7 +147,7 @@ class EITISummaryDataImporter {
   /**
    * Build Summary data report item entity from parsed data from xlsx datasheet
    */
-  private function buildSummaryDataReportFromXls($data) {
+  private function buildSummaryDataReportFromXls($data, $fid) {
     $id = NULL;
     if (isset($data['country_id']) && isset($data['year_start']) && isset($data['year_end'])) {
       $start = $this->getYearByDate($data['year_start']);
@@ -170,6 +170,16 @@ class EITISummaryDataImporter {
         $entity_item->currency_code = $data['currency_code'];
         $data['currency_rate'] = number_format($data['currency_rate'], 2, '.', '');
         $entity_item->currency_rate = $data['currency_rate'];
+
+        // Attach source file to the report
+        $file = file_load($fid);
+        if ($file) {
+          $entity_item->field_sd_report_file['und'][0] = array(
+            'fid' => $file->fid,
+            'display' => TRUE,
+            'description' => '',
+          );
+        }
       }
 
       $entity_item = $this->mappingAboutSection($entity_item, $data);
@@ -246,7 +256,7 @@ class EITISummaryDataImporter {
     }
 
     if (isset($data['field_sd_report_file'])) {
-      $entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
+      //$entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
     }
 
     if (isset($data['field_sd_iso_alpha_3_code'])) {
