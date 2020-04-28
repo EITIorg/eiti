@@ -11,7 +11,7 @@ additional_hostnames: []
 additional_fqdns: []
 nfs_mount_enabled: false
 provider: default
-webimage_extra_packages: [postgresql-client]
+webimage_extra_packages: [postgresql-client, php7.2-memcache]
 use_dns_when_possible: true
 timezone: ""
 disable_settings_management: true
