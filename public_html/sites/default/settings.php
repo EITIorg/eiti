@@ -679,5 +679,5 @@ $conf['memcache_bins'] = array(
 );
 
 // Set keys constant for using if no connection via email.
-$conf['tidio_public'] = 'jt52m9yeblw3gazqg9w2bmf8uafr1t03';
-$conf['tidio_private'] = 'jioooxhbums2qfsod4ttylkhw2qze2re';
+$conf['tidio_public'] = PUBLIC_TIDIO;
+$conf['tidio_private'] = PRIVATE_TIDIO;
