@@ -593,6 +593,13 @@ if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.keys.php')) {
 }
 
 /**
+ * Include environment specific config.
+ */
+if (file_exists(DRUPAL_ROOT . '/' . conf_path() . '/settings.custom.php')) {
+  include_once('settings.custom.php');
+}
+
+/**
  * The current project environment.
  * NOTE: The variable can be used inside update scripts, use only the following
  *       values: local, staging, preprod, production, other.
@@ -618,31 +625,33 @@ if (isset($_SERVER['EITI_ENV'])) {
 /**
  * Set the Google Analytics Account (Web Property ID) on production.
  */
-/*
-if (PROJECT_ENVIRONMENT == 'production') {
-  $conf['googleanalytics_account'] = EITI_GA;
-  $conf['eiti_api_analytics_account'] = EITI_API_GA;
-}
-*/
+//if (PROJECT_ENVIRONMENT == 'production') {
+//  $conf['googleanalytics_account'] = EITI_GA;
+//  $conf['eiti_api_analytics_account'] = EITI_API_GA;
+//}
 
 /**
  * S3 settings.
  */
-/*
-$conf['awssdk2_access_key'] = EITI_AWS_S3_ACCESS_KEY;
-$conf['awssdk2_secret_key'] = EITI_AWS_S3_SECRET_KEY;
-$conf['s3fs_use_s3_for_public'] = TRUE;
-$conf['s3fs_use_s3_for_private'] = TRUE;
-$conf['s3fs_use_cname'] = TRUE;
-$conf['s3fs_use_https'] = TRUE;
-$conf['s3fs_cache_control_header'] = 'public, max-age=31556926';
-$conf['s3fs_encryption'] = 'AES256';
-$conf['s3fs_domain'] = EITI_S3_DOMAIN;
-$conf['s3fs_bucket'] = EITI_S3_BUCKET;
-$conf['s3fs_region'] = EITI_S3_REGION;
-$conf['s3fs_public_folder'] = 'files';
-$conf['s3fs_private_folder'] = 'files-private';
-*/
+//$conf['awssdk2_access_key'] = EITI_AWS_S3_ACCESS_KEY;
+//$conf['awssdk2_secret_key'] = EITI_AWS_S3_SECRET_KEY;
+//$conf['s3fs_use_s3_for_public'] = TRUE;
+//$conf['s3fs_use_s3_for_private'] = TRUE;
+//$conf['s3fs_use_cname'] = TRUE;
+//$conf['s3fs_use_https'] = TRUE;
+//$conf['s3fs_cache_control_header'] = 'public, max-age=31556926';
+//$conf['s3fs_encryption'] = 'AES256';
+//$conf['s3fs_domain'] = EITI_S3_DOMAIN;
+//$conf['s3fs_bucket'] = EITI_S3_BUCKET;
+//$conf['s3fs_region'] = EITI_S3_REGION;
+//$conf['s3fs_public_folder'] = 'files';
+//$conf['s3fs_private_folder'] = 'files-private';
+
+// Automatically generated include for settings managed by ddev.
+//$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
+//if (is_readable($ddev_settings)) {
+//  require $ddev_settings;
+//}
 
 // Implements Memcache settings
 $conf['cache_backends'][] = 'sites/all/modules/contrib/memcache/memcache.inc';
@@ -652,8 +661,8 @@ $conf['cache_default_class'] = 'MemCacheDrupal';
 $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['page_cache_without_database'] = TRUE;
 $conf['page_cache_invoke_hooks'] = FALSE;
-$conf['memcache_servers'] = ['127.0.0.1:11211' => 'default'];
-$conf['memcache_bins'] = [
+$conf['memcache_servers'] = array('127.0.0.1:11211' => 'default');
+$conf['memcache_bins'] = array(
   'cache'                 =>  'default',
   'cache_block'           =>  'default',
   'cache_field'           =>  'default',
@@ -667,7 +676,11 @@ $conf['memcache_bins'] = [
   'cache_token'           =>  'default',
   'cache_views'           =>  'default',
   'cache_views_data'      =>  'default',
-];
+);
+
+// Set keys constant for using if no connection via email.
+$conf['tidio_public'] = 'jt52m9yeblw3gazqg9w2bmf8uafr1t03';
+$conf['tidio_private'] = 'jioooxhbums2qfsod4ttylkhw2qze2re';
 
 /**
  * Include environment specific config.
