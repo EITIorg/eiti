@@ -7,4 +7,6 @@ function tidiochat_install() {
 function tidiochat_uninstall() {
   variable_del('tidiochat-key-private');
   variable_del('tidiochat-key-public');
+  variable_del('tidio_public');
+  variable_del('tidio_private');
 }
