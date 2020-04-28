@@ -677,3 +677,7 @@ $conf['memcache_bins'] = array(
   'cache_views'           =>  'default',
   'cache_views_data'      =>  'default',
 );
+
+// Set keys constant for using if no connection via email.
+$conf['tidio_public'] = 'jt52m9yeblw3gazqg9w2bmf8uafr1t03';
+$conf['tidio_private'] = 'jioooxhbums2qfsod4ttylkhw2qze2re';
