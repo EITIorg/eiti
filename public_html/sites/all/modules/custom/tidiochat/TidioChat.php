@@ -5,10 +5,6 @@
  */
 class TidioChat {
 
-  // Set keys constant for using if no connection via email.
-  const PUBLIC_KEY = 'jt52m9yeblw3gazqg9w2bmf8uafr1t03';
-  const PRIVATE_KEY = 'jioooxhbums2qfsod4ttylkhw2qze2re';
-
   private $platform = 'drupal';
   private $domain;
 
@@ -18,7 +14,7 @@ class TidioChat {
   }
 
   public function getEditorUrl() {
-    $privateKey = $this->getPrivateKey();
+    $privateKey = !empty($this->getPrivateKey()) ? $this->getPrivateKey() : '';
     return 'http://external.tidiochat.com/access?privateKey=' . $privateKey;
   }
 
@@ -68,17 +64,19 @@ class TidioChat {
     $private_key = $data['value']['private_key'];
     $public_key = $data['value']['public_key'];
     if (empty($data['value']['private_key'])) {
-      $private_key = self::PRIVATE_KEY;
-      watchdog('tidiochat', 'Tidiochat connected by public/private keys');
+      $private_key = variable_get('tidio_private');
     }
     if (empty($data['value']['public_key'])) {
-      $public_key = self::PUBLIC_KEY;
+      $public_key = variable_get('tidio_public');
+    }
+    if (!empty($private_key) && !empty($public_key)) {
+      watchdog('tidiochat', 'Tidiochat connected by public/private keys');
+
+      variable_set('tidiochat-key-private', $private_key);
+      variable_set('tidiochat-key-public', $public_key);
     }
 
-    variable_set('tidiochat-key-private', $private_key);
-    variable_set('tidiochat-key-public', $public_key);
-
-    return $data['value']['private_key'];
+    return $private_key;
   }
 
   public function getPrivateKeyUrl() {
@@ -92,7 +90,7 @@ class TidioChat {
   }
 
   public function getJsUrl() {
-    $publicKey = $this->getPublicKey();
+    $publicKey = !empty($this->getPublicKey()) ? $this->getPublicKey() : '';
     return 'https://www.tidiochat.com/uploads/redirect/' . $publicKey . '.js';
   }
 
