@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_bookmark.features.field_instance.inc
@@ -384,6 +385,7 @@ For External URLs include the full domain name and protocoal, e.g.: <b>https://w
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -393,6 +395,7 @@ For External URLs include the full domain name and protocoal, e.g.: <b>https://w
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -402,6 +405,7 @@ For External URLs include the full domain name and protocoal, e.g.: <b>https://w
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -411,6 +415,7 @@ For External URLs include the full domain name and protocoal, e.g.: <b>https://w
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -420,6 +425,7 @@ For External URLs include the full domain name and protocoal, e.g.: <b>https://w
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',

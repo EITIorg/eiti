@@ -47,8 +47,8 @@ function helpertheme_libraries_info() {
     'download url' => 'https://github.com/jonathantneal/svg4everybody/archive/master.tar.gz',
     'version arguments' => array(
       'file' => 'VERSION.txt',
-      'pattern' => '/([0-9a-zA-Z\.-]+)/',
-      'lines' => 1,
+      'pattern' => '/var\s*version\s*=\s*["\']?([0-9a-zA-Z\.-]+)["\']?/',
+      'lines' => 64,
       'cols' => 64,
     ),
     'files' => array('js' => array('svg4everybody.js')),
@@ -58,7 +58,6 @@ function helpertheme_libraries_info() {
       ),
     ),
   );
-
   return $libraries;
 }
 
@@ -94,7 +93,7 @@ function helpertheme_menu() {
   );
 
   $items['page-403'] = array(
-    'title' => 'Access denied',
+    'title' => 'Please log in to view this page',
     'page callback' => 'helpertheme_page_access_denied',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -122,15 +121,24 @@ function helpertheme_menu() {
  * @return string
  */
 function helpertheme_page_access_denied() {
-  $elements['message']['#markup'] = t('You are not authorized to access this page.');
+  $elements['info_top'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('The content you want to view is for internal use.'),
+  );
 
   // Only display the login form for authenticated users.
   if (empty($GLOBALS['user']->uid)) {
     $elements['login_form'] = drupal_get_form('user_login');
   }
 
-  return drupal_render($elements);
+  $elements['info_bottom'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t("If you don't have a login but would like to view this content, contact us at <a href=\"mailto:secretariat@eiti.org\">secretariat@eiti.org</a>, stating the page you would like to access."),
+  );
 
+  return drupal_render($elements);
 }
 
 /**
@@ -349,6 +357,8 @@ function helpertheme_preprocess_page(&$variables) {
     'media' => 'all',
   );
 
+  drupal_add_css($module_path . '/styles/tippy-light.css', $css_options);
+
   // Fix Admin UI style.
   drupal_add_css($module_path . '/styles/helpertheme.admin.css', $css_options);
 
@@ -391,10 +401,7 @@ function helpertheme_preprocess_page(&$variables) {
 
     $options['query']['subset'] = implode(',', $options['query']['subset']);
 
-    global $is_https;
-    $url_scheme = ($is_https) ? 'https://' : 'http://';
-
-    $font_url = url($url_scheme . 'fonts.googleapis.com/css', $options);
+    $font_url = url('https://fonts.googleapis.com/css', $options);
     drupal_add_css($font_url, $css_options);
   }
 
@@ -702,7 +709,7 @@ function theme_helpertheme_ds_field_simple($variables) {
 
   // Render the label.
   if (!$variables['label_hidden']) {
-    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . $variables['label'];
+    $output .= '<div class="label-' . $variables['element']['#label_display'] . '">' . t($variables['label']);
     if (!isset($config['lb-col'])) {
       $output .= ':&nbsp;';
     }

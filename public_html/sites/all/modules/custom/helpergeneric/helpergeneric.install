@@ -24,3 +24,10 @@ function helpergeneric_update_7001(&$sandbox) {
     ->condition('name', 'helpergeneric')
     ->execute();
 }
+
+/**
+ * Enable S3fs and eiti_search module.
+ */
+function helpergeneric_update_7002(&$sandbox) {
+  module_enable(['s3fs', 'eiti_search'], TRUE);
+}

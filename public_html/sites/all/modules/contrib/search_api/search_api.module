@@ -2281,7 +2281,9 @@ function _search_api_query_add_node_access($account, SearchApiQueryInterface $qu
     $query->filter($filter);
   }
   else {
-    $query->condition('status', $published);
+    // Elasticsearch requires a boolean
+    // and seems like there is no easy way to alter this.
+    $query->condition('status', (boolean) $published);
   }
 
   // Filter by node access grants.

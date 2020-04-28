@@ -53,6 +53,7 @@ features[field_instance][] = implementing_country-normal-name_field
 features[field_instance][] = taxonomy_term-country_status-description_field
 features[field_instance][] = taxonomy_term-country_status-field_country_status_id
 features[field_instance][] = taxonomy_term-country_status-name_field
+features[image][] = logo_scaled_226x150
 features[panelizer_defaults][] = implementing_country:normal:default:default
 features[taxonomy][] = country_status
 features[user_permission][] = administer panelizer implementing_country normal content

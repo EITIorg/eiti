@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ *
+ * This is the main module file. It only switches between webform3 and webform4
+ * mode.
+ */
+
+if (function_exists('webform_page_labels')) {
+  require_once dirname(__FILE__) . '/webform4.php';
+}
+else {
+  require_once dirname(__FILE__) . '/webform3.php';
+}
+
+/**
+ * Default settings for the progressbar.
+ */
+function webform_steps_w3_node_defaults() {
+  $progress_bar_defaults = webform_steps_w3_variable_get('webform_progressbar_style');
+  $defaults = array(
+    'progressbar_page_number' => in_array('progressbar_page_number', $progress_bar_defaults) ? '1' : '0',
+    'progressbar_percent' => in_array('progressbar_percent', $progress_bar_defaults) ? '1' : '0',
+    'progressbar_bar' => in_array('progressbar_bar', $progress_bar_defaults) ? '1' : '0',
+    'progressbar_pagebreak_labels' => in_array('progressbar_pagebreak_labels', $progress_bar_defaults) ? '1' : '0',
+    'progressbar_label_first' => webform_steps_w3_variable_get('webform_progressbar_label_first'),
+  );
+  return $defaults;
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function webform_steps_w3_node_insert($node) {
+  if (!isset($node->webform)) {
+    return;
+  }
+  $record = array_intersect_key($node->webform, webform_steps_w3_node_defaults() + array('nid' => TRUE));
+  if ($record) {
+    db_merge('webform_steps_w3_progressbar')
+      ->key(array('nid' => $node->nid))
+      ->fields($record)
+      ->execute();
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function webform_steps_w3_node_update($node) {
+  webform_steps_w3_node_insert($node);
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function webform_steps_w3_node_delete($node) {
+  if (!isset($node->webform)) {
+    return;
+  }
+  db_delete('webform_steps_w3_progressbar')->condition('nid', $node->nid)->execute();
+}
+
+/**
+ * Webform progressbar variables with default values.
+ */
+function webform_steps_w3_variable_get($variable) {
+  switch ($variable) {
+    case 'webform_progressbar_style':
+      $result = variable_get('webform_progressbar_style', array('progressbar_bar', 'progressbar_pagebreak_labels', 'progressbar_include_confirmation'));
+      break;
+    case 'webform_progressbar_label_first':
+      $result = variable_get('webform_progressbar_label_first', t('Start'));
+      break;
+    case 'webform_progressbar_label_confirmation':
+      $result = variable_get('webform_progressbar_label_confirmation', t('Complete'));
+      break;
+  }
+  return $result;
+}

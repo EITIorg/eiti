@@ -1,0 +1,664 @@
+.webform-client-form {
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+    .webform-component {
+        margin-bottom: 2rem;
+    }
+
+    label {
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    .form-item {
+        div {
+            &.description {
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+    }
+
+    .form-text {
+        width: 100%;
+        max-width: 100%;
+        padding: .5rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+
+        border-radius: .2rem;
+        border-width: 1px;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+
+        &:focus {
+            border-color: @claltnormal;
+        }
+    }
+
+    .form-textarea-wrapper {
+        width: 100%;
+        max-width: 100%;
+
+        .form-textarea {
+            padding: .5rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            border-radius: .2rem;
+            border-width: 1px;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+            &:focus {
+                border-color: @claltnormal;
+            }
+        }
+
+    }
+
+    .webform-component-textfield,
+    .webform-component-textarea {
+        .description {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .webform-component {
+
+        &.webform-component--i-have-a-concern-about-a,
+        &.webform-component--i-have-a-concern-about-b {
+            margin-bottom: 0.4em;
+        }
+    }
+
+    .form-radios {
+
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
+            .description {
+                display: block;
+                font-size: 0.85rem;
+                line-height: 1.875rem;
+
+                >p {
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    .eiti-webform-tooltip {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        text-align: center;
+        font-weight: 300;
+        background-color: @clmain__separator;
+        vertical-align: top;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-left: 5px;
+
+        >span {
+            font-size: 1rem;
+            vertical-align: top;
+            margin-top: -2px;
+            display: inline-block;
+        }
+
+        &:hover {
+            color: white;
+            background-color: @claltnormal;
+        }
+    }
+
+    .webform-component--name,
+    .webform-component--email-address,
+    .webform-component--telephone-number {
+        label {
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .webform-component-radios,
+    .webform-component-checkboxes {
+        >label {
+            font-weight: 300;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-item {
+            label {
+                font-weight: 300;
+                font-size: 1rem;
+            }
+        }
+
+        .description {
+            margin-left: 2rem;
+        }
+    }
+
+    .webform-component--i-have-a-concern-about-a,
+    .webform-component--i-have-a-concern-about-b {
+        >label {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .form-radios {
+
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
+            >label {
+                font-weight: 700;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .webform-component--title {
+        >p {
+            font-weight: 300;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+
+            strong {
+                font-weight: 300;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .form-managed-file {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        .form-submit {
+            margin: 1rem 0 0;
+        }
+    }
+
+    .form-file {
+        border-width: 1px;
+    }
+
+    .form-actions {
+        border-top: 1px solid @clmain__separator;
+        padding-top: 2rem;
+        margin-top: 4rem;
+
+        .form-submit {
+            margin: 0;
+        }
+
+        .webform-next,
+        .webform-submit {
+            float: right;
+        }
+    }
+
+    .webform-component--my-issue-concerns,
+    .webform-component--first-recourse {
+        margin-top: 0rem;
+    }
+
+    .webform-component--my-issue-concerns {
+        .description {
+            margin-left: 0;
+        }
+    }
+
+    .form-type-radio,
+    .form-type-checkbox,
+    .form-radios .webform-component--i-have-a-concern-about-a,
+    .form-radios .webform-component--i-have-a-concern-about-b {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 2rem;
+
+        input[type=checkbox],
+        input[type=radio] {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        >label {
+            position: relative;
+            margin-bottom: 0;
+            vertical-align: top;
+            margin-left: 0;
+
+            &:before {
+                position: absolute;
+                top: .15rem;
+                left: -2rem;
+                display: block;
+                width: 1.125rem;
+                height: 1.125rem;
+                pointer-events: none;
+                content: "";
+                background-color: #fff;
+                border: @clmain__separator solid 1px;
+                -webkit-transition: background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+                transition: background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+                transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            &:after {
+                position: absolute;
+                top: .15rem;
+                left: -2rem;
+                display: block;
+                width: 1.125rem;
+                height: 1.125rem;
+                content: "";
+                background: no-repeat center;
+                background-size: 55%;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            >p {
+                font-weight: 700;
+                font-size: 1rem;
+                margin: 0;
+                vertical-align: top;
+                display: inline;
+            }
+        }
+
+        .form-checkbox,
+        .form-radio,
+        .form-radios input[type=radio] {
+            &:checked {
+                ~label {
+                    &:before {
+                        color: #fff;
+                        border-color: @cldetail__alt;
+                        background-color: @cldetail__alt;
+                    }
+
+                    &:after {
+                        background-image: url(~"@{theme_path}images/icons/check-white.svg");
+                    }
+                }
+            }
+
+            &:focus {
+                ~label {
+                    &:before {
+                        -webkit-box-shadow: 0 0 0 0.2rem rgba(27, 194, 238, 0.2);
+                        box-shadow: 0 0 0 0.2rem rgba(27, 194, 238, 0.2);
+                    }
+                }
+
+                &:not(:checked) {
+                    ~label {
+                        &:before {
+                            border-color: @claltnormal;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .form-radio,
+    .form-radios input[type=radio] {
+        &:checked {
+            ~label {
+                &:after {
+                    background-image: url(~"@{theme_path}images/circle.svg") !important;
+                    background-size: 42% !important;
+                }
+            }
+        }
+    }
+
+    .form-type-radio,
+    .form-radios .webform-component--i-have-a-concern-about-a,
+    .form-radios .webform-component--i-have-a-concern-about-b {
+        >label {
+            &:before {
+                border-radius: 50%;
+            }
+
+            &:after {
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .captcha {
+        margin: 3rem 0 0;
+        border: none;
+
+        legend {
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+
+        .fieldset-wrapper {
+            margin: 0;
+            padding: 0;
+        }
+
+        .fieldset-description {
+            font-weight: 300;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+
+}
+
+.webform-progressbar {
+    margin-bottom: 2rem;
+
+    .webform-progressbar-outer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        flex-direction: column;
+    }
+
+    .webform-progressbar-inner,
+    .webform-progressbar-number {
+        display: none !important;
+    }
+
+    .webform-progressbar-page {
+        padding: 15px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        .webform-progressbar-page-label {
+            font-size: 0.875rem;
+            line-height: 1.2rem;
+            color: @claltdetail;
+
+            >span {
+                font-weight: bold;
+                display: block;
+            }
+        }
+
+        .webform-progressbar-page-number {
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: @clmain__separator;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        &.current {
+            .webform-progressbar-page-number {
+                background-color: @cldetail;
+            }
+
+            .webform-progressbar-page-label {
+                color: @clnormal__black;
+            }
+        }
+
+        &.completed {
+            .webform-progressbar-page-number {
+                background-color: @cldetail__alt;
+            }
+
+            .webform-progressbar-page-label {
+                color: @clnormal__black;
+            }
+        }
+    }
+}
+
+.webform-confirmation {
+    border-bottom: 1px solid @clmain__separator;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
+
+    +.links {
+        padding-left: 1.25rem;
+        padding-right: 0;
+        position: relative;
+
+        &:after {
+            content: "";
+            background-image: url(~"@{theme_path}images/icons/angle-right-blue.svg");
+            background-size: contain;
+            display: inline-block;
+            width: 10px;
+            height: 14px;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            transition: transform 200ms ease;
+            transform-origin: center;
+            position: absolute;
+
+            top: 4px;
+            transform: rotate(180deg);
+            right: initial;
+            left: 0;
+        }
+
+        &:hover {
+            &:after {
+                transform: rotate(180deg) translateX(5px);
+            }
+        }
+    }
+}
+
+.webform-steps-buttons {
+    display: none;
+}
+
+.xNormalAndUp() {
+    .webform-client-form {
+        font-size: 1.125rem;
+        line-height: 1.875rem;
+
+        .webform-component-textfield,
+        .webform-component-textarea {
+            .description {
+                max-width: 50%;
+            }
+        }
+
+        .form-textarea-wrapper,
+        .form-text {
+            max-width: 50%;
+        }
+
+        .form-text {
+            font-size: 1.125rem;
+            line-height: 1.875rem;
+        }
+
+        .form-textarea-wrapper {
+            .form-textarea {
+                font-size: 1.125rem;
+                line-height: 1.875rem;
+            }
+        }
+
+        .webform-component--name,
+        .webform-component--email-address,
+        .webform-component--telephone-number {
+            label {
+                font-weight: 300;
+                font-size: 1.25rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .webform-component-radios,
+        .webform-component-checkboxes {
+            >label {
+                font-weight: 300;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .form-item {
+                label {
+                    font-weight: 300;
+                    font-size: 1.125rem;
+                }
+            }
+
+            .description {
+                margin-left: 2rem;
+            }
+        }
+
+        .webform-component--my-issue-concerns {
+            .description {
+                margin-left: 0;
+            }
+        }
+
+        .webform-component--i-have-a-concern-about-a,
+        .webform-component--i-have-a-concern-about-b {
+            >label {
+                font-weight: 700;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .form-radios {
+
+            .webform-component--i-have-a-concern-about-a,
+            .webform-component--i-have-a-concern-about-b {
+                >label {
+                    font-weight: 700;
+                    font-size: 1.125rem;
+                    margin: 0;
+
+                    >p {
+                        font-size: 1.125rem;
+                        line-height: 1.875rem;
+                        margin: 0;
+                        vertical-align: top;
+                        display: inline;
+                    }
+                }
+            }
+        }
+
+        .webform-component--title {
+            >p {
+                font-weight: 300;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+
+                strong {
+                    font-weight: 300;
+                    font-size: 1.5rem;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+    }
+
+    .webform-progressbar {
+        margin-bottom: 4rem;
+
+        .webform-progressbar-outer {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+    }
+}
+
+.xMediumAndUp() {
+    .webform-client-form {
+        .form-managed-file {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+
+            .form-submit {
+                margin: 0;
+            }
+        }
+    }
+}
+
+@import '../lib/custom-grid.less';
+@import '../lib/custom-responsive.less';
+@import '../lib/helpers.less';

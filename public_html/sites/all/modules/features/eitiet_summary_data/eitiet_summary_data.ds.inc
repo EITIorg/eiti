@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitiet_summary_data.ds.inc
@@ -50,8 +51,8 @@ function eitiet_summary_data_ds_layout_settings_info() {
         1 => 'year_end',
         2 => 'field_sd_independent_admin',
         3 => 'field_sd_no_reporting_gov',
-        4 => 'field_sd_no_reporting_com',
-        5 => 'sectors_covered',
+        4 => 'sectors_covered',
+        5 => 'field_sd_no_reporting_com',
         6 => 'field_sd_disagg_revenue_stream',
         7 => 'field_sd_disagg_company',
         8 => 'field_sd_disagg_project',
@@ -70,8 +71,8 @@ function eitiet_summary_data_ds_layout_settings_info() {
       'year_end' => 'main',
       'field_sd_independent_admin' => 'main',
       'field_sd_no_reporting_gov' => 'main',
-      'field_sd_no_reporting_com' => 'main',
       'sectors_covered' => 'main',
+      'field_sd_no_reporting_com' => 'main',
       'field_sd_disagg_revenue_stream' => 'main',
       'field_sd_disagg_company' => 'main',
       'field_sd_disagg_project' => 'main',

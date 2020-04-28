@@ -1,0 +1,7 @@
+name = EITI Webform
+description = This module offers custom handling for webf.
+core = 7.x
+package = EITI Custom
+
+dependencies[] = webform
+dependencies[] = captcha
