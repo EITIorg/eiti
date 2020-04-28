@@ -38,12 +38,12 @@ if (PROJECT_ENVIRONMENT == 'local') {
   //$conf['stage_file_proxy_origin_dir'] = 'sites/default/files';
 
   /**
-   * Custom Memcache daemon configuration.
+   * Custom Memcache daemon configuration example.
    */
-  $use_memcache = TRUE;
+  $use_memcache = FALSE;
   if ($use_memcache) {
     // Use the DB name for unique memcache key prefix.
-//    $conf['memcache_key_prefix'] = $databases['default']['default']['database'];
+    // $conf['memcache_key_prefix'] = $databases['default']['default']['database'];
 
     // Make memcache the default cache class.
     $conf['cache_backends'][] = 'sites/all/modules/contrib/memcache/memcache.inc';
@@ -70,20 +70,6 @@ if (PROJECT_ENVIRONMENT == 'local') {
       'cache' => 'default',
     ];
 
-  }
-}
-
-/**
- * Debugging helper.
- */
-function pa($mixed, $stop = FALSE) {
-  $ar = debug_backtrace();
-  $key = pathinfo($ar[0]['file']);
-  $key = $key['basename'] . ':' . $ar[0]['line'];
-  $print = array($key => $mixed);
-  echo '<pre>' . print_r($print, 1) . '</pre>';
-  if ($stop == 1) {
-    exit();
   }
 }
 
