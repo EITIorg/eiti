@@ -65,7 +65,7 @@ if (PROJECT_ENVIRONMENT == 'local') {
   $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
   $conf['page_cache_without_database'] = TRUE;
   $conf['page_cache_invoke_hooks'] = FALSE;
-  $conf['memcache_servers'] = array('127.0.0.1:11211' => 'default');
+  $conf['memcache_servers'] = array('memcached:11211' => 'default');
   $conf['memcache_bins'] = array(
     'cache'                 =>  'default',
     'cache_block'           =>  'default',
