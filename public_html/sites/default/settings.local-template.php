@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Drupal site-specific configuration file for local development.
+ * Drupal site-specific configuration file for local development with ddev.
  *
  * Important! Rename base setting.php to setting_default.php and rename this file to settings.php.
  * And don't commit new settings.php file!
