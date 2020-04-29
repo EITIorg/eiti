@@ -20,6 +20,7 @@
 # Drupal specific files and folders.
 # Ignore configuration files that may contain sensitive information.
 /public_html/sites/*/drushrc.custom.php
+/public_html/sites/*/settings.custom.php
 /public_html/sites/*/settings.keys.php
 
 # Ignore paths that contain user-generated content.
