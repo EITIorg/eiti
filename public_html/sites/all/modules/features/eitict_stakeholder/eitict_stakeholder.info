@@ -127,5 +127,4 @@ features[variable][] = pathauto_node_stakeholder_pattern
 features[variable][] = pathauto_node_stakeholder_ru_pattern
 features[variable][] = pathauto_node_stakeholder_und_pattern
 features[variable][] = pathauto_taxonomy_term_stakeholder_types_pattern
-features[variable][] = termstatus_enable
 features[views_view][] = stakeholders
