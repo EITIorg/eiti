@@ -15,6 +15,9 @@ webimage_extra_packages: [postgresql-client, php7.2-memcache]
 use_dns_when_possible: true
 timezone: ""
 disable_settings_management: true
+hooks:
+  post-start:
+    - exec: a2enmod proxy_http && apache2ctl graceful
 
 # This config.yaml was created with ddev version v1.13.0
 # webimage: drud/ddev-webserver:v1.13.0
