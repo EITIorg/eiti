@@ -134,12 +134,13 @@ function eitientity_implementing_country_admin_paths() {
  *
  * @see entity_object_load()
  *
- * @param $entity_id
+ * @param int $entity_id
+ *
  * @param $entity_type
  * @return FALSE|ImplementingCountryEntity
  */
 function implementing_country_load($entity_id, $entity_type) {
-  return entity_object_load($entity_id, $entity_type);
+  return is_integer($entity_id) ? entity_object_load($entity_id, $entity_type) : FALSE;
 }
 
 /**
