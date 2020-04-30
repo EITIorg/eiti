@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Drupal site-specific configuration file for local development.
+ * Drupal site-specific configuration file for local development with ddev.
  *
  * Important! Rename base setting.php to setting_default.php and rename this file to settings.php.
  * And don't commit new settings.php file!
@@ -65,7 +65,7 @@ if (PROJECT_ENVIRONMENT == 'local') {
   $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
   $conf['page_cache_without_database'] = TRUE;
   $conf['page_cache_invoke_hooks'] = FALSE;
-  $conf['memcache_servers'] = array('127.0.0.1:11211' => 'default');
+  $conf['memcache_servers'] = array('memcached:11211' => 'default');
   $conf['memcache_bins'] = array(
     'cache'                 =>  'default',
     'cache_block'           =>  'default',
