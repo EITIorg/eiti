@@ -283,10 +283,7 @@
         $('.' + widgetSetting.year_selector_class, context).bind('change', function () {
           widgetSetting.endpoint_data.filter.year = $(this).val();
 
-          widgetSetting.name = Drupal.t('@country - @year', {
-            '@country': widgetSetting.country,
-            '@year': $(this).find(':selected').text()
-          });
+          widgetSetting.name = widgetSetting.country + ' - ' + $(this).find(':selected').text();
 
           var endpoint = widgetSetting.filter_endpoint;
           endpoint += '?filter[country]=' + widgetSetting.endpoint_data.filter.country;
