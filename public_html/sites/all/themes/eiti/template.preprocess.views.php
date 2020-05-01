@@ -73,7 +73,7 @@ function __eiti_preprocess_views_view__content_search(&$variables) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => $realm[$facet_name]['#title'])),
+            '#title' => t('Filter by @title:', array('@title' => t('type'))),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
@@ -88,8 +88,21 @@ function __eiti_preprocess_views_view__content_search(&$variables) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => t('Article Type'))),
-            '#title_tag' => 'h3',
+            '#title' => '',
+            '#title_attributes' => array('class' => array('facet-title')),
+            '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
+            '#attributes' => array(),
+          );
+          $elements[$facet_name]['filters'] = $realm[$facet_name];
+        }
+
+        // Add "Filter by Tags" facets block.
+        $facet_name = 'field_doc_type_public';
+        if (isset($realm[$facet_name])) {
+          $elements[$facet_name] = array(
+            '#type' => 'html_container',
+            '#tag' => 'div',
+            '#title' => '',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
             '#attributes' => array(),
@@ -103,7 +116,7 @@ function __eiti_preprocess_views_view__content_search(&$variables) {
           $elements[$facet_name] = array(
             '#type' => 'html_container',
             '#tag' => 'div',
-            '#title' => t('Filter by @title:', array('@title' => t('Related Country'))),
+            '#title' => t('Filter by @title:', array('@title' => t('country'))),
             '#title_tag' => 'h3',
             '#title_attributes' => array('class' => array('facet-title')),
             '#contextual_info' => array('admin/config/search/facetapi', array($searcher, $realm_name, $facet_name)),
