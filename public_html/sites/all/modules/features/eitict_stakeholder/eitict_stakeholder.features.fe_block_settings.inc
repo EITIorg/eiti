@@ -55,12 +55,12 @@ function eitict_stakeholder_default_fe_block_settings() {
 taxonomy/term/714
 taxonomy/term/715
 taxonomy/term/716
-taxonomy/term/10386
-taxonomy/term/10387
-taxonomy/term/10388
-taxonomy/term/10389
-taxonomy/term/10390
-taxonomy/term/10391',
+taxonomy/term/10459
+taxonomy/term/10460
+taxonomy/term/10461
+taxonomy/term/10462
+taxonomy/term/10463
+taxonomy/term/10464',
     'roles' => array(),
     'themes' => array(
       'adminimal' => array(
