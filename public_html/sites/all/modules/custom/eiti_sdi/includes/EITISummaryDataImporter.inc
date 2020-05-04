@@ -168,7 +168,7 @@ class EITISummaryDataImporter {
         $entity_item->created = time();
         $entity_item->changed = time();
         $entity_item->currency_code = $data['currency_code'];
-        $data['currency_rate'] = number_format($data['currency_rate'], 2, '.', '');
+        $data['currency_rate'] = $this->formatNumberSanitize($data['currency_rate']);
         $entity_item->currency_rate = $data['currency_rate'];
 
         // Attach source file to the report
@@ -276,6 +276,10 @@ class EITISummaryDataImporter {
     }
 
     if (isset($data['field_sd_other_sector_name'])) {
+      if ($data['field_sd_other_sector_name'] == '< Other sector >') {
+        $data['field_sd_other_sector_name'] = '';
+      }
+
       $entity->field_sd_other_sector_name['und'][0]['value'] = $data['field_sd_other_sector_name'];
     }
 
