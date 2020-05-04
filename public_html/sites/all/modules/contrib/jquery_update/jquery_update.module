@@ -144,6 +144,17 @@ function jquery_update_library_alter(&$javascript, $module) {
       $javascript['parent']['js']['modules/overlay/overlay-parent.js']['data'] = $path . '/replace/misc/1.9/overlay-parent.js';
     }
   }
+
+  // misc/form.js in core uses andSelf() which is deprecated in jQuery 2.x and
+  // removed in jQuery 3.x. Provide an overridden copy of the formUpdated
+  // behavior if using jQuery 3.x or later.
+  if (version_compare($jquery_version, '3', '>=')) {
+    $libraries['drupal.form']['js'][$path . '/replace/misc/form-jquery-3.js'] = [
+     'data' => $path . '/replace/misc/form-jquery-3.js',
+      'group' => JS_LIBRARY,
+      'weight' => 1,
+    ];
+  }
 }
 
 /**
@@ -182,6 +193,7 @@ function jquery_update_settings_form() {
       '1.8' => '1.8',
       '1.9' => '1.9',
       '1.10' => '1.10',
+      '3.5' => '3.5',
     ),
     '#default_value' => variable_get('jquery_update_jquery_version', '1.10'),
     '#description' => t('Select which jQuery version to use by default.'),
@@ -197,6 +209,7 @@ function jquery_update_settings_form() {
       '1.7' => '1.7',
       '1.8' => '1.8',
       '1.10' => '1.10',
+      '3.5' => '3.5',
     ),
     '#default_value' => variable_get('jquery_update_jquery_admin_version', ''),
     '#description' => t('Optionally select a different version of jQuery to use on administrative pages.'),
@@ -280,6 +293,9 @@ function jquery_update_jquery_replace(&$javascript, $cdn, $path, $min, $version)
 
     case '1.10':
       $trueversion = '1.10.2';
+      break;
+    case '3.5':
+      $trueversion = '3.5.0';
       break;
   }
   $javascript['jquery']['version'] = $trueversion;
