@@ -81,6 +81,7 @@ class EITISummaryDataImporter {
     if ($disclosure_checklist) {
       $max_row = $xls->setActiveSheetIndex(2)->getHighestRow();
       $disclosure_parsed_data = $this->parseDisclosureChecklistSection($disclosure_checklist, $max_row);
+
       $disclosure_parsed_data_items = $disclosure_parsed_data['items'];
       $max = $disclosure_parsed_data['max'];
     }
@@ -526,6 +527,8 @@ class EITISummaryDataImporter {
 
           $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
+          $value = $this->normalizeCellValue($value);
+
           $data['items'][] = array(
             'parent' => $active_section,
             'requirement_cell' => $requirement_cell,
@@ -542,6 +545,30 @@ class EITISummaryDataImporter {
     $data['max'] = $max;
 
     return $data;
+  }
+
+  /**
+   * Normalize cell value for numeric and percent values
+   */
+  private function normalizeCellValue($value) {
+
+    $value = trim($value,' ');
+    if ($this->checkPercentNumericValues($value)) {
+      $value = $this->cleanupPercentNumericValues($value);
+    }
+
+    if ($this->hasNumericFormat($value)) {
+      $value = $this->formatNumberSanitize($value);
+    }
+
+    return $value;
+  }
+
+  /**
+   * Check cell: is it fromatted number or not
+   */
+  private function hasNumericFormat($str) {
+    return preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $str);
   }
 
   /**
@@ -1172,16 +1199,16 @@ function eiti_sdi_create_indicator_item($values) {
 
             switch ($values['inclusion']) {
               case 'Yes, systematically disclosed':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_SYSTEMATICALLY_DISCLOSED';
+                $value_reporting_type = 'Yes, systematically disclosed';
                 break;
               case 'Yes, through EITI reporting':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_THROUGH_EITI_REPORTING';
+                $value_reporting_type = 'Yes, through EITI reporting';
                 break;
               case 'Not applicable':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_APPLICABLE';
+                $value_reporting_type = 'Not applicable';
                 break;
               case 'Not available':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_AVAILABLE';
+                $value_reporting_type = 'Not available';
                 break;
             }
 
@@ -1201,6 +1228,7 @@ function eiti_sdi_create_indicator_item($values) {
         }
 
         entity_save('indicator_value', $entity_item);
+
         $indicator_id = $entity_item->id;
       }
     }
