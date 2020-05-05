@@ -69,6 +69,13 @@ function eitientity_indicator_value_schema() {
         'not null' => FALSE,
         'default' => NULL,
       ),
+      'value_reporting_type' => array(
+        'description' => 'The reporting type value for this entity.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
       'source' => array(
         'description' => 'The source for this entity.',
         'type' => 'varchar',
