@@ -77,12 +77,10 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
     $file->status = FILE_STATUS_PERMANENT;
     file_save($file);
     $file = file_load($file->fid);
-    $tmp_dir = file_directory_temp();
-    $temp_file = file_copy($file, $tmp_dir . '/' . $file->filename, FILE_EXISTS_REPLACE);
+    $temp_file = file_copy($file, 'temporary://' . $file->filename, FILE_EXISTS_REPLACE);
   }
 
   if (isset($file->uri)) {
-    //watchdog('eiti_sdi', $file->uri, array());
     $dataImporter = new EITISummaryDataImporter();
     $dataImporter->importSummaryData($temp_file->uri, $file->uri,  $fid);
   }
