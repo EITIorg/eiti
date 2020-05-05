@@ -76,6 +76,7 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
   if ($file) {
     $file->status = FILE_STATUS_PERMANENT;
     file_save($file);
+    $file = file_load($file->fid);
   }
 
   if (isset($file->uri)) {
