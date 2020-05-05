@@ -10,10 +10,10 @@ function eiti_sdi_menu() {
 
   $items['admin/content/summary_data/import'] = array(
     'title' => t('Import Summary data XLSX datasheet'),
-    'description' => 'My Profile',
+    'description' => 'Import Summary data XLSX datasheet',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('eiti_sdi_summary_data_import_form'),
-    'access arguments' => array('view own profile'),
+    'access arguments' => array('use summary data import'),
     'type' => MENU_NORMAL_ITEM,
     'menu_name' => 'sdi',
   );

@@ -93,6 +93,9 @@ class IndicatorValueEntity extends Entity {
         return $this->value_unit;
         break;
       case 'text':
+      case 'reporting_type':
+        return $this->value_unit;
+        break;
       default:
         return 'N/A';
     }
