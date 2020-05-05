@@ -11,11 +11,11 @@ class EITISummaryDataImporter {
   /**
    * Process Summary data import
    */
-  public function importSummaryData($uri, $fid) {
+  public function importSummaryData($temp_uri, $uri, $fid) {
     $result = FALSE;
 
-    if ($uri) {
-      $xls = $this->loadXLS($uri);
+    if ($uri && $temp_uri) {
+      $xls = $this->loadXLS($temp_uri);
 
       if ($xls) {
         $is_valid = $this->validateXLS($xls);
