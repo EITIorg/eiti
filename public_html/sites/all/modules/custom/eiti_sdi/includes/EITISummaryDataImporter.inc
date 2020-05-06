@@ -1073,7 +1073,19 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
     $gfs = end($gfs_parsed);
     $gfs = str_replace('(', '', $gfs);
     $gfs = str_replace(')', '', $gfs);
-    $entity_item->gfs_code_id = $gfs;
+    $gfs_id = '';
+    if ($gfs) {
+      $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
+
+      if ($gfs_id_query) {
+        $gfs_id_query = array_shift($gfs_id_query);
+        if (isset($gfs_id_query->id)) {
+          $gfs_id = $gfs_id_query->id;
+        }
+      }
+    }
+
+    $entity_item->gfs_code_id = $gfs_id;
     $entity_item->field_sector['und'][0]['value'] = $item['sector'];
     $entity_item->name = $item['revenue_stream_name'];
     $entity_item->report_status = 1;
