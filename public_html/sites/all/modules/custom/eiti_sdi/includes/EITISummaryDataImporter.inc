@@ -657,18 +657,18 @@ class EITISummaryDataImporter {
                   'full_agency_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
                   'agency_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
                   'id_number' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'total_reported' => $sheet->getCellByColumnAndRow(4, $i)->getOldCalculatedValue(),
+                  'total_reported' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
                 );
                 break;
               case 'company':
                 $item = array(
                   'full_company_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
-                  'company_id' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
-                  'sector' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
-                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
-                  'payment_to_goverment_report' => $sheet->getCellByColumnAndRow(7, $i)->getOldCalculatedValue(),
+                  'company_id' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'sector' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+                  'payment_to_goverment_report' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
                 );
                 break;
               case 'project':
@@ -879,9 +879,15 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                 $reporting_entity->country_id = $context['sandbox']['country_id'];
                 $reporting_entity->name = $item['full_agency_name'];
                 $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+
+                if ($item['total_reported']) {
+                  $item['total_reported'] = preg_replace('/[^\d.]/', '', $item['total_reported']);
+                }
+
                 $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
                 $reporting_entity->changed = time();
                 entity_save('organisation', $reporting_entity);
+
               }
             }
           } else {
@@ -897,6 +903,11 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
             $reporting_entity->summary_data_id = $entity;
             $reporting_entity->country_id = $context['sandbox']['country_id'];
             $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+
+            if ($item['total_reported']) {
+              $item['total_reported'] = preg_replace('/[^\d.]/', '', $item['total_reported']);
+            }
+
             $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
             $reporting_entity->status = 1;
             $reporting_entity->created = time();
@@ -945,11 +956,17 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                   $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
                 }
 
-                $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
-                $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
-                $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+                $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];
+                $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
+
+                if ($item['payment_to_goverment_report']) {
+                  $item['payment_to_goverment_report'] = preg_replace('/[^\d.]/', '', $item['payment_to_goverment_report']);
+                }
+
+                $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
 
                 entity_save('organisation', $reporting_entity);
+
               }
             }
           } else {
@@ -978,9 +995,14 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
               $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
             }
 
-            $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
-	          $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
-            $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+            $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];
+	          $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
+
+            if ($item['payment_to_goverment_report']) {
+              $item['payment_to_goverment_report'] = preg_replace('/[^\d.]/', '', $item['payment_to_goverment_report']);
+            }
+
+            $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
 
             entity_save('organisation', $reporting_entity);
           }
