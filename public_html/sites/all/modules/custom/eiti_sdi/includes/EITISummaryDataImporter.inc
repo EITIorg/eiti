@@ -653,34 +653,67 @@ class EITISummaryDataImporter {
 
             switch ($reporting_entities_active_section) {
               case 'goverment_entity':
+                $total_reported = $sheet->getCellByColumnAndRow(4, $i);
+
+                if ($total_reported->isFormula()) {
+                  $total_reported_value = $total_reported->getOldCalculatedValue();
+                } else {
+                  $total_reported_value = $total_reported->getFormattedValue();
+                }
+
                 $item = array(
                   'full_agency_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
                   'agency_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
                   'id_number' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'total_reported' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'total_reported' => $total_reported_value,
                 );
                 break;
               case 'company':
+                $payment = $sheet->getCellByColumnAndRow(7, $i);
+
+                if ($payment->isFormula()) {
+                  $payment_value = $payment->getOldCalculatedValue();
+                } else {
+                  $payment_value = $payment->getFormattedValue();
+                }
+
                 $item = array(
                   'full_company_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
-                  'company_id' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'sector' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
-                  'commodities' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
-                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
-                  'payment_to_goverment_report' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+                  'company_id' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'sector' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'payment_to_goverment_report' => $payment_value,
                 );
                 break;
               case 'project':
+
+                $volume = $sheet->getCellByColumnAndRow(6, $i);
+
+                if ($volume->isFormula()) {
+                  $volume_value = $volume->getOldCalculatedValue();
+                } else {
+                  $volume_value = $volume->getFormattedValue();
+                }
+
+                $production = $sheet->getCellByColumnAndRow(8, $i);
+
+                if ($production->isFormula()) {
+                  $production_value = $production->getOldCalculatedValue();
+                } else {
+                  $production_value = $production->getFormattedValue();
+                }
+
                 $item = array(
                   'full_project_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
                   'legal_Agreement_ref_number' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
                   'affiliated_companies' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
                   'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
                   'status' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'production_volume' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'production_volume' => $volume_value,
                   'unit' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
-                  'production_value' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+                  'production_value' => $production_value,
                   'currency' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
                 );
                 break;
