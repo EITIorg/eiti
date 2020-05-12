@@ -119,7 +119,7 @@ class EITISummaryDataImporter {
   private function parseAboutSection($sheet, $max_row) {
     $data = array();
 
-    // Skip table header and start onlu from
+    // Skip table header and start only from data rows
     $i = 14;
     $dataMapping = new EITISummaryDataMapping();
     $about_fields = $dataMapping->getAboutSectionFields();
@@ -253,7 +253,7 @@ class EITISummaryDataImporter {
 
     // Process text and numeric fields
     if (isset($data['company_id_name'])) {
-      $entity->	field_sd_company_name['und'][0]['value'] = $data['company_id_name'];
+      $entity->field_sd_company_name['und'][0]['value'] = $data['company_id_name'];
     }
 
     if (isset($data['field_sd_iso_alpha_3_code'])) {
@@ -393,9 +393,14 @@ class EITISummaryDataImporter {
       $entity->field_sd_goverm_open_data_policy['und'][0]['value'] = $this->getIntegerPolicyListItemByValue($data['field_sd_goverm_open_data_policy']);
     }
 
+    // Process URL, EITI Report
+    if (isset($data['field_sd_report_file'])) {
+      $entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
+    }
+
     // Process date fields
-    if (isset($data['field_sd_public_date_eiti_data'])) {
-      $timestamp = strtotime($data['field_sd_public_date_eiti_data']);
+    if (isset($data['published'])) {
+      $timestamp = strtotime($data['published']);
       if ($timestamp) {
         $entity->field_sd_public_date_eiti_data['und'][0]['value'] = $timestamp;
       }
