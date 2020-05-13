@@ -534,13 +534,15 @@ class EITISummaryDataImporter {
 
           $value = $this->normalizeCellValue($value);
 
-          $data['items'][] = array(
-            'parent' => $active_section,
-            'requirement_cell' => $requirement_cell,
-            'inclusion' => $value,
-            'source' => $source_cell,
-          );
-          $max++;
+          if (!empty($value) && $value != '< number >') {
+            $data['items'][] = array(
+              'parent' => $active_section,
+              'requirement_cell' => $requirement_cell,
+              'inclusion' => $value,
+              'source' => $source_cell,
+            );
+            $max++;
+          }
         }
       }
 
@@ -817,13 +819,15 @@ function eiti_sdi_batch_process_disclosure_checklist_import($entity, $disclosure
 
     $indicator_id = '';
     if ($disclosure['requirement_cell']) {
-      $indicator_id = eiti_sdi_create_indicator_item($disclosure);
-    }
-
-    if (!empty($disclosure['parent']) && is_numeric($indicator_id)) {
       $summary_data = entity_load('summary_data', array($entity));
       if ($summary_data) {
         $summary_data = array_shift($summary_data);
+        $indicator_id = eiti_sdi_create_indicator_item($disclosure, $summary_data->currency_rate);
+      }
+    }
+
+    if (!empty($disclosure['parent']) && is_numeric($indicator_id)) {
+      if ($summary_data) {
         $summary_data->field_sd_indicator_values['und'][]['target_id'] = $indicator_id;
         entity_save('summary_data', $summary_data);
       }
@@ -1234,7 +1238,7 @@ function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
 /**
  * Create indicator item
  */
-function eiti_sdi_create_indicator_item($values) {
+function eiti_sdi_create_indicator_item($values, $currency_rate) {
   $indicator_id = NULL;
   $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent']);
 
@@ -1260,6 +1264,15 @@ function eiti_sdi_create_indicator_item($values) {
             $entity_item->value_boolean = $values['inclusion'];
             break;
           case 'numeric':
+            $dataMapping = new EITISummaryDataMapping();
+            $currencies = $dataMapping->getCurrenciesList();
+
+            if (in_array($values['source'], $currencies) && $values['source'] != 'USD') {
+              $values['inclusion'] = $values['inclusion'] / $currency_rate;
+              $values['inclusion'] = round($values['inclusion'], 2);
+              $values['source'] = 'USD';
+            }
+
             $entity_item->value_numeric = $values['inclusion'];
             break;
           case 'text':
@@ -1289,11 +1302,19 @@ function eiti_sdi_create_indicator_item($values) {
         }
 
         if ($indicator->type == 'numeric') {
-          $entity_item->value_unit = $values['source'];
+          $units = $dataMapping->getUnits();
+
+          if (in_array($values['source'], $units)) {
+            $entity_item->value_unit = $values['source'];
+          } else {
+            $entity_item->source = $values['source'];
+          }
+
+
         } else {
           $entity_item->source = $values['source'];
         }
-        
+
         entity_save('indicator_value', $entity_item);
 
         $indicator_id = $entity_item->id;
