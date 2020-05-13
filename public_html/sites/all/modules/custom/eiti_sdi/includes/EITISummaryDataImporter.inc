@@ -1288,17 +1288,12 @@ function eiti_sdi_create_indicator_item($values) {
             break;
         }
 
-        if (!empty($values['source'])) {
-          $values['source'] = trim($values['source']);
-
-          if (strlen($values['source']) < 32) {
-            $entity_item->value_unit = $values['source'];
-          } else {
-            $values['source'] = substr($values['source'], 0, 255);
-            $entity_item->source = $values['source'];
-          }
+        if ($indicator->type == 'numeric') {
+          $entity_item->value_unit = $values['source'];
+        } else {
+          $entity_item->source = $values['source'];
         }
-
+        
         entity_save('indicator_value', $entity_item);
 
         $indicator_id = $entity_item->id;
