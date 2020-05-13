@@ -134,13 +134,16 @@ class EITISummaryDataMapping {
       'Scf',
     ];
 
+    $currencies = $this->getCurrenciesList();
+    $units = array_merge($units, $currencies);
+
     return $units;
   }
 
   /**
    * Get list of possible currencies
    */
-  public function gerCurrenciesList() {
+  public function getCurrenciesList() {
     $list = [
       'AED',
       'AFN',
@@ -205,6 +208,7 @@ class EITISummaryDataMapping {
       'ILS',
       'IMP',
       'INR',
+      'IQD',
       'IRR',
       'ISK',
       'JEP',
@@ -300,7 +304,7 @@ class EITISummaryDataMapping {
       'ZAR',
       'ZMW',
     ];
-    
+
     return $list;
   }
 }
