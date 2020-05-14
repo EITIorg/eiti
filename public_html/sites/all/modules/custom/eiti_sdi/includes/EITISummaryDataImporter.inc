@@ -532,6 +532,10 @@ class EITISummaryDataImporter {
 
           $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
+          if (strlen($source_cell) > 255) {
+            $source_cell = substr($source_cell, 0, 255);
+          }
+
           $value = $this->normalizeCellValue($value);
 
           if (!empty($value) && $value != '< number >') {
