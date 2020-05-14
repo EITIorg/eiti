@@ -44,7 +44,7 @@ class EITISummaryDataImporter {
     $is_valid = FALSE;
     $list = $xls->getSheetNames();
 
-    if (sizeof($list == 7)) {
+    if (sizeof($list >= 7)) {
       if ($list[0] == 'Introduction' && $list[1] == 'Part 1 - About'
         && $list[2] == 'Part 2 - Disclosure checklist' && $list[3] == 'Part 3 - Reporting entities'
         && $list[4] == 'Part 4 - Government revenues' && $list[5] == 'Part 5 - Company data' && $list[6] == 'Lists') {
@@ -1268,12 +1268,18 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
             $currencies = $dataMapping->getCurrenciesList();
 
             if (in_array($values['source'], $currencies) && $values['source'] != 'USD') {
-              $values['inclusion'] = $values['inclusion'] / $currency_rate;
-              $values['inclusion'] = round($values['inclusion'], 2);
-              $values['source'] = 'USD';
+              $values['inclusion_new'] = $values['inclusion'] / $currency_rate;
+              $values['inclusion_new'] = round($values['inclusion_new'], 2);
+              $values['source_new'] = 'USD';
             }
 
-            $entity_item->value_numeric = $values['inclusion'];
+            if (isset($values['inclusion_new'])) {
+              $entity_item->value_numeric = $values['inclusion_new'];
+              $entity_item->original_value_numeric = $values['inclusion'];
+            } else {
+              $entity_item->value_numeric = $values['inclusion'];
+            }
+
             break;
           case 'text':
             $entity_item->value_text = $values['inclusion'];
@@ -1305,18 +1311,20 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
           $units = $dataMapping->getUnits();
 
           if (in_array($values['source'], $units)) {
-            $entity_item->value_unit = $values['source'];
+            if (isset($values['source_new'])) {
+              $entity_item->value_unit = $values['source_new'];
+              $entity_item->original_value_unit = $values['source'];
+            } else {
+              $entity_item->value_unit = $values['source'];
+            }
           } else {
             $entity_item->source = $values['source'];
           }
-
-
         } else {
           $entity_item->source = $values['source'];
         }
 
         entity_save('indicator_value', $entity_item);
-
         $indicator_id = $entity_item->id;
       }
     }
