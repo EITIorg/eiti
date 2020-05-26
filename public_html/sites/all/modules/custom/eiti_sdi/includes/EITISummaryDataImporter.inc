@@ -1420,7 +1420,8 @@ function eiti_sdi_get_indicator_data_type_by_value($value) {
     return 'reporting_type';
   }
 
-  if (is_numeric($value)) {
+  // Check for numeric fields
+  if(preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $value)) {
     return 'numeric';
   }
 
