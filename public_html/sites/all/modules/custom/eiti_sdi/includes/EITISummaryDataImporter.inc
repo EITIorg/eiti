@@ -1260,7 +1260,6 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
       if ($indicator->type != 'group' && !empty($values['inclusion'])) {
         // Create indicator value there
         $entity_item = entity_get_controller('indicator_value')->create();
-
         $entity_item->indicator_id = $indicator->id;
 
         switch ($indicator->type) {
