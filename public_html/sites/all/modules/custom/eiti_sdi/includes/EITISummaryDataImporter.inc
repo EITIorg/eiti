@@ -1344,7 +1344,6 @@ function eiti_sdi_get_indicator_type_by_name($name, $parent, $type = '') {
   $id = NULL;
 
   if ($name) {
-
     if ($parent) {
       $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $parent))->fetchAll();
 
@@ -1352,11 +1351,11 @@ function eiti_sdi_get_indicator_type_by_name($name, $parent, $type = '') {
         $parent_id_result = array_shift($parent_id_query);
 
         if (isset($parent_id_result->id)) {
-          $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.parent = :parent", array(':name' => $name, ':parent' => $parent_id_result->id))->fetchAll();
+          $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.parent = :parent AND ei.type = :type", array(':name' => $name, ':parent' => $parent_id_result->id, ':type' => $type))->fetchAll();
         }
       }
     } else {
-      $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.type = :type", array(':name' => $name, ':type' => $type))->fetchAll();
+      $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $name))->fetchAll();
     }
 
     if (!empty($query)) {
