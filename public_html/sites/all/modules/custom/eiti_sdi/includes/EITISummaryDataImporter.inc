@@ -1244,7 +1244,9 @@ function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
  */
 function eiti_sdi_create_indicator_item($values, $currency_rate) {
   $indicator_id = NULL;
-  $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent']);
+
+  $type = eiti_sdi_get_indicator_data_type_by_value($values['inclusion']);
+  $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent'], $type);
 
   if (!$id) {
     $id = eiti_sdi_create_indicator_type($values);
@@ -1339,7 +1341,7 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
 /**
  * Get indicator type by name
  */
-function eiti_sdi_get_indicator_type_by_name($name, $parent) {
+function eiti_sdi_get_indicator_type_by_name($name, $parent, $type = '') {
   $id = NULL;
 
   if ($name) {
@@ -1355,7 +1357,7 @@ function eiti_sdi_get_indicator_type_by_name($name, $parent) {
         }
       }
     } else {
-      $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $name))->fetchAll();
+      $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.type = :type", array(':name' => $name, ':type' => $type))->fetchAll();
     }
 
     if (!empty($query)) {
@@ -1421,7 +1423,7 @@ function eiti_sdi_get_indicator_data_type_by_value($value) {
   }
 
   // Check for numeric fields
-  if(preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $value)) {
+  if(preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $value) || is_numeric($value)) {
     return 'numeric';
   }
 
