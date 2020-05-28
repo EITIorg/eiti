@@ -19,7 +19,6 @@ class EITISummaryDataImporter {
 
       if ($xls) {
         $is_valid = $this->validateXLS($xls);
-
         if ($is_valid) {
           $this->processDataImport($xls, $fid);
         }
@@ -47,7 +46,7 @@ class EITISummaryDataImporter {
     if (sizeof($list >= 7)) {
       if ($list[0] == 'Introduction' && $list[1] == 'Part 1 - About'
         && $list[2] == 'Part 2 - Disclosure checklist' && $list[3] == 'Part 3 - Reporting entities'
-        && $list[4] == 'Part 4 - Government revenues' && $list[5] == 'Part 5 - Company data' && $list[6] == 'Lists') {
+        && $list[4] == 'Part 4 - Government revenues' && $list[5] == 'Part 5 - Company data') {
         $is_valid = TRUE;
       }
     }
