@@ -28,11 +28,11 @@
       $('.site-navigation-toggle-wrapper .link').append('<span></span>'); // Adding hamburger for mobile
       $('.site-navigation-toggle-wrapper .link', context).click(function (e) {
         var footer_navigation = $('.footer-site-navigation-wrapper', context);
-        if (!footer_navigation.size) {
+        if (!footer_navigation.length) {
           return true;
         }
         e.preventDefault();
-        e.stopPropagation(); //Prevent toggle hamburger menu 
+        e.stopPropagation(); //Prevent toggle hamburger menu
 
         // Close search
         $('.header-search-form').fadeOut('fast', function () {

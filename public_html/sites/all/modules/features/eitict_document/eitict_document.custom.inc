@@ -87,7 +87,7 @@ function eitict_document_form_document_node_form_set_access_submit($form, $form_
  */
 function eitict_document_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   $view = $form_state['view'];
-  if ($view->name == 'publications_search') {
+  if ($view->name == 'documents_search') {
     $search_label = $form['#info']['filter-search_api_views_fulltext']['label'];
     unset($form['#info']['filter-search_api_views_fulltext']['label']);
     $form['search_api_views_fulltext']['#attributes']['placeholder'][] = $search_label;
@@ -113,7 +113,7 @@ function eitict_document_form_views_exposed_form_alter(&$form, &$form_state, $fo
  *  Element's context.
  */
 function eitict_document_date_select_process_alter(&$element, &$form_state, $context) {
-  if (isset($form_state['view']) && $form_state['view']->name == 'publications_search') {
+  if (isset($form_state['view']) && $form_state['view']->name == 'documents_search') {
     $element['month']['#options'][''] = t('- Month -');
     $element['year']['#options'][''] = t('----');
   }

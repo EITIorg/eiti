@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_bookmark.features.user_permission.inc

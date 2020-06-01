@@ -97,3 +97,32 @@ function helpertheme_form_menu_edit_item_save_icon($form, &$form_state) {
     variable_del(HELPERTHEME_SVG_ICON_NAME_PREFIX . $mlid);
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter() for menu_edit_item().
+ */
+function helpertheme_form_stakeholder_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field_supporter_since'], $form['field_since_year'])) {
+    /** @var Entity $entity */
+    $entity = $form['#entity'];
+    $lan = LANGUAGE_NONE;
+    $field_lan = !empty($form["field_supporter_since"]["#language"]) ? $form["field_supporter_since"]["#language"] : $lan;
+    $years_range = range('2004', date('Y'));
+    $default_year = !empty($entity->field_since_year) ? $entity->field_since_year[$lan][0]['value'] : '';
+    $form['field_since_year'][$lan]['#title'] = '';
+    $form['field_since_year'][$lan]['#options'] = array_combine($years_range, $years_range);
+    $form['field_since_year'][$lan]['#default_value'] = $default_year;
+    $form['field_since_year'][$lan]['#weight'] = $form['field_supporter_since']['#weight'] + 1;
+    $form['field_since_year'][$lan]['#states'] = [
+      'visible' => [
+        ':input[name="field_supporter_since[' . $field_lan . ']"]' => ['value' => 'supporter'],
+      ],
+    ];
+    // Hide old field field_stk_category.
+    // It replaced by field_stk_membership.
+    if (isset($form['field_stk_category']) && isset($form['field_stk_membership'])) {
+      $form['field_stk_category']['#access'] = FALSE;
+    }
+  }
+
+}

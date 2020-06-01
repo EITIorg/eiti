@@ -1,0 +1,4 @@
+name = Tidio Chat
+description = Tidio Chat by Tidio Ltd.
+core = "7.x"
+package = EITI General

@@ -66,7 +66,7 @@ Drupal.t('Chad');
 Drupal.t('Colombia');
 Drupal.t('Côte d\'Ivoire');
 Drupal.t('Democratic Republic of Congo');
-Drupal.t('Dominican Republic ');
+Drupal.t('Dominican Republic');
 Drupal.t('Ethiopia');
 Drupal.t('Germany');
 Drupal.t('Ghana');
@@ -108,6 +108,10 @@ Drupal.t('United Kingdom');
 Drupal.t('United States of America');
 Drupal.t('Yemen');
 Drupal.t('Zambia');
+Drupal.t('Argentina');
+Drupal.t('Netherlands');
+Drupal.t('Mexico');
+Drupal.t('Guyana');
 
 if (drupalPlaceholder) {
   Drupal = null;

@@ -1,0 +1,14 @@
+name = SMTP tests
+description = Contains helper logic for the SMTP tests.
+package = Mail
+core = 7.x
+hidden = TRUE
+
+files[] = smtp_tests.mail.inc
+test_dependencies[] = smtp
+
+; Information added by Drupal.org packaging script on 2019-12-12
+version = "7.x-1.7+20-dev"
+core = "7.x"
+project = "smtp"
+datestamp = "1576165687"

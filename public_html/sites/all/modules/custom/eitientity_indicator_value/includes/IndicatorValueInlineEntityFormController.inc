@@ -125,6 +125,19 @@ class IndicatorValueInlineEntityFormController extends EntityInlineEntityFormCon
     );
     $this->entityFormSetElementStates($entity_form['value_text'], 'text', $entity_form['#parents'], 'indicator_id');
 
+    $entity_form['value_reporting_type'] = array(
+      '#type' => 'select',
+      '#title' => t('Reporting type'),
+      '#options' => array(
+        EITIENTITY_INDICATOR_VALUE_VALUE_SYSTEMATICALLY_DISCLOSED => t('Yes, systematically disclosed'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_THROUGH_EITI_REPORTING => t('Yes, through EITI reporting'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_NOT_APPLICABLE => t('Not applicable'),
+        EITIENTITY_INDICATOR_VALUE_VALUE_NOT_AVAILABLE => t('Not available'),
+      ),
+      '#default_value' => $entity->value_reporting_type,
+    );
+    $this->entityFormSetElementStates($entity_form['value_reporting_type'], 'reporting_type', $entity_form['#parents'], 'indicator_id');
+    
     return $entity_form;
   }
 

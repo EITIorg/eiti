@@ -95,6 +95,7 @@ features[variable][] = pathauto_node_document_fr_pattern
 features[variable][] = pathauto_node_document_pattern
 features[variable][] = pathauto_node_document_ru_pattern
 features[variable][] = pathauto_node_document_und_pattern
+features[views_view][] = documents_search
 features[views_view][] = publications
 features[views_view][] = publications_search
 features_exclude[dependencies][entityreference] = entityreference

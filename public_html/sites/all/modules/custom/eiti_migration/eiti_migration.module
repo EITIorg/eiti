@@ -9,6 +9,8 @@
  * other migration-related functionality.
  */
 
+const EITI_MIGRATION_TEMP_DIR = 'temporary://eiti_s3_temp/';
+
 /**
  * Implements hook_menu().
  */
@@ -199,7 +201,7 @@ function _eiti_migration_spreadsheet_dynamic_upload_rollback($migration, $summar
 
 /**
  * Simple batch operation callback function that just informs how many files were
- * imported successfully.
+ * imported successfully and cleans up temp files.
  */
 function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results, $operations) {
   if ($success) {
@@ -217,6 +219,8 @@ function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results,
     ));
     drupal_set_message($message, 'error');
   }
+
+  _eiti_migration_s3_cleanup_spreadsheet_temp();
 }
 
 /**
@@ -571,4 +575,42 @@ function eiti_migration_update_dependencies() {
     'eitientity_summary_data' => 7002,
   );
   return $dependencies;
+}
+
+/**
+ * Check whether or not s3 is used as the public schema.
+ *
+ * @return bool
+ */
+function _eiti_migration_s3_is_public_schema() {
+  return variable_get('s3fs_use_s3_for_public', FALSE);
+}
+
+/**
+ * Try to get temp file, create it if it doesn't exist.
+ *
+ * @param object $file
+ *
+ * @return string|false
+ *   Temp file uri or false if failed.
+ */
+function _eiti_migration_s3_get_temp_file(object $file) {
+  $path_info = pathinfo($file->uri);
+  $temp_dir = str_replace('public://', EITI_MIGRATION_TEMP_DIR, $path_info['dirname']) . '/';
+  file_prepare_directory($temp_dir, FILE_CREATE_DIRECTORY);
+  $temp_uri = $temp_dir . $path_info['basename'];
+
+  if (file_exists($temp_uri)) {
+    return $temp_uri;
+  }
+
+  return file_unmanaged_copy($file->uri, $temp_uri, FILE_EXISTS_REPLACE);
+}
+
+/**
+ * Clean up the temp directory for spreadsheets.
+ */
+function _eiti_migration_s3_cleanup_spreadsheet_temp() {
+  $spreadsheet_temp = EITI_MIGRATION_TEMP_DIR . 'spreadsheets/';
+  file_unmanaged_delete_recursive($spreadsheet_temp);
 }

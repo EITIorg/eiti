@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * eitict_bookmark.field_group.inc
@@ -122,9 +123,9 @@ function eitict_bookmark_field_group_info() {
     'label' => 'Reference',
     'weight' => '5',
     'children' => array(
-      0 => 'field_bm_link',
+      0 => 'field_bm_reference_type',
       1 => 'field_bm_reference',
-      2 => 'field_bm_reference_type',
+      2 => 'field_bm_link',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

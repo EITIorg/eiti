@@ -207,7 +207,7 @@ function contentwidget__viz_scorecard_dynamic__render($plugin, $widget_settings,
   $country_entity = entity_load_single('implementing_country', $widget_settings['extra_settings']['country']);
   $settings = array(
     'type' => 'Scorecard',
-    'name' => t('@country - @year', array('@country' => $country_entity->name, '@year' => $available_years_options[$default_year])),
+    'name' => $country_entity->name . ' - ' . $available_years_options[$default_year],
     'country' => $country_entity->name,
     'width' => 800,
     'height' => 600,

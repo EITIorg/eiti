@@ -51,6 +51,9 @@ function eiti_api_entity_reset_cache($entity, $type, $op) {
       // General render-cache invalidation.
       $target_resources[] = 'summary_data';
       break;
+    case 'score_data':
+      $target_resources[] = 'score_data';
+      break;
   }
 
   // Loop and clean.
