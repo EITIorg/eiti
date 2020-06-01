@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Franklin Gothic Book';
+  src: url('../fonts/FranklinGothic-Book.eot');
+  src: url('../fonts/FranklinGothic-Book.eot?#iefix') format('embedded-opentype'), url('../fonts/FranklinGothic-Book.woff2') format('woff2'), url('../fonts/FranklinGothic-Book.woff') format('woff'), url('../fonts/FranklinGothic-Book.ttf') format('truetype'), url('../fonts/FranklinGothic-Book.svg#FranklinGothic-Book') format('svg');
+}
+
 @page {
   /*(% of page-box width for LR, of height for TB) */
   margin-header: 10mm; /* <any of the usual CSS values for margins> */
@@ -8,18 +14,30 @@
 
 @page :first {
   header: _blank;
-  footer: _blank;
 }
 
-
 /* Title page */
-.pdf-title-page .line {width: 100%; background-color:#0093cf; margin: 130px -57px 130px -57px; font-size: 22px;}
+.pdf-title-page .line {font-family: 'Franklin Gothic Book'; width: 100%; background-color:#0093cf; margin: 130px -57px 130px -57px; font-size: 22px;}
 .pdf-title-page .line td {padding: 6px;}
 .pdf-title-page .line .board {text-align: left; padding-left: 57px;}
 .pdf-title-page .line .date {text-align: right; padding-right: 130px;}
+.pdf-title-page .pre-title {font-size: 45px;}
+.pdf-title-page .sub-title {font-size: 22px; margin-top: 10px;}
 .pdf-title-page .title {font-size: 60px;}
 .pdf-title-page .reference {font-size: 22px; margin-top: 10px;}
 
+.pdf-header,
+.pdf-footer,
+.pdf-scorecard,
+h2,
+.country_scorecard,
+.scorecard-progress,
+.scorecard-legend-item .text,
+.scorecard-text,
+.scorecard-news,
+.pdf-title-page {
+  font-family: 'Franklin Gothic Book';
+}
 /* Header */
 table.pdf-header {
   width: 100%;
@@ -63,7 +81,7 @@ table.scorecard-progress .value-1 .symbol {color: #84AD42;}
 table.scorecard-progress .value-2 .symbol {color: red;}
 
 .pdf-footer {
-  background: #e9f3f9;
+  /*background: #e9f3f9;*/
   font-size: 10px;
   padding: 10px 57px 20px 57px;
   margin: 57px -57px -57px -57px;

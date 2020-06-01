@@ -11,6 +11,192 @@
 function eitiet_score_data_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'score_data-standard-field_assessment_date'.
+  $field_instances['score_data-standard-field_assessment_date'] = array(
+    'bundle' => 'standard',
+    'deleted' => 0,
+    'description' => 'The Validation commencement date	',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_assessment_date',
+    'label' => 'Assessment date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd.m.Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 45,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'score_data-standard-field_corrective_actions_num'.
+  $field_instances['score_data-standard-field_corrective_actions_num'] = array(
+    'bundle' => 'standard',
+    'default_value' => array(
+      0 => array(
+        'value' => 50,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_corrective_actions_num',
+    'label' => 'Number of corrective actions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'html5_tools',
+      'settings' => array(),
+      'type' => 'numberfield',
+      'weight' => 48,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'score_data-standard-field_next_validation_commences'.
+  $field_instances['score_data-standard-field_next_validation_commences'] = array(
+    'bundle' => 'standard',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 6,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_next_validation_commences',
+    'label' => 'Next Validation commences',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 30,
+        'input_format' => 'd.m.Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+10',
+      ),
+      'type' => 'date_popup',
+      'weight' => 49,
+    ),
+  );
+
+  // Exported field_instance: 'score_data-standard-field_overall_assessment'.
+  $field_instances['score_data-standard-field_overall_assessment'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_overall_assessment',
+    'label' => 'Overall assessment',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 44,
+    ),
+  );
+
   // Exported field_instance: 'score_data-standard-field_scd_pdf_date'.
   $field_instances['score_data-standard-field_scd_pdf_date'] = array(
     'bundle' => 'standard',
@@ -21,7 +207,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 9,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -59,13 +245,13 @@ function eitiet_score_data_field_default_field_instances() {
     'bundle' => 'standard',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'This field will be pre-populated by Board decision data if it already related to current Validation.',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 12,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -85,7 +271,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 37,
+      'weight' => 40,
     ),
   );
 
@@ -100,7 +286,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 11,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -121,7 +307,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 36,
+      'weight' => 38,
     ),
   );
 
@@ -136,7 +322,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 13,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -156,7 +342,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 38,
+      'weight' => 41,
     ),
   );
 
@@ -171,7 +357,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 14,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -191,7 +377,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 40,
+      'weight' => 43,
     ),
   );
 
@@ -206,7 +392,7 @@ function eitiet_score_data_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 15,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -226,7 +412,7 @@ function eitiet_score_data_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 39,
+      'weight' => 42,
     ),
   );
 
@@ -235,19 +421,58 @@ function eitiet_score_data_field_default_field_instances() {
     'bundle' => 'standard',
     'default_value' => NULL,
     'deleted' => 0,
+    'description' => 'The title of PDF will be: "Validation of (Country name)"',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_scd_pdf_title',
+    'label' => 'Country name',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 37,
+    ),
+  );
+
+  // Exported field_instance: 'score_data-standard-field_scd_pdf_title_prefix'.
+  $field_instances['score_data-standard-field_scd_pdf_title_prefix'] = array(
+    'bundle' => 'standard',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Validation of',
+      ),
+    ),
+    'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'score_data',
-    'field_name' => 'field_scd_pdf_title',
-    'label' => 'Title',
+    'field_name' => 'field_scd_pdf_title_prefix',
+    'label' => 'Title prefix',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -261,7 +486,7 @@ function eitiet_score_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 36,
     ),
   );
 
@@ -279,7 +504,7 @@ function eitiet_score_data_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 0,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -308,20 +533,115 @@ function eitiet_score_data_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 31,
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'score_data-standard-field_validation_against'.
+  $field_instances['score_data-standard-field_validation_against'] = array(
+    'bundle' => 'standard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_validation_against',
+    'label' => 'Validation against',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'score_data-standard-field_validation_fiscal_year'.
+  $field_instances['score_data-standard-field_validation_fiscal_year'] = array(
+    'bundle' => 'standard',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+    ),
+    'ds_extras_field_template' => 'theme_field',
+    'entity_type' => 'score_data',
+    'field_name' => 'field_validation_fiscal_year',
+    'label' => 'Fiscal year reviewed for Validation',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 30,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-5:+10',
+      ),
+      'type' => 'date_select',
+      'weight' => 47,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Assessment date');
   t('Background');
   t('Corrective actions');
+  t('Country name');
   t('Date');
   t('Decision reference');
+  t('Fiscal year reviewed for Validation');
   t('News');
+  t('Next Validation commences');
+  t('Number of corrective actions');
+  t('Overall assessment');
   t('Score Requirements Values');
   t('The Board\'s decision');
-  t('Title');
+  t('The Validation commencement date	');
+  t('The title of PDF will be: "Validation of (Country name)"');
+  t('This field will be pre-populated by Board decision data if it already related to current Validation.');
+  t('Title prefix');
+  t('Validation against');
 
   return $field_instances;
 }
