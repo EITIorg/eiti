@@ -98,6 +98,7 @@ class EITISummaryDataImporter {
     if ($goverment_revenues) {
       $max_row = $xls->setActiveSheetIndex(4)->getHighestRow();
       $goverment_revenues_parsed_data = $this->parseGovermentRevenuesSection($goverment_revenues, $max_row);
+      $goverment_revenues_gfs = $this->parseGovermentRevenuesSectionGFS($goverment_revenues, $max_row);
     }
 
     // Process Company data section
@@ -109,7 +110,7 @@ class EITISummaryDataImporter {
     }
 
     // Process Batch for iterating Indicators
-    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data);
+    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data, $goverment_revenues_gfs);
   }
 
   /**
@@ -584,7 +585,7 @@ class EITISummaryDataImporter {
   /**
    * Implements functuon
    */
-  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data) {
+  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data, $goverment_revenues_gfs) {
     $batch = array(
       'title' => t('Importing summary data'),
       'operations' => array(
@@ -615,13 +616,14 @@ class EITISummaryDataImporter {
           array(
             $entity,
             $company_parsed_data,
+            $goverment_revenues_gfs,
           ),
         ),
       ),
       'finished' => 'eiti_sdi_batch_process_finish_callback',
     );
     batch_set($batch);
-    //batch_process('admin/content/summary_data');
+    batch_process('admin/content/summary_data');
   }
 
   /**
@@ -762,6 +764,40 @@ class EITISummaryDataImporter {
           'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
           'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
         );
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
+  /**
+   * Parse Goverment revenues section
+   */
+  private function parseGovermentRevenuesSectionGFS($sheet, $max_row) {
+    $data = array();
+    $i = 22;
+
+    while ($i < $max_row) {
+      $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
+
+      if (empty($gfs_classification)) {
+        $i = $max_row;
+      } else {
+
+        $goverment_entity = $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue();
+        $revenue_stream_name = $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue();
+
+        if (!isset($data[$goverment_entity])) {
+          $data[$goverment_entity] = [];
+        }
+
+        if (!isset($data[$goverment_entity][$revenue_stream_name])) {
+          $data[$goverment_entity][$revenue_stream_name] = [];
+        }
+
+        $data[$goverment_entity][$revenue_stream_name]['gfs_classification'] = $gfs_classification;
       }
 
       $i++;
@@ -1111,51 +1147,64 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
   if (isset($goverment_revenues_parsed_data[$context['sandbox']['progress']])) {
     $item = $goverment_revenues_parsed_data[$context['sandbox']['progress']];
 
-    $entity_item = entity_get_controller('revenue_stream')->create();
-    $entity_item->type = 'agency';
-    $gfs = '';
-    $gfs_parsed = explode(' ', $item['gfs_classification']);
-    $gfs = end($gfs_parsed);
-    $gfs = str_replace('(', '', $gfs);
-    $gfs = str_replace(')', '', $gfs);
-    $gfs_id = '';
-    if ($gfs) {
-      $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
-
-      if ($gfs_id_query) {
-        $gfs_id_query = array_shift($gfs_id_query);
-        if (isset($gfs_id_query->id)) {
-          $gfs_id = $gfs_id_query->id;
-        }
-      }
-    }
-
-    $entity_item->gfs_code_id = $gfs_id;
-    $entity_item->field_sector['und'][0]['value'] = $item['sector'];
-    $entity_item->name = $item['revenue_stream_name'];
-    $entity_item->report_status = 1;
-
-    $organisation_id = '';
-    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'goverment_entity', ':name' => $item['goverment_entity']))->fetchAll();
-
-    if ($organisation_query) {
-      $organisation_query = array_shift($organisation_query);
-
-      if (isset($organisation_query->id)) {
-        $organisation_id = $organisation_query->id;
-      }
-    }
-
-    $entity_item->organisation_id = $organisation_id;
-    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_currency['und'][0]['value'] = $item['currency'];
-    $entity_item->currency = $item['currency'];
-
-    entity_save('revenue_stream', $entity_item);
-
     $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
     if ($entity) {
       $entity = array_shift($entity);
+      $entity_item = entity_get_controller('revenue_stream')->create();
+      $entity_item->type = 'agency';
+
+      $gfs = '';
+      $gfs_parsed = explode(' ', $item['gfs_classification']);
+      $gfs = end($gfs_parsed);
+      $gfs = str_replace('(', '', $gfs);
+      $gfs = str_replace(')', '', $gfs);
+      $gfs_id = '';
+      if ($gfs) {
+        $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
+
+        if ($gfs_id_query) {
+          $gfs_id_query = array_shift($gfs_id_query);
+          if (isset($gfs_id_query->id)) {
+            $gfs_id = $gfs_id_query->id;
+          }
+        }
+      }
+
+      $entity_item->gfs_code_id = $gfs_id;
+      $entity_item->field_sector['und'][0]['value'] = $item['sector'];
+      $entity_item->name = $item['revenue_stream_name'];
+      $entity_item->report_status = 1;
+
+      $organisation_id = '';
+      $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'agency', ':name' => $item['goverment_entity']))->fetchAll();
+
+      if ($organisation_query) {
+        $organisation_query = array_shift($organisation_query);
+
+        if (isset($organisation_query->id)) {
+          $organisation_id = $organisation_query->id;
+        }
+      }
+
+      $entity_item->organisation_id = $organisation_id;
+
+      $item['revenue_value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+      $currency_rate = $entity->currency_rate;
+
+      if ($item['reporting_currency'] != 'USD') {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = 'USD';
+        $entity_item->revenue = round($item['revenue_value'] / $currency_rate, 2);
+      } else {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = $item['reporting_currency'];
+        $entity_item->revenue = $item['revenue_value'];
+      }
+
+      entity_save('revenue_stream', $entity_item);
+
       $entity->field_sd_revenue_government['und'][] = array('target_id' => $entity_item->id);
       entity_save('summary_data', $entity);
     }
@@ -1171,7 +1220,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
 /**
  * Implements Batch process for Companies
  */
-function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$context) {
+function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $goverment_revenues_gfs, &$context) {
 
   if (empty($context['sandbox'])) {
     $context['sandbox']['max'] = sizeof($company_parsed_data) - 1;
@@ -1205,19 +1254,56 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$
     $entity_item->field_reported_by_project['und'][0]['value'] = $item['reported_by_project'];
     $entity_item->field_project_name['und'][0]['value'] = $item['project_name'];
     $entity_item->field_currency['und'][0]['value'] = $item['reporting_currency'];
-    $entity_item->currency = $item['reporting_currency'];
-    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
-    $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
-    $entity_item->field_unit['und'][0]['value'] = $item['unit'];
-    $entity_item->field_comments['und'][0]['value'] = $item['comments'];
 
-    entity_save('revenue_stream', $entity_item);
+    if (isset($goverment_revenues_gfs[$item['goverment_entity']][$item['revenue_stream_name']]['gfs_classification'])) {
+      $item['gfs_classification'] = $goverment_revenues_gfs[$item['goverment_entity']][$item['revenue_stream_name']]['gfs_classification'];
 
+      $gfs = '';
+      $gfs_parsed = explode(' ', $item['gfs_classification']);
+      $gfs = end($gfs_parsed);
+      $gfs = str_replace('(', '', $gfs);
+      $gfs = str_replace(')', '', $gfs);
+      $gfs_id = '';
+      if ($gfs) {
+        $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
+
+        if ($gfs_id_query) {
+          $gfs_id_query = array_shift($gfs_id_query);
+          if (isset($gfs_id_query->id)) {
+            $gfs_id = $gfs_id_query->id;
+          }
+        }
+      }
+
+      $entity_item->gfs_code_id = $gfs_id;
+    }
+
+    $item['revenue_value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
     $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
     if ($entity) {
       $entity = array_shift($entity);
+      $currency_rate = $entity->currency_rate;
+
+      if ($item['reporting_currency'] != 'USD') {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = 'USD';
+        $entity_item->revenue = round($item['revenue_value'] / $currency_rate, 2);
+      } else {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = $item['reporting_currency'];
+        $entity_item->revenue = $item['revenue_value'];
+      }
+
+      $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+      $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
+      $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
+      $entity_item->field_unit['und'][0]['value'] = $item['unit'];
+      $entity_item->field_comments['und'][0]['value'] = $item['comments'];
+
+      entity_save('revenue_stream', $entity_item);
+
       $entity->field_sd_revenue_company['und'][] = array('target_id' => $entity_item->id);
       entity_save('summary_data', $entity);
     }
