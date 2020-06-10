@@ -357,6 +357,10 @@ class EITISummaryDataImporter {
       $entity->field_sd_other_files_relecance['und'][0]['value'] = $this->getIntegerListItemByValue($data['field_sd_other_files_relecance']);
     }
 
+    if (isset($data['field_sd_file_links'])) {
+      $entity->field_sd_file_links['und'][0] = ['uri' => $data['field_sd_file_links'], 'title' => $data['field_sd_file_links']];
+    }
+
     if (isset($data['field_sd_oil_sector'])) {
       $entity->field_sd_oil_sector['und'][0]['value'] = $this->getIntegerListItemByValue($data['field_sd_oil_sector']);
     }
