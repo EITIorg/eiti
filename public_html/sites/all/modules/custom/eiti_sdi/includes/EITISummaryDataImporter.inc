@@ -424,7 +424,7 @@ class EITISummaryDataImporter {
    * Applying number formatting for decimal fields
    */
   private function formatNumberSanitize($number) {
-    return preg_replace('/[^\d.]/', '', $number);
+    return preg_replace('/[^\d-]+/', '', $number);
   }
 
   /**
