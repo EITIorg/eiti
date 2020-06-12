@@ -26,9 +26,9 @@ function eitiet_score_data_field_group_info() {
     'children' => array(
       0 => 'field_assessment_date',
       1 => 'field_corrective_actions_num',
-      2 => 'field_next_validation_commences',
-      3 => 'field_overall_assessment',
-      4 => 'field_validation_against',
+      2 => 'field_field_validation_against',
+      3 => 'field_next_validation_commences',
+      4 => 'field_overall_assessment',
       5 => 'field_validation_fiscal_year',
     ),
     'format_type' => 'div',
@@ -62,9 +62,9 @@ function eitiet_score_data_field_group_info() {
     'children' => array(
       0 => 'field_assessment_date',
       1 => 'field_corrective_actions_num',
-      2 => 'field_next_validation_commences',
-      3 => 'field_overall_assessment',
-      4 => 'field_validation_against',
+      2 => 'field_field_validation_against',
+      3 => 'field_next_validation_commences',
+      4 => 'field_overall_assessment',
       5 => 'field_validation_fiscal_year',
     ),
     'format_type' => 'fieldset',
@@ -92,7 +92,7 @@ function eitiet_score_data_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'PDF data',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_scd_pdf_date',
       1 => 'field_scd_pdf_decision_ref',
