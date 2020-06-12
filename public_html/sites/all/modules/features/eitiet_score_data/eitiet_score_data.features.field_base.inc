@@ -58,6 +58,34 @@ function eitiet_score_data_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
+  // Exported field_base: 'field_field_validation_against'.
+  $field_bases['field_field_validation_against'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_field_validation_against',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'standards',
+          'parent' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
+    ),
+    'translatable' => 1,
+    'type' => 'taxonomy_term_reference',
+  );
+
   // Exported field_base: 'field_next_validation_commences'.
   $field_bases['field_next_validation_commences'] = array(
     'active' => 1,
@@ -345,30 +373,32 @@ function eitiet_score_data_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_validation_against'.
-  $field_bases['field_validation_against'] = array(
+  // Exported field_base: 'field_score_req_standard'.
+  $field_bases['field_score_req_standard'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_validation_against',
+    'field_name' => 'field_score_req_standard',
     'indexes' => array(
-      'value' => array(
-        0 => 'value',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'taxonomy',
     'settings' => array(
       'allowed_values' => array(
-        'standard_2016' => 'the 2016 Standard',
-        'standard_2019' => 'the 2019 Standard',
+        0 => array(
+          'vocabulary' => 'standards',
+          'parent' => 0,
+        ),
       ),
-      'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
     ),
-    'translatable' => 1,
-    'type' => 'list_text',
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_validation_fiscal_year'.
