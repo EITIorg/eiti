@@ -1,10 +1,14 @@
 <?php
 
-require DRUPAL_ROOT . '/../vendor/autoload.php';
-use \Mpdf\Mpdf;
+require_once DRUPAL_ROOT . '/../vendor/autoload.php';
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
+use Mpdf\Output\Destination;
 
 /**
  * Scorecard PDF page callback.
+ *
+ * @throws \Mpdf\MpdfException
  */
 function eiti_pdf_scorecard_page() {
   // When this page comes from cache it displays gibberish in the browser.
@@ -135,30 +139,37 @@ function eiti_pdf_scorecard_page() {
   $mpdf_config = array(
     'setAutoTopMargin' => 'stretch',
     'setAutoBottomMargin' => 'stretch',
+    'debug' => TRUE,
   );
-  $mpdf = new Mpdf($mpdf_config);
-  $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
-  $mpdf->WriteHTML($css, 1);
-  $css = file_get_contents(__DIR__ . '/../css/pdf.css');
-  $mpdf->WriteHTML($css, 1);
-  $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
-  if ($html_title_page) {
-    $mpdf->WriteHTML($html_title_page, 2);
+
+  try {
+    $mpdf = new Mpdf($mpdf_config);
+    $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
+    $mpdf->WriteHTML($css, 1);
+    $css = file_get_contents(__DIR__ . '/../css/pdf.css');
+    $mpdf->WriteHTML($css, 1);
+    $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
+    if ($html_title_page) {
+      $mpdf->WriteHTML($html_title_page, 2);
+    }
+    if ($html_header) {
+      $mpdf->DefHTMLHeaderByName('myHeader', $html_header);
+    }
+    if ($html_scorecard_table) {
+      $toc_params = array(
+        'toc-preHTML' => '<h2>' . t('Table of contents') . '</h2>',
+        'resetpagenum' => 3,
+        'links' => 1,
+      );
+      $mpdf->TOCpagebreakByArray($toc_params);
+      $mpdf->WriteHTML($html_scorecard_table, 2);
+    }
+    $filename = $filename . '.pdf';
+    $mpdf->Output($filename, Destination::INLINE);
   }
-  if ($html_header) {
-    $mpdf->DefHTMLHeaderByName('myHeader', $html_header);
+  catch (MpdfException $e) {
+    drupal_set_message(t('Cannot create pdf: @message', ['@message' => $e->getMessage()]), 'error');
   }
-  if ($html_scorecard_table) {
-    $toc_params = array(
-      'toc-preHTML' => '<h2>' . t('Table of contents') . '</h2>',
-      'resetpagenum' => 3,
-      'links' => 1,
-    );
-    $mpdf->TOCpagebreakByArray($toc_params);
-    $mpdf->WriteHTML($html_scorecard_table, 2);
-  }
-  $filename = $filename . '.pdf';
-  $mpdf->Output($filename, \Mpdf\Output\Destination::INLINE);
 }
 
 /**
