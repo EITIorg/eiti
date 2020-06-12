@@ -200,6 +200,13 @@ function score_data_default_form($form, &$form_state, $entity) {
         'wrapper' => 'inline-entity-form-' . $ief_id,
       ],
       '#limit_validation_errors' => $form['field_scd_score_req_values']['und']['actions']['ief_add']['#limit_validation_errors'],
+      '#states' => [
+        'enabled' => [
+          ':input[name^="field_field_validation_against"]' => [
+            '!value' => '_none',
+          ],
+        ],
+      ],
     ];
 
     // Pre-populate PDF Title value.
@@ -279,7 +286,12 @@ function score_data_form_prepopulate_ief(&$form, &$form_state) {
 
   $form_state['rebuild'] = TRUE;
   $form_state['inline_entity_form'][$ief_id]['entities'] = array();
-  $requirements_info = eitientity_score_req_value_get_score_req_information();
+  $standard_tid = '';
+  $lang = $form['field_field_validation_against']['#language'];
+  if (!empty($form['field_field_validation_against'][$lang]['#value'])) {
+    $standard_tid = $form['field_field_validation_against'][$lang]['#value'];
+  }
+  $requirements_info = eitientity_score_req_value_get_score_req_information($standard_tid);
   $weight = 0;
   $default_score_req_values = array(
     'description' => '',

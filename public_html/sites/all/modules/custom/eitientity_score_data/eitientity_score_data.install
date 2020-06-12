@@ -96,3 +96,23 @@ function eitientity_score_data_update_7001(&$sandbox) {
   $field = 'validation_documentation_url';
   db_add_field($table, $field, $schema['fields'][$field]);
 }
+
+/**
+ * Create taxonomy terms for Standards.
+ */
+function eitientity_score_data_update_7002(&$sandbox) {
+  $vocab = taxonomy_vocabulary_machine_name_load('standards');
+  $terms = [
+    ['name' => '2016', 'weight' => '0'],
+    ['name' => '2019', 'weight' => '0'],
+  ];
+  foreach ($terms as $term) {
+    $term = (object) [
+      'vid' => $vocab->vid,
+      'name' => $term['name'],
+      'weight' => $term['weight'],
+      'language' => LANGUAGE_NONE,
+    ];
+    taxonomy_term_save($term);
+  }
+}

@@ -1,5 +1,5 @@
 <div class="pdf-title-page">
-  <div class="logo"><img src="<?php print $logo; ?>" alt="EITI" height="55" /></div>
+  <div class="logo"><img src="<?php print $logo; ?>" alt="EITI" height="120" /></div>
   <table class="line">
     <tbody>
       <tr>
