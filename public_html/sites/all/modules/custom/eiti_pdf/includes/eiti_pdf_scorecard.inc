@@ -127,7 +127,7 @@ function eiti_pdf_scorecard_page() {
 
       // File name.
       if (isset($json->data[0]->country->label) && $json->data[0]->country->label) {
-        $filename = 'EITI - ' . trim(strip_tags($json->data[0]->country->label)) .  ' validation';
+        $filename = 'EITI - ' . trim(strip_tags($json->data[0]->country->label)) . ' validation';
       }
       if (isset($timestamp) && $timestamp) {
         $filename .= ' ' . date('Y-m-d', $timestamp);
@@ -139,7 +139,7 @@ function eiti_pdf_scorecard_page() {
   $mpdf_config = array(
     'setAutoTopMargin' => 'stretch',
     'setAutoBottomMargin' => 'stretch',
-    'debug' => TRUE,
+    // 'debug' => TRUE,
   );
 
   try {
