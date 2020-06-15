@@ -31,32 +31,178 @@ class EITIApiRevenueStreams2 extends EITIApiRevenueStreams {
     $public_fields['summary_data'] = array(
       'callback' => array($this, 'getSummaryData'),
     );
+    $public_fields['sector'] = array(
+      'property' => 'field_o_sector',
+      'callback' => array($this, 'getSector')
+    );
     $public_fields['project_name'] = array(
       'property' => 'field_project_name',
+      'callback' => array($this, 'getProjectName')
     );
     $public_fields['levied_on_project'] = array(
       'property' => 'field_levied_on_project',
+      'callback' => array($this, 'getLeviedOnProject')
     );
     $public_fields['goverment_entity'] = array(
       'property' => 'field_goverment_entity',
+      'callback' => array($this, 'getGovermentEntity')
     );
     $public_fields['reported_by_project'] = array(
       'property' => 'field_reported_by_project',
+      'callback' => array($this, 'getReportedByProject')
     );
     $public_fields['reporting_currency'] = array(
       'property' => 'field_currency',
+      'callback' => array($this, 'getReportingCurrency')
     );
     $public_fields['payment_made_in_kind'] = array(
       'property' => 'field_payment_made_in_kind',
+      'callback' => array($this, 'getPaymentMadeInKind')
     );
     $public_fields['in_kind_volume'] = array(
       'property' => 'field_in_kind_volume',
+      'callback' => array($this, 'getInKindVolume')
     );
     $public_fields['unit'] = array(
       'property' => 'field_unit',
+      'callback' => array($this, 'getUnit')
+    );
+    $public_fields['comments'] = array(
+      'property' => 'field_comments',
+      'callback' => array($this, 'getComment')
     );
 
     return $public_fields;
+  }
+
+  /**
+   * Get the Sector value.
+   */
+  function getSector($emw) {
+    if (isset($emw->field_o_sector)) {
+      $sector = $emw->field_o_sector->value();
+      if (isset($sector)) {
+        return $sector;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Name value.
+   */
+  function getProjectName($emw) {
+    if (isset($emw->field_project_name)) {
+      $project_name = $emw->field_project_name->value();
+      if (isset($project_name)) {
+        return $project_name;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Levied On Project value.
+   */
+  function getLeviedOnProject($emw) {
+    if (isset($emw->field_levied_on_project)) {
+      $levied_on_project = $emw->field_levied_on_project->value();
+      if (isset($levied_on_project)) {
+        return $levied_on_project;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Goverment Entity value.
+   */
+  function getGovermentEntity($emw) {
+    if (isset($emw->field_goverment_entity)) {
+      $goverment_entity = $emw->field_goverment_entity->value();
+      if (isset($goverment_entity)) {
+        return $goverment_entity;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Reported By Project value.
+   */
+  function getReportedByProject($emw) {
+    if (isset($emw->field_reported_by_project)) {
+      $reported_by_project = $emw->field_reported_by_project->value();
+      if (isset($reported_by_project)) {
+        return $reported_by_project;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Reporting Currency value.
+   */
+  function getReportingCurrency($emw) {
+    if (isset($emw->field_currency)) {
+      $currency = $emw->field_currency->value();
+      if (isset($currency)) {
+        return $currency;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Payment Made In Kind value.
+   */
+  function getPaymentMadeInKind($emw) {
+    if (isset($emw->field_payment_made_in_kind)) {
+      $payment_made_in_kind = $emw->field_payment_made_in_kind->value();
+      if (isset($payment_made_in_kind)) {
+        return $payment_made_in_kind;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the In Kind Volume value.
+   */
+  function getInKindVolume($emw) {
+    if (isset($emw->field_in_kind_volume)) {
+      $in_kind_volume = $emw->field_in_kind_volume->value();
+      if (isset($in_kind_volume)) {
+        return $in_kind_volume;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Unit value.
+   */
+  function getUnit($emw) {
+    if (isset($emw->field_unit)) {
+      $unit = $emw->field_unit->value();
+      if (isset($unit)) {
+        return $unit;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Unit value.
+   */
+  function getComment($emw) {
+    if (isset($emw->field_comments)) {
+      $comments = $emw->field_comments->value();
+      if (isset($comments)) {
+        return $comments;
+      }
+    }
+    return NULL;
   }
 
   /**
