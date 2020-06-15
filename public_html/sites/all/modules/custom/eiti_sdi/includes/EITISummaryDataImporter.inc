@@ -300,7 +300,6 @@ class EITISummaryDataImporter {
       if ($this->checkPercentNumericValues($data['field_sd_systematic_disclosed'])) {
         $entity->field_sd_systematic_disclosed['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_systematic_disclosed']);
       } else {
-        $data['field_sd_systematic_disclosed'] = $this->formatNumberSanitize($data['field_sd_systematic_disclosed']);
         $entity->field_sd_systematic_disclosed['und'][0]['value'] = round($data['field_sd_systematic_disclosed'] * 100, 2);
       }
     }
@@ -309,7 +308,6 @@ class EITISummaryDataImporter {
       if ($this->checkPercentNumericValues($data['field_sd_through_eiti_reporting'])) {
         $entity->field_sd_through_eiti_reporting['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_through_eiti_reporting']);
       } else {
-        $data['field_sd_through_eiti_reporting'] = $this->formatNumberSanitize($data['field_sd_through_eiti_reporting']);
         $entity->field_sd_through_eiti_reporting['und'][0]['value'] = round($data['field_sd_through_eiti_reporting'] * 100, 2);
       }
     }
@@ -318,7 +316,6 @@ class EITISummaryDataImporter {
       if ($this->checkPercentNumericValues($data['field_sd_not_applicable'])) {
         $entity->field_sd_not_applicable['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_not_applicable']);
       } else {
-        $data['field_sd_not_applicable'] = $this->formatNumberSanitize($data['field_sd_not_applicable']);
         $entity->field_sd_not_applicable['und'][0]['value'] = round($data['field_sd_not_applicable'] * 100, 2);
       }
     }
@@ -327,7 +324,6 @@ class EITISummaryDataImporter {
       if ($this->checkPercentNumericValues($data['field_sd_not_available'])) {
         $entity->field_sd_not_available['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_not_available']);
       } else {
-        $data['field_sd_not_available'] = $this->formatNumberSanitize($data['field_sd_not_available']);
         $entity->field_sd_not_available['und'][0]['value'] = round($data['field_sd_not_available'] * 100, 2);
       }
     }
