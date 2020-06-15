@@ -31,6 +31,30 @@ class EITIApiRevenueStreams2 extends EITIApiRevenueStreams {
     $public_fields['summary_data'] = array(
       'callback' => array($this, 'getSummaryData'),
     );
+    $public_fields['project_name'] = array(
+      'property' => 'field_project_name',
+    );
+    $public_fields['levied_on_project'] = array(
+      'property' => 'field_levied_on_project',
+    );
+    $public_fields['goverment_entity'] = array(
+      'property' => 'field_goverment_entity',
+    );
+    $public_fields['reported_by_project'] = array(
+      'property' => 'field_reported_by_project',
+    );
+    $public_fields['reporting_currency'] = array(
+      'property' => 'field_currency',
+    );
+    $public_fields['payment_made_in_kind'] = array(
+      'property' => 'field_payment_made_in_kind',
+    );
+    $public_fields['in_kind_volume'] = array(
+      'property' => 'field_in_kind_volume',
+    );
+    $public_fields['unit'] = array(
+      'property' => 'field_unit',
+    );
 
     return $public_fields;
   }
