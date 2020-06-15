@@ -80,7 +80,6 @@ class EITISummaryDataImporter {
     if ($disclosure_checklist) {
       $max_row = $xls->setActiveSheetIndex(2)->getHighestRow();
       $disclosure_parsed_data = $this->parseDisclosureChecklistSection($disclosure_checklist, $max_row);
-
       $disclosure_parsed_data_items = $disclosure_parsed_data['items'];
       $max = $disclosure_parsed_data['max'];
     }
@@ -420,7 +419,7 @@ class EITISummaryDataImporter {
    * Applying number formatting for decimal fields
    */
   private function formatNumberSanitize($number) {
-    return preg_replace('/[^\d-]+/', '', $number);
+    return preg_replace('/[^0-9.-]/', '', $number);
   }
 
   /**
@@ -962,7 +961,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                 $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
 
                 if ($item['total_reported']) {
-                  $item['total_reported'] = preg_replace('/[^\d.]/', '', $item['total_reported']);
+                  $item['total_reported'] = preg_replace('/[^0-9.-]/', '', $item['total_reported']);
                 }
 
                 $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
@@ -986,7 +985,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
             $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
 
             if ($item['total_reported']) {
-              $item['total_reported'] = preg_replace('/[^\d.]/', '', $item['total_reported']);
+              $item['total_reported'] = preg_replace('/[^0-9.-]/', '', $item['total_reported']);
             }
 
             $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
@@ -1041,7 +1040,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                 $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
 
                 if ($item['payment_to_goverment_report']) {
-                  $item['payment_to_goverment_report'] = preg_replace('/[^\d.]/', '', $item['payment_to_goverment_report']);
+                  $item['payment_to_goverment_report'] = preg_replace('/[^0-9.-]/', '', $item['payment_to_goverment_report']);
                 }
 
                 $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
@@ -1080,7 +1079,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
 	          $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
 
             if ($item['payment_to_goverment_report']) {
-              $item['payment_to_goverment_report'] = preg_replace('/[^\d.]/', '', $item['payment_to_goverment_report']);
+              $item['payment_to_goverment_report'] = preg_replace('/[^0-9.-]/', '', $item['payment_to_goverment_report']);
             }
 
             $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
@@ -1188,7 +1187,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
 
       $entity_item->organisation_id = $organisation_id;
 
-      $item['revenue_value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+      $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
       $currency_rate = $entity->currency_rate;
 
       if ($item['reporting_currency'] != 'USD') {
@@ -1278,7 +1277,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
       $entity_item->gfs_code_id = $gfs_id;
     }
 
-    $item['revenue_value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+    $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
     $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
     if ($entity) {
       $entity = array_shift($entity);
@@ -1296,7 +1295,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->revenue = $item['revenue_value'];
       }
 
-      $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
+      $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
       $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
       $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
       $entity_item->field_unit['und'][0]['value'] = $item['unit'];
