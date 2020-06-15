@@ -749,7 +749,7 @@ class EITISummaryDataImporter {
     $data = array();
     $i = 22;
 
-    while ($i < $max_row) {
+    while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
       if (empty($gfs_classification)) {
@@ -778,7 +778,7 @@ class EITISummaryDataImporter {
     $data = array();
     $i = 22;
 
-    while ($i < $max_row) {
+    while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
       if (empty($gfs_classification)) {
@@ -812,7 +812,7 @@ class EITISummaryDataImporter {
     $data = array();
     $i = 15;
 
-    while ($i < $max_row) {
+    while ($i <= $max_row) {
       $company = $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue();
 
       if (empty($company)) {
@@ -1137,7 +1137,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
 function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_revenues_parsed_data, &$context) {
 
   if (empty($context['sandbox'])) {
-    $context['sandbox']['max'] = sizeof($goverment_revenues_parsed_data ) - 1;
+    $context['sandbox']['max'] = sizeof($goverment_revenues_parsed_data );
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['entity_id'] = $entity;
     $context['sandbox']['goverment_revenues'] = $goverment_revenues_parsed_data;
@@ -1222,7 +1222,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
 function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $goverment_revenues_gfs, &$context) {
 
   if (empty($context['sandbox'])) {
-    $context['sandbox']['max'] = sizeof($company_parsed_data) - 1;
+    $context['sandbox']['max'] = sizeof($company_parsed_data);
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['entity_id'] = $entity;
     $context['sandbox']['company'] = $company_parsed_data;
