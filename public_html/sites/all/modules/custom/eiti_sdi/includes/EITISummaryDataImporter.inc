@@ -89,8 +89,22 @@ class EITISummaryDataImporter {
     if ($reporting_entities) {
       $max_row = $xls->setActiveSheetIndex(3)->getHighestRow();
       $reporting_entities_parsed_data = $this->parseReportingEntitiesSection($reporting_entities, $max_row);
-    }
+      $reporting_entities_parsed_company_id_references = $this->parseCompanyIdReferences($reporting_entities, $max_row);
 
+      if ($reporting_entities_parsed_company_id_references) {
+        $summary_data = entity_load('summary_data', array($entity));
+
+        if ($summary_data) {
+          $summary_data = array_shift($summary_data);
+
+          $summary_data->company_id_name = $reporting_entities_parsed_company_id_references['company_id_name'];
+          $summary_data->company_id_register = $reporting_entities_parsed_company_id_references['company_id_register'];
+          $summary_data->company_id_register_url = $reporting_entities_parsed_company_id_references['company_id_register_url'];
+
+          entity_save('summary_data', $summary_data);
+        }
+      }
+    }
     // Process Goverment revenues section
     $goverment_revenues = $this->getSpreadsheet($xls, 4);
 
@@ -537,7 +551,7 @@ class EITISummaryDataImporter {
 
           $value = $this->normalizeCellValue($value);
 
-          if (!empty($value) && $value != '< number >') {
+          if ($value != '< number >') {
             $data['items'][] = array(
               'parent' => $active_section,
               'requirement_cell' => $requirement_cell,
@@ -734,6 +748,30 @@ class EITISummaryDataImporter {
 
           }
         }
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
+    /**
+     * Parse Company Id Reference data
+     */
+  private function parseCompanyIdReferences($sheet, $max_row) {
+    $data = array();
+
+    $i = 13;
+    while ($i < $max_row) {
+      $requirement_cell = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+
+      if ($requirement_cell == 'Company ID references') {
+        $i++;
+        $data['company_id_name'] = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+        $data['company_id_register'] = $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue();
+        $data['company_id_register_url'] = $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue();
+        break;
       }
 
       $i++;
