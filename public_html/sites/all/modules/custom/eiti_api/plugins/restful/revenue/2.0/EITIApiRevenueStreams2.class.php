@@ -79,8 +79,8 @@ class EITIApiRevenueStreams2 extends EITIApiRevenueStreams {
    * Get the Sector value.
    */
   function getSector($emw) {
-    if (isset($emw->field_o_sector)) {
-      $sector = $emw->field_o_sector->value();
+    if (isset($emw->field_sector)) {
+      $sector = $emw->field_sector->value();
       if (isset($sector)) {
         return $sector;
       }
