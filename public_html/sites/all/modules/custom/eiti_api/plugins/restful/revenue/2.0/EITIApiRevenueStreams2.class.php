@@ -80,9 +80,38 @@ class EITIApiRevenueStreams2 extends EITIApiRevenueStreams {
    */
   function getSector($emw) {
     if (isset($emw->field_sector)) {
-      $sector = $emw->field_sector->value();
-      if (isset($sector)) {
-        return $sector;
+        $sector = $emw->field_sector->value();
+        if (isset($sector)) {
+          return $sector;
+        }
+
+    } else {
+      $type = $emw->type->value();
+      if ($type == 'company') {
+        $goverment_entity = $emw->field_goverment_entity->value();
+        $organisation_id = '';
+        $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'agency', ':name' => $goverment_entity))->fetchAll();
+        if ($organisation_query) {
+          $organisation_query = array_shift($organisation_query);
+          $organisation_id = $organisation_query->id;
+        }
+
+        $revenue_stream_name = $emw->name->value();
+
+        if ($organisation_id && $revenue_stream_name) {
+          $query = $query = db_select('eiti_revenue_stream', 'ers');
+          $query->innerJoin('field_data_field_sector', 'fdfs', 'ers.id = fdfs.entity_id');
+          $query->condition('ers.name', $revenue_stream_name);
+          $query->condition('ers.organisation_id', $organisation_id);
+          $query->fields('fdfs', array('field_sector_value'));
+          $result = $query->execute()->fetchAll();
+
+          if ($result) {
+            $result = array_shift($result);
+            $sector = $result->field_sector_value;
+            return $sector;
+          }
+        }
       }
     }
     return NULL;
