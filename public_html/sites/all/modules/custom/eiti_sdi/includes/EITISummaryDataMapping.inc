@@ -133,7 +133,9 @@ class EITISummaryDataMapping {
       'carats',
       'Scf',
       'employees',
-      'm3'
+      'm3',
+      'person',
+      'people'
     ];
 
     $currencies = $this->getCurrenciesList();
