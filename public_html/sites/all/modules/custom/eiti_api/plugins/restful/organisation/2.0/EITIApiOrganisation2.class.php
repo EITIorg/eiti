@@ -21,6 +21,10 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     $public_fields['summary_data'] = array(
       'callback' =>  array($this, 'getSummaryDataApiUrls'),
     );
+    $public_fields['agency_type'] = array(
+      'property' => 'field_agency_type',
+      'callback' => array($this, 'getAgencyType')
+    );
     $public_fields['company_type'] = array(
       'property' => 'field_company_type',
       'callback' => array($this, 'getCompanyType')
@@ -35,6 +39,19 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     );
 
     return $public_fields;
+  }
+
+  /**
+   * Get the Audited Financial Statement value.
+   */
+  function getAgencyType($emw) {
+    if (isset($emw->field_agency_type)) {
+      $agency_type = $emw->field_agency_type->value();
+      if (isset($agency_type)) {
+        return $agency_type;
+      }
+    }
+    return NULL;
   }
 
   /**
