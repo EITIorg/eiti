@@ -37,8 +37,144 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
       'property' => 'field_audited_financial_state',
       'callback' => array($this, 'getAuditedFinancialStatement')
     );
-
+    $public_fields['project_legal_agreement'] = array(
+      'property' => 'field_legal_agreem_ref_num',
+      'callback' => array($this, 'getProjectLegalAgreement')
+    );
+    $public_fields['project_affiliated_companies_start'] = array(
+      'property' => 'field_affiliated_companies_start',
+      'callback' => array($this, 'getProjectAffiliatedCompanies')
+    );
+    $public_fields['project_commodities'] = array(
+      'property' => 'field_commodities',
+      'callback' => array($this, 'getProjectCommodities')
+    );
+    $public_fields['project_status'] = array(
+      'property' => 'field_status',
+      'callback' => array($this, 'getProjectStatus')
+    );
+    $public_fields['project_production_volume'] = array(
+      'property' => 'field_production_volume',
+      'callback' => array($this, 'getProjectProductionVolume')
+    );
+    $public_fields['project_unit'] = array(
+      'property' => 'field_unit',
+      'callback' => array($this, 'getProjectUnit')
+    );
+    $public_fields['project_production'] = array(
+      'property' => 'field_production',
+      'callback' => array($this, 'getProjectProduction')
+    );
+    $public_fields['project_currency'] = array(
+      'property' => 'field_currency',
+      'callback' => array($this, 'getProjectCurrency')
+    );
+    
     return $public_fields;
+  }
+
+  /**
+   * Get the Project Currency value.
+   */
+  function getProjectCurrency($emw) {
+    if (isset($emw->field_currency)) {
+      $currency = $emw->field_currency->value();
+      if (isset($currency)) {
+        return $currency;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Production value.
+   */
+  function getProjectProduction($emw) {
+    if (isset($emw->field_production)) {
+      $production = $emw->field_production->value();
+      if (isset($production)) {
+        return $production;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Unit value.
+   */
+  function getProjectUnit($emw) {
+    if (isset($emw->field_unit)) {
+      $unit = $emw->field_unit->value();
+      if (isset($unit)) {
+        return $unit;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Production Volume value.
+   */
+  function getProjectProductionVolume($emw) {
+    if (isset($emw->field_production_volume)) {
+      $production_volume = $emw->field_production_volume->value();
+      if (isset($production_volume)) {
+        return $production_volume;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Status value.
+   */
+  function getProjectStatus($emw) {
+    if (isset($emw->field_status)) {
+      $status = $emw->field_status->value();
+      if (isset($status)) {
+        return $status;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Commodities value.
+   */
+  function getProjectCommodities($emw) {
+    if (isset($emw->field_commodities)) {
+      $commodities = $emw->field_commodities->value();
+      if (isset($commodities)) {
+        return $commodities;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Affiliated Companies value.
+   */
+  function getProjectAffiliatedCompanies($emw) {
+    if (isset($emw->field_affiliated_companies_start)) {
+      $affiliated_companies_start = $emw->field_affiliated_companies_start->value();
+      if (isset($affiliated_companies_start)) {
+        return $affiliated_companies_start;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Project Legal Agreement value.
+   */
+  function getProjectLegalAgreement($emw) {
+    if (isset($emw->field_legal_agreem_ref_num)) {
+      $legal_agreem_ref_num = $emw->field_legal_agreem_ref_num->value();
+      if (isset($legal_agreem_ref_num)) {
+        return $legal_agreem_ref_num;
+      }
+    }
+    return NULL;
   }
 
   /**
@@ -205,6 +341,7 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
             $sd_query2->fields('rt', array('organisation_id'));
             $sd_query2->condition('sd.id2', $filter['value'][$index]);
             $o_ids2 = $sd_query2->execute()->fetchCol();
+
             $o_ids = array_merge($o_ids1, $o_ids2);
             if (!$o_ids) {
               throw new \RestfulBadRequestException('No organisations for the given summary data found.');
