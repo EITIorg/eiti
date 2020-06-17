@@ -694,7 +694,7 @@ class EITISummaryDataImporter {
                 );
                 break;
               case 'company':
-                $payment = $sheet->getCellByColumnAndRow(7, $i);
+                $payment = $sheet->getCellByColumnAndRow(8, $i);
 
                 if ($payment->isFormula()) {
                   $payment_value = $payment->getOldCalculatedValue();
@@ -704,11 +704,12 @@ class EITISummaryDataImporter {
 
                 $item = array(
                   'full_company_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
-                  'company_id' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
-                  'sector' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
-                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'company_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'company_id' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'sector' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
                   'payment_to_goverment_report' => $payment_value,
                 );
                 break;
@@ -1069,13 +1070,29 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                   $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
                 }
 
-                $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
-                if ($comodity) {
-                  $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+                if (substr_count($item['commodities'], ',')) {
+                  $comodities = explode(",", $item['commodities']);
+                  foreach ($comodities as $comodity_name) {
+                    $comodity = eitientity_organisation_get_commodity_tid($comodity_name);
+
+                    if ($comodity) {
+                      $reporting_entity->	field_o_commodities['und'][]['target_id'] = $comodity;
+                    }
+                  }
+                } else {
+                  $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+
+                  if ($comodity) {
+                    $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+                  }
                 }
 
                 $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];
                 $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
+
+                if ($item['company_type']) {
+                  $reporting_entity->field_company_type['und'][0]['value'] = $item['company_type'];
+                }
 
                 if ($item['payment_to_goverment_report']) {
                   $item['payment_to_goverment_report'] = preg_replace('/[^0-9.-]/', '', $item['payment_to_goverment_report']);
@@ -1108,9 +1125,21 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
               $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
             }
 
-            $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
-            if ($comodity) {
-              $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+            if (substr_count($item['commodities'], ',')) {
+              $comodities = explode(",", $item['commodities']);
+              foreach ($comodities as $comodity_name) {
+                $comodity = eitientity_organisation_get_commodity_tid($comodity_name);
+
+                if ($comodity) {
+                  $reporting_entity->	field_o_commodities['und'][]['target_id'] = $comodity;
+                }
+              }
+            } else {
+              $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+
+              if ($comodity) {
+                $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+              }
             }
 
             $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];

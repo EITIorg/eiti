@@ -21,8 +21,59 @@ class EITIApiOrganisation2 extends EITIApiOrganisation {
     $public_fields['summary_data'] = array(
       'callback' =>  array($this, 'getSummaryDataApiUrls'),
     );
+    $public_fields['company_type'] = array(
+      'property' => 'field_company_type',
+      'callback' => array($this, 'getCompanyType')
+    );
+    $public_fields['stock_exchange_listing'] = array(
+      'property' => 'field_stock_exchange_listing',
+      'callback' => array($this, 'getStockExchangeListing')
+    );
+    $public_fields['audited_financial_state'] = array(
+      'property' => 'field_audited_financial_state',
+      'callback' => array($this, 'getAuditedFinancialStatement')
+    );
 
     return $public_fields;
+  }
+
+  /**
+   * Get the Audited Financial Statement value.
+   */
+  function getAuditedFinancialStatement($emw) {
+    if (isset($emw->field_audited_financial_state)) {
+      $audited_financial_state = $emw->field_audited_financial_state->value();
+      if (isset($audited_financial_state)) {
+        return $audited_financial_state;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Stock Exchange Listing value.
+   */
+  function getStockExchangeListing($emw) {
+    if (isset($emw->field_stock_exchange_listing)) {
+      $stock_exchange_listing = $emw->field_stock_exchange_listing->value();
+      if (isset($stock_exchange_listing)) {
+        return $stock_exchange_listing;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Get the Company Type value.
+   */
+  function getCompanyType($emw) {
+    if (isset($emw->field_company_type)) {
+      $company_type = $emw->field_company_type->value();
+      if (isset($company_type)) {
+        return $company_type;
+      }
+    }
+    return NULL;
   }
 
   /**
