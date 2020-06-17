@@ -126,6 +126,79 @@ function eitiet_organisation_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'organisation-company-field_audited_financial_statemen'.
+  $field_instances['organisation-company-field_audited_financial_statemen'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_audited_financial_statemen',
+    'label' => 'Audited financial statement',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'organisation-company-field_company_type'.
+  $field_instances['organisation-company-field_company_type'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_company_type',
+    'label' => 'Company type',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'organisation-company-field_o_commodities'.
   $field_instances['organisation-company-field_o_commodities'] = array(
     'bundle' => 'company',
@@ -237,6 +310,43 @@ function eitiet_organisation_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'organisation-company-field_st_exch_company_website'.
+  $field_instances['organisation-company-field_st_exch_company_website'] = array(
+    'bundle' => 'company',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'organisation',
+    'field_name' => 'field_st_exch_company_website',
+    'label' => 'Stock exchange listing or company website ',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
     ),
   );
 
@@ -564,8 +674,10 @@ function eitiet_organisation_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Affiliated companies, start with Operator');
   t('Agency type');
+  t('Audited financial statement');
   t('Audited financial statement (or balance sheet, cash flows, profit/loss statement if unavailable)');
   t('Commodities');
+  t('Company type');
   t('Currency');
   t('Legal agreement reference number(s): contract, licence, lease, concession');
   t('Payments to Governments Report');
