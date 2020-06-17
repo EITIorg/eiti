@@ -1410,7 +1410,7 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
     if ($indicator) {
       $indicator = array_shift($indicator);
 
-      if ($indicator->type != 'group' && !empty($values['inclusion'])) {
+      if ($indicator->type != 'group' && !empty($values['parent'])) {
         // Create indicator value there
         $entity_item = entity_get_controller('indicator_value')->create();
         $entity_item->indicator_id = $indicator->id;
@@ -1423,7 +1423,10 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
             $dataMapping = new EITISummaryDataMapping();
             $currencies = $dataMapping->getCurrenciesList();
 
-            if (in_array($values['source'], $currencies) && $values['source'] != 'USD') {
+            if ($values['inclusion'] == '0') {
+              $values['inclusion_new'] = '0';
+              $values['source_new'] = 'USD';
+            } elseif (in_array($values['source'], $currencies) && $values['source'] != 'USD') {
               $values['inclusion_new'] = $values['inclusion'] / $currency_rate;
               $values['inclusion_new'] = round($values['inclusion_new'], 2);
               $values['source_new'] = 'USD';
@@ -1562,6 +1565,10 @@ function eiti_sdi_create_indicator_type($values) {
  * Parse indicator type by value
  */
 function eiti_sdi_get_indicator_data_type_by_value($value) {
+
+  if ($value == '0') {
+    return 'numeric';
+  }
 
   if (empty($value)) {
     return NULL;
