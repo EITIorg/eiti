@@ -40,6 +40,31 @@ class EITIApiScoreData extends RestfulEntityBase {
     $public_fields['score_req_values'] = array(
       'property' => 'field_scd_score_req_values',
     );
+    // To show validation standard in api/v1.0/score_data results
+    $public_fields['standard'] = [
+      'callback' => [$this, 'getStandards'],
+    ];
+
     return $public_fields;
   }
+
+  /**
+   * Gets standards from field_score_req_standard.
+   *
+   * @param $emw
+   *   EntityMetadataWrapper object.
+   *
+   * @return mixed
+   *   Either NULL or an array of standards.
+   */
+  function getStandards($emw) {
+    if (isset($emw->field_field_validation_against)) {
+      $standard = $emw->field_field_validation_against->value();
+      if (!empty($standard->name)) {
+        return $standard->name;
+      }
+    }
+    return NULL;
+  }
+
 }
