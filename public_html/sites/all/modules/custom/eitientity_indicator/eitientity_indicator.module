@@ -121,6 +121,11 @@ function eitientity_indicator_get_types() {
     'description' => t('Text indicators are used for storing text.'),
   );
 
+  $items['reporting_type'] = array(
+    'label' => t('Reporting type'),
+    'description' => t('Reporting type indicators are used for storing reporting type values.'),
+  );
+
   return $items;
 }
 
