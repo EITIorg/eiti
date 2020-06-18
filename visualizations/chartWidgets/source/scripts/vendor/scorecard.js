@@ -18,6 +18,7 @@ export var init = function(data, scores, categories, requirements, el) {
 function renderScorecard(data, placeholder) {
 	window.$ = window.jQuery;
 	var countryScore = _.first(data.result);
+	var standard = countryScore.standard;
 	let hasProgress = false;
 	//TODO: Eliminate magic number 3
 	let progress_values = _.filter(countryScore.score_req_values, function(v){return v && v.progress_value != null && v.progress_value !== "3"});
@@ -51,7 +52,7 @@ function renderScorecard(data, placeholder) {
 	$(placeholder).append(table);
 
 	//Append requirements rows based on the results
-	appendRows(data, tableBody, hasProgress);
+	appendRows(data, tableBody, hasProgress, standard);
 	var legend = $('<DIV>').addClass('scorecard-legend').html(getLegend(hasProgress));
 	$(placeholder).append(legend);
 
@@ -112,13 +113,30 @@ function getLegend(hasProgress) {
 
 }
 
-function appendRows(data, tableBody, hasProgress) {
+function appendRows(data, tableBody, hasProgress, standard) {
 	var categories = data.categories;
 	var requirements = data.requirements;
 	var scores = data.scores;
 	var result = data.result;
 
 	var countryScore = _.first(data.result);
+
+	if (standard) {
+		var categories = _.filter(categories, function (category) {
+			return category.standard.includes(standard);
+		});
+		var requirements = _.filter(requirements, function (requirement) {
+			return requirement.standard.includes(standard);
+		});
+
+	} else {
+		var categories = _.filter(categories, function (category) {
+			return category.standard.includes("2016");
+		});
+		var requirements = _.filter(requirements, function (requirement) {
+			return requirement.standard.includes("2016");
+		});
+	}
 
 	_.each(categories, function(category) {
 	    var bodyRow = $("<TR>");
