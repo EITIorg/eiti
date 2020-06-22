@@ -272,6 +272,14 @@ function eitientity_summary_data_menu_local_tasks_alter(&$data, $router_item, $r
         '#theme' => 'menu_local_action',
         '#link' => $item,
       );
+      $data['actions']['output'][0]['#link']['title'] = t('Add Summary data 1.0');
+      $data['actions']['output'][1] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => array(
+          'href' => 'admin/content/summary_data/import',
+          'title'=> t('Add Summary data 2.0'),
+        ),
+      );
     }
   }
 }
