@@ -92,7 +92,7 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
 function eiti_sdi_block_view_alter(&$data, $block) {
   $current_path = current_path();
 
-  if ($current_path == 'summary_data/add' && $block->bid == '55') {
+  if ($current_path == 'summary_data/add') {
     $data['content']['main']['#markup'] = '<dl class="admin-list"><div class="admin-block-item summary_data-add-summary-data">
 <dt><a href="/summary_data/add/summary-data">Add Summary data 1.0</a></dt><dd class="description">Summary Data 1.0 was used prior to June 2020.</dd>
 <dt><a href="/admin/content/summary_data/import">Add Summary data 2.0</a></dt><dd class="description">Summary data 2.0 is the current data template, launched 1 July 2020. Each file should contain data for a single country, in a single fiscal year.</dd>
