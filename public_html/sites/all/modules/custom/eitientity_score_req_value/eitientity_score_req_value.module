@@ -157,6 +157,25 @@ function eitientity_score_req_value_get_score_req_label($entity_type, $entity) {
  *
  * @return string
  */
+function eitientity_score_req_value_get_score_req_standard($entity_type, $entity) {
+  if (!empty($entity->score_req_id)) {
+    /** @var ScoreReqEntity $score_req_entity */
+    $score_req_entity = entity_load_single('score_req', $entity->score_req_id);
+
+    if (!empty($score_req_entity->field_score_req_standard)) {
+      return ' <b>' . filter_xss($score_req_entity->field_score_req_standard[LANGUAGE_NONE][0]['value']) . '</b>';
+    }
+  }
+  return t('N/A');
+}
+
+
+/**
+ * @param string $entity_type
+ * @param ScoreReqValueEntity $entity
+ *
+ * @return string
+ */
 function eitientity_score_req_value_get_score_req_value_value($entity_type, $entity) {
   if (empty($entity->score_req_id)) {
     return '';
@@ -258,8 +277,11 @@ function _eitientity_score_req_value_get_value_options($id = NULL) {
     EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
     EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
     EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
-    EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+    EITIENTITY_SCORE_REQ_VALUE_OUTSTANDING => t('Outstanding'),
     EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
+    EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+    EITIENTITY_SCORE_REQ_VALUE_ENCOURAGED => t('Encourage'),
+
   );
 
   if ($id == NULL) {
