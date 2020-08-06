@@ -55,13 +55,12 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
       array(
         'data' => t('Code'),
         'type' => 'property',
-        'specifier' => 'name',
+        'specifier' => 'code',
         'class' => array('score-req-ui-name'),
+        'sort' => 'asc',
       ),
       array(
         'data' => t('Standard'),
-        'type' => 'property',
-        'specifier' => 'name',
         'class' => array('score-req-ui-standard'),
       ),
       array(
@@ -75,7 +74,7 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'status',
         'class' => array('score-req-ui-status'),
-        'sort' => 'desc',
+
       ),
       array(
         'data' => t('Operations'),
@@ -111,6 +110,7 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('None.'),
+      '#prefix' => '<h4>' . t('Note: Requirements codes for 2019 Standards should have "1" in the hundredth place, like 2.41') . '</h4>',
     );
     return $render;
   }
