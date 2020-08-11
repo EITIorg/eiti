@@ -47273,6 +47273,9 @@
 		"id": 6,
 		"name": "Socio-economic contribution"
 	}, {
+		"id": 6.1,
+		"name": "Socio-economic spending"
+	}, {
 		"id": 7,
 		"name": "Outcomes and impact"
 	}];
@@ -47285,140 +47288,192 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	var requirements = [{
-		"Requirement": "Government engagement",
-		"Code": 1.1,
-		"Category": 1
+	  "Requirement": "Government engagement",
+	  "Code": 1.1,
+	  "Category": 1
 	}, {
-		"Requirement": "Industry engagement",
-		"Code": 1.2,
-		"Category": 1
+	  "Requirement": "Industry engagement",
+	  "Code": 1.2,
+	  "Category": 1
 	}, {
-		"Requirement": "Civil society engagement",
-		"Code": 1.3,
-		"Category": 1
+	  "Requirement": "Civil society engagement",
+	  "Code": 1.3,
+	  "Category": 1
 	}, {
-		"Requirement": "MSG governance",
-		"Code": 1.4,
-		"Category": 1
+	  "Requirement": "MSG governance",
+	  "Code": 1.4,
+	  "Category": 1
 	}, {
-		"Requirement": "Workplan",
-		"Code": 1.5,
-		"Category": 1
+	  "Requirement": "Workplan",
+	  "Code": 1.5,
+	  "Category": 1
 	}, {
-		"Requirement": "Legal framework",
-		"Code": 2.1,
-		"Category": 2
+	  "Requirement": "Legal framework",
+	  "Code": 2.1,
+	  "Category": 2
 	}, {
-		"Requirement": "License allocations",
-		"Code": 2.2,
-		"Category": 2
+	  "Requirement": "License allocations",
+	  "Code": 2.2,
+	  "Category": 2
 	}, {
-		"Requirement": "License register",
-		"Code": 2.3,
-		"Category": 2
+	  "Requirement": "Contract and license allocations",
+	  "Code": 2.21,
+	  "Category": 2
 	}, {
-		"Requirement": "Policy on contract disclosure",
-		"Code": 2.4,
-		"Category": 2
+	  "Requirement": "License register",
+	  "Code": 2.3,
+	  "Category": 2
 	}, {
-		"Requirement": "Beneficial ownership",
-		"Code": 2.5,
-		"Category": 2
+	  "Requirement": "Register of licenses",
+	  "Code": 2.31,
+	  "Category": 2
 	}, {
-		"Requirement": "State participation",
-		"Code": 2.6,
-		"Category": 2
+	  "Requirement": "Policy on contract disclosure",
+	  "Code": 2.4,
+	  "Category": 2
 	}, {
-		"Requirement": "Exploration data",
-		"Code": 3.1,
-		"Category": 3
+	  "Requirement": "Contracts",
+	  "Code": 2.41,
+	  "Category": 2
 	}, {
-		"Requirement": "Production data",
-		"Code": 3.2,
-		"Category": 3
+	  "Requirement": "Beneficial ownership",
+	  "Code": 2.5,
+	  "Category": 2
 	}, {
-		"Requirement": "Export data",
-		"Code": 3.3,
-		"Category": 3
+	  "Requirement": "State participation",
+	  "Code": 2.6,
+	  "Category": 2
 	}, {
-		"Requirement": "Comprehensiveness",
-		"Code": 4.1,
-		"Category": 4
+	  "Requirement": "Exploration data",
+	  "Code": 3.1,
+	  "Category": 3
 	}, {
-		"Requirement": "In-kind revenues",
-		"Code": 4.2,
-		"Category": 4
+	  "Requirement": "Production data",
+	  "Code": 3.2,
+	  "Category": 3
 	}, {
-		"Requirement": "Barter agreements",
-		"Code": 4.3,
-		"Category": 4
+	  "Requirement": "Export data",
+	  "Code": 3.3,
+	  "Category": 3
 	}, {
-		"Requirement": "Transportation revenues",
-		"Code": 4.4,
-		"Category": 4
+	  "Requirement": "Comprehensiveness",
+	  "Code": 4.1,
+	  "Category": 4
 	}, {
-		"Requirement": "SOE transactions",
-		"Code": 4.5,
-		"Category": 4
+	  "Requirement": "In-kind revenues",
+	  "Code": 4.2,
+	  "Category": 4
 	}, {
-		"Requirement": "Direct subnational payments",
-		"Code": 4.6,
-		"Category": 4
+	  "Requirement": "Barter agreements",
+	  "Code": 4.3,
+	  "Category": 4
 	}, {
-		"Requirement": "Disaggregation",
-		"Code": 4.7,
-		"Category": 4
+	  "Requirement": "Infrastructure provisions and barter arrangements",
+	  "Code": 4.31,
+	  "Category": 4
 	}, {
-		"Requirement": "Data timeliness",
-		"Code": 4.8,
-		"Category": 4
+	  "Requirement": "Transportation revenues",
+	  "Code": 4.4,
+	  "Category": 4
 	}, {
-		"Requirement": "Data quality",
-		"Code": 4.9,
-		"Category": 4
+	  "Requirement": "SOE transactions",
+	  "Code": 4.5,
+	  "Category": 4
 	}, {
-		"Requirement": "Distribution of extractive industry revenues",
-		"Code": 5.1,
-		"Category": 5
+	  "Requirement": "Direct subnational payments",
+	  "Code": 4.6,
+	  "Category": 4
 	}, {
-		"Requirement": "Subnational transfers",
-		"Code": 5.2,
-		"Category": 5
+	  "Requirement": "Subnational payments",
+	  "Code": 4.61,
+	  "Category": 4
 	}, {
-		"Requirement": "Revenue management and expenditures",
-		"Code": 5.3,
-		"Category": 5
+	  "Requirement": "Disaggregation",
+	  "Code": 4.7,
+	  "Category": 4
 	}, {
-		"Requirement": "Mandatory social expenditures",
-		"Code": 6.1,
-		"Category": 6
+	  "Requirement": "Level of disaggregation",
+	  "Code": 4.71,
+	  "Category": 4
 	}, {
-		"Requirement": "SOE quasi-fiscal expenditures",
-		"Code": 6.2,
-		"Category": 6
+	  "Requirement": "Data timeliness",
+	  "Code": 4.8,
+	  "Category": 4
 	}, {
-		"Requirement": "Economic contribution",
-		"Code": 6.3,
-		"Category": 6
+	  "Requirement": "Data quality",
+	  "Code": 4.9,
+	  "Category": 4
 	}, {
-		"Requirement": "Public debate",
-		"Code": 7.1,
-		"Category": 7
+	  "Requirement": "Data quality and assurance",
+	  "Code": 4.91,
+	  "Category": 4
 	}, {
-		"Requirement": "Data accessibility",
-		"Code": 7.2,
-		"Category": 7
+	  "Requirement": "Distribution of extractive industry revenues",
+	  "Code": 5.1,
+	  "Category": 5
 	}, {
-		"Requirement": "Follow up on recommendations",
-		"Code": 7.3,
-		"Category": 7
+	  "Requirement": "Subnational transfers",
+	  "Code": 5.2,
+	  "Category": 5
 	}, {
-		"Requirement": "Outcomes and impact of implementation",
-		"Code": 7.4,
-		"Category": 7
+	  "Requirement": "Revenue management and expenditures",
+	  "Code": 5.3,
+	  "Category": 5
+	}, {
+	  "Requirement": "Mandatory social expenditures",
+	  "Code": 6.1,
+	  "Category": 6
+	}, {
+	  "Requirement": "Mandatory social expenditures",
+	  "Code": 6.11,
+	  "Category": 6.1
+	}, {
+	  "Requirement": "SOE quasi-fiscal expenditures",
+	  "Code": 6.2,
+	  "Category": 6
+	}, {
+	  "Requirement": "SOE quasi-fiscal expenditures",
+	  "Code": 6.21,
+	  "Category": 6.1
+	}, {
+	  "Requirement": "Economic contribution",
+	  "Code": 6.3,
+	  "Category": 6
+	}, {
+	  "Requirement": "Economic contribution",
+	  "Code": 6.31,
+	  "Category": 6.1
+	}, {
+	  "Requirement": "Environmental impact",
+	  "Code": 6.41,
+	  "Category": 6.1
+	}, {
+	  "Requirement": "Public debate",
+	  "Code": 7.1,
+	  "Category": 7
+	}, {
+	  "Requirement": "Data accessibility",
+	  "Code": 7.2,
+	  "Category": 7
+	}, {
+	  "Requirement": "Data accessibility and open data",
+	  "Code": 7.21,
+	  "Category": 7
+	}, {
+	  "Requirement": "Follow up on recommendations",
+	  "Code": 7.3,
+	  "Category": 7
+	}, {
+	  "Requirement": "Outcomes and impact of implementation",
+	  "Code": 7.4,
+	  "Category": 7
+	}, {
+	  "Requirement": "Review of outcomes and impact of implementation",
+	  "Code": 7.41,
+	  "Category": 7
 	}];
 	exports.requirements = requirements;
 
@@ -47827,7 +47882,7 @@
 	}
 
 	function getLegend(hasProgress) {
-		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + translate('<strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.') + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i><div>' + translate('<strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.') + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>  <div>' + translate('<strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>' + translate('<strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.') + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div>' + translate('<strong>Beyond.</strong> The country has gone beyond the requirements.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i><div>' + translate('This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i><div>' + translate('The MSG has demonstrated that this requirement is not applicable in the country.') + '</div></div>';
+		var legendHTML = '<div class="scorecard-legend-item">' + '  <i style="background:#C00000">&nbsp;</i>' + '  <div>' + translate('<strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.') + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#FAC433">&nbsp;</i><div>' + translate('<strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.') + '  </div>' + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#84AD42">&nbsp;</i>  <div>' + translate('<strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#2D8B2A">&nbsp;</i>' + '  <div>' + translate('<strong>Satisfactory progress.</strong> All aspects of the requirement have been implemented and the broader objective of the requirement has been fulfilled.') + '</div>' + '<div class="scorecard-legend-item">' + '  <i style="background:#5182bb">&nbsp;</i>' + '  <div>' + translate('<strong>Outstanding progress (Beyond).</strong> The country has gone beyond the requirements.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i class="only_encouraged">&nbsp;</i><div>' + translate('This requirement is only encouraged or recommended and should not be taken into account in assessing compliance.') + '</div></div>' + '<div class="scorecard-legend-item">' + '  <i class="not_applicable">&nbsp;</i><div>' + translate('The MSG has demonstrated that this requirement is not applicable in the country.') + '</div></div>';
 
 		if (hasProgress) {
 			legendHTML += '<div style="clear:both;padding-top:15px;"><strong>' + translate('Direction of progress') + '</strong><br/><br/></div>' + '<div class="scorecard-legend-item"><span style="color:#676767;text-align:center;">&equals;</span><div>' + translate('No change in performance since the last Validation.') + '</div></div>' + '<div class="scorecard-legend-item"><span style="color:red;text-align:center;">&larr;</span><div>' + translate('The country is performing worse that in the last Validation.') + ' </div></div>' + '<div class="scorecard-legend-item"><span style="color:#84AD42;text-align:center;">&rarr;</span><div>' + translate('The country is performing better than in the last Validation.') + ' </div></div>';
@@ -47850,7 +47905,23 @@
 			var requirements_category = _.filter(requirements, function (requirement) {
 				return requirement.Category === category.id;
 			});
-			bodyRow.append($("<TD>").css({ 'border-bottom': '1px solid black' }).attr('rowspan', requirements_category.length).addClass('requirement').html(translate(category.name)));
+			// We should to know amount of real requirements of current category.
+			var currentScoreRequirements = _.filter(countryScore.score_req_values, function (value) {
+				// We need this trick because Category 6 is different for 2016 and 2019 Standards.
+				if (value.score_req.code.substring(0, 1) == '6' && value.score_req.code.length == 4) {
+					if (category.id == 6.1) {
+						return value.score_req.code.substring(0, 1) == '6';
+					}
+				} else {
+					return value.score_req.code.substring(0, 1) == category.id;
+				}
+			});
+			// We should show only used in results[] categories.
+			if (currentScoreRequirements.length) {
+				bodyRow.append($("<TD>").css({ 'border-bottom': '1px solid black' }).attr('rowspan', requirements_category.length).addClass('requirement').html(translate(category.name)));
+			}
+			// Count the real requirements quantity.
+			var $i = 0;
 
 			_.each(requirements_category, function (requirement, idx) {
 				var currentRow;
@@ -47861,7 +47932,7 @@
 				}
 
 				var bottomBorder = false;
-				if (idx === requirements_category.length - 1) {
+				if ($i === currentScoreRequirements.length - 1) {
 					bottomBorder = true;
 				}
 
@@ -47875,10 +47946,15 @@
 				if (bottomBorder) {
 					req_cell.css({ 'border-bottom': '1px solid black' });
 				}
-				currentRow.append(req_cell.html(translate(requirement.Requirement) + ' (#' + requirement.Code + ') '));
 
 				// Requirement Answers
 				if (currentScore) {
+
+					$i++;
+
+					// Show requirements and levels only if they are in result from countryScore.
+					currentRow.append(req_cell.html(translate(requirement.Requirement) + ' (#' + requirement.Code.toFixed(1) + ') '));
+
 					if (currentScore.description && currentScore.description !== "") {
 						(function () {
 							var descriptionSpan = $("<DIV>").html("<BR/>" + translate(currentScore.description)).addClass("requirement_description").hide();
@@ -47973,21 +48049,25 @@
 						currentRow.append(cell.append(symbolElement));
 					}
 				} else {
-					_.each(scores, function (value) {
-						var cell = $("<TD>").html('&nbsp;');
-						if (bottomBorder) {
-							cell.css({ 'border-bottom': '1px solid black' });
-						}
-						currentRow.append(cell);
-					});
-					if (hasProgress) {
-						//Empty direction of progress
-						var cell = $("<TD>").html('&nbsp;');
-						if (bottomBorder) {
-							cell.css({ 'border-bottom': '1px solid black' });
-						}
-						currentRow.append(cell);
+					if (bottomBorder) {
+						var cell = $("<TD>");
+						cell.css({ 'border-bottom': '1px solid black' });
 					}
+					/*	_.each(scores, function(value) {
+	    				let cell = $("<TD>").html('&nbsp;');
+	    			if(bottomBorder) {
+	    				cell.css({'border-bottom': '1px solid black'});
+	    			}
+	    					currentRow.append(cell);
+	    			});
+	    	if(hasProgress){
+	    				//Empty direction of progress
+	    				let cell = $("<TD>").html('&nbsp;');
+	    			if(bottomBorder) {
+	    				cell.css({'border-bottom': '1px solid black'});
+	    			}
+	    					currentRow.append(cell);
+	    			}*/
 				}
 				//Direction of Progress
 				tableBody.append(currentRow);
@@ -48079,6 +48159,7 @@
 	Drupal.t('<p><span>Meaningful</span></p>');
 	Drupal.t('<p><span>Satisfactory</span></p>');
 	Drupal.t('<p><span>Beyond</span></p>');
+	Drupal.t('<p><span>Outstanding</span></p>');
 	Drupal.t('MSG oversight');
 	Drupal.t('Government engagement');
 	Drupal.t('Industry engagement');
@@ -48086,6 +48167,9 @@
 	Drupal.t('MSG governance');
 	Drupal.t('Workplan');
 	Drupal.t('Licenses and contracts');
+	Drupal.t('Contract and license allocations');
+	Drupal.t('Register of licenses');
+	Drupal.t('Contracts');
 	Drupal.t('Legal framework');
 	Drupal.t('License allocations');
 	Drupal.t('License register');
@@ -48097,6 +48181,10 @@
 	Drupal.t('Production data');
 	Drupal.t('Export data');
 	Drupal.t('Revenue collection');
+	Drupal.t('Infrastructure provisions and barter arrangements');
+	Drupal.t('Subnational payments');
+	Drupal.t('Level of disaggregation');
+	Drupal.t('Data quality and assurance');
 	Drupal.t('Comprehensiveness');
 	Drupal.t('In-kind revenues');
 	Drupal.t('Barter agreements');
@@ -48111,15 +48199,19 @@
 	Drupal.t('Subnational transfers');
 	Drupal.t('Distribution of revenues');
 	Drupal.t('Socio-economic contribution');
+	Drupal.t('Socio-economic spending');
+	Drupal.t('Environmental impact');
 	Drupal.t('Mandatory social expenditures');
 	Drupal.t('Discretionary social expenditures');
 	Drupal.t('SOE quasi-fiscal expenditures');
 	Drupal.t('Economic contribution');
 	Drupal.t('Outcomes and impact');
+	Drupal.t('Data accessibility and open data');
 	Drupal.t('Public debate');
 	Drupal.t('Data accessibility');
 	Drupal.t('Follow up on recommendations');
 	Drupal.t('Outcomes and impact of implementation');
+	Drupal.t('Review of outcomes and impact of implementation');
 	Drupal.t('<strong>No progress.</strong> All or nearly all aspects of the requirement remain outstanding and the broader objective of the requirement is not fulfilled.');
 	Drupal.t('<strong>Inadequate progress.</strong> Significant aspects of the requirement have not been implemented and the broader objective of the requirement is far from fulfilled.');
 	Drupal.t('<strong>Meaningful progress.</strong> Significant aspects of the requirement have been implemented and the broader objective of the requirement is being fulfilled.');
