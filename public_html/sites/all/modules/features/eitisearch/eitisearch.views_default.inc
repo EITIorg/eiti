@@ -79,6 +79,55 @@ function eitisearch_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Search website';
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Indexed Content: Public Sub-Type */
+  $handler->display->display_options['relationships']['field_doc_type_public']['id'] = 'field_doc_type_public';
+  $handler->display->display_options['relationships']['field_doc_type_public']['table'] = 'search_api_index_content';
+  $handler->display->display_options['relationships']['field_doc_type_public']['field'] = 'field_doc_type_public';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_content';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group'] = 1;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Enter terms';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'query';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['min_length'] = '2';
+  /* Filter criterion: Indexed Content: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_content';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'article' => 'article',
+    'document' => 'document',
+    'mention' => 'mention',
+    'page' => 'page',
+    'person' => 'person',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Indexed Content: Public Sub-Type */
+  $handler->display->display_options['filters']['field_doc_type_public']['id'] = 'field_doc_type_public';
+  $handler->display->display_options['filters']['field_doc_type_public']['table'] = 'search_api_index_content';
+  $handler->display->display_options['filters']['field_doc_type_public']['field'] = 'field_doc_type_public';
+  $handler->display->display_options['filters']['field_doc_type_public']['value'] = array(
+    4842 => '4842',
+    4846 => '4846',
+  );
+  $handler->display->display_options['filters']['field_doc_type_public']['group'] = 1;
   $handler->display->display_options['path'] = 'search';
   $translatables['content_search'] = array(
     t('Master'),
@@ -102,6 +151,8 @@ function eitisearch_views_default_views() {
     t(','),
     t('Enter terms'),
     t('Page'),
+    t('Search website'),
+    t('Public Sub-Type'),
   );
   $export['content_search'] = $view;
 

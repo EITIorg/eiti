@@ -13,7 +13,9 @@ define('EITIENTITY_SCORE_REQ_VALUE_INADEQUATE', 1);
 define('EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL', 2);
 define('EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY', 3);
 define('EITIENTITY_SCORE_REQ_VALUE_BEYOND', 4);
+define('EITIENTITY_SCORE_REQ_VALUE_OUTSTANDING', 41);
 define('EITIENTITY_SCORE_REQ_VALUE_NA', 5);
+define('EITIENTITY_SCORE_REQ_VALUE_ENCOURAGED', 6);
 
 // Direction of Progress.
 define('EITIENTITY_SCORE_REQ_DIR_OF_PROGRESS_SAME', 0);
@@ -204,7 +206,7 @@ function eitientity_score_req_value_get_score_req_category($entity_type, $entity
 /**
  * @return array
  */
-function eitientity_score_req_value_get_score_req_information() {
+function eitientity_score_req_value_get_score_req_information($standard_tid = '') {
   $information = &drupal_static(__FUNCTION__);
 
   if (!empty($information)) {
@@ -218,6 +220,9 @@ function eitientity_score_req_value_get_score_req_information() {
   // Get a list of domains sorted by weight and name.
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'score_req');
+  if (!empty($standard_tid))  {
+    $query->fieldCondition('field_score_req_standard', 'tid', $standard_tid);
+  }
   $query->propertyOrderBy('code');
   $results = $query->execute();
 
@@ -252,15 +257,48 @@ function eitientity_score_req_value_get_score_req_information() {
  * @return array|string
  *  Returns either array of options or a label as a string.
  */
-function _eitientity_score_req_value_get_value_options($id = NULL) {
-  $options = array(
-    EITIENTITY_SCORE_REQ_VALUE_NO => t('No Progress'),
-    EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
-    EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
-    EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
-    EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
-    EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
-  );
+function _eitientity_score_req_value_get_value_options($id = NULL, $standard_tid = '') {
+  if (!empty($standard_tid)) {
+    $standard_label = taxonomy_term_load($standard_tid)->name;
+  }
+  // @todo make Level progress dependent on Standards (2016, 2019)
+  // @todo need to update also visualizations/chartWidgets/dist/js/chartWidgets.js and eiti-pdf-scorecard.tpl.php
+  switch ($standard_label) {
+    case '2019':
+      $options = [
+        EITIENTITY_SCORE_REQ_VALUE_NO => t('No Progress'),
+        EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
+        EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
+        EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
+        EITIENTITY_SCORE_REQ_VALUE_OUTSTANDING => t('Outstanding'),
+        EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
+        EITIENTITY_SCORE_REQ_VALUE_ENCOURAGED => t('Encourage'),
+      ];
+      break;
+    case '2016':
+      $options = [
+        EITIENTITY_SCORE_REQ_VALUE_NO => t('No Progress'),
+        EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
+        EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
+        EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
+        EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+        EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
+        EITIENTITY_SCORE_REQ_VALUE_ENCOURAGED => t('Encourage'),
+      ];
+      break;
+    default:
+      // Full options list for getting single Value for ScoreReqEntityUIController::overviewTable
+    $options = [
+      EITIENTITY_SCORE_REQ_VALUE_NO => t('No Progress'),
+      EITIENTITY_SCORE_REQ_VALUE_INADEQUATE => t('Inadequate'),
+      EITIENTITY_SCORE_REQ_VALUE_MEANINGFUL => t('Meaningful'),
+      EITIENTITY_SCORE_REQ_VALUE_SATISFACTORY => t('Satisfactory'),
+      EITIENTITY_SCORE_REQ_VALUE_BEYOND => t('Beyond'),
+      // EITIENTITY_SCORE_REQ_VALUE_OUTSTANDING => t('Outstanding'),
+      EITIENTITY_SCORE_REQ_VALUE_NA => t('Doesn\'t Apply'),
+//      EITIENTITY_SCORE_REQ_VALUE_ENCOURAGED => t('Encourage'),
+    ];
+  }
 
   if ($id == NULL) {
     return $options;

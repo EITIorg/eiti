@@ -11,6 +11,133 @@
 function eitiet_score_data_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_assessment_date'.
+  $field_bases['field_assessment_date'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_assessment_date',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'entity_translation_sync' => FALSE,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_corrective_actions_num'.
+  $field_bases['field_corrective_actions_num'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_corrective_actions_num',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_field_validation_against'.
+  $field_bases['field_field_validation_against'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_field_validation_against',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'standards',
+          'parent' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
+    ),
+    'translatable' => 1,
+    'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_next_validation_commences'.
+  $field_bases['field_next_validation_commences'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_next_validation_commences',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'entity_translation_sync' => FALSE,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_overall_assessment'.
+  $field_bases['field_overall_assessment'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_overall_assessment',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 1,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_scd_pdf_date'.
   $field_bases['field_scd_pdf_date'] = array(
     'active' => 1,
@@ -37,7 +164,7 @@ function eitiet_score_data_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'datetime',
   );
 
@@ -187,6 +314,28 @@ function eitiet_score_data_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_scd_pdf_title_prefix'.
+  $field_bases['field_scd_pdf_title_prefix'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_scd_pdf_title_prefix',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 80,
+    ),
+    'translatable' => 1,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_scd_score_req_values'.
   $field_bases['field_scd_score_req_values'] = array(
     'active' => 1,
@@ -222,6 +371,64 @@ function eitiet_score_data_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_score_req_standard'.
+  $field_bases['field_score_req_standard'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_score_req_standard',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'standards',
+          'parent' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_validation_fiscal_year'.
+  $field_bases['field_validation_fiscal_year'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_validation_fiscal_year',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'entity_translation_sync' => FALSE,
+      'granularity' => array(
+        'day' => 0,
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 0,
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
   );
 
   return $field_bases;
