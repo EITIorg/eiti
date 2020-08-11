@@ -1,6 +1,6 @@
 <?php
 
-//require DRUPAL_ROOT . '/../vendor/autoload.php';
+require DRUPAL_ROOT . '/../vendor/autoload.php';
 use \Mpdf\Mpdf;
 
 /**
