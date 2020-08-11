@@ -19,11 +19,11 @@ function eitiet_score_requirement_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'i18n_taxonomy',
         'settings' => array(),
         'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -40,7 +40,7 @@ function eitiet_score_requirement_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 31,
     ),
   );
 
@@ -56,7 +56,7 @@ function eitiet_score_requirement_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -80,7 +80,7 @@ function eitiet_score_requirement_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => -5,
     ),
   );
 
@@ -96,7 +96,7 @@ function eitiet_score_requirement_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'taxonomy_term',
@@ -118,7 +118,7 @@ function eitiet_score_requirement_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => -5,
     ),
   );
 

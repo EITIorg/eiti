@@ -51,7 +51,6 @@ function eitisearch_default_search_api_index() {
         "author" : { "type" : "integer", "entity_type" : "user" },
         "body:value" : { "type" : "text" },
         "field_article_type" : { "type" : "string" },
-        "field_doc_type_public" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_related_country:name" : { "type" : "list\\u003Cstring\\u003E" },
         "field_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },

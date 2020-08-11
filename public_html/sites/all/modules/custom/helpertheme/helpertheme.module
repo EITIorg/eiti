@@ -93,7 +93,7 @@ function helpertheme_menu() {
   );
 
   $items['page-403'] = array(
-    'title' => 'Please log in to view this page',
+    'title' => 'Access denied',
     'page callback' => 'helpertheme_page_access_denied',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -121,24 +121,15 @@ function helpertheme_menu() {
  * @return string
  */
 function helpertheme_page_access_denied() {
-  $elements['info_top'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'p',
-    '#value' => t('The content you want to view is for internal use.'),
-  );
+  $elements['message']['#markup'] = t('You are not authorized to access this page.');
 
   // Only display the login form for authenticated users.
   if (empty($GLOBALS['user']->uid)) {
     $elements['login_form'] = drupal_get_form('user_login');
   }
 
-  $elements['info_bottom'] = array(
-    '#type' => 'html_tag',
-    '#tag' => 'p',
-    '#value' => t("If you don't have a login but would like to view this content, contact us at <a href=\"mailto:secretariat@eiti.org\">secretariat@eiti.org</a>, stating the page you would like to access."),
-  );
-
   return drupal_render($elements);
+
 }
 
 /**
@@ -797,7 +788,7 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
   // @small: ((@gen_column_width + @gen_gutter_width) * 8) + 1em;
   // @medium: ((@gen_column_width + @gen_gutter_width) * 12) + 1em;
   // @large: ((@gen_column_width + @gen_gutter_width) * 16) + 1em;
-  $col_unit = (float)$theme_info->info['less']['vars']['@gen_column_width'] + (float)$theme_info->info['less']['vars']['@gen_gutter_width'];
+  $col_unit = $theme_info->info['less']['vars']['@gen_column_width'] + $theme_info->info['less']['vars']['@gen_gutter_width'];
   // $breakpoint_small = $col_unit * 8 + 1 . 'em';
   $breakpoint_medium = $col_unit * 12 + 1 . 'em';
   // $breakpoint_large = $col_unit * 16 + 1 . 'em';
