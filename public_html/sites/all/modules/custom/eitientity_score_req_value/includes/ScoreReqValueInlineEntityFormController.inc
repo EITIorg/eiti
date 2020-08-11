@@ -80,10 +80,6 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       '#description' => t('The Score Requirement.'),
       '#theme' => 'select_score_reqs',
     );
-    // @todo make Level progress dependent on Standards (2016, 2019)
-    $lang = $form_state['complete form']['field_field_validation_against']['#language'];
-    $standard = $form_state['complete form']['field_field_validation_against'][$lang]['#value'];
-    $options = ['' => t('- Select -')] + _eitientity_score_req_value_get_value_options(NULL, $standard);
 
     $entity_form['value'] = array(
       '#type' => 'select',
@@ -149,5 +145,4 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
   public function entityFormSubmit(&$entity_form, &$form_state) {
     parent::entityFormSubmit($entity_form, $form_state);
   }
-
 }

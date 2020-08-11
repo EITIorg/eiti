@@ -1,14 +1,10 @@
 <?php
 
-require_once DRUPAL_ROOT . '/../vendor/autoload.php';
-use Mpdf\Mpdf;
-use Mpdf\MpdfException;
-use Mpdf\Output\Destination;
+require DRUPAL_ROOT . '/../vendor/autoload.php';
+use \Mpdf\Mpdf;
 
 /**
  * Scorecard PDF page callback.
- *
- * @throws \Mpdf\MpdfException
  */
 function eiti_pdf_scorecard_page() {
   // When this page comes from cache it displays gibberish in the browser.
@@ -36,41 +32,21 @@ function eiti_pdf_scorecard_page() {
 
       // Title page and header.
       $theme_args = array(
-        'logo' => drupal_get_path('module', 'eiti_pdf') . '/images/Logo_Gradient.png',
+        'logo' => drupal_get_path('module', 'eiti_pdf') . '/images/logo.png',
         'date' => '',
         'title' => '',
         'decision_reference' => '',
       );
       if (isset($score_data->field_scd_pdf_date)) {
         if ($score_data_emw->field_scd_pdf_date->value()) {
-          $theme_args['date'] = __translating_date($score_data_emw->field_scd_pdf_date->value());
+          $theme_args['date'] = format_date($score_data_emw->field_scd_pdf_date->value(), 'custom', $format = 'j F Y');
         }
       }
       if (isset($score_data->field_scd_pdf_decision_ref)) {
         $theme_args['decision_reference'] = check_plain($score_data_emw->field_scd_pdf_decision_ref->value());
       }
-      // Title and pre-title.
       if (isset($score_data->field_scd_pdf_title)) {
-        $theme_args['pre_title'] = t('Board decision');
-        $title_prefix = !empty($score_data_emw->field_scd_pdf_title_prefix) ? check_plain($score_data_emw->field_scd_pdf_title_prefix->value()) : t('Validation of');
-        $year = !empty($score_data_emw->year->value()) ? check_plain($score_data_emw->year->value()) : '';
-        $theme_args['title'] = $title_prefix . ' ' . check_plain($score_data_emw->field_scd_pdf_title->value()) . ' ' . $year;
-      }
-      // Subtitle.
-      if (isset($score_data->field_progress_level)) {
-        $theme_args['progress_level'] = '';
-        if (!empty($score_data_emw->field_progress_level->value())) {
-          $progress_level = check_plain($score_data_emw->field_progress_level->value());
-          $progress_level_field = field_info_field('field_progress_level');
-          $progress_label = $progress_level_field['settings']['allowed_values'][$progress_level];
-          if (!empty($score_data_emw->field_validation_against->value())) {
-            $standard = check_plain($score_data_emw->field_validation_against->value());
-            $standard_field = field_info_field('field_validation_against');
-            $standard_label = $standard_field['settings']['allowed_values'][$standard];
-          }
-          $standard_label_text = !empty($standard_label) ? ' ' . $standard_label : '';
-          $theme_args['progress_level'] = $progress_label . ' ' . $standard_label_text;
-        }
+        $theme_args['title'] = check_plain($score_data_emw->field_scd_pdf_title->value());
       }
       $html_title_page = theme('eiti_pdf_title_page', $theme_args);
       unset($theme_args['logo']);
@@ -127,7 +103,7 @@ function eiti_pdf_scorecard_page() {
 
       // File name.
       if (isset($json->data[0]->country->label) && $json->data[0]->country->label) {
-        $filename = 'EITI - ' . trim(strip_tags($json->data[0]->country->label)) . ' validation';
+        $filename = 'EITI - ' . trim(strip_tags($json->data[0]->country->label)) .  ' validation';
       }
       if (isset($timestamp) && $timestamp) {
         $filename .= ' ' . date('Y-m-d', $timestamp);
@@ -139,37 +115,30 @@ function eiti_pdf_scorecard_page() {
   $mpdf_config = array(
     'setAutoTopMargin' => 'stretch',
     'setAutoBottomMargin' => 'stretch',
-    // 'debug' => TRUE,
   );
-
-  try {
-    $mpdf = new Mpdf($mpdf_config);
-    $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
-    $mpdf->WriteHTML($css, 1);
-    $css = file_get_contents(__DIR__ . '/../css/pdf.css');
-    $mpdf->WriteHTML($css, 1);
-    $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
-    if ($html_title_page) {
-      $mpdf->WriteHTML($html_title_page, 2);
-    }
-    if ($html_header) {
-      $mpdf->DefHTMLHeaderByName('myHeader', $html_header);
-    }
-    if ($html_scorecard_table) {
-      $toc_params = array(
-        'toc-preHTML' => '<h2>' . t('Table of contents') . '</h2>',
-        'resetpagenum' => 3,
-        'links' => 1,
-      );
-      $mpdf->TOCpagebreakByArray($toc_params);
-      $mpdf->WriteHTML($html_scorecard_table, 2);
-    }
-    $filename = $filename . '.pdf';
-    $mpdf->Output($filename, Destination::INLINE);
+  $mpdf = new Mpdf($mpdf_config);
+  $css = file_get_contents(DRUPAL_ROOT . '/sites/all/libraries/eitiChartWidgets/css/chartWidgets.css');
+  $mpdf->WriteHTML($css, 1);
+  $css = file_get_contents(__DIR__ . '/../css/pdf.css');
+  $mpdf->WriteHTML($css, 1);
+  $mpdf->DefHTMLFooterByName('myFooter', $html_footer);
+  if ($html_title_page) {
+    $mpdf->WriteHTML($html_title_page, 2);
   }
-  catch (MpdfException $e) {
-    drupal_set_message(t('Cannot create pdf: @message', ['@message' => $e->getMessage()]), 'error');
+  if ($html_header) {
+    $mpdf->DefHTMLHeaderByName('myHeader', $html_header);
   }
+  if ($html_scorecard_table) {
+    $toc_params = array(
+      'toc-preHTML' => '<h2>' . t('Table of contents') . '</h2>',
+      'resetpagenum' => 3,
+      'links' => 1,
+    );
+    $mpdf->TOCpagebreakByArray($toc_params);
+    $mpdf->WriteHTML($html_scorecard_table, 2);
+  }
+  $filename = $filename . '.pdf';
+  $mpdf->Output($filename, \Mpdf\Output\Destination::INLINE);
 }
 
 /**
@@ -366,20 +335,4 @@ function _eiti_pdf_html_cleanup($text) {
   }
 
   return preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
-}
-
-/**
- * Helper fpr translating month in PDF report.
- *
- * @var $value string
- *  Timestamp of date.
- *
- * @return string
- *   Date with translated month
- */
-function __translating_date($value) {
-  $day = date('j', $value);
-  $month = t(date('F', $value));
-  $year = date('Y', $value);
-  return $day . ' ' . $month . ' ' . $year;
 }

@@ -37,10 +37,10 @@ function eitiet_score_data_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '1',
+          'weight' => '30',
         ),
         'language' => array(
-          'weight' => '0',
+          'weight' => '5',
         ),
       ),
       'display' => array(),

@@ -59,12 +59,6 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
         'class' => array('score-req-ui-name'),
       ),
       array(
-        'data' => t('Standard'),
-        'type' => 'property',
-        'specifier' => 'name',
-        'class' => array('score-req-ui-standard'),
-      ),
-      array(
         'data' => t('Created'),
         'type' => 'property',
         'specifier' => 'created',
@@ -93,16 +87,8 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
     $rows = array();
     /** @var ScoreReqEntity $entity */
     foreach ($entities as $entity) {
-      $standards_labels = [];
-      if (!empty($entity->field_score_req_standard)) {
-        $req_standards = $entity->field_score_req_standard;
-        foreach ($req_standards[LANGUAGE_NONE] as $req_standard) {
-          $standards_labels[] = taxonomy_term_load($req_standard['tid'])->name;
-        }
-      }
       $cols = array(
         !empty($entity->code) ? $entity->code : t('N/A'),
-        !empty($standards_labels) ? implode(', ', $standards_labels) : t('N/A'),
         format_date(!empty($entity->changed) ? $entity->changed : $entity->created, 'short'),
       );
       $rows[] = $this->overviewTableRow($conditions, $entity->identifier(), $entity, $cols);
