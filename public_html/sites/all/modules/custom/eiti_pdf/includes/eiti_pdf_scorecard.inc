@@ -148,6 +148,7 @@ function _eiti_pdf_get_scorecard_table_data($json) {
   // Requirements.
   // Obtaining initial requirement info is based on the eitientity_score_req_value_get_score_req_information() function.
   $requirements = array();
+  $requirements_score = array();
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'score_req');
   $query->propertyOrderBy('code');
@@ -183,8 +184,10 @@ function _eiti_pdf_get_scorecard_table_data($json) {
       if ($requirements[$category_tid][$score_value->score_req_id]['value'] != -1) {
         continue;
       }
+
       $requirements[$category_tid][$score_value->score_req_id] = array(
-        'name' => t($score_value->score_req->name) . ' (#' . $score_value->score_req->code . ')',
+        'name' => t($score_value->score_req->name) . ' (#' . number_format($score_value->score_req->code, 1) . ')',
+        'name_test' => $score_value->score_req->code,
         'description' => t($score_value->description),
         'is_applicable' => $score_value->is_applicable,
         'is_required' => $score_value->is_required,
@@ -192,8 +195,18 @@ function _eiti_pdf_get_scorecard_table_data($json) {
         'progress_value' => $score_value->progress_value,
         'print_name' => ($score_value->score_req->code == '0.0') ? FALSE : TRUE,
       );
+      $requirements_score[$category_tid][$score_value->score_req_id] = $requirements[$category_tid][$score_value->score_req_id];
     }
   }
+  // We need to get requirements only from json data.
+  foreach ($requirements as $c_id => $category) {
+    foreach ($category as $r_id => $requirement) {
+      if (!isset($requirements_score[$c_id][$r_id])) {
+        unset($requirements[$c_id][$r_id]);
+      }
+    }
+  }
+
   // Add additional information for easier html building and styling.
   foreach ($requirements as $c_tid => $r_vals) {
     $add_category_td = TRUE;
@@ -267,7 +280,7 @@ function _eiti_pdf_get_scorecard_legend_data() {
     ),
     array(
       'classes' => 'beyond',
-      'text' => t('<strong>Beyond.</strong> The country has gone beyond the requirements.'),
+      'text' => t('<strong>Outstanding progress (Beyond).</strong> The country has gone beyond the requirements.'),
     ),
     array(
       'classes' => 'only_encouraged',

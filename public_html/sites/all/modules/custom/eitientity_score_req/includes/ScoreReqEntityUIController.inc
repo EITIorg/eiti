@@ -55,8 +55,13 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
       array(
         'data' => t('Code'),
         'type' => 'property',
-        'specifier' => 'name',
+        'specifier' => 'code',
         'class' => array('score-req-ui-name'),
+        'sort' => 'asc',
+      ),
+      array(
+        'data' => t('Standard'),
+        'class' => array('score-req-ui-standard'),
       ),
       array(
         'data' => t('Created'),
@@ -69,7 +74,7 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
         'type' => 'property',
         'specifier' => 'status',
         'class' => array('score-req-ui-status'),
-        'sort' => 'desc',
+
       ),
       array(
         'data' => t('Operations'),
@@ -87,8 +92,14 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
     $rows = array();
     /** @var ScoreReqEntity $entity */
     foreach ($entities as $entity) {
+      $standards_labels = [];
+      if (!empty($entity->field_score_req_standard)) {
+        $req_standards = $entity->field_score_req_standard;
+        $standards_labels[LANGUAGE_NONE] = $req_standards[LANGUAGE_NONE][0]['value'];
+      }
       $cols = array(
         !empty($entity->code) ? $entity->code : t('N/A'),
+        !empty($standards_labels) ? implode(', ', $standards_labels) : t('N/A'),
         format_date(!empty($entity->changed) ? $entity->changed : $entity->created, 'short'),
       );
       $rows[] = $this->overviewTableRow($conditions, $entity->identifier(), $entity, $cols);
@@ -99,6 +110,7 @@ class ScoreReqEntityUIController extends HelperEntityBundleableUIController {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('None.'),
+      '#prefix' => '<h4>' . t('Note: Requirements codes for 2019 Standards should have "1" in the hundredth place, like 2.41') . '</h4>',
     );
     return $render;
   }

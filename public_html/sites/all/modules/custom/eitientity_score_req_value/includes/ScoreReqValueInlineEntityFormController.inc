@@ -48,6 +48,13 @@ class ScoreReqValueInlineEntityFormController extends EntityInlineEntityFormCont
       'weight' => 20,
     );
 
+    $fields['score_req_standard'] = array(
+      'type' => 'callback',
+      'render_callback' => 'eitientity_score_req_value_get_score_req_standard',
+      'label' => t('Standard'),
+      'weight' => 20,
+    );
+
     $fields['score_req_value'] = array(
       'type' => 'callback',
       'render_callback' => 'eitientity_score_req_value_get_score_req_value_value',
