@@ -148,13 +148,13 @@ function jquery_update_library_alter(&$javascript, $module) {
   // misc/form.js in core uses andSelf() which is deprecated in jQuery 2.x and
   // removed in jQuery 3.x. Provide an overridden copy of the formUpdated
   // behavior if using jQuery 3.x or later.
-  if (version_compare($jquery_version, '3', '>=')) {
-    $libraries['drupal.form']['js'][$path . '/replace/misc/form-jquery-3.js'] = [
+  /*if (version_compare($jquery_version, '3', '>=')) {
+    $libraries['drupal.form']['js'][$path . '/replace/misc/form-jquery-3.j'] = [
      'data' => $path . '/replace/misc/form-jquery-3.js',
       'group' => JS_LIBRARY,
       'weight' => 1,
     ];
-  }
+  }*/
 }
 
 /**
