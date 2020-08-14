@@ -788,7 +788,8 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
   // @small: ((@gen_column_width + @gen_gutter_width) * 8) + 1em;
   // @medium: ((@gen_column_width + @gen_gutter_width) * 12) + 1em;
   // @large: ((@gen_column_width + @gen_gutter_width) * 16) + 1em;
-  $col_unit = $theme_info->info['less']['vars']['@gen_column_width'] + $theme_info->info['less']['vars']['@gen_gutter_width'];
+  //$col_unit = $theme_info->info['less']['vars']['@gen_column_width'] + $theme_info->info['less']['vars']['@gen_gutter_width'];
+  $col_unit = 5.25 + 1; 
   // $breakpoint_small = $col_unit * 8 + 1 . 'em';
   $breakpoint_medium = $col_unit * 12 + 1 . 'em';
   // $breakpoint_large = $col_unit * 16 + 1 . 'em';
