@@ -267,7 +267,7 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
   /**
    * Overrides addIndex().
    */
-  public function addIndex(SearchApiIndex $index, $update_mapping = TRUE) {
+  public function addIndex(SearchApiIndex $index) {
     $index_name = $this->getIndexName($index);
     if (!empty($index_name)) {
       try {
@@ -292,14 +292,12 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
             }
           }
           else {
-            throw new SearchApiElasticsearchConnectorException(t('The index you have selected does not exist.'));
+            throw new SearchApiElasticsearchConnectorException(t('The index you have selected, does not exist.'));
           }
         }
 
         // Update mapping.
-        if ($update_mapping) {
-          $this->fieldsUpdated($index);
-        }
+        $this->fieldsUpdated($index);
       }
       catch (Exception $e) {
         drupal_set_message($e->getMessage(), 'error');
@@ -308,28 +306,13 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
   }
 
   /**
-   * Rebuild the index to update mappings.
-   *
-   * @param object $index
-   *   Elasticsearch Connector Index object.
-   */
-  protected function recreateIndex($index) {
-    $settings = $this->getElasticsearchIndexSettings($index);
-    $index->force_create['number_of_shards'] = $settings['index']['number_of_shards'];
-    $index->force_create['number_of_replicas'] = $settings['index']['number_of_replicas'];
-    $this->removeIndex($index);
-    $this->addIndex($index, FALSE);
-  }
-
-  /**
    * Overrides fieldsUpdated().
    */
   public function fieldsUpdated(SearchApiIndex $index) {
-    $this->recreateIndex($index);
     $params = $this->getIndexParam($index, TRUE);
 
     $properties = array(
-      'id' => array('type' => 'keyword'),
+      'id' => array('type' => 'keyword', 'include_in_all' => FALSE),
     );
 
     // Map index fields.
@@ -341,10 +324,18 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
 
     // Not remapping for read only indexes as it removes all data
     if (!isset($index->read_only) || !$index->read_only) {
-      // What we need to do here is delete and recreate the index.
       try {
+        if ($this->elasticsearchClient->indices()->existsType($params)) {
+          $current_mapping = $this->elasticsearchClient->indices()->getMapping($params);
+          if (!empty($current_mapping)) {
+            // If the mapping exits, delete it to be able to re-create it.
+            $this->elasticsearchClient->indices()->deleteMapping($params);
+          }
+        }
+
         $params['body'][$params['type']]['properties'] = $properties;
         drupal_alter('elasticsearch_connector_search_api_mapping_update', $index, $params['body'][$params['type']]);
+
         $results = $this->elasticsearchClient->indices()->putMapping($params);
         if (!elasticsearch_connector_check_response_ack($results)) {
           drupal_set_message(t('Cannot create the mapping of the fields!'), 'error');
@@ -370,11 +361,8 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
     $params = array();
     $params['index'] = $index_name;
 
-    $cluster = elasticsearch_connector_cluster_load($this->cluster_id);
-    $type = ($cluster->options['elasticsearch_connector_upgraded_types'] === 1) ? '_doc' : $index->machine_name;
-
     if ($with_type) {
-      $params['type'] = $type;
+      $params['type'] = $index->machine_name;
     }
 
     return $params;
@@ -446,25 +434,6 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
   }
 
   /**
-   * Process boolean types that aren't being dealt with correctly for ES6.x.
-   * @todo this could be redone as a custom type: hook_search_api_data_type_info
-   *
-   * @param array $item
-   *   Item being indexed.
-   *
-   * @return bool
-   *  Return actual boolean instead of 1 or 0.
-   */
-  protected function itemsDataPostProcessBoolean($item) {
-    if (isset($item['type']) && $item['type'] === 'boolean') {
-      if ($item['value']) {
-        return TRUE;
-      }
-    }
-    return FALSE;
-  }
-
-  /**
    * Overrides indexItems().
    */
   public function indexItems(SearchApiIndex $index, array $items) {
@@ -479,17 +448,14 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
 
     $params = $this->getIndexParam($index, TRUE);
 
+    $documents = array();
     $params['refresh'] = TRUE;
-
     foreach ($items as $id => $fields) {
       $data = array('id' => $id);
       foreach ($fields as $field_id => $field_data) {
-        $postProcessFunction = 'itemsDataPostProcess' . ucfirst($field_data['type']);
-        if (method_exists($this, $postProcessFunction)) {
-          $field_data['value'] = $this->{$postProcessFunction}($field_data);
-        }
         $data[$field_id] = $field_data['value'];
       }
+
       $params['body'][] = array('index' => array('_id' => $this->getSafeId($data['id'])));
       $params['body'][] = $data;
     }

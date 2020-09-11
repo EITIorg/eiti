@@ -53,6 +53,30 @@ function mailchimp_signup_menu() {
 }
 
 /**
+ * Implements hook_admin_menu_map().
+ */
+function mailchimp_signup_admin_menu_map() {
+  if (!user_access('administer mailchimp signup entities')) {
+    return;
+  }
+
+  $mailchimp_signups = mailchimp_signup_load_multiple();
+  $path = 'admin/config/services/mailchimp/signup/manage/%mailchimp_signup_name';
+  $mailchimp_signup_names = array();
+  foreach ($mailchimp_signups as $mailchimp_signup) {
+    $mailchimp_signup_names[] = $mailchimp_signup->name;
+  }
+  $map[$path] = array(
+    'parent' => 'admin/config/services/mailchimp/signup',
+    'arguments' => array(
+      array('%mailchimp_signup_name' => $mailchimp_signup_names),
+    ),
+  );
+
+  return $map;
+}
+
+/**
  * callback function for translatable title
  */
 function mailchimp_signup_title($signup_id){
@@ -150,6 +174,19 @@ function mailchimp_signup_delete_multiple($signup_ids) {
 }
 
 /**
+ * Gets a single Signup.
+ *
+ * @param string $name
+ *   The Mailchimp signup machine name.
+ *
+ * @return \MailchimpSignup
+ *   A single mailchimp signup object.
+ */
+function mailchimp_signup_name_load($name) {
+  return mailchimp_signup_load_multiple_by_name($name);
+}
+
+/**
  * Gets an array of all Signups, keyed by the list name.
  *
  * @param string $name
@@ -196,6 +233,7 @@ function mailchimp_signup_entity_info() {
       ),
       // Enable the entity API's admin UI.
       'admin ui' => array(
+        'menu wildcard' => '%mailchimp_signup_name',
         'path' => 'admin/config/services/mailchimp/signup',
         'file' => 'includes/mailchimp_signup.admin.inc',
         'controller class' => 'MailChimpSignupUIController',
