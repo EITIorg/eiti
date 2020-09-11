@@ -124,7 +124,7 @@ class DatabaseSchema_pgsql extends DatabaseSchema {
 
     $sql_keys = array();
     if (isset($table['primary key']) && is_array($table['primary key'])) {
-      $sql_keys[] = 'PRIMARY KEY ("' . implode('", "', $table['primary key']) . '")';
+      $sql_keys[] = 'PRIMARY KEY (' . implode(', ', $table['primary key']) . ')';
     }
     if (isset($table['unique keys']) && is_array($table['unique keys'])) {
       foreach ($table['unique keys'] as $key_name => $key) {
@@ -175,7 +175,7 @@ class DatabaseSchema_pgsql extends DatabaseSchema {
    *    The field specification, as per the schema data structure format.
    */
   protected function createFieldSql($name, $spec) {
-    $sql = '"' . $name . '" ' . $spec['pgsql_type'];
+    $sql = $name . ' ' . $spec['pgsql_type'];
 
     if (isset($spec['type']) && $spec['type'] == 'serial') {
       unset($spec['not null']);
@@ -441,7 +441,7 @@ class DatabaseSchema_pgsql extends DatabaseSchema {
       throw new DatabaseSchemaObjectExistsException(t("Cannot add primary key to table @table: primary key already exists.", array('@table' => $table)));
     }
 
-    $this->connection->query('ALTER TABLE {' . $table . '} ADD PRIMARY KEY ("' . implode('","', $fields) . '")');
+    $this->connection->query('ALTER TABLE {' . $table . '} ADD PRIMARY KEY (' . implode(',', $fields) . ')');
   }
 
   public function dropPrimaryKey($table) {
