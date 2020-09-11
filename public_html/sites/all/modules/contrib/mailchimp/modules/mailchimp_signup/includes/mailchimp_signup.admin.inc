@@ -165,7 +165,7 @@ function mailchimp_signup_form($form, &$form_state, MailchimpSignup $signup) {
       $form['mc_lists_config']['mergefields'][$mergevar->tag] = array(
         '#type' => 'checkbox',
         '#title' => check_plain($mergevar->name),
-        '#default_value' => isset($signup->settings['mergefields'][$mergevar->tag]) ? !empty($signup->settings['mergefields'][$mergevar->tag]) : TRUE,
+        '#default_value' => $mergevar->required ? TRUE : (isset($signup->settings['mergefields'][$mergevar->tag]) ? !empty($signup->settings['mergefields'][$mergevar->tag]) : TRUE),
         '#required' => $mergevar->required,
         '#disabled' => $mergevar->required,
       );

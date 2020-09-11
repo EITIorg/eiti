@@ -27,6 +27,8 @@ You can configure this module by setting up some variable in the settings.php:
   each server override may contain:
 
   - name: override for the adminstrative title of the server
+  - class: override the search api service (e.g. `search_api_solr_service`,
+    `search_api_db_service` or `acquia_search_service`)
   - description: override for the admin description
   - options: an array of options for the specific server, e.g. may contain keys
     like 'host', 'port', 'path'.
@@ -46,6 +48,8 @@ of your settings.php.
 
 # Example
 
+## Server override
+
 ```
 <?php
 
@@ -54,6 +58,7 @@ $conf['search_api_override_mode'] = 'load';
 $conf['search_api_override_servers'] = array(
   'my_solr_server' => array(
     'name' => 'My Solr Server (overriden)',
+    'class' => 'search_api_solr_service',
     'options' => array(
       'host' => 'localhost',
       'port' => '8983',
@@ -64,9 +69,32 @@ $conf['search_api_override_servers'] = array(
       'retrieve_data' => 0,
       'highlight_data' => 0,
       'http_method' => 'POST',
+      'transport' => 'Http',
     ),
   ),
   'my_second_solr_server' => array(
+    // ...
+  ),
+);
+```
+
+## Index override
+
+```
+<?php
+
+// Override search API index settings fetched from default configuration.
+$conf['search_api_override_mode'] = 'load';
+$conf['search_api_override_indexes'] = array(
+  'my_solr_index' => array(
+    'name' => 'My Solr Index (read-only)',
+    'read_only' => TRUE,
+    'server' => 'my_solr_server',
+    'options' => array(
+      'cron_limit' => 5,
+    ),
+  ),
+  'my_second_solr_index' => array(
     // ...
   ),
 );

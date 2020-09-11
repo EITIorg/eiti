@@ -398,5 +398,12 @@ function facetapi_sort_indexed(array $a, array $b) {
 function facetapi_sort_display(array $a, array $b) {
   $a_value = (isset($a['#markup'])) ? $a['#markup'] : '';
   $b_value = (isset($b['#markup'])) ? $b['#markup'] : '';
+  $a_value = _facetapi_removeAccents($a_value);
+  $b_value = _facetapi_removeAccents($b_value);
   return strnatcasecmp($a_value, $b_value);
 }
+
+function _facetapi_removeAccents($string) {
+  return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8'))), ' '));
+}
+

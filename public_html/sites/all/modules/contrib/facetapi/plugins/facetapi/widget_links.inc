@@ -93,8 +93,12 @@ class FacetapiWidgetLinks extends FacetapiWidget {
     // Builds rows.
     $items = array();
     foreach ($build as $value => $item) {
-      // Reset attributes for each item.
-      $attributes = $attributes_init;
+      // Reset attributes for each item, combining potential custom ones and the
+      // default "class" attribute. The item's "#attributes" property can be
+      // used to e.g. set rel="nofollow" for individual items.
+      $attributes = isset($item['#attributes'])
+        ? $item['#attributes'] + $attributes_init
+        : $attributes_init;
 
       $row = array('class' => array());
 
@@ -120,9 +124,29 @@ class FacetapiWidgetLinks extends FacetapiWidget {
       else {
         // We need nofollow only for items with non zero results.
         if ($settings['nofollow']) {
-          // Initializes links attributes, adds rel="nofollow" if configured.
-          $attributes['rel'] = 'nofollow';
+          // Check if rel="nofollow" should be added to links.
+          switch ($settings['nofollow']) {
+            // Always add nofollow.
+            case 1:
+              $variables['options']['attributes']['rel'] = 'nofollow';
+              break;
+
+            // Add nofollow if there is already an active item of this facet.
+            case 2:
+              if ($this->facet->getAdapter()->getActiveItems(array('name' => $this->key))) {
+                $variables['options']['attributes']['rel'] = 'nofollow';
+              }
+              break;
+
+            // Add nofollow if there is already an active item of any facet.
+            case 3:
+              if ($this->facet->getAdapter()->getAllActiveItems()) {
+                $variables['options']['attributes']['rel'] = 'nofollow';
+              }
+              break;
+          }
         }
+
         // Add an ID to identify this link.
         $variables['options']['attributes']['id'] = drupal_html_id('facetapi-link');
         $variables['options'] += array(
@@ -200,10 +224,18 @@ class FacetapiWidgetLinks extends FacetapiWidget {
 
     // @see http://drupal.org/node/1370342
     $form['widget']['widget_settings']['links'][$this->id]['nofollow'] = array(
-      '#type' => 'checkbox',
+      '#type' => 'select',
       '#title' => t('Prevent crawlers from following facet links'),
-      '#default_value' => !empty($this->settings->settings['nofollow']),
+      '#default_value' => empty($this->settings->settings['nofollow'])
+                          ? 0
+                          : $this->settings->settings['nofollow'],
       '#description' => t('Add the <code>rel="nofollow"</code> attribute to facet links to maximize SEO by preventing crawlers from indexing duplicate content and getting stuck in loops.'),
+      '#options' => array(
+        0 => t('never'),
+        1 => t('always'),
+        2 => t('only for links that select multiple items of the same facet'),
+        3 => t('if there is already a selected item from any facet'),
+      ),
       '#states' => array(
         'visible' => array(
           'select[name="widget"]' => array('value' => $this->id),
