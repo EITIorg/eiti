@@ -66,3 +66,12 @@ function media_youtube_media_parse($embed_code) {
 function media_youtube_file_mimetype_mapping_alter(&$mapping) {
   $mapping['mimetypes'][] = 'video/youtube';
 }
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function media_youtube_ctools_plugin_api($module, $api) {
+  if ($module == 'file_entity' && $api == 'file_default_displays') {
+    return array('version' => 1);
+  }
+}

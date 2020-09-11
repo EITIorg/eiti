@@ -31,7 +31,7 @@ function mailchimp_lists_overview_page() {
       $webhook_status = t('disabled') . ' (' . l(t('enable'), 'admin/config/services/mailchimp/lists/' . $mc_list->id . '/webhook/enable') . ')';
     }
     $rows[] = array(
-      l($mc_list->name, 'https://admin.mailchimp.com/lists'),
+      l($mc_list->name, 'https://admin.mailchimp.com/lists/dashboard/overview?id=' . $mc_list->web_id, array('attributes' => array('target' => '_blank'))),
       $mc_list->stats->member_count,
       $webhook_status,
     );

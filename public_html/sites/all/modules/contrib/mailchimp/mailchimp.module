@@ -195,9 +195,32 @@ function mailchimp_get_api_object($classname = 'Mailchimp', $api_key = NULL) {
     }
   }
 
+  $http_options['headers']['User-Agent'] = _mailchimp_get_user_agent();
+
   $mailchimp = new $classname($api_key, 'apikey', $http_options);
 
   return $mailchimp;
+}
+
+/**
+ * Gets the user agent string for this installation of Mailchimp.
+ *
+ * @return string
+ *   The user agent string.
+ */
+function _mailchimp_get_user_agent() {
+  $version = '7.x-4.x';
+
+  if (module_exists('system')) {
+    $info = system_get_info('module', 'mailchimp');
+    if (!empty($info['version'])) {
+      $version = $info['version'];
+    }
+  }
+
+  $user_agent = "DrupalMailchimp/$version " . \GuzzleHttp\default_user_agent();
+
+  return $user_agent;
 }
 
 /**
@@ -417,7 +440,7 @@ function mailchimp_get_mergevars($list_ids, $reset = FALSE) {
       $mergevars[$list_id] = array(
         (object) array(
           'tag' => 'EMAIL',
-          'name' => 'Email Address',
+          'name' => t('Email Address'),
           'type' => 'email',
           'required' => TRUE,
           'default_value' => '',

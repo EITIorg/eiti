@@ -699,7 +699,7 @@ function mailchimp_lists_action_info() {
   $actions = array(
     'mailchimp_lists_add_to_segment_action' => array(
       'type' => 'entity',
-      'label' => t('Add to Mailchimp Lists Segment'),
+      'label' => t('Add to Mailchimp List Tag'),
       'configurable' => FALSE,
       'triggers' => array('any'),
       'vbo_configurable' => TRUE,
@@ -791,7 +791,7 @@ function mailchimp_lists_add_to_segment_action_form($context, &$form_state) {
     }
     $form['segment'] = array(
       '#type' => 'select',
-      '#title' => "Select a static segment to add subscribed entities to.",
+      '#title' => "Select a tag to add subscribed entities to.",
       '#description' => "Only records that have the appropriate list field on their bundle, and are already subscribed to the list, will be added.",
       '#id' => 'segment-wrapper',
       '#options' => $seg_options,
@@ -799,7 +799,7 @@ function mailchimp_lists_add_to_segment_action_form($context, &$form_state) {
   }
   $form['new_segment'] = array(
     '#type' => 'textfield',
-    '#title' => "Name for your new segment",
+    '#title' => "Name for your new tag",
     '#states' => array(
       'required' => array(
         ':input[name="segment"]' => array('value' => 0),
@@ -873,7 +873,7 @@ function mailchimp_lists_add_to_segment_action_views_bulk_operations_form($optio
     '#title' => t('REQUIRED: Mailchimp List Field(s)'),
     '#options' => $field_options,
     '#multiple' => TRUE,
-    '#description' => t('Select the Mailchimp fields for which to allow segmentation.'),
+    '#description' => t('Select the Mailchimp fields for which to allow tagging.'),
     '#default_value' => isset($options['mailchimp_field']) ? $options['mailchimp_field'] : NULL,
     '#states' => array(
       'required' => array(
