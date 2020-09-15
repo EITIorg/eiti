@@ -142,7 +142,6 @@ class EITISummaryDataImporter {
 
       if (isset($about_fields[$cell])) {
         $value_cell = $sheet->getCellByColumnAndRow(4,$i);
-
         if ($value_cell->isFormula()) {
           $value = $value_cell->getOldCalculatedValue();
         } else {
@@ -1266,7 +1265,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = $item['reporting_currency'];
-        $entity_item->revenue = $item['revenue_value'];
+        $entity_item->revenue = round($item['revenue_value'], 2);
       }
 
       entity_save('revenue_stream', $entity_item);
@@ -1354,15 +1353,17 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = 'USD';
-        $entity_item->revenue = round($item['revenue_value'] / $currency_rate, 2);
+        $item['revenue_value'] = round($item['revenue_value'] / $currency_rate, 2);
+        $entity_item->revenue = $item['revenue_value'];
       } else {
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = $item['reporting_currency'];
+        $item['revenue_value'] = round($item['revenue_value'], 2);
         $entity_item->revenue = $item['revenue_value'];
       }
 
-      $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
+      $entity_item->field_revenue_value['und'][0]['value'] = $item['revenue_value'];
       $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
       $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
       $entity_item->field_unit['und'][0]['value'] = $item['unit'];
