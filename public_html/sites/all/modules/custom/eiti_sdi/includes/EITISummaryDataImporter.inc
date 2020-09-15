@@ -1353,13 +1353,13 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = 'USD';
-        $item['revenue_value'] = round($item['revenue_value'] / $currency_rate, 0);
+        $item['revenue_value'] = round($item['revenue_value'] / $currency_rate, 2);
         $entity_item->revenue = $item['revenue_value'];
       } else {
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = $item['reporting_currency'];
-        $item['revenue_value'] = round($item['revenue_value'], 0);
+        $item['revenue_value'] = round($item['revenue_value'], 2);
         $entity_item->revenue = $item['revenue_value'];
       }
 
