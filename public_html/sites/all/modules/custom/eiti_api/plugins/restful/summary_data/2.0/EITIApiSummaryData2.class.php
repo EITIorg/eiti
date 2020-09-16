@@ -381,7 +381,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
 
     $query->condition('sd.status', TRUE);
     $query->condition('grs.type', 'agency');
-    $query->condition('grs.revenue', 0, '>');
+    //$query->condition('grs.revenue', 0, '>');
 
     $query->groupBy('year');
     $query->groupBy('iso2');
@@ -411,7 +411,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
 
     $query->condition('sd.status', TRUE);
     $query->condition('crs.type', 'company');
-    $query->condition('crs.revenue', 0, '>');
+    //$query->condition('crs.revenue', 0, '>');
 
     $query->groupBy('year');
     $query->groupBy('iso2');
