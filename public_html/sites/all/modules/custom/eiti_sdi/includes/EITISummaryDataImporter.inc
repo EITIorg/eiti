@@ -785,8 +785,22 @@ class EITISummaryDataImporter {
    */
   private function parseGovermentRevenuesSection($sheet, $max_row) {
     $data = array();
-    $i = 22;
+    $i = 0;
 
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
+    
     while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
