@@ -142,10 +142,16 @@ class EITISummaryDataImporter {
 
       if (isset($about_fields[$cell])) {
         $value_cell = $sheet->getCellByColumnAndRow(4,$i);
-        if ($value_cell->isFormula()) {
-          $value = $value_cell->getOldCalculatedValue();
+
+        if ($about_fields[$cell] == 'currency_rate') {
+          $value = $value_cell->getValue();
+          $value = round($value, 10);
         } else {
-          $value = $value_cell->getFormattedValue();
+          if ($value_cell->isFormula()) {
+            $value = $value_cell->getOldCalculatedValue();
+          } else {
+            $value = $value_cell->getFormattedValue();
+          }
         }
 
         $data[$about_fields[$cell]] = $value;
