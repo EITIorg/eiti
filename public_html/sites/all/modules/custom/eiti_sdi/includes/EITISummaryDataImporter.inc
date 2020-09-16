@@ -818,7 +818,7 @@ class EITISummaryDataImporter {
           'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
           'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
           'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
           'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
         );
       }
@@ -899,7 +899,7 @@ class EITISummaryDataImporter {
           'reported_by_project' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
           'project_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
           'reporting_currency' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
           'payment_made_in_kind' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
           'in_kind_volume' => $sheet->getCellByColumnAndRow(11, $i)->getFormattedValue(),
           'unit' => $sheet->getCellByColumnAndRow(12, $i)->getFormattedValue(),
