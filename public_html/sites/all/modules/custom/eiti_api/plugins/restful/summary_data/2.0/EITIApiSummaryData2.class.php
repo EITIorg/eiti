@@ -361,10 +361,10 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $cid_parts_arr[] = 'queryRevenues';
     $cid = implode('::', $cid_parts_arr);
 
-    $cache = $this->getCacheController()->get($cid);
+    /*$cache = $this->getCacheController()->get($cid);
     if (!empty($cache->data)) {
       return $cache->data;
-    }
+    }*/
 
     // First we want to see the sum of all the governmental agencies for each country
     // for each year.
