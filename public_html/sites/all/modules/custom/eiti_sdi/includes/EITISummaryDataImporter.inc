@@ -143,10 +143,15 @@ class EITISummaryDataImporter {
       if (isset($about_fields[$cell])) {
         $value_cell = $sheet->getCellByColumnAndRow(4,$i);
 
-        if ($value_cell->isFormula()) {
-          $value = $value_cell->getOldCalculatedValue();
+        if ($about_fields[$cell] == 'currency_rate') {
+          $value = $value_cell->getValue();
+          $value = round($value, 10);
         } else {
-          $value = $value_cell->getFormattedValue();
+          if ($value_cell->isFormula()) {
+            $value = $value_cell->getOldCalculatedValue();
+          } else {
+            $value = $value_cell->getFormattedValue();
+          }
         }
 
         $data[$about_fields[$cell]] = $value;
@@ -786,7 +791,21 @@ class EITISummaryDataImporter {
    */
   private function parseGovermentRevenuesSection($sheet, $max_row) {
     $data = array();
-    $i = 22;
+    $i = 0;
+
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
 
     while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
@@ -799,7 +818,7 @@ class EITISummaryDataImporter {
           'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
           'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
           'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
           'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
         );
       }
@@ -815,7 +834,22 @@ class EITISummaryDataImporter {
    */
   private function parseGovermentRevenuesSectionGFS($sheet, $max_row) {
     $data = array();
-    $i = 22;
+
+    $i = 0;
+
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
 
     while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
@@ -865,7 +899,7 @@ class EITISummaryDataImporter {
           'reported_by_project' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
           'project_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
           'reporting_currency' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
           'payment_made_in_kind' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
           'in_kind_volume' => $sheet->getCellByColumnAndRow(11, $i)->getFormattedValue(),
           'unit' => $sheet->getCellByColumnAndRow(12, $i)->getFormattedValue(),
@@ -1257,7 +1291,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
       $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
       $currency_rate = $entity->currency_rate;
 
-      if ($item['reporting_currency'] != 'USD') {
+      if ($item['currency'] != 'USD') {
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = 'USD';
@@ -1266,7 +1300,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = $item['reporting_currency'];
-        $entity_item->revenue = $item['revenue_value'];
+        $entity_item->revenue = round($item['revenue_value'], 2);
       }
 
       entity_save('revenue_stream', $entity_item);
@@ -1354,15 +1388,17 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = 'USD';
-        $entity_item->revenue = round($item['revenue_value'] / $currency_rate, 2);
+        $item['revenue_value'] = round($item['revenue_value'] / $currency_rate, 2);
+        $entity_item->revenue = $item['revenue_value'];
       } else {
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = $item['reporting_currency'];
+        $item['revenue_value'] = round($item['revenue_value'], 2);
         $entity_item->revenue = $item['revenue_value'];
       }
 
-      $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
+      $entity_item->field_revenue_value['und'][0]['value'] = $item['revenue_value'];
       $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
       $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
       $entity_item->field_unit['und'][0]['value'] = $item['unit'];

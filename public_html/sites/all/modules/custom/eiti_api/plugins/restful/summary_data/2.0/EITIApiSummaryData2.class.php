@@ -361,10 +361,10 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
     $cid_parts_arr[] = 'queryRevenues';
     $cid = implode('::', $cid_parts_arr);
 
-    $cache = $this->getCacheController()->get($cid);
+    /*$cache = $this->getCacheController()->get($cid);
     if (!empty($cache->data)) {
       return $cache->data;
-    }
+    }*/
 
     // First we want to see the sum of all the governmental agencies for each country
     // for each year.
@@ -381,7 +381,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
 
     $query->condition('sd.status', TRUE);
     $query->condition('grs.type', 'agency');
-    $query->condition('grs.revenue', 0, '>');
+    //$query->condition('grs.revenue', 0, '>');
 
     $query->groupBy('year');
     $query->groupBy('iso2');
@@ -411,7 +411,7 @@ class EITIApiSummaryData2 extends EITIApiSummaryData {
 
     $query->condition('sd.status', TRUE);
     $query->condition('crs.type', 'company');
-    $query->condition('crs.revenue', 0, '>');
+    //$query->condition('crs.revenue', 0, '>');
 
     $query->groupBy('year');
     $query->groupBy('iso2');
