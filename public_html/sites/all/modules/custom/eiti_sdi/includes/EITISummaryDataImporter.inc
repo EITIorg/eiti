@@ -800,7 +800,7 @@ class EITISummaryDataImporter {
     if ($pos != 0) {
       $i = $pos;
     }
-    
+
     while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
@@ -828,7 +828,22 @@ class EITISummaryDataImporter {
    */
   private function parseGovermentRevenuesSectionGFS($sheet, $max_row) {
     $data = array();
-    $i = 22;
+
+    $i = 0;
+
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
 
     while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
@@ -1270,7 +1285,7 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
       $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
       $currency_rate = $entity->currency_rate;
 
-      if ($item['reporting_currency'] != 'USD') {
+      if ($item['currency'] != 'USD') {
         $entity_item->original_currency = $item['reporting_currency'];
         $entity_item->original_revenue = $item['revenue_value'];
         $entity_item->currency = 'USD';
