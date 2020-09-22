@@ -1280,6 +1280,9 @@ function panels_export_display($display, $prefix = '') {
     case PANELS_TITLE_PANE:
       $output .= 'PANELS_TITLE_PANE';
       break;
+    default:
+      $output .= '\'' . $display->hide_title . '\'';
+      break;
   }
   $output .= ";\n";
 
