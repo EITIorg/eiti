@@ -404,15 +404,7 @@ function _elasticsearch_connector_ec_index_process($element, &$form_state, $form
     $index = $element['#default_value']['index'];
   }
 
-  $prefix_warning = '';
   if (!empty($index)) {
-    if (isset($form_state['triggering_element'])) {
-      $mapping_types = elasticsearch_connector_get_index_mappings($cluster_id, $index);
-      if(($mapping_types !== FALSE) && count($mapping_types)) {
-        $prefix_warning = '<span class="error">Index already contains a mapping, if you continue it will be overwritten.</span>';
-      }
-    }
-
     $links[] = array(
       'title' => t('Edit @index index', array('@index' => $index)),
       'href' => 'admin/config/elasticsearch-connector/clusters/' .$cluster_id . '/indices/' . $index . '/edit',
@@ -447,7 +439,7 @@ function _elasticsearch_connector_ec_index_process($element, &$form_state, $form
       'effect' => 'fade',
     ),
     '#prefix' => '<div id="' . $wrapper_id . '">',
-    '#suffix' =>'<div id="' . $element['#id'] . '-dialog-links" class="dialog-links ' . $element['#id'] . '">' . $prefix_warning
+    '#suffix' =>'<div id="' . $element['#id'] . '-dialog-links" class="dialog-links ' . $element['#id'] . '">'
         . theme('links__es_index_links', array(
             'links' => $links,
             'attributes' => array('class' => 'index-dialog-links')
@@ -628,29 +620,6 @@ function elasticsearch_connector_cluster_delete($cluster) {
 }
 
 /**
- * Get the mapping types for a given index in a given cluster
- *
- * @param string $cluster_id
- *   Cluster ID.
- * @param string $index_name
- *   Index Name.
- *
- * @return bool|array
- *   A list of the mapping types, or false if no connection.
- */
-function elasticsearch_connector_get_index_mappings($cluster_id, $index_name) {
-  $client = elasticsearch_connector_get_client_by_id($cluster_id);
-  if ($client) {
-    $mappings = $client->indices()->getMapping(array(
-      'index' => $index_name,
-    ));
-    $mapping_types = $mappings[$index_name]['mappings'];
-    return $mapping_types;
-  }
-  return FALSE;
-}
-
-/**
  * Get the indeces based on cluster id.
  * @param string $cluster_id
  * @return array Indices
@@ -668,19 +637,7 @@ function elasticsearch_connector_get_indices_options($cluster_id, $empty_option 
     if (!empty($indices['indices'])) {
       foreach ($indices['indices'] as $index_name => $index_info) {
         // TODO: Check index status if such e.g. index closed or s.o.
-        $mapping_types = elasticsearch_connector_get_index_mappings($cluster_id, $index_name);
-        if ($mapping_types !== FALSE) {
-          $mapping_count = count($mapping_types);
-          if ($mapping_count <= 1) {
-            if ($mapping_count === 0) {
-              $description = 'no mapping';
-            }
-            else {
-              $description = key($mapping_types);
-            }
-            $result[$index_name] = $index_name . ' [' . $description . ']';
-          }
-        }
+        $result[$index_name] = $index_name;
       }
     }
   }

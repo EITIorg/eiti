@@ -12,8 +12,9 @@ files[] = includes/elasticsearch_stats.inc
 files[] = includes/processor_highlight.inc
 files[] = includes/processor_prefix_search.inc
 files[] = includes/more_like_this_handler.inc
-; Information added by Drupal.org packaging script on 2018-09-05
-version = "7.x-5.0-alpha1+1-dev"
+; Information added by Drupal.org packaging script on 2018-02-07
+version = "7.x-5.0-alpha1"
 core = "7.x"
 project = "elasticsearch_connector"
-datestamp = "1536173588"
+datestamp = "1518040984"
+

@@ -59,8 +59,8 @@ function mailchimp_campaign_campaign_form($form, &$form_state, MailChimpCampaign
   if (!empty($list_segments)) {
     $form['list_segment_id'] = array(
       '#type' => 'select',
-      '#title' => t('List Segment'),
-      '#description' => t('Select the list segment this campaign should be sent to.'),
+      '#title' => t('List Tags'),
+      '#description' => t('Select the list tags this campaign should be sent to.'),
       '#options' => _mailchimp_campaign_build_option_list($list_segments, '-- Entire list --'),
       '#default_value' => (isset($segment_id)) ? $segment_id : '',
     );
