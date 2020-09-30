@@ -1398,6 +1398,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->revenue = $item['revenue_value'];
       }
 
+      $item['revenue_value'] = round($item['revenue_value'], 2);
       $entity_item->field_revenue_value['und'][0]['value'] = $item['revenue_value'];
       $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
       $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
