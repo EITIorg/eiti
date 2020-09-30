@@ -542,10 +542,27 @@ class EITISummaryDataImporter {
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
           $inclusion_cell = $sheet->getCellByColumnAndRow(3, $i);
+          
           if ($inclusion_cell->isFormula()) {
-            $value = $inclusion_cell->getOldCalculatedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+
+              if (substr_count($value, '%')) {
+                $value = str_replace('%', '', $value);
+                $value = $value / 100;
+              }
+
+              $value = round($value, 2);
+            } else {
+              $value = $inclusion_cell->getOldCalculatedValue();
+            }
           } else {
-            $value = $inclusion_cell->getFormattedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+              $value = round($value, 2);
+            } else {
+              $value = $inclusion_cell->getFormattedValue();
+            }
           }
 
           $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
