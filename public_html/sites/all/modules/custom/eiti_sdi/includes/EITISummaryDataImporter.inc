@@ -542,10 +542,24 @@ class EITISummaryDataImporter {
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
           $inclusion_cell = $sheet->getCellByColumnAndRow(3, $i);
+
           if ($inclusion_cell->isFormula()) {
-            $value = $inclusion_cell->getOldCalculatedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+
+              if (substr_count($value, '%')) {
+                $value = str_replace('%', '', $value);
+                $value = $value / 100;
+              }
+            } else {
+              $value = $inclusion_cell->getOldCalculatedValue();
+            }
           } else {
-            $value = $inclusion_cell->getFormattedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+            } else {
+              $value = $inclusion_cell->getFormattedValue();
+            }
           }
 
           $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
@@ -1398,6 +1412,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
         $entity_item->revenue = $item['revenue_value'];
       }
 
+      $item['revenue_value'] = round($item['revenue_value'], 2);
       $entity_item->field_revenue_value['und'][0]['value'] = $item['revenue_value'];
       $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
       $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
