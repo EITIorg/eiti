@@ -542,7 +542,7 @@ class EITISummaryDataImporter {
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
           $inclusion_cell = $sheet->getCellByColumnAndRow(3, $i);
-          
+
           if ($inclusion_cell->isFormula()) {
             if ($requirement_cell == 'Reconciliation coverage') {
               $value = $inclusion_cell->getValue();
@@ -551,15 +551,12 @@ class EITISummaryDataImporter {
                 $value = str_replace('%', '', $value);
                 $value = $value / 100;
               }
-
-              $value = round($value, 2);
             } else {
               $value = $inclusion_cell->getOldCalculatedValue();
             }
           } else {
             if ($requirement_cell == 'Reconciliation coverage') {
               $value = $inclusion_cell->getValue();
-              $value = round($value, 2);
             } else {
               $value = $inclusion_cell->getFormattedValue();
             }
