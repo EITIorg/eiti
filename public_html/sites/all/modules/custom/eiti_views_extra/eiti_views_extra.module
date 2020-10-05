@@ -16,3 +16,15 @@ function eiti_views_extra_views_data_alter(&$data) {
     );
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function eiti_views_extra_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-documents-search-page') {
+    $form['field_doc_published_date']['#default_value'] = FALSE;
+    $form_state['input']['field_doc_published_date'] = FALSE;
+    $form['field_doc_published_date_1']['#default_value'] = FALSE;
+    $form_state['input']['field_doc_published_date_1'] = FALSE;
+  }
+}
