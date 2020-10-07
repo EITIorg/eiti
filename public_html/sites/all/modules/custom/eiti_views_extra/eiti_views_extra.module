@@ -22,9 +22,20 @@ function eiti_views_extra_views_data_alter(&$data) {
  */
 function eiti_views_extra_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-documents-search-page') {
-    $form['field_doc_published_date']['#default_value'] = FALSE;
-    $form_state['input']['field_doc_published_date'] = FALSE;
-    $form['field_doc_published_date_1']['#default_value'] = FALSE;
-    $form_state['input']['field_doc_published_date_1'] = FALSE;
+    if (isset($form['field_doc_published_date']['#default_value']) && $form['field_doc_published_date']['#default_value'] == '') {
+      $form['field_doc_published_date']['#default_value'] = FALSE;
+    }
+
+    if (isset($form['field_doc_published_date_1']['#default_value']) && $form['field_doc_published_date_1']['#default_value'] == '') {
+      $form['field_doc_published_date_1']['#default_value'] = FALSE;
+    }
+
+    if (isset($form_state['input']['field_doc_published_date']) &&  $form_state['input']['field_doc_published_date'] == '') {
+      $form_state['input']['field_doc_published_date'] = FALSE;
+    }
+
+    if (isset($form_state['input']['field_doc_published_date_1']) && $form_state['input']['field_doc_published_date_1'] == '') {
+      $form_state['input']['field_doc_published_date_1'] = FALSE;
+    }
   }
 }
