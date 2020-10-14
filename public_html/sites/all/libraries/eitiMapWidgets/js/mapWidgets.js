@@ -24926,7 +24926,7 @@
 	  "id": 1,
 	  "name": "status",
 	  "description": "Implementation status",
-	  "header": "Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
+	  "header": "Overview on how countries are progressing towards meeting the EITI Standard. <br><a href=\"/about/how-we-work#upholding-the-standard-internationally-validation\">Country statuses explained</a>",
 	  "footer": "<br>For an overview of Validation in each country, click <a href=\"/document/validation-schedule-decisions\">here</a>.<br><br>"
 	}, {
 	  "id": 2,
@@ -25197,7 +25197,7 @@
 	var status2 = exports.status2 = [{
 	  "id": 5329,
 	  "color": "#6CBCE3",
-	  "title": "Yet to be assessed against the 2016 Standard<br>",
+	  "title": "Yet to be assessed against the Standard<br>",
 	  "subtitle": "",
 	  "use_style": true
 	}, {
@@ -25284,7 +25284,7 @@
 	Drupal.t('Open Country Page');
 	Drupal.t('Open Local EITI Website');
 	Drupal.t('Overview');
-	Drupal.t('Overview on how countries are progressing towards meeting the 2016 EITI Standard. <br><a href="/about/how-we-work#upholding-the-standard-internationally-validation">Country statuses explained</a>');
+	Drupal.t('Overview on how countries are progressing towards meeting the EITI Standard. <br><a href="/about/how-we-work#upholding-the-standard-internationally-validation">Country statuses explained</a>');
 	Drupal.t('Satisfactory progress');
 	Drupal.t('Sectors covered');
 	Drupal.t('Share of revenues');
@@ -25296,7 +25296,7 @@
 	Drupal.t('Unavailable');
 	Drupal.t('USD');
 	Drupal.t('Yes');
-	Drupal.t('Yet to be assessed against the 2016 Standard<br>');
+	Drupal.t('Yet to be assessed against the Standard<br>');
 	Drupal.t('Tax & Legal Framework');
 	Drupal.t('Production');
 	Drupal.t('Revenues');
