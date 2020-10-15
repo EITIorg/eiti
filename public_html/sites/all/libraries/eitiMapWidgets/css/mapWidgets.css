@@ -354,6 +354,9 @@
 .eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_against_the_2016_standard {
   background-color: #6CBCE3;
 }
+.eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_against_the_standard {
+  background-color: #6CBCE3;
+}
 .eiti-map-wrapper .country-list .member-status.suspended {
   background-color: #FF6600;
 }
