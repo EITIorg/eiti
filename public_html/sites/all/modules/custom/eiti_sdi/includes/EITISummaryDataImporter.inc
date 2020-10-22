@@ -538,6 +538,15 @@ class EITISummaryDataImporter {
           'source' => '',
         );
 
+        if ($requirement_cell == 'If yes, what was the volume received?' || $requirement_cell == 'If yes, what was sold?') {
+          $data['items'][] = array(
+            'parent' => 'EITI Requirement 4.2: In-kind revenues',
+            'requirement_cell' => $requirement_cell,
+            'inclusion' => '',
+            'source' => '',
+          );
+        }
+
         $max++;
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
@@ -1365,7 +1374,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
 
     $organisation_id = '';
     $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name", array(":type" => 'company', ":name" => $item['company']))->fetchAll();
-    
+
     if ($organisation_query) {
       $organisation_query = array_shift($organisation_query);
 
