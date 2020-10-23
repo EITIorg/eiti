@@ -1486,6 +1486,21 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
     if ($indicator) {
       $indicator = array_shift($indicator);
 
+      if ($indicator->type == 'group' && ($indicator->name == 'If yes, what was the volume received?' || $indicator->name == 'If yes, what was sold?')) {
+
+        if (empty($indicator->parent) || $indicator->parent == null) {
+          $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => 'EITI Requirement 4.2: In-kind revenues'))->fetchAll();
+
+          if ($parent_id_query) {
+            $parent_id_query = array_shift($parent_id_query);
+            if (isset($parent_id_query->id)) {
+              $indicator->parent = $parent_id_query->id;
+              entity_save('indicator', $indicator);
+            }
+          }
+        }
+      }
+
       if ($indicator->type != 'group' && !empty($values['parent'])) {
         // Create indicator value there
         $entity_item = entity_get_controller('indicator_value')->create();
