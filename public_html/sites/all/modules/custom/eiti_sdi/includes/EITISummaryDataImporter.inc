@@ -1106,12 +1106,16 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
       if (isset($reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']])) {
         $item = $reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']];
 
-        if (isset($item['company_id'])) {
-          if ($item['company_id'] != 'Not applicable') {
+        if (isset($item['full_company_name'])) {
+
+          /*if ($item['company_id'] != 'Not applicable') {
             $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type and eo.country_id = :cid", array(':id_number' => $item['company_id'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
           } else {
             $entity_id_query = FALSE;
-          }
+          }*/
+
+
+          $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.name = :name and eo.type = :type and eo.country_id = :cid", array(':name' => $item['full_company_name'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
 
           if ($entity_id_query) {
             $entity_id_query = array_shift($entity_id_query);
