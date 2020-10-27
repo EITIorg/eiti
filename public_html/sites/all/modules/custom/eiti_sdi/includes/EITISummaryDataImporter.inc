@@ -538,6 +538,15 @@ class EITISummaryDataImporter {
           'source' => '',
         );
 
+        if ($requirement_cell == 'If yes, what was the volume received?' || $requirement_cell == 'If yes, what was sold?') {
+          $data['items'][] = array(
+            'parent' => 'EITI Requirement 4.2: In-kind revenues',
+            'requirement_cell' => $requirement_cell,
+            'inclusion' => '',
+            'source' => '',
+          );
+        }
+
         $max++;
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
@@ -827,14 +836,17 @@ class EITISummaryDataImporter {
       if (empty($gfs_classification)) {
         $i = $max_row;
       } else {
-        $data[] = array(
-          'gfs_classification' => $gfs_classification,
-          'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
-          'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
-          'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
-          'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
-        );
+
+        if ($gfs_classification != 'Add new rows as necessary, right click the row number to the left and select "Insert"') {
+          $data[] = array(
+            'gfs_classification' => $gfs_classification,
+            'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+            'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+            'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+            'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
+            'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
+          );
+        }
       }
 
       $i++;
@@ -905,6 +917,7 @@ class EITISummaryDataImporter {
       if (empty($company)) {
         $i = $max_row;
       } else {
+
         $data[] = array(
           'company' => $company,
           'goverment_entity' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
@@ -1093,12 +1106,16 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
       if (isset($reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']])) {
         $item = $reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']];
 
-        if (isset($item['company_id'])) {
-          if ($item['company_id'] != 'Not applicable') {
-            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type", array(':id_number' => $item['company_id'], ':type' => 'company'))->fetchAll();
+        if (isset($item['full_company_name'])) {
+
+          /*if ($item['company_id'] != 'Not applicable') {
+            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type and eo.country_id = :cid", array(':id_number' => $item['company_id'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
           } else {
             $entity_id_query = FALSE;
-          }
+          }*/
+
+
+          $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.name = :name and eo.type = :type and eo.country_id = :cid", array(':name' => $item['full_company_name'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
 
           if ($entity_id_query) {
             $entity_id_query = array_shift($entity_id_query);
@@ -1341,6 +1358,15 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['entity_id'] = $entity;
     $context['sandbox']['company'] = $company_parsed_data;
+    $context['sandbox']['country_id'] = '';
+
+    $country_query = db_query("SELECT esd.country_id FROM {eiti_summary_data} esd WHERE esd.id = :entity_id", array(':entity_id' => $entity))->fetchAll();
+    if ($country_query) {
+      $country_query = array_shift($country_query);
+      if (isset($country_query->country_id)) {
+        $context['sandbox']['country_id'] = $country_query->country_id;
+      }
+    }
   }
 
   if (isset($company_parsed_data[$context['sandbox']['progress']])) {
@@ -1351,7 +1377,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
     $entity_item->report_status = 1;
 
     $organisation_id = '';
-    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'company', ':name' => $item['company']))->fetchAll();
+    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name", array(":type" => 'company', ":name" => $item['company']))->fetchAll();
 
     if ($organisation_query) {
       $organisation_query = array_shift($organisation_query);
@@ -1369,7 +1395,10 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
     $entity_item->field_project_name['und'][0]['value'] = $item['project_name'];
     $entity_item->field_currency['und'][0]['value'] = $item['reporting_currency'];
 
-    if (isset($goverment_revenues_gfs[$item['goverment_entity']][$item['revenue_stream_name']]['gfs_classification'])) {
+    $t_ge = $item['goverment_entity'];
+    $t_rsn = $item['revenue_stream_name'];
+
+    if (isset($goverment_revenues_gfs[$t_ge][$t_rsn]['gfs_classification'])) {
       $item['gfs_classification'] = $goverment_revenues_gfs[$item['goverment_entity']][$item['revenue_stream_name']]['gfs_classification'];
 
       $gfs = '';
@@ -1460,6 +1489,21 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
 
     if ($indicator) {
       $indicator = array_shift($indicator);
+
+      if ($indicator->type == 'group' && ($indicator->name == 'If yes, what was the volume received?' || $indicator->name == 'If yes, what was sold?')) {
+
+        if (empty($indicator->parent) || $indicator->parent == null) {
+          $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => 'EITI Requirement 4.2: In-kind revenues'))->fetchAll();
+
+          if ($parent_id_query) {
+            $parent_id_query = array_shift($parent_id_query);
+            if (isset($parent_id_query->id)) {
+              $indicator->parent = $parent_id_query->id;
+              entity_save('indicator', $indicator);
+            }
+          }
+        }
+      }
 
       if ($indicator->type != 'group' && !empty($values['parent'])) {
         // Create indicator value there

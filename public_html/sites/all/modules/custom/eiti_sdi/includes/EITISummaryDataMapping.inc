@@ -68,6 +68,8 @@ class EITISummaryDataMapping {
       'EITI Requirement 3.3: Exports',
       'EITI Requirement 4.1: Comprehensiveness',
       'EITI Requirement 4.2: In-kind revenues',
+      'If yes, what was the volume received?',
+      'If yes, what was sold?',
       'EITI Requirement 4.3: Barter agreements',
       'EITI Requirement 4.4: Transportation revenues',
       'EITI Requirement 4.5: SOE transactions',
@@ -91,8 +93,6 @@ class EITISummaryDataMapping {
     return array(
       'Does the government publish information about',
       '(Harmonised System Codes)',
-      'If yes, what was the volume received?',
-      'If yes, what was sold?',
     );
   }
 
