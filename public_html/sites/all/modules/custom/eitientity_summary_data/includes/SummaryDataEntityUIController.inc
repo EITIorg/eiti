@@ -15,7 +15,7 @@ class SummaryDataEntityUIController extends HelperEntityBundleableUIController {
   public function hook_menu() {
     $items = parent::hook_menu();
 
-    $defaults = array(
+    /*$defaults = array(
       'file' => $this->entityInfo['admin ui']['file'],
       'file path' =>  isset($this->entityInfo['admin ui']['file path']) ? $this->entityInfo['admin ui']['file path'] : drupal_get_path('module', $this->entityInfo['module']),
     );
@@ -30,7 +30,7 @@ class SummaryDataEntityUIController extends HelperEntityBundleableUIController {
         'type' => MENU_LOCAL_TASK,
         'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
         'weight' => 0,
-      ) + $defaults;
+      ) + $defaults;*/
 
     return $items;
   }
