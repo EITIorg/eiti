@@ -176,6 +176,9 @@ class EITISummaryDataImporter {
 
       if ($is_entity_exists) {
         $entity_item = entity_load('summary_data', array($is_entity_exists));
+        $entity_item = array_shift($entity_item);
+        drupal_set_message(t('Summary data report is already exists, please delete existing one and do re-import. Please keep XLSX report file before deleting the report'), 'status');
+        drupal_goto('summary_data/' . $entity_item->id);
       } else {
         $entity_item = entity_create('summary_data', array('type' => 'summary_data'));
 
@@ -1107,14 +1110,6 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
         $item = $reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']];
 
         if (isset($item['full_company_name'])) {
-
-          /*if ($item['company_id'] != 'Not applicable') {
-            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type and eo.country_id = :cid", array(':id_number' => $item['company_id'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
-          } else {
-            $entity_id_query = FALSE;
-          }*/
-
-
           $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.name = :name and eo.type = :type and eo.country_id = :cid", array(':name' => $item['full_company_name'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
 
           if ($entity_id_query) {
@@ -1539,7 +1534,6 @@ function eiti_sdi_create_indicator_item($values, $currency_rate) {
             $entity_item->value_text = $values['inclusion'];
             break;
           case 'reporting_type':
-
             $value_reporting_type = '';
 
             switch ($values['inclusion']) {
