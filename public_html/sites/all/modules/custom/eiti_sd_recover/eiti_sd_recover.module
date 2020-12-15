@@ -40,6 +40,7 @@ function eiti_sd_recover_revenue_streams_cleanup() {
   $markup = '';
 
   $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
 
   return $markup;
 }

@@ -1461,6 +1461,13 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $g
  * Implements Batch process finish callback for Summary data import
  */
 function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
+
+  // Cleanup for revenue stream
+  $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+
+  //Cleanup for indicators
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
+
   $message = t('Summary data import completed');
   drupal_set_message($message);
 }
