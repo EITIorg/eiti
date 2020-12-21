@@ -126,6 +126,9 @@ function eiti_migration_spreadsheets_import_finished($success, $results, $operat
     ));
     drupal_set_message($message, 'error');
   }
+
+  $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
 }
 
 /**
@@ -220,6 +223,9 @@ function eiti_migration_spreadsheets_dynamic_upload_finished($success, $results,
     drupal_set_message($message, 'error');
   }
 
+  $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
+  
   _eiti_migration_s3_cleanup_spreadsheet_temp();
 }
 
