@@ -381,7 +381,7 @@ function eitientity_implementing_country_lookup_by_name($name) {
   $efq_results = $efq->entityCondition('entity_type', 'implementing_country')
     ->propertyCondition('type', 'normal')
     ->propertyCondition('name', $name, 'LIKE')
-    ->execute();*/
+    ->execute(); */
 
   $efq_results = array('implementing_country' => array());
 
