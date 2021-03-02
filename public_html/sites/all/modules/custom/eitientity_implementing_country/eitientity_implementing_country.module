@@ -140,7 +140,7 @@ function eitientity_implementing_country_admin_paths() {
  * @return FALSE|ImplementingCountryEntity
  */
 function implementing_country_load($entity_id, $entity_type) {
-  return is_numeric($entity_id) ? entity_object_load($entity_id, $entity_type) : FALSE;
+  return is_integer($entity_id) ? entity_object_load($entity_id, $entity_type) : FALSE;
 }
 
 /**
@@ -377,11 +377,25 @@ function eitientity_implementing_country_ctools_plugin_directory($owner, $plugin
  *   Loaded entity if was found or FALSE.
  */
 function eitientity_implementing_country_lookup_by_name($name) {
-  $efq = new EntityFieldQuery();
+  /*$efq = new EntityFieldQuery();
   $efq_results = $efq->entityCondition('entity_type', 'implementing_country')
     ->propertyCondition('type', 'normal')
     ->propertyCondition('name', $name, 'LIKE')
-    ->execute();
+    ->execute(); */
+
+  $efq_results = array('implementing_country' => array());
+
+  $name = preg_replace('/[[:^print:]]/', '%', $name);
+  $results = db_query("SELECT ic.id FROM {eiti_implementing_country} ic WHERE ic.name LIKE :name", array(':name' => $name))->fetchAll();
+
+  foreach ($results as $result) {
+    if (isset($result->id)) {
+      $country_item = new stdClass();
+      $country_item->id = $result->id;
+      $country_item->type = 'normal';
+      $efq_results['implementing_country'][$result->id] = $country_item;
+    }
+  }
 
   if (!empty($efq_results['implementing_country'])) {
     $ids = array_keys($efq_results['implementing_country']);
