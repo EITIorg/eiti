@@ -140,7 +140,7 @@ function eitientity_implementing_country_admin_paths() {
  * @return FALSE|ImplementingCountryEntity
  */
 function implementing_country_load($entity_id, $entity_type) {
-  return is_integer($entity_id) ? entity_object_load($entity_id, $entity_type) : FALSE;
+  return is_numeric($entity_id) ? entity_object_load($entity_id, $entity_type) : FALSE;
 }
 
 /**
