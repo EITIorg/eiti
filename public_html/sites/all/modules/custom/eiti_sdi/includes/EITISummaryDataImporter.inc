@@ -71,6 +71,7 @@ class EITISummaryDataImporter {
     if ($about) {
       $max_row = $xls->setActiveSheetIndex(1)->getHighestRow();
       $parsed_data = $this->parseAboutSection($about, $max_row);
+      dsm($parsed_data);
       $entity = $this->buildSummaryDataReportFromXls($parsed_data, $fid);
     }
 
@@ -90,7 +91,6 @@ class EITISummaryDataImporter {
       $max_row = $xls->setActiveSheetIndex(3)->getHighestRow();
       $reporting_entities_parsed_data = $this->parseReportingEntitiesSection($reporting_entities, $max_row);
       $reporting_entities_parsed_company_id_references = $this->parseCompanyIdReferences($reporting_entities, $max_row);
-
       if ($reporting_entities_parsed_company_id_references) {
         $summary_data = entity_load('summary_data', array($entity));
 
@@ -500,6 +500,12 @@ class EITISummaryDataImporter {
         $item = '0';
         break;
       case 'Yes, through EITI reporting':
+        $item = '1';
+        break;
+      case 'Yes':
+        $item = '0';
+        break;
+      case 'No':
         $item = '1';
         break;
       case 'Not applicable':
