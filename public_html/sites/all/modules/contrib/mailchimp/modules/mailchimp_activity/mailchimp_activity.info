@@ -1,6 +1,6 @@
-name = Mailchimp Activity
+name = MailChimp Activity
 description = View activity for an email address associated with any entity.
-package = Mailchimp
+package = MailChimp
 core = 7.x
 
 dependencies[] = mailchimp
@@ -10,7 +10,7 @@ files[] = includes/mailchimp_activity.entity.inc
 files[] = includes/mailchimp_activity.ui_controller.inc
 
 ; Information added by Drupal.org packaging script on 2019-09-25
-version = "7.x-4.12"
+version = "7.x-5.6"
 core = "7.x"
 project = "mailchimp"
-datestamp = "1569440301"
+datestamp = "1569440314"
