@@ -48,7 +48,7 @@ function devel_create_users($num, $kill, $age = 0, $roles = array(), $pass = NUL
         'uid'     => NULL,
         'name'    => $name,
         'pass'    => $pass,
-        'mail'    => $name . '@' . $url['host'].'.invalid',
+        'mail'    => $name . '@' . $url['host'] . '.invalid',
         'status'  => 1,
         'created' => REQUEST_TIME - mt_rand(0, $age),
         'roles' => drupal_map_assoc($roles),
@@ -189,7 +189,7 @@ function devel_generate_vocabs($records, $maxlength = 12, $types = array('page',
     $voc = new stdClass();
     $voc->name = devel_generate_word(mt_rand(2, $maxlength));
     $voc->machine_name = drupal_strtolower($voc->name);
-    $voc->description = "description of ". $voc->name;
+    $voc->description = "description of " . $voc->name;
     // TODO: not working
     $voc->nodes = array_flip(array($types[array_rand($types)]));
     foreach ($voc->nodes as $key => $value) {
@@ -200,7 +200,7 @@ function devel_generate_vocabs($records, $maxlength = 12, $types = array('page',
     $voc->required = 0;
     $voc->relations = 1;
     $voc->hierarchy = 1;
-    $voc->weight = mt_rand(0,10);
+    $voc->weight = mt_rand(0, 10);
     $voc->language = LANGUAGE_NONE;
 
     taxonomy_vocabulary_save($voc);
@@ -251,7 +251,7 @@ function devel_generate_terms($records, $vocabs, $maxlength = 12) {
                     ->fields('v', array('machine_name'))
                     ->condition('v.vid', array_keys($vocabs), 'IN')
                     ->condition('t.tid', $candidate, '>=')
-                    ->range(0,1)
+                    ->range(0, 1)
                     ->execute()
                     ->fetchAssoc();
           if ($parent['tid']) {
@@ -266,10 +266,11 @@ function devel_generate_terms($records, $vocabs, $maxlength = 12) {
     }
 
     $term->name = devel_generate_word(mt_rand(2, $maxlength));
-    $term->description = "description of ". $term->name;
+    $term->description = "description of " . $term->name;
     $term->format = filter_fallback_format();
     $term->weight = mt_rand(0, 10);
     $term->language = LANGUAGE_NONE;
+    $term->devel_generate = TRUE;
 
     // Populate all core fields on behalf of field.module
     module_load_include('inc', 'devel_generate', 'devel_generate.fields');
@@ -459,7 +460,7 @@ function devel_generate_links($num_links, $menus, $title_length, $link_types, $m
   return $links;
 }
 
-function devel_generate_word($length){
+function devel_generate_word($length) {
   mt_srand((double)microtime()*1000000);
 
   $vowels = array("a", "e", "i", "o", "u");
@@ -470,36 +471,18 @@ function devel_generate_word($length){
   $num_cons = count($cons);
   $word = '';
 
-  while(strlen($word) < $length){
+  while (strlen($word) < $length) {
     $word .= $cons[mt_rand(0, $num_cons - 1)] . $vowels[mt_rand(0, $num_vowels - 1)];
   }
 
   return substr($word, 0, $length);
 }
 
-function devel_create_content($type = NULL) {
-  $nparas = mt_rand(1,12);
-  $type = empty($type) ? mt_rand(0,3) : $type;
-
-  $output = "";
-  switch($type % 3) {
-    // MW: This appears undesireable. Was giving <p> in text fields
-    // case 1: // html
-    //       for ($i = 1; $i <= $nparas; $i++) {
-    //         $output .= devel_create_para(mt_rand(10,60),1);
-    //       }
-    //       break;
-    //
-    //     case 2: // brs only
-    //       for ($i = 1; $i <= $nparas; $i++) {
-    //         $output .= devel_create_para(mt_rand(10,60),2);
-    //       }
-    //       break;
-
-    default: // plain text
-      for ($i = 1; $i <= $nparas; $i++) {
-        $output .= devel_create_para(mt_rand(10,60)) ."\n\n";
-      }
+function devel_create_content() {
+  $nparas = mt_rand(1, 12);
+  $output = '';
+  for ($i = 1; $i <= $nparas; $i++) {
+    $output .= devel_create_para(mt_rand(10, 60)) . "\n\n";
   }
 
   return $output;
@@ -509,7 +492,7 @@ function devel_create_para($words, $type = 0) {
   $output = '';
   switch ($type) {
     case 1:
-      $output .= "<p>" . devel_create_greeking($words)  . "</p>";
+      $output .= "<p>" . devel_create_greeking($words) . "</p>";
       break;
 
     case 2:
@@ -585,7 +568,7 @@ function devel_generate_add_terms(&$node) {
   foreach ($vocabs as $vocab) {
     $sql = "SELECT tid FROM {taxonomy_term_data} WHERE vid = :vid ORDER BY RAND()";
     $result = db_query_range($sql, 0, 5 , array(':vid' => $vocab->vid));
-    foreach($result as $row) {
+    foreach ($result as $row) {
       $node->taxonomy[] = $row->tid;
       if (!$vocab->multiple) {
         break;
@@ -659,8 +642,12 @@ function devel_generate_content_pre_node(&$results) {
 /**
  * Create one node. Used by both batch and non-batch code branches.
  *
- * @param $num
- *   array of options obtained from devel_generate_content_form.
+ * @param $results
+ *   array of options obtained from devel_generate_content_form. If call
+ *   this function directly, $results should contain at the very least:
+ *     node_types => an associative array of node type machine names
+ *     users => an array of UIDs
+ *     title_length => max number of words in titles, for example 4.
  */
 function devel_generate_content_add_node(&$results) {
   $node = new stdClass();
@@ -672,10 +659,10 @@ function devel_generate_content_add_node(&$results) {
   $users = $results['users'];
   $node->uid = $users[array_rand($users)];
   $type = node_type_get_type($node);
-  $node->revision = mt_rand(0,1);
+  $node->revision = mt_rand(0, 1);
   $node->promote = mt_rand(0, 1);
 
-  if ($type->has_title) {
+  if (!$type || $type->has_title) {
     // We should not use the random function if the value is not random
     if ($results['title_length'] < 2) {
       $node->title = devel_create_greeking(1, TRUE);
