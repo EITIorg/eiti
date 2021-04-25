@@ -29,8 +29,8 @@ function mailchimp_campaign_campaign_form($form, &$form_state, MailChimpCampaign
   $mailchimp_lists = mailchimp_get_lists();
   $form['list_id'] = array(
     '#type' => 'select',
-    '#title' => t('List'),
-    '#description' => t('Select the list this campaign should be sent to.'),
+    '#title' => t('Audience'),
+    '#description' => t('Select the audience this campaign should be sent to.'),
     '#options' => _mailchimp_campaign_build_option_list($mailchimp_lists),
     '#default_value' => ($campaign) ? $campaign->mc_data->recipients->list_id : -1,
     '#required' => TRUE,
@@ -59,8 +59,8 @@ function mailchimp_campaign_campaign_form($form, &$form_state, MailChimpCampaign
   if (!empty($list_segments)) {
     $form['list_segment_id'] = array(
       '#type' => 'select',
-      '#title' => t('List Tags'),
-      '#description' => t('Select the list tags this campaign should be sent to.'),
+      '#title' => t('Audience Tags'),
+      '#description' => t('Select the audience tags this campaign should be sent to.'),
       '#options' => _mailchimp_campaign_build_option_list($list_segments, '-- Entire list --'),
       '#default_value' => (isset($segment_id)) ? $segment_id : '',
     );
@@ -96,7 +96,7 @@ function mailchimp_campaign_campaign_form($form, &$form_state, MailChimpCampaign
   $form['template_id'] = array(
     '#type' => 'select',
     '#title' => t('Template'),
-    '#description' => t('Select a Mailchimp user template to use. Due to a limitation in the API, only templates that do not contain repeating sections are available. If empty, the default template will be applied.'),
+    '#description' => t('Select a MailChimp user template to use. Due to a limitation in the API, only templates that do not contain repeating sections are available. If empty, the default template will be applied.'),
     '#options' => _mailchimp_campaign_build_option_list(mailchimp_campaign_list_templates(FALSE, 0, 500), '-- Select --', $template_type_labels),
     '#default_value' => ($campaign) ? $campaign->mc_data->settings->template_id : -1,
     '#ajax' => array(
@@ -140,7 +140,7 @@ function mailchimp_campaign_campaign_form($form, &$form_state, MailChimpCampaign
     }
     foreach ($mc_template->info->sections as $section => $content) {
       // Set the default value and text format to either saved campaign values
-      // or defaults coming from the Mailchimp template.
+      // or defaults coming from the MailChimp template.
       $default_value = $content;
       $format = 'mailchimp_campaign';
       if ($campaign && $campaign->template[$section]) {
@@ -229,7 +229,7 @@ function mailchimp_campaign_template_callback($form, $form_state) {
 }
 
 /**
- * AJAX callback when changing list ID.
+ * AJAX callback when changing list/audience ID.
  */
 function mailchimp_campaign_list_segment_callback($form, $form_state) {
   $commands = array();
@@ -324,7 +324,7 @@ function mailchimp_campaign_get_entity_import_form_elements($entity_type, $secti
     '#id' => 'entity-import',
     '#type' => 'fieldset',
     '#title' => t('Insert site content'),
-    '#description' => t('<b>For use only with text filters that use the Mailchimp Campaign filter</b><br />You can insert an entity of a given type and pick the view mode that will be rendered within this campaign section.'),
+    '#description' => t('<b>For use only with text filters that use the MailChimp Campaign filter</b><br />You can insert an entity of a given type and pick the view mode that will be rendered within this campaign section.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     // '#states' => array(
@@ -404,10 +404,10 @@ function mailchimp_campaign_get_entity_import_form_elements($entity_type, $secti
  * Gets form elements used in the merge vars feature.
  *
  * @param array $merge_vars
- *   Array of Mailchimp merge vars for the current list.
+ *   Array of MailChimp merge vars for the current list/audience.
  * @see mailchimp_get_mergevars
  * @param string $list_name
- *   The name of the current list.
+ *   The name of the current list/audience.
  *
  * @return array
  *   Array of form elements used to display merge vars.
@@ -426,14 +426,14 @@ function mailchimp_campaign_get_merge_vars_form_elements($merge_vars, $list_name
 
   $form['merge_vars']['content'] = array(
     '#type' => 'item',
-    '#title' => t('Mailchimp merge variables'),
+    '#title' => t('MailChimp merge variables'),
     '#markup' => _mailchimp_campaign_build_merge_vars_html($merge_vars),
     '#description' => t(
-      'Insert merge variables from the %list_name list or one of the !standard_link.',
+      'Insert merge variables from the %list_name audience or one of the !standard_link.',
       array(
         '%list_name' => $list_name,
         '!standard_link' => l(
-          t('standard Mailchimp merge variables'), 'http://kb.mailchimp.com/article/all-the-merge-tags-cheatsheet',
+          t('standard MailChimp merge variables'), 'http://kb.mailchimp.com/article/all-the-merge-tags-cheatsheet',
           array('attributes' => array('target' => '_blank'))),
       )
     ),
@@ -531,7 +531,7 @@ function _mailchimp_campaign_build_entity_option_list($entity_info) {
     '' => t('-- Select --'),
   );
   foreach ($entity_info as $entity_id => $entity_data) {
-    // Exclude Mailchimp entities.
+    // Exclude MailChimp entities.
     if (strpos($entity_id, 'mailchimp') === FALSE) {
       $options[$entity_id] = $entity_data['label'];
     }
@@ -580,7 +580,7 @@ function _mailchimp_campaign_build_merge_vars_html($merge_vars) {
     return render($table);
   }
   else {
-    return t('No custom merge vars exist for the current list.');
+    return t('No custom merge vars exist for the current audience.');
   }
 }
 
@@ -612,14 +612,14 @@ function _mailchimp_campaign_parse_template_content($content) {
 }
 
 /**
- * List deletion form.
+ * List/audience deletion form.
  */
 function mailchimp_campaign_delete_form($form, &$form_state, MailChimpCampaign $campaign) {
   $form_state['campaign'] = $campaign;
   return confirm_form($form,
     t('Are you sure you want to delete %name?', array('%name' => $campaign->label())),
     'admin/config/services/mailchimp/campaigns/' . $campaign->mc_campaign_id,
-    t('This action will delete both the Mailchimp campaign and Drupal entity and cannot be undone.'),
+    t('This action will delete both the MailChimp campaign and Drupal entity and cannot be undone.'),
     t('Delete campaign')
   );
 }
@@ -638,14 +638,14 @@ function mailchimp_campaign_delete_form_submit($form, &$form_state) {
 }
 
 /**
- * List deletion form.
+ * List/audience deletion form.
  */
 function mailchimp_campaign_send_form($form, &$form_state, MailChimpCampaign $campaign) {
   $form_state['campaign'] = $campaign;
   return confirm_form($form,
     t('Are you sure you want to send %name?', array('%name' => $campaign->label())),
     'admin/config/services/mailchimp/campaigns/' . $campaign->mc_campaign_id,
-    t('This action will send the campaign through Mailchimp and cannot be undone.'),
+    t('This action will send the campaign through MailChimp and cannot be undone.'),
     t('Send campaign')
   );
 }
@@ -679,7 +679,7 @@ function mailchimp_campaign_send_test_form($form, &$form_state, MailChimpCampaig
   return confirm_form($form,
     t('Confirm test for %name?', array('%name' => $campaign->label())),
     'admin/config/services/mailchimp/campaigns/' . $campaign->mc_campaign_id,
-    t('This action will send a test message through Mailchimp to the recipients specified above.'),
+    t('This action will send a test message through MailChimp to the recipients specified above.'),
     t('Send test')
   );
 }
