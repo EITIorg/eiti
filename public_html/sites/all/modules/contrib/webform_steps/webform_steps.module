@@ -54,6 +54,11 @@ function webform_steps_form_webform_client_form_alter(&$form, &$form_state, $for
     if ($page < $current_page) {
       $button['#validate'] = array();
       $button['#attributes']['formnovalidate'] = 'formnovalidate';
+      // Old versions of jQuery.validate (as bundled in clientside_validations
+      // 1.x) run validations unless the button triggering a submit has the
+      // 'cancel' class.
+      // See: https://www.drupal.org/project/clientside_validation/issues/2113725
+      $button['#attributes']['class'][] = 'cancel';
     }
     if ($ajax) {
       // @see webform_ajax_form_webform_client_form_alter().
