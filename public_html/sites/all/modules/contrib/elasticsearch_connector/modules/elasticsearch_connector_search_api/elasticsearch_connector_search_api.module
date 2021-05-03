@@ -47,10 +47,9 @@ function elasticsearch_connector_search_api_search_api_service_info() {
  * Implements hook_search_api_processor_info().
  */
 function elasticsearch_connector_search_api_search_api_processor_info() {
-
   $processors['search_api_elasticsearch_highlighting'] = array(
     'name' => t('Elasticsearch Highlighting'),
-    'description' => t('Adds highlighting for search results for Elasticsearch server. This will throw an error if the server you\'re are using is not SOMETHING SOMETHING FIX THIS'),
+    'description' => t('Adds highlighting for search results for Elasticsearch server. This will throw error if the server your are using is not'),
     'class' => 'ElasticsearchConnectorSearchApiHighlight',
     'weight' => 35,
   );

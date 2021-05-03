@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Styles for elements created by Devel.
+ */
+
 .dev-query, .dev-timer, .dev-memory-usage {
   padding: 1em;
 }
@@ -135,4 +140,8 @@ div#footer div#block-devel-switch-user div.form-item-username {
 div#content div#block-devel-switch-user #edit-submit,
 div#footer div#block-devel-switch-user #edit-submit {
   margin-top: 5px;
+}
+
+#devel-execute-form textarea {
+  font-family: monospace;
 }

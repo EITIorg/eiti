@@ -6,8 +6,8 @@ package = Elasticsearch
 dependencies[] = elasticsearch_connector
 dependencies[] = devel
 
-; Information added by Drupal.org packaging script on 2018-09-05
-version = "7.x-5.0-alpha1+1-dev"
+; Information added by Drupal.org packaging script on 2019-08-02
+version = "7.x-5.0-alpha1+5-dev"
 core = "7.x"
 project = "elasticsearch_connector"
-datestamp = "1536173588"
+datestamp = "1564760589"

@@ -11,17 +11,16 @@ class EITISummaryDataImporter {
   /**
    * Process Summary data import
    */
-  public function importSummaryData($uri) {
+  public function importSummaryData($temp_uri, $uri, $fid) {
     $result = FALSE;
 
-    if ($uri) {
-      $xls = $this->loadXLS($uri);
+    if ($uri && $temp_uri) {
+      $xls = $this->loadXLS($temp_uri);
 
       if ($xls) {
         $is_valid = $this->validateXLS($xls);
-
         if ($is_valid) {
-          $this->processDataImport($xls);
+          $this->processDataImport($xls, $fid);
         }
       }
     }
@@ -44,10 +43,10 @@ class EITISummaryDataImporter {
     $is_valid = FALSE;
     $list = $xls->getSheetNames();
 
-    if (sizeof($list == 7)) {
+    if (sizeof($list >= 7)) {
       if ($list[0] == 'Introduction' && $list[1] == 'Part 1 - About'
         && $list[2] == 'Part 2 - Disclosure checklist' && $list[3] == 'Part 3 - Reporting entities'
-        && $list[4] == 'Part 4 - Government revenues' && $list[5] == 'Part 5 - Company data' && $list[6] == 'Lists') {
+        && $list[4] == 'Part 4 - Government revenues' && $list[5] == 'Part 5 - Company data') {
         $is_valid = TRUE;
       }
     }
@@ -65,14 +64,15 @@ class EITISummaryDataImporter {
   /**
    * Process data import for Summary Data
    */
-  private function processDataImport($xls) {
+  private function processDataImport($xls, $fid) {
 
     // Process About section
     $about = $this->getSpreadsheet($xls, 1);
     if ($about) {
       $max_row = $xls->setActiveSheetIndex(1)->getHighestRow();
       $parsed_data = $this->parseAboutSection($about, $max_row);
-      $entity = $this->buildSummaryDataReportFromXls($parsed_data);
+      dsm($parsed_data);
+      $entity = $this->buildSummaryDataReportFromXls($parsed_data, $fid);
     }
 
     // Process Disclosure checklist section
@@ -90,14 +90,28 @@ class EITISummaryDataImporter {
     if ($reporting_entities) {
       $max_row = $xls->setActiveSheetIndex(3)->getHighestRow();
       $reporting_entities_parsed_data = $this->parseReportingEntitiesSection($reporting_entities, $max_row);
-    }
+      $reporting_entities_parsed_company_id_references = $this->parseCompanyIdReferences($reporting_entities, $max_row);
+      if ($reporting_entities_parsed_company_id_references) {
+        $summary_data = entity_load('summary_data', array($entity));
 
+        if ($summary_data) {
+          $summary_data = array_shift($summary_data);
+
+          $summary_data->company_id_name = $reporting_entities_parsed_company_id_references['company_id_name'];
+          $summary_data->company_id_register = $reporting_entities_parsed_company_id_references['company_id_register'];
+          $summary_data->company_id_register_url = $reporting_entities_parsed_company_id_references['company_id_register_url'];
+
+          entity_save('summary_data', $summary_data);
+        }
+      }
+    }
     // Process Goverment revenues section
     $goverment_revenues = $this->getSpreadsheet($xls, 4);
 
     if ($goverment_revenues) {
       $max_row = $xls->setActiveSheetIndex(4)->getHighestRow();
       $goverment_revenues_parsed_data = $this->parseGovermentRevenuesSection($goverment_revenues, $max_row);
+      $goverment_revenues_gfs = $this->parseGovermentRevenuesSectionGFS($goverment_revenues, $max_row);
     }
 
     // Process Company data section
@@ -109,7 +123,7 @@ class EITISummaryDataImporter {
     }
 
     // Process Batch for iterating Indicators
-    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data);
+    $this->processIndicatorBatch($entity, $disclosure_parsed_data_items, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data, $goverment_revenues_gfs);
   }
 
   /**
@@ -118,7 +132,7 @@ class EITISummaryDataImporter {
   private function parseAboutSection($sheet, $max_row) {
     $data = array();
 
-    // Skip table header and start onlu from
+    // Skip table header and start only from data rows
     $i = 14;
     $dataMapping = new EITISummaryDataMapping();
     $about_fields = $dataMapping->getAboutSectionFields();
@@ -129,10 +143,15 @@ class EITISummaryDataImporter {
       if (isset($about_fields[$cell])) {
         $value_cell = $sheet->getCellByColumnAndRow(4,$i);
 
-        if ($value_cell->isFormula()) {
-          $value = $value_cell->getOldCalculatedValue();
+        if ($about_fields[$cell] == 'currency_rate') {
+          $value = $value_cell->getValue();
+          $value = round($value, 10);
         } else {
-          $value = $value_cell->getFormattedValue();
+          if ($value_cell->isFormula()) {
+            $value = $value_cell->getOldCalculatedValue();
+          } else {
+            $value = $value_cell->getFormattedValue();
+          }
         }
 
         $data[$about_fields[$cell]] = $value;
@@ -147,7 +166,7 @@ class EITISummaryDataImporter {
   /**
    * Build Summary data report item entity from parsed data from xlsx datasheet
    */
-  private function buildSummaryDataReportFromXls($data) {
+  private function buildSummaryDataReportFromXls($data, $fid) {
     $id = NULL;
     if (isset($data['country_id']) && isset($data['year_start']) && isset($data['year_end'])) {
       $start = $this->getYearByDate($data['year_start']);
@@ -157,6 +176,9 @@ class EITISummaryDataImporter {
 
       if ($is_entity_exists) {
         $entity_item = entity_load('summary_data', array($is_entity_exists));
+        $entity_item = array_shift($entity_item);
+        drupal_set_message(t('Summary data report is already exists, please delete existing one and do re-import. Please keep XLSX report file before deleting the report'), 'status');
+        drupal_goto('summary_data/' . $entity_item->id);
       } else {
         $entity_item = entity_create('summary_data', array('type' => 'summary_data'));
 
@@ -168,8 +190,18 @@ class EITISummaryDataImporter {
         $entity_item->created = time();
         $entity_item->changed = time();
         $entity_item->currency_code = $data['currency_code'];
-        $data['currency_rate'] = number_format($data['currency_rate'], 2, '.', '');
+        $data['currency_rate'] = $this->formatNumberSanitize($data['currency_rate']);
         $entity_item->currency_rate = $data['currency_rate'];
+
+        // Attach source file to the report
+        $file = file_load($fid);
+        if ($file) {
+          $entity_item->field_sd_report_file['und'][0] = array(
+            'fid' => $file->fid,
+            'display' => TRUE,
+            'description' => '',
+          );
+        }
       }
 
       $entity_item = $this->mappingAboutSection($entity_item, $data);
@@ -242,11 +274,7 @@ class EITISummaryDataImporter {
 
     // Process text and numeric fields
     if (isset($data['company_id_name'])) {
-      $entity->	field_sd_company_name['und'][0]['value'] = $data['company_id_name'];
-    }
-
-    if (isset($data['field_sd_report_file'])) {
-      $entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
+      $entity->field_sd_company_name['und'][0]['value'] = $data['company_id_name'];
     }
 
     if (isset($data['field_sd_iso_alpha_3_code'])) {
@@ -270,6 +298,10 @@ class EITISummaryDataImporter {
     }
 
     if (isset($data['field_sd_other_sector_name'])) {
+      if ($data['field_sd_other_sector_name'] == '< Other sector >') {
+        $data['field_sd_other_sector_name'] = '';
+      }
+
       $entity->field_sd_other_sector_name['und'][0]['value'] = $data['field_sd_other_sector_name'];
     }
 
@@ -286,19 +318,35 @@ class EITISummaryDataImporter {
     }
 
     if (isset($data['field_sd_systematic_disclosed'])) {
-      $entity->field_sd_systematic_disclosed['und'][0]['value'] = round($data['field_sd_systematic_disclosed'] * 100, 2);
+      if ($this->checkPercentNumericValues($data['field_sd_systematic_disclosed'])) {
+        $entity->field_sd_systematic_disclosed['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_systematic_disclosed']);
+      } else {
+        $entity->field_sd_systematic_disclosed['und'][0]['value'] = round($data['field_sd_systematic_disclosed'] * 100, 2);
+      }
     }
 
     if (isset($data['field_sd_through_eiti_reporting'])) {
-      $entity->field_sd_through_eiti_reporting['und'][0]['value'] = round($data['field_sd_through_eiti_reporting'] * 100, 2);
+      if ($this->checkPercentNumericValues($data['field_sd_through_eiti_reporting'])) {
+        $entity->field_sd_through_eiti_reporting['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_through_eiti_reporting']);
+      } else {
+        $entity->field_sd_through_eiti_reporting['und'][0]['value'] = round($data['field_sd_through_eiti_reporting'] * 100, 2);
+      }
     }
 
     if (isset($data['field_sd_not_applicable'])) {
-      $entity->field_sd_not_applicable['und'][0]['value'] = round($data['field_sd_not_applicable'] * 100, 2);
+      if ($this->checkPercentNumericValues($data['field_sd_not_applicable'])) {
+        $entity->field_sd_not_applicable['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_not_applicable']);
+      } else {
+        $entity->field_sd_not_applicable['und'][0]['value'] = round($data['field_sd_not_applicable'] * 100, 2);
+      }
     }
 
     if (isset($data['field_sd_not_available'])) {
-      $entity->field_sd_not_available['und'][0]['value'] = round($data['field_sd_not_available'] * 100, 2);
+      if ($this->checkPercentNumericValues($data['field_sd_not_available'])) {
+        $entity->field_sd_not_available['und'][0]['value'] = $this->cleanupPercentNumericValues($data['field_sd_not_available']);
+      } else {
+        $entity->field_sd_not_available['und'][0]['value'] = round($data['field_sd_not_available'] * 100, 2);
+      }
     }
 
     if (isset($data['field_sd_contact_name'])) {
@@ -324,6 +372,10 @@ class EITISummaryDataImporter {
 
     if (isset($data['field_sd_other_files_relecance'])) {
       $entity->field_sd_other_files_relecance['und'][0]['value'] = $this->getIntegerListItemByValue($data['field_sd_other_files_relecance']);
+    }
+
+    if (isset($data['field_sd_file_links'])) {
+      $entity->field_sd_file_links['und'][0] = ['uri' => $data['field_sd_file_links'], 'title' => $data['field_sd_file_links']];
     }
 
     if (isset($data['field_sd_oil_sector'])) {
@@ -362,9 +414,14 @@ class EITISummaryDataImporter {
       $entity->field_sd_goverm_open_data_policy['und'][0]['value'] = $this->getIntegerPolicyListItemByValue($data['field_sd_goverm_open_data_policy']);
     }
 
+    // Process URL, EITI Report
+    if (isset($data['field_sd_report_file'])) {
+      $entity->field_sd_url_eiti_report['und'][0]['value'] = $data['field_sd_report_file'];
+    }
+
     // Process date fields
-    if (isset($data['field_sd_public_date_eiti_data'])) {
-      $timestamp = strtotime($data['field_sd_public_date_eiti_data']);
+    if (isset($data['published'])) {
+      $timestamp = strtotime($data['published']);
       if ($timestamp) {
         $entity->field_sd_public_date_eiti_data['und'][0]['value'] = $timestamp;
       }
@@ -378,6 +435,34 @@ class EITISummaryDataImporter {
     }
 
     return $entity;
+  }
+
+  /**
+   * Applying number formatting for decimal fields
+   */
+  private function formatNumberSanitize($number) {
+    return preg_replace('/[^0-9.-]/', '', $number);
+  }
+
+  /**
+   * Doing checking for percent values, inserted directly without formula
+   */
+  private function checkPercentNumericValues($number) {
+    if (substr_count($number, '%')) {
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Doing cleanup for percent values, inserted directly without formula
+   */
+  private function cleanupPercentNumericValues($number) {
+    $number = str_replace('%', '', $number);
+    $number = round($number, 2);
+
+    return $number;
   }
 
   /**
@@ -415,6 +500,12 @@ class EITISummaryDataImporter {
         $item = '0';
         break;
       case 'Yes, through EITI reporting':
+        $item = '1';
+        break;
+      case 'Yes':
+        $item = '0';
+        break;
+      case 'No':
         $item = '1';
         break;
       case 'Not applicable':
@@ -456,25 +547,56 @@ class EITISummaryDataImporter {
           'source' => '',
         );
 
+        if ($requirement_cell == 'If yes, what was the volume received?' || $requirement_cell == 'If yes, what was sold?') {
+          $data['items'][] = array(
+            'parent' => 'EITI Requirement 4.2: In-kind revenues',
+            'requirement_cell' => $requirement_cell,
+            'inclusion' => '',
+            'source' => '',
+          );
+        }
+
         $max++;
       } else {
         if (!empty($requirement_cell) && !in_array($requirement_cell, $skip_sections)) {
           $inclusion_cell = $sheet->getCellByColumnAndRow(3, $i);
+
           if ($inclusion_cell->isFormula()) {
-            $value = $inclusion_cell->getOldCalculatedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+
+              if (substr_count($value, '%')) {
+                $value = str_replace('%', '', $value);
+                $value = $value / 100;
+              }
+            } else {
+              $value = $inclusion_cell->getOldCalculatedValue();
+            }
           } else {
-            $value = $inclusion_cell->getFormattedValue();
+            if ($requirement_cell == 'Reconciliation coverage') {
+              $value = $inclusion_cell->getValue();
+            } else {
+              $value = $inclusion_cell->getFormattedValue();
+            }
           }
 
           $source_cell = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
-          $data['items'][] = array(
-            'parent' => $active_section,
-            'requirement_cell' => $requirement_cell,
-            'inclusion' => $value,
-            'source' => $source_cell,
-          );
-          $max++;
+          if (strlen($source_cell) > 255) {
+            $source_cell = substr($source_cell, 0, 255);
+          }
+
+          $value = $this->normalizeCellValue($value);
+
+          if ($value != '< number >') {
+            $data['items'][] = array(
+              'parent' => $active_section,
+              'requirement_cell' => $requirement_cell,
+              'inclusion' => $value,
+              'source' => $source_cell,
+            );
+            $max++;
+          }
         }
       }
 
@@ -487,9 +609,33 @@ class EITISummaryDataImporter {
   }
 
   /**
+   * Normalize cell value for numeric and percent values
+   */
+  private function normalizeCellValue($value) {
+
+    $value = trim($value,' ');
+    if ($this->checkPercentNumericValues($value)) {
+      $value = $this->cleanupPercentNumericValues($value);
+    }
+
+    if ($this->hasNumericFormat($value)) {
+      $value = $this->formatNumberSanitize($value);
+    }
+
+    return $value;
+  }
+
+  /**
+   * Check cell: is it fromatted number or not
+   */
+  private function hasNumericFormat($str) {
+    return preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $str);
+  }
+
+  /**
    * Implements functuon
    */
-  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data) {
+  private function processIndicatorBatch($entity, $disclosure_parsed_data, $max, $reporting_entities_parsed_data, $goverment_revenues_parsed_data, $company_parsed_data, $goverment_revenues_gfs) {
     $batch = array(
       'title' => t('Importing summary data'),
       'operations' => array(
@@ -520,13 +666,14 @@ class EITISummaryDataImporter {
           array(
             $entity,
             $company_parsed_data,
+            $goverment_revenues_gfs,
           ),
         ),
       ),
       'finished' => 'eiti_sdi_batch_process_finish_callback',
     );
     batch_set($batch);
-    //batch_process('admin/content/summary_data');
+    batch_process('admin/content/summary_data');
   }
 
   /**
@@ -568,34 +715,68 @@ class EITISummaryDataImporter {
 
             switch ($reporting_entities_active_section) {
               case 'goverment_entity':
+                $total_reported = $sheet->getCellByColumnAndRow(4, $i);
+
+                if ($total_reported->isFormula()) {
+                  $total_reported_value = $total_reported->getOldCalculatedValue();
+                } else {
+                  $total_reported_value = $total_reported->getFormattedValue();
+                }
+
                 $item = array(
                   'full_agency_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
                   'agency_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
                   'id_number' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'total_reported' => $sheet->getCellByColumnAndRow(4, $i)->getOldCalculatedValue(),
+                  'total_reported' => $total_reported_value,
                 );
                 break;
               case 'company':
+                $payment = $sheet->getCellByColumnAndRow(8, $i);
+
+                if ($payment->isFormula()) {
+                  $payment_value = $payment->getOldCalculatedValue();
+                } else {
+                  $payment_value = $payment->getFormattedValue();
+                }
+
                 $item = array(
                   'full_company_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
-                  'company_id' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
-                  'sector' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
-                  'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
-                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
-                  'payment_to_goverment_report' => $sheet->getCellByColumnAndRow(7, $i)->getOldCalculatedValue(),
+                  'company_type' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
+                  'company_id' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
+                  'sector' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
+                  'commodities' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
+                  'stock_exchange_listing' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'audited_financial_statement' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+                  'payment_to_goverment_report' => $payment_value,
                 );
                 break;
               case 'project':
+
+                $volume = $sheet->getCellByColumnAndRow(6, $i);
+
+                if ($volume->isFormula()) {
+                  $volume_value = $volume->getOldCalculatedValue();
+                } else {
+                  $volume_value = $volume->getFormattedValue();
+                }
+
+                $production = $sheet->getCellByColumnAndRow(8, $i);
+
+                if ($production->isFormula()) {
+                  $production_value = $production->getOldCalculatedValue();
+                } else {
+                  $production_value = $production->getFormattedValue();
+                }
+
                 $item = array(
                   'full_project_name' => $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue(),
                   'legal_Agreement_ref_number' => $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue(),
                   'affiliated_companies' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
                   'commodities' => $sheet->getCellByColumnAndRow(4, $i)->getFormattedValue(),
                   'status' => $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue(),
-                  'production_volume' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+                  'production_volume' => $volume_value,
                   'unit' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
-                  'production_value' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+                  'production_value' => $production_value,
                   'currency' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
                 );
                 break;
@@ -613,27 +794,117 @@ class EITISummaryDataImporter {
     return $data;
   }
 
+    /**
+     * Parse Company Id Reference data
+     */
+  private function parseCompanyIdReferences($sheet, $max_row) {
+    $data = array();
+
+    $i = 13;
+    while ($i < $max_row) {
+      $requirement_cell = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+
+      if ($requirement_cell == 'Company ID references') {
+        $i++;
+        $data['company_id_name'] = $sheet->getCellByColumnAndRow(1, $i)->getFormattedValue();
+        $data['company_id_register'] = $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue();
+        $data['company_id_register_url'] = $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue();
+        break;
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
   /**
    * Parse Goverment revenues section
    */
   private function parseGovermentRevenuesSection($sheet, $max_row) {
     $data = array();
-    $i = 22;
+    $i = 0;
 
-    while ($i < $max_row) {
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
+
+    while ($i <= $max_row) {
       $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
 
       if (empty($gfs_classification)) {
         $i = $max_row;
       } else {
-        $data[] = array(
-          'gfs_classification' => $gfs_classification,
-          'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
-          'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
-          'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
-          'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
-        );
+
+        if ($gfs_classification != 'Add new rows as necessary, right click the row number to the left and select "Insert"') {
+          $data[] = array(
+            'gfs_classification' => $gfs_classification,
+            'sector' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
+            'revenue_stream_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
+            'goverment_entity' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
+            'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
+            'currency' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
+          );
+        }
+      }
+
+      $i++;
+    }
+
+    return $data;
+  }
+
+  /**
+   * Parse Goverment revenues section
+   */
+  private function parseGovermentRevenuesSectionGFS($sheet, $max_row) {
+    $data = array();
+
+    $i = 0;
+
+    $is_triggered = false;
+    $pos = 1;
+    while (!$is_triggered) {
+      $title = $sheet->getCellByColumnAndRow(5, $pos)->getFormattedValue();
+      if ($title == 'GFS Classification') {
+        $is_triggered = true;
+      }
+      $pos++;
+    }
+
+    if ($pos != 0) {
+      $i = $pos;
+    }
+
+    while ($i <= $max_row) {
+      $gfs_classification = $sheet->getCellByColumnAndRow(5, $i)->getFormattedValue();
+
+      if (empty($gfs_classification)) {
+        $i = $max_row;
+      } else {
+
+        $goverment_entity = $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue();
+        $revenue_stream_name = $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue();
+
+        if (!isset($data[$goverment_entity])) {
+          $data[$goverment_entity] = [];
+        }
+
+        if (!isset($data[$goverment_entity][$revenue_stream_name])) {
+          $data[$goverment_entity][$revenue_stream_name] = [];
+        }
+
+        $data[$goverment_entity][$revenue_stream_name]['gfs_classification'] = $gfs_classification;
       }
 
       $i++;
@@ -649,12 +920,13 @@ class EITISummaryDataImporter {
     $data = array();
     $i = 15;
 
-    while ($i < $max_row) {
+    while ($i <= $max_row) {
       $company = $sheet->getCellByColumnAndRow(2, $i)->getFormattedValue();
 
       if (empty($company)) {
         $i = $max_row;
       } else {
+
         $data[] = array(
           'company' => $company,
           'goverment_entity' => $sheet->getCellByColumnAndRow(3, $i)->getFormattedValue(),
@@ -663,7 +935,7 @@ class EITISummaryDataImporter {
           'reported_by_project' => $sheet->getCellByColumnAndRow(6, $i)->getFormattedValue(),
           'project_name' => $sheet->getCellByColumnAndRow(7, $i)->getFormattedValue(),
           'reporting_currency' => $sheet->getCellByColumnAndRow(8, $i)->getFormattedValue(),
-          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getFormattedValue(),
+          'revenue_value' => $sheet->getCellByColumnAndRow(9, $i)->getValue(),
           'payment_made_in_kind' => $sheet->getCellByColumnAndRow(10, $i)->getFormattedValue(),
           'in_kind_volume' => $sheet->getCellByColumnAndRow(11, $i)->getFormattedValue(),
           'unit' => $sheet->getCellByColumnAndRow(12, $i)->getFormattedValue(),
@@ -694,13 +966,15 @@ function eiti_sdi_batch_process_disclosure_checklist_import($entity, $disclosure
 
     $indicator_id = '';
     if ($disclosure['requirement_cell']) {
-      $indicator_id = eiti_sdi_create_indicator_item($disclosure);
-    }
-
-    if (!empty($disclosure['parent']) && is_numeric($indicator_id)) {
       $summary_data = entity_load('summary_data', array($entity));
       if ($summary_data) {
         $summary_data = array_shift($summary_data);
+        $indicator_id = eiti_sdi_create_indicator_item($disclosure, $summary_data->currency_rate);
+      }
+    }
+
+    if (!empty($disclosure['parent']) && is_numeric($indicator_id)) {
+      if ($summary_data) {
         $summary_data->field_sd_indicator_values['und'][]['target_id'] = $indicator_id;
         entity_save('summary_data', $summary_data);
       }
@@ -794,9 +1068,15 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                 $reporting_entity->country_id = $context['sandbox']['country_id'];
                 $reporting_entity->name = $item['full_agency_name'];
                 $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+
+                if ($item['total_reported']) {
+                  $item['total_reported'] = preg_replace('/[^0-9.-]/', '', $item['total_reported']);
+                }
+
                 $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
                 $reporting_entity->changed = time();
                 entity_save('organisation', $reporting_entity);
+
               }
             }
           } else {
@@ -812,6 +1092,11 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
             $reporting_entity->summary_data_id = $entity;
             $reporting_entity->country_id = $context['sandbox']['country_id'];
             $reporting_entity->field_agency_type['und'][0]['value'] = $item['agency_type'];
+
+            if ($item['total_reported']) {
+              $item['total_reported'] = preg_replace('/[^0-9.-]/', '', $item['total_reported']);
+            }
+
             $reporting_entity->field_total_reported['und'][0]['value'] = $item['total_reported'];
             $reporting_entity->status = 1;
             $reporting_entity->created = time();
@@ -830,12 +1115,8 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
       if (isset($reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']])) {
         $item = $reporting_entities_parsed_data['company'][$context['sandbox']['company_progress']];
 
-        if (isset($item['company_id'])) {
-          if ($item['company_id'] != 'Not applicable') {
-            $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.identification_number = :id_number and eo.type = :type", array(':id_number' => $item['company_id'], ':type' => 'company'))->fetchAll();
-          } else {
-            $entity_id_query = FALSE;
-          }
+        if (isset($item['full_company_name'])) {
+          $entity_id_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.name = :name and eo.type = :type and eo.country_id = :cid", array(':name' => $item['full_company_name'], ':type' => 'company', ':cid' => $context['sandbox']['country_id']))->fetchAll();
 
           if ($entity_id_query) {
             $entity_id_query = array_shift($entity_id_query);
@@ -855,16 +1136,38 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
                   $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
                 }
 
-                $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
-                if ($comodity) {
-                  $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+                if (substr_count($item['commodities'], ',')) {
+                  $comodities = explode(",", $item['commodities']);
+                  foreach ($comodities as $comodity_name) {
+                    $comodity = eitientity_organisation_get_commodity_tid($comodity_name);
+
+                    if ($comodity) {
+                      $reporting_entity->	field_o_commodities['und'][]['target_id'] = $comodity;
+                    }
+                  }
+                } else {
+                  $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+
+                  if ($comodity) {
+                    $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+                  }
                 }
 
-                $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
-                $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
-                $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+                $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];
+                $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
+
+                if ($item['company_type']) {
+                  $reporting_entity->field_company_type['und'][0]['value'] = $item['company_type'];
+                }
+
+                if ($item['payment_to_goverment_report']) {
+                  $item['payment_to_goverment_report'] = preg_replace('/[^0-9.-]/', '', $item['payment_to_goverment_report']);
+                }
+
+                $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
 
                 entity_save('organisation', $reporting_entity);
+
               }
             }
           } else {
@@ -888,14 +1191,31 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
               $reporting_entity->field_o_sector['und'][0]['target_id'] = $sector;
             }
 
-            $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
-            if ($comodity) {
-              $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+            if (substr_count($item['commodities'], ',')) {
+              $comodities = explode(",", $item['commodities']);
+              foreach ($comodities as $comodity_name) {
+                $comodity = eitientity_organisation_get_commodity_tid($comodity_name);
+
+                if ($comodity) {
+                  $reporting_entity->	field_o_commodities['und'][]['target_id'] = $comodity;
+                }
+              }
+            } else {
+              $comodity = eitientity_organisation_get_commodity_tid($item['commodities']);
+
+              if ($comodity) {
+                $reporting_entity->	field_o_commodities['und'][0]['target_id'] = $comodity;
+              }
             }
 
-            $reporting_entity->field_stock_exchange_listing = $item['stock_exchange_listing'];
-	          $reporting_entity->field_audited_financial_state = $item['audited_financial_statement'];
-            $reporting_entity->field_payments_to_governments = $item['payment_to_goverment_report'];
+            $reporting_entity->field_stock_exchange_listing['und'][0]['value'] = $item['stock_exchange_listing'];
+	          $reporting_entity->field_audited_financial_state['und'][0]['value'] = $item['audited_financial_statement'];
+
+            if ($item['payment_to_goverment_report']) {
+              $item['payment_to_goverment_report'] = preg_replace('/[^0-9.-]/', '', $item['payment_to_goverment_report']);
+            }
+
+            $reporting_entity->field_payments_to_governments['und'][0]['value'] = $item['payment_to_goverment_report'];
 
             entity_save('organisation', $reporting_entity);
           }
@@ -950,7 +1270,7 @@ function eiti_sdi_batch_process_reporting_entities_import($entity, $reporting_en
 function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_revenues_parsed_data, &$context) {
 
   if (empty($context['sandbox'])) {
-    $context['sandbox']['max'] = sizeof($goverment_revenues_parsed_data ) - 1;
+    $context['sandbox']['max'] = sizeof($goverment_revenues_parsed_data );
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['entity_id'] = $entity;
     $context['sandbox']['goverment_revenues'] = $goverment_revenues_parsed_data;
@@ -959,39 +1279,64 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
   if (isset($goverment_revenues_parsed_data[$context['sandbox']['progress']])) {
     $item = $goverment_revenues_parsed_data[$context['sandbox']['progress']];
 
-    $entity_item = entity_get_controller('revenue_stream')->create();
-    $entity_item->type = 'agency';
-    $gfs = '';
-    $gfs_parsed = explode(' ', $item['gfs_classification']);
-    $gfs = end($gfs_parsed);
-    $gfs = str_replace('(', '', $gfs);
-    $gfs = str_replace(')', '', $gfs);
-    $entity_item->gfs_code_id = $gfs;
-    $entity_item->field_sector['und'][0]['value'] = $item['sector'];
-    $entity_item->name = $item['revenue_stream_name'];
-    $entity_item->report_status = 1;
-
-    $organisation_id = '';
-    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'goverment_entity', ':name' => $item['goverment_entity']))->fetchAll();
-
-    if ($organisation_query) {
-      $organisation_query = array_shift($organisation_query);
-
-      if (isset($organisation_query->id)) {
-        $organisation_id = $organisation_query->id;
-      }
-    }
-
-    $entity_item->organisation_id = $organisation_id;
-    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_currency['und'][0]['value'] = $item['currency'];
-    $entity_item->currency = $item['currency'];
-
-    entity_save('revenue_stream', $entity_item);
-
     $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
     if ($entity) {
       $entity = array_shift($entity);
+      $entity_item = entity_get_controller('revenue_stream')->create();
+      $entity_item->type = 'agency';
+
+      $gfs = '';
+      $gfs_parsed = explode(' ', $item['gfs_classification']);
+      $gfs = end($gfs_parsed);
+      $gfs = str_replace('(', '', $gfs);
+      $gfs = str_replace(')', '', $gfs);
+      $gfs_id = '';
+      if ($gfs) {
+        $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
+
+        if ($gfs_id_query) {
+          $gfs_id_query = array_shift($gfs_id_query);
+          if (isset($gfs_id_query->id)) {
+            $gfs_id = $gfs_id_query->id;
+          }
+        }
+      }
+
+      $entity_item->gfs_code_id = $gfs_id;
+      $entity_item->field_sector['und'][0]['value'] = $item['sector'];
+      $entity_item->name = $item['revenue_stream_name'];
+      $entity_item->report_status = 1;
+
+      $organisation_id = '';
+      $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'agency', ':name' => $item['goverment_entity']))->fetchAll();
+
+      if ($organisation_query) {
+        $organisation_query = array_shift($organisation_query);
+
+        if (isset($organisation_query->id)) {
+          $organisation_id = $organisation_query->id;
+        }
+      }
+
+      $entity_item->organisation_id = $organisation_id;
+
+      $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
+      $currency_rate = $entity->currency_rate;
+
+      if ($item['currency'] != 'USD') {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = 'USD';
+        $entity_item->revenue = round($item['revenue_value'] / $currency_rate, 2);
+      } else {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = $item['reporting_currency'];
+        $entity_item->revenue = round($item['revenue_value'], 2);
+      }
+
+      entity_save('revenue_stream', $entity_item);
+
       $entity->field_sd_revenue_government['und'][] = array('target_id' => $entity_item->id);
       entity_save('summary_data', $entity);
     }
@@ -1007,13 +1352,22 @@ function eiti_sdi_batch_process_goverment_revenues_import($entity, $goverment_re
 /**
  * Implements Batch process for Companies
  */
-function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$context) {
+function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, $goverment_revenues_gfs, &$context) {
 
   if (empty($context['sandbox'])) {
-    $context['sandbox']['max'] = sizeof($company_parsed_data) - 1;
+    $context['sandbox']['max'] = sizeof($company_parsed_data);
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['entity_id'] = $entity;
     $context['sandbox']['company'] = $company_parsed_data;
+    $context['sandbox']['country_id'] = '';
+
+    $country_query = db_query("SELECT esd.country_id FROM {eiti_summary_data} esd WHERE esd.id = :entity_id", array(':entity_id' => $entity))->fetchAll();
+    if ($country_query) {
+      $country_query = array_shift($country_query);
+      if (isset($country_query->country_id)) {
+        $context['sandbox']['country_id'] = $country_query->country_id;
+      }
+    }
   }
 
   if (isset($company_parsed_data[$context['sandbox']['progress']])) {
@@ -1024,7 +1378,7 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$
     $entity_item->report_status = 1;
 
     $organisation_id = '';
-    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name ", array(":type" => 'company', ':name' => $item['company']))->fetchAll();
+    $organisation_query = db_query("SELECT eo.id FROM {eiti_organisation} eo WHERE eo.type = :type and eo.name = :name", array(":type" => 'company', ":name" => $item['company']))->fetchAll();
 
     if ($organisation_query) {
       $organisation_query = array_shift($organisation_query);
@@ -1041,19 +1395,62 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$
     $entity_item->field_reported_by_project['und'][0]['value'] = $item['reported_by_project'];
     $entity_item->field_project_name['und'][0]['value'] = $item['project_name'];
     $entity_item->field_currency['und'][0]['value'] = $item['reporting_currency'];
-    $entity_item->currency = $item['reporting_currency'];
-    $entity_item->revenue = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_revenue_value['und'][0]['value'] = preg_replace('/[^\d.]/', '', $item['revenue_value']);
-    $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
-    $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
-    $entity_item->field_unit['und'][0]['value'] = $item['unit'];
-    $entity_item->field_comments['und'][0]['value'] = $item['comments'];
 
-    entity_save('revenue_stream', $entity_item);
+    $t_ge = $item['goverment_entity'];
+    $t_rsn = $item['revenue_stream_name'];
 
+    if (isset($goverment_revenues_gfs[$t_ge][$t_rsn]['gfs_classification'])) {
+      $item['gfs_classification'] = $goverment_revenues_gfs[$item['goverment_entity']][$item['revenue_stream_name']]['gfs_classification'];
+
+      $gfs = '';
+      $gfs_parsed = explode(' ', $item['gfs_classification']);
+      $gfs = end($gfs_parsed);
+      $gfs = str_replace('(', '', $gfs);
+      $gfs = str_replace(')', '', $gfs);
+      $gfs_id = '';
+      if ($gfs) {
+        $gfs_id_query = db_query("SELECT gfs.id FROM {eiti_gfs_code} gfs WHERE gfs.code = :code ", array(':code' => $gfs))->fetchAll();
+
+        if ($gfs_id_query) {
+          $gfs_id_query = array_shift($gfs_id_query);
+          if (isset($gfs_id_query->id)) {
+            $gfs_id = $gfs_id_query->id;
+          }
+        }
+      }
+
+      $entity_item->gfs_code_id = $gfs_id;
+    }
+
+    $item['revenue_value'] = preg_replace('/[^0-9.-]/', '', $item['revenue_value']);
     $entity = entity_load('summary_data', array($context['sandbox']['entity_id']));
     if ($entity) {
       $entity = array_shift($entity);
+      $currency_rate = $entity->currency_rate;
+
+      if ($item['reporting_currency'] != 'USD') {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = 'USD';
+        $item['revenue_value'] = round($item['revenue_value'] / $currency_rate, 2);
+        $entity_item->revenue = $item['revenue_value'];
+      } else {
+        $entity_item->original_currency = $item['reporting_currency'];
+        $entity_item->original_revenue = $item['revenue_value'];
+        $entity_item->currency = $item['reporting_currency'];
+        $item['revenue_value'] = round($item['revenue_value'], 2);
+        $entity_item->revenue = $item['revenue_value'];
+      }
+
+      $item['revenue_value'] = round($item['revenue_value'], 2);
+      $entity_item->field_revenue_value['und'][0]['value'] = $item['revenue_value'];
+      $entity_item->field_payment_made_in_kind['und'][0]['value'] = $item['payment_made_in_kind'];
+      $entity_item->field_in_kind_volume['und'][0]['value'] = $item['in_kind_volume'];
+      $entity_item->field_unit['und'][0]['value'] = $item['unit'];
+      $entity_item->field_comments['und'][0]['value'] = $item['comments'];
+
+      entity_save('revenue_stream', $entity_item);
+
       $entity->field_sd_revenue_company['und'][] = array('target_id' => $entity_item->id);
       entity_save('summary_data', $entity);
     }
@@ -1070,6 +1467,13 @@ function eiti_sdi_batch_process_company_import($entity, $company_parsed_data, &$
  * Implements Batch process finish callback for Summary data import
  */
 function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
+
+  // Cleanup for revenue stream
+  $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+
+  //Cleanup for indicators
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
+
   $message = t('Summary data import completed');
   drupal_set_message($message);
 }
@@ -1077,9 +1481,11 @@ function eiti_sdi_batch_process_finish_callback($uid, $type, &$context) {
 /**
  * Create indicator item
  */
-function eiti_sdi_create_indicator_item($values) {
+function eiti_sdi_create_indicator_item($values, $currency_rate) {
   $indicator_id = NULL;
-  $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent']);
+
+  $type = eiti_sdi_get_indicator_data_type_by_value($values['inclusion']);
+  $id = eiti_sdi_get_indicator_type_by_name($values['requirement_cell'], $values['parent'], $type);
 
   if (!$id) {
     $id = eiti_sdi_create_indicator_type($values);
@@ -1092,10 +1498,24 @@ function eiti_sdi_create_indicator_item($values) {
     if ($indicator) {
       $indicator = array_shift($indicator);
 
-      if ($indicator->type != 'group' && !empty($values['inclusion'])) {
+      if ($indicator->type == 'group' && ($indicator->name == 'If yes, what was the volume received?' || $indicator->name == 'If yes, what was sold?')) {
+
+        if (empty($indicator->parent) || $indicator->parent == null) {
+          $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => 'EITI Requirement 4.2: In-kind revenues'))->fetchAll();
+
+          if ($parent_id_query) {
+            $parent_id_query = array_shift($parent_id_query);
+            if (isset($parent_id_query->id)) {
+              $indicator->parent = $parent_id_query->id;
+              entity_save('indicator', $indicator);
+            }
+          }
+        }
+      }
+
+      if ($indicator->type != 'group' && !empty($values['parent'])) {
         // Create indicator value there
         $entity_item = entity_get_controller('indicator_value')->create();
-
         $entity_item->indicator_id = $indicator->id;
 
         switch ($indicator->type) {
@@ -1103,27 +1523,44 @@ function eiti_sdi_create_indicator_item($values) {
             $entity_item->value_boolean = $values['inclusion'];
             break;
           case 'numeric':
-            $entity_item->value_numeric = $values['inclusion'];
+            $dataMapping = new EITISummaryDataMapping();
+            $currencies = $dataMapping->getCurrenciesList();
+
+            if ($values['inclusion'] == '0') {
+              $values['inclusion_new'] = '0';
+              $values['source_new'] = 'USD';
+            } elseif (in_array($values['source'], $currencies) && $values['source'] != 'USD') {
+              $values['inclusion_new'] = $values['inclusion'] / $currency_rate;
+              $values['inclusion_new'] = round($values['inclusion_new'], 2);
+              $values['source_new'] = 'USD';
+            }
+
+            if (isset($values['inclusion_new'])) {
+              $entity_item->value_numeric = $values['inclusion_new'];
+              $entity_item->original_value_numeric = $values['inclusion'];
+            } else {
+              $entity_item->value_numeric = $values['inclusion'];
+            }
+
             break;
           case 'text':
             $entity_item->value_text = $values['inclusion'];
             break;
           case 'reporting_type':
-
             $value_reporting_type = '';
 
             switch ($values['inclusion']) {
               case 'Yes, systematically disclosed':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_SYSTEMATICALLY_DISCLOSED';
+                $value_reporting_type = 'Yes, systematically disclosed';
                 break;
               case 'Yes, through EITI reporting':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_THROUGH_EITI_REPORTING';
+                $value_reporting_type = 'Yes, through EITI reporting';
                 break;
               case 'Not applicable':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_APPLICABLE';
+                $value_reporting_type = 'Not applicable';
                 break;
               case 'Not available':
-                $value_reporting_type = 'EITIENTITY_INDICATOR_VALUE_VALUE_NOT_AVAILABLE';
+                $value_reporting_type = 'Not available';
                 break;
             }
 
@@ -1131,15 +1568,21 @@ function eiti_sdi_create_indicator_item($values) {
             break;
         }
 
-        if (!empty($values['source'])) {
-          $values['source'] = trim($values['source']);
+        if ($indicator->type == 'numeric') {
+          $units = $dataMapping->getUnits();
 
-          if (strlen($values['source']) < 32) {
-            $entity_item->value_unit = $values['source'];
+          if (in_array($values['source'], $units)) {
+            if (isset($values['source_new'])) {
+              $entity_item->value_unit = $values['source_new'];
+              $entity_item->original_value_unit = $values['source'];
+            } else {
+              $entity_item->value_unit = $values['source'];
+            }
           } else {
-            $values['source'] = substr($values['source'], 0, 255);
             $entity_item->source = $values['source'];
           }
+        } else {
+          $entity_item->source = $values['source'];
         }
 
         entity_save('indicator_value', $entity_item);
@@ -1154,11 +1597,10 @@ function eiti_sdi_create_indicator_item($values) {
 /**
  * Get indicator type by name
  */
-function eiti_sdi_get_indicator_type_by_name($name, $parent) {
+function eiti_sdi_get_indicator_type_by_name($name, $parent, $type = '') {
   $id = NULL;
 
   if ($name) {
-
     if ($parent) {
       $parent_id_query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name", array(':name' => $parent))->fetchAll();
 
@@ -1166,7 +1608,7 @@ function eiti_sdi_get_indicator_type_by_name($name, $parent) {
         $parent_id_result = array_shift($parent_id_query);
 
         if (isset($parent_id_result->id)) {
-          $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.parent = :parent", array(':name' => $name, ':parent' => $parent_id_result->id))->fetchAll();
+          $query = db_query("SELECT ei.id FROM {eiti_indicator} ei WHERE ei.name = :name AND ei.parent = :parent AND ei.type = :type", array(':name' => $name, ':parent' => $parent_id_result->id, ':type' => $type))->fetchAll();
         }
       }
     } else {
@@ -1226,6 +1668,10 @@ function eiti_sdi_create_indicator_type($values) {
  */
 function eiti_sdi_get_indicator_data_type_by_value($value) {
 
+  if ($value == '0') {
+    return 'numeric';
+  }
+
   if (empty($value)) {
     return NULL;
   }
@@ -1235,7 +1681,8 @@ function eiti_sdi_get_indicator_data_type_by_value($value) {
     return 'reporting_type';
   }
 
-  if (is_numeric($value)) {
+  // Check for numeric fields
+  if(preg_match("/^[-+]?[$]?([1-9]\d{0,2}(,\d{3})*|0)(\.\d+)?$/", $value) || is_numeric($value)) {
     return 'numeric';
   }
 

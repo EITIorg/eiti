@@ -10,10 +10,10 @@ function eiti_sdi_menu() {
 
   $items['admin/content/summary_data/import'] = array(
     'title' => t('Import Summary data XLSX datasheet'),
-    'description' => 'My Profile',
+    'description' => 'Import Summary data XLSX datasheet',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('eiti_sdi_summary_data_import_form'),
-    'access arguments' => array('view own profile'),
+    'access arguments' => array('use summary data import'),
     'type' => MENU_NORMAL_ITEM,
     'menu_name' => 'sdi',
   );
@@ -46,6 +46,7 @@ function eiti_sdi_summary_data_import_form($form, &$form_state) {
     '#upload_validators' => array(
       'file_validate_extensions' => array('xlsx'),
     ),
+    '#upload_location' => 'public://spreadsheets/',
     '#required' => TRUE,
   );
 
@@ -72,8 +73,31 @@ function eiti_sdi_summary_data_import_form_submit($form, &$form_state) {
   $fid = $form_state['values']['file'];
   $file = file_load($fid);
 
+  if ($file) {
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+    $file = file_load($file->fid);
+    $temp_file = file_copy($file, 'temporary://' . $file->filename, FILE_EXISTS_REPLACE);
+  }
+
   if (isset($file->uri)) {
     $dataImporter = new EITISummaryDataImporter();
-    $dataImporter->importSummaryData($file->uri);
+    $dataImporter->importSummaryData($temp_file->uri, $file->uri,  $fid);
+  }
+}
+
+/**
+ * Implements hook_block_view_alter()
+ */
+function eiti_sdi_block_view_alter(&$data, $block) {
+  $current_path = current_path();
+
+  if ($current_path == 'summary_data/add') {
+    if (isset($data['content']['main']['#markup']) && $data['content']['main']['#markup'] == '<dl class="admin-list"><div class="admin-block-item summary_data-add-summary-data"><dt><a href="/summary_data/add/summary-data">Add summary data</a></dt><dd class="description">Summary Data represent a single report.</dd></div></dl>') {
+      $data['content']['main']['#markup'] = '<dl class="admin-list"><div class="admin-block-item summary_data-add-summary-data">
+<dt><a href="/summary_data/add/summary-data">Add Summary data 1.0</a></dt><dd class="description">Summary Data 1.0 was used prior to June 2019.</dd>
+<dt><a href="/admin/content/summary_data/import">Add Summary data 2.0</a></dt><dd class="description">Summary data 2.0 is the current data template, launched 1 July 2019. Each file should contain data for a single country, in a single fiscal year.</dd>
+</div></dl>';
+    }
   }
 }

@@ -1,0 +1,3 @@
+[submodule ".ebextensions"]
+	path = .ebextensions
+	url = https://github.com/ADM-Cloudtech/eiti-private-assets.git

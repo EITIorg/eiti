@@ -79,6 +79,8 @@ function eu_cookie_compliance_install() {
   foreach ($roles as $rid => $value) {
     user_role_grant_permissions($rid, array($permission));
   }
+
+  eu_cookie_compliance_module_set_weight();
 }
 
 /**
@@ -86,6 +88,9 @@ function eu_cookie_compliance_install() {
  */
 function eu_cookie_compliance_uninstall() {
   variable_del('eu_cookie_compliance');
+  variable_del('eu_cookie_compliance_cookie_lifetime');
+  variable_del('eu_cookie_compliance_domain');
+  variable_del('eu_cookie_compliance_domain_all_sites');
   cache_clear_all('variables', 'cache');
 }
 
@@ -95,11 +100,11 @@ function eu_cookie_compliance_uninstall() {
 function eu_cookie_compliance_requirements($phase) {
   $requirements = array();
 
-  if ($phase == 'runtime') {
+  if ($phase === 'runtime') {
     module_load_include('module', 'eu_cookie_compliance', 'eu_cookie_compliance');
     $settings = eu_cookie_compliance_get_settings();
 
-    if (!empty($settings['popup_link']) && $settings['popup_link'] == '<front>' && !empty($settings['show_disagree_button']) && $settings['show_disagree_button']) {
+    if (!empty($settings['popup_link']) && $settings['popup_link'] === '<front>' && !empty($settings['show_disagree_button']) && $settings['show_disagree_button']) {
       $requirements['eu_cookie_compliance'] = array(
         'title' => t('EU Cookie Compliance'),
         'severity' => REQUIREMENT_ERROR,
@@ -112,6 +117,24 @@ function eu_cookie_compliance_requirements($phase) {
   return $requirements;
 }
 
+function eu_cookie_compliance_module_set_weight() {
+  if (module_exists('jquery_update')) {
+    // @TODO: Document why this weight change is needed. Add a test.
+    // Get the weight of the jquery update module.
+    $result = db_select('system', 's')
+      ->fields('s', array('weight'))
+      ->condition('name', 'jquery_update', '=')
+      ->execute();
+    $weight = !empty($result) ? $result->fetchField() : 0;
+
+    // Set the weight of this module to 1 heavier.
+    db_update('system')
+      ->fields(array('weight' => $weight + 1))
+      ->condition('name', 'eu_cookie_compliance', '=')
+      ->execute();
+  }
+}
+
 /**
  * Gets the default settings for the 'eu_cookie_compliance' variables.
  *
@@ -121,19 +144,17 @@ function eu_cookie_compliance_requirements($phase) {
  */
 function _eu_cookie_compliance_get_popup_default_setting() {
   $default_filter_format = filter_default_format();
-  if ($default_filter_format == 'filtered_html' && filter_format_load('full_html')) {
+  if ($default_filter_format === 'filtered_html' && filter_format_load('full_html')) {
     $default_filter_format = 'full_html';
   }
 
-  $cookie_policy = _eu_cookie_compliance_find_privacy_policy();
-  if (!$cookie_policy) {
-    $cookie_policy = '<front>';
-  }
+  module_load_include('module', 'eu_cookie_compliance', 'eu_cookie_compliance');
 
   return array(
+    'cookie_policy_version' => '1.0.0',
     'info_template' => 'new',
     'popup_info' => array(
-      'value' => '<h2>We use cookies on this site to enhance your user experience</h2><p>By clicking any link on this page you are giving your consent for us to set cookies.</p>',
+      'value' => '<h2>We use cookies on this site to enhance your user experience</h2><p>By clicking the Accept button, you agree to us doing so.</p>',
       'format' => $default_filter_format,
     ),
     'popup_agreed' => array(
@@ -148,7 +169,7 @@ function _eu_cookie_compliance_get_popup_default_setting() {
     'popup_height' => '',
     'popup_width' => '100%',
     'popup_delay' => 1000,
-    'popup_link' => $cookie_policy,
+    'popup_link' => '<front>',
     'fixed_top_position' => TRUE,
     'consent_storage_method' => 'do_not_store',
     'disabled_javascripts' => '',
@@ -161,6 +182,44 @@ function _eu_cookie_compliance_get_popup_default_setting() {
     'withdraw_action_button_label' => 'Withdraw consent',
     'withdraw_tab_button_label' => 'Privacy settings',
     'withdraw_enabled' => 0,
+    'accept_all_categories_button_label' => 'Accept all cookies',
+    'better_support_for_screen_readers' => 0,
+    'cookie_categories' => '',
+    'cookie_name' => '',
+    'disagree_button_label' => 'No, thanks',
+    'disagree_do_not_show_popup' => 0,
+    'domains_list' => '',
+    'domains_option' => 1,
+    'enable_save_preferences_button' => 1,
+    'eu_only_js' => 0,
+    'eu_only' => 0,
+    'exclude_admin_pages' => 0,
+    'exclude_paths' => '',
+    'exclude_uid_1' => 0,
+    'fix_first_cookie_category' => 1,
+    'method' => 'opt_in',
+    'mobile_breakpoint' => 768,
+    'mobile_popup_info' => array(
+      'value' => '<h2>We use cookies on this site to enhance your user experience</h2><p>By tapping the Accept button, you agree to us doing so.</p>',
+      'format' => $default_filter_format,
+    ),
+    'popup_agree_button_message' => 'OK, I agree',
+    'popup_clicking_confirmation' => 1,
+    'popup_disagree_button_message' => 'No, give me more info',
+    'popup_find_more_button_message' => 'More info',
+    'popup_hide_agreed' => 0,
+    'popup_hide_button_message' => 'Hide',
+    'popup_link_new_window' => 1,
+    'popup_scrolling_confirmation' => 0,
+    'reload_page' => 0,
+    'save_preferences_button_label' => 'Save preferences',
+    'script_scope' => 'footer',
+    'show_disagree_button' => 1,
+    'use_bare_css' => 0,
+    'use_mobile_message' => 0,
+    'allowed_cookies' => '',
+    'withdraw_button_on_info_popup' => 0,
+    'containing_element' => 'body',
   );
 }
 
@@ -220,7 +279,7 @@ function eu_cookie_compliance_update_7001(&$sandbox) {
           if ($langcode == $default_language) {
             $default_value = $value;
           }
-          i18n_variable_set('eu_cookie_compliance', $value, $langcode);
+          variable_realm_set('language', $langcode, 'eu_cookie_compliance', $value, FALSE);
           variable_del($name);
         }
       }
@@ -350,21 +409,7 @@ function eu_cookie_compliance_update_7006() {
  * Version 1.24. Be sure weight of the module is higher than jQuery Update.
  */
 function eu_cookie_compliance_update_7007() {
-  if (module_exists('jquery_update')) {
-    // @TODO: Document why this weight change is needed. Add a test.
-    // Get the weight of the jquery update module.
-    $result = db_select('system', 's')
-      ->fields('s', array('weight'))
-      ->condition('name', 'jquery_update', '=')
-      ->execute();
-    $weight = !empty($result) ? $result->fetchField() : 0;
-
-    // Set the weight of this module to 1 heavier.
-    db_update('system')
-      ->fields(array('weight' => $weight + 1))
-      ->condition('name', 'eu_cookie_compliance', '=')
-      ->execute();
-  }
+  eu_cookie_compliance_module_set_weight();
 }
 
 /**
@@ -372,7 +417,7 @@ function eu_cookie_compliance_update_7007() {
  */
 function eu_cookie_compliance_update_7008() {
   $default_filter_format = filter_default_format();
-  if ($default_filter_format == 'filtered_html' && filter_format_load('full_html')) {
+  if ($default_filter_format === 'filtered_html' && filter_format_load('full_html')) {
     $default_filter_format = 'full_html';
   }
   $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
@@ -382,7 +427,7 @@ function eu_cookie_compliance_update_7008() {
   );
   $eu_cookie_settings['withdraw_action_button_label'] = 'Withdraw consent';
   $eu_cookie_settings['withdraw_tab_button_label'] = 'Privacy settings';
-  $eu_cookie_settings['withdraw_enabled'] = 1;
+  $eu_cookie_settings['withdraw_enabled'] = 0;
   // Set default info template to 'legacy' for 'consent by default' config
   // option.
   if (!array_key_exists('info_template', $eu_cookie_settings)) {
@@ -397,7 +442,7 @@ function eu_cookie_compliance_update_7008() {
 function eu_cookie_compliance_update_7009() {
   $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
 
-  if (!empty($eu_cookie_settings['method']) && $eu_cookie_settings['method'] == 'default' && !empty($eu_cookie_settings['withdraw_enabled']) && $eu_cookie_settings['withdraw_enabled'] == 1) {
+  if (!empty($eu_cookie_settings['method']) && $eu_cookie_settings['method'] === 'default' && !empty($eu_cookie_settings['withdraw_enabled']) && $eu_cookie_settings['withdraw_enabled'] == 1) {
     $eu_cookie_settings['withdraw_enabled'] = 0;
   }
   variable_set('eu_cookie_compliance', $eu_cookie_settings);
@@ -417,8 +462,283 @@ function eu_cookie_compliance_update_7010() {
       $settings = i18n_variable_get('eu_cookie_compliance', $langcode);
       if (!empty($settings)) {
         $updated_setting = $settings + _eu_cookie_compliance_get_popup_default_setting();
-        i18n_variable_set('eu_cookie_compliance', $updated_setting, $langcode);
+        variable_realm_set('language', $langcode, 'eu_cookie_compliance', $updated_setting, FALSE);
       }
     }
   }
+}
+
+/**
+ * Make sure that configurations are correct for multilingual sites.
+ */
+function eu_cookie_compliance_update_7011() {
+  if (function_exists('i18n_variable_get')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $language) {
+      $eu_cookie_language_settings = i18n_variable_get('eu_cookie_compliance', $language);
+      if ($eu_cookie_language_settings && !array_key_exists('info_template', $eu_cookie_language_settings)) {
+        $eu_cookie_language_settings['info_template'] = 'legacy';
+        variable_realm_set('language', $language, 'eu_cookie_compliance', $eu_cookie_language_settings, FALSE);
+      }
+    }
+  }
+}
+
+/**
+ * Add config variables for the "Opt-in with categories" feature.
+ */
+function eu_cookie_compliance_update_7012() {
+  $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
+  $new_settings = array(
+    'cookie_categories' => '',
+    'enable_save_preferences_button' => TRUE,
+    'save_preferences_button_label' => 'Save preferences',
+    'accept_all_categories_button_label' => 'Accept all cookies',
+    'fix_first_cookie_category' => TRUE,
+    'select_all_categories_by_default' => FALSE,
+    'withdraw_button_on_info_popup' => FALSE,
+  );
+  variable_set('eu_cookie_compliance', $eu_cookie_settings + $new_settings);
+
+  if (module_exists('i18n_variable')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $langcode) {
+      $settings = i18n_variable_get('eu_cookie_compliance', $langcode);
+      if (!empty($settings)) {
+        $updated_setting = $settings + $new_settings;
+        variable_realm_set('language', $langcode, 'eu_cookie_compliance', $updated_setting, FALSE);
+      }
+    }
+  }
+}
+
+/**
+ * Add any missing defaults to sites with i18n or domain settings enabled.
+ */
+function eu_cookie_compliance_update_7013() {
+  // Get defaults.
+  $default_settings = _eu_cookie_compliance_get_popup_default_setting();
+
+  // Add any missing configuration defaults to the regular variable.
+  $updated_settings = variable_get('eu_cookie_compliance', array()) + $default_settings;
+  variable_set('eu_cookie_compliance', $updated_settings);
+
+  // Set any missing configuration variables for all languages.
+  if (module_exists('i18n_variable')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $langcode) {
+      $settings = i18n_variable_get('eu_cookie_compliance', $langcode);
+      if (!empty($settings)) {
+        $updated_settings = $settings + $default_settings;
+        variable_realm_set('language', $langcode, 'eu_cookie_compliance', $updated_settings, FALSE);
+      }
+    }
+  }
+
+  // Set any missing configuration variables for all domains.
+  if (module_exists('domain_settings') && module_exists('domain_conf')) {
+    $domains = domain_domains();
+    foreach ($domains as $domain_data) {
+      $domain_id = $domain_data['domain_id'];
+      // Check whether we have eu_cookie_compliance or eu_cookie_compliance_en.
+      $all_domain_settings = domain_conf_data_get($domain_id);
+      $key = FALSE;
+      if (array_key_exists('eu_cookie_compliance', $all_domain_settings)) {
+        $key = 'eu_cookie_compliance';
+      }
+      else if (array_key_exists('eu_cookie_compliance_' . language_default('language'), $all_domain_settings)) {
+        $key = 'eu_cookie_compliance_' . language_default('language');
+      }
+      if ($key) {
+        $settings = domain_conf_variable_get($domain_id, $key);
+        $updated_settings = $settings + $default_settings;
+        domain_conf_variable_save($domain_id, 'eu_cookie_compliance', $updated_settings);
+      }
+    }
+  }
+}
+
+/**
+ * Change configuration variable whitelisted_cookies to allowed_cookies.
+ */
+function eu_cookie_compliance_update_7014() {
+  $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
+  $eu_cookie_settings['allowed_cookies'] = $eu_cookie_settings['whitelisted_cookies'];
+  unset($eu_cookie_settings['whitelisted_cookies']);
+  variable_set('eu_cookie_compliance', $eu_cookie_settings);
+}
+
+/**
+ * Add config variable for containing element.
+ */
+function eu_cookie_compliance_update_7015() {
+  $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
+  $new_settings = array(
+    'containing_element' => 'body',
+  );
+  variable_set('eu_cookie_compliance', $eu_cookie_settings + $new_settings);
+
+  if (module_exists('i18n_variable')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $langcode) {
+      $settings = i18n_variable_get('eu_cookie_compliance', $langcode);
+      if (!empty($settings)) {
+        $updated_setting = $settings + $new_settings;
+        variable_realm_set('language', $langcode, 'eu_cookie_compliance', $updated_setting, FALSE);
+      }
+    }
+  }
+
+  // Set configuration variables for all domains.
+  if (module_exists('domain_settings') && module_exists('domain_conf')) {
+    $domains = domain_domains();
+    foreach ($domains as $domain_data) {
+      $domain_id = $domain_data['domain_id'];
+      $settings = domain_conf_variable_get($domain_id, 'eu_cookie_compliance');
+      $updated_settings = $settings + $new_settings;
+      domain_conf_variable_save($domain_id, 'eu_cookie_compliance', $updated_settings);
+    }
+  }
+}
+
+/**
+ * Add config variable for cookie policy version.
+ */
+function eu_cookie_compliance_update_7016() {
+  $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
+  $new_settings = array(
+    'cookie_policy_version' => '1.0.0',
+  );
+  variable_set('eu_cookie_compliance', $eu_cookie_settings + $new_settings);
+
+  if (module_exists('i18n_variable')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $langcode) {
+      $settings = i18n_variable_get('eu_cookie_compliance', $langcode);
+      if (!empty($settings)) {
+        $updated_setting = $settings + $new_settings;
+        variable_realm_set('language', $langcode, 'eu_cookie_compliance', $updated_setting, FALSE);
+      }
+    }
+  }
+
+  // Set configuration variables for all domains.
+  if (module_exists('domain_settings') && module_exists('domain_conf')) {
+    $domains = domain_domains();
+    foreach ($domains as $domain_data) {
+      $domain_id = $domain_data['domain_id'];
+      $settings = domain_conf_variable_get($domain_id, 'eu_cookie_compliance');
+      $updated_settings = $settings + $new_settings;
+      domain_conf_variable_save($domain_id, 'eu_cookie_compliance', $updated_settings);
+    }
+  }
+}
+
+/**
+ * Migrate categories from string to array.
+ */
+function eu_cookie_compliance_update_7017() {
+  $settings = variable_get('eu_cookie_compliance', array());
+  $categories = $settings['cookie_categories'];
+
+  if (!is_array($categories)) {
+    // Split the string by new line and pipes and transform into array.
+    $categories = _eu_cookie_compliance_extract_category_key_label_description($categories);
+    $categories = _migrate_cookie_categories_to_separate_structure($categories, $settings);
+  }
+
+  // Store categories in a new variable.
+  variable_set('eu_cookie_compliance_categories', $categories);
+
+  // Remove legacy values from main variable.
+  unset($settings['cookie_categories']);
+  unset($settings['fix_first_cookie_category']);
+  variable_set('eu_cookie_compliance', $settings);
+
+  if (module_exists('i18n_variable')) {
+    $languages = language_list();
+    foreach (array_keys($languages) as $langcode) {
+      $settings = i18n_variable_get('eu_cookie_compliance', $langcode, array());
+      $categories = $settings['cookie_categories'];
+
+      if (!is_array($categories)) {
+        // Split the string by new line and pipes and transform into array.
+        $categories = _eu_cookie_compliance_extract_category_key_label_description($categories);
+        $categories = _migrate_cookie_categories_to_separate_structure($categories, $settings);
+      }
+
+      // Store categories in a new variable.
+      i18n_variable_set('eu_cookie_compliance_categories', $categories, $langcode);
+
+      // Remove legacy values from main variable.
+      unset($settings['cookie_categories']);
+      unset($settings['fix_first_cookie_category']);
+      i18n_variable_set('eu_cookie_compliance', $settings, $langcode);
+    }
+  }
+
+  // Set configuration variables for all domains.
+  if (module_exists('domain_settings') && module_exists('domain_conf')) {
+    $domains = domain_domains();
+    foreach ($domains as $domain_data) {
+      $domain_id = $domain_data['domain_id'];
+      $settings = domain_conf_variable_get($domain_id, 'eu_cookie_compliance');
+      $categories = $settings['cookie_categories'];
+
+      if (!is_array($categories)) {
+        // Split the string by new line and pipes and transform into array.
+        $categories = _eu_cookie_compliance_extract_category_key_label_description($categories);
+        $categories = _migrate_cookie_categories_to_separate_structure($categories, $settings);
+      }
+
+      // Store categories in a new variable.
+      domain_conf_variable_save($domain_id, 'eu_cookie_compliance_categories', $categories);
+
+      // Remove legacy values from main variable.
+      unset($settings['cookie_categories']);
+      unset($settings['fix_first_cookie_category']);
+      domain_conf_variable_save($domain_id, 'eu_cookie_compliance', $settings);
+    }
+  }
+}
+
+/**
+ * Add variable for automatic cookies removal toggle.
+ */
+function eu_cookie_compliance_update_7018() {
+  $eu_cookie_settings = variable_get('eu_cookie_compliance', array());
+  // No option to disable given before, so the default is TRUE.
+  $eu_cookie_settings['automatic_cookies_removal'] = TRUE;
+  variable_set('eu_cookie_compliance', $eu_cookie_settings);
+}
+
+/**
+ * Transform string based categories into array based ones.
+ *
+ * @param $categories
+ *   The array of categories to transform.
+ * @param $settings
+ *   The full configuration settings.
+ *
+ * @return array
+ */
+function _migrate_cookie_categories_to_separate_structure($categories, $settings) {
+  if (count($categories)) {
+    $i = 0;
+    // Add default values for new attributes like weight.
+    foreach ($categories as $machine_name => &$category) {
+      $category['machine_name'] = $machine_name;
+      $category['checkbox_default_state'] = 'unchecked';
+      // Preserve all categories being automatically checked
+      // and first category's special treatment, if any.
+      if (!empty($settings['select_all_categories_by_default'])) {
+        $category['checkbox_default_state'] = 'checked';
+      }
+      if ($i === 0 && !empty($settings['fix_first_cookie_category'])) {
+        $category['checkbox_default_state'] = 'required';
+      }
+      $category['weight'] = $i++;
+    }
+  }
+  return $categories;
 }

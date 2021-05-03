@@ -90,7 +90,7 @@ function getLegend(hasProgress) {
     '<div class="scorecard-legend-item">' +
     '  <i style="background:#5182bb">&nbsp;</i>' +
     '  <div>' +
-		translate('<strong>Beyond.</strong> The country has gone beyond the requirements.') +
+		translate('<strong>Outstanding progress (Beyond).</strong> The country has gone beyond the requirements.') +
     '</div></div>' +
     '<div class="scorecard-legend-item">' +
     '  <i class="only_encouraged">&nbsp;</i><div>' +
@@ -127,7 +127,23 @@ function appendRows(data, tableBody, hasProgress) {
 	    var requirements_category = _.filter(requirements, function(requirement) {
 	        return (requirement.Category === category.id);
 	    });
-	    bodyRow.append($("<TD>").css({'border-bottom': '1px solid black'}).attr('rowspan', requirements_category.length).addClass('requirement').html(translate(category.name)));
+	    // We should to know amount of real requirements of current category.
+			var currentScoreRequirements = _.filter(countryScore.score_req_values, function (value) {
+				// We need this trick because Category 6 is different for 2016 and 2019 Standards.
+				if (value.score_req.code.substring(0, 1) == '6' && value.score_req.code.length == 4 ) {
+					if (category.id == 6.1) {
+						return value.score_req.code.substring(0, 1) == '6';
+					}
+				} else {
+					return value.score_req.code.substring(0, 1) == category.id;
+				}
+			});
+			// We should show only used in results[] categories.
+			if (currentScoreRequirements.length) {
+				bodyRow.append($("<TD>").css({'border-bottom': '1px solid black'}).attr('rowspan', requirements_category.length).addClass('requirement').html(translate(category.name)));
+			}
+			// Count the real requirements quantity.
+   		var $i = 0;
 
 	    _.each(requirements_category, function(requirement, idx) {
 	        var currentRow;
@@ -138,9 +154,9 @@ function appendRows(data, tableBody, hasProgress) {
 	        }
 
 	        let bottomBorder = false;
-	        if(idx === requirements_category.length-1) {
-				bottomBorder = true;
-	        }
+					if ($i === currentScoreRequirements.length - 1) {
+						bottomBorder = true;
+					}
 
 	        let currentScore = undefined;
 	        if (countryScore) {
@@ -153,11 +169,16 @@ function appendRows(data, tableBody, hasProgress) {
 	        if(bottomBorder) {
 	        	req_cell.css({'border-bottom': '1px solid black'});
 	        }
-	        currentRow.append(req_cell.html(translate(requirement.Requirement) + ' (#' + requirement.Code + ') '));
 
 	        // Requirement Answers
 	        if (currentScore) {
-	        	if(currentScore.description && currentScore.description !== "") {
+
+						$i++;
+
+						// Show requirements and levels only if they are in result from countryScore.
+						currentRow.append(req_cell.html(translate(requirement.Requirement) + ' (#' + requirement.Code.toFixed(1) + ') '));
+
+						if(currentScore.description && currentScore.description !== "") {
 			        let descriptionSpan = $("<DIV>").html("<BR/>" + translate(currentScore.description)).addClass("requirement_description").hide();
 			        let button = $("<A>").addClass("requirement_button").html("(+)");
 			        button.on("click", function(){
@@ -180,9 +201,9 @@ function appendRows(data, tableBody, hasProgress) {
 			    if (currentScore.is_applicable == 0) {
 			        cellStyle = 'not_applicable ';
 			        let cell = $("<TD>");
-					if(bottomBorder) {
-						cell.css({'border-bottom': '1px solid black'});
-					}
+						if (bottomBorder) {
+							cell.css({'border-bottom': '1px solid black'});
+						}
 
 			        currentRow.append(cell.attr('colspan', scores.length).addClass(cellStyle).html('&nbsp;'));
 			    }
@@ -252,21 +273,26 @@ function appendRows(data, tableBody, hasProgress) {
 			    }
 
 	        } else {
-	            _.each(scores, function(value) {
-	            	let cell = $("<TD>").html('&nbsp;');
-			        if(bottomBorder) {
-			        	cell.css({'border-bottom': '1px solid black'});
-			        }
-	                currentRow.append(cell);
-	            });
-			    if(hasProgress){
-		            //Empty direction of progress
-	            	let cell = $("<TD>").html('&nbsp;');
-			        if(bottomBorder) {
-			        	cell.css({'border-bottom': '1px solid black'});
-			        }
-	                currentRow.append(cell);
-	            }
+						if (bottomBorder) {
+							let cell = $("<TD>");
+							cell.css({'border-bottom': '1px solid black'});
+						}
+						/*	_.each(scores, function(value) {
+										let cell = $("<TD>").html('&nbsp;');
+									if(bottomBorder) {
+										cell.css({'border-bottom': '1px solid black'});
+									}
+											currentRow.append(cell);
+									});
+							if(hasProgress){
+										//Empty direction of progress
+										let cell = $("<TD>").html('&nbsp;');
+									if(bottomBorder) {
+										cell.css({'border-bottom': '1px solid black'});
+									}
+											currentRow.append(cell);
+									}*/
+
 	        }
 	        //Direction of Progress
 	        tableBody.append(currentRow);

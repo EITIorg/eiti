@@ -1,0 +1,271 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ */
+function eiti_sd_recover_menu() {
+  $items = array();
+
+  $items['admin/sd/recovery/recover-indicators'] = array(
+    'title' => t('Recovery Summary data indicators'),
+    'page callback' => 'eiti_sd_recover_indicators_menu_callback',
+    'access arguments' => array(
+      'access administration pages',
+    ),
+  );
+
+  $items['admin/sd/recovery/recover-companies'] = array(
+    'title' => t('Recovery Summary data companies'),
+    'page callback' => 'eiti_sd_recover_companies_menu_callback',
+    'access arguments' => array(
+      'access administration pages',
+    ),
+  );
+
+  $items['admin/sd/recovery/revenue-streams-cleanup'] = array(
+    'title' => t('Cleaning up for orphaned revenue streams'),
+    'page callback' => 'eiti_sd_recover_revenue_streams_cleanup',
+    'access arguments' => array(
+      'access administration pages',
+    ),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements callback for cleanin up of the orphaned revenue streams entities
+ */
+function eiti_sd_recover_revenue_streams_cleanup() {
+  $markup = '';
+
+  $list = db_query("DELETE FROM {eiti_revenue_stream} ers WHERE ers.id NOT IN ((SELECT rg.field_sd_revenue_government_target_id as id FROM {field_data_field_sd_revenue_government} rg) UNION (SELECT rc.field_sd_revenue_company_target_id as id FROM {field_data_field_sd_revenue_company} rc))")->fetchAll();
+  $list = db_query("DELETE FROM {eiti_indicator_value} eiv WHERE eiv.id NOT IN (SELECT fd.field_sd_indicator_values_target_id FROM {field_data_field_sd_indicator_values} fd)")->fetchAll();
+
+  return $markup;
+}
+
+/**
+ * Implements custom page callback for summary data indicators recovery page
+ */
+function eiti_sd_recover_indicators_menu_callback() {
+  $markup = '';
+
+  $form = drupal_get_form('eiti_sd_recover_indicators_repair_form');
+  $markup = drupal_render($form);
+
+  return $markup;
+}
+
+/**
+ * Implements custom page callback for summary data indicators recovery page
+ */
+function eiti_sd_recover_companies_menu_callback() {
+  $markup = '';
+
+  $form = drupal_get_form('eiti_sd_recover_companies_repair_form');
+  $markup = drupal_render($form);
+
+  return $markup;
+}
+
+/**
+ * Implements form for executing summary data indicators repairing process
+ */
+function eiti_sd_recover_indicators_repair_form($form, &$form_state) {
+
+  $form['indicators'] = array(
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+  );
+
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Repair'));
+
+  return $form;
+}
+
+/**
+ * Implements executing summary data indicators yml repairing process form validate callback
+ */
+function eiti_sd_recover_indicators_repair_form_validate($form, &$form_state) {
+
+}
+
+/**
+ * Implements executing summary data indicators yml repairing form submit callback
+ */
+function eiti_sd_recover_indicators_repair_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['indicators'])) {
+    $file = file_load($form_state['values']['indicators']);
+    $content = file_get_contents($file->uri);
+    file_delete($file);
+    $list = json_decode($content);
+
+    if ($list) {
+      $operations[] = array(
+        'eiti_sd_recover_indicators_generate_batch',
+        array($list),
+      );
+
+      $batch = array(
+        'operations' => $operations,
+        'finished' => 'eiti_sd_recover_indicators_generate_batch_finished',
+      );
+
+      batch_set($batch);
+    }
+  }
+}
+
+/**
+ * Implements Batch processing function
+ */
+function eiti_sd_recover_indicators_generate_batch($list, &$context) {
+  if (empty($context['sandbox'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['list'] = $list;
+    $context['sandbox']['max'] = sizeof($list);
+  }
+
+  if (isset($context['sandbox']['list'][$context['sandbox']['progress']])) {
+    $item = $context['sandbox']['list'][$context['sandbox']['progress']];
+
+    if ($item) {
+      if (isset($item->id)) {
+        $exists = db_query("SELECT eiv.id FROM {eiti_indicator_value} eiv WHERE eiv.id = :id", array(':id' => $item->id))->fetchAll();
+
+        if (!$exists) {
+          $result = db_insert('eiti_indicator_value')->fields(array(
+            'id' => $item->id,
+            'indicator_id' => $item->indicator_id,
+            'value_boolean' => $item->value_boolean,
+            'value_enum' => $item->value_enum,
+            'value_numeric' => $item->value_numeric,
+            'value_unit' => $item->value_unit,
+            'original_value_numeric' => $item->original_value_numeric,
+            'original_value_unit' => $item->original_value_unit,
+            'value_text' => $item->value_text,
+            'source' => $item->source,
+            'comments' => $item->comments,
+            'value_reporting_type' => $item->value_reporting_type,
+          ))->execute();
+        }
+      }
+    }
+  }
+
+  $context['sandbox']['progress']++;
+  $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+}
+
+/**
+ * Implements Batch processing function
+ */
+function eiti_sd_recover_indicators_generate_batch_finished($success, $results, $operations) {
+  if ($success) {
+    drupal_set_message(t('Completed successfully'));
+  }
+  else {
+    drupal_set_message(t('Completed with errors'), 'error');
+  }
+}
+
+/***********/
+/**
+ * Implements form for executing summary data companies repairing process
+ */
+function eiti_sd_recover_companies_repair_form($form, &$form_state) {
+
+  $form['companies'] = array(
+    '#type' => 'managed_file',
+    '#upload_location' => 'public://',
+  );
+
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Repair'));
+
+  return $form;
+}
+
+/**
+ * Implements executing summary data companies yml repairing process form validate callback
+ */
+function eiti_sd_recover_companies_repair_form_validate($form, &$form_state) {
+
+}
+
+/**
+ * Implements executing summary data companies yml repairing form submit callback
+ */
+function eiti_sd_recover_companies_repair_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['companies'])) {
+    $file = file_load($form_state['values']['companies']);
+    $content = file_get_contents($file->uri);
+    file_delete($file);
+    $list = json_decode($content);
+
+    if ($list) {
+      $operations[] = array(
+        'eiti_sd_recover_companies_generate_batch',
+        array($list),
+      );
+
+      $batch = array(
+        'operations' => $operations,
+        'finished' => 'eiti_sd_recover_companies_generate_batch_finished',
+      );
+
+      batch_set($batch);
+    }
+  }
+}
+
+/**
+ * Implements Batch processing function
+ */
+function eiti_sd_recover_companies_generate_batch($list, &$context) {
+  if (empty($context['sandbox'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['list'] = $list;
+    $context['sandbox']['max'] = sizeof($list);
+  }
+
+  if (isset($context['sandbox']['list'][$context['sandbox']['progress']])) {
+    $item = $context['sandbox']['list'][$context['sandbox']['progress']];
+    $test = 1;
+    if ($item) {
+      if (isset($item->id)) {
+        $exists = db_query("SELECT eiv.id FROM {eiti_organisation} eiv WHERE eiv.id = :id", array(':id' => $item->id))->fetchAll();
+
+        if (!$exists) {
+          $result = db_insert('eiti_organisation')->fields(array(
+            'id' => $item->id,
+            'type' => $item->type,
+            'name' => $item->name,
+            'country_id' => $item->country_id,
+            'status' => $item->status,
+            'created' => $item->created,
+            'changed' => $item->changed,
+            'identification_number' => $item->identification_number,
+            'summary_data_id' => $item->summary_data_id,
+          ))->execute();
+        }
+      }
+    }
+  }
+
+  $context['sandbox']['progress']++;
+  $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+}
+
+/**
+ * Implements Batch processing function
+ */
+function eiti_sd_recover_companies_generate_batch_finished($success, $results, $operations) {
+  if ($success) {
+    drupal_set_message(t('Completed successfully'));
+  }
+  else {
+    drupal_set_message(t('Completed with errors'), 'error');
+  }
+}
+

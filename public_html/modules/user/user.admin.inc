@@ -61,7 +61,7 @@ function user_filter_form() {
     if ($type == 'permission') {
       // Merge arrays of module permissions into one.
       // Slice past the first element '[any]' whose value is not an array.
-      $options = call_user_func_array('array_merge', array_slice($filters[$type]['options'], 1));
+      $options = call_user_func_array('array_merge', array_values(array_slice($filters[$type]['options'], 1)));
       $value = $options[$value];
     }
     else {
@@ -173,17 +173,6 @@ function user_admin_account() {
 
   $query = db_select('users', 'u');
   $query->condition('u.uid', 0, '<>');
-
-  // Hide system users from the users listing.
-  $db_and = db_and();
-  $db_and->condition('u.uid', 1, '>');
-  $db_and->condition('u.uid', 100, '<');
-  $db_and->condition('u.status', 1);
-  $db_or = db_or();
-  $db_or->condition($db_and);
-  $db_or->condition('u.uid', 100, '>');
-  $query->condition($db_or);
-
   user_build_filter_query($query);
 
   $count_query = clone $query;
@@ -1061,4 +1050,3 @@ function user_admin_role_delete_confirm_submit($form, &$form_state) {
   drupal_set_message(t('The role has been deleted.'));
   $form_state['redirect'] = 'admin/people/permissions/roles';
 }
-

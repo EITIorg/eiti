@@ -107,7 +107,7 @@
 .eiti-map-wrapper .legend i.no_progress {
   background-color: #C00000;
 }
-.eiti-map-wrapper .legend i.yet_to_be_assessed_against_the_2016_standard {
+.eiti-map-wrapper .legend i.yet_to_be_assessed_against_the_standard {
   background-color: #6CBCE3;
 }
 .eiti-map-wrapper .legend i.suspended {
@@ -352,6 +352,9 @@
   background-color: #C00000;
 }
 .eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_against_the_2016_standard {
+  background-color: #6CBCE3;
+}
+.eiti-map-wrapper .country-list .member-status.yet_to_be_assessed_against_the_standard {
   background-color: #6CBCE3;
 }
 .eiti-map-wrapper .country-list .member-status.suspended {

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Rules integration for the mailchimp lists module.
+ * Rules integration for the mailchimp lists/audiences module.
  */
 
 /**
@@ -10,7 +10,7 @@
 function mailchimp_lists_rules_action_info() {
   $items = array();
   $items['mailchimp_lists_user_subscribe'] = array(
-    'label' => t('Subscribe or unsubscribe entity from a Mailchimp list'),
+    'label' => t('Subscribe or unsubscribe entity from a MailChimp audience'),
     'parameter' => array(
       'entity' => array(
         'type' => 'entity',
@@ -19,8 +19,8 @@ function mailchimp_lists_rules_action_info() {
       ),
       'field' => array(
         'type' => '*',
-        'label' => t('Mailchimp List Subscription Field'),
-        'description' => t('Subscription Field connected to the desired Mailchimp List.'),
+        'label' => t('MailChimp Audience Subscription Field'),
+        'description' => t('Subscription Field connected to the desired Mailchimp Audience.'),
         'restriction' => 'selector',
         'wrapped' => TRUE,
         'allow null' => FALSE,
@@ -31,7 +31,7 @@ function mailchimp_lists_rules_action_info() {
         'description' => t('True to subscribe, False to unsubscribe'),
       ),
     ),
-    'group' => t('Mailchimp'),
+    'group' => t('MailChimp'),
     'access callback' => 'mailchimp_lists_rules_access_callback',
     'base' => 'mailchimp_lists_rules_action_entity_subscribe',
   );
@@ -39,7 +39,7 @@ function mailchimp_lists_rules_action_info() {
 }
 
 /**
- * Action callback: Subscribe an entity to a list.
+ * Action callback: Subscribe an entity to a list/audience.
  */
 function mailchimp_lists_rules_action_entity_subscribe($entity, $field, $subscribe) {
   $field_info = $field->info();
