@@ -803,12 +803,7 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
       foreach ($filters as $key => $value) {
         if (is_int($key)) {
           if (isset($value['must_not'])) {
-            if (isset($result['must_not'])) {
-              $result['must_not'] += array($value['must_not']);
-            }
-            else {
-              $result['must_not'] = array($value['must_not']);
-            }
+            $result['must_not'][] = $value['must_not'];
           }
           else {
             if ($conjunction === 'AND') {
@@ -872,8 +867,8 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
 
         case '=':
           $filter = array(
-            'not' => array(
-              'filter' => array(
+            'bool' => array(
+              'must_not' => array(
                 'exists' => array('field' => $filter_assoc['field_id'])
               )
             )
@@ -1380,18 +1375,14 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
     }
 
     // Build the query.
-    if (!empty($query_options['query_search']) && !empty($query_options['query_search_filter'])) {
-      $body['query']['bool']['must'] = $query_options['query_search'];
-      $body['query']['bool']['filter'] = $query_options['query_search_filter']['filter'];
-    }
-    elseif (!empty($query_options['query_search'])) {
-      if (empty($body['query'])) {
-        $body['query'] = array();
-      }
+    if (!empty($query_options['query_search'])) {
       $body['query']['bool']['must'] = $query_options['query_search'];
     }
-    elseif (!empty($query_options['query_search_filter'])) {
+    else {
       $body['query']['bool']['must'] = array('match_all' => (object)array());
+    }
+
+    if (!empty($query_options['query_search_filter'])) {
       $body['query']['bool'] = array_merge($body['query']['bool'], $query_options['query_search_filter']);
     }
 
@@ -1402,6 +1393,10 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
 
     if (empty($body['filter'])) {
       unset($body['filter']);
+    }
+
+    if (empty($body['query'])) {
+      $body['query'] = array();
     }
 
     // Preserve the options for further manipulation if necessary.
@@ -1512,6 +1507,12 @@ class SearchApiElasticsearchConnector extends SearchApiAbstractService {
           'fields' => $fields
         )
       );
+
+      $keys = $query->getKeys();
+      if (isset($keys['#conjunction']) && $keys['#conjunction'] == 'AND') {
+        $multymatch_query['multi_match']['operator'] = 'AND';
+        $multymatch_query['multi_match']['type'] = 'cross_fields';
+      }
     }
 
     return $multymatch_query;
