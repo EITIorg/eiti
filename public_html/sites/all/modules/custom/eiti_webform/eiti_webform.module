@@ -44,16 +44,6 @@ function eiti_webform_init() {
       drupal_access_denied();
     }
 
-    // Check access for Webform submissions overview page
-    $patterns = "node/*/webform-results\n";
-    if (drupal_match_path($path, $patterns)) {
-      global $user;
-      
-      if (!in_array('complaints overviewer', $user->roles)) {
-        drupal_access_denied();
-      }
-    } 
-
     // Deny access to Webform submission standard paths by pattern
     $patterns = "node/*/submissions\nnode/*/submission/*/edit\nnode/*/submission/*/delete";
     if (drupal_match_path($path, $patterns)) {
