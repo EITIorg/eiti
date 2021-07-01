@@ -1,0 +1,229 @@
+networks:
+  default:
+    external: true
+    name: ddev_default
+services:
+  db:
+    build:
+      args:
+        BASE_IMAGE: drud/ddev-dbserver-mariadb-10.3:v1.17.0
+        gid: '20'
+        uid: '501'
+        username: admin
+      context: /Users/olegbogut/Work/EITI/eiti/.ddev/db-build
+      dockerfile: /Users/olegbogut/Work/EITI/eiti/.ddev/.dbimageBuild/Dockerfile
+    command: ''
+    container_name: ddev-eiti-db
+    environment:
+      COLUMNS: '189'
+      DDEV_HOSTNAME: eiti.ddev.site
+      DDEV_PHP_VERSION: '7.2'
+      DDEV_PRIMARY_URL: http://eiti.ddev.site
+      DDEV_PROJECT: eiti
+      DDEV_PROJECT_TYPE: drupal7
+      DDEV_ROUTER_HTTPS_PORT: '443'
+      DDEV_ROUTER_HTTP_PORT: '80'
+      DDEV_SITENAME: eiti
+      DDEV_TLD: ddev.site
+      DOCKER_IP: 127.0.0.1
+      HOST_DOCKER_INTERNAL_IP: ''
+      IS_DDEV_PROJECT: "true"
+      LINES: '56'
+      TZ: ''
+    healthcheck:
+      interval: 1s
+      retries: 120
+      start_period: 2m
+      timeout: 2m
+    hostname: eiti-db
+    image: drud/ddev-dbserver-mariadb-10.3:v1.17.0-eiti-built
+    labels:
+      com.ddev.app-type: drupal7
+      com.ddev.approot: /Users/olegbogut/Work/EITI/eiti
+      com.ddev.platform: ddev
+      com.ddev.site-name: eiti
+    ports:
+    - 127.0.0.1::3306/tcp
+    restart: "no"
+    stop_grace_period: 60s
+    user: '501:20'
+    volumes:
+    - ddev-global-cache:/mnt/ddev-global-cache:rw
+    - source: /Users/olegbogut/Work/EITI/eiti/.ddev
+      target: /mnt/ddev_config
+      type: bind
+    - source: mariadb-database
+      target: /var/lib/mysql
+      type: volume
+      volume:
+        nocopy: true
+  dba:
+    container_name: ddev-eiti-dba
+    environment:
+      HTTPS_EXPOSE: 8037:8036
+      HTTP_EXPOSE: 8036:8036
+      PMA_PASSWORD: root
+      PMA_USER: root
+      TZ: ''
+      UPLOAD_LIMIT: 1024M
+      VIRTUAL_HOST: eiti.ddev.site
+    healthcheck:
+      interval: 2m
+      retries: 1
+      timeout: 2s
+    hostname: eiti-dba
+    image: phpmyadmin:5
+    labels:
+      com.ddev.app-type: drupal7
+      com.ddev.approot: /Users/olegbogut/Work/EITI/eiti
+      com.ddev.platform: ddev
+      com.ddev.site-name: eiti
+    links:
+    - db
+    ports:
+    - target: 80
+    restart: "no"
+  elasticsearch:
+    container_name: ddev-eiti-elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      HTTPS_EXPOSE: 9201:9200
+      HTTP_EXPOSE: 9200:9200
+      VIRTUAL_HOST: eiti.ddev.site
+      bootstrap.memory_lock: "true"
+      cluster.name: docker-cluster
+      discovery.type: single-node
+    hostname: eiti-elasticsearch
+    image: elasticsearch:7.6.1
+    labels:
+      com.ddev.approot: /Users/olegbogut/Work/EITI/eiti
+      com.ddev.site-name: eiti
+    ports:
+    - target: 9200
+    - target: 9300
+    volumes:
+    - /Users/olegbogut/Work/EITI/eiti/.ddev:/mnt/ddev_config:rw
+    - elasticsearch:/usr/share/elasticsearch/data:rw
+  memcached:
+    container_name: ddev-eiti-memcached
+    image: memcached:1.5
+    labels:
+      com.ddev.site-name: eiti
+    ports:
+    - target: 11211
+    restart: "no"
+    volumes:
+    - /Users/olegbogut/Work/EITI/eiti/.ddev:/mnt/ddev_config:rw
+  postgres:
+    container_name: ddev-eiti-postgres
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: db
+      POSTGRES_USER: db
+    image: postgres:10.6-alpine
+    labels:
+      com.ddev.app-url: ''
+      com.ddev.approot: /Users/olegbogut/Work/EITI/eiti
+      com.ddev.site-name: eiti
+    ports:
+    - target: 5432
+    volumes:
+    - /Users/olegbogut/Work/EITI/eiti/.ddev:/mnt/ddev_config:rw
+    - source: postgresdb-database
+      target: /var/lib/postgresql
+      type: volume
+      volume:
+        nocopy: true
+    - source: postgresdb-database-data
+      target: /var/lib/postgresql/data
+      type: volume
+      volume:
+        nocopy: true
+  web:
+    build:
+      args:
+        BASE_IMAGE: drud/ddev-webserver:v1.17.2
+        gid: '20'
+        uid: '501'
+        username: admin
+      context: /Users/olegbogut/Work/EITI/eiti/.ddev/web-build
+      dockerfile: /Users/olegbogut/Work/EITI/eiti/.ddev/.webimageBuild/Dockerfile
+    cap_add:
+    - SYS_PTRACE
+    container_name: ddev-eiti-web
+    environment:
+      COLUMNS: '189'
+      DDEV_DOCROOT: public_html
+      DDEV_FILES_DIR: /var/www/html/public_html/sites/default/files
+      DDEV_HOSTNAME: eiti.ddev.site
+      DDEV_PHP_VERSION: '7.2'
+      DDEV_PRIMARY_URL: http://eiti.ddev.site
+      DDEV_PROJECT: eiti
+      DDEV_PROJECT_TYPE: drupal7
+      DDEV_ROUTER_HTTPS_PORT: '443'
+      DDEV_ROUTER_HTTP_PORT: '80'
+      DDEV_SITENAME: eiti
+      DDEV_TLD: ddev.site
+      DDEV_WEBSERVER_TYPE: apache-fpm
+      DDEV_XDEBUG_ENABLED: "false"
+      DEPLOY_NAME: local
+      DOCKER_IP: 127.0.0.1
+      DOCROOT: public_html
+      DRUSH_ALLOW_XDEBUG: '1'
+      HOST_DOCKER_INTERNAL_IP: ''
+      HTTPS_EXPOSE: 443:80,8026:8025
+      HTTP_EXPOSE: 80:80,8025:8025
+      IS_DDEV_PROJECT: "true"
+      LINES: '56'
+      SSH_AUTH_SOCK: /home/.ssh-agent/socket
+      TZ: ''
+      VIRTUAL_HOST: eiti.ddev.site
+    external_links:
+    - ddev-router:eiti.ddev.site
+    healthcheck:
+      interval: 1s
+      retries: 120
+      start_period: 2m
+      timeout: 2m
+    hostname: eiti-web
+    image: drud/ddev-webserver:v1.17.2-eiti-built
+    labels:
+      com.ddev.app-type: drupal7
+      com.ddev.approot: /Users/olegbogut/Work/EITI/eiti
+      com.ddev.platform: ddev
+      com.ddev.site-name: eiti
+    links:
+    - db
+    - elasticsearch
+    - memcached
+    - postgres
+    ports:
+    - 127.0.0.1::80/tcp
+    - 127.0.0.1::443/tcp
+    restart: "no"
+    user: '501:20'
+    volumes:
+    - /Users/olegbogut/Work/EITI/eiti/.ddev/apache:/etc/apache2/sites-enabled:ro
+    - /Users/olegbogut/Work/EITI/eiti/.ddev/nginx_full:/etc/nginx/sites-enabled:ro
+    - ddev-ssh-agent_socket_dir:/home/.ssh-agent:rw
+    - ddev-global-cache:/mnt/ddev-global-cache:rw
+    - /Users/olegbogut/Work/EITI/eiti/.ddev:/mnt/ddev_config:ro
+    - consistency: cached
+      source: /Users/olegbogut/Work/EITI/eiti
+      target: /var/www/html
+      type: bind
+version: '3.6'
+volumes:
+  ddev-global-cache:
+    name: ddev-global-cache
+  ddev-ssh-agent_socket_dir:
+    external: true
+    name: ddev-ssh-agent_socket_dir
+  elasticsearch: {}
+  mariadb-database:
+    name: eiti-mariadb
+  postgresdb-database:
+    name: eiti-postgresdb
+  postgresdb-database-data:
+    name: eiti-postgresdb-data
+
