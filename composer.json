@@ -1,7 +1,7 @@
 {
     "require": {
-        "mpdf/mpdf": "^7.1",
         "theiconic/php-ga-measurement-protocol": "^2.7",
-        "phpoffice/phpspreadsheet": "^1.11"
+        "phpoffice/phpspreadsheet": "^1.11",
+        "mpdf/mpdf": "8.0.11"
     }
 }
