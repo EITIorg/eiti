@@ -43,4 +43,4 @@ node_modules/
 !.elasticbeanstalk/*.global.yml
 
 # Ignore built folders
-/vendor/
+# /vendor/
