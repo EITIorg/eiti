@@ -75,7 +75,7 @@ function s3fs_libraries_info() {
       'version arguments' => array(
         'file' => 'Aws/Sdk.php',
         'pattern' => "/const VERSION = '(.*)';/",
-        'lines' => 500,
+        'lines' => 1000,
       ),
       'files' => array(
         'php' => array(
