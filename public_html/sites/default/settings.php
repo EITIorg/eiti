@@ -646,6 +646,7 @@ $conf['s3fs_bucket'] = EITI_S3_BUCKET;
 $conf['s3fs_region'] = EITI_S3_REGION;
 $conf['s3fs_public_folder'] = 'files';
 $conf['s3fs_private_folder'] = 'files-private';
+$conf['s3fs_no_rewrite_cssjs'] = TRUE;
 
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
