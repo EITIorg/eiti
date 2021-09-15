@@ -10,7 +10,7 @@
 function mailchimp_campaign_entity_info() {
   $return = array(
     'mailchimp_campaign' => array(
-      'label' => t('Mailchimp Campaign'),
+      'label' => t('MailChimp Campaign'),
       'entity class' => 'MailChimpCampaign',
       'controller class' => 'MailChimpCampaignController',
       'base table' => 'mailchimp_campaigns',
@@ -39,8 +39,8 @@ function mailchimp_campaign_entity_info() {
 function mailchimp_campaign_permission() {
   return array(
     'administer mailchimp campaigns' => array(
-      'title' => t('Administer Mailchimp campaigns'),
-      'description' => t('Create and send Mailchimp campaigns.'),
+      'title' => t('Administer MailChimp campaigns'),
+      'description' => t('Create and send MailChimp campaigns.'),
     ),
   );
 }
@@ -51,7 +51,7 @@ function mailchimp_campaign_permission() {
 function mailchimp_campaign_menu() {
   $items['admin/config/services/mailchimp/campaigns'] = array(
     'title' => t('Campaigns'),
-    'description' => t('Manage Mailchimp Campaigns.'),
+    'description' => t('Manage MailChimp Campaigns.'),
     'page callback' => 'mailchimp_campaign_overview_page',
     'access callback' => 'mailchimp_apikey_ready_access',
     'access arguments' => array('administer mailchimp campaigns'),
@@ -60,7 +60,7 @@ function mailchimp_campaign_menu() {
   );
   $items['admin/config/services/mailchimp/campaigns/add'] = array(
     'title' => t('Add a Campaign'),
-    'description' => t('Add a new Mailchimp campaign.'),
+    'description' => t('Add a new MailChimp campaign.'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mailchimp_campaign_campaign_form'),
     'access callback' => 'mailchimp_apikey_ready_access',
@@ -103,7 +103,7 @@ function mailchimp_campaign_menu() {
   );
   $items['admin/config/services/mailchimp/campaigns/%mailchimp_campaign/edit'] = array(
     'title' => t('Edit'),
-    'description' => t('Edit a Mailchimp campaign.'),
+    'description' => t('Edit a MailChimp campaign.'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mailchimp_campaign_campaign_form', 5),
     'access callback' => 'mailchimp_campaign_access',
@@ -180,7 +180,7 @@ function mailchimp_campaign_entities_autocomplete_callback($type, $string = '') 
  * Callback for hook_menu() within system_themes_page().
  *
  * @param MailChimpCampaign $campaign
- *   The Mailchimp campaign instance.
+ *   The MailChimp campaign instance.
  *
  * @return string
  *   The entity title.
@@ -195,7 +195,7 @@ function mailchimp_campaign_page_title(MailChimpCampaign $campaign) {
  * Provides access to features based on whether or not a campaign has been sent.
  *
  * @param MailChimpCampaign $campaign
- *   The Mailchimp campaign instance.
+ *   The MailChimp campaign instance.
  * @param bool $sent
  *   Set to TRUE when a campaign has been sent.
  */
@@ -210,7 +210,7 @@ function mailchimp_campaign_access(MailChimpCampaign $campaign, $sent = TRUE) {
 }
 
 /**
- * Page callback for showing a list of Mailchimp Campaign entities.
+ * Page callback for showing a list of MailChimp Campaign entities.
  */
 function mailchimp_campaign_overview_page() {
   $campaigns = mailchimp_campaign_load_multiple();
@@ -258,8 +258,8 @@ function mailchimp_campaign_overview_page() {
       t('Title'),
       t('Subject'),
       t('Status'),
-      t('Mailchimp list'),
-      t('Mailchimp template'),
+      t('MailChimp audience'),
+      t('MailChimp template'),
       t('Created'),
       t('Actions'),
     ),
@@ -285,7 +285,7 @@ function mailchimp_campaign_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Save a campaign in Mailchimp and as a Drupal entity.
+ * Save a campaign in MailChimp and as a Drupal entity.
  *
  * @param array $template
  *   Associative array of template content indexed by section IDs.
@@ -294,7 +294,7 @@ function mailchimp_campaign_theme($existing, $type, $theme, $path) {
  * @param object $settings
  *   The subject, from name, reply-to, etc settings for the campaign.
  * @param int $template_id
- *   The Mailchimp template ID.
+ *   The MailChimp template ID.
  * @param string $campaign_id
  *   The ID of the campaign to save, if updating.
  *
@@ -315,7 +315,7 @@ function mailchimp_campaign_save_campaign($template, $recipients, $settings, $te
     );
   }
 
-  // Test for valid list segment, if selected.
+  // Test for valid list/audience segment, if selected.
   if (isset($recipients->segment_opts)) {
     if (mailchimp_test_list_segment($recipients->list_id, $recipients->segment_opts->saved_segment_id) === NULL) {
       return NULL;
@@ -339,7 +339,7 @@ function mailchimp_campaign_save_campaign($template, $recipients, $settings, $te
   /* @var \Mailchimp\MailchimpCampaigns $mc_campaigns */
   $mc_campaigns = mailchimp_get_api_object('MailchimpCampaigns');
 
-  // Save campaign to Mailchimp. (Only regular campaigns are supported).
+  // Save campaign to MailChimp. (Only regular campaigns are supported).
   $is_new = empty($campaign_id);
   if ($is_new) {
 
@@ -409,7 +409,7 @@ function mailchimp_campaign_save_campaign($template, $recipients, $settings, $te
 }
 
 /**
- * Send Mailchimp campaign.
+ * Send MailChimp campaign.
  */
 function mailchimp_campaign_send_campaign(MailChimpCampaign $campaign) {
   /* @var \Mailchimp\MailchimpCampaigns $mc_campaign */
@@ -427,7 +427,7 @@ function mailchimp_campaign_send_campaign(MailChimpCampaign $campaign) {
 
     if ($campaign->status == MAILCHIMP_STATUS_SENT) {
       // Log action, and notify the user.
-      watchdog('mailchimp_campaign', 'Mailchimp campaign %name has been sent.',
+      watchdog('mailchimp_campaign', 'MailChimp campaign %name has been sent.',
         array('%name' => $campaign->label())
       );
 
@@ -447,7 +447,7 @@ function mailchimp_campaign_send_campaign(MailChimpCampaign $campaign) {
 }
 
 /**
- * Send Mailchimp campaign.
+ * Send MailChimp campaign.
  */
 function mailchimp_campaign_send_test_campaign(MailChimpCampaign $campaign, $recipients = array()) {
   /* @var \Mailchimp\MailchimpCampaigns $mc_campaigns */
@@ -461,7 +461,7 @@ function mailchimp_campaign_send_test_campaign(MailChimpCampaign $campaign, $rec
     $mc_campaigns->sendTest($campaign->mc_campaign_id, $recipients, \Mailchimp\MailchimpCampaigns::EMAIL_TYPE_HTML);
 
     // Log action, and notify the user.
-    watchdog('mailchimp_campaign', 'Mailchimp test message for campaign %name has been sent to %recipients.', array(
+    watchdog('mailchimp_campaign', 'MailChimp test message for campaign %name has been sent to %recipients.', array(
       '%name' => $campaign->label(),
       '%recipients' => implode(', ', $recipients),
       ), WATCHDOG_INFO);
@@ -479,14 +479,14 @@ function mailchimp_campaign_send_test_campaign(MailChimpCampaign $campaign, $rec
 }
 
 /**
- * Delete a Mailchimp campaign and the local entity.
+ * Delete a MailChimp campaign and the local entity.
  */
 function mailchimp_campaign_delete_campaign($cid) {
   /* @var \Mailchimp\MailchimpCampaigns $mc_campaigns */
   $mc_campaigns = mailchimp_get_api_object('MailchimpCampaigns');
 
   $result = NULL;
-  // Delete campaign from Mailchimp.
+  // Delete campaign from MailChimp.
   try {
     if (!$mc_campaigns) {
       throw new MailchimpException('Cannot delete campaign without Mailchimp API. Check API key has been entered.');
@@ -495,7 +495,7 @@ function mailchimp_campaign_delete_campaign($cid) {
     $mc_campaigns->delete($cid);
     mailchimp_campaign_delete($cid);
 
-    watchdog('mailchimp_campaign', 'Mailchimp campaign %cid was deleted.', array(
+    watchdog('mailchimp_campaign', 'MailChimp campaign %cid was deleted.', array(
       '%cid' => $cid,
       ), WATCHDOG_INFO);
 
@@ -537,7 +537,7 @@ function mailchimp_campaign_list_templates($reset = FALSE, $offset = 0, $count =
   if ($cache) {
     $all_templates = $cache->data;
   }
-  // Query templates from the Mailchimp API and store in cache:
+  // Query templates from the MailChimp API and store in cache:
   else {
     /* @var \Mailchimp\MailchimpTemplates $mc_templates */
     if ($mc_templates = mailchimp_get_api_object('MailchimpTemplates')) {
@@ -623,8 +623,8 @@ function mailchimp_campaign_convert_url($text) {
  */
 function mailchimp_campaign_filter_info() {
   $filters['mailchimp_campaign'] = array(
-    'title' => t('Mailchimp Campaign filter'),
-    'description' => t('Add content and covert URLs for sending as Mailchimp campaigns.'),
+    'title' => t('MailChimp Campaign filter'),
+    'description' => t('Add content and covert URLs for sending as MailChimp campaigns.'),
     'process callback' => 'mailchimp_campaign_filter_campaign_process',
     'tips callback' => 'mailchimp_campaign_filter_tips',
   );
@@ -752,7 +752,7 @@ function _mailchimp_campaign_recursive_unset(&$array, $unwanted_key) {
  * Page callback for a campaign's statistics.
  *
  * @param MailChimpCampaign $campaign
- *   The Mailchimp campaign instance.
+ *   The MailChimp campaign instance.
  *
  * @return array
  *   A renderable array for the campaign stats page.
@@ -765,14 +765,14 @@ function mailchimp_campaign_stats_page(MailChimpCampaign $campaign) {
 
   try {
     if (!$mc_reports) {
-      throw new MailchimpException('Cannot get campaign stats without Mailchimp API. Check API key has been entered.');
+      throw new MailchimpException('Cannot get campaign stats without MailChimp API. Check API key has been entered.');
     }
 
     $result = $mc_reports->getCampaignSummary($campaign->mc_campaign_id);
   }
   catch (Exception $e) {
     drupal_set_message($e->getMessage(), 'error');
-    watchdog('mailchimp_campaign', 'An error occurred getting report data from Mailchimp: %message', array(
+    watchdog('mailchimp_campaign', 'An error occurred getting report data from MailChimp: %message', array(
       '%message' => $e->getMessage(),
       ), WATCHDOG_ERROR);
     return NULL;
@@ -863,15 +863,15 @@ function mailchimp_campaign_render_template($template) {
 }
 
 /**
- * Get Mailchimp campaigns.
+ * Get MailChimp campaigns.
  *
  * @param array $campaign_ids
- *   Array of Mailchimp campaign IDs.
+ *   Array of MailChimp campaign IDs.
  * @param bool $reset
  *   Set to TRUE if campaigns should not be loaded from cache.
  *
  * @return array
- *   Associative array of Mailchimp campaigns indexed by campaign ID.
+ *   Associative array of MailChimp campaigns indexed by campaign ID.
  */
 function mailchimp_campaign_get_campaigns($campaign_ids, $reset = FALSE) {
   $campaigns = array();
@@ -892,7 +892,7 @@ function mailchimp_campaign_get_campaigns($campaign_ids, $reset = FALSE) {
     $mc_campaigns = mailchimp_get_api_object('MailchimpCampaigns');
     try {
       if (!$mc_campaigns) {
-        throw new MailchimpException('Cannot get list without Mailchimp API. Check API key has been entered.');
+        throw new MailchimpException('Cannot get audience without MailChimp API. Check API key has been entered.');
       }
 
       foreach ($to_refresh as $campaign_id) {
@@ -939,7 +939,7 @@ function mailchimp_campaign_get_campaigns($campaign_ids, $reset = FALSE) {
  *   The segment type to get. "static" or "saved"
  *
  * @return array
- *   Array of Mailchimp list segments.
+ *   Array of MailChimp list segments.
  */
 function mailchimp_campaign_get_list_segments($list_id, $type) {
   /* @var \Mailchimp\MailchimpLists $mc_lists */
@@ -947,7 +947,7 @@ function mailchimp_campaign_get_list_segments($list_id, $type) {
 
   try {
     if (!$mc_lists) {
-      throw new MailchimpException('Cannot get list segments without Mailchimp API. Check API key has been entered.');
+      throw new MailchimpException('Cannot get audience segments without MailChimp API. Check API key has been entered.');
     }
 
     $parameters = array(
@@ -961,7 +961,7 @@ function mailchimp_campaign_get_list_segments($list_id, $type) {
   }
   catch (Exception $e) {
     drupal_set_message($e->getMessage(), 'error');
-    watchdog('mailchimp_campaign', 'An error occurred getting list segments for list ID %list_id: %message', array(
+    watchdog('mailchimp_campaign', 'An error occurred getting audience segments for audience ID %list_id: %message', array(
       '%list_id' => $list_id,
       '%message' => $e->getMessage(),
       ), WATCHDOG_ERROR);
@@ -970,12 +970,12 @@ function mailchimp_campaign_get_list_segments($list_id, $type) {
 }
 
 /**
- * Tests a list segment, returning the number of subscribers in the segment.
+ * Tests a list/audience segment, returning the number of subscribers in the segment.
  *
  * @param string $list_id
  *   The list ID.
  * @param string $list_segment_id
- *   The list segment ID.
+ *   The list/audience segment ID.
  *
  * @return int
  *   The number of subscribers contained in the segment.
@@ -986,7 +986,7 @@ function mailchimp_test_list_segment($list_id, $list_segment_id) {
 
   try {
     if (!$mc_lists) {
-      throw new MailchimpException('Cannot get campaign list segment without Mailchimp API. Check API key has been entered.');
+      throw new MailchimpException('Cannot get campaign audience segment without MailChimp API. Check API key has been entered.');
     }
 
     $result = $mc_lists->getSegmentMembers($list_id, $list_segment_id, array('count' => 500));
@@ -995,7 +995,7 @@ function mailchimp_test_list_segment($list_id, $list_segment_id) {
   }
   catch (Exception $e) {
     drupal_set_message($e->getMessage(), 'error');
-    watchdog('mailchimp_campaign', 'An error occurred testing a list segment: %message', array(
+    watchdog('mailchimp_campaign', 'An error occurred testing an audience segment: %message', array(
       '%message' => $e->getMessage(),
       ), WATCHDOG_ERROR);
     return NULL;
