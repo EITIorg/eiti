@@ -9,10 +9,10 @@
  */
 function mailchimp_campaign_schema() {
   $schema['mailchimp_campaigns'] = array(
-    'description' => 'Mailchimp campaigns.',
+    'description' => 'MailChimp campaigns.',
     'fields' => array(
       'mc_campaign_id' => array(
-        'description' => 'Mailchimp campaign ID.',
+        'description' => 'MailChimp campaign ID.',
         'type' => 'varchar',
         'length' => 16,
         'not null' => TRUE,
@@ -52,7 +52,7 @@ function mailchimp_campaign_install() {
     // Add text formats.
     $mailchimp_campaign_format = array(
       'format' => $format_name,
-      'name' => 'Mailchimp campaign',
+      'name' => 'MailChimp campaign',
       'weight' => 0,
       'filters' => array(
         // URL filter.

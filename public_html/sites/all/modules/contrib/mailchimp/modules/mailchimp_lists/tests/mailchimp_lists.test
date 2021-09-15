@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Test class and methods for the Mailchimp Lists module.
+ * Test class and methods for the Mailchimp Lists/Audiences module.
  */
 
 class MailchimpListsTestCase extends DrupalWebTestCase {
@@ -15,9 +15,9 @@ class MailchimpListsTestCase extends DrupalWebTestCase {
   public static function getInfo() {
     // Note: getInfo() strings are not translated with t().
     return array(
-      'name' => 'Mailchimp Lists',
+      'name' => 'MailChimp Audiences',
       'description' => 'Test Lists Logic.',
-      'group' => 'Mailchimp',
+      'group' => 'MailChimp',
     );
   }
 

@@ -6,7 +6,7 @@
 function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
 
   if (substr_count($form_id, 'webform_client_form_') > 0) {
-  	if (isset($form['details']['page_num']['#value'])
+  	if (isset($form['details']['page_num']['#value']) 
   	  && isset($form['details']['page_count']['#value'])) {
 
       $page_num = $form['details']['page_num']['#value'];
@@ -28,30 +28,20 @@ function eiti_webform_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Implements hook_page_alter()
- * @todo Now we are using Webforms for Concerns only, so this logic is ok,
+ * @todo Now we are using Webforms for Concerns only, so this logic is ok, 
  * but we need to rework it in scope of possible using Webforms for other purposes
  */
 function eiti_webform_init() {
-
+  
   // Need to check only for logged in users
   if (user_is_logged_in()) {
 
-    $path = current_path();
-
+    $path = current_path($path);
+    
     // Deny access to Webform standard paths by pattern
     $patterns = "node/*/webform-results/analysis\nnode/*/webform-results/analysis\nnode/*/webform-results/analysis/*\nnode/*/webform-results/table\nnode/*/webform-results/download\nnode/*/webform-results/clear";
     if (drupal_match_path($path, $patterns)) {
       drupal_access_denied();
-    }
-
-    // Check access for Webform submissions overview page
-    $patterns = "node/*/webform-results\n";
-    if (drupal_match_path($path, $patterns)) {
-      global $user;
-
-      if (!in_array('complaints overviewer', $user->roles)) {
-        drupal_access_denied();
-      }
     }
 
     // Deny access to Webform submission standard paths by pattern
@@ -71,13 +61,13 @@ function eiti_webform_init() {
       $parsed_path = explode("/", $path);
       $nid = $parsed_path[1];
       $sid = $parsed_path[3];
-
+      
       module_load_include('inc','webform','includes/webform.submissions');
       $submissions = webform_get_submissions(array('sid' => $sid));
 
       if (isset($submissions[$sid])) {
         $submission = $submissions[$sid];
-
+        
         $node = node_load($nid);
 
         if (isset($node->webform)) {

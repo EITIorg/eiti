@@ -71,7 +71,6 @@ class EITISummaryDataImporter {
     if ($about) {
       $max_row = $xls->setActiveSheetIndex(1)->getHighestRow();
       $parsed_data = $this->parseAboutSection($about, $max_row);
-      dsm($parsed_data);
       $entity = $this->buildSummaryDataReportFromXls($parsed_data, $fid);
     }
 
