@@ -233,6 +233,8 @@ function elasticsearch_connector_info_cluster($cluster) {
       'delayed_unassigned_shards' => t('Delayed unassigned shards'),
       'number_of_pending_tasks' => t('Number of pending tasks'),
       'number_of_in_flight_fetch' => t('Number of in flight fetch'),
+      'task_max_waiting_in_queue_millis'  => t('Max time waiting in queue'),
+      'active_shards_percent_as_number' => t('Active shards percentage'),
     );
 
     foreach ($cluster_status['health'] as $health_key => $health_value) {
@@ -424,6 +426,13 @@ function elasticsearch_connector_edit_cluster($form, $form_state, $cluster = NUL
     '#element_validate' => array('element_validate_number'),
     '#description' => t('After how many seconds the connection should timeout if there is no connection to Elasticsearch.'),
     '#default_value' => (!empty($cluster->options['timeout']) ? $cluster->options['timeout'] : ELASTICSEARCH_CONNECTOR_DEFAULT_TIMEOUT),
+  );
+
+  $form['options']['elasticsearch_connector_upgraded_types'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use v7.x compatible _doc mapping type.'),
+    '#description' => t('As of 7.x the mapping type will be limited to _doc, this will keep new indices from using the Search API index machine name.'),
+    '#default_value' => (!empty($cluster->options['elasticsearch_connector_upgraded_types']) ? 1 : 0),
   );
 
   $form['actions'] = array(
