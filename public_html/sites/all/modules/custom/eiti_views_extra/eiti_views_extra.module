@@ -39,3 +39,21 @@ function eiti_views_extra_form_views_exposed_form_alter(&$form, &$form_state, $f
     }
   }
 }
+
+
+/**
+ * Implements theme_preprocess_views_view().
+ */
+function eiti_views_extra_preprocess_views_view(&$vars) {
+  if ($vars['view']->name == 'stakeholders'
+    && $vars['view']->current_display == 'stakeholders_companies') {
+
+    $path = current_path();
+
+    if ($path != 'taxonomy/term/714') {
+      $header = $vars['header'];
+      $header = str_replace('organisations', '', $header);
+      $vars['header'] = $header;
+    }
+  }
+}
