@@ -158,24 +158,6 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
     }
 
     /**
-     * Identify any separator that is explicitly set in the file
-     *
-     */
-    protected function checkSeparator()
-    {
-        $line = fgets($this->fileHandle);
-        if ($line === false) {
-            return;
-        }
-
-        if ((strlen(trim($line, "\r\n")) == 5) && (stripos($line, 'sep=') === 0)) {
-            $this->delimiter = substr($line, 4, 1);
-            return;
-        }
-        return $this->skipBOM();
-    }
-
-    /**
      * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
      *
      * @param     string         $pFilename
@@ -193,7 +175,6 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
 
         // Skip BOM, if any
         $this->skipBOM();
-        $this->checkSeparator();
 
         $escapeEnclosures = array( "\\" . $this->enclosure, $this->enclosure . $this->enclosure );
 
@@ -258,7 +239,6 @@ class PHPExcel_Reader_CSV extends PHPExcel_Reader_Abstract implements PHPExcel_R
 
         // Skip BOM, if any
         $this->skipBOM();
-        $this->checkSeparator();
 
         // Create new PHPExcel object
         while ($objPHPExcel->getSheetCount() <= $this->sheetIndex) {

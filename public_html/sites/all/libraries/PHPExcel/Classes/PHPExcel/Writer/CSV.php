@@ -70,14 +70,6 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
     private $useBOM = false;
 
     /**
-     * Whether to write a Separator line as the first line of the file
-     *     sep=x
-     *
-     * @var boolean
-     */
-    private $includeSeparatorLine = false;
-
-    /**
      * Whether to write a fully Excel compatible CSV file.
      *
      * @var boolean
@@ -117,19 +109,14 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
         }
 
         if ($this->excelCompatibility) {
-            $this->setUseBOM(true);                //  Enforce UTF-8 BOM Header
-            $this->setIncludeSeparatorLine(true);  //  Set separator line
-            $this->setEnclosure('"');              //  Set enclosure to "
-            $this->setDelimiter(";");              //  Set delimiter to a semi-colon
+            fwrite($fileHandle, "\xEF\xBB\xBF");    //    Enforce UTF-8 BOM Header
+            $this->setEnclosure('"');                //    Set enclosure to "
+            $this->setDelimiter(";");                //    Set delimiter to a semi-colon
             $this->setLineEnding("\r\n");
-        }
-        if ($this->useBOM) {
+            fwrite($fileHandle, 'sep=' . $this->getDelimiter() . $this->lineEnding);
+        } elseif ($this->useBOM) {
             // Write the UTF-8 BOM code if required
             fwrite($fileHandle, "\xEF\xBB\xBF");
-        }
-        if ($this->includeSeparatorLine) {
-            // Write the separator line if required
-            fwrite($fileHandle, 'sep=' . $this->getDelimiter() . $this->lineEnding);
         }
 
         //    Identify the range that we need to extract from the worksheet
@@ -239,28 +226,6 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
     public function setUseBOM($pValue = false)
     {
         $this->useBOM = $pValue;
-        return $this;
-    }
-
-    /**
-     * Get whether a separator line should be included
-     *
-     * @return boolean
-     */
-    public function getIncludeSeparatorLine()
-    {
-        return $this->includeSeparatorLine;
-    }
-
-    /**
-     * Set whether a separator line should be included as the first line of the file
-     *
-     * @param    boolean    $pValue        Use separator line? Defaults to false
-     * @return PHPExcel_Writer_CSV
-     */
-    public function setIncludeSeparatorLine($pValue = false)
-    {
-        $this->includeSeparatorLine = $pValue;
         return $this;
     }
 
