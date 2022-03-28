@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function eiti_notification_block_info() {
+  $blocks['eiti_notification_site_inactive'] = array(
+    'info' => t('EITI Notification block'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function eiti_notification_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'eiti_notification_site_inactive':
+      $block['content'] = _eiti_notification_get_inactive_block_markup();
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Provides content for block with notification
+ */
+function _eiti_notification_get_inactive_block_markup() {
+  $content = '
+  <div id="eiti_notification_site_inactive">
+    <div class="eiti_notification_site_inactive_wrapper">
+     <p>' . t('This website is no longer being updated and will be archived.') . '</p>
+     <a href="https://eiti.org">' . t('Visit our new website <span>here</span>') . '</a>
+    </div>
+</div>
+  ';
+
+  drupal_add_css(drupal_get_path('module', 'eiti_notification') . '/css/eiti_notification.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+
+  return $content;
+}
