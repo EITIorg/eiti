@@ -1,4 +1,5 @@
 <?php
+<?php
 /**
  * @file
  * Define theme helper functions.
@@ -137,15 +138,13 @@ function helpertheme_page_access_denied() {
  * @return string
  */
 function helpertheme_page_not_found() {
-  $message = 'This is our new website, and some pages are still being updated.';
-  $message .= '<br>';
   $message .= 'If you wish to report an error, please !emailus.';
   $message .= '<br>';
   $message .= 'You can also try searching on our old website: !url';
 
   $elements['message']['#markup'] = t($message, array(
     '!emailus' => l('email us', 'mailto:cberger@eiti.org'),
-    '!url' => l('https://eiti.org/search', 'https://eiti.org/search')
+    '!url' => l('https://archive.eiti.org /search', 'https://archive.eiti.org /search')
   ));
 
   return drupal_render($elements);
@@ -788,8 +787,7 @@ function helpertheme_get_background_image_with_overlay(&$elements, $image_data, 
   // @small: ((@gen_column_width + @gen_gutter_width) * 8) + 1em;
   // @medium: ((@gen_column_width + @gen_gutter_width) * 12) + 1em;
   // @large: ((@gen_column_width + @gen_gutter_width) * 16) + 1em;
-  //$col_unit = $theme_info->info['less']['vars']['@gen_column_width'] + $theme_info->info['less']['vars']['@gen_gutter_width'];
-  $col_unit = 5.25 + 1; 
+  $col_unit = $theme_info->info['less']['vars']['@gen_column_width'] + $theme_info->info['less']['vars']['@gen_gutter_width'];
   // $breakpoint_small = $col_unit * 8 + 1 . 'em';
   $breakpoint_medium = $col_unit * 12 + 1 . 'em';
   // $breakpoint_large = $col_unit * 16 + 1 . 'em';
