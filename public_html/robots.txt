@@ -16,8 +16,8 @@
 # No robots should visit this site further.
 # @see: http://www.robotstxt.org/robotstxt.html
 #
-# User-agent: *
-# Disallow: /
+User-agent: *
+Disallow: /
 # When uncommenting the above lines everything below should removed.
 
 User-agent: *

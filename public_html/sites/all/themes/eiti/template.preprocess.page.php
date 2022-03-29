@@ -8,6 +8,8 @@
  * Preprocess variables for page.tpl.php
  */
 function eiti_preprocess_page(&$variables) {
+  drupal_add_css(drupal_get_path('module', 'eiti_notification') . '/css/eiti_notification.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+
   // For now hide breadcrumb.
   $variables['display_breadcrumb'] = FALSE;
 
