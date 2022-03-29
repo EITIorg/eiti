@@ -1,5 +1,4 @@
 <?php
-<?php
 /**
  * @file
  * Define theme helper functions.
@@ -144,7 +143,7 @@ function helpertheme_page_not_found() {
 
   $elements['message']['#markup'] = t($message, array(
     '!emailus' => l('email us', 'mailto:cberger@eiti.org'),
-    '!url' => l('https://archive.eiti.org /search', 'https://archive.eiti.org /search')
+    '!url' => l('https://archive.eiti.org/search', 'https://archive.eiti.org/search')
   ));
 
   return drupal_render($elements);
