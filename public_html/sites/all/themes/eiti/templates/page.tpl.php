@@ -36,7 +36,12 @@
   <section role="main" id="main-content" class="main-content clearfix">
     <div class="main-content-inner clearfix">
       <?php print render($browser_warnings); ?>
-
+      <div id="eiti_notification_site_inactive">
+        <div class="eiti_notification_site_inactive_wrapper">
+          <p> <?php print t('This website is no longer being updated and will be archived.') ?></p>
+          <a href="https://eiti.org"><?php print t('Visit our new website <span>here</span>') ?></a>
+        </div>
+      </div>
       <?php if ($breadcrumb && $display_breadcrumb): ?>
         <div class="breadcrumb-wrapper"><?php print $breadcrumb; ?></div>
       <?php endif; ?>
