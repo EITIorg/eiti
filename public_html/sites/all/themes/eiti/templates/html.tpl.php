@@ -25,6 +25,7 @@
 ?><!DOCTYPE html>
 <html class="no-js" <?php print $html_attributes; ?>>
 <head>
+  <meta name="robots" content="noindex">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
