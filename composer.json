@@ -1,6 +1,6 @@
 {
     "require": {
-        "mpdf/mpdf": "^7.1",
+        "mpdf/mpdf": "^8.1",
         "theiconic/php-ga-measurement-protocol": "^2.7",
         "drush/drush": "^8.0",
         "nodespark/des-connector": "6.x-dev",
